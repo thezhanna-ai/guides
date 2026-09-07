@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Как рассказать Claude о себе: заполнить инструкции, включить память и перенести данные из ChatGPT">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta property="og:title" content="Как рассказать Claude о себе">
+  <meta property="og:description" content="Пошаговая настройка инструкций и памяти Claude для новичка">
+  <title>Как рассказать Claude о себе</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #B94F32;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Spectral, Georgia, serif;
+      font-size: 18.4px;
+      line-height: 30.36px;
+      -webkit-text-size-adjust: 100%;
+    }
+    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
+    a:hover { color: var(--accent) }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 20; width: 0; height: 3px; background: var(--accent) }
+
+    .masthead { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); background: rgba(248, 247, 242, .97); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 24px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750; letter-spacing: -.015em }
+    .header-actions { display: flex; align-items: center; gap: 14px; margin-right: 68px }
+    .handout-title { color: var(--accent); font-size: 13px; font-weight: 750; line-height: 1.25 }
+    .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 17px; border: 0; border-radius: 11px; background: var(--emerald-mid); color: var(--white); font: 750 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; box-shadow: 0 3px 0 var(--emerald); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
+    .press-button:hover { color: var(--white); transform: translateY(1px); box-shadow: 0 2px 0 var(--emerald) }
+    .press-button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--emerald) }
+
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: -50px; overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: transparent }
+    .toc a.active { color: var(--accent); font-weight: 700 }
+    .toc a.active::before { background: var(--accent) }
+    .toc-group { margin: 15px 0 3px 12px; color: var(--emerald); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+
+    header[id], section[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { max-width: 720px; margin: 0; font-size: 37.6px; line-height: 42.488px; letter-spacing: -.752px }
+    h2 { max-width: 700px; margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em }
+    .lead { max-width: 690px; margin: 20px 0 0; font-size: 18.4px; line-height: 30.36px }
+    .content-section { margin-top: 66px }
+    .purpose { max-width: 675px; margin-bottom: 25px }
+
+    .route-note { margin: 31px 0 0; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted); font-size: 18px }
+    .step { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line) }
+    .result { margin: 22px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+    .path { padding: 2px 6px; border-radius: 5px; background: rgba(16, 47, 48, .08); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .minor { color: var(--muted); font-size: 16px; line-height: 1.65 }
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: min(100%, 620px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--white) }
+    .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .88) }
+    .annotation::before { content: attr(data-n); position: absolute; top: -16px; left: -16px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--white); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .general-nav { left: 2.7%; top: 13.4%; width: 16.6%; height: 4.7% }
+    .general-profile { left: 21.8%; top: 20.8%; width: 73.8%; height: 46% }
+    .general-profile::before { right: -16px; left: auto }
+    .general-display { left: 21.8%; top: 70.4%; width: 73.8%; height: 17.3% }
+    .memory-nav { left: 2.8%; top: 33.5%; width: 16.5%; height: 4.1% }
+    .memory-nav::before { top: 50%; left: -18px; transform: translateY(-50%) }
+    .memory-generate { left: 20.5%; top: 13.2%; width: 76%; height: 7.2% }
+    .memory-sensitive { left: 20.5%; top: 20.8%; width: 76%; height: 9.1% }
+    .memory-sensitive::before { right: -16px; left: auto }
+    .memory-import { left: 20.5%; top: 30.3%; width: 76%; height: 12.5% }
+    .screen-key { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 22px; margin: 15px 0 0; padding: 0; list-style: none; color: var(--muted); font: 600 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .screen-key li { margin: 0 }
+    .screen-key b { color: var(--accent) }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+
+    .prompt-box { position: relative; margin-top: 27px; padding: 57px 22px 23px; border-radius: 12px; background: var(--emerald); color: var(--paper) }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: var(--white); font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 var(--accent-dark); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
+    .copy-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--accent-dark); filter: brightness(.98) }
+    .copy-button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--accent-dark) }
+
+    .compare-wrap { margin-top: 28px; overflow-x: auto; border: 1px solid var(--line); border-radius: 11px; background: var(--white); box-shadow: inset 4px 0 0 var(--accent) }
+    .compare { width: 100%; min-width: 600px; border-collapse: collapse }
+    .compare th, .compare td { width: 50%; padding: 14px 17px; border-right: 1px solid var(--line); text-align: left; vertical-align: top }
+    .compare th:last-child, .compare td:last-child { border-right: 0 }
+    .compare th { background: var(--info); color: var(--emerald); font: 800 19px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .compare td { border-top: 1px solid var(--line) }
+    .compare td p { margin: 0 }
+
+    .check-panel { margin-top: 28px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 7px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 900 }
+    .future-link { display: block; margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info); color: var(--emerald); text-decoration: none }
+    .future-link:hover { color: var(--emerald); border-color: var(--accent) }
+    .future-link span { display: block; margin-bottom: 3px; color: var(--accent); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .future-link strong { font: 750 17px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .related { margin-top: 54px; padding-top: 20px; border-top: 1px solid var(--line) }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--emerald); color: var(--white) }
+    .cta .section-label { color: var(--paper-2) }
+    .cta h2 { color: var(--white) }
+    .cta p { color: var(--paper-2) }
+    .cta .press-button { background: var(--accent); box-shadow: 0 3px 0 var(--accent-dark) }
+    .cta .press-button:hover { box-shadow: 0 2px 0 var(--accent-dark) }
+    .cta .press-button:active { box-shadow: 0 1px 0 var(--accent-dark) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 20px }
+      .brand { max-width: 110px; font-size: 14px; line-height: 1.15 }
+      .header-actions { gap: 9px; margin-right: 0 }
+      .handout-title { max-width: 190px; font-size: 12px }
+      .press-button { min-height: 38px; padding: 0 12px; font-size: 13px }
+      .page-shell { display: block; padding: 24px 20px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      h1 { font-size: 34px; line-height: 1.16; letter-spacing: -.68px }
+      h2 { font-size: 27px }
+      .lead { margin-top: 24px; font-size: 18px; line-height: 1.62 }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+    @media (max-width: 430px) {
+      .masthead-inner { padding: 0 14px }
+      .brand { max-width: 82px; font-size: 12px }
+      .handout-title { display: none }
+      .page-shell { padding-right: 14px; padding-left: 14px }
+      .screen-key { grid-template-columns: 1fr }
+      .prompt-box { padding: 56px 15px 18px }
+      .prompt-box pre { font-size: 12px }
+      .annotation { border-width: 2px }
+      .annotation::before { top: -12px; left: -12px; width: 23px; height: 23px; font-size: 11px }
+      .general-profile::before, .memory-sensitive::before { right: -12px; left: auto }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto }
+      .press-button, .copy-button { transition: none }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand">Claude.ai: кнопка за кнопкой</div>
+      <div class="header-actions">
+        <div class="handout-title">Как рассказать Claude о себе</div>
+        <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">На ИИ-Лагерь</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание">
+      <p class="toc-label">Содержание</p>
+      <a class="active" href="#o-sebe">Как рассказать Claude о себе</a>
+      <div class="toc-group">General</div>
+      <a class="toc-sub" href="#settings">Где открыть настройки</a>
+      <a class="toc-sub" href="#instructions">Рамка 2. Заполни информацию о себе</a>
+      <a class="toc-sub" href="#appearance">Рамка 3. Как выбрать оформление и шрифт</a>
+      <div class="toc-group">Memory</div>
+      <a class="toc-sub" href="#memory">Зачем включать память</a>
+      <a class="toc-sub" href="#import-chatgpt">Как перенести данные из ChatGPT</a>
+      <a href="#check">Как проверить настройки</a>
+      <a href="#sources">Источники</a>
+    </nav>
+
+    <main>
+      <details class="mobile-toc">
+        <summary>Содержание статьи</summary>
+        <nav aria-label="Содержание на телефоне">
+          <a href="#o-sebe">Как рассказать Claude о себе</a>
+          <strong>General</strong>
+          <a href="#settings">Где открыть настройки</a>
+          <a href="#instructions">Рамка 2. Заполни информацию о себе</a>
+          <a href="#appearance">Рамка 3. Как выбрать оформление и шрифт</a>
+          <strong>Memory</strong>
+          <a href="#memory">Зачем включать память</a>
+          <a href="#import-chatgpt">Как перенести данные из ChatGPT</a>
+          <a href="#check">Как проверить настройки</a>
+          <a href="#sources">Источники</a>
+        </nav>
+      </details>
+
+      <article>
+        <header id="o-sebe">
+          <p class="eyebrow">Claude.ai · настройка под себя</p>
+          <h1>Как рассказать Claude о себе</h1>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 7 СЕНТЯБРЯ 2026</p>
+          <p class="lead">Эта настройка нужна, чтобы Claude помнил, кто ты, чем занимаешься и какие ответы тебе подходят. Тогда в новых чатах он сможет приводить примеры из твоей области, а тебе не придётся каждый раз заново объяснять свой контекст</p>
+          <aside class="route-note" aria-label="Короткий маршрут">
+            <h2>Короткий маршрут</h2>
+            <p>Settings → General → имя и Instructions for Claude → оформление и шрифт → Memory → проверка в новом чате</p>
+          </aside>
+        </header>
+
+        <section class="content-section" id="settings">
+          <p class="section-label">Настройки профиля</p>
+          <h2>General</h2>
+          <h3>Где открыть настройки</h3>
+          <p class="purpose">В настройках хранятся данные, которые Claude будет использовать не в одном разговоре, а во всех новых чатах</p>
+          <div class="step">
+            <h3>Открой раздел General</h3>
+            <p>В левом нижнем углу Claude нажми на свои инициалы или имя. В открывшемся меню выбери <b>Settings</b>, затем в левой колонке нажми <b>General</b></p>
+          </div>
+        </section>
+
+        <section class="content-section" id="instructions">
+          <p class="section-label">Данные о тебе</p>
+          <h3>Рамка 2. Заполни информацию о себе</h3>
+          <p class="purpose">Имя и описание работы помогают Claude понимать, с кем он разговаривает. Инструкции задают постоянные правила: на каком языке отвечать, насколько подробно писать и какие задачи ты обычно решаешь</p>
+          <figure>
+            <div class="shot">
+              <img src="assets/claude-general-example.png" alt="Учебный пример заполненных настроек General в Claude">
+              <span class="annotation general-nav" data-n="1" aria-hidden="true"></span>
+              <span class="annotation general-profile" data-n="2" aria-hidden="true"></span>
+              <span class="annotation general-display" data-n="3" aria-hidden="true"></span>
+            </div>
+            <ul class="screen-key" aria-label="Пояснения к экрану General">
+              <li><b>1</b> Раздел General</li>
+              <li><b>2</b> Имя, обращение, роль и инструкции</li>
+              <li><b>3</b> Системная тема оформления и шрифт чата</li>
+            </ul>
+            <figcaption>Учебный пример с вымышленным профилем</figcaption>
+          </figure>
+          <div class="step">
+            <ol>
+              <li><b>What should Claude call you? (Как к тебе обращаться?)</b> - напиши имя или обращение, которое Claude будет использовать в чатах</li>
+              <li><b>What best describes your work? (Что лучше всего описывает твою работу?)</b> - выбери из списка подходящий вариант</li>
+              <li><b>Instructions for Claude (Инструкции для Claude)</b> - расскажи, чем занимаешься и как тебе отвечать</li>
+            </ol>
+            <div class="info-card">
+              <p><span class="info-title">Пример:</span> «Я психолог. Моя специализация - семейные отношения и проблемы подросткового возраста. Сейчас кроме индивидуальных консультаций я создаю онлайн-тесты и анкеты. Хочу открыть онлайн-клуб для подростков, чтобы помогать им справляться с трудностями переходного возраста. Общайся со мной на ты. Отвечай коротко, без воды, обычным разговорным языком»</p>
+            </div>
+          </div>
+          <div class="prompt-box">
+            <button class="copy-button" type="button" data-copy-target="instructions-template">Скопировать</button>
+            <pre id="instructions-template">Кто я
+Меня зовут [имя]. Я [профессия или роль]. Работаю в [ниша] и помогаю [кому] получить [результат]
+
+Чем я занимаюсь сейчас
+Мой проект: [что ты создаёшь или развиваешь]. Моя аудитория: [кому ты помогаешь]. Моя текущая цель: [что хочешь получить]
+
+Как со мной разговаривать
+Обращайся ко мне на [ты или вы]. Отвечай [коротко или подробно], обычным разговорным языком. Не добавляй длинное вступление и не повторяй мой вопрос
+
+Как оформлять ответы
+Используй [абзацы, списки, таблицы] только когда это помогает. Если ответ можно дать в двух строках, дай его в двух строках
+
+Что нельзя делать
+Не выдумывай факты, цифры, ссылки и мой опыт. Если данных действительно не хватает, задай один конкретный вопрос</pre>
+          </div>
+          <div class="result"><p><b>Результат:</b> в блоке 2 заполнены имя, сфера работы и инструкции для Claude</p></div>
+        </section>
+
+        <section class="content-section" id="appearance">
+          <p class="section-label">Удобство чтения</p>
+          <h3>Рамка 3. Как выбрать оформление и шрифт</h3>
+          <p class="purpose">Эти настройки не меняют качество ответов. Они нужны только для того, чтобы тебе было удобно читать Claude днём, вечером и при разном освещении</p>
+          <ol>
+            <li><b>Appearance (Оформление)</b> - выбери системную, светлую или тёмную тему</li>
+            <li><b>Chat font (Шрифт чата)</b> - выбери шрифт, который тебе легче читать</li>
+          </ol>
+          <div class="result"><p><b>Результат:</b> в блоке 3 выбраны оформление и шрифт чата</p></div>
+        </section>
+
+        <section class="content-section" id="memory">
+          <p class="section-label">Память Claude</p>
+          <h2>Memory</h2>
+          <h3>Зачем включать память</h3>
+          <p class="purpose">Память нужна, чтобы Claude постепенно запоминал твои проекты, предпочтения и важные факты из разговоров. Благодаря этому в новом чате он сможет продолжить работу с учётом прошлого контекста, а тебе не придётся снова рассказывать всё с начала</p>
+          <figure>
+            <div class="shot">
+              <img src="assets/claude-memory.png" alt="Экран Memory в настройках Claude с четырьмя пояснениями">
+              <span class="annotation memory-nav" data-n="1" aria-hidden="true"></span>
+              <span class="annotation memory-generate" data-n="2" aria-hidden="true"></span>
+              <span class="annotation memory-sensitive" data-n="3" aria-hidden="true"></span>
+              <span class="annotation memory-import" data-n="4" aria-hidden="true"></span>
+            </div>
+            <ul class="screen-key" aria-label="Пояснения к экрану Memory">
+              <li><b>1</b> Memory: раздел памяти</li>
+              <li><b>2</b> Generate memory from chats: запоминать контекст из разговоров</li>
+              <li><b>3</b> Include sensitive topics: отдельно разрешить чувствительные темы</li>
+              <li><b>4</b> Import memory: перенести данные из другого ИИ</li>
+            </ul>
+          </figure>
+          <div class="step">
+            <h3>Включи память из разговоров</h3>
+            <p>Открой <span class="path">Settings → Memory</span> и включи <b>Generate memory from chats</b>. Создание памяти из старых разговоров может занять некоторое время. Ниже будут появляться темы, которые можно просмотреть, уточнить или удалить</p>
+            <div class="info-card">
+              <p><span class="info-title">Чувствительные темы:</span> <b>Include sensitive topics in memory</b> разрешает сохранять сведения о здоровье, религии и других личных темах. Если такая память тебе не нужна, оставь переключатель выключенным</p>
+            </div>
+          </div>
+          <div class="compare-wrap" aria-label="Разница между Instructions и Memory">
+            <table class="compare">
+              <thead>
+                <tr><th>Instructions</th><th>Memory</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><p><b>Постоянные правила</b><br>Ты задаёшь язык, тон, формат и ограничения для ответов</p></td><td><p><b>Факты из разговоров</b><br>Claude запоминает проекты, предпочтения и контекст, который меняется со временем</p></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="minor">Инкогнито-чат не использует историю и память и не добавляет туда новый разговор</p>
+          <div class="result"><p><b>Результат:</b> в разделе Memory видны сохранённые темы, а ненужные или неверные сведения можно удалить</p></div>
+        </section>
+
+        <section class="content-section" id="import-chatgpt">
+          <p class="section-label">Если раньше был ChatGPT</p>
+          <h3>Как перенести данные из ChatGPT</h3>
+          <p class="purpose">Если ChatGPT уже знает, чем ты занимаешься и как тебе удобнее получать ответы, этот контекст можно перенести в Claude. Тогда не придётся восстанавливать всю информацию вручную</p>
+          <p>В блоке <b>Import memory from other AI providers</b> можно загрузить в Claude информацию о тебе, которую уже знает ChatGPT. Сначала эту информацию нужно подготовить в ChatGPT, а затем перенести в Claude</p>
+          <a class="future-link" href="#import-chatgpt"><span>Скоро</span><strong>Подробная инструкция по переносу информации из ChatGPT будет добавлена позже</strong></a>
+        </section>
+
+        <section class="content-section" id="check">
+          <p class="section-label">Финальная проверка</p>
+          <h2>Как проверить настройки</h2>
+          <p class="purpose">Проверка нужна, чтобы сразу заметить неверное имя, лишний факт или слишком общую инструкцию, а не исправлять это в каждом следующем разговоре</p>
+          <p>Открой новый обычный чат и спроси: <b>«Что ты уже знаешь обо мне и как должен оформлять ответы?»</b></p>
+          <div class="check-panel">
+            <h3>Claude настроен под тебя</h3>
+            <ul class="checklist">
+              <li>Правильно обращается к тебе</li>
+              <li>Верно называет твою работу и текущий проект</li>
+              <li>Приводит примеры из твоей области</li>
+              <li>Соблюдает нужную длину и тон ответа</li>
+              <li>Не добавляет выдуманных фактов</li>
+            </ul>
+          </div>
+          <div class="result"><p><b>Если что-то не совпало:</b> постоянное правило исправь в Instructions, а неверный факт удали или уточни в Memory</p></div>
+        </section>
+
+        <section class="related">
+          <p>Если Claude ещё не открыт, начни с первой статьи: <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a></p>
+        </section>
+
+        <section class="content-section" id="sources">
+          <p class="section-label">Официальные материалы</p>
+          <h2>Источники</h2>
+          <ul class="sources">
+            <li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Anthropic: персональные инструкции Claude</a></li>
+            <li><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Anthropic: память Claude и инкогнито-чаты</a></li>
+            <li><a href="https://support.claude.com/en/articles/12123587-import-and-export-your-memory-from-claude">Anthropic: импорт и экспорт памяти</a></li>
+          </ul>
+        </section>
+
+        <section class="cta">
+          <p class="section-label">Следующий шаг</p>
+          <h2>Claude.ai теперь настроен под тебя</h2>
+          <p>Ты можешь использовать его для своих задач. Когда захочется собрать первую вещь, которая работает на твоё дело, следующим шагом станет Claude Code. В ИИ-Лагере ты сможешь собрать лендинг или бота для своего дела простыми командами по-русски, без программирования</p>
+          <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">Перейти от чата к Claude Code</a>
+        </section>
+
+        <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев</footer>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const progress = document.querySelector('.progress');
+    const links = [...document.querySelectorAll('.toc a')];
+    const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const update = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${height > 0 ? Math.min(100, window.scrollY / height * 100) : 0}%`;
+      const activationLine = window.innerHeight - 24;
+      let current = sections[0];
+      if (window.scrollY > 2) {
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= activationLine) current = section;
+        }
+      }
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current.id}`));
+    };
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    addEventListener('hashchange', () => requestAnimationFrame(update));
+    addEventListener('load', () => requestAnimationFrame(update));
+    document.querySelectorAll('[data-copy-target]').forEach(button => {
+      button.addEventListener('click', async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        try {
+          await navigator.clipboard.writeText(target.innerText);
+          button.textContent = 'Скопировано';
+          setTimeout(() => { button.textContent = 'Скопировать'; }, 1800);
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(target);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          button.textContent = 'Текст выделен';
+        }
+      });
+    });
+    update();
+    requestAnimationFrame(update);
+  </script>
+</body>
+</html>

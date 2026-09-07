@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Гайды по нейросетям</title>
+  <meta name="description" content="Практические инструкции по Claude.ai, Claude Code, Codex и GPT для начинающих и продолжающих">
+  <style>
+    :root {
+      --ink: #102F30;
+      --text: #24302D;
+      --paper: #F8F7F2;
+      --card: #FFFFFF;
+      --sage: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --muted: #65716D;
+    }
+    * { box-sizing: border-box }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header, main { width: min(1120px, calc(100% - 40px)); margin: 0 auto }
+    header { padding: 66px 0 38px }
+    .eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase }
+    h1 { max-width: 760px; margin: 0; color: var(--ink); font-size: clamp(36px, 7vw, 68px); line-height: 1.04 }
+    .lead { max-width: 680px; margin: 22px 0 0; font: 22px/1.5 Georgia, serif }
+    .categories { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding: 18px 0 70px }
+    .category { padding: 26px; border: 1px solid var(--sage-line); border-radius: 16px; background: var(--card) }
+    .category:first-child { grid-column: 1 / -1; background: var(--sage) }
+    h2 { margin: 0; color: var(--ink); font-size: 24px; line-height: 1.25 }
+    .category p { margin: 9px 0 0; color: var(--muted) }
+    .guides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px }
+    .guide-link {
+      display: flex;
+      min-height: 96px;
+      align-items: flex-end;
+      padding: 18px;
+      border: 1px solid var(--sage-line);
+      border-radius: 12px;
+      background: var(--card);
+      color: var(--ink);
+      font-weight: 800;
+      line-height: 1.3;
+      text-decoration: none;
+      box-shadow: 0 4px 0 #AAB9B3;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .guide-link:hover { transform: translateY(2px); box-shadow: 0 2px 0 #AAB9B3 }
+    .guide-link:active { transform: translateY(4px); box-shadow: 0 0 0 #AAB9B3 }
+    .soon { display: inline-block; margin-top: 18px; padding: 6px 10px; border-radius: 7px; background: var(--paper); color: var(--muted); font-size: 13px; font-weight: 700 }
+    @media (max-width: 720px) {
+      header, main { width: min(100% - 28px, 1120px) }
+      header { padding-top: 42px }
+      .categories, .guides { grid-template-columns: 1fr }
+      .category:first-child { grid-column: auto }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Практические инструкции</p>
+    <h1>Гайды по нейросетям</h1>
+    <p class="lead">Выбери инструмент и открой нужную инструкцию. Каждый гайд ведёт от первого шага до понятного результата</p>
+  </header>
+
+  <main>
+    <section class="categories" aria-label="Категории гайдов">
+      <article class="category">
+        <h2>Claude.ai</h2>
+        <p>Знакомство с чатом Claude и его настройками</p>
+        <div class="guides">
+          <a class="guide-link" href="claude-ai/podklyuchenie-iz-rossii/">Как подключить Claude из России</a>
+          <a class="guide-link" href="claude-ai/kak-rasskazat-o-sebe/">Как рассказать Claude о себе</a>
+        </div>
+      </article>
+
+      <article class="category">
+        <h2>Вайбкодинг с Claude Code</h2>
+        <p>Установка, настройка и работа над своими задачами</p>
+        <span class="soon">Гайды готовятся</span>
+      </article>
+
+      <article class="category">
+        <h2>Вайбкодинг с Codex</h2>
+        <p>Работа с проектами и кодом командами на русском языке</p>
+        <span class="soon">Гайды готовятся</span>
+      </article>
+
+      <article class="category">
+        <h2>GPT для начинающих</h2>
+        <p>Первые настройки и понятные сценарии использования</p>
+        <span class="soon">Гайды готовятся</span>
+      </article>
+
+      <article class="category">
+        <h2>GPT для продолжающих</h2>
+        <p>Более сложные сценарии и системная работа</p>
+        <span class="soon">Гайды готовятся</span>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
