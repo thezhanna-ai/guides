@@ -88,7 +88,7 @@ class GuidesSiteTest(unittest.TestCase):
     def test_access_toc_uses_the_current_section_labels(self):
         html = ACCESS.read_text(encoding="utf-8")
         for title in (
-            "Подтвердить номер для нового аккаунта",
+            "Подтвердить телефонный номер для нового аккаунта",
             "Что проверить перед первым сообщением",
         ):
             self.assertEqual(html.count(f">{title}<"), 3)
