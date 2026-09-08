@@ -82,7 +82,7 @@ class GuidesSiteTest(unittest.TestCase):
 
     def test_profile_settings_toc_targets_the_matching_heading(self):
         profile = self.parse(PROFILE)
-        self.assertEqual(profile.headings["settings"], "Где открыть настройки")
+        self.assertEqual(profile.headings["settings"], "1. Где открыть настройки")
         self.assertEqual(profile.headings["memory"], "Зачем включать память")
 
     def test_access_toc_uses_the_current_section_labels(self):
