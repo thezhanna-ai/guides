@@ -21,7 +21,7 @@
       --info: #E2E8E9;
       --info-line: #BBC7CA;
       --accent: #E86F4A;
-      --accent-dark: #B94F32;
+      --accent-dark: #8F371F;
       --ok: #5F7F68;
       --ink: #1E2926;
       --muted: #62706A;
@@ -40,15 +40,15 @@
       -webkit-text-size-adjust: 100%;
     }
     a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
-    a:hover { color: var(--accent) }
-    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px }
+    a:hover { color: var(--accent-dark) }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
     .progress { position: fixed; inset: 0 auto auto 0; z-index: 20; width: 0; height: 3px; background: var(--accent) }
 
     .masthead { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); background: rgba(248, 247, 242, .97); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 24px }
     .brand { color: var(--emerald); font-size: 18px; font-weight: 750; letter-spacing: -.015em }
     .header-actions { display: flex; align-items: center; gap: 14px; margin-right: 68px }
-    .handout-title { color: var(--accent); font-size: 13px; font-weight: 750; line-height: 1.25 }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750; line-height: 1.25 }
     .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 17px; border: 0; border-radius: 11px; background: var(--emerald-mid); color: var(--white); font: 750 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; box-shadow: 0 3px 0 var(--emerald); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
     .press-button:hover { color: var(--white); transform: translateY(1px); box-shadow: 0 2px 0 var(--emerald) }
     .press-button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--emerald) }
@@ -58,14 +58,14 @@
     .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase }
     .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
     .toc a::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: transparent }
-    .toc a.active { color: var(--accent); font-weight: 700 }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
     .toc a.active::before { background: var(--accent) }
     .toc-group { margin: 15px 0 3px 12px; color: var(--emerald); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase }
     .toc .toc-sub { padding-left: 24px }
     .mobile-toc { display: none }
 
-    header[id], section[id] { scroll-margin-top: 84px }
-    .eyebrow, .section-label { color: var(--accent); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase }
     .eyebrow { margin: 0 0 20px }
     .section-label { margin: 0 0 12px }
     h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
@@ -94,7 +94,7 @@
     .shot { position: relative; width: min(100%, 620px) }
     .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--white) }
     .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .88) }
-    .annotation::before { content: attr(data-n); position: absolute; top: -16px; left: -16px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--white); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .annotation::before { content: attr(data-n); position: absolute; top: -16px; left: -16px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--emerald); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .general-nav { left: 2.7%; top: 13.4%; width: 16.6%; height: 4.7% }
     .general-profile { left: 21.8%; top: 20.8%; width: 73.8%; height: 46% }
     .general-profile::before { right: -16px; left: auto }
@@ -107,12 +107,12 @@
     .memory-import { left: 20.5%; top: 30.3%; width: 76%; height: 12.5% }
     .screen-key { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 22px; margin: 15px 0 0; padding: 0; list-style: none; color: var(--muted); font: 600 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .screen-key li { margin: 0 }
-    .screen-key b { color: var(--accent) }
+    .screen-key b { color: var(--accent-dark) }
     figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
 
     .prompt-box { position: relative; margin-top: 27px; padding: 57px 22px 23px; border-radius: 12px; background: var(--emerald); color: var(--paper) }
     .prompt-box pre { margin: 0; white-space: pre-wrap; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
-    .copy-button { position: absolute; top: 13px; right: 13px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: var(--white); font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 var(--accent-dark); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: var(--emerald); font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 var(--accent-dark); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
     .copy-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--accent-dark); filter: brightness(.98) }
     .copy-button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--accent-dark) }
 
@@ -129,19 +129,28 @@
     .checklist { margin: 0; padding: 0; list-style: none }
     .checklist li { position: relative; margin: 7px 0; padding-left: 28px }
     .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 900 }
-    .future-link { display: block; margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info); color: var(--emerald); text-decoration: none }
-    .future-link:hover { color: var(--emerald); border-color: var(--accent) }
-    .future-link span { display: block; margin-bottom: 3px; color: var(--accent); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
-    .future-link strong { font: 750 17px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
-    .related { margin-top: 54px; padding-top: 20px; border-top: 1px solid var(--line) }
+    .future-note { margin: 24px 0 0; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info); color: var(--emerald) }
+    .future-note p { margin: 0 }
+    .related-plaque { grid-column: 2; margin-top: 0; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .related-plaque a { font-weight: 700 }
+    @media (min-width: 1200px) {
+      .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px }
+      .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px }
+    }
+    @media (min-width: 1200px) and (max-width: 1279px) {
+      .toc { margin-left: -18px }
+    }
     .sources { padding-left: 22px }
     .sources li { margin: 9px 0 }
     .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--emerald); color: var(--white) }
     .cta .section-label { color: var(--paper-2) }
     .cta h2 { color: var(--white) }
     .cta p { color: var(--paper-2) }
-    .cta .press-button { background: var(--accent); box-shadow: 0 3px 0 var(--accent-dark) }
-    .cta .press-button:hover { box-shadow: 0 2px 0 var(--accent-dark) }
+    .cta .press-button { background: var(--accent); color: var(--emerald); box-shadow: 0 3px 0 var(--accent-dark) }
+    .cta .press-button:hover { color: var(--emerald); box-shadow: 0 2px 0 var(--accent-dark) }
     .cta .press-button:active { box-shadow: 0 1px 0 var(--accent-dark) }
     .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
 
@@ -158,6 +167,8 @@
       .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
       .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
       .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
       h1 { font-size: 34px; line-height: 1.16; letter-spacing: -.68px }
       h2 { font-size: 27px }
       .lead { margin-top: 24px; font-size: 18px; line-height: 1.62 }
@@ -178,7 +189,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto }
-      .press-button, .copy-button { transition: none }
+      .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active { transition: none; transform: none; box-shadow: none; filter: none }
     }
   </style>
 </head>
@@ -230,18 +241,19 @@
         <header id="o-sebe">
           <p class="eyebrow">Claude.ai · настройка под себя</p>
           <h1>Как рассказать Claude о себе</h1>
-          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 7 СЕНТЯБРЯ 2026</p>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 8 СЕНТЯБРЯ 2026</p>
           <p class="lead">Эта настройка нужна, чтобы Claude помнил, кто ты, чем занимаешься и какие ответы тебе подходят. Тогда в новых чатах он сможет приводить примеры из твоей области, а тебе не придётся каждый раз заново объяснять свой контекст</p>
           <aside class="route-note" aria-label="Короткий маршрут">
             <h2>Короткий маршрут</h2>
             <p>Settings → General → имя и Instructions for Claude → оформление и шрифт → Memory → проверка в новом чате</p>
           </aside>
+          <p class="purpose">Если ты ещё не вошёл в Claude, сначала пройди <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. Там проверишь доступ и первый чат, а сюда вернёшься, чтобы настроить имя, инструкции и память</p>
         </header>
 
-        <section class="content-section" id="settings">
+        <section class="content-section">
           <p class="section-label">Настройки профиля</p>
           <h2>General</h2>
-          <h3>Где открыть настройки</h3>
+          <h3 id="settings">Где открыть настройки</h3>
           <p class="purpose">В настройках хранятся данные, которые Claude будет использовать не в одном разговоре, а во всех новых чатах</p>
           <div class="step">
             <h3>Открой раздел General</h3>
@@ -308,10 +320,10 @@
           <div class="result"><p><b>Результат:</b> в блоке 3 выбраны оформление и шрифт чата</p></div>
         </section>
 
-        <section class="content-section" id="memory">
+        <section class="content-section">
           <p class="section-label">Память Claude</p>
           <h2>Memory</h2>
-          <h3>Зачем включать память</h3>
+          <h3 id="memory">Зачем включать память</h3>
           <p class="purpose">Память нужна, чтобы Claude постепенно запоминал твои проекты, предпочтения и важные факты из разговоров. Благодаря этому в новом чате он сможет продолжить работу с учётом прошлого контекста, а тебе не придётся снова рассказывать всё с начала</p>
           <figure>
             <div class="shot">
@@ -352,9 +364,9 @@
         <section class="content-section" id="import-chatgpt">
           <p class="section-label">Если раньше был ChatGPT</p>
           <h3>Как перенести данные из ChatGPT</h3>
-          <p class="purpose">Если ChatGPT уже знает, чем ты занимаешься и как тебе удобнее получать ответы, этот контекст можно перенести в Claude. Тогда не придётся восстанавливать всю информацию вручную</p>
-          <p>В блоке <b>Import memory from other AI providers</b> можно загрузить в Claude информацию о тебе, которую уже знает ChatGPT. Сначала эту информацию нужно подготовить в ChatGPT, а затем перенести в Claude</p>
-          <a class="future-link" href="#import-chatgpt"><span>Скоро</span><strong>Подробная инструкция по переносу информации из ChatGPT будет добавлена позже</strong></a>
+          <p class="purpose">Функция импорта экспериментальная: она доступна в Claude.ai и Claude Desktop на планах Free, Pro, Max и Team, но импорт может не сработать</p>
+          <p>Если в настройках есть блок <b>Import memory from other AI providers</b>, в нём можно начать перенос информации о тебе из ChatGPT</p>
+          <aside class="future-note"><p>Если кнопки <b>Start import</b> нет, дождись отдельной инструкции или перенеси нужную информацию вручную. Не придумывай другой способ запуска импорта</p></aside>
         </section>
 
         <section class="content-section" id="check">
@@ -373,10 +385,6 @@
             </ul>
           </div>
           <div class="result"><p><b>Если что-то не совпало:</b> постоянное правило исправь в Instructions, а неверный факт удали или уточни в Memory</p></div>
-        </section>
-
-        <section class="related">
-          <p>Если Claude ещё не открыт, начни с первой статьи: <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a></p>
         </section>
 
         <section class="content-section" id="sources">
@@ -399,13 +407,20 @@
         <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев</footer>
       </article>
     </main>
+    <aside class="related-plaque" aria-label="Следующая статья">
+      <p class="plaque-label">Сначала доступ</p>
+      <h2>Как подключить Claude из России</h2>
+      <p>Открой эту инструкцию, если ещё не вошёл в Claude. После первого чата возвращайся сюда для настройки профиля</p>
+      <p><a href="../podklyuchenie-iz-rossii/">Перейти к подключению</a></p>
+    </aside>
   </div>
 
   <script>
     const progress = document.querySelector('.progress');
-    const links = [...document.querySelectorAll('.toc a')];
-    const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
-    const update = () => {
+    const links = [...document.querySelectorAll('.toc a, .mobile-toc a')];
+    const sections = [...new Set(links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean))];
+    let hashIsSettling = Boolean(location.hash);
+    const update = (preferHash = false) => {
       const height = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.width = `${height > 0 ? Math.min(100, window.scrollY / height * 100) : 0}%`;
       const activationLine = window.innerHeight - 24;
@@ -415,12 +430,22 @@
           if (section.getBoundingClientRect().top <= activationLine) current = section;
         }
       }
+      if ((preferHash || hashIsSettling) && location.hash) {
+        current = sections.find(section => `#${section.id}` === location.hash) || current;
+      }
       links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current.id}`));
     };
     addEventListener('scroll', update, { passive: true });
     addEventListener('resize', update);
-    addEventListener('hashchange', () => requestAnimationFrame(update));
-    addEventListener('load', () => requestAnimationFrame(update));
+    const updateHashTarget = () => {
+      const target = sections.find(section => `#${section.id}` === location.hash);
+      hashIsSettling = true;
+      if (target) target.scrollIntoView({ block: 'start' });
+      requestAnimationFrame(() => update(true));
+      setTimeout(() => { hashIsSettling = false; }, 500);
+    };
+    addEventListener('hashchange', updateHashTarget);
+    addEventListener('load', updateHashTarget);
     document.querySelectorAll('[data-copy-target]').forEach(button => {
       button.addEventListener('click', async () => {
         const target = document.getElementById(button.dataset.copyTarget);
@@ -438,8 +463,9 @@
         }
       });
     });
-    update();
-    requestAnimationFrame(update);
+    update(Boolean(location.hash));
+    requestAnimationFrame(() => update(Boolean(location.hash)));
+    if (location.hash) updateHashTarget();
   </script>
 </body>
 </html>

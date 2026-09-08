@@ -4,7 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Пошаговая инструкция по подключению Claude.ai из России: VPN, Google-аккаунт, Gmail и подтверждение зарубежного телефонного номера">
+  <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#F8F7F2">
+  <meta property="og:title" content="Как подключить Claude из России">
+  <meta property="og:description" content="Пошаговый путь к первому чату Claude: подключение, вход и подтверждение номера для нового аккаунта">
   <title>Как подключить Claude из России</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +21,7 @@
       --sage-note: #E2E8E9;
       --sage-line: #BBC7CA;
       --accent: #E86F4A;
+      --accent-dark: #8F371F;
       --ok: #5F7F68;
       --ink: #1E2926;
       --muted: #62706A;
@@ -37,8 +41,8 @@
       -webkit-text-size-adjust: 100%;
     }
     a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
-    a:hover { color: var(--accent) }
-    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px }
+    a:hover { color: var(--accent-dark) }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
     .progress { position: fixed; inset: 0 auto auto 0; z-index: 20; width: 0; height: 3px; background: var(--accent) }
 
     .masthead {
@@ -61,7 +65,7 @@
     }
     .brand { color: var(--emerald); font-size: 18px; font-weight: 750; letter-spacing: -.015em }
     .header-actions { display: flex; align-items: center; gap: 14px; margin-right: 68px }
-    .handout-title { color: var(--accent); font-size: 13px; font-weight: 750; line-height: 1.25 }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750; line-height: 1.25 }
     .camp-link {
       display: inline-flex;
       align-items: center;
@@ -93,7 +97,9 @@
     .toc {
       position: sticky;
       top: 84px;
+      width: 260px;
       max-height: calc(100vh - 104px);
+      margin-left: -50px;
       overflow-y: auto;
       padding: 4px 18px 10px 0;
       border-right: 1px solid var(--line);
@@ -111,17 +117,17 @@
       transition: color .2s ease;
     }
     .toc a::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: transparent }
-    .toc a.active { color: var(--accent); font-weight: 700 }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
     .toc a.active::before { background: var(--accent) }
 
-    @media (min-width: 1000px) {
-      .toc { width: 260px; margin-left: -50px }
+    @media (min-width: 1200px) and (max-width: 1279px) {
+      .toc { margin-left: -18px }
     }
 
     .mobile-toc { display: none }
     article > header, article > section { scroll-margin-top: 86px }
     .article-header { padding-top: 3px }
-    .eyebrow { margin: 0 0 20px; color: var(--accent); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .17em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px; color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .17em; text-transform: uppercase }
     h1 {
       max-width: 720px;
       margin: 0;
@@ -138,12 +144,10 @@
 
     .setup-note {
       margin: 34px 0 0;
-      padding: 16px 28px 17px;
-      border: 1px solid var(--line);
-      border-left: 5px solid var(--accent);
-      border-radius: 13px;
-      background: var(--white);
-      box-shadow: 0 2px 8px var(--shadow);
+      padding: 11px 22px;
+      border: 1px solid var(--sage-line);
+      border-radius: 11px;
+      background: var(--sage-note);
     }
     .setup-note p { margin: 0 }
     .intro-copy { margin-top: 28px }
@@ -153,7 +157,7 @@
     .route-note p { margin: 0; color: var(--muted); font-size: 18px }
 
     .content-section { margin-top: 66px }
-    .section-label { margin: 0 0 12px; color: var(--accent); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase }
+    .section-label { margin: 0 0 12px; color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase }
     h2 {
       max-width: 700px;
       margin: 0 0 22px;
@@ -175,7 +179,7 @@
     .branch-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 32px 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line) }
     .branch { padding: 24px 24px 23px 0 }
     .branch + .branch { padding-left: 24px; border-left: 1px solid var(--line) }
-    .branch-label { margin: 0 0 7px; color: var(--accent); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .branch-label { margin: 0 0 7px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
     .branch-copy-offset { margin-top: 26px }
     .branch p:last-child { margin-bottom: 0 }
 
@@ -197,15 +201,15 @@
     figure { margin: 27px 0 0 }
     .browser-shot { position: relative; width: min(100%, 620px); overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--white) }
     .browser-shot img { display: block; width: 100%; height: auto }
-    .marker { position: absolute; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--white); font: 800 16px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 0 0 5px rgba(248, 247, 242, .92) }
+    .marker { position: absolute; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--emerald); font: 800 16px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 0 0 5px rgba(248, 247, 242, .92) }
     .marker-address { top: 1.5%; left: 36% }
     .marker-google { top: 55.5%; left: 69% }
     .screen-key { display: flex; flex-wrap: wrap; gap: 9px 24px; margin: 16px 0 0; padding: 0; list-style: none; color: var(--muted); font: 600 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .screen-key li { margin: 0 }
-    .screen-key b { color: var(--accent) }
+    .screen-key b { color: var(--accent-dark) }
     figcaption { margin: 12px 0 0; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .shot-outline { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .9) }
-    .shot-outline::before { content: attr(data-n); position: absolute; top: -16px; left: -16px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--white); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .shot-outline::before { content: attr(data-n); position: absolute; top: -16px; left: -16px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--emerald); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .general-nav { left: 2.8%; top: 12.8%; width: 16.5%; height: 5.1% }
     .general-instructions { left: 20.5%; top: 38.7%; width: 76%; height: 23.5% }
     .general-appearance { left: 20.5%; top: 68.8%; width: 76%; height: 12.5% }
@@ -221,10 +225,6 @@
     .memory-card { padding: 23px 23px 22px 0 }
     .memory-card + .memory-card { padding-left: 23px; border-left: 1px solid var(--line) }
     .memory-card p:last-child { margin-bottom: 0 }
-    .future-link { display: block; margin-top: 26px; padding: 19px 21px; border: 2px solid var(--accent); border-radius: 11px; background: var(--white); color: var(--emerald); text-decoration: none }
-    .future-link:hover { color: var(--emerald); background: var(--sage-note) }
-    .future-link span { display: block; margin-bottom: 4px; color: var(--accent); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
-    .future-link strong { font: 750 18px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
 
     details { margin-top: 24px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
     summary { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750; cursor: pointer }
@@ -237,6 +237,15 @@
     .checklist li { position: relative; margin: 10px 0; padding-left: 29px }
     .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 900 }
     .future-note { margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted) }
+    .related-plaque { grid-column: 2; margin-top: 0; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--sage-note) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .related-plaque a { font-weight: 700 }
+    @media (min-width: 1200px) {
+      .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px }
+      .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px }
+    }
     .sources { margin: 0; padding-left: 22px }
     .sources li { margin: 10px 0 }
 
@@ -244,8 +253,8 @@
     .cta .section-label { color: var(--paper-2) }
     .cta h2 { color: var(--white) }
     .cta p { color: var(--paper-2) }
-    .button { display: inline-flex; min-height: 44px; align-items: center; margin-top: 6px; padding: 0 17px; border-radius: 10px; background: var(--accent); color: var(--white); box-shadow: 0 3px 0 rgba(16, 47, 48, .2); font: 750 15px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
-    .button:hover { transform: translateY(1px); color: var(--white); box-shadow: 0 2px 0 rgba(16, 47, 48, .24); filter: brightness(.94) }
+    .button { display: inline-flex; min-height: 44px; align-items: center; margin-top: 6px; padding: 0 17px; border-radius: 10px; background: var(--accent); color: var(--emerald); box-shadow: 0 3px 0 rgba(16, 47, 48, .2); font: 750 15px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
+    .button:hover { transform: translateY(1px); color: var(--emerald); box-shadow: 0 2px 0 rgba(16, 47, 48, .24); filter: brightness(.94) }
     .button:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(16, 47, 48, .24) }
     .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
 
@@ -262,10 +271,11 @@
       .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
       .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
       .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
       h1 { font-size: 34px; line-height: 1.16; letter-spacing: -.68px }
       h2 { font-size: 27px }
       .lead { margin-top: 24px; font-size: 18px; line-height: 1.62 }
-      .setup-note { padding: 16px 21px }
       .content-section { margin-top: 52px }
       .branch-grid { grid-template-columns: 1fr }
       .branch { padding: 21px 0 }
@@ -283,7 +293,6 @@
       .handout-title { max-width: 128px; font-size: 11px }
       .camp-link { padding: 0 10px; font-size: 12px }
       .page-shell { padding-right: 14px; padding-left: 14px }
-      .setup-note { padding: 14px 17px }
       .screen-key { display: grid; gap: 7px }
       .prompt-box { padding: 55px 15px 18px }
       .prompt-box pre { font-size: 12px }
@@ -293,6 +302,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto }
       .toc a, .camp-link { transition: none }
+      .button, .button:hover, .button:active { transition: none; transform: none; box-shadow: none; filter: none }
     }
   </style>
 </head>
@@ -316,10 +326,10 @@
       <a href="#vpn"><span>Проверить VPN</span></a>
       <a href="#google-account"><span>Подготовить Google-аккаунт</span></a>
       <a href="#claude-login"><span>Открыть Claude и войти через Google</span></a>
-      <a href="#phone-verification"><span>Подтвердить номер, если Claude запросил SMS</span></a>
+      <a href="#phone-verification"><span>Подтвердить номер для нового аккаунта</span></a>
       <a href="#first-chat"><span>Проверить первый чат</span></a>
       <a href="#troubleshooting"><span>Что проверить, если вход не получился</span></a>
-      <a href="#checklist"><span>Семь пунктов перед первым сообщением</span></a>
+      <a href="#checklist"><span>Что проверить перед первым сообщением</span></a>
       <a href="#sources"><span>Источники</span></a>
     </nav>
 
@@ -332,10 +342,10 @@
           <a href="#vpn">Проверить VPN</a>
           <a href="#google-account">Подготовить Google-аккаунт</a>
           <a href="#claude-login">Открыть Claude и войти через Google</a>
-          <a href="#phone-verification">Подтвердить номер, если Claude запросил SMS</a>
+          <a href="#phone-verification">Подтвердить номер для нового аккаунта</a>
           <a href="#first-chat">Проверить первый чат</a>
           <a href="#troubleshooting">Что проверить, если вход не получился</a>
-          <a href="#checklist">Семь пунктов перед первым сообщением</a>
+          <a href="#checklist">Что проверить перед первым сообщением</a>
           <a href="#sources">Источники</a>
         </nav>
       </details>
@@ -344,17 +354,17 @@
         <header class="article-header" id="dostup" data-handout-title="Как подключить Claude из России">
           <p class="eyebrow">Claude.ai · кнопка за кнопкой</p>
           <h1>Как подключить Claude из России</h1>
-          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 7 СЕНТЯБРЯ 2026</p>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 8 СЕНТЯБРЯ 2026</p>
           <p class="lead">Путь от проверки подключения до первого открытого чата. На каждом этапе показано, какой экран появится и что выбрать</p>
           <aside class="setup-note">
-            <p>Для входа потребуется стабильный VPN. Выбери страну, где Claude доступен, и не меняй её во время регистрации</p>
+            <p><b>Практическая рекомендация:</b> если используешь VPN для своей сети, выбери локацию из списка доступных Anthropic и не меняй её во время регистрации</p>
           </aside>
           <div class="intro-copy">
-            <p>Эта инструкция относится к работе в чате <b>Claude.ai</b>. Для платных подписок рекомендации будут строже и появятся отдельным документом. Ссылка на него будет добавлена сюда позже</p>
-            <p>В инструкции показан рекомендуемый вариант регистрации и входа через Google-аккаунт с почтой Gmail. Claude также поддерживает другие международные email-адреса (не российские локальные), но отдельно их не разбираем: логика входа та же</p>
+            <p>Эта инструкция относится к работе в чате <b>Claude.ai</b>. Платные подписки здесь не рассматриваются</p>
+            <p>В инструкции показан рекомендуемый вариант регистрации и входа через Google-аккаунт с почтой Gmail. Anthropic также описывает вход по email, но этот маршрут здесь не разбираем</p>
             <aside class="route-note" aria-label="Короткий маршрут">
               <h2>Короткий маршрут</h2>
-              <p>Стабильный VPN, адрес claude.ai, кнопка Continue with Google и доступный зарубежный телефонный номер, если Claude запросит подтверждение</p>
+              <p>Проверь, что Claude доступен в выбранной локации, войди через Google или email, а при создании нового аккаунта подготовь номер из поддерживаемой локации</p>
             </aside>
           </div>
         </header>
@@ -364,9 +374,9 @@
           <h2>Что подготовить</h2>
           <p>Для рекомендуемого маршрута понадобятся три вещи</p>
           <ol class="requirements">
-            <li>Стабильный VPN со страной, где Claude доступен</li>
+            <li>При необходимости - VPN для своей сети и локация из списка доступности Anthropic</li>
             <li>Google-аккаунт с Gmail для рекомендуемого в этой инструкции способа входа</li>
-            <li>Реальный зарубежный телефонный номер, принимающий SMS, если Claude запросит подтверждение</li>
+            <li>Для нового аккаунта - номер из поддерживаемой локации, который принимает SMS</li>
           </ol>
         </section>
 
@@ -376,10 +386,9 @@
           <div class="step">
             <div class="step-copy">
               <h3>Выбери страну и сохрани IP</h3>
-              <p>Включи VPN и выбери страну, где Claude доступен</p>
-              <p>Открой <a href="https://2ip.ru/">2ip.ru</a> и запиши IP целиком, например <span class="path">198.51.100.42</span>, или сделай скриншот. Через день или два снова зайди на 2ip.ru с включённым VPN и сравни цифры. Если IP изменился, такой VPN не обеспечивает стабильный IP-адрес. Для работы с Claude.ai это плохо: за скачки IP можно получить блокировку. В этом случае лучше выбрать другой VPN</p>
-              <p class="minor">Смотри на цифры адреса, а не только на страну. Частая смена IP может привести к дополнительной проверке или блокировке аккаунта</p>
-              <div class="result"><p><b>Результат:</b> 2ip.ru показывает выбранную зарубежную страну, а IP сохранён для повторной проверки</p></div>
+              <p>Проверь <a href="https://support.claude.com/en/articles/8461763-where-can-i-access-claude">список поддерживаемых локаций Anthropic</a>. Эта инструкция рассчитана на ситуацию, когда ты находишься в поддерживаемой локации</p>
+              <p class="minor"><b>Практическая рекомендация:</b> если используешь VPN для своей сети, сохрани выбранную локацию и IP для повторной диагностики. Anthropic не публикует правило о «стабильном IP» как условие входа</p>
+              <div class="result"><p><b>Результат:</b> ты знаешь, подходит ли твоя локация по официальному списку, а при необходимости сохранил данные для диагностики</p></div>
             </div>
           </div>
         </section>
@@ -396,11 +405,11 @@
             <div class="branch">
               <p class="branch-label">Google-аккаунта нет</p>
               <h3>Сначала создать аккаунт</h3>
-              <p class="branch-copy-offset">Пройди регистрацию с включённым VPN поддерживаемой страны. <strong class="inline-warning">Не выбирай российскую локацию для нового аккаунта</strong></p>
+              <p class="branch-copy-offset">Создай Google-аккаунт по инструкции Google. Для Claude подойдёт вход через Google, но отдельный Google-аккаунт не является требованием Anthropic</p>
             </div>
           </div>
           <aside class="account-note">
-            <p><b>Лучше завести для нейросетей отдельный Google-аккаунт.</b> Тогда рассылки и уведомления не будут смешиваться с основной почтой, а рабочий аккаунт останется чистым, если один из сервисов заблокирует вход. Если отдельный аккаунт создавать не хочется, можно использовать старый личный Gmail. Аккаунт, которым ты пользуешься больше 10 лет, проходит стабильнее свежесозданного</p>
+            <p><b>Практическая рекомендация:</b> отдельный Google-аккаунт помогает не смешивать уведомления с личной почтой. Подтверждения, что возраст Gmail влияет на вход в Claude, в официальной справке Anthropic нет</p>
           </aside>
           <div class="step">
             <div class="step-copy">
@@ -412,14 +421,14 @@
             <div class="step-copy">
               <h3>Если Google-аккаунта нет</h3>
               <p>Не выключая VPN, открой <a href="https://accounts.google.com/signup">страницу создания Google-аккаунта</a>. Выбери <span class="path">Создать аккаунт → Для личного использования</span></p>
-              <p>Заполни имя и дату рождения, придумай адрес Gmail и пароль. Если Google запросит телефон, укажи зарубежный номер, к которому у тебя сохранится доступ. <strong class="inline-warning">Не выбирай российскую локацию в новом аккаунте</strong></p>
-              <p class="minor">Полностью закончи регистрацию Google и открой Gmail. После этого переходи в Claude, оставив тот же VPN</p>
-              <div class="result"><p><b>Результат:</b> почта Gmail открывается, аккаунт не привязан к российской локации</p></div>
+              <p>Заполни имя и дату рождения, придумай адрес Gmail и пароль. Если Google запросит телефон, используй номер, к которому у тебя есть долгосрочный доступ</p>
+              <p class="minor">Полностью закончи регистрацию Google и открой Gmail. После этого переходи в Claude</p>
+              <div class="result"><p><b>Результат:</b> почта Gmail открывается, можно выбрать её на экране входа Claude</p></div>
             </div>
           </div>
           <aside class="notice mail-notice">
-            <p class="notice-title">Почему здесь не используются Яндекс.Почта и Mail.ru</p>
-            <p>Для регистрации используй email международного почтового сервиса, например Gmail. Не подойдут временная почта и адреса на российских почтовых доменах Яндекса и Mail.ru: они не проходят верификацию аккаунта Anthropic</p>
+            <p class="notice-title">Почему в инструкции выбран Gmail</p>
+            <p>Это рекомендуемый маршрут этой инструкции, потому что кнопка Continue with Google показана на экране. Anthropic не публикует здесь правило о доменах Яндекс.Почты или Mail.ru, поэтому не выдаём такую рекомендацию за требование сервиса</p>
           </aside>
         </section>
 
@@ -442,29 +451,27 @@
                 </ul>
                 <figcaption>Экран входа Claude. Цифрами отмечены адрес и кнопка Continue with Google</figcaption>
               </figure>
-              <div class="result"><p><b>Результат:</b> Claude создаёт новый аккаунт или переходит к проверке телефонного номера</p></div>
+              <div class="result"><p><b>Результат:</b> для нового аккаунта Claude открывает проверку номера. Для существующего аккаунта ты входишь и переходишь к первому чату</p></div>
             </div>
           </div>
         </section>
 
         <section class="content-section" id="phone-verification">
           <p class="section-label">Шаг 4</p>
-          <h2>Подтвердить номер, если Claude запросил SMS</h2>
+          <h2>Подтвердить номер для нового аккаунта</h2>
           <div class="step">
             <div class="step-copy">
-              <h3>Используй постоянный зарубежный номер</h3>
-              <p>Для подтверждения нужен постоянный зарубежный телефонный номер. Российский номер не подходит. Используй реальную зарубежную SIM или eSIM, которая принимает обычные SMS</p>
-              <p>В идеале страна номера должна совпадать со страной IP. Для платной подписки понадобится ещё и карта той же страны, но это будет разобрано в отдельной инструкции. Сохрани доступ к номеру: Claude может снова запросить подтверждение при следующем входе</p>
-              <p class="minor">Номера VoIP и номера, которые не принимают обычные SMS, могут быть отклонены</p>
-              <div class="result"><p><b>Результат:</b> код принят, Claude открывает экран нового чата</p></div>
+              <h3>Пройди проверку номера</h3>
+              <p>При создании нового аккаунта Anthropic просит номер из поддерживаемой локации. Введи номер на экране проверки, дождись SMS с шестизначным кодом, введи его в поле и нажми <b>Verify code</b></p>
+              <p class="minor">Официальная справка Anthropic не принимает VoIP, Google Voice, номера из приложений, стационарные номера и другие номера без SMS. Выбирай номер, к которому сохранишь долгосрочный доступ</p>
+              <div class="result"><p><b>Результат:</b> код принят, создание аккаунта завершено и Claude открывает новый чат</p></div>
             </div>
           </div>
           <div class="step">
             <div class="step-copy">
-              <h3>Не используй номер из SMS-активатора</h3>
-              <p>Виртуальные номера из SMS-активаторов массово находятся в чёрных списках. Такой номер мог использоваться много раз и не пройти проверку Anthropic</p>
-              <p>Для регистрации нужен реальный номер с постоянным доступом, а не одноразовая аренда на несколько минут</p>
-              <div class="result"><p><b>Если номер отклонён:</b> не отправляй его повторно много раз. Возьми другую реальную SIM или eSIM той же страны, что IP</p></div>
+              <h3>Если код не пришёл или не подошёл</h3>
+              <p>Подожди несколько минут. Если прошло больше пяти минут, нажми <b>Try again</b>, заново введи номер и запроси новый код. Если на экране остаётся ошибка, Anthropic советует использовать другой номер</p>
+              <div class="result"><p><b>Результат:</b> для проверки введён самый свежий код или выбран другой подходящий номер</p></div>
             </div>
           </div>
         </section>
@@ -476,13 +483,13 @@
             <div class="step-copy">
               <h3>Отправь короткое сообщение</h3>
               <p>Напиши в новом чате короткий вопрос. Если Claude отвечает, вход завершён</p>
-              <p>Для следующих входов сохрани выбранную страну, записанный IP, способ входа и доступ к тому же номеру подтверждения</p>
-              <div class="result"><p><b>На следующий вход:</b> включи VPN, выбери ту же страну, открой claude.ai и используй тот же аккаунт</p></div>
+              <p>Теперь настрой имя, инструкции и память в статье <a href="../kak-rasskazat-o-sebe/">«Как рассказать Claude о себе»</a>. Это избавит от повторного объяснения контекста в каждом новом чате</p>
+              <div class="result"><p><b>На следующий вход:</b> открой claude.ai и используй тот же способ входа</p></div>
             </div>
           </div>
           <aside class="notice">
             <p class="notice-title">Если аккаунт Claude уже существует</p>
-            <p>Новый Gmail и новый номер не нужны. Включи привычный VPN, выбери прежнюю страну и войди тем же способом, который использовался раньше</p>
+            <p>Войди тем же способом, который использовался раньше. Если экран проверки номера не появился, шаг с номером не нужен</p>
           </aside>
         </section>
 
@@ -491,46 +498,44 @@
           <h2>Что проверить, если вход не получился</h2>
           <details>
             <summary>Claude пишет, что сервис недоступен в регионе</summary>
-            <p>Закрой вкладку, отключи другие VPN и прокси, выбери в VPN поддерживаемую страну, проверь её на 2ip.ru и открой Claude заново</p>
+            <p>Проверь список поддерживаемых локаций Anthropic. Если ты находишься в поддерживаемой локации, повтори вход и обратись в поддержку Anthropic при сохранении ошибки</p>
           </details>
           <details>
             <summary>Google предлагает российскую локацию</summary>
-            <p>Не продолжай регистрацию в этом окне. Проверь VPN, открой отдельный чистый профиль браузера и начни создание Google-аккаунта заново</p>
+            <p>Это вопрос к регистрации Google, а не правило Anthropic. Заверши или исправь регистрацию по подсказкам Google, затем вернись к входу в Claude</p>
           </details>
           <details>
-            <summary>Российский номер не принимается</summary>
-            <p>Используй реальную зарубежную SIM или eSIM, которая принимает SMS. В идеале страна номера должна совпадать со страной IP</p>
+            <summary>Номер не принимается</summary>
+            <p>Для нового аккаунта нужен номер из поддерживаемой локации, который принимает SMS. VoIP, Google Voice, номера из приложений и стационарные номера не подходят</p>
           </details>
           <details>
             <summary>Код не приходит</summary>
-            <p>Проверь код страны и убедись, что номер принимает обычные SMS. Временный или VoIP-номер мог быть отклонён, тогда потребуется другая реальная SIM или eSIM</p>
+            <p>Если прошло больше пяти минут, нажми Try again, заново введи номер и запроси новый код. Если ошибка сохраняется, используй другой подходящий номер</p>
           </details>
           <details>
             <summary>После входа снова открывается стартовый экран</summary>
-            <p>Не переключай страну VPN. Закрой лишние вкладки Claude и повтори вход в отдельном профиле браузера</p>
+            <p>Войди тем же способом ещё раз. Если ошибка сохраняется, используй официальный раздел поддержки Anthropic</p>
           </details>
         </section>
 
         <section class="content-section" id="checklist">
           <p class="section-label">Финальная проверка</p>
-          <h2>Семь пунктов перед первым сообщением</h2>
+          <h2>Что проверить перед первым сообщением</h2>
           <div class="check-panel">
             <h3>Подключение подготовлено</h3>
             <ul class="checklist">
               <li>VPN включён, выбрана поддерживаемая страна</li>
-              <li>IP записан или сохранён на скриншоте для повторной проверки</li>
+              <li>При необходимости IP сохранён для собственной диагностики</li>
               <li>Google-аккаунт с Gmail открывается, и ты помнишь пароль</li>
-              <li>Для нового аккаунта не выбрана российская локация</li>
-              <li>Не используется временная почта или адрес в доменах Яндекса и Mail.ru</li>
-              <li>Есть реальный зарубежный телефонный номер той же страны, что IP</li>
+              <li>Для нового аккаунта: есть номер из поддерживаемой локации, который принимает SMS</li>
               <li>Открыт адрес claude.ai, а не Claude Code</li>
             </ul>
           </div>
-          <p class="future-note">Этот гид будет дополняться разделами серии для новичков «Claude.ai: кнопка за кнопкой». Список готовых разделов и ссылки на них будут появляться ниже</p>
+          <p class="future-note">После первого чата перейди к <a href="../kak-rasskazat-o-sebe/">настройке Claude под себя</a>: там добавишь имя, инструкции и память</p>
         </section>
 
         <section class="content-section" id="sources">
-          <p class="section-label">Проверено 7 сентября 2026</p>
+          <p class="section-label">Проверено 8 сентября 2026</p>
           <h2>Источники</h2>
           <ul class="sources">
             <li><a href="https://support.claude.com/en/articles/8461763-where-can-i-access-claude">Anthropic: где доступен Claude</a></li>
@@ -549,21 +554,31 @@
         <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев</footer>
       </article>
     </main>
+    <aside class="related-plaque" aria-label="Следующая статья">
+      <p class="plaque-label">После первого чата</p>
+      <h2>Как рассказать Claude о себе</h2>
+      <p>Настрой имя, постоянные инструкции и память, чтобы не объяснять контекст заново</p>
+      <p><a href="../kak-rasskazat-o-sebe/">Перейти к настройке</a></p>
+    </aside>
   </div>
 
   <script>
     const progress = document.querySelector('.progress');
-    const links = [...document.querySelectorAll('.toc a')];
-    const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const links = [...document.querySelectorAll('.toc a, .mobile-toc a')];
+    const sections = [...new Set(links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean))];
+    let hashIsSettling = Boolean(location.hash);
     const updateProgress = () => {
       const height = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.width = `${height > 0 ? Math.min(100, window.scrollY / height * 100) : 0}%`;
     };
-    const updateToc = () => {
+    const updateToc = (preferHash = false) => {
       const marker = window.scrollY + Math.min(220, window.innerHeight * .32);
       let current = sections[0];
       for (const section of sections) {
         if (section.offsetTop <= marker) current = section;
+      }
+      if ((preferHash || hashIsSettling) && location.hash) {
+        current = sections.find(section => `#${section.id}` === location.hash) || current;
       }
       links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current.id}`));
     };
@@ -571,8 +586,15 @@
       updateProgress();
       updateToc();
     }, { passive: true });
-    addEventListener('hashchange', () => requestAnimationFrame(updateToc));
-    addEventListener('load', () => requestAnimationFrame(updateToc));
+    const updateHashTarget = () => {
+      const target = sections.find(section => `#${section.id}` === location.hash);
+      hashIsSettling = true;
+      if (target) target.scrollIntoView({ block: 'start' });
+      requestAnimationFrame(() => updateToc(true));
+      setTimeout(() => { hashIsSettling = false; }, 500);
+    };
+    addEventListener('hashchange', updateHashTarget);
+    addEventListener('load', updateHashTarget);
     document.querySelectorAll('[data-copy-target]').forEach(button => {
       button.addEventListener('click', async () => {
         const target = document.getElementById(button.dataset.copyTarget);
@@ -591,8 +613,9 @@
       });
     });
     updateProgress();
-    updateToc();
-    requestAnimationFrame(() => requestAnimationFrame(updateToc));
+    updateToc(Boolean(location.hash));
+    requestAnimationFrame(() => requestAnimationFrame(() => updateToc(Boolean(location.hash))));
+    if (location.hash) updateHashTarget();
   </script>
 </body>
 </html>
