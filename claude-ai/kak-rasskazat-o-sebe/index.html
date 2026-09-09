@@ -105,6 +105,12 @@
     .memory-sensitive { left: 20.5%; top: 20.8%; width: 76%; height: 9.1% }
     .memory-sensitive::before { right: -16px; left: auto }
     .memory-import { left: 20.5%; top: 30.3%; width: 76%; height: 12.5% }
+    .topics-nav { left: 2.5%; top: 44.7%; width: 16%; height: 7.2% }
+    .topics-first { left: 24.2%; top: 44.7%; width: 69%; height: 14.2% }
+    .topics-first::before { right: -16px; left: auto }
+    .detail-records { left: 24.2%; top: 18.5%; width: 69%; height: 57.5% }
+    .detail-actions { left: 79.4%; top: 22.5%; width: 11.5%; height: 48.5% }
+    .detail-actions::before { right: -16px; left: auto }
     .screen-key { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 22px; margin: 15px 0 0; padding: 0; list-style: none; color: var(--muted); font: 600 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .screen-key li { margin: 0 }
     .screen-key b { color: var(--accent-dark) }
@@ -185,7 +191,7 @@
       .prompt-box pre { font-size: 12px }
       .annotation { border-width: 2px }
       .annotation::before { top: -12px; left: -12px; width: 23px; height: 23px; font-size: 11px }
-      .general-profile::before, .memory-sensitive::before { right: -12px; left: auto }
+      .general-profile::before, .memory-sensitive::before, .topics-first::before, .detail-actions::before { right: -12px; left: auto }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto }
@@ -215,6 +221,8 @@
       <a class="toc-sub" href="#appearance">3. Как выбрать оформление и шрифт</a>
       <div class="toc-group">Memory</div>
       <a class="toc-sub" href="#memory">Зачем включать память</a>
+      <a class="toc-sub" href="#memory-from-chats">Что Claude выбирает из чатов</a>
+      <a class="toc-sub" href="#manage-memory">Где посмотреть и исправить память</a>
       <a class="toc-sub" href="#import-chatgpt">Как перенести данные из ChatGPT</a>
       <a href="#check">Как проверить настройки</a>
       <a href="#sources">Источники</a>
@@ -231,6 +239,8 @@
           <a href="#appearance">3. Как выбрать оформление и шрифт</a>
           <strong>Memory</strong>
           <a href="#memory">Зачем включать память</a>
+          <a href="#memory-from-chats">Что Claude выбирает из чатов</a>
+          <a href="#manage-memory">Где посмотреть и исправить память</a>
           <a href="#import-chatgpt">Как перенести данные из ChatGPT</a>
           <a href="#check">Как проверить настройки</a>
           <a href="#sources">Источники</a>
@@ -241,7 +251,7 @@
         <header id="o-sebe">
           <p class="eyebrow">Claude.ai · настройка под себя</p>
           <h1>Как рассказать Claude о себе</h1>
-          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 8 СЕНТЯБРЯ 2026</p>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 9 СЕНТЯБРЯ 2026</p>
           <p class="lead">Эта настройка нужна, чтобы Claude помнил, кто ты, чем занимаешься и какие ответы тебе подходят. Тогда в новых чатах он сможет приводить примеры из твоей области, а тебе не придётся каждый раз заново объяснять свой контекст</p>
           <aside class="route-note" aria-label="Короткий маршрут">
             <h2>Короткий маршрут</h2>
@@ -341,10 +351,49 @@
           </figure>
           <div class="step">
             <h3>Включи память из разговоров</h3>
-            <p>Открой <span class="path">Settings → Memory</span> и включи <b>Generate memory from chats</b>. Создание памяти из старых разговоров может занять некоторое время. Ниже будут появляться темы, которые можно просмотреть, уточнить или удалить</p>
+            <p>Открой <span class="path">Settings → Memory</span> и включи <b>Generate memory from chats</b>. По мере общения ниже будут появляться темы, которые можно просмотреть, уточнить или удалить</p>
             <div class="info-card">
               <p><span class="info-title">Чувствительные темы:</span> <b>Include sensitive topics in memory</b> разрешает сохранять сведения о здоровье, религии и других личных темах. Если такая память тебе не нужна, оставь переключатель выключенным</p>
             </div>
+          </div>
+          <div class="step">
+            <h3 id="memory-from-chats">Что Claude выбирает из чатов</h3>
+            <p>Claude не складывает переписки в память целиком. По мере общения он создаёт отдельные темы и сохраняет в них то, что пригодится в следующих разговорах: твою роль, проекты, рабочие предпочтения, стиль общения и текущие задачи</p>
+            <p>Если ты ничего не рассказывал о себе, выбирать ему не из чего. Разговор о редактировании документа сам по себе не объясняет, кто ты, чем занимаешься и как тебе удобнее получать ответы</p>
+            <div class="info-card">
+              <p><span class="info-title">Если нужно запомнить конкретный факт:</span> напиши в обычном чате, например: «Запомни, что я готовлю короткие видео про ИИ и предпочитаю короткие ответы без воды»</p>
+            </div>
+            <div class="result"><p><b>Результат:</b> Claude получает факты, которые сможет использовать в следующих разговорах</p></div>
+          </div>
+          <div class="step">
+            <h3 id="manage-memory">Где посмотреть и исправить память</h3>
+            <p>Открой <span class="path">Settings → Memory</span> и найди список <b>Topics</b>. В нём Claude группирует сохранённые записи по темам. Нажми на нужную тему, чтобы прочитать её содержимое</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-memory-topics-example.svg" alt="Учебный пример списка Topics в памяти Claude">
+                <span class="annotation topics-nav" data-n="1" aria-hidden="true"></span>
+                <span class="annotation topics-first" data-n="2" aria-hidden="true"></span>
+              </div>
+              <ul class="screen-key" aria-label="Пояснения к списку тем памяти">
+                <li><b>1</b> Memory: раздел памяти</li>
+                <li><b>2</b> Тема: открой и проверь сохранённые записи</li>
+              </ul>
+              <figcaption>Учебный пример с вымышленными темами без личных данных</figcaption>
+            </figure>
+            <p>Внутри темы прочитай каждую запись. Карандаш открывает редактирование, корзина удаляет ненужный или неверный факт. То же самое можно попросить прямо в чате: «Исправь в памяти…» или «Забудь…»</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-memory-topic-detail-example.svg" alt="Учебный пример записей внутри темы памяти Claude">
+                <span class="annotation detail-records" data-n="3" aria-hidden="true"></span>
+                <span class="annotation detail-actions" data-n="4" aria-hidden="true"></span>
+              </div>
+              <ul class="screen-key" aria-label="Пояснения к записям внутри темы памяти">
+                <li><b>3</b> Записи: проверь, что Claude понял правильно</li>
+                <li><b>4</b> Карандаш и корзина: исправить или удалить</li>
+              </ul>
+              <figcaption>Учебный пример. Имена проектов и личные сведения не используются</figcaption>
+            </figure>
+            <div class="result"><p><b>Результат:</b> ты проверил сохранённые темы и убрал неверную или устаревшую информацию</p></div>
           </div>
           <div class="compare-wrap" aria-label="Разница между Instructions и Memory">
             <table class="compare">
@@ -357,7 +406,7 @@
             </table>
           </div>
           <p class="minor">Инкогнито-чат не использует историю и память и не добавляет туда новый разговор</p>
-          <div class="result"><p><b>Результат:</b> в разделе Memory видны сохранённые темы, а ненужные или неверные сведения можно удалить</p></div>
+          <div class="result"><p><b>Результат:</b> память включена, а новые полезные факты смогут появляться в Topics</p></div>
         </section>
 
         <section class="content-section" id="import-chatgpt">
