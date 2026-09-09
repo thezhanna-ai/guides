@@ -111,6 +111,18 @@
     .detail-records { left: 24.2%; top: 18.5%; width: 69%; height: 57.5% }
     .detail-actions { left: 79.4%; top: 22.5%; width: 11.5%; height: 48.5% }
     .detail-actions::before { right: -16px; left: auto }
+    .import-copy { left: 23.8%; top: 33.6%; width: 52.1%; height: 17.7% }
+    .import-paste { left: 23.8%; top: 62.4%; width: 52.1%; height: 18% }
+    .import-submit { left: 63.3%; top: 83.7%; width: 12.8%; height: 5.8% }
+    .import-submit::before { right: -16px; left: auto }
+    .chatgpt-prompt { left: 3.8%; top: 24.2%; width: 92%; height: 56.2% }
+    .chatgpt-send { left: 89.7%; top: 69.7%; width: 5.6%; height: 9.1% }
+    .chatgpt-send::before { right: -16px; left: auto }
+    .response-shot { aspect-ratio: 1 / 1.05; overflow: hidden; border: 1px solid var(--line); border-radius: 8px }
+    .response-shot img { height: 100%; border: 0; border-radius: 0; object-fit: cover; object-position: top }
+    .chatgpt-result { left: 6.5%; top: 22.5%; width: 88%; height: 65% }
+    .chatgpt-copy { left: 80.5%; top: 13.3%; width: 5%; height: 5% }
+    .chatgpt-copy::before { right: -16px; left: auto }
     .screen-key { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 22px; margin: 15px 0 0; padding: 0; list-style: none; color: var(--muted); font: 600 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .screen-key li { margin: 0 }
     .screen-key b { color: var(--accent-dark) }
@@ -191,7 +203,7 @@
       .prompt-box pre { font-size: 12px }
       .annotation { border-width: 2px }
       .annotation::before { top: -12px; left: -12px; width: 23px; height: 23px; font-size: 11px }
-      .general-profile::before, .memory-sensitive::before, .topics-first::before, .detail-actions::before { right: -12px; left: auto }
+      .general-profile::before, .memory-sensitive::before, .topics-first::before, .detail-actions::before, .import-submit::before, .chatgpt-send::before, .chatgpt-copy::before { right: -12px; left: auto }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto }
@@ -412,9 +424,61 @@
         <section class="content-section" id="import-chatgpt">
           <p class="section-label">Если раньше был ChatGPT</p>
           <h3>Как перенести данные из ChatGPT</h3>
-          <p class="purpose">Функция импорта экспериментальная: она доступна в Claude.ai и Claude Desktop на планах Free, Pro, Max и Team, но импорт может не сработать</p>
-          <p>Если в настройках есть блок <b>Import memory from other AI providers</b>, в нём можно начать перенос информации о тебе из ChatGPT</p>
-          <aside class="future-note"><p>Если кнопки <b>Start import</b> нет, дождись отдельной инструкции или перенеси нужную информацию вручную. Не придумывай другой способ запуска импорта</p></aside>
+          <p class="purpose">Если ChatGPT уже знает, чем ты занимаешься и как тебе удобнее получать ответы, этот контекст можно перенести в Claude. Тогда не придётся восстанавливать всю информацию вручную</p>
+          <ol class="steps">
+            <li>Открой <a href="https://claude.ai/settings/memory">Memory в настройках Claude</a> и нажми <b>Start import</b></li>
+            <li>Скопируй готовый запрос, который покажет Claude</li>
+            <li>Открой <a href="https://chatgpt.com/">ChatGPT</a> в новой вкладке, создай новый чат, вставь запрос и отправь его</li>
+            <li>Дождись ответа ChatGPT и скопируй весь сформированный блок</li>
+            <li>Вернись в Claude, вставь ответ в поле импорта и нажми <b>Add to memory</b></li>
+            <li>После завершения импорта открой <b>Topics</b> или нажми <b>See what Claude learned about you</b> и проверь записи</li>
+          </ol>
+          <figure>
+            <div class="shot">
+              <img src="assets/chatgpt-memory-export-prompt.png" alt="Запрос на выгрузку контекста вставлен в новый чат ChatGPT">
+              <span class="annotation chatgpt-prompt" data-n="1" aria-hidden="true"></span>
+              <span class="annotation chatgpt-send" data-n="2" aria-hidden="true"></span>
+            </div>
+            <ul class="screen-key" aria-label="Пояснения к запросу в ChatGPT">
+              <li><b>1</b> Вставь запрос в новый чат</li>
+              <li><b>2</b> Отправь и дождись ответа</li>
+            </ul>
+            <figcaption>ChatGPT: запрос готов к отправке</figcaption>
+          </figure>
+          <figure>
+            <div class="shot response-shot">
+              <img src="assets/chatgpt-memory-export-result-redacted.png" alt="Ответ ChatGPT с собранным контекстом без личного имени">
+              <span class="annotation chatgpt-result" data-n="1" aria-hidden="true"></span>
+              <span class="annotation chatgpt-copy" data-n="2" aria-hidden="true"></span>
+            </div>
+            <ul class="screen-key" aria-label="Пояснения к ответу ChatGPT">
+              <li><b>1</b> Проверь сформированный контекст</li>
+              <li><b>2</b> Скопируй весь ответ целиком</li>
+            </ul>
+            <figcaption>Пример ответа ChatGPT. Имя удалено из изображения</figcaption>
+          </figure>
+          <figure>
+            <div class="shot">
+              <img src="assets/claude-memory-import-example.svg" alt="Учебный экран импорта памяти в Claude с запросом, полем для ответа ChatGPT и кнопкой Add to memory">
+              <span class="annotation import-copy" data-n="1" aria-hidden="true"></span>
+              <span class="annotation import-paste" data-n="2" aria-hidden="true"></span>
+              <span class="annotation import-submit" data-n="3" aria-hidden="true"></span>
+            </div>
+            <ul class="screen-key" aria-label="Пояснения к импорту памяти">
+              <li><b>1</b> Скопируй запрос для ChatGPT</li>
+              <li><b>2</b> Вставь весь ответ ChatGPT</li>
+              <li><b>3</b> Отправь текст на обработку</li>
+            </ul>
+            <figcaption>Учебный пример экрана Claude. Личные сведения не используются</figcaption>
+          </figure>
+          <p>Если Claude не показал готовый запрос, используй этот вариант:</p>
+          <div class="prompt-box">
+            <button class="copy-button" type="button" data-copy-target="chatgpt-memory-prompt">Скопировать</button>
+            <pre id="chatgpt-memory-prompt">Я перехожу в другой ИИ-сервис и хочу перенести контекст. Собери всё, что ты помнишь обо мне и узнал из прошлых разговоров: мои инструкции по стилю ответов, сведения обо мне и моей работе, проекты, цели, инструменты, предпочтения и мои исправления. Выведи всё одним блоком текста, чтобы я мог скопировать его целиком. Не добавляй ничего, чего не знаешь</pre>
+          </div>
+          <div class="info-card"><p><span class="info-title">Не закрывай импорт сразу:</span> после нажатия <b>Add to memory</b> Claude потребуется время на обработку. Точный срок Anthropic не указывает, поэтому дождись появления новых записей в Memory</p></div>
+          <p class="minor">Импорт памяти пока экспериментальный и иногда не срабатывает. Если кнопки Start import нет или записи не появились, важные факты можно добавить через Tell Claude what to change or remove либо сообщить Claude в обычном чате</p>
+          <div class="result"><p><b>Результат:</b> сведения из ChatGPT отправлены на обработку и после завершения появятся в памяти Claude</p></div>
         </section>
 
         <section class="content-section" id="check">

@@ -141,17 +141,18 @@ class GuidesSiteTest(unittest.TestCase):
         ):
             self.assertNotIn(phrase, html)
 
-    def test_future_import_is_not_a_self_link(self):
+    def test_chatgpt_memory_import_is_complete(self):
         html = PROFILE.read_text(encoding="utf-8")
         import_section = html.split('id="import-chatgpt"', 1)[1].split('id="check"', 1)[0]
         self.assertNotIn('href="#import-chatgpt"', import_section)
         for phrase in (
-            "экспериментальная",
-            "Claude.ai и Claude Desktop",
-            "Free, Pro, Max и Team",
-            "импорт может не сработать",
             "Start import",
-            "перенеси нужную информацию вручную",
+            "Add to memory",
+            "https://chatgpt.com/",
+            "chatgpt-memory-export-prompt.png",
+            "chatgpt-memory-export-result-redacted.png",
+            "claude-memory-import-example.svg",
+            "Точный срок Anthropic не указывает",
         ):
             self.assertIn(phrase, import_section)
 
