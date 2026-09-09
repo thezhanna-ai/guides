@@ -424,60 +424,65 @@
         <section class="content-section" id="import-chatgpt">
           <p class="section-label">Если раньше был ChatGPT</p>
           <h3>Как перенести данные из ChatGPT</h3>
-          <p class="purpose">Если ChatGPT уже знает, чем ты занимаешься и как тебе удобнее получать ответы, этот контекст можно перенести в Claude. Тогда не придётся восстанавливать всю информацию вручную</p>
-          <ol class="steps">
-            <li>Открой <a href="https://claude.ai/settings/memory">Memory в настройках Claude</a> и нажми <b>Start import</b></li>
-            <li>Скопируй готовый запрос, который покажет Claude</li>
-            <li>Открой <a href="https://chatgpt.com/">ChatGPT</a> в новой вкладке, создай новый чат, вставь запрос и отправь его</li>
-            <li>Дождись ответа ChatGPT и скопируй весь сформированный блок</li>
-            <li>Вернись в Claude, вставь ответ в поле импорта и нажми <b>Add to memory</b></li>
-            <li>После завершения импорта открой <b>Topics</b> или нажми <b>See what Claude learned about you</b> и проверь записи</li>
-          </ol>
-          <figure>
-            <div class="shot">
-              <img src="assets/chatgpt-memory-export-prompt.png" alt="Запрос на выгрузку контекста вставлен в новый чат ChatGPT">
-              <span class="annotation chatgpt-prompt" data-n="1" aria-hidden="true"></span>
-              <span class="annotation chatgpt-send" data-n="2" aria-hidden="true"></span>
+          <p class="purpose">Если ты раньше пользовался ChatGPT, а теперь хочешь работать с Claude, не начинай знакомство с нуля. Перенеси в Claude то, что уже рассказывал о себе другой нейросети: чем занимаешься, над чем работаешь и какие ответы тебе подходят</p>
+          <div class="step">
+            <h3>1. Открой импорт в Claude</h3>
+            <p>Открой <a href="https://claude.ai/settings/memory">Memory в настройках Claude</a>, нажми <b>Start import</b> и скопируй готовый запрос, который покажет Claude</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-memory-import-example.svg" alt="Учебный экран импорта памяти в Claude с запросом, полем для ответа ChatGPT и кнопкой Add to memory">
+                <span class="annotation import-copy" data-n="1" aria-hidden="true"></span>
+                <span class="annotation import-paste" data-n="2" aria-hidden="true"></span>
+                <span class="annotation import-submit" data-n="3" aria-hidden="true"></span>
+              </div>
+              <ul class="screen-key" aria-label="Пояснения к импорту памяти">
+                <li><b>1</b> Скопируй запрос сейчас</li>
+                <li><b>2</b> Сюда вернёшься с ответом</li>
+                <li><b>3</b> После вставки запустишь импорт</li>
+              </ul>
+              <figcaption>Учебный пример экрана Claude. Личные сведения не используются</figcaption>
+            </figure>
+            <p>Если Claude не показал готовый запрос, используй этот вариант:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="chatgpt-memory-prompt">Скопировать</button>
+              <pre id="chatgpt-memory-prompt">Я перехожу в другой ИИ-сервис и хочу перенести контекст. Собери всё, что ты помнишь обо мне и узнал из прошлых разговоров: мои инструкции по стилю ответов, сведения обо мне и моей работе, проекты, цели, инструменты, предпочтения и мои исправления. Выведи всё одним блоком текста, чтобы я мог скопировать его целиком. Не добавляй ничего, чего не знаешь</pre>
             </div>
-            <ul class="screen-key" aria-label="Пояснения к запросу в ChatGPT">
-              <li><b>1</b> Вставь запрос в новый чат</li>
-              <li><b>2</b> Отправь и дождись ответа</li>
-            </ul>
-            <figcaption>ChatGPT: запрос готов к отправке</figcaption>
-          </figure>
-          <figure>
-            <div class="shot response-shot">
-              <img src="assets/chatgpt-memory-export-result-redacted.png" alt="Ответ ChatGPT с собранным контекстом без личного имени">
-              <span class="annotation chatgpt-result" data-n="1" aria-hidden="true"></span>
-              <span class="annotation chatgpt-copy" data-n="2" aria-hidden="true"></span>
-            </div>
-            <ul class="screen-key" aria-label="Пояснения к ответу ChatGPT">
-              <li><b>1</b> Проверь сформированный контекст</li>
-              <li><b>2</b> Скопируй весь ответ целиком</li>
-            </ul>
-            <figcaption>Пример ответа ChatGPT. Имя удалено из изображения</figcaption>
-          </figure>
-          <figure>
-            <div class="shot">
-              <img src="assets/claude-memory-import-example.svg" alt="Учебный экран импорта памяти в Claude с запросом, полем для ответа ChatGPT и кнопкой Add to memory">
-              <span class="annotation import-copy" data-n="1" aria-hidden="true"></span>
-              <span class="annotation import-paste" data-n="2" aria-hidden="true"></span>
-              <span class="annotation import-submit" data-n="3" aria-hidden="true"></span>
-            </div>
-            <ul class="screen-key" aria-label="Пояснения к импорту памяти">
-              <li><b>1</b> Скопируй запрос для ChatGPT</li>
-              <li><b>2</b> Вставь весь ответ ChatGPT</li>
-              <li><b>3</b> Отправь текст на обработку</li>
-            </ul>
-            <figcaption>Учебный пример экрана Claude. Личные сведения не используются</figcaption>
-          </figure>
-          <p>Если Claude не показал готовый запрос, используй этот вариант:</p>
-          <div class="prompt-box">
-            <button class="copy-button" type="button" data-copy-target="chatgpt-memory-prompt">Скопировать</button>
-            <pre id="chatgpt-memory-prompt">Я перехожу в другой ИИ-сервис и хочу перенести контекст. Собери всё, что ты помнишь обо мне и узнал из прошлых разговоров: мои инструкции по стилю ответов, сведения обо мне и моей работе, проекты, цели, инструменты, предпочтения и мои исправления. Выведи всё одним блоком текста, чтобы я мог скопировать его целиком. Не добавляй ничего, чего не знаешь</pre>
+          </div>
+          <div class="step">
+            <h3>2. Забери контекст из ChatGPT</h3>
+            <p>Открой <a href="https://chatgpt.com/">ChatGPT</a> в новой вкладке, создай новый чат, вставь запрос из Claude и отправь его</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/chatgpt-memory-export-prompt.png" alt="Запрос на выгрузку контекста вставлен в новый чат ChatGPT">
+                <span class="annotation chatgpt-prompt" data-n="1" aria-hidden="true"></span>
+                <span class="annotation chatgpt-send" data-n="2" aria-hidden="true"></span>
+              </div>
+              <ul class="screen-key" aria-label="Пояснения к запросу в ChatGPT">
+                <li><b>1</b> Вставь запрос в новый чат</li>
+                <li><b>2</b> Отправь и дождись ответа</li>
+              </ul>
+              <figcaption>ChatGPT: запрос готов к отправке</figcaption>
+            </figure>
+            <p>Когда ChatGPT сформирует ответ, проверь его и скопируй весь блок целиком</p>
+            <figure>
+              <div class="shot response-shot">
+                <img src="assets/chatgpt-memory-export-result-redacted.png" alt="Ответ ChatGPT с собранным контекстом без личного имени">
+                <span class="annotation chatgpt-result" data-n="1" aria-hidden="true"></span>
+                <span class="annotation chatgpt-copy" data-n="2" aria-hidden="true"></span>
+              </div>
+              <ul class="screen-key" aria-label="Пояснения к ответу ChatGPT">
+                <li><b>1</b> Проверь сформированный контекст</li>
+                <li><b>2</b> Скопируй весь ответ целиком</li>
+              </ul>
+              <figcaption>Пример ответа ChatGPT. Имя удалено из изображения</figcaption>
+            </figure>
+          </div>
+          <div class="step">
+            <h3>3. Верни ответ в Claude</h3>
+            <p>Вернись к экрану импорта Claude со скрина выше, вставь ответ ChatGPT в поле <b>Paste the result</b> и нажми <b>Add to memory</b></p>
           </div>
           <div class="info-card"><p><span class="info-title">Не закрывай импорт сразу:</span> после нажатия <b>Add to memory</b> Claude потребуется время на обработку. Точный срок Anthropic не указывает, поэтому дождись появления новых записей в Memory</p></div>
-          <p class="minor">Импорт памяти пока экспериментальный и иногда не срабатывает. Если кнопки Start import нет или записи не появились, важные факты можно добавить через Tell Claude what to change or remove либо сообщить Claude в обычном чате</p>
+          <p class="minor">Когда импорт завершится, открой Topics или нажми See what Claude learned about you и проверь записи. Если импорт не сработал, важные факты можно добавить через Tell Claude what to change or remove либо сообщить Claude в обычном чате</p>
           <div class="result"><p><b>Результат:</b> сведения из ChatGPT отправлены на обработку и после завершения появятся в памяти Claude</p></div>
         </section>
 
