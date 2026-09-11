@@ -89,6 +89,8 @@
     .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
     .info-card p { margin: 0 }
     .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    .limit-card { margin-top: 24px; padding: 13px 18px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .limit-card p { margin: 0 }
 
     figure { margin: 28px 0 0 }
     .shot { position: relative; width: min(100%, 620px) }
@@ -523,8 +525,8 @@
           </div>
           <div class="step">
             <h3 id="search-settings">Где включается и выключается</h3>
-            <p>Бывает наоборот: не хочешь, чтобы Claude вообще заглядывал в прошлые разговоры. Тогда поиск отключается одним переключателем</p>
-            <p>Лежит он там же, где память: <span class="path">Settings → Memory</span>, самый первый пункт <b>Search and reference chats</b>. По умолчанию включён, так что специально включать ничего не нужно</p>
+            <p>Включать ничего не надо: поиск работает сразу, по умолчанию он уже включён</p>
+            <p>А вот если ты не хочешь, чтобы Claude вообще заглядывал в прошлые разговоры, его отключают одним движением. Переключатель лежит там же, где память: <span class="path">Settings → Memory</span>, самый первый пункт <b>Search and reference chats</b></p>
             <figure>
               <div class="shot">
                 <img src="assets/claude-search-chats.png" alt="Экран Settings, раздел Memory: включённый переключатель Search and reference chats первым в списке">
@@ -537,8 +539,8 @@
               </ul>
               <figcaption>Переключатель стоит первым в списке, над Generate memory from chats. Синий - значит включён</figcaption>
             </figure>
-            <div class="info-card">
-              <p><span class="info-title">Поиск по чатам доступен на платных тарифах.</span> На бесплатном Claude ответит, что найти прошлый разговор не может. Память при этом работает на всех тарифах, это разные вещи</p>
+            <div class="limit-card">
+              <p><span class="info-title">Поиск по чатам доступен только на платных тарифах</span> - Pro, Max, Team и Enterprise. На бесплатном тарифе прошлый разговор поднять не получится. Память при этом работает и на бесплатном, это разные вещи</p>
             </div>
           </div>
           <div class="step">
