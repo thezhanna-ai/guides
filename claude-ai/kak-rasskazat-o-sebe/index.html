@@ -105,9 +105,9 @@
     .memory-sensitive { left: 20.5%; top: 20.8%; width: 76%; height: 9.1% }
     .memory-sensitive::before { right: -16px; left: auto }
     .memory-import { left: 20.5%; top: 30.3%; width: 76%; height: 12.5% }
-    .search-nav { left: 2.5%; top: 54.6%; width: 16%; height: 8.5% }
+    .search-nav { left: 1.3%; top: 70.1%; width: 17.2%; height: 7.8% }
     .search-nav::before { top: 50%; left: -18px; transform: translateY(-50%) }
-    .search-toggle { left: 23.8%; top: 39.8%; width: 69.8%; height: 10.5% }
+    .search-toggle { left: 20.7%; top: 24.7%; width: 76.7%; height: 13.6% }
     .search-toggle::before { right: -16px; left: auto }
     .topics-nav { left: 2.5%; top: 44.7%; width: 16%; height: 7.2% }
     .topics-first { left: 24.2%; top: 44.7%; width: 69%; height: 14.2% }
@@ -524,10 +524,10 @@
           <div class="step">
             <h3 id="search-settings">Где включается и выключается</h3>
             <p>Бывает наоборот: не хочешь, чтобы Claude вообще заглядывал в прошлые разговоры. Тогда поиск отключается одним переключателем</p>
-            <p>Лежит он там же, где память: <span class="path">Settings → Memory</span>, пункт <b>Search and reference chats</b>. По умолчанию включён, так что специально включать ничего не нужно</p>
+            <p>Лежит он там же, где память: <span class="path">Settings → Memory</span>, самый первый пункт <b>Search and reference chats</b>. По умолчанию включён, так что специально включать ничего не нужно</p>
             <figure>
               <div class="shot">
-                <img src="assets/claude-search-chats-example.svg" alt="Учебный пример экрана Settings, раздел Memory: включённый переключатель Search and reference chats">
+                <img src="assets/claude-search-chats.png" alt="Экран Settings, раздел Memory: включённый переключатель Search and reference chats первым в списке">
                 <span class="annotation search-nav" data-n="1" aria-hidden="true"></span>
                 <span class="annotation search-toggle" data-n="2" aria-hidden="true"></span>
               </div>
@@ -535,7 +535,7 @@
                 <li><b>1</b> Memory: раздел памяти в настройках</li>
                 <li><b>2</b> Search and reference chats: переключатель должен быть включён</li>
               </ul>
-              <figcaption>Учебная схема экрана. Переключатель стоит вторым в списке, сразу под Generate memory from chats</figcaption>
+              <figcaption>Переключатель стоит первым в списке, над Generate memory from chats. Синий - значит включён</figcaption>
             </figure>
             <div class="info-card">
               <p><span class="info-title">Поиск по чатам доступен на платных тарифах.</span> На бесплатном Claude ответит, что найти прошлый разговор не может. Память при этом работает на всех тарифах, это разные вещи</p>
