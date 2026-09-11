@@ -185,6 +185,8 @@
     figure { margin: 28px 0 0 }
     .shot { width: min(100%, 620px) }
     .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--white) }
+    .shot.small { width: min(100%, 388px) }
+    .shot.medium { width: min(100%, 527px) }
     figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .effort-table { width: 100%; margin: 24px 0 0; border-collapse: collapse; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .effort-table th, .effort-table td { padding: 14px 0; border-top: 1px solid var(--line); text-align: left; vertical-align: top }
@@ -224,7 +226,7 @@
     <nav class="toc" aria-label="Содержание">
       <p class="toc-label">Содержание</p>
       <a class="active" href="#pervyy-proekt">Как собрать первый проект в Claude</a>
-      <div class="toc-group">Сборка</div>
+      <a href="#sborka">Сборка проекта</a>
       <a class="toc-sub" href="#gde-proekty">1. Где лежат проекты</a>
       <a class="toc-sub" href="#sozdat">2. Создать проект и дать ему имя</a>
       <a class="toc-sub" href="#znaniya">3. Добавить документы в базу знаний</a>
@@ -242,7 +244,7 @@
         <summary>Содержание статьи</summary>
         <nav aria-label="Содержание на телефоне">
           <a href="#pervyy-proekt">Как собрать первый проект в Claude</a>
-          <strong>Сборка</strong>
+          <a href="#sborka">Сборка проекта</a>
           <a href="#gde-proekty">1. Где лежат проекты</a>
           <a href="#sozdat">2. Создать проект и дать ему имя</a>
           <a href="#znaniya">3. Добавить документы в базу знаний</a>
@@ -264,12 +266,12 @@
           <p class="lead">Чаты по одной задаче расползаются по всей истории, и нужные файлы приходится каждый раз прикреплять заново. Проект собирает их в одно место: документы лежат в базе знаний, а каждый новый чат внутри проекта уже знает, о чём речь</p>
           <aside class="route-note" aria-label="Короткий маршрут">
             <h2>Короткий маршрут</h2>
-            <p>Projects в левом меню → + New Project → имя → добавить документы в базу знаний → написать инструкции → начать чат внутри проекта</p>
+            <p>Projects в левом меню → New project → имя → добавить документы в Context → написать инструкции в Instructions → начать чат внутри проекта</p>
           </aside>
           <p class="purpose">Если ты ещё не вошёл в Claude, начни с инструкции <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. А чтобы Claude знал, кто ты, пройди <a href="../kak-rasskazat-o-sebe/">«Как рассказать Claude о себе»</a></p>
         </header>
 
-        <section class="content-section">
+        <section class="content-section" id="sborka">
           <p class="section-label">С чего начать</p>
           <h2>Сборка проекта</h2>
           <p class="purpose">Весь проект собирается за пять шагов и занимает минут десять. Дальше он работает сам: ты просто открываешь его и пишешь, как в обычном чате</p>
@@ -280,13 +282,25 @@
               <p><span class="info-title">Если левого меню не видно:</span> на узком экране оно спрятано. Нажми на значок из трёх полосок в левом верхнем углу, меню выедет сбоку</p>
             </div>
             <p class="minor">Можно попасть туда и напрямую, по адресу <span class="path">claude.ai/projects</span></p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-projects-list.png" alt="Страница Projects в Claude: пункт Projects в левом меню и кнопка New project в правом верхнем углу">
+              </div>
+              <figcaption>Слева в меню пункт <b>Projects</b>, справа вверху кнопка <b>New project</b>. Ниже карточками лежат уже созданные проекты</figcaption>
+            </figure>
             <div class="result"><p><b>Результат:</b> перед тобой страница проектов, и ты знаешь, как возвращаться сюда каждый раз</p></div>
           </div>
           <div class="step">
             <h3 id="sozdat">2. Создать проект и дать ему имя</h3>
-            <p>В правом верхнем углу страницы проектов нажми <span class="path">+ New Project</span>. Claude попросит заполнить два поля</p>
-            <p><b>Name</b> - название проекта. Пиши по задаче, а не по теме вообще: не «Работа», а «Сайт для студии» или «Посты для Телеграма». Тогда через месяц ты найдёшь нужный проект за секунду</p>
-            <p><b>Description</b> - короткое пояснение, о чём проект. Это подпись для тебя, чтобы не путать проекты между собой</p>
+            <p>В правом верхнем углу страницы проектов нажми <span class="path">New project</span>. Откроется окно <span class="path">Create a project</span> с двумя полями</p>
+            <figure>
+              <div class="shot medium">
+                <img src="assets/claude-create-project.png" alt="Окно Create a project в Claude с полями What are you working on и What are you trying to achieve">
+              </div>
+              <figcaption>Так выглядят заполненные поля: имя <b>Карусели</b> и пояснение <b>для ИГ</b>. Короткого ответа хватает, расписывать не нужно. Дальше жмёшь <b>Create project</b></figcaption>
+            </figure>
+            <p><b>What are you working on?</b> - название проекта. Пиши по задаче, а не по теме вообще: не «Работа», а «Сайт для студии» или «Посты для Телеграма». Тогда через месяц ты найдёшь нужный проект за секунду</p>
+            <p><b>What are you trying to achieve?</b> - короткое пояснение, о чём проект. Это подпись для тебя, чтобы не путать проекты между собой</p>
             <div class="limit-card">
               <p><span class="info-title">На бесплатном тарифе можно создать до пяти проектов.</span> Если пять уже есть, новый не создастся, пока не удалить или не убрать в архив один из старых</p>
             </div>
@@ -294,8 +308,14 @@
           </div>
           <div class="step">
             <h3 id="znaniya">3. Добавить документы в базу знаний</h3>
-            <p>Справа внутри проекта находится <b>база знаний</b> - <span class="path">Project knowledge</span>. Это общая папка проекта: всё, что ты в неё положишь, видят все чаты этого проекта</p>
-            <p>Нажми <span class="path">+</span> и добавь файлы: документы, таблицы, тексты, куски кода. Можно вставить текст прямо в окно, не загружая файл</p>
+            <p>Посмотри вправо внутри проекта. Там столбец из трёх блоков: <span class="path">Instructions</span>, <span class="path">Memory</span> и <span class="path">Context</span>. База знаний - это <b>Context</b>, нижний блок. Это общая папка проекта: всё, что ты в неё положишь, видят все чаты этого проекта</p>
+            <p>Нажми <span class="path">+</span> справа от слова <b>Context</b> и добавь файлы: документы, таблицы, тексты, куски кода. Можно вставить текст прямо в окно, не загружая файл, или перетащить файлы мышкой прямо на этот столбец</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-project-context.png" alt="Правый столбец проекта в Claude: блоки Instructions, Memory и Context с загруженными файлами и полосой заполнения">
+              </div>
+              <figcaption>Стрелки показывают, куда попадают файлы: жмёшь <b>+</b> у <b>Context</b>, и документы ложатся карточками ниже. Полоса над ними показывает, сколько места проекта занято</figcaption>
+            </figure>
             <p>Клади туда то, что Claude должен помнить постоянно: описание твоего продукта, прайс, готовые тексты, выгрузку переписки с клиентом, техническое задание</p>
             <div class="info-card">
               <p><span class="info-title">Главное про базу знаний:</span> чаты внутри проекта не видят друг друга. Файл, который ты прикрепил в одном чате, в соседнем не появится. Общим он становится только тогда, когда лежит в базе знаний проекта</p>
@@ -305,7 +325,19 @@
           </div>
           <div class="step">
             <h3 id="instrukcii">4. Написать инструкции проекта</h3>
-            <p>В том же правом столбце есть <span class="path">Project instructions</span> - инструкции проекта. Здесь ты один раз объясняешь, как Claude должен вести себя именно в этом проекте: в какой роли, каким тоном, что учитывать и чего не делать</p>
+            <p>Открой в том же правом столбце верхний блок <span class="path">Instructions</span> - инструкции проекта. Здесь ты один раз объясняешь, как Claude должен вести себя именно в этом проекте: в какой роли, каким тоном, что учитывать и чего не делать</p>
+            <figure>
+              <div class="shot small">
+                <img src="assets/claude-instructions-button.png" alt="Блок Instructions в правом столбце проекта Claude: кнопка плюс с подсказкой Edit instructions">
+              </div>
+              <figcaption>Инструкции прячутся за плюсиком у слова <b>Instructions</b>. Наведёшь - Claude подскажет <b>Edit instructions</b></figcaption>
+            </figure>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-instructions-window.png" alt="Окно Set project instructions в Claude: пояснение и поле для текста инструкций">
+              </div>
+              <figcaption>Откроется окно <b>Set project instructions</b>. Claude сразу предупреждает: инструкции проекта работают <b>вместе</b> с настройками профиля, а не вместо них. Текст вставляешь в поле и жмёшь <b>Save instructions</b></figcaption>
+            </figure>
             <p>Это не то же самое, что общие настройки профиля. Профиль говорит, кто ты вообще. Инструкции проекта говорят, какую работу ты делаешь здесь</p>
             <div class="prompt-box">
               <button class="copy-button" type="button" data-copy-target="project-instructions">Скопировать</button>
@@ -316,21 +348,28 @@
           </div>
           <div class="step">
             <h3 id="chat">5. Начать чат внутри проекта</h3>
-            <p>Поле ввода внутри проекта выглядит как обычный чат, но работает иначе: он уже видит базу знаний и инструкции. Просто напиши задачу своими словами</p>
+            <p>Напиши задачу своими словами прямо в поле ввода внутри проекта. Выглядит оно как обычный чат, но работает иначе: этот чат уже видит базу знаний и инструкции</p>
             <p>Все чаты проекта складываются тут же, отдельным списком. История задачи перестаёт смешиваться с остальной перепиской</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-project-chat.png" alt="Чат внутри проекта Claude: путь Projects и имя проекта сверху, поле ввода и меню с тремя точками справа">
+              </div>
+              <figcaption>Задача пишется обычными словами, без вводных про то, что за проект: Claude уже знает это из базы знаний и инструкций. Сверху видно, где ты находишься, справа меню с тремя точками</figcaption>
+            </figure>
             <div class="info-card">
               <p><span class="info-title">Как проверить, что база знаний работает:</span> напиши в чате проекта «перечисли, какие документы лежат в базе знаний проекта». Claude назовёт файлы. Если он их не видит - значит файл прикреплён к чату, а не добавлен в базу</p>
             </div>
             <div class="result"><p><b>Результат:</b> проект собран и работает. Дальше ты открываешь его и пишешь, не повторяя вводные</p></div>
           </div>
         </section>
+
         <section class="content-section" id="perenesti">
           <p class="section-label">Что делать со старой перепиской</p>
           <h2>Перенести старый чат в проект</h2>
           <p class="purpose">Обычная ситуация: по задаче уже есть длинный разговор, и начинать с нуля жалко. Переносить его не нужно вручную</p>
           <p>Открой нужный чат, нажми на меню с тремя точками рядом с его названием и выбери перенос в проект. Чат встанет в список проекта вместе со всей историей</p>
           <div class="info-card">
-            <p><span class="info-title">Важная деталь:</span> перенос кладёт в проект сам разговор, но не наполняет базу знаний. Файлы, которые были прикреплены внутри того чата, добавь в <span class="path">Project knowledge</span> отдельно, иначе соседние чаты их не увидят</p>
+            <p><span class="info-title">Важная деталь:</span> перенос кладёт в проект сам разговор, но не наполняет базу знаний. Файлы, которые были прикреплены внутри того чата, добавь в <span class="path">Context</span> отдельно, иначе соседние чаты их не увидят</p>
           </div>
           <div class="result"><p><b>Результат:</b> начатая работа продолжается в проекте, ничего не потеряно</p></div>
         </section>
@@ -338,7 +377,7 @@
         <section class="content-section" id="granicy">
           <p class="section-label">Чтобы не ждать лишнего</p>
           <h2>Что проект не делает</h2>
-          <p class="purpose">Три вещи, из-за которых новички решают, что проект сломался</p>
+          <p class="purpose">Три причины, по которым новички решают, что проект сломался</p>
           <div class="check-panel">
             <h3>Границы проекта</h3>
             <ul class="checklist">
@@ -383,7 +422,7 @@
         <section class="cta">
           <p class="section-label">Следующий шаг</p>
           <h2>Твоя задача собрана в одном месте</h2>
-          <p>Проект наводит порядок внутри чата. Следующий шаг - когда Claude работает не с прикреплёнными файлами, а прямо с папкой на твоём компьютере и собирает готовые вещи: сайт, бота, таблицу. В ИИ-Лагере это делается простыми командами по-русски, без программирования</p>
+          <p>Проект наводит порядок внутри чата. Следующий шаг - когда Claude работает не с прикреплёнными файлами, а прямо с папкой на твоём компьютере и собирает готовое: сайт, бота, таблицу. В ИИ-Лагере это делается простыми командами по-русски, без программирования</p>
           <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">Перейти от чата к Claude Code</a>
         </section>
 

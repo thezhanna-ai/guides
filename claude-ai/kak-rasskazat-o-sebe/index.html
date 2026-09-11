@@ -233,16 +233,16 @@
     <nav class="toc" aria-label="Содержание">
       <p class="toc-label">Содержание</p>
       <a class="active" href="#o-sebe">Как рассказать Claude о себе</a>
-      <div class="toc-group">General</div>
+      <a href="#general">General</a>
       <a class="toc-sub" href="#settings">1. Где открыть настройки</a>
       <a class="toc-sub" href="#instructions">2. Заполни информацию о себе</a>
       <a class="toc-sub" href="#appearance">3. Как выбрать оформление и шрифт</a>
-      <div class="toc-group">Memory</div>
+      <a href="#pamyat">Memory</a>
       <a class="toc-sub" href="#memory">Зачем включать память</a>
       <a class="toc-sub" href="#memory-from-chats">Что Claude выбирает из чатов</a>
       <a class="toc-sub" href="#manage-memory">Где посмотреть и исправить память</a>
       <a class="toc-sub" href="#import-chatgpt">Как перенести данные из ChatGPT</a>
-      <div class="toc-group">Поиск по чатам</div>
+      <a href="#staryy-razgovor">Найти старый разговор</a>
       <a class="toc-sub" href="#search-chats">Когда это понадобится</a>
       <a class="toc-sub" href="#search-how">Как попросить</a>
       <a class="toc-sub" href="#search-settings">Где включается и выключается</a>
@@ -256,16 +256,16 @@
         <summary>Содержание статьи</summary>
         <nav aria-label="Содержание на телефоне">
           <a href="#o-sebe">Как рассказать Claude о себе</a>
-          <strong>General</strong>
+          <a href="#general">General</a>
           <a href="#settings">1. Где открыть настройки</a>
           <a href="#instructions">2. Заполни информацию о себе</a>
           <a href="#appearance">3. Как выбрать оформление и шрифт</a>
-          <strong>Memory</strong>
+          <a href="#pamyat">Memory</a>
           <a href="#memory">Зачем включать память</a>
           <a href="#memory-from-chats">Что Claude выбирает из чатов</a>
           <a href="#manage-memory">Где посмотреть и исправить память</a>
           <a href="#import-chatgpt">Как перенести данные из ChatGPT</a>
-          <strong>Поиск по чатам</strong>
+          <a href="#staryy-razgovor">Найти старый разговор</a>
           <a href="#search-chats">Когда это понадобится</a>
           <a href="#search-how">Как попросить</a>
           <a href="#search-settings">Где включается и выключается</a>
@@ -288,10 +288,10 @@
           <p class="purpose">Если ты ещё не вошёл в Claude, сначала пройди <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. Там проверишь доступ и первый чат, а сюда вернёшься, чтобы настроить имя, инструкции и память</p>
         </header>
 
-        <section class="content-section">
+        <section class="content-section" id="general">
           <p class="section-label">Настройки профиля</p>
           <h2>General</h2>
-          <p class="purpose">В настройках хранятся данные, которые Claude будет использовать не в одном разговоре, а во всех новых чатах</p>
+          <p class="purpose">Ты дописываешь к каждому запросу одно и то же: отвечай по-русски, покороче, без вступлений. Впиши это правило один раз в настройки, и Claude применит его не в одном разговоре, а во всех новых чатах</p>
           <div class="step">
             <h3 id="settings">1. Где открыть настройки</h3>
             <p>В левом нижнем углу Claude нажми на свои инициалы или имя. В открывшемся меню выбери <b>Settings</b>, затем в левой колонке нажми <b>General</b></p>
@@ -357,7 +357,7 @@
           <div class="result"><p><b>Результат:</b> в блоке 3 выбраны оформление и шрифт чата</p></div>
         </section>
 
-        <section class="content-section">
+        <section class="content-section" id="pamyat">
           <p class="section-label">Память Claude</p>
           <h2>Memory</h2>
           <h3 id="memory">Зачем включать память</h3>
@@ -503,9 +503,10 @@
           <div class="result"><p><b>Результат:</b> сведения из ChatGPT отправлены на обработку и после завершения появятся в памяти Claude</p></div>
         </section>
 
-        <section class="content-section">
+        <section class="content-section" id="staryy-razgovor">
           <p class="section-label">Поиск по прошлым чатам</p>
           <h2>Найти старый разговор</h2>
+          <p class="purpose">Работа, которую ты уже делал с Claude, разошлась по десяткам чатов, и нужный кусок теперь ищется прокруткой истории. Искать его руками больше не придётся</p>
           <h3 id="search-chats">Когда это понадобится</h3>
           <p class="purpose">Ты точно помнишь, что уже разбирал это с Claude. Он давал хорошее решение, вы что-то считали, о чём-то договорились. А в каком чате это было - не найти. Прокручиваешь историю, открываешь один разговор за другим, и всё не то</p>
           <p>Искать руками не нужно. Скажи Claude, о чём был тот разговор, и он найдёт его сам и продолжит работу с того места</p>
@@ -525,7 +526,10 @@
           </div>
           <div class="step">
             <h3 id="search-settings">Где включается и выключается</h3>
-            <p>Включать ничего не надо: поиск работает сразу, по умолчанию он уже включён</p>
+            <div class="limit-card">
+              <p><span class="info-title">Поиск по чатам доступен только на платных тарифах</span> - Pro, Max, Team и Enterprise. На бесплатном тарифе прошлый разговор поднять не получится. Память при этом работает и на бесплатном, это разные настройки</p>
+            </div>
+            <p>На платном тарифе включать ничего не надо: поиск работает сразу, по умолчанию он уже включён</p>
             <p>А вот если ты не хочешь, чтобы Claude вообще заглядывал в прошлые разговоры, его отключают одним движением. Переключатель лежит там же, где память: <span class="path">Settings → Memory</span>, самый первый пункт <b>Search and reference chats</b></p>
             <figure>
               <div class="shot">
@@ -539,9 +543,6 @@
               </ul>
               <figcaption>Переключатель стоит первым в списке, над Generate memory from chats. Синий - значит включён</figcaption>
             </figure>
-            <div class="limit-card">
-              <p><span class="info-title">Поиск по чатам доступен только на платных тарифах</span> - Pro, Max, Team и Enterprise. На бесплатном тарифе прошлый разговор поднять не получится. Память при этом работает и на бесплатном, это разные вещи</p>
-            </div>
           </div>
           <div class="step">
             <h3 id="search-granicy">Где Claude ищет, а где нет</h3>
@@ -583,7 +584,7 @@
         <section class="cta">
           <p class="section-label">Следующий шаг</p>
           <h2>Claude.ai теперь настроен под тебя</h2>
-          <p>Ты можешь использовать его для своих задач. Когда захочется собрать первую вещь, которая работает на твоё дело, следующим шагом станет Claude Code. В ИИ-Лагере ты сможешь собрать лендинг или бота для своего дела простыми командами по-русски, без программирования</p>
+          <p>Ты можешь использовать его для своих задач. Когда захочется собрать первое, что работает на твоё дело, следующим шагом станет Claude Code. В ИИ-Лагере ты сможешь собрать лендинг или бота для своего дела простыми командами по-русски, без программирования</p>
           <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">Перейти от чата к Claude Code</a>
         </section>
 
