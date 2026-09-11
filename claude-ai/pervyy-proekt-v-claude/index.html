@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Как создать первый проект в Claude: где кнопка New Project, как добавить документы в базу знаний и написать инструкции проекта">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta property="og:title" content="Как собрать первый проект в Claude">
+  <meta property="og:description" content="Пошагово: создать проект, добавить файлы в базу знаний, задать инструкции и работать в чатах проекта">
+  <title>Как собрать первый проект в Claude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Spectral, Georgia, serif;
+      font-size: 18.4px;
+      line-height: 30.36px;
+      -webkit-text-size-adjust: 100%;
+    }
+    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
+    a:hover { color: var(--accent-dark) }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 20; width: 0; height: 3px; background: var(--accent) }
+
+    .masthead { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); background: rgba(248, 247, 242, .97); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 24px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750; letter-spacing: -.015em }
+    .header-actions { display: flex; align-items: center; gap: 14px; margin-right: 68px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750; line-height: 1.25 }
+    .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 17px; border: 0; border-radius: 11px; background: var(--emerald-mid); color: var(--white); font: 750 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; box-shadow: 0 3px 0 var(--emerald); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
+    .press-button:hover { color: var(--white); transform: translateY(1px); box-shadow: 0 2px 0 var(--emerald) }
+    .press-button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--emerald) }
+
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: -50px; overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: transparent }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { background: var(--accent) }
+    .toc-group { margin: 15px 0 3px 12px; color: var(--emerald); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { max-width: 720px; margin: 0; font-size: 37.6px; line-height: 42.488px; letter-spacing: -.752px }
+    h2 { max-width: 700px; margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em }
+    .lead { max-width: 690px; margin: 20px 0 0; font-size: 18.4px; line-height: 30.36px }
+    .content-section { margin-top: 66px }
+    .purpose { max-width: 675px; margin-bottom: 25px }
+
+    .route-note { margin: 31px 0 0; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note { margin-bottom: 34px }
+    .route-note p { margin: 0; color: var(--muted); font-size: 18px }
+    .step { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line) }
+    .result { margin: 22px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+    .path { padding: 2px 6px; border-radius: 5px; background: rgba(16, 47, 48, .08); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .minor { color: var(--muted); font-size: 16px; line-height: 1.65 }
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+
+
+    .prompt-box { position: relative; margin-top: 27px; padding: 57px 22px 23px; border-radius: 12px; background: var(--emerald); color: var(--paper) }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: var(--emerald); font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 var(--accent-dark); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
+    .copy-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--accent-dark); filter: brightness(.98) }
+    .copy-button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--accent-dark) }
+
+    .compare-wrap { margin-top: 28px; overflow-x: auto; border: 1px solid var(--line); border-radius: 11px; background: var(--white); box-shadow: inset 4px 0 0 var(--accent) }
+    .compare { width: 100%; min-width: 600px; border-collapse: collapse }
+    .compare th, .compare td { width: 50%; padding: 14px 17px; border-right: 1px solid var(--line); text-align: left; vertical-align: top }
+    .compare th:last-child, .compare td:last-child { border-right: 0 }
+    .compare th { background: var(--info); color: var(--emerald); font: 800 19px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .compare td { border-top: 1px solid var(--line) }
+    .compare td p { margin: 0 }
+
+    .check-panel { margin-top: 28px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 7px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 900 }
+    .future-note { margin: 24px 0 0; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info); color: var(--emerald) }
+    .future-note p { margin: 0 }
+    .related-plaque { grid-column: 2; margin-top: 0; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .related-plaque a { font-weight: 700 }
+    @media (min-width: 1200px) {
+      .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px }
+      .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px }
+    }
+    @media (min-width: 1200px) and (max-width: 1279px) {
+      .toc { margin-left: -18px }
+    }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--emerald); color: var(--white) }
+    .cta .section-label { color: var(--paper-2) }
+    .cta h2 { color: var(--white) }
+    .cta p { color: var(--paper-2) }
+    .cta .press-button { background: var(--accent); color: var(--emerald); box-shadow: 0 3px 0 var(--accent-dark) }
+    .cta .press-button:hover { color: var(--emerald); box-shadow: 0 2px 0 var(--accent-dark) }
+    .cta .press-button:active { box-shadow: 0 1px 0 var(--accent-dark) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 20px }
+      .brand { max-width: 110px; font-size: 14px; line-height: 1.15 }
+      .header-actions { gap: 9px; margin-right: 0 }
+      .handout-title { max-width: 190px; font-size: 12px }
+      .press-button { min-height: 38px; padding: 0 12px; font-size: 13px }
+      .page-shell { display: block; padding: 24px 20px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16; letter-spacing: -.68px }
+      h2 { font-size: 27px }
+      .lead { margin-top: 24px; font-size: 18px; line-height: 1.62 }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+    @media (max-width: 430px) {
+      .masthead-inner { padding: 0 14px }
+      .brand { max-width: 82px; font-size: 12px }
+      .handout-title { display: none }
+      .page-shell { padding-right: 14px; padding-left: 14px }
+      .prompt-box { padding: 56px 15px 18px }
+      .prompt-box pre { font-size: 12px }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto }
+      .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active { transition: none; transform: none; box-shadow: none; filter: none }
+    }
+
+    .model-wrap { margin-top: 28px; overflow-x: auto; border: 1px solid var(--line); border-radius: 11px; background: var(--white); box-shadow: inset 4px 0 0 var(--accent) }
+    .model-table { width: 100%; min-width: 640px; border-collapse: collapse; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-size: 15.5px; line-height: 1.5 }
+    .model-table th, .model-table td { padding: 13px 16px; border-right: 1px solid var(--line); text-align: left; vertical-align: top }
+    .model-table th:last-child, .model-table td:last-child { border-right: 0 }
+    .model-table thead th { background: var(--info); color: var(--emerald); font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase }
+    .model-table tbody tr { border-top: 1px solid var(--line) }
+    .model-table tbody th { color: var(--emerald); font-size: 18px; font-weight: 800; white-space: nowrap }
+    .plan-tag { display: inline-block; margin-top: 6px; padding: 3px 8px; border-radius: 6px; font: 700 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; white-space: nowrap }
+    .plan-free { background: rgba(95, 127, 104, .16); color: #3F5C48 }
+    .plan-paid { background: rgba(232, 111, 74, .16); color: var(--accent-dark) }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 620px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--white) }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .effort-table { width: 100%; margin: 24px 0 0; border-collapse: collapse; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .effort-table th, .effort-table td { padding: 14px 0; border-top: 1px solid var(--line); text-align: left; vertical-align: top }
+    .effort-table tr:last-child th, .effort-table tr:last-child td { border-bottom: 1px solid var(--line) }
+    .effort-table th { width: 168px; padding-right: 20px; color: var(--emerald); font-size: 16px; font-weight: 800 }
+    .effort-table td { font-size: 16px; line-height: 1.55 }
+    .effort-default { display: inline-block; margin-top: 4px; padding: 2px 7px; border-radius: 5px; background: rgba(232, 111, 74, .16); color: var(--accent-dark); font: 700 11px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .05em }
+    @media (max-width: 860px) {
+      .effort-table th { width: 116px; padding-right: 14px; font-size: 15px }
+      .effort-table td { font-size: 15px }
+      .model-wrap { overflow-x: visible; box-shadow: none; border: 0; border-radius: 0; background: transparent }
+      .model-table { min-width: 0 }
+      .model-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+      .model-table tbody tr { display: block; margin-top: 14px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white); box-shadow: inset 4px 0 0 var(--accent) }
+      .model-table tbody tr:first-child { margin-top: 0 }
+      .model-table tbody th, .model-table tbody td { display: block; width: auto; padding: 0; border: 0 }
+      .model-table tbody th { margin-bottom: 10px; font-size: 21px; white-space: normal }
+      .model-table tbody td { margin-top: 11px }
+      .model-table tbody td::before { content: attr(data-label); display: block; margin-bottom: 3px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase }
+      .plan-tag { margin-top: 8px }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand">Claude.ai: кнопка за кнопкой</div>
+      <div class="header-actions">
+        <div class="handout-title">Первый проект в Claude</div>
+        <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">На ИИ-Лагерь</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание">
+      <p class="toc-label">Содержание</p>
+      <a class="active" href="#pervyy-proekt">Как собрать первый проект в Claude</a>
+      <div class="toc-group">Сборка</div>
+      <a class="toc-sub" href="#gde-proekty">1. Где лежат проекты</a>
+      <a class="toc-sub" href="#sozdat">2. Создать проект и дать ему имя</a>
+      <a class="toc-sub" href="#znaniya">3. Добавить документы в базу знаний</a>
+      <a class="toc-sub" href="#instrukcii">4. Написать инструкции проекта</a>
+      <a class="toc-sub" href="#chat">5. Начать чат внутри проекта</a>
+      <div class="toc-group">Дальше</div>
+      <a href="#perenesti">Перенести старый чат в проект</a>
+      <a href="#granicy">Что проект не делает</a>
+      <a href="#chto-sobrat">Какие проекты собрать первыми</a>
+      <a href="#sources">Источники</a>
+    </nav>
+
+    <main>
+      <details class="mobile-toc">
+        <summary>Содержание статьи</summary>
+        <nav aria-label="Содержание на телефоне">
+          <a href="#pervyy-proekt">Как собрать первый проект в Claude</a>
+          <strong>Сборка</strong>
+          <a href="#gde-proekty">1. Где лежат проекты</a>
+          <a href="#sozdat">2. Создать проект и дать ему имя</a>
+          <a href="#znaniya">3. Добавить документы в базу знаний</a>
+          <a href="#instrukcii">4. Написать инструкции проекта</a>
+          <a href="#chat">5. Начать чат внутри проекта</a>
+          <strong>Дальше</strong>
+          <a href="#perenesti">Перенести старый чат в проект</a>
+          <a href="#granicy">Что проект не делает</a>
+          <a href="#chto-sobrat">Какие проекты собрать первыми</a>
+          <a href="#sources">Источники</a>
+        </nav>
+      </details>
+
+      <article>
+        <header id="pervyy-proekt">
+          <p class="eyebrow">Claude.ai · проекты</p>
+          <h1>Как собрать первый проект в Claude</h1>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 11 СЕНТЯБРЯ 2026</p>
+          <p class="lead">Чаты по одной задаче расползаются по всей истории, и нужные файлы приходится каждый раз прикреплять заново. Проект собирает их в одно место: документы лежат в базе знаний, а каждый новый чат внутри проекта уже знает, о чём речь</p>
+          <aside class="route-note" aria-label="Короткий маршрут">
+            <h2>Короткий маршрут</h2>
+            <p>Projects в левом меню → + New Project → имя → добавить документы в базу знаний → написать инструкции → начать чат внутри проекта</p>
+          </aside>
+          <p class="purpose">Если ты ещё не вошёл в Claude, начни с инструкции <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. А чтобы Claude знал, кто ты, пройди <a href="../kak-rasskazat-o-sebe/">«Как рассказать Claude о себе»</a></p>
+        </header>
+
+        <section class="content-section">
+          <p class="section-label">С чего начать</p>
+          <h2>Сборка проекта</h2>
+          <p class="purpose">Весь проект собирается за пять шагов и занимает минут десять. Дальше он работает сам: ты просто открываешь его и пишешь, как в обычном чате</p>
+          <div class="step">
+            <h3 id="gde-proekty">1. Где лежат проекты</h3>
+            <p>Открой Claude в браузере и посмотри на левое меню. Под строкой нового чата есть пункт <span class="path">Projects</span>. Нажми на него, и откроется список твоих проектов. В первый раз он будет пустой</p>
+            <div class="info-card">
+              <p><span class="info-title">Если левого меню не видно:</span> на узком экране оно спрятано. Нажми на значок из трёх полосок в левом верхнем углу, меню выедет сбоку</p>
+            </div>
+            <p class="minor">Можно попасть туда и напрямую, по адресу <span class="path">claude.ai/projects</span></p>
+            <div class="result"><p><b>Результат:</b> перед тобой страница проектов, и ты знаешь, как возвращаться сюда каждый раз</p></div>
+          </div>
+          <div class="step">
+            <h3 id="sozdat">2. Создать проект и дать ему имя</h3>
+            <p>В правом верхнем углу страницы проектов нажми <span class="path">+ New Project</span>. Claude попросит заполнить два поля</p>
+            <p><b>Name</b> - название проекта. Пиши по задаче, а не по теме вообще: не «Работа», а «Сайт для студии» или «Посты для Телеграма». Тогда через месяц ты найдёшь нужный проект за секунду</p>
+            <p><b>Description</b> - короткое пояснение, о чём проект. Это подпись для тебя, чтобы не путать проекты между собой</p>
+            <div class="info-card">
+              <p><span class="info-title">На бесплатном тарифе можно создать до пяти проектов.</span> Если пять уже есть, новый не создастся, пока не удалить или не убрать в архив один из старых</p>
+            </div>
+            <div class="result"><p><b>Результат:</b> проект создан, и ты попал внутрь него - на пустой экран с полем ввода и базой знаний справа</p></div>
+          </div>
+          <div class="step">
+            <h3 id="znaniya">3. Добавить документы в базу знаний</h3>
+            <p>Справа внутри проекта находится <b>база знаний</b> - <span class="path">Project knowledge</span>. Это общая папка проекта: всё, что ты в неё положишь, видят все чаты этого проекта</p>
+            <p>Нажми <span class="path">+</span> и добавь файлы: документы, таблицы, тексты, куски кода. Можно вставить текст прямо в окно, не загружая файл</p>
+            <p>Клади туда то, что Claude должен помнить постоянно: описание твоего продукта, прайс, готовые тексты, выгрузку переписки с клиентом, техническое задание</p>
+            <div class="info-card">
+              <p><span class="info-title">Главное про базу знаний:</span> чаты внутри проекта не видят друг друга. Файл, который ты прикрепил в одном чате, в соседнем не появится. Общим он становится только тогда, когда лежит в базе знаний проекта</p>
+            </div>
+            <p class="minor">На платных тарифах в проект помещается заметно больше материалов: Claude включает режим поиска по базе и расширяет её объём примерно в десять раз</p>
+            <div class="result"><p><b>Результат:</b> документы лежат в базе знаний, и прикреплять их в каждом чате больше не нужно</p></div>
+          </div>
+          <div class="step">
+            <h3 id="instrukcii">4. Написать инструкции проекта</h3>
+            <p>В том же правом столбце есть <span class="path">Project instructions</span> - инструкции проекта. Здесь ты один раз объясняешь, как Claude должен вести себя именно в этом проекте: в какой роли, каким тоном, что учитывать и чего не делать</p>
+            <p>Это не то же самое, что общие настройки профиля. Профиль говорит, кто ты вообще. Инструкции проекта говорят, какую работу ты делаешь здесь</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="project-instructions">Скопировать</button>
+              <pre id="project-instructions">Ты помогаешь мне вести этот проект. Что делаем: [коротко, что за проект и какой нужен результат]. Для кого: [кто читатель или клиент]. Опирайся на документы из базы знаний проекта, не выдумывай цифры и факты, которых там нет. Если данных не хватает - спроси, а не заполняй пропуск догадкой. Пиши простым языком, без канцелярита</pre>
+            </div>
+            <p>Подставь в квадратные скобки свои слова и вставь текст в поле инструкций. Дальше правь по ходу: заметил, что Claude раз за разом делает не то, допиши строку сюда</p>
+            <div class="result"><p><b>Результат:</b> каждый новый чат проекта начинается уже настроенным, и объяснять заново не нужно</p></div>
+          </div>
+          <div class="step">
+            <h3 id="chat">5. Начать чат внутри проекта</h3>
+            <p>Поле ввода внутри проекта выглядит как обычный чат, но работает иначе: он уже видит базу знаний и инструкции. Просто напиши задачу своими словами</p>
+            <p>Все чаты проекта складываются тут же, отдельным списком. История задачи перестаёт смешиваться с остальной перепиской</p>
+            <div class="info-card">
+              <p><span class="info-title">Как проверить, что база знаний работает:</span> напиши в чате проекта «перечисли, какие документы лежат в базе знаний проекта». Claude назовёт файлы. Если он их не видит - значит файл прикреплён к чату, а не добавлен в базу</p>
+            </div>
+            <div class="result"><p><b>Результат:</b> проект собран и работает. Дальше ты открываешь его и пишешь, не повторяя вводные</p></div>
+          </div>
+        </section>
+        <section class="content-section" id="perenesti">
+          <p class="section-label">Что делать со старой перепиской</p>
+          <h2>Перенести старый чат в проект</h2>
+          <p class="purpose">Обычная ситуация: по задаче уже есть длинный разговор, и начинать с нуля жалко. Переносить его не нужно вручную</p>
+          <p>Открой нужный чат, нажми на меню с тремя точками рядом с его названием и выбери перенос в проект. Чат встанет в список проекта вместе со всей историей</p>
+          <div class="info-card">
+            <p><span class="info-title">Важная деталь:</span> перенос кладёт в проект сам разговор, но не наполняет базу знаний. Файлы, которые были прикреплены внутри того чата, добавь в <span class="path">Project knowledge</span> отдельно, иначе соседние чаты их не увидят</p>
+          </div>
+          <div class="result"><p><b>Результат:</b> начатая работа продолжается в проекте, ничего не потеряно</p></div>
+        </section>
+
+        <section class="content-section" id="granicy">
+          <p class="section-label">Чтобы не ждать лишнего</p>
+          <h2>Что проект не делает</h2>
+          <p class="purpose">Три вещи, из-за которых новички решают, что проект сломался</p>
+          <div class="check-panel">
+            <h3>Границы проекта</h3>
+            <ul class="checklist">
+              <li>Чаты проекта не видят друг друга: общее только то, что лежит в базе знаний</li>
+              <li>Имя и описание проекта - подпись для тебя, Claude в работе на них не опирается</li>
+              <li>Проект не подтягивает файлы с твоего компьютера сам: документы нужно положить в базу знаний руками</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <p><span class="info-title">Если проект стал лишним:</span> его можно убрать в архив, и он перестанет мешаться в списке, сохранив все настройки. Удалить архивный проект сразу нельзя - сначала верни его из архива, тогда появится удаление</p>
+          </div>
+          <div class="result"><p><b>Результат:</b> ты понимаешь, где проходит граница, и не ищешь поломку там, где её нет</p></div>
+        </section>
+
+        <section class="content-section" id="chto-sobrat">
+          <p class="section-label">С чего начать сегодня</p>
+          <h2>Какие проекты собрать первыми</h2>
+          <p class="purpose">Пяти проектов бесплатного тарифа хватает надолго, если заводить их по крупным направлениям, а не по каждой мелкой задаче</p>
+          <table class="effort-table">
+            <tbody>
+              <tr><th scope="row">Твой продукт</th><td>Описание, прайс, частые вопросы клиентов. Отсюда берутся тексты, письма и ответы</td></tr>
+              <tr><th scope="row">Контент</th><td>Твои удачные посты, темы, правила подачи. Claude пишет в твоём стиле, а не в среднем</td></tr>
+              <tr><th scope="row">Учёба</th><td>Конспекты, инструкции, заметки с занятий. Удобно спрашивать по своим материалам</td></tr>
+              <tr><th scope="row">Разовая крупная задача</th><td>Переезд, ремонт, отчёт, поиск работы. Закончилась - проект в архив</td></tr>
+            </tbody>
+          </table>
+          <div class="info-card">
+            <p><span class="info-title">Частая ошибка:</span> завести проект и оставить базу знаний пустой. Тогда это просто папка с чатами. Ценность появляется с первого документа внутри</p>
+          </div>
+          <div class="result"><p><b>Результат:</b> у тебя есть понятный список, с чего начать, и проект не превращается в пустую папку</p></div>
+        </section>
+
+        <section class="content-section" id="sources">
+          <p class="section-label">Официальные материалы</p>
+          <h2>Источники</h2>
+          <ul class="sources">
+            <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">Anthropic: что такое проекты</a></li>
+            <li><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">Anthropic: как создать проект и управлять им</a></li>
+          </ul>
+        </section>
+
+        <section class="cta">
+          <p class="section-label">Следующий шаг</p>
+          <h2>Твоя задача собрана в одном месте</h2>
+          <p>Проект наводит порядок внутри чата. Следующий шаг - когда Claude работает не с прикреплёнными файлами, а прямо с папкой на твоём компьютере и собирает готовые вещи: сайт, бота, таблицу. В ИИ-Лагере это делается простыми командами по-русски, без программирования</p>
+          <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">Перейти от чата к Claude Code</a>
+        </section>
+
+        <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев</footer>
+      </article>
+    </main>
+    <aside class="related-plaque" aria-label="Следующая статья">
+      <p class="plaque-label">Рядом пригодится</p>
+      <h2>Как выбрать модель Claude и уровень effort</h2>
+      <p>Внутри проекта модель выбирается так же, как в обычном чате. Открой инструкцию, чтобы не тратить тяжёлую модель на мелкую работу</p>
+      <p><a href="../vybor-modeli-i-effort/">Перейти к выбору модели</a></p>
+    </aside>
+  </div>
+  <script>
+    const progress = document.querySelector('.progress');
+    const links = [...document.querySelectorAll('.toc a, .mobile-toc a')];
+    const sections = [...new Set(links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean))];
+    let hashIsSettling = Boolean(location.hash);
+    const update = (preferHash = false) => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${height > 0 ? Math.min(100, window.scrollY / height * 100) : 0}%`;
+      const activationLine = window.innerHeight - 24;
+      let current = sections[0];
+      if (window.scrollY > 2) {
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= activationLine) current = section;
+        }
+      }
+      if ((preferHash || hashIsSettling) && location.hash) {
+        current = sections.find(section => `#${section.id}` === location.hash) || current;
+      }
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current.id}`));
+    };
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    const updateHashTarget = () => {
+      const target = sections.find(section => `#${section.id}` === location.hash);
+      hashIsSettling = true;
+      if (target) target.scrollIntoView({ block: 'start' });
+      requestAnimationFrame(() => update(true));
+      setTimeout(() => { hashIsSettling = false; }, 500);
+    };
+    addEventListener('hashchange', updateHashTarget);
+    addEventListener('load', updateHashTarget);
+    document.querySelectorAll('[data-copy-target]').forEach(button => {
+      button.addEventListener('click', async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        try {
+          await navigator.clipboard.writeText(target.innerText);
+          button.textContent = 'Скопировано';
+          setTimeout(() => { button.textContent = 'Скопировать'; }, 1800);
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(target);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          button.textContent = 'Текст выделен';
+        }
+      });
+    });
+    update(Boolean(location.hash));
+    requestAnimationFrame(() => update(Boolean(location.hash)));
+    if (location.hash) updateHashTarget();
+  </script>
+</body>
+</html>

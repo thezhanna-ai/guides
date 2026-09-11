@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Какую модель Claude выбрать - Haiku, Sonnet, Opus или Fable - и как настроить уровень effort под задачу">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta property="og:title" content="Как выбрать модель Claude и уровень effort">
+  <meta property="og:description" content="Таблица выбора модели под задачу и настройка effort для новичка">
+  <title>Как выбрать модель Claude и уровень effort</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Spectral, Georgia, serif;
+      font-size: 18.4px;
+      line-height: 30.36px;
+      -webkit-text-size-adjust: 100%;
+    }
+    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
+    a:hover { color: var(--accent-dark) }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 20; width: 0; height: 3px; background: var(--accent) }
+
+    .masthead { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); background: rgba(248, 247, 242, .97); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 24px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750; letter-spacing: -.015em }
+    .header-actions { display: flex; align-items: center; gap: 14px; margin-right: 68px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750; line-height: 1.25 }
+    .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 17px; border: 0; border-radius: 11px; background: var(--emerald-mid); color: var(--white); font: 750 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; box-shadow: 0 3px 0 var(--emerald); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
+    .press-button:hover { color: var(--white); transform: translateY(1px); box-shadow: 0 2px 0 var(--emerald) }
+    .press-button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--emerald) }
+
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: -50px; overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: transparent }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { background: var(--accent) }
+    .toc-group { margin: 15px 0 3px 12px; color: var(--emerald); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { max-width: 720px; margin: 0; font-size: 37.6px; line-height: 42.488px; letter-spacing: -.752px }
+    h2 { max-width: 700px; margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em }
+    .lead { max-width: 690px; margin: 20px 0 0; font-size: 18.4px; line-height: 30.36px }
+    .content-section { margin-top: 66px }
+    .purpose { max-width: 675px; margin-bottom: 25px }
+
+    .route-note { margin: 31px 0 0; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note { margin-bottom: 34px }
+    .route-note p { margin: 0; color: var(--muted); font-size: 18px }
+    .step { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line) }
+    .result { margin: 22px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+    .path { padding: 2px 6px; border-radius: 5px; background: rgba(16, 47, 48, .08); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .minor { color: var(--muted); font-size: 16px; line-height: 1.65 }
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+
+
+    .prompt-box { position: relative; margin-top: 27px; padding: 57px 22px 23px; border-radius: 12px; background: var(--emerald); color: var(--paper) }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: var(--emerald); font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 var(--accent-dark); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
+    .copy-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--accent-dark); filter: brightness(.98) }
+    .copy-button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--accent-dark) }
+
+    .compare-wrap { margin-top: 28px; overflow-x: auto; border: 1px solid var(--line); border-radius: 11px; background: var(--white); box-shadow: inset 4px 0 0 var(--accent) }
+    .compare { width: 100%; min-width: 600px; border-collapse: collapse }
+    .compare th, .compare td { width: 50%; padding: 14px 17px; border-right: 1px solid var(--line); text-align: left; vertical-align: top }
+    .compare th:last-child, .compare td:last-child { border-right: 0 }
+    .compare th { background: var(--info); color: var(--emerald); font: 800 19px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .compare td { border-top: 1px solid var(--line) }
+    .compare td p { margin: 0 }
+
+    .check-panel { margin-top: 28px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 7px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 900 }
+    .future-note { margin: 24px 0 0; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info); color: var(--emerald) }
+    .future-note p { margin: 0 }
+    .related-plaque { grid-column: 2; margin-top: 0; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .related-plaque a { font-weight: 700 }
+    @media (min-width: 1200px) {
+      .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px }
+      .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px }
+    }
+    @media (min-width: 1200px) and (max-width: 1279px) {
+      .toc { margin-left: -18px }
+    }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--emerald); color: var(--white) }
+    .cta .section-label { color: var(--paper-2) }
+    .cta h2 { color: var(--white) }
+    .cta p { color: var(--paper-2) }
+    .cta .press-button { background: var(--accent); color: var(--emerald); box-shadow: 0 3px 0 var(--accent-dark) }
+    .cta .press-button:hover { color: var(--emerald); box-shadow: 0 2px 0 var(--accent-dark) }
+    .cta .press-button:active { box-shadow: 0 1px 0 var(--accent-dark) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 20px }
+      .brand { max-width: 110px; font-size: 14px; line-height: 1.15 }
+      .header-actions { gap: 9px; margin-right: 0 }
+      .handout-title { max-width: 190px; font-size: 12px }
+      .press-button { min-height: 38px; padding: 0 12px; font-size: 13px }
+      .page-shell { display: block; padding: 24px 20px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16; letter-spacing: -.68px }
+      h2 { font-size: 27px }
+      .lead { margin-top: 24px; font-size: 18px; line-height: 1.62 }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+    @media (max-width: 430px) {
+      .masthead-inner { padding: 0 14px }
+      .brand { max-width: 82px; font-size: 12px }
+      .handout-title { display: none }
+      .page-shell { padding-right: 14px; padding-left: 14px }
+      .prompt-box { padding: 56px 15px 18px }
+      .prompt-box pre { font-size: 12px }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto }
+      .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active { transition: none; transform: none; box-shadow: none; filter: none }
+    }
+
+    .model-wrap { margin-top: 28px; overflow-x: auto; border: 1px solid var(--line); border-radius: 11px; background: var(--white); box-shadow: inset 4px 0 0 var(--accent) }
+    .model-table { width: 100%; min-width: 640px; border-collapse: collapse; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-size: 15.5px; line-height: 1.5 }
+    .model-table th, .model-table td { padding: 13px 16px; border-right: 1px solid var(--line); text-align: left; vertical-align: top }
+    .model-table th:last-child, .model-table td:last-child { border-right: 0 }
+    .model-table thead th { background: var(--info); color: var(--emerald); font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase }
+    .model-table tbody tr { border-top: 1px solid var(--line) }
+    .model-table tbody th { color: var(--emerald); font-size: 18px; font-weight: 800; white-space: nowrap }
+    .plan-tag { display: inline-block; margin-top: 6px; padding: 3px 8px; border-radius: 6px; font: 700 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; white-space: nowrap }
+    .plan-free { background: rgba(95, 127, 104, .16); color: #3F5C48 }
+    .plan-paid { background: rgba(232, 111, 74, .16); color: var(--accent-dark) }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 620px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--white) }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .effort-table { width: 100%; margin: 24px 0 0; border-collapse: collapse; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .effort-table th, .effort-table td { padding: 14px 0; border-top: 1px solid var(--line); text-align: left; vertical-align: top }
+    .effort-table tr:last-child th, .effort-table tr:last-child td { border-bottom: 1px solid var(--line) }
+    .effort-table th { width: 168px; padding-right: 20px; color: var(--emerald); font-size: 16px; font-weight: 800 }
+    .effort-table td { font-size: 16px; line-height: 1.55 }
+    .effort-default { display: inline-block; margin-top: 4px; padding: 2px 7px; border-radius: 5px; background: rgba(232, 111, 74, .16); color: var(--accent-dark); font: 700 11px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .05em }
+    @media (max-width: 860px) {
+      .effort-table th { width: 116px; padding-right: 14px; font-size: 15px }
+      .effort-table td { font-size: 15px }
+      .model-wrap { overflow-x: visible; box-shadow: none; border: 0; border-radius: 0; background: transparent }
+      .model-table { min-width: 0 }
+      .model-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+      .model-table tbody tr { display: block; margin-top: 14px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white); box-shadow: inset 4px 0 0 var(--accent) }
+      .model-table tbody tr:first-child { margin-top: 0 }
+      .model-table tbody th, .model-table tbody td { display: block; width: auto; padding: 0; border: 0 }
+      .model-table tbody th { margin-bottom: 10px; font-size: 21px; white-space: normal }
+      .model-table tbody td { margin-top: 11px }
+      .model-table tbody td::before { content: attr(data-label); display: block; margin-bottom: 3px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase }
+      .plan-tag { margin-top: 8px }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand">Claude.ai: кнопка за кнопкой</div>
+      <div class="header-actions">
+        <div class="handout-title">Выбор модели и effort</div>
+        <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">На ИИ-Лагерь</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание">
+      <p class="toc-label">Содержание</p>
+      <a class="active" href="#vybor-modeli">Выбор модели и effort</a>
+      <div class="toc-group">Модель</div>
+      <a class="toc-sub" href="#gde-menyu">1. Где переключить модель</a>
+      <a class="toc-sub" href="#tablica">2. Таблица выбора модели</a>
+      <a class="toc-sub" href="#free">3. Что доступно на бесплатном тарифе</a>
+      <div class="toc-group">Effort</div>
+      <a class="toc-sub" href="#effort">Что такое effort</a>
+      <a class="toc-sub" href="#urovni">Уровни effort</a>
+      <a class="toc-sub" href="#thinking">Отдельный переключатель thinking</a>
+      <a href="#pravilo">Простое правило на каждый день</a>
+      <a href="#sources">Источники</a>
+    </nav>
+
+    <main>
+      <details class="mobile-toc">
+        <summary>Содержание статьи</summary>
+        <nav aria-label="Содержание на телефоне">
+          <a href="#vybor-modeli">Выбор модели и effort</a>
+          <strong>Модель</strong>
+          <a href="#gde-menyu">1. Где переключить модель</a>
+          <a href="#tablica">2. Таблица выбора модели</a>
+          <a href="#free">3. Что доступно на бесплатном тарифе</a>
+          <strong>Effort</strong>
+          <a href="#effort">Что такое effort</a>
+          <a href="#urovni">Уровни effort</a>
+          <a href="#thinking">Отдельный переключатель thinking</a>
+          <a href="#pravilo">Простое правило на каждый день</a>
+          <a href="#sources">Источники</a>
+        </nav>
+      </details>
+
+      <article>
+        <header id="vybor-modeli">
+          <p class="eyebrow">Claude.ai · выбор модели</p>
+          <h1>Как выбрать модель Claude и уровень effort</h1>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 10 СЕНТЯБРЯ 2026</p>
+          <p class="lead">В Claude есть несколько моделей, и рядом с ними отдельная настройка effort. Обе управляют одним: сколько сил Claude потратит на твой ответ. Слишком слабая связка даст поверхностный результат, слишком сильная - съест лимит на пустяковой задаче</p>
+          <aside class="route-note" aria-label="Короткий маршрут">
+            <h2>Короткий маршрут</h2>
+            <p>Кнопка модели рядом с полем ввода → выбрать модель под задачу → Effort → выбрать уровень → при сложной задаче включить thinking</p>
+          </aside>
+          <p class="purpose">Если ты ещё не вошёл в Claude, начни с инструкции <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. А чтобы Claude знал, кто ты и как тебе отвечать, пройди <a href="../kak-rasskazat-o-sebe/">«Как рассказать Claude о себе»</a></p>
+        </header>
+
+        <section class="content-section">
+          <p class="section-label">Где находится настройка</p>
+          <h2>Модель</h2>
+          <p class="purpose">Модель выбирается не один раз в настройках, а прямо в чате. Ты можешь менять её под каждую задачу и даже посреди разговора</p>
+          <div class="step">
+            <h3 id="gde-menyu">1. Где переключить модель</h3>
+            <p>Открой любой чат и посмотри вниз, на строку ввода. Справа, рядом с микрофоном, написано название текущей модели и уровень усилия - например <span class="path">Sonnet 5 High</span>. Нажми на эту надпись, и прямо над ней раскроется список моделей</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-where-click.png" alt="Экран чата Claude: стрелка указывает на кнопку модели справа от строки ввода, под ней раскрытый список моделей">
+              </div>
+              <figcaption>Под каждой моделью подписано, для чего она: <b>For your toughest challenges</b> - для самых сложных задач, <b>For complex tasks</b> - для сложных задач, <b>Most efficient for everyday tasks</b> - оптимальна для повседневных, <b>Fastest for quick answers</b> - самая быстрая для коротких ответов</figcaption>
+            </figure>
+            <p>Вот тот же список крупно, с пометками тарифов</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-models-plans.png" alt="Меню выбора модели Claude: Fable, Opus, Sonnet и Haiku с пометками тарифов">
+              </div>
+              <figcaption>Зелёным отмечены модели, доступные на бесплатном тарифе, оранжевым - только на платных</figcaption>
+            </figure>
+            <div class="info-card">
+              <p><span class="info-title">Одно меню - три настройки:</span> в нём выбирается модель, уровень <b>Effort</b> и переключатель <b>thinking</b>. Это разные вещи, и их можно сочетать в любой комбинации</p>
+            </div>
+            <div class="result"><p><b>Результат:</b> ты знаешь, где переключать модель, и можешь делать это в любой момент разговора</p></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="tablica">
+          <p class="section-label">Кому какую работу поручить</p>
+          <h3>2. Таблица выбора модели</h3>
+          <p class="purpose">Модели идут от самой быстрой к самой основательной. Чем сильнее модель, тем глубже она думает, но тем больше расходует твой лимит. Смысл выбора в том, чтобы не брать тяжёлую модель на лёгкую работу</p>
+          <div class="model-wrap">
+            <table class="model-table">
+              <thead>
+                <tr><th scope="col">Модель</th><th scope="col">Для чего</th><th scope="col">Пример задачи</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Haiku<br><span class="plan-tag plan-free">Есть на Free</span></th>
+                  <td data-label="Для чего">Быстрые ответы, короткие пересказы и простое извлечение данных - то, что нужно получить мгновенно</td>
+                  <td data-label="Пример задачи">Пересказать письмо в трёх строках, вытащить даты из текста, разложить список по категориям</td>
+                </tr>
+                <tr>
+                  <th scope="row">Sonnet<br><span class="plan-tag plan-free">Есть на Free</span></th>
+                  <td data-label="Для чего">Универсальная рабочая модель: код, тексты, анализ и задачи в несколько шагов. Подходит для большинства дел</td>
+                  <td data-label="Пример задачи">Написать пост, разобрать ошибку в коде, собрать план запуска, проанализировать таблицу</td>
+                </tr>
+                <tr>
+                  <th scope="row">Opus<br><span class="plan-tag plan-paid">Платные тарифы</span></th>
+                  <td data-label="Для чего">Глубокое исследование и сложные рассуждения, где действительно нужно долго думать</td>
+                  <td data-label="Пример задачи">Сравнить варианты и выбрать стратегию, разобрать запутанную задачу, с которой не справился Sonnet</td>
+                </tr>
+                <tr>
+                  <th scope="row">Fable<br><span class="plan-tag plan-paid">Платные тарифы</span></th>
+                  <td data-label="Для чего">Самые крупные и важные проекты: длинные сложные задачи, которые Claude ведёт сам, реже спрашивая тебя</td>
+                  <td data-label="Пример задачи">Длинный проект из множества связанных шагов, работа с большим объёмом материалов</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="minor">Названия моделей со временем получают номера версий - например Sonnet 5, Haiku 4.5, Opus 5. Логика выбора от этого не меняется: смотри на само имя модели</p>
+          <div class="result"><p><b>Результат:</b> ты понимаешь, какую модель брать под конкретную задачу, а не выбираешь наугад</p></div>
+        </section>
+
+        <section class="content-section" id="free">
+          <p class="section-label">Бесплатный тариф</p>
+          <h3>3. Что доступно на бесплатном тарифе</h3>
+          <p class="purpose">Это первое, обо что спотыкается новичок: он читает про Opus, открывает меню и не находит его у себя. Дело не в ошибке, а в тарифе</p>
+          <div class="info-card">
+            <p><span class="info-title">На бесплатном тарифе доступны Haiku и Sonnet.</span> Opus и Fable открываются только на платных тарифах</p>
+          </div>
+          <p>Кадр выше снят на платном тарифе - поэтому в нём видны все четыре модели. На бесплатном в этом же меню остаются только Sonnet и Haiku</p>
+          <p class="minor">Про Fable интерфейс говорит отдельно: <b>Fable 5.1 is included in Max plans, or available with usage credits on Pro</b> - то есть Fable входит в тариф Max, а на Pro доступен за отдельные кредиты</p>
+          <p>Если в меню видно только две модели - у тебя бесплатный тариф, и это нормально. Sonnet тянет большинство обычных задач: тексты, разбор, планы, простой код</p>
+          <div class="step">
+            <h3>Как считается лимит: пятичасовое окно</h3>
+            <p>Лимит в Claude не привязан к суткам. Он считается окнами примерно по пять часов, и отсчёт начинается не в полночь, а с твоего первого сообщения в этом окне</p>
+            <p>Смысл такой: написал первое сообщение в 10 утра - окно идёт до трёх часов дня. Если лимит закончился в час дня, ждать до завтра не нужно: в три часа окно закроется, счётчик обнулится и начнётся новое</p>
+            <div class="info-card">
+              <p><span class="info-title">Что это значит на практике:</span> упёрся в лимит - посмотри, когда ты написал первое сообщение, и прибавь пять часов. Это и есть время, когда можно продолжить</p>
+            </div>
+            <p>Чем тяжелее модель и выше effort, тем быстрее расходуется окно. Поэтому Haiku и низкий effort на мелких задачах - это не экономия ради экономии, а способ сохранить лимит на то, что действительно важно</p>
+            <p class="minor">На платных тарифах поверх пятичасовых окон действует ещё и недельный потолок</p>
+          </div>
+          <div class="result"><p><b>Результат:</b> ты понимаешь, почему в твоём меню именно такой набор моделей</p></div>
+        </section>
+
+        <section class="content-section">
+          <p class="section-label">Глубина размышления</p>
+          <h2>Effort</h2>
+          <h3 id="effort">Что такое effort</h3>
+          <p class="purpose">Effort - это отдельная настройка рядом с моделью. Она задаёт, насколько тщательно Claude обрабатывает каждый твой запрос</p>
+          <p>Работает это так: чем выше уровень, тем подробнее и продуманнее ответ, но тем дольше он готовится и тем больше расходуется лимит. Поэтому effort снижают на рутине и поднимают на сложном</p>
+          <div class="step">
+            <h3 id="urovni">Уровни effort</h3>
+            <p>Открой меню модели и нажми <b>Effort</b>. Уровни идут от самого лёгкого к самому глубокому</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-effort-menu.png" alt="Меню Effort в Claude: уровни Low, Medium, High, Extra, Max и переключатель Thinking">
+              </div>
+              <figcaption>Сверху меню поясняет: <b>Higher effort means more thorough responses, but takes longer and uses your limits faster</b> - чем выше усилие, тем тщательнее ответ, но дольше ожидание и быстрее расход лимита. Пометка <b>Default</b> стоит на уровне по умолчанию, а у <b>Max</b> предупреждение <b>3.5× or more usage</b> - расход лимита минимум в 3,5 раза выше</figcaption>
+            </figure>
+            <table class="effort-table">
+              <tbody>
+                <tr><th scope="row">Low</th><td>Самый быстрый и экономный. Подходит для простых и повторяющихся действий</td></tr>
+                <tr><th scope="row">Medium<br><span class="effort-default">по умолчанию</span></th><td>Рутинные задачи, где не нужна глубина. Стоит по умолчанию и заметно растягивает твой лимит</td></tr>
+                <tr><th scope="row">High</th><td>Лучший баланс качества и скорости. Хороший выбор, когда задача важная</td></tr>
+                <tr><th scope="row">Extra</th><td>Глубже, чем High. Для длинных задач, которые Claude ведёт долго и без частых подсказок</td></tr>
+                <tr><th scope="row">Max</th><td>Самый тщательный режим. Интерфейс предупреждает: расход лимита минимум в 3,5 раза выше обычного</td></tr>
+              </tbody>
+            </table>
+            <div class="result"><p><b>Результат:</b> ты можешь осознанно поднять или опустить уровень, а не оставлять всё как есть</p></div>
+          </div>
+          <div class="step">
+            <h3 id="thinking">Отдельный переключатель thinking</h3>
+            <p>В том же меню, под уровнями effort, есть переключатель <b>Thinking</b> с подписью <b>Can think for more complex tasks</b> - может думать над более сложными задачами. Он не то же самое, что effort. Effort задаёт глубину каждого ответа, а thinking показывает ход рассуждения: над ответом появляется раскрывающийся блок, в котором видно, как Claude шёл к результату</p>
+            <p>Эти две настройки независимы, и включать их можно в любом сочетании. На сложной задаче есть смысл поднять effort, включить thinking или сделать и то и другое</p>
+            <div class="result"><p><b>Результат:</b> ты различаешь глубину ответа и показ рассуждения и не путаешь одно с другим</p></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="pravilo">
+          <p class="section-label">Как этим пользоваться</p>
+          <h2>Простое правило на каждый день</h2>
+          <p class="purpose">Не нужно каждый раз выбирать заново. Достаточно одного правила, к которому возвращаешься, когда ответ не устроил</p>
+          <div class="check-panel">
+            <h3>Порядок действий</h3>
+            <ul class="checklist">
+              <li>Обычная работа: Sonnet и уровень по умолчанию</li>
+              <li>Мелочь и однотипные действия: Haiku или effort ниже</li>
+              <li>Ответ вышел поверхностным: подними effort на той же модели</li>
+              <li>Не помогло: возьми модель сильнее, если она есть на твоём тарифе</li>
+              <li>Хочешь видеть ход мысли: включи thinking</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <p><span class="info-title">Частая ошибка новичка:</span> всегда держать самую сильную модель и максимальный effort. Лимит уходит на пустяки, а на настоящую задачу его уже не хватает</p>
+          </div>
+          <div class="result"><p><b>Результат:</b> ты тратишь лимит там, где он действительно нужен</p></div>
+        </section>
+
+        <section class="content-section" id="sources">
+          <p class="section-label">Официальные материалы</p>
+          <h2>Источники</h2>
+          <ul class="sources">
+            <li><a href="https://academy.claude.com/tutorials/choosing-the-right-claude-model">Anthropic: как выбрать модель Claude</a></li>
+            <li><a href="https://support.claude.com/en/articles/8664678-change-the-model-effort-and-thinking-settings">Anthropic: настройки модели, effort и thinking</a></li>
+            <li><a href="https://claude.com/pricing">Anthropic: тарифы и доступные модели</a></li>
+          </ul>
+        </section>
+
+        <section class="cta">
+          <p class="section-label">Следующий шаг</p>
+          <h2>Ты выбираешь модель под задачу</h2>
+          <p>Дальше эта же логика работает в Claude Code, где Claude собирает рабочие штуки под твоё дело. В ИИ-Лагере ты сможешь собрать лендинг или бота для своего дела простыми командами по-русски, без программирования</p>
+          <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">Перейти от чата к Claude Code</a>
+        </section>
+
+        <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев</footer>
+      </article>
+    </main>
+    <aside class="related-plaque" aria-label="Следующая статья">
+      <p class="plaque-label">Сначала настройка</p>
+      <h2>Как рассказать Claude о себе</h2>
+      <p>Открой эту инструкцию, чтобы заполнить имя, инструкции и включить память. Тогда любая выбранная модель будет отвечать с учётом твоего контекста</p>
+      <p><a href="../kak-rasskazat-o-sebe/">Перейти к настройке</a></p>
+    </aside>
+  </div>
+
+  <script>
+    const progress = document.querySelector('.progress');
+    const links = [...document.querySelectorAll('.toc a, .mobile-toc a')];
+    const sections = [...new Set(links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean))];
+    let hashIsSettling = Boolean(location.hash);
+    const update = (preferHash = false) => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${height > 0 ? Math.min(100, window.scrollY / height * 100) : 0}%`;
+      const activationLine = window.innerHeight - 24;
+      let current = sections[0];
+      if (window.scrollY > 2) {
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= activationLine) current = section;
+        }
+      }
+      if ((preferHash || hashIsSettling) && location.hash) {
+        current = sections.find(section => `#${section.id}` === location.hash) || current;
+      }
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current.id}`));
+    };
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    const updateHashTarget = () => {
+      const target = sections.find(section => `#${section.id}` === location.hash);
+      hashIsSettling = true;
+      if (target) target.scrollIntoView({ block: 'start' });
+      requestAnimationFrame(() => update(true));
+      setTimeout(() => { hashIsSettling = false; }, 500);
+    };
+    addEventListener('hashchange', updateHashTarget);
+    addEventListener('load', updateHashTarget);
+    update(Boolean(location.hash));
+    requestAnimationFrame(() => update(Boolean(location.hash)));
+    if (location.hash) updateHashTarget();
+  </script>
+</body>
+</html>

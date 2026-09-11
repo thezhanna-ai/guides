@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Как рассказать Claude о себе: заполнить инструкции, включить память и перенести данные из ChatGPT">
+  <meta name="description" content="Как рассказать Claude о себе: заполнить инструкции, включить память, перенести данные из ChatGPT и находить старые разговоры">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#F8F7F2">
   <meta property="og:title" content="Как рассказать Claude о себе">
-  <meta property="og:description" content="Пошаговая настройка инструкций и памяти Claude для новичка">
+  <meta property="og:description" content="Пошаговая настройка инструкций, памяти и поиска по прошлым чатам Claude для новичка">
   <title>Как рассказать Claude о себе</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,6 +105,10 @@
     .memory-sensitive { left: 20.5%; top: 20.8%; width: 76%; height: 9.1% }
     .memory-sensitive::before { right: -16px; left: auto }
     .memory-import { left: 20.5%; top: 30.3%; width: 76%; height: 12.5% }
+    .search-nav { left: 2.5%; top: 54.6%; width: 16%; height: 8.5% }
+    .search-nav::before { top: 50%; left: -18px; transform: translateY(-50%) }
+    .search-toggle { left: 23.8%; top: 39.8%; width: 69.8%; height: 10.5% }
+    .search-toggle::before { right: -16px; left: auto }
     .topics-nav { left: 2.5%; top: 44.7%; width: 16%; height: 7.2% }
     .topics-first { left: 24.2%; top: 44.7%; width: 69%; height: 14.2% }
     .topics-first::before { right: -16px; left: auto }
@@ -236,6 +240,11 @@
       <a class="toc-sub" href="#memory-from-chats">Что Claude выбирает из чатов</a>
       <a class="toc-sub" href="#manage-memory">Где посмотреть и исправить память</a>
       <a class="toc-sub" href="#import-chatgpt">Как перенести данные из ChatGPT</a>
+      <div class="toc-group">Поиск по чатам</div>
+      <a class="toc-sub" href="#search-chats">Когда это понадобится</a>
+      <a class="toc-sub" href="#search-how">Как попросить</a>
+      <a class="toc-sub" href="#search-settings">Где включается и выключается</a>
+      <a class="toc-sub" href="#search-granicy">Где Claude ищет, а где нет</a>
       <a href="#check">Как проверить настройки</a>
       <a href="#sources">Источники</a>
     </nav>
@@ -254,6 +263,11 @@
           <a href="#memory-from-chats">Что Claude выбирает из чатов</a>
           <a href="#manage-memory">Где посмотреть и исправить память</a>
           <a href="#import-chatgpt">Как перенести данные из ChatGPT</a>
+          <strong>Поиск по чатам</strong>
+          <a href="#search-chats">Когда это понадобится</a>
+          <a href="#search-how">Как попросить</a>
+          <a href="#search-settings">Где включается и выключается</a>
+          <a href="#search-granicy">Где Claude ищет, а где нет</a>
           <a href="#check">Как проверить настройки</a>
           <a href="#sources">Источники</a>
         </nav>
@@ -263,11 +277,11 @@
         <header id="o-sebe">
           <p class="eyebrow">Claude.ai · настройка под себя</p>
           <h1>Как рассказать Claude о себе</h1>
-          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 9 СЕНТЯБРЯ 2026</p>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 11 СЕНТЯБРЯ 2026</p>
           <p class="lead">Эта настройка нужна, чтобы Claude помнил, кто ты, чем занимаешься и какие ответы тебе подходят. Тогда в новых чатах он сможет приводить примеры из твоей области, а тебе не придётся каждый раз заново объяснять свой контекст</p>
           <aside class="route-note" aria-label="Короткий маршрут">
             <h2>Короткий маршрут</h2>
-            <p>Settings → General → имя и Instructions for Claude → оформление и шрифт → Memory → проверка в новом чате</p>
+            <p>Settings → General → имя и Instructions for Claude → оформление и шрифт → Memory → поиск по прошлым чатам → проверка в новом чате</p>
           </aside>
           <p class="purpose">Если ты ещё не вошёл в Claude, сначала пройди <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. Там проверишь доступ и первый чат, а сюда вернёшься, чтобы настроить имя, инструкции и память</p>
         </header>
@@ -345,7 +359,8 @@
           <p class="section-label">Память Claude</p>
           <h2>Memory</h2>
           <h3 id="memory">Зачем включать память</h3>
-          <p class="purpose">Память нужна, чтобы Claude постепенно запоминал твои проекты, предпочтения и важные факты из разговоров. Благодаря этому в новом чате он сможет продолжить работу с учётом прошлого контекста, а тебе не придётся снова рассказывать всё с начала</p>
+          <p class="purpose">Каждый новый чат начинается с того, что ты заново объясняешь: чем занимаешься, что за проект, какие ответы тебе нужны. На третий раз это надоедает, и хочется, чтобы он уже наконец запомнил</p>
+          <p>Для этого и нужна память. Claude сам откладывает из разговоров твои проекты, предпочтения и важные факты, и в следующем чате продолжает с учётом того, что уже знает</p>
           <figure>
             <div class="shot">
               <img src="assets/claude-memory.png" alt="Экран Memory в настройках Claude с четырьмя пояснениями">
@@ -486,10 +501,59 @@
           <div class="result"><p><b>Результат:</b> сведения из ChatGPT отправлены на обработку и после завершения появятся в памяти Claude</p></div>
         </section>
 
+        <section class="content-section">
+          <p class="section-label">Поиск по прошлым чатам</p>
+          <h2>Найти старый разговор</h2>
+          <h3 id="search-chats">Когда это понадобится</h3>
+          <p class="purpose">Ты точно помнишь, что уже разбирал это с Claude. Он давал хорошее решение, вы что-то считали, о чём-то договорились. А в каком чате это было - не найти. Прокручиваешь историю, открываешь один разговор за другим, и всё не то</p>
+          <p>Искать руками не нужно. Скажи Claude, о чём был тот разговор, и он найдёт его сам и продолжит работу с того места</p>
+          <p>Память тут не помощник, и это нормально: она хранит короткие факты о тебе, а не ход каждой работы. Поиск по чатам поднимает саму старую переписку и подтягивает её в текущий разговор</p>
+          <div class="step">
+            <h3 id="search-how">Как попросить</h3>
+            <p>Кнопки для этого нет, и искать её не надо. Ты просто пишешь в новом чате обычными словами, что ищешь, будто спрашиваешь у человека, который был рядом</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="search-chats-prompt">Скопировать</button>
+              <pre id="search-chats-prompt">Найди, что мы обсуждали про мой сайт, и продолжи оттуда</pre>
+            </div>
+            <p>Работают любые похожие формулировки: «что мы решили по ценам», «найди наш разговор про переезд», «вернись к тому, на чём мы остановились с отчётом». Чем точнее назовёшь тему, тем вернее Claude попадёт в нужный чат</p>
+            <div class="info-card">
+              <p><span class="info-title">Что ты увидишь:</span> над ответом появится строка о том, что Claude искал по прошлым чатам. Раскрой её, чтобы проверить, какой именно разговор он поднял. Если поднял не тот, уточни тему или назови примерное время: «это было на прошлой неделе»</p>
+            </div>
+            <div class="result"><p><b>Результат:</b> Claude продолжает работу со старого места, и пересказывать предысторию заново не нужно</p></div>
+          </div>
+          <div class="step">
+            <h3 id="search-settings">Где включается и выключается</h3>
+            <p>Бывает наоборот: не хочешь, чтобы Claude вообще заглядывал в прошлые разговоры. Тогда поиск отключается одним переключателем</p>
+            <p>Лежит он там же, где память: <span class="path">Settings → Memory</span>, пункт <b>Search and reference chats</b>. По умолчанию включён, так что специально включать ничего не нужно</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/claude-search-chats-example.svg" alt="Учебный пример экрана Settings, раздел Memory: включённый переключатель Search and reference chats">
+                <span class="annotation search-nav" data-n="1" aria-hidden="true"></span>
+                <span class="annotation search-toggle" data-n="2" aria-hidden="true"></span>
+              </div>
+              <ul class="screen-key" aria-label="Пояснения к экрану Memory">
+                <li><b>1</b> Memory: раздел памяти в настройках</li>
+                <li><b>2</b> Search and reference chats: переключатель должен быть включён</li>
+              </ul>
+              <figcaption>Учебная схема экрана. Переключатель стоит вторым в списке, сразу под Generate memory from chats</figcaption>
+            </figure>
+            <div class="info-card">
+              <p><span class="info-title">Поиск по чатам доступен на платных тарифах.</span> На бесплатном Claude ответит, что найти прошлый разговор не может. Память при этом работает на всех тарифах, это разные вещи</p>
+            </div>
+          </div>
+          <div class="step">
+            <h3 id="search-granicy">Где Claude ищет, а где нет</h3>
+            <p>Иногда разговор точно был, а Claude его не находит. Прежде чем решить, что всё сломалось, посмотри, не попал ли он в одно из двух мест, куда поиск не заглядывает</p>
+            <p>Первое - проекты. Обычные чаты Claude просматривает все, а чаты внутри проекта отделены: находясь в проекте, он ищет только по этому проекту и не смотрит наружу</p>
+            <p>Второе - временные чаты. Разговор, начатый через режим инкогнито, не сохраняется в истории, и поднять его позже нельзя ни поиском, ни как-то ещё</p>
+            <div class="result"><p><b>Результат:</b> ты понимаешь, почему какой-то разговор не находится, и не ищешь поломку там, где её нет</p></div>
+          </div>
+        </section>
+
         <section class="content-section" id="check">
           <p class="section-label">Финальная проверка</p>
           <h2>Как проверить настройки</h2>
-          <p class="purpose">Проверка нужна, чтобы сразу заметить неверное имя, лишний факт или слишком общую инструкцию, а не исправлять это в каждом следующем разговоре</p>
+          <p class="purpose">Настроил всё, а работает ли - непонятно. Проще один раз спросить самого Claude, чем обнаружить через неделю, что он запомнил твоё имя с ошибкой или понял инструкцию слишком общо</p>
           <p>Открой новый обычный чат и спроси: <b>«Что ты уже знаешь обо мне и как должен оформлять ответы?»</b></p>
           <div class="check-panel">
             <h3>Claude настроен под тебя</h3>
@@ -509,7 +573,7 @@
           <h2>Источники</h2>
           <ul class="sources">
             <li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Anthropic: персональные инструкции Claude</a></li>
-            <li><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Anthropic: память Claude и инкогнито-чаты</a></li>
+            <li><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Anthropic: память Claude и поиск по прошлым чатам</a></li>
             <li><a href="https://support.claude.com/en/articles/12123587-import-and-export-your-memory-from-claude">Anthropic: импорт и экспорт памяти</a></li>
           </ul>
         </section>

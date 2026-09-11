@@ -94,7 +94,7 @@ class GuidesSiteTest(unittest.TestCase):
             self.assertEqual(html.count(f">{title}<"), 3)
 
     def test_visible_revision_dates_match_the_current_review(self):
-        self.assertIn("ОБНОВЛЕНО 9 СЕНТЯБРЯ 2026", PROFILE.read_text(encoding="utf-8"))
+        self.assertIn("ОБНОВЛЕНО 11 СЕНТЯБРЯ 2026", PROFILE.read_text(encoding="utf-8"))
         access = ACCESS.read_text(encoding="utf-8")
         self.assertIn("ОБНОВЛЕНО 8 СЕНТЯБРЯ 2026", access)
         self.assertIn("Проверено 8 сентября 2026", access)
