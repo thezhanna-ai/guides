@@ -10,9 +10,10 @@ ACCESS = ROOT / "claude-ai" / "podklyuchenie-iz-rossii" / "index.html"
 PROFILE = ROOT / "claude-ai" / "kak-rasskazat-o-sebe" / "index.html"
 MODEL = ROOT / "claude-ai" / "vybor-modeli-i-effort" / "index.html"
 PROJECT = ROOT / "claude-ai" / "pervyy-proekt-v-claude" / "index.html"
+SERVER = ROOT / "claude-ai" / "svoy-server-dlya-claude" / "index.html"
 
-PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT)
-GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT)
+PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER)
+GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER)
 PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff"
 # Верхняя ссылка оглавления ведёт на <header>, а не на раздел, и из-под
 # критерия дословного совпадения toc-заголовок выведена явно

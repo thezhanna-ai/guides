@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Как перенести Claude Code на свой европейский сервер, подключить домен и открыть CloudCLI в браузере с компьютера или телефона">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta property="og:title" content="Свой сервер для Claude">
+  <meta property="og:description" content="Пошаговый путь от аренды VPS до постоянного доступа к Claude Code через CloudCLI">
+  <title>Свой сервер для Claude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <script>
+    try {
+      if (localStorage.getItem("guide-theme") === "dark") {
+        document.documentElement.dataset.theme = "dark";
+      }
+    } catch (error) {}
+  </script>
+  <style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --surface: #FFFFFF;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --heading: #102F30;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+      --shadow: rgba(16, 47, 48, .07);
+      --code-chip: rgba(16, 47, 48, .08);
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      --paper: #17201E;
+      --paper-2: #D9D2C5;
+      --surface: #202B28;
+      --sage-note: #263936;
+      --sage-line: #47605A;
+      --accent-dark: #FF9A78;
+      --ok: #9AB8A1;
+      --ink: #ECE8DF;
+      --heading: #F6F1E8;
+      --muted: #B8C3BE;
+      --line: #40504B;
+      --shadow: rgba(0, 0, 0, .22);
+      --code-chip: rgba(255, 255, 255, .1);
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body {
+      margin: 0;
+      overflow-x: clip;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Spectral, Georgia, serif;
+      font-size: 18.4px;
+      line-height: 30.36px;
+      -webkit-text-size-adjust: 100%;
+    }
+    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
+    html[data-theme="dark"] a { color: #A9D2C8 }
+    a:hover { color: var(--accent-dark) }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+
+    .masthead {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper) 97%, transparent);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+    .masthead-inner {
+      max-width: 1200px;
+      min-height: 65px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { color: var(--heading); font-size: 18px; font-weight: 750; letter-spacing: -.015em }
+    .header-actions { display: flex; align-items: center; gap: 10px; min-width: 0 }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750; line-height: 1.25 }
+    .theme-toggle, .camp-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border-radius: 11px;
+      font: 750 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease, background .2s ease;
+    }
+    .theme-toggle { padding: 0 13px; border: 1px solid var(--line); background: var(--surface); color: var(--heading); box-shadow: 0 2px 0 var(--line) }
+    .camp-link { padding: 0 17px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 rgba(16, 47, 48, .2) }
+    .theme-toggle:hover, .camp-link:hover { transform: translateY(1px) }
+    .theme-toggle:active, .camp-link:active { transform: translateY(2px); box-shadow: none }
+    .camp-link:hover { background: var(--emerald); color: var(--white) }
+
+    .page-shell {
+      max-width: 1244px;
+      margin: 0 auto;
+      padding: 42px 20px 90px;
+      display: grid;
+      grid-template-columns: 210px minmax(0, 720px);
+      gap: 32px;
+      align-items: start;
+    }
+    .toc {
+      position: sticky;
+      top: 84px;
+      width: 260px;
+      max-height: calc(100vh - 104px);
+      margin-left: -50px;
+      overflow-y: auto;
+      padding: 4px 18px 10px 0;
+      border-right: 1px solid var(--line);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none; transition: color .2s ease }
+    .toc a::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: transparent }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { background: var(--accent) }
+    @media (min-width: 1200px) and (max-width: 1279px) { .toc { margin-left: -18px } }
+
+    .mobile-toc { display: none }
+    article > header, article > section { scroll-margin-top: 86px }
+    .article-header { padding-top: 3px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--heading); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { max-width: 720px; margin: 0; font-size: 37.6px; line-height: 42.488px; letter-spacing: -.752px }
+    h2 { max-width: 700px; margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--heading); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    ul, ol { padding-left: 24px }
+    li { margin: 8px 0 }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em }
+    .lead { max-width: 690px; margin: 30px 0 0; font-size: 18.4px; line-height: 30.36px; text-wrap: pretty }
+    .purpose { max-width: 680px; margin: 0 0 23px; color: var(--muted); text-wrap: pretty }
+    .content-section { margin-top: 66px }
+
+    .setup-note, .notice { margin: 28px 0 0; padding: 11px 22px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--sage-note) }
+    .setup-note p, .notice p:last-child { margin-bottom: 0 }
+    .notice-title { color: var(--heading); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    .route-note { margin: 31px 0 0; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin: 0 0 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted); font-size: 18px }
+    .step { margin-top: 36px; padding: 29px 0 2px; border-top: 1px solid var(--line) }
+    .step-copy > p { max-width: 660px }
+    .result { margin: 23px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--heading) }
+    .result p { margin: 0 }
+    .minor { color: var(--muted); font-size: 16px; line-height: 1.65 }
+    .path { padding: 2px 6px; border-radius: 5px; background: var(--code-chip); color: var(--heading); font: 600 .9em/1.4 ui-monospace, SFMono-Regular, Menlo, monospace }
+
+    .choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 30px 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line) }
+    .choice { padding: 23px 23px 22px 0 }
+    .choice + .choice { padding-left: 23px; border-left: 1px solid var(--line) }
+    .choice p:last-child { margin-bottom: 0 }
+    .choice-label { margin: 0 0 7px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .requirements { display: grid; gap: 0; margin: 25px 0 0; padding-left: 32px; list-style: decimal; border-top: 1px solid var(--line) }
+    .requirements li { margin: 0; padding: 14px 0 14px 7px; border-bottom: 1px solid var(--line) }
+
+    .prompt-box { position: relative; margin-top: 27px; padding: 55px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.4); border-radius: 8px; background: transparent; color: #FFFFFF; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .check-panel { margin-top: 28px; padding: 24px 26px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface) }
+    .check-panel h3 { margin-bottom: 14px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 10px 0; padding-left: 29px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 900 }
+    details { margin-top: 18px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface) }
+    summary { color: var(--heading); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750; cursor: pointer }
+    details[open] summary { margin-bottom: 17px }
+    details p:last-child { margin-bottom: 0 }
+    .sources { margin: 24px 0 0; padding-left: 22px }
+    .sources li { margin: 10px 0; overflow-wrap: anywhere }
+
+    .related-plaque { grid-column: 2; margin-top: 0; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--sage-note) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .related-plaque a { font-weight: 700 }
+    @media (min-width: 1200px) {
+      .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px }
+      .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px }
+    }
+
+    .cta { margin-top: 72px; padding: 31px 30px 33px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta .section-label { color: #F0E8D8 }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .button { display: inline-flex; min-height: 44px; align-items: center; margin-top: 6px; padding: 0 17px; border-radius: 10px; background: #E86F4A; color: #102F30; box-shadow: 0 3px 0 rgba(0,0,0,.25); font: 750 15px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
+    .button:hover { transform: translateY(1px); color: #102F30; box-shadow: 0 2px 0 rgba(0,0,0,.3); filter: brightness(.94) }
+    .button:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.3) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 20px }
+      .brand { max-width: 130px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .theme-toggle, .camp-link { min-height: 38px; font-size: 13px }
+      .camp-link { padding: 0 12px }
+      .page-shell { display: block; padding: 24px 20px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--heading); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16; letter-spacing: -.68px }
+      h2 { font-size: 27px }
+      .lead { margin-top: 24px; font-size: 18px; line-height: 1.62 }
+      .content-section { margin-top: 52px }
+      .choice-grid { grid-template-columns: 1fr }
+      .choice { padding: 21px 0 }
+      .choice + .choice { padding-left: 0; border-top: 1px solid var(--line); border-left: 0 }
+      .cta { padding: 26px 22px 28px }
+    }
+    @media (max-width: 430px) {
+      .masthead-inner { padding: 8px 14px; gap: 8px }
+      .brand { max-width: 90px; font-size: 12px }
+      .header-actions { gap: 6px }
+      .theme-toggle { min-width: 67px; padding: 0 8px; font-size: 12px }
+      .camp-link { padding: 0 9px; font-size: 12px }
+      .page-shell { padding-right: 14px; padding-left: 14px }
+      .prompt-box { padding: 55px 15px 18px }
+      .prompt-box pre { font-size: 12px }
+      .check-panel { padding: 20px 18px }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto }
+      .toc a, .theme-toggle, .camp-link { transition: none }
+      .button, .button:hover, .button:active { transition: none; transform: none; box-shadow: none; filter: none }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand">Гайды по нейросетям</div>
+      <div class="header-actions">
+        <div class="handout-title">Свой сервер для Claude</div>
+        <button class="theme-toggle" type="button" aria-label="Включить тёмную тему" aria-pressed="false">Тёмная</button>
+        <a class="camp-link" data-partner href="#">На ИИ-Лагерь</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание">
+      <p class="toc-label">Содержание</p>
+      <a class="active" href="#zachem-server"><span>Зачем свой сервер, если есть VPN</span></a>
+      <a href="#chto-eto"><span>Что это такое простыми словами</span></a>
+      <a href="#chto-nuzhno"><span>Что понадобится и сколько стоит</span></a>
+      <a href="#arendovat-server"><span>Шаг 1. Арендовать сервер</span></a>
+      <a href="#podklyuchit-domen"><span>Шаг 2. Подключить домен</span></a>
+      <a href="#postavit-claude-code"><span>Шаг 3. Поставить Claude Code</span></a>
+      <a href="#cloudcli"><span>Шаг 4. Веб-доступ через CloudCLI</span></a>
+      <a href="#oshibki"><span>Если что-то пошло не так</span></a>
+      <a href="#vozmozhnosti"><span>Что ещё умеет твой сервер</span></a>
+    </nav>
+
+    <main>
+      <details class="mobile-toc">
+        <summary>Содержание гида</summary>
+        <nav aria-label="Содержание на телефоне">
+          <a href="#zachem-server">Зачем свой сервер, если есть VPN</a>
+          <a href="#chto-eto">Что это такое простыми словами</a>
+          <a href="#chto-nuzhno">Что понадобится и сколько стоит</a>
+          <a href="#arendovat-server">Шаг 1. Арендовать сервер</a>
+          <a href="#podklyuchit-domen">Шаг 2. Подключить домен</a>
+          <a href="#postavit-claude-code">Шаг 3. Поставить Claude Code</a>
+          <a href="#cloudcli">Шаг 4. Веб-доступ через CloudCLI</a>
+          <a href="#oshibki">Если что-то пошло не так</a>
+          <a href="#vozmozhnosti">Что ещё умеет твой сервер</a>
+        </nav>
+      </details>
+
+      <article>
+        <header class="article-header" data-handout-title="Свой сервер для Claude">
+          <p class="eyebrow">Claude Code · следующий уровень доступа</p>
+          <h1>Свой сервер для Claude</h1>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · 12 СЕНТЯБРЯ 2026</p>
+          <p class="lead">VPN помогает открыть Claude с твоего устройства. Сервер меняет саму схему: Claude Code работает на отдельном компьютере в Европе, не засыпает вместе с ноутбуком и открывается в браузере с телефона</p>
+          <aside class="setup-note">
+            <p><b>Сразу уточню:</b> здесь речь о Claude Code, который работает с файлами, папками, терминалом и Git. Это не чат claude.ai, перенесённый на другой адрес</p>
+          </aside>
+          <aside class="route-note" aria-label="Связь с предыдущей статьёй">
+            <h2>Сначала нужен обычный вход</h2>
+            <p>Если аккаунта Claude ещё нет, начни с статьи <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. Сюда возвращайся, когда вход уже работает</p>
+          </aside>
+        </header>
+
+        <section class="content-section" id="zachem-server">
+          <p class="section-label">Глава 1</p>
+          <h2>Зачем свой сервер, если есть VPN</h2>
+          <p class="purpose">Обычный VPN решает задачу входа, пока включён на твоём устройстве. Закрыл ноутбук, сменил сеть или потерял соединение, и работа остановилась</p>
+          <p>Сервер работает круглосуточно. На нём остаются проекты, файлы, история Claude Code и фоновые процессы. Ты можешь начать задачу с компьютера, закрыть крышку и позже проверить результат с телефона</p>
+          <p>У сервера один европейский IP. Это уменьшает количество сетевых изменений по сравнению с VPN, который пересаживает тебя между разными адресами. Но обещание «нулевого риска бана» остаётся словами автора донорской карусели, а не гарантией Anthropic. Стабильный IP снижает один из рисков, но не отменяет правила сервиса, региональные ограничения и проверки аккаунта</p>
+          <div class="result"><p><b>Вывод:</b> VPN нужен, чтобы открыть сервис со своего устройства. Сервер нужен, чтобы Claude Code жил отдельно от устройства и оставался доступен постоянно</p></div>
+        </section>
+
+        <section class="content-section" id="chto-eto">
+          <p class="section-label">Глава 2</p>
+          <h2>Что это такое простыми словами</h2>
+          <p class="purpose">Представь второй компьютер без экрана. Он стоит в европейском дата-центре, включён круглые сутки, а ты управляешь им через интернет</p>
+          <div class="choice-grid">
+            <div class="choice">
+              <p class="choice-label">На сервере</p>
+              <h3>Claude Code и проекты</h3>
+              <p>Claude читает и меняет реальные файлы, запускает команды, работает с Git и продолжает задачу, пока твой ноутбук закрыт</p>
+            </div>
+            <div class="choice">
+              <p class="choice-label">В браузере</p>
+              <h3>CloudCLI</h3>
+              <p>Открытая веб-оболочка показывает чаты, проекты, файлы, терминал и Git. Она работает с тем же Claude Code, а не подменяет его другим ботом</p>
+            </div>
+          </div>
+          <p>Домен даёт запоминающийся адрес, например отдельный поддомен твоего сайта. Защищённое соединение HTTPS шифрует трафик, а дополнительная авторизация не пускает посторонних в рабочую панель</p>
+          <aside class="notice">
+            <p class="notice-title">VS Code пока не нужен</p>
+            <p>CloudCLI открывается в обычном браузере, в том числе на телефоне. VS Code понадобится позже, если захочешь видеть проект привычным деревом, подключаться по SSH и настраивать оркестрацию агентов</p>
+          </aside>
+        </section>
+
+        <section class="content-section" id="chto-nuzhno">
+          <p class="section-label">Глава 3</p>
+          <h2>Что понадобится и сколько стоит</h2>
+          <p class="purpose">До оплаты собери четыре части. Так не окажется, что сервер уже списывает деньги, а домена или доступа к аккаунту ещё нет</p>
+          <ol class="requirements">
+            <li><b>Аккаунт Claude с доступом к Claude Code.</b> CloudCLI даёт интерфейс, но не включает подписку Claude</li>
+            <li><b>Европейский VPS на Ubuntu.</b> По требованиям Anthropic для Claude Code бери не меньше 4 ГБ оперативной памяти. Подойдут Ubuntu 22.04 или 24.04</li>
+            <li><b>Домен.</b> В донорской карусели указан ориентир около 179 рублей в год. Реальная цена зависит от зоны, регистратора и продления, поэтому перед оплатой смотри итоговую сумму в корзине</li>
+            <li><b>VPN для первого входа.</b> Он понадобится на устройстве, где ты откроешь ссылку авторизации Claude. При повторном входе VPN может понадобиться снова</li>
+          </ol>
+          <aside class="notice">
+            <p class="notice-title">Точную цену сервера не фиксируем</p>
+            <p>Тарифы меняются. Timeweb удобен оплатой российской картой. Hetzner обычно дешевле, но требует зарубежный способ оплаты. Сравнивай конфигурации с 4 ГБ памяти, европейской локацией и публичным IPv4</p>
+          </aside>
+        </section>
+
+        <section class="content-section" id="arendovat-server">
+          <p class="section-label">Глава 4</p>
+          <h2>Шаг 1. Арендовать сервер</h2>
+          <p class="purpose">В кабинете хостинга будет несколько десятков настроек. Тебе нужны только европейская локация, Ubuntu, 4 ГБ памяти и публичный IP</p>
+          <div class="step">
+            <h3>Выбери хостинг и создай VPS</h3>
+            <p>На Timeweb ищи облачные серверы. На Hetzner нужен Cloud Server. Названия кнопок и состав тарифов меняются, поэтому ориентируйся на параметры, а не на цвет карточки</p>
+            <p><b>[НУЖЕН СКРИН]</b> Экран создания сервера с рамками вокруг локации, Ubuntu, 4 ГБ RAM и публичного IPv4</p>
+          </div>
+          <div class="step">
+            <h3>Сохрани данные доступа</h3>
+            <p>После создания хостинг покажет IP-адрес, имя пользователя и способ входа: пароль или SSH-ключ. Сохрани их в менеджере паролей. Не отправляй пароль в переписку и не клади его в открытую папку проекта</p>
+            <p><b>[НУЖНА ПРОВЕРКА]</b> Уточнить на реальном аккаунте, где Timeweb и Hetzner показывают пользователя, IP и кнопку подключения</p>
+            <div class="result"><p><b>Результат:</b> сервер запущен, у тебя есть его IP и безопасно сохранённый доступ</p></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="podklyuchit-domen">
+          <p class="section-label">Глава 5</p>
+          <h2>Шаг 2. Подключить домен</h2>
+          <p class="purpose">Цифры IP неудобно запоминать, а открывать рабочую панель без HTTPS опасно. Домен связывает понятный адрес с сервером и позволяет выпустить сертификат</p>
+          <div class="step">
+            <h3>Создай A-запись</h3>
+            <p>Открой управление DNS у регистратора домена. Создай A-запись для выбранного поддомена и направь её на IP нового сервера. Не добавляй в поле IP протокол, порт или путь</p>
+            <p><b>[НУЖЕН СКРИН]</b> Форма DNS с рамками вокруг типа A, имени поддомена и поля IP</p>
+          </div>
+          <div class="step">
+            <h3>Дождись обновления DNS</h3>
+            <p>Запись может появиться не сразу. Проверяй, что выбранный адрес уже возвращает IP сервера, и только потом настраивай HTTPS</p>
+            <p><b>[НУЖНА ПРОВЕРКА]</b> Проверить домен Жанны после создания записи и зафиксировать реальное время обновления</p>
+            <div class="result"><p><b>Результат:</b> доменное имя указывает на IP сервера</p></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="postavit-claude-code">
+          <p class="section-label">Глава 6</p>
+          <h2>Шаг 3. Поставить Claude Code</h2>
+          <p class="purpose">Сервер уже работает, но Claude на нём ещё нет. Подключись к серверу через терминал и установи официальный Claude Code</p>
+          <div class="step">
+            <h3>Установи Claude Code</h3>
+            <p>На Ubuntu Anthropic рекомендует нативный установщик. Скопируй команду целиком и выполни её на сервере</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="install-claude">Скопировать</button>
+              <pre id="install-claude">curl -fsSL https://claude.ai/install.sh | bash
+claude --version</pre>
+            </div>
+            <p class="minor">Если команда завершилась ошибкой 403 или curl вернул HTML вместо установщика, не повторяй её вслепую. Открой раздел ошибок ниже</p>
+          </div>
+          <div class="step">
+            <h3>Войди в аккаунт</h3>
+            <p>Запусти команду <span class="path">claude</span>. Claude Code покажет способ авторизации. Включи VPN на своём телефоне или компьютере, открой выданную ссылку, войди в свой аккаунт и вернись в терминал</p>
+            <p><b>[НУЖЕН СКРИН]</b> Реальный экран авторизации Claude Code на сервере и страница подтверждения в браузере</p>
+            <p>Не обещай себе, что VPN больше никогда не понадобится. Для обычной работы через защищённый адрес сервера он не нужен, но при выходе из аккаунта или повторной авторизации может понадобиться снова</p>
+            <div class="result"><p><b>Результат:</b> команда claude открывает рабочую сессию на сервере</p></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="cloudcli">
+          <p class="section-label">Глава 7</p>
+          <h2>Шаг 4. Веб-доступ через CloudCLI</h2>
+          <p class="purpose">Терминал уже умеет запускать Claude Code. Теперь добавим экран, который открывается как обычный сайт и показывает те же проекты и сессии</p>
+          <div class="step">
+            <h3>Проверь Node.js и установи CloudCLI</h3>
+            <p>CloudCLI требует Node.js 22 или новее. После проверки версии установи официальный пакет веб-интерфейса</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="install-cloudcli">Скопировать</button>
+              <pre id="install-cloudcli">node --version
+npm install -g @siteboon/claude-code-ui</pre>
+            </div>
+            <p class="minor">Если Node.js не установлен или версия ниже 22, сначала поставь Node.js 22 из официального источника. Команду установки под конкретный образ сервера нужно проверить на живом VPS</p>
+          </div>
+          <div class="step">
+            <h3>Дай Claude готовое задание</h3>
+            <p>Самая сложная часть здесь не установка пакета, а постоянный запуск, HTTPS и защита панели. Эту часть можно поручить Claude Code, но результат всё равно нужно проверить</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="setup-prompt">Скопировать</button>
+              <pre id="setup-prompt">Настрой на этом Ubuntu-сервере постоянный и безопасный доступ к CloudCLI
+
+Сначала спроси у меня точное доменное имя и покажи план без изменений
+
+Требования:
+- Node.js 22 или новее
+- пакет @siteboon/claude-code-ui из официальной документации
+- постоянный запуск после перезагрузки сервера через PM2
+- CloudCLI слушает только локальный адрес на порту 3001
+- снаружи доступ только через reverse proxy с HTTPS
+- перед панелью отдельная авторизация
+- порт 3001 не открывать в публичный интернет
+- не менять SSH и firewall, пока не покажешь точный план и не получишь моё подтверждение
+
+После настройки проверь перезапуск сервера, HTTPS, авторизацию и доступ к проектам Claude Code. В конце перечисли изменённые файлы, службы и команды проверки</pre>
+            </div>
+          </div>
+          <aside class="notice">
+            <p class="notice-title">Почему нельзя открыть порт 3001 напрямую</p>
+            <p>Официальная документация CloudCLI предупреждает: встроенной авторизации у оболочки нет. Публичный адрес без reverse proxy и отдельного входа может открыть постороннему проекты, терминал и настройки Claude Code</p>
+          </aside>
+          <div class="step">
+            <h3>Проверь результат с телефона</h3>
+            <p>Открой свой доменный адрес в браузере. Сначала должна появиться отдельная авторизация, затем интерфейс CloudCLI с проектами и сессиями</p>
+            <p><b>[НУЖЕН СКРИН]</b> Экран авторизации, главная CloudCLI, список проектов и открытая сессия Claude Code</p>
+            <p><b>[НУЖНА ПРОВЕРКА]</b> На реальном сервере подтвердить автозапуск PM2, сертификат HTTPS и закрытый снаружи порт 3001</p>
+            <div class="result"><p><b>Результат:</b> Claude Code открывается по защищённому адресу с компьютера и телефона, а после перезагрузки сервера CloudCLI запускается сам</p></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="oshibki">
+          <p class="section-label">Глава 8</p>
+          <h2>Если что-то пошло не так</h2>
+          <p class="purpose">Не переустанавливай сервер при первой ошибке. Сначала найди слой, на котором оборвалась цепочка: сервер, домен, Claude Code или CloudCLI</p>
+          <details>
+            <summary>Домен не открывается</summary>
+            <p>Проверь, что A-запись возвращает IP именно этого сервера. Если запись только что создана, дождись обновления DNS. Не меняй одновременно DNS, firewall и reverse proxy, иначе причину будет трудно найти</p>
+          </details>
+          <details>
+            <summary>Claude Code не устанавливается</summary>
+            <p>Проверь Ubuntu и доступ сервера к интернету. Официальные требования Claude Code начинаются с Ubuntu 20.04 и 4 ГБ памяти. При ошибке curl или 403 сохрани полный текст ошибки для диагностики</p>
+          </details>
+          <details>
+            <summary>После команды claude снова просит войти</summary>
+            <p>Повтори авторизацию с VPN на устройстве, где открываешь ссылку. Убедись, что входишь в тот же аккаунт и не закрываешь терминал до завершения подтверждения</p>
+          </details>
+          <details>
+            <summary>CloudCLI открылся, но проектов нет</summary>
+            <p>Официальный разбор CloudCLI советует сначала запустить Claude Code хотя бы один раз внутри папки проекта. После этого обнови страницу и проверь, что каталог доступен пользователю, от которого работает CloudCLI</p>
+          </details>
+          <details>
+            <summary>Ошибка EADDRINUSE на порту 3001</summary>
+            <p>Порт уже занят другим процессом или второй копией CloudCLI. Не убивай процесс наугад. Сначала выясни, кто слушает порт, и проверь настройки PM2</p>
+          </details>
+          <details>
+            <summary>Страница открывается по IP, но не по HTTPS</summary>
+            <p>CloudCLI работает, ошибка находится в домене или reverse proxy. Проверь DNS, журнал Caddy или nginx и выпуск сертификата. Не открывай порт 3001 как временный постоянный обход</p>
+          </details>
+        </section>
+
+        <section class="content-section" id="vozmozhnosti">
+          <p class="section-label">Глава 9</p>
+          <h2>Что ещё умеет твой сервер</h2>
+          <p class="purpose">Claude Code занял только часть сервера. На той же машине можно держать рабочие процессы, которым нужен круглосуточный запуск</p>
+          <div class="check-panel">
+            <h3>Следующий уровень</h3>
+            <ul class="checklist">
+              <li>Telegram-боты и обработчики сообщений</li>
+              <li>Небольшие сайты и внутренние панели</li>
+              <li>Сценарии по расписанию и автоматические проверки</li>
+              <li>Git-репозитории, сборки и тесты</li>
+              <li>Несколько AI-агентов с отдельными проектами и задачами</li>
+            </ul>
+          </div>
+          <p>Не складывай всё в один процесс и не открывай наружу лишние порты. Для каждого сервиса нужны отдельная папка, служба, журнал и понятный способ восстановления</p>
+          <h3>Источники и граница проверки</h3>
+          <ul class="sources">
+            <li><a href="https://code.claude.com/docs/en/getting-started">Anthropic: установка и требования Claude Code</a></li>
+            <li><a href="https://cloudcli.ai/docs/open-source-self-hosting/prerequisites">CloudCLI: требования для самостоятельной установки</a></li>
+            <li><a href="https://cloudcli.ai/docs/installation/remote-server">CloudCLI: установка на удалённый сервер и требование защиты</a></li>
+            <li><a href="https://cloudcli.ai/docs/troubleshooting/common-issues">CloudCLI: частые ошибки</a></li>
+            <li><a href="https://github.com/devbravo-ai/cloudcli">CloudCLI: открытый исходный код</a></li>
+            <li><a href="https://theivansergeev.com/claude-vpn-bez-banov/">Иван Сергеев: стабильный IP, свой сервер и честная граница риска</a></li>
+            <li><a href="https://blog.fillikam.com/guides/claude-iz-rossii-cherez-vpn-bez-banov/">Fillikam: дополнительный разбор доступа через свой сервер</a></li>
+            <li><a href="https://www.instagram.com/p/DafRptblKrX/">Карусель @alexmerzliakov: исходная тема и последовательность шагов</a></li>
+          </ul>
+        </section>
+
+        <section class="cta">
+          <p class="section-label">Следующий шаг</p>
+          <h2>Сервер есть, теперь дай ему настоящую работу</h2>
+          <p>В ИИ-Лагере ты разберёшься с Claude Code на своём проекте: от первой папки и понятной задачи до рабочих агентов и автоматизации. Сервер останется твоей постоянной площадкой, а не дорогой пустой коробкой</p>
+          <a class="button" data-partner href="#">Перейти в ИИ-Лагерь</a>
+        </section>
+        <footer class="foot">Независимый русскоязычный гид. Claude, Anthropic и CloudCLI являются товарными знаками их владельцев</footer>
+      </article>
+    </main>
+
+    <aside class="related-plaque" aria-label="Предыдущая статья">
+      <p class="plaque-label">Начать с доступа</p>
+      <h2>Как подключить Claude из России</h2>
+      <p>VPN, вход в аккаунт и первый чат для тех, кто ещё не дошёл до Claude Code</p>
+      <p><a href="../podklyuchenie-iz-rossii/">Вернуться к ДОСТУПу</a></p>
+    </aside>
+  </div>
+
+  <script>
+    const progress = document.querySelector('.progress');
+    const links = [...document.querySelectorAll('.toc a, .mobile-toc a')];
+    const sections = [...new Set(links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean))];
+    let hashIsSettling = Boolean(location.hash);
+    const updateProgress = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${height > 0 ? Math.min(100, window.scrollY / height * 100) : 0}%`;
+    };
+    const updateToc = (preferHash = false) => {
+      const marker = window.scrollY + Math.min(220, window.innerHeight * .32);
+      let current = sections[0];
+      for (const section of sections) {
+        if (section.offsetTop <= marker) current = section;
+      }
+      if ((preferHash || hashIsSettling) && location.hash) {
+        current = sections.find(section => `#${section.id}` === location.hash) || current;
+      }
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current.id}`));
+    };
+    addEventListener('scroll', () => {
+      updateProgress();
+      updateToc();
+    }, { passive: true });
+    const updateHashTarget = () => {
+      const target = sections.find(section => `#${section.id}` === location.hash);
+      hashIsSettling = true;
+      if (target) target.scrollIntoView({ block: 'start' });
+      requestAnimationFrame(() => updateToc(true));
+      setTimeout(() => { hashIsSettling = false; }, 500);
+    };
+    addEventListener('hashchange', updateHashTarget);
+    addEventListener('load', updateHashTarget);
+    document.querySelectorAll('[data-copy-target]').forEach(button => {
+      button.addEventListener('click', async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        try {
+          await navigator.clipboard.writeText(target.innerText);
+          button.textContent = 'Скопировано';
+          setTimeout(() => { button.textContent = 'Скопировать'; }, 1800);
+        } catch (error) {
+          const range = document.createRange();
+          range.selectNodeContents(target);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          button.textContent = 'Текст выделен';
+        }
+      });
+    });
+    const themeButton = document.querySelector('.theme-toggle');
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    const renderThemeButton = () => {
+      const dark = document.documentElement.dataset.theme === 'dark';
+      themeButton.textContent = dark ? 'Светлая' : 'Тёмная';
+      themeButton.setAttribute('aria-label', dark ? 'Включить светлую тему' : 'Включить тёмную тему');
+      themeButton.setAttribute('aria-pressed', String(dark));
+      themeMeta.setAttribute('content', dark ? '#17201E' : '#F8F7F2');
+    };
+    themeButton.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('guide-theme', next); } catch (error) {}
+      renderThemeButton();
+    });
+    renderThemeButton();
+    updateProgress();
+    updateToc(Boolean(location.hash));
+    requestAnimationFrame(() => requestAnimationFrame(() => updateToc(Boolean(location.hash))));
+    if (location.hash) updateHashTarget();
+  </script>
+  <script>
+    /* Партнёрская ссылка задаётся здесь и только здесь */
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+    document.querySelectorAll("a[data-partner]").forEach(function (a) { a.href = PARTNER_LINK; });
+  </script>
+</body>
+</html>
