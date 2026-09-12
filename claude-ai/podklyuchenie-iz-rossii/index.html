@@ -313,7 +313,7 @@
       <div class="brand">Claude.ai: кнопка за кнопкой</div>
       <div class="header-actions">
         <div class="handout-title">Как подключить Claude из России</div>
-        <a class="camp-link" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">На ИИ-Лагерь</a>
+        <a class="camp-link" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
       </div>
     </div>
   </header>
@@ -553,7 +553,7 @@
           <p class="section-label">Следующий шаг</p>
           <h2>От чата Claude.ai к Claude Code</h2>
           <p>Работа в чате Claude.ai - первый шаг, чтобы познакомиться с Claude и понять, что ты можешь ему поручить. В бесплатном ИИ-Лагере ты пойдёшь дальше: установишь Claude Code, начнёшь управлять им командами на русском языке и соберёшь своими руками то, что нужно твоему делу</p>
-          <a class="button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">Перейти в ИИ-Лагерь</a>
+          <a class="button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Перейти в ИИ-Лагерь</a>
         </section>
         <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев</footer>
       </article>
@@ -621,5 +621,12 @@
     requestAnimationFrame(() => requestAnimationFrame(() => updateToc(Boolean(location.hash))));
     if (location.hash) updateHashTarget();
   </script>
+<script>
+/* Партнёрская ссылка задаётся ЗДЕСЬ и только здесь.
+   Все кнопки с признаком data-partner получают её отсюда,
+   поэтому менять адрес нужно в одной строке, а не в разметке */
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (a) { a.href = PARTNER_LINK; });
+</script>
 </body>
 </html>

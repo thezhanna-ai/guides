@@ -13,7 +13,7 @@ PROJECT = ROOT / "claude-ai" / "pervyy-proekt-v-claude" / "index.html"
 
 PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT)
 GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT)
-PARTNER_LINK = "https://theivansergeev.com/ailager/?utm_source=botgk&utm_content=post1"
+PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff"
 # Верхняя ссылка оглавления ведёт на <header>, а не на раздел, и из-под
 # критерия дословного совпадения toc-заголовок выведена явно
 HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "o-sebe", "podklyuchenie", "guides"}
@@ -314,6 +314,26 @@ class GuidesSiteTest(unittest.TestCase):
             html = page.read_text(encoding="utf-8")
             with self.subTest(page=page.parent.name):
                 self.assertIn(PARTNER_LINK.replace("&", "&amp;"), html)
+                for link in self.parse(page).links:
+                    if "theivansergeev.com" in link:
+                        self.assertEqual(link, PARTNER_LINK, page)
+
+
+    def test_partner_link_is_defined_in_one_place_per_page(self):
+        """Ссылка задаётся ОДНОЙ константой, а не переписывается в разметке.
+
+        Правило автора: адрес партнёрской ссылки живёт в одном месте страницы,
+        остальные кнопки берут его оттуда. Поэтому на странице обязана быть
+        константа PARTNER_LINK, каждая партнёрская кнопка обязана нести признак
+        data-partner, и адрес обязан встречаться в разметке не чаще, чем есть
+        таких кнопок плюс сама константа
+        """
+        for page in GUIDE_PAGES:
+            html = page.read_text(encoding="utf-8")
+            with self.subTest(page=page.parent.name):
+                self.assertIn("var PARTNER_LINK =", html, f"{page}: нет единой константы")
+                buttons = len(re.findall(r"<a\b[^>]*\bdata-partner\b", html))
+                self.assertGreater(buttons, 0, f"{page}: нет кнопок с data-partner")
                 for link in self.parse(page).links:
                     if "theivansergeev.com" in link:
                         self.assertEqual(link, PARTNER_LINK, page)

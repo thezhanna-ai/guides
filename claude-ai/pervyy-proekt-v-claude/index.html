@@ -217,7 +217,7 @@
       <div class="brand">Claude.ai: кнопка за кнопкой</div>
       <div class="header-actions">
         <div class="handout-title">Первый проект в Claude</div>
-        <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">На ИИ-Лагерь</a>
+        <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
       </div>
     </div>
   </header>
@@ -423,7 +423,7 @@
           <p class="section-label">Следующий шаг</p>
           <h2>Твоя задача собрана в одном месте</h2>
           <p>Проект наводит порядок внутри чата. Следующий шаг - когда Claude работает не с прикреплёнными файлами, а прямо с папкой на твоём компьютере и собирает готовое: сайт, бота, таблицу. В ИИ-Лагере это делается простыми командами по-русски, без программирования</p>
-          <a class="press-button" href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">Перейти от чата к Claude Code</a>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Перейти от чата к Claude Code</a>
         </section>
 
         <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев</footer>
@@ -488,5 +488,12 @@
     requestAnimationFrame(() => update(Boolean(location.hash)));
     if (location.hash) updateHashTarget();
   </script>
+<script>
+/* Партнёрская ссылка задаётся ЗДЕСЬ и только здесь.
+   Все кнопки с признаком data-partner получают её отсюда,
+   поэтому менять адрес нужно в одной строке, а не в разметке */
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (a) { a.href = PARTNER_LINK; });
+</script>
 </body>
 </html>
