@@ -93,6 +93,7 @@
       gap: 20px;
     }
     .brand { color: var(--heading); font-size: 18px; font-weight: 750; letter-spacing: -.015em }
+    .brand-group { display: flex; align-items: center; gap: 13px; min-width: 0 }
     .header-actions { display: flex; align-items: center; gap: 10px; min-width: 0 }
     .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750; line-height: 1.25 }
     .theme-toggle, .camp-link {
@@ -137,7 +138,6 @@
       border-right: 1px solid var(--line);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     }
-    .toc .theme-toggle { margin: 0 0 22px 12px }
     .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase }
     .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none; transition: color .2s ease }
     .toc a::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: transparent }
@@ -146,7 +146,6 @@
     @media (min-width: 1200px) and (max-width: 1279px) { .toc { margin-left: -18px } }
 
     .mobile-toc { display: none }
-    .mobile-theme { display: none }
     article > header, article > section { scroll-margin-top: 86px }
     .article-header { padding-top: 3px }
     .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase }
@@ -239,7 +238,6 @@
       .camp-link { padding: 0 12px }
       .page-shell { display: block; padding: 24px 20px 68px }
       .toc { display: none }
-      .mobile-theme { display: inline-flex; margin: 0 0 18px }
       .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
       .mobile-toc summary { color: var(--heading); font-size: 15px; font-weight: 750 }
       .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
@@ -279,7 +277,13 @@
   <div class="progress" aria-hidden="true"></div>
   <header class="masthead">
     <div class="masthead-inner">
-      <div class="brand">Claude.ai: кнопка за кнопкой</div>
+      <div class="brand-group">
+        <div class="brand">Claude.ai: кнопка за кнопкой</div>
+        <button class="theme-toggle" type="button" aria-label="Переключить тему" aria-pressed="false">
+          <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"></path></svg>
+        </button>
+      </div>
       <div class="header-actions">
         <div class="handout-title">Свой сервер для Claude</div>
         <a class="camp-link" data-partner href="">На ИИ-Лагерь</a>
@@ -289,10 +293,6 @@
 
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание">
-      <button class="theme-toggle" type="button" aria-label="Переключить тему" aria-pressed="false">
-        <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
-        <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"></path></svg>
-      </button>
       <p class="toc-label">Содержание</p>
       <a class="active" href="#zachem-server"><span>Зачем свой сервер, если есть VPN</span></a>
       <a href="#chto-eto"><span>Что это такое простыми словами</span></a>
@@ -306,10 +306,6 @@
     </nav>
 
     <main>
-      <button class="theme-toggle mobile-theme" type="button" aria-label="Переключить тему" aria-pressed="false">
-        <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
-        <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"></path></svg>
-      </button>
       <details class="mobile-toc">
         <summary>Содержание гида</summary>
         <nav aria-label="Содержание на телефоне">
