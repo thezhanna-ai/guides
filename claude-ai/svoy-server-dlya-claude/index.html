@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Как перенести Claude Code на свой европейский сервер, подключить домен и открыть CloudCLI в браузере с компьютера или телефона">
+  <meta name="description" content="Два маршрута к Claude через свой европейский сервер: личный VPN или постоянный Claude Code с доступом через CloudCLI">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#F8F7F2">
   <meta property="og:title" content="Свой сервер для Claude">
-  <meta property="og:description" content="Пошаговый путь от аренды VPS до постоянного доступа к Claude Code через CloudCLI">
+  <meta property="og:description" content="Как выбрать между своим VPN и Claude Code на сервере, настроить подходящий маршрут и при желании совместить оба">
   <title>Свой сервер для Claude</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,11 +41,11 @@
       color-scheme: light;
     }
     html[data-theme="dark"] {
-      --paper: #17201E;
+      --paper: #0B0F0E;
       --paper-2: #D9D2C5;
-      --surface: #202B28;
-      --sage-note: #263936;
-      --sage-line: #47605A;
+      --surface: #121816;
+      --sage-note: #151E1B;
+      --sage-line: #35443F;
       --accent-dark: #FF9A78;
       --ok: #9AB8A1;
       --ink: #ECE8DF;
@@ -106,7 +106,12 @@
       cursor: pointer;
       transition: transform .12s ease, box-shadow .12s ease, background .2s ease;
     }
-    .theme-toggle { padding: 0 13px; border: 1px solid var(--line); background: var(--surface); color: var(--heading); box-shadow: 0 2px 0 var(--line) }
+    .theme-toggle { width: 44px; min-height: 44px; padding: 0; border: 1px solid var(--line); background: var(--surface); color: var(--heading); box-shadow: 0 2px 0 var(--line) }
+    .theme-toggle svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round }
+    .theme-icon-moon { display: none }
+    html[data-theme="dark"] .theme-toggle { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(232, 111, 74, .28) }
+    html[data-theme="dark"] .theme-icon-sun { display: none }
+    html[data-theme="dark"] .theme-icon-moon { display: block }
     .camp-link { padding: 0 17px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 rgba(16, 47, 48, .2) }
     .theme-toggle:hover, .camp-link:hover { transform: translateY(1px) }
     .theme-toggle:active, .camp-link:active { transform: translateY(2px); box-shadow: none }
@@ -132,6 +137,7 @@
       border-right: 1px solid var(--line);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     }
+    .toc .theme-toggle { margin: 0 0 22px 12px }
     .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase }
     .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none; transition: color .2s ease }
     .toc a::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: transparent }
@@ -140,6 +146,7 @@
     @media (min-width: 1200px) and (max-width: 1279px) { .toc { margin-left: -18px } }
 
     .mobile-toc { display: none }
+    .mobile-theme { display: none }
     article > header, article > section { scroll-margin-top: 86px }
     .article-header { padding-top: 3px }
     .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase }
@@ -157,10 +164,11 @@
     .purpose { max-width: 680px; margin: 0 0 23px; color: var(--muted); text-wrap: pretty }
     .content-section { margin-top: 66px }
 
-    .setup-note, .notice { margin: 28px 0 0; padding: 11px 22px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--sage-note) }
+    .setup-note, .notice { margin: 28px 0 0; padding: 11px 22px; border: 1px solid var(--sage-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--sage-note) }
+    .domain-note { margin-bottom: 28px }
     .setup-note p, .notice p:last-child { margin-bottom: 0 }
     .notice-title { color: var(--heading); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
-    .route-note { margin: 31px 0 0; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note { margin: 31px 0 0; padding: 2px 0 4px 24px; border-left: 3px solid var(--line) }
     .route-note h2 { margin: 0 0 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .route-note p { margin: 0; color: var(--muted); font-size: 18px }
     .step { margin-top: 36px; padding: 29px 0 2px; border-top: 1px solid var(--line) }
@@ -175,6 +183,12 @@
     .choice + .choice { padding-left: 23px; border-left: 1px solid var(--line) }
     .choice p:last-child { margin-bottom: 0 }
     .choice-label { margin: 0 0 7px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .route-map { margin: 29px 0 0; display: grid; gap: 12px }
+    .route-map-row { display: grid; grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1.12fr); align-items: stretch }
+    .route-node { min-width: 0; padding: 16px 14px; display: grid; place-content: center; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--heading); font: 700 14px/1.38 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center; overflow-wrap: anywhere }
+    .route-node strong { display: block; margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .09em; text-transform: uppercase }
+    .route-arrow { display: grid; place-items: center; color: var(--accent-dark); font: 800 20px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-caption { margin: 10px 0 0; color: var(--muted); font-size: 15px; line-height: 1.55 }
     .requirements { display: grid; gap: 0; margin: 25px 0 0; padding-left: 32px; list-style: decimal; border-top: 1px solid var(--line) }
     .requirements li { margin: 0; padding: 14px 0 14px 7px; border-bottom: 1px solid var(--line) }
 
@@ -193,7 +207,7 @@
     .sources { margin: 24px 0 0; padding-left: 22px }
     .sources li { margin: 10px 0; overflow-wrap: anywhere }
 
-    .related-plaque { grid-column: 2; margin-top: 0; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--sage-note) }
+    .related-plaque { grid-column: 2; margin-top: 0; padding: 3px 0 3px 16px; border-left: 3px solid var(--line) }
     .related-plaque p { margin: 0 }
     .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
     .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
@@ -210,6 +224,10 @@
     .button { display: inline-flex; min-height: 44px; align-items: center; margin-top: 6px; padding: 0 17px; border-radius: 10px; background: #E86F4A; color: #102F30; box-shadow: 0 3px 0 rgba(0,0,0,.25); font: 750 15px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
     .button:hover { transform: translateY(1px); color: #102F30; box-shadow: 0 2px 0 rgba(0,0,0,.3); filter: brightness(.94) }
     .button:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.3) }
+    .mid-cta { margin-top: 52px; padding: 25px 27px 27px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface) }
+    .mid-cta h2 { margin-bottom: 15px; font: 750 21px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .mid-cta p { margin-bottom: 14px }
+    .mid-cta .button { margin-top: 0 }
     .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
 
     @media (max-width: 860px) {
@@ -221,6 +239,7 @@
       .camp-link { padding: 0 12px }
       .page-shell { display: block; padding: 24px 20px 68px }
       .toc { display: none }
+      .mobile-theme { display: inline-flex; margin: 0 0 18px }
       .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
       .mobile-toc summary { color: var(--heading); font-size: 15px; font-weight: 750 }
       .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
@@ -234,13 +253,15 @@
       .choice-grid { grid-template-columns: 1fr }
       .choice { padding: 21px 0 }
       .choice + .choice { padding-left: 0; border-top: 1px solid var(--line); border-left: 0 }
+      .route-map-row { grid-template-columns: 1fr }
+      .route-arrow { min-height: 28px; transform: rotate(90deg) }
       .cta { padding: 26px 22px 28px }
     }
     @media (max-width: 430px) {
       .masthead-inner { padding: 8px 14px; gap: 8px }
       .brand { max-width: 90px; font-size: 12px }
       .header-actions { gap: 6px }
-      .theme-toggle { min-width: 67px; padding: 0 8px; font-size: 12px }
+      .theme-toggle { width: 40px; min-width: 40px; min-height: 40px }
       .camp-link { padding: 0 9px; font-size: 12px }
       .page-shell { padding-right: 14px; padding-left: 14px }
       .prompt-box { padding: 55px 15px 18px }
@@ -258,17 +279,20 @@
   <div class="progress" aria-hidden="true"></div>
   <header class="masthead">
     <div class="masthead-inner">
-      <div class="brand">Гайды по нейросетям</div>
+      <div class="brand">Claude.ai: кнопка за кнопкой</div>
       <div class="header-actions">
         <div class="handout-title">Свой сервер для Claude</div>
-        <button class="theme-toggle" type="button" aria-label="Включить тёмную тему" aria-pressed="false">Тёмная</button>
-        <a class="camp-link" data-partner href="#">На ИИ-Лагерь</a>
+        <a class="camp-link" data-partner href="">На ИИ-Лагерь</a>
       </div>
     </div>
   </header>
 
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание">
+      <button class="theme-toggle" type="button" aria-label="Переключить тему" aria-pressed="false">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"></path></svg>
+      </button>
       <p class="toc-label">Содержание</p>
       <a class="active" href="#zachem-server"><span>Зачем свой сервер, если есть VPN</span></a>
       <a href="#chto-eto"><span>Что это такое простыми словами</span></a>
@@ -282,6 +306,10 @@
     </nav>
 
     <main>
+      <button class="theme-toggle mobile-theme" type="button" aria-label="Переключить тему" aria-pressed="false">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"></path></svg>
+      </button>
       <details class="mobile-toc">
         <summary>Содержание гида</summary>
         <nav aria-label="Содержание на телефоне">
@@ -299,71 +327,105 @@
 
       <article>
         <header class="article-header" data-handout-title="Свой сервер для Claude">
-          <p class="eyebrow">Claude Code · следующий уровень доступа</p>
+          <p class="eyebrow">Два маршрута через свой сервер</p>
           <h1>Свой сервер для Claude</h1>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · 12 СЕНТЯБРЯ 2026</p>
-          <p class="lead">VPN помогает открыть Claude с твоего устройства. Сервер меняет саму схему: Claude Code работает на отдельном компьютере в Европе, не засыпает вместе с ноутбуком и открывается в браузере с телефона</p>
+          <p class="lead">Обычный VPN помогает открыть Claude из России, но у него есть слабое место: адрес может меняться, а одним сервером нередко пользуется много людей. Собственный европейский сервер даёт тебе отдельный постоянный IP и второй уровень контроля над доступом</p>
+          <p>На практике проблема выглядит просто: вчера Claude открывался, сегодня показывает ошибку региона, а после смены VPN снова работает. Это не всегда означает бан аккаунта. Иногда сервис не принимает именно текущий адрес или видит вход из другой страны</p>
+          <p>Свой сервер нужен не для того, чтобы сделать Claude умнее. Он нужен, чтобы перестать каждый раз искать удачный VPN и собрать понятное рабочее место, адрес которого не меняется без твоего решения</p>
           <aside class="setup-note">
-            <p><b>Сразу уточню:</b> здесь речь о Claude Code, который работает с файлами, папками, терминалом и Git. Это не чат claude.ai, перенесённый на другой адрес</p>
+            <p><b>Сразу уточню:</b> во втором маршруте речь о Claude Code, который работает с файлами, папками, терминалом и Git. Это не чат claude.ai, перенесённый на другой адрес</p>
           </aside>
           <aside class="route-note" aria-label="Связь с предыдущей статьёй">
             <h2>Сначала нужен обычный вход</h2>
-            <p>Если аккаунта Claude ещё нет, начни с статьи <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. Сюда возвращайся, когда вход уже работает</p>
+            <p>Если аккаунта Claude ещё нет, начни со статьи <a href="../podklyuchenie-iz-rossii/index.html">«Как подключить Claude из России»</a>. Сюда возвращайся, когда вход уже работает, ты освоился в claude.ai и хочешь перейти от отдельных чатов к более серьёзной работе с файлами, проектами и Claude Code</p>
           </aside>
         </header>
 
         <section class="content-section" id="zachem-server">
           <p class="section-label">Глава 1</p>
           <h2>Зачем свой сервер, если есть VPN</h2>
-          <p class="purpose">Обычный VPN решает задачу входа, пока включён на твоём устройстве. Закрыл ноутбук, сменил сеть или потерял соединение, и работа остановилась</p>
-          <p>Сервер работает круглосуточно. На нём остаются проекты, файлы, история Claude Code и фоновые процессы. Ты можешь начать задачу с компьютера, закрыть крышку и позже проверить результат с телефона</p>
-          <p>У сервера один европейский IP. Это уменьшает количество сетевых изменений по сравнению с VPN, который пересаживает тебя между разными адресами. Но обещание «нулевого риска бана» остаётся словами автора донорской карусели, а не гарантией Anthropic. Стабильный IP снижает один из рисков, но не отменяет правила сервиса, региональные ограничения и проверки аккаунта</p>
-          <div class="result"><p><b>Вывод:</b> VPN нужен, чтобы открыть сервис со своего устройства. Сервер нужен, чтобы Claude Code жил отдельно от устройства и оставался доступен постоянно</p></div>
+          <p class="purpose">Если сегодня Claude открывается только при удачно выбранном VPN-сервере, а завтра адрес уже другой, доступ превращается в лотерею. Свой VPS убирает эту случайность: адрес закреплён за тобой, а назначение сервера выбираешь ты</p>
+          <p>Региональные ограничения и проверки со стороны сервиса никуда не исчезают. Зато ты больше не зависишь от перегруженного общего VPN, не переключаешься между случайными странами и заранее знаешь, с какого IP заходишь в аккаунт</p>
+          <p>Дальше есть два маршрута. В первом сервер становится твоим личным VPN, а Claude остаётся на привычном компьютере. Во втором на сервер переезжают Claude Code и рабочие проекты, поэтому к ним можно подключаться из браузера или через VS Code</p>
+          <div class="route-map" aria-label="Два маршрута использования сервера для Claude">
+            <div class="route-map-row">
+              <div class="route-node"><strong>Путь А</strong>Твой компьютер</div>
+              <div class="route-arrow" aria-hidden="true">&rarr;</div>
+              <div class="route-node">Свой VPN на VPS</div>
+              <div class="route-arrow" aria-hidden="true">&rarr;</div>
+              <div class="route-node">Claude на твоём компьютере</div>
+            </div>
+            <div class="route-map-row">
+              <div class="route-node"><strong>Путь Б</strong>Браузер или VS Code</div>
+              <div class="route-arrow" aria-hidden="true">&rarr;</div>
+              <div class="route-node">CloudCLI или SSH</div>
+              <div class="route-arrow" aria-hidden="true">&rarr;</div>
+              <div class="route-node">Claude Code и проекты на VPS</div>
+            </div>
+          </div>
+          <p class="route-caption">В пути А сервер отвечает только за соединение. В пути Б он хранит проекты и выполняет работу</p>
+          <p>Путь А проще и привычнее: подключаешь свой VPN и пользуешься Claude на компьютере как раньше. Ноутбук выключен, значит и работа Claude остановлена</p>
+          <p>Путь Б требует больше настройки: Claude Code, проекты и веб-панель работают на сервере. Зато можно зайти с другого компьютера или телефона, а фоновые процессы не зависят от крышки ноутбука</p>
+          <p>Не нужно выбирать маршрут навсегда. Можно начать с личного VPN, спокойно проверить сервер и только потом добавить Claude Code. Можно оставить оба варианта: один для обычного claude.ai, второй для проектов, кода и долгих задач</p>
+          <p>У собственного VPS постоянный адрес, но это адрес дата-центра. Он снижает риск, связанный со случайной сменой IP, однако не даёт стопроцентной гарантии от блокировки аккаунта, ограничения доступа или других мер со стороны Anthropic</p>
+          <div class="route-note"><p><b>Быстрый выбор:</b> нужен только стабильный доступ с одного устройства - путь А. Нужен постоянно работающий Claude Code с проектами - путь Б</p></div>
         </section>
 
         <section class="content-section" id="chto-eto">
           <p class="section-label">Глава 2</p>
           <h2>Что это такое простыми словами</h2>
-          <p class="purpose">Представь второй компьютер без экрана. Он стоит в европейском дата-центре, включён круглые сутки, а ты управляешь им через интернет</p>
+          <p class="purpose">В обоих маршрутах ты арендуешь один и тот же тип сервера. Разница начинается после аренды: какую роль этот сервер будет выполнять</p>
+          <p>VPS можно представить как небольшой компьютер в европейском дата-центре. У него есть свой адрес в интернете, операционная система и пароль для входа. Он работает круглые сутки, даже когда твой ноутбук закрыт</p>
+          <p>Для личного VPN этот компьютер становится входной дверью в интернет. Для Claude Code он становится ещё и рабочим столом: внутри лежат папки проекта, запускаются команды и сохраняется результат</p>
           <div class="choice-grid">
             <div class="choice">
-              <p class="choice-label">На сервере</p>
-              <h3>Claude Code и проекты</h3>
-              <p>Claude читает и меняет реальные файлы, запускает команды, работает с Git и продолжает задачу, пока твой ноутбук закрыт</p>
+              <p class="choice-label">Путь А</p>
+              <h3>Сервер как личный VPN</h3>
+              <p>Claude, файлы и VS Code остаются на твоём компьютере. Через сервер проходит только интернет-соединение с постоянным европейским IP</p>
             </div>
             <div class="choice">
-              <p class="choice-label">В браузере</p>
-              <h3>CloudCLI</h3>
-              <p>Открытая веб-оболочка показывает чаты, проекты, файлы, терминал и Git. Она работает с тем же Claude Code, а не подменяет его другим ботом</p>
+              <p class="choice-label">Путь Б</p>
+              <h3>Сервер как рабочий компьютер</h3>
+              <p>Claude Code и проекты находятся на VPS. CloudCLI показывает их в браузере, а VS Code может подключиться к тому же серверу по SSH</p>
             </div>
           </div>
-          <p>Домен даёт запоминающийся адрес, например отдельный поддомен твоего сайта. Защищённое соединение HTTPS шифрует трафик, а дополнительная авторизация не пускает посторонних в рабочую панель</p>
-          <aside class="notice">
-            <p class="notice-title">VS Code пока не нужен</p>
-            <p>CloudCLI открывается в обычном браузере, в том числе на телефоне. VS Code понадобится позже, если захочешь видеть проект привычным деревом, подключаться по SSH и настраивать оркестрацию агентов</p>
+          <p>Для пути А домен обычно не нужен: приложение VPN подключается прямо к IP сервера. Для пути Б домен заменяет набор цифр понятным адресом. HTTPS шифрует данные между браузером и сервером, а отдельный пароль не пускает посторонних в CloudCLI</p>
+          <aside class="notice domain-note">
+            <p class="notice-title">Покупка домена не создаёт ещё один сервер</p>
+            <p>Домен только даёт понятное имя уже арендованному VPS. Сам Claude Code, файлы и CloudCLI по-прежнему находятся на сервере</p>
           </aside>
+          <h3>CloudCLI и VS Code можно использовать вместе</h3>
+          <p>CloudCLI удобен для входа через браузер и телефон. VS Code удобнее для вайбкодинга: дерево проекта, сравнение изменений, Git, несколько терминалов и контроль агентов. Оба интерфейса могут работать с одними файлами на сервере</p>
         </section>
 
         <section class="content-section" id="chto-nuzhno">
           <p class="section-label">Глава 3</p>
           <h2>Что понадобится и сколько стоит</h2>
-          <p class="purpose">До оплаты собери четыре части. Так не окажется, что сервер уже списывает деньги, а домена или доступа к аккаунту ещё нет</p>
+          <p class="purpose">Сначала выбери маршрут, затем собирай покупки. Для пути А достаточно сервера и приложения VPN. Для пути Б дополнительно нужны Claude Code, домен и защищённая веб-панель</p>
+          <p>Здесь легко перепутать три разные оплаты. VPS оплачивает работу удалённого компьютера. Домен оплачивает его короткий адрес. Тариф Claude или расход API оплачивает работу самой модели. Одна покупка не включает две другие</p>
           <ol class="requirements">
-            <li><b>Аккаунт Claude с доступом к Claude Code.</b> CloudCLI даёт интерфейс, но не включает подписку Claude</li>
-            <li><b>Европейский VPS на Ubuntu.</b> По требованиям Anthropic для Claude Code бери не меньше 4 ГБ оперативной памяти. Подойдут Ubuntu 22.04 или 24.04</li>
-            <li><b>Домен.</b> В донорской карусели указан ориентир около 179 рублей в год. Реальная цена зависит от зоны, регистратора и продления, поэтому перед оплатой смотри итоговую сумму в корзине</li>
-            <li><b>VPN для первого входа.</b> Он понадобится на устройстве, где ты откроешь ссылку авторизации Claude. При повторном входе VPN может понадобиться снова</li>
+            <li><b>Для обоих путей: европейский VPS на Ubuntu.</b> AmneziaVPN официально поддерживает Ubuntu 22.04 или 24.04 на KVM-сервере с публичным IPv4 и архитектурой x86-64. Если допускаешь переход к пути Б, сразу выбирай не меньше 4 ГБ памяти, как требует Claude Code</li>
+            <li><b>Для пути А: приложение AmneziaVPN и аккаунт Claude.</b> AmneziaVPN устанавливает VPN на твой VPS и подключает к нему компьютер или телефон. Оплата сервера не включает Claude: в claude.ai ты продолжаешь пользоваться тем бесплатным или платным тарифом, который доступен твоему аккаунту</li>
+            <li><b>Для пути Б: аккаунт с доступом к Claude Code.</b> CloudCLI даёт только браузерный интерфейс. Доступ к Claude Code оплачивается отдельно через подходящую подписку Claude или через API-биллинг, если выбран этот способ работы</li>
+            <li><b>Для пути Б: домен.</b> Домен можно найти примерно от 179 рублей за первый год, но итоговая цена зависит от доменной зоны, регистратора, акции при покупке и стоимости продления</li>
+            <li><b>Для первого входа в Claude Code: работающий VPN.</b> Он понадобится на устройстве, где откроется ссылка авторизации. При повторном входе может понадобиться снова</li>
           </ol>
-          <aside class="notice">
-            <p class="notice-title">Точную цену сервера не фиксируем</p>
-            <p>Тарифы меняются. Timeweb удобен оплатой российской картой. Hetzner обычно дешевле, но требует зарубежный способ оплаты. Сравнивай конфигурации с 4 ГБ памяти, европейской локацией и публичным IPv4</p>
-          </aside>
+          <h3>Из чего складывается цена сервера</h3>
+          <p>Стоимость зависит от хостинга, страны размещения, количества памяти и процессоров, объёма диска, включённого трафика и публичного IPv4. Timeweb можно оплатить российской картой. Hetzner часто предлагает более низкую цену, но для оплаты нужна зарубежная карта. Для пути Б сравнивай конфигурации с 4 ГБ памяти, европейской локацией и публичным IPv4. Для пути А проверяй KVM, x86-64 и публичный IPv4</p>
+        </section>
+
+        <section class="mid-cta" aria-label="Помощь с настройкой">
+          <p class="section-label">Собрать вместе</p>
+          <h2>Прочитать схему проще, чем впервые настроить сервер</h2>
+          <p>В ИИ-Лагере можно пройти этот маршрут на своём экране: выбрать способ доступа, подключить сервер и довести Claude Code до рабочего проекта. Первые три дня бесплатные, поэтому не придётся оставаться один на один с незнакомыми настройками</p>
+          <a class="button" data-partner href="">Забрать бесплатную путёвку</a>
         </section>
 
         <section class="content-section" id="arendovat-server">
           <p class="section-label">Глава 4</p>
           <h2>Шаг 1. Арендовать сервер</h2>
-          <p class="purpose">В кабинете хостинга будет несколько десятков настроек. Тебе нужны только европейская локация, Ubuntu, 4 ГБ памяти и публичный IP</p>
+          <p class="purpose">Аренда сервера одинакова для обоих маршрутов. После получения IP путь А остаётся в приложении VPN, а путь Б продолжается в терминале сервера</p>
           <div class="step">
             <h3>Выбери хостинг и создай VPS</h3>
             <p>На Timeweb ищи облачные серверы. На Hetzner нужен Cloud Server. Названия кнопок и состав тарифов меняются, поэтому ориентируйся на параметры, а не на цвет карточки</p>
@@ -375,12 +437,25 @@
             <p><b>[НУЖНА ПРОВЕРКА]</b> Уточнить на реальном аккаунте, где Timeweb и Hetzner показывают пользователя, IP и кнопку подключения</p>
             <div class="result"><p><b>Результат:</b> сервер запущен, у тебя есть его IP и безопасно сохранённый доступ</p></div>
           </div>
+          <div class="step">
+            <p class="choice-label">Путь А</p>
+            <h3>Поставь свой VPN через AmneziaVPN</h3>
+            <p>Установи свежую версию AmneziaVPN на компьютер или телефон. Добавь подключение, выбери Self-hosted VPN, введи IP, SSH-пользователя и пароль или ключ от VPS. В автоматическом режиме приложение установит AmneziaWG и создаст готовое подключение без ручных команд в терминале</p>
+            <p><b>[НУЖЕН СКРИН]</b> Первый экран AmneziaVPN, выбор Self-hosted VPN, поля IP и SSH-доступа, Automatic и готовое подключение</p>
+            <p><b>[НУЖНА ПРОВЕРКА]</b> Сверить русские подписи кнопок в актуальной версии приложения на устройстве Жанны</p>
+            <p>После подключения проверь внешний IP и открой Claude на своём устройстве. Claude, VS Code и проекты остаются на этом устройстве. Домен, CloudCLI и установка Claude Code на VPS для пути А не нужны</p>
+            <div class="result"><p><b>Путь А завершён:</b> твой компьютер выходит в интернет через личный европейский VPN. Если нужен постоянно работающий Claude Code, переходи к пути Б</p></div>
+          </div>
         </section>
 
         <section class="content-section" id="podklyuchit-domen">
           <p class="section-label">Глава 5</p>
           <h2>Шаг 2. Подключить домен</h2>
-          <p class="purpose">Цифры IP неудобно запоминать, а открывать рабочую панель без HTTPS опасно. Домен связывает понятный адрес с сервером и позволяет выпустить сертификат</p>
+          <p class="purpose">Этот и следующие два шага относятся к пути Б. Цифры IP неудобно запоминать, а открывать рабочую панель без HTTPS опасно</p>
+          <aside class="route-note">
+            <p class="notice-title">На пути А эту главу можно пропустить</p>
+            <p>Свой VPN подключается к IP сервера. Домен понадобится только если ты переходишь к CloudCLI или размещаешь на VPS другой веб-сервис</p>
+          </aside>
           <div class="step">
             <h3>Создай A-запись</h3>
             <p>Открой управление DNS у регистратора домена. Создай A-запись для выбранного поддомена и направь её на IP нового сервера. Не добавляй в поле IP протокол, порт или путь</p>
@@ -397,7 +472,7 @@
         <section class="content-section" id="postavit-claude-code">
           <p class="section-label">Глава 6</p>
           <h2>Шаг 3. Поставить Claude Code</h2>
-          <p class="purpose">Сервер уже работает, но Claude на нём ещё нет. Подключись к серверу через терминал и установи официальный Claude Code</p>
+          <p class="purpose">Путь Б продолжается здесь. Сервер уже работает, но Claude на нём ещё нет. Подключись через терминал и установи официальный Claude Code</p>
           <div class="step">
             <h3>Установи Claude Code</h3>
             <p>На Ubuntu Anthropic рекомендует нативный установщик. Скопируй команду целиком и выполни её на сервере</p>
@@ -412,7 +487,10 @@ claude --version</pre>
             <h3>Войди в аккаунт</h3>
             <p>Запусти команду <span class="path">claude</span>. Claude Code покажет способ авторизации. Включи VPN на своём телефоне или компьютере, открой выданную ссылку, войди в свой аккаунт и вернись в терминал</p>
             <p><b>[НУЖЕН СКРИН]</b> Реальный экран авторизации Claude Code на сервере и страница подтверждения в браузере</p>
-            <p>Не обещай себе, что VPN больше никогда не понадобится. Для обычной работы через защищённый адрес сервера он не нужен, но при выходе из аккаунта или повторной авторизации может понадобиться снова</p>
+            <aside class="notice">
+              <p class="notice-title">VPN может понадобиться снова</p>
+              <p>Для обычной работы через защищённый адрес сервера он не нужен, но при выходе из аккаунта или повторной авторизации может понадобиться снова</p>
+            </aside>
             <div class="result"><p><b>Результат:</b> команда claude открывает рабочую сессию на сервере</p></div>
           </div>
         </section>
@@ -420,7 +498,7 @@ claude --version</pre>
         <section class="content-section" id="cloudcli">
           <p class="section-label">Глава 7</p>
           <h2>Шаг 4. Веб-доступ через CloudCLI</h2>
-          <p class="purpose">Терминал уже умеет запускать Claude Code. Теперь добавим экран, который открывается как обычный сайт и показывает те же проекты и сессии</p>
+          <p class="purpose">Финальный шаг пути Б добавляет браузерный интерфейс к Claude Code. Те же проекты затем можно открыть в VS Code по SSH</p>
           <div class="step">
             <h3>Проверь Node.js и установи CloudCLI</h3>
             <p>CloudCLI требует Node.js 22 или новее. После проверки версии установи официальный пакет веб-интерфейса</p>
@@ -471,6 +549,14 @@ npm install -g @siteboon/claude-code-ui</pre>
           <h2>Если что-то пошло не так</h2>
           <p class="purpose">Не переустанавливай сервер при первой ошибке. Сначала найди слой, на котором оборвалась цепочка: сервер, домен, Claude Code или CloudCLI</p>
           <details>
+            <summary>AmneziaVPN не устанавливает путь А</summary>
+            <p>Сверь VPS с официальными требованиями: Ubuntu 22.04 или 24.04, виртуализация KVM, публичный IPv4 и архитектура x86-64. Проверь SSH-доступ теми же данными, которые ввела в приложение</p>
+          </details>
+          <details>
+            <summary>VPN подключился, но Claude не открывается</summary>
+            <p>Проверь внешний IP и доступ к другим сайтам. Если интернет работает, а Claude возвращает отказ, не считай постоянный IP гарантией: адрес дата-центра тоже может не пройти проверку сервиса</p>
+          </details>
+          <details>
             <summary>Домен не открывается</summary>
             <p>Проверь, что A-запись возвращает IP именно этого сервера. Если запись только что создана, дождись обновления DNS. Не меняй одновременно DNS, firewall и reverse proxy, иначе причину будет трудно найти</p>
           </details>
@@ -500,6 +586,9 @@ npm install -g @siteboon/claude-code-ui</pre>
           <p class="section-label">Глава 9</p>
           <h2>Что ещё умеет твой сервер</h2>
           <p class="purpose">Claude Code занял только часть сервера. На той же машине можно держать рабочие процессы, которым нужен круглосуточный запуск</p>
+          <h3>Оба маршрута на одном сервере</h3>
+          <p>Технически на одном VPS могут работать и AmneziaVPN, и Claude Code с CloudCLI. VPN обслуживает соединение твоих устройств, а Claude Code работает со своими папками и процессами</p>
+          <p>Для новичка безопаснее сначала закончить один маршрут и проверить его, затем добавлять второй. Перед совмещением Claude должен показать план портов, firewall и служб. Нельзя разрешать ему закрывать SSH или публиковать порт CloudCLI 3001</p>
           <div class="check-panel">
             <h3>Следующий уровень</h3>
             <ul class="checklist">
@@ -511,24 +600,23 @@ npm install -g @siteboon/claude-code-ui</pre>
             </ul>
           </div>
           <p>Не складывай всё в один процесс и не открывай наружу лишние порты. Для каждого сервиса нужны отдельная папка, служба, журнал и понятный способ восстановления</p>
-          <h3>Источники и граница проверки</h3>
+          <h3>Официальные материалы для проверки</h3>
           <ul class="sources">
+            <li><a href="https://docs.amnezia.org/documentation/instructions/install-vpn-on-server/">AmneziaVPN: установка VPN на собственный сервер</a></li>
+            <li><a href="https://docs.amnezia.org/documentation/supported-linux-os-for-vps/">AmneziaVPN: требования к VPS</a></li>
             <li><a href="https://code.claude.com/docs/en/getting-started">Anthropic: установка и требования Claude Code</a></li>
             <li><a href="https://cloudcli.ai/docs/open-source-self-hosting/prerequisites">CloudCLI: требования для самостоятельной установки</a></li>
             <li><a href="https://cloudcli.ai/docs/installation/remote-server">CloudCLI: установка на удалённый сервер и требование защиты</a></li>
             <li><a href="https://cloudcli.ai/docs/troubleshooting/common-issues">CloudCLI: частые ошибки</a></li>
             <li><a href="https://github.com/devbravo-ai/cloudcli">CloudCLI: открытый исходный код</a></li>
-            <li><a href="https://theivansergeev.com/claude-vpn-bez-banov/">Иван Сергеев: стабильный IP, свой сервер и честная граница риска</a></li>
-            <li><a href="https://blog.fillikam.com/guides/claude-iz-rossii-cherez-vpn-bez-banov/">Fillikam: дополнительный разбор доступа через свой сервер</a></li>
-            <li><a href="https://www.instagram.com/p/DafRptblKrX/">Карусель @alexmerzliakov: исходная тема и последовательность шагов</a></li>
           </ul>
         </section>
 
-        <section class="cta">
+        <section class="content-section">
           <p class="section-label">Следующий шаг</p>
           <h2>Сервер есть, теперь дай ему настоящую работу</h2>
           <p>В ИИ-Лагере ты разберёшься с Claude Code на своём проекте: от первой папки и понятной задачи до рабочих агентов и автоматизации. Сервер останется твоей постоянной площадкой, а не дорогой пустой коробкой</p>
-          <a class="button" data-partner href="#">Перейти в ИИ-Лагерь</a>
+          <a class="button" data-partner href="">Перейти в ИИ-Лагерь</a>
         </section>
         <footer class="foot">Независимый русскоязычный гид. Claude, Anthropic и CloudCLI являются товарными знаками их владельцев</footer>
       </article>
@@ -538,7 +626,7 @@ npm install -g @siteboon/claude-code-ui</pre>
       <p class="plaque-label">Начать с доступа</p>
       <h2>Как подключить Claude из России</h2>
       <p>VPN, вход в аккаунт и первый чат для тех, кто ещё не дошёл до Claude Code</p>
-      <p><a href="../podklyuchenie-iz-rossii/">Вернуться к ДОСТУПу</a></p>
+      <p><a href="../podklyuchenie-iz-rossii/index.html">Вернуться к ДОСТУПу</a></p>
     </aside>
   </div>
 
@@ -592,20 +680,23 @@ npm install -g @siteboon/claude-code-ui</pre>
         }
       });
     });
-    const themeButton = document.querySelector('.theme-toggle');
+    const themeButtons = [...document.querySelectorAll('.theme-toggle')];
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     const renderThemeButton = () => {
       const dark = document.documentElement.dataset.theme === 'dark';
-      themeButton.textContent = dark ? 'Светлая' : 'Тёмная';
-      themeButton.setAttribute('aria-label', dark ? 'Включить светлую тему' : 'Включить тёмную тему');
-      themeButton.setAttribute('aria-pressed', String(dark));
-      themeMeta.setAttribute('content', dark ? '#17201E' : '#F8F7F2');
+      themeButtons.forEach(button => {
+        button.setAttribute('aria-label', dark ? 'Включить светлую тему' : 'Включить тёмную тему');
+        button.setAttribute('aria-pressed', String(dark));
+      });
+      themeMeta.setAttribute('content', dark ? '#0B0F0E' : '#F8F7F2');
     };
-    themeButton.addEventListener('click', () => {
-      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      try { localStorage.setItem('guide-theme', next); } catch (error) {}
-      renderThemeButton();
+    themeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('guide-theme', next); } catch (error) {}
+        renderThemeButton();
+      });
     });
     renderThemeButton();
     updateProgress();

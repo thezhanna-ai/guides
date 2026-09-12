@@ -189,6 +189,27 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertIn(".button, .button:hover, .button:active", reduced_motion)
         self.assertIn("transition: none; transform: none; box-shadow: none", reduced_motion)
 
+    def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):
+        html = SERVER.read_text(encoding="utf-8")
+        for phrase in (
+            "Путь А",
+            "Путь Б",
+            "Сервер как личный VPN",
+            "Сервер как рабочий компьютер",
+            "Оба маршрута на одном сервере",
+            'html lang="ru" data-theme="light"',
+            'class="theme-toggle"',
+            'localStorage.getItem("guide-theme")',
+            "localStorage.setItem('guide-theme', next)",
+            "overflow-x: clip",
+            ".route-node { min-width: 0",
+            ".prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word",
+            ".route-map-row { grid-template-columns: 1fr }",
+        ):
+            self.assertIn(phrase, html)
+        self.assertIn("../svoy-server-dlya-claude/index.html", ACCESS.read_text(encoding="utf-8"))
+        self.assertIn("../podklyuchenie-iz-rossii/index.html", html)
+
     def test_interactive_colors_meet_required_contrast(self):
         for page in (ACCESS, PROFILE):
             html = page.read_text(encoding="utf-8")
