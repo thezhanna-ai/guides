@@ -99,7 +99,7 @@ class GuidesSiteTest(unittest.TestCase):
             [
                 "assets/01-plus.png",
                 "assets/02-web-search.png",
-                "assets/03-searched-the-web.png",
+                "assets/03-searched-the-web-v2.png",
             ],
         )
 
@@ -127,6 +127,39 @@ class GuidesSiteTest(unittest.TestCase):
         ):
             self.assertIn(phrase, intro)
         self.assertNotIn("опирается на устаревшие", intro)
+
+    def test_web_search_copy_buttons_show_and_reset_feedback_regression(self):
+        html = SEARCH.read_text(encoding="utf-8")
+        for phrase in (
+            ".prompt-box + h3 { margin-top: 46px }",
+            "h3 + .prompt-box { margin-top: 12px }",
+            ".copy-button.is-copied",
+            'button.textContent = "✓ Скопировано"',
+            'button.textContent = "Скопировать"',
+            "clearTimeout(button.copyTimer)",
+        ):
+            self.assertIn(phrase, html)
+
+    def test_web_search_decision_warning_gives_the_next_action(self):
+        html = SEARCH.read_text(encoding="utf-8")
+        section = html.split('id="pamyatka"', 1)[1].split('id="sources"', 1)[0]
+        for phrase in (
+            "не принимай решение по одному сообщению Claude",
+            "проверь ключевой факт в официальном источнике",
+            "второе независимое подтверждение",
+        ):
+            self.assertIn(phrase, section)
+
+    def test_web_search_cta_uses_the_approved_practice_positioning(self):
+        html = SEARCH.read_text(encoding="utf-8")
+        cta = html.split('<section class="cta"', 1)[1].split("</section>", 1)[0]
+        for phrase in (
+            "бесплатный прикладной практикум по вайб-маркетингу",
+            "показывают каждый шаг на экране",
+            "без кода и технических знаний",
+            "Хочу на бесплатный практикум",
+        ):
+            self.assertIn(phrase, cta)
 
     def test_profile_guide_links_to_access_guide(self):
         self.assertIn("../podklyuchenie-iz-rossii/", self.parse(PROFILE).links)
