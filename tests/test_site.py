@@ -115,6 +115,19 @@ class GuidesSiteTest(unittest.TestCase):
             html,
         )
 
+    def test_web_search_header_controls_align_with_related_column_regression(self):
+        html = SEARCH.read_text(encoding="utf-8")
+        header = html.split('<header class="masthead">', 1)[1].split("</header>", 1)[0]
+        for phrase in (
+            '<div class="header-controls">',
+            ".header-controls { display: flex; align-items: center; gap: 12px }",
+            ".header-actions { margin-right: 8px }",
+            ".header-controls { width: 180px }",
+            "На ИИ-Лагерь",
+        ):
+            self.assertIn(phrase, html if phrase.startswith(".") else header)
+        self.assertNotIn("Бесплатный ИИ-Лагерь", header)
+
     def test_web_search_intro_explains_the_pain_and_mechanism_regression(self):
         html = SEARCH.read_text(encoding="utf-8")
         intro = html.split('id="web-search"', 1)[1].split('id="vklyuchit"', 1)[0]
