@@ -108,6 +108,13 @@ class GuidesSiteTest(unittest.TestCase):
         for leak in ("session_", "claude.ai/code/", "/Users/", "Desktop/"):
             self.assertNotIn(leak, html)
 
+    def test_web_search_header_cta_hover_contrast_regression(self):
+        html = SEARCH.read_text(encoding="utf-8")
+        self.assertIn(
+            ".masthead .press-button:hover { background: #1F4A43; color: #FFC6AD;",
+            html,
+        )
+
     def test_profile_guide_links_to_access_guide(self):
         self.assertIn("../podklyuchenie-iz-rossii/", self.parse(PROFILE).links)
 
