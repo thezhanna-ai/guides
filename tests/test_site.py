@@ -128,6 +128,14 @@ class GuidesSiteTest(unittest.TestCase):
             self.assertIn(phrase, html if phrase.startswith(".") else header)
         self.assertNotIn("Бесплатный ИИ-Лагерь", header)
 
+    def test_web_search_final_cta_has_unmistakable_pressed_state_regression(self):
+        html = SEARCH.read_text(encoding="utf-8")
+        for phrase in (
+            ".cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }",
+            ".cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }",
+        ):
+            self.assertIn(phrase, html)
+
     def test_web_search_intro_explains_the_pain_and_mechanism_regression(self):
         html = SEARCH.read_text(encoding="utf-8")
         intro = html.split('id="web-search"', 1)[1].split('id="vklyuchit"', 1)[0]
