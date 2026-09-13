@@ -115,6 +115,18 @@ class GuidesSiteTest(unittest.TestCase):
             html,
         )
 
+    def test_web_search_intro_explains_the_pain_and_mechanism_regression(self):
+        html = SEARCH.read_text(encoding="utf-8")
+        intro = html.split('id="web-search"', 1)[1].split('id="vklyuchit"', 1)[0]
+        for phrase in (
+            "Он называет старую цену или отменённое правило",
+            "принимаешь решение по информации, которая уже не действует",
+            "Без Web search Claude не открывает интернет перед ответом",
+            "данных, на которых его обучали",
+        ):
+            self.assertIn(phrase, intro)
+        self.assertNotIn("опирается на устаревшие", intro)
+
     def test_profile_guide_links_to_access_guide(self):
         self.assertIn("../podklyuchenie-iz-rossii/", self.parse(PROFILE).links)
 
