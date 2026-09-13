@@ -11,13 +11,14 @@ PROFILE = ROOT / "claude-ai" / "kak-rasskazat-o-sebe" / "index.html"
 MODEL = ROOT / "claude-ai" / "vybor-modeli-i-effort" / "index.html"
 PROJECT = ROOT / "claude-ai" / "pervyy-proekt-v-claude" / "index.html"
 SERVER = ROOT / "claude-ai" / "svoy-server-dlya-claude" / "index.html"
+SEARCH = ROOT / "claude-ai" / "web-search-v-claude" / "index.html"
 
-PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER)
-GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER)
+PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH)
+GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH)
 PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff"
 # Верхняя ссылка оглавления ведёт на <header>, а не на раздел, и из-под
 # критерия дословного совпадения toc-заголовок выведена явно
-HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "o-sebe", "podklyuchenie", "guides"}
+HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "web-search", "o-sebe", "podklyuchenie", "guides"}
 
 
 class PageParser(HTMLParser):
@@ -77,6 +78,35 @@ class GuidesSiteTest(unittest.TestCase):
         links = self.parse(HOME).links
         self.assertIn("claude-ai/podklyuchenie-iz-rossii/", links)
         self.assertIn("claude-ai/kak-rasskazat-o-sebe/", links)
+
+    def test_catalog_links_to_web_search_guide(self):
+        self.assertIn("claude-ai/web-search-v-claude/", self.parse(HOME).links)
+
+    def test_web_search_guide_uses_real_reel_assets_and_current_flow(self):
+        html = SEARCH.read_text(encoding="utf-8")
+        for phrase in (
+            "Нажми плюс слева от строки ввода",
+            "Выбери Web search",
+            "галочка рядом с Web search",
+            "Searched the web",
+            "прямые ссылки на источники",
+            "расходует лимит",
+        ):
+            self.assertIn(phrase, html)
+        images = self.parse(SEARCH).images
+        self.assertEqual(
+            images,
+            [
+                "assets/01-plus.png",
+                "assets/02-web-search.png",
+                "assets/03-searched-the-web.png",
+            ],
+        )
+
+    def test_web_search_guide_does_not_expose_remote_session_or_local_paths(self):
+        html = SEARCH.read_text(encoding="utf-8")
+        for leak in ("session_", "claude.ai/code/", "/Users/", "Desktop/"):
+            self.assertNotIn(leak, html)
 
     def test_profile_guide_links_to_access_guide(self):
         self.assertIn("../podklyuchenie-iz-rossii/", self.parse(PROFILE).links)
