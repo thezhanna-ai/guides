@@ -98,7 +98,8 @@ class GuidesSiteTest(unittest.TestCase):
             "Если в письме есть вложение:",
             "Вместо ручного копирования писем попроси Claude:",
             "Опиши Claude, что знаешь о файле, и он поможет:",
-            "Сформулируй задачу обычными словами, чтобы Claude:",
+            "Сформулируй задачу обычными словами, чтобы Claude помог:",
+            "Копируй примеры запросов и вставляй их в свой чат:",
             "если ты сам не можешь открыть письмо, файл или календарь",
             "Если это рабочий Google-аккаунт:",
             "Как проверить доступ самому:",
@@ -112,20 +113,31 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertEqual(
             self.parse(SERVICES).images,
             [
+                "assets/02-profile-menu-cropped.png",
+                "assets/03-settings-menu.png",
                 "assets/01-connectors-highlighted.png",
-                "assets/02-profile-snippet.png",
-                "assets/03-connectors-snippet.png",
-                "assets/04-gmail-snippet.png",
-                "assets/05-drive-snippet.png",
-                "assets/06-calendar-snippet.png",
+                "assets/04-gmail-card-connected.png",
+                "assets/05-drive-card-content.png",
+                "assets/06-calendar-card-content.png",
             ],
         )
+        self.assertIn('class="settings-pair"', html)
+        self.assertIn('class="annotation profile-name"', html)
+        self.assertIn('class="annotation settings-button"', html)
+        self.assertIn("min-height: 56px", html)
+        self.assertNotIn("min-height: 112px", html)
+        self.assertIn("Интерфейс может меняться. Документ от 14 сентября 2026", html)
+        self.assertNotIn("Материал подготовлен для серии", html)
+        self.assertNotIn("названия кнопок и путь сверены", html)
         self.assertNotIn("С подключённым Gmail Claude может:", html)
         self.assertNotIn("С подключённым Google Drive Claude может:", html)
         self.assertNotIn("С подключённым Google Calendar Claude может:", html)
         self.assertNotIn("05-three-services-clean.png", html)
         self.assertNotIn("с которого я сама начинала", html)
         self.assertNotIn("сборку рабочего результата", html)
+        self.assertNotIn("02-profile-snippet.png", html)
+        self.assertNotIn("03-connectors-snippet.png", html)
+        self.assertNotIn('src="assets/02-profile-menu.png"', html)
 
     def test_google_services_guide_uses_only_official_sources(self):
         html = SERVICES.read_text(encoding="utf-8")

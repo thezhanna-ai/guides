@@ -94,13 +94,16 @@
     .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
     figure { margin: 28px 0 0 }
     .shot { width: min(100%, 650px) }
-    .shot.vertical { width: min(100%, 380px) }
     .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
-    .shot.snippet { width: fit-content; max-width: 100% }
-    .shot.snippet img { width: auto; max-width: 100% }
-    .shot.profile-target img { padding: 6px; border: 3px solid var(--accent); border-radius: 18px }
+    .settings-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; width: min(100%, 650px) }
+    .annotated-shot { position: relative; min-width: 0 }
+    .annotated-shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 10px; pointer-events: none }
+    .annotation.profile-name { left: 10.5%; top: 91.5%; width: 32%; height: 6.4% }
+    .annotation.settings-button { left: 3.5%; top: 1.5%; width: 93%; height: 11.8% }
     .service-snippets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: min(100%, 650px) }
-    .service-snippets .shot { width: 100% }
+    .service-snippets .shot { display: flex; align-items: center; width: 100%; min-height: 56px; padding: 6px 8px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #FFFFFF }
+    .service-snippets .shot img { width: 100%; height: auto; border: 0; border-radius: 0 }
     figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
     h3 + .prompt-box { margin-top: 12px }
@@ -216,7 +219,7 @@
           <p class="eyebrow">Claude.ai · Connectors</p>
           <h1>Как подключить Gmail, Google Drive и Calendar к Claude</h1>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 14 СЕНТЯБРЯ 2026</p>
-          <p class="lead">Ты находишь письмо, копируешь его в Claude, потом отдельно открываешь документ и календарь. На каждом переходе теряется время и часть контекста. Подключи Google-сервисы один раз, и Claude сможет обращаться к нужным письмам, файлам и событиям прямо из разговора</p>
+          <p class="lead">Письмо в почте, файл с правками на диске, встреча в календаре - всё про одну задачу, но лежит в трёх разных местах. Ты копируешь это в Claude по частям и на каждом переходе что-то не доносишь: то важную строку из переписки, то последнюю версию файла. Claude отвечает на обрывок, а не на задачу целиком. Подключение делается один раз: дальше он сам находит нужное письмо, открывает твой файл и смотрит расписание прямо в разговоре</p>
           <aside class="route-note" aria-label="Короткий маршрут">
             <h2>Короткий маршрут</h2>
             <p>Инициалы → Settings → Connectors → нужный Google-сервис → Connect → вход в Google → подтверждение доступа</p>
@@ -226,12 +229,8 @@
         <section class="content-section" id="zachem">
           <p class="section-label">Один разговор вместо трёх вкладок</p>
           <h2>Зачем подключать Google-сервисы</h2>
-          <p class="purpose">Тебе прислали длинную переписку, документ с правками и приглашение на встречу. Пока ты переносишь всё это в чат вручную, Claude видит только отдельные кусочки задачи</p>
-          <p>После подключения Claude может найти нужное письмо, открыть доступный тебе файл или проверить календарь по обычной просьбе. Он использует права твоего Google-аккаунта и не получает доступ к тому, чего не видишь ты</p>
-          <figure>
-            <div class="shot"><img src="assets/01-connectors-highlighted.png" alt="Раздел Connectors в настройках Claude, где оранжевыми рамками отмечены Gmail, Google Drive и Google Calendar"></div>
-            <figcaption>Оранжевыми рамками отмечены Gmail, Google Calendar и Google Drive</figcaption>
-          </figure>
+          <p class="purpose">Подключение меняет не скорость, а то, с чем работает Claude. Раньше он видел куски, которые ты успел перенести руками. Теперь просишь словами: «найди письмо от Марины про смету», «посмотри, что в файле с правками», «я свободен в четверг?» - и он берёт это сам</p>
+          <p>Claude работает правами твоего Google-аккаунта: видит ровно то, что видишь ты, и ничего сверх этого. Доступ к каждому сервису даёшь отдельно и в любой момент отключаешь</p>
         </section>
 
         <section class="content-section" id="podklyuchit">
@@ -243,8 +242,17 @@
             <h3 id="settings">1. Открой Settings</h3>
             <p>Нажми кружок с инициалами в левом нижнем углу Claude и выбери <span class="path">Settings</span></p>
             <figure>
-              <div class="shot snippet profile-target"><img src="assets/02-profile-snippet.png" alt="Круглая кнопка профиля с инициалом в Claude"></div>
-              <figcaption>Нужная кнопка выглядит как круг с твоим инициалом и находится внизу слева</figcaption>
+              <div class="settings-pair">
+                <div class="annotated-shot">
+                  <img src="assets/02-profile-menu-cropped.png" alt="Левое меню Claude с именем профиля внизу">
+                  <span class="annotation profile-name" aria-hidden="true"></span>
+                </div>
+                <div class="annotated-shot">
+                  <img src="assets/03-settings-menu.png" alt="Меню профиля Claude с кнопкой Settings">
+                  <span class="annotation settings-button" aria-hidden="true"></span>
+                </div>
+              </div>
+              <figcaption>Слева нажми область с именем. Справа выбери Settings</figcaption>
             </figure>
             <div class="result"><p><b>Результат:</b> открылась страница настроек Claude</p></div>
           </div>
@@ -253,8 +261,8 @@
             <h3 id="connectors-menu">2. Перейди в Connectors</h3>
             <p>В левом меню прокрути список вниз и нажми <span class="path">Connectors</span>. Здесь собраны уже подключённые и доступные сервисы</p>
             <figure>
-              <div class="shot snippet"><img src="assets/03-connectors-snippet.png" alt="Пункт Connectors в левом меню настроек Claude"></div>
-              <figcaption>Нажми выделенный серым пункт Connectors</figcaption>
+              <div class="shot"><img src="assets/01-connectors-highlighted.png" alt="Раздел Connectors в настройках Claude, где оранжевыми рамками отмечены Gmail, Google Drive и Google Calendar"></div>
+              <figcaption>Открой Connectors в левом меню. Оранжевыми рамками отмечены Gmail, Google Calendar и Google Drive</figcaption>
             </figure>
             <div class="result"><p><b>Результат:</b> перед тобой список сервисов и их текущий статус</p></div>
           </div>
@@ -264,9 +272,9 @@
             <p>Найди Gmail, Google Drive или Google Calendar и нажми <span class="path">Connect</span>. Войди в нужный Google-аккаунт, прочитай список запрашиваемых прав и подтверди доступ. Повтори действие для остальных сервисов, которые собираешься использовать</p>
             <figure>
               <div class="service-snippets">
-                <div class="shot"><img src="assets/04-gmail-snippet.png" alt="Карточка Gmail в списке коннекторов Claude"></div>
-                <div class="shot"><img src="assets/05-drive-snippet.png" alt="Карточка Google Drive с кнопкой Connect"></div>
-                <div class="shot"><img src="assets/06-calendar-snippet.png" alt="Карточка Google Calendar с галочкой подключённого сервиса"></div>
+                <div class="shot"><img src="assets/04-gmail-card-connected.png" alt="Карточка Gmail с галочкой подключённого сервиса"></div>
+                <div class="shot"><img src="assets/05-drive-card-content.png" alt="Карточка Google Drive с кнопкой Connect"></div>
+                <div class="shot"><img src="assets/06-calendar-card-content.png" alt="Карточка Google Calendar с галочкой подключённого сервиса"></div>
               </div>
               <figcaption>Connect означает, что сервис ещё нужно подключить. Галочка справа подтверждает, что доступ уже работает</figcaption>
             </figure>
@@ -304,7 +312,7 @@
         <section class="content-section" id="calendar">
           <p class="section-label">Расписание без поиска по дням</p>
           <h2>Что Claude умеет делать с Google Calendar</h2>
-          <p class="purpose">Нужно найти свободное окно между встречами или перенести событие. Сформулируй задачу обычными словами, чтобы Claude:</p>
+          <p class="purpose">Нужно найти свободное окно между встречами или перенести событие. Сформулируй задачу обычными словами, чтобы Claude помог:</p>
           <ul class="checklist">
             <li>показывать события и доступные тебе календари</li>
             <li>искать общее свободное время участников</li>
@@ -317,7 +325,7 @@
         <section class="content-section" id="prompty">
           <p class="section-label">Можно копировать</p>
           <h2>Три запроса для первого теста</h2>
-          <p class="purpose">Подключение есть, но Claude обращается к сервису только по твоей задаче. Начни с безопасного запроса, который сначала показывает результат и ничего не меняет без подтверждения</p>
+          <p class="purpose">Подключение есть, но Claude обращается к сервису только по твоей задаче. Начни с безопасного запроса, который сначала показывает результат и ничего не меняет без подтверждения. Копируй примеры запросов и вставляй их в свой чат:</p>
           <h3 id="prompt-gmail">Проверить Gmail</h3>
           <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="gmail-test">Скопировать</button><pre id="gmail-test">Найди последнее письмо от [имя или компания], кратко перескажи, что от меня ждут, и подготовь ответ. Ничего не отправляй без моего подтверждения</pre></div>
           <h3 id="prompt-drive">Проверить Google Drive</h3>
@@ -379,7 +387,7 @@
           <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Посмотреть, что собрать дальше</a>
         </section>
 
-        <footer class="foot">Материал подготовлен для серии «Claude.ai: кнопка за кнопкой». Интерфейс может меняться, поэтому названия кнопок и путь сверены 14 сентября 2026</footer>
+        <footer class="foot">Интерфейс может меняться. Документ от 14 сентября 2026</footer>
       </article>
     </main>
 
