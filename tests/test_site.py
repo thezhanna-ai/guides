@@ -12,13 +12,14 @@ MODEL = ROOT / "claude-ai" / "vybor-modeli-i-effort" / "index.html"
 PROJECT = ROOT / "claude-ai" / "pervyy-proekt-v-claude" / "index.html"
 SERVER = ROOT / "claude-ai" / "svoy-server-dlya-claude" / "index.html"
 SEARCH = ROOT / "claude-ai" / "web-search-v-claude" / "index.html"
+SERVICES = ROOT / "claude-ai" / "podklyuchit-gmail-drive-calendar" / "index.html"
 
-PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH)
-GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH)
+PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES)
+GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES)
 PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff"
 # Верхняя ссылка оглавления ведёт на <header>, а не на раздел, и из-под
 # критерия дословного совпадения toc-заголовок выведена явно
-HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "web-search", "o-sebe", "podklyuchenie", "guides"}
+HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "web-search", "connectors", "o-sebe", "podklyuchenie", "guides"}
 
 
 class PageParser(HTMLParser):
@@ -81,6 +82,64 @@ class GuidesSiteTest(unittest.TestCase):
 
     def test_catalog_links_to_web_search_guide(self):
         self.assertIn("claude-ai/web-search-v-claude/", self.parse(HOME).links)
+
+    def test_catalog_links_to_google_services_guide(self):
+        self.assertIn("claude-ai/podklyuchit-gmail-drive-calendar/", self.parse(HOME).links)
+
+    def test_google_services_guide_uses_the_approved_assets_and_current_flow(self):
+        html = SERVICES.read_text(encoding="utf-8")
+        for phrase in (
+            "Инициалы → Settings → Connectors",
+            "1. Открой Settings",
+            "2. Перейди в Connectors",
+            "3. Подключи нужный сервис",
+            "Ничего не отправляй без моего подтверждения",
+            "ничего не меняй в календаре без моего подтверждения",
+            "Если в письме есть вложение:",
+            "Вместо ручного копирования писем попроси Claude:",
+            "Опиши Claude, что знаешь о файле, и он поможет:",
+            "Сформулируй задачу обычными словами, чтобы Claude:",
+            "если ты сам не можешь открыть письмо, файл или календарь",
+            "Если это рабочий Google-аккаунт:",
+            "Как проверить доступ самому:",
+            "myaccount.google.com/connections",
+            "Следующий шаг после Connectors",
+            "сборку рабочего инструмента под твою задачу",
+            "На бесплатном обучении тебе покажут этот путь на экране",
+            "Посмотреть, что собрать дальше",
+        ):
+            self.assertIn(phrase, html)
+        self.assertEqual(
+            self.parse(SERVICES).images,
+            [
+                "assets/01-connectors-highlighted.png",
+                "assets/02-profile-snippet.png",
+                "assets/03-connectors-snippet.png",
+                "assets/04-gmail-snippet.png",
+                "assets/05-drive-snippet.png",
+                "assets/06-calendar-snippet.png",
+            ],
+        )
+        self.assertNotIn("С подключённым Gmail Claude может:", html)
+        self.assertNotIn("С подключённым Google Drive Claude может:", html)
+        self.assertNotIn("С подключённым Google Calendar Claude может:", html)
+        self.assertNotIn("05-three-services-clean.png", html)
+        self.assertNotIn("с которого я сама начинала", html)
+        self.assertNotIn("сборку рабочего результата", html)
+
+    def test_google_services_guide_uses_only_official_sources(self):
+        html = SERVICES.read_text(encoding="utf-8")
+        sources = html.split('id="sources"', 1)[1].split("</section>", 1)[0]
+        self.assertIn("support.claude.com/en/articles/10166901", sources)
+        self.assertIn("support.claude.com/en/articles/11176164", sources)
+        self.assertIn("support.google.com/accounts/answer/13533235", sources)
+        self.assertNotIn("instagram.com", sources)
+        self.assertNotIn("youtube.com", sources)
+
+    def test_google_services_guide_does_not_expose_private_data_or_local_paths(self):
+        html = SERVICES.read_text(encoding="utf-8")
+        for leak in ("/Users/", "Desktop/", "zh.infra.host", "@gmail.com"):
+            self.assertNotIn(leak, html)
 
     def test_web_search_guide_uses_real_reel_assets_and_current_flow(self):
         html = SEARCH.read_text(encoding="utf-8")

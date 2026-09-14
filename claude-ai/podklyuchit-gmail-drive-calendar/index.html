@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Как подключить Gmail, Google Drive и Google Calendar к Claude и начать работать с письмами, файлами и расписанием">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta property="og:title" content="Как подключить Gmail, Google Drive и Calendar к Claude">
+  <meta property="og:description" content="Пошаговое подключение трёх Google-сервисов и готовые запросы для первого использования">
+  <title>Как подключить Gmail, Google Drive и Calendar к Claude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
+    a:hover { color: var(--accent-dark) }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: -50px; overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .route-note { margin: 31px 0 34px; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted) }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+    .info-card, .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot.snippet { width: fit-content; max-width: 100% }
+    .shot.snippet img { width: auto; max-width: 100% }
+    .shot.profile-target img { padding: 6px; border: 3px solid var(--accent); border-radius: 18px }
+    .service-snippets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: min(100%, 650px) }
+    .service-snippets .shot { width: 100% }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    h3 + .prompt-box { margin-top: 12px }
+    .prompt-box + h3 { margin-top: 46px }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: #F28A68 }
+    .copy-button:active { background: #FFD1BF; box-shadow: 0 1px 0 #8F371F; transform: translateY(2px) }
+    .copy-button.is-copied { background: #FFD1BF; box-shadow: 0 0 0 3px rgba(255, 209, 191, .34); transform: translateY(1px) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 900 }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (min-width: 1200px) and (max-width: 1279px) { .toc { margin-left: -18px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+      .service-snippets { grid-template-columns: 1fr }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand">Claude.ai: кнопка за кнопкой</div>
+      <div class="header-actions">
+        <div class="handout-title">Gmail, Drive и Calendar</div>
+        <div class="header-controls">
+          <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание">
+      <p class="toc-label">Содержание</p>
+      <a class="active" href="#connectors">Как подключить Gmail, Google Drive и Calendar к Claude</a>
+      <a href="#zachem">Зачем подключать Google-сервисы</a>
+      <a href="#podklyuchit">Как подключить сервисы</a>
+      <a class="toc-sub" href="#settings">1. Открой Settings</a>
+      <a class="toc-sub" href="#connectors-menu">2. Перейди в Connectors</a>
+      <a class="toc-sub" href="#google-connect">3. Подключи нужный сервис</a>
+      <a href="#gmail">Что Claude умеет делать с Gmail</a>
+      <a href="#drive">Что Claude умеет делать с Google Drive</a>
+      <a href="#calendar">Что Claude умеет делать с Google Calendar</a>
+      <a href="#prompty">Три запроса для первого теста</a>
+      <a class="toc-sub" href="#prompt-gmail">Проверить Gmail</a>
+      <a class="toc-sub" href="#prompt-drive">Проверить Google Drive</a>
+      <a class="toc-sub" href="#prompt-calendar">Проверить Google Calendar</a>
+      <a href="#bezopasnost">Что происходит с доступом и данными</a>
+      <a href="#ne-rabotaet">Если подключение не работает</a>
+      <a href="#sources">Источники</a>
+    </nav>
+
+    <main>
+      <details class="mobile-toc">
+        <summary>Содержание статьи</summary>
+        <nav aria-label="Содержание на телефоне">
+          <a href="#connectors">Как подключить Gmail, Google Drive и Calendar к Claude</a>
+          <a href="#zachem">Зачем подключать Google-сервисы</a>
+          <a href="#podklyuchit">Как подключить сервисы</a>
+          <a href="#settings">1. Открой Settings</a>
+          <a href="#connectors-menu">2. Перейди в Connectors</a>
+          <a href="#google-connect">3. Подключи нужный сервис</a>
+          <a href="#gmail">Что Claude умеет делать с Gmail</a>
+          <a href="#drive">Что Claude умеет делать с Google Drive</a>
+          <a href="#calendar">Что Claude умеет делать с Google Calendar</a>
+          <a href="#prompty">Три запроса для первого теста</a>
+          <a href="#prompt-gmail">Проверить Gmail</a>
+          <a href="#prompt-drive">Проверить Google Drive</a>
+          <a href="#prompt-calendar">Проверить Google Calendar</a>
+          <a href="#bezopasnost">Что происходит с доступом и данными</a>
+          <a href="#ne-rabotaet">Если подключение не работает</a>
+          <a href="#sources">Источники</a>
+        </nav>
+      </details>
+
+      <article>
+        <header id="connectors">
+          <p class="eyebrow">Claude.ai · Connectors</p>
+          <h1>Как подключить Gmail, Google Drive и Calendar к Claude</h1>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 14 СЕНТЯБРЯ 2026</p>
+          <p class="lead">Ты находишь письмо, копируешь его в Claude, потом отдельно открываешь документ и календарь. На каждом переходе теряется время и часть контекста. Подключи Google-сервисы один раз, и Claude сможет обращаться к нужным письмам, файлам и событиям прямо из разговора</p>
+          <aside class="route-note" aria-label="Короткий маршрут">
+            <h2>Короткий маршрут</h2>
+            <p>Инициалы → Settings → Connectors → нужный Google-сервис → Connect → вход в Google → подтверждение доступа</p>
+          </aside>
+        </header>
+
+        <section class="content-section" id="zachem">
+          <p class="section-label">Один разговор вместо трёх вкладок</p>
+          <h2>Зачем подключать Google-сервисы</h2>
+          <p class="purpose">Тебе прислали длинную переписку, документ с правками и приглашение на встречу. Пока ты переносишь всё это в чат вручную, Claude видит только отдельные кусочки задачи</p>
+          <p>После подключения Claude может найти нужное письмо, открыть доступный тебе файл или проверить календарь по обычной просьбе. Он использует права твоего Google-аккаунта и не получает доступ к тому, чего не видишь ты</p>
+          <figure>
+            <div class="shot"><img src="assets/01-connectors-highlighted.png" alt="Раздел Connectors в настройках Claude, где оранжевыми рамками отмечены Gmail, Google Drive и Google Calendar"></div>
+            <figcaption>Оранжевыми рамками отмечены Gmail, Google Calendar и Google Drive</figcaption>
+          </figure>
+        </section>
+
+        <section class="content-section" id="podklyuchit">
+          <p class="section-label">Три действия</p>
+          <h2>Как подключить сервисы</h2>
+          <p class="purpose">Путь одинаковый для Gmail, Google Drive и Google Calendar. Сначала открой общий раздел коннекторов, затем подключи каждый нужный сервис отдельно</p>
+
+          <div class="step">
+            <h3 id="settings">1. Открой Settings</h3>
+            <p>Нажми кружок с инициалами в левом нижнем углу Claude и выбери <span class="path">Settings</span></p>
+            <figure>
+              <div class="shot snippet profile-target"><img src="assets/02-profile-snippet.png" alt="Круглая кнопка профиля с инициалом в Claude"></div>
+              <figcaption>Нужная кнопка выглядит как круг с твоим инициалом и находится внизу слева</figcaption>
+            </figure>
+            <div class="result"><p><b>Результат:</b> открылась страница настроек Claude</p></div>
+          </div>
+
+          <div class="step">
+            <h3 id="connectors-menu">2. Перейди в Connectors</h3>
+            <p>В левом меню прокрути список вниз и нажми <span class="path">Connectors</span>. Здесь собраны уже подключённые и доступные сервисы</p>
+            <figure>
+              <div class="shot snippet"><img src="assets/03-connectors-snippet.png" alt="Пункт Connectors в левом меню настроек Claude"></div>
+              <figcaption>Нажми выделенный серым пункт Connectors</figcaption>
+            </figure>
+            <div class="result"><p><b>Результат:</b> перед тобой список сервисов и их текущий статус</p></div>
+          </div>
+
+          <div class="step">
+            <h3 id="google-connect">3. Подключи нужный сервис</h3>
+            <p>Найди Gmail, Google Drive или Google Calendar и нажми <span class="path">Connect</span>. Войди в нужный Google-аккаунт, прочитай список запрашиваемых прав и подтверди доступ. Повтори действие для остальных сервисов, которые собираешься использовать</p>
+            <figure>
+              <div class="service-snippets">
+                <div class="shot"><img src="assets/04-gmail-snippet.png" alt="Карточка Gmail в списке коннекторов Claude"></div>
+                <div class="shot"><img src="assets/05-drive-snippet.png" alt="Карточка Google Drive с кнопкой Connect"></div>
+                <div class="shot"><img src="assets/06-calendar-snippet.png" alt="Карточка Google Calendar с галочкой подключённого сервиса"></div>
+              </div>
+              <figcaption>Connect означает, что сервис ещё нужно подключить. Галочка справа подтверждает, что доступ уже работает</figcaption>
+            </figure>
+            <div class="result"><p><b>Результат:</b> Claude может использовать выбранный сервис, когда ты прямо просишь об этом в чате</p></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="gmail">
+          <p class="section-label">Письма без ручного копирования</p>
+          <h2>Что Claude умеет делать с Gmail</h2>
+          <p class="purpose">В почте накопилась длинная переписка, а тебе нужно быстро понять, о чём договорились, и подготовить ответ. Вместо ручного копирования писем попроси Claude:</p>
+          <ul class="checklist">
+            <li>искать и читать письма по имени отправителя, теме или содержанию</li>
+            <li>кратко пересказывать длинные цепочки писем</li>
+            <li>готовить черновики ответов с учётом контекста</li>
+            <li>отправлять, пересылать и отвечать после твоего подтверждения по умолчанию</li>
+            <li>работать с ярлыками, цепочками и списком сохранённых черновиков</li>
+          </ul>
+          <div class="info-card"><p><span class="info-title">Если в письме есть вложение:</span> Claude увидит, что файл прикреплён, но не сможет открыть и прочитать его через Gmail. Если файл тоже нужно проанализировать, добавь его в чат вручную или открой через Google Drive</p></div>
+        </section>
+
+        <section class="content-section" id="drive">
+          <p class="section-label">Документы в актуальной версии</p>
+          <h2>Что Claude умеет делать с Google Drive</h2>
+          <p class="purpose">Ты помнишь тему документа, но не название и папку. Опиши Claude, что знаешь о файле, и он поможет:</p>
+          <ul class="checklist">
+            <li>искать Google Docs и другие доступные тебе файлы</li>
+            <li>читать таблицы, презентации, PDF, изображения и файлы Microsoft Office</li>
+            <li>добавлять Google Docs в чат или в проект Claude по ссылке</li>
+            <li>создавать папки, перемещать файлы и сохранять результаты Claude на Drive</li>
+          </ul>
+          <div class="info-card"><p><span class="info-title">Если в документе есть не только текст:</span> Claude прочитает основной текст Google Docs, но не увидит встроенные картинки, комментарии и предложенные правки. Если они важны для задачи, добавь нужные изображения или снимки экрана в чат</p></div>
+        </section>
+
+        <section class="content-section" id="calendar">
+          <p class="section-label">Расписание без поиска по дням</p>
+          <h2>Что Claude умеет делать с Google Calendar</h2>
+          <p class="purpose">Нужно найти свободное окно между встречами или перенести событие. Сформулируй задачу обычными словами, чтобы Claude:</p>
+          <ul class="checklist">
+            <li>показывать события и доступные тебе календари</li>
+            <li>искать общее свободное время участников</li>
+            <li>создавать, обновлять и удалять события</li>
+            <li>управлять участниками, приглашениями и повторяющимися встречами</li>
+          </ul>
+          <div class="info-card"><p><span class="info-title">Перед изменением календаря:</span> попроси Claude сначала показать, что он собирается создать, перенести или удалить. Проверь дату, время, часовой пояс и участников, затем подтверди действие</p></div>
+        </section>
+
+        <section class="content-section" id="prompty">
+          <p class="section-label">Можно копировать</p>
+          <h2>Три запроса для первого теста</h2>
+          <p class="purpose">Подключение есть, но Claude обращается к сервису только по твоей задаче. Начни с безопасного запроса, который сначала показывает результат и ничего не меняет без подтверждения</p>
+          <h3 id="prompt-gmail">Проверить Gmail</h3>
+          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="gmail-test">Скопировать</button><pre id="gmail-test">Найди последнее письмо от [имя или компания], кратко перескажи, что от меня ждут, и подготовь ответ. Ничего не отправляй без моего подтверждения</pre></div>
+          <h3 id="prompt-drive">Проверить Google Drive</h3>
+          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="drive-test">Скопировать</button><pre id="drive-test">Найди в Google Drive документ [название или тема], перечисли главные решения и укажи, какие вопросы в нём остались открытыми</pre></div>
+          <h3 id="prompt-calendar">Проверить Google Calendar</h3>
+          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="calendar-test">Скопировать</button><pre id="calendar-test">Покажи мои встречи на завтра, найди свободное окно на один час и ничего не меняй в календаре без моего подтверждения</pre></div>
+        </section>
+
+        <section class="content-section" id="bezopasnost">
+          <p class="section-label">Права остаются твоими</p>
+          <h2>Что происходит с доступом и данными</h2>
+          <p class="purpose">Подключение рабочих писем и документов может насторожить, потому что Claude просит доступ к Google-аккаунту. Сначала посмотри, чем этот доступ ограничен, затем проверь настройки на своих экранах:</p>
+          <ul class="checklist">
+            <li>Claude видит данные только того Google-аккаунта, который ты подключил</li>
+            <li>если ты сам не можешь открыть письмо, файл или календарь, Claude тоже не получит к ним доступ</li>
+            <li>Claude обращается к Google-сервису, когда для твоего запроса нужны письмо, файл или событие</li>
+            <li>Anthropic сообщает, что письма, файлы и события, полученные через эти подключения, не используются для обучения моделей</li>
+          </ul>
+          <div class="info-card">
+            <p><span class="info-title">Как проверить доступ самому:</span></p>
+            <ol>
+              <li>Нажми <span class="path">Connect</span>. На экране входа Google проверь адрес почты и убедись, что выбираешь нужный аккаунт</li>
+              <li>До подтверждения Google покажет список данных и действий, к которым Claude просит доступ. Прочитай весь список. Если видишь разрешение, которое не готов дать, вернись назад и не подтверждай подключение</li>
+              <li>После подключения открой <span class="path">Settings → Connectors</span>, найди нужный сервис и нажми на него. В карточке можно проверить статус подключения и доступные действия</li>
+              <li>Отправь один из безопасных тестовых запросов выше. В ответе Claude проверь ссылки на письма, файлы или события, которые он использовал как источники</li>
+              <li>Чтобы ещё раз посмотреть разрешения или полностью закрыть доступ, открой <a href="https://myaccount.google.com/connections">сторонние подключения Google-аккаунта</a>, выбери Claude и нажми <span class="path">See details</span>. Для отключения выбери <span class="path">Remove access</span></li>
+            </ol>
+          </div>
+          <div class="info-card"><p><span class="info-title">Что проверяется по документам Anthropic:</span> утверждение о том, что данные из Gmail, Drive и Calendar не используются для обучения моделей, нельзя подтвердить переключателем в аккаунте. Это правило сервиса, опубликованное в справке Anthropic</p></div>
+          <div class="info-card"><p><span class="info-title">Перед отправкой или изменением:</span> Claude покажет, какое действие собирается выполнить, и попросит подтверждение. Проверь письмо, файл или событие и только после этого подтверждай</p></div>
+        </section>
+
+        <section class="content-section" id="ne-rabotaet">
+          <p class="section-label">Переподключение</p>
+          <h2>Если подключение не работает</h2>
+          <p class="purpose">Сервис раньше открывался, а теперь Claude просит войти снова или пишет, что доступ заблокирован. Сначала переподключи сервис:</p>
+          <ol>
+            <li>Открой <span class="path">Settings → Connectors</span></li>
+            <li>Выбери проблемный Google-сервис и нажми <span class="path">Disconnect</span></li>
+            <li>Подтверди отключение и подключи сервис заново</li>
+          </ol>
+          <div class="info-card"><p><span class="info-title">Если это рабочий Google-аккаунт:</span> администратор компании может запрещать подключение сторонних сервисов. Попроси его разрешить Claude в настройках Google Workspace. В панели администратора это называется доверенным приложением. На тарифах Claude Team и Enterprise владелец аккаунта также должен включить коннекторы для всей организации</p></div>
+        </section>
+
+        <section class="content-section" id="sources">
+          <p class="section-label">Проверено 14 сентября 2026</p>
+          <h2>Источники</h2>
+          <ul class="sources">
+            <li><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors">Claude Help Center: Use Google Workspace connectors</a> - возможности Gmail, Google Drive и Google Calendar, подтверждения действий, ограничения и переподключение</li>
+            <li><a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities">Claude Help Center: Use connectors to extend Claude's capabilities</a> - принцип прав доступа и доступность веб-коннекторов</li>
+            <li><a href="https://support.google.com/accounts/answer/13533235">Google Account Help: Manage connections between your Google Account and third parties</a> - как проверить разрешения Claude и отозвать доступ в Google-аккаунте</li>
+          </ul>
+        </section>
+
+        <section class="cta" aria-label="Следующий шаг">
+          <p class="section-label">Следующий шаг после Connectors</p>
+          <h2>От писем и файлов к рабочему инструменту</h2>
+          <p>Подключённые сервисы убирают ручное копирование. Дальше можно поручать Claude Code и Codex уже не поиск отдельных данных, а сборку рабочего инструмента под твою задачу. На бесплатном обучении тебе покажут этот путь на экране. Ты повторишь его простыми командами по-русски, без программирования</p>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Посмотреть, что собрать дальше</a>
+        </section>
+
+        <footer class="foot">Материал подготовлен для серии «Claude.ai: кнопка за кнопкой». Интерфейс может меняться, поэтому названия кнопок и путь сверены 14 сентября 2026</footer>
+      </article>
+    </main>
+
+    <aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Следующая инструкция</p>
+      <h2>Включи веб-поиск в Claude</h2>
+      <p><a href="../web-search-v-claude/">Свежие ответы, прямые ссылки и проверка источников</a></p>
+    </aside>
+  </div>
+
+  <script>
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+
+    var themeButton = document.querySelector(".theme-toggle");
+    var savedTheme = localStorage.getItem("guide-theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+    themeButton.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("guide-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });
+
+    var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+    function updateReadingState() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+      var current = sections[0];
+      sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+      links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+    }
+    updateReadingState();
+    addEventListener("scroll", updateReadingState, { passive: true });
+  </script>
+</body>
+</html>
