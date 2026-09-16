@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Голосовой ввод в Claude: чем Dictate отличается от Voice mode, где эти кнопки и что делать, если микрофон не находится">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta property="og:title" content="Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона">
+  <meta property="og:description" content="Три режима голоса в Claude: продиктовать текст, поговорить вслух и выбрать, каким микрофоном тебя слышат">
+  <title>Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
+    a:hover { color: var(--accent-dark) }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: -50px; overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .route-note { margin: 31px 0 34px; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted) }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+    .info-card, .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .tune-card { margin-top: 26px; padding: 15px 20px 3px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .tune-card h3 { margin-bottom: 9px }
+    .tune-card .result { margin-bottom: 17px }
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .88); pointer-events: none }
+    .annotation::before { content: attr(data-n); position: absolute; top: -38px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--emerald); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .annotation.mic { left: 84.70%; top: 81.47%; width: 3.11%; height: 8.62% }
+    .annotation.wave { left: 89.85%; top: 81.47%; width: 5.89%; height: 8.62% }
+    .annotation.cancel { left: 85.76%; top: 80.39%; width: 4.26%; height: 11.21% }
+    .annotation.accept { left: 91.33%; top: 80.39%; width: 4.26%; height: 11.21% }
+    .annotation.stop { left: 86.48%; top: 79.94%; width: 9.64%; height: 8.33% }
+    .annotation.allow { left: 6.23%; top: 54.40%; width: 54.47%; height: 5.39% }
+    .annotation.nodev { left: 74.32%; top: 88.51%; width: 24.12%; height: 9.87% }
+    .annotation.arrow { left: 94.86%; top: 73.55%; width: 2.97%; height: 9.09% }
+    .annotation.checked { left: 58.92%; top: 45.87%; width: 37.57%; height: 9.50% }
+    .annotation.checked::before { top: 50%; left: -38px; transform: translateY(-50%) }
+    .annotation.arrow::before { top: 50%; left: -38px; transform: translateY(-50%) }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    h3 + .prompt-box { margin-top: 12px }
+    .prompt-box + h3 { margin-top: 46px }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: #F28A68 }
+    .copy-button:active { background: #FFD1BF; box-shadow: 0 1px 0 #8F371F; transform: translateY(2px) }
+    .copy-button.is-copied { background: #FFD1BF; box-shadow: 0 0 0 3px rgba(255, 209, 191, .34); transform: translateY(1px) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 900 }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (min-width: 1200px) and (max-width: 1279px) { .toc { margin-left: -18px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+      .annotation { border-width: 2px }
+      .annotation::before { top: -30px; width: 22px; height: 22px; font-size: 11px }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand">Claude.ai: кнопка за кнопкой</div>
+      <div class="header-actions">
+        <div class="handout-title">Голосовой ввод в Claude</div>
+        <div class="header-controls">
+          <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание">
+      <p class="toc-label">Содержание</p>
+      <a class="active" href="#golos">Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</a>
+      <a href="#zachem">Зачем вообще говорить, а не печатать</a>
+      <a href="#dva-znachka">Два значка, которые ты не замечаешь</a>
+      <a href="#diktovka">Dictate: продиктовать вместо того, чтобы печатать</a>
+      <a class="toc-sub" href="#d-1">1. Нажми на микрофон</a>
+      <a class="toc-sub" href="#d-2">2. Говори обычным голосом</a>
+      <a class="toc-sub" href="#d-3">3. Оставь текст или сотри</a>
+      <a href="#voice-mode">Voice mode: разговор вслух</a>
+      <a class="toc-sub" href="#v-1">1. Нажми на волну</a>
+      <a class="toc-sub" href="#v-2">2. Говори и слушай ответ</a>
+      <a class="toc-sub" href="#v-3">3. Заверши разговор кнопкой Stop</a>
+      <a class="toc-sub" href="#v-4">Выбери голос, который приятно слушать</a>
+      <a href="#chto-vybrat">Что выбрать: продиктовать или поговорить</a>
+      <a href="#mikrofon">Микрофон не находится: что делать</a>
+      <a class="toc-sub" href="#m-1">Дай браузеру разрешение</a>
+      <a class="toc-sub" href="#m-2">Выбери нужное устройство</a>
+      <a href="#prompty">Что говорить, чтобы получилось хорошо</a>
+      <a class="toc-sub" href="#p-1">Наговариваю задачу как есть</a>
+      <a class="toc-sub" href="#p-2">Думаю вслух, помоги додумать</a>
+      <a class="toc-sub" href="#p-3">Продиктовал текст, приведи в порядок</a>
+      <a href="#chastye">Частые вопросы</a>
+      <a href="#sources">Источники</a>
+    </nav>
+
+    <main>
+      <details class="mobile-toc">
+        <summary>Содержание статьи</summary>
+        <nav aria-label="Содержание на телефоне">
+          <a href="#golos">Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</a>
+          <a href="#zachem">Зачем вообще говорить, а не печатать</a>
+          <a href="#dva-znachka">Два значка, которые ты не замечаешь</a>
+          <a href="#diktovka">Dictate: продиктовать вместо того, чтобы печатать</a>
+          <a href="#d-1">1. Нажми на микрофон</a>
+          <a href="#d-2">2. Говори обычным голосом</a>
+          <a href="#d-3">3. Оставь текст или сотри</a>
+          <a href="#voice-mode">Voice mode: разговор вслух</a>
+          <a href="#v-1">1. Нажми на волну</a>
+          <a href="#v-2">2. Говори и слушай ответ</a>
+          <a href="#v-3">3. Заверши разговор кнопкой Stop</a>
+          <a href="#v-4">Выбери голос, который приятно слушать</a>
+          <a href="#chto-vybrat">Что выбрать: продиктовать или поговорить</a>
+          <a href="#mikrofon">Микрофон не находится: что делать</a>
+          <a href="#m-1">Дай браузеру разрешение</a>
+          <a href="#m-2">Выбери нужное устройство</a>
+          <a href="#prompty">Что говорить, чтобы получилось хорошо</a>
+          <a href="#p-1">Наговариваю задачу как есть</a>
+          <a href="#p-2">Думаю вслух, помоги додумать</a>
+          <a href="#p-3">Продиктовал текст, приведи в порядок</a>
+          <a href="#chastye">Частые вопросы</a>
+          <a href="#sources">Источники</a>
+        </nav>
+      </details>
+
+      <article>
+        <header id="golos">
+          <p class="eyebrow">Claude.ai · Dictate и Voice mode</p>
+          <h1>Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</h1>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 16 СЕНТЯБРЯ 2026</p>
+          <p class="lead">Мысль в голове уже сформировалась целиком. Открываешь чат, ставишь руки на клавиатуру, и к третьему предложению уже лень набирать, поэтому вместо задуманного получается короче и суше. А под строкой чата всё это время ждут два значка, про которые никто не рассказывал: микрофон и волна</p>
+          <aside class="route-note" aria-label="Короткий маршрут">
+            <h2>Короткий маршрут</h2>
+            <p>Микрофон в строке чата - речь становится текстом. Волна рядом - разговор голосом, Claude отвечает вслух. Стрелка у волны - выбор микрофона</p>
+          </aside>
+        </header>
+
+        <section class="content-section" id="zachem">
+          <p class="section-label">Почему это стоит включить</p>
+          <h2>Зачем вообще говорить, а не печатать</h2>
+          <p class="purpose">Печатать долго не потому, что ты медленно печатаешь. Пока набираешь длинный запрос, включается внутренний редактор: половину подробностей выкидываешь просто чтобы не набирать, и Claude получает обрубленную задачу вместо той, что была в голове</p>
+          <p>Вслух этого не происходит. За минуту наговаривается столько, сколько печатаешь пять, и остаются все детали: для кого текст, что уже пробовал, чего делать не надо. Чем подробнее задача, тем точнее ответ, поэтому голос заметнее всего выигрывает как раз на длинных запросах</p>
+          <div class="info-card"><p><span class="info-title">Где это особенно заметно:</span> рассказать про свой проект, продиктовать письмо целиком, объяснить сложную ситуацию с клиентом, надиктовать черновик поста по дороге</p></div>
+        </section>
+
+        <section class="content-section" id="dva-znachka">
+          <p class="section-label">Сначала найди кнопки</p>
+          <h2>Два значка, которые ты не замечаешь</h2>
+          <p class="purpose">Открой Claude и посмотри на строку, куда обычно пишешь сообщение. Справа в ней стоят два значка рядом, и это разные вещи, хотя оба про голос</p>
+          <figure>
+            <div class="shot"><img src="assets/01-dva-znachka.png" alt="Строка ввода Claude: справа значок микрофона, рядом значок звуковой волны со стрелкой"><span class="annotation mic" data-n="1" aria-hidden="true"></span><span class="annotation wave" data-n="2" aria-hidden="true"></span></div>
+            <figcaption><b>1</b> - микрофон, это Dictate: речь превращается в текст. <b>2</b> - волна, это Voice mode: разговор голосом, а маленькая стрелка рядом открывает выбор микрофона.</figcaption>
+          </figure>
+          <div class="info-card"><p><span class="info-title">Запомнить просто:</span> микрофон - ты говоришь, Claude пишет. Волна - ты говоришь, Claude отвечает голосом</p></div>
+        </section>
+
+        <section class="content-section" id="diktovka">
+          <p class="section-label">Режим первый</p>
+          <h2>Dictate: продиктовать вместо того, чтобы печатать</h2>
+          <p class="purpose">Задача длинная, объяснять надо много, а печатать не хочется. Тебе нужен обычный текстовый ответ, который потом надо посмотреть и отредактировать - просто наговорить его быстрее</p>
+
+          <div class="step">
+            <h3 id="d-1">1. Нажми на микрофон</h3>
+            <p>Нажми значок микрофона справа в строке ввода. В первый раз браузер спросит разрешение на микрофон, ответь <span class="path">Разрешить, когда я на сайте</span>, иначе запись не начнётся</p>
+            <div class="result"><p><b>Результат:</b> вместо обычной строки появилась полоска записи, Claude слушает</p></div>
+          </div>
+
+          <div class="step">
+            <h3 id="d-2">2. Говори обычным голосом</h3>
+            <p>Говори так же, как объяснял бы человеку, не диктуй по словам. Слова появляются прямо в строке по ходу речи, поэтому видно, что распознаётся правильно</p>
+            <figure>
+              <div class="shot"><img src="assets/02-diktovka-idet.png" alt="Идёт диктовка: текст появляется в строке ввода, справа крестик и галочка"><span class="annotation cancel" data-n="1" aria-hidden="true"></span><span class="annotation accept" data-n="2" aria-hidden="true"></span></div>
+              <figcaption>Во время диктовки текст пишется прямо в строке. <b>1</b> - крестик стирает сказанное, <b>2</b> - галочка оставляет текст в строке</figcaption>
+            </figure>
+            <div class="result"><p><b>Результат:</b> сказанное видно текстом и его можно проверить до отправки</p></div>
+          </div>
+
+          <div class="step">
+            <h3 id="d-3">3. Оставь текст или сотри</h3>
+            <p>Галочка оставляет надиктованное в строке, крестик стирает и даёт сказать заново. После галочки текст обычный: его можно дописать руками, поправить слово и отправить стрелкой, как будто набрал руками</p>
+            <figure>
+              <div class="shot"><img src="assets/03-tekst-gotov.png" alt="Надиктованный текст стоит в строке ввода, справа оранжевая кнопка отправки"></div>
+              <figcaption>Готовый текст в строке. Дальше обычная отправка стрелкой</figcaption>
+            </figure>
+            <div class="result"><p><b>Результат:</b> Claude отвечает текстом на то, что ты наговорил</p></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="voice-mode">
+          <p class="section-label">Режим второй</p>
+          <h2>Voice mode: разговор вслух</h2>
+          <p class="purpose">Бывает наоборот: формулировки ещё нет, ты только думаешь вслух и хочешь, чтобы тебя переспросили. Тогда печатать нечего, нужен разговор</p>
+
+          <div class="step">
+            <h3 id="v-1">1. Нажми на волну</h3>
+            <p>Нажми значок звуковой волны рядом с микрофоном. Claude переходит в режим разговора: он слушает и отвечает голосом</p>
+            <div class="result"><p><b>Результат:</b> в правом нижнем углу окна чата появилась кнопка <span class="path">Stop</span> - значит разговор идёт</p></div>
+          </div>
+
+          <div class="step">
+            <h3 id="v-2">2. Говори и слушай ответ</h3>
+            <p>Просто начинай говорить, Claude отвечает на паузе в речи. Можно перебивать, уточнять и спорить, как в обычном разговоре. Твои слова при этом всё равно видны текстом в строке, а ответ Claude остаётся в чате</p>
+            <figure>
+              <div class="shot"><img src="assets/04-voice-mode.png" alt="Разговор в voice mode: реплика Claude в чате, слова пользователя в строке ввода, справа кнопка Stop"><span class="annotation stop" data-n="1" aria-hidden="true"></span></div>
+              <figcaption>Claude переспрашивает голосом, а сказанное тобой идёт текстом в строку. <b>1</b> - кнопка <b>Stop</b>, ею разговор и завершается</figcaption>
+            </figure>
+            <div class="result"><p><b>Результат:</b> получается диалог, а не переписка</p></div>
+          </div>
+
+          <div class="step">
+            <h3 id="v-3">3. Заверши разговор кнопкой Stop</h3>
+            <p>Claude остаётся в голосовом режиме, пока не нажмёшь <span class="path">Stop</span> в правом нижнем углу окна чата. Весь разговор сохраняется в истории чатов текстом, как обычная переписка, поэтому к нему можно вернуться и перечитать</p>
+            <div class="result"><p><b>Результат:</b> режим выключен, в истории лежит текстовая расшифровка разговора</p></div>
+          </div>
+
+
+          <div class="tune-card">
+            <h3 id="v-4">Выбери голос, который приятно слушать</h3>
+            <p>Голос, которым Claude отвечает, меняется. Если стандартный раздражает или звучит слишком быстро, это не повод бросать режим: открой <span class="path">Settings → General</span> и пролистай до <span class="path">Voice settings</span>. При нажатии на вариант играет короткое превью, повторное нажатие его останавливает</p>
+            <p>На телефоне то же самое лежит внутри самого разговора: кнопка настроек в левом нижнем углу, там же выбирается голос и темп речи</p>
+            <div class="result"><p><b>Результат:</b> Claude говорит голосом и в темпе, которые тебе удобно слушать</p></div>
+          </div>
+
+          <div class="info-card"><p><span class="info-title">Про лимит:</span> голосовые разговоры расходуют тот же лимит, что и обычная переписка, отдельного голосового лимита нет</p></div>
+        </section>
+
+        <section class="content-section" id="chto-vybrat">
+          <p class="section-label">Развилка</p>
+          <h2>Что выбрать: продиктовать или поговорить</h2>
+          <p class="purpose">Оба режима про голос, и легко застрять на выборе. Разница простая: тебе нужен готовый текст или тебе нужен собеседник</p>
+          <div class="check-panel">
+            <h3>Бери Dictate</h3>
+            <ul class="checklist">
+              <li>задача уже сложилась в голове, надо её просто изложить</li>
+              <li>нужен текст, который потом читаешь и правишь глазами</li>
+              <li>рядом люди и слушать ответ вслух неудобно</li>
+              <li>диктуешь письмо, пост или длинное описание проекта</li>
+            </ul>
+          </div>
+          <div class="check-panel">
+            <h3>Бери Voice mode</h3>
+            <ul class="checklist">
+              <li>думаешь вслух и точной формулировки ещё нет</li>
+              <li>хочется, чтобы переспросили и помогли додумать</li>
+              <li>руки заняты: идёшь, готовишь, ведёшь машину</li>
+              <li>разбираешь ситуацию, а не диктуешь готовое</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="content-section" id="mikrofon">
+          <p class="section-label">Если не работает</p>
+          <h2>Микрофон не находится: что делать</h2>
+          <p class="purpose">Нажимаешь микрофон, а вместо записи пусто или надпись <span class="path">No devices found</span>. Выглядит так, будто сломался Claude, но почти всегда дело в двух вещах: браузер не пустил к микрофону или слушает не то устройство</p>
+
+          <div class="step">
+            <h3 id="m-1">Дай браузеру разрешение</h3>
+            <p>Разрешение на микрофон спрашивает браузер, а не Claude. Окошко появляется вверху слева, у адресной строки. Нажми <span class="path">Разрешить, когда я на сайте</span>, чтобы не отвечать на этот вопрос каждый раз</p>
+            <figure>
+              <div class="shot vertical"><img src="assets/05-razreshenie-brauzera.png" alt="Браузер спрашивает разрешение на использование микрофона для claude.ai, справа внизу надпись No devices found"><span class="annotation allow" data-n="1" aria-hidden="true"></span><span class="annotation nodev" data-n="2" aria-hidden="true"></span></div>
+              <figcaption><b>1</b> - нажми <b>Разрешить, когда я на сайте</b>. <b>2</b> - пока разрешение не дано, в списке устройств стоит <b>No devices found</b>: это состояние браузера, а не ошибка Claude</figcaption>
+            </figure>
+            <div class="result"><p><b>Результат:</b> claude.ai получил доступ к микрофону, полоска уровня звука ожила</p></div>
+          </div>
+
+          <div class="step">
+            <h3 id="m-2">Выбери нужное устройство</h3>
+            <p>Нажми маленькую стрелку справа от значка волны. Откроется список подключённых микрофонов: встроенный в ноутбук, телефон, гарнитура. Галочка стоит на том, который слушает сейчас, нажатием её можно перенести на другой</p>
+            <figure>
+              <div class="shot"><img src="assets/06-vybor-mikrofona.png" alt="Список микрофонов: iPhone, встроенный микрофон MacBook Air с галочкой, вариант по умолчанию"><span class="annotation arrow" data-n="1" aria-hidden="true"></span><span class="annotation checked" data-n="2" aria-hidden="true"></span></div>
+              <figcaption><b>1</b> - стрелка, которая открывает этот список. <b>2</b> - галочка на активном микрофоне. Сверху полоска уровня: скажи что-нибудь и посмотри, шевелится ли она</figcaption>
+            </figure>
+            <div class="result"><p><b>Результат:</b> выбран микрофон, который реально тебя слышит</p></div>
+          </div>
+
+          <div class="info-card"><p><span class="info-title">Быстрая проверка:</span> скажи пару слов и смотри на полоску уровня над списком. Не шевелится - дело в микрофоне или разрешении, а не в Claude</p></div>
+        </section>
+
+        <section class="content-section" id="prompty">
+          <p class="section-label">Можно копировать</p>
+          <h2>Что говорить, чтобы получилось хорошо</h2>
+          <p class="purpose">Первые разы голосом получается каша: мысль скачет, Claude отвечает не туда. Помогает начать с одной фразы, которая сразу объясняет, что ты сейчас делаешь</p>
+          <h3 id="p-1">Наговариваю задачу как есть</h3>
+          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="p1">Скопировать</button><pre id="p1">Я сейчас наговорю задачу вслух, поэтому будет сбивчиво и с повторами. Не отвечай сразу: сначала собери из моей речи понятную задачу и покажи её списком, а я поправлю</pre></div>
+          <h3 id="p-2">Думаю вслух, помоги додумать</h3>
+          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="p2">Скопировать</button><pre id="p2">Я думаю вслух и точного решения пока нет. Задавай по одному короткому вопросу и веди меня к решению, не выдавай сразу длинный ответ</pre></div>
+          <h3 id="p-3">Продиктовал текст, приведи в порядок</h3>
+          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="p3">Скопировать</button><pre id="p3">Это надиктованный текст, в нём есть оговорки и слова-паразиты. Приведи его в чистый вид, сохрани мои формулировки и порядок мыслей, ничего не добавляй от себя</pre></div>
+        </section>
+
+        <section class="content-section" id="chastye">
+          <p class="section-label">Короткие ответы</p>
+          <h2>Частые вопросы</h2>
+          <p class="purpose">Вопросы, которые возникают в первые же дни, когда начинаешь пользоваться голосом каждый день</p>
+          <div class="check-panel">
+            <h3>Понимает ли Claude русский</h3>
+            <p>Да, русский язык в списке поддерживаемых для голосового ввода. Голосу можно задать свой язык отдельно от языка интерфейса: <span class="path">Settings → General → Voice → Language</span></p>
+          </div>
+          <div class="check-panel">
+            <h3>Куда девается запись моего голоса</h3>
+            <p>После того как речь превращена в текст, аудиозапись удаляется. В истории чата остаётся текст разговора, как обычная переписка</p>
+          </div>
+          <div class="check-panel">
+            <h3>Нужен ли платный тариф</h3>
+            <p>Голосовой режим работает на всех тарифах, включая бесплатный. Разговоры расходуют общий лимит, отдельного голосового лимита нет</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="sources">
+          <p class="section-label">Откуда факты</p>
+          <h2>Источники</h2>
+          <ul class="sources">
+            <li><a href="https://support.claude.com/en/articles/11101966-use-voice-mode">Claude Help Center: Use voice mode</a> - кнопка волны, завершение по Stop, тарифы, расход лимита, выбор голоса в Voice settings, язык голоса и сохранение расшифровки</li>
+            <li><a href="https://support.claude.com/en/articles/10065434-use-dictation-on-claude-mobile">Claude Help Center: Use dictation</a> - как работает диктовка, список языков и удаление аудиозаписи</li>
+            </ul>
+        </section>
+
+        <section class="cta" aria-label="Следующий шаг">
+          <p class="section-label">Бесплатный практикум</p>
+          <h2>Научись собирать своё, а не только жать кнопки</h2>
+          <p>ИИ-Лагерь - это бесплатный прикладной практикум. Там ты научишься работать с Claude Code и Codex, а не только переключать рычажки голосового режима. Каждый шаг показывают на экране: повторяешь и собираешь полезное для себя и своего бизнеса, без кода и технических знаний, хоть голосом</p>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a>
+        </section>
+
+        <footer class="foot">Интерфейс Claude со временем меняется: кнопки могут переехать, а названия поменяться. Эта статья подготовлена по состоянию на 16 сентября 2026</footer>
+      </article>
+    </main>
+
+    <aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Следующая инструкция</p>
+      <h2>Как включить веб-поиск в Claude</h2>
+      <p><a href="../web-search-v-claude/">Свежие данные со ссылками на источники вместо ответа по памяти</a></p>
+    </aside>
+  </div>
+
+  <script>
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+
+    var themeButton = document.querySelector(".theme-toggle");
+    var savedTheme = localStorage.getItem("guide-theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+    themeButton.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("guide-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });
+
+    var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+    function updateReadingState() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+      var current = sections[0];
+      sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+      links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+    }
+    updateReadingState();
+    addEventListener("scroll", updateReadingState, { passive: true });
+  </script>
+</body>
+</html>

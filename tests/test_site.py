@@ -13,13 +13,14 @@ PROJECT = ROOT / "claude-ai" / "pervyy-proekt-v-claude" / "index.html"
 SERVER = ROOT / "claude-ai" / "svoy-server-dlya-claude" / "index.html"
 SEARCH = ROOT / "claude-ai" / "web-search-v-claude" / "index.html"
 SERVICES = ROOT / "claude-ai" / "podklyuchit-gmail-drive-calendar" / "index.html"
+VOICE = ROOT / "claude-ai" / "golosovoy-vvod-v-claude" / "index.html"
 
-PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES)
-GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES)
+PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES, VOICE)
+GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES, VOICE)
 PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff"
 # Верхняя ссылка оглавления ведёт на <header>, а не на раздел, и из-под
 # критерия дословного совпадения toc-заголовок выведена явно
-HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "web-search", "connectors", "o-sebe", "podklyuchenie", "guides"}
+HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "web-search", "connectors", "o-sebe", "podklyuchenie", "guides", "golos"}
 
 
 class PageParser(HTMLParser):
