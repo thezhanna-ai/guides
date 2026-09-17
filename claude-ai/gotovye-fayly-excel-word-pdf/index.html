@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Скриншот вместо объяснений: как показать Клоду экран, где ты застрял, и получить ответ про конкретную кнопку">
+  <meta name="description" content="Готовый Excel, Word, PDF или презентация от Клода: как получить файл с работающими формулами вместо таблицы текстом в чате">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#F8F7F2">
-  <meta property="og:title" content="Скриншот вместо объяснений: покажи Клоду экран, где застрял">
-  <meta property="og:description" content="Где в меню прикрепить скриншот, что писать вместе с картинкой и почему Клод иногда всё равно отвечает мимо">
-  <title>Скриншот вместо объяснений: покажи Клоду экран, где застрял</title>
+  <meta property="og:title" content="Готовый Excel, Word, PDF или презентация - без копипаста">
+  <meta property="og:description" content="Где включить создание файлов, что написать, чтобы пришёл файл с формулами, и почему вместо него иногда приходит таблица текстом">
+  <title>Готовый Excel, Word, PDF или презентация - без копипаста</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
@@ -90,9 +90,6 @@
     .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
     .result p { margin: 0 }
     .info-card, .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
-    .limit-card { margin-top: 24px; padding: 13px 18px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
-    .limit-card p { margin: 0 }
-    .limit-card h3 { margin-bottom: 7px }
     /* раскрывающиеся вопросы: канон, п.6 и тёплый бумажный #F0E8D8 под нейтральные
        раскрывающиеся блоки. Не серо-голубая плашка: та под информационные врезки */
     .faq-item { margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); overflow: hidden }
@@ -121,6 +118,9 @@
     .viewer.fits .viewer-scroll img { margin: 0 auto }
     .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
     .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
+    .limit-card { margin-top: 24px; padding: 13px 18px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .limit-card p { margin: 0 }
+    .limit-card h3 { margin-bottom: 7px }
     .tune-card { margin-top: 26px; padding: 15px 20px 3px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
     .tune-card h3 { margin-bottom: 9px }
     .tune-card .result { margin-bottom: 17px }
@@ -130,16 +130,17 @@
     .shot { width: min(100%, 650px) }
     .shot { position: relative }
     .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .88); pointer-events: none }
-    .annotation::before { content: attr(data-n); position: absolute; top: -38px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--emerald); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
-    .annotation.askshot { left: 19.06%; top: 42.75%; width: 72.80%; height: 11.53% }
-    .annotation.askshot::before { top: 50%; left: -38px; transform: translateY(-50%) }
-    .annotation.addfiles { left: 7.93%; top: 30.33%; width: 37.44%; height: 3.77% }
-    .annotation.takeshot { left: 7.93%; top: 36.76%; width: 28.35%; height: 3.77% }
-    .annotation.plusbtn { left: 6.53%; top: 86.58%; width: 3.64%; height: 4.04% }
-    .annotation.addfiles::before, .annotation.takeshot::before { top: 50%; left: auto; right: -38px; transform: translateY(-50%) }
-    .annotation.plusbtn::before { top: auto; bottom: -38px; left: 50%; transform: translateX(-50%) }
-    .annotation.upgrade { left: 7.02%; top: 64.69%; width: 79.83%; height: 10.37% }
-    .annotation.upgrade::before { top: 50%; left: -38px; transform: translateY(-50%) }
+    .annotation::before { content: attr(data-n); position: absolute; top: -38px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: #FFFFFF; box-shadow: 0 0 0 3px rgba(255, 255, 255, .95); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    /* пометки на скрине запроса: показывают, что данные в примере условные */
+    .annotation.uslovnym { left: 62.94%; top: 35.80%; width: 31.72%; height: 6.65% }
+    .annotation.naprimer { left: 4.85%; top: 43.50%; width: 15.21%; height: 6.34% }
+    /* на скрине запроса кружки-цифры не ставим: картинка на телефоне мелкая,
+       кружок неизбежно накрывает слова. Рамки говорят сами за себя, а что
+       именно выделено - сказано в подписи под картинкой */
+    .annotation.uslovnym::before, .annotation.naprimer::before { content: none }
+    /* тумблер создания файлов в разделе Capabilities */
+    .annotation.tumbler { left: 92.56%; top: 38.20%; width: 5.94%; height: 9.67% }
+    .annotation.tumbler::before { top: 50%; left: -38px; bottom: auto; transform: translateY(-50%) }
     .shot.vertical { width: min(100%, 380px) }
     .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
     figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
@@ -201,7 +202,7 @@
     <div class="masthead-inner">
       <div class="brand">Claude.ai: кнопка за кнопкой</div>
       <div class="header-actions">
-        <div class="handout-title">Скриншот вместо объяснений</div>
+        <div class="handout-title">Готовый файл вместо таблицы текстом</div>
         <div class="header-controls">
           <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
           <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
@@ -213,20 +214,20 @@
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание">
       <p class="toc-label">Содержание</p>
-      <a class="active" href="#skrin">Скриншот вместо объяснений</a>
-      <a href="#pochemu">Почему словами не выходит</a>
-      <a href="#kak">Как показать Клоду экран</a>
-      <a class="toc-sub" href="#s-1">1. Сними то, где застрял</a>
-      <a class="toc-sub" href="#s-2">2. Нажми плюс под чатом</a>
-      <a class="toc-sub" href="#s-3">3. Напиши словами, что не выходит</a>
-      <a class="toc-sub" href="#s-4">4. Уточняй по тому же скрину</a>
-      <a href="#chto-pisat">Что писать вместе со скриншотом</a>
-      <a class="toc-sub" href="#p-1">Куда нажать на этом экране</a>
-      <a class="toc-sub" href="#p-2">Перевести и объяснить чужой язык</a>
-      <a class="toc-sub" href="#p-3">Разобраться с ошибкой</a>
-      <a class="toc-sub" href="#p-4">Сравнить и выбрать тариф</a>
-      <a href="#mimo">Почему Клод отвечает мимо</a>
-      <a href="#granicy">Чего скриншот не сделает</a>
+      <a class="active" href="#fayl">Готовый файл вместо копипаста</a>
+      <a href="#pochemu">Почему таблица приходит текстом</a>
+      <a href="#kak">Как получить готовый файл</a>
+      <a class="toc-sub" href="#s-1">1. Включи создание файлов</a>
+      <a class="toc-sub" href="#s-2">2. Попроси файл, а не таблицу</a>
+      <a class="toc-sub" href="#s-3">3. Скачай по кнопке Download</a>
+      <a class="toc-sub" href="#s-4">4. Переделай, не начиная заново</a>
+      <a href="#chto-pisat">Что писать, чтобы пришёл файл</a>
+      <a class="toc-sub" href="#p-1">Excel с работающими формулами</a>
+      <a class="toc-sub" href="#p-2">Тот же расчёт в PDF или Word</a>
+      <a class="toc-sub" href="#p-3">Презентация из готового текста</a>
+      <a class="toc-sub" href="#p-4">Разобрать свой файл и вернуть новым</a>
+      <a href="#mimo">Почему файл не пришёл</a>
+      <a href="#granicy">Чего файл не сделает</a>
       <a href="#chastye">Частые вопросы</a>
       <a href="#sources">Источники</a>
     </nav>
@@ -235,171 +236,223 @@
       <details class="mobile-toc">
         <summary>Содержание статьи</summary>
         <nav aria-label="Содержание на телефоне">
-          <a href="#skrin">Скриншот вместо объяснений</a>
-          <a href="#pochemu">Почему словами не выходит</a>
-          <a href="#kak">Как показать Клоду экран</a>
-          <a href="#s-1">1. Сними то, где застрял</a>
-          <a href="#s-2">2. Нажми плюс под чатом</a>
-          <a href="#s-3">3. Напиши словами, что не выходит</a>
-          <a href="#s-4">4. Уточняй по тому же скрину</a>
-          <a href="#chto-pisat">Что писать вместе со скриншотом</a>
-          <a href="#p-1">Куда нажать на этом экране</a>
-          <a href="#p-2">Перевести и объяснить чужой язык</a>
-          <a href="#p-3">Разобраться с ошибкой</a>
-          <a href="#p-4">Сравнить и выбрать тариф</a>
-          <a href="#mimo">Почему Клод отвечает мимо</a>
-          <a href="#granicy">Чего скриншот не сделает</a>
+          <a href="#fayl">Готовый файл вместо копипаста</a>
+          <a href="#pochemu">Почему таблица приходит текстом</a>
+          <a href="#kak">Как получить готовый файл</a>
+          <a href="#s-1">1. Включи создание файлов</a>
+          <a href="#s-2">2. Попроси файл, а не таблицу</a>
+          <a href="#s-3">3. Скачай по кнопке Download</a>
+          <a href="#s-4">4. Переделай, не начиная заново</a>
+          <a href="#chto-pisat">Что писать, чтобы пришёл файл</a>
+          <a href="#p-1">Excel с работающими формулами</a>
+          <a href="#p-2">Тот же расчёт в PDF или Word</a>
+          <a href="#p-3">Презентация из готового текста</a>
+          <a href="#p-4">Разобрать свой файл и вернуть новым</a>
+          <a href="#mimo">Почему файл не пришёл</a>
+          <a href="#granicy">Чего файл не сделает</a>
           <a href="#chastye">Частые вопросы</a>
           <a href="#sources">Источники</a>
         </nav>
       </details>
 
       <article>
-        <header id="skrin">
-          <p class="eyebrow">Claude.ai · Скриншот в чате</p>
-          <h1>Скриншот вместо объяснений: покажи Клоду экран, где застрял</h1>
+        <header id="fayl">
+          <p class="eyebrow">Claude.ai · Готовые файлы</p>
+          <h1>Готовый Excel, Word, PDF или презентация - без копипаста</h1>
+          <p class="lead">Ты просишь посчитать - и получаешь красивую таблицу прямо в чате. А дальше начинается ручная работа: выделить, скопировать, вставить в Excel, поправить развалившиеся столбцы, вписать формулы заново. Клод умеет отдавать сразу файл: таблицу с работающими формулами, документ, презентацию. Скачиваешь и открываешь у себя</p>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 17 СЕНТЯБРЯ 2026</p>
-          <p class="lead">Ты на незнакомом сайте или в настройках своего кабинета. Всё на чужом языке, надо продлить подписку или хотя бы понять, о чём речь, и непонятно, куда нажимать. Объясняешь словами - Клод находит официальную справку сервиса и пересказывает её, а у тебя своя версия приложения и своё устройство. Ты отвечаешь «у меня такой кнопки нет», и начинается выяснение: телефон или компьютер, какая система, что за приложение. Один скриншот отсекает этот круг целиком</p>
-          <aside class="route-note" aria-label="Короткий маршрут">
-            <h2>Короткий маршрут</h2>
-            <p>Плюс под строкой чата → <span class="path">Add files or photos</span> (готовый файл) или <span class="path">Take a screenshot</span> (снять экран сразу) → напиши словами, что именно не выходит</p>
-          </aside>
         </header>
 
+        <div class="route-note">
+          <h2>Короткий маршрут</h2>
+          <p><span class="path">Capabilities</span> → включить <span class="path">Cloud code execution and file creation</span> → в чате написать «собери Excel-файл с формулами и дай скачать» → нажать <span class="path">Download</span> под файлом</p>
+        </div>
+
         <section class="content-section" id="pochemu">
-          <p class="section-label">Откуда берётся круг вопросов</p>
-          <h2>Почему словами не выходит</h2>
-          <p class="purpose">Клод не видит твой экран. Он берёт официальную справку сервиса - ту, которую находит, - и описывает кнопки по ней. Справка не всегда свежая и написана под какое-то одно устройство, а у тебя своя версия приложения, свой язык, свой тариф, телефон вместо компьютера. Названия кнопок он даёт по документации, а не по тому, что у тебя перед глазами</p>
-          <p>И промахивается он чаще не в названии, а в месте. Название ещё можно угадать по смыслу: написано «Подписка», а у тебя «Тарифы» - сообразишь. А когда он говорит «в правом верхнем углу», а у тебя эта настройка спрятана внутри пункта в настройках, на третьем уровне, сам ты её не найдёшь никогда. Ты честно смотришь в правый верхний угол, там ничего нет, и вы ходите по кругу</p>
-          <p>Тогда он начинает уточнять: какая система, с чего работаешь, до какой версии обновлялся. Вопросы по делу, но ты пришёл не за ними - ты хотел узнать, куда нажать. Скриншот снимает их одним движением, потому что на картинке уже видно и версию, и язык, и тариф, и то, где у тебя что лежит</p>
-          <figure>
-            <div class="shot"><img src="assets/01-ne-ponyal.png" alt="Человек описал экран словами, Клод отвечает, что не понял, о какой кнопке речь, и просит прислать скриншот"><span class="annotation askshot" data-n="1" aria-hidden="true"></span></div>
-            <figcaption><b>1</b> - Клод сам просит картинку: «Можешь прислать скриншот экрана, где ты застряла? Я посмотрю и подскажу, куда нажать». Причину он называет там же: интерфейсы отличаются от устройства и версии приложения</figcaption>
-          </figure>
-          <div class="info-card"><p><span class="info-title">Правило простое:</span> видишь экран, который надо объяснить словами дольше одного предложения - снимай скриншот</p></div>
+          <p class="section-label">Откуда берётся копипаст</p>
+          <h2>Почему таблица приходит текстом</h2>
+          <p>По умолчанию Клод отвечает в чате. Таблица в ответе - это оформленный текст: выглядит как таблица, но внутри неё ничего не считается. Перенесёшь в Excel - приедут одни числа, застывшие на момент ответа. Поменяешь ставку или сумму - ничего не пересчитается, потому что формул там никогда не было</p>
+          <p>Отдельная функция даёт Клоду собственную рабочую среду: он пишет там код, выполняет его и собирает настоящий файл - .xlsx, .docx, .pptx или .pdf. В таблице появляются живые формулы, в презентации - слайды, и всё это приходит одной кнопкой на скачивание</p>
+          <div class="info-card">
+            <p><span class="info-title">Разница простая:</span> текстовая таблица в чате - картинка расчёта, файл - сам расчёт. В файле можно поменять свою цифру, и остальное пересчитается само</p>
+          </div>
         </section>
 
         <section class="content-section" id="kak">
           <p class="section-label">Четыре действия</p>
-          <h2>Как показать Клоду экран</h2>
-          <p class="purpose">Весь маршрут - четыре шага, и три из них ты уже умеешь. Новое только одно: где в меню лежат пункты про файл и про съёмку экрана</p>
+          <h2>Как получить готовый файл</h2>
+          <p>Один раз включаешь функцию в настройках, дальше всё делается словами в обычном чате</p>
 
-          <div class="step">
-            <h3 id="s-1">1. Сними то, где застрял</h3>
-            <p>Снимай весь экран или окно целиком, не вырезай «только кнопку». Клоду нужны соседние надписи: по ним он понимает, что это за страница, на каком она языке и какой у тебя тариф. Вырезанный фрагмент оставляет его без этих подсказок</p>
-            <p>На Маке снимок области - <span class="path">Cmd + Shift + 4</span>, на Windows - <span class="path">Win + Shift + S</span>. Скриншот с телефона годится так же: он же картинка</p>
-            <div class="result"><p><b>Результат:</b> есть картинка того места, где ты застрял, вместе с окружением</p></div>
+          <div class="step" id="s-1">
+            <h3>1. Включи создание файлов</h3>
+            <p>Пока функция выключена, Клод будет отвечать таблицей в чате, сколько ни проси файл. Открой раздел <span class="path">Capabilities</span> и включи верхний тумблер - <span class="path">Cloud code execution and file creation</span>. Под ним прямо написано, что именно он даёт: Клод сможет выполнять код на сервере и создавать документы, таблицы, презентации и PDF. На бесплатном тарифе функция тоже есть</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/05-nastroyki.png" alt="Раздел Capabilities: тумблер Cloud code execution and file creation включён">
+                <span class="annotation tumbler" data-n="1"></span>
+              </div>
+              <figcaption>Раздел <span class="path">Capabilities</span> в меню слева. Верхний тумблер справа должен быть синим - это и есть создание файлов</figcaption>
+            </figure>
+            <div class="tune-card">
+              <h3>Второй тумблер трогать не обязательно</h3>
+              <p><span class="path">Allow network egress</span> даёт Клоду выход в сеть, чтобы доставлять себе дополнительные библиотеки для сложного разбора данных. Для обычной таблицы с формулами он не нужен, а в описании рядом стоит предупреждение о рисках - включай осознанно</p>
+            </div>
+            <div class="result">
+              <p>Результат: в чате появилась возможность собирать файлы, и просьба «собери Excel» теперь выполнима</p>
+            </div>
           </div>
 
-          <div class="step">
-            <h3 id="s-2">2. Нажми плюс под чатом</h3>
-            <p>Плюс стоит слева под строкой, где ты пишешь сообщение. В открывшемся меню два верхних пункта - как раз про картинки: <span class="path">Add files or photos</span> прикрепляет готовый файл, <span class="path">Take a screenshot</span> снимает экран сразу из Клода, без поиска файла по папкам</p>
+          <div class="step" id="s-2">
+            <h3>2. Попроси файл, а не таблицу</h3>
+            <p>Скажи прямо в первом же сообщении: собери файл и дай скачать. Слово «файл» здесь рабочее - без него Клод по привычке ответит текстом. Сразу назови формат и что должно быть внутри: формулы, комментарии, отдельная колонка под пояснения</p>
             <figure>
-              <div class="shot"><img src="assets/02-menyu-plyus.png" alt="Меню по плюсу в Claude: пункты Add files or photos и Take a screenshot, ниже Add to project и другие"><span class="annotation plusbtn" data-n="1" aria-hidden="true"></span><span class="annotation addfiles" data-n="2" aria-hidden="true"></span><span class="annotation takeshot" data-n="3" aria-hidden="true"></span></div>
-              <figcaption><b>1</b> - плюс под строкой чата. <b>2</b> - <b>Add files or photos</b>, прикрепить готовый скриншот. <b>3</b> - <b>Take a screenshot</b>, снять экран сразу. Картинку можно и просто вставить из буфера: <span class="path">Cmd + V</span></figcaption>
+              <div class="shot">
+                <img src="assets/01-zapros.png" alt="Запрос в чате: собери Excel файл с формулами, с пометками на словах про условные данные">
+                <span class="annotation uslovnym" data-n="1"></span>
+                <span class="annotation naprimer" data-n="2"></span>
+              </div>
+              <figcaption>Оранжевым отмечены «по условным исходникам» и «Например,» - этими словами ты говоришь Клоду, что цифры выдуманы для расчёта. Настоящие суммы, выписки и договоры загружать не нужно, механика та же. Дальше в запросе названо, что показать формулы в заголовках, и перечислены сами условные данные</figcaption>
             </figure>
-            <div class="result"><p><b>Результат:</b> картинка стоит над строкой ввода, значит прикрепилась</p></div>
+            <div class="result">
+              <p>Результат: Клод считает и собирает файл, а не пересказывает расчёт в чате</p>
+            </div>
           </div>
 
-          <div class="step">
-            <h3 id="s-3">3. Напиши словами, что не выходит</h3>
-            <p>Скриншот без вопроса Клод разбирает на свой вкус: опишет, что видит, и предложит первое разумное. Поэтому вместе с картинкой одной фразой скажи, чего ты хочешь. Длинно не надо - на картинке уже всё видно</p>
+          <div class="step" id="s-3">
+            <h3>3. Скачай по кнопке Download</h3>
+            <p>Готовый файл появляется плиткой внизу ответа: название, тип (<span class="path">Spreadsheet · XLSX</span>) и кнопка <span class="path">Download</span> справа. Рядом Клод коротко пишет, что получилось и что в таблице можно менять. Нажимаешь Download - файл падает в загрузки и открывается в обычном Excel или Numbers</p>
             <figure>
-              <div class="shot"><img src="assets/03-skrin-prikreplen.png" alt="Скриншот прикреплён к сообщению, в строке написан короткий вопрос своими словами"></div>
-              <figcaption>Так это выглядит перед отправкой: картинка прикреплена, рядом обычная фраза своими словами - «Вот он, мне кажется тут чего-то не хватает»</figcaption>
+              <div class="shot"><img src="assets/02-xlsx.png" alt="Готовый файл XLSX с формулами, рядом кнопка Download"></div>
+              <figcaption>Слева ответ и плитка файла с кнопкой Download, справа сама таблица: жёлтым помечены ячейки для своих цифр, отдельная колонка «Как считается» показывает формулу словами. Все суммы на картинке условные - они взяты из примера в запросе, а не из чьей-то реальной зарплаты</figcaption>
             </figure>
-            <div class="result"><p><b>Результат:</b> Клод отвечает про то, что действительно на экране: называет надписи, цену, кнопку и место, где она стоит</p></div>
+            <figure>
+              <div class="shot"><img src="assets/04-download.png" alt="Плитка файла крупно: название, Spreadsheet XLSX и кнопка Download"></div>
+              <figcaption>Та же плитка крупно. Кнопка Download справа - единственное, что нужно нажать</figcaption>
+            </figure>
+            <div class="result">
+              <p>Результат: файл у тебя на компьютере, формулы внутри работают</p>
+            </div>
           </div>
 
-          <div class="step">
-            <h3 id="s-4">4. Уточняй по тому же скрину</h3>
-            <p>Картинка остаётся в чате, второй раз её прикреплять не надо. Спрашивай дальше обычными словами: «а что даёт вторая кнопка», «это точно та, что справа», «переведи весь экран». Если после нажатия открылось новое окно - снимай новый скриншот, чтобы Клод шёл за тобой по шагам</p>
+          <div class="step" id="s-4">
+            <h3>4. Переделай, не начиная заново</h3>
+            <p>Расчёт уже сделан, поэтому другой формат - это одна фраза, а не новый разговор. «Оформи это как PDF», «собери из этого презентацию», «добавь колонку с комментариями» - Клод берёт готовое и пересобирает в нужном виде</p>
             <figure>
-              <div class="shot"><img src="assets/04-otvet.png" alt="Ответ Клода по скриншоту: назван текущий план, соседний план и конкретная кнопка Upgrade to Pro справа"><span class="annotation upgrade" data-n="1" aria-hidden="true"></span></div>
-              <figcaption><b>1</b> - вместо «поищите где-нибудь обновление тарифа» Клод называет конкретное: сейчас у тебя план Plus, рядом Pro, и нажать нужно ту самую чёрную кнопку <b>Upgrade to Pro</b> справа</figcaption>
+              <div class="shot"><img src="assets/03-pdf.png" alt="Запрос оформить расчёт как PDF и готовый PDF-файл в ответе"></div>
+              <figcaption>Одна фраза «Можешь оформить это как пдф?» - и тот же расчёт приходит PDF-файлом на двух страницах</figcaption>
             </figure>
-            <div class="result"><p><b>Результат:</b> разговор идёт по твоему экрану, а не по догадкам о нём</p></div>
+            <div class="result">
+              <p>Результат: один расчёт живёт в нескольких форматах, и каждый скачивается отдельно</p>
+            </div>
           </div>
         </section>
 
         <section class="content-section" id="chto-pisat">
           <p class="section-label">Можно копировать</p>
-          <h2>Что писать вместе со скриншотом</h2>
-          <p class="purpose">Четыре фразы под частые ситуации. Прикрепляешь картинку, вставляешь фразу, отправляешь</p>
-          <h3 id="p-1">Куда нажать на этом экране</h3>
-          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="p1">Скопировать</button><pre id="p1">Вот мой экран. Я хочу [что нужно сделать], но не понимаю, куда нажимать. Назови кнопку так, как она подписана на картинке, и скажи, где именно она стоит. Если нужной кнопки на этом экране нет, так и скажи</pre></div>
-          <h3 id="p-2">Перевести и объяснить чужой язык</h3>
-          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="p2">Скопировать</button><pre id="p2">Этот экран не на русском. Переведи всё, что на нём написано, и объясни своими словами, что мне тут предлагают. Отдельно скажи, на что нажимать НЕ надо, чтобы ничего не купить случайно</pre></div>
-          <h3 id="p-3">Разобраться с ошибкой</h3>
-          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="p3">Скопировать</button><pre id="p3">Вот ошибка с моего экрана. Объясни простыми словами, что она означает и из-за чего появилась. Дай порядок действий: сначала самое простое, что стоит проверить, потом остальное</pre></div>
-          <h3 id="p-4">Сравнить и выбрать тариф</h3>
-          <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="p4">Скопировать</button><pre id="p4">На скриншоте несколько тарифов. Я собираюсь [для чего это нужно]. Разбери, чем они отличаются по существу, и скажи, какого мне хватит и за что я переплачу. Считай только по тому, что видно на картинке, не добавляй от себя</pre></div>
-          <div class="info-card"><p><span class="info-title">Мелочь, которая сильно помогает:</span> впиши в квадратные скобки свою задачу словами. «Хочу продлить подписку», «хочу отключить автосписание» - и Клод ищет на экране путь именно к этому, а не описывает картинку вообще</p></div>
+          <h2>Что писать, чтобы пришёл файл</h2>
+          <p>Четыре фразы под частые задачи. Вставляешь, подставляешь своё в квадратные скобки, отправляешь</p>
+
+          <h3 id="p-1">Excel с работающими формулами</h3>
+          <div class="prompt-box">
+            <button class="copy-button" type="button" data-copy-target="prompt-1">Скопировать</button>
+            <pre id="prompt-1">Собери Excel-файл с формулами и дай скачать. Задача: [что нужно посчитать]. Исходные данные условные, вот они: [перечисли свои цифры]. Ячейки для ввода моих цифр выдели цветом, чтобы остальное пересчитывалось само. Отдельной колонкой покажи, как считается каждая строка, а в последней колонке оставь комментарии к расчёту</pre>
+          </div>
+
+          <h3 id="p-2">Тот же расчёт в PDF или Word</h3>
+          <div class="prompt-box">
+            <button class="copy-button" type="button" data-copy-target="prompt-2">Скопировать</button>
+            <pre id="prompt-2">Оформи этот же расчёт как [PDF или Word] и дай скачать. Ничего не пересчитывай заново, цифры бери те, что уже получились. Таблицу постарайся уместить на одной странице, а пояснения и оговорки вынеси отдельно</pre>
+          </div>
+
+          <h3 id="p-3">Презентация из готового текста</h3>
+          <div class="prompt-box">
+            <button class="copy-button" type="button" data-copy-target="prompt-3">Скопировать</button>
+            <pre id="prompt-3">Собери из этого презентацию в PowerPoint и дай скачать. Тема: [о чём рассказываю], аудитория: [кому показываю], примерно [сколько] слайдов. На каждом слайде одна мысль и короткий заголовок, без стен текста. Там, где есть цифры, поставь таблицу или график</pre>
+          </div>
+
+          <h3 id="p-4">Разобрать свой файл и вернуть новым</h3>
+          <div class="prompt-box">
+            <button class="copy-button" type="button" data-copy-target="prompt-4">Скопировать</button>
+            <pre id="prompt-4">Вот мой файл. Посмотри, что внутри, и собери на его основе новый файл: [что нужно получить]. Мои исходные данные не меняй, добавь расчёт отдельными колонками. Если в данных встретятся пропуски или явные ошибки, не выдумывай значения - отдельно напиши, что именно вызвало вопрос</pre>
+          </div>
+
+          <div class="info-card">
+            <p><span class="info-title">Фраза, которая решает:</span> «дай скачать». Она отделяет просьбу показать от просьбы собрать файл, и с ней Клод почти всегда отвечает плиткой с кнопкой, а не таблицей в чате</p>
+          </div>
         </section>
 
         <section class="content-section" id="mimo">
-          <p class="section-label">Если ответ не по делу</p>
-          <h2>Почему Клод отвечает мимо</h2>
-          <p class="purpose">Бывает, что скриншот отправлен, а ответ всё равно общий. Причина почти всегда в самой картинке, и все четыре случая лечатся за одну попытку</p>
+          <p class="section-label">Если файла нет</p>
+          <h2>Почему файл не пришёл</h2>
+          <p>Ответ есть, а плитки с кнопкой Download под ним нет. Причин немного, и все проверяются за минуту</p>
+
           <div class="check-panel">
-            <h3>Снято слишком мелко</h3>
-            <p>Мелкая картинка - мелкий текст, надписи на кнопках не читаются. Для картинок в справке названа планка: лучше от 1000 пикселей по стороне. Не уменьшай скриншот перед отправкой и не фотографируй монитор телефоном - сними экран средствами системы</p>
+            <h3>Функция выключена</h3>
+            <p>Самое частое. Раздел <span class="path">Capabilities</span>, верхний тумблер <span class="path">Cloud code execution and file creation</span>. Без него Клод отвечает текстом, как бы подробно ты ни описывал нужный файл</p>
           </div>
           <div class="check-panel">
-            <h3>Вырезана одна кнопка</h3>
-            <p>По фрагменту без окружения непонятно, что это за страница. Клод отвечает общими словами именно потому, что кроме кнопки ему ничего не видно. Снимай окно целиком</p>
+            <h3>В просьбе не было слова «файл»</h3>
+            <p>«Посчитай и покажи таблицу» - это просьба показать, её он и выполняет. Нужен файл - так и напиши, вместе с «дай скачать»</p>
           </div>
           <div class="check-panel">
-            <h3>Нет вопроса</h3>
-            <p>Картинка без текста читается как «посмотри и скажи что-нибудь». Одна фраза о том, чего ты хочешь, меняет ответ полностью</p>
+            <h3>Формат не назван</h3>
+            <p>«Сделай документ» можно понять по-разному. Называй прямо: Excel, Word, PDF, презентация</p>
           </div>
           <div class="check-panel">
-            <h3>Экран не тот</h3>
-            <p>Снято меню, а нужная настройка лежит на другой странице. Тогда Клод честно говорит, что на этом экране нужного нет: открой следующий шаг и сними его</p>
+            <h3>Файл слишком большой</h3>
+            <p>Предел - 30 МБ на файл, и он работает в обе стороны, на загрузку и на скачивание. Для таблицы с расчётом это много, но огромная выгрузка на сотни тысяч строк в него не поместится</p>
           </div>
         </section>
 
         <section class="content-section" id="granicy">
           <p class="section-label">Честные ограничения</p>
-          <h2>Чего скриншот не сделает</h2>
-          <p class="purpose">Полезно знать заранее, чтобы не ждать от картинки лишнего</p>
+          <h2>Чего файл не сделает</h2>
+          <p>Чтобы не ждать лишнего и не проверять потом наспех</p>
+
           <div class="limit-card">
-            <h3>Он не нажимает за тебя</h3>
-            <p>Клод в чате смотрит на картинку и рассказывает, куда нажать. Сам он по твоему экрану не щёлкает: кнопки жмёшь ты</p>
+            <h3>Цифры надо проверять</h3>
+            <p>Файл выглядит убедительно: формулы, колонки, итог. Но Клод мог взять не ту ставку или не тот лимит. Прежде чем нести расчёт куда-то дальше, проверь исходные числа и итог глазами</p>
           </div>
           <div class="limit-card">
-            <h3>Он видит момент, а не процесс</h3>
-            <p>На скриншоте один кадр. Что было до и что будет после нажатия, ему неизвестно, поэтому длинную настройку показывают по шагам: снял, нажал, снял следующий экран</p>
+            <h3>Это не бухгалтерия и не юрист</h3>
+            <p>Расчёт по твоим условным данным - не консультация. Вопросы про налоги, вычеты и отчётность решаются с тем, кто за это отвечает</p>
           </div>
           <div class="limit-card">
-            <h3>Он может ошибиться в мелком тексте</h3>
-            <p>Сноски и подписи в несколько пикселей читаются с ошибками. Цену, дату и имя тарифа стоит перепроверить глазами по своему экрану, особенно перед оплатой</p>
+            <h3>Оформление придётся править</h3>
+            <p>Ширина столбцов, шрифты, разрывы страниц - всё это Клод ставит на свой вкус. В Excel и Word это правится за минуту, но ожидать готовый фирменный документ не стоит</p>
           </div>
-          <div class="info-card"><p><span class="info-title">Про личные данные:</span> на скриншоте экрана видно всё, что на нём открыто - почта, имя, номер карты, чужая переписка. Перед отправкой посмотри, что попало в кадр, и сними лишнее с экрана или закрой</p></div>
+          <div class="info-card">
+            <p><span class="info-title">Про данные:</span> для расчёта хватает условных цифр - так и пиши: «данные условные, например, зарплата такая-то». Настоящие выписки, договоры и персональные данные загружать не обязательно, а результат будет тот же</p>
+          </div>
         </section>
 
         <section class="content-section" id="chastye">
           <p class="section-label">Короткие ответы</p>
           <h2>Частые вопросы</h2>
+
           <details class="faq-item">
-            <summary>Сколько картинок можно в один чат</summary>
-            <p>До 20 файлов на чат, каждый до 500 МБ, размер картинки до 8000 на 8000 пикселей. Для скриншотов эти границы недосягаемы: обычный снимок экрана весит меньше мегабайта</p>
-          </details>
-          <details class="faq-item">
-            <summary>Какие форматы подходят</summary>
-            <p>JPEG, PNG, GIF и WebP. Системный скриншот на Маке и на Windows и так получается в PNG, ничего конвертировать не надо</p>
+            <summary>Какие форматы Клод собирает</summary>
+            <p>Excel (.xlsx), Word (.docx), PowerPoint (.pptx) и PDF. Кроме них он может отдать график картинкой</p>
           </details>
           <details class="faq-item">
             <summary>Нужен ли платный тариф</summary>
-            <p>Нет, картинки читает и бесплатный. Лимит расходуется общий, как на обычную переписку</p>
+            <p>Нет. Функция доступна на всех тарифах, включая бесплатный</p>
           </details>
           <details class="faq-item">
-            <summary>Можно вставить картинку из буфера</summary>
-            <p>Да, скопированную картинку можно вставить прямо в строку чата через <span class="path">Cmd + V</span>, не сохраняя в файл</p>
+            <summary>Работает ли с телефона</summary>
+            <p>Да: в браузере, в приложении на компьютере и в мобильном приложении</p>
           </details>
           <details class="faq-item">
-            <summary>Есть ли способ ещё быстрее</summary>
-            <p>В приложении Клода на Мак есть быстрый ввод: двойное нажатие <span class="path">Option</span> открывает поле у курсора, там же появляется «Drag to take a screenshot» - выделяешь область, и она сразу прикрепляется к сообщению. На Windows этой возможности пока нет</p>
+            <summary>Какой максимальный размер</summary>
+            <p>30 МБ на файл - и когда загружаешь свой, и когда скачиваешь собранный</p>
+          </details>
+          <details class="faq-item">
+            <summary>Можно сохранить сразу в облако</summary>
+            <p>Да, готовый файл можно скачать к себе или сохранить прямо в Google Drive</p>
+          </details>
+          <details class="faq-item">
+            <summary>Можно ли дать Клоду свой файл</summary>
+            <p>Да. Прикрепляешь свою таблицу, просишь разобрать и собрать новый файл на её основе - исходник при этом не меняется</p>
           </details>
         </section>
 
@@ -407,18 +460,17 @@
           <p class="section-label">Откуда факты</p>
           <h2>Источники</h2>
           <ul class="sources">
-            <li><a href="https://support.claude.com/en/articles/8241126-what-kinds-of-documents-can-i-upload-to-claude-ai">Claude Help Center: What kinds of documents can I upload</a> - форматы картинок, 20 файлов на чат, 500 МБ на файл, до 8000 на 8000 пикселей, рекомендация от 1000 пикселей и вставка из буфера</li>
-            <li><a href="https://support.claude.com/en/articles/12626668-use-quick-entry-with-claude-desktop-on-mac">Claude Help Center: Use quick entry with Claude Desktop on Mac</a> - быстрый ввод по двойному Option, съёмка области выделением и то, что это только macOS</li>
-            <li><a href="https://code.claude.com/docs/en/desktop">Claude Desktop docs</a> - прикрепление файлов и скриншотов в чат, съёмка экрана и указание Клоду на конкретную кнопку</li>
+            <li><a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Claude Help Center: Create and edit files with Claude</a> - форматы xlsx, docx, pptx и pdf, предел 30 МБ на файл в обе стороны, тумблер создания файлов в разделе Capabilities, доступность на всех тарифах и сохранение в Google Drive</li>
+            <li><a href="https://claude.com/blog/create-files">Claude blog: Claude can now create and edit files</a> - работающие формулы в таблицах, сборка презентаций и документов, работа в браузере, в приложении на компьютере и на телефоне</li>
           </ul>
-          <p class="meta">Пункты меню и ответы Клода на картинках сняты с живого интерфейса 16 сентября 2026</p>
+          <p class="meta">Ответы Клода и вид готового файла на картинках сняты с живого интерфейса 17 сентября 2026. Все суммы в примере условные</p>
         </section>
 
         <section class="cta" aria-label="Следующий шаг">
           <p class="section-label">Бесплатный практикум</p>
-          <h2>Кнопки ты уже нашёл. Дальше - порядок работы</h2>
-          <p>Вот так по шагам ты осваиваешь Claude.ai. А вот как выстроить вокруг него ежедневную работу с нейросетью, чтобы она реально экономила время, - отдельная задача. На Лагере за три дня собирается рабочий порядок вокруг твоего же Клода: как формулировать задачи, чтобы результат не переделывать, как не терять наработки между чатами и в итоге собирать полезное для жизни и твоего бизнеса</p>
-          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Забрать путёвку в ИИ-Лагерь →</a>
+          <h2>Один файл ты собрал. Дальше - понять, что эта штука вообще умеет</h2>
+          <p>Excel с формулами - это одна кнопка из сотни. ИИ-Лагерь - бесплатный трёхдневный практикум, где показывают, как в принципе работать с Клодом, с Клод-Кодом и с другими ИИ-агентами: что они умеют, чего от них ждать и что нужно сделать, чтобы потом собрать своё. Не по одной кнопке, а целиком, каждый шаг на экране - ты смотришь и повторяешь</p>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a>
         </section>
 
         <footer class="foot">Интерфейс Клода со временем меняется: кнопки могут переехать, а названия поменяться. Эта статья подготовлена по состоянию на 17 сентября 2026</footer>
@@ -427,8 +479,8 @@
 
     <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Следующая инструкция</p>
-      <h2>Голосовой ввод в Claude</h2>
-      <p><a href="../golosovoy-vvod-v-claude/">Dictate, Voice mode и выбор микрофона: говорить вместо того, чтобы печатать</a></p>
+      <h2>Скриншот вместо объяснений</h2>
+      <p><a href="../skrinshot-vmesto-obyasneniy/">Покажи Клоду экран, где застрял, и получи ответ про конкретную кнопку</a></p>
     </aside>
   </div>
 
@@ -438,7 +490,7 @@
     <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
   </div>
 
-  <script>
+<script>
     var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
     document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
 
@@ -483,6 +535,7 @@
         }
       });
     });
+
 
     // "Открыть крупнее": скрины в примерах на телефоне ужимаются до 18-29%,
     // кнопка открывает картинку во весь экран

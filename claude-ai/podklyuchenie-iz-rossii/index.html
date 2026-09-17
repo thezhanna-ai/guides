@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +28,19 @@
       --line: #D5C9B7;
       --white: #FFFFFF;
       --shadow: rgba(16, 47, 48, .07);
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
     }
     * { box-sizing: border-box }
     html { scroll-behavior: smooth }
@@ -84,6 +97,8 @@
     }
     .camp-link:hover { transform: translateY(1px); background: var(--emerald); color: var(--white); box-shadow: 0 2px 0 rgba(16, 47, 48, .24) }
     .camp-link:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(16, 47, 48, .24) }
+    .theme-toggle { min-height: 42px; width: 42px; border: 0; border-radius: 11px; background: var(--sage-note); color: var(--emerald); box-shadow: 0 3px 0 var(--sage-line); font: 750 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer; transition: transform .12s ease, box-shadow .12s ease }
+    .theme-toggle:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--sage-line) }
 
     .page-shell {
       max-width: 1244px;
@@ -313,6 +328,7 @@
       <div class="brand">Claude.ai: кнопка за кнопкой</div>
       <div class="header-actions">
         <div class="handout-title">Как подключить Claude из России</div>
+        <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
         <a class="camp-link" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
       </div>
     </div>
@@ -631,6 +647,17 @@
    поэтому менять адрес нужно в одной строке, а не в разметке */
 var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
 document.querySelectorAll("a[data-partner]").forEach(function (a) { a.href = PARTNER_LINK; });
+
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = localStorage.getItem("guide-theme") || "light";
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("guide-theme", next);
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
 </script>
 </body>
 </html>
