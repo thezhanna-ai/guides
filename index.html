@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Гайды по нейросетям</title>
-  <meta name="description" content="Практические инструкции по Claude.ai, Claude Code, Codex и GPT для начинающих и продолжающих">
+  <meta name="description" content="Практические инструкции по Claude.ai, GPT и Codex - от первой кнопки до прикладных проектов">
   <style>
     :root {
       --ink: #102F30;
@@ -15,6 +15,14 @@
       --sage-line: #BBC7CA;
       --accent: #E86F4A;
       --muted: #65716D;
+      --green: #3E8E5A;
+      --green-bg: #E4F1E8;
+      --blue: #2C6FA6;
+      --blue-bg: #E4EDF5;
+      --red: #B4442E;
+      --red-bg: #F5E6E2;
+      --black: #2A2A2A;
+      --black-bg: #E7E5E3;
     }
     * { box-sizing: border-box }
     body {
@@ -24,24 +32,80 @@
       font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     header, main { width: min(1120px, calc(100% - 40px)); margin: 0 auto }
-    header { padding: 66px 0 38px }
+    header { padding: 66px 0 30px }
     .eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase }
     h1 { max-width: 760px; margin: 0; color: var(--ink); font-size: clamp(36px, 7vw, 68px); line-height: 1.04 }
     .lead { max-width: 680px; margin: 22px 0 0; font: 22px/1.5 Georgia, serif }
-    .categories { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding: 18px 0 70px }
-    .category { padding: 26px; border: 1px solid var(--sage-line); border-radius: 16px; background: var(--card) }
-    .category:first-child { grid-column: 1 / -1; background: var(--sage) }
-    h2 { margin: 0; color: var(--ink); font-size: 24px; line-height: 1.25 }
-    .category p { margin: 9px 0 0; color: var(--muted) }
-    .guides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px }
+
+    /* Поиск и фильтр по тегам */
+    .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 30px 0 6px; padding: 18px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--card) }
+    .search-input {
+      flex: 1 1 240px;
+      min-width: 200px;
+      padding: 11px 14px;
+      border: 1px solid var(--sage-line);
+      border-radius: 10px;
+      background: var(--paper);
+      color: var(--text);
+      font: 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .search-input:focus { outline: 2px solid var(--accent); outline-offset: 1px }
+    .tag-filters { display: flex; flex-wrap: wrap; gap: 8px }
+    .tag-btn {
+      padding: 8px 14px;
+      border: 1px solid var(--sage-line);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .1s ease, background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .tag-btn:hover { transform: translateY(-1px) }
+    .tag-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink) }
+    .no-results { display: none; margin: 30px 0; padding: 22px; border: 1px dashed var(--sage-line); border-radius: 12px; color: var(--muted); text-align: center }
+    .no-results.show { display: block }
+
+    /* Блоки верхнего уровня */
+    .tool-block { margin: 40px 0 0 }
+    .tool-block:first-of-type { margin-top: 26px }
+    .tool-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap }
+    .tool-head h2 { margin: 0; color: var(--ink); font-size: 30px; line-height: 1.15 }
+    .tool-head p { margin: 0; color: var(--muted); font-size: 15px }
+
+    /* Трассы (уровни) */
+    .track { margin-top: 20px; padding: 22px; border: 1px solid var(--sage-line); border-radius: 16px; background: var(--card) }
+    .track-head { display: flex; align-items: center; gap: 10px; margin-bottom: 4px }
+    .track-dot { width: 13px; height: 13px; border-radius: 50%; flex: none }
+    .track-dot.green { background: var(--green) }
+    .track-dot.blue { background: var(--blue) }
+    .track-dot.red { background: var(--red) }
+    .track-dot.black { background: var(--black) }
+    .track-name { margin: 0; font-size: 19px; font-weight: 800; color: var(--ink) }
+    .track-tag {
+      margin-left: auto;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .track-tag.green { background: var(--green-bg); color: var(--green) }
+    .track-tag.blue { background: var(--blue-bg); color: var(--blue) }
+    .track-tag.red { background: var(--red-bg); color: var(--red) }
+    .track-tag.black { background: var(--black-bg); color: var(--black) }
+    .track-desc { margin: 4px 0 0; color: var(--muted); font-size: 14.5px }
+    .guides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px }
     .guide-link {
       display: flex;
-      min-height: 96px;
+      min-height: 92px;
       align-items: flex-end;
-      padding: 18px;
+      padding: 16px 18px;
       border: 1px solid var(--sage-line);
       border-radius: 12px;
-      background: var(--card);
+      background: var(--paper);
       color: var(--ink);
       font-weight: 800;
       line-height: 1.3;
@@ -51,12 +115,22 @@
     }
     .guide-link:hover { transform: translateY(2px); box-shadow: 0 2px 0 #AAB9B3 }
     .guide-link:active { transform: translateY(4px); box-shadow: 0 0 0 #AAB9B3 }
-    .soon { display: inline-block; margin-top: 18px; padding: 6px 10px; border-radius: 7px; background: var(--paper); color: var(--muted); font-size: 13px; font-weight: 700 }
+    .soon { display: inline-block; margin-top: 16px; padding: 6px 10px; border-radius: 7px; background: var(--sage); color: var(--muted); font-size: 13px; font-weight: 700 }
+
+    /* Прикладные проекты - отдельный блок без цвета трассы */
+    .projects-block { margin-top: 46px; padding: 26px; border: 1px solid var(--sage-line); border-radius: 16px; background: var(--sage) }
+    .projects-block h2 { margin: 0; color: var(--ink); font-size: 28px }
+    .projects-block > p { margin: 9px 0 0; color: var(--muted) }
+    .projects-block .guides { margin-top: 20px }
+    .projects-block .guide-link { background: var(--card) }
+
+    footer { padding: 60px 0 70px; color: var(--muted); font-size: 13px }
+
     @media (max-width: 720px) {
       header, main { width: min(100% - 28px, 1120px) }
       header { padding-top: 42px }
-      .categories, .guides { grid-template-columns: 1fr }
-      .category:first-child { grid-column: auto }
+      .guides { grid-template-columns: 1fr }
+      .toolbar { flex-direction: column; align-items: stretch }
     }
   </style>
 </head>
@@ -64,49 +138,139 @@
   <header>
     <p class="eyebrow">Практические инструкции</p>
     <h1>Гайды по нейросетям</h1>
-    <p class="lead">Выбери инструмент и открой нужную инструкцию. Каждый гайд ведёт от первого шага до понятного результата</p>
+    <p class="lead">Выбери инструмент, найди свою трассу по уровню и открой нужную инструкцию. Каждый гайд ведёт от первого шага до понятного результата</p>
   </header>
 
   <main>
-    <section class="categories" aria-label="Категории гайдов">
-      <article class="category">
-        <h2>Claude.ai</h2>
-        <p>Знакомство с чатом Claude и его настройками</p>
-        <div class="guides">
-          <a class="guide-link" href="claude-ai/podklyuchenie-iz-rossii/">Как подключить Claude из России</a>
-          <a class="guide-link" href="claude-ai/kak-rasskazat-o-sebe/">Как рассказать Claude о себе</a>
-          <a class="guide-link" href="claude-ai/vybor-modeli-i-effort/">Как выбрать модель Claude и уровень effort</a>
-          <a class="guide-link" href="claude-ai/pervyy-proekt-v-claude/">Как собрать первый проект в Claude</a>
-          <a class="guide-link" href="claude-ai/podklyuchit-gmail-drive-calendar/">Как подключить Gmail, Google Drive и Calendar к Claude</a>
-          <a class="guide-link" href="claude-ai/web-search-v-claude/">Как включить веб-поиск в Claude</a>
-          <a class="guide-link" href="claude-ai/golosovoy-vvod-v-claude/">Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</a>
+    <div class="toolbar">
+      <input class="search-input" type="search" id="guide-search" placeholder="Найти гайд по названию…" aria-label="Поиск по гайдам">
+      <div class="tag-filters" id="tag-filters" role="group" aria-label="Фильтр по уровню">
+        <button class="tag-btn active" data-tag="all" type="button">Все</button>
+        <button class="tag-btn" data-tag="green" type="button">🟢 Кнопка за кнопкой</button>
+        <button class="tag-btn" data-tag="blue" type="button">🔵 Вайбкодинг</button>
+        <button class="tag-btn" data-tag="project" type="button">Прикладные проекты</button>
+      </div>
+    </div>
+    <p class="no-results" id="no-results">Ничего не нашлось. Попробуй другое слово или сними фильтр</p>
+
+    <section class="tool-block" aria-label="Claude">
+      <div class="tool-head">
+        <h2>Claude</h2>
+        <p>Чат Claude.ai и работа в коде через Claude Code</p>
+      </div>
+
+      <div class="track" data-track="green">
+        <div class="track-head">
+          <span class="track-dot green" aria-hidden="true"></span>
+          <h3 class="track-name">Кнопка за кнопкой</h3>
+          <span class="track-tag green">Нулевый уровень</span>
         </div>
-      </article>
+        <p class="track-desc">Чат Claude.ai по одной настройке за раз. Ничего не нужно знать заранее</p>
+        <div class="guides">
+          <a class="guide-link" data-tags="green" href="claude-ai/podklyuchenie-iz-rossii/">Как подключить Claude из России</a>
+          <a class="guide-link" data-tags="green" href="claude-ai/kak-rasskazat-o-sebe/">Как рассказать Claude о себе</a>
+          <a class="guide-link" data-tags="green" href="claude-ai/vybor-modeli-i-effort/">Как выбрать модель Claude и уровень effort</a>
+          <a class="guide-link" data-tags="green" href="claude-ai/podklyuchit-gmail-drive-calendar/">Как подключить Gmail, Google Drive и Calendar к Claude</a>
+          <a class="guide-link" data-tags="green" href="claude-ai/web-search-v-claude/">Как включить веб-поиск в Claude</a>
+          <a class="guide-link" data-tags="green" href="claude-ai/golosovoy-vvod-v-claude/">Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</a>
+          <a class="guide-link" data-tags="green" href="claude-ai/skrinshot-vmesto-obyasneniy/">Скриншот вместо объяснений: покажи Клоду экран, где застрял</a>
+          <a class="guide-link" data-tags="green" href="claude-ai/gotovye-fayly-excel-word-pdf/">Готовый Excel, Word, PDF или презентация - без копипаста</a>
+        </div>
+      </div>
 
-      <article class="category">
-        <h2>Вайбкодинг с Claude Code</h2>
-        <p>Установка, настройка и работа над своими задачами</p>
-        <span class="soon">Гайды готовятся</span>
-      </article>
-
-      <article class="category">
-        <h2>Вайбкодинг с Codex</h2>
-        <p>Работа с проектами и кодом командами на русском языке</p>
-        <span class="soon">Гайды готовятся</span>
-      </article>
-
-      <article class="category">
-        <h2>GPT для начинающих</h2>
-        <p>Первые настройки и понятные сценарии использования</p>
-        <span class="soon">Гайды готовятся</span>
-      </article>
-
-      <article class="category">
-        <h2>GPT для продолжающих</h2>
-        <p>Более сложные сценарии и системная работа</p>
-        <span class="soon">Гайды готовятся</span>
-      </article>
+      <div class="track" data-track="blue">
+        <div class="track-head">
+          <span class="track-dot blue" aria-hidden="true"></span>
+          <h3 class="track-name">Claude Code: вайбкодинг</h3>
+          <span class="track-tag blue">Средний уровень</span>
+        </div>
+        <p class="track-desc">Переход от чата к коду: свои проекты, CLI и настройка под задачу</p>
+        <div class="guides">
+          <a class="guide-link" data-tags="blue" href="claude-ai/pervyy-proekt-v-claude/">Как собрать первый проект в Claude</a>
+          <a class="guide-link" data-tags="blue" href="claude-ai/svoy-server-dlya-claude/">Свой сервер для Claude</a>
+        </div>
+      </div>
     </section>
+
+    <section class="tool-block" aria-label="GPT и Codex">
+      <div class="tool-head">
+        <h2>GPT и Codex</h2>
+        <p>Чат ChatGPT и работа в коде через Codex CLI</p>
+      </div>
+
+      <div class="track" data-track="green">
+        <div class="track-head">
+          <span class="track-dot green" aria-hidden="true"></span>
+          <h3 class="track-name">Кнопка за кнопкой</h3>
+          <span class="track-tag green">Нулевый уровень</span>
+        </div>
+        <p class="track-desc">Та же серия, что и в Claude, только кнопки и экраны - из ChatGPT</p>
+        <span class="soon">Гайды готовятся</span>
+      </div>
+
+      <div class="track" data-track="blue">
+        <div class="track-head">
+          <span class="track-dot blue" aria-hidden="true"></span>
+          <h3 class="track-name">Codex: вайбкодинг</h3>
+          <span class="track-tag blue">Средний уровень</span>
+        </div>
+        <p class="track-desc">Работа в Codex CLI, доступ и Remote Control</p>
+        <span class="soon">Гайды готовятся</span>
+      </div>
+    </section>
+
+    <section class="projects-block" aria-label="Прикладные проекты">
+      <h2>Прикладные проекты</h2>
+      <p>Готовые кейсы вне привязки к одному инструменту: сайт на своём движке, конкретные задачи под ключ</p>
+      <div class="guides">
+        <span class="soon">Гайды готовятся</span>
+      </div>
+    </section>
+
+    <footer>Гайды обновляются регулярно - если нужной инструкции ещё нет, она уже готовится</footer>
   </main>
+
+  <script>
+    var searchInput = document.getElementById('guide-search');
+    var tagButtons = document.querySelectorAll('.tag-btn');
+    var guideLinks = document.querySelectorAll('.guide-link');
+    var noResults = document.getElementById('no-results');
+    var activeTag = 'all';
+
+    function applyFilters() {
+      var query = searchInput.value.trim().toLowerCase();
+      var visibleCount = 0;
+
+      guideLinks.forEach(function (link) {
+        var text = link.textContent.toLowerCase();
+        var tags = (link.getAttribute('data-tags') || '').split(' ');
+        var matchesTag = activeTag === 'all' || tags.indexOf(activeTag) !== -1;
+        var matchesQuery = query === '' || text.indexOf(query) !== -1;
+        var visible = matchesTag && matchesQuery;
+        link.style.display = visible ? '' : 'none';
+        if (visible) visibleCount++;
+      });
+
+      document.querySelectorAll('.track').forEach(function (track) {
+        var links = track.querySelectorAll('.guide-link');
+        var anyVisible = false;
+        links.forEach(function (l) { if (l.style.display !== 'none') anyVisible = true; });
+        track.style.display = (links.length === 0 || anyVisible) ? '' : 'none';
+      });
+
+      noResults.classList.toggle('show', visibleCount === 0 && query !== '');
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+
+    tagButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        tagButtons.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeTag = btn.getAttribute('data-tag');
+        applyFilters();
+      });
+    });
+  </script>
 </body>
 </html>
