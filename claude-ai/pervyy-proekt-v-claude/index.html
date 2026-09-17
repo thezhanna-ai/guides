@@ -6,9 +6,9 @@
   <meta name="description" content="Как создать первый проект в Claude: где кнопка New Project, как добавить документы в базу знаний и написать инструкции проекта">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#F8F7F2">
-  <meta property="og:title" content="Как собрать первый проект в Claude">
+  <meta property="og:title" content="Первый проект в Claude: своя папка с памятью">
   <meta property="og:description" content="Пошагово: создать проект, добавить файлы в базу знаний, задать инструкции и работать в чатах проекта">
-  <title>Как собрать первый проект в Claude</title>
+  <title>Первый проект в Claude: своя папка с памятью</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
@@ -223,6 +223,14 @@
       .model-table tbody td::before { content: attr(data-label); display: block; margin-bottom: 3px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase }
       .plan-tag { margin-top: 8px }
     }
+  
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read a:hover { border-color: var(--accent) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
   </style>
 </head>
 <body>
@@ -241,7 +249,7 @@
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание">
       <p class="toc-label">Содержание</p>
-      <a class="active" href="#pervyy-proekt">Как собрать первый проект в Claude</a>
+      <a class="active" href="#pervyy-proekt">Первый проект в Claude: своя папка с памятью</a>
       <a href="#sborka">Сборка проекта</a>
       <a class="toc-sub" href="#gde-proekty">1. Где лежат проекты</a>
       <a class="toc-sub" href="#sozdat">2. Создать проект и дать ему имя</a>
@@ -259,7 +267,7 @@
       <details class="mobile-toc">
         <summary>Содержание статьи</summary>
         <nav aria-label="Содержание на телефоне">
-          <a href="#pervyy-proekt">Как собрать первый проект в Claude</a>
+          <a href="#pervyy-proekt">Первый проект в Claude: своя папка с памятью</a>
           <a href="#sborka">Сборка проекта</a>
           <a href="#gde-proekty">1. Где лежат проекты</a>
           <a href="#sozdat">2. Создать проект и дать ему имя</a>
@@ -277,7 +285,7 @@
       <article>
         <header id="pervyy-proekt">
           <p class="eyebrow">Claude.ai · проекты</p>
-          <h1>Как собрать первый проект в Claude</h1>
+          <h1>Первый проект в Claude: своя папка с памятью</h1>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 11 СЕНТЯБРЯ 2026</p>
           <p class="lead">Чаты по одной задаче расползаются по всей истории, и нужные файлы приходится каждый раз прикреплять заново. Проект собирает их в одно место: документы лежат в базе знаний, а каждый новый чат внутри проекта уже знает, о чём речь</p>
           <aside class="route-note" aria-label="Короткий маршрут">
@@ -432,6 +440,15 @@
           <ul class="sources">
             <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">Anthropic: что такое проекты</a></li>
             <li><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">Anthropic: как создать проект и управлять им</a></li>
+          </ul>
+        </section>
+
+        <section class="next-read" aria-label="Дальше по теме">
+          <h2>Дальше по теме</h2>
+          <p class="next-sub">Что логично прочитать следующим</p>
+          <ul>
+            <li><a href="../svoy-server-dlya-claude/">Свой сервер для Claude<span class="why">Проект работает - перенеси его на свой сервер и открывай с телефона</span></a></li>
+            <li><a href="../gotovye-fayly-excel-word-pdf/">Готовый Excel, Word, PDF или презентация - без копипаста<span class="why">Чтобы проект отдавал готовые Excel, Word и PDF</span></a></li>
           </ul>
         </section>
 

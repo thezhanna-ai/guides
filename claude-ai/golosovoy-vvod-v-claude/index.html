@@ -163,6 +163,14 @@
       .annotation::before { top: -30px; width: 22px; height: 22px; font-size: 11px }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+  
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read a:hover { border-color: var(--accent) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
   </style>
 </head>
 <body>
@@ -426,6 +434,15 @@
             <li><a href="https://support.claude.com/en/articles/11101966-use-voice-mode">Claude Help Center: Use voice mode</a> - кнопка волны, завершение по Stop, тарифы, расход лимита, выбор голоса в Voice settings, язык голоса и сохранение расшифровки</li>
             <li><a href="https://support.claude.com/en/articles/10065434-use-dictation-on-claude-mobile">Claude Help Center: Use dictation</a> - как работает диктовка, список языков и удаление аудиозаписи</li>
             </ul>
+        </section>
+
+        <section class="next-read" aria-label="Дальше по теме">
+          <h2>Дальше по теме</h2>
+          <p class="next-sub">Что логично прочитать следующим</p>
+          <ul>
+            <li><a href="../kak-rasskazat-o-sebe/">Claude помнит о тебе: что рассказать один раз<span class="why">Надиктовал задачу - а чтобы не повторять контекст, расскажи Claude о себе</span></a></li>
+            <li><a href="../skrinshot-vmesto-obyasneniy/">Скриншот вместо объяснений: покажи Клоду экран, где застрял<span class="why">Когда проще показать, чем продиктовать</span></a></li>
+          </ul>
         </section>
 
         <section class="cta" aria-label="Следующий шаг">

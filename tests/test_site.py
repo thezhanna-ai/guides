@@ -353,7 +353,7 @@ class GuidesSiteTest(unittest.TestCase):
         html = ACCESS.read_text(encoding="utf-8")
         for tag in (
             '<meta name="robots" content="noindex, nofollow">',
-            '<meta property="og:title" content="Как подключить Claude из России">',
+            '<meta property="og:title" content="Claude из России: подключение без блокировок">',
             '<meta property="og:description" content="Пошаговый путь к первому чату Claude: подключение, вход и подтверждение номера для нового аккаунта">',
         ):
             self.assertIn(tag, html)

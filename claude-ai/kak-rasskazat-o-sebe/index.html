@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Как рассказать Claude о себе: заполнить инструкции, включить память, перенести данные из ChatGPT и находить старые разговоры">
+  <meta name="description" content="Что рассказать Claude один раз, чтобы он помнил: заполнить инструкции, включить память, перенести данные из ChatGPT и находить старые разговоры">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#F8F7F2">
-  <meta property="og:title" content="Как рассказать Claude о себе">
+  <meta property="og:title" content="Claude помнит о тебе: что рассказать один раз">
   <meta property="og:description" content="Пошаговая настройка инструкций, памяти и поиска по прошлым чатам Claude для новичка">
-  <title>Как рассказать Claude о себе</title>
+  <title>Claude помнит о тебе: что рассказать один раз</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
@@ -230,6 +230,14 @@
       html { scroll-behavior: auto }
       .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active { transition: none; transform: none; box-shadow: none; filter: none }
     }
+  
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read a:hover { border-color: var(--accent) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
   </style>
 </head>
 <body>
@@ -238,7 +246,7 @@
     <div class="masthead-inner">
       <div class="brand">Claude.ai: кнопка за кнопкой</div>
       <div class="header-actions">
-        <div class="handout-title">Как рассказать Claude о себе</div>
+        <div class="handout-title">Claude помнит о тебе: что рассказать один раз</div>
         <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
         <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
       </div>
@@ -248,7 +256,7 @@
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание">
       <p class="toc-label">Содержание</p>
-      <a class="active" href="#o-sebe">Как рассказать Claude о себе</a>
+      <a class="active" href="#o-sebe">Claude помнит о тебе: что рассказать один раз</a>
       <a href="#general">General</a>
       <a class="toc-sub" href="#settings">1. Где открыть настройки</a>
       <a class="toc-sub" href="#instructions">2. Заполни информацию о себе</a>
@@ -271,7 +279,7 @@
       <details class="mobile-toc">
         <summary>Содержание статьи</summary>
         <nav aria-label="Содержание на телефоне">
-          <a href="#o-sebe">Как рассказать Claude о себе</a>
+          <a href="#o-sebe">Claude помнит о тебе: что рассказать один раз</a>
           <a href="#general">General</a>
           <a href="#settings">1. Где открыть настройки</a>
           <a href="#instructions">2. Заполни информацию о себе</a>
@@ -294,7 +302,7 @@
       <article>
         <header id="o-sebe">
           <p class="eyebrow">Claude.ai · настройка под себя</p>
-          <h1>Как рассказать Claude о себе</h1>
+          <h1>Claude помнит о тебе: что рассказать один раз</h1>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 11 СЕНТЯБРЯ 2026</p>
           <p class="lead">Эта настройка нужна, чтобы Claude помнил, кто ты, чем занимаешься и какие ответы тебе подходят. Тогда в новых чатах он сможет приводить примеры из твоей области, а тебе не придётся каждый раз заново объяснять свой контекст</p>
           <aside class="route-note" aria-label="Короткий маршрут">
@@ -594,6 +602,15 @@
             <li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Anthropic: персональные инструкции Claude</a></li>
             <li><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Anthropic: память Claude и поиск по прошлым чатам</a></li>
             <li><a href="https://support.claude.com/en/articles/12123587-import-and-export-your-memory-from-claude">Anthropic: импорт и экспорт памяти</a></li>
+          </ul>
+        </section>
+
+        <section class="next-read" aria-label="Дальше по теме">
+          <h2>Дальше по теме</h2>
+          <p class="next-sub">Что логично прочитать следующим</p>
+          <ul>
+            <li><a href="../vybor-modeli-i-effort/">Модель и уровень effort: что включать под задачу<span class="why">Claude знает о тебе - теперь выбери, какой моделью и на каком усилии он работает</span></a></li>
+            <li><a href="../skrinshot-vmesto-obyasneniy/">Скриншот вместо объяснений: покажи Клоду экран, где застрял<span class="why">Когда объяснять словами долго: покажи экран скриншотом</span></a></li>
           </ul>
         </section>
 

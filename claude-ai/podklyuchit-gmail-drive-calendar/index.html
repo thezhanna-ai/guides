@@ -6,9 +6,9 @@
   <meta name="description" content="Как подключить Gmail, Google Drive и Google Calendar к Claude и начать работать с письмами, файлами и расписанием">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#F8F7F2">
-  <meta property="og:title" content="Как подключить Gmail, Google Drive и Calendar к Claude">
+  <meta property="og:title" content="Gmail, Google Drive и Calendar внутри Claude">
   <meta property="og:description" content="Пошаговое подключение трёх Google-сервисов и готовые запросы для первого использования">
-  <title>Как подключить Gmail, Google Drive и Calendar к Claude</title>
+  <title>Gmail, Google Drive и Calendar внутри Claude</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
@@ -153,6 +153,14 @@
       .service-snippets { grid-template-columns: 1fr }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+  
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read a:hover { border-color: var(--accent) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
   </style>
 </head>
 <body>
@@ -173,7 +181,7 @@
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание">
       <p class="toc-label">Содержание</p>
-      <a class="active" href="#connectors">Как подключить Gmail, Google Drive и Calendar к Claude</a>
+      <a class="active" href="#connectors">Gmail, Google Drive и Calendar внутри Claude</a>
       <a href="#zachem">Зачем подключать Google-сервисы</a>
       <a href="#podklyuchit">Как подключить сервисы</a>
       <a class="toc-sub" href="#settings">1. Открой Settings</a>
@@ -195,7 +203,7 @@
       <details class="mobile-toc">
         <summary>Содержание статьи</summary>
         <nav aria-label="Содержание на телефоне">
-          <a href="#connectors">Как подключить Gmail, Google Drive и Calendar к Claude</a>
+          <a href="#connectors">Gmail, Google Drive и Calendar внутри Claude</a>
           <a href="#zachem">Зачем подключать Google-сервисы</a>
           <a href="#podklyuchit">Как подключить сервисы</a>
           <a href="#settings">1. Открой Settings</a>
@@ -217,7 +225,7 @@
       <article>
         <header id="connectors">
           <p class="eyebrow">Claude.ai · Connectors</p>
-          <h1>Как подключить Gmail, Google Drive и Calendar к Claude</h1>
+          <h1>Gmail, Google Drive и Calendar внутри Claude</h1>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 14 СЕНТЯБРЯ 2026</p>
           <p class="lead">Письмо в почте, файл с правками на диске, встреча в календаре - всё про одну задачу, но лежит в трёх разных местах. Ты копируешь это в Claude по частям и на каждом переходе что-то не доносишь: то важную строку из переписки, то последнюю версию файла. Claude отвечает на обрывок, а не на задачу целиком. Подключение делается один раз: дальше он сам находит нужное письмо, открывает твой файл и смотрит расписание прямо в разговоре</p>
           <aside class="route-note" aria-label="Короткий маршрут">
@@ -377,6 +385,15 @@
             <li><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors">Claude Help Center: Use Google Workspace connectors</a> - возможности Gmail, Google Drive и Google Calendar, подтверждения действий, ограничения и переподключение</li>
             <li><a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities">Claude Help Center: Use connectors to extend Claude's capabilities</a> - принцип прав доступа и доступность веб-коннекторов</li>
             <li><a href="https://support.google.com/accounts/answer/13533235">Google Account Help: Manage connections between your Google Account and third parties</a> - как проверить разрешения Claude и отозвать доступ в Google-аккаунте</li>
+          </ul>
+        </section>
+
+        <section class="next-read" aria-label="Дальше по теме">
+          <h2>Дальше по теме</h2>
+          <p class="next-sub">Что логично прочитать следующим</p>
+          <ul>
+            <li><a href="../web-search-v-claude/">Веб-поиск в Claude: ответы со свежими ссылками<span class="why">Свои сервисы подключены - добавь свежие данные из интернета</span></a></li>
+            <li><a href="../kak-rasskazat-o-sebe/">Claude помнит о тебе: что рассказать один раз<span class="why">Чтобы Claude понимал, зачем ему твоя почта и календарь</span></a></li>
           </ul>
         </section>
 

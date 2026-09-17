@@ -193,6 +193,14 @@
       .annotation.askshot::before, .annotation.upgrade::before { top: 50%; left: -30px }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+  
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read a:hover { border-color: var(--accent) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
   </style>
 </head>
 <body>
@@ -412,6 +420,15 @@
             <li><a href="https://code.claude.com/docs/en/desktop">Claude Desktop docs</a> - прикрепление файлов и скриншотов в чат, съёмка экрана и указание Клоду на конкретную кнопку</li>
           </ul>
           <p class="meta">Пункты меню и ответы Клода на картинках сняты с живого интерфейса 16 сентября 2026</p>
+        </section>
+
+        <section class="next-read" aria-label="Дальше по теме">
+          <h2>Дальше по теме</h2>
+          <p class="next-sub">Что логично прочитать следующим</p>
+          <ul>
+            <li><a href="../gotovye-fayly-excel-word-pdf/">Готовый Excel, Word, PDF или презентация - без копипаста<span class="why">Разобрались с экраном - пусть Claude соберёт результат в файл</span></a></li>
+            <li><a href="../golosovoy-vvod-v-claude/">Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона<span class="why">Быстрее скриншота бывает только голос</span></a></li>
+          </ul>
         </section>
 
         <section class="cta" aria-label="Следующий шаг">

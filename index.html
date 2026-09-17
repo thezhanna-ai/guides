@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Гайды по нейросетям</title>
-  <meta name="description" content="Практические инструкции по Claude.ai, GPT и Codex - от первой кнопки до прикладных проектов">
+  <title>Нейросети работают на тебя</title>
+  <meta name="description" content="Инструкции, разборы и гайды по нейросетям для не-программистов: от первой кнопки до собственных проектов">
   <style>
     :root {
       --ink: #102F30;
@@ -36,6 +36,10 @@
     .eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase }
     h1 { max-width: 760px; margin: 0; color: var(--ink); font-size: clamp(36px, 7vw, 68px); line-height: 1.04 }
     .lead { max-width: 680px; margin: 22px 0 0; font: 22px/1.5 Georgia, serif }
+    .intro { max-width: 680px; margin: 16px 0 0; color: var(--muted); font-size: 17px; line-height: 1.6 }
+    .levels { max-width: 680px; margin: 10px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 17px; line-height: 1.6 }
+    .levels li { display: flex; align-items: baseline; gap: 10px; margin-top: 8px }
+    .levels b { color: var(--ink) }
 
     /* Поиск и фильтр по тегам */
     .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 30px 0 6px; padding: 18px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--card) }
@@ -113,6 +117,11 @@
       box-shadow: 0 4px 0 #AAB9B3;
       transition: transform .12s ease, box-shadow .12s ease;
     }
+    .guide-link { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 8px }
+    .kind { align-self: flex-start; padding: 3px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase }
+    .kind-instr { background: var(--sage); color: var(--muted) }
+    .kind-razbor { background: #FDF0CE; color: #8A6410 }
+    .kind-obzor { background: #FBE3D2; color: #9C4A1E }
     .guide-link:hover { transform: translateY(2px); box-shadow: 0 2px 0 #AAB9B3 }
     .guide-link:active { transform: translateY(4px); box-shadow: 0 0 0 #AAB9B3 }
     .soon { display: inline-block; margin-top: 16px; padding: 6px 10px; border-radius: 7px; background: var(--sage); color: var(--muted); font-size: 13px; font-weight: 700 }
@@ -131,29 +140,70 @@
       header { padding-top: 42px }
       .guides { grid-template-columns: 1fr }
       .toolbar { flex-direction: column; align-items: stretch }
+      .search-input { flex: 0 0 auto }
     }
   </style>
 </head>
 <body>
   <header>
-    <p class="eyebrow">Практические инструкции</p>
-    <h1>Гайды по нейросетям</h1>
-    <p class="lead">Выбери инструмент, найди свою трассу по уровню и открой нужную инструкцию. Каждый гайд ведёт от первого шага до понятного результата</p>
+    <p class="eyebrow">Надо только научиться ставить задачу</p>
+    <h1>Нейросети работают на тебя</h1>
+    <p class="lead">Ты попал по адресу. Здесь инструкции, разборы и гайды по нейросетям - от первой кнопки до собранных проектов</p>
+    <p class="intro">Начни с простого: отдай нейросети рутину, которая съедает твой день - посчитать, написать, разобрать, оформить. Дальше научишься собирать свои проекты, находить решения для своего дела и делать то, что раньше заказывал на стороне</p>
+    <p class="intro">Гайды размечены по уровню:</p>
+    <ul class="levels">
+      <li><span class="track-dot green" aria-hidden="true"></span><span><b>Начальный</b> - если открываешь нейросеть впервые</span></li>
+      <li><span class="track-dot blue" aria-hidden="true"></span><span><b>Средний</b> - если уже работаешь и хочешь собирать своё</span></li>
+    </ul>
   </header>
 
   <main>
     <div class="toolbar">
       <input class="search-input" type="search" id="guide-search" placeholder="Найти гайд по названию…" aria-label="Поиск по гайдам">
-      <div class="tag-filters" id="tag-filters" role="group" aria-label="Фильтр по уровню">
+      <div class="tag-filters" id="tag-filters" role="group" aria-label="Фильтр по разделам">
         <button class="tag-btn active" data-tag="all" type="button">Все</button>
-        <button class="tag-btn" data-tag="green" type="button">🟢 Кнопка за кнопкой</button>
-        <button class="tag-btn" data-tag="blue" type="button">🔵 Вайбкодинг</button>
-        <button class="tag-btn" data-tag="project" type="button">Прикладные проекты</button>
+        <button class="tag-btn" data-tag="dostup" type="button">Доступ и оплата</button>
+        <button class="tag-btn" data-tag="claude" type="button">Claude</button>
+        <button class="tag-btn" data-tag="gpt" type="button">ChatGPT и Codex</button>
+        <button class="tag-btn" data-tag="kartinki" type="button">Картинки и видео</button>
+        <button class="tag-btn" data-tag="proekty" type="button">Свои проекты</button>
+        <button class="tag-btn" data-tag="proishodit" type="button">Что происходит</button>
       </div>
     </div>
     <p class="no-results" id="no-results">Ничего не нашлось. Попробуй другое слово или сними фильтр</p>
 
-    <section class="tool-block" aria-label="Claude">
+    <section class="tool-block" data-section="dostup" aria-label="Доступ и оплата">
+      <div class="tool-head">
+        <h2>Доступ и оплата</h2>
+        <p>Нужно любой нейросети: как открыть, чем платить, что делать, когда перестало работать</p>
+      </div>
+
+      <div class="track" data-track="green">
+        <div class="track-head">
+          <span class="track-dot green" aria-hidden="true"></span>
+          <h3 class="track-name">Обычный вход</h3>
+          <span class="track-tag green">Начальный уровень</span>
+        </div>
+        <p class="track-desc">Хватает большинству: VPN, регистрация, оплата. Разобрано на примере Claude</p>
+        <div class="guides">
+          <a class="guide-link" data-tags="dostup green" href="claude-ai/podklyuchenie-iz-rossii/"><span class="kind kind-instr">Инструкция</span>Claude из России: подключение без блокировок</a>
+        </div>
+      </div>
+
+      <div class="track" data-track="blue">
+        <div class="track-head">
+          <span class="track-dot blue" aria-hidden="true"></span>
+          <h3 class="track-name">Свой сервер</h3>
+          <span class="track-tag blue">Средний уровень</span>
+        </div>
+        <p class="track-desc">Когда обычный VPN стал лотереей: свой VPS, постоянный адрес, работа с телефона</p>
+        <div class="guides">
+          <a class="guide-link" data-tags="dostup blue" href="claude-ai/svoy-server-dlya-claude/"><span class="kind kind-instr">Инструкция</span>Свой сервер для Claude</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-block" data-section="claude" aria-label="Claude">
       <div class="tool-head">
         <h2>Claude</h2>
         <p>Чат Claude.ai и работа в коде через Claude Code</p>
@@ -163,18 +213,17 @@
         <div class="track-head">
           <span class="track-dot green" aria-hidden="true"></span>
           <h3 class="track-name">Кнопка за кнопкой</h3>
-          <span class="track-tag green">Нулевый уровень</span>
+          <span class="track-tag green">Начальный уровень</span>
         </div>
         <p class="track-desc">Чат Claude.ai по одной настройке за раз. Ничего не нужно знать заранее</p>
         <div class="guides">
-          <a class="guide-link" data-tags="green" href="claude-ai/podklyuchenie-iz-rossii/">Как подключить Claude из России</a>
-          <a class="guide-link" data-tags="green" href="claude-ai/kak-rasskazat-o-sebe/">Как рассказать Claude о себе</a>
-          <a class="guide-link" data-tags="green" href="claude-ai/vybor-modeli-i-effort/">Как выбрать модель Claude и уровень effort</a>
-          <a class="guide-link" data-tags="green" href="claude-ai/podklyuchit-gmail-drive-calendar/">Как подключить Gmail, Google Drive и Calendar к Claude</a>
-          <a class="guide-link" data-tags="green" href="claude-ai/web-search-v-claude/">Как включить веб-поиск в Claude</a>
-          <a class="guide-link" data-tags="green" href="claude-ai/golosovoy-vvod-v-claude/">Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</a>
-          <a class="guide-link" data-tags="green" href="claude-ai/skrinshot-vmesto-obyasneniy/">Скриншот вместо объяснений: покажи Клоду экран, где застрял</a>
-          <a class="guide-link" data-tags="green" href="claude-ai/gotovye-fayly-excel-word-pdf/">Готовый Excel, Word, PDF или презентация - без копипаста</a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/kak-rasskazat-o-sebe/"><span class="kind kind-instr">Инструкция</span>Claude помнит о тебе: что рассказать один раз</a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/vybor-modeli-i-effort/"><span class="kind kind-instr">Инструкция</span>Модель и уровень effort: что включать под задачу</a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/podklyuchit-gmail-drive-calendar/"><span class="kind kind-instr">Инструкция</span>Gmail, Google Drive и Calendar внутри Claude</a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/web-search-v-claude/"><span class="kind kind-instr">Инструкция</span>Веб-поиск в Claude: ответы со свежими ссылками</a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/golosovoy-vvod-v-claude/"><span class="kind kind-instr">Инструкция</span>Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/skrinshot-vmesto-obyasneniy/"><span class="kind kind-instr">Инструкция</span>Скриншот вместо объяснений: покажи Клоду экран, где застрял</a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/gotovye-fayly-excel-word-pdf/"><span class="kind kind-instr">Инструкция</span>Готовый Excel, Word, PDF или презентация - без копипаста</a>
         </div>
       </div>
 
@@ -186,15 +235,14 @@
         </div>
         <p class="track-desc">Переход от чата к коду: свои проекты, CLI и настройка под задачу</p>
         <div class="guides">
-          <a class="guide-link" data-tags="blue" href="claude-ai/pervyy-proekt-v-claude/">Как собрать первый проект в Claude</a>
-          <a class="guide-link" data-tags="blue" href="claude-ai/svoy-server-dlya-claude/">Свой сервер для Claude</a>
+          <a class="guide-link" data-tags="claude blue" href="claude-ai/pervyy-proekt-v-claude/"><span class="kind kind-instr">Инструкция</span>Первый проект в Claude: своя папка с памятью</a>
         </div>
       </div>
     </section>
 
-    <section class="tool-block" aria-label="GPT и Codex">
+    <section class="tool-block" data-section="gpt" aria-label="ChatGPT и Codex">
       <div class="tool-head">
-        <h2>GPT и Codex</h2>
+        <h2>ChatGPT и Codex</h2>
         <p>Чат ChatGPT и работа в коде через Codex CLI</p>
       </div>
 
@@ -202,7 +250,7 @@
         <div class="track-head">
           <span class="track-dot green" aria-hidden="true"></span>
           <h3 class="track-name">Кнопка за кнопкой</h3>
-          <span class="track-tag green">Нулевый уровень</span>
+          <span class="track-tag green">Начальный уровень</span>
         </div>
         <p class="track-desc">Та же серия, что и в Claude, только кнопки и экраны - из ChatGPT</p>
         <span class="soon">Гайды готовятся</span>
@@ -219,11 +267,33 @@
       </div>
     </section>
 
-    <section class="projects-block" aria-label="Прикладные проекты">
-      <h2>Прикладные проекты</h2>
-      <p>Готовые кейсы вне привязки к одному инструменту: сайт на своём движке, конкретные задачи под ключ</p>
-      <div class="guides">
+    <section class="tool-block" data-section="kartinki" aria-label="Картинки и видео">
+      <div class="tool-head">
+        <h2>Картинки и видео</h2>
+        <p>Чем рисовать, чем монтировать, что из этого стоит своих денег</p>
+      </div>
+      <div class="track">
         <span class="soon">Гайды готовятся</span>
+      </div>
+    </section>
+
+    <section class="tool-block" data-section="proekty" aria-label="Свои проекты">
+      <div class="tool-head">
+        <h2>Свои проекты</h2>
+        <p>Собранное под ключ: сайт, бот, рабочая система под конкретную задачу</p>
+      </div>
+      <div class="track">
+        <span class="soon">Гайды готовятся</span>
+      </div>
+    </section>
+
+    <section class="tool-block" data-section="proishodit" aria-label="Что происходит">
+      <div class="tool-head">
+        <h2>Что происходит</h2>
+        <p>Разборы событий, которые меняют работу с нейросетями. Кнопки нажимать не нужно, уровень не важен</p>
+      </div>
+      <div class="track">
+        <span class="soon">Разборы готовятся</span>
       </div>
     </section>
 
@@ -255,7 +325,19 @@
         var links = track.querySelectorAll('.guide-link');
         var anyVisible = false;
         links.forEach(function (l) { if (l.style.display !== 'none') anyVisible = true; });
-        track.style.display = (links.length === 0 || anyVisible) ? '' : 'none';
+        var emptyTrack = links.length === 0;
+        // трасса без своих гайдов («готовится») видна, пока не фильтруют и не ищут
+        var keepEmpty = emptyTrack && query === '';
+        track.style.display = (keepEmpty || anyVisible) ? '' : 'none';
+      });
+
+      document.querySelectorAll('.tool-block').forEach(function (block) {
+        var section = block.getAttribute('data-section');
+        var matchesSection = activeTag === 'all' || section === activeTag;
+        var tracks = block.querySelectorAll('.track');
+        var anyTrack = false;
+        tracks.forEach(function (t) { if (t.style.display !== 'none') anyTrack = true; });
+        block.style.display = (matchesSection && anyTrack) ? '' : 'none';
       });
 
       noResults.classList.toggle('show', visibleCount === 0 && query !== '');
