@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Артефакты в Claude: как вынести чек-лист или калькулятор из переписки в отдельное окно, править словами и отдать работу по ссылке">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta property="og:title" content="Артефакты: ответ Клода в отдельном окне, а не в переписке">
+  <meta property="og:description" content="Что такое артефакт, как попросить его словами, как работать прямо в окне и когда открывать доступ по ссылке">
+  <title>Артефакты: ответ Клода в отдельном окне, а не в переписке</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
+    a:hover { color: var(--accent-dark) }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: -50px; overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .route-note { margin: 31px 0 34px; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted) }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+    .info-card, .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    /* раскрывающиеся вопросы: канон, п.6 и тёплый бумажный #F0E8D8 под нейтральные
+       раскрывающиеся блоки. Не серо-голубая плашка: та под информационные врезки */
+    .faq-item { margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); overflow: hidden }
+    .faq-item summary { padding: 13px 44px 13px 18px; position: relative; color: var(--emerald); font: 750 17px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer; list-style: none }
+    .faq-item summary::-webkit-details-marker { display: none }
+    .faq-item summary::after { content: "+"; position: absolute; top: 50%; right: 17px; transform: translateY(-50%); color: var(--accent-dark); font: 700 22px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .faq-item[open] summary::after { content: "−" }
+    .faq-item p { margin: 0; padding: 0 18px 15px }
+    /* кнопка "Открыть крупнее" на скринах: приём с сайта Ивана. Скрины в
+       примерах шириной 1200-2000 px на телефоне ужимаются до 18-29%, текст
+       в них не прочитать. На мыши кнопка появляется при наведении, на
+       телефоне (нет hover) видна всегда */
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--emerald); color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    .shot .zoom:hover { background: var(--accent) }
+    /* без мыши кнопку не навести, поэтому на телефоне она видна всегда.
+       Условие продублировано по ширине: hover:none не срабатывает в эмуляции */
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    /* полноэкранный просмотр */
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    /* в окне картинка показывается в НАТУРАЛЬНОМ размере с прокруткой: на телефоне
+       ужать её в экран - значит не увеличить ничего. Прокручиваем пальцем */
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
+    .limit-card { margin-top: 24px; padding: 13px 18px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .limit-card p { margin: 0 }
+    .limit-card h3 { margin-bottom: 7px }
+    .tune-card { margin-top: 26px; padding: 15px 20px 3px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .tune-card h3 { margin-bottom: 9px }
+    .tune-card .result { margin-bottom: 17px }
+    .info-card p { margin: 0 }
+    /* после серо-голубой врезки идёт заголовок - без отбивки блоки слипаются */
+    .info-card + h3 { margin-top: 38px }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .88); pointer-events: none }
+    .annotation::before { content: attr(data-n); position: absolute; top: -38px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: #FFFFFF; box-shadow: 0 0 0 3px rgba(255, 255, 255, .95); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    /* пометки на скрине запроса: показывают, что данные в примере условные */
+    .annotation.uslovnym { left: 62.94%; top: 35.80%; width: 31.72%; height: 6.65% }
+    .annotation.naprimer { left: 4.85%; top: 43.50%; width: 15.21%; height: 6.34% }
+    /* на скрине запроса кружки-цифры не ставим: картинка на телефоне мелкая,
+       кружок неизбежно накрывает слова. Рамки говорят сами за себя, а что
+       именно выделено - сказано в подписи под картинкой */
+    .annotation.uslovnym::before, .annotation.naprimer::before { content: none }
+    /* тумблер создания файлов в разделе Capabilities */
+    .annotation.tumbler { left: 92.56%; top: 38.20%; width: 5.94%; height: 9.67% }
+    .annotation.tumbler::before { top: 50%; left: -38px; bottom: auto; transform: translateY(-50%) }
+    .shot.vertical { width: min(100%, 380px) }
+    /* мелкие врезки: скрин интерфейса не увеличиваем искусственно, кегль
+       внутри картинки должен читаться заодно с основным текстом статьи */
+    .shot.compact { width: min(100%, 430px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    h3 + .prompt-box { margin-top: 12px }
+    .prompt-box + h3 { margin-top: 46px }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: #F28A68 }
+    .copy-button:active { background: #FFD1BF; box-shadow: 0 1px 0 #8F371F; transform: translateY(2px) }
+    .copy-button.is-copied { background: #FFD1BF; box-shadow: 0 0 0 3px rgba(255, 209, 191, .34); transform: translateY(1px) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 900 }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (min-width: 1200px) and (max-width: 1279px) { .toc { margin-left: -18px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+      .annotation { border-width: 2px }
+      .annotation::before { top: -30px; width: 22px; height: 22px; font-size: 11px }
+      .annotation.askshot::before, .annotation.upgrade::before { top: 50%; left: -30px }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+  
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read a:hover { border-color: var(--accent) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand">Claude.ai: кнопка за кнопкой</div>
+      <div class="header-actions">
+        <div class="handout-title">Артефакт вместо ответа в переписке</div>
+        <div class="header-controls">
+          <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание">
+      <p class="toc-label">Содержание</p>
+      <a class="active" href="#artefakt">Ответ в отдельном окне</a>
+      <a href="#pochemu">Ответ в чате и рабочий документ</a>
+      <a href="#kak">Как вынести ответ в артефакт</a>
+      <a class="toc-sub" href="#s-1">1. Скажи, что нужен артефакт</a>
+      <a class="toc-sub" href="#s-2">2. Правь словами, не переписывая заново</a>
+      <a class="toc-sub" href="#s-3">3. Работай прямо в окне</a>
+      <a class="toc-sub" href="#s-4">4. Открой доступ другому</a>
+      <a href="#gde-zhivut">Свой раздел в меню слева</a>
+      <a href="#chto-pisat">Что писать, чтобы открылось окно</a>
+      <a class="toc-sub" href="#p-1">Чек-лист, который потом правишь</a>
+      <a class="toc-sub" href="#p-2">Калькулятор, который считает сам</a>
+      <a class="toc-sub" href="#p-3">Документ, который пойдёт людям</a>
+      <a class="toc-sub" href="#p-4">Вынести то, что уже написано в чате</a>
+      <a href="#mimo">Почему окно не открылось</a>
+      <a href="#granicy">Чего артефакт не сделает</a>
+      <a href="#chastye">Частые вопросы</a>
+      <a href="#sources">Источники</a>
+    </nav>
+
+    <main>
+      <details class="mobile-toc">
+        <summary>Содержание статьи</summary>
+        <nav aria-label="Содержание на телефоне">
+          <a href="#artefakt">Ответ в отдельном окне</a>
+          <a href="#pochemu">Ответ в чате и рабочий документ</a>
+          <a href="#kak">Как вынести ответ в артефакт</a>
+          <a href="#s-1">1. Скажи, что нужен артефакт</a>
+          <a href="#s-2">2. Правь словами, не переписывая заново</a>
+          <a href="#s-3">3. Работай прямо в окне</a>
+          <a href="#s-4">4. Открой доступ другому</a>
+          <a href="#gde-zhivut">Свой раздел в меню слева</a>
+          <a href="#chto-pisat">Что писать, чтобы открылось окно</a>
+          <a href="#p-1">Чек-лист, который потом правишь</a>
+          <a href="#p-2">Калькулятор, который считает сам</a>
+          <a href="#p-3">Документ, который пойдёт людям</a>
+          <a href="#p-4">Вынести то, что уже написано в чате</a>
+          <a href="#mimo">Почему окно не открылось</a>
+          <a href="#granicy">Чего артефакт не сделает</a>
+          <a href="#chastye">Частые вопросы</a>
+          <a href="#sources">Источники</a>
+        </nav>
+      </details>
+
+      <article>
+        <header id="artefakt">
+          <p class="eyebrow">Claude.ai · Артефакты</p>
+          <h1>Артефакты: ответ Клода в отдельном окне, а не в переписке</h1>
+          <p class="lead">Все разговоры с Клодом лежат в общем списке чатов. Месяц назад ты считал смету на ремонт: прикидывал по обоям, получил сумму, закрыл чат. За месяц ты передумал: обои разонравились ещё до покупки, теперь стены будут крашеные. Расчёт нужен тот же, меняется в нём один пункт. Но чтобы поменять этот пункт, надо найти тот чат среди десятков, вспомнить свои же условия, дописать новые и ждать, пока Клод посчитает всё заново</p>
+          <p class="lead">То же самое с планом питания: его составляли под прежний вес, вес с тех пор изменился, и весь план надо пересчитывать - хотя меняется в нём одна цифра</p>
+          <p class="lead">Клода можно попросить сразу дать не ответ в чате, а создать «артефакт». Это рабочий документ: он сохранится в разделе Артефакты, и ты сможешь открыть его оттуда, когда угодно. Внутри переключаешь обои на краску, вписываешь цену - сумма меняется сама. Вписываешь сегодняшний вес - меняется расчёт. Чат для этого открывать не надо, цифры правишь прямо в документе</p>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 18 СЕНТЯБРЯ 2026</p>
+        </header>
+
+        <div class="route-note">
+          <h2>Короткий маршрут</h2>
+          <p>Написать в чате «сделай это артефактом» → ответ откроется окном справа → работать прямо в окне → кнопка <span class="path">Share</span> и доступ <span class="path">Anyone with the link</span>, если отдаёшь другому</p>
+        </div>
+
+        <section class="content-section" id="pochemu">
+          <p class="section-label">Что именно ты получаешь</p>
+          <h2>Ответ в чате и рабочий документ - это разное</h2>
+          <p>Ответ в чате можно только перечитать. Даже если Клод посчитал идеально, цифры внутри мёртвые: поменялась одна вводная - и надо возвращаться к нему, объяснять, что изменилось, и ждать новый ответ. Каждый такой заход тратит лимиты и рождает ещё одно сообщение в ленте</p>
+          <p>Артефакт открывается отдельной панелью и живёт в своём разделе. Но работает иначе он по другой причине: внутри у него бывают поля и кнопки. Тогда пересчёт делаешь ты - переключаешь обои на краску, вписываешь цену, сумма меняется сразу и на твоём же устройстве. Клод в этот момент не участвует</p>
+          <div class="limit-card">
+            <h3>Оговорка, которая экономит время</h3>
+            <p>Само собой пересчитывается только то, что сделано <b>как калькулятор</b> - с полями для ввода. Если попросить просто «план питания», придёт красивый текст, и менять его всё равно придётся через Клода. Поэтому в просьбе так и пишут: «сделай артефактом калькулятор, где я ввожу вес, а он показывает норму». Одна фраза в запросе решает, получишь ты текст или рабочий инструмент</p>
+          </div>
+          <div class="info-card">
+            <p><span class="info-title">Короткое правило:</span> сообщение в чате читают, артефакт используют. Нужно открыть завтра, поправить своими руками или показать кому-то - проси артефакт</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="kak">
+          <p class="section-label">Четыре действия</p>
+          <h2>Как вынести ответ в артефакт</h2>
+          <p>Ничего включать не нужно: артефакты работают на всех тарифах, включая бесплатный. Всё делается словами в обычном чате</p>
+
+          <div class="step" id="s-1">
+            <h3>1. Скажи, что нужен артефакт</h3>
+            <p>Иногда Клод открывает окно сам - когда ответ получается большим и самостоятельным: документ, таблица, страница, схема. Но полагаться на это не стоит: короткий список он спокойно напишет в чат. Надёжнее сказать прямо - «сделай это артефактом» или «вынеси в отдельное окно». Работает и с тем, что уже написано выше: попроси вынести готовый ответ, и он переедет в панель</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/01-zapros.png" alt="Запрос в чате: сделай чек-лист артефактом">
+              </div>
+              <figcaption>Слова «сделай артефактом» в конце обычной просьбы. Ничего технического писать не надо</figcaption>
+            </figure>
+            <div class="result">
+              <p>Результат: справа открывается панель, ответ уезжает в неё, чат остаётся слева</p>
+            </div>
+          </div>
+
+          <div class="step" id="s-2">
+            <h3>2. Правь словами, не переписывая заново</h3>
+            <p>Дальше ты просто говоришь в чат, что поменять: «добавь пункт про документы», «убери последние два», «сделай короче». Клод правит то же окно, а не присылает новую копию. Прошлый вариант не теряется: попроси словами - «верни, как было» или «покажи предыдущий вариант», и Клод вернёт его в то же окно</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/02-panel.png" alt="Экран разделён: слева переписка с Клодом, справа панель с калькулятором">
+              </div>
+              <figcaption>Так это выглядит целиком: слева переписка, справа сам артефакт. В чате остаётся только карточка с названием и пометкой <span class="path">Only you</span> - это закрытый доступ. Правки идут словами в чат, меняется содержимое панели справа</figcaption>
+            </figure>
+            <div class="result">
+              <p>Результат: один документ вместо четырёх черновиков в ленте, и всегда видно, какой из них текущий</p>
+            </div>
+          </div>
+
+          <div class="step" id="s-3">
+            <h3>3. Работай прямо в окне</h3>
+            <p>Артефактом пользуются там, где он открылся: вводишь числа в калькулятор, ставишь галочки в чек-листе, читаешь документ. Стрелка в углу разворачивает панель на весь экран - так удобнее, когда полей много. Расчёт при этом идёт внутри твоего устройства: лимиты Клода на это не тратятся, и каждое новое число не уходит в чат</p>
+            <figure>
+              <div class="shot">
+                <img src="assets/03-raschet.png" alt="Калькулятор в панели артефакта: введены размеры комнаты, снизу посчитанный итог">
+              </div>
+              <figcaption>Поля заполнены, итог внизу пересчитывается сам. Чат в это время не трогаем: правки словами нужны, только когда меняется сам калькулятор, а не числа в нём</figcaption>
+            </figure>
+            <div class="result">
+              <p>Результат: рабочий инструмент, в котором можно посчитать десять вариантов подряд, не написав Клоду ни одного сообщения</p>
+            </div>
+          </div>
+
+          <div class="step" id="s-4">
+            <h3>4. Открой доступ, если отдаёшь другому</h3>
+            <p>Ссылка у артефакта есть сразу, но по умолчанию она закрыта: под ней так и написано - <span class="path">Only you can open this link</span>. Открывается она только в твоём аккаунте. Чтобы отдать работу человеку, нажми <span class="path">Share</span> вверху панели, в списке <span class="path">Who has access</span> смени <span class="path">Only you</span> на <span class="path">Anyone with the link</span> и нажми <span class="path">Copy link</span></p>
+            <figure>
+              <div class="shot compact">
+                <img src="assets/04-dostup.png" alt="Окно Share: список доступа, пункты Only people invited и Anyone with the link">
+              </div>
+              <figcaption>Список доступа раскрыт. <span class="path">Anyone with the link</span> - любой, у кого есть адрес, откроет и попользуется, но менять содержимое не сможет: под пунктом так и написано «can view, but not edit»</figcaption>
+            </figure>
+            <div class="info-card">
+              <p><span class="info-title">Для себя переключать не надо:</span> на телефоне и на другом компьютере ты заходишь в свой аккаунт, открываешь тот же чат - артефакт на месте. Доступ меняют только ради других людей</p>
+            </div>
+            <div class="limit-card">
+              <h3>Прежде чем открыть доступ</h3>
+              <p>Ссылку открывает любой, кто её получил, - без регистрации и без пароля. Внутри артефакта не должно быть того, что не предназначено чужим глазам: реальных сумм, фамилий, адресов, рабочих данных. Поэтому в примерах и стоит подпись «все данные условные»</p>
+            </div>
+            <div class="result">
+              <p>Результат: работа отдана одной ссылкой, без пересылки файлов и объяснений «открой вот это вот этим»</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="gde-zhivut">
+          <p class="section-label">Где их искать потом</p>
+          <h2>Свой раздел в меню слева</h2>
+          <p>Артефакты не разбросаны по чатам: у них есть собственный раздел <span class="path">Artifacts</span> в меню слева. Там лежат все - и те, что ты кому-то отдал, и закрытые, которые видишь только ты. Закрытые помечены замочком. Не надо вспоминать, в каком разговоре собирался калькулятор: открываешь раздел и находишь его по названию</p>
+          <figure>
+            <div class="shot">
+              <img src="assets/05-razdel.png" alt="Раздел Artifacts в меню слева: список артефактов, калькулятор с замочком">
+            </div>
+            <figcaption>Раздел <span class="path">Artifacts</span> открыт. Внизу списка калькулятор с замочком - он закрытый, но в разделе всё равно лежит. Вкладки сверху делят список: <span class="path">Yours</span> - твои, <span class="path">Shared with you</span> - то, чем поделились с тобой</figcaption>
+          </figure>
+          <div class="info-card">
+            <p><span class="info-title">Отсюда и работа с разных устройств:</span> заходишь в свой аккаунт с телефона, открываешь этот раздел - все артефакты на месте. Ничего переключать и никуда пересылать не нужно</p>
+          </div>
+
+          <h3>Плюсик рядом: артефакт без чата</h3>
+          <p>У названия раздела есть плюсик. Он создаёт пустой артефакт сразу, минуя переписку: выбираешь <span class="path">Document</span>, <span class="path">Slides</span> или <span class="path">Design</span>, и открывается чистое окно, а Клод встаёт сбоку помощником. Удобно, когда заранее знаешь, что делаешь документ или презентацию, и не хочешь начинать с разговора</p>
+          <figure>
+            <div class="shot compact">
+              <img src="assets/06-plyus.png" alt="Меню плюсика у раздела Artifacts: Document, Slides, Design">
+            </div>
+            <figcaption>Три типа пустого артефакта. Внизу подписано, что получится: чистый артефакт, а Клод рядом</figcaption>
+          </figure>
+          <div class="limit-card">
+            <h3>Эти три пока в бете</h3>
+            <p>Рядом с каждым пунктом стоит пометка <span class="path">Beta</span> - функция новая и может меняться. Обычный путь через чат работает всегда, так что начинать проще с него</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="chto-pisat">
+          <p class="section-label">Готовые формулировки</p>
+          <h2>Что писать, чтобы открылось окно</h2>
+          <p>Четыре просьбы под разные случаи. Подставь своё и отправляй как есть</p>
+
+          <h3 id="p-1">Чек-лист, который потом правишь</h3>
+          <div class="prompt-box">
+            <button class="copy-button" type="button">Скопировать</button>
+            <pre>Собери чек-лист для [своя задача: сбор документов, подготовка к поездке, запуск рассылки]. Сделай это артефактом, чтобы можно было его править и потом открыть отдельно. Пункты короткие, в порядке выполнения, без вступления</pre>
+          </div>
+
+          <h3 id="p-2">Калькулятор, который считает сам</h3>
+          <div class="prompt-box">
+            <button class="copy-button" type="button">Скопировать</button>
+            <pre>Сделай артефактом простой калькулятор: я ввожу [свои поля: сумму, срок, ставку], он показывает [что нужно посчитать]. Данные условные, например [подставь свои примерные числа]. Поля подпиши по-русски, результат покажи крупно</pre>
+          </div>
+
+          <h3 id="p-3">Документ, который пойдёт людям</h3>
+          <div class="prompt-box">
+            <button class="copy-button" type="button">Скопировать</button>
+            <pre>Напиши [что нужно: памятку для клиентов, инструкцию для помощника, описание услуги] и вынеси в артефакт. Пиши простыми словами, короткими абзацами, с подзаголовками. Потом я поправлю формулировки прямо в этом окне</pre>
+          </div>
+
+          <h3 id="p-4">Вынести то, что уже написано в чате</h3>
+          <div class="prompt-box">
+            <button class="copy-button" type="button">Скопировать</button>
+            <pre>Возьми то, что ты написал выше, и вынеси в артефакт без изменений. Дальше будем править там</pre>
+          </div>
+
+          <div class="check-panel">
+            <h3>Проверь себя перед отправкой</h3>
+            <ul class="checklist">
+              <li>В просьбе есть слово «артефакт» или «в отдельное окно»</li>
+              <li>Сказано, что именно внутри: пункты, поля, разделы</li>
+              <li>Числа и имена в примере условные, настоящие не нужны</li>
+              <li>Сказано, что будешь править дальше - Клод оставит окно под правки</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="content-section" id="mimo">
+          <p class="section-label">Если пошло не так</p>
+          <h2>Почему окно не открылось</h2>
+
+          <div class="limit-card">
+            <h3>Ответ оказался слишком коротким</h3>
+            <p>Три строчки Клод вынесет в панель разве что по прямой просьбе: окно заводят под то, что имеет смысл хранить и править. Попроси словами - «вынеси в артефакт», и он откроет окно даже под короткий список</p>
+          </div>
+          <div class="limit-card">
+            <h3>Слова «артефакт» в просьбе не было</h3>
+            <p>Без него Клод действует по своему усмотрению и чаще отвечает в чат. Это самая частая причина: просьба была хорошая, но про окно в ней не сказано</p>
+          </div>
+          <div class="limit-card">
+            <h3>Просьба звучала как вопрос</h3>
+            <p>«А можешь сделать чек-лист?» - это вопрос, и Клод на него отвечает. «Сделай чек-лист артефактом» - это задание, и он его выполняет</p>
+          </div>
+          <div class="limit-card">
+            <h3>Окно закрылось само</h3>
+            <p>Панель сворачивается, когда переключаешься на другой чат. Артефакт при этом никуда не делся: вернись в тот же разговор и нажми на карточку артефакта в переписке - окно откроется снова. А проще - открой раздел <span class="path">Artifacts</span> в меню слева: там лежат все твои артефакты, а не только те, что ты кому-то отдал</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="granicy">
+          <p class="section-label">Честные ограничения</p>
+          <h2>Чего артефакт не сделает</h2>
+          <p>Чтобы не ждать лишнего</p>
+
+          <div class="limit-card">
+            <h3>Это не документ Word с готовым оформлением</h3>
+            <p>Артефакт - рабочая страница: содержание, кнопки, расчёт. Фирменные шрифты, колонтитулы и печать по макету делаются не здесь. Нужен именно .docx или .xlsx - проси файл, это <a href="../gotovye-fayly-excel-word-pdf/">отдельная функция</a></p>
+          </div>
+          <div class="limit-card">
+            <h3>Содержимое надо проверять</h3>
+            <p>Клод мог взять не ту ставку или пропустить пункт. Красивое окно с кнопками убеждает сильнее, чем текст в чате, - но проверка нужна та же самая</p>
+          </div>
+          <div class="limit-card">
+            <h3>Ссылка живёт отдельно от тебя</h3>
+            <p>Опубликованный артефакт открыт всем, у кого есть адрес. Поисковики страницу тоже могут найти. Держи в нём только то, что не жалко показать</p>
+          </div>
+          <div class="info-card">
+            <p><span class="info-title">Про чужие артефакты:</span> справка Клода просит открывать присланные ссылки только от тех, кому доверяешь, - относиться к чужому артефакту как к файлу от незнакомого отправителя</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="chastye">
+          <p class="section-label">Короткие ответы</p>
+          <h2>Частые вопросы</h2>
+
+          <details class="faq-item">
+            <summary>Нужен ли платный тариф</summary>
+            <p>Нет. Артефакты работают на бесплатном тарифе, на Pro и Max, а также в командных</p>
+          </details>
+          <details class="faq-item">
+            <summary>Что вообще может стать артефактом</summary>
+            <p>Документ или текст, таблица, схема и блок-схема, картинка-рисунок, страница сайта и небольшое работающее приложение вроде калькулятора</p>
+          </details>
+          <details class="faq-item">
+            <summary>Работает ли без интернета</summary>
+            <p>Чтобы открыть - нет: артефакт лежит на серверах Клода, и телефон, и браузер тянут его оттуда. А вот дальше интернет уже не нужен: сам расчёт идёт внутри твоего устройства, числа в чат не уходят и лимиты на это не тратятся</p>
+          </details>
+          <details class="faq-item">
+            <summary>Можно ли вернуть прошлую версию</summary>
+            <p>Да, словами в чат: «верни предыдущий вариант». Клод помнит, каким артефакт был до правки, и вернёт его в то же окно</p>
+          </details>
+          <details class="faq-item">
+            <summary>Нужен ли аккаунт тому, кому дал ссылку</summary>
+            <p>На бесплатном, Pro и Max - нет, человек просто открывает страницу. В командных и корпоративных тарифах вход в свой рабочий аккаунт потребуется</p>
+          </details>
+          <details class="faq-item">
+            <summary>Как убрать артефакт из общего доступа</summary>
+            <p>Публикацию можно отменить, но повторно опубликовать тот же артефакт уже не выйдет. Нужен снова общий доступ - придётся сделать новый</p>
+          </details>
+          <details class="faq-item">
+            <summary>Где найти артефакт через неделю</summary>
+            <p>В разделе <span class="path">Artifacts</span> в меню слева - там собраны все, и закрытые тоже. Или в том чате, где он появился, по карточке в переписке</p>
+          </details>
+        </section>
+
+        <section class="content-section" id="sources">
+          <p class="section-label">Откуда факты</p>
+          <h2>Источники</h2>
+          <ul class="sources">
+            <li><a href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them">Claude Help Center: What are artifacts and how do I use them</a> - что становится артефактом, автоматическое открытие окна, доступность на всех тарифах</li>
+            <li><a href="https://support.claude.com/en/articles/9547008-publish-and-share-artifacts">Claude Help Center: Publish and share artifacts</a> - публикация ссылкой, доступ без регистрации на Free, Pro и Max, вход по аккаунту в командных тарифах, невозможность опубликовать заново после отмены, предупреждение про чужие артефакты</li>
+          </ul>
+          <p class="meta">Вид интерфейса на картинках снят с живого Клода 18 сентября 2026. Все данные в примерах условные</p>
+        </section>
+
+        <section class="next-read" aria-label="Дальше по теме">
+          <h2>Дальше по теме</h2>
+          <p class="next-sub">Что логично прочитать следующим</p>
+          <ul>
+            <li><a href="../gotovye-fayly-excel-word-pdf/">Готовый Excel, Word, PDF или презентация<span class="why">Нужен настоящий файл с формулами, а не страница в окне - это соседняя функция</span></a></li>
+            <li><a href="../pervyy-proekt-v-claude/">Первый проект в Claude: своя папка с памятью<span class="why">Артефактов стало много - собери работу по одной теме в проект</span></a></li>
+          </ul>
+        </section>
+
+        <section class="cta" aria-label="Следующий шаг">
+          <p class="section-label">Бесплатный практикум</p>
+          <h2>А знаешь, чего ещё можно наделать полезного без технических навыков?</h2>
+          <p>Калькулятор ремонта получился из одной просьбы в чате. Тем же способом делают сайты, телеграм-ботов, свои небольшие программы под конкретную задачу. Ничего технического знать не нужно: задача ставится обычными словами. ИИ-Лагерь - бесплатный трёхдневный практикум про то, как работать с Клодом, с Клод-Кодом и с другими ИИ-агентами: что им поручают, как ставят задачу и что из этого получается. Каждый шаг показывают на экране - смотришь и повторяешь</p>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a>
+        </section>
+
+        <footer class="foot">Интерфейс Клода со временем меняется: кнопки могут переехать, а названия поменяться. Эта статья подготовлена по состоянию на 18 сентября 2026</footer>
+      </article>
+    </main>
+
+    <aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Следующая инструкция</p>
+      <h2>Готовые файлы: Excel, Word, PDF</h2>
+      <p><a href="../gotovye-fayly-excel-word-pdf/">Нужен настоящий файл с формулами, а не страница в окне</a></p>
+    </aside>
+  </div>
+
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
+    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+    <div class="viewer-scroll"><img alt=""></div>
+    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+  </div>
+
+<script>
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+
+    var themeButton = document.querySelector(".theme-toggle");
+    var savedTheme = localStorage.getItem("guide-theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+    themeButton.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("guide-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });
+
+
+    // "Открыть крупнее": скрины в примерах на телефоне ужимаются до 18-29%,
+    // кнопка открывает картинку во весь экран
+    (function () {
+      var viewer = document.getElementById("viewer");
+      if (!viewer) return;
+      var big = viewer.querySelector("img");
+      var lastFocused = null;
+      function open(src, alt) {
+        lastFocused = document.activeElement;
+        big.src = src; big.alt = alt || "";
+        big.onload = function () {
+          var box = viewer.querySelector(".viewer-scroll");
+          var room = viewer.clientWidth - 44;
+          // цель - читаемый текст, а не максимальный размер. Показываем картинку
+          // примерно вдвое крупнее, чем она стоит в тексте, но не больше её
+          // натуральной величины и не больше двух экранов по ширине
+          var inPage = document.querySelector('.shot img[src$="' + src.split("/").pop() + '"]');
+          var pageWidth = inPage ? inPage.getBoundingClientRect().width : room;
+          var target = Math.min(pageWidth * 2.2, big.naturalWidth);
+          // на большом экране картинка всегда влезает целиком, без прокрутки.
+          // На узком телефоне ужать её - значит ничего не увеличить, поэтому
+          // там разрешаем выйти за экран и прокручивать пальцем
+          var wide = viewer.clientWidth >= 860;
+          target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+          // и по высоте: картинка целиком должна помещаться на экран
+          if (wide) {
+            var maxH = viewer.clientHeight - 96;
+            var byHeight = maxH * (big.naturalWidth / big.naturalHeight);
+            target = Math.min(target, byHeight);
+          }
+          big.style.width = Math.round(target) + "px";
+          viewer.classList.toggle("fits", target <= room);
+          box.scrollLeft = (target - box.clientWidth) / 2;
+          var hint = viewer.querySelector(".viewer-hint");
+          var scrolls = box.scrollWidth > box.clientWidth + 2;
+          hint.textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+        };
+        viewer.setAttribute("open", "");
+        document.body.style.overflow = "hidden";
+        viewer.querySelector(".viewer-close").focus();
+      }
+      function close() {
+        viewer.removeAttribute("open");
+        document.body.style.overflow = "";
+        big.removeAttribute("src");
+        big.style.width = "";
+        if (lastFocused) lastFocused.focus();
+      }
+      document.querySelectorAll(".shot img").forEach(function (img) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "zoom";
+        button.textContent = "Открыть крупнее";
+        button.addEventListener("click", function () { open(img.currentSrc || img.src, img.alt); });
+        img.parentElement.appendChild(button);
+      });
+      viewer.addEventListener("click", function (event) {
+        if (event.target === viewer || event.target.classList.contains("viewer-close")) close();
+      });
+      addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && viewer.hasAttribute("open")) close();
+      });
+    })();
+
+    var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+    function updateReadingState() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+      var current = sections[0];
+      sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+      links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+    }
+    updateReadingState();
+    addEventListener("scroll", updateReadingState, { passive: true });
+  </script>
+</body>
+</html>
