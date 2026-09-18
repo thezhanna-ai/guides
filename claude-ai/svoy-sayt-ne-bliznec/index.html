@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Как собрать свой сайт за вечер в Claude Code: бриф, структура, текст и правки словами, без вёрстки руками">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:title" content="САЙТ - собери свой, а не очередного близнеца">
+<meta property="og:description" content="Бриф, структура, текст и правки словами: сайт за вечер без вёрстки руками">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+<title>САЙТ - собери свой, а не очередного близнеца</title>
+</head>
+<body>
+<style>
+  :root{
+    --emerald:#102F30; --emerald-mid:#1F4A43;
+    --paper:#F8F7F2; --paper2:#F0E8D8;
+    --info:#E2E8E9; --info-line:#BBC7CA;
+    --accent:#E86F4A; --accent-dark:#8F371F; --accent-text:#8F371F;
+    --ok:#5F7F68; --warn:#8F371F;
+    --ink:#1E2926; --muted:#62706A; --line:#D5C9B7;
+    --code:#102F30; --codetext:#F8F7F2;
+    --white:#FFFFFF; --shadow:rgba(16,47,48,.07);
+  }
+
+  /* --- закреплённая шапка серии --- */
+  .masthead{position:sticky;top:0;z-index:10;margin:-30px -18px 26px;border-bottom:1px solid var(--line);
+            background:rgba(248,247,242,.97);
+            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+  .masthead-inner{max-width:1200px;min-height:65px;margin:0 auto;padding:0 20px;display:flex;
+                  align-items:center;justify-content:space-between;gap:24px}
+  .brand{color:var(--emerald);font-size:18px;font-weight:750;letter-spacing:-.015em}
+  .header-actions{display:flex;align-items:center;gap:14px}
+  .handout-title{color:var(--accent-dark);font-size:13px;font-weight:750;line-height:1.25}
+  .press-button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;
+                padding:0 17px;border:0;border-radius:11px;background:var(--emerald-mid);color:var(--white);
+                font:750 14px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+                text-decoration:none;white-space:nowrap;box-shadow:0 3px 0 var(--emerald);cursor:pointer;
+                transition:transform .12s ease,box-shadow .12s ease}
+  .press-button:hover{color:var(--white);transform:translateY(1px);box-shadow:0 2px 0 var(--emerald)}
+  .press-button:active{transform:translateY(2px);box-shadow:0 1px 0 var(--emerald)}
+  @media (max-width:760px){ .handout-title{display:none} }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;padding:30px 18px 80px;background:var(--paper);color:var(--ink);
+       font:400 18.4px/1.65 Spectral,Georgia,serif;
+       -webkit-text-size-adjust:100%}
+  .wrap{max-width:760px;margin:0 auto}
+
+  /* --- оглавление: сетка «оглавление + текст», как в гайдах Ивана --- */
+  .layout{display:block;max-width:760px;margin:0 auto}
+  @media (min-width:1060px){
+    .layout{display:grid;grid-template-columns:236px minmax(0,760px);
+            gap:48px;max-width:1044px;align-items:start}
+  }
+  .toc{display:none}
+  @media (min-width:1060px){
+    .toc{display:block;position:sticky;top:28px;max-height:calc(100vh - 56px);
+         overflow-y:auto;padding-right:22px;
+         /* полоса-разделитель между содержанием и текстом, как у Ивана */
+         border-right:1px solid var(--line)}
+    .toc-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+               color:var(--muted);margin:0 0 14px}
+    .toc ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+    .toc li{margin:0;counter-increment:toc}
+    .toc a{display:grid;grid-template-columns:20px 1fr;gap:9px;align-items:start;
+           padding:7px 0 7px 14px;font-size:14.5px;line-height:1.35;
+           color:var(--muted);text-decoration:none;border-left:2px solid transparent;
+           transition:color .16s ease,border-color .16s ease}
+    .toc a::before{content:counter(toc);font-size:13px;color:var(--muted);
+                   font-variant-numeric:tabular-nums;opacity:.75;text-align:right}
+    .toc a:hover{color:var(--ink);border-left-color:var(--line)}
+    .toc a.is-current{color:var(--accent-text);border-left-color:var(--accent);font-weight:650}
+    .toc a.is-current::before{color:var(--accent-text);opacity:1}
+  }
+  /* мобильное оглавление - сворачиваемое, чтобы не занимать экран */
+  .toc-mobile{margin:0 0 26px}
+  @media (min-width:1060px){ .toc-mobile{display:none} }
+  .toc-mobile ol{margin:6px 0 0;padding-left:20px;font-size:16px}
+  .toc-mobile li{margin:7px 0}
+  .toc-mobile a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  .toc-mobile a:hover{border-bottom-color:var(--accent)}
+  /* якорь не должен уезжать под верх экрана */
+  h2[id],h3[id]{scroll-margin-top:16px}
+  .kicker{color:var(--accent-text);font-weight:700;font-size:13px;letter-spacing:.1em;
+          text-transform:uppercase;margin:0 0 10px}
+  h1,h2{font-family:Unbounded,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-weight:700;color:var(--emerald)}
+  h1{font-size:clamp(28px,6vw,37.6px);line-height:1.08;margin:0 0 14px;letter-spacing:-.02em}
+  .lead{font-size:19px;color:var(--muted);margin:0 0 34px}
+  h2{font-size:23px;margin:44px 0 16px;letter-spacing:-.01em}
+  h3{font-size:18px;margin:26px 0 10px}
+  p{margin:0 0 14px}
+  .card{background:var(--info);border:1px solid var(--info-line);border-radius:14px;
+        padding:11px 18px;margin:0 0 16px;box-shadow:0 1px 2px var(--shadow)}
+  .card.warn{border-left:4px solid var(--warn)}
+  .card.ok{border-left:4px solid var(--ok)}
+  .card.hero{border-left:4px solid var(--accent)}
+  .sign{display:flex;gap:16px;margin:0 0 22px;align-items:flex-start}
+  .num{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--accent);
+       color:#fff;font-weight:700;font-size:19px;display:flex;align-items:center;
+       justify-content:center;box-shadow:0 2px 6px var(--shadow)}
+  .body{flex:1;min-width:0}
+  .body h3{margin-top:4px;margin-bottom:8px}
+  pre{background:var(--code);color:var(--codetext);border-radius:10px;padding:14px 16px;
+      overflow-x:auto;font:500 15px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+      margin:10px 0;position:relative}
+  code{background:var(--paper2);padding:2px 6px;border-radius:5px;
+       font:500 15px/1.4 ui-monospace,Menlo,monospace;overflow-wrap:anywhere}
+  pre code{background:none;padding:0;color:inherit}
+  .copy{position:absolute;top:9px;right:9px;background:#3A342A;color:#EFE4CC;border:0;
+        border-radius:7px;padding:7px 13px;font-size:13px;cursor:pointer;
+        transition:transform .09s ease, background .16s ease, box-shadow .16s ease;
+        box-shadow:0 2px 5px rgba(0,0,0,.3);-webkit-tap-highlight-color:transparent}
+  .copy:hover{background:#4A4235}
+  .copy:active{background:var(--accent);transform:translateY(2px) scale(.97);
+               box-shadow:0 0 0 rgba(0,0,0,0)}
+  .copy.done{background:var(--ok);color:#fff}
+  /* блок с промптом: тёмный, сразу видно что это для копирования */
+  .say{background:#1C1815;border:1px solid #322C25;border-radius:14px;
+       padding:14px 16px 16px;margin:14px 0;position:relative;font-size:16.5px;
+       box-shadow:0 3px 12px rgba(0,0,0,.18)}
+  .say .lbl{display:block;color:#E9873A;font-weight:700;font-size:12px;
+            letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;
+            padding-right:104px}
+  .say .txt{display:block;white-space:pre-line;color:#EFE4CC;
+            font:500 15.5px/1.62 ui-monospace,SFMono-Regular,Menlo,monospace}
+  .say .copy{background:var(--accent);color:#fff;top:11px}
+  .say .copy:hover{background:#C2620F}
+  .say .copy:active{background:#A8540C}
+  ul{margin:8px 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .q{border-left:3px solid var(--accent);padding:2px 0 2px 14px;margin:14px 0;
+     color:var(--muted);font-style:italic}
+  .foot{margin-top:52px;padding-top:18px;border-top:1px solid var(--line);
+        color:var(--muted);font-size:15px}
+  b{font-weight:650}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:16px}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  details{background:var(--paper2);border:1px solid var(--line);border-radius:14px;
+          padding:0;margin:0 0 16px;overflow:hidden}
+  summary{cursor:pointer;padding:16px 20px;font-weight:650;list-style:none;
+          transition:background .16s ease;-webkit-tap-highlight-color:transparent}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"развернуть";float:right;color:var(--accent-text);font-weight:600;
+                 font-size:14px;letter-spacing:.02em}
+  details[open] > summary::after{content:"свернуть"}
+  summary:hover{background:rgba(217,113,31,.07)}
+  summary:active{background:rgba(217,113,31,.14)}
+  .details-body{padding:0 20px 6px;border-top:1px solid var(--line)}
+
+  /* --- раздел для новичка: мятная зона, сворачивается целиком --- */
+  :root{--mint:#E2E8E9; --mint-line:#BBC7CA; --mint-ink:#102F30}
+  details.novice{background:var(--mint);border:1px solid var(--mint-line);
+                 margin:34px 0 26px}
+  details.novice > summary{font-size:20px;padding:18px 20px}
+  details.novice > summary::after{color:var(--mint-ink)}
+  details.novice > summary:hover{background:rgba(61,122,69,.09)}
+  details.novice > .details-body{border-top-color:var(--mint-line);padding-top:6px}
+  /* вложенные раскрывашки внутри мятной зоны - светлее фона */
+  details.novice details{background:var(--paper);border-color:var(--mint-line)}
+  details.novice .card{border-color:var(--mint-line)}
+  .badge{display:inline-block;background:var(--mint-ink);color:var(--mint);
+         font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+         padding:3px 9px;border-radius:20px;margin-right:10px;vertical-align:middle}
+  /* пункт оглавления, ведущий в мятную зону */
+  .toc a[href="#start"].is-current{color:var(--mint-ink);border-left-color:var(--mint-ink)}
+  .toc a[href="#start"].is-current::before{color:var(--mint-ink)}
+  .fix td:first-child{width:40%;color:var(--muted)}
+  .fix tr:first-child td{font-weight:650;color:var(--ink)}
+  @media (max-width:430px){
+    .fix td{display:block;border-bottom:0;padding:4px 10px}
+    .fix td:first-child{width:auto;padding-top:12px;font-weight:650;color:var(--ink)}
+    .fix tr{display:block;border-bottom:1px solid var(--line)}
+    .fix tr:last-child{border-bottom:0}
+  }
+  .check{list-style:none;padding-left:0}
+  .check li{padding-left:30px;position:relative;margin:10px 0}
+  .check li::before{content:"";position:absolute;left:0;top:4px;width:17px;height:17px;
+                    border:2px solid var(--accent);border-radius:4px}
+  /* уже выполненный пункт: залитый квадрат с галочкой */
+  .check li.ok::before{background:var(--ok);border-color:var(--ok)}
+  .check li.ok::after{content:"";position:absolute;left:5px;top:7px;
+                      width:5px;height:9px;border:solid #fff;
+                      border-width:0 2px 2px 0;transform:rotate(43deg)}
+  .check li.ok{color:var(--muted)}
+  .check li.ok b{color:var(--ink)}
+  @media (max-width:520px){
+    .say{padding-top:12px}
+    .say .lbl{padding-right:0;margin-bottom:10px}
+    .say .copy{position:static;display:block;width:100%;margin:12px 0 0;
+               padding:10px 13px;font-size:14px}
+    .say{display:flex;flex-direction:column}
+    .say .copy{order:3}
+  }
+  .tag{display:inline-block;background:var(--accent);color:#fff;font-size:12px;
+       font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.04em;
+       vertical-align:middle;margin-left:6px}
+
+  /* --- «оживание» блока под курсором: только рамка, без прыжков --- */
+  .card,.say,details{transition:border-color .18s ease,box-shadow .18s ease}
+  .card:hover,details:hover{border-color:var(--accent);
+                            box-shadow:0 2px 10px var(--shadow)}
+  .say:hover{border-color:var(--accent);
+             box-shadow:0 4px 16px rgba(0,0,0,.26)}
+  .card.warn:hover{border-left-color:var(--warn)}
+  .card.ok:hover{border-left-color:var(--ok)}
+  .card.hero:hover{border-left-color:var(--accent)}
+  /* строка таблицы подсвечивается, чтобы не терять глазами нужную */
+  .fix tr{transition:background .16s ease}
+  @media (min-width:600px){
+    .fix tr:hover{background:rgba(217,113,31,.06)}
+  }
+  /* признак близнеца целиком реагирует на курсор */
+  .sign{padding:10px 12px;margin-left:-12px;border-radius:12px;
+        transition:background .18s ease}
+  .sign:hover{background:var(--paper2)}
+  /* ссылка-переход к разделу */
+  .jump{color:var(--accent-text);font-style:normal;font-weight:650;
+        text-decoration:none;border-bottom:1px solid var(--accent);
+        white-space:nowrap;transition:border-color .16s ease,color .16s ease}
+  .jump::after{content:" →";font-weight:400}
+  /* внутри скобок стрелка не нужна - упирается в закрывающую скобку */
+  .jump.inline::after{content:none}
+  .jump:hover{color:var(--accent);border-bottom-color:transparent}
+  /* раздел, на который перешли, коротко подсвечивается */
+  @keyframes target-glow{
+    0%{background:rgba(217,113,31,.16)}
+    100%{background:transparent}
+  }
+  :target{animation:target-glow 1.6s ease-out;border-radius:8px}
+
+  /* --- вспышка всей секции при копировании --- */
+  @keyframes flash-ok{
+    0%{background:var(--paper2);border-color:var(--accent)}
+    18%{background:rgba(61,122,69,.20);border-color:var(--ok)}
+    100%{background:var(--paper2);border-color:var(--line)}
+  }
+  @keyframes flash-bad{
+    0%{background:var(--paper2)}
+    18%{background:rgba(200,69,44,.16);border-color:var(--warn)}
+    100%{background:var(--paper2)}
+  }
+  /* тёмный блок мигает по-своему, чтобы не белел */
+  @keyframes flash-ok-dark{
+    0%{background:#1C1815;border-color:#322C25}
+    18%{background:#263A28;border-color:var(--ok)}
+    100%{background:#1C1815;border-color:#322C25}
+  }
+  @keyframes flash-bad-dark{
+    0%{background:#1C1815}
+    18%{background:#3A211C;border-color:var(--warn)}
+    100%{background:#1C1815;border-color:#322C25}
+  }
+  .flash{animation:flash-ok 1.5s ease-out}
+  .flash-fail{animation:flash-bad 1.5s ease-out}
+  .say.flash{animation:flash-ok-dark 1.5s ease-out}
+  .say.flash-fail{animation:flash-bad-dark 1.5s ease-out}
+  pre.flash{animation:none;outline:2px solid var(--ok);outline-offset:2px;
+            transition:outline-color 1.4s ease}
+  pre.flash-fail{outline:2px solid var(--warn);outline-offset:2px}
+  .copy.failed{background:var(--warn);color:#fff}
+
+  /* --- 1. блоки мягко появляются при прокрутке --- */
+  .reveal{opacity:0;transform:translateY(34px) scale(.985);
+          transition:opacity .7s ease-out,transform .7s cubic-bezier(.16,.84,.44,1)}
+  .reveal.seen{opacity:1;transform:none}
+
+  /* --- 3. полоса прогресса чтения --- */
+  .progress{position:fixed;top:0;left:0;height:5px;width:0;z-index:50;
+            background:linear-gradient(90deg,#D9711F,#E9873A);
+            transition:width .12s linear;
+            box-shadow:0 1px 10px rgba(217,113,31,.55)}
+
+  /* --- 4. первый экран проявляется при загрузке --- */
+  @keyframes rise{from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none}}
+  .kicker,h1,.lead{animation:rise .6s cubic-bezier(.22,.61,.36,1) backwards}
+  .kicker{animation-delay:.05s}
+  h1{animation-delay:.14s}
+  .lead{animation-delay:.26s}
+
+  /* примечание про анимации */
+  .motion-note{font-size:14px;color:var(--muted);margin:-20px 0 30px;
+               padding-left:14px;border-left:2px solid var(--line)}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none !important;animation:none !important}
+    .reveal{opacity:1;transform:none}
+    .progress{display:none}
+  }
+
+  /* ============ Раздел 13: куда пойти учиться ============ */
+  /* обёртка: солнышко живёт за блоком */
+  /* сверху воздух под гирлянду */
+  .cta-scene{position:relative;margin:52px 0 8px;padding-top:44px;isolation:isolate}
+  /* солнце крутится ВНУТРИ коричневого блока, обрезано по его скруглению */
+  /* солнце крутится ПОВЕРХ блока: большое, по центру, тонкие лучи через текст */
+  .cta-sun-clip{position:absolute;inset:0;overflow:hidden;z-index:2;
+                pointer-events:none;border-radius:20px}
+  .cta-sun{position:absolute;top:50%;left:50%;width:440px;height:440px;
+           margin:-220px 0 0 -220px;animation:cta-spin 30s linear infinite;
+           opacity:.45;pointer-events:none}
+  .cta-sun span{position:absolute;top:50%;left:50%;width:2px;height:48%;
+                background:linear-gradient(to top,transparent,#F09A45);
+                transform-origin:bottom center;border-radius:3px}
+  @keyframes cta-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+  /* гирлянда флажков поверх верхнего края блока */
+  .cta-flags{position:absolute;top:0;left:0;right:0;height:34px;
+             z-index:3;pointer-events:none}
+  .cta-flags svg{display:block;width:100%;height:100%;overflow:visible}
+
+  .cta-box{position:relative;z-index:1;background:#1C1815;border:1px solid #322C25;
+           border-radius:20px;padding:28px 24px}
+  .cta-box > *:not(.cta-sun-clip){position:relative;z-index:1}
+  .cta-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;
+               font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+               color:#C9BCA8;border:1px solid #3E362C;
+               border-radius:999px;padding:6px 14px;margin-bottom:16px}
+  .cta-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;
+                       background:var(--accent)}
+  .cta-title{font-weight:800;font-size:clamp(24px,6vw,32px);line-height:1.1;
+             color:#F5EDE0;margin:0 0 12px}
+  .cta-title .accent{color:#E9873A}
+  .cta-lead{font-size:16px;color:#E4D9C8;margin:0 0 14px}
+  .cta-sub2{font-size:15px;color:#BCB0A0;margin:0}
+  .cta-what{font-weight:700;font-size:17px;color:#E9873A;margin:20px 0 12px}
+  .cta-list{list-style:none;padding:0;margin:0 0 26px;
+            display:flex;flex-direction:column;gap:12px}
+  .cta-list li{display:flex;align-items:flex-start;gap:10px;font-size:15.5px;color:#E4D9C8}
+  .cta-list .check{flex:0 0 auto;width:20px;height:20px;border-radius:50%;
+                   background:var(--accent);display:flex;align-items:center;
+                   justify-content:center;margin-top:2px}
+  .cta-list .check svg{width:11px;height:11px}
+  .cta-button{display:inline-block;background:var(--accent);color:#FFF6EA;
+              font-weight:800;font-size:17px;text-decoration:none;
+              padding:16px 34px;border-radius:999px;
+              box-shadow:0 10px 28px rgba(217,113,31,.28);
+              transition:transform .12s ease,box-shadow .12s ease}
+  .cta-button:active{transform:scale(.96);box-shadow:0 5px 14px rgba(217,113,31,.35)}
+</style>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">Гайды по нейросетям</div>
+    <div class="header-actions">
+      <div class="handout-title">Собери свой сайт</div>
+      <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="toc" aria-label="Содержание">
+    <p class="toc-title">Содержание</p>
+    <ol>
+      <li><a href="#start">Для новичка: до старта</a></li>
+      <li><a href="#navyk">Навык ui-ux-pro-max</a></li>
+      <li><a href="#obrazec">Откуда брать образец</a></li>
+      <li><a href="#komanda">Команда для старта</a></li>
+      <li><a href="#priznaki">7 признаков близнеца</a></li>
+      <li><a href="#voprosy">Что он спросит</a></li>
+      <li><a href="#tekst">Что писать на сайте</a></li>
+      <li><a href="#posmotret">Как посмотреть и выложить</a></li>
+      <li><a href="#pravki">Правки: как формулировать</a></li>
+      <li><a href="#proverka">Проверка перед показом</a></li>
+      <li><a href="#polomki">Если что-то не работает</a></li>
+      <li><a href="#itog">Что получится в итоге</a></li>
+      <li><a href="#istochniki">Откуда взяты цифры про тариф</a></li>
+      <li><a href="#uchitsya">Куда пойти учиться</a></li>
+    </ol>
+  </aside>
+  <div class="wrap">
+  <p class="kicker">инструкция · сайт</p>
+  <h1>Собери свой сайт, а не очередного близнеца</h1>
+  <p class="lead">Семь признаков, по которым сайт, собранный нейросетью, видно ещё до полной загрузки. И что говорить Клоду, чтобы ни один из них не появился</p>
+
+  <p class="motion-note">* Эта страница собрана тем же способом, что описан ниже: блоки мягко появляются при прокрутке, сверху идёт полоса прочитанного. Если в настройках твоего телефона или компьютера включено «уменьшение движения», анимаций не будет - страница просто останется статичной, читать это не мешает</p>
+
+  <details class="toc-mobile">
+    <summary>Содержание инструкции</summary>
+    <div class="details-body">
+      <ol>
+      <li><a href="#start">Для новичка: до старта</a></li>
+      <li><a href="#navyk">Навык ui-ux-pro-max</a></li>
+      <li><a href="#obrazec">Откуда брать образец</a></li>
+      <li><a href="#komanda">Команда для старта</a></li>
+      <li><a href="#priznaki">7 признаков близнеца</a></li>
+      <li><a href="#voprosy">Что он спросит</a></li>
+      <li><a href="#tekst">Что писать на сайте</a></li>
+      <li><a href="#posmotret">Как посмотреть и выложить</a></li>
+      <li><a href="#pravki">Правки: как формулировать</a></li>
+      <li><a href="#proverka">Проверка перед показом</a></li>
+      <li><a href="#polomki">Если что-то не работает</a></li>
+      <li><a href="#itog">Что получится в итоге</a></li>
+      <li><a href="#istochniki">Откуда взяты цифры про тариф</a></li>
+      <li><a href="#uchitsya">Куда пойти учиться</a></li>
+      </ol>
+    </div>
+  </details>
+
+  <div class="card">
+    <p><b>Откуда берутся близнецы.</b> Нейросеть учили на миллионах одинаковых лендингов. Попроси её «сделай красивый современный сайт» - и она честно выдаст усреднённое по всему интернету: сине-фиолетовый градиент, стеклянные карточки, искры возле каждого «AI»</p>
+    <p style="margin:0"><b>Это лечится.</b> Не магией и не другой нейросетью, а точными словами в запросе. Здесь - вся сборка от начала до конца, и на каждом шаге фраза, которая убирает очередной признак клона</p>
+  </div>
+
+  <div class="card hero">
+    <p><b>Порядок действий, если коротко:</b></p>
+    <ol style="margin:0;padding-left:22px">
+      <li>Проверить, что на компьютере в <b>VS Code</b> стоит <b>Claude Code</b> и оплачена подписка (<a class="jump inline" href="#start">зачем и почему</a>)</li>
+      <li>Завести на компьютере папку под сайт и открыть её в Claude Code</li>
+      <li>Найти образец - сайт, который нравится - и сохранить его первый экран картинкой <b>в эту же папку</b> (<a class="jump inline" href="#obrazec">зачем именно первый</a>)</li>
+      <li>Отправить Клоду одну большую команду - она готовая, ниже на этой странице</li>
+      <li>Смотреть, что вышло, и править фразами из этой инструкции</li>
+      <li>Проверить на телефоне и выложить в интернет</li>
+    </ol>
+  </div>
+
+  <p class="q">Уже пользуешься Claude Code? Тогда блок «для новичка» ниже можешь не открывать - он про установку, папки и лимиты. А вот три пункта после него нужны всем: <a class="jump inline" href="#navyk">навык</a>, <a class="jump inline" href="#obrazec">образец</a> и сама <a class="jump" href="#komanda">команда</a></p>
+
+  <details class="novice" id="start">
+    <summary><span class="badge">для новичка</span>Если ты совсем с нуля: что нужно до старта</summary>
+    <div class="details-body">
+
+    <div class="card warn">
+      <p><b>Главное, из-за чего у людей не получается.</b> В обычном чате на claude.ai нейросеть выдаёт код <b>текстом в окне</b>. Сама она ничего не сохраняет: файлы на твоём компьютере не появляются, и открыть готовый сайт ей нечем</p>
+      <p style="margin:0">В <b>Claude Code</b> она делает это сама: создаёт файлы в твоей папке, складывает их как надо и открывает результат в браузере. Разница не в уме нейросети, а в руках: там она только советует, здесь - делает</p>
+    </div>
+
+    <p><b>Где это делается.</b> Все шаги ниже - в <b>VS Code</b>: это бесплатная программа, внутри которой живёт Claude Code. Подойдёт и отдельное приложение Claude для компьютера, там то же самое, просто окна выглядят иначе</p>
+
+    <details>
+      <summary>А можно всё-таки собрать сайт через обычный чат?</summary>
+      <div class="details-body">
+        <p>Технически да, и честно скажу как: копируешь выданный код, вставляешь в простой текстовый редактор (Блокнот на Windows, TextEdit на Mac), сохраняешь файл с именем вроде <code>index.html</code> и открываешь его двойным щелчком - сайт откроется в браузере</p>
+        <p><b>Почему я всё равно не советую этот путь новичку:</b></p>
+        <ul>
+          <li>Каждая правка - заново: попросить, дождаться, скопировать, вставить, сохранить, обновить страницу. И так десятки раз, а правок всегда десятки</li>
+          <li>Файл обычно не один. К странице идут отдельные файлы стилей и картинок, их надо разложить рядом и не перепутать имена, иначе сайт откроется голым текстом без оформления</li>
+          <li>Ошибку никто не поймает. В Claude Code нейросеть сама видит, что страница сломалась, и чинит. В чате она не видит ничего - ты будешь описывать ей словами, что пошло не так</li>
+          <li>Навык дизайна и готовые блоки туда не подключить - как раз то, что спасает от вида «собрано нейросетью»</li>
+        </ul>
+        <p style="margin:0">Коротко: через чат можно сделать одну простую страничку и помучиться. Всё, что дальше в этой инструкции, рассчитано на Claude Code</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Что за VS Code и почему именно он</summary>
+      <div class="details-body">
+        <p>VS Code - бесплатная программа, в которой обычно пишут код. Нам она нужна не для кода: это дом, внутри которого живёт Claude Code. Ставится один раз, а дальше ты просто пишешь в ней Клоду обычными словами</p>
+        <p><b>Почему именно она:</b></p>
+        <ul style="margin-bottom:0">
+          <li>Клод видит файлы прямо на твоём компьютере и сам их создаёт и правит</li>
+          <li>Слева видно все файлы сайта - понятно, что вообще происходит и где что лежит</li>
+          <li>Он помнит проект: можно закрыть и завтра продолжить с того же места</li>
+          <li>Тут ставятся навыки, а на навыке ui-ux-pro-max держится весь наш способ</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Почему не подойдёт версия в браузере</summary>
+      <div class="details-body">
+        <p>У Claude Code есть версия в браузере, по адресу <code>claude.ai/code</code>. На вид то же самое, но внутри всё иначе: она работает <b>не с твоим компьютером, а в облаке</b></p>
+        <p><b>Почему для нас это не годится:</b></p>
+        <ul>
+          <li><b>Она не видит твои файлы.</b> Картинку-образец с твоего компьютера туда не подсунуть, а без образца сайт получится «на вкус нейросети»</li>
+          <li><b>Готовый сайт не посмотреть сразу.</b> Результат уезжает в хранилище кода, а не открывается у тебя в браузере</li>
+          <li><b>Нужен GitHub</b> - отдельный сервис для хранения кода. Новичку туда сейчас незачем</li>
+        </ul>
+        <p style="margin:0">Поэтому - программа на компьютере, не браузер</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Ещё не поставил и не оплатил? Это отдельная тема</summary>
+      <div class="details-body">
+        <p>Установка и оплата - это отдельный сюжет, и здесь он не разбирается. Причина честная: одна ошибка на этом этапе стоит денег, а способы оплаты из России меняются чуть ли не каждый месяц - любая инструкция устаревает быстрее, чем ты до неё дойдёшь</p>
+        <p style="margin:0">Так что порядок такой: сначала ставишь программу и оплачиваешь подписку, а сюда возвращаешься, когда Claude Code открывается и готов к работе. Всё, что ниже, рассчитано ровно на этот момент</p>
+      </div>
+    </details>
+
+    <h3>Три условия, без которых дальше не двинуться</h3>
+
+    <div class="card">
+      <ul class="check" style="margin:0">
+        <li class="ok"><b>Программа Claude Code стоит и открывается.</b> Не сайт claude.ai, а именно программа. Эта страница начинается с того момента, когда она уже открыта и готова к работе</li>
+        <li class="ok"><b>Подписка оплачена.</b> На старте хватает тарифа Pro. Официальная цена - 20 долларов в месяц. Если платить из России без иностранной карты, на лето 2026 выходило примерно 2100-2200 рублей: цена зависит от курса и от того, через кого платишь. Без подписки программа работать не будет</li>
+        <li><b>Полтора-два часа спокойного времени.</b> Первая версия сайта появится минут через двадцать, остальное уйдёт на правки. Это единственное, что тебе нужно выделить прямо сейчас</li>
+      </ul>
+    </div>
+
+    <h3>В какое окно писать Клоду</h3>
+
+    <div class="card">
+      <p>Самый частый ступор новичка: программа открылась, а куда печатать - непонятно</p>
+      <p><b>Сначала надо вызвать самого Клода.</b> Открыл VS Code, а его панели не видно - это нормально, она не появляется сама. Способ, который работает всегда: в верхнем меню <b>Terminal - New Terminal</b>, внизу откроется чёрное окно, набери в нём слово <code>claude</code> и нажми Enter</p>
+      <p>Клод поздоровается прямо в этом окне. Вот сюда, в самый низ, ты и пишешь</p>
+      <p>Пишешь <b>обычными словами, по-русски</b>, как пишешь человеку. Никаких специальных команд учить не нужно: всё, что дальше в этой инструкции, просто копируешь и вставляешь</p>
+      <p style="margin:0">Отправил - и смотришь, что отвечает. Он пишет, что делает, и иногда переспрашивает</p>
+    </div>
+
+    <div class="card warn">
+      <p><b>Он попросит разрешение создать файлы. Это нормально, соглашайся.</b> Сайт - это и есть файлы, без них ничего не соберётся. Сломать компьютер он при этом не может: работает только в той папке, которая открыта</p>
+      <p style="margin:0">Первым делом спросит про доверие к папке - «Do you trust the files in this folder?». Своей папке - да, выбирай ответ, который начинается с «Yes»</p>
+    </div>
+
+    <h3>Заведи для сайта отдельную папку</h3>
+
+    <p>Не собирай сайт «где попало» - потом не найдёшь. Порядок такой:</p>
+
+    <ul>
+      <li>Создай на рабочем столе обычную папку. <b>Название - латинскими буквами, без пробелов</b>: например <code>my-site</code>, или своё - <code>foto-studia</code>, <code>anna-coach</code>. Слова разделяй дефисом, не пробелом</li>
+      <li>В программе открой именно эту папку. В VS Code это меню <b>File - Open Folder</b>, дальше выбираешь свою папку на рабочем столе</li>
+      <li>Всё, что соберётся, будет лежать внутри неё</li>
+    </ul>
+
+    <div class="card warn">
+      <p style="margin:0"><b>Почему это важно.</b> Клод работает только с той папкой, которая открыта. Откроешь наугад что-то другое - он соберёт сайт там, и завтра ты его не найдёшь. Одна папка на один сайт, и всё остаётся на местах</p>
+    </div>
+
+    <div class="card ok">
+      <p style="margin:0"><b>Как вернуться к работе завтра.</b> Открываешь программу, открываешь ту же папку <code>my-site</code> - и говоришь: «продолжаем работу над сайтом, покажи, что уже собрано». Ничего не теряется, всё лежит файлами на твоём компьютере</p>
+    </div>
+
+    <h3>Про лимиты, чтобы не испугаться</h3>
+
+    <div class="card">
+      <p style="margin:0">На тарифе Pro есть лимит: наработаешь много за короткое время - программа скажет, что лимит исчерпан, и предложит подождать. <b>Это не поломка и не потеря работы.</b> Всё собранное остаётся на месте. По документации Anthropic на сентябрь 2026 лимит сессии обновляется каждые пять часов, и сверх него есть недельный - время следующего обновления Клод показывает сам, когда упрёшься</p>
+    </div>
+    </div>
+  </details>
+
+  <h2 id="navyk">Один навык, который меняет всё</h2>
+
+  <p><b>ui-ux-pro-max</b> - файл с правилами дизайна: отступы, шрифты, композиция, что с чем сочетается. Без него Клод верстает «как получится», с ним - по правилам. Это половина лечения от близнецов</p>
+
+  <div class="card ok">
+    <p style="margin:0"><b>Поставь его первым делом, до сборки сайта.</b> Ставится один раз и дальше работает всегда, во всех твоих проектах</p>
+  </div>
+
+  <p>Скопируй эту строку и отправь Клоду. Он всё сделает сам:</p>
+
+  <div class="say"><span class="lbl">скажи Клоду в чат</span><button class="copy">копировать</button><span class="txt">Выполни в терминале команду: npx skills add nextlevelbuilder/ui-ux-pro-max-skill@ui-ux-pro-max
+Потом скажи мне, что получилось</span></div>
+
+  <p>Клод попросит разрешение запустить команду - разрешай. Установка займёт полминуты, в конце он напишет, что навык добавлен</p>
+
+  <div class="card warn">
+    <p style="margin:0"><b>Просто попросить «найди и установи навык» - не сработает.</b> Клод не умеет искать навыки сам, ему нужна точная команда: та, что выше. Поэтому не переписывай её своими словами, а скопируй как есть</p>
+  </div>
+
+  <div class="card">
+    <p style="margin:0"><b>Больше навыков ставить не надо.</b> Их существует много, и соблазн набрать побольше велик - но на старте это только путаница. Один этот навык закрывает дизайн целиком. Освоишься, захочешь копнуть глубже - тогда спросишь Клода «какие ещё навыки помогут с сайтом», и он подскажет</p>
+  </div>
+
+  <h2 id="obrazec">Откуда брать образец</h2>
+
+  <p>Клод не умеет читать мысли: без образца он соберёт сайт «на свой вкус», а вкус у него усреднённый по интернету - тот самый близнец. Образец нужен, чтобы задать направление</p>
+
+  <div class="card hero">
+    <p><b>Способов два, и они разные по силе:</b></p>
+    <ul style="margin-bottom:0">
+      <li><b>Скриншот</b> - задаёт <b>стиль</b>. Клод смотрит на картинку и делает своё, но похожее по ощущению. Работает сразу, ничего настраивать не надо</li>
+      <li><b>Ключ 21st.dev</b> - даёт <b>готовые блоки</b>. Клод берёт сами куски и ставит их на сайт. Сильнее, но нужно один раз подключить</li>
+    </ul>
+  </div>
+
+  <p style="margin-bottom:24px">Начни со скриншота - он проще. Ключ можно подключить потом, он никуда не денется</p>
+
+  <h3>Скриншот: почему именно первый экран</h3>
+
+  <p>Первый экран - это то, что видно сразу при открытии сайта, до прокрутки. Его называют hero-секцией</p>
+
+  <p><b>Почему именно он, а не вся страница целиком:</b> первый экран задаёт стиль всему остальному. Клод берёт оттуда шрифты, отступы, палитру и достраивает остальные блоки в той же логике. Дашь ему скриншот всей длинной страницы - получит кашу из десятка разных блоков и не поймёт, что именно копировать. Один экран - один понятный образец</p>
+
+  <p><b>Три каталога, где смотреть.</b> Смотреть и делать скриншоты можно во всех трёх без всякой регистрации:</p>
+
+  <div class="scroll">
+  <table class="fix">
+    <tr><td><b>21st.dev</b></td><td>Готовые первые экраны, разложены по видам. Начни отсюда: там ровно то, что нужно, без лишнего</td></tr>
+    <tr><td><b>land-book.com</b></td><td>Большая галерея живых сайтов. Есть раздел Sections - отдельно первые экраны, шапки, блоки с ценами</td></tr>
+    <tr><td><b>onepagelove.com</b></td><td>Только одностраничники - ровно формат визитки. Удобно, если хочешь увидеть сайт целиком, а не кусок</td></tr>
+  </table>
+  </div>
+
+  <p>Плюс два очевидных источника, про которые забывают: <b>сайт конкурента</b>, который тебе нравится, и <b>твоя собственная старая страница</b>, если хочется «то же самое, только по-человечески»</p>
+
+  <div class="card">
+    <p><b>Как выбирать, если глаз не намётан.</b> Не ищи «самый красивый». Ищи по трём признакам:</p>
+    <ul style="margin-bottom:0">
+      <li>С первого взгляда понятно, чем занимается человек или компания</li>
+      <li>Много воздуха, мало всего понапихано</li>
+      <li>Видно одну главную кнопку, а не пять равнозначных</li>
+    </ul>
+  </div>
+
+  <h3>Как сохранить скриншот</h3>
+
+  <div class="scroll">
+  <table class="fix">
+    <tr><td>Mac</td><td>Cmd + Shift + 4, потом выделить мышкой нужный кусок. Картинка сама упадёт на рабочий стол</td></tr>
+    <tr><td>Windows</td><td>Win + Shift + S, выделить кусок, потом сохранить на рабочий стол</td></tr>
+  </table>
+  </div>
+
+  <div class="card warn">
+    <p><b>Важно: положи картинку внутрь папки сайта.</b> Не на рабочий стол, а именно в ту папку, которая открыта в программе - <code>my-site</code>. Клод видит только её содержимое, всё что снаружи для него не существует</p>
+    <p style="margin:0">Перетащи файл мышкой в папку. Дай ему простое имя латиницей: <code>obrazec.png</code>. <b>Пробелы и русские буквы в имени убери</b> - на них Клод спотыкается чаще всего</p>
+  </div>
+
+  <h3>Второй способ: пусть Клод сам берёт готовые блоки</h3>
+
+  <p>21st.dev умеет не только показывать картинки - он может <b>отдавать Клоду сами блоки</b>: первый экран, меню, карточки, подвал. Тогда сайт собирается не «по мотивам скриншота», а из готовых кусков, которые уже выглядят дорого</p>
+
+  <p>Нужен бесплатный ключ. Разбираться самой не надо, попроси Клода провести:</p>
+
+  <div class="say"><span class="lbl">скажи Клоду в чат</span><button class="copy">копировать</button><span class="txt">Подключи мне 21st.dev, чтобы ты мог брать оттуда готовые блоки для сайта. Веди по шагам, я делаю это первый раз: скажи, куда зайти за бесплатным ключом и куда его вставить</span></div>
+
+  <div class="card warn">
+    <p style="margin:0"><b>Это не обязательный шаг.</b> Сайт соберётся и по скриншоту. Подключение делается один раз и пригодится дальше, но если сейчас хочется просто получить результат - пропусти и иди к команде ниже</p>
+  </div>
+
+  <div class="card warn">
+    <p style="margin:0">Копировать чужой сайт один в один не нужно. Образец задаёт ощущение: сколько воздуха, какие шрифты, как расставлены блоки. Содержание всё равно будет твоё - иначе получится тот же близнец, только чужой</p>
+  </div>
+
+
+  <h2 id="komanda">Команда для старта<span class="tag">главное</span></h2>
+
+  <div class="card warn">
+    <p style="margin:0"><b>Про квадратные скобки в командах.</b> Там, где стоит <code>[твоё дело]</code> - это место для твоего текста. <b>Скобки нужно стереть вместе с подсказкой внутри</b> и написать своё. Было <code>про [твоё дело]</code> - стало <code>про студию детской фотографии</code>. Оставишь скобки - Клод соберёт сайт про «твоё дело» буквально</p>
+  </div>
+
+  <p><b>Короткий вариант</b> - если хочется просто попробовать прямо сейчас:</p>
+
+  <div class="say"><span class="lbl">скажи Клоду в чат</span><button class="copy">копировать</button><span class="txt">Собери сайт-визитку про [твоё дело]. Используй навык ui-ux-pro-max. Образец первого экрана - файл obrazec.png в папке проекта, хочу похоже. Добавь плавные анимации: блоки мягко появляются при прокрутке</span></div>
+
+  <div class="card hero">
+    <p style="margin:0"><b>Рабочий вариант.</b> То же самое плюс запреты на семь признаков близнеца и требование показать структуру до кода. Он длиннее не для красоты: каждая лишняя строка убирает один способ получить сайт-клон</p>
+  </div>
+
+  <div class="say"><span class="lbl">скопируй и подставь своё</span><button class="copy">копировать</button><span class="txt">Собери сайт-визитку про [чем ты занимаешься и для кого].
+Используй установленный навык ui-ux-pro-max.
+Образец первого экрана - файл obrazec.png, он лежит в папке проекта, хочу похоже по ощущению, но со своим содержанием.
+Запрещаю: сине-фиолетовый градиент, стеклянные карточки, иконки-искры возле слова AI, стоковые лица в отзывах, логотип просто набранный шрифтом.
+Цвета возьми спокойные, фон однотонный светлый, один акцентный цвет на кнопки.
+Добавь плавные анимации: блоки мягко появляются при прокрутке.
+Начни с одной страницы и покажи мне структуру до того, как писать код</span></div>
+
+  <p class="q">Последняя строка про «покажи структуру до кода» - не украшение. Без неё Клод сразу уходит собирать, и если он понял тебя не так, переделывать придётся целиком</p>
+
+  <div class="card">
+    <p><b>Про анимации, чтобы не запутаться в названиях.</b> Motion - это готовый набор переходов, из-за которых сайт выглядит дорого: блоки мягко появляются при прокрутке, кнопки отзываются на курсор. Раньше библиотека называлась Framer Motion, сейчас просто <b>Motion</b> - если увидишь оба названия в интернете, это одно и то же</p>
+    <p style="margin:0">Название запоминать не нужно: в команде мы просто просим «плавные анимации», а чем их сделать - Клод решит сам под твой сайт. Если после сборки кажется, что всё слишком скачет, скажи: «убавь анимации, оставь только мягкое появление блоков»</p>
+  </div>
+
+  <h2 id="priznaki">Семь признаков близнеца и что говорить</h2>
+
+  <div class="sign">
+    <div class="num">1</div>
+    <div class="body">
+      <h3>Сине-фиолетовый градиент на весь экран</h3>
+      <p>Самый заметный. Если первый экран залит переливом из синего в фиолетовый - дальше можно не смотреть, это дефолт нейросети</p>
+      <div class="say"><span class="lbl">если уже появился</span><button class="copy">копировать</button><span class="txt">Убери градиент с первого экрана. Сделай однотонный светлый фон, а цветом выдели только кнопку</span></div>
+    </div>
+  </div>
+
+  <div class="sign">
+    <div class="num">2</div>
+    <div class="body">
+      <h3>Стеклянные карточки с бликом</h3>
+      <p>Полупрозрачные блоки с размытием под ними. Красиво ровно до момента, когда видишь их на каждом втором сайте</p>
+      <div class="say"><span class="lbl">если уже появились</span><button class="copy">копировать</button><span class="txt">Убери стеклянный эффект с карточек. Сделай обычные карточки на светлом фоне с тонкой рамкой, без размытия и бликов</span></div>
+    </div>
+  </div>
+
+  <div class="sign">
+    <div class="num">3</div>
+    <div class="body">
+      <h3>Заголовки, кнопки и текст на одно лицо</h3>
+      <p>Всё набрано примерно одним размером и одной толщиной. Глазу не за что зацепиться, непонятно, что тут главное</p>
+      <div class="say"><span class="lbl">что сказать</span><button class="copy">копировать</button><span class="txt">Добавь контраста в типографику: заголовок первого экрана сделай заметно крупнее остального, подзаголовок мельче и спокойным серым, кнопку - единственным ярким пятном на экране</span></div>
+    </div>
+  </div>
+
+  <div class="sign">
+    <div class="num">4</div>
+    <div class="body">
+      <h3>Искры возле каждого слова «AI»</h3>
+      <p>Иконка-звёздочка рядом с любым упоминанием нейросети, как будто она что-то значит. Не значит ничего, просто примета жанра</p>
+      <div class="say"><span class="lbl">что сказать</span><button class="copy">копировать</button><span class="txt">Убери иконки-искры и звёздочки. Иконки оставь только там, где они реально помогают понять пункт</span></div>
+    </div>
+  </div>
+
+  <div class="sign">
+    <div class="num">5</div>
+    <div class="body">
+      <h3>Логотип просто набран буквами</h3>
+      <p>В шапке стоит название, напечатанное шрифтом по умолчанию. Выглядит как заглушка, которую забыли заменить - потому что это она и есть</p>
+      <div class="say"><span class="lbl">что сказать</span><button class="copy">копировать</button><span class="txt">В шапке вместо набранного шрифтом названия поставь мой знак - файл logo.png, он лежит в папке проекта. Логотипа нет - сделай простой знак из моих инициалов в круге, спокойным цветом</span></div>
+    </div>
+  </div>
+
+  <div class="sign">
+    <div class="num">6</div>
+    <div class="body">
+      <h3>Мифические люди в отзывах</h3>
+      <p>Карточки с идеальными лицами из бесплатных фотостоков и придуманными именами. Самый дорогой признак: на нём теряют доверие, а не просто вкус</p>
+      <div class="say"><span class="lbl">что сказать</span><button class="copy">копировать</button><span class="txt">Убери блок с отзывами полностью. Настоящих отзывов у меня пока нет, а выдуманные с людьми из фотостоков ставить не буду</span></div>
+      <div class="card warn">
+        <p style="margin:0">Отзывы есть настоящие - отдай их текстом как есть, с реальными именами. Клод сам расставит их по карточкам. Просить его «придумай отзывы» не надо: получишь ровно тех мифических людей, из-за которых сайт и не работает</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sign">
+    <div class="num">7</div>
+    <div class="body">
+      <h3>С телефона всё разъезжается</h3>
+      <p>Контрольная проверка. На компьютере сайт выглядит прилично, открываешь с телефона - блоки наезжают друг на друга, текст обрезан, кнопка уехала за край</p>
+      <div class="say"><span class="lbl">проверить обязательно</span><button class="copy">копировать</button><span class="txt">Покажи, как сайт выглядит на телефоне при ширине 390. Найди и почини всё, что наезжает, обрезается или уходит за край экрана</span></div>
+      <div class="card ok">
+        <p style="margin:0"><b>Не пропускай этот шаг.</b> Больше половины людей откроют твой сайт с телефона. Если он там развалится, остальные шесть пунктов уже не важны</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="voprosy">Что он спросит и что отвечать</h2>
+
+  <p>Место, где новички теряются: Клод начинает задавать вопросы, а что говорить - непонятно. Основные, с готовыми ответами</p>
+
+  <div class="scroll">
+  <table class="fix">
+    <tr><td>Спрашивает про доверие к папке (Do you trust the files…)</td><td>Спрашивает, доверяешь ли ты папке, из которой запущен. Своей папке - да, соглашайся</td></tr>
+    <tr><td>Просит разрешение создать файл или папку</td><td>Разрешай. Он не может собрать сайт, не создавая файлы. Опасного тут нет</td></tr>
+    <tr><td>«Для кого сайт, какая главная задача?»</td><td>Обычными словами: «для тех, кто ищет [твою услугу], главное действие - написать мне в Телеграм»</td></tr>
+    <tr><td>«Какие разделы нужны?»</td><td>Не знаешь - так и скажи: «предложи сам, я посмотрю и поправлю»</td></tr>
+    <tr><td>«Какой текст поставить?»</td><td>На первом заходе можно «поставь черновой, я заменю». Только не оставляй навсегда: выдуманные цифры и достижения на живом сайте не нужны</td></tr>
+    <tr><td>Показал структуру и ждёт</td><td>Прочитай список разделов. Нравится - «да, собирай». Лишнее - «убери раздел X, добавь Y»</td></tr>
+  </table>
+  </div>
+
+  <h2 id="tekst">Что писать на самом сайте</h2>
+
+  <p>Второе место, где все зависают: Клод спрашивает, какой текст ставить, а в голове пусто. Для визитки достаточно четырёх кусков, и все они короткие</p>
+
+  <div class="scroll">
+  <table class="fix">
+    <tr><td>Заголовок первого экрана</td><td>Что ты делаешь и для кого, одной строкой. Не «Добро пожаловать», а «Помогаю мамам в декрете вернуться к работе»</td></tr>
+    <tr><td>Строка под заголовком</td><td>Одно предложение: как именно и с каким результатом. «Разбираем твой опыт и собираем резюме, на которое отвечают»</td></tr>
+    <tr><td>Кнопка</td><td>Действие, а не «Подробнее». «Написать мне в Телеграм», «Записаться на разбор»</td></tr>
+    <tr><td>Блок «обо мне»</td><td>Три-четыре предложения: кто ты, сколько лет в деле, чем отличаешься. Без списка регалий</td></tr>
+  </table>
+  </div>
+
+  <div class="card warn">
+    <p><b>Не проси Клода придумать текст за тебя целиком.</b> Он напишет гладко и ни о чём: «инновационные решения», «индивидуальный подход». Это второй способ получить близнеца - на этот раз близнеца по словам</p>
+    <p style="margin:0">Лучше расскажи ему своими словами, как рассказываешь другу, и попроси причесать:</p>
+  </div>
+
+  <div class="say"><span class="lbl">скажи Клоду в чат</span><button class="copy">копировать</button><span class="txt">Вот как я объясняю своё дело обычными словами: [своими словами, можно сумбурно]. Причеши это в заголовок и одно предложение под ним. Не добавляй ничего от себя, никаких «индивидуальный подход» и «инновационные решения», пиши моими словами</span></div>
+
+  <div class="card ok">
+    <p style="margin:0"><b>Нет текста прямо сейчас - не страшно.</b> Скажи: «поставь черновой текст, я заменю позже». Только не забудь заменить до того, как покажешь сайт людям: выдуманные цифры и достижения на живом сайте не нужны</p>
+  </div>
+
+  <h2 id="posmotret">Как посмотреть, что вышло</h2>
+  <div class="say"><span class="lbl">скажи Клоду в чат</span><button class="copy">копировать</button><span class="txt">Открой сайт в браузере, хочу посмотреть, что получилось</span></div>
+
+  <p>Откроется вкладка с твоим сайтом. Выглядит как настоящий - но есть важная деталь</p>
+
+  <div class="card ok">
+    <p style="margin:0"><b>После каждой правки обновляй вкладку.</b> Клод поменял файл, но открытая страница сама не перерисуется. Нажми <code>Cmd+R</code> на Mac или <code>F5</code> на Windows - и увидишь новую версию. Не обновил - будешь смотреть на старую и думать, что правка не сработала</p>
+  </div>
+
+  <div class="card warn">
+    <p><b>Пока это сайт только для тебя.</b> Он лежит файлами на твоём компьютере, и по интернету его никто не откроет. Скинуть подруге ссылку на этом этапе не получится - у неё не откроется</p>
+    <p style="margin:0">Это нормальный порядок работы: сначала собираешь и правишь у себя, потом выкладываешь. Выкладывать имеет смысл, когда сайт уже нравится</p>
+  </div>
+
+  <h3>Когда захочешь выложить в интернет</h3>
+
+  <p>Отдельно разбираться не нужно, это делается одной просьбой. Клод сам заведёт всё что нужно и проведёт по шагам:</p>
+
+  <div class="say"><span class="lbl">скажи Клоду в чат</span><button class="copy">копировать</button><span class="txt">Выложи сайт в интернет бесплатно и дай мне ссылку, которую можно отправить людям. Веди меня по шагам, я делаю это первый раз</span></div>
+
+  <p style="margin:0">На выходе получишь обычную ссылку - её можно ставить в шапку профиля и отправлять кому угодно. Бесплатного варианта хватает для визитки с головой</p>
+
+  <h2 id="pravki">Правки: не проси «сделай красиво»</h2>
+
+  <p>Это ничего не значит, и в ответ прилетит очередной шаблон. Говори конкретно: что не так и на что заменить</p>
+
+  <div class="scroll">
+  <table class="fix">
+    <tr><td>Слабо</td><td>Сильно</td></tr>
+    <tr><td>«сделай красиво»</td><td>«спокойные цвета, много воздуха между блоками, крупный шрифт»</td></tr>
+    <tr><td>«мне не нравится»</td><td>«первый экран перегружен: оставь заголовок, одно предложение и кнопку, остальное вниз»</td></tr>
+    <tr><td>«скучно»</td><td>«добавь контраста: заголовок крупнее вдвое, кнопку заметным цветом»</td></tr>
+    <tr><td>«переделай всё»</td><td>«устраивает всё кроме блока с ценами - переделай только его»</td></tr>
+  </table>
+  </div>
+
+  <h3>Три фразы вместо «сотри всё и начни заново»</h3>
+
+  <div class="card">
+    <p><b>Испортил то, что нравилось:</b></p>
+    <div class="say"><span class="lbl">скажи Клоду в чат</span><button class="copy">копировать</button><span class="txt">Верни как было до последней правки, дальше меняем только то, что я назову</span></div>
+    <p><b>Правит слишком много лишнего:</b></p>
+    <div class="say"><span class="lbl">скажи Клоду в чат</span><button class="copy">копировать</button><span class="txt">Меняй ровно то, что я прошу, остальное не трогай</span></div>
+    <p style="margin:0"><b>Сам не понимаешь, что не так:</b></p>
+    <div class="say"><span class="lbl">скажи Клоду в чат</span><button class="copy">копировать</button><span class="txt">Посмотри на первый экран глазами человека, который зашёл впервые. Назови три причины, которые мешают понять, о чём этот сайт</span></div>
+  </div>
+
+  <div class="card warn">
+    <p style="margin:0"><b>Почему «сотри всё и начни заново» - плохая идея.</b> Вместе с плохим уйдёт и то хорошее, что уже собралось, а следующая версия окажется не лучше, просто другой. Правь кусками: один блок за раз, смотришь результат, идёшь дальше</p>
+  </div>
+
+  <h2 id="proverka">Проверка перед тем, как показывать людям</h2>
+
+  <div class="card ok">
+    <ul class="check" style="margin:0">
+      <li>Проверил узкий экран - ничего не разъезжается, кнопка на месте. До публикации попроси Клода показать ширину 390, после - открой на своём телефоне</li>
+      <li>На первом экране понятно за пять секунд, о чём сайт и кому он</li>
+      <li>Нет градиента, стеклянных карточек и искр возле AI</li>
+      <li>В отзывах живые люди или блока с отзывами нет вовсе</li>
+      <li>Все цифры и факты настоящие, черновой текст заменён</li>
+      <li>Кнопка ведёт куда надо и её видно без прокрутки</li>
+    </ul>
+  </div>
+
+  <h2 id="polomki">Если что-то не работает</h2>
+  <p>Слева то, что видно на экране, справа - что сказать Клоду. Ищи свою строку по тому, что случилось:</p>
+  <div class="scroll">
+  <table class="fix">
+    <tr><td>Клод говорит, что не знает такого навыка</td><td>Значит навык не установлен. Вернись к разделу про навык и отправь ему команду установки целиком, слово в слово - своими словами это не работает</td></tr>
+    <tr><td>Не видит файл с образцом</td><td>Скорее всего картинка лежит не в той папке. Перетащи её внутрь папки сайта и скажи: «файл obrazec.png лежит в папке проекта»</td></tr>
+    <tr><td>Сайт открылся пустой белой страницей</td><td>«Страница пустая, посмотри ошибки в консоли и почини». Ошибки он читает сам</td></tr>
+    <tr><td>Анимации дёргаются и мешают</td><td>«Убавь анимации, оставь только мягкое появление блоков при прокрутке»</td></tr>
+    <tr><td>Убрал градиент - он вернулся в другом блоке</td><td>Скажи запрет разом на весь сайт: «нигде на странице не используй градиенты, только однотонные заливки»</td></tr>
+  </table>
+  </div>
+
+  <h2 id="itog">Что получится на самом деле</h2>
+
+  <p>Не шедевр студии за миллион. Аккуратный сайт с собственным лицом: чистый первый экран, ровные шрифты, живые анимации, нормально открывается с телефона. Для визитки, страницы услуги или лендинга под запуск этого хватает</p>
+
+  <p style="margin:0">Главное - его не спутают с сотней таких же. А это и было задачей</p>
+
+  <h2 id="istochniki">Откуда взяты цифры про тариф</h2>
+  <p>Цена подписки и правила лимитов сверены с официальной справкой Anthropic:</p>
+  <ul class="sources">
+    <li><a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan">support.claude.com - что такое тариф Pro</a>: цена 20 долларов в месяц, лимит сессии обновляется каждые пять часов</li>
+    <li><a href="https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work">support.claude.com - как работают лимиты</a>: упёрся в лимит, ждёшь обновления либо повышаешь тариф</li>
+  </ul>
+  <p style="margin:0">Рублёвая сумма официальной справкой не задаётся: она зависит от курса и от посредника, поэтому названа как наблюдение на лето 2026, а не как цена навсегда</p>
+
+  <a href="../shest-skillov/" style="display:block;max-width:760px;margin:34px auto 0;padding:18px 20px;border:1px solid #E9DDC6;border-left:4px solid #D9711F;border-radius:12px;background:#FFF6EA;color:#1C140E;text-decoration:none;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif">
+    <span style="display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8F371F">Соседняя инструкция</span>
+    <span style="display:block;margin-top:6px;font-size:18px;font-weight:700">Шесть скиллов Claude: как найти, подключить и вызвать →</span>
+    <span style="display:block;margin-top:5px;font-size:14px;opacity:.74">Тот же Claude Code, только про готовые навыки: дизайн интерфейса, картинки, файлы</span>
+  </a>
+
+  <h2 id="uchitsya">Куда пойти учиться</h2>
+
+  <p>Один сайт по инструкции ты соберёшь. Дальше упрёшься в вопросы, которые текстом не закрыть: как поставить всё с нуля, как принимать оплаты, почему на сайт никто не заходит. Это разбирают на живом мероприятии, где рядом есть кого спросить</p>
+
+  <div class="cta-scene">
+  <div class="cta-flags" aria-hidden="true">
+    <svg viewBox="0 0 360 34" preserveAspectRatio="none">
+      <path d="M2 4 Q 90 16 180 8 T 358 5" stroke="#8A7355" stroke-width="1.4" fill="none"/>
+      <polygon points="8,5 26,7 17,28"     fill="#C4A484" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="38,7 56,9 47,30"    fill="#D9711F" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="68,9 86,11 77,32"   fill="#C89B3C" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="98,11 116,12 107,33" fill="#B04A28" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="128,12 146,12 137,33" fill="#C4A484" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="158,12 176,11 167,32" fill="#D9711F" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="188,11 206,10 197,31" fill="#C89B3C" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="218,10 236,8 227,29"  fill="#B04A28" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="248,8 266,7 257,28"   fill="#C4A484" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="278,7 296,6 287,27"   fill="#D9711F" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="308,6 326,5 317,26"   fill="#C89B3C" stroke="#6B563E" stroke-width="0.8"/>
+      <polygon points="338,5 356,5 347,26"   fill="#B04A28" stroke="#6B563E" stroke-width="0.8"/>
+    </svg>
+  </div>
+
+  <div class="cta-box">
+    <div class="cta-sun-clip" aria-hidden="true">
+      <div class="cta-sun">
+        <span style="transform:rotate(0deg)"></span><span style="transform:rotate(30deg)"></span>
+        <span style="transform:rotate(60deg)"></span><span style="transform:rotate(90deg)"></span>
+        <span style="transform:rotate(120deg)"></span><span style="transform:rotate(150deg)"></span>
+        <span style="transform:rotate(180deg)"></span><span style="transform:rotate(210deg)"></span>
+        <span style="transform:rotate(240deg)"></span><span style="transform:rotate(270deg)"></span>
+        <span style="transform:rotate(300deg)"></span><span style="transform:rotate(330deg)"></span>
+      </div>
+    </div>
+    <span class="cta-eyebrow">хочешь узнать больше</span>
+    <h3 class="cta-title">Путёвка на <span class="accent">практикум</span></h3>
+    <p class="cta-lead">Хочешь познакомиться и научиться работать в Claude Code и Codex? Приходи на онлайн-практикум</p>
+    <p class="cta-sub2">За 3-4 дня ты пройдёшь путь от первого запуска Claude Code / Codex до готового продукта</p>
+
+    <p class="cta-what">Что именно получишь:</p>
+    <ul class="cta-list">
+      <li><span class="check"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12 L10 18 L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Поставишь и настроишь Claude Code / Codex с нуля, даже если никогда не программировал</li>
+      <li><span class="check"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12 L10 18 L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Соберёшь свой первый сайт с приёмом оплат</li>
+      <li><span class="check"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12 L10 18 L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Научишься делать контент, который сам приводит людей на сайт</li>
+      <li><span class="check"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12 L10 18 L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Увидишь вживую, как ИИ собирает целый проект по одной команде словами</li>
+    </ul>
+
+    <a data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff" class="cta-button">Перейти на практикум →</a>
+  </div>
+  </div>
+
+  <p class="foot">Инструкция собрана на живой сборке: все команды и фразы проверены в работе, а не переписаны из чужого поста</p>
+</div>
+</div>
+
+<script>
+// полоса прогресса чтения + мягкое появление блоков
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // полоса вверху
+  var bar = document.createElement('div');
+  bar.className = 'progress';
+  document.body.appendChild(bar);
+  function drawBar(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+    bar.style.width = Math.min(100, Math.max(0, p)) + '%';
+  }
+  var barTick = false;
+  window.addEventListener('scroll', function(){
+    if (barTick) return;
+    barTick = true;
+    requestAnimationFrame(function(){ drawBar(); barTick = false; });
+  }, {passive:true});
+  drawBar();
+
+  if (reduce) return;
+
+  // блоки проявляются, когда доходишь до них
+  var targets = document.querySelectorAll('.card, .sign, .say, details, .scroll, .cta-scene, h2');
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){
+        e.target.classList.add('seen');
+        io.unobserve(e.target);
+      }
+    });
+  }, {rootMargin: '0px 0px -12% 0px', threshold: 0});
+
+  // страховка: что бы ни случилось с наблюдателем, текст обязан проявиться
+  function failsafe(){
+    document.querySelectorAll('.reveal:not(.seen)').forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.95 && r.bottom > 0) el.classList.add('seen');
+    });
+  }
+  var fsTick = false;
+  window.addEventListener('scroll', function(){
+    if (fsTick) return;
+    fsTick = true;
+    setTimeout(function(){ failsafe(); fsTick = false; }, 220);
+  }, {passive:true});
+
+  targets.forEach(function(el){
+    // то, что уже видно при загрузке, не прячем
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.85){
+      el.classList.add('reveal','seen');
+    } else {
+      el.classList.add('reveal');
+      io.observe(el);
+    }
+  });
+})();
+
+// подсветка пункта оглавления, у которого читаешь раздел
+(function(){
+  var links = [].slice.call(document.querySelectorAll('.toc a'));
+  if (!links.length) return;
+  var targets = links.map(function(a){
+    return document.getElementById(a.getAttribute('href').slice(1));
+  }).filter(Boolean);
+  function mark(){
+    var best = null, bestTop = -Infinity;
+    targets.forEach(function(t){
+      var top = t.getBoundingClientRect().top - 140;
+      if (top <= 0 && top > bestTop){ bestTop = top; best = t; }
+    });
+    if (!best) best = targets[0];
+    // у самого низа страницы держим последний раздел
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 40){
+      best = targets[targets.length - 1];
+    }
+    links.forEach(function(a){
+      a.classList.toggle('is-current', a.getAttribute('href') === '#' + best.id);
+    });
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){ mark(); ticking = false; });
+  }, {passive:true});
+  mark();
+})();
+
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click', function(){
+    var host = b.parentElement;
+    var el = host.querySelector('code') || host.querySelector('.txt');
+    if (!el) return;
+    var text = el.innerText;
+
+    function done(ok){
+      // исходную надпись запоминаем один раз, иначе при повторном
+      // нажатии кнопка «запомнит» слово скопировано и залипнет
+      if (!b.dataset.label) b.dataset.label = b.innerText;
+      var old = b.dataset.label;
+      clearTimeout(b._t);
+      b.innerText = ok ? 'скопировано' : 'выдели и скопируй';
+      b.classList.add(ok ? 'done' : 'failed');
+      // мигает вся секция, а не только кнопка
+      host.classList.remove('flash','flash-fail');
+      void host.offsetWidth;               // перезапуск анимации при повторном нажатии
+      host.classList.add(ok ? 'flash' : 'flash-fail');
+      b._t = setTimeout(function(){
+        b.innerText = old;
+        b.classList.remove('done','failed');
+        host.classList.remove('flash','flash-fail');
+      }, 1500);
+      // не получилось скопировать - выделим текст, чтобы забрать руками
+      if (!ok) {
+        try {
+          var r = document.createRange();
+          r.selectNodeContents(el);
+          var s = window.getSelection();
+          s.removeAllRanges();
+          s.addRange(r);
+        } catch(e){}
+      }
+    }
+
+    // запасной способ: работает там, где буфер закрыт политикой страницы
+    function legacy(){
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly','');
+        ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch(e){ return false; }
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        function(){ done(true); },
+        function(){ done(legacy()); }
+      );
+    } else {
+      done(legacy());
+    }
+  });
+});
+</script>
+
+<script>
+/* Партнёрская ссылка задаётся ЗДЕСЬ и только здесь.
+   Все кнопки с признаком data-partner получают её отсюда,
+   поэтому менять адрес нужно в одной строке, а не в разметке */
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (a) { a.href = PARTNER_LINK; });
+</script>
+</body>
+</html>
