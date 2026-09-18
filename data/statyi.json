@@ -1,0 +1,241 @@
+{
+  "_readme": "Реестр статей сайта. ИСТОЧНИК ИСТИНЫ: из него собираются перелинковка, карточки главной и sitemap. Новая статья = новая запись ЗДЕСЬ, потом прогон скриптов. Руками index.html не править.",
+  "_polya": {
+    "slug": "папка статьи внутри claude-ai/",
+    "title": "заголовок как в <title> и на карточке главной",
+    "razdel": "блок на главной: obychnyy-vhod | svoy-server | knopka-za-knopkoy | vaybkoding",
+    "uroven": "green (начальный) | blue (средний)",
+    "tip": "instr (Инструкция) | razbor (Разбор) | obzor (Обзор)",
+    "tags": "data-tags на карточке главной",
+    "ponyatiya": "что объясняет ЭТА статья. Если слово из списка встретилось в чужой статье - там просится ссылка сюда",
+    "trebuet": "что человек должен уже уметь до этой статьи - отсюда ссылка обязательна",
+    "status": "live (на сайте и на главной) | draft (папка есть, на главной нет)",
+    "blokirovka": "почему статья draft - что физически мешает публикации"
+  },
+  "statyi": [
+    {
+      "slug": "podklyuchenie-iz-rossii",
+      "title": "Claude из России: подключение без блокировок",
+      "razdel": "obychnyy-vhod",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "dostup green",
+      "ponyatiya": [
+        "VPN",
+        "вход в Claude",
+        "регистрация",
+        "Google-аккаунт",
+        "подтверждение номера",
+        "доступ из России"
+      ],
+      "trebuet": [],
+      "status": "live"
+    },
+    {
+      "slug": "svoy-server-dlya-claude",
+      "title": "Свой сервер для Claude",
+      "razdel": "svoy-server",
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "dostup blue",
+      "ponyatiya": [
+        "свой сервер",
+        "VPS",
+        "постоянный IP",
+        "CloudCLI",
+        "Claude Code на сервере",
+        "домен к серверу"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "draft",
+      "blokirovka": "нет скринов: 5 пометок [НУЖЕН СКРИН] в тексте. Сервер на практике не проходили. Не публиковать"
+    },
+    {
+      "slug": "kak-rasskazat-o-sebe",
+      "title": "Claude помнит о тебе: что рассказать один раз",
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "память",
+        "Memory",
+        "инструкции о себе",
+        "General",
+        "поиск по старым чатам",
+        "перенос из ChatGPT"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live"
+    },
+    {
+      "slug": "vybor-modeli-i-effort",
+      "title": "Модель и уровень effort: что включать под задачу",
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "модель",
+        "Opus",
+        "Sonnet",
+        "Haiku",
+        "Fable",
+        "effort",
+        "усилие",
+        "лимиты тарифа"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live"
+    },
+    {
+      "slug": "podklyuchit-gmail-drive-calendar",
+      "title": "Gmail, Google Drive и Calendar внутри Claude",
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "Gmail",
+        "Google Drive",
+        "Google Calendar",
+        "подключённые сервисы",
+        "коннекторы",
+        "доступ к почте"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live"
+    },
+    {
+      "slug": "web-search-v-claude",
+      "title": "Веб-поиск в Claude: ответы со свежими ссылками",
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "веб-поиск",
+        "Web search",
+        "свежие ссылки",
+        "проверка источников",
+        "актуальные данные"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live"
+    },
+    {
+      "slug": "golosovoy-vvod-v-claude",
+      "title": "Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона",
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "голосовой ввод",
+        "Dictate",
+        "Voice mode",
+        "микрофон",
+        "надиктовать",
+        "говорить вместо печатать"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live"
+    },
+    {
+      "slug": "skrinshot-vmesto-obyasneniy",
+      "title": "Скриншот вместо объяснений: покажи Клоду экран, где застрял",
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "скриншот",
+        "скрин",
+        "показать экран",
+        "картинка в чат",
+        "непонятная кнопка"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live"
+    },
+    {
+      "slug": "gotovye-fayly-excel-word-pdf",
+      "title": "Готовый Excel, Word, PDF или презентация - без копипаста",
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "готовый файл",
+        "Excel",
+        "xlsx",
+        "Word",
+        "docx",
+        "PDF",
+        "презентация",
+        "pptx",
+        "формулы",
+        "скачать файл"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live"
+    },
+    {
+      "slug": "artefakty-v-claude",
+      "title": "Артефакты: ответ Клода в отдельном окне, а не в переписке",
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "артефакт",
+        "отдельное окно",
+        "калькулятор",
+        "чек-лист",
+        "раздел Artifacts",
+        "поделиться ссылкой",
+        "Share"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live"
+    },
+    {
+      "slug": "pervyy-proekt-v-claude",
+      "title": "Первый проект в Claude: своя папка с памятью",
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "проект",
+        "New Project",
+        "база знаний",
+        "инструкции проекта",
+        "своя папка"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii",
+        "kak-rasskazat-o-sebe"
+      ],
+      "status": "live"
+    }
+  ]
+}
