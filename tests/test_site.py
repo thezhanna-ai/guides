@@ -308,7 +308,9 @@ class GuidesSiteTest(unittest.TestCase):
         for page in (ACCESS, PROFILE):
             html = page.read_text(encoding="utf-8")
             self.assertIn("width: 260px", html)
-            self.assertIn("margin-left: -50px", html)
+            # Отрицательный отступ -50px убран 19.09: он срезал оглавление слева
+            # на 1200-1300px во всех раздатках. Сторожим, чтобы не вернулся
+            self.assertNotIn("margin-left: -50px", html)
             self.assertIn("@media (min-width: 1200px) and (max-width: 1279px)", html)
             self.assertIn("margin-left: -18px", html)
             self.assertNotIn("@media (min-width: 1280px) and (max-width: 1289px)", html)

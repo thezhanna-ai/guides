@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content="{description}">
+  <!-- Страница собрана из data/statyi.json скриптом scripts/sobrat_glavnuyu.py
+       Руками не править: правка затрётся следующей сборкой -->
+  <style>
+    :root {{
+      --ink: #102F30;
+      --text: #24302D;
+      --paper: #F8F7F2;
+      --card: #FFFFFF;
+      --sage: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --muted: #65716D;
+      --green: #3E8E5A;
+      --green-bg: #E4F1E8;
+      --blue: #2C6FA6;
+      --blue-bg: #E4EDF5;
+      --red: #B4442E;
+      --red-bg: #F5E6E2;
+      --black: #2A2A2A;
+      --black-bg: #E7E5E3;
+    }}
+    * {{ box-sizing: border-box }}
+    body {{
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }}
+    header, main {{ width: min(1120px, calc(100% - 40px)); margin: 0 auto }}
+    header {{ padding: 66px 0 30px }}
+    .eyebrow {{ margin: 0 0 12px; color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase }}
+    h1 {{ max-width: 760px; margin: 0; color: var(--ink); font-size: clamp(36px, 7vw, 68px); line-height: 1.04 }}
+    .lead {{ max-width: 680px; margin: 22px 0 0; font: 22px/1.5 Georgia, serif }}
+    .intro {{ max-width: 680px; margin: 16px 0 0; color: var(--muted); font-size: 17px; line-height: 1.6 }}
+    .levels {{ max-width: 680px; margin: 10px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 17px; line-height: 1.6 }}
+    .levels li {{ display: flex; align-items: baseline; gap: 10px; margin-top: 8px }}
+    .levels b {{ color: var(--ink) }}
+
+    /* Поиск и фильтр по тегам */
+    .toolbar {{ display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 30px 0 6px; padding: 18px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--card) }}
+    .search-input {{
+      flex: 1 1 240px;
+      min-width: 200px;
+      padding: 11px 14px;
+      border: 1px solid var(--sage-line);
+      border-radius: 10px;
+      background: var(--paper);
+      color: var(--text);
+      font: 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }}
+    .search-input:focus {{ outline: 2px solid var(--accent); outline-offset: 1px }}
+    .tag-filters {{ display: flex; flex-wrap: wrap; gap: 8px }}
+    .tag-btn {{
+      padding: 8px 14px;
+      border: 1px solid var(--sage-line);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .1s ease, background .15s ease, color .15s ease, border-color .15s ease;
+    }}
+    .tag-btn:hover {{ transform: translateY(-1px) }}
+    .tag-btn.active {{ background: var(--ink); color: var(--paper); border-color: var(--ink) }}
+    .no-results {{ display: none; margin: 30px 0; padding: 22px; border: 1px dashed var(--sage-line); border-radius: 12px; color: var(--muted); text-align: center }}
+    .no-results.show {{ display: block }}
+
+    /* Блоки верхнего уровня */
+    .tool-block {{ margin: 40px 0 0 }}
+    .tool-block:first-of-type {{ margin-top: 26px }}
+    .tool-head {{ display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap }}
+    .tool-head h2 {{ margin: 0; color: var(--ink); font-size: 30px; line-height: 1.15 }}
+    .tool-head p {{ margin: 0; color: var(--muted); font-size: 15px }}
+
+    /* Трассы (уровни) */
+    .track {{ margin-top: 20px; padding: 22px; border: 1px solid var(--sage-line); border-radius: 16px; background: var(--card) }}
+    .track-head {{ display: flex; align-items: center; gap: 10px; margin-bottom: 4px }}
+    .track-dot {{ width: 13px; height: 13px; border-radius: 50%; flex: none }}
+    .track-dot.green {{ background: var(--green) }}
+    .track-dot.blue {{ background: var(--blue) }}
+    .track-dot.red {{ background: var(--red) }}
+    .track-dot.black {{ background: var(--black) }}
+    .track-name {{ margin: 0; font-size: 19px; font-weight: 800; color: var(--ink) }}
+    .track-tag {{
+      margin-left: auto;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }}
+    .track-tag.green {{ background: var(--green-bg); color: var(--green) }}
+    .track-tag.blue {{ background: var(--blue-bg); color: var(--blue) }}
+    .track-tag.red {{ background: var(--red-bg); color: var(--red) }}
+    .track-tag.black {{ background: var(--black-bg); color: var(--black) }}
+    .track-desc {{ margin: 4px 0 0; color: var(--muted); font-size: 14.5px }}
+
+    /* Карточки гайдов: плотная сетка, три колонки на широком экране */
+    /* auto-fit, а не auto-fill: когда статей в трассе мало, они растягиваются
+       на всю ширину, а не жмутся влево с пустотой справа */
+    .guides {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-top: 18px }}
+    .guide-link {{
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      min-height: 0;
+      padding: 13px 14px;
+      border: 1px solid var(--sage-line);
+      border-radius: 10px;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 14.5px;
+      font-weight: 700;
+      line-height: 1.32;
+      text-decoration: none;
+      box-shadow: 0 3px 0 #AAB9B3;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }}
+    .guide-title {{ display: block }}
+    .kind {{ align-self: flex-start; padding: 2px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase }}
+    .kind-instr {{ background: var(--sage); color: var(--muted) }}
+    .kind-razbor {{ background: #FDF0CE; color: #8A6410 }}
+    .kind-obzor {{ background: #FBE3D2; color: #9C4A1E }}
+    .guide-link:hover {{ transform: translateY(2px); box-shadow: 0 1px 0 #AAB9B3 }}
+    .guide-link:active {{ transform: translateY(3px); box-shadow: 0 0 0 #AAB9B3 }}
+    .soon {{ display: inline-block; margin-top: 16px; padding: 6px 10px; border-radius: 7px; background: var(--sage); color: var(--muted); font-size: 13px; font-weight: 700 }}
+
+    footer {{ padding: 60px 0 70px; color: var(--muted); font-size: 13px }}
+
+    @media (max-width: 720px) {{
+      header, main {{ width: min(100% - 28px, 1120px) }}
+      header {{ padding-top: 42px }}
+      .guides {{ grid-template-columns: 1fr }}
+      .toolbar {{ flex-direction: column; align-items: stretch }}
+      .search-input {{ flex: 0 0 auto }}
+    }}
+
+    @media (prefers-reduced-motion: reduce) {{
+      .tag-btn, .tag-btn:hover, .guide-link, .guide-link:hover, .guide-link:active {{
+        transition: none; transform: none;
+      }}
+    }}
+  </style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">{nadzagolovok}</p>
+    <h1>{h1}</h1>
+    <p class="lead">{lead}</p>
+    <p class="intro">{intro}</p>
+    <p class="intro">Гайды размечены по уровню:</p>
+    <ul class="levels">
+{urovni}
+    </ul>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <input class="search-input" type="search" id="guide-search" placeholder="Найти гайд по названию…" aria-label="Поиск по гайдам">
+      <div class="tag-filters" id="tag-filters" role="group" aria-label="Фильтр по разделам">
+{filtry}
+      </div>
+    </div>
+    <p class="no-results" id="no-results">Ничего не нашлось. Попробуй другое слово или сними фильтр</p>
+
+{razdely}
+
+    <footer>{podval}</footer>
+  </main>
+
+  <script>
+    var searchInput = document.getElementById('guide-search');
+    var tagButtons = document.querySelectorAll('.tag-btn');
+    var guideLinks = document.querySelectorAll('.guide-link');
+    var noResults = document.getElementById('no-results');
+    var activeTag = 'all';
+
+    function applyFilters() {{
+      var query = searchInput.value.trim().toLowerCase();
+      var visibleCount = 0;
+
+      guideLinks.forEach(function (link) {{
+        var text = link.textContent.toLowerCase();
+        var tags = (link.getAttribute('data-tags') || '').split(' ');
+        var matchesTag = activeTag === 'all' || tags.indexOf(activeTag) !== -1;
+        var matchesQuery = query === '' || text.indexOf(query) !== -1;
+        var visible = matchesTag && matchesQuery;
+        link.style.display = visible ? '' : 'none';
+        if (visible) visibleCount++;
+      }});
+
+      document.querySelectorAll('.track').forEach(function (track) {{
+        var links = track.querySelectorAll('.guide-link');
+        var anyVisible = false;
+        links.forEach(function (l) {{ if (l.style.display !== 'none') anyVisible = true; }});
+        var emptyTrack = links.length === 0;
+        // трасса без своих гайдов («готовится») видна, пока не фильтруют и не ищут
+        var keepEmpty = emptyTrack && query === '';
+        track.style.display = (keepEmpty || anyVisible) ? '' : 'none';
+      }});
+
+      document.querySelectorAll('.tool-block').forEach(function (block) {{
+        var section = block.getAttribute('data-section');
+        var matchesSection = activeTag === 'all' || section === activeTag;
+        var tracks = block.querySelectorAll('.track');
+        var anyTrack = false;
+        tracks.forEach(function (t) {{ if (t.style.display !== 'none') anyTrack = true; }});
+        block.style.display = (matchesSection && anyTrack) ? '' : 'none';
+      }});
+
+      noResults.classList.toggle('show', visibleCount === 0 && query !== '');
+    }}
+
+    searchInput.addEventListener('input', applyFilters);
+
+    tagButtons.forEach(function (btn) {{
+      btn.addEventListener('click', function () {{
+        tagButtons.forEach(function (b) {{ b.classList.remove('active'); }});
+        btn.classList.add('active');
+        activeTag = btn.getAttribute('data-tag');
+        applyFilters();
+      }});
+    }});
+  </script>
+</body>
+</html>

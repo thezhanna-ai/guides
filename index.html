@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Нейросети работают на тебя</title>
   <meta name="description" content="Инструкции, разборы и гайды по нейросетям для не-программистов: от первой кнопки до собственных проектов">
+  <!-- Страница собрана из data/statyi.json скриптом scripts/sobrat_glavnuyu.py
+       Руками не править: правка затрётся следующей сборкой -->
   <style>
     :root {
       --ink: #102F30;
@@ -101,37 +103,36 @@
     .track-tag.red { background: var(--red-bg); color: var(--red) }
     .track-tag.black { background: var(--black-bg); color: var(--black) }
     .track-desc { margin: 4px 0 0; color: var(--muted); font-size: 14.5px }
-    .guides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px }
+
+    /* Карточки гайдов: плотная сетка, три колонки на широком экране */
+    /* auto-fit, а не auto-fill: когда статей в трассе мало, они растягиваются
+       на всю ширину, а не жмутся влево с пустотой справа */
+    .guides { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-top: 18px }
     .guide-link {
       display: flex;
-      min-height: 92px;
-      align-items: flex-end;
-      padding: 16px 18px;
+      flex-direction: column;
+      gap: 7px;
+      min-height: 0;
+      padding: 13px 14px;
       border: 1px solid var(--sage-line);
-      border-radius: 12px;
+      border-radius: 10px;
       background: var(--paper);
       color: var(--ink);
-      font-weight: 800;
-      line-height: 1.3;
+      font-size: 14.5px;
+      font-weight: 700;
+      line-height: 1.32;
       text-decoration: none;
-      box-shadow: 0 4px 0 #AAB9B3;
+      box-shadow: 0 3px 0 #AAB9B3;
       transition: transform .12s ease, box-shadow .12s ease;
     }
-    .guide-link { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 8px }
-    .kind { align-self: flex-start; padding: 3px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase }
+    .guide-title { display: block }
+    .kind { align-self: flex-start; padding: 2px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase }
     .kind-instr { background: var(--sage); color: var(--muted) }
     .kind-razbor { background: #FDF0CE; color: #8A6410 }
     .kind-obzor { background: #FBE3D2; color: #9C4A1E }
-    .guide-link:hover { transform: translateY(2px); box-shadow: 0 2px 0 #AAB9B3 }
-    .guide-link:active { transform: translateY(4px); box-shadow: 0 0 0 #AAB9B3 }
+    .guide-link:hover { transform: translateY(2px); box-shadow: 0 1px 0 #AAB9B3 }
+    .guide-link:active { transform: translateY(3px); box-shadow: 0 0 0 #AAB9B3 }
     .soon { display: inline-block; margin-top: 16px; padding: 6px 10px; border-radius: 7px; background: var(--sage); color: var(--muted); font-size: 13px; font-weight: 700 }
-
-    /* Прикладные проекты - отдельный блок без цвета трассы */
-    .projects-block { margin-top: 46px; padding: 26px; border: 1px solid var(--sage-line); border-radius: 16px; background: var(--sage) }
-    .projects-block h2 { margin: 0; color: var(--ink); font-size: 28px }
-    .projects-block > p { margin: 9px 0 0; color: var(--muted) }
-    .projects-block .guides { margin-top: 20px }
-    .projects-block .guide-link { background: var(--card) }
 
     footer { padding: 60px 0 70px; color: var(--muted); font-size: 13px }
 
@@ -141,6 +142,12 @@
       .guides { grid-template-columns: 1fr }
       .toolbar { flex-direction: column; align-items: stretch }
       .search-input { flex: 0 0 auto }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tag-btn, .tag-btn:hover, .guide-link, .guide-link:hover, .guide-link:active {
+        transition: none; transform: none;
+      }
     }
   </style>
 </head>
@@ -186,10 +193,20 @@
         </div>
         <p class="track-desc">Хватает большинству: VPN, регистрация, оплата. Разобрано на примере Claude</p>
         <div class="guides">
-          <a class="guide-link" data-tags="dostup green" href="claude-ai/podklyuchenie-iz-rossii/"><span class="kind kind-instr">Инструкция</span>Claude из России: подключение без блокировок</a>
+          <a class="guide-link" data-tags="dostup green" href="claude-ai/podklyuchenie-iz-rossii/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Claude из России: подключение без блокировок</span></a>
         </div>
       </div>
 
+      <div class="track" data-track="blue">
+        <div class="track-head">
+          <span class="track-dot blue" aria-hidden="true"></span>
+          <h3 class="track-name">Свой сервер</h3>
+          <span class="track-tag blue">Средний уровень</span>
+        </div>
+        <p class="track-desc">Постоянный доступ без VPN: своя машина в другой стране</p>
+        <span class="soon">Гайды готовятся</span>
+      </div>
+    </section>
 
     <section class="tool-block" data-section="claude" aria-label="Claude">
       <div class="tool-head">
@@ -205,15 +222,16 @@
         </div>
         <p class="track-desc">Чат Claude.ai по одной настройке за раз. Ничего не нужно знать заранее</p>
         <div class="guides">
-          <a class="guide-link" data-tags="claude green" href="claude-ai/kak-rasskazat-o-sebe/"><span class="kind kind-instr">Инструкция</span>Claude помнит о тебе: что рассказать один раз</a>
-          <a class="guide-link" data-tags="claude green" href="claude-ai/vybor-modeli-i-effort/"><span class="kind kind-instr">Инструкция</span>Модель и уровень effort: что включать под задачу</a>
-          <a class="guide-link" data-tags="claude green" href="claude-ai/podklyuchit-gmail-drive-calendar/"><span class="kind kind-instr">Инструкция</span>Gmail, Google Drive и Calendar внутри Claude</a>
-          <a class="guide-link" data-tags="claude green" href="claude-ai/web-search-v-claude/"><span class="kind kind-instr">Инструкция</span>Веб-поиск в Claude: ответы со свежими ссылками</a>
-          <a class="guide-link" data-tags="claude green" href="claude-ai/golosovoy-vvod-v-claude/"><span class="kind kind-instr">Инструкция</span>Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</a>
-          <a class="guide-link" data-tags="claude green" href="claude-ai/skrinshot-vmesto-obyasneniy/"><span class="kind kind-instr">Инструкция</span>Скриншот вместо объяснений: покажи Клоду экран, где застрял</a>
-          <a class="guide-link" data-tags="claude green" href="claude-ai/gotovye-fayly-excel-word-pdf/"><span class="kind kind-instr">Инструкция</span>Готовый Excel, Word, PDF или презентация - без копипаста</a>
-          <a class="guide-link" data-tags="claude green" href="claude-ai/pervyy-proekt-v-claude/"><span class="kind kind-instr">Инструкция</span>Первый проект в Claude: своя папка с памятью</a>
-          <a class="guide-link" data-tags="claude green" href="claude-ai/artefakty-v-claude/"><span class="kind kind-instr">Инструкция</span>Артефакты: ответ Клода в отдельном окне, а не в переписке</a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/kak-rasskazat-o-sebe/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Claude помнит о тебе: что рассказать один раз</span></a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/vybor-modeli-i-effort/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Модель и уровень effort: что включать под задачу</span></a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/podklyuchit-gmail-drive-calendar/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Gmail, Google Drive и Calendar внутри Claude</span></a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/web-search-v-claude/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Веб-поиск в Claude: ответы со свежими ссылками</span></a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/golosovoy-vvod-v-claude/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</span></a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/skrinshot-vmesto-obyasneniy/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Скриншот вместо объяснений: покажи Клоду экран, где застрял</span></a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/gotovye-fayly-excel-word-pdf/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Готовый Excel, Word, PDF или презентация - без копипаста</span></a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/artefakty-v-claude/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Артефакты: ответ Клода в отдельном окне, а не в переписке</span></a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/incognito-chat-v-claude/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Инкогнито в Claude: разговор, который не попадёт в память</span></a>
+          <a class="guide-link" data-tags="claude green" href="claude-ai/pervyy-proekt-v-claude/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Первый проект в Claude: своя папка с памятью</span></a>
         </div>
       </div>
 
@@ -225,8 +243,8 @@
         </div>
         <p class="track-desc">Переход от чата к коду: свои проекты, CLI и настройка под задачу</p>
         <div class="guides">
-          <a class="guide-link" data-tags="claude blue" href="claude-ai/shest-skillov/"><span class="kind kind-instr">Инструкция</span>Шесть скиллов Claude: как найти, подключить и вызвать</a>
-          <a class="guide-link" data-tags="claude blue" href="claude-ai/svoy-sayt-ne-bliznec/"><span class="kind kind-instr">Инструкция</span>Свой сайт, а не очередной близнец</a>
+          <a class="guide-link" data-tags="claude blue" href="claude-ai/shest-skillov/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Шесть скиллов Claude: как найти, подключить и вызвать</span></a>
+          <a class="guide-link" data-tags="claude blue" href="claude-ai/svoy-sayt-ne-bliznec/"><span class="kind kind-instr">Инструкция</span><span class="guide-title">Свой сайт, а не очередной близнец</span></a>
         </div>
       </div>
     </section>
@@ -263,6 +281,7 @@
         <h2>Картинки и видео</h2>
         <p>Чем рисовать, чем монтировать, что из этого стоит своих денег</p>
       </div>
+
       <div class="track">
         <span class="soon">Гайды готовятся</span>
       </div>
@@ -273,6 +292,7 @@
         <h2>Свои проекты</h2>
         <p>Собранное под ключ: сайт, бот, рабочая система под конкретную задачу</p>
       </div>
+
       <div class="track">
         <span class="soon">Гайды готовятся</span>
       </div>
@@ -283,6 +303,7 @@
         <h2>Что происходит</h2>
         <p>Разборы событий, которые меняют работу с нейросетями. Кнопки нажимать не нужно, уровень не важен</p>
       </div>
+
       <div class="track">
         <span class="soon">Разборы готовятся</span>
       </div>
