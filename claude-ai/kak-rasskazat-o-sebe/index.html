@@ -190,6 +190,13 @@
     }
     .sources { padding-left: 22px }
     .sources li { margin: 9px 0 }
+    /* Партнёрская врезка в середине длинной статьи: узкая строка без заливки.
+       Намеренно тише финального блока - это попутное предложение, а не вывод */
+    .partner-line { margin: 46px 0; padding: 15px 0 15px 16px; border-left: 3px solid var(--line);
+      color: var(--muted); font-size: 15.5px; line-height: 1.5 }
+    .partner-line a { color: var(--accent-dark); font-weight: 700; text-decoration: underline;
+      text-underline-offset: 3px }
+    .partner-line a:hover { color: var(--accent) }
     .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--emerald); color: var(--white) }
     .cta .section-label { color: var(--paper-2) }
     .cta h2 { color: var(--white) }
@@ -390,6 +397,8 @@
           </ol>
           <div class="result"><p><b>Результат:</b> в блоке 3 выбраны оформление и шрифт чата</p></div>
         </section>
+
+        <p class="partner-line">Настройки заполнены - дальше вопрос, что Клоду поручать. На бесплатном практикуме ИИ-Лагерь это показывают прямо на экране: какую задачу дают, какими словами и что получается - <a data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Посмотреть практикум</a></p>
 
         <section class="content-section" id="pamyat">
           <p class="section-label">Память Claude</p>

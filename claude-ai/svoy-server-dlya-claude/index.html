@@ -215,6 +215,13 @@
       .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px }
     }
 
+    /* Партнёрская врезка в середине длинной статьи: узкая строка без заливки.
+       Намеренно тише финального блока - это попутное предложение, а не вывод */
+    .partner-line { margin: 46px 0; padding: 15px 0 15px 16px; border-left: 3px solid var(--line);
+      color: var(--muted); font-size: 15.5px; line-height: 1.5 }
+    .partner-line a { color: var(--accent-dark); font-weight: 700; text-decoration: underline;
+      text-underline-offset: 3px }
+    .partner-line a:hover { color: var(--accent) }
     .cta { margin-top: 72px; padding: 31px 30px 33px; border-radius: 14px; background: #102F30; color: #FFFFFF }
     .cta .section-label { color: #F0E8D8 }
     .cta h2 { color: #FFFFFF }

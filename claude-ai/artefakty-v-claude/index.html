@@ -183,6 +183,13 @@
     .related-plaque p { margin: 0 }
     .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
     .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    /* Партнёрская врезка в середине длинной статьи: узкая строка без заливки.
+       Намеренно тише финального блока - это попутное предложение, а не вывод */
+    .partner-line { margin: 46px 0; padding: 15px 0 15px 16px; border-left: 3px solid var(--line);
+      color: var(--muted); font-size: 15.5px; line-height: 1.5 }
+    .partner-line a { color: var(--accent-dark); font-weight: 700; text-decoration: underline;
+      text-underline-offset: 3px }
+    .partner-line a:hover { color: var(--accent) }
     .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
     .cta h2 { color: #FFFFFF }
     .cta p { color: #F0E8D8 }
@@ -388,6 +395,8 @@
             </div>
           </div>
         </section>
+
+        <p class="partner-line">Тем же способом, каким получился калькулятор, делают сайты, телеграм-ботов и небольшие программы под свою задачу. На бесплатном практикуме ИИ-Лагерь это показывают на экране по шагам - <a data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Посмотреть практикум</a></p>
 
         <section class="content-section" id="gde-zhivut">
           <p class="section-label">Где их искать потом</p>
