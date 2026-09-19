@@ -206,7 +206,7 @@
     .sources { margin: 24px 0 0; padding-left: 22px }
     .sources li { margin: 10px 0; overflow-wrap: anywhere }
 
-    .related-plaque { grid-column: 2; margin-top: 0; padding: 3px 0 3px 16px; border-left: 3px solid var(--line) }
+    .related-plaque { grid-column: 2; margin-top: 0; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--sage-note) }
     .related-plaque p { margin: 0 }
     .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
     .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
@@ -216,7 +216,7 @@
       .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px }
       .header-actions { margin-right: 8px }
       .header-controls { width: 180px }
-      .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px }
+      .masthead .camp-link { flex: 1; justify-content: center; padding: 0 8px }
     }
 
     /* Партнёрская врезка в середине длинной статьи: узкая строка без заливки.
@@ -301,14 +301,16 @@
     <div class="masthead-inner">
       <div class="brand-group">
         <div class="brand">Claude.ai: кнопка за кнопкой</div>
-        <button class="theme-toggle" type="button" aria-label="Переключить тему" aria-pressed="false">
-          <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
-          <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"></path></svg>
-        </button>
       </div>
       <div class="header-actions">
         <div class="handout-title">Свой сервер для Claude</div>
-        <a class="camp-link" data-partner href="">На ИИ-Лагерь</a>
+        <div class="header-controls">
+          <button class="theme-toggle" type="button" aria-label="Включить тёмную тему" aria-pressed="false" title="Переключить тему">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+          </button>
+          <a class="camp-link" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+        </div>
       </div>
     </div>
   </header>
