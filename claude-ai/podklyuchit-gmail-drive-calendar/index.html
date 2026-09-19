@@ -95,8 +95,17 @@
     .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
     .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
     .result p { margin: 0 }
-    .info-card, .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
-    .info-card p { margin: 0 }
+/* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
+       .info-card - полезное уточнение, фон без полосы
+       .warn-card - оговорка или предупреждение, фон плюс оранжевая полоса
+       .check-panel - читатель отмечает пункты, поэтому БЕЛАЯ карточка */
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 0 11px 11px 0; background: var(--info) }
+    .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .info-card p, .warn-card p { margin: 0 }
+    /* абзац после блока слипался с ним: у блоков margin-bottom 0,
+       а у p margin-top 0. Зазор был 0 px при 25 px между абзацами */
+    .info-card + p, .warn-card + p, .check-panel + p { margin-top: 25px }
     .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
     figure { margin: 28px 0 0 }
     .shot { width: min(100%, 650px) }
@@ -337,7 +346,7 @@
             <li>создавать, обновлять и удалять события</li>
             <li>управлять участниками, приглашениями и повторяющимися встречами</li>
           </ul>
-          <div class="info-card"><p><span class="info-title">Перед изменением календаря:</span> попроси Claude сначала показать, что он собирается создать, перенести или удалить. Проверь дату, время, часовой пояс и участников, затем подтверди действие</p></div>
+          <div class="warn-card"><p><span class="info-title">Перед изменением календаря:</span> попроси Claude сначала показать, что он собирается создать, перенести или удалить. Проверь дату, время, часовой пояс и участников, затем подтверди действие</p></div>
         </section>
 
         <section class="content-section" id="prompty">
@@ -373,7 +382,7 @@
             </ol>
           </div>
           <div class="info-card"><p><span class="info-title">Что проверяется по документам Anthropic:</span> утверждение о том, что данные из Gmail, Drive и Calendar не используются для обучения моделей, нельзя подтвердить переключателем в аккаунте. Это правило сервиса, опубликованное в справке Anthropic</p></div>
-          <div class="info-card"><p><span class="info-title">Перед отправкой или изменением:</span> Claude покажет, какое действие собирается выполнить, и попросит подтверждение. Проверь письмо, файл или событие и только после этого подтверждай</p></div>
+          <div class="warn-card"><p><span class="info-title">Перед отправкой или изменением:</span> Claude покажет, какое действие собирается выполнить, и попросит подтверждение. Проверь письмо, файл или событие и только после этого подтверждай</p></div>
         </section>
 
         <section class="content-section" id="ne-rabotaet">
@@ -385,7 +394,7 @@
             <li>Выбери проблемный Google-сервис и нажми <span class="path">Disconnect</span></li>
             <li>Подтверди отключение и подключи сервис заново</li>
           </ol>
-          <div class="info-card"><p><span class="info-title">Если это рабочий Google-аккаунт:</span> администратор компании может запрещать подключение сторонних сервисов. Попроси его разрешить Claude в настройках Google Workspace. В панели администратора это называется доверенным приложением. На тарифах Claude Team и Enterprise владелец аккаунта также должен включить коннекторы для всей организации</p></div>
+          <div class="warn-card"><p><span class="info-title">Если это рабочий Google-аккаунт:</span> администратор компании может запрещать подключение сторонних сервисов. Попроси его разрешить Claude в настройках Google Workspace. В панели администратора это называется доверенным приложением. На тарифах Claude Team и Enterprise владелец аккаунта также должен включить коннекторы для всей организации</p></div>
         </section>
 
         <section class="content-section" id="sources">

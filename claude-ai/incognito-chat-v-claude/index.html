@@ -95,8 +95,17 @@
     .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
     .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
     .result p { margin: 0 }
-    .info-card, .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
-    .info-card p { margin: 0 }
+/* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
+       .info-card - полезное уточнение, фон без полосы
+       .warn-card - оговорка или предупреждение, фон плюс оранжевая полоса
+       .check-panel - читатель отмечает пункты, поэтому БЕЛАЯ карточка */
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 0 11px 11px 0; background: var(--info) }
+    .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .info-card p, .warn-card p { margin: 0 }
+    /* абзац после блока слипался с ним: у блоков margin-bottom 0,
+       а у p margin-top 0. Зазор был 0 px при 25 px между абзацами */
+    .info-card + p, .warn-card + p, .check-panel + p { margin-top: 25px }
     .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
     figure { margin: 28px 0 0 }
     .shot { width: min(100%, 650px) }
@@ -256,14 +265,14 @@
           <div class="step">
             <h3 id="pishi">3. Пиши как обычно</h3>
             <p>Дальше ничего не меняется: то же поле ввода, тот же выбор модели, тот же микрофон. Claude отвечает так же подробно, как в обычном чате. Разница только в том, что этот разговор нигде не останется</p>
-            <div class="info-card"><p><span class="info-title">Важное отличие:</span> в инкогнито Claude не помнит и твои прошлые чаты тоже. Если ответ зависит от того, что вы обсуждали раньше, нужные детали придётся написать прямо здесь</p></div>
+            <div class="warn-card"><p><span class="info-title">Важное отличие:</span> в инкогнито Claude не помнит и твои прошлые чаты тоже. Если ответ зависит от того, что вы обсуждали раньше, нужные детали придётся написать прямо здесь</p></div>
             <div class="result"><p><b>Результат:</b> ты получаешь обычный ответ Claude, но без следа в истории и в памяти</p></div>
           </div>
 
           <div class="step">
             <h3 id="zakryt">4. Закрой чат, когда закончил</h3>
             <p>Нажми крестик в правом верхнем углу чёрного окна. Ты вернёшься в обычный Claude. Поднять этот разговор позже нельзя: ни в истории, ни поиском его больше нет</p>
-            <div class="info-card"><p><span class="info-title">Перед закрытием:</span> если из разговора нужен результат - список, письмо, расчёт, - скопируй его себе сразу. После закрытия вернуться будет некуда</p></div>
+            <div class="warn-card"><p><span class="info-title">Перед закрытием:</span> если из разговора нужен результат - список, письмо, расчёт, - скопируй его себе сразу. После закрытия вернуться будет некуда</p></div>
             <div class="result"><p><b>Результат:</b> разговор закончен и не оставил следа в аккаунте</p></div>
           </div>
         </section>
@@ -305,7 +314,7 @@
               <li>Позже этот чат нельзя найти поиском и открыть заново</li>
             </ul>
           </div>
-          <div class="info-card"><p><span class="info-title">Чего режим не делает:</span> он не прячет тебя от провайдера, работодателя или владельца компьютера и не превращает разговор в анонимный. Сообщение всё равно уходит на сервер, чтобы Claude мог ответить</p></div>
+          <div class="warn-card"><p><span class="info-title">Чего режим не делает:</span> он не прячет тебя от провайдера, работодателя или владельца компьютера и не превращает разговор в анонимный. Сообщение всё равно уходит на сервер, чтобы Claude мог ответить</p></div>
           <p>Насколько долго данные живут на стороне сервиса и что происходит с ними по требованиям безопасности или закона - вопрос не интерфейса, а правил Anthropic. Если тебе нужна точность в этом месте, сверься со справкой по ссылке в конце: в самом окне такой информации нет</p>
         </section>
 

@@ -95,7 +95,17 @@
     .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
     .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
     .result p { margin: 0 }
-    .info-card, .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+/* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
+       .info-card - полезное уточнение, фон без полосы
+       .warn-card - оговорка или предупреждение, фон плюс оранжевая полоса
+       .check-panel - читатель отмечает пункты, поэтому БЕЛАЯ карточка */
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 0 11px 11px 0; background: var(--info) }
+    .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .warn-card p { margin: 0 }
+    /* абзац после блока слипался с ним: у блоков margin-bottom 0,
+       а у p margin-top 0. Зазор был 0 px при 25 px между абзацами */
+    .info-card + p, .warn-card + p, .check-panel + p { margin-top: 25px }
     .limit-card { margin-top: 24px; padding: 13px 18px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
     .limit-card p { margin: 0 }
     .limit-card h3 { margin-bottom: 7px }
@@ -393,7 +403,7 @@
             <h3>Он может ошибиться в мелком тексте</h3>
             <p>Сноски и подписи в несколько пикселей читаются с ошибками. Цену, дату и имя тарифа стоит перепроверить глазами по своему экрану, особенно перед оплатой</p>
           </div>
-          <div class="info-card"><p><span class="info-title">Про личные данные:</span> на скриншоте экрана видно всё, что на нём открыто - почта, имя, номер карты, чужая переписка. Перед отправкой посмотри, что попало в кадр, и сними лишнее с экрана или закрой</p></div>
+          <div class="warn-card"><p><span class="info-title">Про личные данные:</span> на скриншоте экрана видно всё, что на нём открыто - почта, имя, номер карты, чужая переписка. Перед отправкой посмотри, что попало в кадр, и сними лишнее с экрана или закрой</p></div>
         </section>
 
         <section class="content-section" id="chastye">
