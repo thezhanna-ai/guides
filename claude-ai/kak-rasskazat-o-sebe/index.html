@@ -67,6 +67,7 @@
     .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 24px }
     .brand { color: var(--emerald); font-size: 18px; font-weight: 750; letter-spacing: -.015em }
     .header-actions { display: flex; align-items: center; gap: 14px; margin-right: 68px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
     .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750; line-height: 1.25 }
     .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 17px; border: 0; border-radius: 11px; background: var(--emerald-mid); color: var(--white); font: 750 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; box-shadow: 0 3px 0 var(--emerald); cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
     .press-button:hover { color: var(--white); transform: translateY(1px); box-shadow: 0 2px 0 var(--emerald) }
@@ -184,6 +185,9 @@
     @media (min-width: 1200px) {
       .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px }
       .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px }
+      .header-actions { margin-right: 8px }
+      .header-controls { width: 180px }
+      .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px }
     }
     @media (min-width: 1200px) and (max-width: 1279px) {
       .toc { margin-left: -18px }
@@ -264,8 +268,10 @@
       <div class="brand">Claude.ai: кнопка за кнопкой</div>
       <div class="header-actions">
         <div class="handout-title">Claude помнит о тебе: что рассказать один раз</div>
-        <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
-        <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+        <div class="header-controls">
+          <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+        </div>
       </div>
     </div>
   </header>
