@@ -817,6 +817,39 @@ class GuidesSiteTest(unittest.TestCase):
         )
         self.assertIn("На платном тарифе включать ничего не надо", block)
 
+    def test_all_articles_share_the_same_header_and_plaque_layout(self):
+        """Шапка и плашка образуют одну колонку 180px во всех статьях.
+
+        Добавлен 19.09 по её правке «визуально они должны составлять одну
+        ровную колонку». Пять ранних статей отставали от эталона: кнопка в
+        шапке вставала по ширине своего текста и не дотягивала до края
+        плашки 60px. Тест ловит дрейф, когда новую статью верстают лучше
+        предыдущей, а старые остаются как есть
+        """
+        korni = Path(__file__).resolve().parent.parent
+        # у этих двух статей своя вёрстка - её решение, к канону не приводим
+        svoya_verstka = {"shest-skillov", "svoy-sayt-ne-bliznec"}
+
+        for papka in sorted((korni / "claude-ai").iterdir()):
+            stranica = papka / "index.html"
+            if not stranica.exists() or papka.name in svoya_verstka:
+                continue
+            html = stranica.read_text(encoding="utf-8")
+            with self.subTest(statya=papka.name):
+                # переключатель темы и кнопка Лагеря - в общей обёртке
+                self.assertIn('class="header-controls"', html)
+                self.assertIn(".header-controls { width: 180px }", html)
+                # кнопка растягивается на всю колонку
+                self.assertRegex(html, r"\.masthead \.(press-button|camp-link) \{ flex: 1")
+                # плашка соседней статьи: надзаголовок, название и ОДНА строка-ссылка
+                plashka = html.split('class="related-plaque"', 1)[1].split("</aside>", 1)[0]
+                self.assertEqual(
+                    plashka.count("\n      <p"), 2,
+                    "в плашке должно быть ровно два <p>: надзаголовок и строка-ссылка",
+                )
+                # партнёрская ссылка в шапке не пустая
+                self.assertNotIn('data-partner href=""', html)
+
 
 if __name__ == "__main__":
     unittest.main()
