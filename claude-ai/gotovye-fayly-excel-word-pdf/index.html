@@ -44,8 +44,10 @@
     * { box-sizing: border-box }
     html { scroll-behavior: smooth }
     body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
-    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
-    a:hover { color: var(--accent-dark) }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
     a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
     .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
     .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
@@ -61,7 +63,7 @@
     .masthead .press-button { background: #1F4A43; color: #FFFFFF }
     .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
     .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
-    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: -50px; overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
     .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
     .toc a.active { color: var(--accent-dark); font-weight: 700 }
@@ -171,7 +173,6 @@
     .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
     .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
-    @media (min-width: 1200px) and (max-width: 1279px) { .toc { margin-left: -18px } }
     @media (max-width: 860px) {
       body { font-size: 17px; line-height: 1.62 }
       .masthead-inner { min-height: 60px; padding: 0 14px }
@@ -199,8 +200,12 @@
     .next-read h2 { margin: 0 0 4px; font-size: 20px }
     .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
     .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
-    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
-    .next-read a:hover { border-color: var(--accent) }
+    /* карточка должна читаться как ссылка, а не как серый блок текста.
+       text-decoration НАСЛЕДУЕТСЯ, поэтому подчёркиваем только .title */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
     .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
   </style>
 </head>
@@ -480,8 +485,8 @@
           <h2>Дальше по теме</h2>
           <p class="next-sub">Что логично прочитать следующим</p>
           <ul>
-            <li><a href="../pervyy-proekt-v-claude/">Первый проект в Claude: своя папка с памятью<span class="why">Файлы копятся - собери их в проект с общей памятью</span></a></li>
-            <li><a href="../vybor-modeli-i-effort/">Модель и уровень effort: что включать под задачу<span class="why">Под тяжёлые расчёты выбирай модель и усилие осознанно</span></a></li>
+            <li><a href="../pervyy-proekt-v-claude/"><span class="title">Первый проект в Claude: своя папка с памятью</span><span class="why">Файлы копятся - собери их в проект с общей памятью</span></a></li>
+            <li><a href="../vybor-modeli-i-effort/"><span class="title">Модель и уровень effort: что включать под задачу</span><span class="why">Под тяжёлые расчёты выбирай модель и усилие осознанно</span></a></li>
           </ul>
         </section>
 

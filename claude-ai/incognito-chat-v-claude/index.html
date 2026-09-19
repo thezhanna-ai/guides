@@ -44,8 +44,10 @@
     * { box-sizing: border-box }
     html { scroll-behavior: smooth }
     body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
-    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
-    a:hover { color: var(--accent-dark) }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
     a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
     .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
     .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
@@ -61,7 +63,7 @@
     .masthead .press-button { background: #1F4A43; color: #FFFFFF }
     .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
     .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
-    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: -50px; overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
     .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
     .toc a.active { color: var(--accent-dark); font-weight: 700 }
@@ -124,7 +126,6 @@
     .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
     .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
-    @media (min-width: 1200px) and (max-width: 1279px) { .toc { margin-left: -18px } }
     @media (max-width: 860px) {
       body { font-size: 17px; line-height: 1.62 }
       .masthead-inner { min-height: 60px; padding: 0 14px }
@@ -149,8 +150,13 @@
     .next-read h2 { margin: 0 0 4px; font-size: 20px }
     .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
     .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
-    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
-    .next-read a:hover { border-color: var(--accent) }
+    /* карточка должна читаться как ссылка, а не как серый блок текста:
+       цвет ссылки, подчёркивание заголовка и стрелка справа */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700; text-decoration: none }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
+    .next-read a:hover::after { transform: translateX(3px) }
     .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
   </style>
 </head>
@@ -201,10 +207,10 @@
           <p class="eyebrow">Claude.ai · Инкогнито</p>
           <h1>Инкогнито в Claude: разговор, который не попадёт в память</h1>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 18 СЕНТЯБРЯ 2026</p>
-          <p class="lead">Ты собираешься спросить у Claude про здоровье, чужие деньги или семейную ситуацию. Разговор разовый, но он ляжет в историю и в память, и потом Claude будет припоминать его в других чатах, где эта тема совсем не к месту. Отдельную настройку для этого искать не нужно: в углу есть кнопка с призраком</p>
+          <p class="lead">Ты собираешься спросить у Claude про здоровье, чужие деньги или семейную ситуацию. Разговор разовый, но он ляжет в историю и в память, и потом Claude будет припоминать его в других чатах. И дело не в том, что это не к месту. Ты вообще не хочешь, чтобы этот разговор где-то потом всплыл: поговорил, закрыл чат - и всё, больше он нигде и никогда не появляется. Отдельную настройку для этого искать не нужно: в углу есть кнопка с призраком</p>
           <aside class="route-note" aria-label="Короткий маршрут">
             <h2>Короткий маршрут</h2>
-            <p>Открой новый чат, нажми призрака в правом верхнем углу или <span class="path">⇧⌘I</span>. Откроется чёрное окно с надписью You're incognito. Поговорил, закрыл крестиком, чат нигде не остался</p>
+            <p>Открой новый чат и нажми призрака в правом верхнем углу. Откроется чёрное окно с надписью You're incognito. Поговорил, закрыл крестиком, чат нигде не остался</p>
           </aside>
         </header>
 
@@ -214,7 +220,7 @@
           <p class="section-label">Разовый разговор</p>
           <h2>Зачем нужен режим инкогнито</h2>
           <p class="purpose">Обычный чат Claude делает две вещи сразу: сохраняет разговор в истории слева и по ходу дела запоминает про тебя факты, чтобы отвечать точнее в следующий раз. Чаще всего это удобно. Но не каждый разговор ты хочешь оставлять в этой картине</p>
-          <p>Сюда попадают вопросы про диагноз и лекарства, чужие зарплаты и долги, конфликт с близким человеком, черновик заявления об уходе, чей-то чужой документ, который ты просто попросил разобрать. Заводить ради такого второй аккаунт не нужно, а чистить историю вручную потом неудобно</p>
+          <p>Речь о чувствительных темах, личных вопросах и конфиденциальной информации - своей или чужой. Вопросы про диагноз и лекарства, чужие зарплаты и долги, конфликт с близким человеком, черновик заявления об уходе, чей-то документ, который ты просто попросил разобрать. Заводить ради такого второй аккаунт не нужно, а чистить историю вручную потом неудобно</p>
           <div class="info-card"><p><span class="info-title">Простыми словами:</span> инкогнито - это разговор на один раз. Claude отвечает так же, но этот чат не появится в истории и не станет частью того, что он о тебе помнит</p></div>
         </section>
 
@@ -225,10 +231,10 @@
 
           <div class="step">
             <h3 id="prizrak">1. Найди призрака в углу</h3>
-            <p>Открой новый чат и посмотри в правый верхний угол окна. Там стоит кнопка с иконкой призрака. Если навести на неё курсор, появится подпись <span class="path">Use incognito</span> и сочетание клавиш <span class="path">⇧⌘I</span></p>
+            <p>Открой новый чат и посмотри в правый верхний угол окна. Там стоит кнопка с иконкой призрака. Если навести на неё курсор, появится подпись <span class="path">Use incognito</span>. Рядом Claude показывает горячие клавиши для твоей системы: на Mac это <span class="path">⇧⌘I</span>, на Windows сочетание своё - нажимать его необязательно, кнопка работает мышкой на любой системе</p>
             <figure>
               <div class="shot"><img src="assets/01-knopka-prizrak.png" alt="Экран нового чата Claude, в правом верхнем углу кнопка с призраком и подсказка Use incognito"></div>
-              <figcaption>Кнопка с призраком находится над полем ввода, в правом верхнем углу. Рядом с подписью <b>Use incognito</b> показано сочетание клавиш</figcaption>
+              <figcaption>Кнопка с призраком обведена оранжевым: она в правом верхнем углу, над полем ввода. Рядом всплывает подпись <b>Use incognito</b></figcaption>
             </figure>
             <div class="result"><p><b>Результат:</b> ты нашёл вход в инкогнито и можешь включать его одним нажатием или с клавиатуры</p></div>
           </div>
@@ -238,7 +244,7 @@
             <p>Нажми на призрака. Поверх обычного Claude откроется отдельное чёрное окно: слева вверху написано <span class="path">Incognito chat</span> с тем же призраком, в центре крупная надпись <span class="path">You're incognito</span>, справа вверху крестик для выхода</p>
             <figure>
               <div class="shot"><img src="assets/02-okno-incognito.png" alt="Чёрное окно Incognito chat с надписью You're incognito и пустым полем ввода"></div>
-              <figcaption>Тёмное оформление - главный признак режима. Пока окно выглядит так, разговор идёт в инкогнито</figcaption>
+              <figcaption>Оранжевым обведён заголовок <b>Incognito chat</b> - по нему и видно, что режим включён. Второй признак, тёмное оформление окна, не перепутаешь ни с чем</figcaption>
             </figure>
             <div class="result"><p><b>Результат:</b> на экране чёрное окно, а не обычный светлый чат. Это единственная проверка, которая нужна перед первым сообщением</p></div>
           </div>
@@ -264,7 +270,7 @@
           <p class="purpose">Не верь на слово ни инструкции, ни самому Claude. Проверка занимает минуту и делается один раз - дальше ты просто знаешь, что режим работает</p>
           <figure>
             <div class="shot"><img src="assets/03-otvet-claude.png" alt="Ответ Claude в инкогнито-чате: чаты не сохраняются в истории и память из них не формируется"></div>
-            <figcaption>Claude сам описывает правило и предлагает проверить его вживую. Здесь же видна его честная оговорка: свой интерфейс он не видит</figcaption>
+            <figcaption>Оранжевым обведено главное: чаты в инкогнито не сохраняются в истории и память из них не формируется. Ниже видна честная оговорка Claude - свой интерфейс он не видит</figcaption>
           </figure>
           <div class="check-panel">
             <h3>Проверка за минуту</h3>
@@ -277,7 +283,7 @@
           </div>
           <figure>
             <div class="shot"><img src="assets/04-istoriya-bez-chata.png" alt="Боковая панель Claude со списком чатов, инкогнито-разговора в списке нет"></div>
-            <figcaption>Список чатов после закрытия инкогнито: разговора в нём не появилось. Призрак виден и здесь, в правом верхнем углу обычного окна</figcaption>
+            <figcaption>Список чатов после закрытия инкогнито: разговора в нём нет. Оранжевым обведён призрак - из обычного окна он доступен всегда</figcaption>
           </figure>
           <div class="result"><p><b>Результат:</b> ты своими глазами увидел, что чат не попал в историю, и дальше можешь на режим полагаться</p></div>
         </section>
@@ -338,15 +344,16 @@
         <section class="next-read" aria-label="Дальше по теме">
           <h2>Дальше по теме</h2>
           <ul>
-            <li><a href="../kak-rasskazat-o-sebe/">Как рассказать Claude о себе<span class="why">Обратная сторона инкогнито: что и как Claude о тебе запоминает</span></a></li>
-            <li><a href="../pervyy-proekt-v-claude/">Собери первый проект в Claude<span class="why">Где держать разговоры, которые, наоборот, должны сохраняться</span></a></li>
+            <li><a href="../kak-rasskazat-o-sebe/"><span class="title">Как рассказать Claude о себе</span><span class="why">Инкогнито прячет разговор от памяти. А здесь наоборот: как настроить память и посмотреть, что Claude уже о тебе записал</span></a></li>
+            <li><a href="../pervyy-proekt-v-claude/"><span class="title">Собери первый проект в Claude</span><span class="why">Место для разговоров, которые, наоборот, должны сохраняться: файлы и переписка по одной теме лежат вместе</span></a></li>
           </ul>
         </section>
 
         <section class="cta" aria-label="Следующий шаг">
           <p class="section-label">Бесплатный практикум</p>
-          <h2>Разберись в настройках один раз и перестань их бояться</h2>
-          <p>ИИ-Лагерь - это бесплатный прикладной практикум по вайб-маркетингу на Claude Code и Codex. Каждый шаг показывают на экране: ты повторяешь и собираешь своё, без кода и технических знаний</p>
+          <h2>Дальше начинается вайб-кодинг</h2>
+          <p>Инкогнито, память, проекты - это кнопки в чате. Следующий шаг: Claude работает не в окне браузера, а прямо на твоём компьютере и делает за тебя дело - сайт, бота, разбор таблиц. Это называется вайб-кодинг, и он не требует ни кода, ни технических знаний</p>
+          <p>На бесплатном практикуме ИИ-Лагерь каждый шаг показывают на экране: ты повторяешь и собираешь своё</p>
           <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a>
         </section>
 

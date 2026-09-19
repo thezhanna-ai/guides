@@ -53,8 +53,10 @@
       line-height: 30.36px;
       -webkit-text-size-adjust: 100%;
     }
-    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
-    a:hover { color: var(--accent-dark) }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
     a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
     .progress { position: fixed; inset: 0 auto auto 0; z-index: 20; width: 0; height: 3px; background: var(--accent) }
 
@@ -114,7 +116,7 @@
       top: 84px;
       width: 260px;
       max-height: calc(100vh - 104px);
-      margin-left: -50px;
+      margin-left: max(-50px, calc((100vw - 1284px) / -2));
       overflow-y: auto;
       padding: 4px 18px 10px 0;
       border-right: 1px solid var(--line);
@@ -324,8 +326,12 @@
     .next-read h2 { margin: 0 0 4px; font-size: 20px }
     .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
     .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
-    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
-    .next-read a:hover { border-color: var(--accent) }
+    /* карточка должна читаться как ссылка, а не как серый блок текста.
+       text-decoration НАСЛЕДУЕТСЯ, поэтому подчёркиваем только .title */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
     .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
   </style>
 </head>
@@ -581,8 +587,8 @@
           <h2>Дальше по теме</h2>
           <p class="next-sub">Что логично прочитать следующим</p>
           <ul>
-            <li><a href="../kak-rasskazat-o-sebe/">Claude помнит о тебе: что рассказать один раз<span class="why">Вход работает - расскажи Claude о себе, чтобы не объяснять контекст каждый раз</span></a></li>
-            <li><a href="../svoy-server-dlya-claude/">Свой сервер для Claude<span class="why">Если VPN стал лотереей: свой сервер с постоянным адресом</span></a></li>
+            <li><a href="../kak-rasskazat-o-sebe/"><span class="title">Claude помнит о тебе: что рассказать один раз</span><span class="why">Вход работает - расскажи Claude о себе, чтобы не объяснять контекст каждый раз</span></a></li>
+            <li><a href="../svoy-server-dlya-claude/"><span class="title">Свой сервер для Claude</span><span class="why">Если VPN стал лотереей: свой сервер с постоянным адресом</span></a></li>
           </ul>
         </section>
 

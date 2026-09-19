@@ -52,8 +52,10 @@
       line-height: 30.36px;
       -webkit-text-size-adjust: 100%;
     }
-    a { color: var(--emerald-mid); text-decoration-color: var(--accent); text-underline-offset: 4px }
-    a:hover { color: var(--accent-dark) }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
     a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
     .progress { position: fixed; inset: 0 auto auto 0; z-index: 20; width: 0; height: 3px; background: var(--accent) }
 
@@ -69,7 +71,7 @@
     .theme-toggle:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
 
     .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
-    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: -50px; overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase }
     .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
     .toc a::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: transparent }
@@ -226,8 +228,12 @@
     .next-read h2 { margin: 0 0 4px; font-size: 20px }
     .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
     .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
-    .next-read a { display: block; padding: 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--ink); font-weight: 700; text-decoration: none; line-height: 1.35 }
-    .next-read a:hover { border-color: var(--accent) }
+    /* карточка должна читаться как ссылка, а не как серый блок текста.
+       text-decoration НАСЛЕДУЕТСЯ, поэтому подчёркиваем только .title */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
     .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
   </style>
 </head>
@@ -451,8 +457,8 @@
           <h2>Дальше по теме</h2>
           <p class="next-sub">Что логично прочитать следующим</p>
           <ul>
-            <li><a href="../web-search-v-claude/">Веб-поиск в Claude: ответы со свежими ссылками<span class="why">Чтобы ответы были свежими, а не из памяти модели - включи веб-поиск</span></a></li>
-            <li><a href="../pervyy-proekt-v-claude/">Первый проект в Claude: своя папка с памятью<span class="why">Следующий шаг: своя папка с памятью вместо отдельных чатов</span></a></li>
+            <li><a href="../web-search-v-claude/"><span class="title">Веб-поиск в Claude: ответы со свежими ссылками</span><span class="why">Чтобы ответы были свежими, а не из памяти модели - включи веб-поиск</span></a></li>
+            <li><a href="../pervyy-proekt-v-claude/"><span class="title">Первый проект в Claude: своя папка с памятью</span><span class="why">Следующий шаг: своя папка с памятью вместо отдельных чатов</span></a></li>
           </ul>
         </section>
 
