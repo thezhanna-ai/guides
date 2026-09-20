@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
 <title>САЙТ - собери свой, а не очередного близнеца</title>
-</head>
-<body>
 <style>
   :root{
     --emerald:#102F30; --emerald-mid:#1F4A43;
@@ -26,6 +24,26 @@
     --white:#FFFFFF; --shadow:rgba(16,47,48,.07);
   }
 
+  /* --- тёмная тема: канон сайта --- */
+  :root[data-theme="dark"]{
+    --paper:#162221; --paper2:#253331;
+    --info:#243735; --info-line:#48605C;
+    --ink:#EDF1EE; --muted:#B7C2BD; --line:#3C504C;
+    --white:#20302E;
+    --emerald:#DCEAE4; --emerald-mid:#A8D0BE;
+    --accent-dark:#FF9A78; --accent-text:#FF9A78;
+    --ok:#8FB89A; --warn:#FF9A78;
+    --code:#0D1817; --codetext:#EDF1EE;
+    --shadow:rgba(0,0,0,.34);
+    --mint:#243735; --mint-line:#48605C; --mint-ink:#DCEAE4;
+  }
+  /* шапка в тёмной теме не должна светиться бумагой */
+  :root[data-theme="dark"] .masthead{background:rgba(22,34,33,.97)}
+  :root[data-theme="dark"] .press-button{color:#162221}
+  :root[data-theme="dark"] .press-button:hover{color:#162221}
+  :root[data-theme="dark"] .num{color:#162221}
+  :root[data-theme="dark"] .badge{color:#162221}
+
   /* --- закреплённая шапка серии --- */
   .masthead{position:sticky;top:0;z-index:10;margin:-30px -18px 26px;border-bottom:1px solid var(--line);
             background:rgba(248,247,242,.97);
@@ -34,6 +52,13 @@
                   align-items:center;justify-content:space-between;gap:24px}
   .brand{color:var(--emerald);font-size:18px;font-weight:750;letter-spacing:-.015em}
   .header-actions{display:flex;align-items:center;gap:14px}
+  .header-controls{display:flex;align-items:center;gap:12px}
+  .theme-toggle{min-height:42px;width:42px;border:0;border-radius:11px;background:var(--info);
+                color:var(--emerald);box-shadow:0 3px 0 var(--info-line);
+                font:750 14px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+                cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
+  .theme-toggle:hover{transform:translateY(1px);box-shadow:0 2px 0 var(--info-line)}
+  .theme-toggle:active{transform:translateY(2px);box-shadow:0 1px 0 var(--info-line)}
   .handout-title{color:var(--accent-dark);font-size:13px;font-weight:750;line-height:1.25}
   .press-button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;
                 padding:0 17px;border:0;border-radius:11px;background:var(--emerald-mid);color:var(--white);
@@ -52,14 +77,16 @@
 
   /* --- оглавление: сетка «оглавление + текст», как в гайдах Ивана --- */
   .layout{display:block;max-width:760px;margin:0 auto}
+  /* канон сайта: колонка оглавления 210px, текст 720px, контейнер 1244px */
   @media (min-width:1060px){
-    .layout{display:grid;grid-template-columns:236px minmax(0,760px);
-            gap:48px;max-width:1044px;align-items:start}
+    .layout{display:grid;grid-template-columns:210px minmax(0,720px);
+            gap:32px;max-width:1244px;align-items:start}
   }
   .toc{display:none}
   @media (min-width:1060px){
-    .toc{display:block;position:sticky;top:28px;max-height:calc(100vh - 56px);
-         overflow-y:auto;padding-right:22px;
+    .toc{display:block;position:sticky;top:84px;width:260px;max-height:calc(100vh - 104px);
+         margin-left:max(-50px,calc((100vw - 1284px) / -2));
+         overflow-y:auto;padding:4px 18px 10px 0;
          /* полоса-разделитель между содержанием и текстом, как у Ивана */
          border-right:1px solid var(--line)}
     .toc-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
@@ -84,7 +111,7 @@
   .toc-mobile a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
   .toc-mobile a:hover{border-bottom-color:var(--accent)}
   /* якорь не должен уезжать под верх экрана */
-  h2[id],h3[id]{scroll-margin-top:16px}
+  h2[id],h3[id],section[id],details[id]{scroll-margin-top:84px}
   .kicker{color:var(--accent-text);font-weight:700;font-size:13px;letter-spacing:.1em;
           text-transform:uppercase;margin:0 0 10px}
   h1,h2{font-family:Unbounded,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-weight:700;color:var(--emerald)}
@@ -347,13 +374,18 @@
               transition:transform .12s ease,box-shadow .12s ease}
   .cta-button:active{transform:scale(.96);box-shadow:0 5px 14px rgba(217,113,31,.35)}
 </style>
+</head>
+<body>
 
 <header class="masthead">
   <div class="masthead-inner">
     <div class="brand">Гайды по нейросетям</div>
     <div class="header-actions">
       <div class="handout-title">Собери свой сайт</div>
-      <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+      <div class="header-controls">
+        <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+        <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+      </div>
     </div>
   </div>
 </header>
@@ -1088,6 +1120,17 @@ document.querySelectorAll('.copy').forEach(function(b){
    поэтому менять адрес нужно в одной строке, а не в разметке */
 var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
 document.querySelectorAll("a[data-partner]").forEach(function (a) { a.href = PARTNER_LINK; });
+
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = localStorage.getItem("guide-theme") || "light";
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "\u2600" : "\u25D0";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("guide-theme", next);
+  themeButton.textContent = next === "dark" ? "\u2600" : "\u25D0";
+});
 </script>
 </body>
 </html>
