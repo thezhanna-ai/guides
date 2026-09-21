@@ -174,7 +174,8 @@
     .step-copy > p { max-width: 660px }
     .result { margin: 23px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--heading) }
     .result p { margin: 0 }
-    figure { margin: 23px 0 0; max-width: 520px }
+    figure { margin: 23px 0 0; max-width: 100%; width: min(100%, 840px) }
+    figure a { display: block; cursor: zoom-in }
     figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px }
     figcaption { margin-top: 11px; color: var(--muted); font-size: 15px; line-height: 1.6 }
     .minor { color: var(--muted); font-size: 16px; line-height: 1.65 }
@@ -468,7 +469,7 @@
             <h3>Поставь свой VPN через AmneziaVPN</h3>
             <p>Установи свежую версию AmneziaVPN на компьютер или телефон. Добавь подключение, выбери Self-hosted VPN, введи IP, SSH-пользователя и пароль или ключ от VPS. В автоматическом режиме приложение установит AmneziaWG и создаст готовое подключение без ручных команд в терминале</p>
             <figure>
-              <img src="assets/amnezia-self-hosted-forma.png" alt="Три экрана AmneziaVPN: кнопка добавления соединения, пункт Self-hosted VPN и форма Configure your server с полями IP-адреса, SSH Username и пароля">
+              <a href="assets/amnezia-self-hosted-forma.png" target="_blank" rel="noopener"><img src="assets/amnezia-self-hosted-forma.png" alt="Три экрана AmneziaVPN: кнопка добавления соединения, пункт Self-hosted VPN и форма Configure your server с полями IP-адреса, SSH Username и пароля"></a>
               <figcaption>Путь до формы в AmneziaVPN: кнопка «+» → «Self-hosted VPN» → «Configure your server» с полями IP-адреса, SSH-пользователя и пароля. Официальный кадр из <a href="https://docs.amnezia.org/documentation/instructions/install-vpn-on-server" target="_blank" rel="noopener">документации Amnezia</a></figcaption>
             </figure>
             <p class="minor">Кадр выше - из англоязычной документации Amnezia. Если у тебя приложение на русском, названия кнопок и полей могут звучать чуть иначе при дословном переводе - расположение и порядок шагов останутся теми же</p>
@@ -519,7 +520,7 @@ claude --version</pre>
             <h3>Войди в аккаунт</h3>
             <p>Запусти команду <span class="path">claude</span>. Claude Code покажет способ авторизации. Включи VPN на своём телефоне или компьютере, открой выданную ссылку, войди в свой аккаунт и вернись в терминал</p>
             <figure>
-              <img src="assets/cloudcli-vybor-assistenta.png" alt="Экран CloudCLI «Choose Your AI Assistant» с выбранным Claude Code и полем выбора модели Opus">
+              <a href="assets/cloudcli-vybor-assistenta.png" target="_blank" rel="noopener"><img src="assets/cloudcli-vybor-assistenta.png" alt="Экран CloudCLI «Choose Your AI Assistant» с выбранным Claude Code и полем выбора модели Opus"></a>
               <figcaption>Так выглядит CloudCLI сразу после установки: подтверждает, что Claude Code на сервере работает, и даёт выбрать модель. Кадр из открытого проекта <a href="https://github.com/siteboon/claudecodeui" target="_blank" rel="noopener">claudecodeui</a>, у тебя экран будет тем же</figcaption>
             </figure>
             <aside class="notice">
@@ -578,7 +579,7 @@ npm install -g @siteboon/claude-code-ui</pre>
             <h3>Проверь результат с телефона</h3>
             <p>Открой свой доменный адрес в браузере. Сначала должна появиться отдельная авторизация, затем интерфейс CloudCLI с проектами и сессиями</p>
             <figure>
-              <img src="assets/cloudcli-glavnaya.png" alt="Главная CloudCLI: список сессий слева, открытый чат с Claude Code справа, вкладки Chat, Shell и Files сверху">
+              <a href="assets/cloudcli-glavnaya.png" target="_blank" rel="noopener"><img src="assets/cloudcli-glavnaya.png" alt="Главная CloudCLI: список сессий слева, открытый чат с Claude Code справа, вкладки Chat, Shell и Files сверху"></a>
               <figcaption>Главная CloudCLI после входа: слева список сессий и проектов, справа открытый чат с Claude Code. Кадр из открытого проекта <a href="https://github.com/siteboon/claudecodeui" target="_blank" rel="noopener">claudecodeui</a>, у тебя будет тот же интерфейс со своими проектами</figcaption>
             </figure>
             <p><b>[НУЖНА ПРОВЕРКА]</b> На реальном сервере подтвердить автозапуск PM2, сертификат HTTPS и закрытый снаружи порт 3001</p>
