@@ -740,8 +740,8 @@ class GuidesSiteTest(unittest.TestCase):
 
         Если разбор разделов сломается (переименуют класс секции, съедет разметка),
         обе проверки станут пустыми циклами и останутся зелёными, ничего не
-        проверив. Поэтому охват объявлен числом: двадцать лидов в трёх файлах
-        (6 + 5 + 9), и это ВСЕ p.purpose трёх раздаток, а не выборка из них
+        проверив. Поэтому охват объявлен числом: двадцать один лид в трёх файлах
+        (6 + 5 + 10), и это ВСЕ p.purpose трёх раздаток, а не выборка из них
         """
         covered = {
             page.parent.name: sum(
@@ -754,7 +754,7 @@ class GuidesSiteTest(unittest.TestCase):
             {
                 "vybor-modeli-i-effort": 6,
                 "pervyy-proekt-v-claude": 5,
-                "kak-rasskazat-o-sebe": 9,
+                "kak-rasskazat-o-sebe": 10,
             },
             covered,
         )
@@ -825,7 +825,15 @@ class GuidesSiteTest(unittest.TestCase):
             block.index("только на платных тарифах"),
             block.index("включать ничего не надо"),
         )
-        self.assertIn("На платном тарифе включать ничего не надо", block)
+        self.assertIn("Если поиск уже доступен твоему аккаунту на платном тарифе", block)
+
+    def test_profile_guide_share_chat_explains_snapshot_and_reversal(self):
+        html = PROFILE.read_text(encoding="utf-8")
+        block = html.split('id="share-chat"', 1)[1].split('id="check"', 1)[0]
+        self.assertIn("Поделиться чатом по ссылке", block)
+        self.assertIn("Новые сообщения в эту ссылку автоматически не добавятся", block)
+        self.assertIn("Public</b> на <b>Private", block)
+        self.assertIn("в снимок не входит", block)
 
     def test_all_articles_share_the_same_header_and_plaque_layout(self):
         """Шапка и плашка образуют одну колонку 180px во всех статьях.
