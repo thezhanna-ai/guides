@@ -1,5 +1,5 @@
 {
-  "_readme": "Реестр статей сайта. ИСТОЧНИК ИСТИНЫ: из него собираются перелинковка, карточки главной и sitemap. Новая статья = новая запись ЗДЕСЬ, потом прогон скриптов. Руками index.html не править.",
+  "_readme": "Реестр статей сайта. ИСТОЧНИК ИСТИНЫ: из него собираются перелинковка, карточки главной и sitemap. Новая статья = новая запись ЗДЕСЬ, потом прогон скриптов. Руками index.html не править. Кодовые слова живут ЗДЕСЬ же (поле kod_slovo) - из них собирается реестр раздаток .business/marketing/РЕЕСТР-РАЗДАТОК.html. Раздатки без статьи на сайте - в .business/marketing/razdatki-bez-stati.json",
   "_polya": {
     "slug": "папка статьи внутри claude-ai/",
     "title": "заголовок как в <title> и на карточке главной",
@@ -11,7 +11,10 @@
     "trebuet": "что человек должен уже уметь до этой статьи - отсюда ссылка обязательна",
     "status": "live (на сайте и на главной) | draft (папка есть, на главной нет)",
     "blokirovka": "почему статья draft - что физически мешает публикации",
-    "zametka": "особенности статьи, которые нельзя трогать не спросив"
+    "zametka": "особенности статьи, которые нельзя трогать не спросив",
+    "kod_slovo": "кодовое слово для выдачи раздатки в директе. Пусто = слова нет. ЗАНЯТОЕ СЛОВО ПОВТОРНО НЕ НАЗНАЧАТЬ никогда, даже после закрытия связки: люди пишут его годами",
+    "data_vyhoda": "ГГГГ-ММ-ДД первого выхода связанного ролика/карусели в ленту. Пусто = в ленту не выходило",
+    "vydacha": "zhivaya (выдаём по слову) | net (выдачи нет) | vyvedena (слово больше не обслуживается)"
   },
   "statyi": [
     {
@@ -30,7 +33,10 @@
         "доступ из России"
       ],
       "trebuet": [],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "ДОСТУП",
+      "data_vyhoda": "2026-09-08",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "svoy-server-dlya-claude",
@@ -51,7 +57,10 @@
         "podklyuchenie-iz-rossii"
       ],
       "status": "draft",
-      "blokirovka": "нет скринов: 5 пометок [НУЖЕН СКРИН] в тексте. Сервер на практике не проходили. Не публиковать"
+      "blokirovka": "нет скринов: 5 пометок [НУЖЕН СКРИН] в тексте. Сервер на практике не проходили. Не публиковать",
+      "kod_slovo": "",
+      "data_vyhoda": "",
+      "vydacha": "net"
     },
     {
       "slug": "kak-rasskazat-o-sebe",
@@ -71,7 +80,10 @@
       "trebuet": [
         "podklyuchenie-iz-rossii"
       ],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "КЛОД",
+      "data_vyhoda": "2026-09-09",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "vybor-modeli-i-effort",
@@ -93,7 +105,10 @@
       "trebuet": [
         "podklyuchenie-iz-rossii"
       ],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "МОДЕЛЬ",
+      "data_vyhoda": "2026-09-12",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "podklyuchit-gmail-drive-calendar",
@@ -113,7 +128,10 @@
       "trebuet": [
         "podklyuchenie-iz-rossii"
       ],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "СЕРВИСЫ",
+      "data_vyhoda": "2026-09-14",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "web-search-v-claude",
@@ -132,7 +150,10 @@
       "trebuet": [
         "podklyuchenie-iz-rossii"
       ],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "ПОИСК",
+      "data_vyhoda": "2026-09-15",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "golosovoy-vvod-v-claude",
@@ -152,7 +173,10 @@
       "trebuet": [
         "podklyuchenie-iz-rossii"
       ],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "ГОЛОС",
+      "data_vyhoda": "2026-09-16",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "skrinshot-vmesto-obyasneniy",
@@ -171,7 +195,10 @@
       "trebuet": [
         "podklyuchenie-iz-rossii"
       ],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "СКРИН",
+      "data_vyhoda": "2026-09-17",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "gotovye-fayly-excel-word-pdf",
@@ -195,7 +222,10 @@
       "trebuet": [
         "podklyuchenie-iz-rossii"
       ],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "ФАЙЛ",
+      "data_vyhoda": "2026-09-18",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "artefakty-v-claude",
@@ -216,7 +246,10 @@
       "trebuet": [
         "podklyuchenie-iz-rossii"
       ],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "АРТЕФАКТ",
+      "data_vyhoda": "2026-09-19",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "incognito-chat-v-claude",
@@ -236,7 +269,10 @@
         "podklyuchenie-iz-rossii"
       ],
       "status": "live",
-      "zametka": "Режим описан как приватность ВНУТРИ аккаунта, не как анонимность: Anthropic деталей хранения не раскрывает. Обещаний «данные нигде не хранятся» в тексте нет"
+      "zametka": "Режим описан как приватность ВНУТРИ аккаунта, не как анонимность: Anthropic деталей хранения не раскрывает. Обещаний «данные нигде не хранятся» в тексте нет",
+      "kod_slovo": "ПРИЗРАК",
+      "data_vyhoda": "2026-09-21",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "pervyy-proekt-v-claude",
@@ -256,7 +292,10 @@
         "podklyuchenie-iz-rossii",
         "kak-rasskazat-o-sebe"
       ],
-      "status": "live"
+      "status": "live",
+      "kod_slovo": "ПРОЕКТ",
+      "data_vyhoda": "2026-09-13",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "shest-skillov",
@@ -278,7 +317,10 @@
       ],
       "trebuet": [],
       "status": "live",
-      "zametka": "перенесена 18.09 из репозитория 6-claude-skills-guide. Вёрстка, палитра и анимации НЕ приводятся к канону сайта - решение автора. ОДИНОКАЯ ПО СМЫСЛУ: единственная статья про Claude Code в VS Code, все остальные про чат claude.ai. Перекрёстные ссылки НЕ ставить, пока не появятся другие статьи про Code: проект в чате и папка проекта в Code - разные вещи (ошибка поймана автором 18.09)"
+      "zametka": "перенесена 18.09 из репозитория 6-claude-skills-guide. Вёрстка, палитра и анимации НЕ приводятся к канону сайта - решение автора. ОДИНОКАЯ ПО СМЫСЛУ: единственная статья про Claude Code в VS Code, все остальные про чат claude.ai. Перекрёстные ссылки НЕ ставить, пока не появятся другие статьи про Code: проект в чате и папка проекта в Code - разные вещи (ошибка поймана автором 18.09)",
+      "kod_slovo": "СКИЛЛС",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "svoy-sayt-ne-bliznec",
@@ -298,7 +340,10 @@
       ],
       "trebuet": [],
       "status": "live",
-      "zametka": "перенесена 18.09 из репозитория sayt-za-vecher (код-слово САЙТ). Приведена к канону сайта 20.09 по решению автора: переключатель день-ночь, тёмная палитра, сетка 260+720, якоря под липкую шапку. Своя вёрстка блоков (мятная зона новичка, блоки промптов, 7 признаков) сохранена. Старый адрес thezhanna-ai.github.io/sayt-za-vecher/ остаётся живым. Про Claude Code в VS Code, НЕ про чат - связывать только со статьями про Code"
+      "zametka": "перенесена 18.09 из репозитория sayt-za-vecher (код-слово САЙТ). Приведена к канону сайта 20.09 по решению автора: переключатель день-ночь, тёмная палитра, сетка 260+720, якоря под липкую шапку. Своя вёрстка блоков (мятная зона новичка, блоки промптов, 7 признаков) сохранена. Старый адрес thezhanna-ai.github.io/sayt-za-vecher/ остаётся живым. Про Claude Code в VS Code, НЕ про чат - связывать только со статьями про Code",
+      "kod_slovo": "САЙТ",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya"
     },
     {
       "slug": "pdf-v-markdown-markitdown",
@@ -322,7 +367,10 @@
         "podklyuchenie-iz-rossii"
       ],
       "status": "live",
-      "zametka": "Статья про ЛЮБЫЕ форматы (PDF, Word, Excel, презентации) - её правка 20.09. Цифры 41 700 / 13 600 привязаны только к PDF: замер делался на нём, на других форматах не проверялся, так и написано. Звёзд у MarkItDown 185К (проверено 20.09), старая карусель говорила 110К - не повторять"
+      "zametka": "Статья про ЛЮБЫЕ форматы (PDF, Word, Excel, презентации) - её правка 20.09. Цифры 41 700 / 13 600 привязаны только к PDF: замер делался на нём, на других форматах не проверялся, так и написано. Звёзд у MarkItDown 185К (проверено 20.09), старая карусель говорила 110К - не повторять",
+      "kod_slovo": "PDF",
+      "data_vyhoda": "2026-09-22",
+      "vydacha": "zhivaya"
     }
   ]
 }
