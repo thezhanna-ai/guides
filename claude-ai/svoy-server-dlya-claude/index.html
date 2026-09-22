@@ -251,13 +251,10 @@
     .cta .section-label { color: #F0E8D8 }
     .cta h2 { color: #FFFFFF }
     .cta p { color: #F0E8D8 }
-    .button { display: inline-flex; min-height: 44px; align-items: center; margin-top: 6px; padding: 0 17px; border-radius: 10px; background: #E86F4A; color: #102F30; box-shadow: 0 3px 0 rgba(0,0,0,.25); font: 750 15px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; transition: transform .12s ease, box-shadow .12s ease, filter .12s ease }
-    .button:hover { transform: translateY(1px); color: #102F30; box-shadow: 0 2px 0 rgba(0,0,0,.3); filter: brightness(.94) }
-    .button:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.3) }
-    .mid-cta { margin-top: 52px; padding: 25px 27px 27px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface) }
-    .mid-cta h2 { margin-bottom: 15px; font: 750 21px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
-    .mid-cta p { margin-bottom: 14px }
-    .mid-cta .button { margin-top: 0 }
+    .press-button { display: inline-flex; min-height: 40px; align-items: center; padding: 0 15px; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration: none; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
     .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
 
     @media (max-width: 860px) {
@@ -300,7 +297,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto }
       .toc a, .theme-toggle, .camp-link { transition: none }
-      .button, .button:hover, .button:active { transition: none; transform: none; box-shadow: none; filter: none }
+      .press-button, .press-button:hover, .press-button:active { transition: none; transform: none }
     }
   
     .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
@@ -456,12 +453,7 @@
           <p>Стоимость зависит от хостинга, страны размещения, количества памяти и процессоров, объёма диска, включённого трафика и публичного IPv4. Timeweb можно оплатить российской картой. Hetzner часто предлагает более низкую цену, но для оплаты нужна зарубежная карта. VDSina - ещё один вариант с минимальным тарифом около $2,10 в месяц и включённым 1 ТБ трафика. Для пути Б сравнивай конфигурации с 4 ГБ памяти, европейской локацией и публичным IPv4. Для пути А проверяй KVM, x86-64 и публичный IPv4</p>
         </section>
 
-        <section class="mid-cta" aria-label="Помощь с настройкой">
-          <p class="section-label">Собрать вместе</p>
-          <h2>Прочитать схему проще, чем впервые настроить сервер</h2>
-          <p>В ИИ-Лагере можно пройти этот маршрут на своём экране: выбрать способ доступа, подключить сервер и довести Claude Code до рабочего проекта. Первые три дня бесплатные, поэтому не придётся оставаться один на один с незнакомыми настройками</p>
-          <a class="button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Забрать бесплатную путёвку</a>
-        </section>
+        <p class="partner-line">Прочитать схему проще, чем впервые настроить сервер. В ИИ-Лагере можно пройти этот маршрут на своём экране: выбрать способ доступа, подключить сервер и довести Claude Code до рабочего проекта. Первые три дня бесплатные - <a data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">посмотреть практикум</a></p>
 
         <section class="content-section" id="arendovat-server">
           <p class="section-label">Глава 4</p>
@@ -681,11 +673,11 @@ npm install -g @siteboon/claude-code-ui</pre>
           </ul>
         </section>
 
-        <section class="content-section">
+        <section class="cta" aria-label="Следующий шаг">
           <p class="section-label">Следующий шаг</p>
           <h2>Сервер есть, теперь дай ему настоящую работу</h2>
           <p>В ИИ-Лагере ты разберёшься с Claude Code на своём проекте: от первой папки и понятной задачи до рабочих агентов и автоматизации. Сервер останется твоей постоянной площадкой, а не дорогой пустой коробкой</p>
-          <a class="button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Перейти в ИИ-Лагерь</a>
+          <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Перейти в ИИ-Лагерь</a>
         </section>
         <footer class="foot">Независимый русскоязычный гид. Claude, Anthropic и CloudCLI являются товарными знаками их владельцев</footer>
       </article>

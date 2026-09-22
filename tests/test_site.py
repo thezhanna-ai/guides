@@ -364,8 +364,18 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertIn("border: 1px solid var(--sage-line)", setup_note)
         self.assertIn("background: var(--sage-note)", setup_note)
         reduced_motion = html.split("@media (prefers-reduced-motion: reduce)", 1)[1].split("</style>", 1)[0]
-        self.assertIn(".button, .button:hover, .button:active", reduced_motion)
-        self.assertIn("transition: none; transform: none; box-shadow: none", reduced_motion)
+        self.assertIn(".press-button, .press-button:hover, .press-button:active", reduced_motion)
+        self.assertIn("transition: none; transform: none", reduced_motion)
+
+    def test_server_and_access_partner_ctas_follow_series_layout(self):
+        server = SERVER.read_text(encoding="utf-8")
+        access = ACCESS.read_text(encoding="utf-8")
+        self.assertRegex(server, r'<p class="partner-line">[^<]*<a data-partner href="[^"]+">[^<]+</a></p>')
+        self.assertNotIn("mid-cta", server)
+        for html in (server, access):
+            with self.subTest(page="server" if html is server else "access"):
+                self.assertRegex(html, r'<section class="cta" aria-label="Следующий шаг">[\s\S]*?<p class="section-label">[\s\S]*?<h2>[\s\S]*?<p>[\s\S]*?<a class="press-button" data-partner href="https://theivansergeev\.com/ailager/\?gcpc=16fff">[\s\S]*?</section>\s*<footer class="foot">')
+                self.assertIn(".cta .press-button:active", html)
 
     def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):
         html = SERVER.read_text(encoding="utf-8")
