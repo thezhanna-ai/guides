@@ -1,376 +1,441 @@
 {
-  "_readme": "Реестр статей сайта. ИСТОЧНИК ИСТИНЫ: из него собираются перелинковка, карточки главной и sitemap. Новая статья = новая запись ЗДЕСЬ, потом прогон скриптов. Руками index.html не править. Кодовые слова живут ЗДЕСЬ же (поле kod_slovo) - из них собирается реестр раздаток .business/marketing/РЕЕСТР-РАЗДАТОК.html. Раздатки без статьи на сайте - в .business/marketing/razdatki-bez-stati.json",
-  "_polya": {
-    "slug": "папка статьи внутри claude-ai/",
-    "title": "заголовок как в <title> и на карточке главной",
-    "razdel": "блок на главной: obychnyy-vhod | svoy-server | knopka-za-knopkoy | vaybkoding",
-    "uroven": "green (начальный) | blue (средний)",
-    "tip": "instr (Инструкция) | razbor (Разбор) | obzor (Обзор)",
-    "tags": "data-tags на карточке главной",
-    "ponyatiya": "что объясняет ЭТА статья. Если слово из списка встретилось в чужой статье - там просится ссылка сюда",
-    "trebuet": "что человек должен уже уметь до этой статьи - отсюда ссылка обязательна",
-    "status": "live (на сайте и на главной) | draft (папка есть, на главной нет)",
-    "blokirovka": "почему статья draft - что физически мешает публикации",
-    "zametka": "особенности статьи, которые нельзя трогать не спросив",
-    "kod_slovo": "кодовое слово для выдачи раздатки в директе. Пусто = слова нет. ЗАНЯТОЕ СЛОВО ПОВТОРНО НЕ НАЗНАЧАТЬ никогда, даже после закрытия связки: люди пишут его годами",
-    "data_vyhoda": "ГГГГ-ММ-ДД первого выхода связанного ролика/карусели в ленту. Пусто = в ленту не выходило",
-    "vydacha": "zhivaya (выдаём по слову) | net (выдачи нет) | vyvedena (слово больше не обслуживается)"
+ "_readme": "Реестр статей сайта. ИСТОЧНИК ИСТИНЫ: из него собираются перелинковка, карточки главной и sitemap. Новая статья = новая запись ЗДЕСЬ, потом прогон скриптов. Руками index.html не править. Кодовые слова живут ЗДЕСЬ же (поле kod_slovo) - из них собирается реестр раздаток .business/marketing/РЕЕСТР-РАЗДАТОК.html. Раздатки без статьи на сайте - в .business/marketing/razdatki-bez-stati.json",
+ "_polya": {
+  "slug": "папка статьи внутри claude-ai/",
+  "title": "заголовок как в <title> и на карточке главной",
+  "razdel": "блок на главной: obychnyy-vhod | svoy-server | knopka-za-knopkoy | vaybkoding",
+  "uroven": "green (начальный) | blue (средний)",
+  "tip": "instr (Инструкция) | razbor (Разбор) | obzor (Обзор)",
+  "tags": "data-tags на карточке главной",
+  "ponyatiya": "что объясняет ЭТА статья. Если слово из списка встретилось в чужой статье - там просится ссылка сюда",
+  "trebuet": "что человек должен уже уметь до этой статьи - отсюда ссылка обязательна",
+  "status": "live (на сайте и на главной) | draft (папка есть, на главной нет)",
+  "blokirovka": "почему статья draft - что физически мешает публикации",
+  "zametka": "особенности статьи, которые нельзя трогать не спросив",
+  "kod_slovo": "кодовое слово для выдачи раздатки в директе. Пусто = слова нет. ЗАНЯТОЕ СЛОВО ПОВТОРНО НЕ НАЗНАЧАТЬ никогда, даже после закрытия связки: люди пишут его годами",
+  "data_vyhoda": "ГГГГ-ММ-ДД первого выхода связанного ролика/карусели в ленту. Пусто = в ленту не выходило",
+  "vydacha": "zhivaya (выдаём по слову) | net (выдачи нет) | vyvedena (слово больше не обслуживается)"
+ },
+ "statyi": [
+  {
+   "slug": "podklyuchenie-iz-rossii",
+   "title": "Claude из России: подключение без блокировок",
+   "razdel": "obychnyy-vhod",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "dostup green",
+   "ponyatiya": [
+    "VPN",
+    "вход в Claude",
+    "регистрация",
+    "Google-аккаунт",
+    "подтверждение номера",
+    "доступ из России"
+   ],
+   "trebuet": [],
+   "status": "live",
+   "kod_slovo": "ДОСТУП",
+   "data_vyhoda": "2026-09-08",
+   "vydacha": "zhivaya"
   },
-  "statyi": [
-    {
-      "slug": "podklyuchenie-iz-rossii",
-      "title": "Claude из России: подключение без блокировок",
-      "razdel": "obychnyy-vhod",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "dostup green",
-      "ponyatiya": [
-        "VPN",
-        "вход в Claude",
-        "регистрация",
-        "Google-аккаунт",
-        "подтверждение номера",
-        "доступ из России"
-      ],
-      "trebuet": [],
-      "status": "live",
-      "kod_slovo": "ДОСТУП",
-      "data_vyhoda": "2026-09-08",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "svoy-server-dlya-claude",
-      "title": "Свой сервер для Claude",
-      "razdel": "svoy-server",
-      "uroven": "blue",
-      "tip": "instr",
-      "tags": "dostup blue",
-      "ponyatiya": [
-        "свой сервер",
-        "VPS",
-        "постоянный IP",
-        "CloudCLI",
-        "Claude Code на сервере",
-        "домен к серверу"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "draft",
-      "blokirovka": "нет скринов: 5 пометок [НУЖЕН СКРИН] в тексте. Сервер на практике не проходили. Не публиковать",
-      "kod_slovo": "",
-      "data_vyhoda": "",
-      "vydacha": "net"
-    },
-    {
-      "slug": "kak-rasskazat-o-sebe",
-      "title": "Claude помнит о тебе: что рассказать один раз",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "память",
-        "Memory",
-        "инструкции о себе",
-        "General",
-        "поиск по старым чатам",
-        "перенос из ChatGPT"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "kod_slovo": "КЛОД",
-      "data_vyhoda": "2026-09-09",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "vybor-modeli-i-effort",
-      "title": "Модель и уровень effort: что включать под задачу",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "модель",
-        "Opus",
-        "Sonnet",
-        "Haiku",
-        "Fable",
-        "effort",
-        "усилие",
-        "лимиты тарифа"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "kod_slovo": "МОДЕЛЬ",
-      "data_vyhoda": "2026-09-12",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "podklyuchit-gmail-drive-calendar",
-      "title": "Gmail, Google Drive и Calendar внутри Claude",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "Gmail",
-        "Google Drive",
-        "Google Calendar",
-        "подключённые сервисы",
-        "коннекторы",
-        "доступ к почте"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "kod_slovo": "СЕРВИСЫ",
-      "data_vyhoda": "2026-09-14",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "web-search-v-claude",
-      "title": "Веб-поиск в Claude: ответы со свежими ссылками",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "веб-поиск",
-        "Web search",
-        "свежие ссылки",
-        "проверка источников",
-        "актуальные данные"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "kod_slovo": "ПОИСК",
-      "data_vyhoda": "2026-09-15",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "golosovoy-vvod-v-claude",
-      "title": "Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "голосовой ввод",
-        "Dictate",
-        "Voice mode",
-        "микрофон",
-        "надиктовать",
-        "говорить вместо печатать"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "kod_slovo": "ГОЛОС",
-      "data_vyhoda": "2026-09-16",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "skrinshot-vmesto-obyasneniy",
-      "title": "Скриншот вместо объяснений: покажи Клоду экран, где застрял",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "скриншот",
-        "скрин",
-        "показать экран",
-        "картинка в чат",
-        "непонятная кнопка"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "kod_slovo": "СКРИН",
-      "data_vyhoda": "2026-09-17",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "gotovye-fayly-excel-word-pdf",
-      "title": "Готовый Excel, Word, PDF или презентация - без копипаста",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "готовый файл",
-        "Excel",
-        "xlsx",
-        "Word",
-        "docx",
-        "PDF",
-        "презентация",
-        "pptx",
-        "формулы",
-        "скачать файл"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "kod_slovo": "ФАЙЛ",
-      "data_vyhoda": "2026-09-18",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "artefakty-v-claude",
-      "title": "Артефакты: ответ Клода в отдельном окне, а не в переписке",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "артефакт",
-        "отдельное окно",
-        "калькулятор",
-        "чек-лист",
-        "раздел Artifacts",
-        "поделиться ссылкой",
-        "Share"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "kod_slovo": "АРТЕФАКТ",
-      "data_vyhoda": "2026-09-19",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "incognito-chat-v-claude",
-      "title": "Инкогнито в Claude: разговор, который не попадёт в память",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "инкогнито",
-        "временный чат",
-        "приватность внутри аккаунта",
-        "история чатов",
-        "Use incognito"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "zametka": "Режим описан как приватность ВНУТРИ аккаунта, не как анонимность: Anthropic деталей хранения не раскрывает. Обещаний «данные нигде не хранятся» в тексте нет",
-      "kod_slovo": "ПРИЗРАК",
-      "data_vyhoda": "2026-09-21",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "pervyy-proekt-v-claude",
-      "title": "Первый проект в Claude: своя папка с памятью",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "проект",
-        "New Project",
-        "база знаний",
-        "инструкции проекта",
-        "своя папка"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii",
-        "kak-rasskazat-o-sebe"
-      ],
-      "status": "live",
-      "kod_slovo": "ПРОЕКТ",
-      "data_vyhoda": "2026-09-13",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "shest-skillov",
-      "title": "Шесть скиллов Claude: как найти, подключить и вызвать",
-      "razdel": "vaybkoding",
-      "uroven": "blue",
-      "tip": "instr",
-      "tags": "claude blue",
-      "ponyatiya": [
-        "скилл",
-        "скиллы",
-        "Manage Plugins",
-        "плагин",
-        "skill-creator",
-        "mcp-builder",
-        "frontend-design",
-        "canvas-design",
-        "webapp-testing"
-      ],
-      "trebuet": [],
-      "status": "live",
-      "zametka": "перенесена 18.09 из репозитория 6-claude-skills-guide. Вёрстка, палитра и анимации НЕ приводятся к канону сайта - решение автора. ОДИНОКАЯ ПО СМЫСЛУ: единственная статья про Claude Code в VS Code, все остальные про чат claude.ai. Перекрёстные ссылки НЕ ставить, пока не появятся другие статьи про Code: проект в чате и папка проекта в Code - разные вещи (ошибка поймана автором 18.09)",
-      "kod_slovo": "СКИЛЛС",
-      "data_vyhoda": "",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "svoy-sayt-ne-bliznec",
-      "title": "Свой сайт, а не очередной близнец",
-      "razdel": "vaybkoding",
-      "uroven": "blue",
-      "tip": "instr",
-      "tags": "claude blue",
-      "ponyatiya": [
-        "свой сайт",
-        "лендинг",
-        "сайт-близнец",
-        "вёрстка словами",
-        "правки словами",
-        "Claude Code",
-        "бриф сайта"
-      ],
-      "trebuet": [],
-      "status": "live",
-      "zametka": "перенесена 18.09 из репозитория sayt-za-vecher (код-слово САЙТ). Приведена к канону сайта 20.09 по решению автора: переключатель день-ночь, тёмная палитра, сетка 260+720, якоря под липкую шапку. Своя вёрстка блоков (мятная зона новичка, блоки промптов, 7 признаков) сохранена. Старый адрес thezhanna-ai.github.io/sayt-za-vecher/ остаётся живым. Про Claude Code в VS Code, НЕ про чат - связывать только со статьями про Code",
-      "kod_slovo": "САЙТ",
-      "data_vyhoda": "",
-      "vydacha": "zhivaya"
-    },
-    {
-      "slug": "pdf-v-markdown-markitdown",
-      "title": "Документы в markdown: как не сжигать лимит Claude на оформлении",
-      "razdel": "knopka-za-knopkoy",
-      "uroven": "green",
-      "tip": "instr",
-      "tags": "claude green",
-      "ponyatiya": [
-        "markdown",
-        "токены",
-        "лимит",
-        "MarkItDown",
-        "конвертация документов",
-        "PDF",
-        "Word",
-        "Excel",
-        "загрузка файлов"
-      ],
-      "trebuet": [
-        "podklyuchenie-iz-rossii"
-      ],
-      "status": "live",
-      "zametka": "Статья про ЛЮБЫЕ форматы (PDF, Word, Excel, презентации) - её правка 20.09. Цифры 41 700 / 13 600 привязаны только к PDF: замер делался на нём, на других форматах не проверялся, так и написано. Звёзд у MarkItDown 185К (проверено 20.09), старая карусель говорила 110К - не повторять",
-      "kod_slovo": "PDF",
-      "data_vyhoda": "2026-09-22",
-      "vydacha": "zhivaya"
-    }
-  ]
+  {
+   "slug": "svoy-server-dlya-claude",
+   "title": "Свой сервер для Claude",
+   "razdel": "svoy-server",
+   "uroven": "blue",
+   "tip": "instr",
+   "tags": "dostup blue",
+   "ponyatiya": [
+    "свой сервер",
+    "VPS",
+    "постоянный IP",
+    "CloudCLI",
+    "Claude Code на сервере",
+    "домен к серверу"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "draft",
+   "blokirovka": "нет скринов: 5 пометок [НУЖЕН СКРИН] в тексте. Сервер на практике не проходили. Не публиковать",
+   "kod_slovo": "",
+   "data_vyhoda": "",
+   "vydacha": "net"
+  },
+  {
+   "slug": "kak-rasskazat-o-sebe",
+   "title": "Claude помнит о тебе: что рассказать один раз",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "память",
+    "Memory",
+    "инструкции о себе",
+    "General",
+    "поиск по старым чатам",
+    "перенос из ChatGPT"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "kod_slovo": "КЛОД",
+   "data_vyhoda": "2026-09-09",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "vybor-modeli-i-effort",
+   "title": "Модель и уровень effort: что включать под задачу",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "модель",
+    "Opus",
+    "Sonnet",
+    "Haiku",
+    "Fable",
+    "effort",
+    "усилие",
+    "лимиты тарифа"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "kod_slovo": "МОДЕЛЬ",
+   "data_vyhoda": "2026-09-12",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "podklyuchit-gmail-drive-calendar",
+   "title": "Gmail, Google Drive и Calendar внутри Claude",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "Gmail",
+    "Google Drive",
+    "Google Calendar",
+    "подключённые сервисы",
+    "коннекторы",
+    "доступ к почте"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "kod_slovo": "СЕРВИСЫ",
+   "data_vyhoda": "2026-09-14",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "web-search-v-claude",
+   "title": "Веб-поиск в Claude: ответы со свежими ссылками",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "веб-поиск",
+    "Web search",
+    "свежие ссылки",
+    "проверка источников",
+    "актуальные данные"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "kod_slovo": "ПОИСК",
+   "data_vyhoda": "2026-09-15",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "golosovoy-vvod-v-claude",
+   "title": "Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "голосовой ввод",
+    "Dictate",
+    "Voice mode",
+    "микрофон",
+    "надиктовать",
+    "говорить вместо печатать"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "kod_slovo": "ГОЛОС",
+   "data_vyhoda": "2026-09-16",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "skrinshot-vmesto-obyasneniy",
+   "title": "Скриншот вместо объяснений: покажи Клоду экран, где застрял",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "скриншот",
+    "скрин",
+    "показать экран",
+    "картинка в чат",
+    "непонятная кнопка"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "kod_slovo": "СКРИН",
+   "data_vyhoda": "2026-09-17",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "gotovye-fayly-excel-word-pdf",
+   "title": "Готовый Excel, Word, PDF или презентация - без копипаста",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "готовый файл",
+    "Excel",
+    "xlsx",
+    "Word",
+    "docx",
+    "PDF",
+    "презентация",
+    "pptx",
+    "формулы",
+    "скачать файл"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "kod_slovo": "ФАЙЛ",
+   "data_vyhoda": "2026-09-18",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "artefakty-v-claude",
+   "title": "Артефакты: ответ Клода в отдельном окне, а не в переписке",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "артефакт",
+    "отдельное окно",
+    "калькулятор",
+    "чек-лист",
+    "раздел Artifacts",
+    "поделиться ссылкой",
+    "Share"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "kod_slovo": "АРТЕФАКТ",
+   "data_vyhoda": "2026-09-19",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "incognito-chat-v-claude",
+   "title": "Инкогнито в Claude: разговор, который не попадёт в память",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "инкогнито",
+    "временный чат",
+    "приватность внутри аккаунта",
+    "история чатов",
+    "Use incognito"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "zametka": "Режим описан как приватность ВНУТРИ аккаунта, не как анонимность: Anthropic деталей хранения не раскрывает. Обещаний «данные нигде не хранятся» в тексте нет",
+   "kod_slovo": "ПРИЗРАК",
+   "data_vyhoda": "2026-09-21",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "pervyy-proekt-v-claude",
+   "title": "Первый проект в Claude: своя папка с памятью",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "проект",
+    "New Project",
+    "база знаний",
+    "инструкции проекта",
+    "своя папка"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii",
+    "kak-rasskazat-o-sebe"
+   ],
+   "status": "live",
+   "kod_slovo": "ПРОЕКТ",
+   "data_vyhoda": "2026-09-13",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "shest-skillov",
+   "title": "Шесть скиллов Claude: как найти, подключить и вызвать",
+   "razdel": "vaybkoding",
+   "uroven": "blue",
+   "tip": "instr",
+   "tags": "claude blue",
+   "ponyatiya": [
+    "скилл",
+    "скиллы",
+    "Manage Plugins",
+    "плагин",
+    "skill-creator",
+    "mcp-builder",
+    "frontend-design",
+    "canvas-design",
+    "webapp-testing"
+   ],
+   "trebuet": [],
+   "status": "live",
+   "zametka": "перенесена 18.09 из репозитория 6-claude-skills-guide. Вёрстка, палитра и анимации НЕ приводятся к канону сайта - решение автора. ОДИНОКАЯ ПО СМЫСЛУ: единственная статья про Claude Code в VS Code, все остальные про чат claude.ai. Перекрёстные ссылки НЕ ставить, пока не появятся другие статьи про Code: проект в чате и папка проекта в Code - разные вещи (ошибка поймана автором 18.09)",
+   "kod_slovo": "СКИЛЛС",
+   "data_vyhoda": "",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "svoy-sayt-ne-bliznec",
+   "title": "Свой сайт, а не очередной близнец",
+   "razdel": "vaybkoding",
+   "uroven": "blue",
+   "tip": "instr",
+   "tags": "claude blue",
+   "ponyatiya": [
+    "свой сайт",
+    "лендинг",
+    "сайт-близнец",
+    "вёрстка словами",
+    "правки словами",
+    "Claude Code",
+    "бриф сайта"
+   ],
+   "trebuet": [],
+   "status": "live",
+   "zametka": "перенесена 18.09 из репозитория sayt-za-vecher (код-слово САЙТ). Приведена к канону сайта 20.09 по решению автора: переключатель день-ночь, тёмная палитра, сетка 260+720, якоря под липкую шапку. Своя вёрстка блоков (мятная зона новичка, блоки промптов, 7 признаков) сохранена. Старый адрес thezhanna-ai.github.io/sayt-za-vecher/ остаётся живым. Про Claude Code в VS Code, НЕ про чат - связывать только со статьями про Code",
+   "kod_slovo": "САЙТ",
+   "data_vyhoda": "",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "pdf-v-markdown-markitdown",
+   "title": "Документы в markdown: как не сжигать лимит Claude на оформлении",
+   "razdel": "knopka-za-knopkoy",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "markdown",
+    "токены",
+    "лимит",
+    "MarkItDown",
+    "конвертация документов",
+    "PDF",
+    "Word",
+    "Excel",
+    "загрузка файлов"
+   ],
+   "trebuet": [
+    "podklyuchenie-iz-rossii"
+   ],
+   "status": "live",
+   "zametka": "Статья про ЛЮБЫЕ форматы (PDF, Word, Excel, презентации) - её правка 20.09. Цифры 41 700 / 13 600 привязаны только к PDF: замер делался на нём, на других форматах не проверялся, так и написано. Звёзд у MarkItDown 185К (проверено 20.09), старая карусель говорила 110К - не повторять",
+   "kod_slovo": "PDF",
+   "data_vyhoda": "2026-09-22",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "whatsapp-nomer-dlya-agenta",
+   "title": "Свой номер WhatsApp для ИИ-агента: пошагово",
+   "razdel": "vaybkoding",
+   "uroven": "blue",
+   "tip": "instr",
+   "tags": "claude blue",
+   "ponyatiya": [
+    "WhatsApp",
+    "Kapso",
+    "номер без SIM",
+    "песочница",
+    "автоответ",
+    "WhatsApp Flows",
+    "агент в WhatsApp"
+   ],
+   "trebuet": [],
+   "status": "live",
+   "zametka": "Раздатка к карусели «Номер WhatsApp для Клода» (опубликована 25.09). Прошла 3 круга проверки 25.09: плата Meta* с 1.10.2026 отдельно от Kapso, депозит за номер, путь при SMS по instant-setup-troubleshooting. Скрины из документации Kapso",
+   "kod_slovo": "НОМЕР",
+   "data_vyhoda": "2026-09-25",
+   "vydacha": "zhivaya"
+  },
+  {
+   "slug": "urovni-vaybkodera",
+   "title": "7 уровней вайбкодера: один шаг, чтобы подняться выше",
+   "razdel": "vaybkoding",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "вайбкодинг",
+    "уровни вайбкодера",
+    "техзадание",
+    "агент",
+    "Codex"
+   ],
+   "trebuet": [],
+   "status": "draft",
+   "blokirovka": "ждёт её «да»: карусель УРОВЕНЬ не опубликована",
+   "zametka": "Проверена 25.09, исправлено по замечаниям проверяльщика",
+   "kod_slovo": "УРОВЕНЬ",
+   "data_vyhoda": "",
+   "vydacha": "net"
+  },
+  {
+   "slug": "10-besplatnyh-zamen",
+   "title": "10 бесплатных замен платным нейросетям - с подвохами",
+   "razdel": "obychnyy-vhod",
+   "uroven": "green",
+   "tip": "instr",
+   "tags": "claude green",
+   "ponyatiya": [
+    "бесплатные нейросети",
+    "замены платным сервисам",
+    "лимиты бесплатных тарифов"
+   ],
+   "trebuet": [],
+   "status": "draft",
+   "blokirovka": "ждёт её «да»: карусель ЗАМЕНА не опубликована",
+   "zametka": "Цены и лимиты сняты 24.09.2026, перепроверены 25.09. HeyGen: 1-3 видео, зависит от страны",
+   "kod_slovo": "ЗАМЕНА",
+   "data_vyhoda": "",
+   "vydacha": "net"
+  }
+ ]
 }
