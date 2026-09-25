@@ -170,6 +170,9 @@
     .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
     .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
     .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+    @media (min-width: 861px) and (max-width: 1199px) { .toc { width: 240px; margin-left: 0 } }
+    @media (min-width: 1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+    @media (min-width: 1200px) and (max-width: 1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
   </style>
 </head>
 <body>

@@ -103,6 +103,9 @@
     .toc a.is-current{color:var(--accent-text);border-left-color:var(--accent);font-weight:650}
     .toc a.is-current::before{color:var(--accent-text);opacity:1}
   }
+  @media (min-width:1060px) and (max-width:1199px){ .toc{width:240px;margin-left:0} }
+  @media (min-width:1200px){ .toc{margin-left:max(-50px,calc(638px - 50vw))} }
+  @media (min-width:1200px) and (max-width:1304px){ .toc{width:calc(252px - (1304px - 100vw)/2)} }
   /* мобильное оглавление - сворачиваемое, чтобы не занимать экран */
   .toc-mobile{margin:0 0 26px}
   @media (min-width:1060px){ .toc-mobile{display:none} }
