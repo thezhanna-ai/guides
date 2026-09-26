@@ -468,9 +468,9 @@
   <div class="card hero">
     <p><b>Порядок действий, если коротко:</b></p>
     <ol style="margin:0;padding-left:22px">
-      <li>Проверить, что на компьютере в <b>VS Code</b> стоит <b>Claude Code</b> и оплачена подписка (<a class="jump inline" href="#start">зачем и почему</a>)</li>
+      <li>Проверить, что на компьютере в <b>VS Code</b> стоит <b>Claude Code</b> и оплачена подписка (<a class="jump inline" href="#usloviya">зачем и почему</a>)</li>
       <li>Завести на компьютере папку под сайт и открыть её в Claude Code</li>
-      <li>Найти образец - сайт, который нравится - и сохранить его первый экран картинкой <b>в эту же папку</b> (<a class="jump inline" href="#obrazec">зачем именно первый</a>)</li>
+      <li>Найти образец - сайт, который нравится - и сохранить его первый экран картинкой <b>в эту же папку</b> (<a class="jump inline" href="#pervyy-ekran">зачем именно первый</a>)</li>
       <li>Отправить Клоду одну большую команду - она готовая, ниже на этой странице</li>
       <li>Смотреть, что вышло, и править фразами из этой инструкции</li>
       <li>Проверить на телефоне и выложить в интернет</li>
@@ -541,7 +541,7 @@
       </div>
     </details>
 
-    <h3>Три условия, без которых дальше не двинуться</h3>
+    <h3 id="usloviya">Три условия, без которых дальше не двинуться</h3>
 
     <div class="card">
       <ul class="check" style="margin:0">
@@ -629,7 +629,7 @@
 
   <p style="margin-bottom:24px">Начни со скриншота - он проще. Ключ можно подключить потом, он никуда не денется</p>
 
-  <h3>Скриншот: почему именно первый экран</h3>
+  <h3 id="pervyy-ekran">Скриншот: почему именно первый экран</h3>
 
   <p>Первый экран - это то, что видно сразу при открытии сайта, до прокрутки. Его называют hero-секцией</p>
 
@@ -1042,6 +1042,29 @@
     io.observe(el);
     away.observe(el);
   });
+})();
+
+// ссылка ведёт внутрь закрытой раскрывашки - открываем её и показываем нужное место
+(function(){
+  function openTo(id){
+    var t = id && document.getElementById(id);
+    if (!t) return false;
+    var d = t.parentElement && t.parentElement.closest('details');
+    while (d){ d.open = true; d = d.parentElement && d.parentElement.closest('details'); }
+    t.scrollIntoView({block:'start'});
+    return true;
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    var t = document.getElementById(id);
+    if (t && t.closest('details:not([open])') && openTo(id)){
+      e.preventDefault();
+      history.pushState(null, '', '#' + id);
+    }
+  });
+  if (location.hash) openTo(location.hash.slice(1));
 })();
 
 // подсветка пункта оглавления, у которого читаешь раздел
