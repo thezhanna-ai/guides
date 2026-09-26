@@ -62,16 +62,17 @@
     .info-card,.warn-card { margin:24px 0; padding:13px 18px; border:1px solid var(--info-line); border-radius:11px; background:var(--info) }
     .warn-card { border-left:6px solid var(--accent) }
     .info-card p,.warn-card p { margin:0 }
-    .shot { width:min(100%,650px); margin:26px 0 0 }
+    .shot { position:relative; width:min(100%,650px); margin:26px 0 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--emerald); color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    .shot .zoom:hover { background: var(--accent) }
+    /* без мыши кнопку не навести, поэтому на телефоне она видна всегда.
+       Условие продублировано по ширине: hover:none не срабатывает в эмуляции */
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
     .shot img { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:10px; background:#FFFFFF }
     .shot figcaption { margin-top:11px; color:var(--muted); font:500 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
     .shot-missing { width:min(100%,650px); margin:26px 0 0; padding:20px; border:1px dashed var(--info-line); border-radius:11px; background:var(--info); font:600 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
     .shot-missing p { margin:0 }
-    .shot-image { position:relative; width:100% }
-    .shot-image .zoom { position:absolute; right:10px; bottom:10px; z-index:2; padding:9px 15px; border:0; border-radius:9px; background:#102F30; color:#F8F7F2; font:750 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.06em; cursor:pointer; opacity:0; transition:opacity .14s ease,background .14s ease }
-    .shot-image:hover .zoom,.shot-image .zoom:focus-visible { opacity:1 }
-    .shot-image .zoom:hover { background:var(--accent) }
-    @media (hover:none),(max-width:860px) { .shot-image .zoom { opacity:.94 } }
     .prompt-box { position:relative; margin:15px 0 28px; padding:57px 22px 23px; border-radius:12px; background:#102F30; color:#F8F7F2 }
     .prompt-box pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:500 14px/1.58 ui-monospace,SFMono-Regular,Menlo,monospace }
     .copy-button { position:absolute; top:13px; right:13px; min-width:132px; min-height:34px; padding:0 13px; border:0; border-radius:8px; background:var(--accent); color:#102F30; font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; box-shadow:0 3px 0 #8F371F; cursor:pointer }
@@ -91,12 +92,16 @@
     .cta .press-button { background:var(--accent); color:#102F30; box-shadow:0 3px 0 #8F371F }
     .cta .press-button:hover { background:#F28A68; color:#102F30; box-shadow:0 2px 0 #8F371F }
     .cta .press-button:active { background:#FFC6AD; color:#102F30; box-shadow:inset 0 0 0 3px #8F371F }
-    .viewer { display:none; position:fixed; inset:0; z-index:50; padding:56px 18px 26px; background:rgba(0,0,0,.87); color:#FFFFFF }
-    .viewer.open { display:block }
-    .viewer-scroll { width:100%; height:100%; overflow:auto; text-align:center }
-    .viewer img { max-width:none; width:auto; min-width:min(100%,900px); height:auto }
-    .viewer-close { position:absolute; top:12px; right:16px; width:40px; height:40px; border:0; border-radius:8px; background:#FFFFFF; color:#102F30; font-size:22px; cursor:pointer }
-    .viewer-hint { position:absolute; bottom:5px; left:0; right:0; margin:0; text-align:center; font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    /* полноэкранный просмотр */
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    /* в окне картинка показывается в НАТУРАЛЬНОМ размере с прокруткой: на телефоне
+       ужать её в экран - значит не увеличить ничего. Прокручиваем пальцем */
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
     @media(min-width:1200px) { .page-shell { grid-template-columns:210px minmax(0,720px) 180px } .related-plaque { grid-column:3; grid-row:1; position:sticky; top:84px } .header-actions { margin-right:8px } .header-controls { width: 180px } }
     @media(min-width:861px) { .toc { --toc-shift:clamp(-50px,calc(630px - 50vw),0px); margin-left:var(--toc-shift); width:calc(210px - var(--toc-shift)) } }
     @media(max-width:860px) { body { font-size:17px } .masthead-inner { min-height:60px; padding:0 14px } .brand { font-size:14px } .handout-title,.toc { display:none } .page-shell { display:block; padding:24px 14px 68px } .mobile-toc { display:block; margin:0 0 30px; padding:13px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif } .mobile-toc a { display:block; margin-top:9px } h1 { font-size:34px } h2 { font-size:27px } .content-section { margin-top:52px } .cta { padding:26px 22px } .related-plaque { margin-top:46px } }
@@ -133,7 +138,11 @@
       <p><a href="../kak-rasskazat-o-sebe/">Имя, инструкции и память в одном маршруте</a></p>
     </aside>
   </div>
-  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true"><button class="viewer-close" type="button" aria-label="Закрыть">✕</button><div class="viewer-scroll"><img alt=""></div><p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p></div>
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
+    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+    <div class="viewer-scroll"><img alt=""></div>
+    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+  </div>
   <script>
     var themeButton=document.querySelector('.theme-toggle');
     var savedTheme=localStorage.getItem('guide-theme')||'light';
@@ -141,10 +150,69 @@
     themeButton.textContent=savedTheme==='dark'?'☀':'◐';
     themeButton.addEventListener('click',function(){var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);localStorage.setItem('guide-theme',next);themeButton.textContent=next==='dark'?'☀':'◐'});
     document.querySelectorAll('[data-copy-target]').forEach(function(button){button.addEventListener('click',function(){var value=document.getElementById(button.dataset.copyTarget).textContent;function done(){clearTimeout(button.copyTimer);button.textContent='✓ Скопировано';button.classList.add('is-copied');button.copyTimer=setTimeout(function(){button.textContent='Скопировать';button.classList.remove('is-copied')},1800)}function fallback(){var field=document.createElement('textarea');field.value=value;field.setAttribute('readonly','');field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();if(document.execCommand('copy'))done();field.remove()}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(value).then(done).catch(fallback)}else fallback()})});
-    var viewer=document.getElementById('viewer');var lastFocus=null;
-    function closeViewer(){viewer.classList.remove('open');viewer.setAttribute('aria-hidden','true');viewer.querySelector('img').removeAttribute('src');if(lastFocus)lastFocus.focus()}
-    document.querySelectorAll('.shot img').forEach(function(img){var frame=document.createElement('div');frame.className='shot-image';img.parentElement.insertBefore(frame,img);frame.appendChild(img);var button=document.createElement('button');button.type='button';button.className='zoom';button.textContent='Открыть крупнее';button.addEventListener('click',function(){lastFocus=button;viewer.querySelector('img').src=img.currentSrc||img.src;viewer.querySelector('img').alt=img.alt;viewer.classList.add('open');viewer.setAttribute('aria-hidden','false');viewer.querySelector('.viewer-close').focus()});frame.appendChild(button)});
-    viewer.querySelector('.viewer-close').addEventListener('click',closeViewer);viewer.addEventListener('click',function(event){if(event.target===viewer||event.target.classList.contains('viewer-scroll'))closeViewer()});document.addEventListener('keydown',function(event){if(event.key==='Escape'&&viewer.classList.contains('open'))closeViewer()});
+    // "Открыть крупнее": скрины в примерах на телефоне ужимаются до 18-29%,
+    // кнопка открывает картинку во весь экран
+    (function () {
+      var viewer = document.getElementById("viewer");
+      if (!viewer) return;
+      var big = viewer.querySelector("img");
+      var lastFocused = null;
+      function open(src, alt) {
+        lastFocused = document.activeElement;
+        big.src = src; big.alt = alt || "";
+        big.onload = function () {
+          var box = viewer.querySelector(".viewer-scroll");
+          var room = viewer.clientWidth - 44;
+          // цель - читаемый текст, а не максимальный размер. Показываем картинку
+          // примерно вдвое крупнее, чем она стоит в тексте, но не больше её
+          // натуральной величины и не больше двух экранов по ширине
+          var inPage = document.querySelector('.shot img[src$="' + src.split("/").pop() + '"]');
+          var pageWidth = inPage ? inPage.getBoundingClientRect().width : room;
+          var target = Math.min(pageWidth * 2.2, big.naturalWidth);
+          // на большом экране картинка всегда влезает целиком, без прокрутки.
+          // На узком телефоне ужать её - значит ничего не увеличить, поэтому
+          // там разрешаем выйти за экран и прокручивать пальцем
+          var wide = viewer.clientWidth >= 860;
+          target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+          // и по высоте: картинка целиком должна помещаться на экран
+          if (wide) {
+            var maxH = viewer.clientHeight - 96;
+            var byHeight = maxH * (big.naturalWidth / big.naturalHeight);
+            target = Math.min(target, byHeight);
+          }
+          big.style.width = Math.round(target) + "px";
+          viewer.classList.toggle("fits", target <= room);
+          box.scrollLeft = (target - box.clientWidth) / 2;
+          var hint = viewer.querySelector(".viewer-hint");
+          var scrolls = box.scrollWidth > box.clientWidth + 2;
+          hint.textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+        };
+        viewer.setAttribute("open", "");
+        document.body.style.overflow = "hidden";
+        viewer.querySelector(".viewer-close").focus();
+      }
+      function close() {
+        viewer.removeAttribute("open");
+        document.body.style.overflow = "";
+        big.removeAttribute("src");
+        big.style.width = "";
+        if (lastFocused) lastFocused.focus();
+      }
+      document.querySelectorAll(".shot img").forEach(function (img) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "zoom";
+        button.textContent = "Открыть крупнее";
+        button.addEventListener("click", function () { open(img.currentSrc || img.src, img.alt); });
+        img.parentElement.appendChild(button);
+      });
+      viewer.addEventListener("click", function (event) {
+        if (event.target === viewer || event.target.classList.contains("viewer-close")) close();
+      });
+      addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && viewer.hasAttribute("open")) close();
+      });
+    })();
     var links=Array.from(document.querySelectorAll('.toc a,.mobile-toc a'));var sections=links.map(function(link){return document.querySelector(link.getAttribute('href'))}).filter(Boolean);function updateReadingState(){var scrollable=document.documentElement.scrollHeight-window.innerHeight;document.querySelector('.progress').style.width=(scrollable>0?window.scrollY/scrollable*100:0)+'%';var current=sections[0];sections.forEach(function(section){if(section.getBoundingClientRect().top<=120)current=section});if(scrollable>0&&window.scrollY>=scrollable-2)current=sections[sections.length-1];links.forEach(function(link){link.classList.toggle('active',link.getAttribute('href')==='#'+current.id)})}updateReadingState();addEventListener('scroll',updateReadingState,{passive:true});
   </script>
 </body>
