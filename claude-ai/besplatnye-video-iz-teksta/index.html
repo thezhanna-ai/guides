@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Четыре сервиса для видео из текста и два российских: ссылки, бесплатные лимиты, водяные знаки и промпты">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://thezhanna-ai.github.io/guides/claude-ai/besplatnye-video-iz-teksta/">
+<meta property="og:url" content="https://thezhanna-ai.github.io/guides/claude-ai/besplatnye-video-iz-teksta/">
+<meta property="og:type" content="article"><meta name="theme-color" content="#F8F7F2">
+<meta property="og:title" content="Видео из текста: бесплатные сервисы и подвохи">
+<meta property="og:description" content="Шесть сервисов: ссылки, лимиты, водяные знаки, примеры запросов и инструкции">
+<title>Видео из текста: бесплатные сервисы и подвохи</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; --toc-shift: clamp(-50px, calc(630px - 50vw), 0px); width: calc(210px - var(--toc-shift)); max-height: calc(100vh - 104px); margin-left: var(--toc-shift); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .route-note { margin: 31px 0 34px; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted) }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+/* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
+       .info-card - полезное уточнение, фон без полосы
+       .warn-card - оговорка или предупреждение, фон плюс оранжевая полоса
+       .check-panel - читатель отмечает пункты, поэтому БЕЛАЯ карточка */
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .warn-card p { margin: 0 }
+    /* абзац после блока слипался с ним: у блоков margin-bottom 0,
+       а у p margin-top 0. Зазор был 0 px при 25 px между абзацами */
+    .info-card + p, .warn-card + p, .check-panel + p { margin-top: 25px }
+    .tune-card { margin-top: 26px; padding: 15px 20px 3px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .tune-card h3 { margin-bottom: 9px }
+    .tune-card .result { margin-bottom: 17px }
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot-image { position: relative; width: 100% }
+    .shot-image .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #102F30; color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot-image:hover .zoom, .shot-image .zoom:focus-visible { opacity: 1 }
+    .shot-image .zoom:hover { background: var(--accent) }
+    @media (hover: none), (max-width: 860px) { .shot-image .zoom { opacity: .94 } }
+    .viewer { display: none; position: fixed; inset: 0; z-index: 50; padding: 56px 18px 26px; background: rgba(0,0,0,.87); color: #FFFFFF }
+    .viewer.open { display: block }
+    .viewer-scroll { width: 100%; height: 100%; overflow: auto; text-align: center }
+    .viewer img { max-width: none; width: auto; height: auto }
+    .viewer-close { position: absolute; top: 12px; right: 16px; width: 40px; height: 40px; border: 0; border-radius: 8px; background: #FFFFFF; color: #102F30; font-size: 22px; cursor: pointer }
+    .viewer-hint { position: absolute; bottom: 5px; left: 0; right: 0; margin: 0; text-align: center; font: 13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .88); pointer-events: none }
+    .annotation::before { content: attr(data-n); position: absolute; top: -38px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--emerald); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .annotation.mic { left: 84.70%; top: 81.47%; width: 3.11%; height: 8.62% }
+    .annotation.wave { left: 89.85%; top: 81.47%; width: 5.89%; height: 8.62% }
+    .annotation.cancel { left: 85.76%; top: 80.39%; width: 4.26%; height: 11.21% }
+    .annotation.accept { left: 91.33%; top: 80.39%; width: 4.26%; height: 11.21% }
+    .annotation.stop { left: 86.48%; top: 79.94%; width: 9.64%; height: 8.33% }
+    .annotation.allow { left: 6.23%; top: 54.40%; width: 54.47%; height: 5.39% }
+    .annotation.nodev { left: 74.32%; top: 88.51%; width: 24.12%; height: 9.87% }
+    .annotation.arrow { left: 94.86%; top: 73.55%; width: 2.97%; height: 9.09% }
+    .annotation.checked { left: 58.92%; top: 45.87%; width: 37.57%; height: 9.50% }
+    .annotation.checked::before { top: 50%; left: -38px; transform: translateY(-50%) }
+    .annotation.arrow::before { top: 50%; left: -38px; transform: translateY(-50%) }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .service-example { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center; margin: 28px 0 32px }
+    .service-example .shot { width: 100%; max-width: 300px; margin: 0 }
+    .service-example-notes { min-width: 0 }
+    .service-example-notes h3 { font-size: 18px }
+    .service-example-notes p { margin-bottom: 24px }
+    .service-example-notes p:last-child { margin-bottom: 0 }
+    @media (max-width: 600px) {
+      .service-example { grid-template-columns: minmax(0, 1fr); gap: 20px }
+      .service-example .shot { width: min(62%, 220px) }
+    }
+    .phone-strip { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-top: 22px }
+    .phone-strip figure { min-width: 0; margin: 0 }
+    .phone-strip img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--white) }
+    .phone-strip figcaption { margin-top: 6px; text-align: center; font-size: 11px; overflow-wrap: anywhere }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    h3 + .prompt-box { margin-top: 12px }
+    .prompt-box + h3 { margin-top: 46px }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: #F28A68 }
+    .copy-button:active { background: #FFD1BF; box-shadow: 0 1px 0 #8F371F; transform: translateY(2px) }
+    .copy-button.is-copied { background: #FFD1BF; box-shadow: 0 0 0 3px rgba(255, 209, 191, .34); transform: translateY(1px) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 900 }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      .phone-strip { display: flex; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 8px }
+      .phone-strip figure { flex: 0 0 150px; scroll-snap-align: start }
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+      .annotation { border-width: 2px }
+      .annotation::before { top: -30px; width: 22px; height: 22px; font-size: 11px }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+  
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    /* карточка должна читаться как ссылка, а не как серый блок текста.
+       text-decoration НАСЛЕДУЕТСЯ, поэтому подчёркиваем только .title */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+  
+
+
+
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.source-note{margin-top:10px;color:var(--muted);font:500 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.partner-line{margin:46px 0;padding:12px 0 12px 16px;border-left:3px solid var(--line);color:var(--muted);font:500 15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.copy-button:active{box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+
+.service-card { margin-top: 18px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--white) }
+.service-card p { margin: 0 0 11px }
+.service-card p:last-child { margin-bottom: 0 }
+.service-card a { overflow-wrap: anywhere }
+.service-card .source-note { margin-top: 14px }
+.status-note { margin-top: 20px; padding: 14px 18px; border-left: 4px solid var(--accent); background: var(--info) }
+.table-wrap { overflow-x: auto; margin-top: 22px; border: 1px solid var(--line); border-radius: 12px }
+.compare { width: 100%; border-collapse: collapse; font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+.compare th, .compare td { padding: 13px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top }
+.compare th { background: var(--paper-2); color: var(--emerald) }
+.compare tr:last-child td { border-bottom: 0 }
+.compare td:first-child { font-weight: 700 }
+@media (max-width: 860px) { .service-card { padding: 16px } .compare { min-width: 660px } }
+</style></head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner">
+<div class="brand">Claude.ai: кнопка за кнопкой</div>
+<div class="header-actions"><div class="handout-title">Видео из текста</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+</div></div></div></header>
+<div class="page-shell">
+<nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">Видео из текста: 4 сервиса и 2 российских</a>
+<a href="#zsky">1. ZSKY AI</a>
+<a href="#kling">2. Kling</a>
+<a href="#fliki">3. Fliki</a>
+<a href="#steve">4. Steve AI</a>
+<a href="#nashi">И наши</a>
+<a href="#shedevrum">5. Шедеврум</a>
+<a href="#kandinsky">6. Kandinsky в GigaChat</a>
+<a href="#sravnenie">Сравнение</a>
+<a href="#istochniki">Источники</a></nav>
+<main><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#nachalo">Видео из текста: 4 сервиса и 2 российских</a>
+<a href="#zsky">1. ZSKY AI</a>
+<a href="#kling">2. Kling</a>
+<a href="#fliki">3. Fliki</a>
+<a href="#steve">4. Steve AI</a>
+<a href="#nashi">И наши</a>
+<a href="#shedevrum">5. Шедеврум</a>
+<a href="#kandinsky">6. Kandinsky в GigaChat</a>
+<a href="#sravnenie">Сравнение</a>
+<a href="#istochniki">Источники</a></nav></details>
+<article>
+<header id="nachalo"><p class="eyebrow">Видео из текста</p><h1>Видео из текста: 4 сервиса и 2 российских</h1><p class="lead">Здесь шесть сервисов, в которых можно попробовать сделать видео из текста: четыре зарубежных и два российских. Для каждого есть ссылка и условия бесплатного доступа. Ниже приведены примеры запросов и инструкции для первого ролика. Генерация и скачивание готового файла - разные возможности: ограничения указаны отдельно. Тарифы и лимиты актуальны на 25.09.2026</p><p class="status-note">Тарифы и лимиты могут меняться</p></header>
+<section class="content-section" id="zsky"><h2>1. ZSKY AI</h2>
+<p>Генерирует короткое видео и изображение по тексту</p>
+<div class="service-card">
+<p><b>Открыть:</b> <a href="https://zsky.ai/" target="_blank" rel="noopener noreferrer">https://zsky.ai/</a></p>
+<p><b>Бесплатно:</b> Безлимитные генерации изображений и видео, без карты. Пятисекундное видео создаётся по текстовому запросу без дополнительных настроек, готовый файл можно скачать бесплатно</p>
+<p><b>Для чего брать:</b> Короткие сцены и быстрые пробы без счётчика</p>
+<p><b>Звук:</b> Можно загрузить свою аудиодорожку, чтобы видео подстраивалось под неё, или описать нужные звуки в запросе и сгенерировать их вместе с видео</p>
+<p><b>Подвох:</b> Общая очередь на генерацию. В конце ролика есть чёрная заставка ZSKY на 1,5-2 секунды. Её можно обрезать в любом видеоредакторе</p>
+<p><b>Хранение:</b> Бесплатный тариф действует без ограничения по сроку. Созданные видео и изображения хранятся в галерее 7 дней. Надпись «7 DAYS LEFT» относится к сроку хранения файла. Скачай понравившийся ролик, чтобы сохранить его у себя</p>
+<p><b>Водяной знак:</b> Поверх изображения нет, заставка в конце. <b>Карта:</b> Нет. <b>VPN:</b> страница открывается с VPN</p>
+<p class="source-note">Источники условий: <a href="https://zsky.ai/pricing" target="_blank" rel="noopener noreferrer">тарифы</a>, <a href="https://zsky.ai/blog/ai-creation-storage-explained" target="_blank" rel="noopener noreferrer">хранение файлов</a>, <a href="https://zsky.ai/ai-video-with-audio" target="_blank" rel="noopener noreferrer">работа со звуком</a> и <a href="https://zsky.ai/blog/zsky-ai-features-guide" target="_blank" rel="noopener noreferrer">языки запросов</a>, условия на 26.09.2026</p>
+</div>
+<figure class="shot"><a href="assets/zsky-official.png" target="_blank" rel="noopener noreferrer"><img src="assets/zsky-official.png" alt="Официальная таблица тарифов ZSKY AI с бесплатным планом" loading="lazy"></a><figcaption>Бесплатный тариф ZSKY AI. Скрин <a href="https://zsky.ai/pricing" target="_blank" rel="noopener noreferrer">официальной страницы</a></figcaption></figure>
+<figure class="shot"><a href="assets/zsky-generated-example.png" target="_blank" rel="noopener noreferrer"><img src="assets/zsky-generated-example.png" alt="Кадр с рыжеволосой девушкой и бабочками из видео, созданного в ZSKY AI" loading="lazy"></a><figcaption>Пример пятисекундного видео в ZSKY AI. Создание и скачивание бесплатные</figcaption></figure>
+<h3>Промпт для ZSKY AI</h3>
+<p>Короткий запрос для сцены с девушкой и бабочками. ZSKY принимает запросы на русском и английском</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-zsky">Скопировать</button><pre id="prompt-zsky">Рыжеволосая девушка с веснушками и зелёными глазами стоит на солнечном лугу. Вокруг неё разноцветные бабочки, которые взлетают вверх. Девушка неподвижна, камера статична. Мягкий дневной свет и весенний звуковой фон</pre></div>
+</section><section class="content-section" id="kling"><h2>2. Kling</h2>
+<p>Превращает описание сцены в короткое видео</p>
+<div class="service-card">
+<p><b>Открыть:</b> <a href="https://kling.ai/" target="_blank" rel="noopener noreferrer">https://kling.ai/</a></p>
+<p><b>Бесплатно:</b> Есть бесплатный доступ к генерации видео. Количество доступных кредитов посмотри в своём аккаунте. Ежедневные бонусы для подписчиков действуют во время акций</p>
+<p><b>Для чего брать:</b> Когда нужен отдельный выразительный кинокадр</p>
+<p><b>Подвох:</b> На бесплатном видео водяной знак. Перед генерацией посмотри остаток кредитов в своём аккаунте</p>
+<p><b>Водяной знак:</b> Да. <b>Карта:</b> Не указано. <b>VPN:</b> страница открывается без VPN</p>
+<p class="source-note">Источники условий: <a href="https://kling.ai/feature/ai-video-generator" target="_blank" rel="noopener noreferrer">бесплатная генерация и водяной знак</a>, <a href="https://kling.ai/docs/point-policy" target="_blank" rel="noopener noreferrer">правила кредитов</a>, условия на 25.09.2026</p>
+</div>
+<figure class="shot"><a href="assets/kling-official.png" target="_blank" rel="noopener noreferrer"><img src="assets/kling-official.png" alt="Официальная страница генератора видео Kling" loading="lazy"></a><figcaption>Генератор видео Kling. Скрин <a href="https://kling.ai/feature/ai-video-generator" target="_blank" rel="noopener noreferrer">официальной страницы</a></figcaption></figure>
+<h3>Промпт для Kling</h3>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-kling">Скопировать</button><pre id="prompt-kling">Вертикальный кинематографичный кадр 9:16. Ночной трамвай медленно едет по мокрой улице, отражения фонарей скользят по рельсам. Камера плавно следует сбоку, один непрерывный план, реалистичный свет, без текста</pre></div>
+</section><section class="content-section" id="fliki"><h2>3. Fliki</h2>
+<p>Создаёт раскадровку: последовательность картинок под твою озвучку, с субтитрами или без них</p>
+<div class="service-card">
+<p><b>Открыть:</b> <a href="https://fliki.ai/" target="_blank" rel="noopener noreferrer">https://fliki.ai/</a></p>
+<p><b>Бесплатно:</b> Free forever: 3 кредита в месяц, экспорт до 1 минуты в 720p, без карты</p>
+<p><b>Для чего брать:</b> Оформить свою озвучку изображениями. Можно выбрать стиль картинок: реалистичный или рисованный, как в примере ниже</p>
+<p><b>Подвох:</b> На бесплатном тарифе получаешь картинки под свою озвучку. Субтитры можно оставить или отключить. Оживить эти картинки, чтобы персонажи и объекты двигались, в Free нельзя. Для этого нужны платный тариф и кредиты на AI video clips</p>
+<p><b>Водяной знак:</b> Да. <b>Карта:</b> Нет. <b>VPN:</b> страница открывается без VPN</p>
+<p class="source-note">Источники условий: <a href="https://fliki.ai/pricing" target="_blank" rel="noopener noreferrer">тарифы</a> и <a href="https://fliki.ai/frequently-asked-questions" target="_blank" rel="noopener noreferrer">справка Fliki</a>, условия на 26.09.2026</p>
+</div>
+<figure class="shot"><a href="assets/fliki-official.png" target="_blank" rel="noopener noreferrer"><img src="assets/fliki-official.png" alt="Официальная таблица тарифов Fliki с бесплатным планом" loading="lazy"></a><figcaption>Бесплатный тариф Fliki. Скрин <a href="https://fliki.ai/pricing" target="_blank" rel="noopener noreferrer">официальной страницы</a></figcaption></figure>
+<div class="service-example">
+<figure class="shot"><a href="assets/fliki-generated-example.png" target="_blank" rel="noopener noreferrer"><img src="assets/fliki-generated-example.png" alt="Рисованная сцена в стиле аниме с заметным белым логотипом Fliki.ai справа сверху" loading="lazy"></a><figcaption>Картинка из раскадровки с субтитрами и собственной озвучкой. Стиль аниме</figcaption></figure>
+<div class="service-example-notes">
+<h3>Раскадровка под свой голос</h3>
+<p>Загрузи свою озвучку и выбери стиль изображений. Fliki соберёт раскадровку: картинки сменяют друг друга под твой голос. Субтитры можно отключить, если они не нужны</p>
+<h3>Водяной знак</h3>
+<p>На бесплатном экспорте заметный белый логотип Fliki.ai в правом верхнем углу</p>
+<h3>Запись экрана</h3>
+<p>Если в предпросмотре нет логотипа, можно записать видео с экрана. Это подойдёт, если качества предпросмотра и записи достаточно для твоей задачи</p>
+</div>
+</div>
+</section><section class="content-section" id="steve"><h2>4. Steve AI</h2>
+<p>Для обучающего ролика можно перейти из Steve AI в редактор Animaker. Бесплатный результат состоит из картинок по сценарию</p>
+<div class="service-card">
+<p><b>Открыть:</b> <a href="https://www.steve.ai/" target="_blank" rel="noopener noreferrer">https://www.steve.ai/</a></p>
+<p><b>Бесплатно:</b> В Steve AI тариф Free даёт 5 видеокредитов в месяц, 50 минут AI-аватара и речи в месяц, ограниченные стили</p>
+<p><b>Для чего брать:</b> Обучающая раскадровка: иллюстрации и подписи по сценам твоего сценария</p>
+<p><b>Подвох:</b> Сцены могут оставаться неподвижными картинками. Для их оживления редактор предлагает подписку через кнопку «Upgrade to Animate». На бесплатном видео есть водяной знак</p>
+<p><b>Скачивание:</b> Обучающий ролик в Animaker можно скачать в MP4 с водяным знаком</p>
+<p><b>Водяной знак:</b> В Animaker большая плашка «Made with Animaker» в правом нижнем углу. <b>Карта:</b> Для пробного входа не нужна. <b>VPN:</b> страница открывается с VPN</p>
+<p class="source-note">Источники условий: <a href="https://app.steve.ai/pricing/" target="_blank" rel="noopener noreferrer">таблица тарифов</a> и <a href="https://www.steve.ai/photo-video-maker" target="_blank" rel="noopener noreferrer">страница Photo Video Maker</a>, условия на 25.09.2026</p>
+</div>
+<figure class="shot"><a href="assets/steve-official.png" target="_blank" rel="noopener noreferrer"><img src="assets/steve-official.png" alt="Официальная страница Steve AI для создания объясняющих видео" loading="lazy"></a><figcaption>Объяснялка из сценария в Steve AI. Скрин <a href="https://www.steve.ai/explainer-video-maker" target="_blank" rel="noopener noreferrer">официальной страницы</a></figcaption></figure>
+<div class="service-example">
+<figure class="shot"><a href="assets/steve-generated-example.png" target="_blank" rel="noopener noreferrer"><img src="assets/steve-generated-example.png" alt="Обучающий ролик о резервной копии: предупреждение о статичных картинках и кнопка Upgrade to Animate" loading="lazy"></a><figcaption>Сцена из обучающего ролика о резервной копии</figcaption></figure>
+<div class="service-example-notes">
+<h3>Обучающие картинки</h3>
+<p>По сценарию получается раскадровка с иллюстрациями и подписями. Картинки могут оставаться неподвижными</p>
+<h3>Анимация по подписке</h3>
+<p>Под предпросмотром указано, что часть сцен состоит из статичных картинок. Кнопка «Upgrade to Animate» предлагает перейти на подписку для их оживления</p>
+</div>
+</div>
+<div class="service-example">
+<figure class="shot"><a href="assets/steve-downloaded-example.png" target="_blank" rel="noopener noreferrer"><img src="assets/steve-downloaded-example.png" alt="Кадр из MP4 о резервной копии с большой плашкой Made with Animaker в правом нижнем углу" loading="lazy"></a><figcaption>Кадр из готового MP4: восстановление файла из резервной копии</figcaption></figure>
+<div class="service-example-notes">
+<h3>Водяной знак</h3>
+<p>В готовом файле большая плашка «Made with Animaker» в правом нижнем углу. Она накладывается поверх изображения</p>
+<h3>Запись без знака</h3>
+<p>Предпросмотр до скачивания можно записать с экрана без водяного знака, если его качества достаточно для твоей задачи</p>
+</div>
+</div>
+<h3>Запрос для обучающих сцен</h3>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-steve">Скопировать</button><pre id="prompt-steve">Сделай короткую обучающую раскадровку на русском: «Как работает резервная копия». Сцена 1: файл на ноутбуке. Сцена 2: копия уходит в облако. Сцена 3: ноутбук ломается, файл восстанавливается из облака. Добавь короткие подписи</pre></div>
+</section><section class="content-section" id="nashi"><h2>И наши</h2><p>Ещё два российских сервиса для видео из текста: Шедеврум и Kandinsky в GigaChat. Для Шедеврума нужен Яндекс ID, для GigaChat - Сбер ID</p></section><section class="content-section" id="shedevrum"><h2>5. Шедеврум</h2>
+<p>Создаёт короткие видео по текстовому запросу в приложении</p>
+<div class="service-card">
+<p><b>Открыть:</b> <a href="https://shedevrum.ai/" target="_blank" rel="noopener noreferrer">веб-версию Шедеврума</a> или <a href="https://apps.apple.com/ru/app/%D1%88%D0%B5%D0%B4%D0%B5%D0%B2%D1%80%D1%83%D0%BC/id1671837122" target="_blank" rel="noopener noreferrer">приложение для iPhone и iPad</a>. Ссылка на сайт может открыть ленту чужих работ</p>
+<p><b>Бесплатно:</b> В веб-версии можно сделать 10 видеогенераций в день, в приложении дневного ограничения нет</p>
+<p><b>Для чего брать:</b> Быстро проверить визуальную идею на русском языке</p>
+<p><b>Подвох:</b> Чтобы сохранить видео в MP4, его нужно опубликовать. Некоммерческое использование разрешено с указанием источника; для коммерческого требуется разрешение Яндекса</p>
+<p><b>Как начать в приложении:</b> Войди через Яндекс ID, в нижнем меню выбери «Видео», вставь запрос из блока ниже и нажми «Создать». Выбери первый кадр и нажми «Создать видео». После публикации открой пост и сохрани MP4. <a href="https://yandex.ru/support/shedevrum/ru/video/create" target="_blank" rel="noopener noreferrer">Пошаговая справка Яндекса</a></p>
+<p><b>Водяной знак:</b> Не указано. <b>Карта:</b> Вход через Яндекс ID; требование карты не указано. <b>VPN:</b> страница открывается без VPN</p>
+<p class="source-note">Источники условий: <a href="https://yandex.ru/support/shedevrum/ru/generate" target="_blank" rel="noopener noreferrer">справка Шедеврума</a> и <a href="https://practicum.yandex.ru/blog/neyroset-yandexa-shedevrum-dlya-generacii-izobrazhenii/" target="_blank" rel="noopener noreferrer">разбор Яндекс Практикума</a>, условия на 25.09.2026</p>
+</div>
+<figure class="shot"><a href="assets/shedevrum-official.png" target="_blank" rel="noopener noreferrer"><img src="assets/shedevrum-official.png" alt="Официальная карточка приложения Шедеврум в App Store с кадрами видео" loading="lazy"></a><figcaption>Шедеврум в App Store: кадры приложения, загруженные разработчиком. Скрин <a href="https://apps.apple.com/ru/app/%D1%88%D0%B5%D0%B4%D0%B5%D0%B2%D1%80%D1%83%D0%BC/id1671837122" target="_blank" rel="noopener noreferrer">карточки приложения</a></figcaption></figure>
+<h3>Промпт для Шедеврум</h3>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-shedevrum">Скопировать</button><pre id="prompt-shedevrum">Создай короткое вертикальное видео: бумажный кораблик плывёт по луже после дождя, вокруг отражаются вечерние огни. Камера медленно приближается к кораблику, мягкое движение воды, без людей и надписей</pre></div>
+</section><section class="content-section" id="kandinsky"><h2>6. Kandinsky в GigaChat</h2>
+<p>Генерирует короткое видео по тексту или изображению</p>
+<div class="service-card">
+<p><b>Открыть:</b> <a href="https://giga.chat/" target="_blank" rel="noopener noreferrer">https://giga.chat/</a></p>
+<p><b>Бесплатно:</b> Ролики доступны бесплатно после входа через Сбер ID. Число запросов ограничено</p>
+<p><b>Для чего брать:</b> Сделать русскоязычную сцену без оплаты подписки</p>
+<p><b>Подвох:</b> Нужен Сбер ID. Если запросы закончились, придётся подождать или пригласить друзей</p>
+<p><b>Как начать:</b> Войди через Сбер ID, открой «Полезное» → «Создать видео», выбери генерацию по тексту и формат 9:16. Вставь запрос из блока ниже и запусти генерацию. Готовое видео можно скачать кнопкой в левом верхнем углу</p>
+<p><b>Водяной знак:</b> Не указано. <b>Карта:</b> нет, нужен Сбер ID. <b>VPN:</b> страница открывается без VPN</p>
+<p class="source-note">Источник условий: <a href="https://giga.chat/help/articles/kandinsky-to-create-a-video" target="_blank" rel="noopener noreferrer">официальная страница сервиса</a>, условия на 25.09.2026</p>
+</div>
+<figure class="shot"><a href="assets/kandinsky-official.png" target="_blank" rel="noopener noreferrer"><img src="assets/kandinsky-official.png" alt="Официальная инструкция GigaChat по созданию видео в Kandinsky" loading="lazy"></a><figcaption>Создание видео в Kandinsky. Скрин <a href="https://giga.chat/help/articles/kandinsky-to-create-a-video" target="_blank" rel="noopener noreferrer">официальной справки GigaChat</a></figcaption></figure>
+<h3>Промпт для Kandinsky в GigaChat</h3>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-kandinsky">Скопировать</button><pre id="prompt-kandinsky">Создай вертикальное видео 9:16: одинокий красный зонтик лежит на пустой городской скамейке после дождя. Камера плавно отъезжает, на мокрой дорожке отражаются фонари. Реалистичная съёмка, спокойное движение, без текста и людей</pre></div>
+</section>
+<section class="content-section" id="sravnenie"><h2>Сравнение</h2><p>В ZSKY можно бесплатно сгенерировать видео и скачать файл. У Шедеврума нет дневного лимита в приложении. Условия скачивания различаются по сервисам и тарифам</p>
+<div class="table-wrap"><table class="compare"><thead><tr><th>Сервис</th><th>Что бесплатно</th><th>Водяной знак</th><th>VPN · 26.09.2026</th><th>Карта</th></tr></thead><tbody><tr><td><a href="#zsky">ZSKY AI</a></td><td>Безлимит, видео до 5 с, скачивание</td><td>Без плашки поверх видео; заставку в конце можно обрезать</td><td>Открывается с VPN</td><td>Нет</td></tr><tr><td><a href="#kling">Kling</a></td><td>Генерация видео, доступные кредиты в аккаунте</td><td>Да</td><td>Открывается без VPN</td><td>Не указано</td></tr><tr><td><a href="#fliki">Fliki</a></td><td>3 кредита/мес, до 1 мин; раскадровка под свою озвучку, субтитры по желанию</td><td>Заметный логотип справа сверху</td><td>Открывается без VPN</td><td>Нет</td></tr><tr><td><a href="#steve">Steve AI</a></td><td>5 видеокредитов/мес в Steve AI; обучающие картинки в Animaker, оживление по подписке</td><td>Большая плашка Made with Animaker справа снизу; предпросмотр можно записать без знака</td><td>Открывается с VPN</td><td>Нет для пробного входа</td></tr><tr><td><a href="#shedevrum">Шедеврум</a></td><td>10 видео/день в веб-версии</td><td>Не указано</td><td>Открывается без VPN</td><td>Вход через Яндекс ID</td></tr><tr><td><a href="#kandinsky">Kandinsky в GigaChat</a></td><td>Бесплатно, число запросов ограничено</td><td>Не указано</td><td>Открывается без VPN</td><td>Нет, нужен Сбер ID</td></tr></tbody></table></div><p>Информация о доступе актуальна на 26.09.2026</p></section>
+<section class="content-section" id="istochniki"><h2>Источники</h2><p>Тарифы, условия скачивания и инструкции - на официальных страницах сервисов. Лимиты Шедеврума также описаны в разборе Яндекс Практикума</p><ul>
+<li><a href="https://zsky.ai/pricing">ZSKY AI - Pricing</a> и <a href="https://zsky.ai/blog/ai-creation-storage-explained">правила хранения файлов</a></li>
+<li><a href="https://kling.ai/feature/ai-video-generator">Kling - бесплатная генерация</a> и <a href="https://kling.ai/docs/point-policy">правила кредитов</a></li>
+<li><a href="https://fliki.ai/pricing">Fliki - Pricing</a></li>
+<li><a href="https://app.steve.ai/pricing/">Steve AI - Pricing</a> и <a href="https://www.steve.ai/photo-video-maker">страница Photo Video Maker</a></li>
+<li><a href="https://yandex.ru/support/shedevrum/ru/generate">Шедеврум - справка</a> и <a href="https://practicum.yandex.ru/blog/neyroset-yandexa-shedevrum-dlya-generacii-izobrazhenii/">лимиты по Яндекс Практикуму</a></li>
+<li><a href="https://giga.chat/help/articles/kandinsky-to-create-a-video">GigaChat - Kandinsky Video</a></li>
+</ul></section>
+<section class="content-section" id="na-telefone"><h2>Как страницы выглядят на телефоне</h2><p>Шесть сервисов на снимках от 26.09.2026. На телефоне ряд прокручивается вправо</p>
+<div class="phone-strip" aria-label="Шесть снимков сайтов на телефоне">
+<figure><a href="assets/phone-check/01-zsky.png" target="_blank" rel="noopener noreferrer"><img src="assets/phone-check/01-zsky.png" alt="ZSKY AI на телефоне" loading="lazy"></a><figcaption>ZSKY AI</figcaption></figure>
+<figure><a href="assets/phone-check/02-kling.png" target="_blank" rel="noopener noreferrer"><img src="assets/phone-check/02-kling.png" alt="Kling на телефоне" loading="lazy"></a><figcaption>Kling</figcaption></figure>
+<figure><a href="assets/phone-check/03-fliki.png" target="_blank" rel="noopener noreferrer"><img src="assets/phone-check/03-fliki.png" alt="Fliki на телефоне" loading="lazy"></a><figcaption>Fliki</figcaption></figure>
+<figure><a href="assets/phone-check/04-steve.png" target="_blank" rel="noopener noreferrer"><img src="assets/phone-check/04-steve.png" alt="Steve AI на телефоне" loading="lazy"></a><figcaption>Steve AI</figcaption></figure>
+<figure><a href="assets/phone-check/05-shedevrum.png" target="_blank" rel="noopener noreferrer"><img src="assets/phone-check/05-shedevrum.png" alt="Шедеврум на телефоне" loading="lazy"></a><figcaption>Шедеврум</figcaption></figure>
+<figure><a href="assets/phone-check/06-gigachat.png" target="_blank" rel="noopener noreferrer"><img src="assets/phone-check/06-gigachat.png" alt="GigaChat на телефоне" loading="lazy"></a><figcaption>GigaChat</figcaption></figure>
+</div></section>
+<section class="cta" aria-label="Следующий шаг"><p class="section-label">Бесплатный практикум</p><h2>Теперь выбери задачу для своего ролика</h2><p>На ИИ-Лагере показывают, как использовать ИИ-инструменты для своего проекта и проверять результат на практике</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+</article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Дальше по теме</p><h2>Веб-поиск в Claude: ответы со свежими ссылками</h2>
+      <p><a href="../web-search-v-claude/">Открыть статью</a></p></aside>
+</div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true"><button class="viewer-close" type="button" aria-label="Закрыть">✕</button><div class="viewer-scroll"><img alt=""></div><p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p></div>
+<script>
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+
+    var themeButton = document.querySelector(".theme-toggle");
+    var savedTheme = localStorage.getItem("guide-theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+    themeButton.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("guide-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });
+
+    var viewer = document.getElementById("viewer");
+    var lastFocus = null;
+    function closeViewer() {
+      viewer.classList.remove("open");
+      viewer.setAttribute("aria-hidden", "true");
+      viewer.querySelector("img").removeAttribute("src");
+      if (lastFocus) lastFocus.focus();
+    }
+    document.querySelectorAll(".shot img").forEach(function (img) {
+      var content = img.parentElement.tagName === "A" ? img.parentElement : img;
+      var frame = document.createElement("div");
+      frame.className = "shot-image";
+      content.parentElement.insertBefore(frame, content);
+      frame.appendChild(content);
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "zoom";
+      button.textContent = "Открыть крупнее";
+      button.addEventListener("click", function () {
+        lastFocus = button;
+        viewer.querySelector("img").src = img.currentSrc || img.src;
+        viewer.querySelector("img").alt = img.alt;
+        viewer.classList.add("open");
+        viewer.setAttribute("aria-hidden", "false");
+        viewer.querySelector(".viewer-close").focus();
+      });
+      frame.appendChild(button);
+    });
+    viewer.querySelector(".viewer-close").addEventListener("click", closeViewer);
+    viewer.addEventListener("click", function (event) { if (event.target === viewer || event.target.classList.contains("viewer-scroll")) closeViewer(); });
+    document.addEventListener("keydown", function (event) { if (event.key === "Escape" && viewer.classList.contains("open")) closeViewer(); });
+
+    var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+    function updateReadingState() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+      var current = sections[0];
+      sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+      links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+    }
+    updateReadingState();
+    addEventListener("scroll", updateReadingState, { passive: true });
+  </script></body></html>
