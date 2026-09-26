@@ -889,7 +889,7 @@ class GuidesSiteTest(unittest.TestCase):
         """
         korni = Path(__file__).resolve().parent.parent
         # у этих двух статей своя вёрстка - её решение, к канону не приводим
-        svoya_verstka = {"shest-skillov", "svoy-sayt-ne-bliznec"}
+        svoya_verstka = {"shest-skillov"}
 
         for papka in sorted((korni / "claude-ai").iterdir()):
             stranica = papka / "index.html"
