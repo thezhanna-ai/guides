@@ -98,6 +98,24 @@
     .section-intro { color: var(--muted) }
     .gallery { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px }
     .gallery figure { margin: 0 }
+    .shot { position: relative }
+    .steps figure.poster-shot .shot { width: min(100%, 520px) }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--emerald); color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    .shot .zoom:hover { background: var(--accent) }
+    /* без мыши кнопку не навести, поэтому на телефоне она видна всегда.
+       Условие продублировано по ширине: hover:none не срабатывает в эмуляции */
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    /* полноэкранный просмотр */
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    /* в окне картинка показывается в НАТУРАЛЬНОМ размере с прокруткой: на телефоне
+       ужать её в экран - значит не увеличить ничего. Прокручиваем пальцем */
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
     .gallery img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 9px }
     figcaption { padding-top: 7px; color: var(--muted); font: 14px/1.4 Arial,sans-serif }
     .prompt-card { overflow: hidden; border-radius: 13px; background: #102F30; color: #F8F7F2 }
@@ -170,12 +188,12 @@
     </nav></details>
     <article>
       <header id="nachalo"><p class="eyebrow">ПОСТЕР / один снимок</p><h1>Как сделать постер из одного фото без опыта в дизайне?</h1><p class="lead">Есть обычное фото с телефона, а хочется постер для стены или профиля без дизайнера и Фотошопа? Один снимок может выглядеть как обложка архитектурного журнала, но почему город, руки и боксёр превращаются в постеры одной серии? Ниже увидишь путь по шагам и заберёшь полный текст запроса для ChatGPT (промпт): прикрепишь своё фото, вставишь промпт и сможешь получить собственный постер даже на бесплатном тарифе</p><a class="quick-link" href="#prompt">К полному промпту ↓</a></header>
-<section class="content-section" id="how"><h2>Какое фото выбрать и куда его отправить?</h2><p class="section-intro">Каждый постер состоит из двух половин: сверху остаётся твоё фото, снизу появляется коллаж из деталей того же кадра. Сначала выбери один снимок с ясным главным объектом: зданием, человеком, заметной деталью или вывеской</p><div class="note">Из России <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">chatgpt.com</a> без VPN не откроется. Включи VPN, открой сайт и войди в аккаунт или зарегистрируйся. Если пользуешься программой ChatGPT для Mac, открой её после входа в аккаунт</div><ol class="steps"><li><b>Открой новый чат</b> в программе ChatGPT для Mac или на сайте chatgpt.com. Скрины ниже сняты на Mac, на Windows и в браузере шаги те же</li><li><b>Прикрепи одно фото:</b> нажми «+» у поля сообщения. В программе для Mac выбери <b>«Загрузить фото»</b> (на Windows и на сайте chatgpt.com пункт называется чуть иначе, например Add photos &amp; files). Выбери снимок на устройстве. Одно фото за раз помогает не смешать разные кадры в одном результате<figure><img src="assets/her/shag-plus.webp" alt="Поле сообщения в программе ChatGPT для Mac: рамкой выделена кнопка плюс" loading="lazy" width="880" height="222"><figcaption>Сначала нажми «+» у поля сообщения</figcaption></figure><figure><img src="assets/her/shag-menu-zagruzit-foto.webp" alt="Меню программы ChatGPT для Mac: рамкой выделен пункт «Загрузить фото»" loading="lazy" width="880" height="222"><figcaption>Затем выбери «Загрузить фото»</figcaption></figure></li><li><b>Добавь текст:</b> скопируй английский или русский промпт в конце страницы, вставь в то же сообщение рядом с прикреплённым фото и нажми кнопку со стрелкой вверх справа внизу<figure><img src="assets/her/shag-foto-i-promt.webp" alt="К сообщению прикреплено фото, вставлен промпт, рамкой выделена кнопка отправки со стрелкой вверх" loading="lazy" width="1200" height="800"><figcaption>Фото и промпт в одном сообщении. Отправь запрос кнопкой в рамке</figcaption></figure></li><li><b>Сохрани постер:</b> дождись результата, нажми правой кнопкой по изображению и выбери <b>«Сохранить изображение как…»</b>. Генерация может занять несколько минут<figure class="poster-shot"><img src="assets/her/shag-sohranit.webp" alt="Готовый постер с лодками на рассвете: в меню правой кнопки рамкой выделен пункт «Сохранить изображение как…»" loading="lazy" width="1098" height="1208"><figcaption>Нажми правой кнопкой по постеру и выбери пункт в рамке</figcaption></figure></li></ol><p class="small">Шаги загрузки и сохранения: <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq" target="_blank" rel="noopener noreferrer">OpenAI о загрузке фото</a> и <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt" target="_blank" rel="noopener noreferrer">OpenAI об изображениях и сохранении</a></p><div class="note"><b>Условия на 26.09.2026:</b> примеры ниже сделаны в ChatGPT на GPT-5.6 Sol с GPT Image 2, согласно подписи к <a href="https://www.instagram.com/p/DcMp92iCHmj/" target="_blank" rel="noopener noreferrer">исходной карусели</a>. Генерация изображений есть и на бесплатном тарифе, но Free использует GPT-5.6 Luna, а лимиты на загрузку фото и генерацию ниже. Поэтому результат на Free может отличаться от примеров. Если лимит закончится, ChatGPT покажет уведомление. <a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq" target="_blank" rel="noopener noreferrer">Справка OpenAI о Free</a> и <a href="https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt" target="_blank" rel="noopener noreferrer">о доступности моделей</a></div></section>
-<section class="content-section" id="examples"><h2>Хочется увидеть, каким может стать твоё фото?</h2><p class="section-intro">Здесь шесть постеров из шести исходных снимков. У каждого постера верхняя половина опирается на исходную фотографию, а нижняя превращает ту же сцену в коллаж на светлой бумаге. Граница не всегда оказывается ровно посередине, даже когда промпт просит 50:50</p><div class="gallery"><figure><img src="assets/her/primer-golden-hour.webp" alt="Постер: Мозамбик: лодки на берегу на рассвете, 6 утра" loading="lazy" width="1086" height="1448"><figcaption>Мозамбик: лодки на берегу на рассвете, 6 утра</figcaption></figure><figure><img src="assets/city.webp" alt="Постер: Кейптаун: перекрёсток с вывесками и башней" loading="lazy" width="1086" height="1448"><figcaption>Кейптаун: перекрёсток с вывесками и башней</figcaption></figure>
-<figure><img src="assets/tower.webp" alt="Постер: Аланья, Турция: башня у моря" loading="lazy" width="1086" height="1448"><figcaption>Аланья, Турция: башня у моря</figcaption></figure>
-<figure><img src="assets/hands.webp" alt="Постер: Руки с кольцами крупным планом" loading="lazy" width="1086" height="1448"><figcaption>Руки с кольцами крупным планом</figcaption></figure>
-<figure><img src="assets/eye.webp" alt="Постер: Красный глаз крупным планом" loading="lazy" width="1086" height="1448"><figcaption>Красный глаз крупным планом</figcaption></figure>
-<figure><img src="assets/boxer-a.webp" alt="Постер: Боксёр в зале" loading="lazy" width="1086" height="1448"><figcaption>Боксёр в зале</figcaption></figure>
+<section class="content-section" id="how"><h2>Какое фото выбрать и куда его отправить?</h2><p class="section-intro">Каждый постер состоит из двух половин: сверху остаётся твоё фото, снизу появляется коллаж из деталей того же кадра. Сначала выбери один снимок с ясным главным объектом: зданием, человеком, заметной деталью или вывеской</p><div class="note">Из России <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">chatgpt.com</a> без VPN не откроется. Включи VPN, открой сайт и войди в аккаунт или зарегистрируйся. Если пользуешься программой ChatGPT для Mac, открой её после входа в аккаунт</div><ol class="steps"><li><b>Открой новый чат</b> в программе ChatGPT для Mac или на сайте chatgpt.com. Скрины ниже сняты на Mac, на Windows и в браузере шаги те же</li><li><b>Прикрепи одно фото:</b> нажми «+» у поля сообщения. В программе для Mac выбери <b>«Загрузить фото»</b> (на Windows и на сайте chatgpt.com пункт называется чуть иначе, например Add photos &amp; files). Выбери снимок на устройстве. Одно фото за раз помогает не смешать разные кадры в одном результате<figure><div class="shot"><img src="assets/her/shag-plus.webp" alt="Поле сообщения в программе ChatGPT для Mac: рамкой выделена кнопка плюс" loading="lazy" width="880" height="222"></div><figcaption>Сначала нажми «+» у поля сообщения</figcaption></figure><figure><div class="shot"><img src="assets/her/shag-menu-zagruzit-foto.webp" alt="Меню программы ChatGPT для Mac: рамкой выделен пункт «Загрузить фото»" loading="lazy" width="880" height="222"></div><figcaption>Затем выбери «Загрузить фото»</figcaption></figure></li><li><b>Добавь текст:</b> скопируй английский или русский промпт в конце страницы, вставь в то же сообщение рядом с прикреплённым фото и нажми кнопку со стрелкой вверх справа внизу<figure><div class="shot"><img src="assets/her/shag-foto-i-promt.webp" alt="К сообщению прикреплено фото, вставлен промпт, рамкой выделена кнопка отправки со стрелкой вверх" loading="lazy" width="1200" height="800"></div><figcaption>Фото и промпт в одном сообщении. Отправь запрос кнопкой в рамке</figcaption></figure></li><li><b>Сохрани постер:</b> дождись результата, нажми правой кнопкой по изображению и выбери <b>«Сохранить изображение как…»</b>. Генерация может занять несколько минут<figure class="poster-shot"><div class="shot"><img src="assets/her/shag-sohranit.webp" alt="Готовый постер с лодками на рассвете: в меню правой кнопки рамкой выделен пункт «Сохранить изображение как…»" loading="lazy" width="1098" height="1208"></div><figcaption>Нажми правой кнопкой по постеру и выбери пункт в рамке</figcaption></figure></li></ol><p class="small">Шаги загрузки и сохранения: <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq" target="_blank" rel="noopener noreferrer">OpenAI о загрузке фото</a> и <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt" target="_blank" rel="noopener noreferrer">OpenAI об изображениях и сохранении</a></p><div class="note"><b>Условия на 26.09.2026:</b> примеры ниже сделаны в ChatGPT на GPT-5.6 Sol с GPT Image 2, согласно подписи к <a href="https://www.instagram.com/p/DcMp92iCHmj/" target="_blank" rel="noopener noreferrer">исходной карусели</a>. Генерация изображений есть и на бесплатном тарифе, но Free использует GPT-5.6 Luna, а лимиты на загрузку фото и генерацию ниже. Поэтому результат на Free может отличаться от примеров. Если лимит закончится, ChatGPT покажет уведомление. <a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq" target="_blank" rel="noopener noreferrer">Справка OpenAI о Free</a> и <a href="https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt" target="_blank" rel="noopener noreferrer">о доступности моделей</a></div></section>
+<section class="content-section" id="examples"><h2>Хочется увидеть, каким может стать твоё фото?</h2><p class="section-intro">Здесь шесть постеров из шести исходных снимков. У каждого постера верхняя половина опирается на исходную фотографию, а нижняя превращает ту же сцену в коллаж на светлой бумаге. Граница не всегда оказывается ровно посередине, даже когда промпт просит 50:50</p><div class="gallery"><figure><div class="shot"><img src="assets/her/primer-golden-hour.webp" alt="Постер: Мозамбик: лодки на берегу на рассвете, 6 утра" loading="lazy" width="1086" height="1448"></div><figcaption>Мозамбик: лодки на берегу на рассвете, 6 утра</figcaption></figure><figure><div class="shot"><img src="assets/city.webp" alt="Постер: Кейптаун: перекрёсток с вывесками и башней" loading="lazy" width="1086" height="1448"></div><figcaption>Кейптаун: перекрёсток с вывесками и башней</figcaption></figure>
+<figure><div class="shot"><img src="assets/tower.webp" alt="Постер: Аланья, Турция: башня у моря" loading="lazy" width="1086" height="1448"></div><figcaption>Аланья, Турция: башня у моря</figcaption></figure>
+<figure><div class="shot"><img src="assets/hands.webp" alt="Постер: Руки с кольцами крупным планом" loading="lazy" width="1086" height="1448"></div><figcaption>Руки с кольцами крупным планом</figcaption></figure>
+<figure><div class="shot"><img src="assets/eye.webp" alt="Постер: Красный глаз крупным планом" loading="lazy" width="1086" height="1448"></div><figcaption>Красный глаз крупным планом</figcaption></figure>
+<figure><div class="shot"><img src="assets/boxer-a.webp" alt="Постер: Боксёр в зале" loading="lazy" width="1086" height="1448"></div><figcaption>Боксёр в зале</figcaption></figure>
 </div><p class="small">Пять примеров из <a href="https://www.instagram.com/p/DcMp92iCHmj/" target="_blank" rel="noopener noreferrer">авторской карусели от 19 августа</a>; постер с лодками добавлен отдельно</p></section>
 <section class="content-section" id="fix"><h2>Постер почти получился, но что-то не совпало?</h2><p class="section-intro">Отправь короткую поправку в тот же чат. Выбери одну проблему, скопируй готовую фразу и отправь после первого результата</p><div class="fixes"><details class="faq-item"><summary>Несколько фото смешались в один коллаж?</summary><div class="fix-line"><p id="fix-1">Сделай один отдельный постер только по прикреплённой фотографии</p><button class="copy" type="button" data-copy-target="fix-1" aria-label="Скопировать фразу: Несколько фото смешались в один коллаж?">Копировать</button></div></details>
 <details class="faq-item"><summary>Верхняя половина изменила фото?</summary><div class="fix-line"><p id="fix-2">Сохрани главный объект, его положение, свет и цвета в верхней половине без замены деталей</p><button class="copy" type="button" data-copy-target="fix-2" aria-label="Скопировать фразу: Верхняя половина изменила фото?">Копировать</button></div></details>
@@ -215,6 +233,12 @@ Design it with the serene, sense-of-place aesthetic of an international architec
       <p><a href="#prompt">Перейти к двум версиям промпта</a></p>
     </aside>
   </div>
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
+    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+    <div class="viewer-scroll"><img alt=""></div>
+    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+  </div>
+
 <script>
 (function () {
   var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
@@ -251,6 +275,70 @@ Design it with the serene, sense-of-place aesthetic of an international architec
     copy._timer = setTimeout(function () { copy.textContent = 'Копировать'; copy.dataset.state = ''; }, 1800);
   });
   });
+    // "Открыть крупнее": скрины в примерах на телефоне ужимаются до 18-29%,
+    // кнопка открывает картинку во весь экран
+    (function () {
+      var viewer = document.getElementById("viewer");
+      if (!viewer) return;
+      var big = viewer.querySelector("img");
+      var lastFocused = null;
+      function open(src, alt) {
+        lastFocused = document.activeElement;
+        big.src = src; big.alt = alt || "";
+        big.onload = function () {
+          var box = viewer.querySelector(".viewer-scroll");
+          var room = viewer.clientWidth - 44;
+          // цель - читаемый текст, а не максимальный размер. Показываем картинку
+          // примерно вдвое крупнее, чем она стоит в тексте, но не больше её
+          // натуральной величины и не больше двух экранов по ширине
+          var inPage = document.querySelector('.shot img[src$="' + src.split("/").pop() + '"]');
+          var pageWidth = inPage ? inPage.getBoundingClientRect().width : room;
+          var target = Math.min(pageWidth * 2.2, big.naturalWidth);
+          // на большом экране картинка всегда влезает целиком, без прокрутки.
+          // На узком телефоне ужать её - значит ничего не увеличить, поэтому
+          // там разрешаем выйти за экран и прокручивать пальцем
+          var wide = viewer.clientWidth >= 860;
+          target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+          // и по высоте: картинка целиком должна помещаться на экран
+          if (wide) {
+            var maxH = viewer.clientHeight - 96;
+            var byHeight = maxH * (big.naturalWidth / big.naturalHeight);
+            target = Math.min(target, byHeight);
+          }
+          big.style.width = Math.round(target) + "px";
+          viewer.classList.toggle("fits", target <= room);
+          box.scrollLeft = (target - box.clientWidth) / 2;
+          var hint = viewer.querySelector(".viewer-hint");
+          var scrolls = box.scrollWidth > box.clientWidth + 2;
+          hint.textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+        };
+        viewer.setAttribute("open", "");
+        document.body.style.overflow = "hidden";
+        viewer.querySelector(".viewer-close").focus();
+      }
+      function close() {
+        viewer.removeAttribute("open");
+        document.body.style.overflow = "";
+        big.removeAttribute("src");
+        big.style.width = "";
+        if (lastFocused) lastFocused.focus();
+      }
+      document.querySelectorAll(".shot img").forEach(function (img) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "zoom";
+        button.textContent = "Открыть крупнее";
+        button.addEventListener("click", function () { open(img.currentSrc || img.src, img.alt); });
+        img.parentElement.appendChild(button);
+      });
+      viewer.addEventListener("click", function (event) {
+        if (event.target === viewer || event.target.classList.contains("viewer-close")) close();
+      });
+      addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && viewer.hasAttribute("open")) close();
+      });
+    })();
+
   var links = Array.from(document.querySelectorAll('.toc a, .mobile-toc a'));
   var anchors = links.map(function (link) { return document.querySelector(link.getAttribute('href')); }).filter(Boolean);
   function updateReadingState() {

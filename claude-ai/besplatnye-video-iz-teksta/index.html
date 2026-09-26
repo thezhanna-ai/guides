@@ -113,17 +113,6 @@
     figure { margin: 28px 0 0 }
     .shot { width: min(100%, 650px) }
     .shot { position: relative }
-    .shot-image { position: relative; width: 100% }
-    .shot-image .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #102F30; color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
-    .shot-image:hover .zoom, .shot-image .zoom:focus-visible { opacity: 1 }
-    .shot-image .zoom:hover { background: var(--accent) }
-    @media (hover: none), (max-width: 860px) { .shot-image .zoom { opacity: .94 } }
-    .viewer { display: none; position: fixed; inset: 0; z-index: 50; padding: 56px 18px 26px; background: rgba(0,0,0,.87); color: #FFFFFF }
-    .viewer.open { display: block }
-    .viewer-scroll { width: 100%; height: 100%; overflow: auto; text-align: center }
-    .viewer img { max-width: none; width: auto; height: auto }
-    .viewer-close { position: absolute; top: 12px; right: 16px; width: 40px; height: 40px; border: 0; border-radius: 8px; background: #FFFFFF; color: #102F30; font-size: 22px; cursor: pointer }
-    .viewer-hint { position: absolute; bottom: 5px; left: 0; right: 0; margin: 0; text-align: center; font: 13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
     .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .88); pointer-events: none }
     .annotation::before { content: attr(data-n); position: absolute; top: -38px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--emerald); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .annotation.mic { left: 84.70%; top: 81.47%; width: 3.11%; height: 8.62% }
@@ -248,7 +237,22 @@
 .compare tr:last-child td { border-bottom: 0 }
 .compare td:first-child { font-weight: 700 }
 @media (max-width: 860px) { .service-card { padding: 16px } .compare { min-width: 660px } }
-</style></head>
+
+    /* Увеличение скриншотов */
+    .shot { position: relative }
+    .shot-image { position: relative; width: max-content; max-width: 100% }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #102F30; color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    .shot .zoom:hover { background: var(--accent) }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
+  </style></head>
 <body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner">
@@ -418,7 +422,11 @@
       <p class="plaque-label">Дальше по теме</p><h2>Веб-поиск в Claude: ответы со свежими ссылками</h2>
       <p><a href="../web-search-v-claude/">Открыть статью</a></p></aside>
 </div>
-<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true"><button class="viewer-close" type="button" aria-label="Закрыть">✕</button><div class="viewer-scroll"><img alt=""></div><p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p></div>
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
+    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+    <div class="viewer-scroll"><img alt=""></div>
+    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+  </div>
 <script>
     var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
     document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
@@ -465,38 +473,6 @@
       });
     });
 
-    var viewer = document.getElementById("viewer");
-    var lastFocus = null;
-    function closeViewer() {
-      viewer.classList.remove("open");
-      viewer.setAttribute("aria-hidden", "true");
-      viewer.querySelector("img").removeAttribute("src");
-      if (lastFocus) lastFocus.focus();
-    }
-    document.querySelectorAll(".shot img").forEach(function (img) {
-      var content = img.parentElement.tagName === "A" ? img.parentElement : img;
-      var frame = document.createElement("div");
-      frame.className = "shot-image";
-      content.parentElement.insertBefore(frame, content);
-      frame.appendChild(content);
-      var button = document.createElement("button");
-      button.type = "button";
-      button.className = "zoom";
-      button.textContent = "Открыть крупнее";
-      button.addEventListener("click", function () {
-        lastFocus = button;
-        viewer.querySelector("img").src = img.currentSrc || img.src;
-        viewer.querySelector("img").alt = img.alt;
-        viewer.classList.add("open");
-        viewer.setAttribute("aria-hidden", "false");
-        viewer.querySelector(".viewer-close").focus();
-      });
-      frame.appendChild(button);
-    });
-    viewer.querySelector(".viewer-close").addEventListener("click", closeViewer);
-    viewer.addEventListener("click", function (event) { if (event.target === viewer || event.target.classList.contains("viewer-scroll")) closeViewer(); });
-    document.addEventListener("keydown", function (event) { if (event.key === "Escape" && viewer.classList.contains("open")) closeViewer(); });
-
     var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
     var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
     function updateReadingState() {
@@ -508,4 +484,72 @@
     }
     updateReadingState();
     addEventListener("scroll", updateReadingState, { passive: true });
-  </script></body></html>
+  </script>
+<script>
+    // Скриншот открывается в крупном размере с прокруткой на узком экране
+    (function () {
+      var viewer = document.getElementById("viewer");
+      if (!viewer) return;
+      var big = viewer.querySelector("img");
+      var lastFocused = null;
+      function open(img) {
+        lastFocused = document.activeElement;
+        big.src = img.currentSrc || img.src;
+        big.alt = img.alt || "";
+        big.onload = function () {
+          var box = viewer.querySelector(".viewer-scroll");
+          var room = viewer.clientWidth - 44;
+          var pageWidth = img.getBoundingClientRect().width;
+          var target = Math.min(pageWidth * 2.2, big.naturalWidth);
+          var wide = viewer.clientWidth >= 860;
+          target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+          if (wide) {
+            var maxH = viewer.clientHeight - 96;
+            target = Math.min(target, maxH * (big.naturalWidth / big.naturalHeight));
+          }
+          big.style.width = Math.round(target) + "px";
+          viewer.classList.toggle("fits", target <= room);
+          box.scrollLeft = (target - box.clientWidth) / 2;
+          var scrolls = box.scrollWidth > box.clientWidth + 2;
+          viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+        };
+        viewer.setAttribute("open", "");
+        document.body.style.overflow = "hidden";
+        viewer.querySelector(".viewer-close").focus();
+      }
+      function close() {
+        viewer.removeAttribute("open");
+        document.body.style.overflow = "";
+        big.removeAttribute("src");
+        big.style.width = "";
+        if (lastFocused) lastFocused.focus();
+      }
+      document.querySelectorAll(".shot img").forEach(function (img) {
+        var parent = img.parentElement;
+        if (parent.tagName === "A") {
+          parent.replaceWith(img);
+          parent = img.parentElement;
+        }
+        if (parent.matches("figure.shot")) {
+          var frame = document.createElement("div");
+          frame.className = "shot-image";
+          parent.insertBefore(frame, img);
+          frame.appendChild(img);
+          parent = frame;
+        }
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "zoom";
+        button.textContent = "Открыть крупнее";
+        button.addEventListener("click", function () { open(img); });
+        parent.appendChild(button);
+      });
+      viewer.addEventListener("click", function (event) {
+        if (event.target === viewer || event.target.classList.contains("viewer-close")) close();
+      });
+      addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && viewer.hasAttribute("open")) close();
+      });
+    })();
+</script>
+</body></html>

@@ -1,5 +1,6 @@
 from html.parser import HTMLParser
 from pathlib import Path
+import json
 import re
 import unittest
 
@@ -65,11 +66,53 @@ class PageParser(HTMLParser):
             self._heading_text.append(data)
 
 
+class ZoomImageParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.containers = []
+        self.has_zoomable_image = False
+
+    def handle_starttag(self, tag, attrs):
+        classes = set(dict(attrs).get("class", "").split())
+        if tag == "img" and dict(attrs).get("src") and any(
+            "shot" in parent or "gallery" in parent for parent in self.containers
+        ):
+            self.has_zoomable_image = True
+        if tag not in {"img", "br", "hr", "input", "meta", "link", "source", "area", "wbr"}:
+            self.containers.append(classes)
+
+    def handle_endtag(self, tag):
+        if self.containers:
+            self.containers.pop()
+
+
 class GuidesSiteTest(unittest.TestCase):
     def parse(self, page):
         parser = PageParser()
         parser.feed(page.read_text(encoding="utf-8"))
         return parser
+
+    def test_live_guides_with_shots_or_gallery_have_zoom(self):
+        articles = json.loads((ROOT / "data" / "statyi.json").read_text(encoding="utf-8"))["statyi"]
+        missing = []
+        for article in articles:
+            if article["status"] != "live":
+                continue
+            page = ROOT / "claude-ai" / article["slug"] / "index.html"
+            if not page.is_file():
+                continue
+            html = page.read_text(encoding="utf-8")
+            parser = ZoomImageParser()
+            parser.feed(html)
+            if not parser.has_zoomable_image:
+                continue
+            if not all(part in html for part in (
+                'class="viewer"', 'className = "zoom"',
+                '.viewer[open]', '.shot .zoom',
+                'document.querySelectorAll(".shot img")',
+            )):
+                missing.append(article["slug"])
+        self.assertEqual(missing, [], "Опубликованные страницы без увеличения: " + ", ".join(missing))
 
     def test_public_pages_exist_and_have_one_main_heading(self):
         for page in (HOME, ACCESS, PROFILE):
