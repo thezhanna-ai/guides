@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta name="description" content="Как настроить стиль ответа Claude: образец текста, короткие правила и проверка на одном запросе">
+  <meta property="og:title" content="Как научить Claude писать в твоём стиле">
+  <meta property="og:description" content="Образец, короткие правила, Instructions for Claude и проверка на одном запросе">
+  <title>Как научить Claude писать в твоём стиле</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --emerald:#102F30; --emerald-mid:#1F4A43; --paper:#F8F7F2; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F; --ink:#1E2926; --muted:#62706A; --line:#D5C9B7; --white:#FFFFFF }
+    :root[data-theme="dark"] { --emerald:#DCEAE4; --emerald-mid:#A8D0BE; --paper:#162221; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78; --ink:#EDF1EE; --muted:#B7C2BD; --line:#3C504C; --white:#20302E }
+    * { box-sizing:border-box }
+    html { scroll-behavior:smooth }
+    body { margin:0; background:var(--paper); color:var(--ink); font:18.4px/1.65 Spectral,Georgia,serif; -webkit-text-size-adjust:100% }
+    a { color:var(--emerald-mid); text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:2px; text-underline-offset:4px; font-weight:600 }
+    a:hover { color:var(--accent-dark) }
+    a:focus-visible,button:focus-visible,summary:focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px }
+    .progress { position:fixed; top:0; left:0; z-index:30; width:0; height:3px; background:var(--accent) }
+    .masthead { position:sticky; top:0; z-index:20; border-bottom:1px solid var(--line); background:var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .masthead-inner { max-width:1200px; min-height:65px; margin:auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; gap:20px }
+    .brand { color:var(--emerald); font-size:18px; font-weight:750 }
+    .header-actions { display:flex; align-items:center; gap:12px }
+    .header-controls { display:flex; align-items:center; gap:12px }
+    .handout-title { color:var(--accent-dark); font-size:13px; font-weight:750 }
+    .theme-toggle,.press-button { min-height:40px; border:0; border-radius:10px; font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; cursor:pointer }
+    .theme-toggle { width:40px; background:var(--info); color:var(--emerald); box-shadow:0 3px 0 var(--info-line) }
+    .press-button { display:inline-flex; align-items:center; padding:0 15px; background:#1F4A43; color:#FFFFFF; text-decoration:none; box-shadow:0 3px 0 #0A2424 }
+    .theme-toggle,.press-button,.copy-button { transition:background .14s ease,transform .14s ease,box-shadow .14s ease }
+    .theme-toggle:hover { background:#EEF1F1; transform:translateY(1px); box-shadow:0 2px 0 var(--info-line) }
+    :root[data-theme="dark"] .theme-toggle:hover { background:#34504C }
+    .theme-toggle:active { background:#FFFFFF; transform:translateY(3px) scale(.98); box-shadow:inset 0 0 0 3px var(--info-line) }
+    :root[data-theme="dark"] .theme-toggle:active { background:#476B64 }
+    .press-button:hover { background:#37655C; color:#FFFFFF; transform:translateY(1px); box-shadow:0 2px 0 #0A2424 }
+    .press-button:active { background:#4B7E72; color:#FFFFFF; transform:translateY(3px) scale(.98); box-shadow:inset 0 0 0 3px #0A2424 }
+    .masthead .press-button { flex: 1; justify-content:center; padding:0 8px }
+    .page-shell { max-width:1244px; margin:auto; padding:42px 20px 90px; display:grid; grid-template-columns:210px minmax(0,720px); gap:32px; align-items:start }
+    .toc { position:sticky; top:84px; width:260px; padding:4px 18px 10px 0; border-right:1px solid var(--line); font:14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .toc-label { margin:0 0 15px; color:var(--muted); font:700 11px/1.2 ui-monospace,monospace; letter-spacing:.18em; text-transform:uppercase }
+    .toc a { display:block; padding:8px 0 8px 12px; color:var(--muted); text-decoration:none }
+    .toc a.active { color:var(--accent-dark); font-weight:700; border-left:2px solid var(--accent) }
+    .mobile-toc { display:none }
+    header[id],section[id] { scroll-margin-top:84px }
+    .eyebrow,.section-label { color:var(--accent-dark); font:700 12px/1.2 ui-monospace,monospace; letter-spacing:.15em; text-transform:uppercase }
+    h1,h2 { color:var(--emerald); font-family:Unbounded,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-weight:700; text-wrap:balance }
+    h1 { margin:0; font-size:37.6px; line-height:1.13; letter-spacing:-.75px }
+    h2 { margin:0 0 22px; font-size:29px; line-height:1.2 }
+    h3 { margin:0 0 10px; color:var(--emerald); font:750 20px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    p { margin:0 0 20px }
+    .meta { margin:25px 0 0; color:var(--muted); font:600 13px/1.4 ui-monospace,monospace; letter-spacing:.04em }
+    .lead { margin:20px 0 0 }
+    .content-section { margin-top:66px }
+    .route-note { margin:31px 0 34px; padding:2px 0 4px 24px; border-left:3px solid var(--accent) }
+    .route-note h2 { margin-bottom:9px; font:750 20px/1.25 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .route-note p { margin:0; color:var(--muted) }
+    .step { margin-top:28px; padding-top:24px; border-top:1px solid var(--line) }
+    .path { padding:2px 6px; border-radius:5px; background:var(--info); color:var(--emerald); font:600 .9em/1.4 ui-monospace,monospace }
+    .info-card,.warn-card { margin:24px 0; padding:13px 18px; border:1px solid var(--info-line); border-radius:11px; background:var(--info) }
+    .warn-card { border-left:6px solid var(--accent) }
+    .info-card p,.warn-card p { margin:0 }
+    .shot { width:min(100%,650px); margin:26px 0 0 }
+    .shot img { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:10px; background:#FFFFFF }
+    .shot figcaption { margin-top:11px; color:var(--muted); font:500 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .shot-missing { width:min(100%,650px); margin:26px 0 0; padding:20px; border:1px dashed var(--info-line); border-radius:11px; background:var(--info); font:600 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .shot-missing p { margin:0 }
+    .shot-image { position:relative; width:100% }
+    .shot-image .zoom { position:absolute; right:10px; bottom:10px; z-index:2; padding:9px 15px; border:0; border-radius:9px; background:#102F30; color:#F8F7F2; font:750 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.06em; cursor:pointer; opacity:0; transition:opacity .14s ease,background .14s ease }
+    .shot-image:hover .zoom,.shot-image .zoom:focus-visible { opacity:1 }
+    .shot-image .zoom:hover { background:var(--accent) }
+    @media (hover:none),(max-width:860px) { .shot-image .zoom { opacity:.94 } }
+    .prompt-box { position:relative; margin:15px 0 28px; padding:57px 22px 23px; border-radius:12px; background:#102F30; color:#F8F7F2 }
+    .prompt-box pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:500 14px/1.58 ui-monospace,SFMono-Regular,Menlo,monospace }
+    .copy-button { position:absolute; top:13px; right:13px; min-width:132px; min-height:34px; padding:0 13px; border:0; border-radius:8px; background:var(--accent); color:#102F30; font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; box-shadow:0 3px 0 #8F371F; cursor:pointer }
+    .copy-button:hover { background:#F28A68; transform:translateY(1px); box-shadow:0 2px 0 #8F371F }
+    .copy-button:active { background:#FFC6AD; transform:translateY(3px) scale(.98); box-shadow:inset 0 0 0 3px #8F371F }
+    .copy-button.is-copied { background:#FFD1BF; box-shadow:0 0 0 3px rgba(255,209,191,.34) }
+    .sources { padding-left:22px }
+    .sources li { margin:9px 0 }
+    .related-plaque { grid-column:2; padding:14px 16px; border:1px solid var(--info-line); border-radius:11px; background:var(--info) }
+    .related-plaque p { margin:0 }
+    .related-plaque .plaque-label { margin-bottom:5px; color:var(--accent-dark); font:700 11px/1.3 ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase }
+    .related-plaque h2 { margin:0 0 8px; font:750 18px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .cta { margin-top:70px; padding:30px; border-radius:14px; background:#102F30; color:#FFFFFF }
+    .cta h2 { color:#FFFFFF }
+    .cta p { color:#F0E8D8 }
+    .cta .section-label { color:#F0E8D8 }
+    .cta .press-button { background:var(--accent); color:#102F30; box-shadow:0 3px 0 #8F371F }
+    .cta .press-button:hover { background:#F28A68; color:#102F30; box-shadow:0 2px 0 #8F371F }
+    .cta .press-button:active { background:#FFC6AD; color:#102F30; box-shadow:inset 0 0 0 3px #8F371F }
+    .viewer { display:none; position:fixed; inset:0; z-index:50; padding:56px 18px 26px; background:rgba(0,0,0,.87); color:#FFFFFF }
+    .viewer.open { display:block }
+    .viewer-scroll { width:100%; height:100%; overflow:auto; text-align:center }
+    .viewer img { max-width:none; width:auto; min-width:min(100%,900px); height:auto }
+    .viewer-close { position:absolute; top:12px; right:16px; width:40px; height:40px; border:0; border-radius:8px; background:#FFFFFF; color:#102F30; font-size:22px; cursor:pointer }
+    .viewer-hint { position:absolute; bottom:5px; left:0; right:0; margin:0; text-align:center; font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    @media(min-width:1200px) { .page-shell { grid-template-columns:210px minmax(0,720px) 180px } .related-plaque { grid-column:3; grid-row:1; position:sticky; top:84px } .header-actions { margin-right:8px } .header-controls { width: 180px } }
+    @media(min-width:861px) { .toc { --toc-shift:clamp(-50px,calc(630px - 50vw),0px); margin-left:var(--toc-shift); width:calc(210px - var(--toc-shift)) } }
+    @media(max-width:860px) { body { font-size:17px } .masthead-inner { min-height:60px; padding:0 14px } .brand { font-size:14px } .handout-title,.toc { display:none } .page-shell { display:block; padding:24px 14px 68px } .mobile-toc { display:block; margin:0 0 30px; padding:13px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif } .mobile-toc a { display:block; margin-top:9px } h1 { font-size:34px } h2 { font-size:27px } .content-section { margin-top:52px } .cta { padding:26px 22px } .related-plaque { margin-top:46px } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto } .theme-toggle,.theme-toggle:hover,.theme-toggle:active,.press-button,.press-button:hover,.press-button:active,.copy-button,.copy-button:hover,.copy-button:active { transition:none; transform:none } }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div><div class="header-actions"><span class="handout-title">Свой стиль ответов</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#stil">Как научить Клода писать в твоём стиле</a><a href="#do">1. Сохрани исходный ответ</a><a href="#sample">2. Выбери образец</a><a href="#rules">3. Сформулируй правила</a><a href="#settings">4. Открой Instructions for Claude</a><a href="#compare">5. Повтори запрос и сравни</a><a href="#sources">Источники</a></nav>
+    <main><article>
+      <details class="mobile-toc"><summary>Содержание</summary><a href="#stil">Как научить Клода писать в твоём стиле</a><a href="#do">1. Сохрани исходный ответ</a><a href="#sample">2. Выбери образец</a><a href="#rules">3. Сформулируй правила</a><a href="#settings">4. Открой Instructions for Claude</a><a href="#compare">5. Повтори запрос и сравни</a><a href="#sources">Источники</a></details>
+      <header id="stil"><p class="eyebrow">Claude.ai · Серия 16</p><h1>Как научить Клода писать в твоём стиле</h1><p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p><p class="lead">Просишь Клода написать пост, а получаешь чужой текст: длинный, с заголовком, эмодзи и обращением на «вы». Переписываешь его руками, а в следующем чате всё повторяется. Кажется, что надо каждый раз объяснять заново, но Клод просто не знает, как звучишь ты. За пять шагов покажешь ему свой образец, сохранишь правила в настройках, и тот же запрос вернётся заметно ближе к твоей подаче</p><aside class="route-note"><h2>Короткий маршрут</h2><p>Исходный ответ → образец нужной подачи → правила → Settings → Account → Instructions for Claude → тот же запрос ещё раз</p></aside></header>
+      <section class="content-section" id="do"><p class="section-label">Точка сравнения</p><h2>1. Сохрани исходный ответ</h2><p>Открой обычный чат Claude и отправь рабочий запрос. Сохрани сам запрос дословно и полученный ответ. В примере это пост про осеннюю хандру. В конце повторишь запрос без изменений, чтобы увидеть разницу</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-demo">Скопировать</button><pre id="prompt-demo">Напиши короткий пост про осеннюю хандру. Простым человеческим языком</pre></div><figure class="shot"><img src="assets/otvet-do.png" alt="Реальный длинный ответ Claude до настройки"><figcaption>Ответ до настройки - сохрани его для сравнения</figcaption></figure></section>
+      <section class="content-section" id="sample"><p class="section-label">Ориентир для подачи</p><h2>2. Выбери образец</h2><p>Возьми короткий текст с нужной интонацией: своё письмо, пост или отрывок книги. Он нужен как пример подачи. Если берёшь чужой текст, выдели особенности, которые хочешь повторить</p><p>Стиль складывается из обращения, слов, ритма и структуры. Краткость - только один из признаков. Выбери один небольшой образец, по которому эти особенности хорошо видны</p></section>
+      <section class="content-section" id="rules"><p class="section-label">Проверяемые правила</p><h2>3. Сформулируй правила</h2><p>В отдельном чате покажи образец и попроси Клода назвать конкретные особенности. Исправь неверные выводы, затем запиши только те правила, которые подходят для будущих разговоров</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-reading">Скопировать</button><pre id="prompt-reading">Ниже образец нужной мне подачи. Перечисли, что в нём характерно: длина абзацев, тон, лексика и структура. Отдельно назови, в чём не уверен. Пока не пиши новый текст
+
+Образец:</pre></div><p>После слова «Образец» вставь выбранный текст и отправь сообщение. Сверь ответ Клода со своим образцом: например, действительно ли там обращение на «ты», короткие абзацы или шутки. Исправь догадки, с которыми не согласен</p><p>Скопируй следующий блок в заметку. Замени строку в квадратных скобках своим текстом, а в часть «Правила» добавь подтверждённые особенности из предыдущего шага. Удали правила, которые тебе не подходят. Получится один готовый блок для настройки</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-rules">Скопировать</button><pre id="prompt-rules">Образец нужной подачи:
+[Вставь сюда свой текст и удали эту строку]
+
+Правила:
+В ответах используй короткие абзацы и обычные слова. Убирай воду и канцелярит. Не начинай с «важно отметить» и не добавляй общий вывод ради объёма. Не придумывай факты. Если в запросе указан объём, соблюдай его
+
+Когда пишешь текст от моего имени, ориентируйся на тон, лексику и структуру образца. Не копируй его дословно и не переноси из него факты в новый текст</pre></div><p>Если важна длина конкретного ответа, назови её и в самом запросе: например, «три коротких абзаца»</p></section>
+      <section class="content-section" id="settings"><p class="section-label">Реальный путь в интерфейсе</p><h2>4. Открой Instructions for Claude</h2><p>Нажми свои инициалы в левом нижнем углу. Открой <span class="path">Settings → Account → Instructions for Claude</span> и вставь подготовленный блок. На показанном экране поле находится на странице Account</p><p>Эти инструкции Claude учитывает во всех чатах аккаунта. Оставь здесь то, что подходит постоянно. После ввода закрой настройки, снова открой это поле и убедись, что текст сохранился. Если интерфейс поменяется, ищи в Settings поле с тем же названием</p><figure class="shot"><img src="assets/instructions-account.png" alt="Реальная запись экрана: выбран Account и видно поле Instructions for Claude"><figcaption>Account и поле Instructions for Claude</figcaption></figure></section>
+      <section class="content-section" id="compare"><p class="section-label">Результат виден в ответе</p><h2>5. Повтори запрос и сравни</h2><p>Открой новый чат и отправь сохранённый запрос без изменений. Сверь ответ с конкретными правилами: обращение на «ты» или «вы», длина абзацев, характерные слова, заголовки и шутки. Проверь, сохранился ли смысл. Если какой-то признак не совпал, уточни одно правило в настройке и повтори запрос</p><figure class="shot"><img src="assets/otvet-posle.png" alt="Реальный более короткий ответ Claude после настройки"><figcaption>В этом примере исчезли заголовок, эмодзи и призыв к комментариям; обращение сменилось с «вы» на «ты»</figcaption></figure><p>Результат: ты видишь, какие правила Клод применил, и знаешь, что уточнить. Для своего текста сверяй свои признаки подачи</p></section>
+      <section class="content-section" id="sources"><p class="section-label">Официальная справка</p><h2>Источники</h2><ul class="sources"><li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Claude Help Center: Instructions for Claude и персонализация</a></li></ul></section>
+      <section class="cta" aria-label="Следующий шаг"><p class="section-label">Бесплатный практикум</p><h2>Клод пишет твоим голосом - дальше можно собрать своё</h2><p>ИИ-Лагерь - бесплатный трёхдневный практикум на Claude Code и Codex. Шаги показывают на экране, а ты повторяешь на своих задачах: сайт, бот в Telegram для клиентов, калькулятор. Без навыков программиста</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a></section>
+    </article></main>
+    <aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Ещё одна настройка</p>
+      <h2>Расскажи Claude о себе</h2>
+      <p><a href="../kak-rasskazat-o-sebe/">Имя, инструкции и память в одном маршруте</a></p>
+    </aside>
+  </div>
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true"><button class="viewer-close" type="button" aria-label="Закрыть">✕</button><div class="viewer-scroll"><img alt=""></div><p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p></div>
+  <script>
+    var themeButton=document.querySelector('.theme-toggle');
+    var savedTheme=localStorage.getItem('guide-theme')||'light';
+    document.documentElement.setAttribute('data-theme',savedTheme);
+    themeButton.textContent=savedTheme==='dark'?'☀':'◐';
+    themeButton.addEventListener('click',function(){var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);localStorage.setItem('guide-theme',next);themeButton.textContent=next==='dark'?'☀':'◐'});
+    document.querySelectorAll('[data-copy-target]').forEach(function(button){button.addEventListener('click',function(){var value=document.getElementById(button.dataset.copyTarget).textContent;function done(){clearTimeout(button.copyTimer);button.textContent='✓ Скопировано';button.classList.add('is-copied');button.copyTimer=setTimeout(function(){button.textContent='Скопировать';button.classList.remove('is-copied')},1800)}function fallback(){var field=document.createElement('textarea');field.value=value;field.setAttribute('readonly','');field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();if(document.execCommand('copy'))done();field.remove()}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(value).then(done).catch(fallback)}else fallback()})});
+    var viewer=document.getElementById('viewer');var lastFocus=null;
+    function closeViewer(){viewer.classList.remove('open');viewer.setAttribute('aria-hidden','true');viewer.querySelector('img').removeAttribute('src');if(lastFocus)lastFocus.focus()}
+    document.querySelectorAll('.shot img').forEach(function(img){var frame=document.createElement('div');frame.className='shot-image';img.parentElement.insertBefore(frame,img);frame.appendChild(img);var button=document.createElement('button');button.type='button';button.className='zoom';button.textContent='Открыть крупнее';button.addEventListener('click',function(){lastFocus=button;viewer.querySelector('img').src=img.currentSrc||img.src;viewer.querySelector('img').alt=img.alt;viewer.classList.add('open');viewer.setAttribute('aria-hidden','false');viewer.querySelector('.viewer-close').focus()});frame.appendChild(button)});
+    viewer.querySelector('.viewer-close').addEventListener('click',closeViewer);viewer.addEventListener('click',function(event){if(event.target===viewer||event.target.classList.contains('viewer-scroll'))closeViewer()});document.addEventListener('keydown',function(event){if(event.key==='Escape'&&viewer.classList.contains('open'))closeViewer()});
+    var links=Array.from(document.querySelectorAll('.toc a,.mobile-toc a'));var sections=links.map(function(link){return document.querySelector(link.getAttribute('href'))}).filter(Boolean);function updateReadingState(){var scrollable=document.documentElement.scrollHeight-window.innerHeight;document.querySelector('.progress').style.width=(scrollable>0?window.scrollY/scrollable*100:0)+'%';var current=sections[0];sections.forEach(function(section){if(section.getBoundingClientRect().top<=120)current=section});if(scrollable>0&&window.scrollY>=scrollable-2)current=sections[sections.length-1];links.forEach(function(link){link.classList.toggle('active',link.getAttribute('href')==='#'+current.id)})}updateReadingState();addEventListener('scroll',updateReadingState,{passive:true});
+  </script>
+</body>
+</html>
