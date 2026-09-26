@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Почему одна и та же просьба к ИИ даёт разный результат? Найди навык, которого сейчас не хватает твоему проекту">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:title" content="7 уровней вайбкодера: один шаг, чтобы подняться выше">
+<meta property="og:description" content="Почему одна и та же просьба к ИИ даёт разный результат? Найди навык, которого сейчас не хватает твоему проекту">
+<title>7 уровней вайбкодера: один шаг, чтобы подняться выше</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .route-note { margin: 31px 0 34px; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted) }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+/* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
+       .info-card - полезное уточнение, фон без полосы
+       .warn-card - оговорка или предупреждение, фон плюс оранжевая полоса
+       .check-panel - читатель отмечает пункты, поэтому БЕЛАЯ карточка */
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .warn-card p { margin: 0 }
+    /* абзац после блока слипался с ним: у блоков margin-bottom 0,
+       а у p margin-top 0. Зазор был 0 px при 25 px между абзацами */
+    .info-card + p, .warn-card + p, .check-panel + p { margin-top: 25px }
+    .tune-card { margin-top: 26px; padding: 15px 20px 3px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .tune-card h3 { margin-bottom: 9px }
+    .tune-card .result { margin-bottom: 17px }
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .88); pointer-events: none }
+    .annotation::before { content: attr(data-n); position: absolute; top: -38px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--emerald); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .annotation.mic { left: 84.70%; top: 81.47%; width: 3.11%; height: 8.62% }
+    .annotation.wave { left: 89.85%; top: 81.47%; width: 5.89%; height: 8.62% }
+    .annotation.cancel { left: 85.76%; top: 80.39%; width: 4.26%; height: 11.21% }
+    .annotation.accept { left: 91.33%; top: 80.39%; width: 4.26%; height: 11.21% }
+    .annotation.stop { left: 86.48%; top: 79.94%; width: 9.64%; height: 8.33% }
+    .annotation.allow { left: 6.23%; top: 54.40%; width: 54.47%; height: 5.39% }
+    .annotation.nodev { left: 74.32%; top: 88.51%; width: 24.12%; height: 9.87% }
+    .annotation.arrow { left: 94.86%; top: 73.55%; width: 2.97%; height: 9.09% }
+    .annotation.checked { left: 58.92%; top: 45.87%; width: 37.57%; height: 9.50% }
+    .annotation.checked::before { top: 50%; left: -38px; transform: translateY(-50%) }
+    .annotation.arrow::before { top: 50%; left: -38px; transform: translateY(-50%) }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    h3 + .prompt-box { margin-top: 12px }
+    .prompt-box + h3 { margin-top: 46px }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: #F28A68 }
+    .copy-button:active { background: #FFD1BF; box-shadow: 0 1px 0 #8F371F; transform: translateY(2px) }
+    .copy-button.is-copied { background: #FFD1BF; box-shadow: 0 0 0 3px rgba(255, 209, 191, .34); transform: translateY(1px) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 900 }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+      .annotation { border-width: 2px }
+      .annotation::before { top: -30px; width: 22px; height: 22px; font-size: 11px }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+  
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    /* карточка должна читаться как ссылка, а не как серый блок текста.
+       text-decoration НАСЛЕДУЕТСЯ, поэтому подчёркиваем только .title */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+  
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.source-note{margin-top:10px;color:var(--muted);font:500 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.partner-line{margin:46px 0;padding:12px 0 12px 16px;border-left:3px solid var(--line);color:var(--muted);font:500 15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.copy-button:active{box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner">
+<div class="brand">Claude.ai: кнопка за кнопкой</div>
+<div class="header-actions"><div class="handout-title">7 уровней вайбкодера</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+</div></div></div></header>
+<div class="page-shell">
+<nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">7 уровней вайбкодера: один шаг, чтобы подняться выше</a>
+<a href="#kak-polzovatsya">Как пользоваться</a>
+<a href="#uroven-1">Уровень 1 → 2. Собеседник становится автором ТЗ</a>
+<a href="#uroven-2">Уровень 2 → 3. Автор ТЗ становится архитектором</a>
+<a href="#uroven-3">Уровень 3 → 4. Архитектор переходит к работе с файлами</a>
+<a href="#uroven-4">Уровень 4 → 5. Вайбкодер становится отладчиком</a>
+<a href="#uroven-5">Уровень 5 → 6. Отладчик становится выпускающим</a>
+<a href="#uroven-6">Уровень 6 → 7. Выпускающий становится дирижёром агентов</a>
+<a href="#uroven-7">Уровень 7. Дирижёр агентов: что дальше</a>
+<a href="#esli-neponyatno">Если непонятно, где ты</a></nav>
+<main>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#nachalo">7 уровней вайбкодера: один шаг, чтобы подняться выше</a>
+<a href="#kak-polzovatsya">Как пользоваться</a>
+<a href="#uroven-1">Уровень 1 → 2. Собеседник становится автором ТЗ</a>
+<a href="#uroven-2">Уровень 2 → 3. Автор ТЗ становится архитектором</a>
+<a href="#uroven-3">Уровень 3 → 4. Архитектор переходит к работе с файлами</a>
+<a href="#uroven-4">Уровень 4 → 5. Вайбкодер становится отладчиком</a>
+<a href="#uroven-5">Уровень 5 → 6. Отладчик становится выпускающим</a>
+<a href="#uroven-6">Уровень 6 → 7. Выпускающий становится дирижёром агентов</a>
+<a href="#uroven-7">Уровень 7. Дирижёр агентов: что дальше</a>
+<a href="#esli-neponyatno">Если непонятно, где ты</a></nav></details>
+<article>
+<header id="nachalo"><p class="eyebrow">Навигация по уровням</p><h1>7 уровней вайбкодера: один шаг, чтобы подняться выше</h1><p class="lead">Почему одна и та же просьба к ИИ даёт разный результат? Найди навык, которого сейчас не хватает твоему проекту</p></header>
+<section class="content-section" id="kak-polzovatsya"><h2>Как пользоваться</h2>
+<p>Семь уровней из карусели - условная схема, чтобы заметить, как ты работаешь с ИИ. Это не экзамен и не обязательный порядок: можно уже публиковать сайты, но ещё учиться составлять техзадание. Выбирай раздел по тому, где сейчас застревает твой проект</p>
+<p>Под каждым переходом есть действие; там, где нужен разговор с Клодом, есть готовая фраза для копирования. Попробуй действие на небольшой задаче и проверь результат. Если стало легче двигаться дальше, этот навык пригодился</p>
+<p>ТЗ - техническое задание: что должно получиться и как проверить результат. Агент - ИИ, который может читать файлы проекта, менять код и запускать проверки, если ему доступны нужные инструменты и разрешения</p>
+</section>
+<section class="content-section" id="uroven-1"><h2>Уровень 1 → 2. Собеседник становится автором ТЗ</h2>
+<p><b>Признак первого уровня:</b> пишешь «сделай мне сайт», а потом долго уточняешь, что вообще должно было получиться</p>
+<p><b>Шаг:</b> перед новым проектом или существенной функцией согласуй с Клодом техзадание. Для маленькой правки достаточно описать желаемое изменение и проверку результата</p>
+<p>Фраза для Клода (копировать):</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-1">Скопировать</button><pre id="prompt-1">Я хочу сделать [что именно]. Пока не пиши код. Задавай мне вопросы по одному: для кого это, какую задачу решает проект, что человек делает первым, что должно быть на экране и что не входит в первую версию. Когда данных будет достаточно, собери техзадание и добавь проверяемые признаки готового результата. Покажи его мне для согласования</pre></div>
+<p>Прочитай ТЗ и поправь то, что не соответствует твоей задумке. Затем попроси план из следующего раздела. Можно продолжить в том же чате. Если переходишь в другой инструмент или новый чат, передай туда согласованные ТЗ и план</p>
+</section>
+<section class="content-section" id="uroven-2"><h2>Уровень 2 → 3. Автор ТЗ становится архитектором</h2>
+<p><b>Признак второго уровня:</b> желаемый результат описан, но ещё непонятно, как части проекта будут работать вместе</p>
+<p><b>Шаг:</b> до большой реализации попроси объяснить устройство проекта, данные, возможные сбои и порядок работы. У простой страницы может не быть базы данных и входа. У приложения с аккаунтами и оплатой эти решения нужно принять заранее</p>
+<p>Фраза для Клода (копировать):</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-2">Скопировать</button><pre id="prompt-2">Вот согласованное техзадание: [вставить]. Прежде чем писать код, предложи простой план: 1) какие части нужны и как они связаны; 2) нужны ли хранение данных, вход и внешние сервисы; если нужны, где будут данные и почему; 3) что может пойти не так и как это заметить; 4) в каком порядке строить и как проверить каждый шаг. Не добавляй сложность без необходимости. Не угадывай недостающие условия, спроси меня. Пока без кода</pre></div>
+<p>Проверь, что план отвечает ТЗ и каждый этап можно проверить. После согласования попроси реализовать первый небольшой этап, а не весь проект сразу</p>
+</section>
+<section class="content-section" id="uroven-3"><h2>Уровень 3 → 4. Архитектор переходит к работе с файлами</h2>
+<p><b>Признак третьего уровня:</b> план есть, но перенос кода из чата в файлы отнимает время и приводит к ошибкам</p>
+<p><b>Шаг:</b> выбери среду, где агент работает с файлами проекта. В карусели это «Вайбкодер в терминале»: главный навык здесь - работа с кодом проекта, а сам интерфейс может быть графическим. Claude Code, Codex и Cursor - примеры таких инструментов. Для начала хватит одного</p>
+<p>Если не пользуешься редактором кода, можно начать с приложения Claude Desktop: скачай его с <a href="https://claude.com/download">официального сайта</a>, войди в аккаунт, открой вкладку <b>Code</b>, выбери <b>Local</b> и папку проекта через <b>Select folder</b>. Для этого пути не нужно отдельно устанавливать VS Code или работать в терминале. Нужна подписка Claude Pro, Max, Team или Enterprise. <a href="https://code.claude.com/docs/en/desktop-quickstart">Пошаговая инструкция Anthropic</a></p>
+<p>Если уже работаешь в VS Code, можно установить расширение Claude Code туда. Оно поддерживает вход с указанными платными планами Claude или через Claude Console с отдельной оплатой использования API. <a href="https://code.claude.com/docs/en/vs-code">Инструкция для VS Code</a>. Для первого прототипа в браузерном конструкторе переход в другую среду вообще не обязателен</p>
+<p>Открой папку своего проекта и передай агенту согласованные ТЗ и план. Дай одну небольшую задачу: реализовать первый этап, показать изменения и выполнить предусмотренную проверку. Если проект пока живёт в другом сервисе, сначала выясни, как получить его файлы и запустить их; не переноси его вслепую</p>
+<p><b>Куда смотреть:</b> статья <a href="../svoy-sayt-ne-bliznec/#start">«Собери свой сайт, а не очередного близнеца»</a> показывает отдельный маршрут через VS Code. Когда работа с файлами освоена, статья <a href="../shest-skillov/">«Как найти, подключить и вызвать 6 скиллов»</a> объясняет, как использовать готовые инструкции для повторяющихся задач</p>
+</section>
+<section class="content-section" id="uroven-4"><h2>Уровень 4 → 5. Вайбкодер становится отладчиком</h2>
+<p><b>Признак четвёртого уровня:</b> агент уже меняет файлы, но при ошибке хочется попросить «переделай всё заново»</p>
+<p><b>Шаг:</b> опиши, какое действие вызвало ошибку и что ожидалось. Попроси изучить причину до правки. Если агент не видит проект, одного текста ошибки может не хватить</p>
+<p>Фраза для Клода (копировать):</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-3">Скопировать</button><pre id="prompt-3">Вот что я пытался сделать: [описать]. Вот что произошло и текст ошибки: [вставить]. Пока не меняй код. Изучи доступные файлы и объясни простыми словами, что известно о причине, а что пока только предположение. Если данных не хватает, скажи, что нужно показать или как повторить ошибку. Предложи минимальное исправление и проверку, которая покажет, что ошибка устранена и прежнее поведение сохранилось</pre></div>
+<p>Когда причина понятна, попроси внести минимальную правку и повторить проверку. Отладка закончена, когда ошибка больше не воспроизводится и нужные действия работают</p>
+</section>
+<section class="content-section" id="uroven-5"><h2>Уровень 5 → 6. Отладчик становится выпускающим</h2>
+<p><b>Признак пятого уровня:</b> проект проходит локальные проверки, но будущие пользователи ещё не могут им пользоваться</p>
+<p><b>Шаг:</b> подготовь и опубликуй рабочую версию. Выпуск - это не только ссылка: нужны функции из ТЗ и проверка их работы после запуска. База данных, вход, оплата и собственный домен нужны тем проектам, где они предусмотрены. Для простой страницы достаточно подходящего хостинга</p>
+<p>Агенту понадобятся доступ к способу публикации и, возможно, твои действия в аккаунте сервиса. Сначала выясни условия, стоимость и ограничения, затем согласуй запуск</p>
+<p>Фраза для Клода (копировать):</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-4">Скопировать</button><pre id="prompt-4">Помоги подготовить этот проект к публикации. Сначала изучи его и предложи подходящий способ: что нужно разместить, какие доступы потребуются, есть ли бесплатный вариант и его ограничения, что стоит денег. Не добавляй базу данных, вход, оплату или платный домен, если они не нужны по ТЗ. Пока не публикуй и ничего не покупай. После согласования проведи меня по шагам, а после запуска открой ссылку и проверь основные действия из ТЗ</pre></div>
+<p><b>Куда смотреть:</b> статья <a href="../svoy-sayt-ne-bliznec/#posmotret">«Собери свой сайт, а не очередного близнеца»</a>, блок «Как посмотреть и выложить»</p>
+</section>
+<section class="content-section" id="uroven-6"><h2>Уровень 6 → 7. Выпускающий становится дирижёром агентов</h2>
+<p><b>Признак шестого уровня:</b> ты умеешь запускать проект, но сам ведёшь исполнение и каждую проверку</p>
+<p><b>Шаг:</b> попробуй разделить одну подходящую задачу между исполнителем и отдельным проверяющим. Небольшую правку часто быстрее сделать с одним агентом. Несколько агентов полезны, когда части работы можно разделить или нужна независимая проверка</p>
+<p>Покупать второй инструмент для этого необязательно: в Claude Code есть <a href="https://code.claude.com/docs/en/sub-agents">субагенты</a>, отдельные помощники с собственным контекстом. Другой вариант - связка Claude Code и Codex. Роли можно выбрать под задачу</p>
+<p>Два установленных приложения или расширения сами по себе не соединены. Нужен настроенный способ передачи задания и результата; если его нет, ты переносишь их вручную. Исполнители не должны одновременно менять одни файлы. Проверяющий открывает результат и проверяет его по ТЗ</p>
+<p>Фраза для Клода (копировать):</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-5">Скопировать</button><pre id="prompt-5">Вот задача: [описать]. Предложи, какую отдельную часть можно поручить другому агенту, а какую оставить ведущему. Для каждой части укажи результат и способ проверки. Сначала объясни, как в нашей среде передаются задание и результат: автоматически или мне нужно перенести их вручную. Не назначай двум исполнителям одновременную правку одних файлов. Проверяющий должен открыть результат и провести проверки, а не принять отчёт на слово</pre></div>
+<p>Начни с одной части работы и одного проверяющего. Схема пригодилась, если ты получил проверенный результат без постоянного ручного управления каждым шагом</p>
+</section>
+<section class="content-section" id="uroven-7"><h2>Уровень 7. Дирижёр агентов: что дальше</h2>
+<p><b>Признак седьмого уровня:</b> разделение ролей и передача результатов уже настроены, а ты принимаешь решения о цели, качестве и расходах</p>
+<p><b>Шаг:</b> выбери одну повторяющуюся задачу и настрой понятный цикл: входные данные, исполнитель, проверяющий и условия приёмки. Проверь его на одном реальном примере, прежде чем отдавать регулярную работу</p>
+<p>Фраза для Клода (копировать):</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-7">Скопировать</button><pre id="prompt-7">Вот что на этой неделе приходилось делать руками: [перечислить]. Выбери одну повторяющуюся задачу, которую имеет смысл делегировать. Предложи, кто делает, кто проверяет, какие нужны данные и доступы и по каким признакам я принимаю результат. Скажи, что потребует отдельной настройки или моего участия. Сначала предложи план, ничего пока не запускай</pre></div>
+</section>
+<section class="content-section" id="esli-neponyatno"><h2>Если непонятно, где ты</h2>
+<p>Можно уверенно владеть одним навыком и пока не освоить другой. Скопируй список, отправь Клоду и опиши конкретную задачу: полезнее найти недостающий шаг, чем получить красивый номер</p>
+<p>Фраза для Клода (копировать):</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-6">Скопировать</button><pre id="prompt-6">Вот условная схема из семи уровней:
+1. Собеседник - описываю желание и уточняю результат в чате
+2. Автор ТЗ - согласую, что нужно сделать и как проверить готовность
+3. Архитектор - планирую устройство проекта, данные и порядок работы
+4. Вайбкодер в терминале - даю агенту доступ к коду проекта; интерфейс может быть графическим
+5. Отладчик - разбираюсь в ошибке, вношу минимальную правку и проверяю её
+6. Выпускающий - запускаю нужные функции проекта и проверяю их по доступной людям ссылке
+7. Дирижёр агентов - разделяю работу и организую независимую проверку
+
+Вот что я сейчас умею и где застреваю: [описать]. Задай уточняющие вопросы, если нужно. Не присваивай мне точную оценку: назови, какие навыки уже видны, чего не хватает для моей задачи и какое одно действие стоит попробовать следующим</pre></div>
+<p>Следующий шаг выбирай по препятствию: расплывается результат - уточни ТЗ; теряются файлы - наладь работу с проектом; повторяется ошибка - займись отладкой; нет доступа у пользователей - подготовь выпуск; много ручного управления - проверь разделение ролей</p>
+</section>
+<section class="cta" aria-label="Следующий шаг"><p class="section-label">Бесплатный практикум</p><h2>Ступеньки перед тобой. Дальше - выбрать свою</h2><p>Если твой следующий шаг - работа с файлами проекта и агентами, в ИИ-Лагере это показывают на экране шаг за шагом. Это бесплатный трёхдневный практикум: смотришь, повторяешь действия и собираешь свой проект с помощью ИИ</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a></section>
+</article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Дальше по теме</p><h2>Свой сайт, а не очередной близнец</h2>
+      <p><a href="../svoy-sayt-ne-bliznec/">Открыть статью</a></p></aside>
+</div>
+<script>
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+
+    var themeButton = document.querySelector(".theme-toggle");
+    var savedTheme = localStorage.getItem("guide-theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+    themeButton.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("guide-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });
+
+    var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+    function updateReadingState() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+      var current = sections[0];
+      sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+      links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+    }
+    updateReadingState();
+    addEventListener("scroll", updateReadingState, { passive: true });
+  </script>
+</body></html>
