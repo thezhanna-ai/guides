@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta name="description" content="Как поставить Claude задачу на каждый понедельник в 7:30: Gmail, Google Calendar и проверка Scheduled">
+  <meta property="og:title" content="Как поставить Клоду задачу по расписанию">
+  <meta property="og:description" content="Пошаговая настройка плана недели по расписанию с Gmail и Google Calendar">
+  <title>Как поставить Клоду задачу по расписанию</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --emerald:#102F30; --emerald-mid:#1F4A43; --paper:#F8F7F2; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F; --ink:#1E2926; --muted:#62706A; --line:#D5C9B7; --white:#FFFFFF }
+    :root[data-theme="dark"] { --emerald:#DCEAE4; --emerald-mid:#A8D0BE; --paper:#162221; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78; --ink:#EDF1EE; --muted:#B7C2BD; --line:#3C504C; --white:#20302E }
+    * { box-sizing:border-box }
+    html { scroll-behavior:smooth }
+    body { margin:0; background:var(--paper); color:var(--ink); font:18.4px/1.65 Spectral,Georgia,serif; -webkit-text-size-adjust:100% }
+    a { color:var(--emerald-mid); text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:2px; text-underline-offset:4px; font-weight:600 }
+    a:hover { color:var(--accent-dark) }
+    a:focus-visible,button:focus-visible,summary:focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px }
+    .progress { position:fixed; top:0; left:0; z-index:30; width:0; height:3px; background:var(--accent) }
+    .masthead { position:sticky; top:0; z-index:20; border-bottom:1px solid var(--line); background:var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .masthead-inner { max-width:1200px; min-height:65px; margin:auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; gap:20px }
+    .brand { color:var(--emerald); font-size:18px; font-weight:750 }
+    .header-actions { display:flex; align-items:center; gap:12px }
+    .header-controls { display:flex; align-items:center; gap:12px }
+    .handout-title { flex:0 0 auto; color:var(--accent-dark); font-size:13px; font-weight:750; white-space:nowrap }
+    .theme-toggle,.press-button { min-height:40px; border:0; border-radius:10px; font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; cursor:pointer }
+    .theme-toggle { flex:0 0 40px; width:40px; background:var(--info); color:var(--emerald); box-shadow:0 3px 0 var(--info-line) }
+    .press-button { display:inline-flex; align-items:center; padding:0 15px; background:#1F4A43; color:#FFFFFF; text-decoration:none; box-shadow:0 3px 0 #0A2424 }
+    .press-button:hover { color:#FFC6AD; transform:translateY(1px); box-shadow:0 2px 0 #0A2424 }
+    .masthead .press-button { flex: 1; justify-content:center; padding:0 8px; white-space:nowrap }
+    .page-shell { max-width:1244px; margin:auto; padding:42px 20px 90px; display:grid; grid-template-columns:210px minmax(0,720px); gap:32px; align-items:start }
+    .toc { position:sticky; top:84px; width:260px; padding:4px 18px 10px 0; border-right:1px solid var(--line); font:14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .toc-label { margin:0 0 15px; color:var(--muted); font:700 11px/1.2 ui-monospace,monospace; letter-spacing:.18em; text-transform:uppercase }
+    .toc a { display:block; padding:8px 0 8px 12px; color:var(--muted); text-decoration:none }
+    .toc a.active { color:var(--accent-dark); font-weight:700; border-left:2px solid var(--accent) }
+    .mobile-toc { display:none }
+    header[id],section[id] { scroll-margin-top:84px }
+    .eyebrow,.section-label { color:var(--accent-dark); font:700 12px/1.2 ui-monospace,monospace; letter-spacing:.15em; text-transform:uppercase }
+    h1,h2 { color:var(--emerald); font-family:Unbounded,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-weight:700; text-wrap:balance }
+    h1 { margin:0; font-size:37.6px; line-height:1.13; letter-spacing:-.75px }
+    h2 { margin:0 0 22px; font-size:29px; line-height:1.2 }
+    h3 { margin:0 0 10px; color:var(--emerald); font:750 20px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    p { margin:0 0 20px }
+    .meta { margin:25px 0 0; color:var(--muted); font:600 13px/1.4 ui-monospace,monospace; letter-spacing:.04em }
+    .lead { margin:20px 0 0 }
+    .content-section { margin-top:66px }
+    .route-note { margin:31px 0 34px; padding:2px 0 4px 24px; border-left:3px solid var(--accent) }
+    .route-note h2 { margin-bottom:9px; font:750 20px/1.25 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .route-note p { margin:0; color:var(--muted) }
+    .step { margin-top:28px; padding-top:24px; border-top:1px solid var(--line) }
+    .path { padding:2px 6px; border-radius:5px; background:var(--info); color:var(--emerald); font:600 .9em/1.4 ui-monospace,monospace }
+    .info-card,.warn-card { margin:24px 0; padding:13px 18px; border:1px solid var(--info-line); border-radius:11px; background:var(--info) }
+    .warn-card { border-left:6px solid var(--accent) }
+    .info-card p,.warn-card p { margin:0 }
+    .faq-item { margin-top:12px; border:1px solid var(--line); border-radius:12px; background:var(--paper); overflow:hidden }
+.faq-item summary { padding:13px 44px 13px 18px; position:relative; color:var(--emerald); font:750 17px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; cursor:pointer; list-style:none }
+.faq-item summary::-webkit-details-marker { display:none }
+.faq-item summary::after { content:"+"; position:absolute; top:50%; right:17px; transform:translateY(-50%); color:var(--accent-dark); font:700 22px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+.faq-item[open] summary::after { content:"−" }
+.faq-item p { margin:0; padding:0 18px 15px }
+.shot { width:min(100%,650px); margin:26px 0 0 }
+    .shot img { display:block; width:auto; max-width:100%; height:auto; border:1px solid var(--line); border-radius:10px; background:#FFFFFF }
+    .shot figcaption { margin-top:11px; color:var(--muted); font:500 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .shot-missing { width:min(100%,650px); margin:26px 0 0; padding:20px; border:1px dashed var(--info-line); border-radius:11px; background:var(--info); font:600 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .shot-missing p { margin:0 }
+    .shot-image { position:relative; width:max-content; max-width:100% }
+    .shot-image .zoom { position:absolute; right:10px; bottom:10px; z-index:2; padding:9px 15px; border:0; border-radius:9px; background:#102F30; color:#F8F7F2; font:750 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.06em; cursor:pointer; opacity:0; transition:opacity .14s ease,background .14s ease }
+    .shot-image:hover .zoom,.shot-image .zoom:focus-visible { opacity:1 }
+    .shot-image .zoom:hover { background:var(--accent) }
+    @media (hover:none),(max-width:860px) { .shot-image .zoom { opacity:.94 } }
+    .prompt-box { position:relative; margin:15px 0 28px; padding:57px 22px 23px; border-radius:12px; background:#102F30; color:#F8F7F2 }
+    .prompt-box pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:500 14px/1.58 ui-monospace,SFMono-Regular,Menlo,monospace }
+    .copy-button { position:absolute; top:13px; right:13px; min-width:132px; min-height:34px; padding:0 13px; border:0; border-radius:8px; background:var(--accent); color:#102F30; font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; box-shadow:0 3px 0 #8F371F; cursor:pointer }
+    .copy-button.is-copied { background:#FFD1BF; box-shadow:0 0 0 3px rgba(255,209,191,.34) }
+    .sources { padding-left:22px }
+    .sources li { margin:9px 0 }
+    .related-plaque { grid-column:2; padding:14px 16px; border:1px solid var(--info-line); border-radius:11px; background:var(--info) }
+    .related-plaque p { margin:0 }
+    .related-plaque .plaque-label { margin-bottom:5px; color:var(--accent-dark); font:700 11px/1.3 ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase }
+    .related-plaque h2 { margin:0 0 8px; font:750 18px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .cta { margin-top:70px; padding:30px; border-radius:14px; background:#102F30; color:#FFFFFF }
+    .cta h2 { color:#FFFFFF }
+    .cta p { color:#F0E8D8 }
+    .cta .section-label { color:#F0E8D8 }
+    .cta .press-button { background:var(--accent); color:#102F30; box-shadow:0 3px 0 #8F371F }
+    .cta .press-button:hover { background:#F28A68; color:#102F30 }
+    .viewer { display:none; position:fixed; inset:0; z-index:50; padding:56px 18px 26px; background:rgba(0,0,0,.87); color:#FFFFFF }
+    .viewer.open { display:block }
+    .viewer-scroll { width:100%; height:100%; overflow:auto; text-align:center }
+    .viewer img { max-width:none; width:auto; height:auto }
+    .viewer-close { position:absolute; top:12px; right:16px; width:40px; height:40px; border:0; border-radius:8px; background:#FFFFFF; color:#102F30; font-size:22px; cursor:pointer }
+    .viewer-hint { position:absolute; bottom:5px; left:0; right:0; margin:0; text-align:center; font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    @media(min-width:1200px) { .page-shell { grid-template-columns:210px minmax(0,720px) 180px } .related-plaque { grid-column:3; grid-row:1; position:sticky; top:84px } .header-actions { margin-right:8px } .header-controls { width: 180px } }
+    @media(max-width:860px) { body { font-size:17px } .masthead-inner { min-height:60px; padding:0 14px } .brand { font-size:14px } .handout-title,.toc { display:none } .page-shell { display:block; padding:24px 14px 68px } .mobile-toc { display:block; margin:0 0 30px; padding:13px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif } .mobile-toc a { display:block; margin-top:9px } h1 { font-size:34px } h2 { font-size:27px } .content-section { margin-top:52px } .cta { padding:26px 22px } .related-plaque { margin-top:46px } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto } }
+    @media (min-width:861px) and (max-width:1199px) { .toc { width:240px; margin-left:0 } }
+    @media (min-width:1200px) { .toc { margin-left:max(-50px,calc(630px - 50vw)) } }
+    @media (min-width:1200px) and (max-width:1304px) { .toc { width:calc(260px - (1304px - 100vw) / 2) } }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div><div class="header-actions"><span class="handout-title">План недели по расписанию</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</a><a href="#dostup">1. Убедись, что расписание доступно</a><a href="#istochniki">2. Подключи Gmail и Google Calendar</a><a href="#zadacha">3. Создай задачу на каждый понедельник</a><a href="#proverka">4. Проверь, что будильник заведён</a><a href="#primer">Пример с пустой почтой</a><a href="#oshibki">Если кнопки или результата нет</a><a href="#sources">Источники</a></nav>
+    <main><article>
+      <details class="mobile-toc"><summary>Содержание</summary><a href="#nachalo">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</a><a href="#dostup">1. Убедись, что расписание доступно</a><a href="#istochniki">2. Подключи Gmail и Google Calendar</a><a href="#zadacha">3. Создай задачу на каждый понедельник</a><a href="#proverka">4. Проверь, что будильник заведён</a><a href="#primer">Пример с пустой почтой</a><a href="#oshibki">Если кнопки или результата нет</a><a href="#sources">Источники</a></details>
+      <header id="nachalo"><p class="eyebrow">Claude.ai · Серия 17</p><h1>Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</h1><p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p><p class="lead">Один раз задай Клоду работу на понедельник: разобрать письма за выходные и собрать план недели из календаря. Когда подключены Gmail и Google Calendar, такая задача может выполняться, даже если ноутбук закрыт</p><aside class="route-note"><h2>Короткий маршрут</h2><p>Проверь доступ → подключи Gmail и Google Calendar → создай задачу Scheduled → проверь расписание и результат</p></aside></header>
+      <section class="content-section" id="dostup">
+        <p class="section-label">Сначала проверь</p><h2>1. Убедись, что расписание доступно</h2>
+        <p>Задачи Scheduled доступны на платных тарифах Pro, Max, Team и Enterprise. Если под полем сообщения виден переключатель <span class="path">Chat / Cowork</span>, у тебя прежний интерфейс: обычный Chat в нём не создаёт задачу Scheduled. В обновлённом интерфейсе, где этого переключателя нет, задачу можно поставить на расписание прямо из разговора</p>
+        <figure class="shot"><img src="assets/01-chat-cowork.png" alt="Реальный экран Claude с переключателем Chat и Cowork под полем ввода" loading="lazy"><figcaption>На снимке из аккаунта автора виден прежний интерфейс Chat / Cowork</figcaption></figure>
+        <p>Свой тариф видно внизу меню профиля, рядом с именем. Все тарифы открываются пунктом View all plans. Путь к созданию Scheduled зависит от версии интерфейса</p>
+        <figure class="shot"><img src="assets/02-profile-menu.png" alt="Меню профиля Claude с пунктом View all plans" loading="lazy" style="width:400px"><figcaption>Меню профиля: тарифы открываются пунктом View all plans. Снимок из аккаунта автора статьи</figcaption></figure>
+        <div class="info-card"><p>Результат: ты знаешь тариф и видишь, какой интерфейс открыт. Это помогает найти правильный путь к Scheduled</p></div>
+      </section>
+      <section class="content-section" id="istochniki"><p class="section-label">Без данных план будет пустым</p><h2>2. Подключи Gmail и Google Calendar</h2><p>В чате нажми <span class="path">+</span>, открой <span class="path">Connectors</span> и включи <span class="path">Gmail</span> и <span class="path">Google Calendar</span> по отдельности. Проверить подключения можно также через меню профиля <span class="path">Settings → Connectors</span>. При первом обращении к сервису войди в нужный Google-аккаунт и подтверди подключение. На Team и Enterprise коннекторы сначала должен разрешить Owner или Primary Owner организации</p><figure class="shot"><img src="assets/03-connectors.png" alt="Настройки Claude Connectors: Gmail и Google Calendar отмечены как Connected" loading="lazy"><figcaption>На реальном экране Settings → Connectors у Gmail и Google Calendar стоят галочки в колонке Status. Это признак подключения обоих сервисов, а не список найденных писем или событий. Снимок из аккаунта автора статьи</figcaption></figure><p>Проверь каждый источник до создания расписания. Отправь в чат проверочный запрос ниже. Если писем или событий сейчас нет, это нормальный ответ: главное, чтобы Клод проверил источники и не придумал данные</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-check">Скопировать</button><pre id="prompt-check">Проверь подключённые Gmail и Google Calendar. Покажи письма за последние два дня: отправитель, тема и ссылка на письмо. Затем покажи события этой недели: дата, время и ссылка на событие. Если писем или событий нет, так и скажи. Если нет доступа к источнику, сообщи об этом отдельно. Ничего не отправляй и не меняй</pre></div><div class="info-card"><p>Результат: Клод обращается к обоим источникам. Если он нашёл письма и события, указывает ссылки на них. Если выборка пустая, прямо сообщает об этом</p></div></section>
+      <section class="content-section" id="zadacha">
+        <p class="section-label">Создание Scheduled</p><h2>3. Создай задачу на каждый понедельник</h2>
+        <p>В новом интерфейсе без переключателя Chat/Cowork вставь запрос в обычный разговор. В прежнем интерфейсе открой <span class="path">Cowork → Scheduled → New task → Create with Claude</span> и дай Клоду тот же запрос. Если Cowork недоступен, обычный Chat пока не сохранит автоматическое расписание</p><figure class="shot"><img src="assets/04-scheduled-menu.png" alt="Claude: под полем ввода выбран Cowork, в меню слева раздел Scheduled" loading="lazy"><figcaption>Под полем ввода выбран Cowork, слева в меню раздел Scheduled. Снимок из аккаунта автора статьи</figcaption></figure><figure class="shot"><img src="assets/05-scheduled-new-task.png" alt="Раздел Scheduled tasks с кнопкой New task справа вверху" loading="lazy"><figcaption>Раздел Scheduled: справа вверху кнопка New task, ниже готовые примеры задач. Снимок из аккаунта автора статьи</figcaption></figure>
+        <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-schedule">Скопировать</button><pre id="prompt-schedule">Создай повторяющуюся задачу на каждый понедельник в 7:30 утра по моему часовому поясу. Проверь подключённый Gmail: найди важные письма, пришедшие в субботу и воскресенье. Проверь подключённый Google Calendar: найди события предстоящей недели. Собери короткий план недели: что требует ответа, какие встречи и сроки ждут меня, к чему подготовиться в среду. Укажи ссылки на найденные письма и события. Если писем или событий нет, прямо сообщи об этом. Если к Gmail или Calendar нет доступа, тоже скажи об этом вместо выдуманного плана. Письма не отправляй и события не меняй</pre></div>
+        <p>Ответь на уточняющие вопросы Claude. Проверь название задачи, инструкцию, день, время и часовой пояс. Если всё верно, нажми <span class="path">Schedule</span></p>
+        <div class="info-card"><p>Результат: задача появилась в Scheduled. Сам отправленный запрос без подтверждения кнопкой Schedule не означает, что запуск сохранён</p></div>
+      </section>
+      <section class="content-section" id="proverka">
+        <p class="section-label">Проверка результата</p><h2>4. Проверь, что будильник заведён</h2>
+        <p>Открой <span class="path">Scheduled</span> и найди свою задачу. Сверь ближайший запуск, понедельник, 7:30, часовой пояс и инструкцию. Здесь можно изменить задачу, поставить её на паузу или запустить вручную. Убедись, что Gmail и Google Calendar подключены</p>
+        <p>После первого запуска открой результат. Там должны быть найденные письма за выходные и события недели со ссылками либо честное сообщение, что за выбранный период ничего не найдено. Если источники не подключились, исправь доступ и повтори запуск. Задача выполняется на стороне Claude, поэтому ноутбук может быть закрыт</p>
+        <div class="info-card"><p>Результат: задача видна в Scheduled с правильным временем. После запуска план опирается на подключённые источники</p></div>
+      </section>
+      <section class="content-section" id="primer"><p class="section-label">Когда в почте и календаре пусто</p><h2>Пример с пустой почтой</h2><p>Для пробного запуска можно временно добавить в Google Calendar три вымышленных события на следующую неделю. Пометь каждое словом «ТЕСТ», чтобы потом быстро найти и удалить:</p><ul><li>Понедельник, 11:00 - ТЕСТ: звонок по проекту</li><li>Среда, 15:00 - ТЕСТ: маникюр</li><li>Пятница, 18:00 - ТЕСТ: оплатить коммунальные услуги</li></ul><figure class="shot"><img src="assets/06-otvet-claude-test.png" alt="Ответ Claude: календарь недели с тестовыми событиями и ссылками Открыть событие" loading="lazy" style="width:480px"><figcaption>Настоящий ответ Claude по тестовым событиям в календаре автора: дни, время и ссылка на каждое событие. Показано начало списка</figcaption></figure><div class="info-card"><p>В своём ответе проверь, что ссылки открывают нужные события, и удали тестовые записи после проверки</p></div><p>Можно обойтись и без тестовых событий. Тогда пустой список встреч будет корректным результатом, если Claude действительно проверил календарь</p></section>
+      <section class="content-section" id="oshibki">
+        <p class="section-label">Если что-то не сошлось</p><h2>Если кнопки или результата нет</h2>
+        <details class="faq-item"><summary>Нет Schedule в обычном чате</summary><p>проверь платный тариф и версию интерфейса. Если виден переключатель Chat/Cowork, путь к Scheduled проходит через Cowork. Обычный Chat в прежнем интерфейсе не сохраняет автоматическое расписание</p></details><details class="faq-item"><summary>Задача создана, но нет писем или встреч</summary><p>проверь, есть ли они за указанные дни, оба коннектора и нужный Google-аккаунт</p></details><details class="faq-item"><summary>В карточке неверное время</summary><p>открой Scheduled и поправь день, время и часовой пояс</p></details>
+      </section>
+      <section class="content-section" id="sources"><p class="section-label">Проверено 26 сентября 2026</p><h2>Источники</h2><ul class="sources"><li><a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork">Claude Help Center: тарифы, создание и проверка Scheduled tasks</a></li><li><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors">Claude Help Center: Gmail и Google Calendar, меню Connectors</a></li><li><a href="https://support.claude.com/en/articles/16761823-claude-cowork-and-chat-are-one-claude">Claude Help Center: постепенный переход к объединённому интерфейсу и общие лимиты</a></li><li><a href="https://support.claude.com/en/articles/8114491-get-started-with-claude">Claude Help Center: повторные вопросы и лимиты Free</a></li><li><a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan">Claude Help Center: лимиты Pro</a></li></ul></section>
+      <section class="cta"><p class="section-label">Бесплатный практикум</p><h2>Будильник для Клода уже заведён. Дальше можно собрать своё</h2><p>Задача по расписанию - это одно поручение. ИИ-Лагерь - бесплатный трёхдневный практикум, где показывают, как работать с Claude Code и Codex (это ИИ-агенты от Anthropic и OpenAI). С ними собирают то, что работает на тебя каждый день: свой сайт, бота в Telegram, который отвечает клиентам, калькулятор стоимости ремонта прямо на сайте. Навыки программиста не нужны: каждый шаг показывают на экране, ты повторяешь</p><a class="press-button" href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+    </article></main>
+    <aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Дальше по теме</p>
+      <h2>Gmail, Google Drive и Calendar внутри Claude</h2>
+      <p><a href="../podklyuchit-gmail-drive-calendar/">Проверь подключение сервисов</a></p>
+    </aside>
+  </div>
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true"><button class="viewer-close" type="button" aria-label="Закрыть">✕</button><div class="viewer-scroll"><img alt=""></div><p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p></div>
+  <script>
+    var themeButton=document.querySelector('.theme-toggle');
+    var savedTheme=localStorage.getItem('guide-theme')||'light';
+    document.documentElement.setAttribute('data-theme',savedTheme);
+    themeButton.textContent=savedTheme==='dark'?'☀':'◐';
+    themeButton.addEventListener('click',function(){var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);localStorage.setItem('guide-theme',next);themeButton.textContent=next==='dark'?'☀':'◐'});
+    document.querySelectorAll('[data-copy-target]').forEach(function(button){button.addEventListener('click',function(){var value=document.getElementById(button.dataset.copyTarget).textContent;function done(){clearTimeout(button.copyTimer);button.textContent='✓ Скопировано';button.classList.add('is-copied');button.copyTimer=setTimeout(function(){button.textContent='Скопировать';button.classList.remove('is-copied')},1800)}function fallback(){var field=document.createElement('textarea');field.value=value;field.setAttribute('readonly','');field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();if(document.execCommand('copy'))done();field.remove()}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(value).then(done).catch(fallback)}else fallback()})});
+    var viewer=document.getElementById('viewer');var lastFocus=null;
+    function closeViewer(){viewer.classList.remove('open');viewer.setAttribute('aria-hidden','true');viewer.querySelector('img').removeAttribute('src');if(lastFocus)lastFocus.focus()}
+    document.querySelectorAll('.shot img').forEach(function(img){var frame=document.createElement('div');frame.className='shot-image';img.parentElement.insertBefore(frame,img);frame.appendChild(img);var button=document.createElement('button');button.type='button';button.className='zoom';button.textContent='Открыть крупнее';button.addEventListener('click',function(){lastFocus=button;viewer.querySelector('img').src=img.currentSrc||img.src;viewer.querySelector('img').alt=img.alt;viewer.classList.add('open');viewer.setAttribute('aria-hidden','false');viewer.querySelector('.viewer-close').focus()});frame.appendChild(button)});
+    viewer.querySelector('.viewer-close').addEventListener('click',closeViewer);viewer.addEventListener('click',function(event){if(event.target===viewer||event.target.classList.contains('viewer-scroll'))closeViewer()});document.addEventListener('keydown',function(event){if(event.key==='Escape'&&viewer.classList.contains('open'))closeViewer()});
+    var links=Array.from(document.querySelectorAll('.toc a,.mobile-toc a'));var sections=links.map(function(link){return document.querySelector(link.getAttribute('href'))}).filter(Boolean);function updateReadingState(){var scrollable=document.documentElement.scrollHeight-window.innerHeight;document.querySelector('.progress').style.width=(scrollable>0?window.scrollY/scrollable*100:0)+'%';var current=sections[0];sections.forEach(function(section){if(section.getBoundingClientRect().top<=120)current=section});links.forEach(function(link){link.classList.toggle('active',link.getAttribute('href')==='#'+current.id)})}updateReadingState();addEventListener('scroll',updateReadingState,{passive:true});
+  </script>
+</body>
+</html>
