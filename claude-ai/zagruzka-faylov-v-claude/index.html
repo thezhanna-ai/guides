@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Как добавить один или несколько файлов в чат Claude, проверить вложения, форматы и ограничения">
+<title>Загрузка файлов в Claude: один документ и пачка файлов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+<style>
+
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .route-note { margin: 31px 0 34px; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted) }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+/* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
+       .info-card - полезное уточнение, фон без полосы
+       .warn-card - оговорка или предупреждение, фон плюс оранжевая полоса
+       .check-panel - читатель отмечает пункты, поэтому БЕЛАЯ карточка */
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .info-card p, .warn-card p { margin: 0 }
+    /* абзац после блока слипался с ним: у блоков margin-bottom 0,
+       а у p margin-top 0. Зазор был 0 px при 25 px между абзацами */
+    .info-card + p, .warn-card + p, .check-panel + p { margin-top: 25px }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: min(100%, 650px) }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--emerald); color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    .shot .zoom:hover { background: var(--accent) }
+    /* без мыши кнопку не навести, поэтому на телефоне она видна всегда.
+       Условие продублировано по ширине: hover:none не срабатывает в эмуляции */
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    /* полноэкранный просмотр */
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    /* в окне картинка показывается в НАТУРАЛЬНОМ размере с прокруткой: на телефоне
+       ужать её в экран - значит не увеличить ничего. Прокручиваем пальцем */
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    h3 + .prompt-box { margin-top: 12px }
+    .prompt-box + h3 { margin-top: 46px }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: #F28A68 }
+    .copy-button:active { background: #FFD1BF; box-shadow: 0 1px 0 #8F371F; transform: translateY(2px) }
+    .copy-button.is-copied { background: #FFD1BF; box-shadow: 0 0 0 3px rgba(255, 209, 191, .34); transform: translateY(1px) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 900 }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+  
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    /* карточка должна читаться как ссылка, а не как серый блок текста.
+       text-decoration НАСЛЕДУЕТСЯ, поэтому подчёркиваем только .title */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+    @media (min-width: 861px) and (max-width: 1199px) { .toc { width: 240px; margin-left: 0 } }
+    @media (min-width: 1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+    @media (min-width: 1200px) and (max-width: 1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+  </style></head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div>
+<div class="header-actions"><div class="handout-title">Загрузка файлов в Claude</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+</div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p>
+<a href="#nachalo">Загрузка файлов в Claude: один документ и пачка файлов</a>
+<a href="#odin">Прикрепи один документ</a>
+<a href="#neskolko">Добавь пачку файлов</a>
+<a href="#proverka">Проверь, что Claude получил</a>
+<a href="#formaty">Форматы и скрытая засада</a>
+<a href="#zaprosy">Спроси по оригиналам</a>
+<a href="#sources">Источники</a>
+</nav><main><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне">
+<a href="#nachalo">Загрузка файлов в Claude: один документ и пачка файлов</a>
+<a href="#odin">Прикрепи один документ</a>
+<a href="#neskolko">Добавь пачку файлов</a>
+<a href="#proverka">Проверь, что Claude получил</a>
+<a href="#formaty">Форматы и скрытая засада</a>
+<a href="#zaprosy">Спроси по оригиналам</a>
+<a href="#sources">Источники</a>
+</nav></details><article>
+<header id="nachalo"><p class="eyebrow">Claude.ai · выпуск 18</p><h1>Загрузка файлов в Claude: один документ и пачка файлов</h1>
+<p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 26 СЕНТЯБРЯ 2026</p>
+<p class="lead">Копируешь договор в чат по абзацу: пункт сюда, таблицу туда, а потом ещё объясняешь Claude, как куски связаны. Claude отвечает по твоему пересказу, и важное различие между версиями легко теряется. Кажется, достаточно приложить оригиналы - но даже три видимых вложения могут привести к неверному сравнению. За две минуты пройдёшь путь от одного файла до пачки, узнаешь, что Claude действительно читает, и получишь фразу для проверки перед анализом</p>
+<aside class="route-note" aria-label="Короткий маршрут"><h2>Короткий маршрут</h2><p>Плюс → Add files or photos → выбрать один файл или несколько → «Какие файлы ты получил?» → вопрос с файлом, страницей и пунктом</p></aside>
+</header>
+<section class="content-section" id="odin"><p class="section-label">Первый файл</p><h2>Прикрепи один документ</h2>
+<p class="purpose">Открой <a href="https://claude.ai/">claude.ai</a> и начни с договора, который сейчас приходится переносить в чат вручную</p>
+<div class="step"><h3>1. Найди плюс у поля ввода</h3><p>Кнопка <span class="path">+</span> находится слева внизу поля сообщения. Нажми её, чтобы открыть меню вложений</p>
+<figure><div class="shot"><img src="assets/her/shag-pole-plus.webp" alt="Поле ввода Claude с выделенной кнопкой плюс" loading="lazy"></div><figcaption>Скрин автора: кнопка + слева внизу поля ввода</figcaption></figure>
+<div class="result"><p><b>Результат:</b> открыто меню действий у поля ввода</p></div></div>
+<div class="step"><h3>2. Выбери файл</h3><p>Нажми <span class="path">Add files or photos</span>, найди договор в системном окне и нажми <span class="path">Открыть (Open)</span>. Другой способ - перетащи файл мышкой прямо в окно чата</p>
+<figure><div class="shot vertical"><img src="assets/her/shag-menu-add-files.webp" alt="Меню кнопки плюс с выделенным пунктом Add files or photos" loading="lazy"></div><figcaption>Скрин автора: пункт Add files or photos в меню кнопки +</figcaption></figure>
+<div class="result"><p><b>Результат:</b> имя договора появилось как вложение рядом с сообщением. Название файла, просто напечатанное в чате, вложением не считается</p></div></div>
+</section>
+<section class="content-section" id="neskolko"><p class="section-label">Три версии разом</p><h2>Добавь пачку файлов</h2>
+<p class="purpose">Если сравниваешь несколько версий, приложи оригиналы в один чат, чтобы Claude мог сопоставить их между собой</p>
+<div class="step"><h3>3. Выдели нужные документы</h3><p>Снова нажми <span class="path">+</span> → <span class="path">Add files or photos</span>. Открой папку на компьютере, выдели нужные файлы и нажми <span class="path">Открыть (Open)</span>. Несколько выделенных файлов можно также перетащить в чат вместе</p><div class="result"><p><b>Результат:</b> у сообщения видны отдельные вложения для каждой версии. Выбор файлов в папке не открывает Claude всю папку</p></div><figure><div class="shot"><img src="assets/her/shag-tri-fayla.webp" alt="Три вложения в поле ввода Claude, выделенные рамкой; содержимое двух PDF скрыто" loading="lazy"></div><figcaption>Скрин автора: три отдельных вложения у сообщения</figcaption></figure></div>
+<p>В обычном чате Anthropic указывает предел до 20 файлов и до 500 МБ на файл. Если материалов больше, раздели анализ на части. Для постоянной справки есть <a href="../pervyy-proekt-v-claude/">Projects в Claude</a>: туда добавляют файлы, доступные в новых чатах этого проекта</p>
+</section>
+<section class="content-section" id="proverka"><p class="section-label">До анализа</p><h2>Проверь, что Claude получил</h2>
+<p class="purpose">Вложения появились у сообщения. Теперь отправь короткую проверку, прежде чем просить вывод по договору</p>
+<div class="step"><h3>4. Сверь список файлов</h3><p>Скопируй фразу ниже и отправь в том же чате. Сверь ответ Claude с именами файлов на компьютере</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="received">Скопировать</button><pre id="received">Перечисли названия всех файлов, которые ты получил в этом чате. Если какой-то файл не открывается или его содержимое недоступно, скажи об этом до анализа</pre></div>
+<div class="result"><p><b>Результат:</b> виден список доступных Claude файлов. Если версия отсутствует, прикрепи её отдельно и повтори проверку</p></div></div>
+<div class="check-panel"><h3>Проверка за минуту</h3><ul class="checklist"><li>Имена всех нужных файлов есть у сообщения и в ответе Claude</li></ul></div>
+</section>
+<section class="content-section" id="formaty"><p class="section-label">Где теряется смысл</p><h2>Форматы и скрытая засада</h2>
+<p>Claude принимает PDF, DOCX, CSV, TXT, HTML, ODT, RTF, EPUB, JSON и XLSX. Из изображений подходят JPEG, PNG, GIF и WebP. Картинку можно также вставить из буфера обмена через <span class="path">Ctrl/Cmd + V</span></p>
+<p>Для XLSX включи <span class="path">Settings → Capabilities → Code execution and file creation</span>. Прямой путь: <a href="https://claude.ai/settings/capabilities">настройки возможностей Claude</a>. Без этого переключателя XLSX не загрузится</p>
+<figure><div class="shot"><img src="assets/03-xlsx-setting-anthropic.png" alt="Официальный скрин включённого переключателя Code execution and file creation в настройках Claude" loading="lazy"></div><figcaption>Синий переключатель Code execution and file creation нужен для XLSX. Источник: <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Anthropic Help Center, Create and edit files with Claude</a></figcaption></figure>
+<div class="warn-card"><p><span class="info-title">Засада с Word:</span> из DOCX и других документов, кроме PDF, Claude извлекает текст, но не читает встроенные изображения. Если схема или скрин внутри Word влияют на ответ, приложи изображение отдельно и назови его в запросе</p></div>
+<p>У PDF до 100 страниц Claude анализирует текст вместе с визуальными элементами. В PDF от 101 до 1000 страниц Claude обрабатывает только текст. Для PDF указывай номер страницы из просмотрщика файла: напечатанный на листе номер может отличаться</p>
+</section>
+<section class="content-section" id="zaprosy"><p class="section-label">Теперь вопрос</p><h2>Спроси по оригиналам</h2>
+<p class="purpose">Когда Claude назвал все файлы и важные картинки приложены отдельно, переходи от общего «что думаешь?» к пункту, который можно открыть и проверить</p>
+<div class="step"><h3>5. Найди конкретное условие</h3><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="payment">Скопировать</button><pre id="payment">Найди срок оплаты в приложенном договоре. Назови файл, страницу и пункт. Приведи короткую цитату, на которой основан ответ. Если не нашёл, так и скажи</pre></div><div class="result"><p><b>Результат:</b> у срока оплаты есть адрес в оригинале, а не только уверенная формулировка Claude</p></div></div>
+<div class="step"><h3>6. Сравни три версии</h3><p>Если в чате три договора, отправь запрос на сравнение. Открой названные пункты в каждом исходнике и сверь различия</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="versions">Скопировать</button><pre id="versions">Сравни три приложенные версии договора. Для каждого различия назови файл, страницу и пункт. Отдельно покажи, как менялись срок оплаты и ответственность сторон. Если какого-то файла нет среди вложений, остановись и сообщи об этом</pre></div>
+<div class="result"><p><b>Результат:</b> различия разложены по версиям и пунктам, а пропущенный файл остановит сравнение</p></div></div>
+<p>Вот та самая деталь: файл у сообщения ещё не доказывает, что Claude увидел схему внутри Word или не перепутал версии. Сначала отдельная картинка и список полученных файлов, затем ответ с файлом, страницей и пунктом. Раньше в чат попадал твой пересказ договора. Теперь у Claude на столе оригиналы, а каждое различие можно проверить</p>
+</section>
+<section class="content-section" id="sources"><p class="section-label">Первоисточники</p><h2>Источники</h2><ul class="sources"><li><a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude">Anthropic: Upload files to Claude</a> - путь загрузки, форматы, лимиты и обработка PDF</li><li><a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Anthropic: Create and edit files with Claude</a> - путь к переключателю для XLSX</li></ul></section>
+<section class="next-read" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">После загрузки документов</p><ul><li><a href="../pervyy-proekt-v-claude/"><span class="title">Первый проект в Claude</span><span class="why">Сохрани документы для нескольких разговоров по одной задаче</span></a></li><li><a href="../gotovye-fayly-excel-word-pdf/"><span class="title">Готовые Excel, Word и PDF</span><span class="why">Попроси Claude собрать результат анализа в файл</span></a></li></ul></section>
+<section class="cta" aria-label="Следующий шаг"><p class="section-label">Бесплатный практикум</p><h2>От загруженного файла к задаче на своём проекте</h2><p>ИИ-Лагерь - бесплатный прикладной практикум по вайб-маркетингу на Claude Code и Codex. Шаги показывают на экране: ты повторяешь работу со своими материалами и собираешь результат без кода и технических знаний</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a></section>
+<footer class="foot">Интерфейс Claude может меняться. Документ от 26 сентября 2026</footer>
+</article></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Перед загрузкой</p>
+      <h2>Начни с первого чата</h2>
+      <p><a href="../podklyuchenie-iz-rossii/">Как войти в Claude и открыть чат</a></p>
+</aside></div>
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
+    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+    <div class="viewer-scroll"><img alt=""></div>
+    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+  </div>
+
+<script>
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+
+    var themeButton = document.querySelector(".theme-toggle");
+    var savedTheme = localStorage.getItem("guide-theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+    themeButton.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("guide-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });
+
+    // "Открыть крупнее": скрины в примерах на телефоне ужимаются до 18-29%,
+    // кнопка открывает картинку во весь экран
+    (function () {
+      var viewer = document.getElementById("viewer");
+      if (!viewer) return;
+      var big = viewer.querySelector("img");
+      var lastFocused = null;
+      function open(src, alt) {
+        lastFocused = document.activeElement;
+        big.src = src; big.alt = alt || "";
+        big.onload = function () {
+          var box = viewer.querySelector(".viewer-scroll");
+          var room = viewer.clientWidth - 44;
+          // цель - читаемый текст, а не максимальный размер. Показываем картинку
+          // примерно вдвое крупнее, чем она стоит в тексте, но не больше её
+          // натуральной величины и не больше двух экранов по ширине
+          var inPage = document.querySelector('.shot img[src$="' + src.split("/").pop() + '"]');
+          var pageWidth = inPage ? inPage.getBoundingClientRect().width : room;
+          var target = Math.min(pageWidth * 2.2, big.naturalWidth);
+          // на большом экране картинка всегда влезает целиком, без прокрутки.
+          // На узком телефоне ужать её - значит ничего не увеличить, поэтому
+          // там разрешаем выйти за экран и прокручивать пальцем
+          var wide = viewer.clientWidth >= 860;
+          target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+          // и по высоте: картинка целиком должна помещаться на экран
+          if (wide) {
+            var maxH = viewer.clientHeight - 96;
+            var byHeight = maxH * (big.naturalWidth / big.naturalHeight);
+            target = Math.min(target, byHeight);
+          }
+          big.style.width = Math.round(target) + "px";
+          viewer.classList.toggle("fits", target <= room);
+          box.scrollLeft = (target - box.clientWidth) / 2;
+          var hint = viewer.querySelector(".viewer-hint");
+          var scrolls = box.scrollWidth > box.clientWidth + 2;
+          hint.textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+        };
+        viewer.setAttribute("open", "");
+        document.body.style.overflow = "hidden";
+        viewer.querySelector(".viewer-close").focus();
+      }
+      function close() {
+        viewer.removeAttribute("open");
+        document.body.style.overflow = "";
+        big.removeAttribute("src");
+        big.style.width = "";
+        if (lastFocused) lastFocused.focus();
+      }
+      document.querySelectorAll(".shot img").forEach(function (img) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "zoom";
+        button.textContent = "Открыть крупнее";
+        button.addEventListener("click", function () { open(img.currentSrc || img.src, img.alt); });
+        img.parentElement.appendChild(button);
+      });
+      viewer.addEventListener("click", function (event) {
+        if (event.target === viewer || event.target.classList.contains("viewer-close")) close();
+      });
+      addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && viewer.hasAttribute("open")) close();
+      });
+    })();
+
+    var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+    function updateReadingState() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+      var current = sections[0];
+      sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+      links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+    }
+    updateReadingState();
+    addEventListener("scroll", updateReadingState, { passive: true });
+  </script></body></html>
