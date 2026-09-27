@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta name="description" content="Как держать чаты Claude Code и Codex и файлы проекта в одном окне VS Code, открывать отдельные вкладки для задач и отдельно настроить передачу заданий через CLI">
+  <meta property="og:title" content="Claude Code и Codex в одном VS Code: чаты и файлы рядом">
+  <meta property="og:description" content="Как держать чаты Claude Code и Codex и файлы проекта в одном окне VS Code, открывать отдельные вкладки для задач и отдельно настроить передачу заданий через CLI">
+  <title>Claude Code и Codex в одном VS Code: чаты и файлы рядом</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --emerald:#102F30; --emerald-mid:#1F4A43; --paper:#F8F7F2; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F; --ink:#1E2926; --muted:#62706A; --line:#D5C9B7; --white:#FFFFFF }
+    :root[data-theme="dark"] { --emerald:#DCEAE4; --emerald-mid:#A8D0BE; --paper:#162221; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78; --ink:#EDF1EE; --muted:#B7C2BD; --line:#3C504C; --white:#20302E }
+    * { box-sizing:border-box }
+    html { scroll-behavior:smooth }
+    body { margin:0; background:var(--paper); color:var(--ink); font:18.4px/1.65 Spectral,Georgia,serif; -webkit-text-size-adjust:100% }
+    a { color:var(--emerald-mid); text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:2px; text-underline-offset:4px; font-weight:600 }
+    a:hover { color:var(--accent-dark) }
+    a:focus-visible,button:focus-visible,summary:focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px }
+    .progress { position:fixed; top:0; left:0; z-index:30; width:0; height:3px; background:var(--accent) }
+    .masthead { position:sticky; top:0; z-index:20; border-bottom:1px solid var(--line); background:var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .masthead-inner { max-width:1200px; min-height:65px; margin:auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; gap:20px }
+    .brand { color:var(--emerald); font-size:18px; font-weight:750 }
+    .header-actions { display:flex; align-items:center; gap:12px }
+    .header-controls { display:flex; align-items:center; gap:12px }
+    .handout-title { color:var(--accent-dark); font-size:13px; font-weight:750 }
+    .theme-toggle,.press-button { min-height:40px; border:0; border-radius:10px; font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; cursor:pointer }
+    .theme-toggle { width:40px; background:var(--info); color:var(--emerald); box-shadow:0 3px 0 var(--info-line) }
+    .press-button { display:inline-flex; align-items:center; padding:0 15px; background:#1F4A43; color:#FFFFFF; text-decoration:none; box-shadow:0 3px 0 #0A2424 }
+    .theme-toggle,.press-button,.copy-button { transition:background .14s ease,transform .14s ease,box-shadow .14s ease }
+    .theme-toggle:hover { background:#EEF1F1; transform:translateY(1px); box-shadow:0 2px 0 var(--info-line) }
+    :root[data-theme="dark"] .theme-toggle:hover { background:#34504C }
+    .theme-toggle:active { background:#FFFFFF; transform:translateY(3px) scale(.98); box-shadow:inset 0 0 0 3px var(--info-line) }
+    :root[data-theme="dark"] .theme-toggle:active { background:#476B64 }
+    .press-button:hover { background:#37655C; color:#FFFFFF; transform:translateY(1px); box-shadow:0 2px 0 #0A2424 }
+    .press-button:active { background:#4B7E72; color:#FFFFFF; transform:translateY(3px) scale(.98); box-shadow:inset 0 0 0 3px #0A2424 }
+    .masthead .press-button { flex: 1; justify-content:center; padding:0 8px }
+    .page-shell { max-width:1244px; margin:auto; padding:42px 20px 90px; display:grid; grid-template-columns:210px minmax(0,720px); gap:32px; align-items:start }
+    .toc { position:sticky; top:84px; width:260px; padding:4px 18px 10px 0; border-right:1px solid var(--line); font:14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .toc-label { margin:0 0 15px; color:var(--muted); font:700 11px/1.2 ui-monospace,monospace; letter-spacing:.18em; text-transform:uppercase }
+    .toc a { display:block; padding:8px 0 8px 12px; color:var(--muted); text-decoration:none }
+    .toc a.active { color:var(--accent-dark); font-weight:700; border-left:2px solid var(--accent) }
+    .mobile-toc { display:none }
+    header[id],section[id] { scroll-margin-top:84px }
+    .eyebrow,.section-label { color:var(--accent-dark); font:700 12px/1.2 ui-monospace,monospace; letter-spacing:.15em; text-transform:uppercase }
+    h1,h2 { color:var(--emerald); font-family:Unbounded,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-weight:700; text-wrap:balance }
+    h1 { margin:0; font-size:37.6px; line-height:1.13; letter-spacing:-.75px }
+    h2 { margin:0 0 22px; font-size:29px; line-height:1.2 }
+    h3 { margin:0 0 10px; color:var(--emerald); font:750 20px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    p { margin:0 0 20px }
+    .meta { margin:25px 0 0; color:var(--muted); font:600 13px/1.4 ui-monospace,monospace; letter-spacing:.04em }
+    .lead { margin:20px 0 0 }
+    .content-section { margin-top:66px }
+    .route-note { margin:31px 0 34px; padding:2px 0 4px 24px; border-left:3px solid var(--accent) }
+    .route-note h2 { margin-bottom:9px; font:750 20px/1.25 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .route-note p { margin:0; color:var(--muted) }
+    .step { margin-top:28px; padding-top:24px; border-top:1px solid var(--line) }
+    .path { padding:2px 6px; border-radius:5px; background:var(--info); color:var(--emerald); font:600 .9em/1.4 ui-monospace,monospace }
+    .info-card,.warn-card { margin:24px 0; padding:13px 18px; border:1px solid var(--info-line); border-radius:11px; background:var(--info) }
+    .warn-card { border-left:6px solid var(--accent) }
+    .info-card p,.warn-card p { margin:0 }
+    .shot { position:relative; width:min(100%,650px); margin:26px 0 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--emerald); color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    .shot .zoom:hover { background: var(--accent) }
+    /* без мыши кнопку не навести, поэтому на телефоне она видна всегда.
+       Условие продублировано по ширине: hover:none не срабатывает в эмуляции */
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .shot img { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:10px; background:#FFFFFF }
+    .shot figcaption { margin-top:11px; color:var(--muted); font:500 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .shot-missing { width:min(100%,650px); margin:26px 0 0; padding:20px; border:1px dashed var(--info-line); border-radius:11px; background:var(--info); font:600 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .shot-missing p { margin:0 }
+    .prompt-box { position:relative; margin:15px 0 28px; padding:57px 22px 23px; border-radius:12px; background:#102F30; color:#F8F7F2 }
+    .prompt-box pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:500 14px/1.58 ui-monospace,SFMono-Regular,Menlo,monospace }
+    .copy-button { position:absolute; top:13px; right:13px; min-width:132px; min-height:34px; padding:0 13px; border:0; border-radius:8px; background:var(--accent); color:#102F30; font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; box-shadow:0 3px 0 #8F371F; cursor:pointer }
+    .copy-button:hover { background:#F28A68; transform:translateY(1px); box-shadow:0 2px 0 #8F371F }
+    .copy-button:active { background:#FFC6AD; transform:translateY(3px) scale(.98); box-shadow:inset 0 0 0 3px #8F371F }
+    .copy-button.is-copied { background:#FFD1BF; box-shadow:0 0 0 3px rgba(255,209,191,.34) }
+    .sources { padding-left:22px }
+    .sources li { margin:9px 0 }
+    .related-plaque { grid-column:2; padding:14px 16px; border:1px solid var(--info-line); border-radius:11px; background:var(--info) }
+    .related-plaque p { margin:0 }
+    .related-plaque .plaque-label { margin-bottom:5px; color:var(--accent-dark); font:700 11px/1.3 ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase }
+    .related-plaque h2 { margin:0 0 8px; font:750 18px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .cta { margin-top:70px; padding:30px; border-radius:14px; background:#102F30; color:#FFFFFF }
+    .cta h2 { color:#FFFFFF }
+    .cta p { color:#F0E8D8 }
+    .cta .section-label { color:#F0E8D8 }
+    .cta .press-button { background:var(--accent); color:#102F30; box-shadow:0 3px 0 #8F371F }
+    .cta .press-button:hover { background:#F28A68; color:#102F30; box-shadow:0 2px 0 #8F371F }
+    .cta .press-button:active { background:#FFC6AD; color:#102F30; box-shadow:inset 0 0 0 3px #8F371F }
+    /* полноэкранный просмотр */
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    /* в окне картинка показывается в НАТУРАЛЬНОМ размере с прокруткой: на телефоне
+       ужать её в экран - значит не увеличить ничего. Прокручиваем пальцем */
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
+    @media(min-width:1200px) { .page-shell { grid-template-columns:210px minmax(0,720px) 180px } .related-plaque { grid-column:3; grid-row:1; position:sticky; top:84px } .header-actions { margin-right:8px } .header-controls { width: 180px } }
+    @media(min-width:861px) { .toc { --toc-shift:clamp(-50px,calc(630px - 50vw),0px); margin-left:var(--toc-shift); width:calc(210px - var(--toc-shift)) } }
+    @media(max-width:860px) { body { font-size:17px } .masthead-inner { min-height:60px; padding:0 14px } .brand { font-size:14px } .handout-title,.toc { display:none } .page-shell { display:block; padding:24px 14px 68px } .mobile-toc { display:block; margin:0 0 30px; padding:13px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif } .mobile-toc a { display:block; margin-top:9px } h1 { font-size:34px } h2 { font-size:27px } .content-section { margin-top:52px } .cta { padding:26px 22px } .related-plaque { margin-top:46px } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto } .theme-toggle,.theme-toggle:hover,.theme-toggle:active,.press-button,.press-button:hover,.press-button:active,.copy-button,.copy-button:hover,.copy-button:active { transition:none; transform:none } }
+  
+    .result { margin:22px 0 0; padding:2px 0 2px 14px; border-left:3px solid #5F7F68 }
+    .check-panel { padding:11px 18px; border:1px solid var(--line); border-radius:11px; background:var(--white) }
+    .check-panel ul { margin:0; padding-left:24px }
+    .check-panel li { margin:8px 0 }
+    h2 { margin-bottom:18px }
+    .warn-card { padding:11px 18px }
+    .related-plaque .title { display:block; text-decoration:underline; text-decoration-color:var(--accent) }
+    .related-plaque .why { display:block; margin-top:8px; color:var(--muted); font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .related-plaque a { text-decoration:none }
+    .header-controls .press-button { text-align:center }
+  </style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="masthead"><div class="masthead-inner">
+<a class="brand" href="../../">Гайды по ИИ</a>
+<div class="header-actions"><span class="handout-title">Claude Code + Codex</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div>
+</div></div>
+<div class="page-shell">
+<nav class="toc" aria-label="Оглавление"><p class="toc-label">В этой инструкции</p><a href="#intro">Claude Code и Codex в одном VS Code: чаты и файлы рядом</a><a href="#why">Зачем собирать работу в одном окне</a><a href="#before">Что понадобится перед настройкой</a><a href="#window">1. Открой VS Code и свою папку проекта</a><a href="#extensions">2. Найди и установи расширения внутри VS Code</a><a href="#panels">3. Открой два чата и расположи их рядом</a><a href="#project">4. Дай им одну папку и общие правила</a><a href="#delegate">5. Поручи Клоду запускать Кодекс</a><a href="#remember">6. Сохрани схему для следующих сессий</a><a href="#finish">Проверь, что всё действительно связано</a><a href="#sources">Официальные инструкции</a><a href="#help">Если запутался на любом шаге</a></nav><main><details class="mobile-toc"><summary>Оглавление</summary><a href="#intro">Claude Code и Codex в одном VS Code: чаты и файлы рядом</a><a href="#why">Зачем собирать работу в одном окне</a><a href="#before">Что понадобится перед настройкой</a><a href="#window">1. Открой VS Code и свою папку проекта</a><a href="#extensions">2. Найди и установи расширения внутри VS Code</a><a href="#panels">3. Открой два чата и расположи их рядом</a><a href="#project">4. Дай им одну папку и общие правила</a><a href="#delegate">5. Поручи Клоду запускать Кодекс</a><a href="#remember">6. Сохрани схему для следующих сессий</a><a href="#finish">Проверь, что всё действительно связано</a><a href="#sources">Официальные инструкции</a><a href="#help">Если запутался на любом шаге</a></details><article>
+<header id="intro">
+  <p class="eyebrow">Claude Code + Codex · VS Code</p>
+  <h1>Claude Code и Codex в одном VS Code: чаты и файлы рядом</h1>
+  <p class="lead">Клод в одном окне, Кодекс в другом, а файл с результатом приходится искать отдельно. Когда задач несколько, переключаешься уже между целой стопкой окон. Как держать нужные разговоры и работу перед глазами?</p>
+  <p class="meta">Пошаговая инструкция · Mac, Windows и Linux</p>
+</header>
+
+<section class="content-section" id="why">
+  <h2>Зачем собирать работу в одном окне</h2>
+  <p>В <strong>Visual Studio Code (VS Code)</strong> можно расположить чаты Клода и Кодекса рядом, а между ними открыть файл проекта. Ты видишь ответы обоих и сразу смотришь, что получилось в тексте, сценарии или HTML-странице. Для этого не приходится переходить из одной программы в другую</p>
+  <ul>
+    <li><strong>Два разговора видны одновременно.</strong> Можно прочитать ответ Клода и сверить его с ответом Кодекса, не пряча один чат за другим</li>
+    <li><strong>Для разных задач можно оставить отдельные вкладки.</strong> Например, в одном чате обсуждать статью, в другом собирать страницу. Нужный разговор выбираешь внутри того же редактора</li>
+    <li><strong>Результат лежит рядом с обсуждением.</strong> Открываешь сохранённый файл из папки проекта, читаешь правки и возвращаешься в нужный чат. Искать его через отдельное окно с папками не нужно</li>
+  </ul>
+  <p>Например, ты обсуждаешь с Клодом текст раздатки, затем просишь Кодекс оформить его в HTML. Сохранённый текст доступен обоим из одной папки, страница открыта рядом, а каждый разговор остаётся в своей вкладке. Так удобнее видеть, что уже сделано и к какой задаче относится ответ</p>
+  <div class="warn-card"><p><strong>Передача задач настраивается отдельно</strong><br>Клод может запускать Кодекс через CLI: отдельную программу, которой передают задание командой. Для этого два чата в VS Code не нужны. Можно работать и из другого приложения, если у Клода есть возможность запускать установленный Codex CLI. Расположение в одном окне само по себе не включает общение между помощниками</p></div>
+  <p>Ниже сначала соберёшь удобное окно для своей работы. Затем сможешь отдельно настроить запуск Кодекса Клодом, если хочешь передавать ему задачи без ручного копирования</p>
+</section>
+
+<section class="content-section" id="before">
+  <h2>Что понадобится перед настройкой</h2>
+  <p>Нужны <strong>Visual Studio Code</strong>, аккаунт Claude и аккаунт ChatGPT с доступом к Codex. Если VS Code ещё нет, скачай его с <a href="https://code.visualstudio.com/download">официального сайта Microsoft</a>, установи и запусти. Если уже пользуешься им, открой своё обычное окно</p>
+  <p><strong>Приложение Codex и программа VS Code - разные окна.</strong> Дальше все пункты меню нужно нажимать именно в Visual Studio Code. Открытая в браузере статья остаётся инструкцией, команды из неё выполняются в редакторе</p>
+  <p>Claude Code и Codex добавляются в VS Code как <strong>расширения</strong>: дополнения, которые дают редактору новые функции. После установки у каждого появится свой чат внутри VS Code. Если они уже установлены, повторная установка не нужна</p>
+  <div class="warn-card"><p><strong>Аккаунты и лимиты остаются отдельными</strong><br>В Claude Code входишь через аккаунт Claude, в Codex - через ChatGPT. Одна оболочка не объединяет подписки и не гарантирует экономию. Доступ к работе зависит от твоих тарифов</p></div>
+  <p>Сначала откроешь свою папку, установишь недостающие расширения и расположишь чаты рядом. После этого можно остановиться или отдельно настроить передачу заданий от Клода Кодексу</p>
+</section>
+
+<section class="content-section" id="window">
+  <h2>1. Открой VS Code и свою папку проекта</h2>
+  <p>Открой в VS Code папку, где лежит твоя работа: <strong>Файл → Открыть папку…</strong>. Если проект уже открыт, оставь его. Эта папка будет общей для Клода и Кодекса</p>
+  <details><summary>Если VS Code спрашивает о доверии к папке</summary><p>Для своей знакомой рабочей папки выбери <strong>Да, я доверяю авторам</strong>. В ограниченном режиме работа агентов может быть недоступна. Незнакомую скачанную папку сначала нужно проверить</p></details>
+</section>
+
+<section class="content-section" id="extensions">
+  <h2>2. Найди и установи расширения внутри VS Code</h2>
+  <p>Нужны два расширения: <strong>Claude Code for VS Code</strong> от <strong>Anthropic</strong> и <strong>Codex</strong> от <strong>OpenAI</strong>. Если у тебя уже есть их иконки и открываются чаты, переходи к следующему шагу</p>
+  <details><summary>Как установить, если иконок ещё нет</summary>
+    <p>Открой <strong>Вид → Расширения</strong>, найди оба дополнения через поле поиска слева и нажми <strong>Установить</strong> в их карточках. Названия издателей помогут отличить официальные расширения от похожих. Если есть кнопки «Отключить» и «Удалить», дополнение уже установлено</p>
+    <figure class="shot" style="max-width:520px"><img src="assets/vscode-extensions-crop.jpg" alt="Поиск расширений VS Code и официальные дополнения Anthropic и OpenAI"><figcaption>Поиск расширений находится слева. Нужные издатели: Anthropic и OpenAI</figcaption></figure>
+    <figure class="shot"><img src="assets/claude-marketplace-header-ru.png" alt="Название официального расширения Claude Code и кнопка Установить на русской карточке"><figcaption>Карточка Claude Code с переводом браузера. Для поиска в VS Code используй исходное название Claude Code for VS Code</figcaption></figure>
+    <p>Официальные карточки: <a href="https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code">Claude Code</a> и <a href="https://marketplace.visualstudio.com/items?itemName=openai.chatgpt">Codex</a></p>
+  </details>
+</section>
+
+<section class="content-section" id="panels">
+  <h2>3. Открой два чата и расположи их рядом</h2>
+  <p>В верхней части редактора нажми <strong>солнышко Клода</strong>, затем <strong>значок Кодекса</strong> рядом с ним. Они открывают соответствующие чаты. В некоторых раскладках значки находятся на боковой полосе</p>
+  <figure class="shot" style="max-width:620px"><img src="assets/vscode-icons-crop.jpg" alt="Солнышко Claude Code и значок Codex в верхней части редактора"><figcaption>Слева в этом фрагменте: оранжевое солнышко Клода и чёрный значок Кодекса. Ниже плюс в кружке создаёт новый разговор Клода, карандаш справа - новый чат Кодекса</figcaption></figure>
+  <p>Если расширение просит войти, используй свой аккаунт Claude для Клода и ChatGPT для Кодекса. После входа вернись в VS Code</p>
+  <h3>Как увидеть оба чата одновременно</h3>
+  <p>Если Клод открыт в редакторе, а Кодекс в боковой области справа, они уже видны вместе. Оставь такое расположение</p>
+  <p>Если оба открылись <strong>вкладками сверху</strong> и один скрывает другой, перетащи вкладку Codex за её название к правому краю редактора. Когда правая половина подсветится, отпусти. Получатся две области с отдельными чатами. Их ширину можно менять, двигая границу между ними</p>
+  <details><summary>Как открыть ещё и файл рядом с чатами</summary>
+    <p>В <strong>Вид → Проводник</strong> видны файлы общей папки. Если Кодекс занимает боковую область, файл можно перетащить из Проводника к краю области редактора с Клодом: на подсветке отпусти, чтобы файл открылся рядом с его чатом</p>
+    <p>Если оба чата открыты именно вкладками редактора, выбери <strong>Вид → Макет редактора → Три столбца</strong>. Перетащи вкладку Кодекса в правый столбец, а нужный файл из Проводника - в середину. На узком экране удобнее оставить два чата, а файл открывать по мере необходимости</p>
+  </details>
+  <p class="result"><strong>Результат:</strong> оба чата видны в одном окне. Это удобное расположение для тебя; передачу заданий от Клода Кодексу включим отдельно на шаге 5</p>
+</section>
+
+<section class="content-section" id="project">
+  <h2>4. Дай им одну папку и общие правила</h2>
+  <p>Папку ты уже открыл на шаге 1. Теперь нужно убедиться, что оба помощника работают именно в ней, и дать им общие правила</p>
+  <p>Скопируй следующий запрос и отправь его <strong>по очереди в чат Клода и в чат Кодекса</strong>. Вставлять нужно в поле сообщения, где ты обычно пишешь задачу. Кнопка отправки - стрелка справа в этом поле</p>
+  <figure class="shot" style="max-width:560px"><img src="assets/claude-message-crop.jpg" alt="Поле сообщения Клоду и стрелка отправки справа"><figcaption>Сюда отправляются запросы Клоду. На скрине пояснение, оно не отправлено</figcaption></figure>
+  <figure class="shot" style="max-width:560px"><img src="assets/codex-message-crop.jpg" alt="Поле сообщения Кодексу и стрелка отправки справа"><figcaption>Это отдельное поле Кодекса. Первый проверочный запрос нужно отправить и ему</figcaption></figure>
+  <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-check">Скопировать</button><pre id="prompt-check">Пока ничего не меняй. Покажи полный путь к папке проекта, в которой ты работаешь, и названия файлов и папок в её корне. Прочитай инструкции проекта, назови файлы, из которых взял правила, и одно конкретное правило из каждого</pre></div>
+  <p>Сравни ответы: путь должен совпадать с папкой, которую ты открыл на шаге 1. Если один из помощников назвал другой путь, ничего ему пока не поручай. В поле его чата напиши: <strong>«Ты назвал другую папку. Нужна папка, открытая в этом окне VS Code. Помоги выбрать её, пока ничего не меняй»</strong>. После исправления отправь проверочный запрос ещё раз</p>
+  <p>Правила проекта Codex читает из <strong>AGENTS.md</strong>. У Claude Code традиционно используется <strong>CLAUDE.md</strong>; новые версии также умеют читать AGENTS.md, но загрузка зависит от версии и существующих файлов инструкций. Наличие обоих файлов ещё не означает, что Клод прочитал оба</p>
+  <p>Следующий большой запрос отправь <strong>только в чат Клода</strong>: скопируй блок, вставь в его поле сообщения и нажми стрелку отправки. Клод должен сохранить действующие правила проекта и подключить общую версию, а не заменить их пустым шаблоном</p>
+  <h3>Промпт №1: проверь и закончи настройку</h3>
+  <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-setup">Скопировать</button><pre id="prompt-setup">Помоги настроить Claude Code и Codex в одном окне VS Code, с двумя видимыми чатами и одной папкой проекта.
+
+Сначала проверь, что уже установлено. Не переустанавливай рабочие расширения, не переноси проект и не создавай его копию.
+
+Если нужна моя помощь в интерфейсе, объясняй по одному шагу: что нажать, где и что должно появиться. Мне нужны оба поля ввода одновременно.
+
+Проверь общие правила проекта. Codex должен читать AGENTS.md. Определи, откуда твоя версия Claude Code загружает инструкции. Сохрани существующие правила и настрой чтение общей версии без двух расходящихся копий. Если ты уже загружаешь AGENTS.md напрямую, второй импорт не добавляй. Если используется CLAUDE.md, проверь подключение общей версии через @AGENTS.md и учти особенности установленной версии. Не перезаписывай существующие файлы вслепую.
+
+Если в проекте уже настроены рабочие инструкции и память, сохрани их и проверь, что оба помощника могут прочитать нужные файлы. Не требуй установки дополнительной системы для этой настройки.
+
+В конце покажи путь проекта, какие файлы инструкций читает каждый агент, одно конкретное правило из каждого и что осталось сделать руками. Одного ответа «готово» недостаточно</pre></div>
+  <div class="warn-card"><p><strong>Общие файлы не объединяют переписки</strong><br>Кодекс не узнает автоматически, что ты сказала Клоду в его чате. Решения, стиль, текущую задачу и принятый результат сохраняй в файлы проекта. Тогда второй помощник сможет их прочитать</p></div>
+  <p class="result"><strong>Результат:</strong> оба агента называют один путь и показывают, откуда прочитали общие правила</p>
+</section>
+
+<section class="content-section" id="delegate">
+  <h2>5. Поручи Клоду запускать Кодекс</h2>
+  <p>Если тебе достаточно чатов и файлов в одном окне, основная настройка закончена. Следующие два шага нужны, чтобы Клод сам запускал Кодекс. Их можно выполнить и без общей оболочки: важны установленный Codex CLI, вход в него и возможность Клода запускать команды в нужной папке</p>
+  <p>Теперь можно говорить о задаче только с Клодом. Он составит задание, запустит Кодекс, прочитает результат и проверит его. Для этого используется <strong>codex exec</strong> - запуск Codex CLI без отдельного диалога</p>
+  <p><strong>Codex CLI</strong> - отдельная программа, которой дают задания командой. Она запускается в терминале: области для выполнения команд компьютера. Расширение с видимым чатом и CLI устанавливаются отдельно</p>
+  <p>Самостоятельно открывать терминал и вставлять команды из большого запроса ниже не нужно. Нажми <strong>Скопировать</strong> у промпта №2, вставь весь текст в <strong>поле сообщения Клоду</strong> и отправь. Клод проверит наличие CLI, при необходимости выполнит установку по <a href="https://developers.openai.com/codex/cli/">официальной инструкции OpenAI</a> и объяснит твои действия для входа. Если нужно подтвердить вход в браузере, это делаешь ты</p>
+  <div class="warn-card"><p><strong>Задание не появится само во втором открытом чате</strong><br>Запуск через codex exec - отдельная сессия CLI. Видимая панель Codex остаётся для самостоятельной работы. Результат запущенной задачи Клод получает из вывода команды и файлов проекта</p></div>
+  <h3>Промпт №2: раздели работу и проверь результат</h3>
+  <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-delegate">Скопировать</button><pre id="prompt-delegate">Теперь сам передавай Codex подходящие части моих задач через codex exec. Я обсуждаю задачу с тобой, вручную переносить сообщения между чатами не хочу.
+
+Сначала проверь codex --version и codex login status. Если программы нет, установи официальный Codex CLI. Если вход не выполнен, запусти codex login и объясни, что мне сделать в браузере. После входа снова проверь codex login status. Данные авторизации не показывай.
+
+Перед первой работой предложи, что поручишь Codex, что оставишь себе и как проверишь результат. Передавай ему точное задание: цель, разрешённые файлы, ограничения и проверку. Запускай в нашей папке проекта.
+
+Начни с небольшой задачи только на чтение. Запусти Codex с --sandbox read-only: пусть перечислит файлы в корне, укажет прочитанные инструкции проекта и одно правило из каждого файла. Покажи команду запуска и настоящий ответ.
+
+Для задач с правкой файлов используй разрешение workspace-write только в нужной рабочей папке. Не отключай защиту и не обходи запросы разрешений. Не редактируй одновременно с Codex одни и те же файлы.
+
+В каждом задании запрещай Codex делать git add, коммиты, push, удалять файлы или публиковать результат без моего отдельного поручения.
+
+После выполнения сам открой результат и проведи подходящую проверку. Если результат не соответствует заданию, исправь или забери работу обратно. Покажи мне итог и доказательство проверки</pre></div>
+  <p>Подходящие поручения: проверить ссылки, собрать HTML по готовому тексту, обработать набор файлов, написать скрипт по точному заданию. Замысел и критерии качества остаются у Клода. Такое разделение - твоя настройка работы, а не обязательная роль каждой модели</p>
+  <p class="result"><strong>Результат:</strong> Клод действительно запустил Codex CLI и показал его ответ. Обещание «буду делегировать» без запуска настройку не подтверждает</p>
+</section>
+
+<section class="content-section" id="remember">
+  <h2>6. Сохрани схему для следующих сессий</h2>
+  <p>Если договориться только в переписке, в новом чате придётся напоминать. Запиши в правила проекта, когда Клод должен поручать работу Кодексу и как проверять его ответ. Тогда в новом чате эту договорённость можно прочитать из файла</p>
+  <p>Этот запрос тоже отправь <strong>только Клоду</strong>, в его обычное поле сообщения</p>
+  <h3>Промпт №3: запиши постоянный алгоритм</h3>
+  <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-memory">Скопировать</button><pre id="prompt-memory">Сохрани нашу схему работы с Codex для следующих сессий в этой папке проекта.
+
+Правило: перед объёмной задачей определить, какую часть можно передать Codex с точным заданием. Маленькую или неделимую задачу делать самому. Codex запускать через codex exec в папке проекта, его результат проверять до показа мне. Не менять параллельно одни и те же файлы. В заданиях сохранять запрет на git add, коммит, push, удаление и публикацию без моего поручения.
+
+Используй действующие инструкции и память проекта. Общую схему запиши в AGENTS.md и проверь, что ты тоже её читаешь. Если есть memory/MEMORY.md, добавь ссылку на подробное правило. Не удаляй прежние инструкции и не создавай вторую расходящуюся копию.
+
+Покажи точные места записи. Затем объясни, как проверить правило в новом чате. Не обещай «навсегда»: настройка должна подтверждаться чтением файлов после перезапуска.
+
+Если предлагаешь хук-напоминание в Claude Code, отдельно объясни его событие и действие. Он не заменяет проверку результата. Существующие хуки и настройки разрешений не меняй</pre></div>
+  <p>Нажми <strong>плюс в кружке в верхней части чата Клода</strong>, чтобы начать новый разговор в той же папке. В нём попроси: <strong>«Прочитай правила проекта. Как ты будешь распределять работу с Codex? Пока ничего не запускай»</strong>. Сверь ответ с сохранённым алгоритмом</p>
+  <p class="result"><strong>Результат:</strong> новый чат прочитал сохранённую схему. Ты видишь, что настройка пережила смену разговора</p>
+</section>
+
+<section class="content-section" id="finish">
+  <h2>Проверь, что всё действительно связано</h2>
+  <div class="check-panel"><ul>
+    <li>Оба чата видны в одном окне VS Code</li>
+    <li>Оба агента называют одну и ту же локальную папку проекта</li>
+    <li>Оба прочитали общие правила и могут назвать их источник</li>
+    <li>Если включена передача задач, Клод показал настоящий результат запуска Codex CLI</li>
+    <li>Если сохранял передачу задач, новый чат прочитал алгоритм из файлов проекта</li>
+  </ul></div>
+  <p>Если первые три пункта выполнены, оба помощника работают в одной папке и читают общие правила. Передача задач подтверждена отдельно: Клод показал команду запуска и настоящий ответ Кодекса. Чтобы не переносить объяснения из чата в чат, сохраняй новые решения там же, в проекте</p>
+</section>
+
+<section class="content-section" id="sources">
+  <h2>Официальные инструкции</h2>
+  <ul class="sources">
+    <li><a href="https://code.claude.com/docs/en/vs-code">Anthropic: расширение Claude Code в VS Code</a></li>
+    <li><a href="https://developers.openai.com/codex/ide/">OpenAI: расширение Codex</a></li>
+    <li><a href="https://code.visualstudio.com/docs/configure/custom-layout">Microsoft: расположение областей редактора и перемещение вкладок</a></li>
+    <li><a href="https://code.visualstudio.com/docs/editing/workspaces/workspace-trust">Microsoft: доверие к рабочей папке</a></li>
+    <li><a href="https://developers.openai.com/codex/auth/">OpenAI: вход через ChatGPT и API-ключ</a></li>
+    <li><a href="https://developers.openai.com/codex/guides/agents-md/">OpenAI: инструкции в AGENTS.md</a></li>
+    <li><a href="https://code.claude.com/docs/en/memory#agentsmd">Anthropic: загрузка AGENTS.md и общие инструкции</a></li>
+    <li><a href="https://developers.openai.com/codex/noninteractive/">OpenAI: codex exec и разрешения на работу</a></li>
+    <li><a href="https://code.claude.com/docs/en/hooks-guide">Anthropic: хуки и события</a></li>
+  </ul>
+</section>
+
+<section class="content-section" id="help">
+  <h2>Если запутался на любом шаге</h2>
+  <p>Если не знаешь, куда нажать, как настроить или что делать дальше, напиши Клоду обычными человеческими словами. Скопируй запрос в его чат и замени текст в квадратных скобках на свою задачу и место, где остановился</p>
+  <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-help">Скопировать</button><pre id="prompt-help">Я новичок и запутался. Хочу [что именно хочу сделать]. Сейчас я [где нахожусь и что уже сделал], но не понимаю [что не получается или куда двигаться дальше].
+
+Помоги мне разобраться и проведи по шагам обычным человеческим языком. Объясняй, куда нажать, что написать и что должно появиться. Давай по одному шагу и жди моего ответа. Если тебе не хватает информации, сначала спроси</pre></div>
+</section>
+
+<section class="cta" aria-label="Следующий шаг">
+  <p class="section-label">ИИ-Лагерь</p>
+  <h2>Сайт, бот и контент-завод для твоего дела</h2>
+  <p>В ИИ-Лагере с Claude Code и Codex собирают конкретные части своего проекта: продающий сайт под свой оффер, приём оплат, бота с цепочкой сообщений для клиентов и контент-завод для подготовки роликов и каруселей</p>
+  <p>Первые три дня бесплатные, записи можно смотреть в своём темпе. Выбери задачу для своего дела и начни собирать её вместе с ними</p>
+  <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Собрать свою систему в ИИ-Лагере</a>
+</section>
+
+</article></main><aside class="related-plaque" aria-label="Дальше по теме">
+      <p class="plaque-label">Дальше по теме</p>
+      <h2>Шесть скиллов для работы с ИИ</h2>
+      <p><a href="../shest-skillov/"><span class="title">Дай помощникам готовые инструменты →</span><span class="why">Когда оба агента подключены, можно добавить инструменты под свои задачи</span></a></p>
+    </aside></div>  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
+    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+    <div class="viewer-scroll"><img alt=""></div>
+    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+  </div>
+  <script>
+    var themeButton=document.querySelector('.theme-toggle');
+    var savedTheme=localStorage.getItem('guide-theme')||'light';
+    document.documentElement.setAttribute('data-theme',savedTheme);
+    themeButton.textContent=savedTheme==='dark'?'☀':'◐';
+    themeButton.addEventListener('click',function(){var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);localStorage.setItem('guide-theme',next);themeButton.textContent=next==='dark'?'☀':'◐'});
+    document.querySelectorAll('[data-copy-target]').forEach(function(button){button.addEventListener('click',function(){var value=document.getElementById(button.dataset.copyTarget).textContent;function done(){clearTimeout(button.copyTimer);button.textContent='✓ Скопировано';button.classList.add('is-copied');button.copyTimer=setTimeout(function(){button.textContent='Скопировать';button.classList.remove('is-copied')},1800)}function fallback(){var field=document.createElement('textarea');field.value=value;field.setAttribute('readonly','');field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();if(document.execCommand('copy'))done();field.remove()}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(value).then(done).catch(fallback)}else fallback()})});
+    // "Открыть крупнее": скрины в примерах на телефоне ужимаются до 18-29%,
+    // кнопка открывает картинку во весь экран
+    (function () {
+      var viewer = document.getElementById("viewer");
+      if (!viewer) return;
+      var big = viewer.querySelector("img");
+      var lastFocused = null;
+      function open(src, alt) {
+        lastFocused = document.activeElement;
+        big.src = src; big.alt = alt || "";
+        big.onload = function () {
+          var box = viewer.querySelector(".viewer-scroll");
+          var room = viewer.clientWidth - 44;
+          // цель - читаемый текст, а не максимальный размер. Показываем картинку
+          // примерно вдвое крупнее, чем она стоит в тексте, но не больше её
+          // натуральной величины и не больше двух экранов по ширине
+          var inPage = document.querySelector('.shot img[src$="' + src.split("/").pop() + '"]');
+          var pageWidth = inPage ? inPage.getBoundingClientRect().width : room;
+          var target = Math.min(pageWidth * 2.2, big.naturalWidth);
+          // на большом экране картинка всегда влезает целиком, без прокрутки.
+          // На узком телефоне ужать её - значит ничего не увеличить, поэтому
+          // там разрешаем выйти за экран и прокручивать пальцем
+          var wide = viewer.clientWidth >= 860;
+          target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+          // и по высоте: картинка целиком должна помещаться на экран
+          if (wide) {
+            var maxH = viewer.clientHeight - 96;
+            var byHeight = maxH * (big.naturalWidth / big.naturalHeight);
+            target = Math.min(target, byHeight);
+          }
+          big.style.width = Math.round(target) + "px";
+          viewer.classList.toggle("fits", target <= room);
+          box.scrollLeft = (target - box.clientWidth) / 2;
+          var hint = viewer.querySelector(".viewer-hint");
+          var scrolls = box.scrollWidth > box.clientWidth + 2;
+          hint.textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+        };
+        viewer.setAttribute("open", "");
+        document.body.style.overflow = "hidden";
+        viewer.querySelector(".viewer-close").focus();
+      }
+      function close() {
+        viewer.removeAttribute("open");
+        document.body.style.overflow = "";
+        big.removeAttribute("src");
+        big.style.width = "";
+        if (lastFocused) lastFocused.focus();
+      }
+      document.querySelectorAll(".shot img").forEach(function (img) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "zoom";
+        button.textContent = "Открыть крупнее";
+        button.addEventListener("click", function () { open(img.currentSrc || img.src, img.alt); });
+        img.parentElement.appendChild(button);
+      });
+      viewer.addEventListener("click", function (event) {
+        if (event.target === viewer || event.target.classList.contains("viewer-close")) close();
+      });
+      addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && viewer.hasAttribute("open")) close();
+      });
+    })();
+    var links=Array.from(document.querySelectorAll('.toc a,.mobile-toc a'));var sections=links.map(function(link){return document.querySelector(link.getAttribute('href'))}).filter(Boolean);function updateReadingState(){var scrollable=document.documentElement.scrollHeight-window.innerHeight;document.querySelector('.progress').style.width=(scrollable>0?window.scrollY/scrollable*100:0)+'%';var current=sections[0];sections.forEach(function(section){if(section.getBoundingClientRect().top<=120)current=section});if(scrollable>0&&window.scrollY>=scrollable-2)current=sections[sections.length-1];links.forEach(function(link){link.classList.toggle('active',link.getAttribute('href')==='#'+current.id)})}updateReadingState();addEventListener('scroll',updateReadingState,{passive:true});
+  </script>
+</body>
+</html>
