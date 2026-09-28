@@ -1,0 +1,793 @@
+<!-- generated-new-draft-page -->
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Полный маршрут работы с Claude: вход и 403, оплата, личный VPN на VPS, Claude Code on the web и CloudCLI, сохранение данных и апелляция">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Claude из России: ошибки доступа, свой VPS, облако и восстановление аккаунта">
+<meta property="og:description" content="Полный маршрут работы с Claude: вход и 403, оплата, личный VPN на VPS, Claude Code on the web и CloudCLI, сохранение данных и апелляция"><meta name="theme-color" content="#F8F7F2">
+<title>Claude из России: ошибки доступа, свой VPS, облако и восстановление аккаунта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+<style>
+
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .route-note { margin: 31px 0 34px; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted) }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+/* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
+       .info-card - полезное уточнение, фон без полосы
+       .warn-card - оговорка или предупреждение, фон плюс оранжевая полоса
+       .check-panel - читатель отмечает пункты, поэтому БЕЛАЯ карточка */
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .info-card p, .warn-card p { margin: 0 }
+    /* абзац после блока слипался с ним: у блоков margin-bottom 0,
+       а у p margin-top 0. Зазор был 0 px при 25 px между абзацами */
+    .info-card + p, .warn-card + p, .check-panel + p { margin-top: 25px }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: min(100%, 650px) }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--emerald); color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    .shot .zoom:hover { background: var(--accent) }
+    /* без мыши кнопку не навести, поэтому на телефоне она видна всегда.
+       Условие продублировано по ширине: hover:none не срабатывает в эмуляции */
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    /* полноэкранный просмотр */
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    /* в окне картинка показывается в НАТУРАЛЬНОМ размере с прокруткой: на телефоне
+       ужать её в экран - значит не увеличить ничего. Прокручиваем пальцем */
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    h3 + .prompt-box { margin-top: 12px }
+    .prompt-box + h3 { margin-top: 46px }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: #F28A68 }
+    .copy-button:active { background: #FFD1BF; box-shadow: 0 1px 0 #8F371F; transform: translateY(2px) }
+    .copy-button.is-copied { background: #FFD1BF; box-shadow: 0 0 0 3px rgba(255, 209, 191, .34); transform: translateY(1px) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 900 }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    /* карточка должна читаться как ссылка, а не как серый блок текста.
+       text-decoration НАСЛЕДУЕТСЯ, поэтому подчёркиваем только .title */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+    @media (min-width: 861px) and (max-width: 1199px) { .toc { width: 240px; margin-left: 0 } }
+    @media (min-width: 1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+    @media (min-width: 1200px) and (max-width: 1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+  
+    .toc-group { margin-top: 16px; padding-top: 11px; border-top: 1px solid var(--line) }
+    .toc-group-title { margin: 0 0 5px; color: var(--emerald); font: 750 11px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase }
+    .toc-group a { padding-top: 6px; padding-bottom: 6px }
+    .mobile-toc .toc-group { margin-top: 8px }
+    .mobile-toc .toc-group a { display: block; padding: 6px 0 6px 12px }
+    .list-panel { padding: 0; border: 0; background: transparent }
+    .list-panel > .info-title { display: block; margin: 0 0 12px; font: 750 19px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .list-panel > ul { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none }
+    .list-panel > ul > li { margin: 0; padding: 16px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white); font-size: 17px; line-height: 1.42 }
+    .list-panel > ul > li strong { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .case-list { counter-reset: situation }
+    .case-list > li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 14px; counter-increment: situation }
+    .case-list > li::before { content: counter(situation, decimal-leading-zero); padding-top: 2px; color: var(--accent-dark); font: 750 12px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .case-title { display: block; color: var(--emerald); font: 750 17px/1.32 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .case-action { display: block; margin-top: 6px; font: 500 17px/1.4 Spectral, Georgia, serif }
+    .case-list code { overflow-wrap: anywhere; font-size: .86em }
+    .content-section > ul:not(.sources) { display: grid; gap: 12px; margin: 18px 0 0; padding: 0; list-style: none }
+    .content-section > ul:not(.sources) > li { padding: 14px 17px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); line-height: 1.42 }
+    .content-section > ol > li { padding: 10px 0; line-height: 1.46 }
+    .content-section > ol > li + li { border-top: 1px solid var(--line) }
+    #network > h3, #save-now > h3 { margin-top:32px; padding-top:24px; border-top:1px solid var(--line) }
+    .content-section .warn-card, .content-section .info-card, .content-section .check-panel:not(.list-panel) { line-height: 1.48 }
+    .source-note { margin: 20px 0 24px; color: var(--muted); font-size: 16.5px; line-height: 1.5 }
+    .content-section > .result { margin: 26px 0 28px; font-size: 17.5px; line-height: 1.5 }
+    .prompt-box.command-box { margin: 12px 0 17px; padding: 48px 18px 16px; border-radius: 10px }
+    .command-box .copy-button { top: 9px; right: 9px; min-width: 110px; min-height: 30px; font-size: 12px }
+    .command-caption { display: block; margin: 15px 0 5px; color: var(--emerald); font: 700 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    li > .command-caption:first-of-type { margin-top: 12px }
+    .route-map { margin: 28px 0 38px }
+    .route-map-intro { margin: 0 0 17px; font-size: 17px; line-height: 1.47 }
+    .route-map-intro strong { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px }
+    .route-card { display: flex; flex-direction: column; min-width: 0; padding: 0 0 25px; border-bottom: 1px solid var(--line) }
+    .route-kicker { margin: 0 0 8px; color: var(--accent-dark); font: 750 12px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase }
+    .route-card h3 { margin: 0 0 13px; font: 750 21px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-card-copy { margin: 13px 0 15px; font-size: 16px; line-height: 1.43 }
+    .route-illustration-wrap.shot { width: 100%; max-width: none }
+    .route-illustration-wrap img.route-illustration { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--paper-2) }
+    .route-card-link { display: block; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); color: var(--emerald-mid); font: 650 13px/1.42 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration-color: var(--accent); text-underline-offset: 3px }
+    .route-card-link:hover { color: var(--accent-dark) }
+    .route-map figcaption { margin-top: 13px; padding: 11px 13px; border-left: 3px solid var(--accent); border-radius: 0 7px 7px 0; background: var(--paper-2); font-size: 14px; line-height: 1.45 }
+    .route-map figcaption strong { color: var(--emerald) }
+    .cost-table-wrap { margin: 22px 0 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--white); -webkit-overflow-scrolling: touch }
+    .cost-table { width: 100%; min-width: 690px; border-collapse: separate; border-spacing: 0; color: var(--emerald); font: 14px/1.38 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cost-table th, .cost-table td { width: 22%; padding: 13px 12px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left }
+    .cost-table th:first-child { width: 34% }
+    .cost-table thead th { background: var(--emerald); color: var(--paper); font-weight: 750 }
+    .cost-table tbody th { font-weight: 750; background: var(--paper-2) }
+    .cost-table td strong, .cost-table td span { display: block }
+    .cost-table td strong { font-weight: 750 }
+    .cost-table td span { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.35 }
+    .cost-table tbody tr:last-child th, .cost-table tbody tr:last-child td { border-bottom: 0 }
+    .cost-table-total th, .cost-table-total td { background: var(--sage-note) }
+    .cost-table-total td strong { color: var(--emerald); font-size: 17px }
+    .cost-table-scroll { display: none; margin: 7px 0 16px; color: var(--muted); font: 600 12px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cost-table-note { margin: 14px 0 0; color: var(--muted); font-size: 14px; line-height: 1.52 }
+    #costs .check-panel { margin-top: 18px }
+    @media (max-width: 760px) { .cost-table-scroll { display: block } }
+    @media (max-width: 860px) {
+      .list-panel > ul { gap: 11px }
+      .list-panel > ul > li { padding: 13px 14px; font-size: 16px }
+      .case-list > li { grid-template-columns: 25px minmax(0, 1fr); gap: 10px }
+      .case-title { font-size: 16px }
+      .case-action { font-size: 16px }
+    }
+  </style></head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div>
+<div class="header-actions"><div class="handout-title">Доступ и блокировка Claude</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">На ИИ-Лагерь</a>
+</div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p>
+<a href="#nachalo">К началу статьи</a>
+<div class="toc-group"><p class="toc-group-title">01 · Доступ, ошибки и блокировка</p>
+<a href="#start">Выбрать свой случай</a>
+<a href="#login">Повторный вход</a>
+<a href="#network">Ошибка 403 и регион</a>
+<a href="#payment">Отказ оплаты</a>
+<a href="#save-now">Сохранить данные</a>
+<a href="#registration">Причины ограничений</a>
+<a href="#appeal">Апелляция</a></div>
+<div class="toc-group"><p class="toc-group-title">02 · Выбрать маршрут и VPN</p>
+<a href="#paths-map">Сравнить три способа</a>
+<a href="#costs">Сравнить расходы</a>
+<a href="#server">Настроить VPN на VPS</a></div>
+<div class="toc-group"><p class="toc-group-title">03 · Облако и CloudCLI</p>
+<a href="#remote">Где хранить проект</a>
+<a href="#anthropic-cloud">Claude Code в облаке Anthropic</a>
+<a href="#cloudcli">Claude Code на своём VPS</a></div>
+<div class="toc-group"><p class="toc-group-title">04 · После решения</p>
+<a href="#after">Проверить результат</a>
+<a href="#faq">Частые вопросы</a>
+<a href="#sources">Официальные источники</a></div>
+</nav><main><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне">
+<a href="#nachalo">К началу статьи</a>
+<div class="toc-group"><p class="toc-group-title">01 · Доступ, ошибки и блокировка</p>
+<a href="#start">Выбрать свой случай</a>
+<a href="#login">Повторный вход</a>
+<a href="#network">Ошибка 403 и регион</a>
+<a href="#payment">Отказ оплаты</a>
+<a href="#save-now">Сохранить данные</a>
+<a href="#registration">Причины ограничений</a>
+<a href="#appeal">Апелляция</a></div>
+<div class="toc-group"><p class="toc-group-title">02 · Выбрать маршрут и VPN</p>
+<a href="#paths-map">Сравнить три способа</a>
+<a href="#costs">Сравнить расходы</a>
+<a href="#server">Настроить VPN на VPS</a></div>
+<div class="toc-group"><p class="toc-group-title">03 · Облако и CloudCLI</p>
+<a href="#remote">Где хранить проект</a>
+<a href="#anthropic-cloud">Claude Code в облаке Anthropic</a>
+<a href="#cloudcli">Claude Code на своём VPS</a></div>
+<div class="toc-group"><p class="toc-group-title">04 · После решения</p>
+<a href="#after">Проверить результат</a>
+<a href="#faq">Частые вопросы</a>
+<a href="#sources">Официальные источники</a></div>
+</nav></details><article>
+<header id="nachalo"><p class="eyebrow">Claude.ai · доступ из России</p><h1>Claude из России: ошибки доступа, свой VPS, облако и восстановление аккаунта</h1><p class="meta">ОБНОВЛЕНО 28 СЕНТЯБРЯ 2026</p><p class="lead">Claude не открывается, не принимает оплату или внезапно просит войти снова. А может, он работает, но тебе нужен собственный сервер или доступ к проекту с другого устройства. Найди свой случай и пройди только его маршрут: у сетевой ошибки, отключённого аккаунта и удалённой работы разные решения</p></header>
+<div class="route-note"><p><strong class="info-title">Начинаешь с первого подключения?</strong> Открой <a href="../podklyuchenie-iz-rossii/">базовую инструкцию по входу и проверке VPN</a>. Если на экране уже ошибка или ограничение аккаунта либо хочешь понять, зачем нужны собственный VPS и удалённая работа, выбери свою ситуацию ниже</p></div>
+
+<section class="content-section" id="start"><p class="section-label">Первый шаг</p><h2>Выбери свою ситуацию</h2>
+<p>Похожие слова «нет доступа» скрывают разные ситуации. Не меняй сеть и не создавай новый аккаунт, пока не выяснишь, какая из них произошла</p>
+<div class="check-panel list-panel choice-panel"><p class="info-title">Что произошло у тебя?</p>
+<ul class="case-list">
+<li><div><strong class="case-title">Claude просит войти или не присылает письмо</strong><span class="case-action">Начни с <a href="#login">восстановления входа</a> в прежний аккаунт</span></div></li>
+<li><div><strong class="case-title">Появилась форма апелляции или сообщение об отключении аккаунта</strong><span class="case-action">Сначала <a href="#save-now">сохрани данные</a>, затем <a href="#appeal">попроси пересмотреть решение</a></span></div></li>
+<li><div><strong class="case-title">Сайт или Claude Code показывает <code>403</code> либо <code>App unavailable in region</code></strong><span class="case-action">Проверь <a href="#network">доступность сервиса и сетевой маршрут</a></span></div></li>
+<li><div><strong class="case-title">Не проходит карта или не продлевается подписка</strong><span class="case-action">Начни с <a href="#payment">проверки платежа</a></span></div></li>
+<li><div><strong class="case-title">В сообщении указан срок сброса лимита</strong><span class="case-action">Это ограничение использования. Дождись указанного времени или посмотри лимиты тарифа</span></div></li>
+<li><div><strong class="case-title">Claude Code пишет <code>This organization has been disabled</code>, а сайт работает</strong><span class="case-action">Проверь <a href="#organization">способ входа в Claude Code</a>: он мог подключиться к другой API-организации</span></div></li>
+<li><div><strong class="case-title">Аккаунт работает, но нужен свой сервер или работа без локального компьютера</strong><span class="case-action">Сравни <a href="#server">VPS с AmneziaVPN</a>, <a href="#remote">облако Anthropic и CloudCLI</a></span></div></li>
+</ul>
+</div>
+<div class="warn-card"><p><strong class="info-title">Внимание.</strong> Для читателя из России есть условие, которое важно знать до любой настройки. России нет в <a href="https://www.anthropic.com/supported-countries">официальном списке поддерживаемых стран Anthropic</a>. В <a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals">правилах об ограничениях</a> компания относит создание аккаунта из неподдерживаемого региона к возможным причинам отключения. Настройка сети не меняет правила для владельца аккаунта и не гарантирует доступ</p></div>
+</section>
+
+<section class="content-section" id="login"><p class="section-label">Вход в прежний аккаунт</p><h2>Если Claude снова просит войти</h2>
+<p class="source-note">Обычный запрос входа ещё не означает блокировку. По <a href="https://support.claude.com/en/articles/10310342-how-do-i-log-out-of-all-active-sessions">справке Anthropic</a>, сессия браузера заканчивается после 28 дней бездействия. Вход потребуется также после очистки данных браузера или на новом устройстве</p>
+<ol>
+<li>Открой <a href="https://claude.ai/">claude.ai</a> и используй тот же способ входа, что раньше: <code>Continue with Google</code> с прежним Google-аккаунтом или <code>Continue with email</code> с прежним адресом</li>
+<li>При входе по почте открой последнее письмо с темой <code>Secure link to log in to Claude.ai</code>. Если письмо открыто на другом устройстве, введи показанный код там, где запущен вход</li>
+<li>Если письма нет, проверь спам и фильтры почты для <code>mail.anthropic.com</code>. Для рабочей почты попроси администратора проверить карантин. Не запрашивай много новых писем подряд: используй последнее полученное</li>
+</ol>
+<figure><div class="shot"><img src="assets/claude-login-google.png" alt="Экран входа Claude с кнопкой Continue with Google и полем для входа по почте" loading="lazy"></div><figcaption>Если прежний вход был через Google, нажми Continue with Google и выбери тот же аккаунт. Если вход был по почте, введи прежний адрес в поле ниже</figcaption></figure>
+<p class="result"><strong>Проверка результата:</strong> после входа должны появиться прежние чаты</p>
+<p>Если история пуста, проверь, не выбран ли другой Google-аккаунт или адрес почты. Если вместо чатов открылась форма пересмотра, переходи к разделу о <a href="#save-now">данных заблокированного аккаунта</a></p>
+<h3 id="organization">Если ошибка появилась только в Claude Code</h3>
+<p>Claude Code может работать через личную подписку или через API-организацию. Сообщение <code>This organization has been disabled</code> относится к организации, к которой подключена программа; оно само по себе не доказывает блокировку личного аккаунта на claude.ai. В открытом Claude Code введи команду и проверь, каким способом выполнен вход:</p>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="claude-status-check">Скопировать</button><pre id="claude-status-check">/status</pre></div>
+<p>Если у тебя на Mac или Linux осталась переменная <code>ANTHROPIC_API_KEY</code> от старого проекта, она может направлять запросы в прежнюю API-организацию. Если ключ тебе больше не нужен в этом терминале, временно убери его и запусти Claude Code снова. Команда действует только в текущей сессии терминала</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="claude-reset-api-key">Скопировать</button><pre id="claude-reset-api-key">unset ANTHROPIC_API_KEY
+claude</pre></div>
+<p>Если организация принадлежит работодателю, её статус и права участников уточняй у администратора. Если после проверки способа входа сайт тоже показывает блокировку личного аккаунта, действия уже другие - сначала сохрани данные, затем подай апелляцию</p>
+</section>
+
+<section class="content-section" id="network"><p class="section-label">Проверка соединения</p><h2>Если видишь 403 или сообщение о регионе</h2>
+<div class="info-card"><p><strong class="info-title">Что означает 403.</strong> Ошибка <code>403</code> означает, что запрос отклонён, но по одному коду нельзя установить причину. Начни с текста рядом с кодом и места, где он появился. Форма апелляции после входа указывает на аккаунт; <code>App unavailable in region</code> указывает на доступность региона; ошибка только в Claude Code может относиться к его способу подключения</p></div>
+<h3>Проверь по порядку</h3>
+<ol>
+<li>Проверь <a href="https://status.claude.com/">статус Claude</a>. Если у сервиса сбой, дождись его устранения и не перестраивай свою сеть</li>
+<li>Сравни поведение сайта и Claude Code. Если сайт открывается, а терминал получает 403, выясни, использует ли VPN полное туннелирование для всего компьютера. Прокси только в браузере не проверяет маршрут программы в терминале</li>
+<li>Если подключение идёт через VPN, открой настройки приложения и найди режим для всей системы или полный туннель. Затем в том же терминале, где запускаешь Claude Code, проверь внешний IP:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="network-terminal-ip">Скопировать</button><pre id="network-terminal-ip">curl -4 https://api.ipify.org</pre></div>
+Сравни результат с адресом VPN. Сайт проверки IP в браузере проверяет только браузерный путь; терминальная команда даёт отдельную проверку, хотя настройки самой программы тоже могут влиять на её соединение</li>
+<li>Если надпись прямо говорит о регионе, сверь страну использования и условия Anthropic с <a href="https://www.anthropic.com/supported-countries">официальным списком</a>. Если страна не поддерживается, официального маршрута для личного аккаунта Claude из неё нет. Сохрани доступную работу и выбери сервис, доступный по его правилам</li>
+</ol>
+<div class="info-card"><p><strong class="info-title">Не меняй всё сразу.</strong> Если после каждой ошибки переключать страну и сервер, будет непонятно, какая настройка изменила результат. Автоподключение и Kill Switch помогают сохранить выбранный маршрут при запуске и обрыве соединения, но не защищают от решения Anthropic по аккаунту</p></div>
+<h3>Куда идти после проверки</h3>
+<p>Даже если VPN был один и тот же и страна не менялась, внезапная ошибка ещё не доказывает блокировку. Ориентируйся на точную надпись на экране</p>
+<ul>
+<li><strong>Появилась форма пересмотра:</strong> сначала проверь <a href="#save-now">сохранение данных</a>, затем подай апелляцию</li>
+<li><strong>Страна поддерживается, а проблема в соединении:</strong> смотри <a href="#server">вариант с собственным сервером</a> и его ограничения</li>
+<li><strong>Сообщение говорит о неподдерживаемом регионе:</strong> собственный сервер не решает вопрос права доступа</li>
+</ul>
+</section>
+
+
+
+<section class="content-section" id="payment"><p class="section-label">Подписка и карта</p><h2>Если карта отклонена или подписка не продлилась</h2>
+<p>Когда платный тариф не включился или пропал после продления, легко принять это за блокировку. Сначала посмотри на точное сообщение в платёжной форме и уведомление банка: отказ списания означает проблему оплаты, а не сам по себе отключение аккаунта</p>
+<div class="check-panel list-panel"><p class="info-title">Возможная причина - что сделать</p><ul>
+<li><strong>Ошибка в данных карты:</strong> проверь номер, срок, CVC и платёжный адрес. Адрес должен соответствовать данным у банка, а страна выпуска карты - условиям оплаты Anthropic</li>
+<li><strong>Банк остановил операцию:</strong> проверь баланс, международные платежи, лимит и запрос подтверждения. Точную причину отказа и возможность повторного списания уточняй в банке</li>
+<li><strong>Не прошло продление:</strong> в своём аккаунте открой статус подписки и способ оплаты; проверь, не истёк ли срок карты</li>
+</ul></div>
+<p class="source-note"><a href="https://support.claude.com/en/articles/9402418-why-was-my-card-declined">Справка Anthropic</a> отдельно называет неподдерживаемую страну выпуска карты, несовпадение платёжного адреса, недостаток средств и неподтверждённую операцию</p>
+<p>VPN не меняет данные банка. Виртуальная карта, её пополнение у посредника и списание за Claude - разные операции: успешное пополнение не гарантирует оплату подписки</p>
+<p class="result"><strong>Проверка результата:</strong> тариф появился в Claude, а списание видно в банке</p>
+<p>Не повторяй одну и ту же отклонённую попытку много раз. Если банк подтверждает успешную операцию, а тариф не появился, обратись в <a href="https://support.claude.com/en/articles/9015913-how-to-get-support">поддержку Anthropic</a> с данными платежа. Если аккаунт куплен у посредника, вопрос возврата или замены решай с продавцом по условиям покупки; вопрос блокировки аккаунта идёт через отдельную апелляцию</p>
+</section>
+
+<section class="content-section" id="save-now"><p class="section-label">Если аккаунт отключён</p><h2>Сначала сохрани доступную работу</h2>
+<p>При отключении аккаунта главное сейчас - не потерять переписки и файлы проекта. Апелляция может занять время и не гарантирует возврата доступа, поэтому сначала сохрани то, что ещё можно открыть</p>
+<h3>Запроси экспорт переписок</h3>
+<p class="source-note"><a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals">Anthropic допускает</a> вход в отключённый личный аккаунт Free, Pro или Max ради выгрузки или удаления данных. Доступный объём экспорта зависит от ограничения</p>
+<p>Войди в прежний аккаунт и посмотри, предлагает ли экран ограничения экспорт. Если обычное меню доступно, на сайте или в Claude Desktop открой значок профиля слева внизу, затем <code>Settings → Privacy → Export data</code> по <a href="https://support.claude.com/en/articles/9450526-export-your-claude-data">официальной инструкции</a></p>
+<h3>Проверь полученный архив</h3>
+<p>Ссылка для скачивания придёт на почту аккаунта после подготовки архива. Войди под тем же аккаунтом, скачай архив и открой файл. Ссылка действует 24 часа после отправки письма</p>
+<p class="source-note">С телефона в приложении iOS или Android запросить экспорт нельзя. Для Team или Enterprise самостоятельный экспорт данных организации доступен её Primary Owner</p>
+<div class="check-panel"><p><strong class="info-title">Сохрани и переписки, и проект.</strong> Работа Claude Code с локальными файлами может уже лежать на твоём компьютере. Проверь папку проекта и сделай её копию отдельно от истории чатов. Если проект был на удалённом сервере, проверь файлы и скопируй их за пределы этого сервера. Экспорт переписок и копия проекта решают разные задачи</p></div>
+<p class="result"><strong>Результат:</strong> если экспорт доступен, архив скачан и открывается; копия файлов проекта сохранена отдельно</p>
+<p>Дальше отдели подтверждённые причины от догадок и переходи к <a href="#appeal">апелляции</a>. Если экспорт недоступен, подать её всё равно можно</p>
+</section>
+
+<section class="content-section" id="registration"><p class="section-label">Причины ограничений</p><h2>Если аккаунт отключили: что могло повлиять</h2>
+<p>Когда появляется сообщение об отключении аккаунта Claude, хочется найти один «прокол», после которого это случилось. Anthropic не раскрывает причину каждого решения. Сначала отдели её опубликованные правила от пользовательских версий: так ты сможешь описать факты в апелляции, не объявляя догадку доказательством</p>
+<div class="check-panel list-panel"><p class="info-title">Что известно из правил Anthropic</p><ul>
+<li><strong>Регион:</strong> создание аккаунта из страны вне <a href="https://www.anthropic.com/supported-countries">списка поддерживаемых</a> названо в <a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals">справке</a> возможной причиной отключения. России в списке нет</li>
+<li><strong>Правила использования:</strong> ограничения возможны при нарушении условий сервиса и политик использования. Точная причина конкретного решения может быть неизвестна владельцу аккаунта</li>
+</ul></div>
+<p>Номер телефона и вход через Google относятся к соседним шагам регистрации. Их ошибки легко спутать с отключением Claude, поэтому проверь, где именно появилось сообщение</p>
+<div class="check-panel list-panel"><p class="info-title">Подтверждённые правила для номера</p>
+<ul>
+<li><strong>При регистрации Google:</strong> <a href="https://support.google.com/accounts/answer/40695?hl=en">несколько аккаунтов Google сами по себе разрешены</a>, но <a href="https://support.google.com/accounts/answer/114129?hl=en">число проверок с одного номера ограничено</a>. Ошибку номера решай в Google</li>
+<li><strong>При регистрации Claude:</strong> Anthropic разрешает <a href="https://support.claude.com/en/articles/8287232-verify-your-phone-number">подтвердить до трёх аккаунтов Claude одним номером</a>. Ошибка на следующей регистрации не доказывает блокировку действующего аккаунта</li>
+</ul></div>
+<div class="info-card"><p><strong class="info-title">Пользовательские версии.</strong> Новый Google-аккаунт, карта другого человека или номер, уже использованный в нескольких аккаунтах Google, могут казаться подозрительными признаками. Есть предположение, что система накапливает несколько сигналов и ограничивает доступ позже. Anthropic <a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals">не подтверждает эти признаки и не публикует балльный порог</a>. По ним нельзя установить причину конкретной блокировки или обещать «безопасную» комбинацию</p></div>
+<p>Если ошибка была на стороне Google, возвращайся к <a href="#login">входу прежним способом</a>. Если банк отклонил карту, смотри <a href="#payment">платёжный маршрут</a>. Если Anthropic отключила аккаунт, сохрани доступные данные и подай апелляцию; покупка VPS или другой карты прежний аккаунт не восстановит</p>
+</section>
+
+
+
+<section class="content-section" id="appeal"><p class="section-label">Официальный пересмотр</p><h2>Как подать апелляцию по отключённому аккаунту</h2>
+<p>Если Anthropic действительно отключила личный аккаунт, настройка сети и новый платёж не изменят это решение. Следующий путь - запросить пересмотр через форму своего аккаунта; если открыть её нельзя, обратиться в поддержку с точным сообщением об ошибке</p>
+<p>Войди на <a href="https://claude.ai/">claude.ai</a> под тем же адресом, к которому относится блокировка личного аккаунта, и используй показанную форму <code>Submit an appeal</code>. Если форма не появилась, сохрани точный текст ошибки. В <a href="https://support.claude.com/en/articles/9015913-how-to-get-support">официальной инструкции поддержки</a> указан маршрут: открой справочный центр, нажми значок сообщения внизу справа и выбери <code>I can't login</code>, если войти не удаётся. Если вход доступен, в меню аккаунта открой <code>Get help</code> и опиши, что форма апелляции не показывается</p>
+<p>Если личный аккаунт работает, но на экране указана приостановленная организация, выбери эту организацию и нажми <code>Request a review</code>. Это <a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals">отдельный путь пересмотра для организации</a>. Если нужной кнопки или прав нет, передай точное сообщение владельцу или администратору организации</p>
+<h3>Если форму апелляции невозможно открыть</h3>
+<ul>
+<li><strong>Не удаётся войти в старый аккаунт:</strong> проверь прежний способ входа и почтовую ссылку из <a href="#login">первого раздела</a>. В справочном центре используй значок сообщения и вариант <code>I can't login</code>. Опиши, что мешает войти именно в тот аккаунт, где должна появиться форма</li>
+<li><strong>Вход есть, формы нет:</strong> зафиксируй точную надпись или скрин без личных данных для публичного показа. Открой <code>Get help</code> из меню профиля и сообщи, что после входа не видишь форму из официальной инструкции. Укажи адрес аккаунта и дату ограничения</li>
+<li><strong>Показано предупреждение, а доступ ещё работает:</strong> это не отключение. В <a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals">справке Anthropic</a> для предупреждений указан отдельный канал; форму бана для такого случая искать не нужно</li>
+</ul>
+<p>Канал поддержки при невозможности входа помогает разобраться с доступом и доступным экспортом, но не обещает заменить саму процедуру пересмотра решения безопасности. Если в ответе сказано, что пересмотр недоступен, сохрани это сообщение и данные, которые удалось выгрузить. Покупка нового VPS, смена почты и повторный платёж не создадут форму внутри старого аккаунта</p>
+<div class="check-panel"><p><strong class="info-title">Что написать в обращении.</strong> Достаточно четырёх фактов: адрес затронутого аккаунта, когда пропал доступ, точная надпись на экране и как сервис использовался на самом деле. Не называй предполагаемую причину установленной, если Anthropic её не сообщила. Справка не обещает ни положительного решения, ни точного срока ответа</p></div>
+<p>Ниже черновики для разных обстоятельств. Выбери один, который соответствует фактам, замени текст в квадратных скобках своими данными и проверь письмо перед отправкой. Это примеры формулировок, а не официальные формы</p>
+<h3>Причина ограничения неизвестна</h3><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="vpn-appeal-a">Скопировать</button><pre id="vpn-appeal-a">Hello. I am requesting a review of the restriction on my Claude account registered to [your email]. Access stopped around [date], and the message I see is [exact message]. I use the service for [your actual work]. I am not aware of a violation and would appreciate a review of the decision. Please tell me if you need more information to identify the account or understand what happened. Thank you.</pre></div>
+<h3>Перед ограничением менялась сеть</h3><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="vpn-appeal-b">Скопировать</button><pre id="vpn-appeal-b">Hello. Please review the restriction on [your registered email]. I noticed it on [date]. Around that time I used [truthful description of networks or travel], so my connection details may have changed. I use Claude for [real purpose] and would like to understand whether this contributed to the decision. I can provide any relevant details you request. Thank you for looking into this.</pre></div>
+<h3>Ограничение появилось после интенсивной работы</h3><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="vpn-appeal-c">Скопировать</button><pre id="vpn-appeal-c">Hello. My account [your registered email] was restricted on or around [date]. Before that I worked on [brief description of the real task]. The activity involved [truthful description of how you used Claude]. If this pattern was interpreted as automated misuse, I would appreciate a review with that context. Please let me know what information would help. Thank you.</pre></div>
+<h3>Нужен контекст одного разговора</h3><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="vpn-appeal-d">Скопировать</button><pre id="vpn-appeal-d">Hello. I am asking for a review of the restriction on [your registered email], which appeared around [date]. A conversation about [brief neutral topic] may have lacked context. My actual purpose was [truthful legitimate purpose]. I respect the Usage Policy and can explain the context in more detail if needed. Please review the decision when possible. Thank you.</pre></div>
+<p class="result"><strong>После отправки:</strong> сохрани подтверждение, если оно появится, и следи за почтой прежнего аккаунта</p>
+<p>Пока ждёшь, не удаляй аккаунт и не рассчитывай, что новая регистрация вернёт старые чаты. <a href="https://support.claude.com/en/articles/12109679-creating-a-new-account-after-deletion">Правило Anthropic о 30 днях</a> касается повторной регистрации после добровольного удаления. При отключении за нарушение правил прежний адрес нельзя использовать для нового аккаунта и после этого срока</p>
+<p>У проверки входа, выгрузки и апелляции нет общего таймера. Письмо для входа может появиться быстро или задержаться из-за почтового фильтра. Выгрузка зависит от того, что сервис показывает конкретному аккаунту. Для апелляции Anthropic не обещает точного срока ответа. Пока ждёшь, продолжай работу с уже сохранёнными файлами и не подавай несколько обращений с противоречивыми версиями одного события</p>
+</section>
+
+<section class="content-section" id="paths-map"><p class="section-label">Перед выбором маршрута</p><h2>Три способа работы: где лежат файлы и где запущен Claude Code</h2>
+<figure class="route-map" aria-label="Три способа работать с Claude Code">
+<p class="route-map-intro"><strong>Одна модель, три места для работы.</strong> В описанных здесь вариантах модель Claude работает в сервисе Anthropic и получает нужный для ответа контекст. На схеме показано, где лежит проект и запускается Claude Code</p>
+<div class="route-grid">
+<div class="route-card route-local">
+<p class="route-kicker">На твоём устройстве</p><h3>Проект и Claude Code на компьютере</h3>
+<div class="shot route-illustration-wrap"><img class="route-illustration" src="route-local.png" width="1672" height="941" loading="lazy" alt="На компьютере открыты файлы проекта и Claude Code. Запрос к модели Claude уходит в облако Anthropic, ответ модели возвращается на компьютер. GitHub и собственный VPS в этом маршруте не нужны"></div>
+<p class="route-card-copy">Файлы проекта и Claude Code находятся у тебя. Выключишь компьютер - задача остановится</p>
+<a class="route-card-link" href="#server">Свой VPS только для VPN: что он меняет</a>
+</div>
+<div class="route-card route-anthropic">
+<p class="route-kicker">Через сайт Claude</p><h3>Проект из GitHub, работа на сервере Anthropic</h3>
+<div class="shot route-illustration-wrap"><img class="route-illustration" src="route-anthropic.png" width="1672" height="941" loading="lazy" alt="На компьютере открыт claude.ai/code. Задача идёт к серверу Anthropic, ответ возвращается обратно. Из отдельного облака GitHub на сервер приходят файлы проекта. На сервере работают Claude Code и копия проекта, рядом показана модель Claude"></div>
+<p class="route-card-copy">После запуска компьютер можно выключить: облачная задача продолжит выполняться</p>
+<a class="route-card-link" href="#anthropic-cloud">Как запустить в облаке</a>
+</div>
+<div class="route-card route-own-vps">
+<p class="route-kicker">Через свой сервер</p><h3>Проект и Claude Code работают на твоём VPS</h3>
+<div class="shot route-illustration-wrap"><img class="route-illustration" src="route-vps-fixed.png" width="1672" height="941" loading="lazy" alt="С компьютера через браузер задача идёт на свой VPS, а ответ возвращается обратно. Телефон лежит рядом и тоже может открыть CloudCLI. На VPS находятся файлы проекта, Claude Code и CloudCLI. Сервер обращается к модели Claude в отдельном облаке Anthropic и получает ответ модели"></div>
+<p class="route-card-copy">Сервер продолжит работу после выключения компьютера. GitHub для этого маршрута не обязателен</p>
+<a class="route-card-link" href="#cloudcli">Как настроить свой VPS</a>
+</div>
+</div>
+<figcaption><strong>Не путай две роли VPS:</strong> сервер с AmneziaVPN только проводит соединение и не получает проект. В третьем варианте ты переносишь туда файлы и запускаешь Claude Code</figcaption>
+</figure>
+</section>
+
+<section class="content-section" id="costs"><p class="section-label">Перед настройкой</p><h2>За что платить в каждом способе работы</h2>
+<p>На схемах видно, где находится проект. Теперь сравни расходы. Во всех трёх маршрутах нужен платный доступ к Claude Code; для понятного сравнения ниже взята подписка Claude Pro с помесячной оплатой. На компьютере и своём VPS вместо неё можно платить за API по фактическому расходу</p>
+<div class="cost-table-wrap" role="region" aria-label="Сравнение расходов на три способа работы с Claude Code" tabindex="0">
+<table class="cost-table">
+<thead><tr><th scope="col">За что платишь</th><th scope="col">На компьютере</th><th scope="col">В облаке Anthropic</th><th scope="col">На своём VPS</th></tr></thead>
+<tbody>
+<tr><th scope="row">Claude Code</th><td><strong>$20/мес</strong><span>Claude Pro</span></td><td><strong>$20/мес</strong><span>Claude Pro</span></td><td><strong>$20/мес</strong><span>Claude Pro</span></td></tr>
+<tr><th scope="row">Где работает проект</th><td><strong>Без новой аренды</strong><span>на твоём компьютере</span></td><td><strong>Включено</strong><span>сервер Anthropic входит в облачную сессию</span></td><td><strong>Аренда VPS</strong><span>пример: $24/мес за 4 ГБ памяти</span></td></tr>
+<tr><th scope="row">GitHub</th><td><strong>Не обязателен</strong><span>можно хранить резервную копию проекта</span></td><td><strong>Бесплатно</strong><span>GitHub Free; нужен для показанного запуска через сайт</span></td><td><strong>Не обязателен</strong></td></tr>
+<tr><th scope="row">CloudCLI</th><td><strong>Не нужен</strong></td><td><strong>Не нужен</strong></td><td><strong>Бесплатно</strong><span>самостоятельная установка на свой VPS</span></td></tr>
+<tr><th scope="row">Личный VPN на VPS</th><td><strong>По желанию</strong><span>Amnezia бесплатно; пример VPS с 1 ГБ - $6/мес</span></td><td><strong>По желанию</strong><span>та же отдельная трата, если нужен свой VPN</span></td><td><strong>По желанию</strong><span>при подходящих ресурсах VPN можно разместить на том же VPS</span></td></tr>
+<tr><th scope="row">Домен для доступа к панели</th><td><strong>Не нужен</strong></td><td><strong>Не нужен</strong></td><td><strong>Нужен</strong><span>для инструкции с Caddy; цена зависит от регистратора и имени</span></td></tr>
+<tr class="cost-table-total"><th scope="row">Пример без личного VPN</th><td><strong>$20/мес</strong></td><td><strong>$20/мес</strong></td><td><strong>От $44/мес + домен</strong><span>$20 за Pro + пример VPS за $24; домен отдельно</span></td></tr>
+</tbody></table></div>
+<p class="cost-table-scroll">На телефоне проведи по таблице в сторону, чтобы увидеть все три маршрута</p>
+<p class="cost-table-note">Цены проверены 28 сентября 2026 года. <a href="https://claude.com/pricing">Claude Pro стоит $20 при оплате за месяц</a>; годовая оплата, налоги и дополнительные лимиты меняют итог. Для рабочего VPS взят <a href="https://www.digitalocean.com/pricing/droplets">пример DigitalOcean с 4 ГБ за $24/мес</a>: <a href="https://code.claude.com/docs/en/getting-started">Anthropic требует для Claude Code не меньше 4 ГБ памяти</a>. Для отдельного VPN взят пример VPS с 1 ГБ за $6/мес; <a href="https://docs.amnezia.org/documentation/supported-linux-os-for-vps/">Amnezia допускает 1 ГБ</a>, но проверь также страну сервера и внешний IPv4. Это примеры тарифов, а не единая цена любого хостинга</p>
+<p class="cost-table-note"><a href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans">GitHub Free</a> позволяет хранить личный закрытый репозиторий без платы. <a href="https://cloudcli.ai/open-source">Самостоятельная версия CloudCLI бесплатна</a>; платный CloudCLI Cloud здесь не используется. На компьютере и своём VPS вместо подписки Pro возможна <a href="https://code.claude.com/docs/en/costs">оплата Claude Code через API по фактическому расходу</a>, поэтому для такого входа заранее фиксированного итога нет. Облачный запуск через сайт в этой таблице рассчитан с подпиской</p>
+<div class="check-panel"><p>Дешёвые VPS за 180-500 ₽ подходят только для личного VPN; для Claude Code нужен сервер с памятью от 4 ГБ</p></div>
+</section>
+
+<section class="content-section" id="server"><p class="section-label">Свой маршрут · инструкция</p><h2>Как поднять личный VPN на VPS через AmneziaVPN</h2>
+<p><strong>Зачем вообще свой VPS?</strong> VPN был включён, IP при проверках не менялся, а доступ всё равно ограничили. Это не доказывает, что причиной был VPN: Anthropic может не сообщить точную причину. Однако разовая проверка не показывает, менял ли VPN-сервис сервер между проверками, при переподключении или после обрыва. Собственный VPS убирает именно эту неопределённость: ты выбираешь один сервер и контролируешь его адрес</p>
+<div class="check-panel list-panel"><p class="info-title">Что даёт свой VPS вместо общего VPN</p><ul>
+<li><strong>Один выбранный адрес:</strong> у VPS есть <a href="https://docs.amnezia.org/documentation/selfhosted-is-easy/">отдельный внешний IP</a>. Пока хостинг сохраняет его за сервером, чужой VPN-сервис не может автоматически переключить тебя на другой свой узел. Это заметно снижает риск случайных скачков IP</li>
+<li><strong>Понятную проверку соединения:</strong> ты знаешь IP своей машины и можешь сравнить с ним адрес, который виден в браузере и в терминале. Так проще заметить, что одно приложение обошло VPN</li>
+<li><strong>Контроль при обрыве:</strong> автоподключение и KillSwitch помогают не уйти незаметно на обычное соединение. Ниже показано, где их включить</li>
+</ul></div>
+<div class="warn-card"><p class="info-title">Минусы и границы</p><ul>
+<li><strong>Нет гарантии от блокировки:</strong> Anthropic не подтверждает, что собственный VPS снижает риск ограничения аккаунта. Он не снимает <a href="https://www.anthropic.com/supported-countries">региональные правила</a> и не возвращает отключённый аккаунт; для этого есть <a href="#save-now">сохранение данных</a> и <a href="#appeal">апелляция</a></li>
+<li><strong>Есть расходы и уход:</strong> сервер надо оплачивать и обслуживать, а его адрес тоже может получать ошибку 403. Если браузер и Claude Code показывают разные IP, вернись к <a href="#network">проверке полного подключения</a></li>
+<li><strong>Проект остаётся на твоём устройстве:</strong> VPS с Amnezia передаёт соединение. Чтобы перенести на сервер файлы и Claude Code, нужен <a href="#cloudcli">отдельный маршрут с CloudCLI</a></li>
+</ul></div>
+
+<h3>Шаг 1. Выбери сервер по параметрам, а не по рекламной цене</h3>
+<p>Если взять самый дешёвый VPS без нужной системы, внешнего IP или доступа администратора, Amnezia не сможет развернуть на нём VPN. Твоя цель на этом шаге - получить работающую машину с закреплённым за ней адресом и не переплатить за мощность, которая сетевому узлу не нужна</p>
+<p>У любого хостинга открой заказ обычного VPS. Сверь выбранный тариф с <a href="https://docs.amnezia.org/documentation/supported-linux-os-for-vps/">текущими требованиями Amnezia</a>. Нужны виртуализация KVM, внешний IPv4, доступ SSH, поддерживаемая Linux, не меньше 1 ГБ оперативной памяти и 10 ГБ диска. Если на этой же машине позже будет работать Claude Code, выбирай x86-64 и больше памяти; требования к агенту проверь по <a href="https://code.claude.com/docs/en/getting-started">документации Anthropic</a> до оплаты</p>
+<p>В форме заказа отдельно проверь страну размещения, систему, срок аренды, лимит трафика и итоговое списание. Уточни у хостинга, сохраняется ли выделенный IP за этим VPS при обычной перезагрузке и продлении аренды. Не выбирай мощный GPU или Hi-CPU тариф только потому, что в названии есть «AI»: для личного VPN вычислитель модели не нужен. Итог шага - VPS с известным адресом и реквизитами доступа; если подходящий сервер уже арендован, второй не нужен</p>
+<h3>Шаг 2. Сохрани реквизиты и установи приложение</h3>
+<p>Оплаченный сервер ещё не означает, что VPN готов: приложение должно получить доступ к машине. Если потерять IP или пароль администратора, установка остановится на первом экране</p>
+<p>После заказа проверь, что VPS запущен. В кабинете хостинга найди его внешний IP, имя SSH-пользователя и пароль или закрытый ключ. Имя часто выглядит как <code>root</code>, но бери фактическое значение из своего кабинета. Сохрани секреты в менеджере паролей: пароль администратора даёт управление всей машиной</p>
+<p>Скачай AmneziaVPN по ссылке с <a href="https://docs.amnezia.org/ru/documentation/instructions/install-vpn-on-server/">официальной инструкции</a> для своей операционной системы. В итоге у тебя есть приложение и данные сервера. Сеть пока идёт обычным маршрутом: VPN заработает после следующего шага</p>
+<h3>Шаг 3. Подключи VPS в AmneziaVPN</h3>
+<p>Теперь передай Amnezia адрес сервера и данные доступа. Приложение установит на нём VPN, к которому ты затем подключишь свои устройства</p>
+<p>В приложении нажми плюс, выбери <code>Self-hosted VPN</code>, затем введи IP сервера, SSH-пользователя и пароль либо ключ. Сверь каждое поле с кабинетом хостинга, нажми <code>Continue</code> и следуй автоматической установке. Приложение подключится по SSH и развернёт VPN без ручного ввода серверных команд</p>
+<figure><div class="shot"><img src="assets/amnezia-self-hosted-forma.png" alt="Три экрана AmneziaVPN: плюс, Self-hosted VPN и форма с IP, SSH Username, паролем" loading="lazy"></div><figcaption>Последовательность в приложении: плюс, Self-hosted VPN, затем IP и данные SSH. Изображение из <a href="https://docs.amnezia.org/documentation/instructions/install-vpn-on-server/">документации Amnezia</a></figcaption></figure>
+<p>На снимке показаны английские подписи. В русской версии они могут отличаться, но смысл полей тот же: адрес машины и данные администратора для установки. Пример IP на снимке не подходит для твоего подключения</p>
+<h3>Шаг 4. Проверь два разных результата</h3>
+<p>Надпись «Подключено» в Amnezia ещё не доказывает, что и браузер, и Claude Code идут через выбранный сервер. Если проверить только браузер, можно не заметить, что терминальная программа использует другой путь</p>
+<ol>
+<li>В AmneziaVPN нажми «Подключиться». На своём устройстве открой страницу проверки внешнего IP и сравни её результат с IP арендованного сервера. Совпадение показывает, что браузер идёт через выбранный узел</li>
+<li>Если используешь Claude Code в терминале, проверь IP отдельной командой в том же терминале:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-terminal-ip">Скопировать</button><pre id="vps-terminal-ip">curl -4 https://api.ipify.org</pre></div>
+Браузерная проверка сама по себе не доказывает путь терминального приложения</li>
+<li>После проверки сети открой нужный сервис. Если он всё равно показывает отключённый аккаунт, возвращайся к <a href="#save-now">сохранению данных и апелляции</a>. Если появляется 403, сверяй точную ошибку с <a href="#network">сетевой диагностикой</a></li>
+</ol>
+<p>Один сервер позволяет подключить несколько устройств, но пароль администратора им не раздают. В <a href="https://docs.amnezia.org/ru/documentation/instructions/amnezia-hosting-sharing/">официальной инструкции Amnezia</a> для этого есть гостевой доступ: открой «Поделиться», задай имя, выбери сервер и протокол, передай человеку отдельный QR-код или ключ. У такого ключа нет прав управлять VPS; во вкладке «Пользователи» его можно отозвать. Полный ключ сервера не высылай</p>
+<h3>Что настроить после первого подключения</h3>
+<p>После перезапуска устройства VPN может не включиться сам, а при обрыве соединения трафик может пойти через обычную сеть. Способ защиты зависит от устройства</p>
+<p><strong>На Windows, macOS и Linux</strong> включи защиту в AmneziaVPN: шестерёнка → «Соединение» → <code>KillSwitch</code>. Если VPN неожиданно оборвётся, приложение заблокирует обычное подключение к интернету</p>
+<p><strong>На Android</strong> в AmneziaVPN такого переключателя нет. Сначала подключись к нужному серверу в приложении, затем открой системные настройки Android → VPN → AmneziaVPN. Включи «Постоянная VPN», после неё - «Блокировать соединения без VPN». Названия пунктов могут отличаться на разных телефонах</p>
+<p><strong>На iOS</strong> в AmneziaVPN переключателя <code>KillSwitch</code> нет, поэтому описанные выше действия для этой системы не подходят. После сбоя проверь, что VPN снова подключён, прежде чем продолжать работу. <a href="https://docs.amnezia.org/ru/documentation/instructions/killswitch/">Официальная инструкция Amnezia по устройствам</a></p>
+<p>Если в твоём клиенте доступны автозапуск и автоподключение, проверь их отдельно: первая настройка открывает программу, вторая подключает VPN. Защита при обрыве на компьютере и Android настраивается разными способами, описанными выше. Эти настройки не создают права на сервис в неподдерживаемой стране, но помогают заметить сетевой сбой</p>
+<h3>Если установка или подключение не удались</h3>
+<ul>
+<li><strong>Amnezia не может войти на VPS:</strong> проверь внешний IP, имя SSH-пользователя, пароль или ключ и то, что хостинг уже запустил машину</li>
+<li><strong>VPN работал и перестал:</strong> проверь оплату аренды, статус VPS и не изменился ли его IP</li>
+<li><strong>Проблема только у одного человека:</strong> проверь его гостевой ключ и выбранный протокол, не меняя настройки всех устройств сразу</li>
+<li><strong>Менялся порт или сервер пересоздали:</strong> прежние гостевые ключи могут потребовать перевыпуска</li>
+<li><strong>VPN подключился, но Claude показывает блокировку аккаунта:</strong> настройка VPN закончена, дальше нужен <a href="#appeal">раздел об апелляции</a>, а не ещё один VPS</li>
+</ul>
+
+<p>Аренда сервера оплачивается хостингу отдельно от Claude. Текущую цену, комиссии и трафик смотри перед заказом у конкретного поставщика. Когда сеть работает, можно решить, где выполнять саму работу: на своём компьютере, в облаке Anthropic или на этом VPS с CloudCLI</p>
+</section>
+
+<section class="content-section" id="remote"><p class="section-label">Где выполняется работа</p><h2>Где хранить проект: свой компьютер, облако Anthropic или свой VPS</h2>
+
+<p>После проверки доступа реши, где будут лежать файлы и выполняться Claude Code. Если ты просто пишешь сообщения в обычном чате claude.ai, отдельного «подключения к облаку» нет: это тот же аккаунт, а файлы с компьютера нужно <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude">добавлять в чат или проект</a> вручную. Ниже речь о другом режиме - Claude Code, который работает с папкой проекта и меняет её файлы</p>
+<p>VPN на VPS меняет сетевой маршрут твоего компьютера, но сам проект остаётся на компьютере. Claude Code on the web запускает отдельную рабочую среду Anthropic и для описанного ниже старта через браузер берёт проект из GitHub. CloudCLI открывает в браузере Claude Code, запущенный на твоём VPS с перенесённым проектом</p>
+<div class="check-panel list-panel"><p class="info-title">Где окажется твой проект</p>
+<ul>
+<li><strong>Claude Code на своём компьютере:</strong> программа работает с файлами локальной папки; VPN при необходимости меняет сетевой путь устройства. Обычный чат claude.ai описан выше</li>
+<li><strong>Claude Code on the web:</strong> для описанного ниже запуска через браузер <a href="https://code.claude.com/docs/en/web-quickstart">нужен репозиторий GitHub</a>. Облачная сессия берёт файлы из него; папка, оставшаяся только на твоём компьютере, в ней не появится</li>
+<li><strong>Claude Code плюс CloudCLI на своём VPS:</strong> GitHub не обязателен. Но папку проекта нужно <a href="#cloudcli">скопировать с компьютера на VPS</a> или клонировать из репозитория. Если этого не сделать, серверная панель не увидит прежний локальный проект и может показать пустой список. Прежние локальные чаты и настройки также не переносятся одной установкой CloudCLI</li>
+</ul>
+</div>
+
+<div class="warn-card"><p><strong class="info-title">Удалённая работа не снимает ограничения аккаунта.</strong> В облачном режиме код выполняется на машине Anthropic и может продолжать работу после закрытия ноутбука. Но в аккаунт ты входишь со своего устройства, а <a href="https://www.anthropic.com/supported-countries">правила поддерживаемых регионов</a> и <a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals">правила ограничения аккаунта</a> остаются теми же. Anthropic не обещает, что облачный режим снижает риск блокировки. Если аккаунт уже отключён, сначала открой <a href="#save-now">маршрут сохранения данных и апелляции</a></p></div>
+<h3 id="anthropic-cloud">Путь А. Claude Code on the web без своего сервера</h3>
+<p>Если задача должна продолжаться после закрытия ноутбука или ты хочешь проверить результат с телефона, локальный Claude Code неудобен: он зависит от твоего компьютера. Облачная сессия Anthropic решает именно эту задачу. За удобство платишь переносом проекта в доступную облаку среду и отсутствием твоих локальных настроек в новой сессии</p>
+<p class="source-note">По <a href="https://code.claude.com/docs/en/web-quickstart">официальной инструкции Anthropic</a>, облачные сессии доступны на Pro, Max, Team и отдельных местах Enterprise. Сессия выполняется в отдельной облачной среде и продолжает работу, когда ты закрываешь ноутбук. Для старта через браузер нужен репозиторий GitHub</p>
+<p>Требование GitHub выше относится к запуску через сайт. Если Claude Code уже установлен и папка проекта является Git-репозиторием хотя бы с одним сохранённым коммитом, есть <a href="https://code.claude.com/docs/en/claude-code-on-the-web">отдельный запуск из терминала</a>:</p>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="claude-cloud-launch">Скопировать</button><pre id="claude-cloud-launch">claude --cloud</pre></div>
+<p>Когда у репозитория нет удалённого адреса GitHub или к нему не подключено приложение Claude GitHub App, программа может загрузить локальный репозиторий прямо в новую облачную сессию. Файлы вне Git и прежний локальный разговор автоматически не переезжают</p>
+<p>Если проект пока только на компьютере, открой GitHub, создай закрытый репозиторий и через <code>Add file → Upload files</code> перетащи в него папку проекта, затем нажми <code>Commit changes</code>. Это <a href="https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository">официальный способ загрузки файлов через браузер</a>; для большого проекта или уже настроенного Git используй <a href="https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github">инструкцию GitHub по переносу существующего репозитория</a>. До загрузки убери из проекта пароли, токены и личные данные, которые не нужны облачной задаче</p>
+<ol>
+<li>Открой <a href="https://claude.ai/code">claude.ai/code</a> и войди в действующий аккаунт Claude</li>
+<li>При первом запуске подключи GitHub по предложению страницы. Разреши доступ к нужному репозиторию; для закрытого репозитория проверь установку Claude GitHub App именно на него</li>
+<li>Пройди создание облачной среды <code>Default</code>, если страница его предлагает. На Pro и Max среда обычно создаётся при первичном подключении; в рабочей организации могут потребоваться настройки владельца</li>
+<li>Выбери репозиторий и исходную ветку под полем запроса, сформулируй задачу и отправь её. Claude клонирует проект, создаст свою ветку и покажет ход работы</li>
+<li>Открой список изменений (diff) и проверь каждый файл. Если результат подходит, создай запрос на включение изменений в основную ветку (pull request, PR) или перенеси файлы в свой рабочий процесс</li>
+</ol>
+<p class="result"><strong>Результат пути А:</strong> задача и изменённые файлы доступны в облачной сессии с другого устройства</p>
+<p>При запуске через сайт рабочей основой служит выбранный репозиторий GitHub; локальная папка сама собой туда не переносится. При запуске <code>claude --cloud</code> проверяй файлы и результат в новой облачной сессии. В обоих вариантах аренда VPS, установка AmneziaVPN и CloudCLI не нужны. Если страница сообщает, что функция недоступна для организации, проверь права и настройку GitHub у владельца организации по <a href="https://code.claude.com/docs/en/web-quickstart">инструкции Anthropic</a></p>
+
+<h3 id="cloudcli">Путь Б. Claude Code и CloudCLI на собственном VPS</h3>
+<p>Если нужен доступ к проекту с другого устройства, но ты хочешь работать на собственном сервере, можно запустить Claude Code на VPS и открыть его через CloudCLI. Тогда проект не зависит от включённого ноутбука; зато тебе придётся перенести файлы, оплачивать сервер и защитить вход в его панель</p>
+<p>CloudCLI - браузерная оболочка для уже установленного агента. Он не покупает подписку Claude за тебя и не создаёт аккаунт Anthropic. Его <a href="https://cloudcli.ai/docs/open-source-self-hosting/prerequisites">официальные требования</a>: Node.js версии 22 или новее и хотя бы один установленный, авторизованный AI-агент. Для этого пути агентом будет Claude Code на том же сервере</p>
+<div class="info-card"><p><strong class="info-title">Сначала перенеси проект.</strong> Если до этого работа шла в приложении или VS Code на компьютере, установка CloudCLI на VPS сама не скопирует твою папку и историю работы. GitHub нужен только как один из способов переноса; можно передать файлы напрямую командой <code>scp</code> в шаге 2. После переноса запусти Claude Code в этой папке на VPS хотя бы один раз: <a href="https://cloudcli.ai/docs/troubleshooting/common-issues">CloudCLI советует</a> это проверить, когда список проектов пуст</p></div>
+<p>Если собираешь оба пути на одном VPS, планируй машину под более требовательную часть. Для личного VPN хватает минимальных параметров Amnezia; Claude Code и постоянно работающий веб-интерфейс требуют больше памяти и диска. Перед оплатой сверяй требования <a href="https://code.claude.com/docs/en/getting-started">Claude Code</a> и <a href="https://cloudcli.ai/docs/open-source-self-hosting/prerequisites">CloudCLI</a>, а не покупай минимальный тариф только по требованиям VPN</p>
+<ol>
+<li><strong>Подготовь рабочий сервер.</strong> Арендуй VPS с подходящей Linux, внешним адресом и SSH. Сохрани IP и ключ доступа. Держи резервную копию проекта вне сервера, например в своём Git-репозитории</li>
+<li><strong>Перенеси проект.</strong> Если файлы пока на компьютере, открой терминал на своём компьютере. Замени путь к папке, имя для SSH и IP сервера на свои значения. Выполни один из двух вариантов копирования:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-copy-project">Скопировать</button><pre id="vps-copy-project">scp -r "/полный/путь/к/проекту" SSH_ИМЯ@IP_СЕРВЕРА:~/</pre></div>
+<span class="command-caption">Если вход на VPS настроен по SSH-ключу, используй этот вариант и замени путь к ключу:</span>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-copy-project-key">Скопировать</button><pre id="vps-copy-project-key">scp -i "/путь/к/ключу" -r "/полный/путь/к/проекту" SSH_ИМЯ@IP_СЕРВЕРА:~/</pre></div>
+<span class="command-caption">После копирования подключись к VPS одним из двух способов:</span>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-ssh-login">Скопировать</button><pre id="vps-ssh-login">ssh SSH_ИМЯ@IP_СЕРВЕРА</pre></div>
+<span class="command-caption">Если для копирования нужен отдельный SSH-ключ, укажи его и при входе:</span>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-ssh-login-key">Скопировать</button><pre id="vps-ssh-login-key">ssh -i "/путь/к/ключу" SSH_ИМЯ@IP_СЕРВЕРА</pre></div>
+<span class="command-caption">В терминале VPS проверь, появилась ли папка проекта:</span>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-list-project">Скопировать</button><pre id="vps-list-project">ls -la ~</pre></div>
+Если проект уже в GitHub, вместо копирования можешь клонировать репозиторий на VPS с настроенным доступом Git</li>
+<li><strong>Установи Claude Code на сервере.</strong> В терминале VPS возьми установочную команду из <a href="https://code.claude.com/docs/en/getting-started">актуальной документации Anthropic</a>. После установки проверь её результат:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-claude-version">Скопировать</button><pre id="vps-claude-version">claude --version</pre></div>
+Затем перейди в перенесённую папку проекта, запусти Claude Code и заверши авторизацию своего действующего аккаунта:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-claude-launch">Скопировать</button><pre id="vps-claude-launch">cd ~/ИМЯ_ПАПКИ_ПРОЕКТА
+claude</pre></div></li>
+<li><strong>Проверь Node.js.</strong> В терминале VPS выполни команду:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-node-version">Скопировать</button><pre id="vps-node-version">node --version</pre></div>
+Если версия ниже 22 или команда отсутствует, установи Node.js 22+ по <a href="https://cloudcli.ai/docs/open-source-self-hosting/prerequisites">инструкции CloudCLI</a> и повтори проверку</li>
+<li><strong>Установи CloudCLI.</strong> В том же серверном терминале выполни команду из официальной инструкции ниже. Она ставит веб-оболочку. Сначала закрой прямой публичный доступ к порту 3001, затем запускай сервис и настраивай защищённую панель</li>
+</ol>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="install-cloudcli-article">Скопировать</button><pre id="install-cloudcli-article">npm install -g @siteboon/claude-code-ui</pre></div>
+<div class="warn-card"><p><strong class="info-title">Не открывай CloudCLI без защиты.</strong> Следующий шаг обязателен до доступа с телефона через интернет. По <a href="https://cloudcli.ai/docs/installation/remote-server">документации CloudCLI</a>, у интерфейса нет встроенного входа. Открытый порт 3001 дал бы доступ к проектам и терминалу любому, кто знает адрес. Ниже один конкретный маршрут защиты через Caddy; для него нужен свой домен. Если на этом же VPS уже работает Amnezia, сохрани используемые ею порты при изменении правил сети</p></div>
+<ol>
+<li><strong>Подготовь домен.</strong> Если домена ещё нет, сначала зарегистрируй его и получи доступ к настройкам DNS у регистратора. Затем создай A-запись для выбранного поддомена со значением внешнего IP VPS. Проверь, что домен указывает именно на этот сервер. Для автоматического HTTPS Caddy должен быть доступен извне по портам 80 и 443</li>
+<li><strong>Закрой прямой вход.</strong> В сетевых правилах хостинга оставь доступ к SSH, 80 и 443, а входящие подключения к 3001 из интернета запрети. Если VPS уже используется для VPN, не закрывай его действующие порты. Сам CloudCLI должен оставаться доступен Caddy локально на сервере</li>
+<li><strong>Установи Caddy.</strong> Для Ubuntu или Debian выполни команды из <a href="https://caddyserver.com/docs/install">официальной инструкции Caddy</a>. Программа устанавливается как фоновая служба. После установки в терминале VPS создай хеш для отдельного пароля браузерной панели:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-caddy-password">Скопировать</button><pre id="vps-caddy-password">caddy hash-password</pre></div>
+Введи пароль по запросу программы и сохрани напечатанный хеш. Пароль не вписывай в конфигурацию открытым текстом</li>
+<li><strong>Настрой защищённый адрес.</strong> В терминале VPS открой файл конфигурации:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-caddy-edit">Скопировать</button><pre id="vps-caddy-edit">sudo nano /etc/caddy/Caddyfile</pre></div>
+Замени содержимое файла примером ниже: адрес - на свой поддомен, <code>owner</code> - на выбранное имя входа, <code>ХЕШ_ПАРОЛЯ</code> - на результат предыдущей команды. Нажми <code>Ctrl+O</code>, <code>Enter</code> и <code>Ctrl+X</code>. Затем проверь конфигурацию:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-caddy-check">Скопировать</button><pre id="vps-caddy-check">sudo caddy validate --config /etc/caddy/Caddyfile</pre></div>
+Если проверка прошла без ошибки, перезапусти Caddy:
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-caddy-reload">Скопировать</button><pre id="vps-caddy-reload">sudo systemctl reload caddy</pre></div>
+Синтаксис <a href="https://caddyserver.com/docs/caddyfile/directives/basic_auth">авторизации</a> и <a href="https://caddyserver.com/docs/caddyfile/directives/reverse_proxy">прокси</a> описан Caddy</li>
+</ol>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="cloudcli-caddy-article">Скопировать</button><pre id="cloudcli-caddy-article">code.example.com {
+    basic_auth {
+        owner ХЕШ_ПАРОЛЯ
+    }
+    reverse_proxy localhost:3001
+}</pre></div>
+<p>Когда внешний доступ к 3001 закрыт, запусти CloudCLI в терминале сервера:</p>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-cloudcli-trial">Скопировать</button><pre id="vps-cloudcli-trial">cloudcli</pre></div>
+<p>Из второго SSH-сеанса проверь, отвечает ли панель:</p>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-cloudcli-check">Скопировать</button><pre id="vps-cloudcli-check">curl -I http://localhost:3001</pre></div>
+<p>После проверки останови пробный запуск клавишами Ctrl+C, иначе он займёт порт 3001 и PM2 не поднимет панель. Для постоянной работы <a href="https://cloudcli.ai/docs/installation/global-installation">документация CloudCLI</a> предлагает PM2. Выполни три команды ниже по одной. <code>pm2 startup</code> напечатает дополнительную команду для настройки автозапуска: выполни её, затем отдельно запусти команды сохранения и проверки</p>
+<div class="prompt-box"><button class="copy-button" type="button" data-copy-target="cloudcli-pm2-article">Скопировать</button><pre id="cloudcli-pm2-article">npm install -g pm2
+pm2 start cloudcli --name cloudcli-ui
+pm2 startup</pre></div>
+<div class="prompt-box command-box"><button class="copy-button" type="button" data-copy-target="vps-pm2-save-check">Скопировать</button><pre id="vps-pm2-save-check">pm2 save
+pm2 list</pre></div>
+<p>После настройки открой свой HTTPS-адрес с другого устройства. Сначала должен появиться запрос имени и пароля Caddy, затем интерфейс CloudCLI. Прямой адрес <code>http://IP_СЕРВЕРА:3001</code> с другого устройства открываться не должен. Создай новую сессию, выбери Claude Code и папку проекта, отправь небольшую задачу, затем проверь изменённый файл. Если панель пуста, по <a href="https://cloudcli.ai/docs/troubleshooting/common-issues">официальному разбору неполадок</a> сначала запусти Claude Code хотя бы один раз в нужной папке и проверь права на файлы</p>
+<figure><div class="shot vertical"><img src="assets/cloudcli-vybor-assistenta.png" alt="Экран CloudCLI с выбором Claude Code и модели для новой сессии" loading="lazy"></div><figcaption>Пример экрана новой сессии CloudCLI: выбери Claude Code после установки и авторизации агента. Вид панели может измениться с обновлением</figcaption></figure>
+<figure><div class="shot"><img src="assets/cloudcli-glavnaya.png" alt="Главная CloudCLI с проектами и сессиями слева, чатом и вкладками Chat, Shell, Files справа" loading="lazy"></div><figcaption>Ищи кнопку New Session слева и вкладки Chat, Shell, Files в рабочей области. На сохранённом снимке видно прежнее название Claude Code UI; актуальный интерфейс называется CloudCLI</figcaption></figure>
+<p class="result"><strong>Результат пути Б:</strong> файлы проекта и Claude Code находятся на твоём VPS, а защищённая панель открывается с другого устройства и видит проект</p>
+<p>После перезагрузки сервера снова открой HTTPS-адрес и проверь, что панель запустилась. PM2 поддерживает работу самой панели, но не обещает сохранить активную задачу агента после остановки машины. Если локальная проверка порта 3001 отвечает, но домен не открывается, проверяй DNS, Caddy и доступ к 80/443. Если панель открывается, но Claude не отвечает, проверяй авторизацию Claude Code</p>
+
+</section>
+
+<section class="content-section" id="after"><p class="section-label">После диагностики</p><h2>Что проверить после каждого исхода</h2>
+<ul>
+<li><strong>Вход восстановлен:</strong> проверь прежние чаты и тариф, затем сохрани важные материалы</li>
+<li><strong>Доступ вернули после апелляции:</strong> проверь переписки и локальные проекты, затем сделай экспорт. Если подозреваешь чужой вход, заверши активные сессии в <code>Settings → Account</code> и отдельно проверь ключи Claude Code и API</li>
+<li><strong>В апелляции отказали:</strong> продолжай работу с сохранёнными файлами в доступном тебе сервисе</li>
+<li><strong>Ошибка 403 исчезла:</strong> повтори действие, на котором она появлялась, в том же приложении. Если регион не поддерживается, используй исход из <a href="#network">сетевой ветки</a></li>
+<li><strong>Платёж прошёл:</strong> проверь статус подписки в аккаунте и банковское списание. Если банк снова отказал, вернись к причине отказа в <a href="#payment">платёжной ветке</a></li>
+<li><strong>Свой VPN подключён:</strong> проверь, что его адрес виден и в браузере, и в терминале, если пользуешься Claude Code; сохрани настройки подключения</li>
+<li><strong>Задача в облаке Anthropic завершилась:</strong> при запуске через сайт проверь изменения и ветку GitHub; при <code>claude --cloud</code> проверь файлы в облачной сессии. Нужные изменения перенеси в основной проект</li>
+<li><strong>CloudCLI на VPS открылся:</strong> проверь, что видна папка проекта и её файлы; сохрани копию проекта вне сервера</li>
+</ul>
+<p>На будущее держи копию важных файлов вне единственного сервиса и запоминай, каким адресом и способом входа пользуешься. Тогда при следующем сбое ты сначала увидишь конкретный симптом, а не будешь одновременно менять сеть, карту и аккаунт</p>
+</section>
+
+<section class="content-section" id="faq"><p class="section-label">Короткие ответы</p><h2>Что ещё часто путают в этих маршрутах</h2>
+<h3>Можно ли пользоваться семейным VPN через один аккаунт Claude?</h3><p>Гостевые ключи Amnezia дают каждому устройству сетевое подключение. Они не передают подписку Claude и не меняют условия личного аккаунта. У каждого человека должны быть собственные права на сервис</p>
+<h3>Что делать, если аккаунт куплен у посредника и его отключили?</h3><p>Сохрани номер заказа, условия обещанной замены и сообщение об отключении. Вопрос возврата или замены решай с продавцом через канал покупки. Если тебе доступен прежний аккаунт, официальный пересмотр блокировки идёт отдельно через Anthropic. Продавец не может гарантировать снятие решения Anthropic</p>
+<h3>Где хранить результат после восстановления?</h3><p>Сохрани архив переписок и копию проекта вне единственного компьютера или VPS. Экспорт Claude не переносит разговоры автоматически в другой личный аккаунт; рабочие файлы из Claude Code копируй отдельно</p>
+</section>
+
+<section class="content-section" id="sources"><p class="section-label">Документы сервисов</p><h2>Официальные источники</h2>
+<ul class="sources"><li><a href="https://www.anthropic.com/supported-countries">Anthropic: поддерживаемые страны и регионы</a></li><li><a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals">Anthropic: предупреждения, ограничения и апелляции</a></li><li><a href="https://support.claude.com/en/articles/9015913-how-to-get-support">Anthropic: как обратиться в поддержку</a></li><li><a href="https://support.claude.com/en/articles/13189465-log-in-to-your-claude-account">Anthropic: вход в аккаунт Claude</a></li><li><a href="https://support.claude.com/en/articles/8287232-verify-your-phone-number">Anthropic: проверка номера телефона</a></li><li><a href="https://support.google.com/accounts/answer/40695?hl=en">Google: использование нескольких аккаунтов</a></li><li><a href="https://support.google.com/accounts/answer/114129?hl=en">Google: ограничение проверок номера</a></li><li><a href="https://support.claude.com/en/articles/10310342-how-do-i-log-out-of-all-active-sessions">Anthropic: срок сессии и выход</a></li><li><a href="https://support.claude.com/en/articles/12109679-creating-a-new-account-after-deletion">Anthropic: новый аккаунт после удаления</a></li><li><a href="https://support.claude.com/en/articles/9402418-why-was-my-card-declined">Anthropic: причины отказа карты</a></li><li><a href="https://support.claude.com/en/articles/9450526-export-your-claude-data">Anthropic: экспорт данных Claude</a></li><li><a href="https://code.claude.com/docs/en/web-quickstart">Anthropic: запуск Claude Code в облаке</a></li><li><a href="https://code.claude.com/docs/en/claude-code-on-the-web">Anthropic: работа Claude Code в облаке из терминала</a></li><li><a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude">Anthropic: добавление файлов в обычный чат Claude</a></li><li><a href="https://code.claude.com/docs/en/getting-started">Anthropic: установка Claude Code</a></li><li><a href="https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository">GitHub: загрузка файлов в репозиторий</a></li><li><a href="https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github">GitHub: перенос локального репозитория</a></li><li><a href="https://docs.amnezia.org/documentation/supported-linux-os-for-vps/">Amnezia: требования к VPS</a></li><li><a href="https://docs.amnezia.org/ru/documentation/instructions/install-vpn-on-server/">Amnezia: установка VPN на сервере</a></li><li><a href="https://docs.amnezia.org/ru/documentation/instructions/amnezia-hosting-sharing/">Amnezia: гостевой доступ к VPN</a></li><li><a href="https://docs.amnezia.org/ru/documentation/instructions/killswitch/">Amnezia: KillSwitch</a></li><li><a href="https://cloudcli.ai/docs/open-source-self-hosting/prerequisites">CloudCLI: условия самостоятельной установки</a></li><li><a href="https://cloudcli.ai/docs/installation/global-installation">CloudCLI: установка и фоновый запуск</a></li><li><a href="https://cloudcli.ai/docs/installation/remote-server">CloudCLI: работа на удалённом сервере</a></li><li><a href="https://cloudcli.ai/docs/troubleshooting/common-issues">CloudCLI: пустой список проектов и доступ к папке</a></li><li><a href="https://caddyserver.com/docs/install">Caddy: установка</a></li><li><a href="https://caddyserver.com/docs/caddyfile/directives/basic_auth">Caddy: пароль для входа</a></li><li><a href="https://caddyserver.com/docs/caddyfile/directives/reverse_proxy">Caddy: обратный прокси</a></li></ul>
+</section>
+
+<section class="cta" aria-label="Следующий шаг"><p class="section-label">Бесплатный практикум</p><h2>Примени этот шаг на своём проекте</h2><p>ИИ-Лагерь - бесплатный прикладной практикум по вайб-маркетингу на Claude Code и Codex. Шаги показывают на экране: ты повторяешь работу со своими материалами и собираешь рабочий инструмент под свою задачу без кода и технических знаний</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?utm_source=botgk&amp;utm_content=post1">Хочу на бесплатный практикум</a></section>
+<footer class="foot">Обновлено 28 сентября 2026</footer>
+
+</article></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Вся подборка</p>
+      <h2>Гайды по нейросетям</h2>
+      <p><a href="../../">Открыть каталог статей</a></p>
+</aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
+    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+    <div class="viewer-scroll"><img alt=""></div>
+    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+  </div>
+
+<script>
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?utm_source=botgk&utm_content=post1";
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+
+    var themeButton = document.querySelector(".theme-toggle");
+    var savedTheme = localStorage.getItem("guide-theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+    themeButton.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("guide-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });
+
+    // "Открыть крупнее": скрины в примерах на телефоне ужимаются до 18-29%,
+    // кнопка открывает картинку во весь экран
+    (function () {
+      var viewer = document.getElementById("viewer");
+      if (!viewer) return;
+      var big = viewer.querySelector("img");
+      var lastFocused = null;
+      function open(src, alt) {
+        lastFocused = document.activeElement;
+        big.src = src; big.alt = alt || "";
+        big.onload = function () {
+          var box = viewer.querySelector(".viewer-scroll");
+          var room = viewer.clientWidth - 44;
+          // цель - читаемый текст, а не максимальный размер. Показываем картинку
+          // примерно вдвое крупнее, чем она стоит в тексте, но не больше её
+          // натуральной величины и не больше двух экранов по ширине
+          var inPage = document.querySelector('.shot img[src$="' + src.split("/").pop() + '"]');
+          var pageWidth = inPage ? inPage.getBoundingClientRect().width : room;
+          var target = Math.min(pageWidth * 2.2, big.naturalWidth);
+          // на большом экране картинка всегда влезает целиком, без прокрутки.
+          // На узком телефоне ужать её - значит ничего не увеличить, поэтому
+          // там разрешаем выйти за экран и прокручивать пальцем
+          var wide = viewer.clientWidth >= 860;
+          target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+          // и по высоте: картинка целиком должна помещаться на экран
+          if (wide) {
+            var maxH = viewer.clientHeight - 96;
+            var byHeight = maxH * (big.naturalWidth / big.naturalHeight);
+            target = Math.min(target, byHeight);
+          }
+          big.style.width = Math.round(target) + "px";
+          viewer.classList.toggle("fits", target <= room);
+          box.scrollLeft = (target - box.clientWidth) / 2;
+          var hint = viewer.querySelector(".viewer-hint");
+          var scrolls = box.scrollWidth > box.clientWidth + 2;
+          hint.textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+        };
+        viewer.setAttribute("open", "");
+        document.body.style.overflow = "hidden";
+        viewer.querySelector(".viewer-close").focus();
+      }
+      function close() {
+        viewer.removeAttribute("open");
+        document.body.style.overflow = "";
+        big.removeAttribute("src");
+        big.style.width = "";
+        if (lastFocused) lastFocused.focus();
+      }
+      document.querySelectorAll(".shot img").forEach(function (img) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "zoom";
+        button.textContent = "Открыть крупнее";
+        button.addEventListener("click", function () { open(img.currentSrc || img.src, img.alt); });
+        img.parentElement.appendChild(button);
+      });
+      viewer.addEventListener("click", function (event) {
+        if (event.target === viewer || event.target.classList.contains("viewer-close")) close();
+      });
+      addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && viewer.hasAttribute("open")) close();
+      });
+    })();
+
+    var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+    function updateReadingState() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+      var current = sections[0];
+      sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+      links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+    }
+    updateReadingState();
+    addEventListener("scroll", updateReadingState, { passive: true });
+  </script></body></html>
