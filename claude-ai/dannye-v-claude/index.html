@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Удаление данных в Claude: как сохранить копию, убрать чаты, отдельно проверить память и удалить аккаунт">
+  <meta property="og:title" content="Удаление данных в Claude">
+  <meta property="og:description" content="Как сохранить копию данных, удалить чаты и проверить память Claude">
+  <meta name="theme-color" content="#F8F7F2">
+  <title>Удаление данных в Claude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#F8F7F2; --white:#FFFFFF; --ink:#1E2926; --emerald:#102F30; --mid:#1F4A43; --muted:#62706A; --line:#D5C9B7; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F }
+    :root[data-theme="dark"] { --paper:#162221; --white:#20302E; --ink:#EDF1EE; --emerald:#DCEAE4; --mid:#A8D0BE; --muted:#B7C2BD; --line:#3C504C; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78 }
+    * { box-sizing:border-box }
+    html { scroll-behavior:smooth }
+    body { margin:0; background:var(--paper); color:var(--ink); font:18px/1.62 Spectral, Georgia, serif }
+    a { color:var(--mid); text-decoration-color:var(--accent); text-decoration-thickness:2px; text-underline-offset:4px; font-weight:600 }
+    button { cursor:pointer }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline:3px solid var(--accent); outline-offset:3px }
+    .progress { position:fixed; top:0; left:0; z-index:30; width:0; height:3px; background:var(--accent) }
+    .masthead { position:sticky; top:0; z-index:20; background:var(--paper); border-bottom:1px solid var(--line); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .masthead-inner { max-width:1200px; min-height:65px; margin:auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; gap:20px }
+    .brand { color:var(--emerald); font-size:17px; font-weight:800; text-decoration:none }
+    .header-actions { display:flex; align-items:center; gap:12px }
+    .handout-title { flex:0 0 auto; color:var(--accent-dark); font-size:12px; font-weight:800; white-space:nowrap }
+    .header-controls { display:flex; align-items:center; gap:12px }
+    .theme-toggle { flex:0 0 40px; width:40px; height:40px; border:1px solid var(--info-line); border-radius:9px; color:var(--emerald); background:var(--info); font-size:17px }
+    .press-button { display:inline-flex; align-items:center; min-height:40px; padding:0 12px; border-radius:9px; background:#1F4A43; color:#FFFFFF; text-decoration:none; font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .masthead .press-button { flex: 1; justify-content:center; padding:0 8px; white-space:nowrap }
+    .page-shell { max-width:1244px; margin:auto; padding:42px 20px 90px; display:grid; grid-template-columns:210px minmax(0,720px); align-items:start; gap:32px }
+    .toc { position:sticky; top:84px; width:260px; border-right:1px solid var(--line); padding-right:16px; font:600 13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .toc p { margin:0 0 14px; color:var(--accent-dark); font:700 11px/1.2 ui-monospace,monospace; letter-spacing:.13em }
+    .toc a { display:block; padding:7px 0; color:var(--muted); text-decoration:none }
+    .toc a:hover { color:var(--accent-dark) }
+    .toc a.active { color:var(--accent-dark); border-left:2px solid var(--accent); padding-left:10px }
+    .mobile-toc { display:none }
+    .eyebrow { margin:0 0 16px; color:var(--accent-dark); font:700 12px/1.25 ui-monospace,monospace; letter-spacing:.14em }
+    h1,h2 { color:var(--emerald); font-family:Unbounded,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-weight:700; text-wrap:balance }
+    h1 { margin:0; font-size:38px; line-height:1.14; letter-spacing:-.03em }
+    h2 { margin:0 0 18px; font-size:27px; line-height:1.2 }
+    h3 { margin:22px 0 8px; color:var(--emerald); font:750 19px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    p { margin:0 0 18px }
+    .lead { margin:22px 0 0; font-size:inherit; line-height:inherit }
+    .meta { margin-top:23px; color:var(--muted); font:600 12px/1.4 ui-monospace,monospace }
+    .content-section { margin-top:66px; scroll-margin-top:85px }
+    .step { margin:25px 0 0; padding:24px 0 0; border-top:1px solid var(--line) }
+    .step:first-of-type { margin-top:0; border-top:0; padding-top:0 }
+    .step h3 { margin-top:0 }
+    .path { padding:2px 5px; border-radius:4px; background:var(--info); font:650 .87em/1.4 ui-monospace,monospace }
+    .info-card,.warn-card { margin:24px 0; padding:11px 18px; border:1px solid var(--info-line); border-radius:11px; background:var(--info) }
+    .warn-card { border-left:6px solid var(--accent) }
+    .info-card p,.warn-card p { margin:0 }
+    .info-card + p,.warn-card + p { margin-top:25px }
+    .result { margin:23px 0 0; padding-left:17px; border-left:3px solid #5F7F68; color:var(--mid) }
+    .result p { margin:0 }
+    .shot { position:relative; width:min(100%,650px); margin:26px 0 30px }
+    .shot.narrow { width:min(100%,365px) }
+    .shot img { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:10px; background:#fff; cursor:zoom-in }
+    .annotated-frame { position:relative; width:100% }
+    .annotated-frame .frame-mask,.annotated-frame .round-frame { position:absolute; left:var(--frame-x); top:var(--frame-y); width:var(--frame-w); height:var(--frame-h); box-sizing:border-box; pointer-events:none }
+    .annotated-frame .frame-mask { left:calc(var(--frame-x) - 3px); top:calc(var(--frame-y) - 3px); width:calc(var(--frame-w) + 6px); height:calc(var(--frame-h) + 6px); border:7px solid var(--mask-bg) }
+    .annotated-frame .round-frame { border:3px solid var(--frame-color); border-radius:var(--frame-radius) }
+    .export-frame { --frame-x:81.8328%; --frame-y:46.8224%; --frame-w:14.5498%; --frame-h:6.6355%; --mask-bg:#fefefe; --frame-color:#e86f4a; --frame-radius:12px }
+    .chat-frame { --frame-x:5.5901%; --frame-y:81.2037%; --frame-w:20.1087%; --frame-h:5.8333%; --mask-bg:#fcfcfc; --frame-color:#f27645; --frame-radius:10px }
+    .memory-frame { --frame-x:1.5361%; --frame-y:67.7027%; --frame-w:21.0445%; --frame-h:7.8378%; --mask-bg:#fafafa; --frame-color:#f27645; --frame-radius:11px }
+    .account-frame { --frame-x:78.6798%; --frame-y:91.453%; --frame-w:17.0713%; --frame-h:6.0779%; --mask-bg:#fefefe; --frame-color:#f37847; --frame-radius:11px }
+    .memory-frame { position:relative }
+    .memory-frame .old-underline { position:absolute; left:28.1%; top:46.2%; width:25.9%; height:1.1%; background:#fff; pointer-events:none }
+    .memory-frame .new-underline { position:absolute; left:28.1%; top:45%; width:25.9%; height:.54%; background:var(--accent); pointer-events:none }
+    figcaption { margin-top:10px; min-height:30px; padding-right:125px; color:var(--muted); font:500 14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .shot .zoom { position:absolute; right:0; bottom:0; padding:6px 9px; border:0; border-radius:7px; background:#102F30; color:#fff; font:750 11px/1 ui-monospace,monospace; opacity:0; pointer-events:none }
+    .shot:hover .zoom,.shot .zoom:focus-visible { opacity:1; pointer-events:auto }
+    @media (hover:none) { .shot .zoom { display:none } figcaption { padding-right:0; min-height:0 } }
+    .map { margin:26px 0; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .map div { min-height:140px; padding:17px; border:1px solid var(--line); border-radius:11px; background:var(--white) }
+    .map b { display:block; margin-bottom:9px; color:var(--emerald); font-size:17px }
+    .map span { color:var(--muted); font-size:14px; line-height:1.4 }
+    .checklist { padding-left:21px }
+    .checklist li { margin:11px 0 }
+    .sources { padding-left:21px }
+    .sources li { margin:9px 0 }
+    .related-plaque { grid-column:2; padding:15px 17px; border:1px solid var(--info-line); border-radius:11px; background:var(--info); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .related-plaque p { margin:0 }
+    .related-plaque .plaque-label { margin-bottom:6px; color:var(--accent-dark); font:700 11px/1.3 ui-monospace,monospace; letter-spacing:.12em }
+    .related-plaque h2 { margin:0 0 8px; font:750 18px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .next-read { margin:46px 0 0; padding:24px; border:1px solid var(--info-line); border-radius:14px; background:var(--info) }
+    .next-read h2 { margin:0 0 4px; font-size:20px }
+    .next-read .next-sub { margin:0 0 16px; color:var(--muted); font-size:14.5px }
+    .next-read a { position:relative; display:block; padding:14px 42px 14px 16px; border:1px solid var(--info-line); border-radius:11px; background:var(--white); text-decoration:none; font:700 16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .next-read .title { text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:2px; text-underline-offset:4px }
+    .next-read a::after { content:"→"; position:absolute; top:14px; right:16px; color:var(--accent); font-size:19px; font-weight:700 }
+    .next-read .why { display:block; margin-top:5px; color:var(--muted); font-weight:400; font-size:14px }
+    .cta { margin-top:68px; padding:27px; border-radius:13px; background:#102F30; color:#F8F7F2 }
+    .cta h2 { color:#F8F7F2 }
+    .cta p { color:#F0E8D8 }
+    .cta .eyebrow { color:#F0E8D8 }
+    .cta .press-button { display:inline-flex; align-items:center; min-height:40px; padding:0 15px; background:var(--accent); color:#102F30 }
+    .press-button,.theme-toggle,.shot .zoom { box-shadow:0 3px 0 var(--info-line); transition:background .15s,transform .15s,box-shadow .15s }
+    .press-button:hover,.theme-toggle:hover,.shot .zoom:hover { background:#F28A68; color:#102F30; transform:translateY(1px); box-shadow:0 2px 0 var(--info-line) }
+    .press-button:active,.theme-toggle:active,.shot .zoom:active { background:#FFD1BF; color:#102F30; transform:translateY(3px) scale(.98); box-shadow:inset 0 0 0 3px rgba(16,47,48,.42) }
+    .foot { margin-top:30px; color:var(--muted); font:500 13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .viewer { display:none; position:fixed; inset:0; z-index:50; padding:64px 16px 18px; background:#102F30; grid-template-rows:1fr auto; place-items:center; gap:12px }
+    .viewer[open] { display:grid }
+    .viewer-scroll { max-width:100%; max-height:100%; overflow:auto; border-radius:10px; background:#fff; -webkit-overflow-scrolling:touch }
+    .viewer-image { position:relative; flex:none }
+    .viewer-image img { display:block; width:100%; height:auto; object-fit:contain }
+    .viewer-image .old-underline,.viewer-image .new-underline,.viewer-image .frame-mask,.viewer-image .round-frame { display:none }
+    .viewer-image.annotated-frame .frame-mask,.viewer-image.annotated-frame .round-frame { display:block }
+    .viewer-image.memory-frame .old-underline { display:block; left:28.1%; top:46.2%; width:25.9%; height:1.1%; background:#fff }
+    .viewer-image.memory-frame .new-underline { display:block; left:28.1%; top:45%; width:25.9%; height:.54%; background:var(--accent) }
+    .viewer-close { position:absolute; top:16px; right:16px; min-width:42px; min-height:42px; border:0; border-radius:10px; background:#F8F7F2; color:#102F30; font:750 17px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .viewer-hint { margin:0; color:#C9D6D2; font:600 13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; text-align:center }
+    @media (min-width:1200px) { .page-shell { grid-template-columns:210px minmax(0,720px) 180px } .related-plaque { grid-column:3; grid-row:1; position:sticky; top:84px } .header-actions { margin-right:8px } .header-controls { width: 180px } }
+    @media (max-width:860px) { body { font-size:17px } .masthead-inner { min-height:60px; padding:0 14px } .brand { font-size:14px } .page-shell { display:block; padding:26px 18px 70px } .toc { display:none } .mobile-toc { display:block; margin:23px 0 30px; padding:13px 15px; border:1px solid var(--line); border-radius:10px; font:650 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif } .mobile-toc summary { color:var(--emerald); cursor:pointer } .mobile-toc a { display:block; padding:7px 0 } .related-plaque { margin-top:36px } .header-actions .handout-title { display:none } .header-controls { width:auto } h1 { font-size:31px } h2 { font-size:24px } .map { grid-template-columns:1fr } .map div { min-height:0 } }
+    @media (min-width:861px) and (max-width:1199px) { .toc { width:240px; margin-left:0 } }
+    @media (min-width:1200px) { .toc { margin-left:max(-50px,calc(630px - 50vw)) } }
+    @media (min-width:1200px) and (max-width:1304px) { .toc { width:calc(260px - (1304px - 100vw) / 2) } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto } .press-button,.theme-toggle,.shot .zoom { transition:none } .press-button:hover,.theme-toggle:hover,.shot .zoom:hover,.press-button:active,.theme-toggle:active,.shot .zoom:active { transform:none } }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="masthead"><div class="masthead-inner">
+    <a class="brand" href="../../">Claude.ai: кнопка за кнопкой</a>
+    <div class="header-actions"><span class="handout-title">УДАЛЕНИЕ ДАННЫХ</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div>
+  </div></div>
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p>
+      <a href="#kopiya">Сначала сохрани нужные переписки</a><a href="#chat">Как удалить чаты из истории Claude</a><a href="#memory">Удаление чувствительных сведений из памяти Claude</a><a href="#account">Закрытие аккаунта Claude</a><a href="#itog">Что именно удаляется после каждого шага</a><a href="#sources">Официальные источники</a>
+    </nav>
+    <main>
+      <header id="nachalo"><p class="eyebrow">CLAUDE.AI · ЧАТЫ, ПАМЯТЬ, АККАУНТ</p><h1>Удаление данных в Claude</h1>
+        <p class="lead">Ты удаляешь из истории Claude чат с чувствительными деталями о себе или работе, чтобы они больше не всплывали. Но позже Claude может снова упомянуть одну из них в новом разговоре: она могла сохраниться в памяти. Ниже покажу, как убрать такие сведения и при этом не потерять переписки, которые захочешь перечитать</p>
+        <p class="meta">ОБНОВЛЕНО 28 СЕНТЯБРЯ 2026</p>
+      </header>
+      <details class="mobile-toc"><summary>Содержание статьи</summary><a href="#kopiya">Сначала сохрани нужные переписки</a><a href="#chat">Как удалить чаты из истории Claude</a><a href="#memory">Удаление чувствительных сведений из памяти Claude</a><a href="#account">Закрытие аккаунта Claude</a><a href="#itog">Что именно удаляется после каждого шага</a><a href="#sources">Официальные источники</a></details>
+
+      <section class="content-section" id="kopiya"><h2>Сначала сохрани нужные переписки</h2>
+        <p>Если позже захочешь перечитать разговор или найти в нём ответ Claude, сохрани копию до удаления. В приложении Claude на iPhone и Android запросить архив нельзя. Открой Claude на компьютере в браузере или приложении Claude Desktop, нажми свои инициалы в левом нижнем углу и перейди в <span class="path">Settings → Privacy</span>. В блоке <b>Your data</b> нажми <span class="path">Export data</span></p>
+        <figure class="shot"><div class="annotated-frame export-frame" data-frame="export"><img src="assets/export-data-screen.png" alt="Экран Privacy в Claude; кнопка Export data выделена скруглённой рамкой" loading="lazy"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span></div><figcaption>Privacy: экспорт находится в блоке Your data</figcaption></figure>
+        <p>Когда архив будет готов, Claude пришлёт письмо со ссылкой на почту твоего аккаунта. Открой письмо и перейди по ссылке: отдельную кнопку в Claude искать не нужно. Для скачивания нужно быть в том же аккаунте Claude, из которого был запрошен экспорт. Ссылка работает 24 часа после того, как пришло письмо. Скачанный файл ищи в папке загрузок браузера, обычно она называется «Загрузки». Открой архив и убедись, что нужные разговоры сохранились, прежде чем удалять их из Claude</p>
+        <div class="result"><p>Результат: у тебя есть копия переписок. Сам запрос экспорта ничего не удаляет, а скачанный архив нельзя импортировать в другой личный аккаунт Claude</p></div>
+        <div class="info-card"><p>На личных тарифах экспорт запрашивает владелец аккаунта. Для Team и Enterprise выгрузка данных организации доступна Primary Owner</p></div>
+      </section>
+
+      <section class="content-section" id="chat"><h2>Как удалить чаты из истории Claude</h2>
+        <div class="step"><h3>Удаление одного чата</h3>
+          <p>Найди разговор в левой колонке Claude, наведи указатель на его название и нажми <span class="path">⋮</span>. Выбери <span class="path">Delete</span>, затем ещё раз нажми <span class="path">Delete</span> в окне подтверждения</p>
+          <figure class="shot"><div class="annotated-frame chat-frame" data-frame="chat"><img src="assets/delete-chat-screen.png" alt="Экран тестового чата Claude; действие Delete выделено скруглённой рамкой" loading="lazy"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span></div><figcaption>Меню разговора в боковой колонке</figcaption></figure>
+        </div>
+        <div class="step"><h3>Удаление нескольких чатов сразу</h3>
+          <p>Открой <span class="path">Chats and tasks</span> в левой колонке. Наведи указатель на первый чат, нажми <span class="path">⋮ → Select</span> и отметь галочками остальные чаты, которые хочешь удалить. Перед подтверждением посмотри на галочки и названия: среди выделенных не должно быть разговора, который ты собираешься оставить. Затем нажми красную кнопку <span class="path">Delete</span> вверху страницы и ещё раз <span class="path">Delete</span> в окне подтверждения</p>
+          <figure class="shot multiple"><img src="assets/delete-multiple-chats-screen.png" alt="Экран выбора нескольких чатов Claude: шесть разговоров отмечены галочками, названия видны, вверху находится красная кнопка Delete" loading="lazy"><figcaption>Перед Delete проверь, какие разговоры отмечены галочками</figcaption></figure>
+        </div>
+        <div class="result"><p>Результат: выбранные чаты исчезают из истории сразу. По данным Anthropic, их удаление из внутренних систем может занять до 30 дней. Сведения, которые Claude успел сохранить в памяти, удаляются отдельно</p></div>
+      </section>
+
+      <section class="content-section" id="memory"><h2>Удаление чувствительных сведений из памяти Claude</h2>
+        <p>После удаления чатов открой <span class="path">Settings → Memory</span>. Здесь две разные настройки: <b>Search and reference chats</b> разрешает Claude искать сведения в прошлых разговорах, а <b>Generate memory from chats</b> создаёт отдельные записи памяти. Удаление чата из истории не удаляет факты, которые уже попали в память</p>
+        <p>Ниже есть переключатель <b>Include sensitive topics in memory</b>. Выключи его, и Claude не будет сохранять в память темы вроде здоровья или убеждений</p>
+        <figure class="shot"><div class="annotated-frame memory-frame" data-frame="memory"><img src="assets/memory-settings-screen.png" alt="Экран Memory в Claude; выбранный раздел обведён скруглённой рамкой, Generate memory from chats подчёркнут" loading="lazy"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span><span class="old-underline" aria-hidden="true"></span><span class="new-underline" aria-hidden="true"></span></div><figcaption>Memory: создание памяти выделено оранжевой линией</figcaption></figure>
+        <p>Если ниже виден список <b>Topics</b>, найди тему с чувствительной деталью, которую хочешь убрать, открой её и нажми <b>Delete</b>. Если хочешь удалить всю сохранённую память, нажми переключатель <b>Generate memory from chats</b> и выбери <b>Reset memory</b></p>
+        <div class="warn-card"><p><b>Перед Reset memory:</b> это действие необратимо и удаляет также память проектов. Если хочешь удалить только одну чувствительную деталь, сначала ищи её в Topics</p></div>
+        <p><b>Pause memory</b> не удаляет прежние записи. Этот вариант лишь приостанавливает использование памяти и создание новых записей</p>
+        <div class="result"><p>Результат: после удаления темы Claude больше не хранит выбранную запись памяти. После Reset memory он начинает собирать память заново, если ты снова включишь эту функцию</p></div>
+      </section>
+
+      <section class="content-section" id="account"><h2>Закрытие аккаунта Claude</h2>
+        <p>Если ты хочешь закрыть учётную запись целиком, сначала скачай архив с нужными разговорами. Удаление аккаунта необратимо: после него ты потеряешь доступ к чатам, проектам и другим сохранённым данным</p>
+        <p>Открой <span class="path">Settings → Account</span> и найди внизу кнопку <span class="path">Delete account</span>. На скрине она неактивна, потому что в этом аккаунте действует подписка Pro. Если у тебя Pro или Max, сначала открой <span class="path">Settings → Billing</span>, отмени подписку и дождись конца оплаченного периода. После этого вернись в Account, нажми <b>Delete account</b> и следуй шагам подтверждения</p>
+        <figure class="shot"><div class="annotated-frame account-frame" data-frame="account"><img src="assets/delete-account-screen.png" alt="Экран Account в Claude; личные инструкции скрыты, Delete account выделена скруглённой рамкой" loading="lazy"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span></div><figcaption>Account: личные инструкции закрыты, расположение кнопки сохранено</figcaption></figure>
+        <div class="result"><p>Результат: после подтверждения аккаунт удаляется, а войти в него и восстановить переписки уже нельзя</p></div>
+      </section>
+
+      <section class="content-section" id="itog"><h2>Что именно удаляется после каждого шага</h2>
+        <div class="map"><div><b>Чат</b><span>Ты убираешь разговор из истории, но отдельная запись памяти может остаться</span></div><div><b>Память</b><span>Через Topics ты удаляешь один сохранённый факт, через Reset memory - все записи</span></div><div><b>Аккаунт</b><span>Ты удаляешь всю учётную запись вместе с доступом к сохранённым данным</span></div></div>
+        <p>Если ты хочешь убрать из Claude чувствительную деталь, начни с разговора, где она появилась, а затем проверь память. Если хочешь закрыть аккаунт, сначала сохрани архив: после удаления вернуть переписку уже не получится</p>
+      </section>
+
+      <section class="content-section" id="sources"><h2>Официальные источники</h2>
+        <ul class="sources"><li><a href="https://support.claude.com/en/articles/9450526-export-your-claude-data">Anthropic: экспорт данных</a></li><li><a href="https://support.claude.com/en/articles/8230524-delete-or-rename-a-conversation">Anthropic: удаление чатов</a></li><li><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Anthropic: поиск и память</a></li><li><a href="https://support.claude.com/en/articles/9028421-delete-your-claude-account">Anthropic: удаление аккаунта</a></li></ul>
+      </section>
+
+      <section class="next-read" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><a href="../kak-rasskazat-o-sebe/"><span class="title">Как рассказать Claude о себе</span><span class="why">Проверь, какие сведения и правила ответа остаются в настройках после очистки памяти</span></a></section>
+      <section class="cta" aria-label="Бесплатный практикум"><p class="eyebrow">БЕСПЛАТНЫЙ ПРАКТИКУМ</p><h2>От порядка в Claude к инструменту для своей работы</h2><p>Когда решишь, какие данные оставить в Claude, можно перейти к работе над своим проектом. На бесплатном трёхдневном ИИ-Лагере показывают, как с Claude Code и Codex собрать сайт под свой оффер, бота для сообщений клиентам или систему для выпуска роликов и каруселей. Каждый шаг виден на экране, программировать не нужно</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Посмотреть ИИ-Лагерь</a></section>
+      <p class="foot">Материал подготовлен по интерфейсу Claude и справке Anthropic на 28 сентября 2026 года</p>
+    </main>
+    <aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">ПО ТЕМЕ</p>
+      <h2>Приватный чат в Claude</h2>
+      <p><a href="../incognito-chat-v-claude/">Когда нужен разговор без истории</a></p>
+    </aside>
+  </div>
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Изображение крупнее"><button class="viewer-close" type="button" aria-label="Закрыть изображение">×</button><div class="viewer-scroll"><div class="viewer-image"><img alt=""><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span><span class="old-underline" aria-hidden="true"></span><span class="new-underline" aria-hidden="true"></span></div></div><p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p></div>
+  <script>
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+    document.querySelectorAll("[data-partner]").forEach(function(link) { link.href = PARTNER_LINK; });
+    var themeButton = document.querySelector(".theme-toggle");
+    var progress = document.querySelector(".progress");
+    var tocLinks = Array.from(document.querySelectorAll(".toc a[href^='#']"));
+    function updateReadingPosition() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (max > 0 ? Math.min(100, Math.max(0, window.scrollY / max * 100)) : 100) + "%";
+      var active = tocLinks[0];
+      tocLinks.forEach(function(link) {
+        var section = document.querySelector(link.getAttribute("href"));
+        if (section && section.getBoundingClientRect().top <= 120) active = link;
+      });
+      tocLinks.forEach(function(link) { link.classList.toggle("active", link === active); });
+    }
+    window.addEventListener("scroll", updateReadingPosition, { passive:true });
+    window.addEventListener("resize", updateReadingPosition);
+    updateReadingPosition();
+    themeButton.addEventListener("click", function() {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+    var viewer = document.getElementById("viewer");
+    var viewerImage = viewer.querySelector("img");
+    document.querySelectorAll(".shot img").forEach(function(img) {
+      var zoom = document.createElement("button");
+      zoom.className = "zoom";
+      zoom.type = "button";
+      zoom.textContent = "Открыть крупнее";
+      img.closest(".shot").appendChild(zoom);
+      function openViewer() { var room = window.innerWidth - 44; var pageWidth = img.getBoundingClientRect().width; var target = Math.min(img.naturalWidth, pageWidth * 2.2); var wide = window.innerWidth >= 860; target = wide ? Math.min(target, room, (window.innerHeight - 96) * img.naturalWidth / img.naturalHeight) : Math.max(target, Math.min(room, img.naturalWidth)); viewerImage.parentElement.style.width = Math.max(1, Math.round(target)) + "px"; viewerImage.src = img.src; viewerImage.alt = img.alt; var frame = img.closest(".annotated-frame"); viewerImage.parentElement.className = frame ? "viewer-image annotated-frame " + frame.dataset.frame + "-frame" : "viewer-image"; viewer.setAttribute("open", ""); var box = viewer.querySelector(".viewer-scroll"); box.scrollLeft = (target - box.clientWidth) / 2; viewer.querySelector(".viewer-hint").textContent = target > room ? "Двигай картинку пальцем. Нажми в стороне или Esc, чтобы закрыть" : "Нажми в стороне или Esc, чтобы закрыть"; document.body.style.overflow = "hidden"; }
+      zoom.addEventListener("click", openViewer);
+      img.addEventListener("click", openViewer);
+      img.tabIndex = 0;
+      img.setAttribute("role", "button");
+      img.setAttribute("aria-label", "Открыть скриншот крупнее");
+      img.addEventListener("keydown", function(event) { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openViewer(); } });
+    });
+    function closeViewer() { viewer.removeAttribute("open"); document.body.style.overflow = ""; viewerImage.parentElement.className = "viewer-image"; viewerImage.parentElement.style.width = ""; viewerImage.removeAttribute("src"); }
+    viewer.querySelector(".viewer-close").addEventListener("click", closeViewer);
+    viewer.addEventListener("click", function(event) { if (event.target === viewer) closeViewer(); });
+    document.addEventListener("keydown", function(event) { if (event.key === "Escape") closeViewer(); });
+  </script>
+</body>
+</html>
