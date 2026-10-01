@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Каждая пара проверена по официальным сайтам 24.09.2026. У бесплатного всегда есть ограничение, и здесь оно написано прямо">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:title" content="10 бесплатных замен платным нейросетям - с подвохами">
+<meta property="og:description" content="Каждая пара проверена по официальным сайтам 24.09.2026. У бесплатного всегда есть ограничение, и здесь оно написано прямо">
+<title>10 бесплатных замен платным нейросетям - с подвохами</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .route-note { margin: 31px 0 34px; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted) }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+/* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
+       .info-card - полезное уточнение, фон без полосы
+       .warn-card - оговорка или предупреждение, фон плюс оранжевая полоса
+       .check-panel - читатель отмечает пункты, поэтому БЕЛАЯ карточка */
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .warn-card p { margin: 0 }
+    /* абзац после блока слипался с ним: у блоков margin-bottom 0,
+       а у p margin-top 0. Зазор был 0 px при 25 px между абзацами */
+    .info-card + p, .warn-card + p, .check-panel + p { margin-top: 25px }
+    .tune-card { margin-top: 26px; padding: 15px 20px 3px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .tune-card h3 { margin-bottom: 9px }
+    .tune-card .result { margin-bottom: 17px }
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px rgba(248, 247, 242, .88); pointer-events: none }
+    .annotation::before { content: attr(data-n); position: absolute; top: -38px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--emerald); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .annotation.mic { left: 84.70%; top: 81.47%; width: 3.11%; height: 8.62% }
+    .annotation.wave { left: 89.85%; top: 81.47%; width: 5.89%; height: 8.62% }
+    .annotation.cancel { left: 85.76%; top: 80.39%; width: 4.26%; height: 11.21% }
+    .annotation.accept { left: 91.33%; top: 80.39%; width: 4.26%; height: 11.21% }
+    .annotation.stop { left: 86.48%; top: 79.94%; width: 9.64%; height: 8.33% }
+    .annotation.allow { left: 6.23%; top: 54.40%; width: 54.47%; height: 5.39% }
+    .annotation.nodev { left: 74.32%; top: 88.51%; width: 24.12%; height: 9.87% }
+    .annotation.arrow { left: 94.86%; top: 73.55%; width: 2.97%; height: 9.09% }
+    .annotation.checked { left: 58.92%; top: 45.87%; width: 37.57%; height: 9.50% }
+    .annotation.checked::before { top: 50%; left: -38px; transform: translateY(-50%) }
+    .annotation.arrow::before { top: 50%; left: -38px; transform: translateY(-50%) }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    h3 + .prompt-box { margin-top: 12px }
+    .prompt-box + h3 { margin-top: 46px }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: #F28A68 }
+    .copy-button:active { background: #FFD1BF; box-shadow: 0 1px 0 #8F371F; transform: translateY(2px) }
+    .copy-button.is-copied { background: #FFD1BF; box-shadow: 0 0 0 3px rgba(255, 209, 191, .34); transform: translateY(1px) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 900 }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+      .annotation { border-width: 2px }
+      .annotation::before { top: -30px; width: 22px; height: 22px; font-size: 11px }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    /* карточка должна читаться как ссылка, а не как серый блок текста.
+       text-decoration НАСЛЕДУЕТСЯ, поэтому подчёркиваем только .title */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.source-note{margin-top:10px;color:var(--muted);font:500 14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.partner-line{margin:46px 0;padding:12px 0 12px 16px;border-left:3px solid var(--line);color:var(--muted);font:500 15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.copy-button:active{box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner">
+<div class="brand">Claude.ai: кнопка за кнопкой</div>
+<div class="header-actions"><div class="handout-title">10 бесплатных замен</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a>
+</div></div></div></header>
+<div class="page-shell">
+<nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">10 бесплатных замен платным нейросетям - с подвохами</a>
+<a href="#kak-chitat">Как читать список</a>
+<a href="#zamena-1">1. Автопостинг: Buffer Essentials $6 → Publer</a>
+<a href="#zamena-2">2. Обработка фото: Adobe Firefly $9.99 → Photoroom</a>
+<a href="#zamena-3">3. Код: GitHub Copilot Pro $10 → Cursor</a>
+<a href="#zamena-4">4. Сайт: Framer Basic $10 → Durable</a>
+<a href="#zamena-5">5. Дизайн: Canva Pro $12 → Canva Free</a>
+<a href="#zamena-6">6. Поиск по научным статьям: Perplexity Pro $20 → Consensus</a>
+<a href="#zamena-7">7. Видео с аватаром: HeyGen Creator $29 → HeyGen Free</a>
+<a href="#zamena-8">8. Картинки: Midjourney Pro $60 → Nano Banana в Gemini</a>
+<a href="#zamena-9">9. Видео по тексту: Runway Max $95 → ZSKY AI</a>
+<a href="#zamena-10">10. Озвучка голосом: ElevenLabs Pro $99 → MiniMax Audio</a>
+<a href="#bonus-muzyka">Бонус. Музыка: Suno Pro $10 → Suno Free</a>
+<a href="#chto-ne-voshlo">Что ещё советуют в сети и почему не вошло в эту подборку</a>
+<a href="#glavnoe-pravilo">Главное правило</a></nav>
+<main>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#nachalo">10 бесплатных замен платным нейросетям - с подвохами</a>
+<a href="#kak-chitat">Как читать список</a>
+<a href="#zamena-1">1. Автопостинг: Buffer Essentials $6 → Publer</a>
+<a href="#zamena-2">2. Обработка фото: Adobe Firefly $9.99 → Photoroom</a>
+<a href="#zamena-3">3. Код: GitHub Copilot Pro $10 → Cursor</a>
+<a href="#zamena-4">4. Сайт: Framer Basic $10 → Durable</a>
+<a href="#zamena-5">5. Дизайн: Canva Pro $12 → Canva Free</a>
+<a href="#zamena-6">6. Поиск по научным статьям: Perplexity Pro $20 → Consensus</a>
+<a href="#zamena-7">7. Видео с аватаром: HeyGen Creator $29 → HeyGen Free</a>
+<a href="#zamena-8">8. Картинки: Midjourney Pro $60 → Nano Banana в Gemini</a>
+<a href="#zamena-9">9. Видео по тексту: Runway Max $95 → ZSKY AI</a>
+<a href="#zamena-10">10. Озвучка голосом: ElevenLabs Pro $99 → MiniMax Audio</a>
+<a href="#bonus-muzyka">Бонус. Музыка: Suno Pro $10 → Suno Free</a>
+<a href="#chto-ne-voshlo">Что ещё советуют в сети и почему не вошло в эту подборку</a>
+<a href="#glavnoe-pravilo">Главное правило</a></nav></details>
+<article>
+<header id="nachalo"><p class="eyebrow">Подборка · 10 сервисов</p><h1>10 бесплатных замен платным нейросетям - с подвохами</h1><p class="lead">Каждая пара проверена по официальным сайтам 24.09.2026, HeyGen, ZSKY AI и MiniMax перепроверены 30.09.2026, вход из России без VPN проверен 01.10.2026. Сервисы меняют цены и лимиты часто, через месяц цифры могут быть другими. У бесплатного всегда есть ограничение, и здесь оно написано прямо</p></header>
+<section class="content-section" id="kak-chitat"><h2>Как читать список</h2>
+<p>Слева платный сервис и его цена в месяц, справа бесплатная замена, её ссылка и в чём подвох. Где известно, как сервис работает из России, это написано в паре. Если сервис не открывается - включай VPN, тот же, через который работаешь с Claude. Кредиты, которые встретятся ниже, - это внутренняя валюта сервиса: на неё тратятся генерации</p>
+</section>
+<section class="content-section" id="zamena-1"><h2>1. Автопостинг: Buffer Essentials $6 → Publer</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://publer.com/" target="_blank" rel="noopener noreferrer">https://publer.com/</a></p>
+<p><b>Бесплатно:</b> до 3 аккаунтов соцсетей, кроме X (бывший Twitter), до 10 постов в очереди на каждый одновременно, 25 черновиков</p>
+<p><b>Подвох:</b> публикация в X и часть аналитики только платно. $6 у Buffer - за один канал</p>
+<p><b>Из России:</b> работает без VPN, но медленнее, чем с VPN</p>
+<p class="source-note">Источник лимитов: справка Publer</p>
+</div>
+</section>
+<section class="content-section" id="zamena-2"><h2>2. Обработка фото: Adobe Firefly $9.99 → Photoroom</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://www.photoroom.com/" target="_blank" rel="noopener noreferrer">https://www.photoroom.com/</a></p>
+<p><b>Бесплатно:</b> 100 готовых картинок в месяц, но не больше 25 в неделю</p>
+<p><b>Подвох:</b> сильный инструмент для фото товаров и замены фона, но видео и звука, как в Firefly, нет</p>
+<p><b>Из России:</b> открывается без VPN. При входе предлагают 7 дней Pro бесплатно, это проба, потом платно</p>
+</div>
+</section>
+<section class="content-section" id="zamena-3"><h2>3. Код: GitHub Copilot Pro $10 → Cursor</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://cursor.com/" target="_blank" rel="noopener noreferrer">https://cursor.com/</a></p>
+<p><b>Бесплатно:</b> тариф Hobby без карты. Cursor - программа для кода, её ставят на компьютер</p>
+<p><b>Подвох:</b> запросы к агенту ограничены, точное число Cursor не публикует</p>
+<p><b>Из России:</b> сайт открывается и программа ставится без VPN, но модели Claude, GPT и Gemini их владельцы из России закрыли: без VPN в Cursor остаются только модели вроде Composer и DeepSeek. Поддержка Cursor подтвердила это на своём форуме в январе 2026</p>
+</div>
+</section>
+<section class="content-section" id="zamena-4"><h2>4. Сайт: Framer Basic $10 → Durable</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://durable.com/" target="_blank" rel="noopener noreferrer">https://durable.com/</a></p>
+<p><b>Бесплатно:</b> сайт на адресе вида имя.durable.site, 5 ИИ-картинок и 10 ИИ-чатов в месяц</p>
+<p><b>Подвох:</b> свой домен только на платном тарифе, дизайном управлять сложнее, чем во Framer. $10 у Framer - цена в месяц при оплате за год</p>
+<p><b>Из России:</b> открывается без VPN</p>
+</div>
+</section>
+<section class="content-section" id="zamena-5"><h2>5. Дизайн: Canva Pro $12 → Canva Free</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">https://www.canva.com/</a></p>
+<p><b>Бесплатно:</b> 5 ГБ хранилища и до 20 использований ИИ-функций в месяц</p>
+<p><b>Подвох:</b> часть шаблонов и элементов только в Pro. $12 - цена в месяц при оплате за год</p>
+<p><b>Из России:</b> Canva ушла из России в 2022 году и закрыла доступ, без VPN не работает</p>
+</div>
+</section>
+<section class="content-section" id="zamena-6"><h2>6. Поиск по научным статьям: Perplexity Pro $20 → Consensus</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://consensus.app/" target="_blank" rel="noopener noreferrer">https://consensus.app/</a></p>
+<p><b>Бесплатно:</b> поиск по статьям без лимита, 10 продвинутых ответов, 3 глубоких обзора в месяц</p>
+<p><b>Подвох:</b> ищет только по научным публикациям, обычный поиск по интернету не заменит</p>
+<p><b>Из России:</b> работает без VPN</p>
+</div>
+</section>
+<section class="content-section" id="zamena-7"><h2>7. Видео с аватаром: HeyGen Creator $29 → HeyGen Free</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://www.heygen.com/" target="_blank" rel="noopener noreferrer">https://www.heygen.com/</a></p>
+<p><b>Бесплатно:</b> 1-3 пробных видео до минуты для новых пользователей, чтобы познакомиться с сервисом. Так отвечает ИИ-помощник на сайте HeyGen, число видео зависит от страны, сколько дадут тебе, видно в аккаунте</p>
+<p><b>Подвох:</b> скачать бесплатное видео можно только с водяным знаком, и он крупный, поверх всего видео, а не в уголке. Для проб годится, для соцсетей нет. В зарубежных подборках вместо него советуют Hedra, но постоянного бесплатного тарифа у Hedra на сайте нет</p>
+<p><b>Из России:</b> сайт работает без VPN, но российские карты HeyGen не принимает</p>
+</div>
+</section>
+<section class="content-section" id="zamena-8"><h2>8. Картинки: Midjourney Pro $60 → Nano Banana в Gemini</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">https://gemini.google.com/</a></p>
+<p><b>Бесплатно:</b> генерация картинок в обычном Gemini, лимит Google не публикует</p>
+<p><b>Подвох:</b> России нет в списке стран Gemini, без VPN не откроется, и даже с VPN доступ не гарантирован. Без VPN бесплатно рисует Алиса AI от Яндекса, но в часы нагрузки функция может пропадать</p>
+<p><b>Из России:</b> официально не поддерживается, нужен VPN</p>
+</div>
+</section>
+<section class="content-section" id="zamena-9"><h2>9. Видео по тексту: Runway Max $95 → ZSKY AI</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://zsky.ai/" target="_blank" rel="noopener noreferrer">https://zsky.ai/</a></p>
+<p><b>Бесплатно:</b> генерация видео и картинок без лимита и без карты, ролик 5 секунд, скачивание бесплатное</p>
+<p><b>Подвох:</b> общая очередь, в часы нагрузки ждать дольше. Поверх видео плашки нет, но в конце ролика чёрная заставка ZSKY на 1,5-2 секунды, её можно обрезать в любом видеоредакторе. Файлы хранятся в галерее 7 дней, понравившееся сразу скачивай. В зарубежных подборках тут советуют Stable Diffusion, но это модель для картинок на своём компьютере, а не видео. Примеры запросов и ещё пять сервисов - в <a href="../besplatnye-video-iz-teksta/">инструкции про видео из текста</a></p>
+<p><b>Из России:</b> открывается с VPN</p>
+</div>
+</section>
+<section class="content-section" id="zamena-10"><h2>10. Озвучка голосом: ElevenLabs Pro $99 → MiniMax Audio</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://www.minimax.io/audio/" target="_blank" rel="noopener noreferrer">https://www.minimax.io/audio/</a></p>
+<p><b>Бесплатно:</b> ежедневные кредиты и ограниченное клонирование голоса</p>
+<p><b>Подвох:</b> количество кредитов не гарантировано, для проб годится, для регулярной работы вряд ли. Бесплатные кредиты здесь только на озвучку: видео MiniMax теперь делает в отдельном приложении MiniMax Design, там новым пользователям дают 3 бесплатные пробы, дальше платно (объявление на сайте MiniMax, 30.09.2026)</p>
+<p><b>Из России:</b> работает без VPN</p>
+</div>
+</section>
+<section class="content-section" id="bonus-muzyka"><h2>Бонус. Музыка: Suno Pro $10 → Suno Free</h2>
+<div class="pair-card">
+<p><b>Ссылка:</b> <a href="https://suno.com/" target="_blank" rel="noopener noreferrer">https://suno.com/</a></p>
+<p><b>Бесплатно:</b> песни по текстовому описанию, 50 кредитов в день</p>
+<p><b>Подвох:</b> скачивать песни на бесплатном тарифе нельзя, и использовать их в коммерческих целях тоже. Pro за $10 при оплате помесячно даёт 20 скачиваний в месяц и права на коммерцию (страница цен Suno, 01.10.2026). Слушать бесплатные песни можно, так что есть обход: включи запись экрана со звуком системы, проиграй трек и вытащи звук из записи. Если микрофон хороший, можно просто записать трек с колонок</p>
+<p><b>Ещё вариант:</b> <a href="https://www.udio.com/" target="_blank" rel="noopener noreferrer">Udio</a> тоже бесплатно генерирует песни, но скачивание там отключено для всех, даже на платных тарифах. Обход тот же</p>
+</div>
+</section>
+<section class="content-section" id="chto-ne-voshlo"><h2>Что ещё советуют в сети и почему не вошло в эту подборку</h2>
+<p>В сети попадаются и другие бесплатные замены, но после проверки в эту подборку их не включили по таким причинам:</p>
+<ul>
+<li>Higgsfield → Hailuo: у Hailuo бесплатно только разовый пакет на 3 дня, с водяным знаком</li>
+<li>Jasper → Copy.ai: постоянного бесплатного тарифа у Copy.ai на сайте нет, только проба</li>
+<li>Surfer → Ubersuggest: это просто поиск ключевых слов, не замена редактору Surfer</li>
+<li>Canva → Lovart: бесплатные кредиты Lovart только пробные, объём не указан. Честнее бесплатная Canva</li>
+<li>CapCut → Edits: цена CapCut Pro зависит от страны и устройства, честно сравнить нельзя</li>
+</ul>
+</section>
+<section class="content-section" id="glavnoe-pravilo"><h2>Главное правило</h2>
+<p>Бесплатное почти всегда с ограничением. Начинай с бесплатного, а платить имеет смысл, когда упрёшься в лимит на реальной работе</p>
+</section>
+<section class="cta" aria-label="Следующий шаг"><p class="section-label">Бесплатный практикум</p><h2>Бесплатных сервисов хватит на пробу. Дальше - собирать своё</h2><p>Каждый сервис из списка закрывает одну задачу. ИИ-Лагерь - бесплатный трёхдневный практикум, где показывают, как работать с Claude Code и Codex: агентами, которые по твоей просьбе собирают сайт, бота или таблицу под твоё дело. Без программирования: каждый шаг показывают на экране, ты повторяешь</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a></section>
+</article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Дальше по теме</p><h2>Номер WhatsApp для агента</h2>
+      <p><a href="../whatsapp-nomer-dlya-agenta/">Открыть статью</a></p></aside>
+</div>
+<script>
+    var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+
+    var themeButton = document.querySelector(".theme-toggle");
+    var savedTheme = localStorage.getItem("guide-theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+    themeButton.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("guide-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });
+
+    var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+    function updateReadingState() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+      var current = sections[0];
+      sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+      links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+    }
+    updateReadingState();
+    addEventListener("scroll", updateReadingState, { passive: true });
+  </script>
+</body></html>
