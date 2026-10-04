@@ -190,7 +190,8 @@
     .bar-link {{ color: rgba(243,239,230,.72); font: 500 13px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .06em; text-decoration: none }}
     .bar-link:hover {{ color: #F3EFE6 }}
     .cover-body {{ position: relative; z-index: 3; width: min(1200px, calc(100% - 64px)); margin: 0 auto; padding: 92px 0 96px; max-width: 1200px }}
-    .cover-copy {{ max-width: 600px }}
+    .cover-copy {{ max-width: 680px }}
+    @media (min-width: 601px) {{ .cover-actions {{ flex-wrap: nowrap }} .btn-main {{ flex: none }} }}
     .pill {{ display: inline-block; margin: 0 0 34px; padding: 8px 14px; border: 1px solid rgba(243,239,230,.18); border-radius: 999px;
       background: rgba(255,255,255,.04); color: #EDE7DA; font: 500 12.5px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase }}
     .cover h1 {{ position: relative; max-width: none; margin: 0; padding-left: 26px; color: #F7F3EA;
