@@ -3,6 +3,8 @@
 
 Руками index.html НЕ править: любая правка затрётся следующей сборкой.
 Новая статья = запись в реестре, потом `python3 scripts/sobrat_glavnuyu.py`.
+Краткое содержание карточек и подписи обложек = kratko и podpis в реестре.
+Сборка также обновляет только figcaption обложки cover-v2 в статьях.
 Обложки статей = data/OBLOZHKI.json (slug, путь, alt и размер).
 Нет соответствия или файла картинки = тёмная заглушка с названием статьи.
 
@@ -10,12 +12,12 @@
 это содержание, которого нет в реестре, оно правится здесь.
 
 Проверка без записи: `python3 scripts/sobrat_glavnuyu.py --proverit`
-Возвращает код 1, если собранное расходится с тем, что лежит в index.html
+Возвращает код 1, если главная или подписи обложек расходятся с реестром
 """
 
 import json
+import re
 import sys
-from html.parser import HTMLParser
 from pathlib import Path
 
 KORNI = Path(__file__).resolve().parent.parent
@@ -157,30 +159,36 @@ def zagruzit_oblozhki():
     return json.loads(OBLOZHKI.read_text(encoding="utf-8")) if OBLOZHKI.exists() else {}
 
 
-class OpisanieStatyi(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.opisanie = ""
-
-    def handle_starttag(self, tag, attrs):
-        values = dict(attrs)
-        if tag == "meta" and values.get("name", "").lower() == "description":
-            self.opisanie = values.get("content", "").strip()
+def tekst_iz_reestra(statya, pole, limit):
+    tekst = statya.get(pole)
+    if (not isinstance(tekst, str) or not tekst.strip() or tekst != tekst.strip()
+            or len(tekst) > limit or "\n" in tekst or "\r" in tekst):
+        raise ValueError("%s: поле %s должно содержать одну строку от 1 до %d знаков"
+                         % (statya["slug"], pole, limit))
+    return tekst
 
 
-def kratkoe_soderzhanie(statya, oblozhka):
-    page = (KORNI / "claude-ai" / statya["slug"] / "index.html").resolve()
-    if page.is_relative_to(KORNI) and page.is_file():
-        parser = OpisanieStatyi()
-        parser.feed(page.read_text(encoding="utf-8"))
-        if parser.opisanie:
-            prefix = statya["title"] + ": "
-            if parser.opisanie.startswith(prefix):
-                summary = parser.opisanie[len(prefix):].strip()
-                if summary:
-                    return summary[0].upper() + summary[1:]
-            return parser.opisanie
-    return (oblozhka or {}).get("subtitle", "")
+def sobrat_podpisi():
+    reestr = json.loads(REESTR.read_text(encoding="utf-8"))
+    oblozhki = zagruzit_oblozhki()
+    stranicy = {}
+    figura = re.compile(r'<figure\b[^>]*\sclass="(?:[^"]*\s)?cover-v2(?:\s[^"]*)?"[^>]*>.*?</figure>', re.S)
+    caption = re.compile(r'(<figcaption>).*?(</figcaption>)', re.S)
+    for statya in reestr["statyi"]:
+        if statya["slug"] not in oblozhki:
+            continue
+        podpis = tekst_iz_reestra(statya, "podpis", 100)
+        page = (KORNI / "claude-ai" / statya["slug"] / "index.html").resolve()
+        if not page.is_relative_to(KORNI) or not page.is_file():
+            raise ValueError("%s: страница с обложкой должна находиться внутри сайта" % statya["slug"])
+        html = page.read_text(encoding="utf-8")
+        figures = list(figura.finditer(html))
+        if len(figures) != 1 or len(caption.findall(figures[0].group())) != 1:
+            raise ValueError("%s: нужна одна обложка cover-v2 с одной подписью" % statya["slug"])
+        match = figures[0]
+        cover = caption.sub(lambda m: m[1] + ekranirovat(podpis) + m[2], match.group(), count=1)
+        stranicy[page] = html[:match.start()] + cover + html[match.end():]
+    return stranicy
 
 
 def sobrat_kartochku(statya, oblozhki):
@@ -224,7 +232,7 @@ def sobrat_kartochku(statya, oblozhki):
         title=title,
         kod=ekranirovat(statya.get("kod_slovo", "")),
         poisk=ekranirovat(" ".join([statya["title"], *statya.get("ponyatiya", [])])),
-        summary=ekranirovat(kratkoe_soderzhanie(statya, oblozhka)),
+        summary=ekranirovat(tekst_iz_reestra(statya, "kratko", 85)),
     )
 
 
@@ -318,18 +326,28 @@ def sobrat_stranicu():
 
 def main():
     stranica = sobrat_stranicu()
+    podpisi = sobrat_podpisi()
     proverka = "--proverit" in sys.argv
 
     if proverka:
         tekushchaya = GLAVNAYA.read_text(encoding="utf-8") if GLAVNAYA.exists() else ""
-        if tekushchaya == stranica:
+        razlichiya = [page for page, html in podpisi.items() if page.read_text(encoding="utf-8") != html]
+        if tekushchaya == stranica and not razlichiya:
             print("Главная совпадает с реестром")
+            print("Подписи %d статей совпадают с реестром" % len(podpisi))
             return 0
-        print("РАСХОЖДЕНИЕ: index.html не совпадает с тем, что собирается из реестра")
+        if tekushchaya != stranica:
+            print("РАСХОЖДЕНИЕ: index.html не совпадает с тем, что собирается из реестра")
+        for page in razlichiya:
+            print("РАСХОЖДЕНИЕ: подпись в %s" % page)
         print("Пересобрать: python3 scripts/sobrat_glavnuyu.py")
         return 1
 
     GLAVNAYA.write_text(stranica, encoding="utf-8")
+    for page, html in podpisi.items():
+        if page.read_text(encoding="utf-8") != html:
+            page.write_text(html, encoding="utf-8")
+    print("Подписи %d статей собраны из реестра" % len(podpisi))
     po_trassam = zagruzit_statyi()
     vsego = sum(len(v) for v in po_trassam.values())
     print("Собрано: %s, статей на главной %d" % (GLAVNAYA.name, vsego))

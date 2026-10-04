@@ -226,7 +226,8 @@ class ArticleImagesTest(unittest.TestCase):
                 self.assertIn("cover-v2", cover.attrs["class"].split())
                 captions = cover.all(tag="figcaption")
                 self.assertEqual(len(captions), 1)
-                self.assertEqual(captions[0].text_content().strip(), self.covers[article["slug"]]["subtitle"])
+                self.assertEqual(captions[0].text_content().strip(), article["podpis"])
+                self.assertNotEqual(article["podpis"], self.covers[article["slug"]]["subtitle"])
                 self.assertNotEqual(captions[0].text_content().strip(), h1.text_content().strip())
 
     def test_header_typography_matches_variant_b_including_mobile_and_font_loading(self):
@@ -320,11 +321,7 @@ class ArticleImagesTest(unittest.TestCase):
                 self.assertEqual((image["width"], image["height"]), ("1600", "840"))
                 summaries = card.all(klass="guide-summary")
                 self.assertEqual(len(summaries), 1)
-                page = ImageDocument((ROOT / "claude-ai" / slug / "index.html").read_text())
-                description = next(meta.attrs["content"] for meta in page.root.all(tag="meta") if meta.attrs.get("name") == "description")
-                if slug == "dannye-v-claude":
-                    description = "Как сохранить копию, убрать чаты, отдельно проверить память и удалить аккаунт"
-                self.assertEqual(summaries[0].text_content(), description)
+                self.assertEqual(summaries[0].text_content(), article["kratko"])
                 self.assertNotIn(article["title"], card.text_content())
                 self.assertEqual(card.all(klass="guide-title"), [])
                 self.assertTrue((ROOT / image["src"]).is_file())
@@ -376,33 +373,123 @@ class ArticleImagesTest(unittest.TestCase):
                 self.assertEqual(doc.root.all(tag="img"), [])
                 self.assertEqual(len(doc.root.all(klass="guide-placeholder")), 1)
 
-    def test_summary_falls_back_to_v2_subtitle_for_missing_page_and_is_escaped(self):
+    def test_summary_comes_from_registry_even_for_missing_page_and_is_escaped(self):
         article = dict(self.eligible[0], slug="missing-guide", title='Название <script>alert(1)</script>',
-                       kod_slovo='код" onclick="x', ponyatiya=['тема" onclick="x', '<script>'])
+                       kod_slovo='код" onclick="x', ponyatiya=['тема" onclick="x', '<script>'],
+                       kratko='Выбери <script> & "пример"')
         covers = {article["slug"]: {"image": "absent.webp", "subtitle": 'Вопрос <script> & "ответ"?'}}
         doc = ImageDocument(self.generator.sobrat_kartochku(article, covers))
         card = doc.root.all(tag="a")[0]
         self.assertEqual(card.attrs["aria-label"], article["title"])
         self.assertEqual(card.attrs["data-kod"], article["kod_slovo"])
         self.assertIn(article["title"], card.attrs["data-poisk"])
-        self.assertEqual(card.all(klass="guide-summary")[0].text_content(), covers[article["slug"]]["subtitle"])
+        self.assertEqual(card.all(klass="guide-summary")[0].text_content(), article["kratko"])
         self.assertEqual(doc.root.all(tag="script"), [])
         self.assertNotIn("onclick", card.attrs)
 
-    def test_description_entities_are_escaped_and_symlink_cannot_read_outside_root(self):
+    def test_summary_does_not_read_page_description_or_follow_its_symlink(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder).resolve()
             page = root / "claude-ai" / "example" / "index.html"
             page.parent.mkdir(parents=True)
             page.write_text('<meta name="description" content="Суть &amp; &quot;пример&quot; &lt;script&gt;">')
-            article = dict(self.eligible[0], slug="example")
+            article = dict(self.eligible[0], slug="example", kratko='Проверь свой <пример> & "ответ"')
             with patch.object(self.generator, "KORNI", root):
                 card = ImageDocument(self.generator.sobrat_kartochku(article, {}))
-                self.assertEqual(card.root.all(klass="guide-summary")[0].text_content(), 'Суть & "пример" <script>')
+                self.assertEqual(card.root.all(klass="guide-summary")[0].text_content(), article["kratko"])
                 self.assertEqual(card.root.all(tag="script"), [])
                 page.unlink()
                 page.symlink_to(SERVICES)
-                self.assertEqual(self.generator.kratkoe_soderzhanie(article, {"subtitle": "Подпись v2"}), "Подпись v2")
+                card = ImageDocument(self.generator.sobrat_kartochku(article, {}))
+                self.assertEqual(card.root.all(klass="guide-summary")[0].text_content(), article["kratko"])
+
+    def test_registry_captions_and_summaries_are_short_finished_unique_lines(self):
+        for article in self.eligible:
+            with self.subTest(slug=article["slug"]):
+                for field, limit in (("podpis", 100), ("kratko", 85)):
+                    text = article[field]
+                    self.assertIsInstance(text, str)
+                    self.assertTrue(text.strip())
+                    self.assertEqual(text, text.strip())
+                    self.assertLessEqual(len(text), limit)
+                    self.assertNotRegex(text, r"[\r\n\u2013\u2014]|(?:\.|\u2026)$")
+                    self.assertNotEqual(text.casefold(), article["title"].casefold())
+                    self.assertNotEqual(text.casefold(), self.covers[article["slug"]]["subtitle"].casefold())
+                self.assertNotEqual(article["podpis"], article["kratko"])
+
+    def test_summary_css_has_no_clipping_or_ellipsis(self):
+        rule = re.search(r"\.guide-summary\s*\{([^}]+)\}", HOME.read_text()).group(1)
+        self.assertNotRegex(rule, r"line-clamp|box-orient|overflow:\s*hidden|text-overflow|max-height|(?:^|;)\s*height:")
+        self.assertIn("display: block", rule)
+
+    def test_generator_rejects_missing_empty_or_overlong_registry_text(self):
+        for field, limit in (("podpis", 100), ("kratko", 85)):
+            for value in (None, "", "   ", 42, "я" * (limit + 1), "две\nстроки"):
+                with self.subTest(field=field, value=value):
+                    article = dict(self.eligible[0], **{field: value})
+                    with self.assertRaises(ValueError):
+                        self.generator.tekst_iz_reestra(article, field, limit)
+            article = dict(self.eligible[0])
+            article.pop(field)
+            with self.assertRaises(ValueError):
+                self.generator.tekst_iz_reestra(article, field, limit)
+            self.assertEqual(self.generator.tekst_iz_reestra(dict(article, **{field: "я" * limit}), field, limit), "я" * limit)
+
+    def test_caption_generation_only_changes_cover_caption_and_escapes_registry_text(self):
+        article = dict(self.eligible[0], podpis='Проверь <script> & "ответ"')
+        page = ROOT / "claude-ai" / article["slug"] / "index.html"
+        before = page.read_text()
+        with patch.object(self.generator, "REESTR") as registry:
+            registry.read_text.return_value = json.dumps({"statyi": [article]})
+            generated = self.generator.sobrat_podpisi()
+        self.assertEqual(set(generated), {page})
+        doc = ImageDocument(generated[page])
+        caption = doc.root.all(klass="cover-v2")[0].all(tag="figcaption")[0]
+        self.assertEqual(caption.text_content(), article["podpis"])
+        self.assertEqual(len(doc.root.all(tag="script")), len(ImageDocument(before).root.all(tag="script")))
+        expected = before.replace('<figcaption>' + self.eligible[0]["podpis"] + '</figcaption>',
+                                  '<figcaption>' + self.generator.ekranirovat(article["podpis"]) + '</figcaption>', 1)
+        self.assertEqual(generated[page], expected)
+
+    def test_caption_generation_rejects_unsafe_page_paths_and_missing_or_duplicate_cover(self):
+        article = self.eligible[0]
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            page = root / "claude-ai" / article["slug"] / "index.html"
+            page.parent.mkdir(parents=True)
+            source = '<figure class="cover cover-v2"><img src="cover.webp"><figcaption>Старая подпись</figcaption></figure>'
+            with patch.object(self.generator, "KORNI", root), patch.object(self.generator, "REESTR") as registry:
+                registry.read_text.return_value = json.dumps({"statyi": [article]})
+                for html in ("<h1>Нет обложки</h1>", source + source, source.replace("figcaption", "span"),
+                             source.replace("cover-v2", "not-cover-v2"), source.replace("cover-v2", "cover-v2-extra")):
+                    page.write_text(html)
+                    with self.assertRaises(ValueError):
+                        self.generator.sobrat_podpisi()
+                page.unlink()
+                page.symlink_to(ACCESS)
+                with self.assertRaises(ValueError):
+                    self.generator.sobrat_podpisi()
+                unsafe = dict(article, slug="../../outside")
+                registry.read_text.return_value = json.dumps({"statyi": [unsafe]})
+                with patch.object(self.generator, "zagruzit_oblozhki", return_value={unsafe["slug"]: {}}):
+                    with self.assertRaises(ValueError):
+                        self.generator.sobrat_podpisi()
+
+    def test_check_mode_detects_stale_caption_and_does_not_write_files(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            home = root / "index.html"
+            article = root / "article.html"
+            home.write_text("Главная")
+            article.write_text("Старая подпись")
+            with patch.object(self.generator, "GLAVNAYA", home), \
+                 patch.object(self.generator, "sobrat_stranicu", return_value="Главная"), \
+                 patch.object(self.generator, "sobrat_podpisi", return_value={article: "Новая подпись"}), \
+                 patch.object(self.generator.sys, "argv", ["sobrat_glavnuyu.py", "--proverit"]), \
+                 patch("builtins.print"):
+                self.assertEqual(self.generator.main(), 1)
+            self.assertEqual(home.read_text(), "Главная")
+            self.assertEqual(article.read_text(), "Старая подпись")
 
 
 
