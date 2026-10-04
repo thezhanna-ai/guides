@@ -170,11 +170,11 @@ class ArticleImagesTest(unittest.TestCase):
     def rows(self, article):
         return [row for row in self.manifest if row["article"] == article["title"]]
 
-    def test_image_manifest_covers_all_28_approved_articles_and_excludes_new_article(self):
-        self.assertEqual(len(self.eligible), 28)
+    def test_image_manifest_covers_all_29_approved_articles_and_excludes_new_article(self):
+        self.assertEqual(len(self.eligible), 29)
         self.assertEqual(set(self.covers), {a["slug"] for a in self.eligible})
-        self.assertEqual(len(self.manifest), 35)
-        self.assertTrue(all(row["number"] < 36 for row in self.manifest))
+        self.assertEqual(len(self.manifest), 36)
+        self.assertTrue(all(row["number"] < 37 for row in self.manifest))
         for article in self.eligible:
             with self.subTest(slug=article["slug"]):
                 rows = self.rows(article)
@@ -964,12 +964,12 @@ class GuidesSiteTest(unittest.TestCase):
                         continue
                     self.assertTrue((page.parent / source).exists(), f"{page}: {source}")
 
-    def test_no_long_dashes_and_no_paragraph_ends_with_a_period(self):
+    def test_no_long_dashes(self):
+        # Точка в конце абзаца в статьях разрешена: решение автора 04.10.2026
         for page in PAGES:
             html = page.read_text(encoding="utf-8")
             with self.subTest(page=page.parent.name):
                 self.assertEqual(re.findall(r"[\u2014\u2013]", html), [], page)
-                self.assertEqual(re.findall(r"[^.>]\.</p>", html), [], page)
 
     def test_partner_link_is_canonical_on_every_guide_page(self):
         for page in GUIDE_PAGES:
