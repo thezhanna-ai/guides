@@ -26,9 +26,10 @@ OBLOZHKI = KORNI / "data" / "OBLOZHKI.json"
 GLAVNAYA = KORNI / "index.html"
 
 SHAPKA = {
-    "nadzagolovok": "Надо только научиться ставить задачу",
-    "h1": "Нейросети работают на тебя",
-    "lead": "Ты попал по адресу. Здесь инструкции, разборы и гайды по нейросетям - от первой кнопки до собранных проектов",
+    "nadzagolovok": "Инструкции по нейросетям",
+    "h1": "Нейросети работают",
+    "h1_akcent": "на тебя",
+    "lead": "Надо только научиться ставить задачу. Здесь инструкции и разборы - от первой кнопки до собранных проектов",
     "intro": "Начни с простого: отдай нейросети рутину, которая съедает твой день - посчитать, написать, разобрать, оформить. Дальше научишься собирать свои проекты, находить решения для своего дела и делать то, что раньше заказывал на стороне",
     "title": "Нейросети работают на тебя",
     "description": "Инструкции, разборы и гайды по нейросетям для не-программистов: от первой кнопки до собственных проектов",
@@ -268,8 +269,8 @@ def sobrat_trassu(trassa, po_trassam, oblozhki):
 
 def sobrat_razdel(razdel, po_trassam, oblozhki):
     stroki = [
-        '    <section class="tool-block" data-section="%s" aria-label="%s">'
-        % (razdel["tag"], ekranirovat(razdel["zagolovok"])),
+        '    <section class="tool-block" id="r-%s" data-section="%s" aria-label="%s">'
+        % (razdel["tag"], razdel["tag"], ekranirovat(razdel["zagolovok"])),
         '      <div class="tool-head">',
         '        <img class="section-icon" src="assets/glavnaya/razdely/%s.webp" alt="%s" '
         'width="600" height="600" loading="lazy" decoding="async">'
@@ -296,6 +297,13 @@ def sobrat_filtry():
     return "\n".join(knopki)
 
 
+def sobrat_navigaciyu():
+    return "\n".join(
+        '        <a href="#r-%s">%s</a>' % (razdel["tag"], ekranirovat(razdel["zagolovok"]))
+        for razdel in RAZDELY
+    )
+
+
 def sobrat_urovni():
     stroki = []
     for kod, (nazvanie, poyasnenie) in UROVNI.items():
@@ -315,6 +323,9 @@ def sobrat_stranicu():
         description=ekranirovat(SHAPKA["description"]),
         nadzagolovok=ekranirovat(SHAPKA["nadzagolovok"]),
         h1=ekranirovat(SHAPKA["h1"]),
+        h1_akcent=ekranirovat(SHAPKA["h1_akcent"]),
+        chislo=sum(len(v) for v in po_trassam.values()),
+        navigaciya=sobrat_navigaciyu(),
         lead=ekranirovat(SHAPKA["lead"]),
         intro=ekranirovat(SHAPKA["intro"]),
         urovni=sobrat_urovni(),

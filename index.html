@@ -7,6 +7,9 @@
   <meta name="description" content="Инструкции, разборы и гайды по нейросетям для не-программистов: от первой кнопки до собственных проектов">
   <!-- Страница собрана из data/statyi.json скриптом scripts/sobrat_glavnuyu.py
        Руками не править: правка затрётся следующей сборкой -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Spectral:wght@300;400&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #102F30;
@@ -35,11 +38,6 @@
     }
     header, main { width: min(1120px, calc(100% - 40px)); margin: 0 auto }
     header { padding: 66px 0 30px }
-    .hero { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: 44px; align-items: center }
-    .hero-copy { min-width: 0 }
-    .hero-visual { margin: 0; overflow: hidden; border-radius: 22px; background: var(--ink); box-shadow: 0 16px 40px rgba(16, 47, 48, .13) }
-    .hero-image { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5 }
-    .eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase }
     h1 { max-width: 760px; margin: 0; color: var(--ink); font-size: clamp(36px, 7vw, 68px); line-height: 1.04 }
     .lead { max-width: 680px; margin: 22px 0 0; font: 22px/1.5 Georgia, serif }
     .intro { max-width: 680px; margin: 16px 0 0; color: var(--muted); font-size: 17px; line-height: 1.6 }
@@ -153,14 +151,11 @@
     footer { padding: 60px 0 70px; color: var(--muted); font-size: 13px }
 
     @media (max-width: 1023px) {
-      .hero { gap: 28px }
       .guides { grid-template-columns: repeat(2, minmax(0, 1fr)) }
     }
 
     @media (max-width: 720px) {
       header, main { width: min(100% - 28px, 1120px) }
-      header { padding-top: 42px }
-      .hero { grid-template-columns: minmax(0, 1fr); gap: 28px }
       .guides { grid-template-columns: 1fr }
       .toolbar { flex-direction: column; align-items: stretch }
       .search-input { flex: 0 0 auto }
@@ -176,28 +171,130 @@
         transition: none; transform: none;
       }
     }
+
+    /* Первый экран: тёмная полоса как у обложек v2 */
+    header.cover { --hot: #F06A2C; width: 100%; max-width: none; margin: 0; padding: 0; position: relative; overflow: hidden;
+      background: #0B2122; color: #F3EFE6; isolation: isolate }
+    .cover::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: .16; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") }
+    .cover-scene { position: absolute; inset: 0 0 0 auto; width: 64%; z-index: 0; margin: 0 }
+    .cover-scene img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 62% 40% }
+    .cover-scene::before { content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(90deg, #0B2122 0%, rgba(11,33,34,.86) 18%, rgba(11,33,34,.25) 48%, rgba(11,33,34,0) 70%),
+                  linear-gradient(0deg, #0B2122 0%, rgba(11,33,34,0) 26%) }
+    .cover-bar { position: relative; z-index: 3; width: min(1200px, calc(100% - 64px)); margin: 0 auto; display: flex; align-items: center;
+      justify-content: space-between; padding: 22px 0; border-bottom: 1px solid rgba(243,239,230,.1) }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: #F3EFE6; font: 500 14px/1 "JetBrains Mono", ui-monospace, monospace;
+      letter-spacing: .04em; text-decoration: none }
+    .brand::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--hot) }
+    .bar-link { color: rgba(243,239,230,.72); font: 500 13px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .06em; text-decoration: none }
+    .bar-link:hover { color: #F3EFE6 }
+    .cover-body { position: relative; z-index: 3; width: min(1200px, calc(100% - 64px)); margin: 0 auto; padding: 92px 0 96px; max-width: 1200px }
+    .cover-copy { max-width: 600px }
+    .pill { display: inline-block; margin: 0 0 34px; padding: 8px 14px; border: 1px solid rgba(243,239,230,.18); border-radius: 999px;
+      background: rgba(255,255,255,.04); color: #EDE7DA; font: 500 12.5px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase }
+    .cover h1 { position: relative; max-width: none; margin: 0; padding-left: 26px; color: #F7F3EA;
+      font: 700 clamp(40px, 5.4vw, 74px)/1.04 Unbounded, -apple-system, BlinkMacSystemFont, sans-serif; letter-spacing: -.02em; text-wrap: balance }
+    .cover h1::before { content: ""; position: absolute; left: 0; top: .12em; bottom: .1em; width: 3px; border-radius: 2px; background: var(--hot) }
+    .cover h1 em { font-style: normal; color: var(--hot) }
+    .cover .lead { max-width: 520px; margin: 30px 0 0 26px; color: rgba(243,239,230,.84); font: 300 22px/1.5 Spectral, Georgia, serif }
+    .cover-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin: 40px 0 0 26px }
+    .btn-main { display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; border-radius: 12px;
+      background: linear-gradient(115deg, #FBAD52 0%, #F68C3E 48%, var(--hot) 100%); color: #FFFFFF;
+      font: 700 14px/1 Unbounded, -apple-system, BlinkMacSystemFont, sans-serif; letter-spacing: .01em; text-decoration: none;
+      text-shadow: 0 1px 2px rgba(120, 40, 5, .55);
+      box-shadow: 0 8px 26px rgba(237, 119, 51, .28), inset 0 1px 0 rgba(255, 255, 255, .35);
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease }
+    .btn-main:active { transform: translateY(0) scale(.98) }
+    .btn-main:focus-visible { outline: 3px solid #FBAD52; outline-offset: 4px }
+    .btn-main:hover { transform: translateY(-2px); filter: saturate(1.1) brightness(1.04); box-shadow: 0 12px 32px rgba(237, 119, 51, .38), inset 0 1px 0 rgba(255, 255, 255, .35) }
+    .btn-note { max-width: 250px; color: rgba(243,239,230,.6); font: 500 12px/1.5 "JetBrains Mono", ui-monospace, monospace }
+    .cover-foot { position: relative; z-index: 3; width: min(1200px, calc(100% - 64px)); margin: 0 auto; padding: 16px 0 20px;
+      border-top: 1px solid rgba(243,239,230,.1); display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 26px;
+      color: rgba(243,239,230,.6); font: 500 12.5px/1.4 "JetBrains Mono", ui-monospace, monospace }
+    .cover-foot b { color: #F3EFE6; font-weight: 700 }
+    .cover-foot nav { display: flex; flex-wrap: wrap; gap: 8px 22px }
+    .cover-foot nav a { color: rgba(243,239,230,.72); text-decoration: none; border-bottom: 1px solid transparent; transition: color .15s ease, border-color .15s ease }
+    .cover-foot nav a:hover { color: #F3EFE6; border-color: var(--hot) }
+    @media (prefers-reduced-motion: no-preference) {
+      .cover-copy > * { animation: rise .7s cubic-bezier(.16, 1, .3, 1) both }
+      .cover-copy > :nth-child(2) { animation-delay: .08s }
+      .cover-copy > :nth-child(3) { animation-delay: .16s }
+      .cover-copy > :nth-child(4) { animation-delay: .24s }
+      @keyframes rise { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
+    }
+    .after-cover { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 40px 0 0;
+      display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px; align-items: start }
+    .after-cover .intro { margin: 0 }
+    .after-cover .levels-box .intro { margin: 0 0 4px }
+    #guide-search { scroll-margin-top: 44px }
+    .tool-block { scroll-margin-top: 24px }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth } }
+
+    @media (max-width: 900px) {
+      .cover-scene { width: 100% }
+      .cover-scene::before { background: linear-gradient(90deg, rgba(11,33,34,.92) 0%, rgba(11,33,34,.6) 60%, rgba(11,33,34,.35) 100%),
+        linear-gradient(0deg, #0B2122 0%, rgba(11,33,34,0) 30%) }
+      .after-cover { grid-template-columns: 1fr; gap: 18px }
+    }
+    @media (max-width: 600px) {
+      .cover-bar, .cover-body, .cover-foot { width: calc(100% - 32px) }
+      .bar-link { display: none }
+      .cover-scene { inset: 0 0 auto 0; width: 100%; height: 300px }
+      .cover-scene img { object-position: 58% 30% }
+      .cover-scene::before { background: linear-gradient(0deg, #0B2122 2%, rgba(11,33,34,.35) 55%, rgba(11,33,34,.55) 100%) }
+      .cover-body { padding: 196px 0 44px }
+      .pill { margin-bottom: 20px; font-size: 11px }
+      .cover h1 { padding-left: 18px; font-size: 36px }
+      .cover .lead { margin: 20px 0 0 18px; font-size: 19px }
+      .cover-actions { margin: 28px 0 0 18px }
+      .after-cover { width: calc(100% - 28px) }
+      .cover-foot { gap: 10px }
+      .cover-foot nav { gap: 6px 16px }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Надо только научиться ставить задачу</p>
-        <h1>Нейросети работают на тебя</h1>
-        <p class="lead">Ты попал по адресу. Здесь инструкции, разборы и гайды по нейросетям - от первой кнопки до собранных проектов</p>
-      </div>
-      <figure class="hero-visual">
-        <img class="hero-image" src="assets/glavnaya/hero.webp" width="1600" height="1000" fetchpriority="high" decoding="async"
-             alt="Дирижёр управляет созданием картинок, видео и звука: готовые результаты на экранах и аудиоустройствах">
-      </figure>
+  <header class="cover">
+    <figure class="cover-scene">
+      <img class="hero-image" src="assets/glavnaya/hero.webp" width="1600" height="1000" fetchpriority="high" decoding="async"
+           alt="Дирижёр управляет созданием картинок, видео и звука: готовые результаты на экранах и аудиоустройствах">
+    </figure>
+    <div class="cover-bar">
+      <a class="brand" href="./">pronovoe.com</a>
     </div>
+    <div class="cover-body">
+      <div class="cover-copy">
+        <p class="pill">Инструкции по нейросетям</p>
+        <h1>Нейросети работают <em>на тебя</em></h1>
+        <p class="lead">Надо только научиться ставить задачу. Здесь инструкции и разборы - от первой кнопки до собранных проектов</p>
+        <div class="cover-actions">
+          <a class="btn-main" href="#guide-search">Найти инструкцию →</a>
+          <span class="btn-note">Пришёл из рилза? Впиши кодовое слово, инструкция откроется сразу</span>
+        </div>
+      </div>
+    </div>
+    <div class="cover-foot"><span><b>27</b> инструкций по шагам</span>
+      <nav aria-label="Разделы">
+        <a href="#r-dostup">Доступ и оплата</a>
+        <a href="#r-claude">Claude</a>
+        <a href="#r-gpt">ChatGPT и Codex</a>
+        <a href="#r-kartinki">Картинки и видео</a>
+        <a href="#r-proekty">Свои проекты</a>
+        <a href="#r-proishodit">Что происходит</a>
+      </nav>
+    </div>
+  </header>
+  <section class="after-cover">
     <p class="intro">Начни с простого: отдай нейросети рутину, которая съедает твой день - посчитать, написать, разобрать, оформить. Дальше научишься собирать свои проекты, находить решения для своего дела и делать то, что раньше заказывал на стороне</p>
-    <p class="intro">Гайды размечены по уровню:</p>
-    <ul class="levels">
+    <div class="levels-box">
+      <p class="intro">Гайды размечены по уровню:</p>
+      <ul class="levels">
       <li><span class="track-dot green" aria-hidden="true"></span><span><b>Начальный</b> - если открываешь нейросеть впервые</span></li>
       <li><span class="track-dot blue" aria-hidden="true"></span><span><b>Средний</b> - если уже работаешь и хочешь собирать своё</span></li>
-    </ul>
-  </header>
+      </ul>
+    </div>
+  </section>
 
   <main>
     <div class="toolbar">
@@ -214,7 +311,7 @@
     </div>
     <p class="no-results" id="no-results" role="status" aria-live="polite">Ничего не нашлось. Попробуй другое слово или сними фильтр</p>
 
-    <section class="tool-block" data-section="dostup" aria-label="Доступ и оплата">
+    <section class="tool-block" id="r-dostup" data-section="dostup" aria-label="Доступ и оплата">
       <div class="tool-head">
         <img class="section-icon" src="assets/glavnaya/razdely/dostup.webp" alt="Металлический ключ как образ доступа и оплаты" width="600" height="600" loading="lazy" decoding="async">
         <div class="tool-heading">
@@ -247,7 +344,7 @@
       </div>
     </section>
 
-    <section class="tool-block" data-section="claude" aria-label="Claude">
+    <section class="tool-block" id="r-claude" data-section="claude" aria-label="Claude">
       <div class="tool-head">
         <img class="section-icon" src="assets/glavnaya/razdely/claude.webp" alt="Перо ручки как образ работы с текстом в Claude" width="600" height="600" loading="lazy" decoding="async">
         <div class="tool-heading">
@@ -302,7 +399,7 @@
       </div>
     </section>
 
-    <section class="tool-block" data-section="gpt" aria-label="ChatGPT и Codex">
+    <section class="tool-block" id="r-gpt" data-section="gpt" aria-label="ChatGPT и Codex">
       <div class="tool-head">
         <img class="section-icon" src="assets/glavnaya/razdely/gpt.webp" alt="Микросхема как образ ChatGPT и Codex" width="600" height="600" loading="lazy" decoding="async">
         <div class="tool-heading">
@@ -334,7 +431,7 @@
       </div>
     </section>
 
-    <section class="tool-block" data-section="kartinki" aria-label="Картинки и видео">
+    <section class="tool-block" id="r-kartinki" data-section="kartinki" aria-label="Картинки и видео">
       <div class="tool-head">
         <img class="section-icon" src="assets/glavnaya/razdely/kartinki.webp" alt="Объектив как образ создания картинок и видео" width="600" height="600" loading="lazy" decoding="async">
         <div class="tool-heading">
@@ -350,7 +447,7 @@
       </div>
     </section>
 
-    <section class="tool-block" data-section="proekty" aria-label="Свои проекты">
+    <section class="tool-block" id="r-proekty" data-section="proekty" aria-label="Свои проекты">
       <div class="tool-head">
         <img class="section-icon" src="assets/glavnaya/razdely/proekty.webp" alt="Штангенциркуль как образ создания собственных проектов" width="600" height="600" loading="lazy" decoding="async">
         <div class="tool-heading">
@@ -364,7 +461,7 @@
       </div>
     </section>
 
-    <section class="tool-block" data-section="proishodit" aria-label="Что происходит">
+    <section class="tool-block" id="r-proishodit" data-section="proishodit" aria-label="Что происходит">
       <div class="tool-head">
         <img class="section-icon" src="assets/glavnaya/razdely/proishodit.webp" alt="Антенна как образ новостей и событий" width="600" height="600" loading="lazy" decoding="async">
         <div class="tool-heading">
