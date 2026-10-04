@@ -133,7 +133,7 @@
     .guide-body { display: flex; flex-direction: column; gap: 14px; flex: 1; padding: 17px 18px 18px }
     .guide-summary { display: block; overflow-wrap: anywhere; font-weight: 400; line-height: 1.5 }
     .guide-link.kod-hit { border-color: var(--accent) }
-    .guide-link.kod-hit::after { content: "по кодовому слову"; display: block; padding: 0 18px 14px; color: var(--accent); font-size: 12px; font-weight: 700 }
+    .guide-link.kod-hit::after { content: "по слову из видео"; display: block; padding: 0 18px 14px; color: var(--accent); font-size: 12px; font-weight: 700 }
     .guide-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin-top: auto }
     .guide-level { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 11px; font-weight: 500; line-height: 1.4 }
     .guide-level .track-dot { width: 7px; height: 7px }
@@ -270,7 +270,7 @@
         <p class="lead">Надо только научиться ставить задачу. Здесь инструкции и разборы - от первой кнопки до собранных проектов</p>
         <div class="cover-actions">
           <a class="btn-main" href="#guide-search">Найти инструкцию →</a>
-          <span class="btn-note">Пришёл из рилза? Впиши кодовое слово, инструкция откроется сразу</span>
+          <span class="btn-note">Впиши тему или слово из видео - нужная инструкция найдётся сразу</span>
         </div>
       </div>
     </div>
@@ -298,7 +298,7 @@
 
   <main>
     <div class="toolbar">
-      <input class="search-input" type="search" id="guide-search" placeholder="Тема гайда или кодовое слово" aria-label="Поиск по теме или кодовому слову">
+      <input class="search-input" type="search" id="guide-search" placeholder="Тема или слово из видео" aria-label="Поиск по теме или слову из видео">
       <div class="tag-filters" id="tag-filters" role="group" aria-label="Фильтр по разделам">
         <button class="tag-btn active" data-tag="all" type="button" aria-pressed="true">Все</button>
         <button class="tag-btn" data-tag="dostup" type="button" aria-pressed="false">Доступ и оплата</button>
