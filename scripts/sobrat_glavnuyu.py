@@ -4,7 +4,8 @@
 Руками index.html НЕ править: любая правка затрётся следующей сборкой.
 Новая статья = запись в реестре, потом `python3 scripts/sobrat_glavnuyu.py`.
 Краткое содержание карточек и подписи обложек = kratko и podpis в реестре.
-Сборка также обновляет только figcaption обложки cover-v2 в статьях.
+Сборка также обновляет figcaption обложки cover-v2 и robots-метатеги статей,
+sitemap.xml и robots.txt. Индексация: status=live без noindex_reason.
 Обложки статей = data/OBLOZHKI.json (slug, путь, alt и размер).
 Нет соответствия или файла картинки = тёмная заглушка с названием статьи.
 
@@ -12,7 +13,7 @@
 это содержание, которого нет в реестре, оно правится здесь.
 
 Проверка без записи: `python3 scripts/sobrat_glavnuyu.py --proverit`
-Возвращает код 1, если главная или подписи обложек расходятся с реестром
+Возвращает код 1, если любой результат сборки расходится с реестром
 """
 
 import json
@@ -24,6 +25,7 @@ KORNI = Path(__file__).resolve().parent.parent
 REESTR = KORNI / "data" / "statyi.json"
 OBLOZHKI = KORNI / "data" / "OBLOZHKI.json"
 GLAVNAYA = KORNI / "index.html"
+DOMEN = "https://pronovoe.com/"
 
 SHAPKA = {
     "nadzagolovok": "Инструкции по нейросетям",
@@ -335,30 +337,71 @@ def sobrat_stranicu():
     )
 
 
+def sobrat_indeksaciyu(podpisi):
+    """Единая политика noindex и sitemap, поверх уже собранных подписей."""
+    reestr = json.loads(REESTR.read_text(encoding="utf-8"))
+    stranicy = {}
+    adresy = [DOMEN]
+    robots_tag = re.compile(r'<meta\b(?=[^>]*\bname\s*=\s*[\'"]robots[\'"])[^>]*>\s*', re.I)
+    zapret = '<meta name="robots" content="noindex, nofollow">'
+    slugi = set()
+    for statya in reestr["statyi"]:
+        slug = statya["slug"]
+        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug) or slug in slugi:
+            raise ValueError("Некорректный или повторный slug: %s" % slug)
+        slugi.add(slug)
+        page = (KORNI / "claude-ai" / slug / "index.html").resolve()
+        if not page.is_relative_to(KORNI) or not page.is_file():
+            raise ValueError("%s: страница должна находиться внутри сайта" % slug)
+        html = podpisi.get(page, page.read_text(encoding="utf-8"))
+        indeksirovat = statya.get("status") == "live" and not statya.get("noindex_reason")
+        if indeksirovat:
+            html = robots_tag.sub(lambda match: "" if re.search(r"\b(noindex|nofollow|none)\b", match.group(), re.I)
+                                  else match.group(), html)
+            adresy.append(DOMEN + "claude-ai/" + slug + "/")
+        elif robots_tag.search(html):
+            # Удерживаем запрет и не меняем исходный HTML уже закрытых страниц.
+            html = robots_tag.sub(lambda match: zapret + match.group()[match.group().index(">") + 1:], html)
+        else:
+            if not re.search(r"</head\s*>", html, re.I):
+                raise ValueError("%s: отсутствует закрывающий тег head" % slug)
+            html = re.sub(r"</head\s*>", zapret + "\n</head>", html, count=1, flags=re.I)
+        stranicy[page] = html
+
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    sitemap.extend("  <url><loc>%s</loc></url>" % ekranirovat(adres) for adres in adresy)
+    sitemap.append("</urlset>")
+    stranicy[KORNI / "sitemap.xml"] = "\n".join(sitemap) + "\n"
+    stranicy[KORNI / "robots.txt"] = "User-agent: *\nAllow: /\n\nSitemap: " + DOMEN + "sitemap.xml\n"
+    return stranicy
+
+
 def main():
     stranica = sobrat_stranicu()
     podpisi = sobrat_podpisi()
+    rezultaty = {GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi)}
     proverka = "--proverit" in sys.argv
 
     if proverka:
-        tekushchaya = GLAVNAYA.read_text(encoding="utf-8") if GLAVNAYA.exists() else ""
-        razlichiya = [page for page, html in podpisi.items() if page.read_text(encoding="utf-8") != html]
-        if tekushchaya == stranica and not razlichiya:
+        razlichiya = [page for page, html in rezultaty.items()
+                     if not page.exists() or page.read_text(encoding="utf-8") != html]
+        if not razlichiya:
             print("Главная совпадает с реестром")
             print("Подписи %d статей совпадают с реестром" % len(podpisi))
+            print("Индексация %d статей, sitemap.xml и robots.txt совпадают с реестром"
+                  % (len(rezultaty) - 3))
             return 0
-        if tekushchaya != stranica:
-            print("РАСХОЖДЕНИЕ: index.html не совпадает с тем, что собирается из реестра")
         for page in razlichiya:
-            print("РАСХОЖДЕНИЕ: подпись в %s" % page)
+            print("РАСХОЖДЕНИЕ: %s не совпадает с реестром" % page.relative_to(KORNI))
         print("Пересобрать: python3 scripts/sobrat_glavnuyu.py")
         return 1
 
-    GLAVNAYA.write_text(stranica, encoding="utf-8")
-    for page, html in podpisi.items():
-        if page.read_text(encoding="utf-8") != html:
+    for page, html in rezultaty.items():
+        if not page.exists() or page.read_text(encoding="utf-8") != html:
             page.write_text(html, encoding="utf-8")
     print("Подписи %d статей собраны из реестра" % len(podpisi))
+    print("Индексация %d статей, sitemap.xml и robots.txt собраны из реестра" % (len(rezultaty) - 3))
     po_trassam = zagruzit_statyi()
     vsego = sum(len(v) for v in po_trassam.values())
     print("Собрано: %s, статей на главной %d" % (GLAVNAYA.name, vsego))

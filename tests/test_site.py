@@ -477,14 +477,16 @@ class ArticleImagesTest(unittest.TestCase):
 
     def test_check_mode_detects_stale_caption_and_does_not_write_files(self):
         with tempfile.TemporaryDirectory() as folder:
-            root = Path(folder)
+            root = Path(folder).resolve()
             home = root / "index.html"
             article = root / "article.html"
             home.write_text("Главная")
             article.write_text("Старая подпись")
-            with patch.object(self.generator, "GLAVNAYA", home), \
+            with patch.object(self.generator, "KORNI", root), \
+                 patch.object(self.generator, "GLAVNAYA", home), \
                  patch.object(self.generator, "sobrat_stranicu", return_value="Главная"), \
                  patch.object(self.generator, "sobrat_podpisi", return_value={article: "Новая подпись"}), \
+                 patch.object(self.generator, "sobrat_indeksaciyu", side_effect=dict), \
                  patch.object(self.generator.sys, "argv", ["sobrat_glavnuyu.py", "--proverit"]), \
                  patch("builtins.print"):
                 self.assertEqual(self.generator.main(), 1)
@@ -806,7 +808,6 @@ class GuidesSiteTest(unittest.TestCase):
     def test_access_metadata_info_note_and_reduced_motion_follow_the_canon(self):
         html = ACCESS.read_text(encoding="utf-8")
         for tag in (
-            '<meta name="robots" content="noindex, nofollow">',
             '<meta property="og:title" content="Claude из России: подключение без блокировок">',
             '<meta property="og:description" content="Пошаговый путь к первому чату Claude: подключение, вход и подтверждение номера для нового аккаунта">',
         ):
