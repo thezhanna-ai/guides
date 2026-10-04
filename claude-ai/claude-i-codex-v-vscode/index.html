@@ -118,7 +118,17 @@
     .related-plaque .why { display:block; margin-top:8px; color:var(--muted); font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
     .related-plaque a { text-decoration:none }
     .header-controls .press-button { text-align:center }
-  </style>
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+</style>
+
+  <meta property="og:image" content="https://pronovoe.com/claude-ai/claude-i-codex-v-vscode/assets/oblozhka.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://pronovoe.com/claude-ai/claude-i-codex-v-vscode/assets/oblozhka.webp">
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
@@ -133,6 +143,8 @@
   <h1>Claude Code и Codex в одном VS Code: чаты и файлы рядом</h1>
   <p class="lead">Клод в одном окне, Кодекс в другом, а файл с результатом приходится искать отдельно. Когда задач несколько, переключаешься уже между целой стопкой окон. Как держать нужные разговоры и работу перед глазами?</p>
   <p class="meta">Пошаговая инструкция · Mac, Windows и Linux</p>
+<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Матовые шахматные король и ферзь одного цвета на одной доске как образ Claude Code и Codex в общей команде" loading="eager" decoding="async"></figure>
+
 </header>
 
 <section class="content-section" id="why">
@@ -213,6 +225,8 @@
 В конце покажи путь проекта, какие файлы инструкций читает каждый агент, одно конкретное правило из каждого и что осталось сделать руками. Одного ответа «готово» недостаточно</pre></div>
   <div class="warn-card"><p><strong>Общие файлы не объединяют переписки</strong><br>Кодекс не узнает автоматически, что ты сказала Клоду в его чате. Решения, стиль, текущую задачу и принятый результат сохраняй в файлы проекта. Тогда второй помощник сможет их прочитать</p></div>
   <p class="result"><strong>Результат:</strong> оба агента называют один путь и показывают, откуда прочитали общие правила</p>
+
+<figure class="cover"><img src="assets/seredina-scena.webp" width="1600" height="900" alt="Один открытый регламент AGENTS.md с двумя закладками Claude Code и Codex на общем развороте как образ общих правил" loading="lazy" decoding="async"></figure>
 </section>
 
 <section class="content-section" id="delegate">

@@ -341,7 +341,17 @@
     @media (min-width: 861px) and (max-width: 1199px) { .toc { width: 240px; margin-left: 0 } }
     @media (min-width: 1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
     @media (min-width: 1200px) and (max-width: 1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
-  </style>
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+</style>
+
+  <meta property="og:image" content="https://pronovoe.com/claude-ai/podklyuchenie-iz-rossii/assets/oblozhka.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://pronovoe.com/claude-ai/podklyuchenie-iz-rossii/assets/oblozhka.webp">
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -395,6 +405,8 @@
           <p class="eyebrow">Claude.ai · кнопка за кнопкой</p>
           <h1>Claude из России: подключение без блокировок</h1>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 8 СЕНТЯБРЯ 2026</p>
+<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Стеклянный глобус с выделенной Россией и открытым каналом связи для статьи о доступе к Claude" loading="eager" decoding="async"></figure>
+
           <p class="lead">Путь от проверки подключения до первого открытого чата. На каждом этапе показано, какой экран появится и что выбрать</p>
           <aside class="setup-note">
             <p><b>Практическая рекомендация:</b> если используешь VPN для своей сети, выбери локацию из списка доступных Anthropic и не меняй её во время регистрации</p>

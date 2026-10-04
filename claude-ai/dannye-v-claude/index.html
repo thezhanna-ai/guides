@@ -119,7 +119,17 @@
     @media (min-width:1200px) { .toc { margin-left:max(-50px,calc(630px - 50vw)) } }
     @media (min-width:1200px) and (max-width:1304px) { .toc { width:calc(260px - (1304px - 100vw) / 2) } }
     @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto } .press-button,.theme-toggle,.shot .zoom { transition:none } .press-button:hover,.theme-toggle:hover,.shot .zoom:hover,.press-button:active,.theme-toggle:active,.shot .zoom:active { transform:none } }
-  </style>
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+</style>
+
+  <meta property="og:image" content="https://pronovoe.com/claude-ai/dannye-v-claude/assets/oblozhka.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://pronovoe.com/claude-ai/dannye-v-claude/assets/oblozhka.webp">
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -135,6 +145,8 @@
       <header id="nachalo"><p class="eyebrow">CLAUDE.AI · ЧАТЫ, ПАМЯТЬ, АККАУНТ</p><h1>Удаление данных в Claude</h1>
         <p class="lead">Ты удаляешь из истории Claude чат с чувствительными деталями о себе или работе, чтобы они больше не всплывали. Но позже Claude может снова упомянуть одну из них в новом разговоре: она могла сохраниться в памяти. Ниже покажу, как убрать такие сведения и при этом не потерять переписки, которые захочешь перечитать</p>
         <p class="meta">ОБНОВЛЕНО 28 СЕНТЯБРЯ 2026</p>
+<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Современный шредер с измельчённым обезличенным текстом как образ удаления данных в Claude" loading="eager" decoding="async"></figure>
+
       </header>
       <details class="mobile-toc"><summary>Содержание статьи</summary><a href="#kopiya">Сначала сохрани нужные переписки</a><a href="#chat">Как удалить чаты из истории Claude</a><a href="#memory">Удаление чувствительных сведений из памяти Claude</a><a href="#account">Закрытие аккаунта Claude</a><a href="#itog">Что именно удаляется после каждого шага</a><a href="#sources">Официальные источники</a></details>
 

@@ -183,7 +183,17 @@
     @media (min-width: 861px) and (max-width: 1199px) { .toc { width: 240px; margin-left: 0 } }
     @media (min-width: 1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
     @media (min-width: 1200px) and (max-width: 1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
-  </style></head><body>
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+</style>
+  <meta property="og:image" content="https://pronovoe.com/claude-ai/zagruzka-faylov-v-claude/assets/oblozhka.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://pronovoe.com/claude-ai/zagruzka-faylov-v-claude/assets/oblozhka.webp">
+</head><body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div>
 <div class="header-actions"><div class="handout-title">Загрузка файлов в Claude</div><div class="header-controls">
@@ -209,6 +219,8 @@
 </nav></details><article>
 <header id="nachalo"><p class="eyebrow">Claude.ai · выпуск 18</p><h1>Загрузка файлов в Claude: один документ и пачка файлов</h1>
 <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 26 СЕНТЯБРЯ 2026</p>
+<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Один объёмный PDF и пачка из трёх PDF входят в реплику как образ загрузки файлов в разговор Claude" loading="eager" decoding="async"></figure>
+
 <p class="lead">Копируешь договор в чат по абзацу: пункт сюда, таблицу туда, а потом ещё объясняешь Claude, как куски связаны. Claude отвечает по твоему пересказу, и важное различие между версиями легко теряется. Кажется, достаточно приложить оригиналы - но даже три видимых вложения могут привести к неверному сравнению. За две минуты пройдёшь путь от одного файла до пачки, узнаешь, что Claude действительно читает, и получишь фразу для проверки перед анализом</p>
 <aside class="route-note" aria-label="Короткий маршрут"><h2>Короткий маршрут</h2><p>Плюс → Add files or photos → выбрать один файл или несколько → «Какие файлы ты получил?» → вопрос с файлом, страницей и пунктом</p></aside>
 </header>

@@ -3,6 +3,8 @@
 
 Руками index.html НЕ править: любая правка затрётся следующей сборкой.
 Новая статья = запись в реестре, потом `python3 scripts/sobrat_glavnuyu.py`.
+Обложки статей = data/OBLOZHKI.json (slug, путь, alt и размер).
+Нет соответствия или файла картинки = тёмная заглушка с названием статьи.
 
 Текст шапки, названия разделов и описания трасс лежат ниже в РАЗДЕЛЫ -
 это содержание, которого нет в реестре, оно правится здесь.
@@ -17,6 +19,7 @@ from pathlib import Path
 
 KORNI = Path(__file__).resolve().parent.parent
 REESTR = KORNI / "data" / "statyi.json"
+OBLOZHKI = KORNI / "data" / "OBLOZHKI.json"
 GLAVNAYA = KORNI / "index.html"
 
 SHAPKA = {
@@ -38,6 +41,15 @@ TIPY = {
     "instr": ("Инструкция", "kind-instr"),
     "razbor": ("Разбор", "kind-razbor"),
     "obzor": ("Обзор", "kind-obzor"),
+}
+
+ZNACHKI = {
+    "dostup": "Металлический ключ как образ доступа и оплаты",
+    "claude": "Перо ручки как образ работы с текстом в Claude",
+    "gpt": "Микросхема как образ ChatGPT и Codex",
+    "kartinki": "Объектив как образ создания картинок и видео",
+    "proekty": "Штангенциркуль как образ создания собственных проектов",
+    "proishodit": "Антенна как образ новостей и событий",
 }
 
 # Порядок разделов на странице и трасс внутри них.
@@ -140,22 +152,52 @@ def zagruzit_statyi():
     return po_trassam
 
 
-def sobrat_kartochku(statya):
+def zagruzit_oblozhki():
+    return json.loads(OBLOZHKI.read_text(encoding="utf-8")) if OBLOZHKI.exists() else {}
+
+
+def sobrat_kartochku(statya, oblozhki):
     podpis, klass = TIPY[statya["tip"]]
+    title = ekranirovat(statya["title"])
+    oblozhka = oblozhki.get(statya["slug"])
+    put = (KORNI / oblozhka["image"]).resolve() if oblozhka else None
+    if put and not Path(oblozhka["image"]).is_absolute() and put.is_relative_to(KORNI) and put.is_file():
+        media = (
+            '<img class="guide-cover" src="{image}" alt="{alt}" '
+            'width="{width}" height="{height}" loading="lazy" decoding="async">'
+        ).format(
+            image=ekranirovat(oblozhka["image"]),
+            alt=ekranirovat(oblozhka["alt"]),
+            width=int(oblozhka["width"]),
+            height=int(oblozhka["height"]),
+        )
+    else:
+        media = '<span class="guide-cover guide-placeholder" aria-hidden="true">%s</span>' % title
+
+    uroven = statya.get("uroven")
+    podpis_urovnya = ""
+    if uroven in UROVNI:
+        podpis_urovnya = (
+            '<span class="guide-level"><span class="track-dot {kod}" aria-hidden="true"></span>'
+            '{nazvanie} уровень</span>'
+        ).format(kod=uroven, nazvanie=UROVNI[uroven][0])
     return (
         '          <a class="guide-link" data-tags="{tags}" href="claude-ai/{slug}/">'
-        '<span class="kind {klass}">{podpis}</span>'
-        "<span class=\"guide-title\">{title}</span></a>"
+        '{media}<span class="guide-body"><span class="guide-title">{title}</span>'
+        '<span class="guide-meta">{uroven}<span class="kind {klass}">{podpis}</span></span>'
+        '</span></a>'
     ).format(
         tags=ekranirovat(statya["tags"]),
-        slug=statya["slug"],
+        slug=ekranirovat(statya["slug"]),
+        media=media,
+        uroven=podpis_urovnya,
         klass=klass,
         podpis=podpis,
-        title=ekranirovat(statya["title"]),
+        title=title,
     )
 
 
-def sobrat_trassu(trassa, po_trassam):
+def sobrat_trassu(trassa, po_trassam, oblozhki):
     statyi = po_trassam.get(trassa["trassa"], [])
     uroven = trassa.get("uroven")
 
@@ -176,7 +218,7 @@ def sobrat_trassu(trassa, po_trassam):
 
     if statyi:
         stroki.append('        <div class="guides">')
-        stroki.extend(sobrat_kartochku(s) for s in statyi)
+        stroki.extend(sobrat_kartochku(s, oblozhki) for s in statyi)
         stroki.append("        </div>")
     else:
         stroki.append('        <span class="soon">%s</span>' % ekranirovat(trassa["pusto"]))
@@ -185,26 +227,31 @@ def sobrat_trassu(trassa, po_trassam):
     return "\n".join(stroki)
 
 
-def sobrat_razdel(razdel, po_trassam):
+def sobrat_razdel(razdel, po_trassam, oblozhki):
     stroki = [
         '    <section class="tool-block" data-section="%s" aria-label="%s">'
         % (razdel["tag"], ekranirovat(razdel["zagolovok"])),
         '      <div class="tool-head">',
-        "        <h2>%s</h2>" % ekranirovat(razdel["zagolovok"]),
-        "        <p>%s</p>" % ekranirovat(razdel["opisanie"]),
+        '        <img class="section-icon" src="assets/glavnaya/razdely/%s.webp" alt="%s" '
+        'width="600" height="600" loading="lazy" decoding="async">'
+        % (razdel["tag"], ekranirovat(ZNACHKI[razdel["tag"]])),
+        '        <div class="tool-heading">',
+        "          <h2>%s</h2>" % ekranirovat(razdel["zagolovok"]),
+        "          <p>%s</p>" % ekranirovat(razdel["opisanie"]),
+        "        </div>",
         "      </div>",
         "",
     ]
-    stroki.append("\n\n".join(sobrat_trassu(t, po_trassam) for t in razdel["trassy"]))
+    stroki.append("\n\n".join(sobrat_trassu(t, po_trassam, oblozhki) for t in razdel["trassy"]))
     stroki.append("    </section>")
     return "\n".join(stroki)
 
 
 def sobrat_filtry():
-    knopki = ['        <button class="tag-btn active" data-tag="all" type="button">Все</button>']
+    knopki = ['        <button class="tag-btn active" data-tag="all" type="button" aria-pressed="true">Все</button>']
     for razdel in RAZDELY:
         knopki.append(
-            '        <button class="tag-btn" data-tag="%s" type="button">%s</button>'
+            '        <button class="tag-btn" data-tag="%s" type="button" aria-pressed="false">%s</button>'
             % (razdel["tag"], ekranirovat(razdel["zagolovok"]))
         )
     return "\n".join(knopki)
@@ -222,6 +269,7 @@ def sobrat_urovni():
 
 def sobrat_stranicu():
     po_trassam = zagruzit_statyi()
+    oblozhki = zagruzit_oblozhki()
     shablon = (KORNI / "scripts" / "shablon_glavnoy.html").read_text(encoding="utf-8")
     return shablon.format(
         title=ekranirovat(SHAPKA["title"]),
@@ -232,7 +280,7 @@ def sobrat_stranicu():
         intro=ekranirovat(SHAPKA["intro"]),
         urovni=sobrat_urovni(),
         filtry=sobrat_filtry(),
-        razdely="\n\n".join(sobrat_razdel(r, po_trassam) for r in RAZDELY),
+        razdely="\n\n".join(sobrat_razdel(r, po_trassam, oblozhki) for r in RAZDELY),
         podval=ekranirovat(SHAPKA["podval"]),
     )
 

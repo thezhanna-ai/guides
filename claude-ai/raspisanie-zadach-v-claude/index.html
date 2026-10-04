@@ -104,7 +104,17 @@
     .viewer.fits .viewer-scroll img { margin: 0 auto }
     .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
     .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
-  </style>
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+</style>
+
+  <meta property="og:image" content="https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/assets/oblozhka.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/assets/oblozhka.webp">
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -113,7 +123,9 @@
     <nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</a><a href="#dostup">1. Убедись, что расписание доступно</a><a href="#istochniki">2. Подключи Gmail и Google Calendar</a><a href="#zadacha">3. Создай задачу на каждый понедельник</a><a href="#proverka">4. Проверь, что будильник заведён</a><a href="#primer">Пример с пустой почтой</a><a href="#oshibki">Если кнопки или результата нет</a><a href="#sources">Источники</a></nav>
     <main><article>
       <details class="mobile-toc"><summary>Содержание</summary><a href="#nachalo">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</a><a href="#dostup">1. Убедись, что расписание доступно</a><a href="#istochniki">2. Подключи Gmail и Google Calendar</a><a href="#zadacha">3. Создай задачу на каждый понедельник</a><a href="#proverka">4. Проверь, что будильник заведён</a><a href="#primer">Пример с пустой почтой</a><a href="#oshibki">Если кнопки или результата нет</a><a href="#sources">Источники</a></details>
-      <header id="nachalo"><p class="eyebrow">Claude.ai · Серия 17</p><h1>Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</h1><p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p><p class="lead">Один раз задай Клоду работу на понедельник: разобрать письма за выходные и собрать план недели из календаря. Когда подключены Gmail и Google Calendar, такая задача может выполняться, даже если ноутбук закрыт</p><aside class="route-note"><h2>Короткий маршрут</h2><p>Проверь доступ → подключи Gmail и Google Calendar → создай задачу Scheduled → проверь расписание и результат</p></aside></header>
+      <header id="nachalo"><p class="eyebrow">Claude.ai · Серия 17</p><h1>Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</h1><p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p>
+<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Электронный будильник на 7:30 для задачи Claude по расписанию с письмами и встречами" loading="eager" decoding="async"></figure>
+<p class="lead">Один раз задай Клоду работу на понедельник: разобрать письма за выходные и собрать план недели из календаря. Когда подключены Gmail и Google Calendar, такая задача может выполняться, даже если ноутбук закрыт</p><aside class="route-note"><h2>Короткий маршрут</h2><p>Проверь доступ → подключи Gmail и Google Calendar → создай задачу Scheduled → проверь расписание и результат</p></aside></header>
       <section class="content-section" id="dostup">
         <p class="section-label">Сначала проверь</p><h2>1. Убедись, что расписание доступно</h2>
         <p>Задачи Scheduled доступны на платных тарифах Pro, Max, Team и Enterprise. Если под полем сообщения виден переключатель <span class="path">Chat / Cowork</span>, у тебя прежний интерфейс: обычный Chat в нём не создаёт задачу Scheduled. В обновлённом интерфейсе, где этого переключателя нет, задачу можно поставить на расписание прямо из разговора</p>

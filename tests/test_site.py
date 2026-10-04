@@ -1,8 +1,12 @@
 from html.parser import HTMLParser
 from pathlib import Path
+import importlib.util
 import json
 import re
+import tempfile
 import unittest
+from unittest.mock import patch
+from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -86,6 +90,249 @@ class ZoomImageParser(HTMLParser):
             self.containers.pop()
 
 
+class ImageElement:
+    def __init__(self, tag, attrs=(), parent=None):
+        self.tag = tag
+        self.attrs = dict(attrs)
+        self.parent = parent
+        self.children = []
+        self.text = ""
+
+    def all(self, tag=None, klass=None):
+        found = []
+        for child in self.children:
+            if (tag is None or child.tag == tag) and (
+                klass is None or klass in child.attrs.get("class", "").split()
+            ):
+                found.append(child)
+            found.extend(child.all(tag, klass))
+        return found
+
+    def text_content(self):
+        return self.text + "".join(child.text_content() for child in self.children)
+
+
+class ImageDocument(HTMLParser):
+    """Структура настоящей страницы для проверки позиции иллюстраций."""
+    VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
+
+    def __init__(self, html):
+        super().__init__()
+        self.root = ImageElement("document")
+        self.stack = [self.root]
+        self.feed(html)
+
+    def handle_starttag(self, tag, attrs):
+        node = ImageElement(tag, attrs, self.stack[-1])
+        node.parent.children.append(node)
+        if tag not in self.VOID:
+            self.stack.append(node)
+
+    def handle_endtag(self, tag):
+        for index in range(len(self.stack) - 1, 0, -1):
+            if self.stack[index].tag == tag:
+                del self.stack[index:]
+                break
+
+    def handle_data(self, data):
+        self.stack[-1].text += data
+
+
+def catalog_dom_fixture():
+    """Для существующих Node-тестов поиска и фильтров без запуска браузера."""
+    doc = ImageDocument(HOME.read_text(encoding="utf-8"))
+    return {
+        "sections": [
+            {"tag": section.attrs["data-section"], "tracks": [
+                {"links": [{"attrs": link.attrs, "text": link.text_content()}
+                           for link in track.all(klass="guide-link")]}
+                for track in section.all(klass="track")
+            ]}
+            for section in doc.root.all(klass="tool-block")
+        ],
+        "buttons": [button.attrs for button in doc.root.all(klass="tag-btn")],
+    }
+
+
+class ArticleImagesTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.articles = json.loads((ROOT / "data/statyi.json").read_text())["statyi"]
+        cls.manifest = json.loads((ROOT / "data/KARTINKI.json").read_text())
+        cls.covers = json.loads((ROOT / "data/OBLOZHKI.json").read_text())
+        cls.eligible = [a for a in cls.articles if a["status"] in {"live", "gotova"}
+                        and any(row["article"] == a["title"] for row in cls.manifest)]
+        spec = importlib.util.spec_from_file_location("catalog_generator", ROOT / "scripts/sobrat_glavnuyu.py")
+        cls.generator = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.generator)
+
+    def rows(self, article):
+        return [row for row in self.manifest if row["article"] == article["title"]]
+
+    def test_image_manifest_covers_all_28_approved_articles_and_excludes_new_article(self):
+        self.assertEqual(len(self.eligible), 28)
+        self.assertEqual(set(self.covers), {a["slug"] for a in self.eligible})
+        self.assertEqual(len(self.manifest), 35)
+        self.assertTrue(all(row["number"] < 36 for row in self.manifest))
+        for article in self.eligible:
+            with self.subTest(slug=article["slug"]):
+                rows = self.rows(article)
+                cover = [row for row in rows if row["placement"].startswith("обложка")]
+                self.assertEqual(len(cover), 1)
+                self.assertEqual(self.covers[article["slug"]]["source_number"], cover[0]["number"])
+                self.assertEqual(self.covers[article["slug"]]["alt"], cover[0]["alt"])
+
+    def test_every_illustrated_article_has_scene_files_alt_and_correct_loading(self):
+        for article in self.eligible:
+            slug = article["slug"]
+            page = ROOT / "claude-ai" / slug / "index.html"
+            doc = ImageDocument(page.read_text(encoding="utf-8"))
+            figures = doc.root.all(tag="figure", klass="cover")
+            rows = self.rows(article)
+            with self.subTest(slug=slug):
+                self.assertEqual(len(figures), len(rows))
+                self.assertTrue((page.parent / "assets/oblozhka.webp").is_file())
+                for figure, row in zip(figures, rows):
+                    self.assertEqual(len(figure.all(tag="img")), 1)
+                    attrs = figure.all(tag="img")[0].attrs
+                    cover = row["placement"].startswith("обложка")
+                    self.assertEqual(attrs["src"], "assets/oblozhka-scena.webp" if cover else "assets/seredina-scena.webp")
+                    self.assertTrue((page.parent / attrs["src"]).is_file())
+                    self.assertEqual(attrs["alt"], row["alt"])
+                    self.assertTrue(attrs["alt"].strip())
+                    self.assertEqual((attrs["width"], attrs["height"]), ("1600", "900"))
+                    self.assertEqual(attrs["loading"], "eager" if cover else "lazy")
+                    self.assertEqual(attrs["decoding"], "async")
+
+    def test_cover_follows_header_metadata_or_existing_intro_without_invented_dates(self):
+        for article in self.eligible:
+            page = ROOT / "claude-ai" / article["slug"] / "index.html"
+            doc = ImageDocument(page.read_text(encoding="utf-8"))
+            cover = doc.root.all(tag="figure", klass="cover")[0]
+            siblings = cover.parent.children
+            previous = siblings[siblings.index(cover) - 1]
+            with self.subTest(slug=article["slug"]):
+                if doc.root.all(tag="p", klass="meta"):
+                    self.assertEqual(previous.tag, "p")
+                    self.assertIn("meta", previous.attrs.get("class", "").split())
+                else:
+                    self.assertTrue(set(previous.attrs.get("class", "").split()) & {"lead", "intro-subtitle-wrap"})
+
+    def test_middle_scenes_follow_the_named_sections_including_carousel_exception(self):
+        for article in self.eligible:
+            for row in self.rows(article):
+                if row["placement"] != "середина":
+                    continue
+                page = ROOT / "claude-ai" / article["slug"] / "index.html"
+                doc = ImageDocument(page.read_text(encoding="utf-8"))
+                middle = doc.root.all(tag="figure", klass="cover")[1]
+                with self.subTest(slug=article["slug"]):
+                    if article["slug"] == "animirovannaya-karusel":
+                        siblings = middle.parent.children
+                        index = siblings.index(middle)
+                        self.assertEqual(siblings[index - 1].attrs.get("id"), "chatgpt")
+                        self.assertEqual(siblings[index + 1].attrs.get("id"), "agent")
+                    else:
+                        title = re.search("«([^»]+)»", row["after_h2"]).group(1)
+                        heading = next(h for h in doc.root.all(tag="h2") if h.text_content().strip() == title)
+                        self.assertIs(middle.parent, heading.parent)
+                        siblings = middle.parent.children
+                        if heading.parent.tag == "section":
+                            self.assertIs(siblings[-1], middle)
+                        else:
+                            next_heading = next(node for node in siblings[siblings.index(heading) + 1:] if node.tag == "h2")
+                            self.assertIs(siblings[siblings.index(next_heading) - 1], middle)
+
+    def test_social_images_are_unique_and_resolve_to_captioned_cover(self):
+        for article in self.eligible:
+            page = ROOT / "claude-ai" / article["slug"] / "index.html"
+            doc = ImageDocument(page.read_text(encoding="utf-8"))
+            expected_url = "https://pronovoe.com/claude-ai/" + article["slug"] + "/assets/oblozhka.webp"
+            values = {"og:image": expected_url, "twitter:image": expected_url,
+                      "og:image:width": "1600", "og:image:height": "900",
+                      "twitter:card": "summary_large_image"}
+            with self.subTest(slug=article["slug"]):
+                for key, value in values.items():
+                    tags = [node for node in doc.root.all(tag="meta") if node.attrs.get("property", node.attrs.get("name")) == key]
+                    self.assertEqual(len(tags), 1, key)
+                    self.assertEqual(tags[0].attrs["content"], value)
+                    if key.endswith("image"):
+                        parsed = urlparse(value)
+                        self.assertEqual(parsed.netloc, "pronovoe.com")
+                        self.assertTrue((ROOT / parsed.path.lstrip("/")).is_file())
+
+    def test_cover_styles_remain_local_responsive_and_support_dark_theme(self):
+        for article in self.eligible:
+            html = (ROOT / "claude-ai" / article["slug"] / "index.html").read_text()
+            styles = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, re.S))
+            with self.subTest(slug=article["slug"]):
+                self.assertRegex(styles, r"figure\.cover\s*\{[^}]*margin:\s*22px 0 26px")
+                self.assertRegex(styles, r"figure\.cover img\s*\{[^}]*width:\s*100%[^}]*height:\s*auto[^}]*border-radius:\s*14px[^}]*box-shadow:")
+                self.assertIn(':root[data-theme="dark"] figure.cover img', styles)
+
+    def test_catalog_uses_captioned_article_covers_and_only_live_links(self):
+        doc = ImageDocument(HOME.read_text())
+        cards = doc.root.all(klass="guide-link")
+        live = [a for a in self.eligible if a["status"] == "live"]
+        expected = ["claude-ai/" + a["slug"] + "/" for section in self.generator.RAZDELY
+                    for track in section["trassy"] for a in live if a["razdel"] == track["trassa"]]
+        self.assertEqual([card.attrs["href"] for card in cards], expected)
+        for card in cards:
+            slug = card.attrs["href"].split("/")[1]
+            with self.subTest(slug=slug):
+                image = card.all(tag="img")[0].attrs
+                self.assertEqual(image["src"], "claude-ai/" + slug + "/assets/oblozhka.webp")
+                self.assertEqual(image["alt"], self.covers[slug]["alt"])
+                self.assertTrue((ROOT / image["src"]).is_file())
+                self.assertEqual(image["loading"], "lazy")
+        hero = doc.root.all(klass="hero-image")[0].attrs
+        self.assertEqual(hero["src"], "assets/glavnaya/hero.webp")
+        self.assertIn("Дирижёр", hero["alt"])
+        self.assertNotEqual(hero.get("loading"), "lazy")
+        self.assertEqual(hero["fetchpriority"], "high")
+        icons = doc.root.all(klass="section-icon")
+        self.assertEqual(len(icons), 6)
+        self.assertTrue(all(i.attrs["src"].startswith("assets/glavnaya/razdely/") for i in icons))
+
+    def test_generator_is_reproducible_and_missing_or_unsafe_images_get_placeholders(self):
+        self.assertEqual(self.generator.sobrat_stranicu(), HOME.read_text())
+        article = self.eligible[0]
+        for covers in ({}, {article["slug"]: {"image": "absent.webp"}},
+                       {article["slug"]: {"image": str(HOME)}},
+                       {article["slug"]: {"image": "../../AGENTS.md"}}):
+            doc = ImageDocument(self.generator.sobrat_kartochku(article, covers))
+            self.assertEqual(doc.root.all(tag="img"), [])
+            self.assertEqual(doc.root.all(klass="guide-placeholder")[0].text_content(), article["title"])
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(self.generator, "OBLOZHKI", Path(folder) / "absent.json"):
+                self.assertEqual(self.generator.zagruzit_oblozhki(), {})
+        unsafe = dict(article, title='<script>alert("x")</script>', tags='a" onclick="x', slug='a" onclick="x')
+        doc = ImageDocument(self.generator.sobrat_kartochku(unsafe, {}))
+        self.assertEqual(doc.root.all(tag="script"), [])
+        self.assertNotIn("onclick", doc.root.all(tag="a")[0].attrs)
+
+    def test_cover_attributes_are_escaped_and_symlinks_cannot_escape_site_root(self):
+        article = self.eligible[0]
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            filename = 'cover" onerror="alert(1).webp'
+            (root / filename).write_bytes(b"")
+            alt = 'Описание " onerror="alert(1) <script> & текст'
+            covers = {article["slug"]: {"image": filename, "alt": alt, "width": 1600, "height": 900}}
+            with patch.object(self.generator, "KORNI", root):
+                doc = ImageDocument(self.generator.sobrat_kartochku(article, covers))
+                image = doc.root.all(tag="img")[0].attrs
+                self.assertEqual(image["src"], filename)
+                self.assertEqual(image["alt"], alt)
+                self.assertNotIn("onerror", image)
+                self.assertEqual(doc.root.all(tag="script"), [])
+                (root / "outside.webp").symlink_to(HOME)
+                covers[article["slug"]]["image"] = "outside.webp"
+                doc = ImageDocument(self.generator.sobrat_kartochku(article, covers))
+                self.assertEqual(doc.root.all(tag="img"), [])
+                self.assertEqual(len(doc.root.all(klass="guide-placeholder")), 1)
+
+
 class GuidesSiteTest(unittest.TestCase):
     def parse(self, page):
         parser = PageParser()
@@ -157,6 +404,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertEqual(
             self.parse(SERVICES).images,
             [
+                "assets/oblozhka-scena.webp",
                 "assets/02-profile-menu-cropped.png",
                 "assets/03-settings-menu.png",
                 "assets/01-connectors-highlighted.png",
@@ -212,6 +460,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertEqual(
             images,
             [
+                "assets/oblozhka-scena.webp",
                 "assets/01-plus.png",
                 "assets/02-web-search.png",
                 "assets/03-searched-the-web-v2.png",
