@@ -149,7 +149,9 @@ def sobrat_kartochku(statya):
     ).format(
         tags=ekranirovat(statya["tags"]),
         # кодовое слово на странице не видно, по нему ищет поле поиска
-        kod=' data-kod="%s"' % ekranirovat(statya["kod_slovo"]) if statya.get("kod_slovo") else "",
+        kod=(' data-kod="%s"' % ekranirovat(statya["kod_slovo"]) if statya.get("kod_slovo") else "")
+        # темы статьи из реестра: поиск находит гайд по теме, а не только по точному названию
+        + (' data-poisk="%s"' % ekranirovat(" ".join(statya["ponyatiya"])) if statya.get("ponyatiya") else ""),
         slug=statya["slug"],
         klass=klass,
         podpis=podpis,

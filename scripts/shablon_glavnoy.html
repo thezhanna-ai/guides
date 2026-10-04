@@ -167,7 +167,7 @@
 
   <main>
     <div class="toolbar">
-      <input class="search-input" type="search" id="guide-search" placeholder="Название гайда или кодовое слово" aria-label="Поиск по названию или кодовому слову">
+      <input class="search-input" type="search" id="guide-search" placeholder="Тема гайда или кодовое слово" aria-label="Поиск по теме или кодовому слову">
       <div class="tag-filters" id="tag-filters" role="group" aria-label="Фильтр по разделам">
 {filtry}
       </div>
@@ -186,17 +186,105 @@
     var noResults = document.getElementById('no-results');
     var activeTag = 'all';
 
+    // Поиск прощает: е/ё, и/й, мягкий знак, одну опечатку в слове от 4 букв,
+    // латиницу (транслит «dostup» и забытую раскладку «ljcneg»)
+    var RASKLADKA = {{ q:'й', w:'ц', e:'у', r:'к', t:'е', y:'н', u:'г', i:'ш', o:'щ', p:'з', '[':'х', ']':'ъ',
+      a:'ф', s:'ы', d:'в', f:'а', g:'п', h:'р', j:'о', k:'л', l:'д', ';':'ж', "'":'э',
+      z:'я', x:'ч', c:'с', v:'м', b:'и', n:'т', m:'ь', ',':'б', '.':'ю', '`':'ё' }};
+    var TRANSLIT2 = [['shch','щ'], ['sch','щ'], ['zh','ж'], ['kh','х'], ['ch','ч'], ['sh','ш'], ['ts','ц'],
+      ['yu','ю'], ['ya','я'], ['yo','е'], ['ye','е'], ['ju','ю'], ['ja','я']];
+    var TRANSLIT1 = {{ a:'а', b:'б', v:'в', g:'г', d:'д', e:'е', z:'з', i:'и', j:'и', k:'к', l:'л', m:'м', n:'н',
+      o:'о', p:'п', r:'р', s:'с', t:'т', u:'у', f:'ф', h:'х', c:'ц', w:'в', x:'кс', q:'к' }};
+
+    function normalize(value) {{
+      return value.toLowerCase().replace(/ё/g, 'е').replace(/й/g, 'и').replace(/[ьъ]/g, '')
+        .replace(/[^a-zа-я0-9]+/g, ' ').trim();
+    }}
+
+    function rasklad(value) {{
+      return value.toLowerCase().split('').map(function (ch) {{ return RASKLADKA[ch] || ch; }}).join('');
+    }}
+
+    function translit(value) {{
+      var src = value.toLowerCase(), out = '', i = 0;
+      while (i < src.length) {{
+        var hit = null;
+        for (var k = 0; k < TRANSLIT2.length; k++) {{
+          if (src.substr(i, TRANSLIT2[k][0].length) === TRANSLIT2[k][0]) {{ hit = TRANSLIT2[k]; break; }}
+        }}
+        if (hit) {{ out += hit[1]; i += hit[0].length; continue; }}
+        var ch = src[i];
+        if (ch === 'y') out += /[аеиоуыэюя]$/.test(out) ? 'и' : 'ы';
+        else out += TRANSLIT1[ch] || ch;
+        i++;
+      }}
+      return out;
+    }}
+
+    // названия сервисов русскими буквами: в статьях они латиницей
+    var SINONIMY = {{ 'клод':'claude', 'впн':'vpn', 'эксел':'excel', 'ексел':'excel', 'ворд':'word', 'пдф':'pdf',
+      'джимеил':'gmail', 'гмаил':'gmail', 'гугл':'google', 'кодекс':'codex', 'чатгпт':'chatgpt', 'гпт':'gpt',
+      'ватсап':'whatsapp', 'вотсап':'whatsapp', 'маркдаун':'markdown' }};
+
+    function sinonimy(value) {{
+      return value.split(' ').map(function (w) {{ return SINONIMY[w] || w; }}).join(' ');
+    }}
+
+    // варианты запроса: как набрано, раскладка, транслит, сервис латиницей
+    function variants(raw) {{
+      var list = [normalize(raw)];
+      if (/[a-z]/i.test(raw)) {{ list.push(normalize(rasklad(raw))); list.push(normalize(translit(raw))); }}
+      list.push(sinonimy(list[0]));
+      return list.filter(function (v, i) {{ return v !== '' && list.indexOf(v) === i; }});
+    }}
+
+    // расстояние не больше одной правки (замена, пропуск или лишняя буква)
+    function oneEdit(a, b) {{
+      if (a === b) return true;
+      if (Math.abs(a.length - b.length) > 1) return false;
+      var i = 0, j = 0, edits = 0;
+      while (i < a.length && j < b.length) {{
+        if (a[i] === b[j]) {{ i++; j++; continue; }}
+        if (++edits > 1) return false;
+        if (a.length > b.length) i++;
+        else if (a.length < b.length) j++;
+        else {{ i++; j++; }}
+      }}
+      return edits + (a.length - i) + (b.length - j) <= 1;
+    }}
+
+    function wordHits(q, words) {{
+      return words.some(function (w) {{
+        if (w.indexOf(q) !== -1) return true;
+        if (q.length < 4) return false;
+        // слово целиком или его начало: человек ещё допечатывает
+        return oneEdit(q, w) || oneEdit(q, w.slice(0, q.length)) || oneEdit(q, w.slice(0, q.length + 1));
+      }});
+    }}
+
+    function textMatches(query, text) {{
+      if (text.indexOf(query) !== -1) return true;
+      var words = text.split(' ');
+      return query.split(' ').every(function (q) {{ return wordHits(q, words); }});
+    }}
+
+    function kodMatches(query, kod) {{
+      return kod !== '' && (query === kod || (kod.length >= 4 && query.indexOf(' ') === -1 && oneEdit(query, kod)));
+    }}
+
     function applyFilters() {{
-      var query = normalize(searchInput.value);
+      var queries = variants(searchInput.value);
+      var searching = queries.length > 0;
       var visibleCount = 0;
 
       guideLinks.forEach(function (link) {{
-        var text = normalize(link.textContent);
+        var text = normalize(link.textContent + ' ' + (link.getAttribute('data-poisk') || ''));
+        var kod = normalize(link.getAttribute('data-kod') || '');
         var tags = (link.getAttribute('data-tags') || '').split(' ');
-        // кодовое слово совпадает целиком: статья видна при любом фильтре, на одно слово может быть несколько статей
-        var kodHit = query !== '' && normalize(link.getAttribute('data-kod') || '') === query;
+        // кодовое слово: статья видна при любом фильтре, на одно слово может быть несколько статей
+        var kodHit = queries.some(function (q) {{ return kodMatches(q, kod); }});
         var matchesTag = activeTag === 'all' || tags.indexOf(activeTag) !== -1;
-        var matchesQuery = query === '' || text.indexOf(query) !== -1;
+        var matchesQuery = !searching || queries.some(function (q) {{ return textMatches(q, text); }});
         var visible = kodHit || (matchesTag && matchesQuery);
         link.style.display = visible ? '' : 'none';
         link.classList.toggle('kod-hit', kodHit);
@@ -209,7 +297,7 @@
         links.forEach(function (l) {{ if (l.style.display !== 'none') anyVisible = true; }});
         var emptyTrack = links.length === 0;
         // трасса без своих гайдов («готовится») видна, пока не фильтруют и не ищут
-        var keepEmpty = emptyTrack && query === '';
+        var keepEmpty = emptyTrack && !searching;
         track.style.display = (keepEmpty || anyVisible) ? '' : 'none';
       }});
 
@@ -223,11 +311,7 @@
         block.style.display = ((matchesSection || kodInBlock) && anyTrack) ? '' : 'none';
       }});
 
-      noResults.classList.toggle('show', visibleCount === 0 && query !== '');
-    }}
-
-    function normalize(value) {{
-      return value.trim().toLowerCase().replace(/ё/g, 'е');
+      noResults.classList.toggle('show', visibleCount === 0 && searching);
     }}
 
     searchInput.addEventListener('input', applyFilters);
@@ -236,7 +320,7 @@
     searchInput.addEventListener('keydown', function (event) {{
       if (event.key !== 'Enter') return;
       var shown = Array.prototype.filter.call(guideLinks, function (l) {{ return l.style.display !== 'none'; }});
-      if (shown.length === 1 && normalize(searchInput.value) !== '') window.location.href = shown[0].getAttribute('href');
+      if (shown.length === 1 && variants(searchInput.value).length > 0) window.location.href = shown[0].getAttribute('href');
     }});
 
     tagButtons.forEach(function (btn) {{
