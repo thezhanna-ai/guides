@@ -204,19 +204,20 @@ class ArticleImagesTest(unittest.TestCase):
                     self.assertEqual(attrs["loading"], "eager" if cover else "lazy")
                     self.assertEqual(attrs["decoding"], "async")
 
-    def test_cover_follows_header_metadata_or_existing_intro_without_invented_dates(self):
+    def test_cover_immediately_follows_h1_or_its_immediate_metadata_before_lead(self):
         for article in self.eligible:
             page = ROOT / "claude-ai" / article["slug"] / "index.html"
             doc = ImageDocument(page.read_text(encoding="utf-8"))
             cover = doc.root.all(tag="figure", klass="cover")[0]
-            siblings = cover.parent.children
-            previous = siblings[siblings.index(cover) - 1]
+            h1 = doc.root.all(tag="h1")[0]
             with self.subTest(slug=article["slug"]):
-                if doc.root.all(tag="p", klass="meta"):
-                    self.assertEqual(previous.tag, "p")
-                    self.assertIn("meta", previous.attrs.get("class", "").split())
-                else:
-                    self.assertTrue(set(previous.attrs.get("class", "").split()) & {"lead", "intro-subtitle-wrap"})
+                self.assertIs(cover.parent, h1.parent)
+                siblings = h1.parent.children
+                next_index = siblings.index(h1) + 1
+                next_node = siblings[next_index]
+                if next_node.tag == "p" and "meta" in next_node.attrs.get("class", "").split():
+                    next_index += 1
+                self.assertIs(siblings[next_index], cover)
 
     def test_middle_scenes_follow_the_named_sections_including_carousel_exception(self):
         for article in self.eligible:
