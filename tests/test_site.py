@@ -555,12 +555,12 @@ class GuidesSiteTest(unittest.TestCase):
                         continue
                     self.assertTrue((page.parent / source).exists(), f"{page}: {source}")
 
-    def test_no_long_dashes_and_no_paragraph_ends_with_a_period(self):
+    def test_no_long_dashes(self):
+        # Точка в конце абзаца в статьях разрешена: решение автора 04.10.2026
         for page in PAGES:
             html = page.read_text(encoding="utf-8")
             with self.subTest(page=page.parent.name):
                 self.assertEqual(re.findall(r"[\u2014\u2013]", html), [], page)
-                self.assertEqual(re.findall(r"[^.>]\.</p>", html), [], page)
 
     def test_partner_link_is_canonical_on_every_guide_page(self):
         for page in GUIDE_PAGES:
