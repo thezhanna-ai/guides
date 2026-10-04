@@ -15,7 +15,7 @@ from test_site import ImageDocument, ROOT
 
 BASE = "https://pronovoe.com/"
 NS = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-HIGH_RISK = {"shest-skillov", "svoy-sayt-ne-bliznec"}
+RELEASED = {"shest-skillov", "svoy-sayt-ne-bliznec"}
 
 
 def robots(html):
@@ -37,10 +37,11 @@ def generator():
 
 
 class IndexingTest(unittest.TestCase):
-    def test_only_nonlive_and_documented_high_risk_pages_keep_noindex(self):
+    def test_only_nonlive_pages_keep_noindex_after_authorized_corrections(self):
         registry = json.loads((ROOT / "data/statyi.json").read_text())["statyi"]
         held = {a["slug"] for a in registry if a.get("noindex_reason")}
-        self.assertEqual(held, HIGH_RISK)
+        self.assertEqual(held, set())
+        self.assertTrue(all("noindex_reason" not in a for a in registry if a["slug"] in RELEASED))
         self.assertFalse(any("noindex" in r or "nofollow" in r for r in robots((ROOT / "index.html").read_text())))
         for a in registry:
             with self.subTest(slug=a["slug"]):
@@ -57,7 +58,7 @@ class IndexingTest(unittest.TestCase):
                              if a["status"] == "live" and not a.get("noindex_reason")]
         self.assertEqual(urls, expected)
         self.assertEqual(len(urls), len(set(urls)))
-        self.assertEqual(len(urls), 27)
+        self.assertEqual(len(urls), 29)
         self.assertNotIn("lastmod", (ROOT / "sitemap.xml").read_text())
 
     def test_robots_announces_sitemap_without_blocking_noindex_crawling(self):
@@ -91,6 +92,9 @@ class IndexingTest(unittest.TestCase):
             root = self.fixture(directory)
             path = root / "data/statyi.json"
             data = json.loads(path.read_text())
+            for held in data["statyi"]:
+                if held["slug"] in RELEASED:
+                    held["noindex_reason"] = "Тест: независимый юридический запрет"
             source = data["statyi"][0]
             article = dict(source, slug="novaya-statya", status="live")
             data["statyi"].append(article)
@@ -107,7 +111,7 @@ class IndexingTest(unittest.TestCase):
                     allowed = status == "live" and not reason
                     self.assertEqual(url in locations((root / "sitemap.xml").read_text()), allowed)
                     self.assertEqual(robots(page.read_text()), [] if allowed else ["noindex, nofollow"])
-                    for slug in HIGH_RISK:
+                    for slug in RELEASED:
                         self.assertEqual(robots((root / "claude-ai" / slug / "index.html").read_text()),
                                          ["noindex, nofollow"])
             before = {p: p.read_bytes() for p in root.rglob("*") if p.is_file()}
@@ -129,9 +133,7 @@ class IndexingTest(unittest.TestCase):
                     before = {p: p.read_bytes() for p in root.rglob("*") if p.is_file()}
                     # Sitemap/robots/home are fully generated; article metadata needs a real directive change.
                     if "claude-ai" in path.parts:
-                        html = path.read_text().replace('<meta name="robots" content="noindex, nofollow">', "")
-                        if "podklyuchenie" in str(path):
-                            html = html.replace("</head>", '<meta name="robots" content="noindex, nofollow"></head>')
+                        html = path.read_text().replace("</head>", '<meta name="robots" content="noindex, nofollow"></head>')
                         path.write_text(html)
                         before[path] = path.read_bytes()
                     self.assertEqual(self.run_generator(root, check=True), 1)
