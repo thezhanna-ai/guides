@@ -10,7 +10,7 @@
   <title>Удаление данных в Claude</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
   <style>
     :root { --paper:#F8F7F2; --white:#FFFFFF; --ink:#1E2926; --emerald:#102F30; --mid:#1F4A43; --muted:#62706A; --line:#D5C9B7; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F }
     :root[data-theme="dark"] { --paper:#162221; --white:#20302E; --ink:#EDF1EE; --emerald:#DCEAE4; --mid:#A8D0BE; --muted:#B7C2BD; --line:#3C504C; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78 }
@@ -127,9 +127,18 @@
 
   <meta property="og:image" content="https://pronovoe.com/claude-ai/dannye-v-claude/assets/oblozhka.webp">
   <meta property="og:image:width" content="1600">
-  <meta property="og:image:height" content="900">
+  <meta property="og:image:height" content="840">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://pronovoe.com/claude-ai/dannye-v-claude/assets/oblozhka.webp">
+
+  <style id="shapka-b">
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+  </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -142,8 +151,9 @@
       <a href="#kopiya">Сначала сохрани нужные переписки</a><a href="#chat">Как удалить чаты из истории Claude</a><a href="#memory">Удаление чувствительных сведений из памяти Claude</a><a href="#account">Закрытие аккаунта Claude</a><a href="#itog">Что именно удаляется после каждого шага</a><a href="#sources">Официальные источники</a>
     </nav>
     <main>
-      <header id="nachalo"><p class="eyebrow">CLAUDE.AI · ЧАТЫ, ПАМЯТЬ, АККАУНТ</p><h1>Удаление данных в Claude</h1>
-<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Современный шредер с измельчённым обезличенным текстом как образ удаления данных в Claude" loading="eager" decoding="async"></figure>
+      <header id="nachalo"><p class="eyebrow">CLAUDE.AI · ЧАТЫ, ПАМЯТЬ, АККАУНТ</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Современный шредер с измельчённым обезличенным текстом как образ удаления данных в Claude" loading="eager" decoding="async" fetchpriority="high"><figcaption>Как очистить историю и память?</figcaption></figure>
+<h1 class="article-title-v2">Удаление данных в Claude</h1>
+
 
         <p class="lead">Ты удаляешь из истории Claude чат с чувствительными деталями о себе или работе, чтобы они больше не всплывали. Но позже Claude может снова упомянуть одну из них в новом разговоре: она могла сохраниться в памяти. Ниже покажу, как убрать такие сведения и при этом не потерять переписки, которые захочешь перечитать</p>
         <p class="meta">ОБНОВЛЕНО 28 СЕНТЯБРЯ 2026</p>

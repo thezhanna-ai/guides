@@ -8,7 +8,7 @@
   <title>Пять дополнений для Claude Code: что каждое решает</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
   <style>
     :root { --paper:#F8F7F2; --white:#FFFFFF; --ink:#1E2926; --emerald:#102F30; --mid:#1F4A43; --muted:#62706A; --line:#D5C9B7; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F }
     :root[data-theme="dark"] { --paper:#162221; --white:#20302E; --ink:#EDF1EE; --emerald:#DCEAE4; --mid:#A8D0BE; --muted:#B7C2BD; --line:#3C504C; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78 }
@@ -96,9 +96,18 @@
 
   <meta property="og:image" content="https://pronovoe.com/claude-ai/pyat-instrumentov-claude-code/assets/oblozhka.webp">
   <meta property="og:image:width" content="1600">
-  <meta property="og:image:height" content="900">
+  <meta property="og:image:height" content="840">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://pronovoe.com/claude-ai/pyat-instrumentov-claude-code/assets/oblozhka.webp">
+
+  <style id="shapka-b">
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+  </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -109,8 +118,9 @@
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p><a href="#omniroute">OmniRoute: запасной выход, когда кончился лимит</a><a href="#claude-mem">claude-mem: когда надоело объяснять проект с нуля</a><a href="#headroom">Headroom: когда мешают длинные технические отчёты</a><a href="#setup">Claude Code Setup: когда неясно, чем дополнить проект</a><a href="#observer">Task Observer: когда одни и те же правки повторяются</a><a href="#itog">С чего начать сегодня</a></nav>
     <main>
-      <header id="nachalo"><p class="eyebrow">CLAUDE CODE · ПЯТЬ ИНСТРУМЕНТОВ</p><h1>Пять дополнений для Claude Code: что каждое решает</h1>
-<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Пять объёмных частей дополняют один пазл как образ расширения возможностей Claude Code" loading="eager" decoding="async"></figure>
+      <header id="nachalo"><p class="eyebrow">CLAUDE CODE · ПЯТЬ ИНСТРУМЕНТОВ</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Пять объёмных частей дополняют один пазл как образ расширения возможностей Claude Code" loading="eager" decoding="async" fetchpriority="high"><figcaption>Что подключить под задачу?</figcaption></figure>
+<h1 class="article-title-v2">Пять дополнений для Claude Code: что каждое решает</h1>
+
 
         <p class="lead">Работаешь в Claude Code, а одна и та же помеха снова обрывает задачу. Какое дополнение поможет продолжить именно тебе? Найди свою ситуацию и открой нужный раздел</p>
         <ul class="problem-list">

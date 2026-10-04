@@ -12,7 +12,7 @@
   <title>Как сделать движущиеся слайды в карусели: инструкция и промпты</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
   <style>
     :root { --paper:#F8F7F2; --white:#FFFFFF; --ink:#1E2926; --emerald:#102F30; --mid:#1F4A43; --muted:#62706A; --line:#D5C9B7; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F }
     :root[data-theme="dark"] { --paper:#162221; --white:#20302E; --ink:#EDF1EE; --emerald:#DCEAE4; --mid:#A8D0BE; --muted:#B7C2BD; --line:#3C504C; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78 }
@@ -123,9 +123,18 @@ main{min-width:0}.content-section{margin-top:42px}figure{margin:22px 0}video{dis
 
   <meta property="og:image" content="https://pronovoe.com/claude-ai/animirovannaya-karusel/assets/oblozhka.webp">
   <meta property="og:image:width" content="1600">
-  <meta property="og:image:height" content="900">
+  <meta property="og:image:height" content="840">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://pronovoe.com/claude-ai/animirovannaya-karusel/assets/oblozhka.webp">
+
+  <style id="shapka-b">
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+  </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -133,8 +142,9 @@ main{min-width:0}.content-section{margin-top:42px}figure{margin:22px 0}video{dis
     <a class="brand" href="../../">Claude.ai: кнопка за кнопкой</a>
     <div class="header-actions"><span class="handout-title">Движущиеся слайды</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div>
   </div></div>
-<div class="page-shell"><nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p><a href="#primer">Посмотри, как движутся слайды</a><a href="#nuzhno-zaranee">Что нужно заранее</a><a href="#podgotovka">Подготовь содержание своей карусели</a><a href="#kak-sdelat">Как это сделать: два пути</a><div class="toc-children"><a href="#chatgpt">1. Через ChatGPT</a><a href="#agent">2. Через агента</a></div><a href="#styk">Если движение скачет между слайдами</a><a href="#finish">Проверь перед загрузкой карусели</a></nav><main><header><p class="eyebrow">ИНСТРУКЦИЯ · АНИМИРОВАННАЯ КАРУСЕЛЬ</p><h1>Как сделать движущиеся слайды в карусели</h1>
-<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Три реальные фазы слайда: светлая плашка, оранжевое нажатие с уменьшением, возврат к светлой" loading="eager" decoding="async"></figure>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p><a href="#primer">Посмотри, как движутся слайды</a><a href="#nuzhno-zaranee">Что нужно заранее</a><a href="#podgotovka">Подготовь содержание своей карусели</a><a href="#kak-sdelat">Как это сделать: два пути</a><div class="toc-children"><a href="#chatgpt">1. Через ChatGPT</a><a href="#agent">2. Через агента</a></div><a href="#styk">Если движение скачет между слайдами</a><a href="#finish">Проверь перед загрузкой карусели</a></nav><main><header><p class="eyebrow">ИНСТРУКЦИЯ · АНИМИРОВАННАЯ КАРУСЕЛЬ</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Три реальные фазы слайда: светлая плашка, оранжевое нажатие с уменьшением, возврат к светлой" loading="eager" decoding="async" fetchpriority="high"><figcaption>Как оживить слайды нажатием?</figcaption></figure>
+<h1 class="article-title-v2">Как сделать движущиеся слайды в карусели</h1>
+
 <p class="lead">Хочешь оживить карусель, но каждый слайд приходится отдельно собирать в видеоредакторе, а при перелистывании линия или волна перескакивает на другое место? Как сделать так, чтобы движение продолжалось плавно?</p><p>Можно поручить нейросети нарисовать движение кодом: она задаст, как меняются линии, буквы и плашки, и свяжет соседние слайды. Ниже живой пример и два пути для твоей карусели: макет в ChatGPT или видеофайлы через агента</p><p class="meta">ОБНОВЛЕНО 1 ОКТЯБРЯ 2026</p>
 
 </header><details class="mobile-toc"><summary>Содержание инструкции</summary><a href="#primer">Посмотри, как движутся слайды</a><a href="#nuzhno-zaranee">Что нужно заранее</a><a href="#podgotovka">Подготовь содержание своей карусели</a><a href="#kak-sdelat">Как это сделать: два пути</a><div class="toc-children"><a href="#chatgpt">1. Через ChatGPT</a><a href="#agent">2. Через агента</a></div><a href="#styk">Если движение скачет между слайдами</a><a href="#finish">Проверь перед загрузкой карусели</a></details><section class="content-section" id="primer"><h2>Посмотри, как движутся слайды</h2><p>В примере ниже волна проходит через буквы и продолжает движение на следующем слайде. Во втором видео три плашки мягко дышат, а нижняя реагирует на нажатие. Это уже собранные видео: их можно посмотреть прямо здесь</p>

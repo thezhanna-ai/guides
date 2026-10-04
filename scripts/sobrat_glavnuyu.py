@@ -15,6 +15,7 @@
 
 import json
 import sys
+from html.parser import HTMLParser
 from pathlib import Path
 
 KORNI = Path(__file__).resolve().parent.parent
@@ -156,6 +157,32 @@ def zagruzit_oblozhki():
     return json.loads(OBLOZHKI.read_text(encoding="utf-8")) if OBLOZHKI.exists() else {}
 
 
+class OpisanieStatyi(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.opisanie = ""
+
+    def handle_starttag(self, tag, attrs):
+        values = dict(attrs)
+        if tag == "meta" and values.get("name", "").lower() == "description":
+            self.opisanie = values.get("content", "").strip()
+
+
+def kratkoe_soderzhanie(statya, oblozhka):
+    page = (KORNI / "claude-ai" / statya["slug"] / "index.html").resolve()
+    if page.is_relative_to(KORNI) and page.is_file():
+        parser = OpisanieStatyi()
+        parser.feed(page.read_text(encoding="utf-8"))
+        if parser.opisanie:
+            prefix = statya["title"] + ": "
+            if parser.opisanie.startswith(prefix):
+                summary = parser.opisanie[len(prefix):].strip()
+                if summary:
+                    return summary[0].upper() + summary[1:]
+            return parser.opisanie
+    return (oblozhka or {}).get("subtitle", "")
+
+
 def sobrat_kartochku(statya, oblozhki):
     podpis, klass = TIPY[statya["tip"]]
     title = ekranirovat(statya["title"])
@@ -167,7 +194,7 @@ def sobrat_kartochku(statya, oblozhki):
             'width="{width}" height="{height}" loading="lazy" decoding="async">'
         ).format(
             image=ekranirovat(oblozhka["image"]),
-            alt=ekranirovat(oblozhka["alt"]),
+            alt=ekranirovat(statya["title"] + ". " + oblozhka["alt"]),
             width=int(oblozhka["width"]),
             height=int(oblozhka["height"]),
         )
@@ -182,8 +209,9 @@ def sobrat_kartochku(statya, oblozhki):
             '{nazvanie} уровень</span>'
         ).format(kod=uroven, nazvanie=UROVNI[uroven][0])
     return (
-        '          <a class="guide-link" data-tags="{tags}" href="claude-ai/{slug}/">'
-        '{media}<span class="guide-body"><span class="guide-title">{title}</span>'
+        '          <a class="guide-link" data-tags="{tags}" data-kod="{kod}" '
+        'data-poisk="{poisk}" aria-label="{title}" href="claude-ai/{slug}/">'
+        '{media}<span class="guide-body"><span class="guide-summary">{summary}</span>'
         '<span class="guide-meta">{uroven}<span class="kind {klass}">{podpis}</span></span>'
         '</span></a>'
     ).format(
@@ -194,6 +222,9 @@ def sobrat_kartochku(statya, oblozhki):
         klass=klass,
         podpis=podpis,
         title=title,
+        kod=ekranirovat(statya.get("kod_slovo", "")),
+        poisk=ekranirovat(" ".join([statya["title"], *statya.get("ponyatiya", [])])),
+        summary=ekranirovat(kratkoe_soderzhanie(statya, oblozhka)),
     )
 
 

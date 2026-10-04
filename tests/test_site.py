@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import importlib.util
+import hashlib
 import json
 import re
 import tempfile
@@ -180,7 +181,7 @@ class ArticleImagesTest(unittest.TestCase):
                 cover = [row for row in rows if row["placement"].startswith("обложка")]
                 self.assertEqual(len(cover), 1)
                 self.assertEqual(self.covers[article["slug"]]["source_number"], cover[0]["number"])
-                self.assertEqual(self.covers[article["slug"]]["alt"], cover[0]["alt"])
+                self.assertEqual(self.covers[article["slug"]]["source_alt"], cover[0]["alt"])
 
     def test_every_illustrated_article_has_scene_files_alt_and_correct_loading(self):
         for article in self.eligible:
@@ -196,15 +197,17 @@ class ArticleImagesTest(unittest.TestCase):
                     self.assertEqual(len(figure.all(tag="img")), 1)
                     attrs = figure.all(tag="img")[0].attrs
                     cover = row["placement"].startswith("обложка")
-                    self.assertEqual(attrs["src"], "assets/oblozhka-scena.webp" if cover else "assets/seredina-scena.webp")
+                    self.assertEqual(attrs["src"], "assets/oblozhka.webp" if cover else "assets/seredina-scena.webp")
                     self.assertTrue((page.parent / attrs["src"]).is_file())
-                    self.assertEqual(attrs["alt"], row["alt"])
+                    self.assertEqual(attrs["alt"], self.covers[slug]["alt"] if cover else row["alt"])
                     self.assertTrue(attrs["alt"].strip())
-                    self.assertEqual((attrs["width"], attrs["height"]), ("1600", "900"))
+                    self.assertEqual((attrs["width"], attrs["height"]), ("1600", "840") if cover else ("1600", "900"))
+                    if cover:
+                        self.assertEqual(attrs["fetchpriority"], "high")
                     self.assertEqual(attrs["loading"], "eager" if cover else "lazy")
                     self.assertEqual(attrs["decoding"], "async")
 
-    def test_cover_immediately_follows_h1_or_its_immediate_metadata_before_lead(self):
+    def test_cover_immediately_precedes_h1_after_section_label_without_second_cover(self):
         for article in self.eligible:
             page = ROOT / "claude-ai" / article["slug"] / "index.html"
             doc = ImageDocument(page.read_text(encoding="utf-8"))
@@ -213,11 +216,35 @@ class ArticleImagesTest(unittest.TestCase):
             with self.subTest(slug=article["slug"]):
                 self.assertIs(cover.parent, h1.parent)
                 siblings = h1.parent.children
-                next_index = siblings.index(h1) + 1
-                next_node = siblings[next_index]
-                if next_node.tag == "p" and "meta" in next_node.attrs.get("class", "").split():
-                    next_index += 1
-                self.assertIs(siblings[next_index], cover)
+                index = siblings.index(h1)
+                self.assertIs(siblings[index - 1], cover)
+                self.assertTrue({"eyebrow", "kicker"} & set(siblings[index - 2].attrs.get("class", "").split()))
+                images = [img for img in doc.root.all(tag="img") if img.attrs.get("src") in
+                          {"assets/oblozhka.webp", "assets/oblozhka-scena.webp"}]
+                self.assertEqual(len(images), 1)
+                self.assertIs(images[0], cover.all(tag="img")[0])
+                self.assertIn("cover-v2", cover.attrs["class"].split())
+                captions = cover.all(tag="figcaption")
+                self.assertEqual(len(captions), 1)
+                self.assertEqual(captions[0].text_content().strip(), self.covers[article["slug"]]["subtitle"])
+                self.assertNotEqual(captions[0].text_content().strip(), h1.text_content().strip())
+
+    def test_header_typography_matches_variant_b_including_mobile_and_font_loading(self):
+        for article in self.eligible:
+            html = (ROOT / "claude-ai" / article["slug"] / "index.html").read_text()
+            with self.subTest(slug=article["slug"]):
+                self.assertIn("Spectral:wght@300;400;600", html)
+                self.assertRegex(html, r"h1\.article-title-v2\s*\{[^}]*font-family: Spectral[^}]*font-size: 46px[^}]*font-weight: 300[^}]*line-height: 1\.07")
+                self.assertRegex(html, r"@media \(max-width: 860px\)\s*\{\s*h1\.article-title-v2\s*\{[^}]*font-size: clamp\(30px, 7\.5vw, 46px\)[^}]*line-height: 1\.1")
+                self.assertRegex(html, r"figure\.cover-v2 figcaption\s*\{[^}]*color: var\(--muted[^}]*font: 400 14px/1\.5 Spectral")
+                self.assertRegex(html, r"figure\.cover-v2 img\s*\{[^}]*border-radius: 14px[^}]*box-shadow: none")
+                self.assertIn("article-title-v2", ImageDocument(html).root.all(tag="h1")[0].attrs["class"].split())
+
+    def test_v2_cover_files_match_imported_sha256(self):
+        for slug, cover in self.covers.items():
+            with self.subTest(slug=slug):
+                self.assertEqual((cover["width"], cover["height"]), (1600, 840))
+                self.assertEqual(hashlib.sha256((ROOT / cover["image"]).read_bytes()).hexdigest(), cover["sha256"])
 
     def test_middle_scenes_follow_the_named_sections_including_carousel_exception(self):
         for article in self.eligible:
@@ -250,7 +277,7 @@ class ArticleImagesTest(unittest.TestCase):
             doc = ImageDocument(page.read_text(encoding="utf-8"))
             expected_url = "https://pronovoe.com/claude-ai/" + article["slug"] + "/assets/oblozhka.webp"
             values = {"og:image": expected_url, "twitter:image": expected_url,
-                      "og:image:width": "1600", "og:image:height": "900",
+                      "og:image:width": "1600", "og:image:height": "840",
                       "twitter:card": "summary_large_image"}
             with self.subTest(slug=article["slug"]):
                 for key, value in values.items():
@@ -283,7 +310,23 @@ class ArticleImagesTest(unittest.TestCase):
             with self.subTest(slug=slug):
                 image = card.all(tag="img")[0].attrs
                 self.assertEqual(image["src"], "claude-ai/" + slug + "/assets/oblozhka.webp")
-                self.assertEqual(image["alt"], self.covers[slug]["alt"])
+                article = next(a for a in live if a["slug"] == slug)
+                self.assertEqual(image["alt"], article["title"] + ". " + self.covers[slug]["alt"])
+                self.assertEqual(card.attrs["aria-label"], article["title"])
+                self.assertIn(article["title"], card.attrs["data-poisk"])
+                self.assertEqual(card.attrs.get("data-kod", ""), article.get("kod_slovo", ""))
+                for term in article["ponyatiya"]:
+                    self.assertIn(term, card.attrs["data-poisk"])
+                self.assertEqual((image["width"], image["height"]), ("1600", "840"))
+                summaries = card.all(klass="guide-summary")
+                self.assertEqual(len(summaries), 1)
+                page = ImageDocument((ROOT / "claude-ai" / slug / "index.html").read_text())
+                description = next(meta.attrs["content"] for meta in page.root.all(tag="meta") if meta.attrs.get("name") == "description")
+                if slug == "dannye-v-claude":
+                    description = "Как сохранить копию, убрать чаты, отдельно проверить память и удалить аккаунт"
+                self.assertEqual(summaries[0].text_content(), description)
+                self.assertNotIn(article["title"], card.text_content())
+                self.assertEqual(card.all(klass="guide-title"), [])
                 self.assertTrue((ROOT / image["src"]).is_file())
                 self.assertEqual(image["loading"], "lazy")
         hero = doc.root.all(klass="hero-image")[0].attrs
@@ -324,7 +367,7 @@ class ArticleImagesTest(unittest.TestCase):
                 doc = ImageDocument(self.generator.sobrat_kartochku(article, covers))
                 image = doc.root.all(tag="img")[0].attrs
                 self.assertEqual(image["src"], filename)
-                self.assertEqual(image["alt"], alt)
+                self.assertEqual(image["alt"], article["title"] + ". " + alt)
                 self.assertNotIn("onerror", image)
                 self.assertEqual(doc.root.all(tag="script"), [])
                 (root / "outside.webp").symlink_to(HOME)
@@ -332,6 +375,35 @@ class ArticleImagesTest(unittest.TestCase):
                 doc = ImageDocument(self.generator.sobrat_kartochku(article, covers))
                 self.assertEqual(doc.root.all(tag="img"), [])
                 self.assertEqual(len(doc.root.all(klass="guide-placeholder")), 1)
+
+    def test_summary_falls_back_to_v2_subtitle_for_missing_page_and_is_escaped(self):
+        article = dict(self.eligible[0], slug="missing-guide", title='Название <script>alert(1)</script>',
+                       kod_slovo='код" onclick="x', ponyatiya=['тема" onclick="x', '<script>'])
+        covers = {article["slug"]: {"image": "absent.webp", "subtitle": 'Вопрос <script> & "ответ"?'}}
+        doc = ImageDocument(self.generator.sobrat_kartochku(article, covers))
+        card = doc.root.all(tag="a")[0]
+        self.assertEqual(card.attrs["aria-label"], article["title"])
+        self.assertEqual(card.attrs["data-kod"], article["kod_slovo"])
+        self.assertIn(article["title"], card.attrs["data-poisk"])
+        self.assertEqual(card.all(klass="guide-summary")[0].text_content(), covers[article["slug"]]["subtitle"])
+        self.assertEqual(doc.root.all(tag="script"), [])
+        self.assertNotIn("onclick", card.attrs)
+
+    def test_description_entities_are_escaped_and_symlink_cannot_read_outside_root(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            page = root / "claude-ai" / "example" / "index.html"
+            page.parent.mkdir(parents=True)
+            page.write_text('<meta name="description" content="Суть &amp; &quot;пример&quot; &lt;script&gt;">')
+            article = dict(self.eligible[0], slug="example")
+            with patch.object(self.generator, "KORNI", root):
+                card = ImageDocument(self.generator.sobrat_kartochku(article, {}))
+                self.assertEqual(card.root.all(klass="guide-summary")[0].text_content(), 'Суть & "пример" <script>')
+                self.assertEqual(card.root.all(tag="script"), [])
+                page.unlink()
+                page.symlink_to(SERVICES)
+                self.assertEqual(self.generator.kratkoe_soderzhanie(article, {"subtitle": "Подпись v2"}), "Подпись v2")
+
 
 
 class GuidesSiteTest(unittest.TestCase):
@@ -405,7 +477,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertEqual(
             self.parse(SERVICES).images,
             [
-                "assets/oblozhka-scena.webp",
+                "assets/oblozhka.webp",
                 "assets/02-profile-menu-cropped.png",
                 "assets/03-settings-menu.png",
                 "assets/01-connectors-highlighted.png",
@@ -461,7 +533,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertEqual(
             images,
             [
-                "assets/oblozhka-scena.webp",
+                "assets/oblozhka.webp",
                 "assets/01-plus.png",
                 "assets/02-web-search.png",
                 "assets/03-searched-the-web-v2.png",

@@ -12,7 +12,7 @@
   <title>Как скопировать стиль любого фото в ChatGPT</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
   <style>
     :root { --paper:#F8F7F2; --white:#FFFFFF; --ink:#1E2926; --emerald:#102F30; --mid:#1F4A43; --muted:#62706A; --line:#D5C9B7; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F }
     :root[data-theme="dark"] { --paper:#162221; --white:#20302E; --ink:#EDF1EE; --emerald:#DCEAE4; --mid:#A8D0BE; --muted:#B7C2BD; --line:#3C504C; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78 }
@@ -182,9 +182,18 @@
 
   <meta property="og:image" content="https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/assets/oblozhka.webp">
   <meta property="og:image:width" content="1600">
-  <meta property="og:image:height" content="900">
+  <meta property="og:image:height" content="840">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/assets/oblozhka.webp">
+
+  <style id="shapka-b">
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+  </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -193,8 +202,9 @@
     <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p><a href="#primery">Что получится из одного фото</a><a href="#chto-ponadobitsya">Что понадобится</a><a href="#chto-takoe-json">Что такое JSON простыми словами</a><a href="#shag-1-retsept">Шаг 1. Получи рецепт образца</a><a href="#shag-2-kopirovanie">Шаг 2. Скопируй JSON</a><a href="#shag-3-svoy-foto">Шаг 3. Перенеси стиль на своё фото</a><a href="#odezhda-i-fon">Как поменять ещё и одежду с фоном</a><a href="#odna-fraza">Одна фраза на все случаи</a><a href="#esli-ne-poluchaetsya">Если что-то не получается</a><a href="#stalo-ponyatnee">Стало понятнее?</a></nav>
     <main>
       <p class="eyebrow">ФОТО / стиль любого снимка</p>
-      <h1>Как скопировать стиль любого фото в ChatGPT: один промпт и JSON</h1>
-<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Исходный портрет мужчины и два его результата с перенесённым фотографическим стилем в ChatGPT" loading="eager" decoding="async"></figure>
+      <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Исходный портрет мужчины и два его результата с перенесённым фотографическим стилем в ChatGPT" loading="eager" decoding="async" fetchpriority="high"><figcaption>Как перенести свет и обработку?</figcaption></figure>
+<h1 class="article-title-v2">Как скопировать стиль любого фото в ChatGPT: один промпт и JSON</h1>
+
 
       <p class="lead">Есть обычное фото: ты у окна, с друзьями, на прогулке. А хочется чего-то творческого: кадр как из журнала, из кино или из студии со светом. Раньше за этим шли к фотографу и дизайнеру. Сейчас нейросети исполняют такие желания как золотая рыбка, за пару минут</p>
       <p class="lead">Нужно всего две вещи: найти образ, который нравится, и сделать три шага в ChatGPT. Все фразы ниже готовые, их можно просто скопировать</p>

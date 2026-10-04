@@ -11,7 +11,7 @@
   <title>Gmail, Google Drive и Calendar внутри Claude</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --emerald: #102F30;
@@ -205,9 +205,18 @@
 
   <meta property="og:image" content="https://pronovoe.com/claude-ai/podklyuchit-gmail-drive-calendar/assets/oblozhka.webp">
   <meta property="og:image:width" content="1600">
-  <meta property="og:image:height" content="900">
+  <meta property="og:image:height" content="840">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://pronovoe.com/claude-ai/podklyuchit-gmail-drive-calendar/assets/oblozhka.webp">
+
+  <style id="shapka-b">
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+  </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -271,9 +280,10 @@
       <article>
         <header id="connectors">
           <p class="eyebrow">Claude.ai · Connectors</p>
-          <h1>Gmail, Google Drive и Calendar внутри Claude</h1>
+          <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Почтовый ящик, облако хранения и электронный календарь для подключения почты, файлов и встреч к Claude" loading="eager" decoding="async" fetchpriority="high"><figcaption>Как подключить три сервиса?</figcaption></figure>
+<h1 class="article-title-v2">Gmail, Google Drive и Calendar внутри Claude</h1>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 14 СЕНТЯБРЯ 2026</p>
-<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Почтовый ящик, облако хранения и электронный календарь для подключения почты, файлов и встреч к Claude" loading="eager" decoding="async"></figure>
+
 
           <p class="lead">Письмо в почте, файл с правками на диске, встреча в календаре - всё про одну задачу, но лежит в трёх разных местах. Ты копируешь это в Claude по частям и на каждом переходе что-то не доносишь: то важную строку из переписки, то последнюю версию файла. Claude отвечает на обрывок, а не на задачу целиком. Подключение делается один раз: дальше он сам находит нужное письмо, открывает твой файл и смотрит расписание прямо в разговоре</p>
           <aside class="route-note" aria-label="Короткий маршрут">

@@ -4,7 +4,7 @@
 <meta name="description" content="Как добавить один или несколько файлов в чат Claude, проверить вложения, форматы и ограничения">
 <title>Загрузка файлов в Claude: один документ и пачка файлов</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
 <style>
 
     :root {
@@ -190,9 +190,18 @@
 </style>
   <meta property="og:image" content="https://pronovoe.com/claude-ai/zagruzka-faylov-v-claude/assets/oblozhka.webp">
   <meta property="og:image:width" content="1600">
-  <meta property="og:image:height" content="900">
+  <meta property="og:image:height" content="840">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://pronovoe.com/claude-ai/zagruzka-faylov-v-claude/assets/oblozhka.webp">
+
+  <style id="shapka-b">
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+  </style>
 </head><body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div>
@@ -217,9 +226,10 @@
 <a href="#zaprosy">Спроси по оригиналам</a>
 <a href="#sources">Источники</a>
 </nav></details><article>
-<header id="nachalo"><p class="eyebrow">Claude.ai · выпуск 18</p><h1>Загрузка файлов в Claude: один документ и пачка файлов</h1>
+<header id="nachalo"><p class="eyebrow">Claude.ai · выпуск 18</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Один объёмный PDF и пачка из трёх PDF входят в реплику как образ загрузки файлов в разговор Claude" loading="eager" decoding="async" fetchpriority="high"><figcaption>Как загрузить пачку файлов?</figcaption></figure>
+<h1 class="article-title-v2">Загрузка файлов в Claude: один документ и пачка файлов</h1>
 <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 26 СЕНТЯБРЯ 2026</p>
-<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Один объёмный PDF и пачка из трёх PDF входят в реплику как образ загрузки файлов в разговор Claude" loading="eager" decoding="async"></figure>
+
 
 <p class="lead">Копируешь договор в чат по абзацу: пункт сюда, таблицу туда, а потом ещё объясняешь Claude, как куски связаны. Claude отвечает по твоему пересказу, и важное различие между версиями легко теряется. Кажется, достаточно приложить оригиналы - но даже три видимых вложения могут привести к неверному сравнению. За две минуты пройдёшь путь от одного файла до пачки, узнаешь, что Claude действительно читает, и получишь фразу для проверки перед анализом</p>
 <aside class="route-note" aria-label="Короткий маршрут"><h2>Короткий маршрут</h2><p>Плюс → Add files or photos → выбрать один файл или несколько → «Какие файлы ты получил?» → вопрос с файлом, страницей и пунктом</p></aside>

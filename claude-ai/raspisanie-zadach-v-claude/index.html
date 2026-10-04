@@ -10,7 +10,7 @@
   <title>Как поставить Клоду задачу по расписанию</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&amp;family=Unbounded:wght@700&amp;display=swap" rel="stylesheet">
   <style>
     :root { --emerald:#102F30; --emerald-mid:#1F4A43; --paper:#F8F7F2; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F; --ink:#1E2926; --muted:#62706A; --line:#D5C9B7; --white:#FFFFFF }
     :root[data-theme="dark"] { --emerald:#DCEAE4; --emerald-mid:#A8D0BE; --paper:#162221; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78; --ink:#EDF1EE; --muted:#B7C2BD; --line:#3C504C; --white:#20302E }
@@ -112,9 +112,18 @@
 
   <meta property="og:image" content="https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/assets/oblozhka.webp">
   <meta property="og:image:width" content="1600">
-  <meta property="og:image:height" content="900">
+  <meta property="og:image:height" content="840">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/assets/oblozhka.webp">
+
+  <style id="shapka-b">
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+  </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -123,8 +132,9 @@
     <nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</a><a href="#dostup">1. Убедись, что расписание доступно</a><a href="#istochniki">2. Подключи Gmail и Google Calendar</a><a href="#zadacha">3. Создай задачу на каждый понедельник</a><a href="#proverka">4. Проверь, что будильник заведён</a><a href="#primer">Пример с пустой почтой</a><a href="#oshibki">Если кнопки или результата нет</a><a href="#sources">Источники</a></nav>
     <main><article>
       <details class="mobile-toc"><summary>Содержание</summary><a href="#nachalo">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</a><a href="#dostup">1. Убедись, что расписание доступно</a><a href="#istochniki">2. Подключи Gmail и Google Calendar</a><a href="#zadacha">3. Создай задачу на каждый понедельник</a><a href="#proverka">4. Проверь, что будильник заведён</a><a href="#primer">Пример с пустой почтой</a><a href="#oshibki">Если кнопки или результата нет</a><a href="#sources">Источники</a></details>
-      <header id="nachalo"><p class="eyebrow">Claude.ai · Серия 17</p><h1>Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</h1><p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p>
-<figure class="cover"><img src="assets/oblozhka-scena.webp" width="1600" height="900" alt="Электронный будильник на 7:30 для задачи Claude по расписанию с письмами и встречами" loading="eager" decoding="async"></figure>
+      <header id="nachalo"><p class="eyebrow">Claude.ai · Серия 17</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Электронный будильник на 7:30 для задачи Claude по расписанию с письмами и встречами" loading="eager" decoding="async" fetchpriority="high"><figcaption>Как получить план недели?</figcaption></figure>
+<h1 class="article-title-v2">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</h1><p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p>
+
 <p class="lead">Один раз задай Клоду работу на понедельник: разобрать письма за выходные и собрать план недели из календаря. Когда подключены Gmail и Google Calendar, такая задача может выполняться, даже если ноутбук закрыт</p><aside class="route-note"><h2>Короткий маршрут</h2><p>Проверь доступ → подключи Gmail и Google Calendar → создай задачу Scheduled → проверь расписание и результат</p></aside></header>
       <section class="content-section" id="dostup">
         <p class="section-label">Сначала проверь</p><h2>1. Убедись, что расписание доступно</h2>
