@@ -126,6 +126,8 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }}
     .guide-title {{ display: block }}
+    .guide-link.kod-hit {{ border-color: var(--accent) }}
+    .guide-link.kod-hit::after {{ content: "по кодовому слову"; display: block; margin-top: 6px; color: var(--accent); font-size: 12px; font-weight: 700 }}
     .kind {{ align-self: flex-start; padding: 2px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase }}
     .kind-instr {{ background: var(--sage); color: var(--muted) }}
     .kind-razbor {{ background: #FDF0CE; color: #8A6410 }}
@@ -165,7 +167,7 @@
 
   <main>
     <div class="toolbar">
-      <input class="search-input" type="search" id="guide-search" placeholder="Найти гайд по названию…" aria-label="Поиск по гайдам">
+      <input class="search-input" type="search" id="guide-search" placeholder="Название гайда или кодовое слово" aria-label="Поиск по названию или кодовому слову">
       <div class="tag-filters" id="tag-filters" role="group" aria-label="Фильтр по разделам">
 {filtry}
       </div>
@@ -185,16 +187,19 @@
     var activeTag = 'all';
 
     function applyFilters() {{
-      var query = searchInput.value.trim().toLowerCase();
+      var query = normalize(searchInput.value);
       var visibleCount = 0;
 
       guideLinks.forEach(function (link) {{
-        var text = link.textContent.toLowerCase();
+        var text = normalize(link.textContent);
         var tags = (link.getAttribute('data-tags') || '').split(' ');
+        // кодовое слово совпадает целиком: статья видна при любом фильтре, на одно слово может быть несколько статей
+        var kodHit = query !== '' && normalize(link.getAttribute('data-kod') || '') === query;
         var matchesTag = activeTag === 'all' || tags.indexOf(activeTag) !== -1;
         var matchesQuery = query === '' || text.indexOf(query) !== -1;
-        var visible = matchesTag && matchesQuery;
+        var visible = kodHit || (matchesTag && matchesQuery);
         link.style.display = visible ? '' : 'none';
+        link.classList.toggle('kod-hit', kodHit);
         if (visible) visibleCount++;
       }});
 
@@ -214,13 +219,25 @@
         var tracks = block.querySelectorAll('.track');
         var anyTrack = false;
         tracks.forEach(function (t) {{ if (t.style.display !== 'none') anyTrack = true; }});
-        block.style.display = (matchesSection && anyTrack) ? '' : 'none';
+        var kodInBlock = block.querySelector('.guide-link.kod-hit') !== null;
+        block.style.display = ((matchesSection || kodInBlock) && anyTrack) ? '' : 'none';
       }});
 
       noResults.classList.toggle('show', visibleCount === 0 && query !== '');
     }}
 
+    function normalize(value) {{
+      return value.trim().toLowerCase().replace(/ё/g, 'е');
+    }}
+
     searchInput.addEventListener('input', applyFilters);
+
+    // Enter при единственном найденном гайде открывает его
+    searchInput.addEventListener('keydown', function (event) {{
+      if (event.key !== 'Enter') return;
+      var shown = Array.prototype.filter.call(guideLinks, function (l) {{ return l.style.display !== 'none'; }});
+      if (shown.length === 1 && normalize(searchInput.value) !== '') window.location.href = shown[0].getAttribute('href');
+    }});
 
     tagButtons.forEach(function (btn) {{
       btn.addEventListener('click', function () {{

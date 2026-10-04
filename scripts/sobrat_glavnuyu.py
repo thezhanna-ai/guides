@@ -143,11 +143,13 @@ def zagruzit_statyi():
 def sobrat_kartochku(statya):
     podpis, klass = TIPY[statya["tip"]]
     return (
-        '          <a class="guide-link" data-tags="{tags}" href="claude-ai/{slug}/">'
+        '          <a class="guide-link" data-tags="{tags}"{kod} href="claude-ai/{slug}/">'
         '<span class="kind {klass}">{podpis}</span>'
         "<span class=\"guide-title\">{title}</span></a>"
     ).format(
         tags=ekranirovat(statya["tags"]),
+        # кодовое слово на странице не видно, по нему ищет поле поиска
+        kod=' data-kod="%s"' % ekranirovat(statya["kod_slovo"]) if statya.get("kod_slovo") else "",
         slug=statya["slug"],
         klass=klass,
         podpis=podpis,
