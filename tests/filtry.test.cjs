@@ -137,6 +137,17 @@ test('Скрипт не выполняет сетевых запросов и р
 const registry = JSON.parse(fs.readFileSync(path.join(root, 'data/statyi.json'), 'utf8')).statyi;
 const articleHref = slug => 'claude-ai/' + slug + '/';
 
+test('ЖЕМЧУГ находится по слову, транслиту и раскладке; Enter открывает новую статью', () => {
+  const article = registry.find(a => a.slug === '10-saytov-starogo-interneta');
+  assert.equal(article.kod_slovo, 'ЖЕМЧУГ');
+  for (const query of ['ЖЕМЧУГ', '  жемчуг  ', 'zhemchug', ';tvxeu']) {
+    const p = page(); p.filter('proishodit'); p.search(query);
+    assert.deepEqual(p.visible().map(link => link.attrs.href), [articleHref(article.slug)]);
+    assert.ok(p.visible()[0].classes.has('kod-hit'));
+    p.key('Enter'); assert.equal(p.window.location.href, articleHref(article.slug));
+  }
+});
+
 test('Все кодовые слова реальных live-статей находят каждый связанный гайд при любом фильтре', () => {
   for (const code of new Set(registry.filter(a => a.status === 'live' && a.kod_slovo).map(a => a.kod_slovo))) {
     const p = page(); p.filter('proishodit'); p.search(code);
