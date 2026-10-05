@@ -36,6 +36,12 @@ SHAPKA = {
     "title": "Нейросети работают на тебя",
     "description": "Инструкции, разборы и гайды по нейросетям для не-программистов: от первой кнопки до собственных проектов",
     "podval": "Гайды обновляются регулярно - если нужной инструкции ещё нет, она уже готовится",
+    "avtor_imya": "Жанна Слепова",
+    "avtor_tekst": "28 лет в финансах: 20 в Big4, затем 8 в российском консалтинге, проектный учёт. "
+                   "Работа, где разные системы интегрируются в один сквозной процесс и должны сходиться между собой. "
+                   "С 2025 года - нейросети и вайбкодинг, обучение у лучших на рынке. "
+                   "Взгляд тот же: сначала убедиться, что всё сходится, потом объяснить простыми словами",
+    "podval_avtor": "Ведёт Жанна Слепова - 28 лет в финансах Big4 и консалтинга, с 2025 года в нейросетях",
 }
 
 UROVNI = {
@@ -328,6 +334,9 @@ def sobrat_stranicu():
         filtry=sobrat_filtry(),
         razdely="\n\n".join(sobrat_razdel(r, po_trassam, oblozhki) for r in RAZDELY),
         podval=ekranirovat(SHAPKA["podval"]),
+        avtor_imya=ekranirovat(SHAPKA["avtor_imya"]),
+        avtor_tekst=ekranirovat(SHAPKA["avtor_tekst"]),
+        podval_avtor=ekranirovat(SHAPKA["podval_avtor"]),
     )
 
 
