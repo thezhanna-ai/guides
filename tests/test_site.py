@@ -1359,7 +1359,7 @@ class RubrikiIMetkiTest(unittest.TestCase):
                 self.assertEqual(card.attrs["data-metki"].split(), a["metki"])
                 level = card.all(klass="guide-level")[0]
                 self.assertIn(a["uroven"], level.attrs["class"].split())
-                self.assertEqual(level.text_content().strip(), self.gen.UROVNI[a["uroven"]][0])
+                self.assertEqual(level.text_content().strip(), self.gen.UROVNI[a["uroven"]][0] + " уровень")
 
     def test_level_mark_right_after_article_title(self):
         for a in self.live:
@@ -1368,4 +1368,4 @@ class RubrikiIMetkiTest(unittest.TestCase):
                 self.assertEqual(html.count('class="uroven-metka'), 1)
                 after = html.split("</h1>", 1)[1].lstrip()
                 self.assertTrue(after.startswith('<p class="uroven-metka %s"' % a["uroven"]))
-                self.assertIn(">%s</p>" % self.gen.UROVNI[a["uroven"]][0], after.split("\n", 1)[0])
+                self.assertIn(">%s уровень</p>" % self.gen.UROVNI[a["uroven"]][0], after.split("\n", 1)[0])
