@@ -14,7 +14,7 @@ class PublicationTest(unittest.TestCase):
     def setUpClass(cls):
         cls.registry = json.loads((ROOT / "data/statyi.json").read_text())["statyi"]
         cls.covers = json.loads((ROOT / "data/OBLOZHKI.json").read_text())
-        # 29 оформленных статей, главная и черновик VPS проверяются отдельно
+        # 29 оформленных статей, главная и три черновика проверяются отдельно
         cls.pages = [ROOT / "index.html"] + [
             ROOT / "claude-ai" / article["slug"] / "index.html"
             for article in cls.registry
@@ -37,7 +37,7 @@ class PublicationTest(unittest.TestCase):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"}}
         self.assertEqual(len(ready), 30)
         self.assertEqual(set(self.covers), ready)
-        self.assertEqual(len(self.pages), 31)
+        self.assertEqual(len(self.pages), 33)
         self.assertEqual(len(set(self.pages)), len(self.pages))
 
     def test_all_internal_links_and_cross_page_fragments_exist(self):
