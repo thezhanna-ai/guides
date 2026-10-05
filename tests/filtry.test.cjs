@@ -46,13 +46,14 @@ function page() {
   });
   const tracks = sections.flatMap(section => section.tracks);
   const links = tracks.flatMap(track => track.links);
-  const buttons = fixture.buttons.map(attrs => new Element(attrs));
-  const input = new Element(); input.value = '';
+  const select = new Element(); select.value = 'all';
+  const go = new Element();
+  const input = new Element(); input.value = ''; input.focused = false; input.focus = () => { input.focused = true; };
   const noResults = new Element();
   const document = {
-    getElementById(id) { return id === 'guide-search' ? input : noResults; },
+    getElementById(id) { return {'guide-search': input, 'metka': select, 'search-go': go}[id] || noResults; },
     querySelectorAll(selector) {
-      return {'.tag-btn': buttons, '.guide-link': links, '.track': tracks, '.tool-block': sections}[selector];
+      return {'.guide-link': links, '.track': tracks, '.tool-block': sections}[selector];
     },
   };
   const window = {location: {href: ''}};
@@ -61,16 +62,18 @@ function page() {
   Object.assign(state, {document, window});
   vm.runInContext(script, state);
   return {
-    sections, tracks, links, buttons, input, noResults, window, state,
+    sections, tracks, links, select, go, input, noResults, window, state,
     key(key) { if (input.listeners.keydown) input.listeners.keydown({key}); },
     search(value) { input.value = value; input.listeners.input(); },
-    filter(tag) { buttons.find(btn => btn.attrs['data-tag'] === tag).listeners.click(); },
+    filter(tag) { select.value = tag; select.listeners.change(); },
+    find() { go.listeners.click(); },
     visible() { return links.filter(link => link.style.display !== 'none' && link.section.style.display !== 'none'); },
   };
 }
 
-test('Начальная страница: 30 карточек и шесть разделов', () => {
-  const p = page(); assert.equal(p.visible().length, 30); assert.equal(p.sections.length, 6);
+test('Начальная страница: 30 карточек и пять рубрик', () => {
+  const p = page(); assert.equal(p.visible().length, 30); assert.equal(p.sections.length, 5);
+  assert.deepEqual(p.sections.map(s => s.attrs['data-section']), ['start', 'kazhdyy-den', 'kartinki', 'vaybkoding', 'servisy']);
 });
 
 test('Каждое настоящее название статьи находится целиком', () => {
@@ -100,32 +103,41 @@ test('Стирание запроса возвращает карточки и �
   assert.ok(!p.noResults.classes.has('show'));
 });
 
-for (const tag of ['dostup', 'claude', 'gpt', 'kartinki', 'proekty', 'proishodit']) {
-  test('Фильтр ' + tag + ' сохраняет прежние правила тегов и разделов', () => {
+for (const tag of ['claude-chat', 'claude-code', 'chatgpt', 'codex', 'kartinki', 'video', 'sayt', 'bot', 'dostup', 'besplatno']) {
+  test('Метка ' + tag + ' показывает ровно статьи с этой меткой', () => {
     const p = page();
-    const expected = p.links.filter(link => link.attrs['data-tags'].split(' ').includes(tag) && link.section.attrs['data-section'] === tag);
+    const expected = p.links.filter(link => link.attrs['data-metki'].split(' ').includes(tag));
+    assert.ok(expected.length > 0, tag);
     p.filter(tag);
     assert.deepEqual(p.visible(), expected);
-    assert.ok(p.sections.every(s => s.style.display === 'none' || s.attrs['data-section'] === tag));
-    assert.equal(p.buttons.filter(btn => btn.classes.has('active')).length, 1);
-    assert.equal(p.buttons.filter(btn => btn.attrs['aria-pressed'] === 'true').length, 1);
+    assert.ok(p.sections.every(s => s.style.display === 'none' || s.tracks.some(t => t.links.some(l => expected.includes(l)))));
   });
 }
 
-test('Поиск и фильтр совместно, затем смена фильтра без потери запроса', () => {
-  const p = page(); p.filter('claude'); p.search('голосовой'); assert.equal(p.visible().length, 1);
-  p.filter('gpt'); assert.equal(p.visible().length, 0); assert.ok(p.noResults.classes.has('show'));
+test('Поиск и метка совместно, затем смена метки без потери запроса', () => {
+  const p = page(); p.filter('claude-chat'); p.search('голосовой'); assert.equal(p.visible().length, 1);
+  p.filter('codex'); assert.equal(p.visible().length, 0); assert.ok(p.noResults.classes.has('show'));
   p.filter('all'); assert.equal(p.visible().length, 1); assert.equal(p.input.value, 'голосовой');
 });
 
-test('Регрессия: совпадение в скрытом разделе не подавляет сообщение «Ничего не нашлось»', () => {
-  const p = page(); p.filter('claude'); p.search('10 бесплатных');
+test('Регрессия: совпадение без выбранной метки не подавляет сообщение «Ничего не нашлось»', () => {
+  const p = page(); p.filter('claude-chat'); p.search('10 бесплатных');
   assert.equal(p.visible().length, 0); assert.ok(p.noResults.classes.has('show'));
 });
 
-test('Все после фильтра возвращает 30 карточек и пустые разделы', () => {
-  const p = page(); p.filter('gpt'); p.filter('all');
+test('«Все метки» после фильтра возвращает 30 карточек и все рубрики', () => {
+  const p = page(); p.filter('codex'); p.filter('all');
   assert.equal(p.visible().length, 30); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+});
+
+test('«Другое» снимает метку и ставит курсор в поле поиска', () => {
+  const p = page(); p.filter('codex'); p.filter('drugoe');
+  assert.equal(p.visible().length, 30); assert.ok(p.input.focused);
+});
+
+test('Кнопка «Найти» открывает единственный результат', () => {
+  const p = page(); p.search('golosovoy'); p.find();
+  assert.equal(p.window.location.href, articleHref('golosovoy-vvod-v-claude'));
 });
 
 test('Скрипт не выполняет сетевых запросов и работает из локального HTML', () => {
@@ -141,7 +153,7 @@ test('ЖЕМЧУГ находится по слову, транслиту и р�
   const article = registry.find(a => a.slug === '10-saytov-starogo-interneta');
   assert.equal(article.kod_slovo, 'ЖЕМЧУГ');
   for (const query of ['ЖЕМЧУГ', '  жемчуг  ', 'zhemchug', ';tvxeu']) {
-    const p = page(); p.filter('proishodit'); p.search(query);
+    const p = page(); p.filter('sravnenie'); p.search(query);
     assert.deepEqual(p.visible().map(link => link.attrs.href), [articleHref(article.slug)]);
     assert.ok(p.visible()[0].classes.has('kod-hit'));
     p.key('Enter'); assert.equal(p.window.location.href, articleHref(article.slug));
@@ -150,7 +162,7 @@ test('ЖЕМЧУГ находится по слову, транслиту и р�
 
 test('Все кодовые слова реальных live-статей находят каждый связанный гайд при любом фильтре', () => {
   for (const code of new Set(registry.filter(a => a.status === 'live' && a.kod_slovo).map(a => a.kod_slovo))) {
-    const p = page(); p.filter('proishodit'); p.search(code);
+    const p = page(); p.filter('sravnenie'); p.search(code);
     for (const article of registry.filter(a => a.status === 'live' && a.kod_slovo === code)) {
       assert.ok(p.visible().some(link => link.attrs.href === articleHref(article.slug)), code + ': ' + article.slug);
     }
@@ -171,7 +183,7 @@ test('Темы из реестра находятся после удалени�
 
 for (const query of ['ДОСТУП', 'dostup', 'ljcneg', 'достп', 'досттуп', 'достуб']) {
   test('Кодовое слово с регистром, транслитом, раскладкой или одной правкой: ' + query, () => {
-    const p = page(); p.filter('proishodit'); p.search(query);
+    const p = page(); p.filter('sravnenie'); p.search(query);
     assert.ok(p.visible().some(link => link.attrs.href === articleHref('podklyuchenie-iz-rossii')));
     assert.ok(p.visible().some(link => link.classes.has('kod-hit')));
   });
@@ -219,16 +231,16 @@ test('Enter при пустом или ненайденном запросе н�
   p.search('zzzzzzнебывает'); p.key('Enter'); assert.equal(p.window.location.href, '');
 });
 
-test('Enter не открывает совпадение, скрытое выбранным разделом', () => {
-  const p = page(); p.filter('gpt'); p.search('голосовой');
+test('Enter не открывает совпадение, скрытое выбранной меткой', () => {
+  const p = page(); p.filter('codex'); p.search('голосовой');
   assert.equal(p.visible().length, 0); p.key('Enter'); assert.equal(p.window.location.href, '');
 });
 
 test('Стирание кодового слова снимает подсветку и сохраняет выбранный фильтр', () => {
-  const p = page(); p.filter('gpt'); p.search('ДОСТУП'); assert.ok(p.visible().length > 0);
+  const p = page(); p.filter('codex'); p.search('ДОСТУП'); assert.ok(p.visible().length > 0);
   p.search(''); assert.ok(p.links.every(link => !link.classes.has('kod-hit')));
-  assert.ok(p.visible().every(link => link.section.attrs['data-section'] === 'gpt'));
-  assert.equal(p.buttons.find(btn => btn.classes.has('active')).attrs['data-tag'], 'gpt');
+  assert.ok(p.visible().every(link => link.attrs['data-metki'].split(' ').includes('codex')));
+  assert.equal(p.select.value, 'codex');
 });
 
 test('Поисковый ввод с разметкой остаётся данными', () => {

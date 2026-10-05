@@ -109,7 +109,7 @@ class PublicationTest(unittest.TestCase):
                     elif "zoom" in classes:
                         self.assertEqual(len(button.parent.all(tag="img")), 1)
                     else:
-                        self.assertTrue(classes & {"theme-toggle", "viewer-close", "tag-btn"}, "Неизвестный тип кнопки")
+                        self.assertTrue(classes & {"theme-toggle", "viewer-close", "search-go"}, "Неизвестный тип кнопки")
 
     def test_partner_ctas_are_nonempty_and_point_to_the_practice(self):
         for page, doc in self.docs.items():

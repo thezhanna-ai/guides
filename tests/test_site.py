@@ -304,7 +304,7 @@ class ArticleImagesTest(unittest.TestCase):
         cards = doc.root.all(klass="guide-link")
         live = [a for a in self.eligible if a["status"] == "live"]
         expected = ["claude-ai/" + a["slug"] + "/" for section in self.generator.RAZDELY
-                    for track in section["trassy"] for a in live if a["razdel"] == track["trassa"]]
+                    for track in section["trassy"] for a in live if a["rubrika"] == track["trassa"]]
         self.assertEqual([card.attrs["href"] for card in cards], expected)
         for card in cards:
             slug = card.attrs["href"].split("/")[1]
@@ -332,7 +332,7 @@ class ArticleImagesTest(unittest.TestCase):
         self.assertNotEqual(hero.get("loading"), "lazy")
         self.assertEqual(hero["fetchpriority"], "high")
         icons = doc.root.all(klass="section-icon")
-        self.assertEqual(len(icons), 6)
+        self.assertEqual(len(icons), 5)
         self.assertTrue(all(i.attrs["src"].startswith("assets/glavnaya/razdely/") for i in icons))
 
     def test_generator_is_reproducible_and_missing_or_unsafe_images_get_placeholders(self):
@@ -1324,3 +1324,48 @@ class GuidesSiteTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RubrikiIMetkiTest(unittest.TestCase):
+    """Рубрики главной, метки поиска и метка уровня под заголовком статьи"""
+
+    @classmethod
+    def setUpClass(cls):
+        spec = importlib.util.spec_from_file_location("rubriki_generator", ROOT / "scripts/sobrat_glavnuyu.py")
+        cls.gen = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.gen)
+        cls.live = [a for a in json.loads((ROOT / "data/statyi.json").read_text())["statyi"] if a["status"] == "live"]
+
+    def test_every_live_article_has_known_rubric_and_tags(self):
+        rubriki = {r["tag"] for r in self.gen.RAZDELY}
+        for a in self.live:
+            with self.subTest(slug=a["slug"]):
+                self.assertIn(a["rubrika"], rubriki)
+                self.assertTrue(a["metki"])
+                self.assertTrue(set(a["metki"]) <= set(self.gen.METKI))
+
+    def test_dropdown_lists_all_tags_in_order_and_ends_with_other(self):
+        doc = ImageDocument(HOME.read_text(encoding="utf-8"))
+        values = [o.attrs["value"] for o in doc.root.all(tag="option")]
+        self.assertEqual(values, ["all", *self.gen.METKI, "drugoe"])
+        self.assertIn("Claude Code (код)", HOME.read_text(encoding="utf-8"))
+
+    def test_cards_carry_tags_and_colored_level(self):
+        doc = ImageDocument(HOME.read_text(encoding="utf-8"))
+        by_slug = {a["slug"]: a for a in self.live}
+        for card in doc.root.all(klass="guide-link"):
+            a = by_slug[card.attrs["href"].split("/")[1]]
+            with self.subTest(slug=a["slug"]):
+                self.assertEqual(card.attrs["data-metki"].split(), a["metki"])
+                level = card.all(klass="guide-level")[0]
+                self.assertIn(a["uroven"], level.attrs["class"].split())
+                self.assertEqual(level.text_content().strip(), self.gen.UROVNI[a["uroven"]][0])
+
+    def test_level_mark_right_after_article_title(self):
+        for a in self.live:
+            html = (ROOT / "claude-ai" / a["slug"] / "index.html").read_text(encoding="utf-8")
+            with self.subTest(slug=a["slug"]):
+                self.assertEqual(html.count('class="uroven-metka'), 1)
+                after = html.split("</h1>", 1)[1].lstrip()
+                self.assertTrue(after.startswith('<p class="uroven-metka %s"' % a["uroven"]))
+                self.assertIn(">%s</p>" % self.gen.UROVNI[a["uroven"]][0], after.split("\n", 1)[0])

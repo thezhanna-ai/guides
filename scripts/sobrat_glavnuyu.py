@@ -32,15 +32,43 @@ SHAPKA = {
     "h1": "Нейросети работают",
     "h1_akcent": "на тебя",
     "lead": "Надо только научиться ставить задачу. Здесь инструкции и разборы - от первой кнопки до собранных проектов",
-    "intro": "Начни с простого: отдай нейросети рутину, которая съедает твой день - посчитать, написать, разобрать, оформить. Дальше научишься собирать свои проекты, находить решения для своего дела и делать то, что раньше заказывал на стороне",
+    "intro": "Начни с простого: отдай нейросети рутину, которая съедает твой день - посчитать, написать, разобрать, оформить. Дальше научишься собирать свои проекты, находить решения для своего дела и делать то, что раньше отдавали на сторону",
     "title": "Нейросети работают на тебя",
     "description": "Инструкции, разборы и гайды по нейросетям для не-программистов: от первой кнопки до собственных проектов",
     "podval": "Гайды обновляются регулярно - если нужной инструкции ещё нет, она уже готовится",
 }
 
 UROVNI = {
-    "green": ("Начальный", "если открываешь нейросеть впервые"),
-    "blue": ("Средний", "если уже работаешь и хочешь собирать своё"),
+    "green": ("Сможет любой", "если открываешь нейросеть впервые"),
+    "blue": ("Нужен опыт", "если уже работаешь и хочешь собирать своё"),
+}
+
+# Метки поиска: код в реестре (поле metki) -> название в выпадающем списке и подпись.
+# Порядок здесь = порядок в списке. «Другое» добавляется последним и открывает свободное поле
+METKI = {
+    "claude-chat": ("Claude", "чат"),
+    "claude-code": ("Claude Code", "код"),
+    "chatgpt": ("ChatGPT", "чат"),
+    "codex": ("Codex", "код"),
+    "sravnenie": ("Сравнение моделей", ""),
+    "kartinki": ("Картинки", ""),
+    "video": ("Видео", ""),
+    "sayt": ("Сайт", ""),
+    "bot": ("Бот", ""),
+    "fayly": ("Файлы и документы", ""),
+    "poisk": ("Поиск в интернете", ""),
+    "golos": ("Голос", ""),
+    "pochta": ("Почта и календарь", ""),
+    "raspisanie": ("Расписание", ""),
+    "proekty": ("Проекты", ""),
+    "artefakty": ("Артефакты", ""),
+    "pamyat": ("Память и настройки", ""),
+    "privatnost": ("Приватность", ""),
+    "modeli": ("Модели и лимиты", ""),
+    "skilly": ("Скиллы и плагины", ""),
+    "dostup": ("Доступ из России", ""),
+    "oplata": ("Оплата", ""),
+    "besplatno": ("Бесплатные сервисы", ""),
 }
 
 TIPY = {
@@ -50,94 +78,50 @@ TIPY = {
 }
 
 ZNACHKI = {
-    "dostup": "Металлический ключ как образ доступа и оплаты",
-    "claude": "Перо ручки как образ работы с текстом в Claude",
-    "gpt": "Микросхема как образ ChatGPT и Codex",
+    "dostup": "Металлический ключ как образ доступа и первых настроек",
+    "claude": "Перо ручки как образ ежедневной работы с нейросетью",
     "kartinki": "Объектив как образ создания картинок и видео",
-    "proekty": "Штангенциркуль как образ создания собственных проектов",
-    "proishodit": "Антенна как образ новостей и событий",
+    "proekty": "Штангенциркуль как образ собственных проектов",
+    "gpt": "Микросхема как образ полезных сервисов",
 }
 
-# Порядок разделов на странице и трасс внутри них.
-# "trassa" совпадает с полем razdel в реестре, статьи подставляются автоматически
+# Рубрики главной по порядку. "trassa" совпадает с полем rubrika в реестре,
+# статьи подставляются автоматически. "ikonka" - файл в assets/glavnaya/razdely/
 RAZDELY = [
     {
-        "tag": "dostup",
-        "zagolovok": "Доступ и оплата",
-        "opisanie": "Нужно любой нейросети: как открыть, чем платить, что делать, когда перестало работать",
-        "trassy": [
-            {
-                "trassa": "obychnyy-vhod",
-                "uroven": "green",
-                "nazvanie": "Обычный вход",
-                "opisanie": "Хватает большинству: VPN, регистрация, оплата. Разобрано на примере Claude",
-            },
-            {
-                "trassa": "svoy-server",
-                "uroven": "blue",
-                "nazvanie": "Свой сервер",
-                "opisanie": "Постоянный доступ без VPN: своя машина в другой стране",
-                "pusto": "Гайды готовятся",
-            },
-        ],
+        "tag": "start",
+        "ikonka": "dostup",
+        "zagolovok": "С чего начать: доступ, оплата и первые настройки",
+        "opisanie": "Как открыть Claude и ChatGPT, чем платить и что настроить в первый день",
+        "trassy": [{"trassa": "start"}],
     },
     {
-        "tag": "claude",
-        "zagolovok": "Claude",
-        "opisanie": "Чат Claude.ai и работа в коде через Claude Code",
-        "trassy": [
-            {
-                "trassa": "knopka-za-knopkoy",
-                "uroven": "green",
-                "nazvanie": "Кнопка за кнопкой",
-                "opisanie": "Чат Claude.ai по одной настройке за раз. Ничего не нужно знать заранее",
-            },
-            {
-                "trassa": "vaybkoding",
-                "uroven": "blue",
-                "nazvanie": "Claude Code: вайбкодинг",
-                "opisanie": "Переход от чата к коду: свои проекты, CLI и настройка под задачу",
-            },
-        ],
-    },
-    {
-        "tag": "gpt",
-        "zagolovok": "ChatGPT и Codex",
-        "opisanie": "Чат ChatGPT и работа в коде через Codex CLI",
-        "trassy": [
-            {
-                "trassa": "gpt-knopka",
-                "uroven": "green",
-                "nazvanie": "Первые шаги",
-                "opisanie": "Короткие инструкции: одна задача в ChatGPT - один готовый результат",
-                "pusto": "Гайды готовятся",
-            },
-            {
-                "trassa": "gpt-vaybkoding",
-                "uroven": "blue",
-                "nazvanie": "Вайбкодинг",
-                "opisanie": "Собираешь своё через ChatGPT и Codex: анимация, код, проекты",
-                "pusto": "Гайды готовятся",
-            },
-        ],
+        "tag": "kazhdyy-den",
+        "ikonka": "claude",
+        "zagolovok": "Нейросеть на каждый день: поиск, файлы, голос, проекты",
+        "opisanie": "Рутина, которую можно отдать уже сегодня",
+        "trassy": [{"trassa": "kazhdyy-den"}],
     },
     {
         "tag": "kartinki",
+        "ikonka": "kartinki",
         "zagolovok": "Картинки и видео",
-        "opisanie": "Чем рисовать, чем монтировать, что из этого стоит своих денег",
-        "trassy": [{"trassa": "kartinki", "pusto": "Гайды готовятся"}],
+        "opisanie": "Фото, постеры, ролики и честные сравнения моделей",
+        "trassy": [{"trassa": "kartinki"}],
     },
     {
-        "tag": "proekty",
-        "zagolovok": "Свои проекты",
-        "opisanie": "Собранное под ключ: сайт, бот, рабочая система под конкретную задачу",
-        "trassy": [{"trassa": "proekty", "pusto": "Гайды готовятся"}],
+        "tag": "vaybkoding",
+        "ikonka": "proekty",
+        "zagolovok": "Вайбкодинг: свои сайты, боты и инструменты",
+        "opisanie": "Собираешь своё руками агента, без программирования",
+        "trassy": [{"trassa": "vaybkoding"}],
     },
     {
-        "tag": "proishodit",
-        "zagolovok": "Что происходит",
-        "opisanie": "Разборы событий, которые меняют работу с нейросетями. Кнопки нажимать не нужно, уровень не важен",
-        "trassy": [{"trassa": "proishodit", "pusto": "Разборы готовятся"}],
+        "tag": "servisy",
+        "ikonka": "gpt",
+        "zagolovok": "Полезные сервисы и бесплатные замены",
+        "opisanie": "Маленькие сайты и замены платным подпискам",
+        "trassy": [{"trassa": "servisy"}],
     },
 ]
 
@@ -154,7 +138,10 @@ def zagruzit_statyi():
     for statya in reestr["statyi"]:
         if statya.get("status") != "live":
             continue
-        po_trassam.setdefault(statya["razdel"], []).append(statya)
+        neizvestnye = [m for m in statya.get("metki", []) if m not in METKI]
+        if neizvestnye:
+            raise ValueError("%s: неизвестные метки %s" % (statya["slug"], ", ".join(neizvestnye)))
+        po_trassam.setdefault(statya["rubrika"], []).append(statya)
     return po_trassam
 
 
@@ -216,17 +203,19 @@ def sobrat_kartochku(statya, oblozhki):
     podpis_urovnya = ""
     if uroven in UROVNI:
         podpis_urovnya = (
-            '<span class="guide-level"><span class="track-dot {kod}" aria-hidden="true"></span>'
-            '{nazvanie} уровень</span>'
+            '<span class="guide-level {kod}"><span class="track-dot {kod}" aria-hidden="true"></span>'
+            '{nazvanie}</span>'
         ).format(kod=uroven, nazvanie=UROVNI[uroven][0])
+    metki = statya.get("metki", [])
     return (
-        '          <a class="guide-link" data-tags="{tags}" data-kod="{kod}" '
+        '          <a class="guide-link" data-tags="{tags}" data-metki="{metki}" data-kod="{kod}" '
         'data-poisk="{poisk}" aria-label="{title}" href="claude-ai/{slug}/">'
         '{media}<span class="guide-body"><span class="guide-summary">{summary}</span>'
         '<span class="guide-meta">{uroven}<span class="kind {klass}">{podpis}</span></span>'
         '</span></a>'
     ).format(
         tags=ekranirovat(statya["tags"]),
+        metki=ekranirovat(" ".join(metki)),
         slug=ekranirovat(statya["slug"]),
         media=media,
         uroven=podpis_urovnya,
@@ -234,7 +223,8 @@ def sobrat_kartochku(statya, oblozhki):
         podpis=podpis,
         title=title,
         kod=ekranirovat(statya.get("kod_slovo", "")),
-        poisk=ekranirovat(" ".join([statya["title"], *statya.get("ponyatiya", [])])),
+        poisk=ekranirovat(" ".join([statya["title"], *statya.get("ponyatiya", []),
+                                    *(METKI[m][0] for m in metki)])),
         summary=ekranirovat(tekst_iz_reestra(statya, "kratko", 85)),
     )
 
@@ -263,7 +253,7 @@ def sobrat_trassu(trassa, po_trassam, oblozhki):
         stroki.extend(sobrat_kartochku(s, oblozhki) for s in statyi)
         stroki.append("        </div>")
     else:
-        stroki.append('        <span class="soon">%s</span>' % ekranirovat(trassa["pusto"]))
+        stroki.append('        <span class="soon">%s</span>' % ekranirovat(trassa.get("pusto", "Статьи готовятся")))
 
     stroki.append("      </div>")
     return "\n".join(stroki)
@@ -276,7 +266,7 @@ def sobrat_razdel(razdel, po_trassam, oblozhki):
         '      <div class="tool-head">',
         '        <img class="section-icon" src="assets/glavnaya/razdely/%s.webp" alt="%s" '
         'width="600" height="600" loading="lazy" decoding="async">'
-        % (razdel["tag"], ekranirovat(ZNACHKI[razdel["tag"]])),
+        % (razdel["ikonka"], ekranirovat(ZNACHKI[razdel["ikonka"]])),
         '        <div class="tool-heading">',
         "          <h2>%s</h2>" % ekranirovat(razdel["zagolovok"]),
         "          <p>%s</p>" % ekranirovat(razdel["opisanie"]),
@@ -290,13 +280,12 @@ def sobrat_razdel(razdel, po_trassam, oblozhki):
 
 
 def sobrat_filtry():
-    knopki = ['        <button class="tag-btn active" data-tag="all" type="button" aria-pressed="true">Все</button>']
-    for razdel in RAZDELY:
-        knopki.append(
-            '        <button class="tag-btn" data-tag="%s" type="button" aria-pressed="false">%s</button>'
-            % (razdel["tag"], ekranirovat(razdel["zagolovok"]))
-        )
-    return "\n".join(knopki)
+    punkty = ['        <option value="all">Все метки</option>']
+    for kod, (nazvanie, podpis) in METKI.items():
+        tekst = nazvanie + (" (%s)" % podpis if podpis else "")
+        punkty.append('        <option value="%s">%s</option>' % (kod, ekranirovat(tekst)))
+    punkty.append('        <option value="drugoe">Другое: своё слово</option>')
+    return "\n".join(punkty)
 
 
 def sobrat_navigaciyu():
@@ -335,6 +324,35 @@ def sobrat_stranicu():
         razdely="\n\n".join(sobrat_razdel(r, po_trassam, oblozhki) for r in RAZDELY),
         podval=ekranirovat(SHAPKA["podval"]),
     )
+
+
+METKA_STIL = {
+    "green": "background:#E4F1E8;color:#2F7448",
+    "blue": "background:#E4EDF5;color:#2C6FA6",
+}
+
+
+def sobrat_metki_urovnya(stranicy):
+    """Метка уровня под заголовком каждой живой статьи, из поля uroven реестра."""
+    reestr = json.loads(REESTR.read_text(encoding="utf-8"))
+    staraya = re.compile(r'\n?<p class="uroven-metka[^"]*"[^>]*>.*?</p>', re.S)
+    for statya in reestr["statyi"]:
+        uroven = statya.get("uroven")
+        if statya.get("status") != "live" or uroven not in UROVNI:
+            continue
+        page = (KORNI / "claude-ai" / statya["slug"] / "index.html").resolve()
+        if not page.is_relative_to(KORNI) or not page.is_file():
+            continue  # путь проверяет сборка индексации и падает с понятной ошибкой
+        html = stranicy.get(page, page.read_text(encoding="utf-8"))
+        html = staraya.sub("", html)
+        if html.count("</h1>") < 1:
+            raise ValueError("%s: нет заголовка h1 для метки уровня" % statya["slug"])
+        metka = ('\n<p class="uroven-metka %s" style="display:inline-block;margin:16px 0 0;padding:5px 12px;'
+                 'border-radius:999px;%s;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,'
+                 'Arial,sans-serif">%s</p>' % (uroven, METKA_STIL[uroven], UROVNI[uroven][0]))
+        html = html.replace("</h1>", "</h1>" + metka, 1)
+        stranicy[page] = html
+    return stranicy
 
 
 def sobrat_indeksaciyu(podpisi):
@@ -379,7 +397,7 @@ def sobrat_indeksaciyu(podpisi):
 
 def main():
     stranica = sobrat_stranicu()
-    podpisi = sobrat_podpisi()
+    podpisi = sobrat_metki_urovnya(sobrat_podpisi())
     rezultaty = {GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi)}
     proverka = "--proverit" in sys.argv
 
@@ -408,8 +426,7 @@ def main():
     for razdel in RAZDELY:
         for trassa in razdel["trassy"]:
             kolvo = len(po_trassam.get(trassa["trassa"], []))
-            if kolvo:
-                print("  %-22s %d" % (trassa["trassa"], kolvo))
+            print("  %-22s %d" % (trassa["trassa"], kolvo))
     return 0
 
 
