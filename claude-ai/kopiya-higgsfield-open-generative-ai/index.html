@@ -200,8 +200,8 @@
 .warn-card + p, .info-card + p { margin-top: 25px }
 figure + .result, figure + p, figure + ol { margin-top: 20px }
 .result + p { margin-top: 16px }
-.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
-.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.shot:has(img[src="assets/camera-card.webp"]) { width: min(100%, 300px) }
+.shot:has(img[src="assets/initialize-studio.webp"]) { width: min(100%, 460px) }
 .help-banner .copy-button { margin-top: 16px; min-width: 172px }
 .copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
 .copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
@@ -217,80 +217,98 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#kak-rabotaet">Что такое Open Generative AI и где возникает расход</a>
 <a href="#download">1. Скачай установщик под свою систему</a>
 <a href="#install">2. Установи и запусти студию</a>
-<a href="#api-key">3. Подключи свой ключ MuAPI</a>
-<a href="#cinema">4. Настрой объектив, фокусное и диафрагму в Cinema Studio</a>
-<a href="#first-frame">5. Создай один кадр и дождись результата</a>
-<a href="#save">6. Скачай кадр и найди его на компьютере</a>
+<a href="#macos">3. Разреши первый запуск на Mac</a>
+<a href="#api-key">4. Подключи свой ключ MuAPI и пополни баланс</a>
+<a href="#cinema">5. Настрой объектив, фокусное и диафрагму в Cinema Studio</a>
+<a href="#first-frame">6. Создай один кадр и дождись результата</a>
+<a href="#save">7. Скачай кадр и найди его на компьютере</a>
 <a href="#svoya-zadacha">От первого кадра к своему инструменту</a></nav>
 <main><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#kak-rabotaet">Что такое Open Generative AI и где возникает расход</a>
 <a href="#download">1. Скачай установщик под свою систему</a>
 <a href="#install">2. Установи и запусти студию</a>
-<a href="#api-key">3. Подключи свой ключ MuAPI</a>
-<a href="#cinema">4. Настрой объектив, фокусное и диафрагму в Cinema Studio</a>
-<a href="#first-frame">5. Создай один кадр и дождись результата</a>
-<a href="#save">6. Скачай кадр и найди его на компьютере</a>
+<a href="#macos">3. Разреши первый запуск на Mac</a>
+<a href="#api-key">4. Подключи свой ключ MuAPI и пополни баланс</a>
+<a href="#cinema">5. Настрой объектив, фокусное и диафрагму в Cinema Studio</a>
+<a href="#first-frame">6. Создай один кадр и дождись результата</a>
+<a href="#save">7. Скачай кадр и найди его на компьютере</a>
 <a href="#svoya-zadacha">От первого кадра к своему инструменту</a></nav></details>
 <article><header id="nachalo"><p class="eyebrow">Инструкция · Первый результат</p>
 <h1 class="article-title-v2">Open Generative AI: открытая копия Higgsfield, как поставить и сделать первый кадр</h1>
-<p class="lead">Нужен первый кадр в Open Generative AI, а вокруг ссылки на код и незнакомые названия файлов. Как поставить студию без терминала и найти результат после генерации? Ниже путь от готового установщика до одного изображения в известной папке</p><p class="meta">Доступные источники сверены 05.10.2026 · Маршрут по документации сервиса</p></header>
+<p class="lead">Нужен первый кадр в Open Generative AI, а вокруг ссылки на код и незнакомые названия файлов. Как поставить студию без терминала и найти результат после генерации? Ниже путь от готового установщика до одного изображения в известной папке</p><p class="meta">Актуально на 05.10.2026 · Open Generative AI v2.0.0</p></header>
 <section class="content-section" id="kak-rabotaet"><h2>Что такое Open Generative AI и где возникает расход</h2>
 <p>В одной студии выбираешь камеру и описываешь сцену, а в другой приходится заново искать нужную модель и её условия. <a href="https://github.com/Anil-matcha/Open-Generative-AI">Open Generative AI</a> собирает инструменты создания изображений и видео в одном приложении на компьютере</p>
 <p>У проекта <a href="https://github.com/Anil-matcha/Open-Generative-AI/blob/main/LICENSE">открытый код с MIT-лицензией</a>. Для облачного пути приложение отправляет описание сцены в MuAPI, сервис доступа к моделям. Связь через API означает, что программа сама передаёт запрос сервису и получает изображение. Это похоже на пульт: параметры выбираешь у себя, а сам кадр создаётся на стороне сервиса</p>
-<div class="warn-card"><p><b>До первого запроса:</b> установка кода без подписки не даёт безлимитных облачных генераций. Ключ MuAPI связывает запрос с твоим аккаунтом, где и учитывается расход. Его условия зависят от модели и параметров: сверь их в <a href="https://muapi.ai/pricing">MuAPI Pricing</a>. Точная цена и единый лимит на момент проверки не подтверждены; обещание «списывается только за готовый результат» не распространяй на любые ошибки без условий провайдера</p></div>
-<p>Полное повторение Higgsfield этим проектом, оценка Higgsfield в миллиард долларов и набор первых пяти тысяч звёзд за пару дней на момент проверки не подтверждены. На 05.10.2026 <a href="https://github.com/Anil-matcha/Open-Generative-AI">GitHub показывает 29.6k stars</a> (округлённое отображение сайта, не точный счётчик). Для первого кадра важнее пройти установку, ключ и сохранение</p>
+<div class="warn-card"><p><b>До первого запроса:</b> подписка MuAPI не обязательна, но для настоящей генерации нужен баланс. По <a href="https://muapi.ai/pricing">прайсу на 05.10.2026</a> один кадр Cinema Studio в версии 2.0.0 стоит около 12 центов: студия использует модель <code>nano-banana-pro</code>. <a href="https://muapi.ai/billing">Баланс пополняется от 10 долларов</a>, а расход списывается за кадр. Условия и цену перед запуском проверь в своём аккаунте</p></div>
+<p>На 05.10.2026 у <a href="https://api.github.com/repos/Anil-matcha/Open-Generative-AI">репозитория GitHub</a> 29 648 звёзд. Звёзды показывают интерес к проекту; свой результат получим после установки, подключения ключа и сохранения кадра</p>
 </section>
 <section class="content-section" id="download"><h2>1. Скачай установщик под свою систему</h2>
-<p>Открой <a href="https://github.com/Anil-matcha/Open-Generative-AI/releases/latest">официальные Releases</a> на GitHub. Это раздел готовых выпусков программы. На дату проверки последним обозначен <b>v2.0.0</b>. Раскрой <b>Assets</b> («Файлы выпуска») и выбери вариант</p>
-<ul><li><b>Windows:</b> <code>Open.Generative.AI.Setup.2.0.0.exe</code></li>
-<li><b>Mac с Apple Silicon:</b> <code>Open.Generative.AI-2.0.0-arm64.dmg</code>. В меню Apple → «Об этом Mac» такой компьютер показывает чип Apple M</li>
-<li><b>Mac с Intel:</b> <code>Open.Generative.AI-2.0.0.dmg</code>, без arm64 в названии</li>
+<p>Открой <a href="https://github.com/Anil-matcha/Open-Generative-AI/releases/latest">официальные Releases</a> на GitHub. Это раздел готовых выпусков программы. На 05.10.2026 последним обозначен <b>v2.0.0 от 23.05.2026</b> с меткой <b>Latest</b> («Последний»). Раскрой <b>Assets</b> («Файлы выпуска») и выбери вариант</p>
+<ul><li><b>Windows:</b> <code>Open.Generative.AI.Setup.2.0.0.exe</code>, 128 МБ</li>
+<li><b>Mac с Apple Silicon:</b> <code>Open.Generative.AI-2.0.0-arm64.dmg</code>, 202 МБ. В меню Apple → «Об этом Mac» такой компьютер показывает чип Apple M</li>
+<li><b>Mac с Intel:</b> <code>Open.Generative.AI-2.0.0.dmg</code>, 209 МБ, без arm64 в названии</li>
 <li><b>Linux:</b> <code>Open.Generative.AI-2.0.0.AppImage</code> или пакет <code>open-generative-ai_2.0.0_amd64.deb</code> для Debian/Ubuntu</li></ul>
+<figure><div class="shot"><img src="assets/github-assets.webp" width="1182" height="336" loading="lazy" decoding="async" alt="Список Assets выпуска v2.0.0, рамкой выделен DMG для Mac с Apple M"></div><figcaption>Assets значит «Файлы выпуска»: рамкой выделен вариант arm64 для Mac с Apple M; для другой системы выбери соответствующую строку</figcaption></figure>
 <div class="result"><p><b>Результат:</b> скачался установщик подходящего формата из официального выпуска</p></div>
-<p><b>Если не получилось:</b> дождись загрузки Assets и сверь название файла со своей системой. Для Mac сначала выясни чип, затем выбирай DMG. Кнопка скачивания исходного кода не нужна: далее идём через готовое приложение</p>
+<p><b>Если не получилось:</b> дождись загрузки Assets и сверь название файла со своей системой. Для Mac сначала выясни чип, затем выбирай DMG. Source code («Исходный код») скачивать не нужно: далее идём через готовое приложение</p>
 </section>
 <section class="content-section" id="install"><h2>2. Установи и запусти студию</h2>
-<ul><li><b>Mac:</b> открой DMG и перенеси приложение в «Программы» (Applications), если установщик предлагает такое окно. Затем открой Open Generative AI</li>
+<ul><li><b>Mac:</b> открой DMG и перенеси приложение в «Программы» (Applications), если установщик предлагает такое окно. Затем попробуй открыть Open Generative AI. Предупреждение macOS разбирается в следующем шаге</li>
 <li><b>Windows:</b> запусти EXE, следуй указаниям установщика и открой приложение из меню «Пуск»</li>
 <li><b>Debian/Ubuntu:</b> открой DEB через установку программ и после установки запусти приложение. Для AppImage используй свойства файла: разреши выполнение как программы и открой его</li></ul>
-<p>Путь через готовое приложение подтверждён <a href="https://github.com/Anil-matcha/Open-Generative-AI#-quick-start">Quick Start</a>. Точный вид окон установщика и совместимость со всеми версиями ОС на момент проверки не подтверждены</p>
-<div class="result"><p><b>Результат:</b> приложение запускается; видны разделы студии или предложение ввести ключ MuAPI</p></div>
-<p><b>Если не получилось:</b> сначала проверь, что установщик взят из нужного выпуска и подходит системе. На Mac документация проекта описывает путь без терминала: после попытки запуска открой «Системные настройки» → «Конфиденциальность и безопасность» и найди сообщение о блокировке именно Open Generative AI. Разрешай запуск только того файла, который скачан из официального Releases. Если причина другая, сверяй сообщение со <a href="https://github.com/Anil-matcha/Open-Generative-AI/releases/tag/v2.0.0">страницей выпуска</a> или обратись к Claude через блок помощи в конце</p>
-<p>Пока открылась только программа. Для выбранного облачного маршрута ей ещё нужен доступ к модели</p>
+<p><a href="https://github.com/Anil-matcha/Open-Generative-AI#-quick-start">Quick Start проекта</a> описывает путь через готовое приложение. После запуска в верхней строке видны Image, Video, Lip Sync, Cinema Studio, Workflows, Agents и MCP &amp; CLI, справа Settings («Настройки»)</p>
+<figure><div class="shot"><img src="assets/first-screen.webp" width="1280" height="75" loading="lazy" decoding="async" alt="Верхняя строка Open Generative AI с вкладкой Cinema Studio"></div><figcaption>Cinema Studio значит «Киностудия»: эта вкладка нужна для первого кадра</figcaption></figure>
+<div class="result"><p><b>Результат:</b> программа установлена; на Windows/Linux она открывается, а на Mac первая попытка может закончиться предупреждением защиты</p></div>
+<p><b>Если не получилось:</b> сначала проверь, что установщик взят из нужного выпуска и подходит системе. При предупреждении macOS перейди к шагу 3; при другой ошибке сверяй сообщение со <a href="https://github.com/Anil-matcha/Open-Generative-AI/releases/tag/v2.0.0">страницей выпуска</a> или обратись к Claude через блок помощи в конце</p>
 </section>
-<section class="content-section" id="api-key"><h2>3. Подключи свой ключ MuAPI</h2>
+<section class="content-section" id="macos"><h2>3. Разреши первый запуск на Mac</h2>
+<p>На Windows и Linux пропусти этот шаг. У Mac-версии v2.0.0 нет нотариального заверения Apple, а подпись приложения локальная (ad-hoc): она не подтверждает личность разработчика. Поэтому защита macOS при первом запуске показывает предупреждение и не открывает приложение</p>
+<div class="warn-card"><p><a href="https://support.apple.com/ru-ru/102445">Apple предупреждает</a>: ПО без подтверждённой подписи и подлинности может быть опасным. Продолжай только с приложением из официального репозитория. Если предупреждение говорит, что программа повреждена или навредит компьютеру, этот обход не применяй</p></div>
+<ol><li>После попытки открыть Open Generative AI зайди в <b>«Системные настройки»</b></li>
+<li>Открой <b>«Конфиденциальность и безопасность»</b>, прокрути вниз до сообщения о блокировке именно этого приложения</li>
+<li>Нажми кнопку подтверждения открытия. В русской инструкции Apple она называется <b>«Подтвердить вход»</b>, в английском интерфейсе - <b>Open Anyway</b> («Всё равно открыть»)</li>
+<li>В повторном предупреждении нажми <b>«Открыть»</b>. После подтверждения приложение сохраняется как исключение и открывается двойным щелчком</li></ol>
+<div class="result"><p><b>Результат:</b> Open Generative AI открывается на Mac, видна верхняя строка разделов студии</p></div>
+<p><b>Если не получилось:</b> убедись, что попытка запуска уже была и сообщение относится к Open Generative AI. Если кнопки нет или настройками управляет администратор, сверь предупреждение со страницей Apple; не отключай защиту целиком</p>
+<p>Программа открылась. Теперь подключим аккаунт, в котором будет учитываться расход за первый кадр</p>
+</section>
+<section class="content-section" id="api-key"><h2>4. Подключи свой ключ MuAPI и пополни баланс</h2>
 <p>API-ключ - секретная строка, которой приложение подтверждает доступ к твоему аккаунту MuAPI. Подписка на Higgsfield этот ключ не заменяет</p>
-<ol><li>Открой <a href="https://muapi.ai/">MuAPI</a>. Войди в свой аккаунт, а если его нет, сначала создай аккаунт на этом сайте</li>
-<li>Открой <a href="https://muapi.ai/access-keys">API Keys</a> («Ключи API»). В <b>Key Name</b> («Название ключа») введи понятное тебе название, например «Моя студия», и нажми <b>Generate Key</b> («Создать ключ»). Для настоящего кадра оставь <b>Create as Sandbox (Testing) Key</b> выключенным: тестовый ключ возвращает демонстрационные данные. Скопируй <b>Secret Key</b> («Секретный ключ») через <b>Copy Key</b>. Сервис показывает эту строку один раз</li>
-<li>Вернись в Open Generative AI. В поле <b>API Access Key</b> («Ключ доступа API») вставь скопированную строку и нажми <b>Get Started</b> («Начать»), как в <a href="https://github.com/Anil-matcha/Open-Generative-AI/blob/v2.0.0/components/ApiKeyModal.js">форме выпуска v2.0.0</a>. <a href="https://github.com/Anil-matcha/Open-Generative-AI#-quick-start">Quick Start</a> отдельно предупреждает: нужно значение ключа, а не его название</li></ol>
-<div class="result"><p><b>Результат:</b> ключ принят формой приложения, можно перейти к облачной генерации. Окончательно его работу подтвердит первый успешный запрос</p></div>
-<p><b>Если не получилось:</b> при 401/403 (ошибке доступа) проверь, что вставлено значение ключа из нужного аккаунта, без лишних пробелов. При ошибке баланса открой Usage («Расход») и Billing («Баланс») в MuAPI. Ключ вводи только в приложение: в чат Claude и на скриншот он попадать не должен</p>
+<ol><li>Открой <a href="https://muapi.ai/access-keys">Access Keys</a> («Ключи доступа») в MuAPI. Нажми <b>Sign In</b> («Войти»); если аккаунта нет, создай его на этом сайте</li>
+<li>В поле <b>KEY NAME</b> («Название ключа») введи понятное название, например «Моя студия». Оставь <b>Create as Sandbox (Testing) Key</b> выключенным: эта галочка создаёт тестовый ключ с демонстрационными данными, настоящего кадра не будет. Нажми <b>Generate Key</b> («Создать ключ») и скопируй значение созданного ключа</li></ol>
+<figure><div class="shot"><img src="assets/muapi-key.webp" width="710" height="335" loading="lazy" decoding="async" alt="Форма Access Keys с полем KEY NAME, Generate Key и выключенной галочкой Sandbox"></div><figcaption>KEY NAME - «Название ключа», Generate Key - «Создать ключ»; галочку Sandbox оставь выключенной</figcaption></figure>
+<p>В <a href="https://muapi.ai/billing">Billing</a> («Баланс») открой <b>Top up balance</b> («Пополнить баланс»). Минимум пополнения - $10, шаг суммы - $5; доступны USD (доллары США) и INR (индийские рупии). Для маршрута в долларах выбери USD и нужную сумму, нажми <b>Buy Now</b> («Пополнить сейчас») и следуй форме сервиса. После завершения проверь, что сумма появилась в балансе. Подписка не обязательна: тариф Free работает по расходу за генерацию (<b>Pay as you go</b>)</p>
+<figure><div class="shot"><img src="assets/muapi-balance.webp" width="865" height="560" loading="lazy" decoding="async" alt="Пополнение баланса MuAPI, рамкой выделен вариант 10 долларов"></div><figcaption>Top up balance - «Пополнить баланс», Buy Now - кнопка пополнения выбранной суммой; минимум $10, шаг $5</figcaption></figure>
+<ol start="3"><li>Вернись в приложение и открой <b>Cinema Studio</b>. Если окно ключа ещё не появилось, введи описание сцены и нажми <b>GENERATE</b>: без ключа эта кнопка открывает окно <b>MUAPI API KEY REQUIRED</b> («Нужен API-ключ MuAPI»)</li>
+<li>В поле <b>MUAPI ACCESS KEY</b> («Ключ доступа MuAPI») вставь само значение ключа, не название «Моя студия». Нажми <b>Initialize Studio</b> («Запустить студию»)</li></ol>
+<figure><div class="shot"><img src="assets/initialize-studio.webp" width="460" height="530" loading="lazy" decoding="async" alt="Окно MUAPI API KEY REQUIRED с полем MUAPI ACCESS KEY и кнопкой Initialize Studio"></div><figcaption>MUAPI ACCESS KEY - «Ключ доступа MuAPI», Initialize Studio - «Запустить студию»; вставь значение ключа</figcaption></figure>
+<div class="result"><p><b>Результат:</b> окно ввода ключа закрыто, ключ подключён, баланс MuAPI пополнен для настоящего запроса</p></div>
+<p><b>Если не получилось:</b> при 401/403 (ошибке доступа) проверь значение ключа и лишние пробелы. При ошибке баланса открой Billing; если вместо настоящего кадра приходят тестовые данные, проверь галочку Sandbox. Ключ вводи только в приложение: в чат Claude и на скриншот он попадать не должен</p>
 </section>
-<section class="content-section" id="cinema"><h2>4. Настрой объектив, фокусное и диафрагму в Cinema Studio</h2>
-<p>Открой <b>Cinema Studio</b> («Киностудия»). Нажми карточку параметров камеры рядом с полем запроса. Выбор камеры, объектива, фокусного расстояния и диафрагмы описан в <a href="https://github.com/Anil-matcha/Open-Generative-AI#-cinema-studio-controls">Cinema Studio Controls</a></p>
-<figure><div class="shot"><img src="assets/camera-open.webp" width="200" height="127" loading="lazy" decoding="async" alt="Карточка выбранной камеры у поля Cinema Studio выделена оранжевой рамкой"></div><figcaption>Нажми карточку камеры: под её названием перечислены объектив, фокусное и диафрагма</figcaption></figure>
-<p>Для первой попытки оставь выбранную камеру. В <b>Lens</b> («Объектив») выбери один доступный вариант. В <b>Focal Length</b> («Фокусное расстояние») выбери 35 mm, в <b>Aperture</b> («Диафрагма») - f/4. Это пробные настройки для одного кадра, а не обещание точного поведения настоящей камеры</p>
-<figure><div class="shot"><img src="assets/lens.webp" width="485" height="717" loading="lazy" decoding="async" alt="Колонка Lens в настройках Cinema Studio выделена оранжевой рамкой"></div><figcaption>Lens значит «Объектив»: выбери один вариант в этой колонке</figcaption></figure>
-<figure><div class="shot"><img src="assets/aperture.webp" width="715" height="670" loading="lazy" decoding="async" alt="Колонки Focal Length и Aperture в Cinema Studio выделены оранжевыми рамками"></div><figcaption>Focal Length - «Фокусное расстояние», Aperture - «Диафрагма»; на кадре 35 mm и f/1.4, для первого теста выбери f/4</figcaption></figure>
-<p>Вернись к полю описания сцены, нажав в стороне от панели. По документации студия превращает параметры камеры в уточнения текстового запроса к модели</p>
-<div class="result"><p><b>Результат:</b> карточка параметров у поля запроса показывает выбранные объектив, фокусное и диафрагму</p></div>
-<p><b>Если не получилось:</b> при отсутствии Cinema Studio проверь версию приложения. Если панель закрылась без выбора, снова открой карточку параметров. Подписи Camera, Lens, Focal Length и Aperture помогают найти нужные настройки, даже если расположение изменилось</p>
+<section class="content-section" id="cinema"><h2>5. Настрой объектив, фокусное и диафрагму в Cinema Studio</h2>
+<p>Во вкладке <b>Cinema Studio</b> («Киностудия») найди поле <b>Describe your scene</b> («Опиши сцену»). Внизу видны 16:9, 2K, Builder, карточка камеры и GENERATE. Для первой попытки оставь 16:9 и 2K, затем нажми карточку камеры рядом с кнопкой генерации</p>
+<figure><div class="shot"><img src="assets/camera-card.webp" width="210" height="75" loading="lazy" decoding="async" alt="Карточка камеры Cinema Studio с объективом Creative Tilt Lens, 35 mm и f/1.4"></div><figcaption>Нажми карточку камеры: под названием видны объектив, фокусное расстояние и диафрагма</figcaption></figure>
+<p>Откроется панель <b>CAMERA / LENS / FOCAL LENGTH / APERTURE</b>. В <b>CAMERA</b> («Камера») оставь Modular 8K Digital, в <b>LENS</b> («Объектив») - Creative Tilt Lens, в <b>FOCAL LENGTH</b> («Фокусное расстояние») - 35 mm, в <b>APERTURE</b> («Диафрагма») - f/1.4. Эти значения выбраны по умолчанию в версии 2.0.0 и показаны на скрине</p>
+<figure><div class="shot"><img src="assets/camera-controls.webp" width="900" height="545" loading="lazy" decoding="async" alt="Панель CAMERA, LENS, FOCAL LENGTH и APERTURE с рамками вокруг трёх настроек"></div><figcaption>CAMERA - «Камера», LENS - «Объектив», FOCAL LENGTH - «Фокусное расстояние», APERTURE - «Диафрагма»</figcaption></figure>
+<p>Закрой панель крестиком справа вверху. По <a href="https://github.com/Anil-matcha/Open-Generative-AI#-cinema-studio-controls">документации проекта</a> параметры камеры добавляются к текстовому запросу для модели; они задают ориентир для картинки, а не обещают точную симуляцию настоящей оптики</p>
+<div class="result"><p><b>Результат:</b> карточка у поля запроса показывает Modular 8K Digital, Creative Tilt Lens, 35 mm и f/1.4</p></div>
+<p><b>Если не получилось:</b> при отсутствии Cinema Studio проверь версию приложения. Если значения другие, открой карточку и выбери нужные в соответствующих колонках</p>
 <p>Осталось описать сцену и увидеть, как эти настройки проявятся в кадре</p>
 </section>
-<section class="content-section" id="first-frame"><h2>5. Создай один кадр и дождись результата</h2>
-<p>В поле описания сцены введи один простой запрос своими словами, например: «Керамическая чашка на деревянном столе у окна, мягкий утренний свет, без надписей». Это пример для первой попытки; совпадение всех деталей заранее не гарантируется</p>
-<p>Перед запуском сверь модель и условия запроса в MuAPI. В <a href="https://github.com/Anil-matcha/Open-Generative-AI/blob/main/packages/studio/src/components/CinemaStudio.jsx">текущем официальном коде Cinema Studio</a> путь без исходного изображения использует Nano Banana Pro. Для установленного выпуска сверь действующую модель в студии перед запросом. Выбор модели в Image Studio не означает, что Cinema Studio применяет ту же модель</p>
-<p>Нажми <b>Generate</b> («Создать») один раз и дождись завершения задания. Пустой запрос не запускается. Не отправляй копии задания, пока оно выполняется</p>
-<figure><div class="shot"><img src="assets/generate.webp" width="960" height="143" loading="lazy" decoding="async" alt="Поле описания и кнопка Generate в Cinema Studio выделены оранжевыми рамками"></div><figcaption>Describe your scene - «Опиши сцену», Generate - «Создать»</figcaption></figure>
+<section class="content-section" id="first-frame"><h2>6. Создай один кадр и дождись результата</h2>
+<p>В поле <b>Describe your scene</b> введи один простой запрос своими словами, например: «Керамическая чашка на деревянном столе у окна, мягкий утренний свет, без надписей». Это пример для первой попытки; совпадение всех деталей заранее не гарантируется</p>
+<p><a href="https://github.com/Anil-matcha/Open-Generative-AI/tree/v2.0.0">Cinema Studio в версии 2.0.0</a> отправляет этот запрос в <b>Nano Banana Pro</b> (<code>nano-banana-pro</code>). В <a href="https://muapi.ai/pricing">прайсе MuAPI на 05.10.2026</a> указано $0,12 за генерацию, то есть около 12 центов за кадр. Выбор модели во вкладке Image не меняет модель Cinema Studio</p>
+<p>Нажми <b>GENERATE</b> («Создать») один раз и дождись завершения задания. Пустой запрос не запускается. Не отправляй копии задания, пока оно выполняется</p>
+<figure><div class="shot"><img src="assets/cinema-generate.webp" width="900" height="123" loading="lazy" decoding="async" alt="Поле Describe your scene и кнопка GENERATE в Cinema Studio выделены рамками"></div><figcaption>Describe your scene - «Опиши сцену», GENERATE - «Создать»; 16:9 - форма кадра, 2K - разрешение</figcaption></figure>
 <div class="result"><p><b>Результат:</b> в области просмотра появился созданный кадр, а не только сообщение об отправленном запросе</p></div>
-<p><b>Если не получилось:</b> прочитай сообщение приложения. Ошибка доступа возвращает к шагу 3, ошибка баланса - к аккаунту MuAPI. Если задание остаётся в работе, проверь его состояние перед повтором. Само отсутствие картинки ещё не объясняет, был ли расход по ключу</p>
+<p><b>Если не получилось:</b> прочитай сообщение приложения. Ошибка доступа возвращает к шагу 4, ошибка баланса - к Billing в MuAPI. Если задание остаётся в работе, проверь его состояние перед повтором. Расход конкретной попытки смотри в Usage («Расход»); отсутствие картинки само по себе ещё не объясняет списание</p>
 </section>
-<section class="content-section" id="save"><h2>6. Скачай кадр и найди его на компьютере</h2>
-<ol><li>У готового результата нажми действие <b>Download</b> («Скачать»), обозначенное стрелкой вниз. Его можно найти у кадра в истории генераций. <a href="https://github.com/Anil-matcha/Open-Generative-AI/blob/main/packages/studio/src/components/CinemaStudio.jsx">Официальный код студии</a> содержит скачивание результата с именем, начинающимся на <code>cinema-shot-</code></li>
-<li>Если появляется окно сохранения, выбери папку и запомни её. Если файл скачивается автоматически, сначала проверь «Загрузки», затем настройки места скачивания. Папка зависит от настроек приложения и системы</li>
-<li>Открой сохранённый файл отдельно от Open Generative AI. Если скачивание открыло изображение в новой вкладке, сохрани его через меню изображения и снова открой файл с компьютера</li></ol>
+<section class="content-section" id="save"><h2>7. Скачай кадр и найди его на компьютере</h2>
+<ol><li>Найди готовый кадр в истории справа, <b>HISTORY</b> («История»), и нажми <b>Download</b> («Скачать»). В <a href="https://github.com/Anil-matcha/Open-Generative-AI/tree/v2.0.0">версии 2.0.0</a> приложение сохраняет JPEG с именем <code>cinema-shot-&lt;число&gt;.jpg</code></li>
+<li>В окне сохранения macOS или Windows выбери папку, например «Изображения», и подтверди сохранение. Приложение не задаёт папку заранее, поэтому запомни выбранное место</li>
+<li>Открой выбранную папку и сам файл отдельно от Open Generative AI</li></ol>
 <div class="result"><p><b>Результат:</b> один кадр лежит в известной папке и открывается как обычное изображение</p></div>
-<p><b>Если не получилось:</b> вернись к готовому кадру в истории и повтори скачивание, а не генерацию. Если папка неизвестна, найди на компьютере файл по началу имени <code>cinema-shot-</code></p>
-<p>Теперь студия прошла проверку целиком: она открывается, ключ даёт доступ, параметры камеры применяются, кадр сохранён отдельно. В аккаунте MuAPI открой Usage («Расход») и посмотри запись о запросе: этот шаг покажет стоимость именно твоей попытки</p>
+<p><b>Если не получилось:</b> вернись к готовому кадру в HISTORY и повтори скачивание, не генерацию. Если папка неизвестна, найди на компьютере файл по началу имени <code>cinema-shot-</code></p>
+<p>Теперь есть результат всего маршрута: собственный кадр, который открывается с компьютера. В аккаунте MuAPI загляни в Usage («Расход»), чтобы увидеть стоимость именно своей попытки</p>
 </section>
 <section class="content-section" id="svoya-zadacha"><h2>От первого кадра к своему инструменту</h2>
 <p>Open Generative AI собрали вокруг одной задачи: управлять генерацией через понятный интерфейс. Такой же подход можно применить к своему делу: собрать сайт с портфолио, бот с цепочкой сообщений или калькулятор. После первого кадра задача уже становится конкретной: какие поля нужны человеку и какой результат он должен сохранить</p>
