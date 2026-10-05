@@ -35,9 +35,9 @@ class PublicationTest(unittest.TestCase):
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"}}
-        self.assertEqual(len(ready), 32)
+        self.assertEqual(len(ready), 33)
         self.assertEqual(set(self.covers), ready)
-        self.assertEqual(len(self.pages), 33)
+        self.assertEqual(len(self.pages), 34)
         self.assertEqual(len(set(self.pages)), len(self.pages))
 
     def test_all_internal_links_and_cross_page_fragments_exist(self):
