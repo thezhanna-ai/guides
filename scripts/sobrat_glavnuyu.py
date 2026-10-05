@@ -151,6 +151,10 @@ def zagruzit_statyi():
         neizvestnye = [m for m in statya.get("metki", []) if m not in METKI]
         if neizvestnye:
             raise ValueError("%s: неизвестные метки %s" % (statya["slug"], ", ".join(neizvestnye)))
+        rubriki = [r["tag"] for r in RAZDELY]
+        if statya.get("rubrika") not in rubriki:
+            raise ValueError("%s: у живой статьи должно быть поле rubrika, одно из: %s"
+                             % (statya["slug"], ", ".join(rubriki)))
         po_trassam.setdefault(statya["rubrika"], []).append(statya)
     return po_trassam
 
