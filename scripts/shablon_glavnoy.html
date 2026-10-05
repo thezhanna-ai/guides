@@ -312,7 +312,8 @@
     .avtor-tekst {{ max-width: 820px; margin: 0; color: var(--text); font-size: 17px; line-height: 1.6 }}
     .avtor-tekst b {{ color: var(--ink) }}
     footer p {{ margin: 0 0 6px }}
-    .podval-avtor {{ color: var(--ink); font-weight: 600 }}
+    .podval-kontakt {{ color: var(--ink); font-size: 15px }}
+    .podval-kontakt a {{ color: #B4522F; font-weight: 600 }}
 
     /* Новое на сайте */
     .novoe {{ margin: 30px 0 0 }}
@@ -394,7 +395,7 @@
       <p class="avtor-tekst"><b>{avtor_imya}.</b> {avtor_tekst}</p>
     </section>
 
-    <footer><p>{podval}</p></footer>
+    <footer><p class="podval-kontakt">Связаться: <a href="mailto:{kontakt}">{kontakt}</a></p><p>{podval}</p></footer>
   </main>
 
   <script>

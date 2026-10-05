@@ -37,6 +37,7 @@ SHAPKA = {
     "description": "Инструкции, разборы и гайды по нейросетям для не-программистов: от первой кнопки до собственных проектов",
     "podval": "Гайды обновляются регулярно - если нужной инструкции ещё нет, она уже готовится",
     "avtor_imya": "Жанна Слепова",
+    "kontakt": "pronovoe.site@yandex.ru",
     "avtor_tekst": "Более 25 лет в финансах в проектном учёте: Big 4 и российский IT консалтинг. "
                    "Работа, где разные учетные системы интегрируются между собой и работают как единое целое. "
                    "С\u00a02025 года - нейросети и вайбкодинг, обучение у лучших на рынке. "
@@ -361,6 +362,7 @@ def sobrat_stranicu():
         razdely="\n\n".join(sobrat_razdel(r, po_trassam, oblozhki) for r in RAZDELY),
         podval=ekranirovat(SHAPKA["podval"]),
         avtor_imya=ekranirovat(SHAPKA["avtor_imya"]),
+        kontakt=ekranirovat(SHAPKA["kontakt"]),
         avtor_tekst=ekranirovat(SHAPKA["avtor_tekst"]),
         podval_avtor=ekranirovat(SHAPKA["podval_avtor"]),
     )
