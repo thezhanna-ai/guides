@@ -316,6 +316,30 @@ def sobrat_urovni():
     return "\n".join(stroki)
 
 
+def chislo_instrukciy(n):
+    if n % 10 == 1 and n % 100 != 11:
+        return "инструкция по шагам"
+    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+        return "инструкции по шагам"
+    return "инструкций по шагам"
+
+
+def sobrat_novoe(po_trassam, oblozhki, skolko=3):
+    """Три последние статьи по дате публикации: свежая статья к сегодняшнему ролику видна сразу"""
+    # при одной дате выше та, что позже добавлена в реестр
+    poryadok = {s["slug"]: i for i, s in enumerate(json.loads((KORNI / "data" / "statyi.json").read_text(encoding="utf-8"))["statyi"])}
+    vse = [s for v in po_trassam.values() for s in v if s.get("data_publikacii")]
+    vse.sort(key=lambda s: (s["data_publikacii"], poryadok.get(s["slug"], 0)), reverse=True)
+    stroki = []
+    for s in vse[:skolko]:
+        ob = oblozhki.get(s["slug"], {})
+        kartinka = ('<img src="%s" alt="%s" width="1600" height="840" loading="lazy" decoding="async">' % (ekranirovat(ob["image"]), ekranirovat(ob.get("alt", s["title"])))
+                    if ob.get("image") else "")
+        stroki.append('        <a class="novoe-link" href="claude-ai/%s/">%s<span>%s</span></a>'
+                      % (ekranirovat(s["slug"]), kartinka, ekranirovat(s["title"])))
+    return "\n".join(stroki)
+
+
 def sobrat_stranicu():
     po_trassam = zagruzit_statyi()
     oblozhki = zagruzit_oblozhki()
@@ -327,6 +351,8 @@ def sobrat_stranicu():
         h1=ekranirovat(SHAPKA["h1"]),
         h1_akcent=ekranirovat(SHAPKA["h1_akcent"]),
         chislo=sum(len(v) for v in po_trassam.values()),
+        chislo_slovo=chislo_instrukciy(sum(len(v) for v in po_trassam.values())),
+        novoe=sobrat_novoe(po_trassam, oblozhki),
         navigaciya=sobrat_navigaciyu(),
         lead=ekranirovat(SHAPKA["lead"]),
         intro=ekranirovat(SHAPKA["intro"]),

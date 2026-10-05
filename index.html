@@ -7,6 +7,8 @@
   <meta name="description" content="Инструкции, разборы и гайды по нейросетям для не-программистов: от первой кнопки до собственных проектов">
   <!-- Страница собрана из data/statyi.json скриптом scripts/sobrat_glavnuyu.py
        Руками не править: правка затрётся следующей сборкой -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
   <link href="assets/fonts/fonts.css" rel="stylesheet">
   <style>
     :root {
@@ -311,6 +313,19 @@
     .avtor-tekst b { color: var(--ink) }
     footer p { margin: 0 0 6px }
     .podval-avtor { color: var(--ink); font-weight: 600 }
+
+    /* Новое на сайте */
+    .novoe { margin: 30px 0 0 }
+    .novoe-label { margin: 0 0 12px; color: #B4522F; font: 700 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .novoe-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px }
+    .novoe-link { display: flex; align-items: center; gap: 14px; padding: 10px; border-radius: 14px; background: var(--card); color: var(--ink);
+      font-size: 14.5px; font-weight: 700; line-height: 1.35; text-decoration: none; box-shadow: 0 4px 14px rgba(16, 47, 48, .07); transition: transform .18s ease, box-shadow .18s ease }
+    .novoe-link img { flex: none; width: 112px; height: auto; aspect-ratio: 1600 / 840; border-radius: 8px; object-fit: cover; background: var(--ink) }
+    @media (hover: hover) { .novoe-link:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(16, 47, 48, .12) } }
+    .novoe-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px }
+    @media (max-width: 900px) { .novoe-list { grid-template-columns: 1fr } }
+    /* Карточки без второй рамки вокруг: рубрика держится заголовком */
+    .track { margin-top: 6px; padding: 0; border: 0; background: transparent }
   </style>
 </head>
 <body>
@@ -334,7 +349,7 @@
         <p class="cover-hint">Например: доступ, голосовой ввод, свой сайт</p>
       </div>
     </div>
-    <div class="cover-foot"><span><b>32</b> инструкций по шагам</span>
+    <div class="cover-foot"><span><b>32</b> инструкции по шагам</span>
       <nav aria-label="Разделы">
         <a href="#r-start">С чего начать: доступ, оплата и первые настройки</a>
         <a href="#r-kazhdyy-den">Нейросеть на каждый день: поиск, файлы, голос, проекты</a>
@@ -385,6 +400,14 @@
         <option value="drugoe">Другое: своё слово</option>
       </select>
     </div>
+    <section class="novoe" id="novoe" aria-label="Новое на сайте">
+      <p class="novoe-label">Новое на сайте</p>
+      <div class="novoe-list">
+        <a class="novoe-link" href="claude-ai/kopiya-higgsfield-open-generative-ai/"><img src="claude-ai/kopiya-higgsfield-open-generative-ai/assets/oblozhka.webp" alt="Панель камеры Cinema Studio в Open Generative AI: камера, объектив, фокусное расстояние и диафрагма" width="1600" height="840" loading="lazy" decoding="async"><span>Открытая копия Higgsfield: кадры как в кино без ежемесячной подписки</span></a>
+        <a class="novoe-link" href="claude-ai/ozhivit-maket-bez-keyframe/"><img src="claude-ai/ozhivit-maket-bez-keyframe/assets/oblozhka.webp" alt="Ожившие карточки из макета разлетаются по экрану: кадр готовой анимации" width="1600" height="840" loading="lazy" decoding="async"><span>Как оживить макет из Figma за одно нажатие: 4 варианта анимации без After Effects</span></a>
+        <a class="novoe-link" href="claude-ai/claude-iz-rossii-bez-banov/"><img src="claude-ai/claude-iz-rossii-bez-banov/assets/oblozhka.webp" alt="Экран Claude Your account is on hold с кнопкой Request a review" width="1600" height="840" loading="lazy" decoding="async"><span>Claude из России не пускает: ошибка 403, отказ оплаты, блокировка и апелляция</span></a>
+      </div>
+    </section>
     <p class="no-results" id="no-results" role="status" aria-live="polite">Ничего не нашлось. Попробуй другое слово или выбери «Все метки»</p>
     <section class="lager" id="lager" aria-label="Практикум">
       <div>
@@ -645,6 +668,8 @@
       noResults.classList.toggle('show', visibleCount === 0 && filtering);
       // Пока человек ищет, блок практикума не отодвигает найденное вниз
       if (lager) lager.hidden = filtering;
+      var novoe = document.getElementById('novoe');
+      if (novoe) novoe.hidden = filtering;
     }
 
     searchInput.addEventListener('input', applyFilters);
