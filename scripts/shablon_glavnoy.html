@@ -263,6 +263,46 @@
       .cover-foot {{ gap: 10px }}
       .cover-foot nav {{ gap: 6px 16px }}
     }}
+
+    /* Первый экран 05.10: поиск в шапке, картинка справа, вокруг неё дорисованное продолжение сцены
+       (assets/glavnaya/hero-fon.webp, исходник и задание - tasks/для-кодекса/2026-10-05-HERO-RASSHIRENIE.md) */
+    .cover-bar, .cover-body, .cover-foot {{ width: min(1120px, calc(100% - 40px)) }}
+    .cover-body {{ padding: 52px 0 46px }}
+    .cover-copy {{ max-width: 640px }}
+    .pill {{ margin-bottom: 22px }}
+    .cover h1 {{ font-size: clamp(32px, 3.2vw, 48px); line-height: 1.08 }}
+    .cover .lead {{ max-width: 560px; margin-top: 18px; font-size: 19px }}
+    .cover .toolbar {{ max-width: 660px; margin: 30px 0 0 26px }}
+    .cover .search-input {{ flex: 1 1 320px; padding: 17px 20px; font-size: 17px }}
+    .cover-hint {{ margin: 12px 0 0 26px; color: rgba(243,239,230,.62); font: 500 12px/1.5 "JetBrains Mono", ui-monospace, monospace }}
+    .cover-scene {{ inset: 50% max(20px, calc((100% - 1120px) / 2)) auto auto; width: min(40%, 500px); height: auto; aspect-ratio: 16 / 10;
+      transform: translateY(-46%); overflow: visible }}
+    .cover-scene::before {{ inset: -142.11% -190.38% -142.86% -70.19%; z-index: 0; background: url("assets/glavnaya/hero-fon.webp") 0 0 / 100% 100% no-repeat }}
+    .cover-scene img {{ position: relative; z-index: 1;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%), linear-gradient(0deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-composite: source-in;
+              mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%), linear-gradient(0deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+              mask-composite: intersect }}
+    .after-cover {{ padding-top: 36px }}
+    .filtr-metok {{ display: flex; align-items: center; gap: 12px; margin: 34px 0 0; color: var(--muted); font-size: 15px }}
+    .filtr-metok .metka-select {{ padding-top: 11px; padding-bottom: 11px }}
+    main > .lager {{ margin-top: 30px }}
+    @media (max-width: 900px) {{
+      .cover-scene {{ inset: 0; width: 100%; height: 100%; transform: none; aspect-ratio: auto }}
+      .cover-scene img {{ position: static; width: 100%; height: 100%; -webkit-mask-image: none; mask-image: none }}
+      .cover-scene::before {{ inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(11,33,34,.92) 0%, rgba(11,33,34,.6) 60%, rgba(11,33,34,.35) 100%),
+        linear-gradient(0deg, #0B2122 0%, rgba(11,33,34,0) 30%) }}
+    }}
+    @media (max-width: 600px) {{
+      .cover-bar, .cover-body, .cover-foot {{ width: calc(100% - 32px) }}
+      .cover-scene {{ inset: 0 0 auto 0; height: 240px }}
+      .cover-scene::before {{ background: linear-gradient(0deg, #0B2122 2%, rgba(11,33,34,.35) 55%, rgba(11,33,34,.55) 100%) }}
+      .cover-body {{ padding: 150px 0 34px }}
+      .cover h1 {{ font-size: 32px }}
+      .cover .lead {{ font-size: 17px }}
+      .cover .toolbar, .cover-hint {{ margin-left: 18px }}
+      .cover .search-input {{ font-size: 16px }}
+    }}
   </style>
 </head>
 <body>
@@ -279,10 +319,11 @@
         <p class="pill">{nadzagolovok}</p>
         <h1>{h1} <em>{h1_akcent}</em></h1>
         <p class="lead">{lead}</p>
-        <div class="cover-actions">
-          <a class="btn-main" href="#guide-search">Найти инструкцию →</a>
-          <span class="btn-note">Впиши тему или слово из поста или видео - нужная инструкция найдётся сразу</span>
+        <div class="toolbar" role="search">
+          <input class="search-input" type="search" id="guide-search" placeholder="Тема или слово из поста или видео" aria-label="Поиск по теме или слову из поста или видео">
+          <button class="search-go" id="search-go" type="button">Найти</button>
         </div>
+        <p class="cover-hint">Например: доступ, голосовой ввод, свой сайт</p>
       </div>
     </div>
     <div class="cover-foot"><span><b>{chislo}</b> инструкций по шагам</span>
@@ -302,13 +343,10 @@
   </section>
 
   <main>
-    <div class="toolbar" role="search">
-      <input class="search-input" type="search" id="guide-search" placeholder="Тема или слово из поста или видео" aria-label="Поиск по теме или слову из поста или видео">
+    <div class="filtr-metok"><label for="metka">Показать:</label>
       <select class="metka-select" id="metka" aria-label="Метка">
 {filtry}
       </select>
-      <button class="search-go" id="search-go" type="button">Найти</button>
-    </div>
     </div>
     <p class="no-results" id="no-results" role="status" aria-live="polite">Ничего не нашлось. Попробуй другое слово или выбери «Все метки»</p>
     <section class="lager" id="lager" aria-label="Практикум">
