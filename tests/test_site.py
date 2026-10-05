@@ -1357,6 +1357,9 @@ class RubrikiIMetkiTest(unittest.TestCase):
             a = by_slug[card.attrs["href"].split("/")[1]]
             with self.subTest(slug=a["slug"]):
                 self.assertEqual(card.attrs["data-metki"].split(), a["metki"])
+                if not a["uroven"]:
+                    self.assertEqual(card.all(klass="guide-level"), [])
+                    continue
                 level = card.all(klass="guide-level")[0]
                 self.assertIn(a["uroven"], level.attrs["class"].split())
                 self.assertEqual(level.text_content().strip(), self.gen.UROVNI[a["uroven"]][0] + " уровень")
@@ -1365,6 +1368,9 @@ class RubrikiIMetkiTest(unittest.TestCase):
         for a in self.live:
             html = (ROOT / "claude-ai" / a["slug"] / "index.html").read_text(encoding="utf-8")
             with self.subTest(slug=a["slug"]):
+                if not a["uroven"]:
+                    self.assertNotIn('class="uroven-metka', html)
+                    continue
                 self.assertEqual(html.count('class="uroven-metka'), 1)
                 after = html.split("</h1>", 1)[1].lstrip()
                 self.assertTrue(after.startswith('<p class="uroven-metka %s"' % a["uroven"]))

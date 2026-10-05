@@ -338,13 +338,17 @@ def sobrat_metki_urovnya(stranicy):
     staraya = re.compile(r'\n?<p class="uroven-metka[^"]*"[^>]*>.*?</p>', re.S)
     for statya in reestr["statyi"]:
         uroven = statya.get("uroven")
-        if statya.get("status") != "live" or uroven not in UROVNI:
+        if statya.get("status") != "live":
             continue
         page = (KORNI / "claude-ai" / statya["slug"] / "index.html").resolve()
         if not page.is_relative_to(KORNI) or not page.is_file():
             continue  # путь проверяет сборка индексации и падает с понятной ошибкой
         html = stranicy.get(page, page.read_text(encoding="utf-8"))
         html = staraya.sub("", html)
+        if uroven not in UROVNI:
+            # обзор без уровня: метку снимаем, если стояла
+            stranicy[page] = html
+            continue
         if html.count("</h1>") < 1:
             raise ValueError("%s: нет заголовка h1 для метки уровня" % statya["slug"])
         metka = ('\n<p class="uroven-metka %s" style="display:inline-block;margin:16px 0 0;padding:5px 12px;'
