@@ -43,6 +43,9 @@ UROVNI = {
     "blue": ("Средний", "уже уверенно работаешь с нейросетью"),
 }
 
+# Метки-инструменты: их названия стоят на карточке над кратким содержанием
+INSTRUMENTY = ["claude-chat", "claude-code", "chatgpt", "codex"]
+
 # Метки поиска: код в реестре (поле metki) -> название в выпадающем списке и подпись.
 # Порядок здесь = порядок в списке. «Другое» добавляется последним и открывает свободное поле
 METKI = {
@@ -210,12 +213,14 @@ def sobrat_kartochku(statya, oblozhki):
     return (
         '          <a class="guide-link" data-tags="{tags}" data-metki="{metki}" data-kod="{kod}" '
         'data-poisk="{poisk}" aria-label="{title}" href="claude-ai/{slug}/">'
-        '{media}<span class="guide-body"><span class="guide-summary">{summary}</span>'
+        '{media}<span class="guide-body">{instrumenty}<span class="guide-summary">{summary}</span>'
         '<span class="guide-meta">{uroven}<span class="kind {klass}">{podpis}</span></span>'
         '</span></a>'
     ).format(
         tags=ekranirovat(statya["tags"]),
         metki=ekranirovat(" ".join(metki)),
+        instrumenty=('<span class="guide-tools">%s</span>' % " · ".join("%s (%s)" % METKI[m] for m in INSTRUMENTY if m in metki)
+                     if any(m in metki for m in INSTRUMENTY) else ""),
         slug=ekranirovat(statya["slug"]),
         media=media,
         uroven=podpis_urovnya,
