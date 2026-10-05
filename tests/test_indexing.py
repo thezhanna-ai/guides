@@ -58,7 +58,7 @@ class IndexingTest(unittest.TestCase):
                              if a["status"] == "live" and not a.get("noindex_reason")]
         self.assertEqual(urls, expected)
         self.assertEqual(len(urls), len(set(urls)))
-        self.assertEqual(len(urls), 31)
+        self.assertEqual(len(urls), 33)
         self.assertNotIn("lastmod", (ROOT / "sitemap.xml").read_text())
 
     def test_robots_announces_sitemap_without_blocking_noindex_crawling(self):

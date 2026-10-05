@@ -171,10 +171,10 @@ class ArticleImagesTest(unittest.TestCase):
         return [row for row in self.manifest if row["article"] == article["title"]]
 
     def test_image_manifest_covers_all_29_approved_articles_and_excludes_new_article(self):
-        self.assertEqual(len(self.eligible), 30)
+        self.assertEqual(len(self.eligible), 32)
         self.assertEqual(set(self.covers), {a["slug"] for a in self.eligible})
-        self.assertEqual(len(self.manifest), 36)
-        self.assertTrue(all(row["number"] < 38 for row in self.manifest))
+        self.assertEqual(len(self.manifest), 38)
+        self.assertTrue(all(row["number"] < 40 for row in self.manifest))
         for article in self.eligible:
             with self.subTest(slug=article["slug"]):
                 rows = self.rows(article)
