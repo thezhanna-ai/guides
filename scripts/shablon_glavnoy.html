@@ -151,7 +151,8 @@
     /* Практикум: заметный блок под поиском, до статей */
     .lager {{ display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 22px 0 8px; padding: 26px 30px; border-radius: 16px; background: var(--ink); color: #E8EFEC }}
     .lager-label {{ margin: 0 0 6px; color: #FFB08F; font: 700 12px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }}
-    .lager h2 {{ margin: 0 0 8px; color: #FFFFFF; font-size: 26px; line-height: 1.2 }}
+    .lager-badge {{ display: inline-block; margin-left: 10px; padding: 4px 10px; border-radius: 999px; background: var(--accent); color: #102F30; font: 800 12px/1.2 -apple-system, BlinkMacSystemFont, sans-serif; letter-spacing: 0; text-transform: none; vertical-align: 1px }}
+    .lager h2 {{ max-width: 720px; margin: 4px 0 10px; color: #FFFFFF; font-size: 30px; line-height: 1.18 }}
     .lager p.lager-text {{ max-width: 640px; margin: 0; font-size: 16px; line-height: 1.55 }}
     .lager-btn {{ flex: none; display: inline-flex; align-items: center; padding: 15px 24px; border-radius: 12px; background: var(--accent); color: #102F30; font-weight: 800; font-size: 16px; text-decoration: none; box-shadow: 0 3px 0 #8F371F; transition: transform .12s ease, box-shadow .12s ease, background .12s ease }}
     .lager-btn:hover {{ background: #F28A68; transform: translateY(1px); box-shadow: 0 2px 0 #8F371F }}
@@ -311,11 +312,11 @@
     <p class="no-results" id="no-results" role="status" aria-live="polite">Ничего не нашлось. Попробуй другое слово или сними фильтр</p>
     <section class="lager" id="lager" aria-label="Практикум">
       <div>
-        <p class="lager-label">Практикум</p>
-        <h2>Собери инструмент под своё дело</h2>
-        <p class="lager-text">На ИИ-Лагере показывают, как собрать сайт, бота или калькулятор с Claude Code и Codex. Это ИИ-помощники, которым ты описываешь задачу словами, а они пишут код. На практикуме этот путь проходят по шагам, без программирования.</p>
+        <p class="lager-label">Практикум <span class="lager-badge">3 дня бесплатно</span></p>
+        <h2>Инструкции учат одной кнопке. А если собрать целую систему?</h2>
+        <p class="lager-text">Сайт, который продаёт. Бот, который отвечает клиентам. Контент, который выходит без тебя. На ИИ-Лагере это собирают с Claude Code и Codex: задачу описываешь словами, код пишет ИИ. Каждый шаг показывают на экране - смотришь и сразу делаешь для себя. Программировать уметь не нужно</p>
       </div>
-      <a class="lager-btn" href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь →</a>
+      <a class="lager-btn" href="https://theivansergeev.com/ailager/?gcpc=16fff">Забрать путёвку →</a>
     </section>
 
 {razdely}
