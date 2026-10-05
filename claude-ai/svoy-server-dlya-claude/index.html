@@ -3,12 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Два маршрута к Claude через свой европейский сервер: личный VPN или постоянный Claude Code с доступом через CloudCLI">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Как поднять личный VPN на своём сервере через AmneziaVPN, запустить Claude Code в облаке Anthropic или на своём VPS и управлять им с телефона через Remote Control">
   <meta name="theme-color" content="#F8F7F2">
-  <meta property="og:title" content="Свой сервер для Claude">
-  <meta property="og:description" content="Как выбрать между своим VPN и Claude Code на сервере, настроить подходящий маршрут и при желании совместить оба">
-  <title>Свой сервер для Claude</title>
+  <meta property="og:title" content="Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона">
+  <meta property="og:description" content="Как поднять личный VPN на своём сервере через AmneziaVPN, запустить Claude Code в облаке Anthropic или на своём VPS и управлять им с телефона через Remote Control">
+  <title>Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона</title>
   <link href="../../assets/fonts/fonts.css" rel="stylesheet">
   <script>
     try {
@@ -309,6 +308,58 @@
     .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
     .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
     .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+
+    .plus-list, .requirements-list { display: grid; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none }
+    .plus-list li, .requirements-list li { margin: 0; padding: 13px 16px; border: 1px solid var(--line); border-left: 4px solid var(--ok); border-radius: 9px; background: var(--surface); line-height: 1.48 }
+    .plus-list b, .requirements-list b { color: var(--heading); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .command-caption { display: block; margin: 20px 0 0; color: var(--heading); font: 700 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .step .prompt-box { margin-top: 12px; padding: 48px 20px 18px }
+    .step .prompt-box.no-copy { padding-top: 18px }
+    .step .prompt-box + p { margin-top: 14px }
+    .cloudcli-note ul { margin: 12px 0 14px }
+    .route-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; margin: 28px 0 0 }
+    .route-card { display: flex; flex-direction: column; min-width: 0; padding: 0 0 25px; border-bottom: 1px solid var(--line) }
+    .route-kicker { margin: 0 0 8px; color: var(--accent-dark); font: 750 12px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase }
+    .route-card h3 { margin: 0 0 13px; font: 750 21px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-card .shot { width: 100% }
+    .route-card-copy { margin: 13px 0 15px; font-size: 16.5px; line-height: 1.45 }
+    .route-card-link { display: block; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); color: var(--emerald-mid); font: 650 14px/1.42 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-decoration-color: var(--accent); text-underline-offset: 3px }
+    .route-card-link:hover { color: var(--accent-dark) }
+    .cost-table-wrap { margin: 22px 0 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); -webkit-overflow-scrolling: touch }
+    .cost-table { width: 100%; min-width: 690px; border-collapse: separate; border-spacing: 0; color: var(--heading); font: 14px/1.38 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cost-table th, .cost-table td { width: 22%; padding: 13px 12px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); vertical-align: top; text-align: left }
+    .cost-table th:last-child, .cost-table td:last-child { border-right: 0 }
+    .cost-table th:first-child { width: 34% }
+    .cost-table thead th { background: var(--emerald); color: var(--paper); font-weight: 750 }
+    .cost-table tbody th { font-weight: 750; background: var(--paper-2) }
+    .cost-table td strong, .cost-table td span { display: block }
+    .cost-table td strong { font-weight: 750 }
+    .cost-table td span { margin-top: 5px; color: var(--muted); font-size: 12.5px; line-height: 1.35 }
+    .cost-table tbody tr:last-child th, .cost-table tbody tr:last-child td { border-bottom: 0 }
+    .cost-table-total th, .cost-table-total td { background: var(--sage-note) }
+    .cost-table-total td strong { font-size: 17px }
+    .cost-table-scroll { display: none; margin: 7px 0 16px; color: var(--muted); font: 600 12px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cost-table-note { margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.52 }
+    @media (max-width: 760px) { .cost-table-scroll { display: block } }
+  </style>
+  <style>
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+  </style>
+  <meta property="og:image" content="https://pronovoe.com/claude-ai/svoy-server-dlya-claude/assets/oblozhka.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="840">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://pronovoe.com/claude-ai/svoy-server-dlya-claude/assets/oblozhka.webp">
+
+  <style id="shapka-b">
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
   </style>
 </head>
 <body>
@@ -335,14 +386,15 @@
     <nav class="toc" aria-label="Содержание">
       <p class="toc-label">Содержание</p>
       <a class="active" href="#zachem-server"><span>Зачем свой сервер, если есть VPN</span></a>
-      <a href="#chto-eto"><span>Что это такое простыми словами</span></a>
-      <a href="#chto-nuzhno"><span>Что понадобится и сколько стоит</span></a>
+      <a href="#marshruty"><span>Три способа работы: где лежат файлы и где запущен Claude Code</span></a>
+      <a href="#skolko-stoit"><span>Сколько стоит каждый способ</span></a>
       <a href="#arendovat-server"><span>Шаг 1. Арендовать сервер</span></a>
-      <a href="#podklyuchit-domen"><span>Шаг 2. Подключить домен</span></a>
-      <a href="#postavit-claude-code"><span>Шаг 3. Поставить Claude Code</span></a>
-      <a href="#cloudcli"><span>Шаг 4. Веб-доступ через CloudCLI</span></a>
+      <a href="#svoy-vpn"><span>Шаг 2. Свой VPN через AmneziaVPN</span></a>
+      <a href="#oblako"><span>Claude Code в облаке Anthropic</span></a>
+      <a href="#claude-code-na-servere"><span>Claude Code на своём VPS и работа с телефона</span></a>
       <a href="#oshibki"><span>Если что-то пошло не так</span></a>
       <a href="#vozmozhnosti"><span>Что ещё умеет твой сервер</span></a>
+      <a href="#istochniki"><span>Официальные источники</span></a>
     </nav>
 
     <main>
@@ -350,105 +402,119 @@
         <summary>Содержание гида</summary>
         <nav aria-label="Содержание на телефоне">
           <a href="#zachem-server">Зачем свой сервер, если есть VPN</a>
-          <a href="#chto-eto">Что это такое простыми словами</a>
-          <a href="#chto-nuzhno">Что понадобится и сколько стоит</a>
+          <a href="#marshruty">Три способа работы: где лежат файлы и где запущен Claude Code</a>
+          <a href="#skolko-stoit">Сколько стоит каждый способ</a>
           <a href="#arendovat-server">Шаг 1. Арендовать сервер</a>
-          <a href="#podklyuchit-domen">Шаг 2. Подключить домен</a>
-          <a href="#postavit-claude-code">Шаг 3. Поставить Claude Code</a>
-          <a href="#cloudcli">Шаг 4. Веб-доступ через CloudCLI</a>
+          <a href="#svoy-vpn">Шаг 2. Свой VPN через AmneziaVPN</a>
+          <a href="#oblako">Claude Code в облаке Anthropic</a>
+          <a href="#claude-code-na-servere">Claude Code на своём VPS и работа с телефона</a>
           <a href="#oshibki">Если что-то пошло не так</a>
           <a href="#vozmozhnosti">Что ещё умеет твой сервер</a>
+          <a href="#istochniki">Официальные источники</a>
         </nav>
       </details>
 
       <article>
         <header class="article-header" data-handout-title="Свой сервер для Claude">
-          <p class="eyebrow">Два маршрута через свой сервер</p>
-          <h1>Свой сервер для Claude</h1>
-          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · 12 СЕНТЯБРЯ 2026</p>
-          <p class="lead">Обычный VPN помогает открыть Claude из России, но у него есть слабое место: адрес может меняться, а одним сервером нередко пользуется много людей. Собственный европейский сервер даёт тебе отдельный постоянный IP и второй уровень контроля над доступом</p>
-          <p>На практике проблема выглядит просто: вчера Claude открывался, сегодня показывает ошибку региона, а после смены VPN снова работает. Это не всегда означает бан аккаунта. Иногда сервис не принимает именно текущий адрес или видит вход из другой страны</p>
-          <p>Свой сервер нужен не для того, чтобы сделать Claude умнее. Он нужен, чтобы перестать каждый раз искать удачный VPN и собрать понятное рабочее место, адрес которого не меняется без твоего решения</p>
+          <p class="eyebrow">Технические настройки, которые снижают риски</p>
+          <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Серверный модуль, от которого тянутся два оранжевых облачка чата, для статьи о своём сервере для Claude" loading="eager" decoding="async" fetchpriority="high"><figcaption>Личный VPN через AmneziaVPN, Claude Code в облаке или на своём сервере</figcaption></figure>
+          <h1 class="article-title-v2">Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона</h1>
+          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · 29 СЕНТЯБРЯ 2026</p>
+          <p class="lead">Вчера Claude открывался, сегодня показывает ошибку региона, а после смены VPN снова работает. Часто дело не в аккаунте, а в адресе: общий VPN меняет его без спроса, и одним адресом пользуются тысячи людей. Эту случайность можно убрать, а заодно получить Claude Code, который работает, пока ноутбук закрыт</p>
+          <p>Свой сервер не делает Claude умнее и не отменяет правил Anthropic. Он даёт другое: один постоянный адрес, который меняется только по твоему решению, и рабочее место, которое не зависит от крышки ноутбука. Ниже три способа это собрать, от самого простого до самого самостоятельного</p>
           <aside class="setup-note">
-            <p><b>Сразу уточню:</b> во втором маршруте речь о Claude Code, который работает с файлами, папками, терминалом и Git. Это не чат claude.ai, перенесённый на другой адрес</p>
+            <p><b>Если на экране уже ошибка 403, отказ оплаты или форма апелляции,</b> сначала пройди <a href="../claude-iz-rossii-bez-banov/">разбор ограничений доступа</a>. Эта инструкция снижает риски на будущее, но не возвращает отключённый аккаунт</p>
           </aside>
           <aside class="route-note" aria-label="Связь с предыдущей статьёй">
             <h2>Сначала нужен обычный вход</h2>
-            <p>Если аккаунта Claude ещё нет, начни со статьи <a href="../podklyuchenie-iz-rossii/index.html">«Как подключить Claude из России»</a>. Сюда возвращайся, когда вход уже работает, ты освоился в claude.ai и хочешь перейти от отдельных чатов к более серьёзной работе с файлами, проектами и Claude Code</p>
+            <p>Если аккаунта Claude ещё нет, начни со статьи <a href="../podklyuchenie-iz-rossii/index.html">«Как подключить Claude из России»</a>. Сюда возвращайся, когда вход уже работает и хочется перейти от отдельных чатов к постоянной работе с файлами и Claude Code</p>
           </aside>
         </header>
 
         <section class="content-section" id="zachem-server">
           <p class="section-label">Глава 1</p>
           <h2>Зачем свой сервер, если есть VPN</h2>
-          <p class="purpose">Если сегодня Claude открывается только при удачно выбранном VPN-сервере, а завтра адрес уже другой, доступ превращается в лотерею. Свой VPS убирает эту случайность: адрес закреплён за тобой, а назначение сервера выбираешь ты</p>
-          <p>Региональные ограничения и проверки со стороны сервиса никуда не исчезают. Зато ты больше не зависишь от перегруженного общего VPN, не переключаешься между случайными странами и заранее знаешь, с какого IP заходишь в аккаунт</p>
-          <p>Дальше есть два маршрута. В первом сервер становится твоим личным VPN, а Claude остаётся на привычном компьютере. Во втором на сервер переезжают Claude Code и рабочие проекты: попасть к ним можно двумя независимыми способами - через браузер по CloudCLI или через приложение VS Code на компьютере, которое подключается к серверу напрямую по SSH (защищённый удалённый доступ - способ, которым любая программа на твоём компьютере может напрямую работать с файлами сервера, как будто они лежат локально). Это не два шага одного пути, а два разных входа в один и тот же сервер - обычно хватает только CloudCLI</p>
-          <div class="route-map" aria-label="Два маршрута использования сервера для Claude">
-            <div class="route-map-row">
-              <div class="route-node"><strong>Путь А</strong>Твой компьютер</div>
-              <div class="route-arrow" aria-hidden="true">&rarr;</div>
-              <div class="route-node">Свой VPN на VPS</div>
-              <div class="route-arrow" aria-hidden="true">&rarr;</div>
-              <div class="route-node">Claude на твоём компьютере</div>
-            </div>
-            <div class="route-map-row">
-              <div class="route-node"><strong>Путь Б</strong>Браузер (плюс VS Code по желанию)</div>
-              <div class="route-arrow" aria-hidden="true">&rarr;</div>
-              <div class="route-node">CloudCLI, опционально SSH</div>
-              <div class="route-arrow" aria-hidden="true">&rarr;</div>
-              <div class="route-node">Claude Code и проекты на VPS</div>
-            </div>
-          </div>
-          <p class="route-caption">В пути А сервер отвечает только за соединение. В пути Б он хранит проекты и выполняет работу</p>
-          <p>Путь А проще и привычнее: подключаешь свой VPN и пользуешься Claude на компьютере как раньше. Ноутбук выключен, значит и работа Claude остановлена</p>
-          <p>Путь Б требует больше настройки: Claude Code, проекты и веб-панель работают на сервере. Зато можно зайти с другого компьютера или телефона, а фоновые процессы не зависят от крышки ноутбука</p>
-          <p>Не нужно выбирать маршрут навсегда. Можно начать с личного VPN, спокойно проверить сервер и только потом добавить Claude Code. Можно оставить оба варианта: один для обычного claude.ai, второй для проектов, кода и долгих задач</p>
-          <p>У собственного VPS постоянный адрес, но это адрес дата-центра. Он снижает риск, связанный со случайной сменой IP, однако не даёт стопроцентной гарантии от блокировки аккаунта, ограничения доступа или других мер со стороны Anthropic</p>
-          <div class="route-note"><p><b>Быстрый выбор:</b> нужен только стабильный доступ с одного устройства - путь А. Нужен постоянно работающий Claude Code с проектами - путь Б</p></div>
-        </section>
-
-        <section class="content-section" id="chto-eto">
-          <p class="section-label">Глава 2</p>
-          <h2>Что это такое простыми словами</h2>
-          <p class="purpose">В обоих маршрутах ты арендуешь один и тот же тип сервера. Разница начинается после аренды: какую роль этот сервер будет выполнять</p>
-          <p>VPS можно представить как небольшой компьютер в европейском дата-центре. У него есть свой адрес в интернете, операционная система и пароль для входа. Он работает круглые сутки, даже когда твой ноутбук закрыт</p>
-          <p>Для личного VPN этот компьютер становится входной дверью в интернет. Для Claude Code он становится ещё и рабочим столом: внутри лежат папки проекта, запускаются команды и сохраняется результат</p>
+          <p class="purpose">VPN был включён, страна не менялась, а доступ всё равно пропал. Разовая проверка не показывает, переключал ли VPN-сервис тебя на другой свой сервер при переподключении или после обрыва. Свой VPS убирает именно эту неопределённость: адрес закреплён за тобой</p>
+          <p>VPS - это небольшой компьютер в дата-центре, который сдают в аренду помесячно. У него есть свой адрес в интернете, операционная система и пароль для входа. Он работает круглые сутки, даже когда твой ноутбук выключен</p>
+          <p>Этот сервер может выполнять одну из двух ролей, и их легко перепутать:</p>
           <div class="choice-grid">
             <div class="choice">
-              <p class="choice-label">Путь А</p>
+              <p class="choice-label">Роль 1</p>
               <h3>Сервер как личный VPN</h3>
-              <p>Claude, файлы и VS Code остаются на твоём компьютере. Через сервер проходит только интернет-соединение с постоянным европейским IP</p>
+              <p>Claude, файлы и проекты остаются на твоём компьютере. Через сервер проходит только интернет-соединение, и сервисы видят его постоянный адрес</p>
             </div>
             <div class="choice">
-              <p class="choice-label">Путь Б</p>
+              <p class="choice-label">Роль 2</p>
               <h3>Сервер как рабочий компьютер</h3>
-              <p>Claude Code и проекты находятся на VPS. CloudCLI показывает их в браузере, а VS Code может подключиться к тому же серверу по SSH</p>
+              <p>На сервер переезжают Claude Code и папка проекта. Задачи выполняются там, а ты открываешь сессию с телефона или другого компьютера</p>
             </div>
           </div>
-          <p>Для пути А домен обычно не нужен: приложение VPN подключается прямо к IP сервера. Для пути Б домен заменяет набор цифр понятным адресом. HTTPS шифрует данные между браузером и сервером, а отдельный пароль не пускает посторонних в CloudCLI</p>
-          <aside class="notice domain-note">
-            <p class="notice-title">Покупка домена не создаёт ещё один сервер</p>
-            <p>Домен только даёт понятное имя уже арендованному VPS. Сам Claude Code, файлы и CloudCLI по-прежнему находятся на сервере</p>
+          <h3>Что даёт свой VPS вместо общего VPN</h3>
+          <ul class="plus-list">
+            <li><b>Один выбранный адрес.</b> У VPS отдельный внешний IP. Пока хостинг сохраняет его за сервером, никто не переключит тебя на другой узел без твоего ведома</li>
+            <li><b>Понятную проверку.</b> Ты знаешь IP своей машины и можешь сравнить его с адресом, который видят браузер и терминал. Так проще заметить, что одно приложение пошло в обход VPN</li>
+            <li><b>Контроль при обрыве.</b> Автоподключение и KillSwitch не дают незаметно уйти на обычное соединение. Где их включить - во втором шаге</li>
+            <li><b>Цену, которая не растёт от числа людей.</b> Один сервер обслуживает всю семью через гостевые ключи</li>
+          </ul>
+          <aside class="notice">
+            <p class="notice-title">Чего свой сервер не гарантирует</p>
+            <p>Адрес VPS постоянный, но это адрес дата-центра, и он тоже может получить ошибку 403. Anthropic не подтверждает, что собственный сервер снижает риск ограничения аккаунта. Он не меняет <a href="https://www.anthropic.com/supported-countries">список поддерживаемых стран</a> и не возвращает отключённый аккаунт. Сервер нужно оплачивать и обслуживать</p>
           </aside>
-          <h3>CloudCLI и VS Code можно использовать вместе</h3>
-          <p>CloudCLI удобен для входа через браузер и телефон. VS Code удобнее для вайбкодинга: дерево проекта, сравнение изменений, Git, несколько терминалов и контроль агентов. Оба интерфейса могут работать с одними файлами на сервере</p>
         </section>
 
-        <section class="content-section" id="chto-nuzhno">
+        <section class="content-section" id="marshruty">
+          <p class="section-label">Глава 2</p>
+          <h2>Три способа работы: где лежат файлы и где запущен Claude Code</h2>
+          <p class="purpose">Модель Claude во всех трёх способах работает у Anthropic. Меняется другое: где лежит твой проект и где запущен Claude Code, который читает файлы и выполняет команды. Посмотри на три схемы и выбери свою</p>
+          <div class="route-grid">
+            <article class="route-card">
+              <p class="route-kicker">На твоём устройстве</p>
+              <h3>Проект и Claude Code на компьютере</h3>
+              <div class="shot route-illustration-wrap"><img class="route-illustration" src="assets/route-local.png" alt="Человек за ноутбуком: папка проекта и Claude Code на компьютере, запрос уходит к модели Claude в облаке Anthropic и возвращается ответом"></div>
+              <p class="route-card-copy">Файлы и Claude Code у тебя. Выключишь компьютер - задача остановится. Свой VPN на сервере здесь только проводит соединение</p>
+              <a class="route-card-link" href="#svoy-vpn">Шаг 2. Свой VPN через AmneziaVPN</a>
+            </article>
+            <article class="route-card">
+              <p class="route-kicker">Через сайт Claude</p>
+              <h3>Проект из GitHub, работа на сервере Anthropic</h3>
+              <div class="shot route-illustration-wrap"><img class="route-illustration" src="assets/route-anthropic.png" alt="Человек отправляет задачу в браузере, проект берётся из GitHub, Claude Code и копия проекта работают на сервере внутри облака Anthropic"></div>
+              <p class="route-card-copy">После запуска компьютер можно выключить: облачная задача продолжит выполняться. Свой сервер не нужен</p>
+              <a class="route-card-link" href="#oblako">Claude Code в облаке Anthropic</a>
+            </article>
+            <article class="route-card">
+              <p class="route-kicker">Через свой сервер</p>
+              <h3>Проект и Claude Code работают на твоём VPS</h3>
+              <div class="shot route-illustration-wrap"><img class="route-illustration" src="assets/route-vps.png" alt="Человек открывает claude.ai/code в браузере, файлы проекта, Claude Code и Remote Control находятся на своём VPS, модель Claude отдельно в облаке Anthropic"></div>
+              <p class="route-card-copy">Сервер продолжает работу после выключения компьютера, а сессию можно открыть с телефона. GitHub для этого способа не обязателен. Сообщения между телефоном и сервером проходят через сервис Anthropic, файлы и команды остаются на сервере</p>
+              <a class="route-card-link" href="#claude-code-na-servere">Claude Code на своём VPS и работа с телефона</a>
+            </article>
+          </div>
+          <p class="minor">Если ты просто пишешь в обычном чате claude.ai, отдельного «подключения к облаку» нет: это тот же аккаунт, а файлы добавляются в чат вручную. Три способа выше относятся к Claude Code, который работает с папкой проекта и меняет её файлы</p>
+        </section>
+
+        <section class="content-section" id="skolko-stoit">
           <p class="section-label">Глава 3</p>
-          <h2>Что понадобится и сколько стоит</h2>
-          <p class="purpose">Сначала выбери маршрут, затем собирай покупки. Для пути А достаточно сервера и приложения VPN. Для пути Б дополнительно нужны вторая, отдельная установка Claude Code прямо на сервере (не та, что уже может стоять у тебя на компьютере), домен и защищённая веб-панель</p>
-          <p>Здесь легко перепутать три разные оплаты. VPS оплачивает работу удалённого компьютера. Домен оплачивает его короткий адрес. Тариф Claude или расход API оплачивает работу самой модели. Одна покупка не включает две другие</p>
-          <ol class="requirements">
-            <li><b>Для обоих путей: европейский VPS на Ubuntu.</b> AmneziaVPN официально поддерживает Ubuntu 22.04 или 24.04 на KVM-сервере с публичным IPv4 и архитектурой x86-64. Если допускаешь переход к пути Б, сразу выбирай не меньше 4 ГБ памяти, как требует Claude Code</li>
-            <li><b>Для пути А: приложение AmneziaVPN и аккаунт Claude.</b> AmneziaVPN устанавливает VPN на твой VPS и подключает к нему компьютер или телефон. Дальше через этот же VPN работает любой продукт Claude на этом устройстве - и claude.ai в браузере, и Claude Code в VS Code или терминале. Оплата сервера не включает Claude: ты продолжаешь пользоваться тем бесплатным или платным тарифом, который доступен твоему аккаунту</li>
-            <li><b>Для пути Б: аккаунт с доступом к Claude Code.</b> CloudCLI даёт только браузерный интерфейс. Доступ к Claude Code оплачивается отдельно через подходящую подписку Claude или через API-биллинг, если выбран этот способ работы</li>
-            <li><b>Для пути Б: домен.</b> Домен можно найти примерно от 179 рублей за первый год, но итоговая цена зависит от доменной зоны, регистратора, акции при покупке и стоимости продления</li>
-            <li><b>Для первого входа в Claude Code: работающий VPN.</b> Он понадобится на устройстве, где откроется ссылка авторизации. При повторном входе может понадобиться снова</li>
-          </ol>
-          <h3>Из чего складывается цена сервера</h3>
-          <p>Стоимость зависит от хостинга, страны размещения, количества памяти и процессоров, объёма диска, включённого трафика и публичного IPv4. Timeweb можно оплатить российской картой. Hetzner часто предлагает более низкую цену, но для оплаты нужна зарубежная карта. VDSina - ещё один вариант с минимальным тарифом около $2,10 в месяц и включённым 1 ТБ трафика. Для пути Б сравнивай конфигурации с 4 ГБ памяти, европейской локацией и публичным IPv4. Для пути А проверяй KVM, x86-64 и публичный IPv4</p>
+          <h2>Сколько стоит каждый способ</h2>
+          <p class="purpose">Здесь легко перепутать две разные оплаты. Аренда VPS оплачивает работу удалённого компьютера, подписка Claude оплачивает работу самой модели. Одна покупка не включает другую</p>
+          <div class="cost-table-wrap">
+            <table class="cost-table">
+              <thead>
+                <tr><th scope="col">За что платишь</th><th scope="col">На компьютере</th><th scope="col">В облаке Anthropic</th><th scope="col">На своём VPS</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Claude Code</th><td><strong>$20/мес</strong><span>Claude Pro</span></td><td><strong>$20/мес</strong><span>Claude Pro</span></td><td><strong>$20/мес</strong><span>Claude Pro</span></td></tr>
+                <tr><th scope="row">Где работает проект</th><td><strong>Без новой аренды</strong><span>на твоём компьютере</span></td><td><strong>Включено</strong><span>сервер Anthropic входит в облачную сессию</span></td><td><strong>$20,10/мес</strong><span>VPS с 4 ГБ памяти, пример VDSina</span></td></tr>
+                <tr><th scope="row">Работа с телефона</th><td><strong>Входит в подписку</strong><span>Remote Control, пока компьютер включён</span></td><td><strong>Входит в подписку</strong><span>claude.ai/code и приложение Claude</span></td><td><strong>Входит в подписку</strong><span>Remote Control, сервер работает круглосуточно</span></td></tr>
+                <tr><th scope="row">GitHub</th><td><strong>Не обязателен</strong><span>можно хранить резервную копию проекта</span></td><td><strong>Бесплатно</strong><span>GitHub Free; нужен для запуска через сайт</span></td><td><strong>Не обязателен</strong><span>можно хранить резервную копию проекта</span></td></tr>
+                <tr><th scope="row">Личный VPN на VPS</th><td><strong>По желанию</strong><span>AmneziaVPN бесплатно, VPS с 1 ГБ - $2,10/мес</span></td><td><strong>По желанию</strong><span>та же отдельная трата, если нужен свой VPN</span></td><td><strong>Без доплаты</strong><span>VPN помещается на тот же VPS</span></td></tr>
+                <tr class="cost-table-total"><th scope="row">Итого без личного VPN</th><td><strong>$20/мес</strong></td><td><strong>$20/мес</strong></td><td><strong>$40,10/мес</strong><span>$20 за Pro и $20,10 за VPS</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cost-table-scroll">На телефоне проведи по таблице в сторону, чтобы увидеть все три способа</p>
+          <p class="cost-table-note">Цены на 29 сентября 2026 года. Claude Pro стоит <a href="https://claude.com/pricing">$20 при оплате за месяц</a>; годовая оплата, налоги и дополнительные лимиты меняют итог. Для VPS взяты <a href="https://vdsina.com/pricing/standard">стандартные тарифы VDSina</a> в Амстердаме: 1 ГБ памяти за $2,10 для личного VPN и 4 ГБ за $20,10 для Claude Code, которому <a href="https://code.claude.com/docs/en/setup">нужно не меньше 4 ГБ памяти</a>. Это примеры, а не единая цена любого хостинга</p>
+          <p class="cost-table-note">На компьютере Claude Code можно оплачивать и через API по фактическому расходу. Для работы с телефона через Remote Control нужна подписка Pro или Max: <a href="https://code.claude.com/docs/en/remote-control">API-ключ он не поддерживает</a>. Облачные сессии тоже работают по подписке. Дешёвые VPS за пару долларов подходят только для личного VPN</p>
+          <figure class="cover"><img src="assets/seredina-scena.webp" width="1600" height="900" alt="VPN-сервер пропускает соединение к Claude, рабочий VPS размещает отдельную среду Claude Code" loading="lazy" decoding="async"></figure>
         </section>
 
         <p class="partner-line">Прочитать схему проще, чем впервые настроить сервер. В ИИ-Лагере можно пройти этот маршрут на своём экране: выбрать способ доступа, подключить сервер и довести Claude Code до рабочего проекта. Первые три дня бесплатные - <a data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">посмотреть практикум</a></p>
@@ -456,189 +522,306 @@
         <section class="content-section" id="arendovat-server">
           <p class="section-label">Глава 4</p>
           <h2>Шаг 1. Арендовать сервер</h2>
-          <p class="purpose">Аренда сервера одинакова для обоих маршрутов. После получения IP путь А остаётся в приложении VPN, а путь Б продолжается в терминале сервера</p>
+          <p class="purpose">Если взять самый дешёвый сервер без нужной системы или внешнего адреса, AmneziaVPN не сможет на нём развернуться. Цель шага - работающая машина с закреплённым адресом и без переплаты за мощность, которая не нужна</p>
           <div class="step">
-            <h3>Выбери хостинг и создай VPS</h3>
-            <p>На Timeweb ищи облачные серверы. На Hetzner нужен Cloud Server. На VDSina - обычный VPS/VDS, не Hi-CPU. Названия кнопок и состав тарифов меняются, поэтому ориентируйся на параметры, а не на цвет карточки</p>
+            <h3>Сверь параметры до оплаты</h3>
+            <ul class="requirements-list">
+              <li><b>Только для личного VPN:</b> KVM, внешний IPv4, доступ по SSH, Ubuntu 22.04 или 24.04, от 1 ГБ памяти и 10 ГБ диска. Это <a href="https://docs.amnezia.org/documentation/supported-linux-os-for-vps/">требования AmneziaVPN</a></li>
+              <li><b>Для Claude Code на сервере:</b> от 4 ГБ памяти, Ubuntu 20.04 или новее, процессор x64 или ARM64. Это <a href="https://code.claude.com/docs/en/setup">требования Anthropic</a>. Если позже захочешь держать на одном сервере и VPN, и Claude Code, сразу бери 4 ГБ и архитектуру x86-64</li>
+              <li><b>Страна сервера:</b> не Россия. Нидерланды и Германия есть в <a href="https://www.anthropic.com/supported-countries">списке стран, где Claude работает официально</a></li>
+            </ul>
+          </div>
+          <div class="step">
+            <h3>Создай сервер на VDSina</h3>
+            <p>Регистрируйся на <span class="path">vdsina.com</span>, именно .com, а не .ru: у vdsina.ru только московские серверы, и с российским адресом смысл пропадает</p>
+            <ol class="requirements">
+              <li>Заведи аккаунт. Понадобится только почта, пароль от кабинета придёт письмом</li>
+              <li>Пополни баланс: раздел «Финансы» → «Пополнить баланс». Минимальная сумма для зарубежной карты, российской карты и криптовалюты разная, панель показывает её сама. Деньги списываются посуточно</li>
+              <li>Открой раздел «Тарифы и услуги» → «Стандартные VPS/VDS серверы». Соседние разделы Hi-CPU и «Серверы с GPU» стоят в десятки раз дороже и для этой задачи не нужны. Видишь трёхзначную цену - значит, открыт не тот раздел</li>
+              <li>Выбери тариф: 1 ГБ для личного VPN или 4 ГБ, если на сервере будет работать Claude Code</li>
+              <li>Локация - Амстердам, система - Ubuntu 22.04. Если ровно этой версии нет, бери 24.04</li>
+              <li>Закажи сервер. Через несколько минут придёт письмо «Создан новый сервер», то же сообщение появится в панели: «Поддержка» → «Тикеты»</li>
+            </ol>
+            <div class="prompt-box no-copy">
+              <pre>IP-адрес:     203.0.113.10
+Пользователь: root
+Пароль:       пароль_из_письма</pre>
+            </div>
+            <p class="minor">Так выглядят три главные строки письма. Цифры выше - пример, у тебя будут свои</p>
             <aside class="notice">
-              <p class="notice-title">Провайдер не принципиален</p>
-              <p>Привык к Timeweb - панель timeweb.cloud, раздел «Облачные серверы», кнопка «Добавить», ОС Ubuntu, регион Нидерланды или Германия, минимальный тариф, «Заказать». IP и пароль root покажет вкладка «Дашборд» созданного сервера. Уже арендуешь сервер не в России - используй его, ничего нового покупать не нужно. Подойдёт любой провайдер, если совпали три условия: сервер не в России, цена устраивает и провайдеру ты доверяешь. За самыми дешёвыми не гонись - такие серверы постоянно отваливаются, иногда на целые дни</p>
+              <p class="notice-title">Удобнее другой хостинг - можно и там</p>
+              <p>В Timeweb: панель timeweb.cloud → «Облачные серверы» → «Добавить» → ОС Ubuntu → регион Нидерланды или Германия → тариф → «Заказать». IP и пароль root покажет вкладка «Дашборд» созданного сервера. Уже арендуешь сервер не в России - используй его. Подойдёт любой провайдер, если сервер не в России, цена устраивает и провайдеру ты доверяешь. За самыми дешёвыми не гонись: такие серверы отваливаются, иногда на целые дни</p>
             </aside>
           </div>
           <div class="step">
             <h3>Сохрани данные доступа</h3>
-            <p>После создания хостинг покажет IP-адрес, имя пользователя и способ входа: пароль или SSH-ключ. Сохрани их в менеджере паролей. Не отправляй пароль в переписку и не клади его в открытую папку проекта</p>
-            <p><b>[НУЖНА ПРОВЕРКА]</b> Уточнить на реальном аккаунте, где Timeweb и Hetzner показывают пользователя, IP и кнопку подключения</p>
+            <p>IP, имя пользователя и пароль сохрани в менеджере паролей. Пароль администратора даёт управление всей машиной: не отправляй его в переписку и не клади в папку проекта. Если потерять IP или пароль, установка остановится на первом же экране</p>
             <div class="result"><p><b>Результат:</b> сервер запущен, у тебя есть его IP и безопасно сохранённый доступ</p></div>
           </div>
+        </section>
+
+        <section class="content-section" id="svoy-vpn">
+          <p class="section-label">Глава 5</p>
+          <h2>Шаг 2. Свой VPN через AmneziaVPN</h2>
+          <p class="purpose">AmneziaVPN - бесплатное приложение с открытым кодом. Оно само заходит на арендованный сервер и устанавливает на нём VPN, команды в терминале набирать не нужно</p>
           <div class="step">
-            <p class="choice-label">Путь А</p>
-            <h3>Поставь свой VPN через AmneziaVPN</h3>
-            <p>Установи свежую версию AmneziaVPN на компьютер или телефон. Добавь подключение, выбери Self-hosted VPN, введи IP, SSH-пользователя и пароль или ключ от VPS. В автоматическом режиме приложение установит AmneziaWG и создаст готовое подключение без ручных команд в терминале</p>
+            <h3>Установи приложение</h3>
+            <ul class="requirements-list">
+              <li><b>iPhone и iPad:</b> App Store, приложение «AmneziaVPN». Нужен iOS 17 или новее</li>
+              <li><b>Android:</b> Google Play, приложение «Amnezia VPN»</li>
+              <li><b>Windows и Mac:</b> страница <a href="https://github.com/amnezia-vpn/amnezia-client/releases">релизов AmneziaVPN на GitHub</a>. Открой верхний релиз, разверни блок «Assets» и скачай файл, который оканчивается на <span class="path">x64.exe</span> для Windows или <span class="path">macos.pkg</span> для Mac</li>
+            </ul>
+          </div>
+          <div class="step">
+            <h3>Подключи свой сервер</h3>
+            <ol class="requirements">
+              <li>Открой AmneziaVPN и нажми «Приступим». Если приложение уже открывалось раньше, нажми плюс</li>
+              <li>Внизу, в блоке «Другие варианты подключения», выбери «Self-hosted VPN» с подписью «Настроить VPN на собственном сервере»</li>
+              <li>На экране «Настроить ваш сервер» заполни три поля из письма хостинга: IP-адрес сервера, имя пользователя SSH (обычно root) и пароль. Пароль вставляй копированием, не перепечатывай. Нажми «Продолжить»</li>
+              <li>На экране «Выберите тип установки» нажми «Автоматическая». Приложение установит протокол AmneziaWG</li>
+              <li>Дождись конца установки: на экране будет надпись «Обычно это занимает не более 5 минут»</li>
+              <li>Нажми большую кнопку «Подключиться» на главном экране</li>
+            </ol>
             <figure>
               <div class="shot"><img src="assets/amnezia-self-hosted-forma.png" alt="Три экрана AmneziaVPN: кнопка добавления соединения, пункт Self-hosted VPN и форма Configure your server с полями IP-адреса, SSH Username и пароля"></div>
-              <figcaption>Путь до формы в AmneziaVPN: кнопка «+» → «Self-hosted VPN» → «Configure your server» с полями IP-адреса, SSH-пользователя и пароля. Официальный кадр из <a href="https://docs.amnezia.org/documentation/instructions/install-vpn-on-server" target="_blank" rel="noopener">документации Amnezia</a></figcaption>
+              <figcaption>Путь до формы: плюс → «Self-hosted VPN» → поля IP-адреса, SSH-пользователя и пароля. Кадр из <a href="https://docs.amnezia.org/documentation/instructions/install-vpn-on-server/" target="_blank" rel="noopener">документации Amnezia</a> на английском, в русской версии приложения подписи другие, порядок тот же. Пример IP на снимке не подходит для твоего подключения</figcaption>
             </figure>
-            <p class="minor">Кадр выше - из англоязычной документации Amnezia. Если у тебя приложение на русском, названия кнопок и полей могут звучать чуть иначе при дословном переводе - расположение и порядок шагов останутся теми же</p>
-            <p>После подключения проверь внешний IP и открой Claude на своём устройстве. Claude, VS Code и проекты остаются на этом устройстве. Домен, CloudCLI и установка Claude Code на VPS для пути А не нужны</p>
-            <div class="result"><p><b>Путь А завершён:</b> твой компьютер выходит в интернет через личный европейский VPN. Если нужен постоянно работающий Claude Code, переходи к пути Б</p></div>
           </div>
-        </section>
-
-        <section class="content-section" id="podklyuchit-domen">
-          <p class="section-label">Глава 5</p>
-          <h2>Шаг 2. Подключить домен</h2>
-          <p class="purpose">Этот и следующие два шага относятся к пути Б. Цифры IP неудобно запоминать, а открывать рабочую панель без HTTPS опасно</p>
-          <aside class="route-note">
-            <p class="notice-title">На пути А эту главу можно пропустить</p>
-            <p>Свой VPN подключается к IP сервера. Домен понадобится только если ты переходишь к CloudCLI или размещаешь на VPS другой веб-сервис</p>
-          </aside>
           <div class="step">
-            <h3>Создай A-запись</h3>
-            <p>Открой управление DNS у регистратора домена. Создай A-запись для выбранного поддомена и направь её на IP нового сервера. Не добавляй в поле IP протокол, порт или путь</p>
+            <h3>Проверь два разных результата</h3>
+            <p>Надпись «Подключено» ещё не доказывает, что и браузер, и Claude Code идут через твой сервер. Проверь каждый путь отдельно</p>
+            <p><b>Браузер.</b> Открой <span class="path">2ip.ru</span>. Страна должна смениться на страну сервера, а IP совпасть с IP сервера. Запиши сами цифры адреса</p>
+            <p><b>Терминал, если пользуешься Claude Code.</b> В том же терминале, где запускаешь Claude Code, выполни команду:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="check-ip">Скопировать</button>
+              <pre id="check-ip">curl -4 https://api.ipify.org</pre>
+            </div>
+            <p>Команда должна вернуть тот же IP сервера. Проверка в браузере не доказывает, каким путём идёт программа в терминале</p>
+            <p><b>Через день-два.</b> Снова открой <span class="path">2ip.ru</span> и сравни цифры с записанными. У своего сервера адрес один и не меняется. Если цифры поехали, где-то подмешался старый VPN: отключи его и заходи только через свой сервер</p>
+          </div>
+          <div class="step">
+            <h3>Настрой защиту от обрыва</h3>
+            <p>VPN иногда отваливается сам, а иногда его просто забываешь включить. Тогда запросы уходят с обычного адреса. Способ защиты зависит от устройства</p>
+            <ul class="requirements-list">
+              <li><b>Windows, macOS, Linux:</b> в AmneziaVPN шестерёнка снизу → «Соединение» → «KillSwitch», включи верхний переключатель. Если VPN оборвётся, приложение заблокирует обычное подключение к интернету. Затем вернись в настройки → «Приложение» и включи «Автозапуск» и «Автоподключение»: первое открывает программу при включении компьютера, второе сразу поднимает VPN</li>
+              <li><b>Android:</b> в AmneziaVPN такого переключателя нет. Подключись к серверу в приложении, затем открой системные настройки Android → VPN → AmneziaVPN и включи «Постоянная VPN» и «Блокировать соединения без VPN». Названия пунктов могут отличаться на разных телефонах</li>
+              <li><b>iPhone и iPad:</b> переключателя KillSwitch в AmneziaVPN нет. После сбоя связи проверь, что VPN снова подключён, прежде чем продолжать работу</li>
+            </ul>
+            <p class="minor">Подробности по устройствам - в <a href="https://docs.amnezia.org/ru/documentation/instructions/killswitch/">официальной инструкции Amnezia</a></p>
+          </div>
+          <div class="step">
+            <h3>Подключи другие свои устройства и семью</h3>
+            <p>Пароль администратора никому не раздают. Для этого есть гостевой доступ: в AmneziaVPN нажми «Поделиться» в нижней панели и выбери «Поделиться доступом к VPN без возможности управления сервером». Задай имя, выбери сервер и протокол, приложение выдаст QR-код или ключ</p>
+            <p>Человек ставит AmneziaVPN, нажимает «Приступим» и сканирует QR-код или вставляет ключ. Такой ключ не даёт управлять сервером, а во вкладке «Пользователи» его можно отозвать. Вариант «Поделиться полным доступом к серверу и VPN» оставь только для собственных устройств: по <a href="https://docs.amnezia.org/ru/documentation/instructions/amnezia-hosting-sharing/">инструкции Amnezia</a> отозвать его невозможно</p>
             <aside class="notice">
-              <p class="notice-title">Форма у каждого регистратора своя, поля - одни и те же</p>
-              <p>Внешний вид панели отличается у Timeweb, reg.ru, Cloudflare и остальных, но набор полей везде один: тип записи (выбери A), имя или поддомен, значение - сюда идёт голый IP сервера без http, https и слэшей. Сохрани и подожди обновления, как описано ниже</p>
+              <p class="notice-title">Гостевой ключ делится интернетом, а не аккаунтом Claude</p>
+              <p>Ключ даёт устройству сетевое подключение, но не передаёт подписку и не меняет условия личного аккаунта. У каждого человека должен быть свой аккаунт Claude. Один аккаунт, в который заходят разные люди из разных мест, - первый повод для проверки со стороны сервиса</p>
             </aside>
-          </div>
-          <div class="step">
-            <h3>Дождись обновления DNS</h3>
-            <p>Запись может появиться не сразу. Проверяй, что выбранный адрес уже возвращает IP сервера, и только потом настраивай HTTPS</p>
-            <p><b>[НУЖНА ПРОВЕРКА]</b> Проверить домен Жанны после создания записи и зафиксировать реальное время обновления</p>
-            <div class="result"><p><b>Результат:</b> доменное имя указывает на IP сервера</p></div>
+            <div class="result"><p><b>Результат:</b> твои устройства выходят в интернет через личный VPN, адрес одинаковый в браузере и в терминале. Если нужно только это, настройка закончена. Если нужен Claude Code, который работает без твоего компьютера, читай дальше</p></div>
           </div>
         </section>
 
-        <section class="content-section" id="postavit-claude-code">
+        <section class="content-section" id="oblako">
           <p class="section-label">Глава 6</p>
-          <h2>Шаг 3. Поставить Claude Code</h2>
-          <p class="purpose">Путь Б продолжается здесь. Сервер уже работает, но Claude на нём ещё нет. Подключись через терминал и установи официальный Claude Code</p>
+          <h2>Claude Code в облаке Anthropic</h2>
+          <p class="purpose">Задача должна продолжаться после закрытия ноутбука, а результат хочется проверить с телефона. Облачная сессия Anthropic решает это без аренды сервера. Цена удобства: проект нужно положить в GitHub, а твои локальные настройки в облако не переезжают</p>
+          <p>По <a href="https://code.claude.com/docs/en/web-quickstart">инструкции Anthropic</a> облачные сессии доступны на Pro, Max, Team и отдельных местах Enterprise. Сессия работает в отдельной облачной среде и продолжается, когда ноутбук закрыт</p>
           <div class="step">
-            <h3>Установи Claude Code</h3>
-            <p>На Ubuntu Anthropic рекомендует нативный установщик. Скопируй команду целиком и выполни её на сервере</p>
+            <h3>Положи проект в GitHub</h3>
+            <p>Если проект пока только на компьютере, открой GitHub, создай закрытый репозиторий, затем через Add file → Upload files перетащи в него папку проекта и нажми Commit changes. Это <a href="https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository">официальный способ загрузки через браузер</a>. Для большого проекта или уже настроенного Git есть <a href="https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github">инструкция GitHub по переносу репозитория</a></p>
+            <p>До загрузки убери из проекта пароли, токены и личные данные, которые не нужны облачной задаче</p>
+          </div>
+          <div class="step">
+            <h3>Запусти задачу</h3>
+            <ol class="requirements">
+              <li>Открой <a href="https://claude.ai/code">claude.ai/code</a> и войди в свой аккаунт Claude</li>
+              <li>При первом запуске подключи GitHub по предложению страницы. Разреши доступ к нужному репозиторию; для закрытого репозитория проверь, что Claude GitHub App установлен именно на него</li>
+              <li>Если страница предлагает создать облачную среду Default, пройди этот шаг. На Pro и Max среда обычно создаётся при первом подключении</li>
+              <li>Под полем запроса выбери репозиторий и ветку, напиши задачу и отправь. Claude скопирует проект, создаст свою ветку и покажет ход работы</li>
+              <li>Открой список изменений и проверь каждый файл. Если результат подходит, создай запрос на включение изменений в основную ветку (pull request) или перенеси файлы в свой проект</li>
+            </ol>
+          </div>
+          <div class="step">
+            <h3>Запуск из терминала</h3>
+            <p>Если Claude Code уже установлен, а папка проекта - Git-репозиторий хотя бы с одним сохранённым коммитом, облачную сессию можно запустить из терминала. Выполни в папке проекта:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="claude-cloud">Скопировать</button>
+              <pre id="claude-cloud">claude --cloud</pre>
+            </div>
+            <p>Если у репозитория нет адреса на GitHub, программа может <a href="https://code.claude.com/docs/en/claude-code-on-the-web">загрузить локальный репозиторий прямо в облачную сессию</a>. Файлы вне Git и прежний локальный разговор сами не переезжают</p>
+            <div class="result"><p><b>Результат:</b> задача и изменённые файлы доступны в облачной сессии с любого устройства. Свой сервер и AmneziaVPN для этого способа не нужны</p></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="claude-code-na-servere">
+          <p class="section-label">Глава 7</p>
+          <h2>Claude Code на своём VPS и работа с телефона</h2>
+          <p class="purpose">Хочется, чтобы Claude Code работал круглосуточно и с твоими файлами, без GitHub и без включённого ноутбука, а управлять им можно было с телефона. Тогда Claude Code переезжает на сервер, а телефон подключается к нему через Remote Control - официальную функцию Anthropic</p>
+          <p>Что понадобится: сервер с 4 ГБ памяти из первого шага и подписка Pro или Max. API-ключ для Remote Control <a href="https://code.claude.com/docs/en/remote-control">не подходит</a></p>
+          <div class="step">
+            <h3>Перенеси проект на сервер</h3>
+            <p>Открой терминал на своём компьютере. Замени путь к папке, имя пользователя и IP сервера на свои значения и выполни один из двух вариантов</p>
+            <p class="command-caption">Если вход на сервер по паролю:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="scp-password">Скопировать</button>
+              <pre id="scp-password">scp -r "/полный/путь/к/проекту" root@IP_СЕРВЕРА:~/</pre>
+            </div>
+            <p class="command-caption">Если вход по SSH-ключу:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="scp-key">Скопировать</button>
+              <pre id="scp-key">scp -i "/путь/к/ключу" -r "/полный/путь/к/проекту" root@IP_СЕРВЕРА:~/</pre>
+            </div>
+            <p>Затем подключись к серверу той же командой, выбрав свой вариант входа:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="ssh-login">Скопировать</button>
+              <pre id="ssh-login">ssh root@IP_СЕРВЕРА</pre>
+            </div>
+            <p class="minor">По ключу: <span class="path">ssh -i "/путь/к/ключу" root@IP_СЕРВЕРА</span>. Если проект уже лежит в GitHub, вместо копирования его можно склонировать прямо на сервере</p>
+            <p>В терминале сервера проверь, что папка появилась:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="ls-home">Скопировать</button>
+              <pre id="ls-home">ls -la ~</pre>
+            </div>
+          </div>
+          <div class="step">
+            <h3>Установи Claude Code на сервере</h3>
+            <p>В терминале сервера выполни официальный установщик, затем проверь версию:</p>
             <div class="prompt-box">
               <button class="copy-button" type="button" data-copy-target="install-claude">Скопировать</button>
-              <pre id="install-claude">curl -fsSL https://claude.ai/install.sh | bash
-claude --version</pre>
+              <pre id="install-claude">curl -fsSL https://claude.ai/install.sh | bash</pre>
             </div>
-            <p class="minor">Если команда завершилась ошибкой 403 или curl вернул HTML вместо установщика, не повторяй её вслепую. Открой раздел ошибок ниже</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="claude-version">Скопировать</button>
+              <pre id="claude-version">claude --version</pre>
+            </div>
+            <p>Появился номер версии - установка прошла. Если терминал пишет, что команда <span class="path">claude</span> не найдена, открой новое подключение к серверу и повтори проверку. При ошибке <span class="path">403</span> или другой ошибке curl не повторяй команду вслепую: сверь её текст с <a href="https://code.claude.com/docs/en/troubleshoot-install">разбором ошибок установки</a></p>
           </div>
           <div class="step">
             <h3>Войди в аккаунт</h3>
-            <p>Запусти команду <span class="path">claude</span>. Claude Code покажет способ авторизации. Включи VPN на своём телефоне или компьютере, открой выданную ссылку, войди в свой аккаунт и вернись в терминал</p>
-            <figure>
-              <div class="shot portrait"><img src="assets/cloudcli-vybor-assistenta.png" alt="Экран CloudCLI «Choose Your AI Assistant» с выбранным Claude Code и полем выбора модели Opus"></div>
-              <figcaption>Так выглядит CloudCLI сразу после установки: подтверждает, что Claude Code на сервере работает, и даёт выбрать модель. Кадр из открытого проекта <a href="https://github.com/siteboon/claudecodeui" target="_blank" rel="noopener">claudecodeui</a>, у тебя экран будет тем же</figcaption>
-            </figure>
-            <aside class="notice">
-              <p class="notice-title">VPN может понадобиться снова</p>
-              <p>Для обычной работы через защищённый адрес сервера он не нужен, но при выходе из аккаунта или повторной авторизации может понадобиться снова</p>
-            </aside>
-            <div class="result"><p><b>Результат:</b> команда claude открывает рабочую сессию на сервере</p></div>
+            <p>Перейди в папку проекта и запусти Claude Code:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="cd-claude">Скопировать</button>
+              <pre id="cd-claude">cd ~/ИМЯ_ПАПКИ_ПРОЕКТА
+claude</pre>
+            </div>
+            <ol class="requirements">
+              <li>Выбери вход через подписку Claude. На сервере браузер не откроется сам: нажми клавишу <span class="path">c</span>, чтобы скопировать ссылку для входа</li>
+              <li>Открой ссылку на телефоне или компьютере с включённым VPN и войди в свой аккаунт</li>
+              <li>Если браузер покажет код, вставь его в терминал сервера в строку <span class="path">Paste code here if prompted</span></li>
+              <li>Терминал напишет <span class="path">Login successful</span>. Нажми Enter</li>
+              <li>Claude Code спросит, доверяешь ли ты этой папке. Подтверди: без этого Remote Control из папки не запустится</li>
+            </ol>
+            <p class="minor">Так вход устроен по <a href="https://code.claude.com/docs/en/authentication">официальной инструкции Anthropic</a> для подключения по SSH. Выйди из Claude Code командой <span class="path">/exit</span>: дальше его запустит Remote Control</p>
           </div>
+          <div class="step">
+            <h3>Запусти Remote Control так, чтобы он не выключился вместе с терминалом</h3>
+            <p>Если закрыть окно SSH, Claude Code на сервере остановится. Чтобы он продолжал работать, Anthropic <a href="https://code.claude.com/docs/en/remote-control">советует</a> запускать его внутри программы <span class="path">tmux</span>: она держит сессию на сервере открытой, даже после отключения. В Ubuntu tmux обычно уже установлен</p>
+            <p class="command-caption">1. Открой постоянную сессию tmux:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="tmux-new">Скопировать</button>
+              <pre id="tmux-new">tmux new -s claude</pre>
+            </div>
+            <p class="minor">Если сервер ответил, что команда не найдена, установи её: <span class="path">sudo apt install tmux</span></p>
+            <p class="command-caption">2. Внутри неё перейди в папку проекта и запусти Remote Control:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="rc-start">Скопировать</button>
+              <pre id="rc-start">cd ~/ИМЯ_ПАПКИ_ПРОЕКТА
+claude remote-control</pre>
+            </div>
+            <p>При первом запуске программа спросит <span class="path">Enable Remote Control? (y/n)</span>. Нажми <span class="path">y</span>. На экране появится ссылка на сессию, а по нажатию пробела - QR-код</p>
+            <p class="command-caption">3. Отключись от tmux, не останавливая Claude Code: нажми Ctrl+B, отпусти, затем нажми D. Вернуться позже:</p>
+            <div class="prompt-box">
+              <button class="copy-button" type="button" data-copy-target="tmux-attach">Скопировать</button>
+              <pre id="tmux-attach">tmux attach -t claude</pre>
+            </div>
+          </div>
+          <div class="step">
+            <h3>Открой сессию с телефона</h3>
+            <ul class="requirements-list">
+              <li><b>Сканируй QR-код</b> из терминала сервера: сессия откроется в приложении Claude</li>
+              <li><b>Или открой приложение Claude</b>, нажми Code в навигации и найди сессию в списке. Сессия на сервере отмечена значком компьютера с зелёной точкой</li>
+              <li><b>С компьютера</b> та же сессия открывается на <a href="https://claude.ai/code">claude.ai/code</a></li>
+            </ul>
+            <aside class="notice">
+              <p class="notice-title">Телефон тоже подключи через свой VPN</p>
+              <p>Claude Code на сервере обращается к Anthropic с адреса сервера. Но приложение Claude на телефоне заходит в сервис само, со своего подключения. Подключи телефон к AmneziaVPN на том же сервере, и Anthropic будет видеть один и тот же адрес и у сервера, и у телефона</p>
+            </aside>
+            <div class="result"><p><b>Результат:</b> проект и Claude Code работают на сервере, а ты отправляешь задачи и смотришь изменения с телефона или любого браузера. Ноутбук можно закрыть</p></div>
+          </div>
+          <div class="step">
+            <h3>Что важно знать про Remote Control</h3>
+            <ul class="requirements-list">
+              <li><b>Сессия живёт, пока работает Claude Code на сервере.</b> После перезагрузки сервера зайди по SSH и снова выполни команды из пункта про tmux</li>
+              <li><b>Долгий обрыв сети на сервере.</b> Примерно через 10 минут без связи режим <span class="path">claude remote-control</span> завершается. Запусти его снова</li>
+              <li><b>Вход в аккаунт истекает.</b> За три дня до этого Claude Code предупредит сообщением <span class="path">Your login expires in 3 days</span>. Зайди в tmux, останови Remote Control клавишами Ctrl+C, запусти <span class="path">claude</span>, выполни <span class="path">/login</span>, выйди командой <span class="path">/exit</span> и снова запусти <span class="path">claude remote-control</span>. Иначе после окончания срока сессия перестанет работать</li>
+              <li><b>Переписка сессии хранится у Anthropic,</b> чтобы синхронизироваться между устройствами. Файлы и команды остаются на твоём сервере</li>
+            </ul>
+            <p class="minor">Для удобной работы с файлами проекта к тому же серверу можно подключить VS Code по SSH. Это отдельный, необязательный способ, Remote Control от него не зависит</p>
+          </div>
+          <aside class="notice cloudcli-note">
+            <p class="notice-title">А как же CloudCLI?</p>
+            <p>В сети обсуждают ещё один способ открыть Claude Code на сервере с телефона - веб-панель CloudCLI. Её советуют как путь, при котором Anthropic видит только адрес сервера: телефон общается с твоим сервером, а не с Anthropic напрямую. У этого способа серьёзные минусы:</p>
+            <ul class="requirements-list">
+              <li><b>Это не программа Anthropic,</b> а сторонняя бесплатная программа</li>
+              <li><b>Своего входа по паролю у неё нет</b> - это прямо написано в её <a href="https://cloudcli.ai/docs/installation/remote-server">документации</a>. Нужно отдельно настраивать домен, защищённое соединение HTTPS, пароль и закрытый порт. Ошибка в настройке открывает постороннему доступ к твоему серверу и проектам</li>
+              <li><b>От блокировки она не защищает,</b> как и Remote Control: Anthropic не обещает, что какой-то из этих способов снижает риск</li>
+            </ul>
+            <p>Один адрес для Anthropic можно получить проще: работай через официальный Remote Control и подключи телефон к AmneziaVPN на том же сервере, как описано выше</p>
+          </aside>
           <aside class="notice">
             <p class="notice-title">Не держи единственную копию проекта на сервере</p>
-            <p>Сервер сам по себе не опаснее компьютера, но правило то же: единственная копия где угодно - это риск. Провайдер может заблокировать доступ, сервер может выйти из строя, пароль может потеряться. Заведи для каждого проекта Git-репозиторий (GitHub, GitLab) - тогда сервер остаётся рабочим местом, а настоящий архив хранится отдельно и переживёт любые проблемы с самим VPS</p>
+            <p>Правило то же, что для компьютера: единственная копия где угодно - это риск. Провайдер может заблокировать доступ, сервер может выйти из строя, пароль может потеряться. Заведи для проекта закрытый Git-репозиторий - тогда сервер остаётся рабочим местом, а архив хранится отдельно</p>
           </aside>
-        </section>
-
-        <section class="content-section" id="cloudcli">
-          <p class="section-label">Глава 7</p>
-          <h2>Шаг 4. Веб-доступ через CloudCLI</h2>
-          <p class="purpose">Финальный шаг пути Б добавляет браузерный интерфейс к Claude Code. Те же проекты затем можно открыть в VS Code по SSH</p>
-          <div class="step">
-            <h3>Проверь Node.js и установи CloudCLI</h3>
-            <p>CloudCLI требует Node.js 22 или новее - это отдельная программа для запуска таких веб-сервисов, без неё CloudCLI просто не запустится. После проверки версии установи официальный пакет веб-интерфейса</p>
-            <div class="prompt-box">
-              <button class="copy-button" type="button" data-copy-target="install-cloudcli">Скопировать</button>
-              <pre id="install-cloudcli">node --version
-npm install -g @siteboon/claude-code-ui</pre>
-            </div>
-            <p class="minor">Если Node.js не установлен или версия ниже 22, сначала поставь Node.js 22 из официального источника. Команду установки под конкретный образ сервера нужно проверить на живом VPS</p>
-          </div>
-          <div class="step">
-            <h3>Дай Claude готовое задание</h3>
-            <p>Самая сложная часть здесь не установка пакета, а постоянный запуск, HTTPS и защита панели. Эту часть можно поручить Claude Code, но результат всё равно нужно проверить</p>
-            <div class="prompt-box">
-              <button class="copy-button" type="button" data-copy-target="setup-prompt">Скопировать</button>
-              <pre id="setup-prompt">Настрой на этом Ubuntu-сервере постоянный и безопасный доступ к CloudCLI
-
-Сначала спроси у меня точное доменное имя и покажи план без изменений
-
-Требования:
-- Node.js 22 или новее
-- пакет @siteboon/claude-code-ui из официальной документации
-- постоянный запуск после перезагрузки сервера через PM2
-- CloudCLI слушает только локальный адрес на порту 3001
-- снаружи доступ только через reverse proxy с HTTPS
-- перед панелью отдельная авторизация
-- порт 3001 не открывать в публичный интернет
-- не менять SSH и firewall, пока не покажешь точный план и не получишь моё подтверждение
-
-После настройки проверь перезапуск сервера, HTTPS, авторизацию и доступ к проектам Claude Code. В конце перечисли изменённые файлы, службы и команды проверки</pre>
-            </div>
-          </div>
-          <aside class="notice">
-            <p class="notice-title">Почему нельзя открыть порт 3001 напрямую</p>
-            <p>Официальная документация CloudCLI предупреждает: встроенной авторизации у оболочки нет. Публичный адрес без reverse proxy и отдельного входа может открыть постороннему проекты, терминал и настройки Claude Code</p>
-          </aside>
-          <div class="step">
-            <h3>Проверь результат с телефона</h3>
-            <p>Открой свой доменный адрес в браузере. Сначала должна появиться отдельная авторизация, затем интерфейс CloudCLI с проектами и сессиями</p>
-            <figure>
-              <div class="shot"><img src="assets/cloudcli-glavnaya.png" alt="Главная CloudCLI: список сессий слева, открытый чат с Claude Code справа, вкладки Chat, Shell и Files сверху"></div>
-              <figcaption>Главная CloudCLI после входа: слева список сессий и проектов, справа открытый чат с Claude Code. Кадр из открытого проекта <a href="https://github.com/siteboon/claudecodeui" target="_blank" rel="noopener">claudecodeui</a>, у тебя будет тот же интерфейс со своими проектами</figcaption>
-            </figure>
-            <p><b>[НУЖНА ПРОВЕРКА]</b> На реальном сервере подтвердить автозапуск PM2, сертификат HTTPS и закрытый снаружи порт 3001</p>
-            <div class="result"><p><b>Результат:</b> Claude Code открывается по защищённому адресу с компьютера и телефона, а после перезагрузки сервера CloudCLI запускается сам</p></div>
-          </div>
         </section>
 
         <section class="content-section" id="oshibki">
           <p class="section-label">Глава 8</p>
           <h2>Если что-то пошло не так</h2>
-          <p class="purpose">Не переустанавливай сервер при первой ошибке. Сначала найди слой, на котором оборвалась цепочка: сервер, домен, Claude Code или CloudCLI</p>
+          <p class="purpose">Не переустанавливай сервер при первой ошибке. Сначала найди звено, на котором оборвалась цепочка: сервер, VPN, Claude Code или Remote Control</p>
           <details>
-            <summary>AmneziaVPN не устанавливает путь А</summary>
-            <p>Сверь VPS с официальными требованиями: Ubuntu 22.04 или 24.04, виртуализация KVM, публичный IPv4 и архитектура x86-64. Проверь SSH-доступ теми же данными, которые ввела в приложение</p>
+            <summary>AmneziaVPN пишет ошибку с кодом 300-305 при установке</summary>
+            <p>Почти всегда это опечатка. Проверь IP, имя пользователя и пароль без лишних пробелов, пароль вставляй копированием. Сверь сервер с требованиями: Ubuntu 22.04 или 24.04, KVM, внешний IPv4, x86-64</p>
           </details>
           <details>
-            <summary>VPN подключился, но Claude не открывается</summary>
-            <p>Проверь внешний IP и доступ к другим сайтам. Если интернет работает, а Claude возвращает отказ, не считай постоянный IP гарантией: адрес дата-центра тоже может не пройти проверку сервиса</p>
+            <summary>«Тайм-аут подключения к серверу»</summary>
+            <p>Зайди в панель хостинга и проверь, что сервер создан, запущен и оплачен</p>
           </details>
           <details>
-            <summary>Домен не открывается</summary>
-            <p>Проверь, что A-запись возвращает IP именно этого сервера. Если запись только что создана, дождись обновления DNS. Не меняй одновременно DNS, firewall и reverse proxy, иначе причину будет трудно найти</p>
+            <summary>VPN работал, а потом перестал подключаться</summary>
+            <p>Проверь баланс хостинга: при посуточном списании сервер выключается, когда деньги заканчиваются. Если сервер работает, сменить порт протокола советует <a href="https://docs.amnezia.org/ru/faq">официальный FAQ Amnezia</a>, вопрос «Как поменять порт VPN-протокола?». После смены порта или пересоздания сервера гостевые ключи придётся выдать заново</p>
           </details>
           <details>
-            <summary>Claude Code не устанавливается</summary>
-            <p>Проверь Ubuntu и доступ сервера к интернету. Официальные требования Claude Code начинаются с Ubuntu 20.04 и 4 ГБ памяти. При ошибке curl или 403 сохрани полный текст ошибки для диагностики</p>
+            <summary>Не подключается только один человек</summary>
+            <p>Проверь его гостевой ключ и выбранный протокол. Не меняй настройки всех устройств сразу</p>
           </details>
           <details>
-            <summary>После команды claude снова просит войти</summary>
-            <p>Повтори авторизацию с VPN на устройстве, где открываешь ссылку. Убедись, что входишь в тот же аккаунт и не закрываешь терминал до завершения подтверждения</p>
+            <summary>VPN подключён, но Claude не открывается или пишет 403</summary>
+            <p>Проверь внешний IP в браузере и в терминале. Если интернет работает, а Claude отказывает, постоянный адрес - не гарантия: адрес дата-центра тоже может не пройти проверку сервиса. Если сервис показывает отключение аккаунта, дальше нужен <a href="../claude-iz-rossii-bez-banov/">разбор ограничений доступа</a>, а не ещё один сервер</p>
           </details>
           <details>
-            <summary>CloudCLI открылся, но проектов нет</summary>
-            <p>Официальный разбор CloudCLI советует сначала запустить Claude Code хотя бы один раз внутри папки проекта. После этого обнови страницу и проверь, что каталог доступен пользователю, от которого работает CloudCLI</p>
+            <summary>Claude Code не устанавливается на сервере</summary>
+            <p>Проверь версию Ubuntu, 4 ГБ памяти и доступ сервера в интернет. При ошибке curl или <span class="path">403</span> сохрани полный текст ошибки и сверь его с <a href="https://code.claude.com/docs/en/troubleshoot-install">разбором ошибок установки</a></p>
           </details>
           <details>
-            <summary>Ошибка EADDRINUSE на порту 3001</summary>
-            <p>Порт уже занят другим процессом или второй копией CloudCLI. Не убивай процесс наугад. Сначала выясни, кто слушает порт, и проверь настройки PM2</p>
+            <summary>Вход в аккаунт не завершается</summary>
+            <p>Открывай ссылку входа на устройстве с включённым VPN. Если браузер показал код, вставь его в терминал сервера. Не закрывай терминал, пока не появится <span class="path">Login successful</span>, и входи в тот же аккаунт, что на телефоне</p>
           </details>
           <details>
-            <summary>Страница открывается по IP, но не по HTTPS</summary>
-            <p>CloudCLI работает, ошибка находится в домене или reverse proxy. Проверь DNS, журнал Caddy или nginx и выпуск сертификата. Не открывай порт 3001 как временный постоянный обход</p>
+            <summary>Remote Control не запускается</summary>
+            <p>Проверь, что вход выполнен через подписку Pro или Max: API-ключ не подходит. Если на сервере задана переменная <span class="path">ANTHROPIC_API_KEY</span>, выполни <span class="path">unset ANTHROPIC_API_KEY</span> и запусти снова. Запускай команду из папки проекта, которой уже подтверждено доверие</p>
+          </details>
+          <details>
+            <summary>Сессия пропала из списка на телефоне</summary>
+            <p>Скорее всего, Claude Code на сервере остановился: сервер перезагрузился, пропала сеть или Claude Code был запущен без tmux. Зайди по SSH, выполни <span class="path">tmux attach -t claude</span>. Если сессии tmux нет, запусти Remote Control заново</p>
           </details>
         </section>
 
         <section class="content-section" id="vozmozhnosti">
           <p class="section-label">Глава 9</p>
           <h2>Что ещё умеет твой сервер</h2>
-          <p class="purpose">Claude Code занял только часть сервера. На той же машине можно держать рабочие процессы, которым нужен круглосуточный запуск</p>
-          <h3>Оба маршрута на одном сервере</h3>
-          <p>Технически на одном VPS могут работать и AmneziaVPN, и Claude Code с CloudCLI. VPN обслуживает соединение твоих устройств, а Claude Code работает со своими папками и процессами</p>
-          <p>Для новичка безопаснее сначала закончить один маршрут и проверить его, затем добавлять второй. Перед совмещением Claude должен показать план портов, firewall и служб. Нельзя разрешать ему закрывать SSH или публиковать порт CloudCLI 3001</p>
+          <p class="purpose">Сервер с 4 ГБ памяти, на котором работает Claude Code, может заодно быть твоим личным VPN и площадкой для задач, которым нужен круглосуточный запуск</p>
+          <h3>VPN и Claude Code на одном сервере</h3>
+          <p>На одном VPS могут работать и AmneziaVPN, и Claude Code: VPN обслуживает соединение твоих устройств, Claude Code работает со своими папками. Именно так телефон и сервер получают один адрес. Для начала безопаснее закончить один способ и проверить его, затем добавлять второй. Если просишь Claude менять настройки сети на сервере, пусть сначала покажет план и не трогает доступ по SSH и порты VPN</p>
           <div class="check-panel">
             <h3>Следующий уровень</h3>
             <ul class="checklist">
@@ -646,19 +829,33 @@ npm install -g @siteboon/claude-code-ui</pre>
               <li>Небольшие сайты и внутренние панели</li>
               <li>Сценарии по расписанию и автоматические проверки</li>
               <li>Git-репозитории, сборки и тесты</li>
-              <li>Несколько AI-агентов с отдельными проектами и задачами</li>
+              <li>Несколько ИИ-агентов с отдельными проектами и задачами</li>
             </ul>
           </div>
-          <p>Не складывай всё в один процесс и не открывай наружу лишние порты. Для каждого сервиса нужны отдельная папка, служба, журнал и понятный способ восстановления</p>
-          <h3>Официальные материалы для проверки</h3>
+          <p>Не складывай всё в один процесс и не открывай наружу лишние порты. Для каждого сервиса нужны своя папка, свой журнал и понятный способ восстановления. Тогда сервер становится не арендованной коробкой с VPN, а рабочим местом, которое трудится, пока ты спишь</p>
+        </section>
+
+        <section class="content-section" id="istochniki">
+          <p class="section-label">Документы сервисов</p>
+          <h2>Официальные источники</h2>
           <ul class="sources">
-            <li><a href="https://docs.amnezia.org/documentation/instructions/install-vpn-on-server/">AmneziaVPN: установка VPN на собственный сервер</a></li>
+            <li><a href="https://www.anthropic.com/supported-countries">Anthropic: поддерживаемые страны и регионы</a></li>
+            <li><a href="https://code.claude.com/docs/en/setup">Anthropic: требования и установка Claude Code</a></li>
+            <li><a href="https://code.claude.com/docs/en/authentication">Anthropic: вход в Claude Code</a></li>
+            <li><a href="https://code.claude.com/docs/en/troubleshoot-install">Anthropic: ошибки установки и входа</a></li>
+            <li><a href="https://code.claude.com/docs/en/remote-control">Anthropic: Remote Control</a></li>
+            <li><a href="https://code.claude.com/docs/en/web-quickstart">Anthropic: запуск Claude Code в облаке</a></li>
+            <li><a href="https://code.claude.com/docs/en/claude-code-on-the-web">Anthropic: облачная сессия из терминала</a></li>
+            <li><a href="https://claude.com/pricing">Anthropic: тарифы Claude</a></li>
+            <li><a href="https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository">GitHub: загрузка файлов в репозиторий</a></li>
+            <li><a href="https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github">GitHub: перенос локального репозитория</a></li>
             <li><a href="https://docs.amnezia.org/documentation/supported-linux-os-for-vps/">AmneziaVPN: требования к VPS</a></li>
-            <li><a href="https://code.claude.com/docs/en/getting-started">Anthropic: установка и требования Claude Code</a></li>
-            <li><a href="https://cloudcli.ai/docs/open-source-self-hosting/prerequisites">CloudCLI: требования для самостоятельной установки</a></li>
-            <li><a href="https://cloudcli.ai/docs/installation/remote-server">CloudCLI: установка на удалённый сервер и требование защиты</a></li>
-            <li><a href="https://cloudcli.ai/docs/troubleshooting/common-issues">CloudCLI: частые ошибки</a></li>
-            <li><a href="https://github.com/devbravo-ai/cloudcli">CloudCLI: открытый исходный код</a></li>
+            <li><a href="https://docs.amnezia.org/documentation/instructions/install-vpn-on-server/">AmneziaVPN: установка VPN на свой сервер</a></li>
+            <li><a href="https://docs.amnezia.org/ru/documentation/instructions/killswitch/">AmneziaVPN: KillSwitch</a></li>
+            <li><a href="https://docs.amnezia.org/ru/documentation/instructions/amnezia-hosting-sharing/">AmneziaVPN: гостевой доступ</a></li>
+            <li><a href="https://docs.amnezia.org/ru/faq">AmneziaVPN: частые вопросы</a></li>
+            <li><a href="https://vdsina.com/pricing/standard">VDSina: стандартные тарифы VPS</a></li>
+            <li><a href="https://cloudcli.ai/docs/installation/remote-server">CloudCLI: работа на удалённом сервере</a></li>
           </ul>
         </section>
 
@@ -666,8 +863,10 @@ npm install -g @siteboon/claude-code-ui</pre>
           <h2>Дальше по теме</h2>
           <p class="next-sub">Что логично прочитать следующим</p>
           <ul>
-            <li><a href="../podklyuchenie-iz-rossii/"><span class="title">Claude из России: подключение без блокировок</span><span class="why">Если обычный вход ещё не настроен - начни отсюда</span></a></li>
-            <li><a href="../pervyy-proekt-v-claude/"><span class="title">Первый проект в Claude: своя папка с памятью</span><span class="why">Что переносить на сервер: свои проекты с памятью</span></a></li>
+            <li><a href="../urovni-vaybkodera/"><span class="title">7 уровней вайбкодера: один шаг, чтобы подняться выше</span>
+<span class="why">Сервер готов - посмотри, какие задачи уже можно поручать Claude Code</span></a></li>
+            <li><a href="../whatsapp-nomer-dlya-agenta/"><span class="title">Свой номер WhatsApp для ИИ-агента: пошагово</span>
+<span class="why">Дай серверу круглосуточную работу: агент, который отвечает на сообщения</span></a></li>
           </ul>
         </section>
 
@@ -677,14 +876,14 @@ npm install -g @siteboon/claude-code-ui</pre>
           <p>В ИИ-Лагере ты разберёшься с Claude Code на своём проекте: от первой папки и понятной задачи до рабочих агентов и автоматизации. Сервер останется твоей постоянной площадкой, а не дорогой пустой коробкой</p>
           <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Перейти в ИИ-Лагерь</a>
         </section>
-        <footer class="foot">Независимый русскоязычный гид. Claude, Anthropic и CloudCLI являются товарными знаками их владельцев</footer>
+        <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев</footer>
       </article>
     </main>
 
-    <aside class="related-plaque" aria-label="Предыдущая статья">
-      <p class="plaque-label">Начать с доступа</p>
-      <h2>Claude из России: подключение без блокировок</h2>
-      <p><a href="../podklyuchenie-iz-rossii/">VPN, вход в аккаунт и первый чат - если до Claude Code ещё не дошёл</a></p>
+    <aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Если доступ уже ограничен</p>
+      <h2>Claude из России не пускает</h2>
+      <p><a href="../claude-iz-rossii-bez-banov/">Ошибка 403, отказ оплаты, блокировка и апелляция</a></p>
     </aside>
   </div>
 

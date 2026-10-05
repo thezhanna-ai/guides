@@ -171,10 +171,10 @@ class ArticleImagesTest(unittest.TestCase):
         return [row for row in self.manifest if row["article"] == article["title"]]
 
     def test_image_manifest_covers_all_29_approved_articles_and_excludes_new_article(self):
-        self.assertEqual(len(self.eligible), 29)
+        self.assertEqual(len(self.eligible), 30)
         self.assertEqual(set(self.covers), {a["slug"] for a in self.eligible})
-        self.assertEqual(len(self.manifest), 36)
-        self.assertTrue(all(row["number"] < 37 for row in self.manifest))
+        self.assertEqual(len(self.manifest), 37)
+        self.assertTrue(all(row["number"] < 38 for row in self.manifest))
         for article in self.eligible:
             with self.subTest(slug=article["slug"]):
                 rows = self.rows(article)
@@ -833,11 +833,11 @@ class GuidesSiteTest(unittest.TestCase):
     def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):
         html = SERVER.read_text(encoding="utf-8")
         for phrase in (
-            "Путь А",
-            "Путь Б",
+            "Роль 1",
+            "Роль 2",
             "Сервер как личный VPN",
             "Сервер как рабочий компьютер",
-            "Оба маршрута на одном сервере",
+            "VPN и Claude Code на одном сервере",
             'html lang="ru" data-theme="light"',
             'class="theme-toggle"',
             'localStorage.getItem("guide-theme")',

@@ -35,7 +35,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"}}
-        self.assertEqual(len(ready), 29)
+        self.assertEqual(len(ready), 30)
         self.assertEqual(set(self.covers), ready)
         self.assertEqual(len(self.pages), 31)
         self.assertEqual(len(set(self.pages)), len(self.pages))

@@ -69,8 +69,8 @@ function page() {
   };
 }
 
-test('Начальная страница: 28 карточек и шесть разделов', () => {
-  const p = page(); assert.equal(p.visible().length, 28); assert.equal(p.sections.length, 6);
+test('Начальная страница: 30 карточек и шесть разделов', () => {
+  const p = page(); assert.equal(p.visible().length, 30); assert.equal(p.sections.length, 6);
 });
 
 test('Каждое настоящее название статьи находится целиком', () => {
@@ -96,7 +96,7 @@ test('Ненайденный запрос скрывает карточки, т�
 
 test('Стирание запроса возвращает карточки и пустые разделы', () => {
   const p = page(); p.search('zzzzzzнебывает'); p.search('');
-  assert.equal(p.visible().length, 28); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 30); assert.ok(p.sections.every(s => s.style.display !== 'none'));
   assert.ok(!p.noResults.classes.has('show'));
 });
 
@@ -123,9 +123,9 @@ test('Регрессия: совпадение в скрытом разделе 
   assert.equal(p.visible().length, 0); assert.ok(p.noResults.classes.has('show'));
 });
 
-test('Все после фильтра возвращает 28 карточек и пустые разделы', () => {
+test('Все после фильтра возвращает 30 карточек и пустые разделы', () => {
   const p = page(); p.filter('gpt'); p.filter('all');
-  assert.equal(p.visible().length, 28); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 30); assert.ok(p.sections.every(s => s.style.display !== 'none'));
 });
 
 test('Скрипт не выполняет сетевых запросов и работает из локального HTML', () => {
