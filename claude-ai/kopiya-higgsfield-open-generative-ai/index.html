@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Открытая копия Higgsfield: кадры как в кино без ежемесячной подписки</title>
+<meta name="description" content="Open Generative AI - открытая копия Higgsfield с Cinema Studio. Без подписки, около 12 центов за кадр. Как поставить без терминала, подключить ключ и сохранить первый кадр">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Открытая копия Higgsfield: кадры как в кино без ежемесячной подписки">
+<meta property="og:description" content="Open Generative AI - открытая копия Higgsfield с Cinema Studio. Без подписки, около 12 центов за кадр. Как поставить без терминала, подключить ключ и сохранить первый кадр">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/kopiya-higgsfield-open-generative-ai/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/kopiya-higgsfield-open-generative-ai/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/kopiya-higgsfield-open-generative-ai/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Панель камеры Cinema Studio в Open Generative AI: камера, объектив, фокусное расстояние и диафрагма">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/kopiya-higgsfield-open-generative-ai/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/muapi-key.webp"]) img { width: 500px }
+    .shot:has(img[src="assets/muapi-balance.webp"]) img { width: 390px }
+    .shot:has(img[src="assets/initialize-studio.webp"]) img { width: 330px }
+    .shot:has(img[src="assets/camera-controls.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-card.webp"]) { width: min(100%, 300px) }
+.shot:has(img[src="assets/initialize-studio.webp"]) { width: min(100%, 460px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+</style></head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">Первый кадр в студии</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#kak-rabotaet">Что это за приложение и сколько стоит кадр</a>
+<a href="#download">1. Скачай установщик под свою систему</a>
+<a href="#install">2. Установи и запусти студию</a>
+<a href="#macos">3. Разреши первый запуск на Mac</a>
+<a href="#api-key">4. Подключи свой ключ MuAPI и пополни баланс</a>
+<a href="#cinema">5. Настрой объектив, фокусное и диафрагму в Cinema Studio</a>
+<a href="#first-frame">6. Создай один кадр и дождись результата</a>
+<a href="#save">7. Скачай кадр и найди его на компьютере</a>
+<a href="#svoya-zadacha">От первого кадра к своему инструменту</a></nav>
+<main><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#kak-rabotaet">Что это за приложение и сколько стоит кадр</a>
+<a href="#download">1. Скачай установщик под свою систему</a>
+<a href="#install">2. Установи и запусти студию</a>
+<a href="#macos">3. Разреши первый запуск на Mac</a>
+<a href="#api-key">4. Подключи свой ключ MuAPI и пополни баланс</a>
+<a href="#cinema">5. Настрой объектив, фокусное и диафрагму в Cinema Studio</a>
+<a href="#first-frame">6. Создай один кадр и дождись результата</a>
+<a href="#save">7. Скачай кадр и найди его на компьютере</a>
+<a href="#svoya-zadacha">От первого кадра к своему инструменту</a></nav></details>
+<article><header id="nachalo"><p class="eyebrow">Инструкция · Первый результат</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Панель камеры Cinema Studio в Open Generative AI: камера, объектив, фокусное расстояние и диафрагма" loading="eager" decoding="async" fetchpriority="high"><figcaption>Выбор камеры в Open Generative AI: четыре барабана, по одному на настройку</figcaption></figure>
+<h1 class="article-title-v2">Открытая копия Higgsfield: кадры как в кино без ежемесячной подписки</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<p class="lead">Higgsfield снимает кадры как в кино, но подписку списывает каждый месяц, даже если за месяц получилось всего три картинки. Разработчик выложил на GitHub открытую копию этой студии, Open Generative AI. Режим Cinema Studio на месте: выбираешь камеру, объектив и диафрагму, а промпт приложение собирает само. Подписки нет, списывается только за готовый кадр, по прайсу на 05.10 это около 12 центов</p><p class="lead">Ниже весь путь по шагам: какой файл скачать, как пропустить приложение через защиту Mac, где взять ключ и как сохранить первый кадр. Код писать не нужно, терминал не понадобится</p><p class="meta">Актуально на 05.10.2026 · Open Generative AI v2.0.0</p></header>
+<section class="content-section" id="kak-rabotaet"><h2>Что это за приложение и сколько стоит кадр</h2>
+<p><a href="https://github.com/Anil-matcha/Open-Generative-AI">Open Generative AI</a> собирает в одном приложении на компьютере картинки, видео, синхрон губ и Cinema Studio</p>
+<p>Код проекта <a href="https://github.com/Anil-matcha/Open-Generative-AI">открыт на GitHub</a>, на 05.10.2026 у него 29 648 звёзд: это значит, что проектом пользуются и следят за ним десятки тысяч человек. Само приложение скачивается и ставится без подписки</p><p>Кадры рисует не твой компьютер, а сервис MuAPI. Приложение работает как пульт: камеру и объектив выбираешь у себя, описание сцены уходит в MuAPI, обратно приходит готовая картинка. Поэтому нужен свой аккаунт MuAPI с ключом и балансом</p>
+<div class="warn-card"><p><b>Сколько это стоит:</b> подписки нет, <a href="https://muapi.ai/billing">баланс пополняется от 10 долларов</a>, а списывается только за готовые кадры. По <a href="https://muapi.ai/pricing">прайсу на 05.10.2026</a> один кадр Cinema Studio стоит около 12 центов, то есть 10 долларов хватит примерно на 80 кадров. Цены у сервиса могут меняться, перед запуском загляни в прайс</p></div>
+</section>
+<section class="content-section" id="download"><h2>1. Скачай установщик под свою систему</h2>
+<p>Открой <a href="https://github.com/Anil-matcha/Open-Generative-AI/releases/latest">официальные Releases</a> на GitHub. Это раздел готовых выпусков программы. На 05.10.2026 последним обозначен <b>v2.0.0 от 23.05.2026</b> с меткой <b>Latest</b> («Последний»). Раскрой <b>Assets</b> («Файлы выпуска») и выбери вариант</p>
+<ul><li><b>Windows:</b> <code>Open.Generative.AI.Setup.2.0.0.exe</code>, 128 МБ</li>
+<li><b>Mac с Apple Silicon:</b> <code>Open.Generative.AI-2.0.0-arm64.dmg</code>, 202 МБ. В меню Apple → «Об этом Mac» такой компьютер показывает чип Apple M</li>
+<li><b>Mac с Intel:</b> <code>Open.Generative.AI-2.0.0.dmg</code>, 209 МБ, без arm64 в названии</li>
+<li><b>Linux:</b> <code>Open.Generative.AI-2.0.0.AppImage</code> или пакет <code>open-generative-ai_2.0.0_amd64.deb</code> для Debian/Ubuntu</li></ul>
+<figure><div class="shot"><img src="assets/github-assets.webp" width="1182" height="336" loading="lazy" decoding="async" alt="Список Assets выпуска v2.0.0, рамкой выделен DMG для Mac с Apple M"></div><figcaption>Assets значит «Файлы выпуска»: рамкой выделен вариант arm64 для Mac с Apple M; для другой системы выбери соответствующую строку</figcaption></figure>
+<div class="result"><p><b>Результат:</b> скачался установщик подходящего формата из официального выпуска</p></div>
+<p><b>Если не получилось:</b> дождись загрузки Assets и сверь название файла со своей системой. Для Mac сначала выясни чип, затем выбирай DMG. Source code («Исходный код») скачивать не нужно: далее идём через готовое приложение</p>
+</section>
+<section class="content-section" id="install"><h2>2. Установи и запусти студию</h2>
+<ul><li><b>Mac:</b> открой DMG и перенеси приложение в «Программы» (Applications), если установщик предлагает такое окно. Затем попробуй открыть Open Generative AI. Предупреждение macOS разбирается в следующем шаге</li>
+<li><b>Windows:</b> запусти EXE, следуй указаниям установщика и открой приложение из меню «Пуск»</li>
+<li><b>Debian/Ubuntu:</b> открой DEB через установку программ и после установки запусти приложение. Для AppImage используй свойства файла: разреши выполнение как программы и открой его</li></ul>
+<p>После запуска в верхней строке видны Image, Video, Lip Sync, Cinema Studio, Workflows, Agents и MCP &amp; CLI, справа Settings («Настройки»)</p>
+<figure><div class="shot"><img src="assets/first-screen.webp" width="650" height="48" loading="lazy" decoding="async" alt="Верхняя строка Open Generative AI с вкладкой Cinema Studio"></div><figcaption>Cinema Studio значит «Киностудия»: эта вкладка нужна для первого кадра</figcaption></figure>
+<div class="result"><p><b>Результат:</b> программа установлена; на Windows/Linux она открывается, а на Mac первая попытка может закончиться предупреждением защиты</p></div>
+<p><b>Если не получилось:</b> сначала проверь, что установщик взят из нужного выпуска и подходит системе. При предупреждении macOS перейди к шагу 3; при другой ошибке сверяй сообщение со <a href="https://github.com/Anil-matcha/Open-Generative-AI/releases/tag/v2.0.0">страницей выпуска</a> или обратись к Claude через блок помощи в конце</p>
+</section>
+<section class="content-section" id="macos"><h2>3. Разреши первый запуск на Mac</h2>
+<p>На Windows и Linux пропусти этот шаг. У Mac-версии v2.0.0 нет нотариального заверения Apple, а подпись приложения локальная (ad-hoc): она не подтверждает личность разработчика. Поэтому защита macOS при первом запуске показывает предупреждение и не открывает приложение</p>
+<div class="warn-card"><p><a href="https://support.apple.com/ru-ru/102445">Apple предупреждает</a>: ПО без подтверждённой подписи и подлинности может быть опасным. Продолжай только с приложением из официального репозитория. Если предупреждение говорит, что программа повреждена или навредит компьютеру, этот обход не применяй</p></div>
+<ol><li>После попытки открыть Open Generative AI зайди в <b>«Системные настройки»</b></li>
+<li>Открой <b>«Конфиденциальность и безопасность»</b>, прокрути вниз до сообщения о блокировке именно этого приложения</li>
+<li>Нажми кнопку подтверждения открытия. В русской инструкции Apple она называется <b>«Подтвердить вход»</b>, в английском интерфейсе - <b>Open Anyway</b> («Всё равно открыть»)</li>
+<li>В повторном предупреждении нажми <b>«Открыть»</b>. После подтверждения приложение сохраняется как исключение и открывается двойным щелчком</li></ol>
+<div class="result"><p><b>Результат:</b> Open Generative AI открывается на Mac, видна верхняя строка разделов студии</p></div>
+<p><b>Если не получилось:</b> убедись, что попытка запуска уже была и сообщение относится к Open Generative AI. Если кнопки нет или настройками управляет администратор, сверь предупреждение со страницей Apple; не отключай защиту целиком</p>
+<p>Программа открылась. Теперь подключим аккаунт, в котором будет учитываться расход за первый кадр</p>
+</section>
+<section class="content-section" id="api-key"><h2>4. Подключи свой ключ MuAPI и пополни баланс</h2>
+<p>API-ключ - секретная строка, по которой MuAPI узнаёт, что запрос пришёл от тебя, и списывает расход с твоего баланса</p>
+<ol><li>Открой <a href="https://muapi.ai/access-keys">Access Keys</a> («Ключи доступа») в MuAPI. Нажми <b>Sign In</b> («Войти»); если аккаунта нет, создай его на этом сайте</li>
+<li>В поле <b>KEY NAME</b> («Название ключа») введи понятное название, например «Моя студия». Оставь <b>Create as Sandbox (Testing) Key</b> выключенным: эта галочка создаёт тестовый ключ с демонстрационными данными, настоящего кадра не будет. Нажми <b>Generate Key</b> («Создать ключ») и скопируй значение созданного ключа</li></ol>
+<figure><div class="shot"><img src="assets/muapi-key.webp" width="710" height="335" loading="lazy" decoding="async" alt="Форма Access Keys с полем KEY NAME, Generate Key и выключенной галочкой Sandbox"></div><figcaption>KEY NAME - «Название ключа», Generate Key - «Создать ключ»; галочку Sandbox оставь выключенной</figcaption></figure>
+<p>В <a href="https://muapi.ai/billing">Billing</a> («Баланс») открой <b>Top up balance</b> («Пополнить баланс»). Минимум пополнения - $10, шаг суммы - $5; доступны USD (доллары США) и INR (индийские рупии). Для маршрута в долларах выбери USD и нужную сумму, нажми <b>Buy Now</b> («Пополнить сейчас») и следуй форме сервиса. После завершения проверь, что сумма появилась в балансе. Подписка не обязательна: тариф Free работает по расходу за генерацию (<b>Pay as you go</b>)</p>
+<figure><div class="shot"><img src="assets/muapi-balance.webp" width="865" height="560" loading="lazy" decoding="async" alt="Пополнение баланса MuAPI, рамкой выделен вариант 10 долларов"></div><figcaption>Top up balance - «Пополнить баланс», Buy Now - кнопка пополнения выбранной суммой; минимум $10, шаг $5</figcaption></figure>
+<ol start="3"><li>Вернись в приложение и открой <b>Cinema Studio</b>. Если окно ключа ещё не появилось, введи описание сцены и нажми <b>GENERATE</b>: без ключа эта кнопка открывает окно <b>MUAPI API KEY REQUIRED</b> («Нужен API-ключ MuAPI»)</li>
+<li>В поле <b>MUAPI ACCESS KEY</b> («Ключ доступа MuAPI») вставь само значение ключа, не название «Моя студия». Нажми <b>Initialize Studio</b> («Запустить студию»)</li></ol>
+<figure><div class="shot"><img src="assets/initialize-studio.webp" width="460" height="530" loading="lazy" decoding="async" alt="Окно MUAPI API KEY REQUIRED с полем MUAPI ACCESS KEY и кнопкой Initialize Studio"></div><figcaption>MUAPI ACCESS KEY - «Ключ доступа MuAPI», Initialize Studio - «Запустить студию»; вставь значение ключа</figcaption></figure>
+<div class="result"><p><b>Результат:</b> окно ввода ключа закрыто, ключ подключён, баланс MuAPI пополнен для настоящего запроса</p></div>
+<p><b>Если не получилось:</b> при 401/403 (ошибке доступа) проверь значение ключа и лишние пробелы. При ошибке баланса открой Billing; если вместо настоящего кадра приходят тестовые данные, проверь галочку Sandbox. Ключ вводи только в приложение: в чат Claude и на скриншот он попадать не должен</p>
+</section>
+<section class="content-section" id="cinema"><h2>5. Настрой объектив, фокусное и диафрагму в Cinema Studio</h2>
+<p>Во вкладке <b>Cinema Studio</b> («Киностудия») найди поле <b>Describe your scene</b> («Опиши сцену»). Внизу видны 16:9, 2K, Builder, карточка камеры и GENERATE. Для первой попытки оставь 16:9 и 2K, затем нажми карточку камеры рядом с кнопкой генерации</p>
+<figure><div class="shot"><img src="assets/camera-card.webp" width="210" height="75" loading="lazy" decoding="async" alt="Карточка камеры Cinema Studio с объективом Creative Tilt Lens, 35 mm и f/1.4"></div><figcaption>Нажми карточку камеры: под названием видны объектив, фокусное расстояние и диафрагма</figcaption></figure>
+<p>Откроется панель <b>CAMERA / LENS / FOCAL LENGTH / APERTURE</b>. В <b>CAMERA</b> («Камера») оставь Modular 8K Digital, в <b>LENS</b> («Объектив») - Creative Tilt Lens, в <b>FOCAL LENGTH</b> («Фокусное расстояние») - 35 mm, в <b>APERTURE</b> («Диафрагма») - f/1.4. Эти значения выбраны по умолчанию в версии 2.0.0 и показаны на скрине</p>
+<figure><div class="shot"><img src="assets/camera-controls.webp" width="900" height="545" loading="lazy" decoding="async" alt="Панель CAMERA, LENS, FOCAL LENGTH и APERTURE с рамками вокруг трёх настроек"></div><figcaption>CAMERA - «Камера», LENS - «Объектив», FOCAL LENGTH - «Фокусное расстояние», APERTURE - «Диафрагма»</figcaption></figure>
+<p>Закрой панель крестиком справа вверху. По <a href="https://github.com/Anil-matcha/Open-Generative-AI#-cinema-studio-controls">документации проекта</a> параметры камеры добавляются к текстовому запросу для модели; они задают ориентир для картинки, а не обещают точную симуляцию настоящей оптики</p>
+<div class="result"><p><b>Результат:</b> карточка у поля запроса показывает Modular 8K Digital, Creative Tilt Lens, 35 mm и f/1.4</p></div>
+<p><b>Если не получилось:</b> при отсутствии Cinema Studio проверь версию приложения. Если значения другие, открой карточку и выбери нужные в соответствующих колонках</p>
+<p>Осталось описать сцену и увидеть, как эти настройки проявятся в кадре</p>
+</section>
+<section class="content-section" id="first-frame"><h2>6. Создай один кадр и дождись результата</h2>
+<p>В поле <b>Describe your scene</b> введи один простой запрос своими словами, например: «Керамическая чашка на деревянном столе у окна, мягкий утренний свет, без надписей». Это пример для первой попытки; совпадение всех деталей заранее не гарантируется</p>
+<p>Cinema Studio рисует кадр моделью Nano Banana Pro, по прайсу MuAPI на 05.10.2026 это около 12 центов за кадр</p>
+<p>Нажми <b>GENERATE</b> («Создать») один раз и дождись завершения задания. Пустой запрос не запускается. Не отправляй копии задания, пока оно выполняется</p>
+<figure><div class="shot"><img src="assets/cinema-generate.webp" width="900" height="123" loading="lazy" decoding="async" alt="Поле Describe your scene и кнопка GENERATE в Cinema Studio выделены рамками"></div><figcaption>Describe your scene - «Опиши сцену», GENERATE - «Создать»; 16:9 - форма кадра, 2K - разрешение</figcaption></figure>
+<div class="result"><p><b>Результат:</b> в области просмотра появился созданный кадр, а не только сообщение об отправленном запросе</p></div>
+<p><b>Если не получилось:</b> прочитай сообщение приложения. Ошибка доступа возвращает к шагу 4, ошибка баланса - к Billing в MuAPI. Если задание остаётся в работе, проверь его состояние перед повтором. Сколько списалось за попытку, видно в Usage («Расход»)</p>
+</section>
+<section class="content-section" id="save"><h2>7. Скачай кадр и найди его на компьютере</h2>
+<ol><li>Найди готовый кадр в истории справа, <b>HISTORY</b> («История»), и нажми <b>Download</b> («Скачать»). В <a href="https://github.com/Anil-matcha/Open-Generative-AI/tree/v2.0.0">версии 2.0.0</a> приложение сохраняет JPEG с именем <code>cinema-shot-&lt;число&gt;.jpg</code></li>
+<li>В окне сохранения macOS или Windows выбери папку, например «Изображения», и подтверди сохранение. Приложение не задаёт папку заранее, поэтому запомни выбранное место</li>
+<li>Открой выбранную папку и сам файл отдельно от Open Generative AI</li></ol>
+<div class="result"><p><b>Результат:</b> один кадр лежит в известной папке и открывается как обычное изображение</p></div>
+<p><b>Если не получилось:</b> вернись к готовому кадру в HISTORY и повтори скачивание, не генерацию. Если папка неизвестна, найди на компьютере файл по началу имени <code>cinema-shot-</code></p>
+<p>Теперь есть результат всего маршрута: собственный кадр, который открывается с компьютера. В аккаунте MuAPI загляни в Usage («Расход»), чтобы увидеть стоимость именно своей попытки</p>
+</section>
+<section class="content-section" id="svoya-zadacha"><h2>От первого кадра к своему инструменту</h2>
+<p>Open Generative AI собрали вокруг одной задачи: управлять генерацией через понятный интерфейс. Такой же подход можно применить к своему делу: собрать сайт с портфолио, бот с цепочкой сообщений или калькулятор. После первого кадра задача уже становится конкретной: какие поля нужны человеку и какой результат он должен сохранить</p>
+</section>
+<section class="help-banner" aria-label="Если что-то не получается">
+<p class="help-title">Запнулся? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу [желаемый результат] в Open Generative AI. Сейчас вижу [текущий экран], уже выполнено [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Напиши, какие кнопки видны на текущем экране. Начнём с одного действия</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button></section>
+<section class="cta" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент под своё дело</h2>
+<p>На ИИ-Лагере показывают, как собрать сайт, бота или калькулятор с Claude Code и Codex. Это ИИ-помощники, которым ты описываешь задачу словами, а они пишут код. На практикуме этот путь проходят по шагам, без программирования</p>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+</article></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Дальше по теме</p><h2>10 замен нейросетям: что доступно без подписки и где ограничения</h2>
+      <p><a href="../10-besplatnyh-zamen/">Открыть статью</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+</div>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+(function () {
+  var viewer = document.getElementById("viewer");
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+  var lastFocused;
+  function open(img) {
+    lastFocused = document.activeElement;
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewer.setAttribute("open", "");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    big.src = img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    viewer.removeAttribute("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+</body></html>
