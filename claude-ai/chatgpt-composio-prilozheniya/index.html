@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChatGPT делает работу в твоих приложениях: Composio, Gmail и Notion за одну настройку</title>
+<meta name="description" content="Как подключить Composio к ChatGPT: плагин, запасной путь через MCP, проверка чтения Gmail и создание черновика без отправки. Отдельное подключение Notion.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="ChatGPT делает работу в твоих приложениях: Composio, Gmail и Notion за одну настройку">
+<meta property="og:description" content="Как подключить Composio к ChatGPT: плагин, запасной путь через MCP, проверка чтения Gmail и создание черновика без отправки. Отдельное подключение Notion.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/chatgpt-composio-prilozheniya/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/chatgpt-composio-prilozheniya/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/chatgpt-composio-prilozheniya/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Латунный штекер с коралловым плетёным кабелем подключён к розетке на тёмном бирюзовом столе">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/chatgpt-composio-prilozheniya/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.code-card { width: 100%; padding: 48px 18px 16px }
+.copy-button { background: #E86F4A; color: #102F30; box-shadow: 0 3px 0 #8F371F }
+.copy-button:hover { background: #F28A68; box-shadow: 0 2px 0 #8F371F }
+.copy-button:active { background: #FFC6AD; color: #102F30; box-shadow: inset 0 0 0 3px #8F371F }
+.copy-button.is-copied { background: #FFD1BF; color: #102F30; outline: 3px solid #FFAB8A }
+</style><meta name="robots" content="noindex, nofollow">
+</head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">СВЯЗЬ</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
+<a href="#composio">Шаг 1. Установи Composio в ChatGPT</a>
+<a href="#gmail">Шаг 2. Разреши Composio доступ к Gmail</a>
+<a href="#chtenie">Шаг 3. Сверь непрочитанные письма с Gmail</a>
+<a href="#notion">Шаг 4. Подключи Notion, если используешь его</a>
+<a href="#oshibki">Если подключение или чтение не получилось</a>
+<a href="#chernovik">Шаг 5. Создай черновик и открой его в Gmail</a>
+<a href="#svoi-proekt">Собери инструмент под своё дело</a>
+<a href="#dalshe">Дальше по теме</a></nav>
+<main><header id="nachalo"><p class="eyebrow">Инструкция · ChatGPT и приложения</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Латунный штекер с коралловым плетёным кабелем подключён к розетке на тёмном бирюзовом столе" loading="eager" decoding="async" fetchpriority="high"><figcaption>От подключения аккаунта до проверки письма, сохранённого в почте</figcaption></figure>
+<h1 class="article-title-v2">ChatGPT делает работу в твоих приложениях: Composio, Gmail и Notion за одну настройку</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 sans-serif">Средний уровень</p>
+<p class="lead">Просишь ChatGPT помочь с почтой, а переносить письма и сохранять результат всё равно приходится тебе? <b>Подключим приложения так, чтобы часть этой работы можно было поручить прямо в чате.</b> Сначала проверим доступ к письмам, затем перейдём к действию в самой почте.</p>
+<p>Как отличить ответ <b>про</b> твою почту от действия <b>в</b> ней? В последнем шаге будет проверка, для которой недостаточно фразы ChatGPT «готово».</p><p class="meta">АКТУАЛЬНО НА 6 ОКТЯБРЯ 2026</p></header>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Что нужно до начала</a>
+<a href="#composio">Шаг 1. Установи Composio в ChatGPT</a>
+<a href="#gmail">Шаг 2. Разреши Composio доступ к Gmail</a>
+<a href="#chtenie">Шаг 3. Сверь непрочитанные письма с Gmail</a>
+<a href="#notion">Шаг 4. Подключи Notion, если используешь его</a>
+<a href="#oshibki">Если подключение или чтение не получилось</a>
+<a href="#chernovik">Шаг 5. Создай черновик и открой его в Gmail</a>
+<a href="#svoi-proekt">Собери инструмент под своё дело</a>
+<a href="#dalshe">Дальше по теме</a></nav></details>
+<article><section class="content-section" id="podgotovka">
+<h2>Что нужно до начала</h2>
+<p>Когда просишь ChatGPT разобрать почту, без подключения приходится переносить письма в чат. <b>Composio</b> - сервис-посредник между ChatGPT и твоими приложениями. Ты называешь задачу, он находит подходящие действия, запрашивает доступ к нужному аккаунту и выполняет разрешённую операцию. Это похоже на переходник: один вход со стороны ChatGPT, разные подключения со стороны сервисов. Такой порядок описан на <a href="https://composio.dev/toolkits/composio/framework/chatgpt">странице Composio</a>.</p>
+<p><b>Плагин</b> - дополнение к ChatGPT, которое объединяет приложение и инструкции для работы с ним. Установка плагина Composio не открывает всю твою почту и документы: аккаунт каждого сервиса подключается отдельно. По <a href="https://help.openai.com/en/articles/20001256-plugins-in-chatgpt">справке OpenAI</a>, возможности конкретного плагина зависят от тарифа, аккаунта и настроек рабочей организации.</p>
+<ul>
+<li><b>ChatGPT в браузере.</b> Войди в свой аккаунт на <a href="https://chatgpt.com/">chatgpt.com</a>. Для первого подключения используй веб-версию, чтобы пройти и основной, и запасной путь из этой инструкции.</li>
+<li><b>Аккаунт Composio.</b> Если его ещё нет, открой <a href="https://dashboard.composio.dev/">Composio</a> и зарегистрируйся. Если есть, войди в тот аккаунт, через который хочешь подключать приложения.</li>
+<li><b>Gmail.</b> Открой свою почту в соседней вкладке. В ней будешь сверять найденные письма и проверять последнее действие.</li>
+</ul>
+<div class="warn-card"><p><b>Каталог приложений не означает доступ ко всем действиям.</b> Composio заявляет о <a href="https://composio.dev/toolkits/composio/framework/chatgpt">более чем тысяче интеграций</a>, но каждая требует своих разрешений. На некоторых тарифах приложения только читают данные, действия записи доступны не везде. Для ручного подключения через <b>MCP</b> (общий способ обращения ChatGPT к внешним инструментам) <a href="https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt">OpenAI описывает полный доступ к записи для Business и Enterprise/Edu, а для Pro - чтение и получение данных</a>. Установка плагина не отменяет ограничения аккаунта. Лимиты самого Composio смотри на <a href="https://composio.dev/pricing">странице тарифов сервиса</a>.</p></div>
+</section>
+
+<section class="content-section" id="composio">
+<h2>Шаг 1. Установи Composio в ChatGPT</h2>
+<p>Открой <a href="https://composio.dev/mcp">официальную страницу подключения Composio</a>. В блоке <b>ChatGPT / Codex</b> нажми <b>Install plugin</b> («Установить плагин»). Откроется <a href="https://chatgpt.com/plugins/plugin_asdk_app_6a58503580c08191b78cc5bdaf4eba6e">карточка Composio в ChatGPT</a>. Нажми <b>Install plugin</b> и, если появится, <b>Connect</b> («Подключить»). Это основной путь из <a href="https://composio.dev/toolkits/composio/framework/chatgpt">инструкции Composio</a> и <a href="https://help.openai.com/en/articles/20001256-plugins-in-chatgpt">справки OpenAI о плагинах</a>.</p>
+<p>Заверши вход в Composio. На экране разрешений прочитай, к чему получит доступ ChatGPT, и нажми <b>Allow access</b> («Разрешить доступ»), если указанные права подходят. Затем вернись в ChatGPT. Не закрывай окно авторизации до её завершения.</p>
+<p class="result"><b>Результат:</b> Composio установлен, вход в сервис завершён. В новом чате введи <code>@</code> и выбери Composio из появившегося списка, чтобы добавить его к запросу. OpenAI описывает упоминание через <code>@</code> как способ <a href="https://help.openai.com/en/articles/20001494-connecting-and-managing-app-accounts-in-chatgpt">выбрать подключённое приложение</a>.</p>
+<details class="check-panel" id="mcp"><summary>Плагин недоступен: запасной путь через режим разработчика</summary>
+<p><b>Режим разработчика</b> разрешает добавить своё MCP-приложение по адресу сервера. Для этого пути используй ChatGPT в браузере: по <a href="https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt">справке OpenAI</a>, ручные MCP-приложения доступны в веб-версии. В рабочей организации может потребоваться администратор; в Business режим доступен администраторам и владельцам.</p>
+<ol>
+<li>Открой <b>Settings → Apps → Advanced Settings</b> («Настройки → Приложения → Дополнительные настройки») и включи <b>Developer mode</b> («Режим разработчика»), если переключатель доступен. Затем открой <b>Apps → Create</b> («Приложения → Создать»). Для администратора рабочей организации путь начинается в <b>Workspace settings</b> («Настройки рабочего пространства»).</li>
+<li>В форме укажи имя <b>Composio</b>, адрес сервера из блока ниже и способ входа <b>OAuth</b>. OAuth - авторизация на сайте сервиса с одобрением прав; пароль не нужно вставлять в чат. Адрес опубликован на <a href="https://composio.dev/mcp">странице Composio</a>.</li>
+</ol>
+<div class="code-card"><pre id="mcp-url"><code>https://connect.composio.dev/mcp</code></pre><button class="copy-button" type="button" data-copy-target="mcp-url" aria-label="Скопировать адрес MCP-сервера Composio" aria-live="polite">Скопировать</button></div>
+<p>В интерфейсе с разделом <b>Plugins → MCP</b> («Плагины → MCP») Composio описывает другую форму: <b>Add server</b> («Добавить сервер»), имя Composio, тип <b>Streamable HTTP</b> («Подключение по HTTP»), тот же URL, затем <b>Save</b> («Сохранить») и <b>Authenticate</b> («Авторизоваться»). Используй эту ветку, если именно она показана в аккаунте, по <a href="https://composio.dev/toolkits/composio/framework/chatgpt">инструкции Composio</a>.</p>
+<p>В форме Apps нажми <b>Scan Tools</b> («Проверить инструменты»), заверши открывшийся вход в Composio и дождись списка инструментов. Затем нажми <b>Create</b> («Создать»). Такой порядок указан в <a href="https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt">справке OpenAI</a>.</p>
+<p>Если переключателя или создания приложения нет, этот путь для твоего аккаунта недоступен. При сообщении <b>Disabled by admin</b> («Отключено администратором») обратись к администратору рабочего пространства. Не меняй тариф только ради этой инструкции: сначала уточни доступ к Composio и созданию черновиков.</p>
+<p class="result"><b>Результат:</b> приложение Composio добавлено, авторизация завершена, инструменты обнаружены. Вернись в новый чат, выбери Composio и переходи к подключению Gmail.</p>
+</details>
+</section>
+
+<section class="content-section" id="gmail">
+<h2>Шаг 2. Разреши Composio доступ к Gmail</h2>
+<p>Вход в Composio и вход в Google - два отдельных действия. Первый подключает посредника к ChatGPT, второй даёт ему доступ к конкретной почте. В новом чате выбери Composio через <code>@</code> и отправь запрос. Для каждого следующего действия выбирай его снова: <a href="https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt">OpenAI указывает, что выбор приложения относится к конкретному сообщению</a>:</p>
+<div class="code-card"><pre id="gmail-connect"><code>Используй Composio. Проверь, подключён ли мой Gmail и какой аккаунт используется. Если подключения нет, дай ссылку для авторизации Gmail. Пока ничего не отправляй, не создавай и не меняй в почте.</code></pre><button class="copy-button" type="button" data-copy-target="gmail-connect" aria-label="Скопировать запрос подключения Gmail" aria-live="polite">Скопировать</button></div>
+<p>Открой ссылку подключения из ответа Composio. На странице Google выбери тот аккаунт, почта которого открыта в соседней вкладке. Пройди показанный экран разрешений и вернись в чат. Если Gmail уже подключён, попроси Composio подтвердить, какой аккаунт используется. В <a href="https://composio.dev/toolkits/gmail/framework/chatgpt">инструкции Gmail от Composio</a> подключение аккаунта предшествует работе с письмами.</p>
+<div class="warn-card"><p><b>Прочитай права до подтверждения.</b> Для просмотра тем нужен доступ к чтению, а для последнего шага - к созданию черновика. Экран Google может запрашивать более широкие права, включая отправку писем; если они не подходят, отмени подключение. Содержимое подключённых сервисов обрабатывают ChatGPT и Composio, поэтому используй аккаунт с данными, доступ к которым вправе разрешить. Чтобы остановить доступ со стороны ChatGPT, открой <b>Settings → Plugins</b> («Настройки → Плагины»), выбери Composio и нужное подключение, затем <b>Disconnect</b> («Отключить»). Отдельное разрешение Gmail через Composio проверь и при отключении отзови в <a href="https://support.google.com/accounts/answer/13533235?hl=ru">настройках связей своего Google-аккаунта</a>. Отключение не удаляет уже сохранённые чаты, как поясняет <a href="https://help.openai.com/en/articles/20001494-connecting-and-managing-app-accounts-in-chatgpt">OpenAI</a>.</p></div>
+<p class="result"><b>Результат:</b> Composio подтверждает активное подключение Gmail и нужный аккаунт. Одного сообщения «плагин установлен» для этой проверки недостаточно.</p>
+</section>
+
+<section class="content-section" id="chtenie">
+<h2>Шаг 3. Сверь непрочитанные письма с Gmail</h2>
+<p>Сначала проверим чтение. В том же чате снова выбери Composio через <code>@</code> и отправь:</p>
+<div class="code-card"><pre id="gmail-read"><code>Используй Composio и подключённый Gmail. Найди до пяти последних непрочитанных писем и покажи только темы и отправителей. Ничего не отправляй, не изменяй и не отмечай прочитанным. Если непрочитанных нет, скажи об этом.</code></pre><button class="copy-button" type="button" data-copy-target="gmail-read" aria-label="Скопировать запрос проверки непрочитанных писем" aria-live="polite">Скопировать</button></div>
+<p>У ответа открой сведения о работе приложения и проверь, что ChatGPT обратился к Composio и Gmail. Поиск писем есть в <a href="https://docs.composio.dev/toolkits/gmail">списке инструментов Gmail от Composio</a>. Затем открой Gmail, введи в поиске <code>is:unread</code> и сравни темы найденных писем. Поиск <code>is:unread</code> означает «непрочитанные», он описан в <a href="https://support.google.com/mail/answer/7190?hl=en">справке Gmail</a>. Отображаемое количество может отличаться из-за группировки писем в цепочки, поэтому сверяй сами темы и отправителей.</p>
+<p>Если непрочитанных писем нет, попроси Composio показать темы последних писем без изменения их статуса и сравни их с почтой. Не нужно отправлять себе письмо или передавать содержимое переписки в чат вручную.</p>
+<p class="result"><b>Результат:</b> темы и отправители из ответа совпадают с письмами в подключённом Gmail. При пустом списке непрочитанных проверка последних писем подтверждает чтение. Теперь можно проверить другой сервис или сразу перейти к <a href="#chernovik">последнему шагу</a>.</p>
+</section>
+
+<section class="content-section" id="notion">
+<h2>Шаг 4. Подключи Notion, если используешь его</h2>
+<p>Этот шаг необязательный. Если работаешь только с почтой, переходи к <a href="#chernovik">созданию черновика</a>. Второй сервис показывает, зачем нужен один посредник: ChatGPT выбирает нужные действия через уже установленный Composio, а ты отдельно разрешаешь доступ к документам. В <a href="https://composio.dev/toolkits/notion/framework/chatgpt">списке инструментов Notion</a> есть поиск страниц и чтение их содержимого. Снова выбери Composio через <code>@</code> и отправь:</p>
+<div class="code-card"><pre id="notion-connect"><code>Используй Composio. Дай ссылку для подключения моего Notion, если он ещё не подключён. Я разрешу доступ к одной тестовой странице. Пока ничего не создавай и не меняй.</code></pre><button class="copy-button" type="button" data-copy-target="notion-connect" aria-label="Скопировать запрос подключения Notion" aria-live="polite">Скопировать</button></div>
+<p>Открой ссылку авторизации из ответа, войди в нужное рабочее пространство Notion и разреши доступ только к тестовой странице без личных данных. Как выбирать доступные страницы, объясняет <a href="https://www.notion.com/help/add-and-manage-connections-with-the-api">справка Notion о подключениях</a>. Вернись в чат, напиши название этой страницы и попроси найти её через Composio и показать заголовок, ничего не меняя. Открой найденную страницу в самом Notion и сравни.</p>
+<p class="result"><b>Результат:</b> Composio находит разрешённую страницу, заголовок совпадает с Notion. Остальные документы не становятся доступными лишь потому, что плагин установлен. Вернись к Gmail: там проверим действие, которое меняет содержимое приложения.</p>
+</section>
+
+<section class="content-section" id="oshibki">
+<h2>Если подключение или чтение не получилось</h2>
+<ul>
+<li><b>В ответе только совет, сведений о вызове Gmail нет.</b> Выбери Composio через <code>@</code> и повтори запрос из шага 3. Если появляется просьба о входе, заверши подключение из шага 2.</li>
+<li><b>Нашлись письма другого аккаунта.</b> Попроси Composio назвать активный аккаунт Gmail и сравни его с аккаунтом в открытой почте. Переподключи нужный аккаунт через ссылку авторизации, прежде чем продолжать.</li>
+<li><b>Google отказывает в доступе.</b> Прочитай причину на экране авторизации. В рабочем аккаунте подключение может требовать одобрения администратора Google. Сам вход в ChatGPT этого ограничения не снимает.</li>
+<li><b>Notion не находит страницу.</b> Проверь доступ именно к этой странице и выбор рабочего пространства. Поиск по названию не открывает доступ к закрытому документу.</li>
+<li><b>Сервис сообщает об исчерпании лимита.</b> Проверь расход и условия своего аккаунта на <a href="https://composio.dev/pricing">странице тарифов Composio</a>, затем повтори действие, когда доступ восстановится.</li>
+</ul>
+<p>В <a href="https://help.openai.com/en/articles/20001494-connecting-and-managing-app-accounts-in-chatgpt">справке OpenAI</a> отдельно указано: авторизация сервиса не отменяет ограничения рабочего пространства и разрешения самого аккаунта. Если чтение работает, а запись недоступна, не подключай Gmail заново наугад. Сначала уточни доступ к действию создания черновика у администратора или в поддержке сервиса.</p>
+</section>
+
+<section class="content-section" id="chernovik">
+<h2>Шаг 5. Создай черновик и открой его в Gmail</h2>
+<p>Темы писем уже совпали. Осталась проверка, ради которой мы подключали приложения: появится ли результат в почте после запроса в ChatGPT? У Composio для Gmail есть отдельный инструмент <b>Create email draft</b> («Создать черновик письма»), он указан в <a href="https://composio.dev/toolkits/gmail/framework/chatgpt">официальном каталоге</a>.</p>
+<p>В том же чате сначала напиши адрес своего Gmail-аккаунта, открытого в соседней вкладке. Затем выбери Composio через <code>@</code> и отправь запрос ниже. Он станет получателем тестового черновика, отправка останется запрещена. В примере создания черновика <a href="https://composio.dev/toolkits/gmail/framework/cli">Composio указывает адрес получателя вместе с темой и текстом</a>:</p>
+<div class="code-card"><pre id="gmail-draft"><code>Используй Composio и подключённый Gmail. Создай ровно один новый черновик письма. Получатель: мой адрес Gmail из предыдущего сообщения. Если адрес не указан, сначала спроси его. Тема: Проверка связи ChatGPT и Gmail. Текст: Это тестовый черновик, созданный через Composio. Письмо отправлять не нужно. Не отправляй письмо, не добавляй других получателей и не меняй существующие письма. После сохранения покажи идентификатор созданного черновика. Если запись недоступна, сообщи причину, не подменяй создание черновика ответом в чате.</code></pre><button class="copy-button" type="button" data-copy-target="gmail-draft" aria-label="Скопировать запрос создания черновика без отправки" aria-live="polite">Скопировать</button></div>
+<p>Если ChatGPT запросит подтверждение, прочитай предложенную операцию. Подтверди только создание одного черновика с указанными темой и текстом. Если вместо этого предлагается отправка письма, отклони действие и повтори запрос с явным запретом отправки. Возможность подтверждений описана в <a href="https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt">справке OpenAI</a>.</p>
+<p>Открой Gmail в соседней вкладке, обнови страницу и зайди в <b>Drafts</b> («Черновики»). Найди письмо с темой «Проверка связи ChatGPT и Gmail» и открой его. Внутри должен быть текст из запроса, а в поле получателя должен стоять твой адрес. Если письма нет, попроси Composio найти черновик с этой темой и показать его идентификатор. Это поможет отличить сохранённое письмо от текста, который ChatGPT только предложил.</p>
+<p>Если доступ к записи запрещён, этот шаг пока выполнить нельзя. Сохрани результат проверки чтения и уточни возможность создания черновиков для своего аккаунта и способа подключения. Просьба «напиши текст письма» не заменяет создание черновика в Gmail.</p>
+<p class="result"><b>Результат:</b> в Gmail открыт новый черновик с нужной темой и текстом, получатель - твой адрес, письмо не отправлено. Это и есть ответ на вопрос из начала: о выполненном действии говорит результат в самом приложении, который ты можешь открыть и проверить. Дальше таким же способом отдавай ChatGPT небольшие задачи с понятным исходом: сначала запрос, затем проверка там, где должна измениться работа.</p>
+</section>
+
+<section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
+<p class="help-title">Не получается? Спроси ChatGPT. <span class="accent">Попроси идти по одному действию</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу [желаемый результат] через Composio в ChatGPT. Сейчас вижу [текущий экран или сообщение], уже выполнено [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа.</p></div>
+<div class="bubble claude"><span class="who">ChatGPT</span>Уточни, какое приложение подключаем и что сейчас видно. Начнём с одного действия.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
+</section>
+<section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент под своё дело</h2>
+<p>Если хочешь собрать свой рабочий процесс, на ИИ-Лагере показывают, как сделать сайт под оффер и бота с цепочкой сообщений с помощью Claude Code и Codex. Это помощники, которым ты описываешь задачу словами, а они пишут код. На практикуме разбирают сборку первых частей своего проекта по шагам. <a href="https://theivansergeev.com/ailager/">Программа и условия участия</a>.</p>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+<section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><ul>
+<li><a href="../podklyuchit-gmail-drive-calendar/"><span class="title">Gmail, Google Drive и Calendar внутри Claude</span><span class="why">Как подключить почту, файлы и календарь, если работаешь в Claude.</span></a></li>
+<li><a href="../claude-i-codex-v-vscode/"><span class="title">Claude Code и Codex в VS Code</span><span class="why">Установка помощников, чтобы собирать свои проекты в папке на компьютере.</span></a></li>
+</ul></section>
+</article>
+</main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Для другого помощника</p><h2>Почта внутри Claude</h2>
+      <p><a href="../podklyuchit-gmail-drive-calendar/">Открыть инструкцию</a></p></aside></div>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+</body></html>
