@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Монтаж видео нейросетью Claude Code или Codex: один промпт, два результата</title>
+<meta name="description" content="Монтаж видео нейросетью Claude Code и Codex: инструменты, полный промпт, запуск в пустой папке и сравнение двух версий одного ролика по кадрам и времени.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Монтаж видео нейросетью Claude Code или Codex: один промпт, два результата">
+<meta property="og:description" content="Монтаж видео нейросетью Claude Code и Codex: инструменты, полный промпт, запуск в пустой папке и сравнение двух версий одного ролика по кадрам и времени.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/montazh-video-claude-code-codex/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/montazh-video-claude-code-codex/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/montazh-video-claude-code-codex/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Две панели ролика на 1,6 секунде с надписью «МОНТАЖЁРЫ НЕ НУЖНЫ?»">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/montazh-video-claude-code-codex/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+.prompt-block { margin: 22px 0; padding: 18px; border-radius: 11px; background: #102F30; color: #F8F7F2 }
+.prompt-block pre { margin: 0 0 16px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono",monospace; color: inherit; background: transparent }
+.prompt-block .copy-button, .help-banner .copy-button { min-width: 172px }
+.check-panel { margin: 24px 0 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+.check-panel summary { cursor: pointer; font: 700 17px/1.5 sans-serif }
+.check-panel[open] summary { margin-bottom: 20px }
+.check-panel + p { margin-top: 25px }
+.shot img { border: 2px solid #E86F4A }
+.shot { width: min(100%, 460px) }
+.shot .zoom { left: 0; right: 0; bottom: 0; width: 100%; padding: 7px 10px; border-radius: 0 0 8px 8px; opacity: 1 }
+.copy-button:focus-visible { outline: 3px solid #E86F4A; outline-offset: 4px }
+h2 { margin-bottom: 20px }
+h3 { margin-top: 26px }
+
+.file-table { width: 100%; border-collapse: collapse; font: 17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+.file-table th, .file-table td { padding: 12px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; overflow-wrap: anywhere }
+.file-table th { color: var(--emerald); font-weight: 700 }
+.file-table code { white-space: normal; overflow-wrap: anywhere }
+.table-scroll { max-width: 100%; overflow-x: auto; margin: 22px 0 }
+.comparison-shot { width: min(100%, 792px) }
+.shot-media { position: relative; display: block }
+.prompt-block { position: relative; padding: 57px 22px 23px; border-radius: 12px }
+.prompt-block pre { margin: 0 }
+.prompt-block .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: #E86F4A; color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer }
+.prompt-block .copy-button:hover { background: #F28A68; box-shadow: 0 2px 0 #8F371F }
+.prompt-block .copy-button:active { background: #FFC6AD; box-shadow: inset 0 0 0 3px #8F371F }
+.prompt-block .copy-button.is-copied { background: #FFD1BF; color: #102F30; outline: 0; box-shadow: 0 0 0 3px rgba(255,209,191,.34) }
+</style></head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">Монтаж видео</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
+<a href="#instrumenty">Шаг 1. Попроси агента подключить инструменты</a>
+<a href="#papka">Шаг 2. Собери материалы в папку material</a>
+<a href="#zadanie">Шаг 3. Сохрани подробный промпт</a>
+<a href="#mp4">Шаг 4. Запусти монтаж в новой папке</a>
+<a href="#razbor">Как был собран ролик со сравнением</a>
+<a href="#sravnenie">Сравнение двух монтажей по кадрам и времени</a>
+<a href="#oshibki">Если монтаж остановился на ошибке</a></nav><main><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Что нужно до начала</a>
+<a href="#instrumenty">Шаг 1. Попроси агента подключить инструменты</a>
+<a href="#papka">Шаг 2. Собери материалы в папку material</a>
+<a href="#zadanie">Шаг 3. Сохрани подробный промпт</a>
+<a href="#mp4">Шаг 4. Запусти монтаж в новой папке</a>
+<a href="#razbor">Как был собран ролик со сравнением</a>
+<a href="#sravnenie">Сравнение двух монтажей по кадрам и времени</a>
+<a href="#oshibki">Если монтаж остановился на ошибке</a></nav></details><article><header id="nachalo"><p class="eyebrow">Инструкция · Один промпт, два монтажа</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Две панели ролика на 1,6 секунде с надписью «МОНТАЖЁРЫ НЕ НУЖНЫ?»" loading="eager" decoding="async" fetchpriority="high"><figcaption>Сверху монтаж Claude Code, снизу Codex: один голос и одинаковое задание</figcaption></figure>
+<h1 class="article-title-v2">Монтаж видео нейросетью Claude Code или Codex: один промпт, два результата</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
+<p class="lead">Дубли лежат в папке, а монтаж снова съедает вечер. Можно отдать эту работу агенту на компьютере, но как понять, какой справится лучше? Для сравнения Claude Code и Codex получили один подробный промпт, один голос и одинаковые записи аватара, цифрового двойника в кадре. На выходе получились два разных монтажа.</p>
+<p class="lead">Это разбор одного конкретного ролика, его можно посмотреть целиком в разделе <a href="#razbor">«Как был собран ролик»</a>. Обе модели работали в новых пустых папках, без памяти и привязки к проекту. Здесь можно взять полное задание, подключить инструменты и повторить такой запуск со своими материалами. А затем сравнить кадры: где каждая модель распорядилась заданием по-своему и почему время работы отличается почти в два с половиной раза.</p>
+<p class="meta">Актуально на 06.10.2026 · Claude Code, Codex и локальный монтаж</p></header>
+<section class="content-section" id="podgotovka"><h2>Что нужно до начала</h2>
+<p>Нужны компьютер, Claude Code или Codex и папка с исходниками. Это агенты: программы, которые открывают разрешённые файлы на твоём компьютере и запускают инструменты по заданию словами. Обычный разговор на сайте не заменяет этот доступ. Агент здесь как помощник за рабочим столом, которому можно показать материалы и объяснить результат.</p>
+<p>Работать с агентом можно там, где удобнее: в приложении на компьютере, в редакторе VS Code или в терминале. У Claude Code есть приложение Claude для Mac и Windows, где нужна вкладка Code, а у Codex своё приложение Codex. В обоих выбираешь папку проекта и пишешь задание в чат. Версии в браузере для монтажа не подходят: они работают в облаке и не видят программы и файлы на твоём компьютере.</p>
+<p>Если удобнее редактор, установи агента по статье <a href="../claude-i-codex-v-vscode/">«Claude Code и Codex в VS Code»</a>. VS Code - редактор, в котором рядом видны папка проекта и разговор с агентом. Дальше все шаги показаны на VS Code, в приложении они те же: открыть папку и написать в чат. Код для первого монтажа писать не требуется. В Claude Code можно войти с подпиской Pro, Max, Team или Enterprise, либо через аккаунт Console. В Codex войди аккаунтом ChatGPT; при входе с API-ключом часть функций может быть недоступна. Условия описаны в <a href="https://code.claude.com/docs/en/quickstart">быстром старте Claude Code</a> и <a href="https://learn.chatgpt.com/docs/quickstart">быстром старте Codex</a>.</p>
+<p>Открой агента: приложение или панель в VS Code. Запрос на установку из следующего шага отправляй туда, в чат агента. После подготовки компьютера для самого монтажа откроем отдельную папку и начнём новый разговор.</p>
+</section>
+<section class="content-section" id="instrumenty"><h2>Шаг 1. Попроси агента подключить инструменты</h2>
+<p>Сам по себе агент резать видео не умеет, для этого ему нужны три программы. Ставить их вручную не нужно: агент поставит всё сам по одной просьбе, а ты только разрешаешь его действия. Сначала коротко о том, что это за программы.</p>
+<h3 id="ffmpeg">FFmpeg: обрезать и склеить дубли</h3>
+<p>Когда в начале дубля есть пауза, а нужная фраза лежит в другом файле, FFmpeg помогает вырезать и соединить эти куски. Это «руки» монтажа, ножницы и клей для видео и звука. Агент говорит ей, что сделать, а она режет, склеивает и сохраняет файл в нужном формате. Какую сцену оставить, она сама не решает, это ты объясняешь агенту. Установщики для разных систем собраны на <a href="https://ffmpeg.org/download.html">официальной странице FFmpeg</a>.</p>
+<h3 id="whisper">Whisper: понять, когда звучит каждое слово</h3>
+<p>Если титр появляется раньше нужной фразы, зрителю приходится читать и слушать разное. Whisper - это «уши» монтажа. Он слушает звук из видео и записывает речь текстом, отмечая, на какой секунде прозвучало каждое слово. По этим отметкам агент и ставит титры точно под слова. Мы берём версию, которая работает прямо на компьютере, она называется <code>whisper.cpp</code>.</p>
+<p>Для распознавания нужен отдельный файл модели <code>ggml-large-v3-turbo.bin</code>. В нём хранится всё, что программа знает о речи. Агент скачает его из <a href="https://huggingface.co/ggerganov/whisper.cpp">каталога моделей whisper.cpp</a>. Сама транскрипция выполняется на компьютере и не отправляет видео в облако. Имена и названия всё равно проверь: распознавание может ошибаться, а точность отметок времени нужно сверять с речью. Сам агент при этом работает через интернет, как обычно. Подробности локальной работы есть в <a href="https://github.com/ggml-org/whisper.cpp">документации whisper.cpp</a>.</p>
+<h3 id="hyperframes">HyperFrames: добавить движущуюся графику</h3>
+<p>Когда поверх видео нужны схема, число или подпись с движением, одной склейки мало. HyperFrames добавляет поверх видео надписи, схемы и движение. Агент решает, где появится надпись и как она будет двигаться, а HyperFrames собирает из этого кадры готового MP4. Снимать ролик и придумывать, о чём он, за тебя он не будет.</p>
+<p>HyperFrames сделали в HeyGen и выложили в открытый доступ. Видео он собирает на твоём компьютере и кредиты HeyGen на это не тратит. Для работы ему нужны FFmpeg и программа Node.js, их агент поставит вместе с ним. У самого агента и у сервисов голоса или аватара, если ими пользоваться, свои условия. Подробности есть на <a href="https://github.com/heygen-com/hyperframes">странице HyperFrames на GitHub</a> и в <a href="https://hyperframes.heygen.com/quickstart">быстром старте</a>.</p>
+<p>Есть и другой инструмент для графики, Remotion. Частным лицам, некоммерческим организациям и компаниям до трёх сотрудников он открыт свободно, а большим компаниям нужна коммерческая <a href="https://github.com/remotion-dev/remotion/blob/main/LICENSE.md">лицензия</a>.</p>
+<p>Программа <code>ffprobe</code>, которая устанавливается вместе с FFmpeg, показывает размер, длительность и другие параметры файла. После установки агент сможет проверять ими готовый MP4.</p>
+<p>Теперь скопируй запрос ниже и вставь его в чат агента, в приложении или в панели VS Code:</p>
+<div class="prompt-block"><pre id="install-prompt">Подготовь этот компьютер к локальному монтажу видео. Сначала определи операционную систему и проверь, что уже установлено. Существующие рабочие установки не заменяй без необходимости.
+
+Поставь недостающее: FFmpeg с ffprobe, whisper.cpp с whisper-cli, модель ggml-large-v3-turbo.bin из официального каталога whisper.cpp и Node.js 22 или новее. Подключи HyperFrames к моему агенту по официальной документации: плагин для Claude Code или скиллы для Codex. Пароли не проси в чате; если их требует системное окно, объясни, где мне ввести их самостоятельно.
+
+Перед каждым запросом разрешения объясни, что устанавливаешь, откуда скачиваешь и какую папку меняешь. Исходные видео никуда не загружай.
+
+После установки покажи фактические версии FFmpeg, whisper.cpp и HyperFrames, версию Node.js и полный путь к модели. Если whisper-cli не сообщает версию отдельной командой, покажи версию установленного пакета и успешный запуск его справки. Проверь, что мой агент видит инструкции HyperFrames. Если для этого нужен перезапуск, скажи, что открыть заново. Не выдавай установку за завершённую, пока проверки не пройдут.</pre><button class="copy-button" type="button" data-copy-target="install-prompt" aria-live="polite">Скопировать</button></div>
+<p>Агент может попросить доступ к папке, разрешение скачать программу или запустить установку. Разрешай действие, когда в запросе указаны нужный инструмент, официальный источник и понятная папка. Если нужно подтвердить установку в системном окне, сделай это там и вернись в чат. Если агент остановился из-за отсутствия доступа, покажи ему полный текст отказа.</p>
+<div class="result"><p><strong>Результат:</strong> в ответе есть версии FFmpeg, whisper.cpp и HyperFrames, Node.js 22+ и путь к скачанной модели. Агент подтверждает, что может запускать эти программы из папки ролика.</p></div>
+<details class="check-panel"><summary>Если агент не смог поставить сам</summary>
+<p>Это запасной маршрут. Открой в VS Code Terminal → New Terminal («Терминал → Новый терминал»). Ниже команды, которые агент обычно запускает или просит разрешить. Если потребуется ручной ввод, выполняй только блок для своей системы и своего агента, по одной строке.</p>
+<p>На Mac с Homebrew установка FFmpeg и whisper.cpp выглядит так. Если Homebrew ещё нет, его установку возьми с <a href="https://brew.sh">brew.sh</a>. Название пакета теперь <code>whisper.cpp</code>, прежнее <code>whisper-cpp</code> встречается в старых инструкциях. Актуальное имя указано в <a href="https://formulae.brew.sh/formula/whisper.cpp">каталоге Homebrew</a>.</p>
+<div class="prompt-block"><pre id="mac-install">brew install ffmpeg
+brew install whisper.cpp
+ffmpeg -version
+whisper-cli --help</pre><button class="copy-button" type="button" data-copy-target="mac-install">Скопировать</button></div>
+<p>Модель не входит в установку автоматически: скачай <code>ggml-large-v3-turbo.bin</code> из каталога выше, положи в отдельную папку <code>models</code> на компьютере и сообщи агенту путь. Для Windows/Linux возьми FFmpeg со страницы загрузки выше, а whisper.cpp установи по <a href="https://github.com/ggml-org/whisper.cpp#quick-start">официальной инструкции сборки</a>. Если она требует Git, CMake или компилятор, покажи агенту конкретный шаг: он поможет подобрать установку под твою систему.</p>
+<p>Node.js 22+ возьми с <a href="https://nodejs.org/en/download">официальной страницы Node.js</a>. Для Claude Code подключение плагина выглядит так:</p>
+<div class="prompt-block"><pre id="claude-plugin">claude plugin marketplace add heygen-com/hyperframes
+claude plugin install hyperframes@hyperframes</pre><button class="copy-button" type="button" data-copy-target="claude-plugin">Скопировать</button></div>
+<p>Для Codex используется установка скиллов. Скилл - набор инструкций, по которым агент собирает видео. В списке выбери Codex и Core Skills («основные скиллы»):</p>
+<div class="prompt-block"><pre id="codex-skills">npx skills add heygen-com/hyperframes</pre><button class="copy-button" type="button" data-copy-target="codex-skills">Скопировать</button></div>
+<p>Если агент устанавливает без интерактивного списка, в инструкции HyperFrames советуют команду <code>npx hyperframes skills update</code> для основного набора. После установки перезапусти разговор с агентом. В Claude Code отправь: «Используя /hyperframes:hyperframes, сделай титульный кадр на 5 секунд с надписью “Привет”». В Codex попроси использовать скилл HyperFrames для такого же кадра. Порядок подключения есть в <a href="https://hyperframes.heygen.com/guides/plugins">руководстве по плагинам</a>.</p>
+<p>Попроси агента показать <code>npx hyperframes info</code> и повторить проверки из основного запроса. К следующему шагу переходи, когда он видит все инструменты и модель.</p>
+</details>
+</section>
+<section class="content-section" id="papka"><h2>Шаг 2. Собери материалы в папку material</h2>
+<p>Теперь собери один набор исходников. В Finder на Mac или Проводнике на Windows создай папку <code>video-project</code>, а внутри неё <code>material</code>. Это материалы ролика: агенту не придётся искать голос в загрузках, шрифты в переписке и видео на телефоне.</p>
+<p>Коротко, что было на входе в нашем примере. Полная озвучка одним файлом и текст этой озвучки со временем каждого слова. Записи аватара, уже нарезанные на куски по паузам, а не одна сплошная запись. Два шрифта и три коротких звука для появления элементов. Всё остальное: сцены, приёмы монтажа, цвета и переходы - описано словами в промпте.</p>
+<p>Ниже те же файлы подробно. Названия в таблице совпадают с полным промптом, поэтому их удобно оставить и для первого собственного запуска.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Файлы в папке material"><table class="file-table"><thead><tr><th scope="col">Файл внутри material</th><th scope="col">Зачем он нужен</th></tr></thead><tbody>
+<tr><td><code>voice.wav</code></td><td>Главная озвучка. По ней выстраивается весь ролик; звук из видео аватара не используется.</td></tr>
+<tr><td><code>words.json</code></td><td>Текст речи с началом и концом каждого слова в секундах. По нему агент привязывает субтитры и графику к голосу.</td></tr>
+<tr><td><code>avatar-01.mp4</code></td><td>Первая запись аватара, для участка голоса от 0 до 23,37 секунды.</td></tr>
+<tr><td><code>avatar-02.mp4</code></td><td>Вторая запись аватара, для участка от 41,065 до 66,15 секунды.</td></tr>
+<tr><td><code>fonts/BebasNeueCyrillic.ttf</code></td><td>Шрифт крупных заголовков.</td></tr>
+<tr><td><code>fonts/Montserrat-SemiBold.ttf</code><br><code>fonts/Montserrat-Bold.ttf</code></td><td>Шрифты субтитров и подписей.</td></tr>
+<tr><td><code>sfx/pop.mp3</code><br><code>sfx/click.mp3</code><br><code>sfx/whoosh.mp3</code></td><td>Короткие звуки для появления слов, щелчков и переходов. Музыки в этом задании нет.</td></tr>
+</tbody></table></div>
+<p>Свой голос можно записать обычным способом, а вместо аватара использовать собственное видео. Готовые шрифты и звуки сложи в подпапки <code>fonts</code> и <code>sfx</code> внутри <code>material</code>. Логотипы, музыку и пример желаемого монтажа добавляй только тогда, когда они упомянуты в твоём задании.</p>
+<p>Файл <code>words.json</code> руками не делается и не устанавливается: его по голосу собирает сам агент. Если он у тебя уже есть, пропусти блок ниже.</p>
+<details class="check-panel"><summary>Нет words.json? Агент сделает его сам</summary>
+<p>Открой папку <code>video-project</code> в агенте и отправь запрос ниже. Агент распознает голос и запишет каждое слово с секундами.</p><div class="prompt-block"><pre id="words-prompt">Возьми material/voice.wav. Распознай речь локально через whisper.cpp с моделью large-v3-turbo. Сохрани material/words.json: список слов, для каждого word (слово), start (начало) и end (конец). Время укажи в секундах от начала голоса. Проверь названия, пунктуацию и совпадение отметок со звуком. Покажи расшифровку и спорные места для исправления текста до монтажа. Видео и голос никуда не загружай.</pre><button class="copy-button" type="button" data-copy-target="words-prompt" aria-live="polite">Скопировать</button></div><p>Агент покажет расшифровку. Исправь в чате неточные слова и попроси записать исправления в <code>words.json</code>, сохранив отметки времени. Если в твоём ролике другие куски видео, названия или длительность, поменяй соответствующие строки промпта.</p>
+</details>
+<p>Не клади сюда архив старого проекта, лишние дубли и материалы других роликов. Для сравнения двух моделей сделай две новые папки, например <code>montazh-claude</code> и <code>montazh-codex</code>, и скопируй в каждую одну и ту же готовую <code>material</code>. Эти папки не должны находиться внутри прежнего рабочего проекта с его правилами.</p><div class="result"><p><strong>Результат:</strong> в <code>material</code> лежат нужные видео, озвучка, проверенные слова с временем, шрифты и звуки. Для сравнения у обеих моделей одинаковые копии этих файлов.</p></div>
+</section>
+<section class="content-section" id="zadanie"><h2>Шаг 3. Сохрани подробный промпт</h2>
+<p>Просьба «смонтируй красиво» оставляет агенту почти все решения: что выделить, когда показать лицо и какой текст поставить на экран. В нашем задании эти решения описаны до запуска: время каждой сцены, точные слова, размер надписей, цвета, переходы и окна, когда лицо нужно закрыть графикой.</p>
+<p>Ниже полный промпт, который получили обе модели. Скопируй его. В VS Code выбери File → New Text File («Файл → Новый текстовый файл»), вставь текст, затем File → Save As («Файл → Сохранить как»). Сохрани его в папке проекта с именем <code>PROMPT.md</code>. Это обычный документ с заданием, а не программа. Для двух моделей сохрани одинаковый файл в обеих папках.</p><div class="prompt-block"><pre id="montazh-prompt"># Промпт на автомонтаж ролика «ИИ монтирует лучше монтажёра?»
+
+Ты монтажёр коротких роликов уровня топовых Reels. Смонтируй горизонтальное видео по этому заданию. Всё, что нужно, лежит в папке проекта `material/`. Ничего не скачивай, браузер не запускай
+
+## 1. Что за ролик
+
+Короткий обучающий ролик для Instagram. Девушка-эксперт (аватар) объясняет, как смонтировать видео нейросетью за три этапа. Зритель - новичок в нейросетях, смотрит с телефона без звука или со звуком. Задача монтажа: удержать внимание каждую секунду и показать смысл каждой фразы картинкой
+
+## 2. Формат
+
+- 1280×720, 16:9, 30 fps, H.264 + AAC, длина ровно по голосу 66,15 с
+- Видео потом уменьшится до 920 px по ширине и встанет в половину вертикального экрана. Поэтому всё крупно и контрастно: главное слово не меньше 110 px по высоте букв, подписи не меньше 40 px, мелкого текста нет
+- Безопасные поля 40 px со всех сторон, текст за них не выходит
+
+## 3. Материалы в `material/`
+
+| Файл | Что это |
+|---|---|
+| `voice.wav` | Голос, главная дорожка. Темп, высоту и громкость не менять |
+| `words.json` | Каждое слово голоса с началом и концом в секундах |
+| `avatar-01.mp4` | Аватар 1080×1920 (вертикальный), губы совпадают с голосом 0,00-23,37 с. Кадр куска = время голоса |
+| `avatar-02.mp4` | Аватар 1080×1920, губы совпадают с голосом 41,065-66,15 с. Кадр куска = время голоса минус 41,065 |
+| `fonts/BebasNeueCyrillic.ttf` | Заголовки и крупные слова |
+| `fonts/Montserrat-SemiBold.ttf`, `Montserrat-Bold.ttf` | Субтитры, подписи, текст в карточках |
+| `sfx/pop.mp3` | Мягкий pop: появилось слово, цифра, карточка |
+| `sfx/click.mp3` | Короткий клик: шаг, выбор, галочка, печать текста |
+| `sfx/whoosh.mp3` | Воздушный whoosh: смена сцены, въезд элемента, линия |
+
+Звук из файлов аватара не использовать
+
+## 4. Стиль
+
+- **Цвета.** Фон тёмный графит `#15171C`. Главный акцент оранжевый `#E2852E`. Текст белый `#FFFFFF`. Второстепенный текст и рамки кремовый `#F3E9D7` и серый `#8A8F98`. Других цветов нет, кроме цветов логотипов ChatGPT и Claude
+- **Шрифты.** Крупные слова и заголовки - Bebas Neue, капсом. Всё остальное - Montserrat. Размер подбирай сам, чтобы читалось на 920 px
+- **Логотипы и иконки** рисуешь сам простыми плоскими значками (папка, плёнка, ножницы, ухо, волна звука, часы, файл, стрелка). Логотипы ChatGPT и Claude - узнаваемые упрощённые значки
+- **Субтитры.** Внизу по центру, нижний край строки всегда на y=660, никогда не прыгают по высоте. 1-3 слова, дословно по `words.json`, текущее слово оранжевым, остальные белые, мягкая тёмная тень без плашки. Субтитры не перекрывают рот и главное слово
+
+## 5. Аватар - обязательные правила
+
+1. **Используй ВСЕ записи аватара.** С 0,00 по 23,37 с и с 41,065 по 66,15 с аватар в кадре всё время. Убирать его можно только в окнах улыбок (пункт 3)
+2. **Основная раскладка:** аватар справа, занимает правые 45% кадра на всю высоту, с родным фоном, без вырезки, пропорции не искажать. Левые 55% - графика по смыслу фразы. На хуке (0-4,5 с) и в финале (60,6-66,15 с) можно аватар на весь кадр с графикой поверх
+3. **Широкие улыбки с зубами не показывать.** В эти окна лицо закрыто графикой (карточка, крупное слово, иконка поверх зоны аватара) или аватар временно сменяется полноэкранной графикой. Окна: 1,96-2,50 · 9,30-10,20 · 13,25-13,76 · 18,15-18,65 · 20,84-21,70 · 47,56-48,40 · 52,84-53,80 · 55,43-56,40 · 58,20-60,64 с. Вне окон лицо открыто
+4. С 23,37 по 41,065 с записи аватара нет: здесь вся ширина кадра под графику. Аватар в этом промежутке не показывать
+5. Наезд на аватар разрешён: плавно 100→108% на ударных словах, не чаще раза в 4 с
+
+## 6. Сцены (время по голосу)
+
+| Время, с | Голос | Что обязательно на экране |
+|---|---|---|
+| 0,0-2,0 | Монтажёры, похоже, больше не нужны | Крупно МОНТАЖЁРЫ, на «не нужны» появляется НЕ НУЖНЫ? оранжевым |
+| 2,1-4,5 | Я отдала монтаж нейросети, и вот что получается | Значок «монтаж» (плёнка) переходит к значку нейросети |
+| 4,6-7,4 | Давай сравним, как ChatGPT и Claude монтируют видео | СРАВНИМ, логотипы ChatGPT и Claude рядом через «VS» |
+| 7,5-10,2 | Чтобы монтировать видео нейросетью, нужно пройти три этапа | 3 ЭТАПА, три пустые ячейки 1 · 2 · 3 |
+| 10,3-11,7 | Сначала подключить инструменты | Ячейка 1 загорается: ЭТАП 1 · ИНСТРУМЕНТЫ |
+| 11,8-16,3 | FFmpeg - это руки нейросети. Режет и склеивает материал | FFMPEG = РУКИ, плёнку режут ножницы и склеивают |
+| 16,4-21,0 | Whisper - это уши. Переводит видео и аудио в текст | WHISPER = УШИ, волна звука превращается в строки текста |
+| 21,2-23,4 | А третий инструмент отвечает за всю инфографику | ИНФОГРАФИКА, растущие столбики или карточки |
+| 23,4-26,7 | Выбираешь между двумя фреймворками, HyperFrames или Motion | Две карточки HYPERFRAMES и MOTION, загораются по словам |
+| 26,8-27,4 | Дело вкуса | ДЕЛО ВКУСА поверх обеих карточек |
+| 27,6-30,7 | Второе. Собираешь в одну папку всё, что касается проекта | Ячейка 2 загорается: ЭТАП 2 · ОДНА ПАПКА, большая папка |
+| 30,8-33,4 | Дубли, логотипы, шрифты, музыку | Четыре файла влетают в папку по словам, с подписями |
+| 33,5-35,0 | И отдаёшь эту папку нейросети | Папка уезжает к значку нейросети |
+| 35,1-36,9 | Третье. Пишешь подробный промпт | Ячейка 3 загорается: ЭТАП 3 · ПРОМПТ |
+| 37,2-41,1 | Какой монтаж хочешь видеть, какие переходы, какой стиль | Окно промпта, строки печатаются по словам: «монтаж: …», «переходы: …», «стиль: …» |
+| 41,1-45,7 | Вот в чём фишка: результат зависит от промпта больше, чем от модели | Аватар. ПРОМПТ &gt; МОДЕЛЬ, знак «больше» крупно |
+| 45,9-49,1 | Хочешь крутой монтаж? Пиши подробное задание, а не одну строчку | Аватар. Одна строчка зачёркивается, рядом длинное задание с галочками |
+| 49,2-52,1 | Монтаж такого ролика - примерно 30 минут | 30 МИНУТ, часы с бегущей стрелкой |
+| 52,2-55,4 | Это реально работает уже сейчас, без монтажёра | БЕЗ МОНТАЖЁРА, галочка |
+| 55,4-57,6 | И кстати, на этом видео мой аватар | АВАТАР, стрелка на аватара |
+| 57,6-60,5 | То есть всё, от идеи до монтажа, сделано нейросетью | Цепочка ИДЕЯ → ТЕКСТ → ГОЛОС → АВАТАР → МОНТАЖ, звенья по словам |
+| 60,6-64,6 | Инструкция по автомонтажу придёт за слово МОНТАЖ в комментариях | Крупно слово МОНТАЖ оранжевым, значок комментария, «пиши в комментариях» |
+| 64,6-66,15 | Она же есть по ссылке в профиле | «или ссылка в профиле» |
+
+## 7. Движение
+
+- Движение поддерживает смысл: элемент появляется ровно на своём слове (±0,1 с), не раньше
+- Внутри сцены элементы накапливаются, а не сменяют друг друга по одному
+- Смена сцены - короткий переход до 0,3 с (сдвиг, вытеснение, масштаб). Без растворений через чёрное
+- Ни одна картинка не стоит неподвижно дольше 2 с: лёгкий дрейф, пульс акцента, наезд
+- Выбор приёмов, скорости и анимации - за тобой. Цель: самое сильное и понятное видео по этому заданию
+
+## 8. Звук
+
+- Голос без изменений + звуки из `sfx/`. Музыки нет
+- Звук ставится на точное визуальное попадание (появилось слово, влетел файл, сменилась сцена), минимум один звук на 5 с, громкость звуков 0,2-0,3 от голоса
+- Итог -16 LUFS, пик не выше -1 dBTP
+
+## 9. Сдача
+
+- `МОНТАЖ-&lt;твоё имя&gt;.mp4` и лист кадров каждые 0,5 с `ЛИСТ-&lt;твоё имя&gt;.jpg`
+- Перед сдачей проверь по листу: аватар есть во всех кадрах 0-23,37 и 41,065-66,15 кроме окон улыбок, улыбок с зубами нет, субтитры на одной линии, всё читается
+- `ОТЧЁТ-&lt;твоё имя&gt;.md`: какие приёмы выбрал и почему, сколько заняла работа
+</pre><button class="copy-button" type="button" data-copy-target="montazh-prompt" aria-live="polite">Скопировать</button></div><p><strong>Что поменять под свой ролик.</strong> В этом опыте каждая модель собирала горизонтальное видео 1280×720, чтобы две версии поместились в вертикальном сравнении. Для самостоятельного вертикального ролика укажи 1080×1920 и соотношение 9:16. Затем замени сцены и их время под свой голос, цвета и шрифты под свой стиль. Пересчитай положение субтитров, безопасные поля и раскладку аватара под новый размер кадра. Если аватара нет, убери правила его появления и окна улыбок.</p>
+<p>В таблице сцен сохранено слово «Motion», потому что так прозвучала исходная озвучка. Здесь имеется в виду Remotion. Реплика «примерно 30 минут» тоже часть этого конкретного ролика, а не срок для твоего монтажа. Первый запуск включает установку, а дальнейшее время зависит от компьютера, длины ролика и числа правок.</p><div class="result"><p><strong>Результат:</strong> рядом с <code>material</code> сохранён <code>PROMPT.md</code>. Названия файлов, размер кадра, сцены и их время соответствуют твоим материалам.</p></div>
+</section>
+<section class="content-section" id="mp4"><h2>Шаг 4. Запусти монтаж в новой папке</h2>
+<p>Открой папку готового запуска: в VS Code через File → Open Folder («Файл → Открыть папку»), в приложении через выбор папки проекта. Для первого монтажа это твоя <code>video-project</code>. Для сравнения открывай <code>montazh-claude</code> в Claude Code, а <code>montazh-codex</code> в Codex. Начни новый разговор, который не продолжает прежнюю переписку.</p>
+<p>До запуска монтажа в папке должны быть только <code>PROMPT.md</code> и <code>material</code>. Если агент наследует общие пользовательские инструкции или память, отключи их для сравнения. Попроси подтвердить путь папки и сообщить, видит ли он правила за её пределами; если видит, исключи их до запуска. Одна пустая папка сама по себе не отключает общие настройки агента.</p>
+<p>В нашем сравнении Claude Code работал с Opus 5.5, Codex с GPT-Sol. Обе модели выбраны одного уровня, уровень усилий high («высокий»): модель тратит больше усилий на обдумывание задачи перед действием. Это настройки конкретного запуска; выбирай доступную модель в своём агенте. В готовом ролике нижняя панель подписана ChatGPT, но монтаж выполнял агент Codex.</p>
+<p>Когда папка и настройки выбраны, отправь одну фразу:</p><div class="prompt-block"><pre id="launch-prompt">Смонтируй по PROMPT.md.</pre><button class="copy-button" type="button" data-copy-target="launch-prompt" aria-live="polite">Скопировать</button></div><p>Агент прочитает файл и соберёт ролик. Если ему не хватает материала, исправь название или добавь именно отсутствующий файл. Сохранение проекта, MP4, листа кадров и отчёта уже описано в разделе «Сдача» промпта.</p>
+<p>Готовый файл по этому заданию называется <code>МОНТАЖ-CLAUDE.mp4</code> или <code>МОНТАЖ-CHATGPT.mp4</code> и лежит в папке запуска. Для своей версии имя зависит от имени, которое использует агент. Попроси его показать точное имя и открыть файл в обычном видеоплеере; при необходимости найти его можно через Finder или Проводник.</p>
+<div class="check-panel"><p><strong>Просмотри ролик целиком со звуком, затем без звука.</strong></p><ul><li>Начало без случайного чёрного кадра; финальная фраза не обрезана.</li><li>Речь слышна, эффекты не заглушают голос.</li><li>Титры совпадают со словами и остаются на одной линии.</li><li>Текст читается на телефоне, графика не закрывает рот; лицо закрывается только в заданные окна.</li></ul></div>
+<p>Если нужна правка, назови секунду и предмет: «На 00:12 титр появляется раньше слова. Сдвинь только этот титр по началу слова в звуке. Остальные сцены сохрани, новую версию запиши отдельным MP4». Сравни этот участок в двух версиях, затем просмотри новую целиком.</p><div class="result"><p><strong>Результат:</strong> в папке запуска есть открываемый MP4, лист кадров и отчёт. После просмотра понятно, какие места оставить и что попросить поправить.</p></div>
+</section>
+<section class="content-section" id="razbor"><h2>Как был собран ролик со сравнением</h2>
+<p>Видимые панели - уже монтаж готовых материалов. До этого отдельно подготовлены текст и озвучка голосом-клоном, то есть синтезированным голосом на основе собственного образца. Из озвучки получены слова с временем. Затем в HeyGen созданы записи аватара кусками по паузам. Монтажный агент сам аватар не создавал.</p>
+<p>В первой записи аватар говорит от начала до 23,37 секунды. Вторая относится к голосу от 41,065 до 66,15 секунды; для неё время кадра считается от начала второго куска. Между записями всю ширину занимают схемы и надписи. Эти границы уже стоят в промпте, поэтому обе модели получили одинаковый маршрут.</p>
+<p>Широкие улыбки закрываются графикой в девяти заданных окнах. Например, от 1,96 до 2,50 секунды лицо можно заменить крупной надписью. В остальные моменты аватар должен оставаться видимым. Такую просьбу удобнее задавать точным временем, чем словами «не показывай неудачное выражение лица».</p>
+<p>После двух отдельных запусков горизонтальные версии уменьшены и собраны в вертикальный ролик 1080×1920. Claude стоит сверху, Codex снизу. К панелям добавлены названия моделей и плашки времени. Это отдельная сборка сравнения после монтажа каждой модели.</p><figure class="shot "><video controls playsinline preload="none" width="540" height="960" poster="assets/sravnenie-v5.webp" src="assets/sravnenie.mp4" aria-label="Ролик со сравнением: сверху монтаж Claude Code, снизу Codex, в конце время работы 28 и 12 минут"></video><figcaption>Сам ролик: сверху монтаж Claude Code, снизу Codex. В конце на плашках время работы каждой модели.</figcaption></figure><p>Теперь обе версии можно рассматривать на одних и тех же секундах. Совпадение материала и задания позволяет увидеть решения монтажа без подмены исходников.</p>
+</section>
+<section class="content-section" id="sravnenie"><h2>Сравнение двух монтажей по кадрам и времени</h2>
+<p>В каждой паре слева Claude Code, справа Codex. Кадры взяты из обеих версий в одну и ту же секунду. По неподвижному кадру можно сравнить раскладку и надписи; скорость движения и совпадение со звуком нужно смотреть в самом MP4.</p><h3 id="para-huk">1,5 секунды: два способа начать</h3><figure class="shot comparison-shot"><img src="assets/para-01_5.webp" width="792" height="266" loading="lazy" decoding="async" alt="1,5 секунды: слева Claude с аватаром во весь кадр, справа Codex с аватаром в правой части"><figcaption>Один момент голоса. Claude заполняет кадр аватаром; Codex сразу разделяет экран на графику и человека.</figcaption></figure><p>У Claude слово «МОНТАЖЁРЫ» стоит поверх головы, аватар занимает весь кадр. У Codex слово находится в левой графической части, аватар справа. В промпте полный кадр на первых секундах разрешён, но не обязателен, поэтому обе раскладки укладываются в задание.</p><h3 id="para-grafika">23 секунды: как уместить длинное слово</h3><figure class="shot comparison-shot"><img src="assets/para-23.webp" width="792" height="266" loading="lazy" decoding="async" alt="23 секунды: надпись ИНФОГРАФИКА в версиях Claude и Codex"><figcaption>Длинное слово занимает разное место. Слева один заголовок, справа перенос на две строки.</figcaption></figure><p>Claude оставляет «ИНФОГРАФИКА» одним словом. В его отчёте отмечено, что длинный заголовок немного выходит из левых 55% кадра на торс аватара. Codex разделяет его на «ИНФО» и «ГРАФИКА»; этот выбор также описан в отчёте. Здесь видна граница задания: крупный текст и узкая колонка требуют решения, а предпочтительный перенос заранее не указан.</p><h3 id="para-papka">32 секунды: материалы собираются в папку</h3><figure class="shot comparison-shot"><img src="assets/para-32.webp" width="792" height="266" loading="lazy" decoding="async" alt="32 секунды: слева Claude с папкой ПРОЕКТ, справа Codex с папкой и строками файлов"><figcaption>В обеих версиях уже видны дубли и логотипы. Claude использует значки, Codex выделяет строки рамками.</figcaption></figure><p>Claude показывает большую папку «ПРОЕКТ», рядом файлы с маленькими значками. У Codex подписи «Дубли» и «Логотипы» собраны в отдельные строки с рамками рядом с папкой. В обоих отчётах описано накопление файлов по словам: появившийся материал остаётся до следующей сцены.</p><h3 id="para-prompt">39 секунд: что печатается в задании</h3><figure class="shot comparison-shot"><img src="assets/para-39.webp" width="792" height="266" loading="lazy" decoding="async" alt="39 секунд: слева Claude с фразой Монтаж: динамичный, без пауз, справа Codex с пунктом МОНТАЖ: …"><figcaption>Claude раскрывает строку задания словами; Codex показывает её как пункт с галочкой.</figcaption></figure><p>В окне Claude читается «Монтаж: динамичный, без пауз». У Codex виден пункт «МОНТАЖ: …» с галочкой. Промпт задаёт печать строк по словам голоса, но оставляет часть оформления агенту. Если тебе нужен дословный текст без многоточий, впиши готовую строку в сцену заранее.</p>
+<h3 id="vremya">Время и границы сравнения</h3>
+<p>По замеру полного запуска для рилза Claude занял <strong>28 минут</strong>, Codex <strong>12 минут</strong>. Это почти в два с половиной раза быстрее в этом опыте. Установка программ и создание голоса с аватаром в эти цифры не входят.</p>
+<p>В <a href="assets/otchet-claude.txt">отчёте Claude</a> и <a href="assets/otchet-codex.txt">отчёте Codex</a> указан другой отрезок: Claude пишет примерно о 26 минутах до завершения монтажа, Codex о 10 минутах 37 секундах от первого рабочего кадра до конца проверок, без начального чтения и анализа. Поэтому для сравнения здесь используются 28 и 12 минут всего запуска, как на плашках ролика.</p>
+<p>Способы сборки тоже разные. Claude в отчёте описывает графику через Python/PIL (код для рисования картинок) и финальную сборку FFmpeg. У Codex рабочие файлы написаны на Swift (языке программирования), звук подготовлен отдельным скриптом, сборка также проходит через FFmpeg. HyperFrames полезен для твоего собственного маршрута, но этот промпт не обязывал модели использовать его, и приписывать ему оба результата нельзя.</p>
+<p>По этим данным нельзя точно определить, почему Codex потратил меньше времени. Возможных причин несколько. Модели по-разному собирали сцены, проверяли и правили результат. На скорость влияет загрузка серверов Anthropic и OpenAI в момент запуска. И ещё одно условие опыта: пока Claude монтировал, на том же аккаунте Claude параллельно работали другие чаты, а у Codex в это время других задач не было. Claude отдельно описывает исправления расположения лица и размера значка после первых кадров. Одного запуска недостаточно, чтобы обещать такое же преимущество на любом компьютере.</p>
+<p><strong>В этом запуске Codex быстрее. Одного победителя по качеству кадры не показывают.</strong> Claude крупнее использует лицо в начале и подробнее заполняет строку промпта; Codex сразу отделяет графику от человека и иначе укладывает длинные слова. Нужный вариант зависит от того, какой кадр и текст ты хочешь получить.</p>
+<p>Практический вывод из ролика: результат больше зависит от подробного промпта, чем от выбора модели. Это рабочее правило для постановки задачи; один опыт с одинаковым заданием не измеряет вклад промпта отдельно от модели. Он показывает другое полезное для первого запуска: обе модели следуют заданным сценам, а неописанные детали решают по-разному. Цвета, переносы, текст и время в задании дают тебе предмет для проверки и следующей правки.</p>
+<h3 id="skolko-zadavat">Сколько расписывать самому</h3>
+<p>Подробный промпт как у нас не обязателен. Если монтируешь для себя и оставляешь агенту место додумать, он соберёт ролик и из небольшого набора материалов, но потом придётся больше править. Чем подробнее продумаешь заранее сцены, надписи и стиль, тем меньше правок после первого просмотра.</p>
+<h3 id="primer-rolika">Если не знаешь, каким должен быть монтаж</h3>
+<p>Найди ролик, который нравится, положи его в папку <code>material</code> и попроси агента сначала разобрать его, а потом смонтировать твой по той же структуре. С примером перед глазами агенту проще, чем с описанием словами.</p><div class="prompt-block"><pre id="primer-prompt">В material/primer.mp4 ролик, который мне нравится. Сначала разбери его: какие сцены, сколько длится каждая, где лицо, где графика, какие надписи и переходы, какие звуки. Покажи разбор списком. Потом смонтируй мой ролик из material по той же структуре и в том же стиле, со своим голосом и своим текстом.</pre><button class="copy-button" type="button" data-copy-target="primer-prompt" aria-live="polite">Скопировать</button></div>
+</section>
+<section class="content-section" id="oshibki"><h2>Если монтаж остановился на ошибке</h2>
+<p>Когда агент сообщает об ошибке, скопируй весь её текст в тот же чат. Не начинай проект заново: попроси исправить конкретную причину и продолжить с последнего успешного этапа.</p>
+<ul><li><strong>Command not found («команда не найдена»).</strong> «Проверь, установлена ли программа и доступна ли она из среды, где ты запускаешь команды. Если нужен новый терминал или перезапуск агента, объясни. Затем повтори проверку версии».</li><li><strong>Старая версия Node.js.</strong> «Покажи фактическую версию Node.js в своей среде. Подключи версию 22 или новее, проверь её и повтори запуск HyperFrames».</li><li><strong>Рендер упал.</strong> «Прочитай полный журнал ошибки и проверь инструмент, которым ты собирал видео. Исправь причину, сохраняя задание и исходники. Повтори экспорт и проверку файла. Покажи результат только после успешной сборки».</li><li><strong>Титры не совпадают с речью.</strong> «На [время] титр [точная надпись] расходится со звуком. Проверь пословные отметки, ошибку распознавания и их пересчёт после нарезки. Исправь этот участок и дай новую версию».</li></ul>
+<p>А если вообще непонятно, где всё остановилось, отправь агенту запрос ниже: он разберёт ситуацию по одному шагу.</p>
+</section>
+<section class="help-banner" aria-label="Если что-то не получается">
+<p class="help-title">Запутался монтаж? <span class="accent">Попроси агента объяснить следующий шаг</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу [желаемый результат] из видео в текущей папке. Сейчас вижу [экран или полный текст ошибки], уже выполнено [действия], непонятно [место затруднения]. Объясни простыми словами по одному шагу и после каждого дождись моего ответа.</p></div><div class="bubble claude"><span class="who">Пример ответа агента</span>Сначала уточним, какой файл не удалось открыть. Пришли его название из сообщения об ошибке.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button></section>
+<section class="cta" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент для своего проекта</h2>
+<p>Теперь у тебя есть пример того, как обычное задание словами превращается в ролик, и понятно, что уточнять после первого просмотра. Так же можно собрать свой сайт, бот или калькулятор, и программировать для этого не нужно. На ИИ-Лагере работу с Claude Code и Codex разбирают по шагам. Посмотри программу и выбери задачу для своего проекта.</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+</article>
+</main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Дальше по теме</p><h2>Как сделать анимированную карусель для своего проекта</h2>
+      <p><a href="../animirovannaya-karusel/">Открыть статью</a></p></aside></div><div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+</div>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+(function () {
+  var viewer = document.getElementById("viewer");
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+  var lastFocused;
+  function open(img) {
+    lastFocused = document.activeElement;
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewer.setAttribute("open", "");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    big.src = img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    viewer.removeAttribute("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    var media = document.createElement("span");
+    media.className = "shot-media";
+    img.parentElement.insertBefore(media, img);
+    media.appendChild(img);
+    media.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+</body></html>
