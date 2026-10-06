@@ -296,21 +296,21 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 
 <section class="content-section" id="shag-1">
 <h2>Шаг 1. Посмотри, что Claude Code разрешено сейчас</h2>
-<p>В поле чата Claude Code набери <code>/</code>. Откроется меню команд. В нём найди раздел <code>Customize</code> («Настроить») и выбери <code>Permissions</code> («Разрешения»).</p>
-<p>Откроется список правил, разбитый на три группы:</p>
+<p>В поле ввода Claude Code нажми значок <code>/</code>: квадратик с косой чертой рядом с <code>+</code>. Можно и просто набрать <code>/</code> с клавиатуры. В открывшемся меню выбери <code>Permissions</code> («Разрешения»).</p>
+<p>Откроется окно <code>Permission rules</code> («Правила разрешений»). Правила в нём разбиты на три группы:</p>
 <ul>
-<li><code>Allow</code> («разрешено») - агент делает это без вопроса;</li>
-<li><code>Ask</code> («спросить») - сначала спрашивает тебя;</li>
-<li><code>Deny</code> («запрещено») - не делает вообще.</li>
+<li><code>ALLOW</code> («разрешено») - агент делает это без вопроса;</li>
+<li><code>ASK</code> («спросить») - сначала спрашивает тебя;</li>
+<li><code>DENY</code> («запрещено») - не делает вообще.</li>
 </ul>
-<p>Посмотри на группу <code>Deny</code>. Если Claude Code стоит недавно, она, скорее всего, пустая: <b>запрещённого нет ничего</b>.</p>
-<div class="info-card"><p><span class="info-title">Почему режим «спрашивать перед действием» не спасает.</span> Режим Claude Code решает, спрашивать ли тебя перед действием. Чтение файлов в рабочей папке и в обычном режиме <code>Manual</code> идёт без вопроса. А с версии 2.1.283 Claude Code по умолчанию стартует в режиме <code>Auto</code>, если не выбран другой: в нём большую часть действий без тебя одобряет проверяющая модель. Так написано в <a href="https://code.claude.com/docs/en/permission-modes">описании режимов</a>. Правило <code>Deny</code> отвечает на другой вопрос: можно ли действие вообще. Оно проверяется первым и работает в любом режиме.</p></div>
-<div class="result"><p><b>Результат:</b> ты видишь, что агенту разрешено, и знаешь, что группа <code>Deny</code> пока пустая.</p></div>
+<p>У каждого правила справа подписано, откуда оно: например <code>From user settings</code> («из личных настроек»). Пролистай окно вниз до группы <code>DENY</code>. Если Claude Code стоит недавно, она, скорее всего, пустая: <b>запрещённого нет ничего</b>.</p>
+<div class="info-card"><p><span class="info-title">Почему режим «спрашивать перед действием» не спасает.</span> Режим Claude Code решает, спрашивать ли тебя перед действием. Чтение файлов в рабочей папке и в обычном режиме <code>Manual</code> идёт без вопроса. А с версии 2.1.283 Claude Code по умолчанию стартует в режиме <code>Auto</code>, если не выбран другой: в нём большую часть действий без тебя одобряет проверяющая модель. Так написано в <a href="https://code.claude.com/docs/en/permission-modes">описании режимов</a>. Правило из группы <code>DENY</code> отвечает на другой вопрос: можно ли действие вообще. Оно проверяется первым и работает в любом режиме.</p></div>
+<div class="result"><p><b>Результат:</b> ты видишь, что агенту разрешено, и знаешь, что группа <code>DENY</code> пока пустая.</p></div>
 </section>
 
 <section class="content-section" id="shag-2">
 <h2>Шаг 2. Добавь три запрета</h2>
-<p>В том же окне <code>Permissions</code> добавь в группу <code>Deny</code> правило и при сохранении выбери <code>User settings</code> («личные настройки»). Так запрет начнёт работать <b>во всех твоих проектах сразу</b>, а не только в этой папке. Повтори для каждого из трёх правил:</p>
+<p>В том же окне <code>Permission rules</code> у группы <code>DENY</code> нажми <code>Add rule…</code> («Добавить правило»), впиши правило и при сохранении выбери <code>User settings</code> («личные настройки»). Так запрет начнёт работать <b>во всех твоих проектах сразу</b>, а не только в этой папке. Повтори для каждого из трёх правил:</p>
 <div class="code-card"><pre id="rule-env"><code>Read(**/.env)</code></pre><button class="copy-button" type="button" data-copy-target="rule-env" aria-label="Скопировать правило для .env" aria-live="polite">Скопировать</button></div>
 <div class="code-card"><pre id="rule-env-copies"><code>Read(**/.env.*)</code></pre><button class="copy-button" type="button" data-copy-target="rule-env-copies" aria-label="Скопировать правило для копий .env" aria-live="polite">Скопировать</button></div>
 <div class="code-card"><pre id="rule-ssh"><code>Read(~/.ssh/**)</code></pre><button class="copy-button" type="button" data-copy-target="rule-ssh" aria-label="Скопировать правило для папки .ssh" aria-live="polite">Скопировать</button></div>
@@ -320,7 +320,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <li><code>Read(**/.env.*)</code> - его копии вроде <code>.env.local</code> и <code>.env.production</code>, в них обычно те же ключи;</li>
 <li><code>Read(~/.ssh/**)</code> - папку <code>.ssh</code> в твоей домашней папке, там лежат ключи для входа на серверы.</li>
 </ul>
-<p>Есть ещё одна причина поставить запрет именно в VS Code. Пока файл открыт в редакторе, Claude Code получает его имя, а иногда и выделенный в нём текст. Правило <code>Deny</code> перекрывает и это, сказано в <a href="https://code.claude.com/docs/en/vs-code">справке по расширению</a>.</p>
+<p>Есть ещё одна причина поставить запрет именно в VS Code. Пока файл открыт в редакторе, Claude Code получает его имя, а иногда и выделенный в нём текст. Правило из группы <code>DENY</code> перекрывает и это, сказано в <a href="https://code.claude.com/docs/en/vs-code">справке по расширению</a>.</p>
 <details class="check-panel"><summary>Попросить агента добавить правила за тебя</summary>
 <p>Отправь в чат Claude Code:</p>
 <div class="code-card"><pre id="prompt-deny"><code>Добавь в мои личные настройки ~/.claude/settings.json запрет на чтение секретных файлов. В список permissions.deny добавь три правила: "Read(**/.env)", "Read(**/.env.*)", "Read(~/.ssh/**)". Если файла нет, создай его. Если он есть, ничего в нём не удаляй и не меняй, только допиши эти строки. Содержимое .env и папки .ssh не открывай. Покажи файл целиком до изменения и после.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-deny" aria-label="Скопировать просьбу добавить запрет" aria-live="polite">Скопировать</button></div>
@@ -340,7 +340,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <p>Если файл уже есть и в нём есть раздел <code>permissions</code>, допиши три строки в его список <code>deny</code>, а если списка нет, добавь его внутрь <code>permissions</code>. Второй раздел с тем же названием не создавай: он может спрятать прежние настройки. Следи за запятыми между строками и за парными скобками: лишняя запятая в конце списка ломает файл. Как устроены файлы настроек, описано в <a href="https://code.claude.com/docs/en/settings">справке Anthropic</a>.</p>
 </details>
 <div class="info-card"><p><span class="info-title">Ключи лежат где-то ещё?</span> Добавь правило на это место. Например, <code>Read(./secrets/**)</code> закрывает папку <code>secrets</code> в проекте. Запрет по окончанию вроде <code>Read(**/*.key)</code> ставь осторожно: под него может попасть обычный файл, который агенту нужен для работы.</p></div>
-<div class="result"><p><b>Результат:</b> в группе <code>Deny</code> три правила с пометкой личных настроек.</p></div>
+<div class="result"><p><b>Результат:</b> в группе <code>DENY</code> три правила с подписью <code>From user settings</code>.</p></div>
 </section>
 
 <section class="content-section" id="shag-3">
@@ -368,7 +368,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <p>Эту лазейку закрывает песочница - <code>sandbox</code>. Это стеклянная стена вокруг всего, что агент запускает в терминале: команды и программы, которые они запускают, видят только то, что разрешено. Следит за стеной сама операционная система, а не агент. <b>Запреты на чтение из шага 2 песочница берёт себе сама</b>, так описано в <a href="https://code.claude.com/docs/en/sandboxing">справке о песочнице</a>.</p>
 <p>Как включить:</p>
 <ol>
-<li>В чате Claude Code набери <code>/</code> и в разделе <code>Customize</code> выбери <code>Sandbox</code> («Песочница»). Или просто отправь команду <code>/sandbox</code>.</li>
+<li>В поле ввода Claude Code нажми значок <code>/</code> и выбери <code>Sandbox</code> («Песочница»). Или просто отправь команду <code>/sandbox</code>.</li>
 <li>Во вкладке <code>Mode</code> («Режим») выбери <code>regular permissions</code> («обычные разрешения»): песочница включится, а вопросы перед действиями останутся как были. Второй вариант, <code>auto-allow</code>, запускает команды в песочнице без вопросов.</li>
 </ol>
 <p>Если команда не сможет выполниться в песочнице, Claude Code может перезапустить её снаружи. В режиме <code>Auto</code> такой перезапуск одобряет проверяющая модель, а не ты. Чтобы выхода наружу не было совсем, допиши в личные настройки <code>~/.claude/settings.json</code> раздел ниже, рядом с <code>permissions</code> и через запятую после него. Справка называет это строгим режимом песочницы.</p>
@@ -385,11 +385,11 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 
 <section class="content-section" id="oshibki">
 <h2>Если не получилось</h2>
-<details class="check-panel"><summary>В меню нет раздела Customize или пункта Sandbox</summary>
+<details class="check-panel"><summary>В меню нет пункта Permissions или Sandbox</summary>
 <p>Значит, расширение старое: <code>Permissions</code> появился в версии 2.1.269, <code>Sandbox</code> - в 2.1.280. Обнови Claude Code во вкладке Extensions («Расширения») VS Code и открой новый разговор.</p>
 </details>
 <details class="check-panel"><summary>Агент всё равно показал TEST=123</summary>
-<p>Посмотри, как он это сделал. Если строку вывела команда поиска или скрипт, это лазейка из шага 4: включи песочницу и повтори проверку. Если он открыл файл обычным чтением, правило не загрузилось: вернись в <code>Permissions</code> и проверь, что три правила стоят в группе <code>Deny</code> и записаны без опечаток.</p>
+<p>Посмотри, как он это сделал. Если строку вывела команда поиска или скрипт, это лазейка из шага 4: включи песочницу и повтори проверку. Если он открыл файл обычным чтением, правило не загрузилось: вернись в <code>Permissions</code> и проверь, что три правила стоят в группе <code>DENY</code> и записаны без опечаток.</p>
 </details>
 <details class="check-panel"><summary>Claude Code пишет Settings Error</summary>
 <p>Это ошибка в файле настроек, обычно лишняя или пропущенная запятая. В справке Anthropic сказано, что окно с ошибкой предлагает исправить файл с помощью Claude. Пока ошибка не исправлена, не считай запрет действующим. Можно отправить агенту:</p>
@@ -412,8 +412,8 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <section class="content-section" id="faq">
 <h2>Частые вопросы</h2>
 <details class="faq-item"><summary>Можно запретить чтение только одного файла?</summary><p>Да. Впиши путь к нему, например <code>Read(./config/keys.json)</code>. На каждый файл - отдельное правило.</p></details>
-<details class="faq-item"><summary>Есть же файл .claudeignore?</summary><p>Нет, Claude Code такой файл не читает. В справке Anthropic прямо сказано: если в проекте есть <code>.claudeignore</code>, он ни на что не влияет, и его строки нужно перенести в правила <code>Read</code> в группе <code>Deny</code>.</p></details>
-<details class="faq-item"><summary>Запрет работает в режимах Auto и bypassPermissions?</summary><p>Да. По <a href="https://code.claude.com/docs/en/permission-modes">описанию режимов</a> правила <code>Deny</code> блокируют действие в любом режиме, включая <code>bypassPermissions</code>, где Claude Code вообще ни о чём не спрашивает.</p></details>
+<details class="faq-item"><summary>Есть же файл .claudeignore?</summary><p>Нет, Claude Code такой файл не читает. В справке Anthropic прямо сказано: если в проекте есть <code>.claudeignore</code>, он ни на что не влияет, и его строки нужно перенести в правила <code>Read</code> в группе <code>DENY</code>.</p></details>
+<details class="faq-item"><summary>Запрет работает в режимах Auto и bypassPermissions?</summary><p>Да. По <a href="https://code.claude.com/docs/en/permission-modes">описанию режимов</a> правила из группы <code>DENY</code> блокируют действие в любом режиме, включая <code>bypassPermissions</code>, где Claude Code вообще ни о чём не спрашивает.</p></details>
 <details class="faq-item"><summary>Под запрет попал .env.example, а он нужен агенту</summary><p>Добавь в тот же список запретов, после остальных правил, строку-исключение <code>Read(!.env.example)</code>. Знак <code>!</code> вырезает этот файл из запретов, записанных выше в том же файле настроек. Мы проверили: с таким исключением <code>.env</code> и <code>.env.local</code> остаются закрыты, а <code>.env.example</code> читается.</p></details>
 <details class="faq-item"><summary>Почему правило в настройках, а не просьба в CLAUDE.md?</summary><p>Просьба в <code>CLAUDE.md</code> - это совет агенту, и он может его не учесть. Правило в настройках проверяет сама программа Claude Code до того, как агент что-то сделает, поэтому обойти его просьбой или ошибкой нельзя.</p></details>
 </section>
@@ -432,7 +432,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
 <p class="help-title">Застрял шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу закрыть от Claude Code файлы с ключами. Сейчас на экране [текущий экран или сообщение], уже сделано [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа. Содержимое моих секретных файлов не открывай.</p></div>
-<div class="bubble claude"><span class="who">Claude</span>Уточни, что сейчас видно в Permissions в группе Deny. Начнём с одного действия.</div></div>
+<div class="bubble claude"><span class="who">Claude</span>Уточни, что сейчас видно в Permissions в группе DENY. Начнём с одного действия.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
 </section>
 <section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент под своё дело</h2>
