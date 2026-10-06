@@ -172,7 +172,7 @@ class ArticleImagesTest(unittest.TestCase):
 
     def test_image_manifest_covers_all_29_approved_articles_and_excludes_new_article(self):
         self.assertEqual(len(self.eligible), 36)
-        self.assertEqual(set(self.covers), {a["slug"] for a in self.eligible})
+        self.assertEqual(set(self.covers), {a["slug"] for a in self.eligible} | {a["slug"] for a in self.articles if a.get("seriya") == "Промпты для картинок в ChatGPT"})
         self.assertEqual(len(self.manifest), 42)
         self.assertTrue(all(row["number"] < 44 for row in self.manifest))
         for article in self.eligible:
@@ -302,7 +302,8 @@ class ArticleImagesTest(unittest.TestCase):
     def test_catalog_uses_captioned_article_covers_and_only_live_links(self):
         doc = ImageDocument(HOME.read_text())
         cards = doc.root.all(klass="guide-link")
-        live = [a for a in self.eligible if a["status"] == "live"]
+        live = [a for a in self.articles if a["status"] == "live"
+                and (a in self.eligible or a.get("seriya") == "Промпты для картинок в ChatGPT")]
         expected = ["claude-ai/" + a["slug"] + "/" for section in self.generator.RAZDELY
                     for track in section["trassy"] for a in live if a["rubrika"] == track["trassa"]]
         self.assertEqual([card.attrs["href"] for card in cards], expected)
@@ -487,6 +488,7 @@ class ArticleImagesTest(unittest.TestCase):
                  patch.object(self.generator, "sobrat_stranicu", return_value="Главная"), \
                  patch.object(self.generator, "sobrat_podpisi", return_value={article: "Новая подпись"}), \
                  patch.object(self.generator, "sobrat_indeksaciyu", side_effect=dict), \
+                 patch.object(self.generator, "sobrat_serii", side_effect=dict), \
                  patch.object(self.generator.sys, "argv", ["sobrat_glavnuyu.py", "--proverit"]), \
                  patch("builtins.print"):
                 self.assertEqual(self.generator.main(), 1)
@@ -515,6 +517,8 @@ class GuidesSiteTest(unittest.TestCase):
             parser.feed(html)
             if not parser.has_zoomable_image:
                 continue
+            if "../../assets/promty-foto.js" in html:
+                continue  # серия промптов: своё окно увеличения в assets/promty-foto.js
             if not all(part in html for part in (
                 'class="viewer"', 'className = "zoom"',
                 '.viewer[open]', '.shot .zoom',

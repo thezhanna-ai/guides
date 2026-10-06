@@ -445,10 +445,42 @@ def sobrat_indeksaciyu(podpisi):
     return stranicy
 
 
+def spisok_serii(reestr, nazvanie):
+    statyi = {s['slug']: s for s in reestr['statyi']}
+    stroki = ['<ul>']
+    for tema in reestr.get('serii', {}).get(nazvanie, []):
+        slug = tema['slug']
+        if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', slug):
+            raise ValueError('Некорректный slug серии: %s' % slug)
+        title = ekranirovat(tema['title'])
+        if statyi.get(slug, {}).get('status') == 'live':
+            stroki.append('<li><a href="../%s/">%s</a></li>' % (slug, title))
+        else:
+            stroki.append('<li>%s <span class="soon">(скоро)</span></li>' % title)
+    return '\n'.join(stroki + ['</ul>'])
+
+
+def sobrat_serii(stranicy):
+    reestr = json.loads(REESTR.read_text(encoding='utf-8'))
+    marker = re.compile(r'(<!-- series:start -->).*?(<!-- series:end -->)', re.S)
+    for statya in reestr['statyi']:
+        seriya = statya.get('seriya')
+        if not seriya:
+            continue
+        if seriya not in reestr.get('serii', {}):
+            raise ValueError('%s: состав серии отсутствует в реестре' % statya['slug'])
+        page = (KORNI / 'claude-ai' / statya['slug'] / 'index.html').resolve()
+        html = stranicy.get(page, page.read_text(encoding='utf-8'))
+        if len(marker.findall(html)) != 1:
+            raise ValueError('%s: нужен один блок series:start/series:end' % statya['slug'])
+        stranicy[page] = marker.sub(lambda m: m[1] + '\n' + spisok_serii(reestr, seriya) + '\n' + m[2], html)
+    return stranicy
+
+
 def main():
     stranica = sobrat_stranicu()
     podpisi = sobrat_metki_urovnya(sobrat_podpisi())
-    rezultaty = {GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi)}
+    rezultaty = sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi)})
     proverka = "--proverit" in sys.argv
 
     if proverka:

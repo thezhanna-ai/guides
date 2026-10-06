@@ -34,10 +34,10 @@ class PublicationTest(unittest.TestCase):
         return target / "index.html" if target.is_dir() else target
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
-        ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"}}
+        ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"} and not a.get("seriya")}
         self.assertEqual(len(ready), 36)
-        self.assertEqual(set(self.covers), ready)
-        self.assertEqual(len(self.pages), 37)
+        self.assertEqual(set(self.covers), ready | {a["slug"] for a in self.registry if a.get("seriya") == "Промпты для картинок в ChatGPT"})
+        self.assertEqual(len(self.pages), 1 + len(self.registry))
         self.assertEqual(len(set(self.pages)), len(self.pages))
 
     def test_all_internal_links_and_cross_page_fragments_exist(self):
