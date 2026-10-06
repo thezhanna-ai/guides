@@ -245,6 +245,9 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 .code-card pre { margin: 0 }
 .code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
 @media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/permission-rules.webp"]) img, .shot:has(img[src="assets/add-deny-rule.webp"]) img, .shot:has(img[src="assets/deny-tri-pravila.webp"]) img { width: 440px }
+.shot:has(img[src="assets/otkaz.webp"]) img { width: 560px }
 </style></head><body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
@@ -303,17 +306,19 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <li><code>ASK</code> («спросить») - сначала спрашивает тебя;</li>
 <li><code>DENY</code> («запрещено») - не делает вообще.</li>
 </ul>
-<p>У каждого правила справа подписано, откуда оно: например <code>From user settings</code> («из личных настроек»). Пролистай окно вниз до группы <code>DENY</code>. Если Claude Code стоит недавно, она, скорее всего, пустая: <b>запрещённого нет ничего</b>.</p>
+<figure><div class="shot"><img src="assets/permission-rules.webp" width="1036" height="511" loading="lazy" decoding="async" alt="Окно Permission rules: группа ALLOW со ссылкой Add rule и правила с подписью From user settings"></div><figcaption>Окно <code>Permission rules</code>: справа у группы ссылка <code>Add rule…</code>, у каждого правила подписано, откуда оно</figcaption></figure>
+<p>У каждого правила справа подписано, откуда оно: например <code>From user settings</code> («из личных настроек»). Пролистай окно вниз до группы <code>DENY</code>. Если Claude Code стоит недавно, она пустая, рядом написано <code>DENY (0)</code>: <b>запрещённого нет ничего</b>. Ниже идёт <code>WORKSPACE</code> - это не правила, а папки, с которыми работает агент.</p>
 <div class="info-card"><p><span class="info-title">Почему режим «спрашивать перед действием» не спасает.</span> Режим Claude Code решает, спрашивать ли тебя перед действием. Чтение файлов в рабочей папке и в обычном режиме <code>Manual</code> идёт без вопроса. А с версии 2.1.283 Claude Code по умолчанию стартует в режиме <code>Auto</code>, если не выбран другой: в нём большую часть действий без тебя одобряет проверяющая модель. Так написано в <a href="https://code.claude.com/docs/en/permission-modes">описании режимов</a>. Правило из группы <code>DENY</code> отвечает на другой вопрос: можно ли действие вообще. Оно проверяется первым и работает в любом режиме.</p></div>
 <div class="result"><p><b>Результат:</b> ты видишь, что агенту разрешено, и знаешь, что группа <code>DENY</code> пока пустая.</p></div>
 </section>
 
 <section class="content-section" id="shag-2">
 <h2>Шаг 2. Добавь три запрета</h2>
-<p>В том же окне <code>Permission rules</code> у группы <code>DENY</code> нажми <code>Add rule…</code> («Добавить правило»), впиши правило и при сохранении выбери <code>User settings</code> («личные настройки»). Так запрет начнёт работать <b>во всех твоих проектах сразу</b>, а не только в этой папке. Повтори для каждого из трёх правил:</p>
+<p>В том же окне <code>Permission rules</code> у группы <code>DENY</code> нажми <code>Add rule…</code> («Добавить правило»). Откроется окно <code>Add deny rule</code>. Впиши правило в поле, в списке <code>Save for</code> («Сохранить для») оставь <code>all projects</code> («все проекты») и нажми <code>Add rule</code>. Так запрет начнёт работать <b>во всех твоих проектах сразу</b>. Два других варианта, <code>this project (just you)</code> и <code>this project (shared)</code>, сохраняют правило только для открытой папки: для себя или для всех, кто работает с проектом. Повтори для каждого из трёх правил:</p>
 <div class="code-card"><pre id="rule-env"><code>Read(**/.env)</code></pre><button class="copy-button" type="button" data-copy-target="rule-env" aria-label="Скопировать правило для .env" aria-live="polite">Скопировать</button></div>
 <div class="code-card"><pre id="rule-env-copies"><code>Read(**/.env.*)</code></pre><button class="copy-button" type="button" data-copy-target="rule-env-copies" aria-label="Скопировать правило для копий .env" aria-live="polite">Скопировать</button></div>
 <div class="code-card"><pre id="rule-ssh"><code>Read(~/.ssh/**)</code></pre><button class="copy-button" type="button" data-copy-target="rule-ssh" aria-label="Скопировать правило для папки .ssh" aria-live="polite">Скопировать</button></div>
+<figure><div class="shot"><img src="assets/add-deny-rule.webp" width="1036" height="634" loading="lazy" decoding="async" alt="Окно Add deny rule: в поле правило Read(**/.env), Save for all projects, кнопка Add rule"></div><figcaption>Окно <code>Add deny rule</code>: правило вписано, сохраняется для всех проектов</figcaption></figure>
 <p>Что закрывает каждое:</p>
 <ul>
 <li><code>Read(**/.env)</code> - файл <code>.env</code> в папке проекта и во всех вложенных папках;</li>
@@ -340,6 +345,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <p>Если файл уже есть и в нём есть раздел <code>permissions</code>, допиши три строки в его список <code>deny</code>, а если списка нет, добавь его внутрь <code>permissions</code>. Второй раздел с тем же названием не создавай: он может спрятать прежние настройки. Следи за запятыми между строками и за парными скобками: лишняя запятая в конце списка ломает файл. Как устроены файлы настроек, описано в <a href="https://code.claude.com/docs/en/settings">справке Anthropic</a>.</p>
 </details>
 <div class="info-card"><p><span class="info-title">Ключи лежат где-то ещё?</span> Добавь правило на это место. Например, <code>Read(./secrets/**)</code> закрывает папку <code>secrets</code> в проекте. Запрет по окончанию вроде <code>Read(**/*.key)</code> ставь осторожно: под него может попасть обычный файл, который агенту нужен для работы.</p></div>
+<figure><div class="shot"><img src="assets/deny-tri-pravila.webp" width="996" height="470" loading="lazy" decoding="async" alt="Группа DENY (3): правила Read(**/.env), Read(**/.env.*), Read(~/.ssh/**)"></div><figcaption>Группа <code>DENY</code> с тремя правилами. Здесь они сохранены только для одного проекта, поэтому подпись <code>From project local settings</code>. С вариантом <code>all projects</code> будет <code>From user settings</code></figcaption></figure>
 <div class="result"><p><b>Результат:</b> в группе <code>DENY</code> три правила с подписью <code>From user settings</code>.</p></div>
 </section>
 
@@ -353,7 +359,8 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <li>Открой новый разговор с Claude Code: нажми <code>+</code> вверху его панели. Отправь:</li>
 </ol>
 <div class="code-card"><pre id="prompt-test"><code>Прочитай файл .env в этой папке и покажи его содержимое.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-test" aria-label="Скопировать проверочную просьбу" aria-live="polite">Скопировать</button></div>
-<p>Агент должен ответить, что доступ к файлу запрещён настройками. Когда мы проверяли, Claude Code ответил так: <code>File is in a directory that is denied by your permission settings</code> («файл в папке, которая запрещена настройками разрешений»). Строки <code>TEST=123</code> в ответе нет.</p>
+<p>Агент должен ответить, что доступ к файлу запрещён настройками. Он может попробовать открыть файл разными способами, например командой <code>cat</code>, но получит отказ: <code>Permission to use Bash with command cat … has been denied</code> («запрещено выполнять команду cat …»). Строки <code>TEST=123</code> в ответе нет.</p>
+<figure><div class="shot"><img src="assets/otkaz.webp" width="1370" height="810" loading="lazy" decoding="async" alt="Claude Code пытается выполнить cat для файла .env, получает Permission denied и отвечает, что система заблокировала чтение"></div><figcaption>Проверка в VS Code: команда <code>cat</code> заблокирована, содержимое файла агент не показал</figcaption></figure>
 <div class="result"><p><b>Результат:</b> на просьбу прочитать <code>.env</code> агент отвечает отказом.</p></div>
 </section>
 
@@ -450,7 +457,69 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 </main><aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Перед настройкой</p><h2>Claude Code в VS Code</h2>
       <p><a href="../claude-i-codex-v-vscode/">Открыть инструкцию</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+
 <script>
+(function () {
+  var viewer = document.getElementById("viewer");
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+  var lastFocused;
+  function open(img) {
+    lastFocused = document.activeElement;
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewer.setAttribute("open", "");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    big.src = img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    viewer.removeAttribute("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+
 var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
 document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
 var themeButton = document.querySelector(".theme-toggle");
