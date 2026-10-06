@@ -202,6 +202,10 @@
     h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
     @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
   </style>
+<!-- privacy:head:start -->
+<link rel="stylesheet" href="/assets/privacy.css">
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
 </head><body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div>
@@ -274,7 +278,10 @@
 <section class="content-section" id="sources"><p class="section-label">Первоисточники</p><h2>Источники</h2><ul class="sources"><li><a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude">Anthropic: Upload files to Claude</a> - путь загрузки, форматы, лимиты и обработка PDF</li><li><a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Anthropic: Create and edit files with Claude</a> - путь к переключателю для XLSX</li></ul></section>
 <section class="next-read" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">После загрузки документов</p><ul><li><a href="../pervyy-proekt-v-claude/"><span class="title">Первый проект в Claude</span><span class="why">Сохрани документы для нескольких разговоров по одной задаче</span></a></li><li><a href="../gotovye-fayly-excel-word-pdf/"><span class="title">Готовые Excel, Word и PDF</span><span class="why">Попроси Claude собрать результат анализа в файл</span></a></li></ul></section>
 <section class="cta" aria-label="Следующий шаг"><p class="section-label">Бесплатный практикум</p><h2>От загруженного файла к задаче на своём проекте</h2><p>ИИ-Лагерь - бесплатный прикладной практикум по вайб-маркетингу на Claude Code и Codex. Шаги показывают на экране: ты повторяешь работу со своими материалами и собираешь результат без кода и технических знаний</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a></section>
-<footer class="foot">Интерфейс Claude может меняться. Документ от 26 сентября 2026</footer>
+<footer class="foot">Интерфейс Claude может меняться. Документ от 26 сентября 2026<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
 </article></main><aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Перед загрузкой</p>
       <h2>Начни с первого чата</h2>
@@ -407,4 +414,15 @@
     }
     updateReadingState();
     addEventListener("scroll", updateReadingState, { passive: true });
-  </script></body></html>
+  </script><!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Разрешить статистику посещений? Нажимая «Понятно», вы соглашаетесь на обработку cookie и технических данных сервисом Яндекс Метрика, если он включён владельцем сайта. <a href="/politika/">Какие данные и зачем</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline">Без аналитики</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>

@@ -22,7 +22,7 @@ class LegalCorrectionsTest(unittest.TestCase):
             with self.subTest(slug=slug):
                 self.assertIn(PROMISE, html)
                 self.assertIn(CONTENT, html)
-        for path in [ROOT / "index.html", *ROOT.glob("claude-ai/*/index.html"), *ROOT.glob("scripts/*.html")]:
+        for path in [ROOT / "index.html", *ROOT.glob("claude-ai/*/index.html"), *ROOT.glob("scripts/shablon_*.html")]:
             with self.subTest(path=path.relative_to(ROOT)):
                 html = path.read_text()
                 self.assertNotRegex(html, r"За 3-4 дня(?: в лагере)? ты пройдёшь путь[^<]*до готового продукта")
@@ -41,16 +41,17 @@ class LegalCorrectionsTest(unittest.TestCase):
             self.assertNotRegex(path.read_text(), r"WhatsApp\s*(?:\*|\(Meta\*)", str(path))
 
     def test_every_page_and_template_loads_existing_local_font_stylesheet(self):
-        pages = [ROOT / "index.html", *ROOT.glob("claude-ai/*/index.html"), *ROOT.glob("scripts/*.html")]
-        self.assertEqual(len(pages), 2 + len(json.loads((ROOT / "data/statyi.json").read_text())["statyi"]))
+        pages = [ROOT / "index.html", ROOT / "politika/index.html", *ROOT.glob("claude-ai/*/index.html"), *ROOT.glob("scripts/shablon_*.html")]
+        self.assertEqual(len(pages), 4 + len(json.loads((ROOT / "data/statyi.json").read_text())["statyi"]))
         for path in pages:
             links = ImageDocument(path.read_text()).root.all(tag="link")
             fonts = [n.attrs["href"] for n in links if n.attrs.get("href", "").endswith("/fonts/fonts.css")]
             with self.subTest(path=path.relative_to(ROOT)):
                 self.assertEqual(len(fonts), 1)
                 base = ROOT if path.parent.name == "scripts" else path.parent
-                self.assertEqual((base / fonts[0]).resolve(), ROOT / "assets/fonts/fonts.css")
-                self.assertTrue((base / fonts[0]).is_file())
+                target = ROOT / fonts[0].lstrip("/") if fonts[0].startswith("/") else base / fonts[0]
+                self.assertEqual(target.resolve(), ROOT / "assets/fonts/fonts.css")
+                self.assertTrue(target.is_file())
 
     def test_no_google_fonts_resources_in_site_html_css_js_or_generator(self):
         paths = [ROOT / "index.html"]

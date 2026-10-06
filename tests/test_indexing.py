@@ -54,7 +54,7 @@ class IndexingTest(unittest.TestCase):
     def test_sitemap_matches_indexable_live_registry_and_home_exactly(self):
         registry = json.loads((ROOT / "data/statyi.json").read_text())["statyi"]
         urls = locations((ROOT / "sitemap.xml").read_text())
-        expected = [BASE] + [BASE + "claude-ai/" + a["slug"] + "/" for a in registry
+        expected = [BASE, BASE + 'politika/'] + [BASE + "claude-ai/" + a["slug"] + "/" for a in registry
                              if a["status"] == "live" and not a.get("noindex_reason")]
         self.assertEqual(urls, expected)
         self.assertEqual(len(urls), len(set(urls)))
@@ -71,7 +71,7 @@ class IndexingTest(unittest.TestCase):
         root = Path(directory).resolve()
         for folder in ("scripts", "data"):
             (root / folder).mkdir()
-        for name in ("data/statyi.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "index.html"):
+        for name in ("data/statyi.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "index.html"):
             shutil.copyfile(ROOT / name, root / name)
         for a in json.loads((root / "data/statyi.json").read_text())["statyi"]:
             target = root / "claude-ai" / a["slug"] / "index.html"
@@ -123,7 +123,7 @@ class IndexingTest(unittest.TestCase):
             root = self.fixture(directory)
             self.assertEqual(self.run_generator(root), 0)
             self.assertEqual(self.run_generator(root, check=True), 0)
-            paths = [root / "sitemap.xml", root / "robots.txt", root / "index.html",
+            paths = [root / "politika/index.html", root / "sitemap.xml", root / "robots.txt", root / "index.html",
                      root / "claude-ai/shest-skillov/index.html",
                      root / "claude-ai/podklyuchenie-iz-rossii/index.html"]
             for path in paths:
@@ -157,7 +157,8 @@ class IndexingTest(unittest.TestCase):
             html = page.read_text().replace("</head>", '<meta name="robots" content="index,follow">\n</head>')
             page.write_text(html)
             self.assertEqual(self.run_generator(root), 0)
-            self.assertEqual(page.read_text(), html)
+            self.assertEqual(page.read_text(), generator().dobavit_privacy(html))
+            self.assertEqual(robots(page.read_text()), ["index,follow"])
 
 
 if __name__ == "__main__":

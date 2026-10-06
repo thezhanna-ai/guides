@@ -27,6 +27,36 @@ OBLOZHKI = KORNI / "data" / "OBLOZHKI.json"
 GLAVNAYA = KORNI / "index.html"
 DOMEN = "https://pronovoe.com/"
 
+
+def privacy_fragment(name):
+    return (KORNI / "scripts" / name).read_text(encoding="utf-8").strip()
+
+
+def dobavit_privacy(html):
+    """Один локальный загрузчик и одна плашка, без внешних запросов из HTML."""
+    html = re.sub(r'<!-- privacy:(head|footer|banner):start -->.*?<!-- privacy:\1:end -->\s*',
+                  '', html, flags=re.S)
+    head = ('<!-- privacy:head:start -->\n'
+            '<link rel="stylesheet" href="/assets/privacy.css">\n'
+            '<script defer src="/assets/privacy.js"></script>\n'
+            '<!-- privacy:head:end -->\n')
+    footer = ('<!-- privacy:footer:start -->\n<div class="privacy-footer">'
+              '<a href="/politika/">Политика данных</a>'
+              '<button type="button" data-cookie-settings>Настройки аналитики</button>'
+              '</div>\n<!-- privacy:footer:end -->\n')
+    if not re.search(r'</footer\s*>', html, re.I):
+        html = re.sub(r'</body\s*>', '<footer class="privacy-site-footer">\n</footer>\n</body>', html, count=1, flags=re.I)
+    for tag in ('head', 'footer', 'body'):
+        if len(re.findall(r'</' + tag + r'\s*>', html, re.I)) != 1:
+            raise ValueError('Для политики нужен один закрывающий тег ' + tag)
+    html = re.sub(r'</head\s*>', lambda _: head + '</head>', html, flags=re.I)
+    html = re.sub(r'</footer\s*>', lambda _: footer + '</footer>', html, flags=re.I)
+    return re.sub(r'</body\s*>', lambda _: privacy_fragment('privacy-banner.html') + '\n</body>', html, flags=re.I)
+
+
+def sobrat_politiku():
+    return dobavit_privacy(privacy_fragment('shablon_politiki.html') + '\n')
+
 SHAPKA = {
     "nadzagolovok": "Инструкции по нейросетям",
     "h1": "Нейросети работают",
@@ -349,7 +379,7 @@ def sobrat_stranicu():
     po_trassam = zagruzit_statyi()
     oblozhki = zagruzit_oblozhki()
     shablon = (KORNI / "scripts" / "shablon_glavnoy.html").read_text(encoding="utf-8")
-    return shablon.format(
+    return dobavit_privacy(shablon.format(
         title=ekranirovat(SHAPKA["title"]),
         description=ekranirovat(SHAPKA["description"]),
         nadzagolovok=ekranirovat(SHAPKA["nadzagolovok"]),
@@ -369,7 +399,7 @@ def sobrat_stranicu():
         kontakt=ekranirovat(SHAPKA["kontakt"]),
         avtor_tekst=ekranirovat(SHAPKA["avtor_tekst"]),
         podval_avtor=ekranirovat(SHAPKA["podval_avtor"]),
-    )
+    ))
 
 
 METKA_STIL = {
@@ -409,7 +439,7 @@ def sobrat_indeksaciyu(podpisi):
     """Единая политика noindex и sitemap, поверх уже собранных подписей."""
     reestr = json.loads(REESTR.read_text(encoding="utf-8"))
     stranicy = {}
-    adresy = [DOMEN]
+    adresy = [DOMEN, DOMEN + "politika/"]
     robots_tag = re.compile(r'<meta\b(?=[^>]*\bname\s*=\s*[\'"]robots[\'"])[^>]*>\s*', re.I)
     zapret = '<meta name="robots" content="noindex, nofollow">'
     slugi = set()
@@ -434,7 +464,7 @@ def sobrat_indeksaciyu(podpisi):
             if not re.search(r"</head\s*>", html, re.I):
                 raise ValueError("%s: отсутствует закрывающий тег head" % slug)
             html = re.sub(r"</head\s*>", zapret + "\n</head>", html, count=1, flags=re.I)
-        stranicy[page] = html
+        stranicy[page] = dobavit_privacy(html)
 
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -480,7 +510,8 @@ def sobrat_serii(stranicy):
 def main():
     stranica = sobrat_stranicu()
     podpisi = sobrat_metki_urovnya(sobrat_podpisi())
-    rezultaty = sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi)})
+    rezultaty = sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()})
     proverka = "--proverit" in sys.argv
 
     if proverka:
@@ -490,7 +521,8 @@ def main():
             print("Главная совпадает с реестром")
             print("Подписи %d статей совпадают с реестром" % len(podpisi))
             print("Индексация %d статей, sitemap.xml и robots.txt совпадают с реестром"
-                  % (len(rezultaty) - 3))
+                  % (len(rezultaty) - 4))
+            print("Политика данных и общие блоки согласия совпадают с шаблонами")
             return 0
         for page in razlichiya:
             print("РАСХОЖДЕНИЕ: %s не совпадает с реестром" % page.relative_to(KORNI))
@@ -499,9 +531,11 @@ def main():
 
     for page, html in rezultaty.items():
         if not page.exists() or page.read_text(encoding="utf-8") != html:
+            page.parent.mkdir(parents=True, exist_ok=True)
             page.write_text(html, encoding="utf-8")
     print("Подписи %d статей собраны из реестра" % len(podpisi))
-    print("Индексация %d статей, sitemap.xml и robots.txt собраны из реестра" % (len(rezultaty) - 3))
+    print("Индексация %d статей, sitemap.xml и robots.txt собраны из реестра" % (len(rezultaty) - 4))
+    print("Политика данных и общие блоки согласия собраны из шаблонов")
     po_trassam = zagruzit_statyi()
     vsego = sum(len(v) for v in po_trassam.values())
     print("Собрано: %s, статей на главной %d" % (GLAVNAYA.name, vsego))

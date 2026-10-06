@@ -15,7 +15,7 @@ class PublicationTest(unittest.TestCase):
         cls.registry = json.loads((ROOT / "data/statyi.json").read_text())["statyi"]
         cls.covers = json.loads((ROOT / "data/OBLOZHKI.json").read_text())
         # 29 оформленных статей, главная и три черновика проверяются отдельно
-        cls.pages = [ROOT / "index.html"] + [
+        cls.pages = [ROOT / "index.html", ROOT / "politika/index.html"] + [
             ROOT / "claude-ai" / article["slug"] / "index.html"
             for article in cls.registry
         ]
@@ -37,7 +37,7 @@ class PublicationTest(unittest.TestCase):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"} and not a.get("seriya")}
         self.assertEqual(len(ready), 36)
         self.assertEqual(set(self.covers), ready | {a["slug"] for a in self.registry if a.get("seriya") == "Промпты для картинок в ChatGPT"})
-        self.assertEqual(len(self.pages), 1 + len(self.registry))
+        self.assertEqual(len(self.pages), 2 + len(self.registry))
         self.assertEqual(len(set(self.pages)), len(self.pages))
 
     def test_all_internal_links_and_cross_page_fragments_exist(self):
@@ -106,6 +106,12 @@ class PublicationTest(unittest.TestCase):
                     elif classes & {"copy", "copy-button"}:
                         candidates = button.parent.all(tag="pre") + button.parent.all(tag="code") + button.parent.all(klass="txt")
                         self.assertTrue(any(n.text_content().strip() for n in candidates))
+                    elif 'data-cookie-settings' in button.attrs:
+                        self.assertEqual(button.text_content(), 'Настройки аналитики')
+                        self.assertIn('cookie-banner', ids)
+                    elif button.attrs.get('id') in {'cookie-accept', 'cookie-decline'}:
+                        self.assertIn('cookie-banner', ids)
+                        self.assertTrue(button.text_content().strip())
                     elif "zoom" in classes:
                         self.assertEqual(len(button.parent.all(tag="img")), 1)
                     else:
@@ -113,7 +119,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_partner_ctas_are_nonempty_and_point_to_the_practice(self):
         for page, doc in self.docs.items():
-            if page == ROOT / "index.html":
+            if page in {ROOT / "index.html", ROOT / "politika/index.html"}:
                 continue
             links = [n for n in doc.root.all(tag="a") if "data-partner" in n.attrs or
                      "theivansergeev.com/ailager/" in n.attrs.get("href", "")]

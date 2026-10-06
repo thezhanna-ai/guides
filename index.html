@@ -328,6 +328,10 @@
     /* Карточки без второй рамки вокруг: рубрика держится заголовком */
     .track { margin-top: 6px; padding: 0; border: 0; background: transparent }
   </style>
+<!-- privacy:head:start -->
+<link rel="stylesheet" href="/assets/privacy.css">
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
 </head>
 <body>
   <header class="cover">
@@ -538,7 +542,10 @@
       <p class="avtor-tekst"><b>Жанна Слепова.</b> Более 25 лет в финансах в проектном учёте: Big 4 и российский IT консалтинг. Работа, где разные учетные системы интегрируются между собой и работают как единое целое. С 2025 года - нейросети и вайбкодинг, обучение у лучших на рынке. Тот же системный подход: разобраться, как всё устроено, собрать в работающую связку и объяснить сложное простыми словами</p>
     </section>
 
-    <footer><p class="podval-kontakt">Связаться: <a href="mailto:pronovoe.site@yandex.ru">pronovoe.site@yandex.ru</a></p><p>Гайды обновляются регулярно - если нужной инструкции ещё нет, она уже готовится</p></footer>
+    <footer><p class="podval-kontakt">Связаться: <a href="mailto:pronovoe.site@yandex.ru">pronovoe.site@yandex.ru</a></p><p>Гайды обновляются регулярно - если нужной инструкции ещё нет, она уже готовится</p><!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
   </main>
 
   <script>
@@ -713,5 +720,16 @@
       applyFilters();
     });
   </script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Разрешить статистику посещений? Нажимая «Понятно», вы соглашаетесь на обработку cookie и технических данных сервисом Яндекс Метрика, если он включён владельцем сайта. <a href="/politika/">Какие данные и зачем</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline">Без аналитики</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
 </body>
 </html>

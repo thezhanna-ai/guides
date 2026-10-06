@@ -486,6 +486,7 @@ class ArticleImagesTest(unittest.TestCase):
             with patch.object(self.generator, "KORNI", root), \
                  patch.object(self.generator, "GLAVNAYA", home), \
                  patch.object(self.generator, "sobrat_stranicu", return_value="Главная"), \
+                 patch.object(self.generator, "sobrat_politiku", return_value="Политика"), \
                  patch.object(self.generator, "sobrat_podpisi", return_value={article: "Новая подпись"}), \
                  patch.object(self.generator, "sobrat_indeksaciyu", side_effect=dict), \
                  patch.object(self.generator, "sobrat_serii", side_effect=dict), \
