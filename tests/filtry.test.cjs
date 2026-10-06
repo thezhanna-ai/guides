@@ -71,8 +71,8 @@ function page() {
   };
 }
 
-test('Начальная страница: 34 карточки и пять рубрик', () => {
-  const p = page(); assert.equal(p.visible().length, 34); assert.equal(p.sections.length, 5);
+test('Начальная страница: 35 карточек и пять рубрик', () => {
+  const p = page(); assert.equal(p.visible().length, 35); assert.equal(p.sections.length, 5);
   assert.deepEqual(p.sections.map(s => s.attrs['data-section']), ['start', 'kazhdyy-den', 'kartinki', 'vaybkoding', 'servisy']);
 });
 
@@ -99,7 +99,7 @@ test('Ненайденный запрос скрывает карточки, т�
 
 test('Стирание запроса возвращает карточки и пустые разделы', () => {
   const p = page(); p.search('zzzzzzнебывает'); p.search('');
-  assert.equal(p.visible().length, 34); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 35); assert.ok(p.sections.every(s => s.style.display !== 'none'));
   assert.ok(!p.noResults.classes.has('show'));
 });
 
@@ -125,14 +125,14 @@ test('Регрессия: совпадение без выбранной мет�
   assert.equal(p.visible().length, 0); assert.ok(p.noResults.classes.has('show'));
 });
 
-test('«Все метки» после фильтра возвращает 34 карточки и все рубрики', () => {
+test('«Все метки» после фильтра возвращает 35 карточек и все рубрики', () => {
   const p = page(); p.filter('codex'); p.filter('all');
-  assert.equal(p.visible().length, 34); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 35); assert.ok(p.sections.every(s => s.style.display !== 'none'));
 });
 
 test('«Другое» снимает метку и ставит курсор в поле поиска', () => {
   const p = page(); p.filter('codex'); p.filter('drugoe');
-  assert.equal(p.visible().length, 34); assert.ok(p.input.focused);
+  assert.equal(p.visible().length, 35); assert.ok(p.input.focused);
 });
 
 test('Кнопка «Найти» открывает единственный результат', () => {

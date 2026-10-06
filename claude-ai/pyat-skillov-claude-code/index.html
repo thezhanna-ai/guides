@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пять скиллов для Claude Code: поиск, план, память, дизайн и один, который учит остальные</title>
+<meta name="description" content="Скиллы для Claude Code: установка Find Skills, Superpowers, claude-mem, Impeccable и Task Observer. Пять шагов с проверками и готовыми просьбами помощнику.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Пять скиллов для Claude Code: поиск, план, память, дизайн и один, который учит остальные">
+<meta property="og:description" content="Скиллы для Claude Code: установка Find Skills, Superpowers, claude-mem, Impeccable и Task Observer. Пять шагов с проверками и готовыми просьбами помощнику.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/pyat-skillov-claude-code/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/pyat-skillov-claude-code/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/pyat-skillov-claude-code/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Пять предметов на тёмном столе: лупа, чертёж с карандашом, записная книжка с закладкой, кисть и латунная подзорная труба">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/pyat-skillov-claude-code/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+</style></head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">СКИЛЛЫ</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
+<a href="#find-skills">Шаг 1. Find Skills: найди скилл под свою задачу</a>
+<a href="#superpowers">Шаг 2. Superpowers: сначала план, потом файлы</a>
+<a href="#claude-mem">Шаг 3. claude-mem: новый чат помнит прошлую работу</a>
+<a href="#impeccable">Шаг 4. Impeccable: замечания к дизайну страницы</a>
+<a href="#task-observer">Шаг 5. Task Observer: поправка становится правилом</a>
+<a href="#vmeste">Как пять работают вместе</a>
+<a href="#oshibki">Если не получилось</a>
+<a href="#svoi-proekt">Собери инструмент под своё дело</a>
+<a href="#dalshe">Дальше по теме</a></nav>
+<main>
+<header id="nachalo">
+<p class="eyebrow">Инструкция · Пять скиллов для Claude Code</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Пять предметов на тёмном столе: лупа, чертёж с карандашом, записная книжка с закладкой, кисть и латунная подзорная труба" loading="eager" decoding="async" fetchpriority="high"><figcaption>Пять предметов на столе, по одному на каждый скилл</figcaption></figure>
+<h1 class="article-title-v2">Пять скиллов для Claude Code: поиск, план, память, дизайн и один, который учит остальные</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
+<p class="lead">Claude Code стоит, а работать с ним всё равно тяжело: утром он не помнит, что вы решили вчера, на любую просьбу сразу лезет править файлы, сайты выходят одинаковые, а ту же ошибку приходится поправлять в пятый раз. <b>Пять дополнений снимают эти помехи по одной.</b> Ниже каждое ставится одной командой и проверяется одной фразой, так что сразу видно, заработало или нет.</p>
+<p>Самое интересное - пятое. Оно запоминает твои поправки и предлагает, как исправить остальные скиллы, чтобы в следующий раз объяснять не пришлось. Как это устроено и где здесь твоё слово, в последнем шаге.</p>
+<p>Два слова, которые встретятся дальше. <b>Скилл</b> - готовая инструкция, по которой Claude Code делает определённую работу. <b>Плагин</b> - дополнение, внутри которого может лежать несколько скиллов и других настроек. Superpowers и claude-mem ставятся как плагины, остальные три - как скиллы.</p>
+<p class="meta">АКТУАЛЬНО НА 6 ОКТЯБРЯ 2026</p>
+</header>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Что нужно до начала</a>
+<a href="#find-skills">Шаг 1. Find Skills: найди скилл под свою задачу</a>
+<a href="#superpowers">Шаг 2. Superpowers: сначала план, потом файлы</a>
+<a href="#claude-mem">Шаг 3. claude-mem: новый чат помнит прошлую работу</a>
+<a href="#impeccable">Шаг 4. Impeccable: замечания к дизайну страницы</a>
+<a href="#task-observer">Шаг 5. Task Observer: поправка становится правилом</a>
+<a href="#vmeste">Как пять работают вместе</a>
+<a href="#oshibki">Если не получилось</a>
+<a href="#svoi-proekt">Собери инструмент под своё дело</a>
+<a href="#dalshe">Дальше по теме</a></nav></details>
+<article>
+<section class="content-section" id="podgotovka">
+<h2>Что нужно до начала</h2>
+<ul>
+<li><b>Claude Code в VS Code.</b> Если его ещё нет, начни с <a href="../claude-i-codex-v-vscode/">установки Claude Code в VS Code</a>. Для работы нужна подписка Pro, Max, Team или Enterprise либо аккаунт Console, так написано в <a href="https://code.claude.com/docs/en/setup">инструкции Anthropic</a>.</li>
+<li><b>Node.js.</b> Скачай версию с пометкой LTS («с долгой поддержкой») <a href="https://nodejs.org/en/download">с официального сайта</a>. Вместе с ним появится команда <code>npx</code>, через которую ставятся три скилла из пяти. Для claude-mem нужна версия 20 или новее, это указано на <a href="https://github.com/thedotmack/claude-mem">странице проекта</a>.</li>
+<li><b>Одна папка проекта.</b> Все пять шагов делай в ней. Не хочется экспериментировать на рабочем сайте - создай пустую папку и открой её в VS Code.</li>
+</ul>
+<p>Команды в статье бывают двух видов, и вводятся они в разных местах:</p>
+<ul>
+<li>Команды с <code>npx</code> - в <b>Terminal</b> («Терминал», окно для команд). В VS Code он открывается через меню <b>Terminal → New Terminal</b> («Терминал → Новый терминал») и сразу стоит в папке проекта.</li>
+<li>Команды со слэшем, например <code>/plugin</code> или <code>/impeccable</code>, и просьбы обычными словами - в чат Claude Code. Каждую отправляй, только когда пришёл ответ на предыдущую.</li>
+</ul>
+<p>Проверь, что Node.js на месте. Введи в терминале по очереди две команды, каждая должна ответить номером версии:</p>
+<div class="code-card"><pre id="node-check"><code>node --version</code></pre><button class="copy-button" type="button" data-copy-target="node-check" aria-label="Скопировать проверку версии Node.js" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="npx-check"><code>npx --version</code></pre><button class="copy-button" type="button" data-copy-target="npx-check" aria-label="Скопировать проверку команды npx" aria-live="polite">Скопировать</button></div>
+<p>Вместо номера пишет «command not found» («команда не найдена»)? Закрой терминал и открой новый: старое окно не видит только что установленный Node.js.</p>
+<details class="check-panel"><summary>Если чат в VS Code не принимает команды /plugin</summary>
+<p>В панели VS Code плагины можно ставить мышкой. Напиши в чате <code>/plugins</code>, откроется окно <b>Manage plugins</b> («Управление плагинами»). На вкладке <b>Marketplaces</b> («Каталоги») добавляются каталоги, на вкладке <b>Plugins</b> («Плагины») ищешь нужный и жмёшь <b>Install</b> («Установить»). Так написано в <a href="https://code.claude.com/docs/en/vs-code#manage-plugins">документации Anthropic</a>.</p>
+<p>Второй путь - запустить Claude Code прямо в терминале. Открой ещё один терминал и введи:</p>
+<div class="code-card"><pre id="claude-terminal"><code>claude</code></pre><button class="copy-button" type="button" data-copy-target="claude-terminal" aria-label="Скопировать запуск Claude Code в терминале" aria-live="polite">Скопировать</button></div>
+<p>Когда появится поле для сообщения, вводи команды <code>/plugin</code> туда. Если терминал не знает команду <code>claude</code>, поставь Claude Code для терминала по <a href="https://code.claude.com/docs/en/setup">инструкции Anthropic</a>: расширение VS Code её не добавляет.</p>
+</details>
+</section>
+
+<section class="content-section" id="find-skills">
+<h2>Шаг 1. Find Skills: найди скилл под свою задачу</h2>
+<p>Скиллов уже тысячи, и угадать, какой нужен под твою задачу, трудно. <b>Find Skills ищет их за тебя.</b> Это скилл от компании Vercel: ты говоришь Claude Code, что собираешься делать, а он ищет подходящие в каталоге <a href="https://skills.sh/">skills.sh</a>.</p>
+<p>В ответ приходит список: что делает каждый скилл, кто его выложил, сколько раз его поставили и какой командой подключить. По <a href="https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md">его инструкции</a> он советует брать скиллы, у которых больше тысячи установок, и <b>ставит выбранный только после твоего «да»</b>.</p>
+<p>Ставим его первым, потому что дальше им же можно искать всё остальное. Введи в терминале:</p>
+<div class="code-card"><pre id="find-install"><code>npx skills add vercel-labs/skills --skill find-skills -a claude-code</code></pre><button class="copy-button" type="button" data-copy-target="find-install" aria-label="Скопировать установку Find Skills" aria-live="polite">Скопировать</button></div>
+<p>Приписка <code>-a claude-code</code> говорит, что скилл ставится для Claude Code. Если установщик спросит, куда ставить, выбери текущий проект. Потом открой новый чат Claude Code в этой же папке и отправь:</p>
+<div class="code-card"><pre id="find-check"><code>Найди скилл для проверки доступности сайта. Покажи варианты, что каждый проверяет, откуда он и сколько у него установок. Предложи подходящий, но дождись моего согласия перед установкой.</code></pre><button class="copy-button" type="button" data-copy-target="find-check" aria-label="Скопировать просьбу найти скилл" aria-live="polite">Скопировать</button></div>
+<p>Доступность - это удобно ли пользоваться сайтом тем, кто ходит по странице клавиатурой или слушает её через программу чтения с экрана.</p>
+<details class="check-panel"><summary>Как искать и управлять скиллами из терминала</summary>
+<p>Поиск по слову accessibility («доступность»):</p>
+<div class="code-card"><pre id="find-cli"><code>npx skills find accessibility</code></pre><button class="copy-button" type="button" data-copy-target="find-cli" aria-label="Скопировать поиск accessibility" aria-live="polite">Скопировать</button></div>
+<p>Какие скиллы уже стоят:</p>
+<div class="code-card"><pre id="skills-list"><code>npx skills list</code></pre><button class="copy-button" type="button" data-copy-target="skills-list" aria-label="Скопировать список скиллов" aria-live="polite">Скопировать</button></div>
+<p>Обновить все поставленные скиллы:</p>
+<div class="code-card"><pre id="skills-update"><code>npx skills update</code></pre><button class="copy-button" type="button" data-copy-target="skills-update" aria-label="Скопировать обновление скиллов" aria-live="polite">Скопировать</button></div>
+</details>
+<div class="result"><p><b>Результат:</b> на просьбу найти скилл приходит список вариантов с числом установок, а ставит Claude Code только тот, на который ты согласишься.</p></div>
+</section>
+
+<section class="content-section" id="superpowers">
+<h2>Шаг 2. Superpowers: сначала план, потом файлы</h2>
+<p>Просишь добавить на сайт один блок, а Claude Code уже переписал три файла, хотя вы толком не договорились, что должно получиться. <b>Superpowers заставляет его притормозить.</b> Это плагин с набором скиллов, который выстраивает работу по порядку.</p>
+<p>Порядок такой, по <a href="https://github.com/obra/superpowers#how-it-works">описанию разработчика</a>:</p>
+<ol>
+<li>Claude Code расспрашивает, чего ты на самом деле хочешь.</li>
+<li>Показывает замысел короткими кусками, чтобы его можно было прочитать и одобрить.</li>
+<li>Составляет план работы.</li>
+<li>После твоего «делай» выполняет план по задачам и проверяет каждую.</li>
+</ol>
+<p>Включать ничего не нужно, скиллы срабатывают сами, когда видят задачу. Ошибки это не отменяет, зато неверное решение видно на этапе замысла, а не после переделки половины проекта.</p>
+<p>Superpowers есть в <a href="https://github.com/obra/superpowers#claude-code">официальном каталоге плагинов Anthropic</a>. Введи в чате Claude Code:</p>
+<div class="code-card"><pre id="super-install"><code>/plugin install superpowers@claude-plugins-official</code></pre><button class="copy-button" type="button" data-copy-target="super-install" aria-label="Скопировать установку Superpowers" aria-live="polite">Скопировать</button></div>
+<details class="check-panel"><summary>Если официальный каталог не находит Superpowers</summary>
+<p>Поставь его из каталога самого разработчика. В том же чате по очереди: первая команда добавляет каталог, вторая ставит плагин.</p>
+<div class="code-card"><pre id="super-market"><code>/plugin marketplace add obra/superpowers-marketplace</code></pre><button class="copy-button" type="button" data-copy-target="super-market" aria-label="Скопировать добавление каталога Superpowers" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="super-fallback"><code>/plugin install superpowers@superpowers-marketplace</code></pre><button class="copy-button" type="button" data-copy-target="super-fallback" aria-label="Скопировать запасную установку Superpowers" aria-live="polite">Скопировать</button></div>
+</details>
+<p>Перезапусти Claude Code и дай ему задачу, в которой есть что обсудить:</p>
+<div class="code-card"><pre id="super-check"><code>Хочу добавить на сайт блок с вопросами клиентов и ответами. Если страницы ещё нет, начнём с одной простой страницы. Помоги выбрать, как её устроить.</code></pre><button class="copy-button" type="button" data-copy-target="super-check" aria-label="Скопировать задачу для проверки Superpowers" aria-live="polite">Скопировать</button></div>
+<p>Ответь на его вопросы, одобри замысел, потом план. Когда страница готова, попроси показать, в каком она файле: <b>эта страница пригодится в шаге 4</b>.</p>
+<div class="result"><p><b>Результат:</b> Claude Code начинает с вопросов и плана, а файлы меняет только после твоего разрешения.</p></div>
+</section>
+
+<section class="content-section" id="claude-mem">
+<h2>Шаг 3. claude-mem: новый чат помнит прошлую работу</h2>
+<p>Закрываешь чат, открываешь новый - и всё рассказываешь заново: что за проект, что уже сделано, что решили. <b>claude-mem избавляет от этого пересказа.</b> Плагин записывает ход работы, сжимает его в короткие заметки и подкладывает нужные в начало следующего разговора.</p>
+<p>Это заметки, а не дословная запись переписки, поэтому важные решения всё равно стоит держать в файлах проекта. Что ещё умеет плагин, разобрано в статье <a href="../pyat-instrumentov-claude-code/#claude-mem">«Пять дополнений для Claude Code»</a>. Здесь ставим и проверяем, что память правда работает.</p>
+<p>Введи в чате Claude Code по очереди две команды из <a href="https://github.com/thedotmack/claude-mem#quick-start">инструкции claude-mem</a> и перезапусти Claude Code:</p>
+<div class="code-card"><pre id="mem-market"><code>/plugin marketplace add thedotmack/claude-mem</code></pre><button class="copy-button" type="button" data-copy-target="mem-market" aria-label="Скопировать каталог claude-mem" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="mem-install"><code>/plugin install claude-mem</code></pre><button class="copy-button" type="button" data-copy-target="mem-install" aria-label="Скопировать установку claude-mem" aria-live="polite">Скопировать</button></div>
+<div class="warn-card"><p><b>Кто обрабатывает память.</b> Заметки составляет нейросеть, и она расходует чей-то лимит. Если ставить через терминал командой из блока ниже, установщик предложит выбор: сервис claude-mem, свой ключ OpenRouter или Gemini либо твоя подписка Anthropic. <b>Сервис claude-mem первые до 14 дней не тратит лимит твоей подписки</b>, потом память переходит на подписку Anthropic, если не оформить их собственную. Это касается только памяти, остальная работа Claude Code идёт как обычно.</p></div>
+<details class="check-panel"><summary>Установка через терминал с выбором, кто обрабатывает память</summary>
+<p>Это другой способ поставить тот же плагин. Выбери один из двух, оба делать не нужно:</p>
+<div class="code-card"><pre id="mem-cli"><code>npx claude-mem install</code></pre><button class="copy-button" type="button" data-copy-target="mem-cli" aria-label="Скопировать установщик claude-mem" aria-live="polite">Скопировать</button></div>
+<p>Установщик попросит войти по ссылке, которая придёт на почту, банковская карта не нужна. Потом спросит, кто будет обрабатывать память. Ключ OpenRouter или Gemini - это личный пароль от сервиса, в обычный чат его не вставляй.</p>
+<p>Входить не хочется - добавь к команде флаг <code>--provider</code> с выбранным вариантом. Все настройки потом лежат в файле <code>~/.claude-mem/settings.json</code>, и Claude Code может объяснить, что там выбрано.</p>
+</details>
+<p>Теперь дай памяти что запомнить. В текущем чате отправь:</p>
+<div class="code-card"><pre id="mem-task"><code>Посмотри файлы проекта и запиши в README, какую страницу мы собираем и для кого она. Следующий шаг - проверить эту страницу с Impeccable. Если README ещё нет, создай его.</code></pre><button class="copy-button" type="button" data-copy-target="mem-task" aria-label="Скопировать задачу для памяти" aria-live="polite">Скопировать</button></div>
+<p>Когда файл записан, открой новый чат в той же папке и, ничего не пересказывая, спроси:</p>
+<div class="code-card"><pre id="mem-check"><code>Над чем мы работали в прошлой сессии и какой следующий шаг согласовали? Сначала используй память claude-mem, без чтения README, и укажи, на какую сохранённую запись опираешься.</code></pre><button class="copy-button" type="button" data-copy-target="mem-check" aria-label="Скопировать проверку памяти в новом чате" aria-live="polite">Скопировать</button></div>
+<p>Просьба не читать README нужна, чтобы отличить память от простого чтения файла. Ответа нет - смотри <a href="#oshibki">«Если не получилось»</a>.</p>
+<div class="result"><p><b>Результат:</b> в новом чате Claude Code сам называет прошлую задачу и следующий шаг и показывает, на какую заметку claude-mem опирается.</p></div>
+</section>
+
+<section class="content-section" id="impeccable">
+<h2>Шаг 4. Impeccable: замечания к дизайну страницы</h2>
+<p>Страница из шага 2 работает, но выглядит как сотня других, собранных нейросетью: те же цвета, те же карточки, мелкий серый текст. <b><a href="https://github.com/pbakaus/impeccable">Impeccable</a> учит Claude Code видеть такие вещи.</b> Он вырос из скилла frontend-design от Anthropic и знает 61 признак, по которому сгенерированный дизайн видно сразу.</p>
+<p>Внутри одного скилла 24 команды: проверить страницу, разобрать дизайн, отполировать перед публикацией и другие. Решать, какие замечания принять, всё равно тебе. Чем лучше он знает твой продукт и читателей, тем точнее советы, поэтому начинается всё с короткого знакомства.</p>
+<p>Введи в терминале <a href="https://github.com/pbakaus/impeccable#installation">команду установки</a>:</p>
+<div class="code-card"><pre id="impeccable-install"><code>npx impeccable install</code></pre><button class="copy-button" type="button" data-copy-target="impeccable-install" aria-label="Скопировать установку Impeccable" aria-live="polite">Скопировать</button></div>
+<p>Установщик сам найдёт Claude Code и спросит, ставить в этот проект или во все. Выбери этот проект. Перезапусти Claude Code и один раз отправь в чат:</p>
+<div class="code-card"><pre id="impeccable-init"><code>/impeccable init</code></pre><button class="copy-button" type="button" data-copy-target="impeccable-init" aria-label="Скопировать начало настройки Impeccable" aria-live="polite">Скопировать</button></div>
+<p>Он задаст вопросы про продукт и читателей и сохранит ответы в файл <code>PRODUCT.md</code>, к которому будет возвращаться в каждой следующей проверке. Теперь проверка страницы:</p>
+<div class="code-card"><pre id="impeccable-audit"><code>/impeccable audit</code></pre><button class="copy-button" type="button" data-copy-target="impeccable-audit" aria-label="Скопировать проверку страницы Impeccable" aria-live="polite">Скопировать</button></div>
+<p>Если спросит, какую страницу смотреть, назови файл из шага 2. Audit («Проверка») смотрит, удобна ли страница для всех, быстро ли грузится и как выглядит на телефоне. Например, отметит бледный текст, который сливается с фоном, или кнопку, в которую трудно попасть пальцем.</p>
+<p>Ещё две команды пригодятся после проверки. Их отправляют в тот же чат, полный список есть в <a href="https://github.com/pbakaus/impeccable#commands">описании Impeccable</a>:</p>
+<ul>
+<li><code>/impeccable critique</code> («Разбор») - мнение о дизайне: что цепляет взгляд, что путает.</li>
+<li><code>/impeccable polish</code> («Полировка») - последний проход перед публикацией.</li>
+</ul>
+<p>Короткая команда <code>/audit</code> без слова impeccable появится, только если создать её командой <code>/impeccable pin audit</code>.</p>
+<div class="result"><p><b>Результат:</b> на <code>/impeccable audit</code> приходит список конкретных замечаний именно к твоей странице.</p></div>
+</section>
+
+<section class="content-section" id="task-observer">
+<h2>Шаг 5. Task Observer: поправка становится правилом</h2>
+<p>Четыре скилла стоят, а одно и то же всё равно приходится повторять: проверь на телефоне, пиши короче, не трогай этот файл. В новом проекте всё сначала. <b><a href="https://github.com/rebelytics/one-skill-to-rule-them-all">Task Observer</a> замечает такие поправки и превращает их в правила для остальных скиллов.</b></p>
+<p>Пока ты работаешь, он ведёт журнал: какие поправки ты делаешь, что предпочитаешь, где скиллам не хватает инструкций. Из журнала он готовит конкретные правки к скиллам и предлагает новые. Следит и за собой, поэтому со временем наблюдает точнее. Подробнее о нём в статье <a href="../pyat-instrumentov-claude-code/#observer">«Пять дополнений для Claude Code»</a>.</p>
+<div class="warn-card"><p><b>Сам он скиллы не переписывает.</b> Каждую правку ты читаешь и одобряешь, только после этого она попадает в скилл. И одной установки мало: нужно правило, по которому он включается в каждом новом чате, иначе он почти не срабатывает. Обе вещи сделаем ниже.</p></div>
+<p>Поставь скилл. Введи в терминале:</p>
+<div class="code-card"><pre id="observer-install"><code>npx skills add rebelytics/one-skill-to-rule-them-all --skill task-observer -a claude-code</code></pre><button class="copy-button" type="button" data-copy-target="observer-install" aria-label="Скопировать установку Task Observer" aria-live="polite">Скопировать</button></div>
+<p>На вопрос, куда ставить, оставь текущий проект. Чтобы он работал во всех проектах сразу, к команде добавляют <code>-g</code>.</p>
+<p>Теперь правило запуска. Оно записывается в <code>CLAUDE.md</code> - файл с постоянными правилами проекта, который Claude Code читает в начале каждого чата. Вручную ничего переносить не нужно, отправь в чат просьбу, и Claude Code сам настроит всё по <a href="https://github.com/rebelytics/one-skill-to-rule-them-all/blob/main/references/environments.md">инструкции Task Observer</a>:</p>
+<div class="code-card"><pre id="observer-setup"><code>Настрой установленный Task Observer для этой папки проекта. Прочитай его SKILL.md и references/environments.md. Проверь, что рядом сохранены папки references и scripts.
+
+Добавь в CLAUDE.md правило: в начале каждого нового чата, до первого обращения к инструментам и до составления плана, загрузить Task Observer и выполнить его стартовую проверку (Session Start Protocol).
+
+Укажи реальные полные пути к скиллу, журналу наблюдений и предложениям правок. Создай нужные папки, не оставляй примерные пути. Если CLAUDE.md ещё нет, создай его. Покажи добавленное правило и где будут лежать записи. Остальные скиллы пока не меняй: сначала покажи предложение и дождись моего одобрения.</code></pre><button class="copy-button" type="button" data-copy-target="observer-setup" aria-label="Скопировать настройку запуска Task Observer" aria-live="polite">Скопировать</button></div>
+<p>Правило срабатывает в начале чата, поэтому проверять его нужно в новом. Открой новый чат в той же папке и отправь:</p>
+<div class="code-card"><pre id="observer-check"><code>Посмотри нашу страницу и предложи одну доработку.</code></pre><button class="copy-button" type="button" data-copy-target="observer-check" aria-label="Скопировать проверку запуска Task Observer" aria-live="polite">Скопировать</button></div>
+<p>В начале ответа должно быть видно, что Task Observer загрузился сам, без напоминания. Не видно - попроси показать его стартовую проверку и путь к журналу. Включился только после просьбы - значит, правило не сработало, повтори настройку и проверь снова в новом чате.</p>
+<p>Теперь самое главное. Дай Claude Code настоящую поправку, например «перед сдачей всегда проверяй кнопки на телефоне», и отправь:</p>
+<div class="code-card"><pre id="observer-review"><code>Покажи, где Task Observer записал мою поправку. Предложи конкретное изменение подходящего скилла, чтобы учитывать её в следующих задачах. Покажи текст правки и дождись моего одобрения.</code></pre><button class="copy-button" type="button" data-copy-target="observer-review" aria-label="Скопировать просьбу показать наблюдение и правку" aria-live="polite">Скопировать</button></div>
+<p>Прочитай, что он предлагает. Подходит - одобри и попроси показать, как теперь выглядит скилл. Вот и весь круг: <b>ты один раз поправляешь, Task Observer записывает, предлагает правку, ты соглашаешься - и в следующей задаче, в любом проекте с этим скиллом, Claude Code уже делает по-новому.</b> Так пятый скилл и улучшает остальные: не сам по себе, а из твоих поправок и с твоего согласия.</p>
+<div class="result"><p><b>Результат:</b> в новом чате Task Observer включается сам, твоя поправка появляется в журнале, а правка скилла ждёт твоего одобрения.</p></div>
+</section>
+
+<section class="content-section" id="vmeste">
+<h2>Как пять работают вместе</h2>
+<p>Возьми одну маленькую задачу, например доработать блок с вопросами из шага 2, и пройди её целиком:</p>
+<ol>
+<li><b>Find Skills</b> подбирает скилл для проверки доступности, ты соглашаешься на подходящий.</li>
+<li><b>Superpowers</b> не даёт начать без замысла и плана.</li>
+<li><b>claude-mem</b> в новом чате напоминает, что изменили и что осталось.</li>
+<li><b>Impeccable</b> проверяет страницу и даёт список замечаний.</li>
+<li><b>Task Observer</b> записывает твою поправку и предлагает правку скилла.</li>
+</ol>
+<p>После такого прохода следующая задача начинается не с нуля: проект Claude Code помнит, а твои поправки уже лежат в скиллах.</p>
+</section>
+
+<section class="content-section" id="oshibki">
+<h2>Если не получилось</h2>
+<details class="check-panel"><summary>Терминал не знает команду npx</summary>
+<p>Поставь Node.js с пометкой LTS, закрой терминал, открой новый и снова введи <code>npx --version</code>. Не помогло - отправь в чат Claude Code:</p>
+<div class="code-card"><pre id="error-npx"><code>В терминале VS Code команда npx не найдена. Помоги проверить установку Node.js и подскажи, как открыть терминал в папке этого проекта. Объясняй по одному действию.</code></pre><button class="copy-button" type="button" data-copy-target="error-npx" aria-label="Скопировать помощь с npx" aria-live="polite">Скопировать</button></div>
+</details>
+<details class="check-panel"><summary>Плагин не появился после установки</summary>
+<p>Перезапусти Claude Code в той же папке и открой список плагинов:</p>
+<div class="code-card"><pre id="plugin-list"><code>/plugin</code></pre><button class="copy-button" type="button" data-copy-target="plugin-list" aria-label="Скопировать управление плагинами" aria-live="polite">Скопировать</button></div>
+<p>Найди в списке нужный плагин и проверь, что он включён. Его там нет - отправь:</p>
+<div class="code-card"><pre id="error-plugin"><code>После установки и перезапуска не вижу нужный плагин. Помоги проверить список через /plugin и объясни, что означает сообщение установщика. Сначала спроси название плагина и текст ошибки.</code></pre><button class="copy-button" type="button" data-copy-target="error-plugin" aria-label="Скопировать помощь с плагином" aria-live="polite">Скопировать</button></div>
+</details>
+<details class="check-panel"><summary>claude-mem установлен, а памяти нет</summary>
+<p>Частая причина - установка командой <code>npm install -g claude-mem</code>. Она ставит только библиотеку для программистов, а сам плагин не подключает, об этом <a href="https://github.com/thedotmack/claude-mem#quick-start">предупреждают разработчики</a>. Поставь заново способом из шага 3, перезапусти Claude Code и сделай небольшую задачу. Память так и не появилась - отправь:</p>
+<div class="code-card"><pre id="error-mem"><code>claude-mem не вспоминает работу в новом чате той же папки. Проверь, подключён ли плагин, работает ли служба памяти и кто её обрабатывает. Покажи причину и одно действие для исправления, без вывода моих ключей.</code></pre><button class="copy-button" type="button" data-copy-target="error-mem" aria-label="Скопировать помощь с памятью" aria-live="polite">Скопировать</button></div>
+</details>
+<details class="check-panel"><summary>Task Observer молчит</summary>
+<p>Почти всегда дело в правиле запуска: скилл стоит, а в <code>CLAUDE.md</code> правила нет или в нём неверный путь. Отправь в новом чате:</p>
+<div class="code-card"><pre id="error-observer"><code>Task Observer установлен, но после рабочих задач и моей поправки нет записи. Проверь правило запуска в CLAUDE.md по references/environments.md, выполнение стартовой проверки и доступность папки журнала. Покажи, что мешает записи, и предложи исправление.</code></pre><button class="copy-button" type="button" data-copy-target="error-observer" aria-label="Скопировать помощь с наблюдателем" aria-live="polite">Скопировать</button></div>
+</details>
+</section>
+
+<section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
+<p class="help-title">Запнулся? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу [желаемый результат] с одним из пяти дополнений Claude Code. Сейчас вижу [текущий экран или сообщение], уже выполнено [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа.</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Уточни, какой инструмент настраиваем и что сейчас видно. Начнём с одного действия.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
+</section>
+<section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент под своё дело</h2>
+<p>На ИИ-Лагере показывают, как собрать сайт, бота или калькулятор с Claude Code и Codex. Это ИИ-помощники, которым ты описываешь задачу словами, а они пишут код. На практикуме этот путь проходят по шагам, без программирования</p>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+<section class="next-read" id="dalshe">
+<h2>Дальше по теме</h2>
+<p class="next-sub">Что логично прочитать следующим</p>
+<ul>
+<li><a href="../pyat-instrumentov-claude-code/"><span class="title">Пять дополнений для Claude Code: что каждое решает</span><span class="why">Подробнее о claude-mem и Task Observer, а ещё о том, что делать, когда кончился лимит или мешают длинные отчёты.</span></a></li>
+<li><a href="../shest-skillov/"><span class="title">Шесть скиллов Claude: как найти, подключить и вызвать</span><span class="why">Другие скиллы и установка мышкой через окно Manage Plugins («Управление плагинами»).</span></a></li>
+<li><a href="../claude-i-codex-v-vscode/"><span class="title">Claude Code и Codex в VS Code</span><span class="why">Установка помощников и первый запуск в папке проекта.</span></a></li>
+</ul>
+</section>
+</article>
+</main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Перед установкой</p><h2>Claude Code в VS Code</h2>
+      <p><a href="../claude-i-codex-v-vscode/">Открыть инструкцию</a></p></aside></div>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+</body></html>
