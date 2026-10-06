@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>72 промпта для товара в ChatGPT: от снимка до витрины</title>
+<meta name="description" content="72 промптов для картинок в ChatGPT: товар, реклама и упаковка, перевод каждой строки, кнопки копирования и три пробы.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="72 промпта для товара в ChatGPT: от снимка до витрины">
+<meta property="og:description" content="72 промптов для картинок в ChatGPT: товар, реклама и упаковка, перевод каждой строки, кнопки копирования и три пробы.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/promty-tovar-reklama-chatgpt/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/promty-tovar-reklama-chatgpt/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/promty-tovar-reklama-chatgpt/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Флакон и коробка: три способа показать один товар">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/promty-tovar-reklama-chatgpt/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+</style><link rel="stylesheet" href="../../assets/promty-foto.css">
+</head><body><div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">ВИТРИНА</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#kak">Как пользоваться</a><a href="#proby">Пробы было/стало</a><a href="#list-5">Фото товара</a><a href="#list-8">Реклама и печатные материалы</a><a href="#list-17">Упаковка</a><a href="#seriya">Другие подборки серии</a><a href="#dalshe">Дальше по теме</a><a href="#itog">Что проверить перед сохранением</a></nav><main><header id="nachalo"><p class="eyebrow">Промпты для картинок в ChatGPT</p><h1 class="article-title-v2">72 промпта для товара в ChatGPT: от снимка до витрины</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Флакон и коробка: три способа показать один товар" loading="eager" decoding="async" fetchpriority="high"><figcaption>Флакон и коробка: три способа показать один товар</figcaption></figure><p class="lead">Фото товара есть, а картинка для витрины всё ещё не складывается: белый фон, реклама и коробка требуют разных запросов к ChatGPT. Здесь 72 строки с переводами для этих трёх задач. Посмотри пробы, выбери нужную подачу и скопируй запрос. В конце покажем, что проверить, чтобы красивая упаковка не выдала вымышленный товар.</p><p class="meta">АКТУАЛЬНО НА 6 ОКТЯБРЯ 2026</p></header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#kak">Как пользоваться</a><a href="#proby">Пробы было/стало</a><a href="#list-5">Фото товара</a><a href="#list-8">Реклама и печатные материалы</a><a href="#list-17">Упаковка</a><a href="#seriya">Другие подборки серии</a><a href="#dalshe">Дальше по теме</a><a href="#itog">Что проверить перед сохранением</a></nav></details><article><section class="content-section" id="kak"><h2>Как пользоваться промптами в ChatGPT</h2><p>ChatGPT - это чат на сайте, в котором можно попросить создать картинку по описанию или изменить загруженное изображение. Ты можешь прикрепить фото и написать, что сделать с ним, либо попросить нарисовать новую сцену. Эти способы описаны в <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">справке OpenAI</a>.</p><p>Слово со слэшем, например <code>/purewhite</code>, здесь служит коротким именем стиля. Это не встроенная команда ChatGPT. Копируй строку целиком вместе с английским описанием: именно полные строки использованы в наших пробах. Перевод ниже помогает понять, какую картинку ты просишь.</p><h3>1. Подготовь фото или выбери новую сцену</h3><p>Открой <a href="https://chatgpt.com/">ChatGPT</a> и новый чат. Если хочешь изменить свой снимок, прикрепи его к сообщению и дождись миниатюры. Для новой сцены фото не требуется: можно начать с одной строки из подборки. Если нужен конкретный предмет или надпись, добавь его описание или точный текст по-русски.</p><p class="result"><b>Результат:</b> готов новый чат. Фото прикреплено, если нужно изменить свой снимок; для новой сцены можно переходить к выбору строки.</p><h3>2. Отправь полную строку</h3><p>Найди подходящий перевод ниже и нажми «Скопировать» на его плашке. Вставь строку в то же сообщение и отправь. Дождись готовой картинки. Для сравнения нескольких стилей каждый раз прикладывай исходник, чтобы следующий эффект не накладывался на предыдущий.</p><p class="result"><b>Результат:</b> в чате появилась картинка, которую можно сравнить с исходником и переводом запроса.</p><h3>3. Проверь нужные детали</h3><p>Открой результат крупнее. Если эффект не тот, отправь ту же строку ещё раз или добавь по-русски, что оставить как есть. Например: «Сохрани форму флакона и надписи на этикетке, меняй только фон». Повтор может дать другой результат. Выбранная область тоже не всегда ограничивает правку строго, об этом предупреждает <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">OpenAI</a>.</p><p>Когда картинка подходит, открой её и нажми Save («Сохранить»), чтобы скачать файл. Это действие описано в той же <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">справке OpenAI</a>.</p><p class="result"><b>Результат:</b> сохранён файл, в котором виден нужный эффект и сохранены важные для тебя детали.</p></section><section class="content-section" id="proby"><h2>Пробы было/стало</h2><p>Наши пробы: фото + строка целиком, одна попытка. Дополнительных уточнений и правок результата не было.</p><h3>Товар на белом фоне</h3><p><code>/purewhite - clean white background</code></p><div class="probe-pair"><figure class="shot"><img src="assets/proba-1-do.webp" width="1600" height="1067" loading="lazy" decoding="async" alt="Было: четыре флакона духов на светлом ворсистом фоне"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Было: четыре флакона духов на светлом ворсистом фоне</figcaption></figure><figure class="shot"><img src="assets/proba-1-posle.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Стало: четыре флакона на чистом белом фоне"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Стало: четыре флакона на чистом белом фоне</figcaption></figure></div><p class="photo-license">Исходник: <a href="https://www.pexels.com/photo/965989/">Pexels №965989</a>, <a href="https://www.pexels.com/license/">Pexels License</a>. Результат создан генератором изображений.</p><p>Фактурный фон стал белым, четыре флакона остались узнаваемыми. Контуры и надписи перерисованы, поэтому макет нельзя считать точной предметной фотографией.</p><h3>Всплеск в воздухе</h3><p><code>/liquidfreeze - splash frozen midair</code></p><div class="probe-pair"><figure class="shot"><img src="assets/proba-2-do.webp" width="1600" height="1067" loading="lazy" decoding="async" alt="Было: четыре флакона духов на светлом ворсистом фоне"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Было: четыре флакона духов на светлом ворсистом фоне</figcaption></figure><figure class="shot"><img src="assets/proba-2-posle.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Стало: флаконы среди застывших брызг"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Стало: флаконы среди застывших брызг</figcaption></figure></div><p class="photo-license">Исходник: <a href="https://www.pexels.com/photo/965989/">Pexels №965989</a>, <a href="https://www.pexels.com/license/">Pexels License</a>. Результат создан генератором изображений.</p><p>Вокруг флаконов появились прозрачные брызги. Фон и расположение похожи на исходник, но отражения и мелкий текст изменились.</p><h3>Подарочная коробка</h3><p><code>/giftready - open gift box</code></p><div class="probe-pair"><figure class="shot"><img src="assets/proba-3-do.webp" width="1600" height="1067" loading="lazy" decoding="async" alt="Было: четыре флакона духов на светлом ворсистом фоне"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Было: четыре флакона духов на светлом ворсистом фоне</figcaption></figure><figure class="shot"><img src="assets/proba-3-posle.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Стало: флаконы в открытой коробке с лентой"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Стало: флаконы в открытой коробке с лентой</figcaption></figure></div><p class="photo-license">Исходник: <a href="https://www.pexels.com/photo/965989/">Pexels №965989</a>, <a href="https://www.pexels.com/license/">Pexels License</a>. Результат создан генератором изображений.</p><p>Появились открытая коробка, бумажный наполнитель, ленты и записка. Эти детали выбрала модель. Флаконы изменили расположение, этикетки нужно сверить с оригиналом.</p></section><section class="content-section" id="list-5"><h2>Фото товара</h2><p>24 строки. Читай перевод и копируй запрос с нужным эффектом.</p><div class="prompt-grid"><div class="prompt-item"><div class="code-card"><pre id="prompt-5-1"><code>/purewhite - clean white background</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-1" aria-label="Скопировать /purewhite целиком" aria-live="polite">Скопировать</button></div><p>чистый белый фон</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-2"><code>/inhandreal - product held in hand</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-2" aria-label="Скопировать /inhandreal целиком" aria-live="polite">Скопировать</button></div><p>товар в руке</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-3"><code>/allcolors - every color in row</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-3" aria-label="Скопировать /allcolors целиком" aria-live="polite">Скопировать</button></div><p>все расцветки в ряд</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-4"><code>/floatnoline - floating without support</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-4" aria-label="Скопировать /floatnoline целиком" aria-live="polite">Скопировать</button></div><p>товар парит без опоры</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-5"><code>/bundlepack - full matching set</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-5" aria-label="Скопировать /bundlepack целиком" aria-live="polite">Скопировать</button></div><p>полный набор в одном стиле</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-6"><code>/nextobject - beside item for scale</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-6" aria-label="Скопировать /nextobject целиком" aria-live="polite">Скопировать</button></div><p>рядом предмет для сравнения размера</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-7"><code>/liquidfreeze - splash frozen midair</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-7" aria-label="Скопировать /liquidfreeze целиком" aria-live="polite">Скопировать</button></div><p>всплеск жидкости застыл в воздухе</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-8"><code>/deviceframe - inside device mockup</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-8" aria-label="Скопировать /deviceframe целиком" aria-live="polite">Скопировать</button></div><p>картинка в макете экрана устройства</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-9"><code>/shelfrow - retail shelf placement</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-9" aria-label="Скопировать /shelfrow целиком" aria-live="polite">Скопировать</button></div><p>товар на полке магазина</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-10"><code>/handoutshot - passed hand to hand</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-10" aria-label="Скопировать /handoutshot целиком" aria-live="polite">Скопировать</button></div><p>товар передают из рук в руки</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-11"><code>/giftready - open gift box</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-11" aria-label="Скопировать /giftready целиком" aria-live="polite">Скопировать</button></div><p>открытая подарочная коробка</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-12"><code>/travelcase - packed in travel bag</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-12" aria-label="Скопировать /travelcase целиком" aria-live="polite">Скопировать</button></div><p>товар уложен в дорожную сумку</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-13"><code>/openbox - freshly opened box</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-13" aria-label="Скопировать /openbox целиком" aria-live="polite">Скопировать</button></div><p>только что открытая коробка</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-14"><code>/closebox - sealed upright box</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-14" aria-label="Скопировать /closebox целиком" aria-live="polite">Скопировать</button></div><p>закрытая коробка стоит вертикально</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-15"><code>/stackedset - neat stacked units</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-15" aria-label="Скопировать /stackedset целиком" aria-live="polite">Скопировать</button></div><p>аккуратная стопка одинаковых товаров</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-16"><code>/rotatingview - six product angles</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-16" aria-label="Скопировать /rotatingview целиком" aria-live="polite">Скопировать</button></div><p>шесть ракурсов товара</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-17"><code>/macrotexture - material texture close up</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-17" aria-label="Скопировать /macrotexture целиком" aria-live="polite">Скопировать</button></div><p>фактура материала крупным планом</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-18"><code>/coloredbg - matching solid backdrop</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-18" aria-label="Скопировать /coloredbg целиком" aria-live="polite">Скопировать</button></div><p>однотонный фон в цвет товара</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-19"><code>/lifestylehold - real daily use</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-19" aria-label="Скопировать /lifestylehold целиком" aria-live="polite">Скопировать</button></div><p>товар в повседневном использовании</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-20"><code>/outdooruse - used outside naturally</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-20" aria-label="Скопировать /outdooruse целиком" aria-live="polite">Скопировать</button></div><p>естественное использование на улице</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-21"><code>/wearingit - worn as intended</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-21" aria-label="Скопировать /wearingit целиком" aria-live="polite">Скопировать</button></div><p>вещь надета по назначению</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-22"><code>/demoaction - mid use moment</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-22" aria-label="Скопировать /demoaction целиком" aria-live="polite">Скопировать</button></div><p>товар в момент использования</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-23"><code>/cleanupshot - clean and polished</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-23" aria-label="Скопировать /cleanupshot целиком" aria-live="polite">Скопировать</button></div><p>чистый и отполированный товар</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-5-24"><code>/packedtogo - ready to ship</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5-24" aria-label="Скопировать /packedtogo целиком" aria-live="polite">Скопировать</button></div><p>товар подготовлен к отправке</p></div></div></section><section class="content-section" id="list-8"><h2>Реклама и печатные материалы</h2><p>24 строки. Читай перевод и копируй запрос с нужным эффектом.</p><div class="prompt-grid"><div class="prompt-item"><div class="code-card"><pre id="prompt-8-1"><code>/handsonly - only hands using it</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-1" aria-label="Скопировать /handsonly целиком" aria-live="polite">Скопировать</button></div><p>только руки, которые используют товар</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-2"><code>/founderpic - founder in workshop</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-2" aria-label="Скопировать /founderpic целиком" aria-live="polite">Скопировать</button></div><p>основатель в мастерской</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-3"><code>/storycover - book cover with spine</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-3" aria-label="Скопировать /storycover целиком" aria-live="polite">Скопировать</button></div><p>обложка книги с корешком</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-4"><code>/albumsquare - square album cover</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-4" aria-label="Скопировать /albumsquare целиком" aria-live="polite">Скопировать</button></div><p>квадратная обложка альбома</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-5"><code>/roadsign - real outdoor billboard</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-5" aria-label="Скопировать /roadsign целиком" aria-live="polite">Скопировать</button></div><p>настоящий рекламный щит на улице</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-6"><code>/paperprint - old newspaper print</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-6" aria-label="Скопировать /paperprint целиком" aria-live="polite">Скопировать</button></div><p>печать как в старой газете</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-7"><code>/bigquote - clean quote card</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-7" aria-label="Скопировать /bigquote целиком" aria-live="polite">Скопировать</button></div><p>аккуратная карточка с цитатой</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-8"><code>/timemarks - timeline with milestones</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-8" aria-label="Скопировать /timemarks целиком" aria-live="polite">Скопировать</button></div><p>линия времени с важными событиями</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-9"><code>/shelftalker - clip on shelf sign</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-9" aria-label="Скопировать /shelftalker целиком" aria-live="polite">Скопировать</button></div><p>ценник или табличка на краю полки</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-10"><code>/instoread - store ad display</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-10" aria-label="Скопировать /instoread целиком" aria-live="polite">Скопировать</button></div><p>рекламная стойка в магазине</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-11"><code>/pointofsale - card at register</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-11" aria-label="Скопировать /pointofsale целиком" aria-live="polite">Скопировать</button></div><p>карточка у кассы</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-12"><code>/windowdisplay - shop window display</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-12" aria-label="Скопировать /windowdisplay целиком" aria-live="polite">Скопировать</button></div><p>оформленная витрина магазина</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-13"><code>/tabletent - folded table card</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-13" aria-label="Скопировать /tabletent целиком" aria-live="polite">Скопировать</button></div><p>сложенная настольная карточка</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-14"><code>/menuboard - restaurant menu board</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-14" aria-label="Скопировать /menuboard целиком" aria-live="polite">Скопировать</button></div><p>доска с меню ресторана</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-15"><code>/receiptprint - thermal receipt strip</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-15" aria-label="Скопировать /receiptprint целиком" aria-live="polite">Скопировать</button></div><p>полоска чека из термопринтера</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-16"><code>/couponcut - tear off coupon</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-16" aria-label="Скопировать /couponcut целиком" aria-live="polite">Скопировать</button></div><p>купон с отрывным краем</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-17"><code>/catalogspread - two page catalog</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-17" aria-label="Скопировать /catalogspread целиком" aria-live="polite">Скопировать</button></div><p>разворот каталога на две страницы</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-18"><code>/directmail - mailable postcard</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-18" aria-label="Скопировать /directmail целиком" aria-live="polite">Скопировать</button></div><p>открытка для почтовой рассылки</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-19"><code>/doorhanger - doorknob flyer</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-19" aria-label="Скопировать /doorhanger целиком" aria-live="polite">Скопировать</button></div><p>листовка на дверной ручке</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-20"><code>/stickernote - handwritten sticky note</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-20" aria-label="Скопировать /stickernote целиком" aria-live="polite">Скопировать</button></div><p>стикер с рукописной заметкой</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-21"><code>/businesscard2 - simple business card</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-21" aria-label="Скопировать /businesscard2 целиком" aria-live="polite">Скопировать</button></div><p>простая визитка</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-22"><code>/badgepin - round event badge</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-22" aria-label="Скопировать /badgepin целиком" aria-live="polite">Скопировать</button></div><p>круглый значок мероприятия</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-23"><code>/lanyardcard - ID card with lanyard</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-23" aria-label="Скопировать /lanyardcard целиком" aria-live="polite">Скопировать</button></div><p>карточка на шнурке</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-8-24"><code>/eventbanner - wide stage banner</code></pre><button class="copy-button" type="button" data-copy-target="prompt-8-24" aria-label="Скопировать /eventbanner целиком" aria-live="polite">Скопировать</button></div><p>широкий баннер над сценой</p></div></div></section><section class="content-section" id="list-17"><h2>Упаковка</h2><p>24 строки. Читай перевод и копируй запрос с нужным эффектом.</p><div class="prompt-grid"><div class="prompt-item"><div class="code-card"><pre id="prompt-17-1"><code>/bottlelabel - bottle label design</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-1" aria-label="Скопировать /bottlelabel целиком" aria-live="polite">Скопировать</button></div><p>этикетка на бутылке</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-2"><code>/canlabel - bold printed can</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-2" aria-label="Скопировать /canlabel целиком" aria-live="polite">Скопировать</button></div><p>яркая печать на банке</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-3"><code>/candywrap - playful candy wrapper</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-3" aria-label="Скопировать /candywrap целиком" aria-live="polite">Скопировать</button></div><p>игривая обёртка конфеты</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-4"><code>/boxprint - printed box artwork</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-4" aria-label="Скопировать /boxprint целиком" aria-live="polite">Скопировать</button></div><p>рисунок на коробке</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-5"><code>/bagprint - paper shopping bag</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-5" aria-label="Скопировать /bagprint целиком" aria-live="polite">Скопировать</button></div><p>бумажный пакет для покупок</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-6"><code>/giftwrap - ribbon and bow</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-6" aria-label="Скопировать /giftwrap целиком" aria-live="polite">Скопировать</button></div><p>подарок с лентой и бантом</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-7"><code>/kitbox - kit in open box</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-7" aria-label="Скопировать /kitbox целиком" aria-live="polite">Скопировать</button></div><p>набор в открытой коробке</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-8"><code>/ecobox - recycled cardboard package</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-8" aria-label="Скопировать /ecobox целиком" aria-live="polite">Скопировать</button></div><p>упаковка из переработанного картона</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-9"><code>/perfumebottle - elegant perfume label</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-9" aria-label="Скопировать /perfumebottle целиком" aria-live="polite">Скопировать</button></div><p>изящная этикетка духов</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-10"><code>/lotionbottle - pastel lotion bottle</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-10" aria-label="Скопировать /lotionbottle целиком" aria-live="polite">Скопировать</button></div><p>флакон лосьона в пастельных цветах</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-11"><code>/pillbottle - clear medicine label</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-11" aria-label="Скопировать /pillbottle целиком" aria-live="polite">Скопировать</button></div><p>понятная этикетка лекарства</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-12"><code>/jarlabel - rustic jar label</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-12" aria-label="Скопировать /jarlabel целиком" aria-live="polite">Скопировать</button></div><p>этикетка на банке в деревенском стиле</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-13"><code>/tubepackage - squeeze tube pack</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-13" aria-label="Скопировать /tubepackage целиком" aria-live="polite">Скопировать</button></div><p>упаковка мягкого тюбика</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-14"><code>/blisterpack2 - clear plastic dome</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-14" aria-label="Скопировать /blisterpack2 целиком" aria-live="polite">Скопировать</button></div><p>прозрачный пластиковый блистер</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-15"><code>/clamshell - hinged clear shell</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-15" aria-label="Скопировать /clamshell целиком" aria-live="polite">Скопировать</button></div><p>прозрачная упаковка с откидной крышкой</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-16"><code>/pouchpack - resealable standup pouch</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-16" aria-label="Скопировать /pouchpack целиком" aria-live="polite">Скопировать</button></div><p>пакет, который стоит и закрывается повторно</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-17"><code>/sachetpack - single use sachet</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-17" aria-label="Скопировать /sachetpack целиком" aria-live="polite">Скопировать</button></div><p>одноразовый пакетик</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-18"><code>/tinpackage - hinged metal tin</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-18" aria-label="Скопировать /tinpackage целиком" aria-live="polite">Скопировать</button></div><p>жестяная коробка с откидной крышкой</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-19"><code>/boxset2 - box with compartments</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-19" aria-label="Скопировать /boxset2 целиком" aria-live="polite">Скопировать</button></div><p>коробка с отдельными ячейками</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-20"><code>/crateset - small wooden crate</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-20" aria-label="Скопировать /crateset целиком" aria-live="polite">Скопировать</button></div><p>небольшой деревянный ящик</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-21"><code>/basketset - woven basket set</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-21" aria-label="Скопировать /basketset целиком" aria-live="polite">Скопировать</button></div><p>набор в плетёной корзине</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-22"><code>/trayset - molded tray insert</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-22" aria-label="Скопировать /trayset целиком" aria-live="polite">Скопировать</button></div><p>вставка с выемками для предметов</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-23"><code>/displaystand - retail display stand</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-23" aria-label="Скопировать /displaystand целиком" aria-live="polite">Скопировать</button></div><p>стойка для товара в магазине</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-17-24"><code>/counterdisplay - compact checkout display</code></pre><button class="copy-button" type="button" data-copy-target="prompt-17-24" aria-label="Скопировать /counterdisplay целиком" aria-live="polite">Скопировать</button></div><p>небольшая стойка у кассы</p></div></div></section><section class="content-section" id="seriya"><h2>Другие подборки серии</h2><p>Семь тем, каждая со своими строками. Следующие подборки появятся здесь после публикации.</p><!-- series:start -->
+<ul>
+<li><a href="../promty-sveta-dlya-foto-chatgpt/">Свет и камера</a></li>
+<li><a href="../promty-tovar-reklama-chatgpt/">Товар, реклама и упаковка</a></li>
+<li>Постеры, соцсети, надписи и 3D <span class="soon">(скоро)</span></li>
+<li>Иллюстрация, живопись и ручная работа <span class="soon">(скоро)</span></li>
+<li>Игрушки, персонажи и игры <span class="soon">(скоро)</span></li>
+<li>Еда, кухня, дом и путешествия <span class="soon">(скоро)</span></li>
+<li>Ретро и устройство предметов <span class="soon">(скоро)</span></li>
+</ul>
+<!-- series:end --></section><section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
+<p class="help-title">Не получилось? Спроси ChatGPT. <span class="accent">Попроси идти по одному действию</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу изменить картинку по этой строке. Сейчас результат не подходит. Помоги уточнить запрос: спроси, какой эффект нужен и какие детали исходника сохранить. Объясняй по одному действию.</p></div>
+<div class="bubble claude"><span class="who">ChatGPT</span>Какой эффект нужен и какие детали исходника сохранить?</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
+</section>
+<section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент под своё дело</h2>
+<p>На ИИ-Лагере показывают, как собрать сайт, бота или калькулятор с Claude Code и Codex. Это ИИ-помощники, которым ты описываешь задачу словами, а они пишут код. На практикуме этот путь проходят по шагам, без программирования.</p>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+<section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><ul><li><a href="../kopirovat-stil-foto-v-chatgpt/"><span class="title">Как скопировать стиль любого фото в ChatGPT</span><span class="why">Перенеси свет и цвета конкретного образца на свой снимок.</span></a></li><li><a href="../postery-iz-odnogo-foto/"><span class="title">Постеры из одной фотографии в ChatGPT</span><span class="why">Собери постер с фотографией и рисованной сценой.</span></a></li></ul></section><section class="content-section" id="itog"><h2>Что проверить перед сохранением</h2><p>Красивую упаковку легко принять за готовую рекламу. Но строка задаёт внешний вид, а название, состав, объём и форма твоего товара в ней не закреплены. Сверь эти детали с исходником и только потом сохраняй изображение для витрины. Для следующего запроса приложи настоящий товар и напиши, что оставить без изменений: так картинка будет отвечать твоей задаче.</p></section></article></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Продолжение</p><h2>Стиль по образцу</h2>
+      <p><a href="../kopirovat-stil-foto-v-chatgpt/">Открыть инструкцию</a></p></aside></div><script>
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script><script src="../../assets/promty-foto.js"></script></body></html>
