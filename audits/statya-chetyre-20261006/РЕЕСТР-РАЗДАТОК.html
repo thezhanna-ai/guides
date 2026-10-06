@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Все раздатки и кодовые слова</title>
+  <style>
+    :root {
+      --paper:#F8F7F2; --card:#FFFFFF; --ink:#1E2926; --muted:#62706A;
+      --emerald:#102F30; --emerald-mid:#1F4A43; --accent:#E86F4A;
+      --sage:#E2E8E9; --sage-line:#BBC7CA; --warm:#F0E8D8; --line:#D5C9B7;
+    }
+    * { box-sizing:border-box }
+    body { max-width:1240px; margin:0 auto; padding:28px 16px 60px; background:var(--paper);
+      color:var(--ink); font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    h1 { margin:0; color:var(--emerald); font-size:clamp(24px,4vw,34px); line-height:1.1 }
+    .meta { margin:6px 0 16px; color:var(--muted); font-size:14px }
+    .meta b { color:var(--ink) }
+    .alarm { margin:0 0 14px; padding:8px 12px; border-left:4px solid var(--accent); border-radius:8px;
+      background:#FBEDE7; font-size:14px }
+    #q { width:100%; max-width:420px; margin:0 0 14px; padding:10px 12px; border:1px solid var(--line);
+      border-radius:8px; font:inherit; background:var(--card) }
+    a { color:var(--emerald-mid); text-underline-offset:3px; word-break:break-all }
+    .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--card) }
+    table { width:100%; min-width:860px; border-collapse:collapse }
+    th,td { padding:11px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top }
+    th { position:sticky; top:0; background:var(--warm); color:var(--emerald); font-size:12px;
+      letter-spacing:.05em; text-transform:uppercase }
+    tr:last-child td { border-bottom:0 }
+    .word { color:var(--emerald); font-weight:800; letter-spacing:.03em; white-space:nowrap }
+    .status { display:inline-block; padding:3px 8px; border-radius:7px; font-size:12px; font-weight:800; white-space:nowrap }
+    .ready { background:var(--emerald-mid); color:#fff }
+    .hold { background:var(--sage); color:var(--emerald); border:1px solid var(--sage-line) }
+    .pending { background:#fff; color:var(--accent); border:1px dashed var(--accent) }
+    .muted { color:var(--muted); font-size:13px }
+    tr.sayt td { color:#5B6B8C; background:#F3F5FA }
+    tr.sayt .word { color:#5B6B8C }
+    .metka { display:inline-block; margin-top:4px; padding:2px 7px; border-radius:6px; font-size:11px;
+      font-weight:700; color:#fff; background:#7A8AAE }
+    .foot { margin-top:22px; color:var(--muted); font-size:13px }
+    code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px }
+  </style>
+</head>
+<body>
+  <h1>Все раздатки и кодовые слова</h1>
+  <p class="meta">Обновлено 6 октября 2026 · <b>35</b> можно выдавать ·
+  <b>4</b> не готовы · всего 40</p>
+  <input id="q" type="search" placeholder="Найти: слово, тема, серия…">
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Кодовое слово</th><th>Раздатка</th><th>Серия</th><th>Рилз вышел</th><th>Ссылка для выдачи</th><th>Статус</th></tr></thead>
+      <tbody id="t">
+        <tr>
+          <td class="word">ЗАМЕНА</td>
+          <td>10 бесплатных замен платным нейросетям - с подвохами</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td>01.10.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/10-besplatnyh-zamen/">thezhanna-ai.github.io/guides/claude-ai/10-besplatnyh-zamen/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ФОТО</td>
+          <td>Как скопировать стиль любого фото в ChatGPT</td>
+          <td>ChatGPT: кнопка за кнопкой</td>
+          <td>01.10.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/kopirovat-stil-foto-v-chatgpt/">thezhanna-ai.github.io/guides/claude-ai/kopirovat-stil-foto-v-chatgpt/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">МОУШЕН</td>
+          <td>Как сделать движущиеся слайды в карусели</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td>01.10.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/animirovannaya-karusel/">thezhanna-ai.github.io/guides/claude-ai/animirovannaya-karusel/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">СТИЛЬ</td>
+          <td>Как научить Claude писать в твоём стиле</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>26.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/svoy-stil-otvetov/">thezhanna-ai.github.io/guides/claude-ai/svoy-stil-otvetov/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">НОМЕР</td>
+          <td>Свой номер WhatsApp для ИИ-агента: пошагово</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td>25.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/whatsapp-nomer-dlya-agenta/">thezhanna-ai.github.io/guides/claude-ai/whatsapp-nomer-dlya-agenta/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">PDF</td>
+          <td>Документы в markdown: как не сжигать лимит Claude на оформлении</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>22.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/pdf-v-markdown-markitdown/">thezhanna-ai.github.io/guides/claude-ai/pdf-v-markdown-markitdown/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ПРИЗРАК</td>
+          <td>Инкогнито в Claude: разговор, который не попадёт в память</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>21.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/incognito-chat-v-claude/">thezhanna-ai.github.io/guides/claude-ai/incognito-chat-v-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">АРТЕФАКТ</td>
+          <td>Артефакты: ответ Клода в отдельном окне, а не в переписке</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>19.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/artefakty-v-claude/">thezhanna-ai.github.io/guides/claude-ai/artefakty-v-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ФАЙЛ</td>
+          <td>Готовый Excel, Word, PDF или презентация - без копипаста</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>18.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/gotovye-fayly-excel-word-pdf/">thezhanna-ai.github.io/guides/claude-ai/gotovye-fayly-excel-word-pdf/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">СКРИН</td>
+          <td>Скриншот вместо объяснений: покажи Клоду экран, где всё застопорилось</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>17.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/skrinshot-vmesto-obyasneniy/">thezhanna-ai.github.io/guides/claude-ai/skrinshot-vmesto-obyasneniy/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ГОЛОС</td>
+          <td>Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>16.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/golosovoy-vvod-v-claude/">thezhanna-ai.github.io/guides/claude-ai/golosovoy-vvod-v-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ПОИСК</td>
+          <td>Веб-поиск в Claude: ответы со свежими ссылками</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>15.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/web-search-v-claude/">thezhanna-ai.github.io/guides/claude-ai/web-search-v-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">СЕРВИСЫ</td>
+          <td>Gmail, Google Drive и Calendar внутри Claude</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>14.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/podklyuchit-gmail-drive-calendar/">thezhanna-ai.github.io/guides/claude-ai/podklyuchit-gmail-drive-calendar/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ПРОЕКТ</td>
+          <td>Первый проект в Claude: своя папка с памятью</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>13.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/pervyy-proekt-v-claude/">thezhanna-ai.github.io/guides/claude-ai/pervyy-proekt-v-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">МОДЕЛЬ</td>
+          <td>Модель и уровень effort: что включать под задачу</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>12.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/vybor-modeli-i-effort/">thezhanna-ai.github.io/guides/claude-ai/vybor-modeli-i-effort/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">КЛОД</td>
+          <td>Claude помнит о тебе: что рассказать один раз</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td>09.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/kak-rasskazat-o-sebe/">thezhanna-ai.github.io/guides/claude-ai/kak-rasskazat-o-sebe/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ДОСТУП</td>
+          <td>Claude из России: подключение без блокировок</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td>08.09.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/podklyuchenie-iz-rossii/">thezhanna-ai.github.io/guides/claude-ai/podklyuchenie-iz-rossii/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ПИТОМЕЦ</td>
+          <td>Свой питомец в Codex</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td>25.08.2026</td>
+          <td><span class="muted">локальный файл, публичной страницы нет</span></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ГРАНИЦЫ</td>
+          <td>Четыре правила для Claude Code</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td>23.08.2026</td>
+          <td><span class="muted">локальный файл, публичной страницы нет</span></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ПОСТЕР</td>
+          <td>Постеры из одной фотографии в ChatGPT</td>
+          <td>ChatGPT: кнопка за кнопкой</td>
+          <td>19.08.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/postery-iz-odnogo-foto/">thezhanna-ai.github.io/guides/claude-ai/postery-iz-odnogo-foto/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ПУЛЬТ</td>
+          <td>ПУЛЬТ: управляй Claude из Telegram</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td>04.08.2026</td>
+          <td><a href="https://thezhanna-ai.github.io/pult-telegram-claude/">thezhanna-ai.github.io/pult-telegram-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">СКИЛЛС</td>
+          <td>Шесть скиллов Claude: как найти, подключить и вызвать</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/shest-skillov/">thezhanna-ai.github.io/guides/claude-ai/shest-skillov/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">САЙТ</td>
+          <td>Свой сайт, а не очередной близнец</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/svoy-sayt-ne-bliznec/">thezhanna-ai.github.io/guides/claude-ai/svoy-sayt-ne-bliznec/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">УРОВЕНЬ</td>
+          <td>7 уровней вайбкодера: один шаг, чтобы подняться выше</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/urovni-vaybkodera/">thezhanna-ai.github.io/guides/claude-ai/urovni-vaybkodera/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">РОЛИК</td>
+          <td>Видео из текста: бесплатные сервисы и подвохи</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/besplatnye-video-iz-teksta/">thezhanna-ai.github.io/guides/claude-ai/besplatnye-video-iz-teksta/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">РАСПИСАНИЕ</td>
+          <td>Задача по расписанию в Claude: план недели к 7:30</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/raspisanie-zadach-v-claude/">thezhanna-ai.github.io/guides/claude-ai/raspisanie-zadach-v-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ЗАГРУЗКА</td>
+          <td>Загрузка файлов в Claude: один документ и пачка файлов</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/zagruzka-faylov-v-claude/">thezhanna-ai.github.io/guides/claude-ai/zagruzka-faylov-v-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word"><span class="muted">нет слова</span></td>
+          <td>Claude Code и Codex в одном VS Code: чаты и файлы рядом</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/claude-i-codex-v-vscode/">thezhanna-ai.github.io/guides/claude-ai/claude-i-codex-v-vscode/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ДАННЫЕ</td>
+          <td>Удаление данных в Claude</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/dannye-v-claude/">thezhanna-ai.github.io/guides/claude-ai/dannye-v-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">НАБОР</td>
+          <td>Пять дополнений для Claude Code: что каждое решает</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/pyat-instrumentov-claude-code/">thezhanna-ai.github.io/guides/claude-ai/pyat-instrumentov-claude-code/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ЛОТТИ</td>
+          <td>Как оживить макет из Figma за одно нажатие: 4 варианта анимации без After Effects</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/ozhivit-maket-bez-keyframe/">thezhanna-ai.github.io/guides/claude-ai/ozhivit-maket-bez-keyframe/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">СТУДИЯ</td>
+          <td>Открытая копия Higgsfield: кадры как в кино без ежемесячной подписки</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/kopiya-higgsfield-open-generative-ai/">thezhanna-ai.github.io/guides/claude-ai/kopiya-higgsfield-open-generative-ai/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ССЫЛКА</td>
+          <td>Как отозвать публичную ссылку на чат Claude</td>
+          <td>Claude.ai: кнопка за кнопкой</td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/otozvat-ssylku-na-chat-claude/">thezhanna-ai.github.io/guides/claude-ai/otozvat-ssylku-na-chat-claude/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">МОНТАЖ</td>
+          <td>Монтаж видео нейросетью Claude Code или Codex: один промпт, два результата</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/montazh-video-claude-code-codex/">thezhanna-ai.github.io/guides/claude-ai/montazh-video-claude-code-codex/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">СКИЛЛЫ</td>
+          <td>Пять скиллов для Claude Code: поиск, план, память, дизайн и один, который учит остальные</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><a href="https://thezhanna-ai.github.io/guides/claude-ai/pyat-skillov-claude-code/">thezhanna-ai.github.io/guides/claude-ai/pyat-skillov-claude-code/</a></td>
+          <td><span class="status ready">Можно выдавать</span></td>
+        </tr>
+        <tr>
+          <td class="word">ЖЕМЧУГ</td>
+          <td>10 сайтов старого интернета, которые работают до сих пор</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td>05.10.2026</td>
+          <td><span class="muted">статья на сайте: 10-saytov-starogo-interneta</span></td>
+          <td><span class="status pending">Не готова</span></td>
+        </tr>
+        <tr class="sayt">
+          <td class="word">ЧЕТЫРЕ</td>
+          <td>Четыре MCP для Claude Code: поиск, браузер, страницы и свежая документация<br><span class="metka">только для сайта: не опубликована, рилза/карусели под неё не вышло</span></td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><span class="muted">черновик на сайте, не опубликован. Черновик: вычитка Claude, живые скриншоты и браузерная проверка перед публикацией</span><br><a href="http://127.0.0.1:8765/claude-ai/chetyre-mcp-claude-code/">посмотреть черновик</a></td>
+          <td><span class="status pending">Не готова</span></td>
+        </tr>
+        <tr>
+          <td class="word">ГИТХАБ</td>
+          <td>Какой инструмент экономии токенов Claude Code выбрать</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><span class="muted">tasks/content/2026-09-01-godofprompt-token-tools/giveaway.md, PDF и DOCX в папке «Раздатки» на Рабочем столе</span></td>
+          <td><span class="status pending">Не готова</span></td>
+        </tr>
+        <tr>
+          <td class="word"><span class="muted">нет слова</span></td>
+          <td>Claude + Codex в одном VS Code</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td><span class="muted">не выходил</span></td>
+          <td><span class="muted">Desktop/Раздатки/claude-plus-codex.html</span></td>
+          <td><span class="status pending">Не готова</span></td>
+        </tr>
+        <tr>
+          <td class="word">ПОИСК.OLD</td>
+          <td>Последний скилл (find-skills)</td>
+          <td><span class="muted">самостоятельный</span></td>
+          <td>29.07.2026</td>
+          <td><span class="muted">ссылки нет</span></td>
+          <td><span class="status hold">Выведено из выдачи</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    document.getElementById('q').addEventListener('input', function () {
+      var q = this.value.toLowerCase();
+      document.querySelectorAll('#t tr').forEach(function (r) {
+        r.style.display = r.textContent.toLowerCase().indexOf(q) > -1 ? '' : 'none';
+      });
+    });
+  </script>
+  <p class="foot">Файл собирается сам, руками не правят. Данные: <code>projects/guides/data/statyi.json</code>
+  и <code>.business/marketing/razdatki-bez-stati.json</code>. Пересборка:
+  <code>python3 ~/IvanOS/.business/scripts/sobrat-reestr-razdatok.py</code></p>
+</body>
+</html>
