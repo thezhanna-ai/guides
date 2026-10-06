@@ -39,7 +39,7 @@ function run({ id = '', saved = null, storageFails = false } = {}) {
     },
     head: { appendChild(script) { calls.push('append'); } }
   };
-  vm.runInNewContext(source.replace("const METRIKA_ID = '';", `const METRIKA_ID = '${id}';`), {
+  vm.runInNewContext(source.replace(/const METRIKA_ID = '\d*';/, `const METRIKA_ID = '${id}';`), {
     window, document, Date,
     ResizeObserver: class { constructor(fn) { this.fn = fn; } observe() { this.fn(); } },
     fetch() { requests.push('fetch'); }, XMLHttpRequest() { requests.push('xhr'); }
@@ -77,8 +77,8 @@ test('accepted choice is stored; valid ID loads once and initializes after load'
   const init = app.ymCalls[0];
   assert.equal(init[0], 123456);
   assert.equal(init[1], 'init');
-  assert.equal(init[2].webvisor, false);
-  assert.equal(init[2].clickmap, false);
+  assert.equal(init[2].webvisor, true);
+  assert.equal(init[2].clickmap, true);
   assert.equal(init[2].disableYtm, true);
   app.click('cookie-accept');
   assert.equal(app.requests.length, 1);

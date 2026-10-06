@@ -52,7 +52,7 @@ class PrivacyTest(unittest.TestCase):
 
     def test_single_empty_counter_id_and_no_pixel_or_preconnect(self):
         js = (ROOT / 'assets/privacy.js').read_text()
-        self.assertIn("const METRIKA_ID = '';", js)
+        self.assertRegex(js, r"const METRIKA_ID = '(?:|[1-9]\d*)';")
         files = [ROOT / 'scripts/sobrat_glavnuyu.py'] + list((ROOT / 'scripts').glob('*.html')) + self.pages() + [ROOT / 'assets/privacy.js']
         assignments = sum(len(re.findall(r'\bMETRIKA_ID\s*=', p.read_text())) for p in files)
         self.assertEqual(assignments, 1)
