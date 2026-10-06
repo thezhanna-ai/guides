@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Штат ИИ-агентов в Claude Code: ставишь одну цель, а работу делит команда</title>
+<meta name="description" content="Как собрать в Paperclip штат ИИ-агентов на Claude Code: директор, маркетолог и инженер, бюджет до запуска, одобрение плана и проверка общей работы.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Штат ИИ-агентов в Claude Code: ставишь одну цель, а работу делит команда">
+<meta property="og:description" content="Как собрать в Paperclip штат ИИ-агентов на Claude Code: директор, маркетолог и инженер, бюджет до запуска, одобрение плана и проверка общей работы.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/shtat-agentov-paperclip/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/shtat-agentov-paperclip/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/shtat-agentov-paperclip/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Три металлических офисных штампа: высокий латунный и два небольших рядом с коралловой штемпельной подушкой">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/shtat-agentov-paperclip/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+</style>
+</head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">ШТАТ</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
+<a href="#ustanovka">Шаг 1. Запусти Paperclip</a>
+<a href="#direktor">Шаг 2. Назови организацию и найми директора</a>
+<a href="#byudzhet">Шаг 3. Поставь бюджет и одобрение найма</a>
+<a href="#tsel">Шаг 4. Дай директору одну цель</a>
+<a href="#plan">Шаг 5. Одобри план и команду</a>
+<a href="#komanda">Шаг 6. Смотри, как работа переходит от роли к роли</a>
+<a href="#proverka">Шаг 7. Проверь, что они работали вместе, и поставь на паузу</a>
+<a href="#oshibki">Если не получилось</a>
+<a href="#svoi-proekt">Штат собран - поручи ему настоящее дело</a>
+<a href="#dalshe">Дальше по теме</a></nav>
+<main><header id="nachalo"><p class="eyebrow">Инструкция · Команда агентов в Paperclip</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Три металлических офисных штампа: высокий латунный и два небольших рядом с коралловой штемпельной подушкой" loading="eager" decoding="async" fetchpriority="high"><figcaption>Три штампа на столе: директор, маркетолог и инженер ставят печать на одну работу</figcaption></figure>
+<h1 class="article-title-v2">Штат ИИ-агентов в Claude Code: ставишь одну цель, а работу делит команда</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
+<p class="lead">Один Claude Code тянет одну задачу. Нужно что-то побольше, и ты вручную раскладываешь работу по чатам, переносишь текст из одного окна в другое и следишь, чтобы ничего не потерялось. <b>Paperclip забирает эту возню на себя:</b> ты ставишь одну цель, а штат ИИ-агентов - директор, маркетолог и инженер - делит её на задачи и передаёт работу друг другу.</p>
+<p><a href="https://github.com/paperclipai/paperclip">Paperclip</a> - бесплатное открытое приложение. Оно ставится на твой компьютер и открывается в браузере. Внутри всё как в маленьком офисе: кто кому подчиняется, задачи с ответственными, планы на одобрение и бюджет. Работу делает твой Claude Code, а Paperclip раздаёт поручения и записывает, кто что сделал.</p>
+<p>Ниже по шагам: как поставить Paperclip, нанять директора, ограничить расходы и дать команде первую цель. А в последнем шаге - как понять, что агенты правда работали вместе, а не каждый сам по себе в своём окне.</p><p class="meta">АКТУАЛЬНО НА 6 ОКТЯБРЯ 2026</p></header>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Что нужно до начала</a>
+<a href="#ustanovka">Шаг 1. Запусти Paperclip</a>
+<a href="#direktor">Шаг 2. Назови организацию и найми директора</a>
+<a href="#byudzhet">Шаг 3. Поставь бюджет и одобрение найма</a>
+<a href="#tsel">Шаг 4. Дай директору одну цель</a>
+<a href="#plan">Шаг 5. Одобри план и команду</a>
+<a href="#komanda">Шаг 6. Смотри, как работа переходит от роли к роли</a>
+<a href="#proverka">Шаг 7. Проверь, что они работали вместе, и поставь на паузу</a>
+<a href="#oshibki">Если не получилось</a>
+<a href="#svoi-proekt">Штат собран - поручи ему настоящее дело</a>
+<a href="#dalshe">Дальше по теме</a></nav></details>
+<article><section class="content-section" id="podgotovka">
+<h2>Что нужно до начала</h2>
+<ul>
+<li><b>Claude Code, который уже работает.</b> Если его нет, сначала пройди инструкцию <a href="../claude-i-codex-v-vscode/">«Claude Code и Codex в VS Code»</a> и отправь ему любое сообщение. Paperclip будет запускать именно его.</li>
+<li><b>Node.js версии 24.11 или новее.</b> Это программа, через которую ставится Paperclip. Открой <a href="https://nodejs.org/en/download">nodejs.org</a>, скачай установщик, открой скачанный файл и нажимай «Далее» до конца.</li>
+</ul>
+<p>Открой VS Code, в меню выбери Terminal → New Terminal («Терминал → Новый терминал»). Внизу появится окно для команд. Вставь туда по очереди две команды и после каждой нажми Enter:</p>
+<div class="code-card"><pre id="check-node"><code>node --version</code></pre><button class="copy-button" type="button" data-copy-target="check-node" aria-label="Скопировать проверку Node.js" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="check-claude"><code>claude --version</code></pre><button class="copy-button" type="button" data-copy-target="check-claude" aria-label="Скопировать проверку Claude Code" aria-live="polite">Скопировать</button></div>
+<p>Первая команда должна ответить <code>v24.11.0</code> или больше, вторая - номером версии Claude Code. Пишет «command not found» (на Windows «не является внутренней или внешней командой») - программа не поставилась: установи её, закрой терминал и открой новый.</p>
+<div class="warn-card"><p><b>Агенты в Paperclip работают без спроса.</b> Claude Code здесь не просит подтверждать действия: читает файлы и выполняет команды сам, иначе он не смог бы работать, пока тебя нет рядом. Для первого раза не подключай почту, оплату и другие сервисы.</p></div>
+<div class="result"><p><b>Результат:</b> обе команды ответили номерами версий, Claude Code отвечает в чате.</p></div>
+</section>
+
+<section class="content-section" id="ustanovka">
+<h2>Шаг 1. Запусти Paperclip</h2>
+<p>В том же терминале вставь команду и нажми Enter:</p>
+<div class="code-card"><pre id="install-paperclip"><code>npx paperclipai@latest onboard --yes</code></pre><button class="copy-button" type="button" data-copy-target="install-paperclip" aria-label="Скопировать команду установки Paperclip" aria-live="polite">Скопировать</button></div>
+<p>Терминал спросит «Ok to proceed? (y)» («Продолжить?») - введи <code>y</code> и нажми Enter. Команда сама всё поставит, заведёт базу данных и запустит панель. Терминал не закрывай: пока он открыт, Paperclip работает.</p>
+<p>Панель откроется в браузере по адресу <b>http://localhost:3100</b>. Не открылась сама - вставь этот адрес в браузер. <code>localhost</code> значит «твой компьютер»: сервер в интернете не нужен, всё лежит у тебя.</p>
+<p>После перезагрузки компьютера Paperclip запускается этой командой:</p>
+<div class="code-card"><pre id="run-paperclip"><code>npx paperclipai@latest run</code></pre><button class="copy-button" type="button" data-copy-target="run-paperclip" aria-label="Скопировать команду повторного запуска Paperclip" aria-live="polite">Скопировать</button></div>
+<div class="result"><p><b>Результат:</b> в браузере открыта панель Paperclip с вопросом «What is the name of your organization?».</p></div>
+</section>
+
+<section class="content-section" id="direktor">
+<h2>Шаг 2. Назови организацию и найми директора</h2>
+<p>Дальше Paperclip покажет три экрана подряд:</p>
+<ol>
+<li><b>What is the name of your organization?</b> («Как называется организация?»). Впиши любое название, например «Первая команда», и нажми Continue («Продолжить»). Организация - общее место для агентов, целей и задач.</li>
+<li><b>Create your first agent</b> («Создай первого агента»). В поле имени впиши «Директор» и нажми Next («Далее»). Это главный агент: он будет разговаривать с тобой, составлять план и нанимать остальных.</li>
+<li><b>Connect a model</b> («Подключи модель»). Нажми плитку <b>Claude</b>, под ней подпись Subscription («Подписка»): Paperclip возьмёт вход, под которым уже работает твой Claude Code. Нажми Connect («Подключить»). Если вместо подписки у тебя API-ключ (отдельная оплата за каждое обращение к Claude), нажми ссылку Use API key instead и вставь ключ. Paperclip сам проверит, что Claude отвечает. Пока проверка не пройдёт, директора нанять не получится.</li>
+</ol>
+<p>Появится экран «Let's get started...» с подписью «Директор is ready to work!» («Директор готов к работе»). Нажми <b>Get started</b> («Начать»). Откроется первая задача: в ней директор поздоровался и спрашивает «What would you like to do?» («Чем займёмся?»).</p>
+<p>Пока не отвечай. Директор спит, пока ты ему не напишешь, а до первого запуска нужно ограничить расходы.</p>
+<div class="result"><p><b>Результат:</b> директор нанят, перед тобой его приветствие и вопрос «What would you like to do?».</p></div>
+</section>
+
+<section class="content-section" id="byudzhet">
+<h2>Шаг 3. Поставь бюджет и одобрение найма</h2>
+<p>Агенты обращаются к Claude сами, без тебя. Каждый запуск тратит лимит твоей подписки или деньги на API-ключе. Если не поставить рамки, директор наймёт сколько захочет помощников, и они будут работать, пока не кончится лимит.</p>
+<p><b>Запрети нанимать без тебя.</b> Внизу слева нажми на свой значок профиля и выбери Settings («Настройки»). В разделе Hiring («Найм») включи <b>Require board approval for new hires</b> («Нанимать только после одобрения»). Теперь каждого нового агента директор сначала присылает тебе на согласие.</p>
+<p><b>Поставь директору денежный предел.</b> В меню слева открой Agents («Агенты») → Директор, в меню агента выбери Budgets («Бюджеты»). Впиши сумму в долларах на месяц и нажми Set budget («Задать бюджет»). Когда расход дойдёт до предела, Paperclip сам поставит агента на паузу. Для учебной цели хватит небольшой суммы на пробу.</p>
+<div class="warn-card"><p><b>На подписке денежный предел не защищает лимит.</b> Он считает расход в долларах, а подписка тратит свой лимит сообщений. Сколько ушло, видно на сайте claude.ai: Settings → Usage («Настройки → Использование»). Главная защита на подписке - одобрение найма и пауза из шага 7.</p></div>
+<div class="result"><p><b>Результат:</b> найм только с твоего согласия, у директора стоит месячный бюджет.</p></div>
+</section>
+
+<section class="content-section" id="tsel">
+<h2>Шаг 4. Дай директору одну цель</h2>
+<p>В меню слева открой Tasks («Задачи») и нажми на задачу «Paperclip onboarding» с приветствием директора. На вопрос «What would you like to do?» выбери <b>I have a task in mind</b> («У меня есть задача»). В поле ответа вставь текст ниже и нажми Continue.</p>
+<p>Для первого раза возьмём маленькую цель, которую легко проверить глазами: текст страницы для простого приложения «Список дел». В тексте прямо сказано, кто что делает, и что сначала нужен план на одобрение.</p>
+<div class="code-card"><pre id="team-goal"><code>Хочу, чтобы над этой целью работала команда, а не один агент.
+
+Цель: подготовить текст страницы для учебного приложения «Список дел». Это простое приложение: человек записывает дела, отмечает выполненные и видит, что осталось. Цены, отзывы и новые функции не придумывай.
+
+Команда: ты директор, под тобой маркетолог и инженер.
+1. Маркетолог пишет заголовок, объяснение продукта в двух предложениях и три пользы для человека.
+2. Инженер берёт готовый текст маркетолога и собирает из него структуру страницы: блоки сверху вниз и что в каждом. Без текста маркетолога он не начинает.
+3. Ты читаешь оба результата и пишешь, подходит ли итог под цель.
+
+Сначала сохрани план с командой документом и дай мне его одобрить. Одобрение плана = разрешение нанять маркетолога и инженера через Claude Code, раздать им задачи и довести цель до проверенного результата. Каждый результат сохраняй документом в своей задаче. Сайт не программируй и ничего не публикуй.</code></pre><button class="copy-button" type="button" data-copy-target="team-goal" aria-label="Скопировать цель для команды" aria-live="polite">Скопировать</button></div>
+<p>Слова «дай мне его одобрить» важны. Без них директор может начать работу сразу, а с ними он остановится и пришлёт план тебе.</p>
+<div class="result"><p><b>Результат:</b> директор проснулся и пишет план. Ход его работы виден в задаче.</p></div>
+</section>
+
+<section class="content-section" id="plan">
+<h2>Шаг 5. Одобри план и команду</h2>
+<p>Через пару минут в задаче появится документ <b>plan</b> и карточка с галочками для одобрения. Открой план и проверь три вещи:</p>
+<ul>
+<li>в команде маркетолог и инженер, оба подчиняются директору;</li>
+<li>инженер начинает после маркетолога и берёт его текст;</li>
+<li>нет публикации, подключения сервисов и придуманных цен.</li>
+</ul>
+<p>Всё на месте - отметь пункты в карточке и подтверди. Что-то не так - напиши в поле комментария внизу задачи, что поправить, и отправь. Директор пришлёт исправленный план.</p>
+<p>После одобрения директор начнёт нанимать. Из-за настройки в шаге 3 каждый найм придёт к тебе. Открой <b>Inbox</b> («Входящие») в меню слева: там две заявки, на маркетолога и на инженера. Они же видны в задаче директора. Открой каждую и найди, через что работает агент: там должно стоять Claude Code. Всё так - нажми <b>Approve</b> («Одобрить»). Если в заявке есть почта, оплата или другие сервисы, нажми Request revision («Попросить исправить») и ниже, в поле комментария, напиши «Убери подключение сервисов».</p>
+<p>Новым агентам поставь предел так же, как директору: Agents → агент → Budgets → Set budget.</p>
+<div class="result"><p><b>Результат:</b> план одобрен, в Agents («Агенты») три агента с бюджетами: директор, маркетолог и инженер.</p></div>
+</section>
+
+<section class="content-section" id="komanda">
+<h2>Шаг 6. Смотри, как работа переходит от роли к роли</h2>
+<p>Открой <b>Tasks</b> («Задачи»). Директор создал задачи и раздал их: одна у маркетолога, одна у инженера, проверка у себя. Нажми на задачу, чтобы увидеть исполнителя, переписку и сохранённые документы.</p>
+<p>Порядок работы такой:</p>
+<ol>
+<li>Маркетолог пишет текст и сохраняет документом в своей задаче.</li>
+<li>Инженер открывает текст маркетолога и собирает из него структуру страницы.</li>
+<li>Директор читает оба документа и пишет в своей задаче, подходит ли результат.</li>
+</ol>
+<p>Ничего нажимать не нужно: агент просыпается сам, когда ему назначили задачу или ответили в ней. Если задача стоит в статусе blocked («Заблокировано»), открой её и прочитай причину. Чаще всего агент ждёт ответа от тебя или результата коллеги.</p>
+<div class="result"><p><b>Результат:</b> в Tasks задачи у всех трёх агентов, у маркетолога и инженера сохранены документы с результатом.</p></div>
+</section>
+
+<section class="content-section" id="proverka">
+<h2>Шаг 7. Проверь, что они работали вместе, и поставь на паузу</h2>
+<p>Вот и ответ на вопрос из начала: как понять, что агенты работали вместе. Статус done («Выполнено») у задач ещё ничего не доказывает: так можно отметить и пустую работу. Командную работу видно по трём следам:</p>
+<ol>
+<li><b>Документы.</b> Открой результат инженера: в нём заголовок и три пользы из текста маркетолога, а не придуманные заново.</li>
+<li><b>Журнал запусков.</b> Открой Agents → Инженер → Runs («Запуски») и последний запуск. В журнале видно каждое действие агента. Найди строку «Read a document» с документом маркетолога: это момент, когда инженер его открыл, прежде чем писать своё.</li>
+<li><b>Приёмка директора.</b> В задаче директора есть комментарий: какие документы он прочитал и подходит ли итог под цель.</li>
+</ol>
+<p>Если все три следа на месте, задача прошла через три роли: один написал, второй использовал, третий проверил. Три отдельных ответа, где никто не читал чужую работу, такую проверку не проходят.</p>
+<p><b>Останови команду.</b> Открой каждого агента в Agents и вверху его страницы нажми Pause («Пауза», на телефоне это значок паузы). Без паузы агенты проснутся от любого нового комментария или задачи и снова начнут тратить лимит. Вернуть их в работу можно кнопкой Resume («Продолжить»). Если закрыть терминал с Paperclip, остановится вся команда сразу.</p>
+<div class="result"><p><b>Результат:</b> текст страницы готов и проверен директором, вклад каждой роли виден в документах и журналах, команда на паузе.</p></div>
+</section>
+
+<section class="content-section" id="oshibki">
+<h2>Если не получилось</h2>
+<details class="check-panel"><summary>Установщик пишет E404</summary>
+<p>Команда обратилась не к тому каталогу программ. В <a href="https://github.com/paperclipai/paperclip#quickstart">описании проекта</a> есть вариант, который берёт пакет из официального каталога:</p>
+<div class="code-card"><pre id="error-registry"><code>npx --registry https://registry.npmjs.org paperclipai@latest onboard --yes</code></pre><button class="copy-button" type="button" data-copy-target="error-registry" aria-label="Скопировать установку через официальный каталог npm" aria-live="polite">Скопировать</button></div>
+</details>
+<details class="check-panel"><summary>Панель не открывается</summary>
+<p>Посмотри в терминал: если там ошибка, скопируй её текст и отправь в чат Claude Code с просьбой разобраться. Если терминал закрыт, Paperclip остановлен - запусти его командой из шага 1.</p>
+</details>
+<details class="check-panel"><summary>На экране Connect a model написано Sign in to Claude</summary>
+<p>Значит, Claude Code на компьютере не вошёл в аккаунт. Проверь в терминале <code>claude --version</code> и отправь любое сообщение в чат Claude Code. Если он не отвечает, набери в терминале <code>claude</code>, нажми Enter, затем набери <code>/login</code> и войди своим аккаунтом. После этого вернись в Paperclip и нажми Check again («Проверить снова»).</p>
+</details>
+<details class="check-panel"><summary>Агент остановился и не продолжает</summary>
+<p>Проверь три места по порядку:</p>
+<ul>
+<li>Inbox - не ждёт ли тебя заявка на одобрение;</li>
+<li>задача агента - не стоит ли blocked, и почему;</li>
+<li>страница агента → Budgets - не кончился ли бюджет.</li>
+</ul>
+<p>Если кончился лимит самой подписки Claude, дождись, пока он восстановится. Не перезапускай агента раз за разом, пока причина не ясна.</p>
+</details>
+</section>
+
+<section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
+<p class="help-title">Застрял шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Настраиваю команду агентов в Paperclip. Хочу [что хочешь получить]. Сейчас на экране [экран или текст ошибки], уже сделано [что сделано]. Объясни по одному шагу и после каждого жди моего ответа. Не запускай агентов и не меняй бюджет без моего слова. Не показывай ключи и пароли.</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Пришли текст ошибки, только без ключей и личных данных.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с Paperclip" aria-live="polite">Скопировать</button>
+</section>
+<section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Штат собран - поручи ему настоящее дело</h2>
+<p>Команда агентов только что довела учебную цель от плана до проверенного результата. Дальше её можно ставить на своё: собрать сайт под услугу, бота, который принимает заявки, или калькулятор цены на странице. На ИИ-Лагере три дня показывают, как делать такие вещи с Claude Code и Codex: ты объясняешь задачу обычными словами, а ИИ-помощники пишут код. Программировать для этого не нужно.</p>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+<section class="next-read" id="dalshe"><h2>Дальше по теме</h2>
+<p class="next-sub">Что логично прочитать следующим</p>
+<ul><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Как закрыть секретные файлы от Claude Code</span><span class="why">Агенты читают файлы без спроса. Запрет в настройках не даст им открыть пароли и ключи.</span></a></li>
+<li><a href="../pyat-skillov-claude-code/"><span class="title">Пять скиллов для Claude Code</span><span class="why">Готовые навыки, которые помогают агенту планировать и проверять свою работу.</span></a></li></ul>
+</section>
+</article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Перед подключением</p><h2>Claude Code в VS Code</h2>
+      <p><a href="../claude-i-codex-v-vscode/">Открыть инструкцию</a></p></aside></div>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+</body></html>
