@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Штат ИИ-агентов в Claude Code: Paperclip, роли и одна общая цель</title>
+<meta name="description" content="Как собрать штат ИИ-агентов в Claude Code через Paperclip: директор, маркетолог и инженер, бюджеты до запуска, одобрение стратегии и проверка общего результата.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Штат ИИ-агентов в Claude Code: Paperclip, роли и одна общая цель">
+<meta property="og:description" content="Как собрать штат ИИ-агентов в Claude Code через Paperclip: директор, маркетолог и инженер, бюджеты до запуска, одобрение стратегии и проверка общего результата.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/shtat-agentov-paperclip/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/shtat-agentov-paperclip/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/shtat-agentov-paperclip/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Три металлических офисных штампа: высокий латунный и два небольших рядом с коралловой штемпельной подушкой">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/shtat-agentov-paperclip/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+</style><meta name="robots" content="noindex, nofollow">
+</head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">ШТАТ</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
+<a href="#ustanovka">Шаг 1. Запусти Paperclip на компьютере</a>
+<a href="#direktor">Шаг 2. Создай организацию и подключи директора</a>
+<a href="#roli">Шаг 3. Добавь маркетолога и инженера</a>
+<a href="#byudzhet">Шаг 4. Поставь бюджеты до первого запуска</a>
+<a href="#tsel">Шаг 5. Поставь одну цель всей команде</a>
+<a href="#strategiya">Шаг 6. Запусти директора и одобри стратегию</a>
+<a href="#proverka">Шаг 7. Проследи работу до итогового файла</a>
+<a href="#oshibki">Если не получилось</a>
+<a href="#svoi-proekt">Собери инструмент под своё дело</a>
+<a href="#dalshe">Дальше по теме</a></nav>
+<main><header id="nachalo"><p class="eyebrow">Инструкция · Команда агентов в Paperclip</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Три металлических офисных штампа: высокий латунный и два небольших рядом с коралловой штемпельной подушкой" loading="eager" decoding="async" fetchpriority="high"><figcaption>От общей цели и одобрения стратегии до файла, который прошёл проверку директора</figcaption></figure>
+<h1 class="article-title-v2">Штат ИИ-агентов в Claude Code: Paperclip, роли и одна общая цель</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
+<p class="lead">Когда поручений становится больше, чем один чат Claude Code успевает удержать, приходится самому передавать текст, напоминать про план и собирать ответы в один результат. Как дать эту работу директору, маркетологу и инженеру, а самому видеть, что они действительно движутся к одной цели?</p>
+<p>С <a href="https://github.com/paperclipai/paperclip">Paperclip</a> ты соберёшь такую команду на своём компьютере. Это отдельное открытое приложение с панелью в браузере: в ней ты задаёшь цели, назначаешь роли, читаешь задачи и одобряешь планы. Claude Code выполняет работу, Paperclip хранит поручения и историю. Это похоже на общий рабочий стол команды, где у каждой задачи есть ответственный.</p>
+<p>Paperclip не добавляет лимит Claude и не превращает агента в самостоятельного владельца проекта. Ты задаёшь исходные данные и принимаешь результат. Начнём с небольшой текстовой страницы, которую можно проверить без программирования. В последнем шаге разберём, какие записи и файлы показывают, что роли работали вместе.</p><p class="meta">АКТУАЛЬНО НА 6 ОКТЯБРЯ 2026</p></header>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Что нужно до начала</a>
+<a href="#ustanovka">Шаг 1. Запусти Paperclip на компьютере</a>
+<a href="#direktor">Шаг 2. Создай организацию и подключи директора</a>
+<a href="#roli">Шаг 3. Добавь маркетолога и инженера</a>
+<a href="#byudzhet">Шаг 4. Поставь бюджеты до первого запуска</a>
+<a href="#tsel">Шаг 5. Поставь одну цель всей команде</a>
+<a href="#strategiya">Шаг 6. Запусти директора и одобри стратегию</a>
+<a href="#proverka">Шаг 7. Проследи работу до итогового файла</a>
+<a href="#oshibki">Если не получилось</a>
+<a href="#svoi-proekt">Собери инструмент под своё дело</a>
+<a href="#dalshe">Дальше по теме</a></nav></details>
+<article><section class="content-section" id="podgotovka">
+<h2>Что нужно до начала</h2>
+<p>Открой VS Code с установленным Claude Code. Если его ещё нет, пройди <a href="../claude-i-codex-v-vscode/">инструкцию установки</a>, войди в аккаунт и отправь обычное сообщение. Paperclip будет запускать этого же помощника на твоём компьютере через адаптер <code>claude_local</code>. Адаптер - соединение между панелью управления и программой, которая выполняет работу.</p>
+<p>Поставь <a href="https://nodejs.org/en/download">Node.js с официального сайта</a>, версию 24.11 или новее. Это программа, с которой работает установщик Paperclip. Требование указано в <a href="https://github.com/paperclipai/paperclip#quickstart">README проекта</a>. Вместе с Node.js появится команда <code>npx</code>, которая скачивает и запускает нужное приложение.</p>
+<p>Создай отдельную пустую папку <code>paperclip-workspace</code> и открой её в VS Code через File → Open Folder («Файл → Открыть папку»). В меню Terminal → New Terminal («Терминал → Новый терминал») открой окно для команд. Вводи команды ниже туда, по одной, нажимая Enter после каждой:</p>
+<div class="code-card"><pre id="check-node"><code>node --version</code></pre><button class="copy-button" type="button" data-copy-target="check-node" aria-label="Скопировать проверку Node.js" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="check-npx"><code>npx --version</code></pre><button class="copy-button" type="button" data-copy-target="check-npx" aria-label="Скопировать проверку npx" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="check-claude"><code>claude --version</code></pre><button class="copy-button" type="button" data-copy-target="check-claude" aria-label="Скопировать проверку Claude Code" aria-live="polite">Скопировать</button></div>
+<p>Первый ответ должен быть <code>v24.11.0</code> или выше, остальные два - номера версий. Если команда не найдена, закрой терминал и открой новый после установки соответствующей программы.</p>
+<p>Чтобы не искать полный путь к папке вручную, отправь в чат Claude Code:</p>
+<div class="code-card"><pre id="workspace-path"><code>Покажи полный абсолютный путь к текущей папке paperclip-workspace. Ничего в ней не меняй. Мне нужно вставить этот путь в Local folder проекта Paperclip.</code></pre><button class="copy-button" type="button" data-copy-target="workspace-path" aria-label="Скопировать просьбу показать рабочую папку" aria-live="polite">Скопировать</button></div>
+<div class="warn-card"><p>Локальный адаптер умеет читать файлы и выполнять команды. В его стандартной настройке подтверждения действий отключены, это описано в <a href="https://docs.paperclip.ing/reference/adapters/claude-code/#permissions">разделе Permissions («Разрешения»)</a>. Пустая папка отделяет учебные файлы от рабочего проекта, но сама по себе не ограничивает доступ агента к остальному компьютеру. Для первой проверки не подключай внешние сервисы и не клади в эту папку документы с личными данными.</p></div>
+<div class="result"><p><b>Результат:</b> три команды отвечают номерами версий, чат Claude Code работает, полный путь к пустой папке готов для настройки агентов.</p></div>
+</section>
+
+<section class="content-section" id="ustanovka">
+<h2>Шаг 1. Запусти Paperclip на компьютере</h2>
+<p>В том же терминале введи команду из <a href="https://github.com/paperclipai/paperclip#quickstart">официального Quickstart («Быстрого старта»)</a>:</p>
+<div class="code-card"><pre id="install-paperclip"><code>npx paperclipai@latest onboard --yes</code></pre><button class="copy-button" type="button" data-copy-target="install-paperclip" aria-label="Скопировать установку Paperclip" aria-live="polite">Скопировать</button></div>
+<p>Если <code>npx</code> спросит разрешение скачать пакет, введи <code>y</code> и нажми Enter. <code>--yes</code> принимает стандартные настройки мастера Paperclip. Он создаёт локальные данные и запускает панель. Оставь терминал открытым и открой в браузере <a href="http://localhost:3100">http://localhost:3100</a>, если окно не появилось само. Если установщик напечатал другой адрес, открой именно его.</p>
+<p><code>localhost</code> означает твой компьютер. Для этой проверки сервер в интернете не нужен. После перезапуска компьютера Paperclip можно снова открыть командой из <a href="https://docs.paperclip.ing/guides/getting-started/installation/">инструкции установки</a>:</p>
+<div class="code-card"><pre id="run-paperclip"><code>npx paperclipai@latest run</code></pre><button class="copy-button" type="button" data-copy-target="run-paperclip" aria-label="Скопировать повторный запуск Paperclip" aria-live="polite">Скопировать</button></div>
+<div class="result"><p><b>Результат:</b> в браузере открылась панель Paperclip с мастером создания организации. Сообщений об ошибке запуска в терминале нет.</p></div>
+</section>
+
+<section class="content-section" id="direktor">
+<h2>Шаг 2. Создай организацию и подключи директора</h2>
+<p>На первом экране введи название <code>Первая команда</code> и нажми Continue («Продолжить»). Organization («Организация») - общее место для целей, агентов и задач. В <a href="https://docs.paperclip.ing/guides/getting-started/your-first-company/">документации создания организации</a> ещё встречается слово Company («Компания»), но в мастере используется Organization.</p>
+<p>Следующий экран предлагает первого агента. Назови его <code>CEO</code> (директор). Если мастер уже пройден, открой Agents («Агенты») → New Agent («Новый агент»). Первый агент получает роль директора; маркетолог и инженер будут подчиняться ему через Reports To («Руководитель»). Порядок создания описан в <a href="https://docs.paperclip.ing/guides/getting-started/your-first-agent/">Hire Your First Agent («Первый агент»)</a>.</p>
+<ol>
+<li>Выбери адаптер Claude Code (<code>claude_local</code>) и локальное окружение на этом компьютере. В мастере подключения используй уже работающий вход Claude Code либо свой API-ключ.</li>
+<li>В Model («Модель») выбери модель, доступную в твоём аккаунте. Общую папку зададим проекту в шаге 5, до рабочей цели. Поле Working directory («Рабочая папка») в старых конфигурациях ещё встречается, но для новых настроек используется папка проекта.</li>
+<li>Оставь запуск по расписанию выключенным. Heartbeat («Рабочий запуск») - одно пробуждение агента: он читает поручения, делает работу и записывает результат. Для первого опыта расписание не требуется.</li>
+<li>В мастере нажми Run test («Проверить»), затем Finish setup («Завершить настройку»), когда проверка успешна. На полной странице агента проверка называется Test environment («Проверить окружение»). Кнопки текущего мастера описаны в <a href="https://github.com/paperclipai/paperclip/blob/v2026.1001.0/docs/specs/agent-config-ui.md#current-implementation-2026-09-07">описании интерфейса выпуска 2026.1001.0</a>.</li>
+</ol>
+<p>Тест проверяет команду <code>claude</code>, окружение и вход в аккаунт. <a href="https://docs.paperclip.ing/reference/adapters/claude-code/#environment-test">Справка адаптера</a> допускает вход по подписке Claude, API-ключ или настройки Bedrock. Если Claude Code уже работает по подписке, начни с этого входа. Если используешь API, сохрани <code>ANTHROPIC_API_KEY</code> как Secret («Секрет») и подключи его к агенту через переменные окружения. Ключ не вставляют в описание задачи или инструкции.</p>
+<p>Проверка окружения сама обращается к модели с коротким тестовым запросом. Успешный тест ещё не запускает рабочую цель.</p>
+<div class="result"><p><b>Результат:</b> CEO есть в списке, проверка окружения успешна, рабочий запуск ещё не начат.</p></div>
+</section>
+
+<section class="content-section" id="roli">
+<h2>Шаг 3. Добавь маркетолога и инженера</h2>
+<p>Теперь директору нужны исполнители с разными обязанностями. Агент здесь - отдельная настройка Claude Code: имя, роль, инструкции и история работы. <a href="https://docs.paperclip.ing/guides/getting-started/your-first-agent/">Paperclip связывает агентов руководителем</a>, но содержание обязанностей задаёшь ты.</p>
+<p>Через Agents → New Agent создай ещё двух агентов: <code>Маркетолог</code> и <code>Инженер</code>. Для обоих повтори настройку Claude Code, той же модели и локального окружения. После создания открой Configuration («Настройки») и в Reports to («Руководитель») выбери CEO. Не включай расписание. Проведи Test environment для каждого и сохрани настройки через Save («Сохранить»).</p>
+<p>Открой Instructions («Инструкции») каждого агента. В списке Files («Файлы») выбери главный файл инструкций <code>AGENTS.md</code>, допиши в его редактор соответствующий текст ниже и нажми Save. Сохрани уже имеющиеся правила Paperclip. В текущем выпуске постоянные инструкции хранятся здесь, а старый <code>promptTemplate</code> отмечен как устаревший, что видно в <a href="https://github.com/paperclipai/paperclip/blob/v2026.1001.0/ui/src/pages/AgentDetail.production.tsx">коде редактора инструкций</a>.</p>
+<h3>Инструкция директору CEO</h3>
+<div class="code-card"><pre id="role-ceo"><code>Ты директор учебной команды. Прочитай общую цель организации. Сначала предложи стратегию и создай в Paperclip запрос одобрения типа approve_ceo_strategy. В нём покажи план, исходные данные и критерии приёмки. До одобрения не поручай исполнителям работу по цели.
+
+После одобрения создай связанные с одной целью задачи: маркетолог готовит текст, инженер собирает итоговый файл, ты проверяешь результат. У каждой задачи укажи исполнителя, ожидаемый файл и критерии приёмки. Инженер начинает сборку после готовности текста маркетолога. Финал принимай после чтения файла, а не по сообщению исполнителя.
+
+Работай только в настроенной рабочей папке. Не меняй настройки компьютера, не подключай сервисы, не публикуй результат. После выполнения учебной цели не создавай новых задач. Если чего-то не хватает, запиши препятствие в задаче.</code></pre><button class="copy-button" type="button" data-copy-target="role-ceo" aria-label="Скопировать инструкцию директору" aria-live="polite">Скопировать</button></div>
+<h3>Инструкция маркетологу</h3>
+<div class="code-card"><pre id="role-marketing"><code>Ты маркетолог учебной команды, твой руководитель CEO. Выполняй назначенную тебе задачу Paperclip по общей цели. Подготовь marketing.md: заголовок, краткое объяснение продукта и три пользы для читателя. Не выдумывай цены, отзывы или статистику. Используй только учебные данные из цели.
+
+Работай только в настроенной рабочей папке. Итоговый файл команды team-result.md не меняй. После сохранения marketing.md запиши его имя и результат в комментарии своей задачи. Если данных не хватает, отметь препятствие и обратись к CEO.</code></pre><button class="copy-button" type="button" data-copy-target="role-marketing" aria-label="Скопировать инструкцию маркетологу" aria-live="polite">Скопировать</button></div>
+<h3>Инструкция инженеру</h3>
+<div class="code-card"><pre id="role-engineer"><code>Ты инженер учебной команды, твой руководитель CEO. Выполняй назначенную задачу Paperclip по общей цели. Сначала прочитай готовый marketing.md. Если его ещё нет, отметь зависимость в своей задаче и сообщи CEO, не придумывай текст вместо маркетолога.
+
+Создай team-result.md из текста marketing.md: один заголовок, объяснение продукта и три пункта пользы. Это текстовая структура страницы, код сайта писать не нужно. Добавь раздел «Проверка» с перечнем того, что вошло в файл. Работай только в настроенной рабочей папке. В комментарии задачи укажи файл и что проверено. Не публикуй результат.</code></pre><button class="copy-button" type="button" data-copy-target="role-engineer" aria-label="Скопировать инструкцию инженеру" aria-live="polite">Скопировать</button></div>
+<p>Это учебное распределение обязанностей. Разные имена сами по себе не делают команду: инструкции задают, кто пишет исходный текст, кто его использует и кто принимает результат. Прежде чем дать им работу, ограничим расход.</p>
+<div class="result"><p><b>Результат:</b> три агента настроены, у двух исполнителей руководитель CEO, инструкции сохранены и все тесты окружения успешны.</p></div>
+</section>
+
+<section class="content-section" id="byudzhet">
+<h2>Шаг 4. Поставь бюджеты до первого запуска</h2>
+<p>Агенты обращаются к модели самостоятельно. При входе через подписку они расходуют её лимит, при API-входе расход учитывается по тарифу сервиса. Бюджет Paperclip - денежный предел на зарегистрированный расход, а не число оставшихся сообщений Claude.</p>
+<ol>
+<li>Открой Costs («Расходы») → Budgets («Бюджеты»). В Monthly Budget («Бюджет на месяц») задай общий предел организации и нажми Save («Сохранить»).</li>
+<li>Открой CEO → Budget («Бюджет»), установи отдельный месячный предел и сохрани. Повтори для маркетолога и инженера. Вводи положительные суммы, которые разрешаешь потратить; универсальной суммы для всех аккаунтов нет.</li>
+<li>Вернись в Costs → Budgets и проверь, что видны все сохранённые пределы. Настройки и уровни ограничений описаны в <a href="https://docs.paperclip.ing/guides/day-to-day/costs/#setting-a-company-budget">справке бюджетов</a>.</li>
+</ol>
+<div class="warn-card"><p>Эти пределы зависят от данных, которые передаёт адаптер. Не считай сумму в Paperclip гарантией сохранности квоты подписки: её расход смотри и в Claude. <a href="https://github.com/paperclipai/paperclip#whats-under-the-hood">Разработчики предупреждают</a>, что отчёт о расходе и уже начатая работа могут задержать остановку при достижении предела.</p></div>
+<p>Для первой проверки оставь запуск по расписанию выключенным. Ограничь один рабочий запуск каждого агента:</p>
+<ol><li>В Configuration раскрой Advanced Run Policy («Дополнительные правила запуска»). В Timeout (sec) («Время запуска, секунды», <code>timeoutSec</code>) введи <code>300</code>.</li>
+<li>В разделе Advanced («Дополнительно») найди Max turns per run («Число ходов за запуск», <code>maxTurnsPerRun</code>) и введи <code>20</code>.</li>
+<li>Выключи Continue after max-turn stop («Продолжать после остановки по числу ходов»), чтобы остановленный опыт не возобновлялся автоматически. Сохрани настройки.</li></ol>
+<p>Эти подписи есть в <a href="https://github.com/paperclipai/paperclip/blob/v2026.1001.0/ui/src/components/AgentConfigForm.tsx">форме настроек</a> и <a href="https://github.com/paperclipai/paperclip/blob/v2026.1001.0/ui/src/adapters/claude-local/config-fields.tsx">полях адаптера Claude</a>. 300 секунд и 20 ходов - выбранные ограничения учебного опыта, не обещание, что задача успеет за них завершиться. Если времени не хватит, прочитай журнал перед повтором. Значение времени <code>0</code> в локальном режиме означает отсутствие такого ограничения, согласно <a href="https://docs.paperclip.ing/reference/adapters/claude-code/#common-fields">справке адаптера</a>.</p>
+<div class="result"><p><b>Результат:</b> общий бюджет и три бюджета агентов сохранены, расписание выключено, у каждого рабочего запуска есть ограничения.</p></div>
+</section>
+
+<section class="content-section" id="tsel">
+<h2>Шаг 5. Поставь одну цель всей команде</h2>
+<p>Открой Goals («Цели») и создай цель с названием <code>Первая текстовая страница</code>. В описание вставь текст ниже и сохрани. Цель добавляется после создания организации, как объясняет <a href="https://docs.paperclip.ing/guides/getting-started/your-first-company/#set-your-goal-after-creating-the-company">справка Goals</a>.</p>
+<div class="code-card"><pre id="company-goal"><code>Подготовить текстовую структуру страницы учебного продукта «Список дел». Это простое приложение, в котором человек записывает дела, отмечает выполненные и видит оставшиеся. Эти сведения - все исходные данные. Цены, отзывы и дополнительные функции не придумывать.
+
+Маркетолог создаёт marketing.md с одним заголовком, кратким объяснением продукта и тремя пунктами пользы. После него инженер читает marketing.md и собирает team-result.md с тем же содержанием и разделом «Проверка». CEO читает оба файла, проверяет соответствие цели и записывает приёмку в комментарии итоговой задачи.
+
+Все задачи свяжи с этой целью и проектом «Первая текстовая страница», назначь нужным ролям. Используй настроенную Local folder этого проекта. Сначала предложи стратегию на моё одобрение, затем делегируй. Итог опыта: два файла в общей рабочей папке и комментарий CEO с результатом проверки. После этого остановись. Сайт не программировать и ничего не публиковать.</code></pre><button class="copy-button" type="button" data-copy-target="company-goal" aria-label="Скопировать учебную цель команды" aria-live="polite">Скопировать</button></div>
+<p>Теперь закрепи за этой целью общую папку. Открой Projects («Проекты»), создай проект <code>Первая текстовая страница</code> через Create project («Создать проект»). Подключать GitHub для этого опыта не нужно. Открой созданный проект → Configuration → Codebase («Рабочие файлы») → Set local folder («Задать локальную папку»). Вставь полный путь из подготовки и нажми Save. В Local folder («Локальная папка») должен появиться этот путь. Поля описаны в <a href="https://github.com/paperclipai/paperclip/blob/v2026.1001.0/ui/src/components/ProjectProperties.tsx">настройках проекта текущего выпуска</a>.</p>
+<p>В Description («Описание») проекта укажи: «Учебный проект по цели Первая текстовая страница. Все результаты сохранять в указанную Local folder». В инструкции CEO из шага 3 добавь: «Каждой задаче по этой цели укажи проект Первая текстовая страница и эту же цель». Связь задачи с проектом передаёт рабочую папку исполнителю, согласно <a href="https://github.com/paperclipai/paperclip/blob/v2026.1001.0/docs/api/goals-and-projects.md#project-workspaces">описанию рабочих папок</a>.</p>
+<p>Здесь есть всё для первого опыта: исходные данные, порядок передачи работы и видимый результат. Пока CEO не начнёт работу, сохранённая цель остаётся поручением, поэтому следующий шаг - стратегия.</p>
+<div class="result"><p><b>Результат:</b> в Goals сохранена одна цель с двумя именами файлов и критериями проверки, а у проекта указана общая локальная папка.</p></div>
+</section>
+
+<section class="content-section" id="strategiya">
+<h2>Шаг 6. Запусти директора и одобри стратегию</h2>
+<p>Открой Agents → CEO и нажми Run Heartbeat («Запустить сейчас»). Для ручного запуска расписание включать не требуется: в <a href="https://github.com/paperclipai/paperclip/blob/v2026.1001.0/docs/agents-runtime.md#2-when-an-agent-wakes-up">описании рабочих запусков</a> ручное обращение выделено отдельно от таймера.</p>
+<p>Открой Runs («Запуски») в карточке CEO, затем запись текущего запуска. Статус running («Работает») показывает, что агент выполняет поручение. Прочитай журнал: директор должен увидеть цель и подготовить план. После завершения открой Approvals («Одобрения») и предложение Strategy («Стратегия»).</p>
+<p>Проверь план перед согласием: текст делает маркетолог, инженер использует его файл, директор читает финал. В плане не должно быть публикации сайта, подключения сервисов или придуманной цены продукта. Если это есть, нажми Request revision («Попросить исправить») и напиши, что изменить. Подходящий план прими через Approve («Одобрить»). Эти действия описаны в <a href="https://docs.paperclip.ing/guides/getting-started/watching-agents-work/#review-the-ceos-strategy">инструкции первого запуска</a>.</p>
+<p>Одобрение может сразу поставить CEO в очередь на продолжение. Если он остался без нового запуска, снова нажми Run Heartbeat. Когда в Issues («Задачи») появятся поручения, прочитай их и проверь исполнителей, цель и проект «Первая текстовая страница». Если директор снова пишет только план или выполняет всё сам, оставь комментарий в его задаче. Если задачи у CEO ещё нет, создай её в Issues с названием «Делегировать учебную цель», назначь CEO в Assignee («Исполнитель»), укажи нашу цель и проект. В описание вставь текст ниже:</p>
+<div class="code-card"><pre id="delegation-fix"><code>По одобренной стратегии создай отдельные задачи маркетологу и инженеру, свяжи их с целью и проектом «Первая текстовая страница». Укажи имена выходных файлов и что инженер ждёт готовый marketing.md. Итоговую проверку назначь себе. Покажи номера созданных задач.</code></pre><button class="copy-button" type="button" data-copy-target="delegation-fix" aria-label="Скопировать уточнение делегирования" aria-live="polite">Скопировать</button></div>
+<p>После комментария или создания задачи запусти CEO вручную, если нового запуска нет. Если стратегии в Approvals не оказалось, вернись в Runs: проверь, что цель прочитана, инструкции сохранены и в журнале нет ошибки. Не переходи к исполнителям, пока план не представлен и не одобрен.</p>
+<div class="result"><p><b>Результат:</b> стратегия одобрена, на доске Issues видны задачи с именами исполнителей и общей целью.</p></div>
+</section>
+
+<section class="content-section" id="proverka">
+<h2>Шаг 7. Проследи работу до итогового файла</h2>
+<p>Открой задачу маркетолога на доске Issues. Если её выполнение уже началось, дождись результата. Если нового запуска нет, открой Agents → Маркетолог → Run Heartbeat. В комментарии задачи должно появиться сообщение о файле <code>marketing.md</code>. Открой его в VS Code, в папке <code>paperclip-workspace</code>.</p>
+<p>Теперь открой задачу инженера. После готовности исходного текста запусти инженера так же, если он ещё не работает. Задачи и комментарии поддерживают передачу работы между ролями, как описано в <a href="https://github.com/paperclipai/paperclip/blob/v2026.1001.0/docs/guides/agent-developer/task-workflow.md">Task Workflow («Работа с задачами»)</a>. Если инженер остановился в статусе blocked («Заблокировано»), прочитай причину, сообщи в задаче, что исходный файл готов, и запусти агента снова.</p>
+<p>В рабочей папке открой <code>team-result.md</code>. Он должен содержать заголовок, объяснение «Списка дел», три пользы и раздел «Проверка». Затем дай CEO завершить задачу приёмки, при необходимости через ручной запуск. В комментарии директор должен назвать прочитанные файлы и написать, соответствуют ли они цели. Если чего-то нет, оставь замечание в соответствующей задаче и повтори только нужный запуск.</p>
+<p>Теперь можно ответить на вопрос из начала. В <b>Issues</b> открой задачи и проверь общую цель, назначения и комментарии. В <b>Runs</b> каждого агента открой завершённый запуск и найди его действия: маркетолог сохранил исходный текст, инженер прочитал его и собрал финал, CEO прочитал результат. <a href="https://docs.paperclip.ing/guides/getting-started/watching-agents-work/#reading-the-run-transcript">Runs показывает ход работы и обращения к инструментам</a>. Сравни журнал с реальными файлами, а не только со статусом done («Выполнено»).</p>
+<p><b>Общая цель, связанная передача работы и файл, который прошёл проверку директора, показывают, что роли работали вместе.</b> Три отдельных ответа без передачи результата между ними этой проверки не проходят.</p>
+<p>После приёмки открой карточки агентов и переведи их в Pause («Пауза»). Выключенного таймера недостаточно для полной остановки: агенты могут просыпаться и от событий. Управление паузой описано в <a href="https://github.com/paperclipai/paperclip/blob/v2026.1001.0/docs/guides/board-operator/managing-agents.md">Managing Agents («Управление агентами»)</a>. Вернуться к работе можно через Resume («Продолжить»).</p>
+<div class="result"><p><b>Результат:</b> в папке есть <code>marketing.md</code> и <code>team-result.md</code>, комментарий CEO содержит приёмку, в Issues и Runs прослеживается вклад всех трёх ролей. Учебная команда поставлена на паузу.</p></div>
+</section>
+
+<section class="content-section" id="oshibki">
+<h2>Если не получилось</h2>
+<details class="check-panel"><summary>Установщик сообщает E404</summary>
+<p>Он мог обратиться к частному каталогу npm вместо общего. В <a href="https://github.com/paperclipai/paperclip#quickstart">README</a> есть команда для установки из официального каталога:</p>
+<div class="code-card"><pre id="error-registry"><code>npx --registry https://registry.npmjs.org paperclipai@latest onboard --yes</code></pre><button class="copy-button" type="button" data-copy-target="error-registry" aria-label="Скопировать установку через официальный каталог npm" aria-live="polite">Скопировать</button></div>
+</details>
+<details class="check-panel"><summary>Панель не открывается или ошибка базы данных</summary>
+<p>Посмотри ошибку в терминале. Если Paperclip остановлен, используй команду повторного запуска из шага 1. Не запускай установщик с <code>sudo</code> или из терминала администратора: встроенная база данных этого не допускает. Для ошибки Embedded PostgreSQL на Mac с Apple Silicon есть отдельная ветка в <a href="https://docs.paperclip.ing/guides/getting-started/installation/#step-3-run-the-onboarding-command">документации установки</a>. Передай Claude Code точный текст ошибки и попроси исправить её по этой странице.</p>
+</details>
+<details class="check-panel"><summary>Test environment не проходит</summary>
+<p>Проверь <code>claude --version</code> в терминале и обычное сообщение в чате Claude Code. Для задач в проекте сравни Local folder с полным путём из подготовки. Если журнал указывает на ACP, открой Configuration → Advanced → Execution engine («Способ запуска»), выбери Claude CLI (<code>engine: cli</code>, обычный запуск Claude Code), сохрани настройки и повтори тест. Справка <a href="https://docs.paperclip.ing/reference/adapters/claude-code/#acp-engine">ACP Engine</a> объясняет: режим auto использует ACP и сам не переключается на CLI при несовместимом окружении.</p>
+</details>
+<details class="check-panel"><summary>Агент не продолжает работу</summary>
+<p>Открой Runs, затем проверь три места: ожидающее одобрение в Approvals, причину blocked в задаче и состояние бюджета в Costs. Если исчерпан лимит самой модели, дождись его восстановления. Если достигнут бюджет Paperclip, сохрани паузу либо измени предел осознанно после просмотра расхода. Не запускай агента многократно без чтения причины остановки.</p>
+</details>
+</section>
+
+<section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
+<p class="help-title">Запнулся? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу [желаемый результат] в Paperclip. Сейчас вижу [экран или текст ошибки], уже выполнено [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа. Не запускай агентов и не меняй бюджеты без моего указания. Не выводи ключи и секреты.</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Начнём с текущего экрана и одного действия. Покажи текст ошибки без ключей и личных данных.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с Paperclip" aria-live="polite">Скопировать</button>
+</section>
+<section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент под своё дело</h2>
+<p>Команда передала текст от одной роли к другой и довела его до проверенного файла. Следующий шаг - задача под твой проект. На ИИ-Лагере показывают, как собрать сайт, бота или калькулятор с Claude Code и Codex. Ты описываешь задачу словами, а помощник пишет код. На практикуме этот путь проходят по шагам, без программирования.</p>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+<section class="next-read" id="dalshe"><h2>Дальше по теме</h2>
+<p class="next-sub">Что логично прочитать следующим</p>
+<ul><li><a href="../claude-i-codex-v-vscode/"><span class="title">Claude Code и Codex в VS Code</span><span class="why">Установка помощников, вход в аккаунт и первая рабочая папка.</span></a></li>
+<li><a href="../pyat-skillov-claude-code/"><span class="title">Пять скиллов для Claude Code</span><span class="why">Поиск подходящих инструкций, планирование и проверка работы помощника.</span></a></li></ul>
+</section>
+</article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Перед подключением</p><h2>Claude Code в VS Code</h2>
+      <p><a href="../claude-i-codex-v-vscode/">Открыть инструкцию</a></p></aside></div>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+</body></html>
