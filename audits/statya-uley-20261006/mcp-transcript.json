@@ -1,0 +1,115 @@
+[
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2024-11-05",
+        "capabilities": {},
+        "clientInfo": {
+          "name": "article-verification",
+          "version": "1"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "protocolVersion": "2024-11-05",
+        "serverInfo": {
+          "name": "ruflo",
+          "version": "3.0.0"
+        },
+        "capabilities": {
+          "tools": {
+            "listChanged": true
+          },
+          "resources": {
+            "subscribe": true,
+            "listChanged": true
+          }
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "method": "tools/list",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "toolCount": 358,
+        "selectedTools": [
+          "agent_spawn",
+          "swarm_status",
+          "memory_store",
+          "memory_retrieve",
+          "memory_list"
+        ]
+      }
+    },
+    "audit_note": "Full tools/list retained in temporary verification folder; only count and names relevant to the article are kept in this commit"
+  },
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "method": "tools/call",
+      "params": {
+        "name": "memory_store",
+        "arguments": {
+          "key": "uley-demo-brief",
+          "value": "Учебная проверка памяти статьи УЛЕЙ. Требования: шесть флажков, счётчик, сброс.",
+          "namespace": "uley-demo"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"key\": \"uley-demo-brief\",\n  \"namespace\": \"uley-demo\",\n  \"stored\": true,\n  \"storedAt\": \"2026-10-06T09:03:06.200Z\",\n  \"hasEmbedding\": true,\n  \"embeddingDimensions\": 384,\n  \"provenanceType\": \"unknown\",\n  \"backend\": \"sqlite (bridge, brute-force cosine)\",\n  \"storeTime\": \"203.59ms\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  },
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "method": "tools/call",
+      "params": {
+        "name": "memory_retrieve",
+        "arguments": {
+          "key": "uley-demo-brief",
+          "namespace": "uley-demo"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"key\": \"uley-demo-brief\",\n  \"namespace\": \"uley-demo\",\n  \"value\": \"Учебная проверка памяти статьи УЛЕЙ. Требования: шесть флажков, счётчик, сброс.\",\n  \"tags\": [],\n  \"storedAt\": 1791277386192,\n  \"updatedAt\": 1791277386200,\n  \"accessCount\": 1,\n  \"hasEmbedding\": true,\n  \"found\": true,\n  \"backend\": \"sqlite (bridge, brute-force cosine)\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  }
+]

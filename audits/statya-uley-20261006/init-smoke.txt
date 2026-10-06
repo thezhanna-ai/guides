@@ -1,0 +1,37 @@
+
+Initializing RuFlo V3
+
+Transformers.js loaded: Xenova/all-MiniLM-L6-v2
+RuFlo V3 initialized successfully!
+
++--------- Summary ----------+
+| Directories: 12 created    |
+| Files: 110 created         |
+| Skipped: 1 (already exist) |
++----------------------------+
+
++---------- Claude Code Integration -----------+
+| CLAUDE.md:   Swarm guidance & configuration  |
+| Settings:    .claude/settings.json           |
+| Skills:      .claude/skills/ (30 skills)     |
+| Commands:    .claude/commands/ (16 commands) |
+| Agents:      .claude/agents/ (17 agents)     |
+| Helpers:     .claude/helpers/                |
+| MCP:         .mcp.json                       |
++----------------------------------------------+
+
++------------- V3 Runtime --------------+
+| Config:      .claude-flow/config.yaml |
+| Data:        .claude-flow/data/       |
+| Logs:        .claude-flow/logs/       |
+| Sessions:    .claude-flow/sessions/   |
++---------------------------------------+
+
+[INFO] Hooks: 7 hook types enabled in settings.json
+
+Next steps:
+  - Run ruflo daemon start to start background workers
+  - Run ruflo swarm init to initialize a swarm
+  - Or use ruflo init --start-all to do all of the above
+  - Review .claude/settings.json for hook configurations
+  - Run ruflo metaharness score for a 5-dim harness readiness scorecard (ADR-150)

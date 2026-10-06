@@ -1,0 +1,78 @@
+
+ruflo init
+Initialize RuFlo in the current directory
+
+SUBCOMMANDS:
+  wizard          Interactive setup wizard for comprehensive configuration
+  check           Check if RuFlo is initialized
+  skills          Initialize only skills
+  hooks           Initialize only hooks configuration
+  upgrade         Update statusline and helpers while preserving existing data
+
+OPTIONS:
+  -f, --force               Overwrite existing configuration [default: false]
+  -m, --minimal             Create minimal configuration [default: false]
+      --full                Create full configuration with all components [default: false]
+      --cloud-mcp           Register auth-gated cloud MCP servers (ruv-swarm, flow-nexus) in .mcp.json (only relevant with --full) [default: false]
+      --skip-claude         Skip .claude/ directory creation (runtime only) [default: false]
+      --no-signup           Skip the post-init Cognitum capability enrollment prompt [default: false]
+      --only-claude         Only create .claude/ directory (skip runtime) [default: false]
+      --no-global           Skip the ~/.claude/CLAUDE.md "Ruflo Integration" pointer block (#1744) [default: false]
+      --start-all           Auto-start daemon, memory, and swarm after init [default: false]
+      --start-daemon        Auto-start daemon after init [default: false]
+      --mods                Enable the ruflo mod plugins in .claude/settings.json (default on; --no-mods to skip); classic hooks stay as fallback [default: true]
+      --plugin-install      With mods: refresh the ruflo marketplace and claude plugin install the mods (--no-plugin-install to write settings only) [default: true]
+      --with-embeddings     Initialize ONNX embedding subsystem with hyperbolic support [default: false]
+      --embedding-model     ONNX embedding model to use [default: Xenova/all-MiniLM-L6-v2]
+      --codex               Initialize for OpenAI Codex CLI (creates AGENTS.md, .agents/) [default: false]
+      --dual                Initialize for both Claude Code and OpenAI Codex [default: false]
+      --no-codex-detect     Skip auto-detecting the OpenAI Codex CLI and configuring its MCP server + skills [default: false]
+      --no-skills-sh        Skip the post-init `npx skills add ruvnet/ruflo` registration (also honored via RUFLO_NO_SKILLS_SH=1) [default: false]
+      --all-agents          Install all agent categories (ADR-128: default is ~24 substrate agents; this restores the full set of ~89) [default: false]
+
+EXAMPLES:
+  $ claude-flow init
+    Initialize with default configuration
+  $ claude-flow init --start-all
+    Initialize and start daemon, memory, swarm
+  $ claude-flow init --start-daemon
+    Initialize and start daemon only
+  $ claude-flow init --minimal
+    Initialize with minimal configuration
+  $ claude-flow init --full
+    Initialize with all components
+  $ claude-flow init --force
+    Reinitialize and overwrite existing config
+  $ claude-flow init --only-claude
+    Only create Claude Code integration
+  $ claude-flow init --skip-claude
+    Only create V3 runtime
+  $ claude-flow init wizard
+    Interactive setup wizard
+  $ claude-flow init --with-embeddings
+    Initialize with ONNX embeddings
+  $ claude-flow init --with-embeddings --embedding-model Xenova/all-mpnet-base-v2
+    Use larger embedding model
+  $ claude-flow init skills --all
+    Install all available skills
+  $ claude-flow init hooks --minimal
+    Create minimal hooks configuration
+  $ claude-flow init upgrade
+    Update helpers while preserving data
+  $ claude-flow init upgrade --settings
+    Update helpers and merge new settings (Agent Teams)
+  $ claude-flow init upgrade --verbose
+    Show detailed upgrade info
+  $ claude-flow init --codex
+    Initialize for OpenAI Codex (AGENTS.md)
+  $ claude-flow init --codex --full
+    Codex init with all canonical packaged skills
+  $ claude-flow init --dual
+    Initialize for both Claude Code and Codex
+  $ claude-flow init --no-codex-detect
+    Skip auto-configuring OpenAI Codex even if it is installed
+  $ claude-flow init --no-skills-sh
+    Skip the post-init skills.sh registration
+  $ claude-flow init --all-agents
+    Install all agent categories (~89 agents; ADR-128 opt-in)
+

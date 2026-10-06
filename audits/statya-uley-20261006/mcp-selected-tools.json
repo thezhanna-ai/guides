@@ -1,0 +1,161 @@
+[
+  {
+    "name": "agent_spawn",
+    "description": "Spawn a Ruflo-tracked agent with cost attribution + memory persistence + swarm coordination. Use when native Task tool is wrong because you need (a) cost tracking per agent in the cost-tracking namespace, (b) cross-session learning via the patterns namespace, or (c) coordination with other agents in a swarm topology (hierarchical / mesh / consensus). For one-shot subtasks with no learning loop, native Task is fine. Pair with hooks_route to pick the right model first.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "agentType": {
+          "type": "string",
+          "description": "Type of agent to spawn"
+        },
+        "agentId": {
+          "type": "string",
+          "description": "Optional custom agent ID"
+        },
+        "swarmId": {
+          "type": "string",
+          "description": "Optional swarm to register the agent with (defaults to most-recent swarm)"
+        },
+        "config": {
+          "type": "object",
+          "description": "Agent configuration"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Agent domain"
+        },
+        "model": {
+          "type": "string",
+          "enum": [
+            "haiku",
+            "sonnet",
+            "opus",
+            "opus-4.7",
+            "inherit"
+          ],
+          "description": "Claude model alias (haiku=fast/cheap, sonnet=balanced, opus=current Opus 4.8, opus-4.7=prior Opus pin)"
+        },
+        "task": {
+          "type": "string",
+          "description": "Task description for intelligent model routing"
+        },
+        "memoryBase": {
+          "type": "string",
+          "description": "Opt-in: base .rvf memory file to fork a per-agent Copy-On-Write branch from (agenticow). When set, the agent gets an isolated ~162-byte COW branch instead of a full copy — promote on success, discard on terminate. Requires the optional `agenticow` dep; degrades to a no-op when absent or when CLAUDE_FLOW_NO_COW_MEMORY=1."
+        },
+        "memoryDimension": {
+          "type": "integer",
+          "description": "Vector dimension for the COW base (required only when memoryBase does not exist yet)"
+        }
+      },
+      "required": [
+        "agentType"
+      ]
+    }
+  },
+  {
+    "name": "swarm_status",
+    "description": "Get swarm status from persistent state Use when native Task tool is wrong because you need multi-agent coordination — topology (hierarchical/mesh/star), consensus (raft/byzantine/gossip/crdt/quorum), shared memory namespace, or anti-drift gates. For independent one-shot subagents, native Task is fine; spawn each separately.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "swarmId": {
+          "type": "string",
+          "description": "Swarm ID (omit for most recent)"
+        }
+      }
+    }
+  },
+  {
+    "name": "memory_store",
+    "description": "Persistent key-value store with vector embedding — survives across sessions and is searchable by meaning, not just by file path. Use when native Write is wrong because the data is not a file (e.g. a learned pattern, a decision, a budget config) AND you need to recall it later by semantic query, not by path. Defaults to namespace=\"default\". Upsert semantics: writing an existing key updates it (matching the CLI `memory store` default); pass `upsert: false` to force strict-insert instead.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Memory key (unique within namespace)"
+        },
+        "value": {
+          "description": "Value to store (string or object)"
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace for organization (default: \"default\")"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional tags for filtering"
+        },
+        "ttl": {
+          "type": "number",
+          "description": "Time-to-live in seconds (optional)"
+        },
+        "upsert": {
+          "type": "boolean",
+          "description": "Update existing key instead of failing (default: true, matching CLI `memory store`; set false for strict-insert). #2775 parity."
+        },
+        "provenance_type": {
+          "type": "string",
+          "enum": [
+            "user_claim",
+            "agent_output",
+            "system_observation",
+            "tool_result",
+            "unknown"
+          ],
+          "description": "ADR-323: who/what produced this value, so shared-namespace retrieval can filter by trust level instead of conflating a user's stated claim with an agent's own output. Default: \"unknown\"."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    }
+  },
+  {
+    "name": "memory_retrieve",
+    "description": "Read back a value previously stored via memory_store, by exact (namespace, key) — lossless, includes metadata. Use when native Read is wrong because the value is not a file (it lives in the .swarm/memory.db SQLite store) AND you know the exact key. For semantic lookup by meaning, use memory_search.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Memory key"
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace (default: \"default\")"
+        }
+      },
+      "required": [
+        "key"
+      ]
+    }
+  },
+  {
+    "name": "memory_list",
+    "description": "Enumerate stored memory entries (optionally filtered by namespace/tags) without semantic search. Use when native Glob is wrong because the entries are not files (they live in .swarm/memory.db). For inspection / audit / \"what is in my memory\" — pair with memory_search for retrieval-by-meaning.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "Filter by namespace"
+        },
+        "limit": {
+          "type": "number",
+          "description": "Maximum results (default: 50)"
+        },
+        "offset": {
+          "type": "number",
+          "description": "Offset for pagination (default: 0)"
+        }
+      }
+    }
+  }
+]
