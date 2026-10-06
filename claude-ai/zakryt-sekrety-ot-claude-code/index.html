@@ -246,7 +246,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 .code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
 @media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
 
-.shot:has(img[src="assets/permission-rules.webp"]) img, .shot:has(img[src="assets/add-deny-rule.webp"]) img, .shot:has(img[src="assets/deny-tri-pravila.webp"]) img { width: 440px }
+.shot:has(img[src="assets/permission-rules.webp"]) img, .shot:has(img[src="assets/add-deny-rule.webp"]) img, .shot:has(img[src="assets/deny-tri-pravila.webp"]) img, .shot:has(img[src="assets/sandbox.webp"]) img { width: 440px }
 .shot:has(img[src="assets/otkaz.webp"]) img { width: 560px }
 </style></head><body>
 <div class="progress" aria-hidden="true"></div>
@@ -376,13 +376,10 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <p>Как включить:</p>
 <ol>
 <li>В поле ввода Claude Code нажми значок <code>/</code> и выбери <code>Sandbox</code> («Песочница»). Или просто отправь команду <code>/sandbox</code>.</li>
-<li>Во вкладке <code>Mode</code> («Режим») выбери <code>regular permissions</code> («обычные разрешения»): песочница включится, а вопросы перед действиями останутся как были. Второй вариант, <code>auto-allow</code>, запускает команды в песочнице без вопросов.</li>
+<li>В разделе <code>Mode</code> («Режим») выбери <code>Sandbox commands, with regular permissions</code> («команды в песочнице, обычные разрешения»): песочница включится, а вопросы перед действиями останутся как были. Вариант <code>with auto-allow</code> запускает команды в песочнице без вопросов, а <code>No sandbox</code> выключает её.</li>
+<li>Ниже, в разделе <code>Overrides</code>, выключи переключатель <code>Allow unsandboxed fallback</code> («разрешить запуск без песочницы»). Пока он включён, команду, которая не смогла выполниться в песочнице, Claude Code может перезапустить снаружи, а в режиме <code>Auto</code> такой перезапуск одобряет проверяющая модель, а не ты. Переключатель меняется только при включённой песочнице.</li>
 </ol>
-<p>Если команда не сможет выполниться в песочнице, Claude Code может перезапустить её снаружи. В режиме <code>Auto</code> такой перезапуск одобряет проверяющая модель, а не ты. Чтобы выхода наружу не было совсем, допиши в личные настройки <code>~/.claude/settings.json</code> раздел ниже, рядом с <code>permissions</code> и через запятую после него. Справка называет это строгим режимом песочницы.</p>
-<div class="code-card"><pre id="json-sandbox"><code>"sandbox": {
-  "enabled": true,
-  "allowUnsandboxedCommands": false
-}</code></pre><button class="copy-button" type="button" data-copy-target="json-sandbox" aria-label="Скопировать настройку строгой песочницы" aria-live="polite">Скопировать</button></div>
+<figure><div class="shot"><img src="assets/sandbox.webp" width="1244" height="902" loading="lazy" decoding="async" alt="Окно Sandbox: раздел Mode с тремя вариантами и раздел Overrides с переключателем Allow unsandboxed fallback"></div><figcaption>Окно <code>Sandbox</code>: сверху режим, ниже переключатель запуска без песочницы. На снимке песочница ещё выключена, отмечен <code>No sandbox</code></figcaption></figure>
 <p>Теперь проверь стену. В той же пробной папке открой новый разговор и отправь:</p>
 <div class="code-card"><pre id="prompt-sandbox-test"><code>Выполни в терминале ровно одну команду: grep -r TEST . и покажи её вывод дословно. Других команд не запускай.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-sandbox-test" aria-label="Скопировать проверку песочницы" aria-live="polite">Скопировать</button></div>
 <p>В нашей проверке с включённой песочницей вместо строки с ключом команда ответила <code>cannot read .env: Operation not permitted</code> («нельзя прочитать .env: действие не разрешено»).</p>
