@@ -42,7 +42,7 @@ class LegalCorrectionsTest(unittest.TestCase):
 
     def test_every_page_and_template_loads_existing_local_font_stylesheet(self):
         pages = [ROOT / "index.html", *ROOT.glob("claude-ai/*/index.html"), *ROOT.glob("scripts/*.html")]
-        self.assertEqual(len(pages), 37)
+        self.assertEqual(len(pages), 38)
         for path in pages:
             links = ImageDocument(path.read_text()).root.all(tag="link")
             fonts = [n.attrs["href"] for n in links if n.attrs.get("href", "").endswith("/fonts/fonts.css")]
