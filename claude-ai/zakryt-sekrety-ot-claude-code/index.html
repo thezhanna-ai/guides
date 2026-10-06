@@ -2,12 +2,12 @@
 <html lang="ru" data-theme="light"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Как закрыть секретные файлы от Claude Code</title>
-<meta name="description" content="Claude Code читает файлы проекта без вопроса. Как одним правилом закрыть .env и ключи SSH, проверить запрет на пробном файле и закрыть лазейку через команды песочницей.">
+<meta name="description" content="Claude Code читает файлы проекта без вопроса. Как в VS Code закрыть .env и ключи SSH правилом Deny, проверить запрет на пробном файле и закрыть лазейку через команды песочницей.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#F8F7F2">
 <meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Как закрыть секретные файлы от Claude Code">
-<meta property="og:description" content="Claude Code читает файлы проекта без вопроса. Как одним правилом закрыть .env и ключи SSH, проверить запрет на пробном файле и закрыть лазейку через команды песочницей.">
+<meta property="og:description" content="Claude Code читает файлы проекта без вопроса. Как в VS Code закрыть .env и ключи SSH правилом Deny, проверить запрет на пробном файле и закрыть лазейку через команды песочницей.">
 <meta property="og:url" content="https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/">
 <meta property="og:image" content="https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/assets/oblozhka.webp">
 <meta property="og:image:width" content="1600">
@@ -253,9 +253,10 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
 <div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
 <a href="#shag-1">Шаг 1. Посмотри, что Claude Code разрешено сейчас</a>
-<a href="#shag-2">Шаг 2. Добавь запрет одной просьбой</a>
-<a href="#shag-3">Шаг 3. Проверь, что запрет включился</a>
+<a href="#shag-2">Шаг 2. Добавь три запрета</a>
+<a href="#shag-3">Шаг 3. Проверь запрет на ненастоящем файле</a>
 <a href="#shag-4">Шаг 4. Закрой лазейку через команды</a>
+<a href="#oshibki">Если не получилось</a>
 <a href="#granica">Что запрет не отменяет</a>
 <a href="#faq">Частые вопросы</a>
 <a href="#istochniki">Источники</a>
@@ -267,16 +268,17 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Приоткрытый стальной сейф с папками внутри и ключ на столе" loading="eager" decoding="async" fetchpriority="high"><figcaption>Сейф с ключом: файлы с паролями закрыты от чтения</figcaption></figure>
 <h1 class="article-title-v2">Как закрыть секретные файлы от Claude Code</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
-<p class="lead">В папке проекта лежит файл <code>.env</code>, а в нём пароли и ключи: от почты, от оплаты, от базы с клиентами. Claude Code читает файлы своей папки без вопроса, так он устроен. Пишешь ему «разберись, почему не работает подключение», и он открывает <code>.env</code> вместе с остальными файлами. Ключ уходит в переписку с нейросетью, хотя ты об этом не просил.</p>
-<p>Строчка «не читай .env» в <code>CLAUDE.md</code> тут не поможет. В <a href="https://code.claude.com/docs/en/permissions#manage-permissions">справке Anthropic</a> прямо сказано: инструкции в <code>CLAUDE.md</code> влияют на то, что Claude пытается сделать, но не меняют того, что ему разрешено. <b>Запрет работает, только когда он записан в настройках.</b></p>
-<p>Ниже по шагам: как посмотреть, что агенту разрешено сейчас, готовый запрет для копирования и безопасная проверка, что он включился. А в последнем шаге - лазейка, которую этот запрет не закрывает, и как закрыть её тоже.</p>
+<p class="lead">В папке проекта лежит файл <code>.env</code>, а в нём пароли и ключи: от почты, от оплаты, от базы с клиентами. Claude Code читает файлы своей папки без вопроса, так он устроен, и на задачи вроде «почини подключение» сам открывает <code>.env</code> вместе с остальными файлами. Ключ уходит в переписку с нейросетью. <b>Одно правило в настройках закрывает такие файлы сразу во всех проектах.</b></p>
+<p>Просьба «не читай .env» в файле <code>CLAUDE.md</code> тут не сработает. В <a href="https://code.claude.com/docs/en/permissions#manage-permissions">справке Anthropic</a> прямо сказано: инструкции в <code>CLAUDE.md</code> влияют на то, что Claude пытается сделать, но не меняют того, что ему разрешено. Запрет действует, только когда он записан в настройках.</p>
+<p>Ниже по шагам: где посмотреть, что агенту разрешено сейчас, как добавить запрет и как проверить его на ненастоящем файле. А в последнем шаге - лазейка, через которую ключи утекают даже при запрете, и как закрыть её тоже.</p>
 <p class="meta">АКТУАЛЬНО НА 6 ОКТЯБРЯ 2026</p>
 </header>
 <details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Что нужно до начала</a>
 <a href="#shag-1">Шаг 1. Посмотри, что Claude Code разрешено сейчас</a>
-<a href="#shag-2">Шаг 2. Добавь запрет одной просьбой</a>
-<a href="#shag-3">Шаг 3. Проверь, что запрет включился</a>
+<a href="#shag-2">Шаг 2. Добавь три запрета</a>
+<a href="#shag-3">Шаг 3. Проверь запрет на ненастоящем файле</a>
 <a href="#shag-4">Шаг 4. Закрой лазейку через команды</a>
+<a href="#oshibki">Если не получилось</a>
 <a href="#granica">Что запрет не отменяет</a>
 <a href="#faq">Частые вопросы</a>
 <a href="#istochniki">Источники</a>
@@ -286,40 +288,46 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <section class="content-section" id="podgotovka">
 <h2>Что нужно до начала</h2>
 <ul>
-<li><b>Claude Code.</b> Если его ещё нет, начни с <a href="../claude-i-codex-v-vscode/">установки Claude Code в VS Code</a>.</li>
+<li><b>Claude Code в VS Code.</b> Если его ещё нет, начни с <a href="../claude-i-codex-v-vscode/">установки Claude Code в VS Code</a>. Нужна версия 2.1.280 или новее. Чтобы узнать свою, отправь в чат Claude Code команду <code>/status</code>: в открывшемся окне есть строка с версией. Старая версия обновится, если в VS Code открыть Extensions («Расширения») и нажать Update у Claude Code.</li>
 <li><b>Папка проекта, открытая в VS Code.</b> Больше ничего ставить не нужно.</li>
 </ul>
-<p>Команды со слэшем, например <code>/permissions</code>, и просьбы обычными словами пишутся в чат Claude Code, туда же, где ты даёшь ему задания.</p>
+<p>Три слова, которые встретятся дальше. <b><code>.env</code></b> - файл, куда программы складывают пароли и ключи доступа. <b><code>settings.json</code></b> - файл настроек Claude Code. <b>Правило</b> - строка в этом файле, которая разрешает или запрещает агенту действие.</p>
 </section>
 
 <section class="content-section" id="shag-1">
 <h2>Шаг 1. Посмотри, что Claude Code разрешено сейчас</h2>
-<p>Введи в чат Claude Code команду и нажми Enter:</p>
-<div class="code-card"><pre id="cmd-permissions"><code>/permissions</code></pre><button class="copy-button" type="button" data-copy-target="cmd-permissions" aria-label="Скопировать команду /permissions" aria-live="polite">Скопировать</button></div>
-<p>Откроется список правил. Он разбит на вкладки: <code>Allow</code> («разрешено» - агент делает это без вопроса), <code>Ask</code> («спросить» - сначала спрашивает тебя) и <code>Deny</code> («запрещено» - не делает вообще). У каждого правила указан файл настроек, из которого оно пришло.</p>
-<p>Открой вкладку <code>Deny</code>. Если Claude Code стоит недавно, она, скорее всего, пустая: <b>запрещённого нет ничего</b>.</p>
-<div class="info-card"><p><span class="info-title">Почему режим «спрашивать перед действием» не спасает.</span> Режимы Claude Code решают, спрашивать ли тебя перед действием. Чтение файлов в рабочей папке в обычном режиме <code>Manual</code> идёт без вопроса, а в режиме <code>Auto</code> агент без вопроса выполняет и большую часть остального. С версии 2.1.283 <code>Auto</code> включается сам при каждом запуске в терминале и в VS Code, это написано в <a href="https://code.claude.com/docs/en/permission-modes">описании режимов</a>. Правило <code>Deny</code> отвечает на другой вопрос: можно ли действие вообще. И проверяется оно первым: сначала запреты, потом «спросить», потом «разрешено».</p></div>
-<div class="result"><p><b>Результат:</b> ты видишь, что агенту разрешено, и знаешь, что вкладка <code>Deny</code> пока пустая.</p></div>
+<p>В поле чата Claude Code набери <code>/</code>. Откроется меню команд. В нём найди раздел <code>Customize</code> («Настроить») и выбери <code>Permissions</code> («Разрешения»).</p>
+<p>Откроется список правил, разбитый на три группы:</p>
+<ul>
+<li><code>Allow</code> («разрешено») - агент делает это без вопроса;</li>
+<li><code>Ask</code> («спросить») - сначала спрашивает тебя;</li>
+<li><code>Deny</code> («запрещено») - не делает вообще.</li>
+</ul>
+<p>Посмотри на группу <code>Deny</code>. Если Claude Code стоит недавно, она, скорее всего, пустая: <b>запрещённого нет ничего</b>.</p>
+<div class="info-card"><p><span class="info-title">Почему режим «спрашивать перед действием» не спасает.</span> Режим Claude Code решает, спрашивать ли тебя перед действием. Чтение файлов в рабочей папке и в обычном режиме <code>Manual</code> идёт без вопроса. А с версии 2.1.283 Claude Code по умолчанию стартует в режиме <code>Auto</code>, если не выбран другой: в нём большую часть действий без тебя одобряет проверяющая модель. Так написано в <a href="https://code.claude.com/docs/en/permission-modes">описании режимов</a>. Правило <code>Deny</code> отвечает на другой вопрос: можно ли действие вообще. Оно проверяется первым и работает в любом режиме.</p></div>
+<div class="result"><p><b>Результат:</b> ты видишь, что агенту разрешено, и знаешь, что группа <code>Deny</code> пока пустая.</p></div>
 </section>
 
 <section class="content-section" id="shag-2">
-<h2>Шаг 2. Добавь запрет одной просьбой</h2>
-<p>Запрет записывается в файл настроек. Их два, и действуют они по-разному:</p>
+<h2>Шаг 2. Добавь три запрета</h2>
+<p>В том же окне <code>Permissions</code> добавь в группу <code>Deny</code> правило и при сохранении выбери <code>User settings</code> («личные настройки»). Так запрет начнёт работать <b>во всех твоих проектах сразу</b>, а не только в этой папке. Повтори для каждого из трёх правил:</p>
+<div class="code-card"><pre id="rule-env"><code>Read(**/.env)</code></pre><button class="copy-button" type="button" data-copy-target="rule-env" aria-label="Скопировать правило для .env" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="rule-env-copies"><code>Read(**/.env.*)</code></pre><button class="copy-button" type="button" data-copy-target="rule-env-copies" aria-label="Скопировать правило для копий .env" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="rule-ssh"><code>Read(~/.ssh/**)</code></pre><button class="copy-button" type="button" data-copy-target="rule-ssh" aria-label="Скопировать правило для папки .ssh" aria-live="polite">Скопировать</button></div>
+<p>Что закрывает каждое:</p>
 <ul>
-<li><code>~/.claude/settings.json</code> - твои личные настройки, <b>запрет работает во всех проектах сразу</b>. Подходит почти всегда.</li>
-<li><code>.claude/settings.json</code> внутри папки проекта - только для этого проекта. Если проект лежит на GitHub, файл увидят и все, кто с тобой работает.</li>
-</ul>
-<p>Проще всего попросить сам Claude Code дописать правило в личные настройки. Отправь ему в чат:</p>
-<div class="code-card"><pre id="prompt-deny"><code>Добавь в мои личные настройки ~/.claude/settings.json запрет на чтение секретных файлов. В список permissions.deny добавь три правила: "Read(**/.env)", "Read(**/.env.*)", "Read(~/.ssh/**)". Если файла нет, создай его. Если он есть, ничего в нём не удаляй и не меняй, только допиши эти строки. Содержимое .env и папки .ssh не открывай. Покажи файл целиком до изменения и после.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-deny" aria-label="Скопировать просьбу добавить запрет" aria-live="polite">Скопировать</button></div>
-<p>Claude Code спросит разрешения изменить файл настроек: настройки защищены, и без твоего «да» он их не правит. Посмотри, что в файле появились три строки и ничего не пропало, и подтверди.</p>
-<p>Что закрывают эти три правила:</p>
-<ul>
-<li><code>Read(**/.env)</code> - файл <code>.env</code> в папке проекта и во всех её вложенных папках;</li>
+<li><code>Read(**/.env)</code> - файл <code>.env</code> в папке проекта и во всех вложенных папках;</li>
 <li><code>Read(**/.env.*)</code> - его копии вроде <code>.env.local</code> и <code>.env.production</code>, в них обычно те же ключи;</li>
 <li><code>Read(~/.ssh/**)</code> - папку <code>.ssh</code> в твоей домашней папке, там лежат ключи для входа на серверы.</li>
 </ul>
-<details class="check-panel"><summary>Хочу вписать запрет сам, без агента</summary>
-<p>Открой файл <code>~/.claude/settings.json</code> в любом редакторе. Если файла нет, создай его и вставь блок целиком:</p>
+<p>Есть ещё одна причина поставить запрет именно в VS Code. Пока файл открыт в редакторе, Claude Code получает его имя, а иногда и выделенный в нём текст. Правило <code>Deny</code> перекрывает и это, сказано в <a href="https://code.claude.com/docs/en/vs-code">справке по расширению</a>.</p>
+<details class="check-panel"><summary>Попросить агента добавить правила за тебя</summary>
+<p>Отправь в чат Claude Code:</p>
+<div class="code-card"><pre id="prompt-deny"><code>Добавь в мои личные настройки ~/.claude/settings.json запрет на чтение секретных файлов. В список permissions.deny добавь три правила: "Read(**/.env)", "Read(**/.env.*)", "Read(~/.ssh/**)". Если файла нет, создай его. Если он есть, ничего в нём не удаляй и не меняй, только допиши эти строки. Содержимое .env и папки .ssh не открывай. Покажи файл целиком до изменения и после.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-deny" aria-label="Скопировать просьбу добавить запрет" aria-live="polite">Скопировать</button></div>
+<p>В режиме <code>Manual</code> агент спросит разрешения изменить файл настроек. В режиме <code>Auto</code> вопрос может не появиться: правку одобряет проверяющая модель. Поэтому в обоих случаях сравни файл до и после: должны появиться три строки, и ничего не должно пропасть.</p>
+</details>
+<details class="check-panel"><summary>Вписать запрет вручную</summary>
+<p>Файл лежит в домашней папке: <code>~/.claude/settings.json</code>, где <code>~</code> - это твоя домашняя папка. В VS Code открой меню File → Open File («Файл → Открыть файл»). Папка <code>.claude</code> скрытая: на Mac нажми в окне выбора Cmd+Shift+. (точка), и она появится. Если файла нет, создай его и вставь блок целиком:</p>
 <div class="code-card"><pre id="json-deny"><code>{
   "permissions": {
     "deny": [
@@ -329,61 +337,84 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
     ]
   }
 }</code></pre><button class="copy-button" type="button" data-copy-target="json-deny" aria-label="Скопировать блок настроек" aria-live="polite">Скопировать</button></div>
-<p>Если файл уже есть и в нём есть раздел <code>permissions</code>, допиши три строки в его список <code>deny</code>, а если списка нет - добавь его внутрь <code>permissions</code>. Второй раздел с тем же названием не создавай: он может спрятать прежние настройки. Следи за запятыми между строками и за парными скобками. Как устроены файлы настроек, описано в <a href="https://code.claude.com/docs/en/settings">справке Anthropic</a>.</p>
+<p>Если файл уже есть и в нём есть раздел <code>permissions</code>, допиши три строки в его список <code>deny</code>, а если списка нет, добавь его внутрь <code>permissions</code>. Второй раздел с тем же названием не создавай: он может спрятать прежние настройки. Следи за запятыми между строками и за парными скобками: лишняя запятая в конце списка ломает файл. Как устроены файлы настроек, описано в <a href="https://code.claude.com/docs/en/settings">справке Anthropic</a>.</p>
 </details>
 <div class="info-card"><p><span class="info-title">Ключи лежат где-то ещё?</span> Добавь правило на это место. Например, <code>Read(./secrets/**)</code> закрывает папку <code>secrets</code> в проекте. Запрет по окончанию вроде <code>Read(**/*.key)</code> ставь осторожно: под него может попасть обычный файл, который агенту нужен для работы.</p></div>
-<div class="result"><p><b>Результат:</b> в файле настроек три новых правила, старые настройки на месте.</p></div>
+<div class="result"><p><b>Результат:</b> в группе <code>Deny</code> три правила с пометкой личных настроек.</p></div>
 </section>
 
 <section class="content-section" id="shag-3">
-<h2>Шаг 3. Проверь, что запрет включился</h2>
-<p>Перезапусти Claude Code: закрой чат и открой новый. Снова введи <code>/permissions</code> и открой вкладку <code>Deny</code>. Там должны быть три правила, а рядом с ними путь <code>~/.claude/settings.json</code>.</p>
-<p>Список показывает, что правило загрузилось. Чтобы увидеть, что оно <b>работает</b>, проверь его на ненастоящем файле. Свой <code>.env</code> с живыми ключами для проверки не бери: если в настройке ошибка, агент прочитает его.</p>
+<h2>Шаг 3. Проверь запрет на ненастоящем файле</h2>
+<p>Список показывает, что правило записано. Чтобы увидеть, что оно <b>работает</b>, проверь его на пробном файле. Свой <code>.env</code> с живыми ключами для проверки не бери: если в настройке ошибка, агент его прочитает.</p>
 <ol>
-<li>Создай пустую папку, например <code>proverka-zapreta</code>, и открой её в VS Code.</li>
-<li>Создай в ней файл <code>.env</code> и напиши в нём одну строку: <code>TEST=123</code>. Сохрани.</li>
-<li>Открой Claude Code в этой папке и отправь:</li>
+<li>Создай пустую папку, например <code>proverka-zapreta</code>, и открой её в VS Code через File → Open Folder («Файл → Открыть папку»).</li>
+<li>В списке файлов слева нажми значок нового файла, назови его <code>.env</code> и нажми Enter. Finder на Mac такой файл создать не даст, поэтому только так.</li>
+<li>Впиши в файл одну строку <code>TEST=123</code> и сохрани: Cmd+S на Mac, Ctrl+S на Windows.</li>
+<li>Открой новый разговор с Claude Code: нажми <code>+</code> вверху его панели. Отправь:</li>
 </ol>
 <div class="code-card"><pre id="prompt-test"><code>Прочитай файл .env в этой папке и покажи его содержимое.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-test" aria-label="Скопировать проверочную просьбу" aria-live="polite">Скопировать</button></div>
-<p>Агент должен ответить, что доступ к файлу запрещён настройками, и строки <code>TEST=123</code> ты не увидишь. Если он её показал - вернись к шагу 2 и проверь, в какой файл записаны правила.</p>
-<div class="warn-card"><p><b>Если программа пишет об ошибке в файле настроек</b>, исправь её до продолжения работы. Обычно это пропущенная запятая или лишняя скобка. Пока ошибка не исправлена, не считай запрет действующим.</p></div>
+<p>Агент должен ответить, что доступ к файлу запрещён настройками. Когда мы проверяли, Claude Code ответил так: <code>File is in a directory that is denied by your permission settings</code> («файл в папке, которая запрещена настройками разрешений»). Строки <code>TEST=123</code> в ответе нет.</p>
 <div class="result"><p><b>Результат:</b> на просьбу прочитать <code>.env</code> агент отвечает отказом.</p></div>
 </section>
 
 <section class="content-section" id="shag-4">
 <h2>Шаг 4. Закрой лазейку через команды</h2>
-<p>Запрет из шага 2 останавливает встроенное чтение файлов в Claude Code и команды, которые он узнаёт, например <code>cat</code>, <code>head</code> и <code>tail</code>. Но в <a href="https://code.claude.com/docs/en/permissions#read-and-edit">справке Anthropic</a> честно перечислено, чего он не ловит:</p>
+<p>Запрет из шага 2 останавливает встроенное чтение файлов в Claude Code и команды, которые он узнаёт, например <code>cat</code>, <code>head</code> и <code>tail</code>. Но в <a href="https://code.claude.com/docs/en/permissions#read-and-edit">справке Anthropic</a> перечислено, чего он не ловит:</p>
 <ul>
 <li>поиск по всей папке, который не называет файл по имени, например <code>grep -r</code>;</li>
 <li>скрипт на Python или Node.js, который агент написал и запустил: такой скрипт открывает файлы сам, мимо правил.</li>
 </ul>
-<p>Агент не станет обходить запрет специально. Но, разбираясь с ошибкой, он вполне может запустить поиск по всем файлам проекта, и <b>ключ окажется в выводе команды</b>.</p>
-<p>Эту лазейку закрывает песочница - <code>sandbox</code>. Она работает на уровне операционной системы: команды, которые запускает агент, и все программы, которые эти команды запускают, видят только то, что разрешено. Включается она командой в чате Claude Code:</p>
-<div class="code-card"><pre id="cmd-sandbox"><code>/sandbox</code></pre><button class="copy-button" type="button" data-copy-target="cmd-sandbox" aria-label="Скопировать команду /sandbox" aria-live="polite">Скопировать</button></div>
-<p>Откроется панель песочницы, в ней выбери включение. Самое приятное здесь: <b>запреты на чтение из шага 2 песочница берёт себе сама</b>. Твои три правила начинают действовать для любой программы, которую запустит агент, а не только для его встроенного чтения. Так описано в <a href="https://code.claude.com/docs/en/sandboxing">справке о песочнице</a>.</p>
-<p>Пара вещей, которые стоит знать:</p>
-<ul>
-<li>На Mac песочница работает сразу. На Linux ей нужны две небольшие программы, и панель <code>/sandbox</code> сама покажет, каких не хватает. На Windows она работает только внутри WSL2 («подсистема Linux для Windows»).</li>
-<li>Если команда не сможет выполниться в песочнице, агент может попросить запустить её без песочницы. Такую просьбу читай внимательно и не соглашайся, если не понимаешь, зачем ей выходить наружу. Чтобы таких попыток не было совсем, во вкладке <code>Overrides</code> той же панели включи <code>Strict sandbox mode</code> («строгий режим песочницы»).</li>
-</ul>
-<div class="result"><p><b>Результат:</b> секретные файлы закрыты дважды - от чтения самим агентом и от любых программ, которые он запускает.</p></div>
+<p>Мы проверили это в той же пробной папке. Запрет стоял, а команда поиска по папке всё равно вывела <code>.env:TEST=123</code>. Разбираясь с ошибкой, агент может запустить такой поиск по всему проекту, и <b>ключ окажется в выводе команды</b>.</p>
+<p>Эту лазейку закрывает песочница - <code>sandbox</code>. Это стеклянная стена вокруг всего, что агент запускает в терминале: команды и программы, которые они запускают, видят только то, что разрешено. Следит за стеной сама операционная система, а не агент. <b>Запреты на чтение из шага 2 песочница берёт себе сама</b>, так описано в <a href="https://code.claude.com/docs/en/sandboxing">справке о песочнице</a>.</p>
+<p>Как включить:</p>
+<ol>
+<li>В чате Claude Code набери <code>/</code> и в разделе <code>Customize</code> выбери <code>Sandbox</code> («Песочница»). Или просто отправь команду <code>/sandbox</code>.</li>
+<li>Во вкладке <code>Mode</code> («Режим») выбери <code>regular permissions</code> («обычные разрешения»): песочница включится, а вопросы перед действиями останутся как были. Второй вариант, <code>auto-allow</code>, запускает команды в песочнице без вопросов.</li>
+</ol>
+<p>Если команда не сможет выполниться в песочнице, Claude Code может перезапустить её снаружи. В режиме <code>Auto</code> такой перезапуск одобряет проверяющая модель, а не ты. Чтобы выхода наружу не было совсем, допиши в личные настройки <code>~/.claude/settings.json</code> раздел ниже, рядом с <code>permissions</code> и через запятую после него. Справка называет это строгим режимом песочницы.</p>
+<div class="code-card"><pre id="json-sandbox"><code>"sandbox": {
+  "enabled": true,
+  "allowUnsandboxedCommands": false
+}</code></pre><button class="copy-button" type="button" data-copy-target="json-sandbox" aria-label="Скопировать настройку строгой песочницы" aria-live="polite">Скопировать</button></div>
+<p>Теперь проверь стену. В той же пробной папке открой новый разговор и отправь:</p>
+<div class="code-card"><pre id="prompt-sandbox-test"><code>Выполни в терминале ровно одну команду: grep -r TEST . и покажи её вывод дословно. Других команд не запускай.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-sandbox-test" aria-label="Скопировать проверку песочницы" aria-live="polite">Скопировать</button></div>
+<p>В нашей проверке с включённой песочницей вместо строки с ключом команда ответила <code>cannot read .env: Operation not permitted</code> («нельзя прочитать .env: действие не разрешено»).</p>
+<div class="info-card"><p><span class="info-title">Чего песочница не делает.</span> Она стоит только вокруг команд терминала. Встроенное чтение файлов и подключённые сервисы работают снаружи: для чтения нужны правила из шага 2, подключения проверяй отдельно. На Mac песочница работает сразу. На Linux ей нужны две небольшие программы, и панель <code>Sandbox</code> сама покажет, каких не хватает. На Windows она работает только внутри WSL2 («подсистема Linux для Windows»), а без неё остаются только правила шага 2.</p></div>
+<div class="result"><p><b>Результат:</b> поиск по папке больше не показывает строку из <code>.env</code>. Секретные файлы закрыты дважды: от чтения самим агентом и от любых программ, которые он запускает.</p></div>
+</section>
+
+<section class="content-section" id="oshibki">
+<h2>Если не получилось</h2>
+<details class="check-panel"><summary>В меню нет раздела Customize или пункта Sandbox</summary>
+<p>Значит, расширение старое: <code>Permissions</code> появился в версии 2.1.269, <code>Sandbox</code> - в 2.1.280. Обнови Claude Code во вкладке Extensions («Расширения») VS Code и открой новый разговор.</p>
+</details>
+<details class="check-panel"><summary>Агент всё равно показал TEST=123</summary>
+<p>Посмотри, как он это сделал. Если строку вывела команда поиска или скрипт, это лазейка из шага 4: включи песочницу и повтори проверку. Если он открыл файл обычным чтением, правило не загрузилось: вернись в <code>Permissions</code> и проверь, что три правила стоят в группе <code>Deny</code> и записаны без опечаток.</p>
+</details>
+<details class="check-panel"><summary>Claude Code пишет Settings Error</summary>
+<p>Это ошибка в файле настроек, обычно лишняя или пропущенная запятая. В справке Anthropic сказано, что окно с ошибкой предлагает исправить файл с помощью Claude. Пока ошибка не исправлена, не считай запрет действующим. Можно отправить агенту:</p>
+<div class="code-card"><pre id="error-settings"><code>В ~/.claude/settings.json ошибка, Claude Code пишет Settings Error. Найди и исправь только ошибку в записи, остальные настройки не меняй. Покажи, что было и что стало.</code></pre><button class="copy-button" type="button" data-copy-target="error-settings" aria-label="Скопировать просьбу исправить настройки" aria-live="polite">Скопировать</button></div>
+</details>
+<details class="check-panel"><summary>Песочница показывает только вкладку Dependencies</summary>
+<p>Так бывает на Linux и в WSL2: не хватает программ <code>bubblewrap</code> и <code>socat</code>. Вкладка покажет, каких именно. Установи их, перезапусти Claude Code и открой <code>Sandbox</code> снова.</p>
+</details>
 </section>
 
 <section class="content-section" id="granica">
 <h2>Что запрет не отменяет</h2>
 <ul>
 <li><b>Уже прочитанное.</b> Если агент открывал <code>.env</code> до запрета, ключ уже побывал в переписке. Запрет действует только на следующие попытки. Такие ключи лучше заменить в самих сервисах.</li>
-<li><b>Подключённые сервисы.</b> Если ты подключил агенту базу данных или другой сервис через MCP, у него свой доступ, и закрытый <code>.env</code> его не отменяет. Список подключений смотри отдельно.</li>
-<li><b>Что происходит с переданным.</b> Запрет решает, попадёт ли файл в переписку. Как хранится и используется то, что уже передано, решают настройки конфиденциальности твоего аккаунта Anthropic, описанные в <a href="https://privacy.claude.com/">Privacy Center</a>. Чем меньше секретов попадёт в переписку, тем меньше зависит от этих настроек.</li>
+<li><b>Подключённые сервисы.</b> Если к агенту подключена база данных или другой сервис через MCP (способ подключить агенту внешний сервис: базу, почту, браузер), у него свой доступ, и закрытый <code>.env</code> его не отменяет. Список подключений смотри отдельно.</li>
+<li><b>Что происходит с переданным.</b> Запрет решает, попадёт ли файл в переписку. Как хранится и используется то, что уже передано, решают настройки конфиденциальности твоего аккаунта, описанные в <a href="https://privacy.claude.com/">Privacy Center</a> Anthropic. Чем меньше секретов попадёт в переписку, тем меньше зависит от этих настроек.</li>
 </ul>
 </section>
 
 <section class="content-section" id="faq">
 <h2>Частые вопросы</h2>
-<details class="faq-item"><summary>Можно запретить чтение только одного файла?</summary><p>Да. Впиши путь к нему, например <code>Read(./config/keys.json)</code>. На каждый файл - отдельная строка в списке <code>deny</code>.</p></details>
-<details class="faq-item"><summary>Есть же файл .claudeignore?</summary><p>Нет, Claude Code такой файл не читает. В справке Anthropic прямо сказано: если в проекте есть <code>.claudeignore</code>, он ни на что не влияет, и его строки нужно перенести в правила <code>Read</code> в списке <code>deny</code>.</p></details>
-<details class="faq-item"><summary>Запрет работает в режимах Auto и bypassPermissions?</summary><p>Да. По <a href="https://code.claude.com/docs/en/permission-modes">описанию режимов</a> правила <code>deny</code> блокируют действие в любом режиме, включая <code>bypassPermissions</code>, где Claude Code вообще ни о чём не спрашивает.</p></details>
-<details class="faq-item"><summary>Под запрет попал .env.example, а он нужен агенту</summary><p>Добавь сразу после запретов строку-исключение <code>"Read(!.env.example)"</code> в тот же список <code>deny</code>. Знак <code>!</code> вырезает этот файл из запретов, записанных выше в том же файле настроек.</p></details>
+<details class="faq-item"><summary>Можно запретить чтение только одного файла?</summary><p>Да. Впиши путь к нему, например <code>Read(./config/keys.json)</code>. На каждый файл - отдельное правило.</p></details>
+<details class="faq-item"><summary>Есть же файл .claudeignore?</summary><p>Нет, Claude Code такой файл не читает. В справке Anthropic прямо сказано: если в проекте есть <code>.claudeignore</code>, он ни на что не влияет, и его строки нужно перенести в правила <code>Read</code> в группе <code>Deny</code>.</p></details>
+<details class="faq-item"><summary>Запрет работает в режимах Auto и bypassPermissions?</summary><p>Да. По <a href="https://code.claude.com/docs/en/permission-modes">описанию режимов</a> правила <code>Deny</code> блокируют действие в любом режиме, включая <code>bypassPermissions</code>, где Claude Code вообще ни о чём не спрашивает.</p></details>
+<details class="faq-item"><summary>Под запрет попал .env.example, а он нужен агенту</summary><p>Добавь в тот же список запретов, после остальных правил, строку-исключение <code>Read(!.env.example)</code>. Знак <code>!</code> вырезает этот файл из запретов, записанных выше в том же файле настроек. Мы проверили: с таким исключением <code>.env</code> и <code>.env.local</code> остаются закрыты, а <code>.env.example</code> читается.</p></details>
 <details class="faq-item"><summary>Почему правило в настройках, а не просьба в CLAUDE.md?</summary><p>Просьба в <code>CLAUDE.md</code> - это совет агенту, и он может его не учесть. Правило в настройках проверяет сама программа Claude Code до того, как агент что-то сделает, поэтому обойти его просьбой или ошибкой нельзя.</p></details>
 </section>
 
@@ -393,14 +424,15 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <li><a href="https://code.claude.com/docs/en/permissions">Anthropic: настройка разрешений Claude Code</a></li>
 <li><a href="https://code.claude.com/docs/en/permission-modes">Anthropic: режимы разрешений</a></li>
 <li><a href="https://code.claude.com/docs/en/sandboxing">Anthropic: песочница для команд</a></li>
+<li><a href="https://code.claude.com/docs/en/vs-code">Anthropic: Claude Code в VS Code</a></li>
 <li><a href="https://code.claude.com/docs/en/settings">Anthropic: файлы настроек</a></li>
 </ul>
 </section>
 
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
-<p class="help-title">Запнулся? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
-<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу закрыть от Claude Code файлы с ключами. Сейчас вижу [текущий экран или сообщение], уже сделано [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа. Содержимое моих секретных файлов не открывай.</p></div>
-<div class="bubble claude"><span class="who">Claude</span>Уточни, что показывает /permissions на вкладке Deny. Начнём с одного действия.</div></div>
+<p class="help-title">Застрял шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу закрыть от Claude Code файлы с ключами. Сейчас на экране [текущий экран или сообщение], уже сделано [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа. Содержимое моих секретных файлов не открывай.</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Уточни, что сейчас видно в Permissions в группе Deny. Начнём с одного действия.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
 </section>
 <section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент под своё дело</h2>
