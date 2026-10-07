@@ -37,3 +37,14 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 }
 @media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
 .privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, #D5C9B7) }
+/* Отказ - крестик: одна заметная кнопка «Понятно», выбор по закону остаётся */
+.cookie-actions { align-items: center }
+.cookie-actions .cookie-close {
+  min-width: 44px; padding: 0; border-color: transparent; background: transparent;
+  color: var(--muted, #62706A); font: 400 26px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+.cookie-actions .cookie-close:hover { border-color: transparent; color: var(--ink, #1E2926) }
+@media (max-width: 600px) {
+  .cookie-actions { flex-wrap: nowrap }
+  .cookie-actions .cookie-close { flex: 0 0 44px }
+}
