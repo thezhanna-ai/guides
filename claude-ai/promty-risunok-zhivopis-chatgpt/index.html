@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>72 промпта для рисунка в ChatGPT: фото становится живописью</title>
+<meta name="description" content="72 промпта для картинок в ChatGPT: иллюстрация, живопись и ручная работа, перевод каждой строки, кнопки копирования и три пробы.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="72 промпта для рисунка в ChatGPT: фото становится живописью">
+<meta property="og:description" content="72 промпта для картинок в ChatGPT: иллюстрация, живопись и ручная работа, перевод каждой строки, кнопки копирования и три пробы.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/promty-risunok-zhivopis-chatgpt/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/promty-risunok-zhivopis-chatgpt/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/promty-risunok-zhivopis-chatgpt/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Кисть, палитра и бумага: выбирай след настоящего материала">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/promty-risunok-zhivopis-chatgpt/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+</style><link rel="stylesheet" href="../../assets/promty-foto.css">
+<!-- privacy:head:start -->
+<link rel="stylesheet" href="/assets/privacy.css">
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+</head><body><div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">КИСТЬ</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#kak">Как пользоваться</a><a href="#proby">Пробы было/стало</a><a href="#list-9">Иллюстрация</a><a href="#list-12">Живопись и рисунок</a><a href="#list-7">Ручная работа</a><a href="#seriya">Другие подборки серии</a><a href="#dalshe">Дальше по теме</a><a href="#itog">Что проверить перед сохранением</a></nav><main><header id="nachalo"><p class="eyebrow">Промпты для картинок в ChatGPT</p><h1 class="article-title-v2">72 промпта для рисунка в ChatGPT: фото становится живописью</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Кисть, палитра и бумага: выбирай след настоящего материала" loading="eager" decoding="async" fetchpriority="high"><figcaption>Кисть, палитра и бумага: выбирай след настоящего материала</figcaption></figure><p class="lead">Хочется превратить фото в рисунок в ChatGPT, но слова «сделай красиво» не помогают выбрать между акварелью, маслом и бумажным коллажем. Здесь 72 строки с понятными переводами и пробы разных материалов. Можно сравнить их и скопировать нужный запрос. В конце разберём, по чему узнавать выбранную технику в готовой картинке.</p><p class="meta">АКТУАЛЬНО НА 7 ОКТЯБРЯ 2026</p></header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#kak">Как пользоваться</a><a href="#proby">Пробы было/стало</a><a href="#list-9">Иллюстрация</a><a href="#list-12">Живопись и рисунок</a><a href="#list-7">Ручная работа</a><a href="#seriya">Другие подборки серии</a><a href="#dalshe">Дальше по теме</a><a href="#itog">Что проверить перед сохранением</a></nav></details><article><section class="content-section" id="kak"><h2>Как пользоваться промптами в ChatGPT</h2><p>ChatGPT - это чат на сайте, в котором можно попросить создать картинку по описанию или изменить загруженное изображение. Ты можешь прикрепить фото и написать, что сделать с ним, либо попросить нарисовать новую сцену. Эти способы описаны в <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">справке OpenAI</a>.</p><p>Слово со слэшем, например <code>/storypage</code>, здесь служит коротким именем стиля. Это не встроенная команда ChatGPT. Копируй строку целиком вместе с английским описанием: именно полные строки использованы в наших пробах. Перевод ниже помогает понять, какую картинку ты просишь.</p><h3>1. Подготовь фото или выбери новую сцену</h3><p>Открой <a href="https://chatgpt.com/">ChatGPT</a> и новый чат. Если хочешь изменить свой снимок, прикрепи его к сообщению и дождись миниатюры. Для новой сцены фото не требуется: можно начать с одной строки из подборки. Если нужен конкретный предмет или надпись, добавь его описание или точный текст по-русски.</p><p class="result"><b>Результат:</b> готов новый чат. Фото прикреплено, если нужно изменить свой снимок; для новой сцены можно переходить к выбору строки.</p><h3>2. Отправь полную строку</h3><p>Найди подходящий перевод ниже и нажми «Скопировать» на его плашке. Вставь строку в то же сообщение и отправь. Дождись готовой картинки. Для сравнения нескольких стилей каждый раз прикладывай исходник, чтобы следующий эффект не накладывался на предыдущий.</p><p class="result"><b>Результат:</b> в чате появилась картинка, которую можно сравнить с исходником и переводом запроса.</p><h3>3. Проверь нужные детали</h3><p>Открой результат крупнее. Если эффект не тот, отправь ту же строку ещё раз или добавь по-русски, что оставить как есть. Например: «Сохрани лицо, позу и одежду, меняй только освещение». Повтор может дать другой результат. Выбранная область тоже не всегда ограничивает правку строго, об этом предупреждает <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">OpenAI</a>.</p><p>Когда картинка подходит, открой её и нажми Save («Сохранить»), чтобы скачать файл. Это действие описано в той же <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">справке OpenAI</a>.</p><p class="result"><b>Результат:</b> сохранён файл, в котором виден нужный эффект и сохранены важные для тебя детали.</p></section><section class="content-section" id="proby"><h2>Пробы было/стало</h2><p>Наши пробы: фото + строка целиком, одна попытка. Дополнительных уточнений и правок результата не было.</p><h3>Акварель с мягкими краями</h3><p><code>/wetpaper - watercolor bleeding edges</code></p><div class="probe-pair"><figure class="shot"><img src="assets/proba-1-do.webp" width="1600" height="2400" loading="lazy" decoding="async" alt="Было: портрет женщины у кирпичной стены"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Было: портрет женщины у кирпичной стены</figcaption></figure><figure class="shot"><img src="assets/proba-1-posle.webp" width="1024" height="1536" loading="lazy" decoding="async" alt="Стало: акварельный портрет с растекающейся краской"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Стало: акварельный портрет с растекающейся краской</figcaption></figure></div><p class="photo-license">Исходник: <a href="https://www.pexels.com/photo/confident-young-woman-with-hand-on-waist-looking-at-camera-4032336/">Pexels №4032336</a>, <a href="https://www.pexels.com/license/">Pexels License</a>. Результат создан генератором изображений.</p><p>Появились размытые цветовые края, капли и фактура бумаги. Лицо прорисовано подробнее окружающих пятен, поза и цвета одежды узнаваемы.</p><h3>Густое масло</h3><p><code>/thickpaint - thick oil brushstrokes</code></p><div class="probe-pair"><figure class="shot"><img src="assets/proba-2-do.webp" width="1600" height="2400" loading="lazy" decoding="async" alt="Было: портрет женщины у кирпичной стены"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Было: портрет женщины у кирпичной стены</figcaption></figure><figure class="shot"><img src="assets/proba-2-posle.webp" width="1024" height="1536" loading="lazy" decoding="async" alt="Стало: портрет с густыми рельефными мазками масла"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Стало: портрет с густыми рельефными мазками масла</figcaption></figure></div><p class="photo-license">Исходник: <a href="https://www.pexels.com/photo/confident-young-woman-with-hand-on-waist-looking-at-camera-4032336/">Pexels №4032336</a>, <a href="https://www.pexels.com/license/">Pexels License</a>. Результат создан генератором изображений.</p><p>На лице, волосах, одежде и фоне видны густые мазки. Сюжет сохранился, но мелкие детали стали частью живописной фактуры.</p><h3>Вышитая нашивка</h3><p><code>/threadart - embroidered fabric patch</code></p><div class="probe-pair"><figure class="shot"><img src="assets/proba-3-do.webp" width="1600" height="2400" loading="lazy" decoding="async" alt="Было: портрет женщины у кирпичной стены"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Было: портрет женщины у кирпичной стены</figcaption></figure><figure class="shot"><img src="assets/proba-3-posle.webp" width="1024" height="1536" loading="lazy" decoding="async" alt="Стало: вышитый нитками портрет на ткани"><button class="zoom" type="button">Открыть крупнее</button><figcaption>Стало: вышитый нитками портрет на ткани</figcaption></figure></div><p class="photo-license">Исходник: <a href="https://www.pexels.com/photo/confident-young-woman-with-hand-on-waist-looking-at-camera-4032336/">Pexels №4032336</a>, <a href="https://www.pexels.com/license/">Pexels License</a>. Результат создан генератором изображений.</p><p>Вместо снимка появилась нашивка с плотными стежками и светлой каймой. Поза узнаваема, пропорции лица и мелкие детали изменились под вышивку.</p></section><section class="content-section" id="list-9"><h2>Иллюстрация</h2><p>24 строки. Читай перевод и копируй запрос с нужным эффектом.</p><div class="prompt-grid"><div class="prompt-item"><div class="code-card"><pre id="prompt-9-1"><code>/storypage - children&#x27;s picture book</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-1" aria-label="Скопировать /storypage целиком" aria-live="polite">Скопировать</button></div><p>страница детской книжки с картинками</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-2"><code>/magpage - editorial magazine art</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-2" aria-label="Скопировать /magpage целиком" aria-live="polite">Скопировать</button></div><p>иллюстрация для журнала</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-3"><code>/scribbleframe - doodles around subject</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-3" aria-label="Скопировать /scribbleframe целиком" aria-live="polite">Скопировать</button></div><p>каракули вокруг главного предмета</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-4"><code>/bigcheek - cute chibi big head</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-4" aria-label="Скопировать /bigcheek целиком" aria-live="polite">Скопировать</button></div><p>милый персонаж с большой головой</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-5"><code>/cutesmile - kawaii pastel style</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-5" aria-label="Скопировать /cutesmile целиком" aria-live="polite">Скопировать</button></div><p>милый стиль в пастельных цветах</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-6"><code>/flatshadow - flat cel shading</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-6" aria-label="Скопировать /flatshadow целиком" aria-live="polite">Скопировать</button></div><p>плоские цветные тени как в мультфильме</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-7"><code>/gamearl - game concept art</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-7" aria-label="Скопировать /gamearl целиком" aria-live="polite">Скопировать</button></div><p>эскиз образа для игры</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-8"><code>/filmbg - painted film background</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-8" aria-label="Скопировать /filmbg целиком" aria-live="polite">Скопировать</button></div><p>нарисованный фон для фильма</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-9"><code>/watercolorbook - soft watercolor page</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-9" aria-label="Скопировать /watercolorbook целиком" aria-live="polite">Скопировать</button></div><p>мягкая акварельная страница</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-10"><code>/inkwashart - loose gray ink wash</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-10" aria-label="Скопировать /inkwashart целиком" aria-live="polite">Скопировать</button></div><p>свободные серые размывы туши</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-11"><code>/screenprint2 - flat screen print</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-11" aria-label="Скопировать /screenprint2 целиком" aria-live="polite">Скопировать</button></div><p>плоская трафаретная печать</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-12"><code>/riso2 - risograph color overlap</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-12" aria-label="Скопировать /riso2 целиком" aria-live="polite">Скопировать</button></div><p>цветные слои печати накладываются друг на друга</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-13"><code>/papercutart - layered paper cut</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-13" aria-label="Скопировать /papercutart целиком" aria-live="polite">Скопировать</button></div><p>слои вырезанной бумаги</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-14"><code>/shadowpuppet - backlit puppet silhouette</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-14" aria-label="Скопировать /shadowpuppet целиком" aria-live="polite">Скопировать</button></div><p>силуэт куклы с подсветкой сзади</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-15"><code>/silhouetteart - plain black silhouette</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-15" aria-label="Скопировать /silhouetteart целиком" aria-live="polite">Скопировать</button></div><p>обычный чёрный силуэт</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-16"><code>/stainedart - stained glass style</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-16" aria-label="Скопировать /stainedart целиком" aria-live="polite">Скопировать</button></div><p>стиль цветного витража</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-17"><code>/muralwall - weathered wall mural</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-17" aria-label="Скопировать /muralwall целиком" aria-live="polite">Скопировать</button></div><p>потёртая роспись на стене</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-18"><code>/graffitiart - dripping spray graffiti</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-18" aria-label="Скопировать /graffitiart целиком" aria-live="polite">Скопировать</button></div><p>граффити с потёками краски</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-19"><code>/chalkart - sidewalk chalk drawing</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-19" aria-label="Скопировать /chalkart целиком" aria-live="polite">Скопировать</button></div><p>рисунок мелом на тротуаре</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-20"><code>/crayonart - child&#x27;s waxy crayon</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-20" aria-label="Скопировать /crayonart целиком" aria-live="polite">Скопировать</button></div><p>детский рисунок восковыми мелками</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-21"><code>/fingerpaint - smeared finger paint</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-21" aria-label="Скопировать /fingerpaint целиком" aria-live="polite">Скопировать</button></div><p>размазанная пальцами краска</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-22"><code>/spraypainl - soft paint clouds</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-22" aria-label="Скопировать /spraypainl целиком" aria-live="polite">Скопировать</button></div><p>мягкие облака распылённой краски</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-23"><code>/stencilart - sharp stencil cutout</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-23" aria-label="Скопировать /stencilart целиком" aria-live="polite">Скопировать</button></div><p>чёткий рисунок через трафарет</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-9-24"><code>/collageart - magazine paper collage</code></pre><button class="copy-button" type="button" data-copy-target="prompt-9-24" aria-label="Скопировать /collageart целиком" aria-live="polite">Скопировать</button></div><p>коллаж из журнальной бумаги</p></div></div></section><section class="content-section" id="list-12"><h2>Живопись и рисунок</h2><p>24 строки. Читай перевод и копируй запрос с нужным эффектом.</p><div class="prompt-grid"><div class="prompt-item"><div class="code-card"><pre id="prompt-12-1"><code>/wetpaper - watercolor bleeding edges</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-1" aria-label="Скопировать /wetpaper целиком" aria-live="polite">Скопировать</button></div><p>акварель с растекающимися краями</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-2"><code>/thickpaint - thick oil brushstrokes</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-2" aria-label="Скопировать /thickpaint целиком" aria-live="polite">Скопировать</button></div><p>густые мазки масляной краски</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-3"><code>/flatgouache - watte gouache blocks</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-3" aria-label="Скопировать /flatgouache целиком" aria-live="polite">Скопировать</button></div><p>матовые цветовые пятна гуаши</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-4"><code>/grayink - gray ink wash</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-4" aria-label="Скопировать /grayink целиком" aria-live="polite">Скопировать</button></div><p>серые размывы туши</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-5"><code>/smudgestick - smudged charcoal</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-5" aria-label="Скопировать /smudgestick целиком" aria-live="polite">Скопировать</button></div><p>растушёванный уголь</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-6"><code>/chalktone - pastel on color paper</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-6" aria-label="Скопировать /chalktone целиком" aria-live="polite">Скопировать</button></div><p>пастель на цветной бумаге</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-7"><code>/thickpaste - palette knife ridges</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-7" aria-label="Скопировать /thickpaste целиком" aria-live="polite">Скопировать</button></div><p>рельефные следы лопатки для краски</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-8"><code>/wallpaint - old fresco wall</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-8" aria-label="Скопировать /wallpaint целиком" aria-live="polite">Скопировать</button></div><p>старая фреска на стене</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-9"><code>/sprayart - spray paint canvas</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-9" aria-label="Скопировать /sprayart целиком" aria-live="polite">Скопировать</button></div><p>краска из баллончика на холсте</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-10"><code>/digitalpaint - polished digital paint</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-10" aria-label="Скопировать /digitalpaint целиком" aria-live="polite">Скопировать</button></div><p>проработанный цифровой рисунок</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-11"><code>/gesturedraw - loose gesture lines</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-11" aria-label="Скопировать /gesturedraw целиком" aria-live="polite">Скопировать</button></div><p>быстрые свободные линии движения</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-12"><code>/blindcontour - one continuous line</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-12" aria-label="Скопировать /blindcontour целиком" aria-live="polite">Скопировать</button></div><p>рисунок одной непрерывной линией</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-13"><code>/crosshatchdraw - hatched pen shading</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-13" aria-label="Скопировать /crosshatchdraw целиком" aria-live="polite">Скопировать</button></div><p>тени из штрихов пера</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-14"><code>/stipplepoint - shading with dots</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-14" aria-label="Скопировать /stipplepoint целиком" aria-live="polite">Скопировать</button></div><p>тени из множества точек</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-15"><code>/scratchart - white scratched on black</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-15" aria-label="Скопировать /scratchart целиком" aria-live="polite">Скопировать</button></div><p>белые процарапанные линии на чёрном</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-16"><code>/monoprint - uneven monoprint ink</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-16" aria-label="Скопировать /monoprint целиком" aria-live="polite">Скопировать</button></div><p>неровный оттиск краски</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-17"><code>/encausticwax - layered wax paint</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-17" aria-label="Скопировать /encausticwax целиком" aria-live="polite">Скопировать</button></div><p>слои восковой живописи</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-18"><code>/temperapaint - chalky tempera</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-18" aria-label="Скопировать /temperapaint целиком" aria-live="polite">Скопировать</button></div><p>матовая краска темперы</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-19"><code>/acrylicpour - swirled acrylic pour</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-19" aria-label="Скопировать /acrylicpour целиком" aria-live="polite">Скопировать</button></div><p>завитки жидкого акрила</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-20"><code>/inkdrip - ink drips down page</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-20" aria-label="Скопировать /inkdrip целиком" aria-live="polite">Скопировать</button></div><p>тушь стекает по странице</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-21"><code>/washline - thin diluted wash</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-21" aria-label="Скопировать /washline целиком" aria-live="polite">Скопировать</button></div><p>тонкий слой разбавленной краски</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-22"><code>/drybrush - dry brush streaks</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-22" aria-label="Скопировать /drybrush целиком" aria-live="polite">Скопировать</button></div><p>полосы от сухой кисти</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-23"><code>/finelineart - intricate fine lines</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-23" aria-label="Скопировать /finelineart целиком" aria-live="polite">Скопировать</button></div><p>сложный рисунок тонкими линиями</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-12-24"><code>/roughsketch - construction lines visible</code></pre><button class="copy-button" type="button" data-copy-target="prompt-12-24" aria-label="Скопировать /roughsketch целиком" aria-live="polite">Скопировать</button></div><p>черновой рисунок с видимыми линиями построения</p></div></div></section><section class="content-section" id="list-7"><h2>Ручная работа</h2><p>24 строки. Читай перевод и копируй запрос с нужным эффектом.</p><div class="prompt-grid"><div class="prompt-item"><div class="code-card"><pre id="prompt-7-1"><code>/inkline - thick black ink outline</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-1" aria-label="Скопировать /inkline целиком" aria-live="polite">Скопировать</button></div><p>толстый чёрный контур тушью</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-2"><code>/paperscrap - torn paper collage</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-2" aria-label="Скопировать /paperscrap целиком" aria-live="polite">Скопировать</button></div><p>коллаж из рваной бумаги</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-3"><code>/threadstitch - cross stitch pattern</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-3" aria-label="Скопировать /threadstitch целиком" aria-live="polite">Скопировать</button></div><p>узор для вышивки крестиком</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-4"><code>/quickmarker - loose marker sketch</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-4" aria-label="Скопировать /quickmarker целиком" aria-live="polite">Скопировать</button></div><p>свободный набросок маркером</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-5"><code>/printdots - old newsprint dots</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-5" aria-label="Скопировать /printdots целиком" aria-live="polite">Скопировать</button></div><p>точки старой газетной печати</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-6"><code>/glasspane - stained glass window</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-6" aria-label="Скопировать /glasspane целиком" aria-live="polite">Скопировать</button></div><p>окно из цветного стекла</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-7"><code>/threadart - embroidered fabric patch</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-7" aria-label="Скопировать /threadart целиком" aria-live="polite">Скопировать</button></div><p>вышитая тканевая нашивка</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-8"><code>/grainshow - wood or fabric grain</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-8" aria-label="Скопировать /grainshow целиком" aria-live="polite">Скопировать</button></div><p>видимая фактура дерева или ткани</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-9"><code>/woodburn - burned into wood</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-9" aria-label="Скопировать /woodburn целиком" aria-live="polite">Скопировать</button></div><p>выжженный рисунок на дереве</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-10"><code>/leathertool - pressed leather grooves</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-10" aria-label="Скопировать /leathertool целиком" aria-live="polite">Скопировать</button></div><p>вдавленные бороздки на коже</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-11"><code>/clayimprint - soft clay impression</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-11" aria-label="Скопировать /clayimprint целиком" aria-live="polite">Скопировать</button></div><p>отпечаток в мягкой глине</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-12"><code>/feltcraft - fuzzy felt craft</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-12" aria-label="Скопировать /feltcraft целиком" aria-live="polite">Скопировать</button></div><p>пушистая поделка из фетра</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-13"><code>/macrame - knotted rope design</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-13" aria-label="Скопировать /macrame целиком" aria-live="polite">Скопировать</button></div><p>узор из узлов верёвки</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-14"><code>/beadwork - tiny colored beads</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-14" aria-label="Скопировать /beadwork целиком" aria-live="polite">Скопировать</button></div><p>мелкие цветные бусины</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-15"><code>/quilted - stitched fabric patches</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-15" aria-label="Скопировать /quilted целиком" aria-live="polite">Скопировать</button></div><p>сшитые лоскутки ткани</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-16"><code>/origamiform - sharp folded origami</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-16" aria-label="Скопировать /origamiform целиком" aria-live="polite">Скопировать</button></div><p>оригами с чёткими сгибами</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-17"><code>/wirebent - bent wire sculpture</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-17" aria-label="Скопировать /wirebent целиком" aria-live="polite">Скопировать</button></div><p>скульптура из согнутой проволоки</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-18"><code>/candlewax - carved wax drips</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-18" aria-label="Скопировать /candlewax целиком" aria-live="polite">Скопировать</button></div><p>резной воск с потёками</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-19"><code>/soapcarve - hand carved soap</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-19" aria-label="Скопировать /soapcarve целиком" aria-live="polite">Скопировать</button></div><p>мыло с ручной резьбой</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-20"><code>/inkstamp - uneven stamped ink</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-20" aria-label="Скопировать /inkstamp целиком" aria-live="polite">Скопировать</button></div><p>неровный отпечаток туши</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-21"><code>/rubberstamp - stamp ready to press</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-21" aria-label="Скопировать /rubberstamp целиком" aria-live="polite">Скопировать</button></div><p>штамп, готовый к оттиску</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-22"><code>/waxseal - wax seal on envelope</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-22" aria-label="Скопировать /waxseal целиком" aria-live="polite">Скопировать</button></div><p>восковая печать на конверте</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-23"><code>/leafprint - real leaf print</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-23" aria-label="Скопировать /leafprint целиком" aria-live="polite">Скопировать</button></div><p>отпечаток настоящего листа</p></div><div class="prompt-item"><div class="code-card"><pre id="prompt-7-24"><code>/sandart - colored sand layers</code></pre><button class="copy-button" type="button" data-copy-target="prompt-7-24" aria-label="Скопировать /sandart целиком" aria-live="polite">Скопировать</button></div><p>слои цветного песка</p></div></div></section><section class="content-section" id="seriya"><h2>Другие подборки серии</h2><p>Семь тем, каждая со своими строками. Следующие подборки появятся здесь после публикации.</p><!-- series:start -->
+<ul>
+<li><a href="../promty-sveta-dlya-foto-chatgpt/">Свет и камера</a></li>
+<li><a href="../promty-tovar-reklama-chatgpt/">Товар, реклама и упаковка</a></li>
+<li><a href="../promty-blog-biznes-chatgpt/">Постеры, соцсети, надписи и 3D</a></li>
+<li><a href="../promty-risunok-zhivopis-chatgpt/">Иллюстрация, живопись и ручная работа</a></li>
+<li>Игрушки, персонажи и игры <span class="soon">(скоро)</span></li>
+<li>Еда, кухня, дом и путешествия <span class="soon">(скоро)</span></li>
+<li>Ретро и устройство предметов <span class="soon">(скоро)</span></li>
+</ul>
+<!-- series:end --></section><section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
+<p class="help-title">Не получилось? Спроси ChatGPT. <span class="accent">Попроси идти по одному действию</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу изменить картинку по этой строке. Сейчас результат не подходит. Помоги уточнить запрос: спроси, какой эффект нужен и какие детали исходника сохранить. Объясняй по одному действию.</p></div>
+<div class="bubble claude"><span class="who">ChatGPT</span>Какой эффект нужен и какие детали исходника сохранить?</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
+</section>
+<section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Рисунки есть. Где их увидят?</h2>
+<p>Галерея работ, страница с заказом картины, бот, который присылает эскизы клиенту, - всё это собирается без навыков программиста. На ИИ-Лагере три дня показывают, как ставить такие задачи Claude Code и Codex словами и доводить их до работающего результата.</p>
+<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+<section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><ul><li><a href="../kopirovat-stil-foto-v-chatgpt/"><span class="title">Как скопировать стиль любого фото в ChatGPT</span><span class="why">Перенеси свет и цвета конкретного образца на свой снимок.</span></a></li><li><a href="../postery-iz-odnogo-foto/"><span class="title">Постеры из одной фотографии в ChatGPT</span><span class="why">Собери постер с фотографией и рисованной сценой.</span></a></li></ul></section><section class="content-section" id="itog"><h2>Что проверить перед сохранением</h2><p>Выбранную технику видно по следу материала: у масла остаются мазки, у бумаги края вырезанных слоёв, у вышивки стежки. Короткая строка направляет рисунок, но не обещает одинаковый результат на каждом фото. Открой пробу крупнее, сравни эти признаки с переводом и сохрани тот вариант, в котором узнаётся и техника, и твой исходный сюжет.</p></section></article></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Продолжение</p><h2>Стиль по образцу</h2>
+      <p><a href="../kopirovat-stil-foto-v-chatgpt/">Открыть инструкцию</a></p></aside></div><script>
+var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script><script src="../../assets/promty-foto.js"></script><footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Разрешить статистику посещений? Нажимая «Понятно», вы соглашаетесь на обработку cookie и технических данных сервисом Яндекс Метрика. <a href="/politika/">Какие данные и зачем</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline">Без аналитики</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>
