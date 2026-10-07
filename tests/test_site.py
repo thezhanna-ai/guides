@@ -23,7 +23,7 @@ VOICE = ROOT / "claude-ai" / "golosovoy-vvod-v-claude" / "index.html"
 
 PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES, VOICE)
 GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES, VOICE)
-PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff"
+PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff"
 # Верхняя ссылка оглавления ведёт на <header>, а не на раздел, и из-под
 # критерия дословного совпадения toc-заголовок выведена явно
 HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "web-search", "connectors", "o-sebe", "podklyuchenie", "guides", "golos"}
@@ -562,10 +562,10 @@ class GuidesSiteTest(unittest.TestCase):
             "Если это рабочий Google-аккаунт:",
             "Как проверить доступ самому:",
             "myaccount.google.com/connections",
-            "Следующий шаг после Connectors",
-            "сборку рабочего инструмента под твою задачу",
-            "На бесплатном обучении тебе покажут этот путь на экране",
-            "Посмотреть, что собрать дальше",
+            "Почта и календарь подключены. Кто разберёт их за тебя?",
+            "отдать разбор ИИ-агентам",
+            "шесть способов заработать с её помощью",
+            "Занять место",
         ):
             self.assertIn(phrase, html)
         self.assertEqual(
@@ -654,10 +654,10 @@ class GuidesSiteTest(unittest.TestCase):
             ".header-controls { display: flex; align-items: center; gap: 12px }",
             ".header-actions { margin-right: 8px }",
             ".header-controls { width: 180px }",
-            "На ИИ-Лагерь",
+            "На Концентрат",
         ):
             self.assertIn(phrase, html if phrase.startswith(".") else header)
-        self.assertNotIn("Бесплатный ИИ-Лагерь", header)
+        self.assertNotIn("Бесплатный Концентрат", header)
 
     def test_web_search_final_cta_has_unmistakable_pressed_state_regression(self):
         html = SEARCH.read_text(encoding="utf-8")
@@ -702,14 +702,16 @@ class GuidesSiteTest(unittest.TestCase):
         ):
             self.assertIn(phrase, section)
 
-    def test_web_search_cta_uses_the_approved_practice_positioning(self):
+    def test_web_search_cta_uses_the_concentrat_program(self):
         html = SEARCH.read_text(encoding="utf-8")
         cta = html.split('<section class="cta"', 1)[1].split("</section>", 1)[0]
         for phrase in (
-            "бесплатный прикладной практикум по вайб-маркетингу",
-            "показывают каждый шаг на экране",
-            "без кода и технических знаний",
-            "Хочу на бесплатный практикум",
+            "Бесплатный Концентрат",
+            "Свежие ссылки найдены. Кто превратит их в пост?",
+            "контент-завод соберут на Концентрате 15 октября в 19:00 МСК",
+            "13-го и 14-го разберут команду ИИ-агентов и шесть способов на ней заработать",
+            "Занять место",
+            "Регистрация на сайте до 14 октября, участие бесплатное",
         ):
             self.assertIn(phrase, cta)
 
@@ -832,7 +834,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertNotIn("mid-cta", server)
         for html in (server, access):
             with self.subTest(page="server" if html is server else "access"):
-                self.assertRegex(html, r'<section class="cta" aria-label="Следующий шаг">[\s\S]*?<p class="section-label">[\s\S]*?<h2>[\s\S]*?<p>[\s\S]*?<a class="press-button" data-partner href="https://theivansergeev\.com/ailager/\?gcpc=16fff">[\s\S]*?</section>\s*<footer class="foot">')
+                self.assertRegex(html, r'<section class="cta" aria-label="Концентрат">[\s\S]*?<p class="section-label">[\s\S]*?<h2>[\s\S]*?<p>[\s\S]*?<a class="press-button" data-partner href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">[\s\S]*?</section>\s*<footer class="foot">')
                 self.assertIn(".cta .press-button:active", html)
 
     def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):

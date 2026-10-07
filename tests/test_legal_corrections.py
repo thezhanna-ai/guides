@@ -10,18 +10,20 @@ from urllib.parse import urlparse
 from test_site import ImageDocument, ROOT
 
 
-PROMISE = "За 3-4 дня в лагере ты пройдёшь путь от первого запуска Claude Code / Codex до своего первого продукта. Результат зависит от того, сколько сделаешь сам"
-CONTENT = "Разберёшь, как делать контент, который приводит людей на сайт"
+PROGRAM = "шесть способов заработать с их помощью"
+CONTENT = "контент-завод для роликов, каруселей и статей без ручной работы"
 FOOTNOTE = "*Meta признана экстремистской организацией и запрещена в РФ"
 
 
 class LegalCorrectionsTest(unittest.TestCase):
-    def test_practicum_uses_requested_copy_and_no_old_promises_remain(self):
+    def test_concentrat_uses_requested_copy_and_no_old_promises_remain(self):
         for slug in ("shest-skillov", "svoy-sayt-ne-bliznec"):
             html = (ROOT / "claude-ai" / slug / "index.html").read_text()
             with self.subTest(slug=slug):
-                self.assertIn(PROMISE, html)
-                self.assertIn(CONTENT, html)
+                self.assertIn("Концентрате 13 октября в 19:00 МСК", html)
+                self.assertIn("Бесплатный Концентрат", html)
+                self.assertNotIn("За 3-4 дня в лагере", html)
+                self.assertIn("Занять место", html)
         for path in [ROOT / "index.html", *ROOT.glob("claude-ai/*/index.html"), *ROOT.glob("scripts/shablon_*.html")]:
             with self.subTest(path=path.relative_to(ROOT)):
                 html = path.read_text()

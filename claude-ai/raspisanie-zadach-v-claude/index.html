@@ -129,7 +129,7 @@
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
-  <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div><div class="header-actions"><span class="handout-title">План недели по расписанию</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+  <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div><div class="header-actions"><span class="handout-title">План недели по расписанию</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" href="https://theivansergeev.com/koncentrat/?gcpc=16fff" data-partner>На Концентрат</a></div></div></div></header>
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</a><a href="#dostup">1. Убедись, что расписание доступно</a><a href="#istochniki">2. Подключи Gmail и Google Calendar</a><a href="#zadacha">3. Создай задачу на каждый понедельник</a><a href="#proverka">4. Проверь, что будильник заведён</a><a href="#primer">Пример с пустой почтой</a><a href="#oshibki">Если кнопки или результата нет</a><a href="#sources">Источники</a></nav>
     <main><article>
@@ -167,7 +167,7 @@
         <details class="faq-item"><summary>Нет Schedule в обычном чате</summary><p>проверь платный тариф и версию интерфейса. Если виден переключатель Chat/Cowork, путь к Scheduled проходит через Cowork. Обычный Chat в прежнем интерфейсе не сохраняет автоматическое расписание</p></details><details class="faq-item"><summary>Задача создана, но нет писем или встреч</summary><p>проверь, есть ли они за указанные дни, оба коннектора и нужный Google-аккаунт</p></details><details class="faq-item"><summary>В карточке неверное время</summary><p>открой Scheduled и поправь день, время и часовой пояс</p></details>
       </section>
       <section class="content-section" id="sources"><p class="section-label">Проверено 26 сентября 2026</p><h2>Источники</h2><ul class="sources"><li><a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork">Claude Help Center: тарифы, создание и проверка Scheduled tasks</a></li><li><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors">Claude Help Center: Gmail и Google Calendar, меню Connectors</a></li><li><a href="https://support.claude.com/en/articles/16761823-claude-cowork-and-chat-are-one-claude">Claude Help Center: постепенный переход к объединённому интерфейсу и общие лимиты</a></li><li><a href="https://support.claude.com/en/articles/8114491-get-started-with-claude">Claude Help Center: повторные вопросы и лимиты Free</a></li><li><a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan">Claude Help Center: лимиты Pro</a></li></ul></section>
-      <section class="cta"><p class="section-label">Бесплатный практикум</p><h2>Будильник для Клода уже заведён. Дальше можно собрать своё</h2><p>Задача по расписанию - это одно поручение. ИИ-Лагерь - бесплатный трёхдневный практикум, где показывают, как работать с Claude Code и Codex (это ИИ-агенты от Anthropic и OpenAI). С ними собирают то, что работает на тебя каждый день: свой сайт, бота в Telegram, который отвечает клиентам, калькулятор стоимости ремонта прямо на сайте. Навыки программиста не нужны: каждый шаг показывают на экране, ты повторяешь</p><a class="press-button" href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
+      <section class="cta" aria-label="Концентрат"><p class="section-label">Бесплатный Концентрат</p><h2>Письма разобраны к утру. Что ещё можно отдать?</h2><p>Одна задача по расписанию уже работает без тебя. Таких задач можно поставить много и раздать их команде ИИ-агентов, а себе оставить проверку. Как её собрать, разберут на Концентрате 13 октября в 19:00 МСК, 14-го покажут шесть способов заработать с её помощью, 15-го соберут контент-завод.</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Занять место</a><p class="cta-note" style="font-size: 13px; margin-top: 12px; line-height: 1.5;">Регистрация на сайте до 14 октября, участие бесплатное</p></section>
     </article></main>
     <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Дальше по теме</p>
@@ -262,6 +262,10 @@
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+</script>
 <!-- privacy:banner:start -->
 <aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
   <div class="cookie-inner">

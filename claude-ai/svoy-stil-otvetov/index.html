@@ -131,7 +131,7 @@
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
-  <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div><div class="header-actions"><span class="handout-title">Свой стиль ответов</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
+  <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div><div class="header-actions"><span class="handout-title">Свой стиль ответов</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" href="https://theivansergeev.com/koncentrat/?gcpc=16fff" data-partner>На Концентрат</a></div></div></div></header>
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#stil">Как научить Клода писать в твоём стиле</a><a href="#do">1. Сохрани исходный ответ</a><a href="#sample">2. Выбери образец</a><a href="#rules">3. Сформулируй правила</a><a href="#settings">4. Открой Instructions for Claude</a><a href="#compare">5. Повтори запрос и сравни</a><a href="#sources">Источники</a></nav>
     <main><article>
@@ -155,7 +155,7 @@
       <section class="content-section" id="settings"><p class="section-label">Реальный путь в интерфейсе</p><h2>4. Открой Instructions for Claude</h2><p>Нажми свои инициалы в левом нижнем углу. Открой <span class="path">Settings → Account → Instructions for Claude</span> и вставь подготовленный блок. На показанном экране поле находится на странице Account</p><p>Эти инструкции Claude учитывает во всех чатах аккаунта. Оставь здесь то, что подходит постоянно. После ввода закрой настройки, снова открой это поле и убедись, что текст сохранился. Если интерфейс поменяется, ищи в Settings поле с тем же названием</p><figure class="shot"><img src="assets/instructions-account.png" alt="Реальная запись экрана: выбран Account и видно поле Instructions for Claude"><figcaption>Account и поле Instructions for Claude</figcaption></figure></section>
       <section class="content-section" id="compare"><p class="section-label">Результат виден в ответе</p><h2>5. Повтори запрос и сравни</h2><p>Открой новый чат и отправь сохранённый запрос без изменений. Сверь ответ с конкретными правилами: обращение на «ты» или «вы», длина абзацев, характерные слова, заголовки и шутки. Проверь, сохранился ли смысл. Если какой-то признак не совпал, уточни одно правило в настройке и повтори запрос</p><figure class="shot"><img src="assets/otvet-posle.png" alt="Реальный более короткий ответ Claude после настройки"><figcaption>В этом примере исчезли заголовок, эмодзи и призыв к комментариям; обращение сменилось с «вы» на «ты»</figcaption></figure><p>Результат: ты видишь, какие правила Клод применил, и знаешь, что уточнить. Для своего текста сверяй свои признаки подачи</p></section>
       <section class="content-section" id="sources"><p class="section-label">Официальная справка</p><h2>Источники</h2><ul class="sources"><li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Claude Help Center: Instructions for Claude и персонализация</a></li></ul></section>
-      <section class="cta" aria-label="Следующий шаг"><p class="section-label">Бесплатный практикум</p><h2>Клод пишет твоим голосом - дальше можно собрать своё</h2><p>ИИ-Лагерь - бесплатный трёхдневный практикум на Claude Code и Codex. Шаги показывают на экране, а ты повторяешь на своих задачах: сайт, бот в Telegram для клиентов, калькулятор. Без навыков программиста</p><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">Хочу на бесплатный практикум</a></section>
+      <section class="cta" aria-label="Концентрат"><p class="section-label">Бесплатный Концентрат</p><h2>Claude пишет твоим голосом. Сколько текстов он может выпустить?</h2><p>Когда стиль настроен, тексты почти не нужно переписывать. Значит, их можно выпускать потоком: посты, подписи к каруселям, сценарии роликов. Такой контент-завод соберут на Концентрате 15 октября в 19:00 МСК, а 13-го и 14-го разберут команду ИИ-агентов и шесть способов на ней заработать.</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Занять место</a><p class="cta-note" style="font-size: 13px; margin-top: 12px; line-height: 1.5;">Регистрация на сайте до 14 октября, участие бесплатное</p></section>
     </article></main>
     <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Ещё одна настройка</p>
@@ -245,6 +245,10 @@
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+</script>
 <!-- privacy:banner:start -->
 <aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
   <div class="cookie-inner">

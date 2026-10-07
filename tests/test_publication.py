@@ -4,7 +4,7 @@ import json
 import re
 import subprocess
 import unittest
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 
 from test_site import ImageDocument, ROOT
 
@@ -119,19 +119,20 @@ class PublicationTest(unittest.TestCase):
 
     def test_partner_ctas_are_nonempty_and_point_to_the_practice(self):
         for page, doc in self.docs.items():
-            if page in {ROOT / "index.html", ROOT / "politika/index.html"}:
+            if page == ROOT / "politika/index.html":
                 continue
             links = [n for n in doc.root.all(tag="a") if "data-partner" in n.attrs or
-                     "theivansergeev.com/ailager/" in n.attrs.get("href", "") or
-                     "theivansergeev.com/koncentrat/" in n.attrs.get("href", "")]
+                     "theivansergeev.com" in n.attrs.get("href", "")]
             with self.subTest(page=str(page.relative_to(ROOT))):
                 self.assertTrue(links)
                 for link in links:
                     self.assertTrue(link.attrs.get("href", "").strip())
                     self.assertTrue(link.text_content().strip())
                     url = urlsplit(link.attrs["href"])
-                    self.assertEqual((url.scheme, url.netloc), ("https", "theivansergeev.com"))
-                    self.assertIn(url.path, {"/ailager/", "/koncentrat/"})
+                    self.assertEqual((url.scheme, url.netloc, url.path), ("https", "theivansergeev.com", "/koncentrat/"))
+                    self.assertEqual(parse_qs(url.query), {"gcpc": ["16fff"]})
+                    self.assertEqual(url.fragment, "")
+                    self.assertIn("data-partner", link.attrs)
 
     def test_all_inline_javascript_parses_in_node(self):
         scripts = []
