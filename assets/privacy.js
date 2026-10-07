@@ -1,7 +1,7 @@
 /* Единственное место для номера счётчика. Пустая строка полностью выключает Метрику */
 (() => {
   'use strict';
-  const METRIKA_ID = '113486318';
+  const METRIKA_ID = '';
   const KEY = 'pronovoe-analytics-v1';
   const banner = document.getElementById('cookie-banner');
   if (!banner) return;
