@@ -122,14 +122,16 @@ class PublicationTest(unittest.TestCase):
             if page in {ROOT / "index.html", ROOT / "politika/index.html"}:
                 continue
             links = [n for n in doc.root.all(tag="a") if "data-partner" in n.attrs or
-                     "theivansergeev.com/ailager/" in n.attrs.get("href", "")]
+                     "theivansergeev.com/ailager/" in n.attrs.get("href", "") or
+                     "theivansergeev.com/koncentrat/" in n.attrs.get("href", "")]
             with self.subTest(page=str(page.relative_to(ROOT))):
                 self.assertTrue(links)
                 for link in links:
                     self.assertTrue(link.attrs.get("href", "").strip())
                     self.assertTrue(link.text_content().strip())
                     url = urlsplit(link.attrs["href"])
-                    self.assertEqual((url.scheme, url.netloc, url.path), ("https", "theivansergeev.com", "/ailager/"))
+                    self.assertEqual((url.scheme, url.netloc), ("https", "theivansergeev.com"))
+                    self.assertIn(url.path, {"/ailager/", "/koncentrat/"})
 
     def test_all_inline_javascript_parses_in_node(self):
         scripts = []
