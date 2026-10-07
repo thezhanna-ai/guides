@@ -244,6 +244,9 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 .code-card pre { margin: 0 }
 .code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
 @media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
 </style>
 </head><body>
 <div class="progress" aria-hidden="true"></div>
@@ -254,7 +257,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
 <a href="#ustanovka">Шаг 1. Запусти Paperclip</a>
 <a href="#direktor">Шаг 2. Назови организацию и найми директора</a>
-<a href="#byudzhet">Шаг 3. Поставь бюджет и одобрение найма</a>
+<a href="#byudzhet">Шаг 3. Включи одобрение найма и ограничь запуски</a>
 <a href="#tsel">Шаг 4. Дай директору одну цель</a>
 <a href="#plan">Шаг 5. Одобри план и команду</a>
 <a href="#komanda">Шаг 6. Смотри, как работа переходит от роли к роли</a>
@@ -272,7 +275,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Что нужно до начала</a>
 <a href="#ustanovka">Шаг 1. Запусти Paperclip</a>
 <a href="#direktor">Шаг 2. Назови организацию и найми директора</a>
-<a href="#byudzhet">Шаг 3. Поставь бюджет и одобрение найма</a>
+<a href="#byudzhet">Шаг 3. Включи одобрение найма и ограничь запуски</a>
 <a href="#tsel">Шаг 4. Дай директору одну цель</a>
 <a href="#plan">Шаг 5. Одобри план и команду</a>
 <a href="#komanda">Шаг 6. Смотри, как работа переходит от роли к роли</a>
@@ -311,20 +314,24 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <ol>
 <li><b>What is the name of your organization?</b> («Как называется организация?»). Впиши любое название, например «Первая команда», и нажми Continue («Продолжить»). Организация - общее место для агентов, целей и задач.</li>
 <li><b>Create your first agent</b> («Создай первого агента»). В поле имени впиши «Директор» и нажми Next («Далее»). Это главный агент: он будет разговаривать с тобой, составлять план и нанимать остальных.</li>
-<li><b>Connect a model</b> («Подключи модель»). Нажми плитку <b>Claude</b>, под ней подпись Subscription («Подписка»): Paperclip возьмёт вход, под которым уже работает твой Claude Code. Нажми Connect («Подключить»). Если вместо подписки у тебя API-ключ (отдельная оплата за каждое обращение к Claude), нажми ссылку Use API key instead и вставь ключ. Paperclip сам проверит, что Claude отвечает. Пока проверка не пройдёт, директора нанять не получится.</li>
+<li><b>Connect a model</b> («Подключи модель»). Нажми плитку <b>Claude</b>, под ней подпись Subscription («Подписка»): Paperclip возьмёт вход, под которым уже работает твой Claude Code. Сразу начнётся проверка «Testing connection…», она идёт около полуминуты. Если вместо подписки у тебя API-ключ (отдельная оплата за каждое обращение к Claude), нажми ссылку Use API key instead и вставь ключ. Пока проверка не пройдёт, директора нанять не получится.</li>
 </ol>
-<p>Появится экран «Let's get started...» с подписью «Директор is ready to work!» («Директор готов к работе»). Нажми <b>Get started</b> («Начать»). Откроется первая задача: в ней директор поздоровался и спрашивает «What would you like to do?» («Чем займёмся?»).</p>
+<figure><div class="shot"><img src="assets/connect.webp" width="560" height="520" loading="lazy" decoding="async" alt="Экран Connect a model: плитки Claude и OpenAI с подписью Subscription и ссылка Use API key instead"></div><figcaption>Экран <code>Connect a model</code>: нажми плитку <code>Claude</code>, проверка начнётся сама</figcaption></figure>
+<p>Когда проверка пройдёт, сам откроется экран «Let's get started...» с подписью «Директор is ready to work!» («Директор готов к работе»). Нажми <b>Get started</b> («Начать»). Откроется первая задача: в ней директор поздоровался и спрашивает «What would you like to do?» («Чем займёмся?»).</p>
+<figure><div class="shot"><img src="assets/pervaya-zadacha.webp" width="980" height="370" loading="lazy" decoding="async" alt="Первая задача: приветствие директора и вопрос What would you like to do? с двумя вариантами"></div><figcaption>Первая задача: приветствие директора и вопрос с двумя вариантами</figcaption></figure>
 <p>Пока не отвечай. Директор спит, пока ты ему не напишешь, а до первого запуска нужно ограничить расходы.</p>
 <div class="result"><p><b>Результат:</b> директор нанят, перед тобой его приветствие и вопрос «What would you like to do?».</p></div>
 </section>
 
 <section class="content-section" id="byudzhet">
-<h2>Шаг 3. Поставь бюджет и одобрение найма</h2>
+<h2>Шаг 3. Включи одобрение найма и ограничь запуски</h2>
 <p>Агенты обращаются к Claude сами, без тебя. Каждый запуск тратит лимит твоей подписки или деньги на API-ключе. Если не поставить рамки, директор наймёт сколько захочет помощников, и они будут работать, пока не кончится лимит.</p>
-<p><b>Запрети нанимать без тебя.</b> Внизу слева нажми на свой значок профиля и выбери Settings («Настройки»). В разделе Hiring («Найм») включи <b>Require board approval for new hires</b> («Нанимать только после одобрения»). Теперь каждого нового агента директор сначала присылает тебе на согласие.</p>
-<p><b>Поставь директору денежный предел.</b> В меню слева открой Agents («Агенты») → Директор, в меню агента выбери Budgets («Бюджеты»). Впиши сумму в долларах на месяц и нажми Set budget («Задать бюджет»). Когда расход дойдёт до предела, Paperclip сам поставит агента на паузу. Для учебной цели хватит небольшой суммы на пробу.</p>
-<div class="warn-card"><p><b>На подписке денежный предел не защищает лимит.</b> Он считает расход в долларах, а подписка тратит свой лимит сообщений. Сколько ушло, видно на сайте claude.ai: Settings → Usage («Настройки → Использование»). Главная защита на подписке - одобрение найма и пауза из шага 7.</p></div>
-<div class="result"><p><b>Результат:</b> найм только с твоего согласия, у директора стоит месячный бюджет.</p></div>
+<p><b>Запрети нанимать без тебя.</b> Внизу слева нажми на Board и выбери Settings («Настройки»). В разделе Hiring («Найм») включи <b>Require board approval for new hires</b> («Нанимать только после одобрения»). Переключатель сохраняется сам. Теперь каждого нового агента директор сначала присылает тебе на согласие.</p>
+<figure><div class="shot"><img src="assets/naym-odobrenie.webp" width="720" height="450" loading="lazy" decoding="async" alt="Настройки организации: в разделе Hiring включён переключатель Require board approval for new hires"></div><figcaption>Settings → General: переключатель в разделе <code>Hiring</code> включён</figcaption></figure>
+<p><b>Ограничь директору длину одного запуска.</b> В меню слева открой Agents («Агенты») → Директор → Harness / Runtime («Настройки запуска»). В поле Max turns per run («Ходов за запуск») стоит 1000. Впиши 50 и нажми Save changes («Сохранить»). Ход - одно действие агента: прочитать файл, написать текст, создать задачу. На учебную цель директору хватило 50 ходов за запуск, а бесконечно крутиться он больше не сможет.</p>
+<figure><div class="shot"><img src="assets/max-turns.webp" width="1180" height="350" loading="lazy" decoding="async" alt="Настройки директора Harness / Runtime: поле Max turns per run со значением 50"></div><figcaption>Директор → <code>Harness / Runtime</code>: в поле <code>Max turns per run</code> стоит 50</figcaption></figure>
+<div class="warn-card"><p><b>Денежный бюджет на подписке не поможет.</b> В Paperclip есть бюджеты в долларах, но подписка тратит не доллары, а свой лимит сообщений. Сколько ушло, видно на сайте claude.ai: Settings → Usage («Настройки → Использование»). На подписке защищают одобрение найма, ограничение ходов и пауза из шага 7.</p></div>
+<div class="result"><p><b>Результат:</b> найм только с твоего согласия, у директора не больше 50 ходов за запуск.</p></div>
 </section>
 
 <section class="content-section" id="tsel">
@@ -347,16 +354,18 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 
 <section class="content-section" id="plan">
 <h2>Шаг 5. Одобри план и команду</h2>
-<p>Через пару минут в задаче появится документ <b>plan</b> и карточка с галочками для одобрения. Открой план и проверь три вещи:</p>
+<p>Через пару минут справа откроется документ с планом, а под перепиской придёт карточка «Одобрить план и команду» с галочками. Директор пишет на языке твоей цели, поэтому кнопки в карточке будут по-русски. Открой план и проверь три вещи:</p>
 <ul>
 <li>в команде маркетолог и инженер, оба подчиняются директору;</li>
 <li>инженер начинает после маркетолога и берёт его текст;</li>
 <li>нет публикации, подключения сервисов и придуманных цен.</li>
 </ul>
-<p>Всё на месте - отметь пункты в карточке и подтверди. Что-то не так - напиши в поле комментария внизу задачи, что поправить, и отправь. Директор пришлёт исправленный план.</p>
-<p>После одобрения директор начнёт нанимать. Из-за настройки в шаге 3 каждый найм придёт к тебе. Открой <b>Inbox</b> («Входящие») в меню слева: там две заявки, на маркетолога и на инженера. Они же видны в задаче директора. Открой каждую и найди, через что работает агент: там должно стоять Claude Code. Всё так - нажми <b>Approve</b> («Одобрить»). Если в заявке есть почта, оплата или другие сервисы, нажми Request revision («Попросить исправить») и ниже, в поле комментария, напиши «Убери подключение сервисов».</p>
-<p>Новым агентам поставь предел так же, как директору: Agents → агент → Budgets → Set budget.</p>
-<div class="result"><p><b>Результат:</b> план одобрен, в Agents («Агенты») три агента с бюджетами: директор, маркетолог и инженер.</p></div>
+<figure><div class="shot"><img src="assets/plan-odobrenie.webp" width="1200" height="520" loading="lazy" decoding="async" alt="План директора и карточка Одобрить план и команду с тремя отмеченными пунктами и кнопками Переделать план и Одобрить"></div><figcaption>План директора и карточка одобрения: пункты отмечены, справа сам план</figcaption></figure>
+<p>Всё на месте - оставь галочки и нажми «Одобрить». Если директор назвал кнопки иначе, ищи кнопку подтверждения в той же карточке. Что-то не так - напиши в поле комментария внизу задачи, что поправить, и отправь. Директор пришлёт исправленный план.</p>
+<p>После одобрения директор начнёт нанимать. Из-за настройки в шаге 3 каждый найм придёт к тебе. Открой <b>Inbox</b> («Входящие») в меню слева: там две заявки, на маркетолога и на инженера. Они же видны в задаче директора. Нажми на заявку: откроется её страница. В строке Adapter должно стоять <code>claude_local</code>, это и есть Claude Code. Всё так - нажми <b>Approve</b> («Одобрить»). Кнопка Approve есть и прямо в списке Inbox. Если в заявке есть почта, оплата или другие сервисы, нажми Request revision («Попросить исправить») и ниже, в поле комментария, напиши «Убери подключение сервисов».</p>
+<figure><div class="shot"><img src="assets/zayavka-naym.webp" width="770" height="330" loading="lazy" decoding="async" alt="Заявка Hire Agent на маркетолога: имя, роль, описание и строка Adapter claude_local"></div><figcaption>Заявка на найм маркетолога: в строке <code>Adapter</code> стоит <code>claude_local</code></figcaption></figure>
+<p>Новым агентам поставь такое же ограничение, как директору: Agents → агент → Harness / Runtime → Max turns per run → Save changes.</p>
+<div class="result"><p><b>Результат:</b> план одобрен, в Agents («Агенты») три агента: директор, маркетолог и инженер.</p></div>
 </section>
 
 <section class="content-section" id="komanda">
@@ -368,6 +377,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <li>Инженер открывает текст маркетолога и собирает из него структуру страницы.</li>
 <li>Директор читает оба документа и пишет в своей задаче, подходит ли результат.</li>
 </ol>
+<figure><div class="shot"><img src="assets/dokument-inzhenera.webp" width="770" height="520" loading="lazy" decoding="async" alt="Задача инженера: документ Структура страницы и комментарий, что структура собрана из текста маркетолога CMP-2"></div><figcaption>Инженер закончил: структура собрана из текста маркетолога, ссылка на его задачу</figcaption></figure>
 <p>Ничего нажимать не нужно: агент просыпается сам, когда ему назначили задачу или ответили в ней. Если задача стоит в статусе blocked («Заблокировано»), открой её и прочитай причину. Чаще всего агент ждёт ответа от тебя или результата коллеги.</p>
 <div class="result"><p><b>Результат:</b> в Tasks задачи у всех трёх агентов, у маркетолога и инженера сохранены документы с результатом.</p></div>
 </section>
@@ -377,12 +387,13 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <p>Вот и ответ на вопрос из начала: как понять, что агенты работали вместе. Статус done («Выполнено») у задач ещё ничего не доказывает: так можно отметить и пустую работу. Командную работу видно по трём следам:</p>
 <ol>
 <li><b>Документы.</b> Открой результат инженера: в нём заголовок и три пользы из текста маркетолога, а не придуманные заново.</li>
-<li><b>Журнал запусков.</b> Открой Agents → Инженер → Runs («Запуски») и последний запуск. В журнале видно каждое действие агента. Найди строку «Read a document» с документом маркетолога: это момент, когда инженер его открыл, прежде чем писать своё.</li>
-<li><b>Приёмка директора.</b> В задаче директора есть комментарий: какие документы он прочитал и подходит ли итог под цель.</li>
+<li><b>Ход работы.</b> Открой задачу инженера и раскрой строки Worked («Работал»). Там видно, что инженер сначала забрал текст маркетолога и только потом писал своё. В итоговом комментарии он ссылается на задачу маркетолога.</li>
+<li><b>Приёмка директора.</b> В первой задаче директор сохранил документ с вердиктом: что он проверил по цели и подходит ли итог.</li>
 </ol>
+<figure><div class="shot"><img src="assets/verdikt.webp" width="1200" height="420" loading="lazy" decoding="async" alt="Вердикт директора: подходит под цель, справа документ Приёмка с таблицей требований и фактов"></div><figcaption>Вердикт директора: «подходит под цель», справа таблица проверки по каждому требованию</figcaption></figure>
 <p>Если все три следа на месте, задача прошла через три роли: один написал, второй использовал, третий проверил. Три отдельных ответа, где никто не читал чужую работу, такую проверку не проходят.</p>
 <p><b>Останови команду.</b> Открой каждого агента в Agents и вверху его страницы нажми Pause («Пауза», на телефоне это значок паузы). Без паузы агенты проснутся от любого нового комментария или задачи и снова начнут тратить лимит. Вернуть их в работу можно кнопкой Resume («Продолжить»). Если закрыть терминал с Paperclip, остановится вся команда сразу.</p>
-<div class="result"><p><b>Результат:</b> текст страницы готов и проверен директором, вклад каждой роли виден в документах и журналах, команда на паузе.</p></div>
+<div class="result"><p><b>Результат:</b> текст страницы готов и проверен директором, вклад каждой роли виден в документах и ходе работы, команда на паузе.</p></div>
 </section>
 
 <section class="content-section" id="oshibki">
@@ -402,7 +413,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <ul>
 <li>Inbox - не ждёт ли тебя заявка на одобрение;</li>
 <li>задача агента - не стоит ли blocked, и почему;</li>
-<li>страница агента → Budgets - не кончился ли бюджет.</li>
+<li>журнал Runs агента - не остановился ли он на пределе ходов.</li>
 </ul>
 <p>Если кончился лимит самой подписки Claude, дождись, пока он восстановится. Не перезапускай агента раз за разом, пока причина не ясна.</p>
 </details>
@@ -426,7 +437,68 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Перед подключением</p><h2>Claude Code в VS Code</h2>
       <p><a href="../claude-i-codex-v-vscode/">Открыть инструкцию</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint"></p></div>
 <script>
+(function () {
+  var viewer = document.getElementById("viewer");
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+  var lastFocused;
+  function open(img) {
+    lastFocused = document.activeElement;
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewer.setAttribute("open", "");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    big.src = img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    viewer.removeAttribute("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
 var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
 document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
 var themeButton = document.querySelector(".theme-toggle");
