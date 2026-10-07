@@ -248,6 +248,21 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 .shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
 .shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
 </style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
@@ -257,7 +272,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
 <div class="header-actions"><div class="handout-title">ШТАТ</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
-<a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">На Концентрат</a></div></div></div></header>
+</div></div></div></header>
 <div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
 <a href="#ustanovka">Шаг 1. Запусти Paperclip</a>
 <a href="#direktor">Шаг 2. Назови организацию и «найми» директора</a>
@@ -443,7 +458,8 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Пришли текст ошибки, только без ключей и личных данных.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с Paperclip" aria-live="polite">Скопировать</button>
 </section>
-<section class="cta" id="svoi-proekt" aria-label="Концентрат"><p class="section-label">Бесплатный Концентрат</p><h2>Штат собран. Что он должен приносить?</h2><p>Директор, маркетолог и инженер уже делят работу. Дальше вопрос, на чём такая команда может зарабатывать и как выпускать контент без ручной работы. Шесть способов заработать с помощью ИИ-агентов разберут на Концентрате 14 октября в 19:00 МСК, а 15-го соберут контент-завод для роликов, каруселей и статей.</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Занять место</a><p class="cta-note" style="font-size: 13px; margin-top: 12px; line-height: 1.5;">Регистрация на сайте до 14 октября, участие бесплатное</p></section>
+<p class="cta-question">Штат собран. Что он должен приносить?</p>
+<section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: <span data-erid></span></p></section>
 <section class="next-read" id="dalshe"><h2>Дальше по теме</h2>
 <p class="next-sub">Что логично прочитать следующим</p>
 <ul><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Как закрыть секретные файлы от Claude Code</span><span class="why">Агенты читают файлы без спроса. Запрет в настройках не даст им открыть пароли и ключи.</span></a></li>
@@ -575,6 +591,10 @@ addEventListener("scroll", updateReadingState, { passive: true });
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
+<script>
+var ERID = "ERID_PLACEHOLDER";
+document.querySelectorAll("[data-erid]").forEach(function (label) { label.textContent = ERID; });
+</script>
 <!-- privacy:banner:start -->
 <aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
   <div class="cookie-inner">

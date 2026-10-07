@@ -246,7 +246,22 @@ h3 { margin-top: 26px }
 .prompt-block .copy-button:hover { background: #F28A68; box-shadow: 0 2px 0 #8F371F }
 .prompt-block .copy-button:active { background: #FFC6AD; box-shadow: inset 0 0 0 3px #8F371F }
 .prompt-block .copy-button.is-copied { background: #FFD1BF; color: #102F30; outline: 0; box-shadow: 0 0 0 3px rgba(255,209,191,.34) }
-</style><!-- privacy:head:start -->
+</style><!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
@@ -255,7 +270,7 @@ h3 { margin-top: 26px }
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
 <div class="header-actions"><div class="handout-title">Монтаж видео</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
-<a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">На Концентрат</a></div></div></div></header>
+</div></div></div></header>
 <div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
 <a href="#instrumenty">Шаг 1. Попроси агента подключить инструменты</a>
 <a href="#papka">Шаг 2. Собери материалы в папку material</a>
@@ -477,7 +492,8 @@ claude plugin install hyperframes@hyperframes</pre><button class="copy-button" t
 <p class="help-title">Запутался монтаж? <span class="accent">Попроси агента объяснить следующий шаг</span></p>
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу [желаемый результат] из видео в текущей папке. Сейчас вижу [экран или полный текст ошибки], уже выполнено [действия], непонятно [место затруднения]. Объясни простыми словами по одному шагу и после каждого дождись моего ответа.</p></div><div class="bubble claude"><span class="who">Пример ответа агента</span>Сначала уточним, какой файл не удалось открыть. Пришли его название из сообщения об ошибке.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button></section>
-<section class="cta" aria-label="Концентрат"><p class="section-label">Бесплатный Концентрат</p><h2>Один ролик смонтирован. Как выпускать их без остановки?</h2><p>Промпт монтирует ролик, пока ты занимаешься другим. Следующий шаг - чтобы сценарий, монтаж, подпись и карусель по тому же ролику делались одной цепочкой. Такой контент-завод соберут на Концентрате 15 октября в 19:00 МСК, а 13-го разберут команду ИИ-агентов, которая его ведёт.</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Занять место</a><p class="cta-note" style="font-size: 13px; margin-top: 12px; line-height: 1.5;">Регистрация на сайте до 14 октября, участие бесплатное</p></section>
+<p class="cta-question">Один ролик смонтирован. Как выпускать их без остановки?</p>
+<section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: <span data-erid></span></p></section>
 </article>
 </main><aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Дальше по теме</p><h2>Как сделать анимированную карусель для своего проекта</h2>
@@ -608,6 +624,10 @@ addEventListener("scroll", updateReadingState, { passive: true });
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
+<script>
+var ERID = "ERID_PLACEHOLDER";
+document.querySelectorAll("[data-erid]").forEach(function (label) { label.textContent = ERID; });
+</script>
 <!-- privacy:banner:start -->
 <aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
   <div class="cookie-inner">

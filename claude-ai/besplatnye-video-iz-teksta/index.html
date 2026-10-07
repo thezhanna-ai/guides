@@ -193,7 +193,7 @@
       .annotation::before { top: -30px; width: 22px; height: 22px; font-size: 11px }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
-  
+
     .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
     .next-read h2 { margin: 0 0 4px; font-size: 20px }
     .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
@@ -205,7 +205,7 @@
     .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
     .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
     .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
-  
+
 
 
 
@@ -271,6 +271,21 @@
     h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
     @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
   </style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
@@ -282,7 +297,7 @@
 <div class="brand">Claude.ai: кнопка за кнопкой</div>
 <div class="header-actions"><div class="handout-title">Видео из текста</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
-<a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">На Концентрат</a>
+
 </div></div></div></header>
 <div class="page-shell">
 <nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">Видео из текста: 4 сервиса и 2 российских</a>
@@ -445,7 +460,8 @@
 <figure><a href="assets/phone-check/05-shedevrum.png" target="_blank" rel="noopener noreferrer"><img src="assets/phone-check/05-shedevrum.png" alt="Шедеврум на телефоне" loading="lazy"></a><figcaption>Шедеврум</figcaption></figure>
 <figure><a href="assets/phone-check/06-gigachat.png" target="_blank" rel="noopener noreferrer"><img src="assets/phone-check/06-gigachat.png" alt="GigaChat на телефоне" loading="lazy"></a><figcaption>GigaChat</figcaption></figure>
 </div></section>
-<section class="cta" aria-label="Концентрат"><p class="section-label">Бесплатный Концентрат</p><h2>Ролик из текста готов. А если нужен каждый день?</h2><p>Один ролик сервис делает за пару минут. Но блогу их нужно много, и к каждому ещё сценарий, подпись и обложка. Если соединить эти шаги, нейросеть будет выпускать ролики, карусели и статьи, а тебе останется проверять. Такой контент-завод соберут на Концентрате 15 октября в 19:00 МСК, а 13-го и 14-го разберут команду ИИ-агентов и шесть способов на ней заработать.</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Занять место</a><p class="cta-note" style="font-size: 13px; margin-top: 12px; line-height: 1.5;">Регистрация на сайте до 14 октября, участие бесплатное</p></section>
+<p class="cta-question">Ролик из текста готов. А если нужен каждый день?</p>
+<section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: <span data-erid></span></p></section>
 </article></main>
 <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Дальше по теме</p><h2>Веб-поиск в Claude: ответы со свежими ссылками</h2>
@@ -586,6 +602,10 @@
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
+<script>
+var ERID = "ERID_PLACEHOLDER";
+document.querySelectorAll("[data-erid]").forEach(function (label) { label.textContent = ERID; });
+</script>
 <!-- privacy:banner:start -->
 <aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
   <div class="cookie-inner">

@@ -563,9 +563,10 @@ class GuidesSiteTest(unittest.TestCase):
             "Как проверить доступ самому:",
             "myaccount.google.com/connections",
             "Почта и календарь подключены. Кто разберёт их за тебя?",
-            "отдать разбор ИИ-агентам",
-            "шесть способов заработать с её помощью",
-            "Занять место",
+            "Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу",
+            "13-15 октября, 19:00 по Москве",
+            "Зарегистрироваться",
+            "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid:",
         ):
             self.assertIn(phrase, html)
         self.assertEqual(
@@ -639,11 +640,12 @@ class GuidesSiteTest(unittest.TestCase):
         for leak in ("session_", "claude.ai/code/", "/Users/", "Desktop/"):
             self.assertNotIn(leak, html)
 
-    def test_web_search_header_cta_hover_contrast_regression(self):
+    def test_web_search_final_cta_hover_contrast_regression(self):
         html = SEARCH.read_text(encoding="utf-8")
+        css = html.split("<!-- erid:style:start -->", 1)[1].split("<!-- erid:style:end -->", 1)[0]
         self.assertIn(
-            ".masthead .press-button:hover { background: #1F4A43; color: #FFC6AD;",
-            html,
+            ".cta .press-button:hover { background: #FF7A4D; color: #0B2223;",
+            css,
         )
 
     def test_web_search_header_controls_align_with_related_column_regression(self):
@@ -654,18 +656,21 @@ class GuidesSiteTest(unittest.TestCase):
             ".header-controls { display: flex; align-items: center; gap: 12px }",
             ".header-actions { margin-right: 8px }",
             ".header-controls { width: 180px }",
-            "На Концентрат",
         ):
             self.assertIn(phrase, html if phrase.startswith(".") else header)
         self.assertNotIn("Бесплатный Концентрат", header)
+        self.assertNotIn("На Концентрат", header)
+        self.assertNotIn("data-partner", header)
+        self.assertIn('class="theme-toggle"', header)
 
     def test_web_search_final_cta_has_unmistakable_pressed_state_regression(self):
         html = SEARCH.read_text(encoding="utf-8")
+        css = html.split("<!-- erid:style:start -->", 1)[1].split("<!-- erid:style:end -->", 1)[0]
         for phrase in (
-            ".cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }",
+            ".cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }",
             ".cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }",
         ):
-            self.assertIn(phrase, html)
+            self.assertIn(phrase, css)
 
     def test_web_search_intro_explains_the_pain_and_mechanism_regression(self):
         html = SEARCH.read_text(encoding="utf-8")
@@ -702,18 +707,19 @@ class GuidesSiteTest(unittest.TestCase):
         ):
             self.assertIn(phrase, section)
 
-    def test_web_search_cta_uses_the_concentrat_program(self):
+    def test_web_search_cta_uses_the_single_registered_creative(self):
         html = SEARCH.read_text(encoding="utf-8")
         cta = html.split('<section class="cta"', 1)[1].split("</section>", 1)[0]
         for phrase in (
-            "Бесплатный Концентрат",
-            "Свежие ссылки найдены. Кто превратит их в пост?",
-            "контент-завод соберут на Концентрате 15 октября в 19:00 МСК",
-            "13-го и 14-го разберут команду ИИ-агентов и шесть способов на ней заработать",
-            "Занять место",
-            "Регистрация на сайте до 14 октября, участие бесплатное",
+            "Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?",
+            "Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве",
+            "Участие бесплатное, регистрация на сайте до 14 октября",
+            "Зарегистрироваться",
+            "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid:",
         ):
             self.assertIn(phrase, cta)
+        self.assertIn('<p class="cta-question">Свежие ссылки найдены. Кто превратит их в пост?</p>', html)
+        self.assertNotIn("Свежие ссылки найдены", cta)
 
     def test_profile_guide_links_to_access_guide(self):
         self.assertIn("../podklyuchenie-iz-rossii/", self.parse(PROFILE).links)
@@ -830,11 +836,11 @@ class GuidesSiteTest(unittest.TestCase):
     def test_server_and_access_partner_ctas_follow_series_layout(self):
         server = SERVER.read_text(encoding="utf-8")
         access = ACCESS.read_text(encoding="utf-8")
-        self.assertRegex(server, r'<p class="partner-line">[^<]*<a data-partner href="[^"]+">[^<]+</a></p>')
+        self.assertRegex(server, r'<p class="partner-line">Сервер даёт место для работы Claude Code\.[^<]*посмотреть программу</p>')
         self.assertNotIn("mid-cta", server)
         for html in (server, access):
             with self.subTest(page="server" if html is server else "access"):
-                self.assertRegex(html, r'<section class="cta" aria-label="Концентрат">[\s\S]*?<p class="section-label">[\s\S]*?<h2>[\s\S]*?<p>[\s\S]*?<a class="press-button" data-partner href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">[\s\S]*?</section>\s*<footer class="foot">')
+                self.assertRegex(html, r'<p class="cta-question">[^<]+</p>\s*<section class="cta" aria-label="Концентрат"><h2>[^<]+</h2><p>[^<]+</p><a class="press-button" data-partner href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама\.[^<]+<span data-erid></span></p></section>\s*<footer class="foot">')
                 self.assertIn(".cta .press-button:active", html)
 
     def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):

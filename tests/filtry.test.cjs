@@ -50,8 +50,9 @@ function page() {
   const go = new Element();
   const input = new Element(); input.value = ''; input.focused = false; input.focus = () => { input.focused = true; };
   const noResults = new Element();
+  const lager = new Element();
   const document = {
-    getElementById(id) { return {'guide-search': input, 'metka': select, 'search-go': go}[id] || noResults; },
+    getElementById(id) { return {'guide-search': input, 'metka': select, 'search-go': go, 'lager': lager}[id] || noResults; },
     querySelectorAll(selector) {
       return {'.guide-link': links, '.track': tracks, '.tool-block': sections}[selector];
     },
@@ -62,7 +63,7 @@ function page() {
   Object.assign(state, {document, window});
   vm.runInContext(script, state);
   return {
-    sections, tracks, links, select, go, input, noResults, window, state,
+    sections, tracks, links, select, go, input, noResults, lager, window, state,
     key(key) { if (input.listeners.keydown) input.listeners.keydown({key}); },
     search(value) { input.value = value; input.listeners.input(); },
     filter(tag) { select.value = tag; select.listeners.change(); },
@@ -95,6 +96,18 @@ test('Ненайденный запрос скрывает карточки, т�
   assert.ok(p.tracks.every(track => track.style.display === 'none'));
   assert.ok(p.sections.every(section => section.style.display === 'none'));
   assert.ok(p.noResults.classes.has('show'));
+});
+
+test('Поиск и фильтры скрывают весь блок с вопросом и рекламой, сброс возвращает его', () => {
+  const p = page();
+  p.search('голосовой');
+  assert.equal(p.lager.hidden, true);
+  p.search('');
+  assert.equal(p.lager.hidden, false);
+  p.filter('codex');
+  assert.equal(p.lager.hidden, true);
+  p.filter('all');
+  assert.equal(p.lager.hidden, false);
 });
 
 test('Стирание запроса возвращает карточки и пустые разделы', () => {

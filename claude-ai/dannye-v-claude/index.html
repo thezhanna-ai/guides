@@ -137,6 +137,21 @@
     h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
     @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
   </style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
@@ -146,7 +161,7 @@
   <div class="progress" aria-hidden="true"></div>
   <div class="masthead"><div class="masthead-inner">
     <a class="brand" href="../../">Claude.ai: кнопка за кнопкой</a>
-    <div class="header-actions"><span class="handout-title">УДАЛЕНИЕ ДАННЫХ</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">На Концентрат</a></div></div>
+    <div class="header-actions"><span class="handout-title">УДАЛЕНИЕ ДАННЫХ</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button></div></div>
   </div></div>
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p>
@@ -212,7 +227,8 @@
       </section>
 
       <section class="next-read" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><a href="../kak-rasskazat-o-sebe/"><span class="title">Как рассказать Claude о себе</span><span class="why">Проверь, какие сведения и правила ответа остаются в настройках после очистки памяти</span></a></section>
-      <section class="cta" aria-label="Концентрат"><p class="section-label">Бесплатный Концентрат</p><h2>Лишнее удалено. Что теперь доверить Claude?</h2><p>Ты знаешь, где лежат твои данные и как их убрать, значит Claude можно спокойно отдавать больше работы. Не отдельные вопросы, а целые задачи, которые делит команда ИИ-агентов. Как её собрать, разберут на Концентрате 13 октября в 19:00 МСК, а 14-го и 15-го покажут, как с её помощью заработать и запустить контент-завод.</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Занять место</a><p class="cta-note" style="font-size: 13px; margin-top: 12px; line-height: 1.5;">Регистрация на сайте до 14 октября, участие бесплатное</p></section>
+      <p class="cta-question">Лишнее удалено. Что теперь доверить Claude?</p>
+<section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: <span data-erid></span></p></section>
       <p class="foot">Материал подготовлен по интерфейсу Claude и справке Anthropic на 28 сентября 2026 года</p>
     </main>
     <aside class="related-plaque" aria-label="Соседняя статья">
@@ -272,6 +288,10 @@
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
+<script>
+var ERID = "ERID_PLACEHOLDER";
+document.querySelectorAll("[data-erid]").forEach(function (label) { label.textContent = ERID; });
+</script>
 <!-- privacy:banner:start -->
 <aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
   <div class="cookie-inner">

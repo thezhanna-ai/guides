@@ -185,7 +185,7 @@
     @media (min-width: 861px) and (max-width: 1199px) { .toc { width: 240px; margin-left: 0 } }
     @media (min-width: 1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
     @media (min-width: 1200px) and (max-width: 1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
-  
+
     .toc-group { margin-top: 16px; padding-top: 11px; border-top: 1px solid var(--line) }
     .toc-group-title { margin: 0 0 5px; color: var(--emerald); font: 750 11px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase }
     .toc-group a { padding-top: 6px; padding-bottom: 6px }
@@ -270,6 +270,21 @@
     h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
     @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
   </style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
@@ -279,7 +294,7 @@
 <header class="masthead"><div class="masthead-inner"><div class="brand">Claude.ai: кнопка за кнопкой</div>
 <div class="header-actions"><div class="handout-title">Доступ и блокировка Claude</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
-<a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">На Концентрат</a>
+
 </div></div></div></header>
 <div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p>
 <a href="#nachalo">К началу статьи</a>
@@ -463,7 +478,8 @@ claude</pre></div>
 <ul class="sources"><li><a href="https://www.anthropic.com/supported-countries">Anthropic: поддерживаемые страны и регионы</a></li><li><a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals">Anthropic: предупреждения, ограничения и апелляции</a></li><li><a href="https://support.claude.com/en/articles/9015913-how-to-get-support">Anthropic: как обратиться в поддержку</a></li><li><a href="https://support.claude.com/en/articles/13189465-log-in-to-your-claude-account">Anthropic: вход в аккаунт Claude</a></li><li><a href="https://support.claude.com/en/articles/8287232-verify-your-phone-number">Anthropic: проверка номера телефона</a></li><li><a href="https://support.google.com/accounts/answer/40695?hl=en">Google: использование нескольких аккаунтов</a></li><li><a href="https://support.google.com/accounts/answer/114129?hl=en">Google: ограничение проверок номера</a></li><li><a href="https://support.claude.com/en/articles/10310342-how-do-i-log-out-of-all-active-sessions">Anthropic: срок сессии и выход</a></li><li><a href="https://support.claude.com/en/articles/12109679-creating-a-new-account-after-deletion">Anthropic: новый аккаунт после удаления</a></li><li><a href="https://support.claude.com/en/articles/9402418-why-was-my-card-declined">Anthropic: причины отказа карты</a></li><li><a href="https://support.claude.com/en/articles/9450526-export-your-claude-data">Anthropic: экспорт данных Claude</a></li></ul>
 </section>
 
-<section class="cta" aria-label="Концентрат"><p class="section-label">Бесплатный Концентрат</p><h2>Доступ вернулся. На что его потратить?</h2><p>Когда аккаунт снова работает, хочется, чтобы подписка окупалась, а не уходила на редкие вопросы в чат. Claude Code и Codex умеют больше: работать командой агентов и выпускать контент без ручной работы. Шесть способов заработать с помощью ИИ-агентов разберут на Концентрате 14 октября в 19:00 МСК. 13-го покажут, как собрать команду, 15-го соберут контент-завод.</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Занять место</a><p class="cta-note" style="font-size: 13px; margin-top: 12px; line-height: 1.5;">Регистрация на сайте до 14 октября, участие бесплатное</p></section>
+<p class="cta-question">Доступ вернулся. На что его потратить?</p>
+<section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: <span data-erid></span></p></section>
 <footer class="foot">Обновлено 29 сентября 2026<!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
@@ -601,7 +617,11 @@ claude</pre></div>
     }
     updateReadingState();
     addEventListener("scroll", updateReadingState, { passive: true });
-  </script><!-- privacy:banner:start -->
+  </script><script>
+var ERID = "ERID_PLACEHOLDER";
+document.querySelectorAll("[data-erid]").forEach(function (label) { label.textContent = ERID; });
+</script>
+<!-- privacy:banner:start -->
 <aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
   <div class="cookie-inner">
     <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
