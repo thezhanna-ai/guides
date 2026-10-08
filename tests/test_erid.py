@@ -9,7 +9,7 @@ from test_site import ImageDocument, ROOT, PARTNER_LINK
 TITLE = "Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?"
 COPY = ("Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: "
         "13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября")
-DISCLOSURE = "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: ERID_PLACEHOLDER"
+DISCLOSURE = "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm"
 
 
 class EridTest(unittest.TestCase):
@@ -53,7 +53,7 @@ class EridTest(unittest.TestCase):
                 html = page.read_text()
                 self.assertNotRegex(html, r'\b(?:var|let|const)\s+ERID\b')
                 self.assertEqual(len(re.findall(r'var PARTNER_LINK = "[^"\n]+";', html)), 1)
-                self.assertEqual(html.count("ERID_PLACEHOLDER"), 1)
+                self.assertEqual(html.count("2VtzqviiWtm"), 1)
                 self.assertIn(f'<p class="ad-disclosure">{DISCLOSURE}</p>', html)
                 self.assertNotIn("data-erid", html)
                 scripts = re.findall(r'<script\b[^>]*>(.*?)</script>', html, re.S | re.I)

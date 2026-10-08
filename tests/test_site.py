@@ -840,7 +840,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertNotIn("mid-cta", server)
         for html in (server, access):
             with self.subTest(page="server" if html is server else "access"):
-                self.assertRegex(html, r'<p class="cta-question">[^<]+</p>\s*<section class="cta" aria-label="Концентрат"><h2>[^<]+</h2><p>[^<]+</p><a class="press-button" data-partner href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама\.[^<]+ERID_PLACEHOLDER</p></section>\s*<footer class="foot">')
+                self.assertRegex(html, r'<p class="cta-question">[^<]+</p>\s*<section class="cta" aria-label="Концентрат"><h2>[^<]+</h2><p>[^<]+</p><a class="press-button" data-partner href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама\.[^<]+2VtzqviiWtm</p></section>\s*<footer class="foot">')
                 self.assertIn(".cta .press-button:active", html)
 
     def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):
