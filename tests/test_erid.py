@@ -1,6 +1,7 @@
 """Единый креатив и видимая маркировка на всех партнёрских страницах."""
 import importlib.util
 import re
+import html as html_module
 import unittest
 
 from test_site import ImageDocument, ROOT, PARTNER_LINK
@@ -20,7 +21,7 @@ class EridTest(unittest.TestCase):
                      ROOT / "scripts/shablon_glavnoy.html"]
 
     def test_every_partner_page_and_template_has_exactly_one_marked_creative(self):
-        self.assertEqual(len(self.pages), 47)
+        self.assertEqual(len(self.pages), 48)
         for page in self.pages:
             with self.subTest(page=str(page.relative_to(ROOT))):
                 html = page.read_text()
@@ -28,20 +29,34 @@ class EridTest(unittest.TestCase):
                 blocks = doc.root.all(klass="cta")
                 self.assertEqual(len(blocks), 1)
                 block = blocks[0]
-                self.assertEqual(block.all(tag="h2")[0].text_content(), TITLE)
-                self.assertEqual([p.text_content().strip() for p in block.all(tag="p")],
-                                 [COPY, DISCLOSURE])
+                if page == ROOT / "claude-ai/pyat-instrumentov-dlya-sayta/index.html":
+                    self.assertEqual(block.all(tag="h2")[0].text_content(),
+                                     "Сайт собран. Как поручить его проверки команде ИИ-агентов?")
+                    creative = re.search(r'<section[^>]*class="cta".*?</section>', html, re.S).group()
+                    paragraphs = [
+                        html_module.unescape(re.sub(r"<[^>]+>", "", text)).strip()
+                        for text in re.findall(r"<p\b[^>]*>(.*?)</p>", creative, re.S)
+                    ]
+                    self.assertEqual(paragraphs, [
+                        "Бесплатный Концентрат",
+                        "Ты знаешь, чем проверить кнопки и заявки. Дальше можно собрать команду ИИ-агентов для таких проверок. На Концентрате три вечера, 13-15 октября в 19:00 по Москве, онлайн: работа с командой агентов в Claude Code, Codex и ChatGPT.",
+                        "Регистрация на сайте до 14 октября, участие бесплатное",
+                        DISCLOSURE])
+                else:
+                    self.assertEqual(block.all(tag="h2")[0].text_content(), TITLE)
+                    self.assertEqual([p.text_content().strip() for p in block.all(tag="p")],
+                                     [COPY, DISCLOSURE])
                 links = [a for a in doc.root.all(tag="a") if "data-partner" in a.attrs
                          or "theivansergeev.com" in a.attrs.get("href", "")]
                 self.assertEqual(len(links), 1)
                 self.assertIn(links[0], block.all(tag="a"))
                 self.assertEqual(links[0].attrs["href"], PARTNER_LINK)
                 self.assertIn("data-partner", links[0].attrs)
-                self.assertEqual(links[0].text_content(), "Зарегистрироваться")
+                self.assertEqual(links[0].text_content(), "Занять место" if page.name == "index.html" and page.parent.name == "pyat-instrumentov-dlya-sayta" else "Зарегистрироваться")
                 for header in doc.root.all(tag="header"):
                     self.assertFalse(any("data-partner" in a.attrs for a in header.all(tag="a")))
                     self.assertNotIn("На Концентрат", header.text_content())
-                self.assertEqual([n.tag for n in block.children], ["h2", "p", "a", "p"])
+                self.assertEqual([n.tag for n in block.children], ["p", "h2", "p", "a", "p", "p"] if page.parent.name == "pyat-instrumentov-dlya-sayta" else ["h2", "p", "a", "p"])
                 self.assertEqual(len(block.all(klass="ad-disclosure")), 1)
                 disclosure = block.all(klass="ad-disclosure")[0]
                 self.assertEqual(disclosure.children, [])

@@ -35,7 +35,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"} and not a.get("seriya")}
-        self.assertEqual(len(ready), 39)
+        self.assertEqual(len(ready), 40)
         self.assertEqual(set(self.covers), ready | {a["slug"] for a in self.registry if a.get("seriya") == "Промпты для картинок в ChatGPT"})
         self.assertEqual(len(self.pages), 2 + len(self.registry))
         self.assertEqual(len(set(self.pages)), len(self.pages))
@@ -140,7 +140,7 @@ class PublicationTest(unittest.TestCase):
         self.assertIn('erid: 2VtzqviiWtm', html)
         before_cta = html.split('<p class="cta-question">')[0].lower()
         self.assertNotRegex(before_cta.split("<main>")[1], r"иван|theivansergeev|data-partner|источник-ролик")
-        self.assertIn('name="robots" content="noindex, nofollow"', html)
+        self.assertNotIn('noindex', html)
 
     def test_all_inline_javascript_parses_in_node(self):
         scripts = []

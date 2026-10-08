@@ -171,10 +171,10 @@ class ArticleImagesTest(unittest.TestCase):
         return [row for row in self.manifest if row["article"] == article["title"]]
 
     def test_image_manifest_covers_all_29_approved_articles_and_excludes_new_article(self):
-        self.assertEqual(len(self.eligible), 39)
+        self.assertEqual(len(self.eligible), 40)
         self.assertEqual(set(self.covers), {a["slug"] for a in self.eligible} | {a["slug"] for a in self.articles if a.get("seriya") == "Промпты для картинок в ChatGPT"})
-        self.assertEqual(len(self.manifest), 45)
-        self.assertTrue(all(row["number"] < 47 for row in self.manifest))
+        self.assertEqual(len(self.manifest), 46)
+        self.assertTrue(all(row["number"] < 48 for row in self.manifest))
         for article in self.eligible:
             with self.subTest(slug=article["slug"]):
                 rows = self.rows(article)
