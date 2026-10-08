@@ -8,6 +8,17 @@
   <title>Пять дополнений для Claude Code: что каждое решает</title>
   <link href="../../assets/fonts/fonts.css" rel="stylesheet">
   <style>
+    /* Components reused from svoy-server-dlya-claude; existing page color tokens */
+    .setup-note, .notice { margin: 28px 0 0; padding: 11px 22px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .setup-note p, .notice p:last-child { margin-bottom: 0 }
+    .notice-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    .result { margin: 23px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid #5F7F68; color: var(--emerald) }
+    .result p { margin: 0 }
+    .prompt-box { position: relative; margin-top: 27px; padding: 55px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
+    .step .prompt-box { margin-top: 12px; padding: 48px 20px 18px }
+    .step .prompt-box.no-copy { padding-top: 18px }
+    .step .prompt-box + p { margin-top: 14px }
     :root { --paper:#F8F7F2; --white:#FFFFFF; --ink:#1E2926; --emerald:#102F30; --mid:#1F4A43; --muted:#62706A; --line:#D5C9B7; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F }
     :root[data-theme="dark"] { --paper:#162221; --white:#20302E; --ink:#EDF1EE; --emerald:#DCEAE4; --mid:#A8D0BE; --muted:#B7C2BD; --line:#3C504C; --info:#243735; --info-line:#48605C; --accent-dark:#FF9A78 }
     * { box-sizing:border-box }
@@ -42,6 +53,7 @@
     .lead { margin:22px 0 0; font-size:inherit; line-height:inherit }
     .problem-list,.start-list { padding-left:23px }
     .problem-list { margin:18px 0 0 }
+    .problem-list a { color:inherit; font-weight:400 }
     .problem-list li,.start-list li { margin:9px 0 }
     .meta { margin-top:23px; color:var(--muted); font:600 12px/1.4 ui-monospace,monospace }
     .content-section { margin-top:66px; scroll-margin-top:85px }
@@ -62,6 +74,7 @@
     .next-read { margin:46px 0 0; padding:24px; border:1px solid var(--info-line); border-radius:14px; background:var(--info) }
     .next-read h2 { margin:0 0 10px; font-size:20px }
     .next-read p { margin:0 }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
     .cta { margin-top:68px; padding:27px; border-radius:13px; background:#102F30; color:#F8F7F2 }
     .cta h2 { color:#F8F7F2 }
     .cta p,.cta .eyebrow { color:#F0E8D8 }
@@ -127,11 +140,11 @@
 
         <p class="lead">Работаешь в Claude Code, а одна и та же помеха снова обрывает задачу. Какое дополнение поможет продолжить именно тебе? Найди свою ситуацию и открой нужный раздел</p>
         <ul class="problem-list">
-          <li><a href="#omniroute">Claude Code остановился посреди задачи: закончился лимит. Как продолжить работу, пока он не обновился?</a></li>
-          <li><a href="#claude-mem">Открываешь новый чат, а Claude не помнит, что вы решили вчера. Приходится всё пересказывать заново</a></li>
-          <li><a href="#headroom">Чат разросся: в нём длинные логи (технические отчёты). Claude Code перечитывает их и тратит токены (части текста, по которым считают расход)</a></li>
-          <li><a href="#setup">Не знаешь, какие скиллы (готовые инструкции) и подключения нужны твоему проекту</a></li>
-          <li><a href="#observer">Раз за разом поправляешь агента, то есть Claude Code, в одном и том же</a></li>
+          <li><a href="#omniroute"><strong>Claude Code остановился посреди задачи: закончился лимит.</strong> Как продолжить работу, пока он не обновился?</a></li>
+          <li><a href="#claude-mem">Открываешь новый чат, а <strong>Claude не помнит, что вы решили вчера.</strong> Приходится всё пересказывать заново</a></li>
+          <li><a href="#headroom">Чат разросся: в нём <strong>длинные логи (технические отчёты).</strong> Claude Code перечитывает их и тратит токены (части текста, по которым считают расход)</a></li>
+          <li><a href="#setup">Не знаешь, <strong>какие скиллы (готовые инструкции) и подключения нужны твоему проекту</strong></a></li>
+          <li><a href="#observer">Раз за разом поправляешь агента, то есть Claude Code, <strong>в одном и том же</strong></a></li>
         </ul>
         <p class="meta">ПОДГОТОВЛЕНО 29 СЕНТЯБРЯ 2026</p>
 
@@ -141,51 +154,118 @@
       <section class="content-section" id="omniroute">
 <h2>OmniRoute: запасной выход, когда кончился лимит</h2>
         <p>Знакомая картина: работаешь в Claude Code, задача на середине, и тут он сообщает, что лимит исчерпан. Работа стоит, пока лимит не обновится</p>
-        <p>OmniRoute решает как раз это. Это программа, которая ставится на твой компьютер и встаёт посредником между Claude Code и нейросетями. Такого посредника называют шлюзом. После подключения запросы Claude Code идут через него, а он выбирает, какая модель, то есть вариант нейросети, ответит. Среди бесплатных вариантов есть OpenCode Free: для него не нужна регистрация или ключ этого сервиса. Порядок выбора, по описанию разработчика: сначала твоя подписка, если она добавлена в OmniRoute, потом подключённые тобой платные сервисы, затем дешёвые модели и бесплатные. Кончился лимит на одном уровне - запрос может уйти на следующий</p>
+        <p>OmniRoute решает как раз это. Это программа, которая <strong>ставится на твой компьютер</strong> и встаёт посредником между Claude Code и нейросетями. Такого посредника называют шлюзом. После подключения запросы Claude Code идут через него, а он выбирает, какая модель, то есть вариант нейросети, ответит.</p>
+        <p>Среди бесплатных вариантов есть OpenCode Free: для него не нужна регистрация или ключ этого сервиса.</p>
+        <p>Порядок выбора, по описанию разработчика: <strong>сначала твоя подписка, если она добавлена в OmniRoute</strong>, потом подключённые тобой платные сервисы, затем дешёвые модели и бесплатные. Кончился лимит на одном уровне - запрос может уйти на следующий</p>
         <p>Это похоже на диспетчера такси: ты вызываешь машину, а какая из свободных приедет, решает диспетчер</p>
-        <p>OmniRoute не превращает Claude в безлимитный. Важно: если не добавить в OmniRoute свою подписку Claude, Claude Code вообще перестанет отвечать через Claude, и все ответы будут давать другие, обычно более слабые модели. Чтобы первым отвечал Claude, а остальные подхватывали только после лимита, подписку нужно добавить. Когда лимит Claude кончился, дальше отвечает другая нейросеть, и она может быть слабее. Разработчик пишет о суммарной бесплатной квоте свыше полутора миллиардов токенов, но это сумма по сервисам, а не твой личный лимит. У каждого сервиса свои условия и правила обращения с твоими данными</p>
-        <div class="info-card"><p><b>Как начать:</b> Если Node.js ещё нет на компьютере, <a href="https://nodejs.org/en/download">установи его с официального сайта</a>. Открой терминал (окно для ввода команд), установи OmniRoute командой <span class="path">npm i -g omniroute</span> и запусти его командой <span class="path">omniroute</span>. В браузере открой <span class="path">http://localhost:20128</span>. В разделе <span class="path">Providers</span> (подключения к нейросетям) выбери <span class="path">OpenCode Free</span> без регистрации и ключа этого сервиса. Если подключаешь Claude Code вручную, скопируй ключ из раздела <span class="path">Endpoints</span> (адреса для подключения): это локальный ключ OmniRoute, а не ключ OpenCode Free. Для быстрого запуска введи в терминале <span class="path">omniroute launch</span>. Команда откроет Claude Code и сама передаст ему нужный адрес и локальный ключ. Результат: Claude Code начнёт отправлять запросы через OmniRoute к подключённой модели. Шаги подключения есть в <a href="https://github.com/diegosouzapw/OmniRoute#-quick-start">инструкции проекта OmniRoute</a>, запуск Claude Code описан в <a href="https://github.com/diegosouzapw/OmniRoute/blob/release/v3.8.51/docs/guides/CLAUDE-CODE-CONFIGURATION.md#quick-start">инструкции того же проекта для Claude Code</a></p></div>
+        <aside class="notice"><p><strong>OmniRoute не превращает Claude в безлимитный.</strong> Важно: если не добавить в OmniRoute свою подписку Claude, Claude Code вообще перестанет отвечать через Claude, и все ответы будут давать другие, обычно более слабые модели. Чтобы первым отвечал Claude, а остальные подхватывали только после лимита, <strong>подписку нужно добавить.</strong> Когда лимит Claude кончился, дальше отвечает другая нейросеть, и она может быть слабее.</p>
+        <p>Разработчик пишет о суммарной бесплатной квоте свыше полутора миллиардов токенов, но <strong>это сумма по сервисам, а не твой личный лимит.</strong> У каждого сервиса свои условия и правила обращения с твоими данными</p></aside>
+        <div class="step">
+          <h3>Как начать:</h3>
+          <aside class="setup-note"><p>Если Node.js ещё нет на компьютере, <a href="https://nodejs.org/en/download">установи его с официального сайта</a>.</p></aside>
+          <p>Открой терминал (окно для ввода команд), установи OmniRoute командой</p>
+          <div class="prompt-box no-copy"><pre><code>npm i -g omniroute</code></pre></div>
+          <p>и запусти его командой</p>
+          <div class="prompt-box no-copy"><pre><code>omniroute</code>.</pre></div>
+          <p>В браузере открой <span class="path">http://localhost:20128</span>.</p>
+          <p>В разделе <span class="path">Providers</span> (подключения к нейросетям) выбери <span class="path">OpenCode Free</span> без регистрации и ключа этого сервиса.</p>
+          <p>Если подключаешь Claude Code вручную, скопируй ключ из раздела <span class="path">Endpoints</span> (адреса для подключения): это локальный ключ OmniRoute, а не ключ OpenCode Free.</p>
+          <p>Для быстрого запуска введи в терминале</p>
+          <div class="prompt-box no-copy"><pre><code>omniroute launch</code>.</pre></div>
+          <p>Команда откроет Claude Code и сама передаст ему нужный адрес и локальный ключ.</p>
+          <div class="result"><p><strong>Результат:</strong> Claude Code начнёт отправлять запросы через OmniRoute к подключённой модели.</p></div>
+          <p>Шаги подключения есть в <a href="https://github.com/diegosouzapw/OmniRoute#-quick-start">инструкции проекта OmniRoute</a>, запуск Claude Code описан в <a href="https://github.com/diegosouzapw/OmniRoute/blob/release/v3.8.51/docs/guides/CLAUDE-CODE-CONFIGURATION.md#quick-start">инструкции того же проекта для Claude Code</a></p>
+          </div>
       </section>
 
       <section class="content-section" id="claude-mem">
 <h2>claude-mem: когда надоело объяснять проект с нуля</h2>
         <p>Возвращаешься к проекту после перерыва, а Claude Code не помнит, что вы уже решили и какие варианты отбросили. Приходится снова пересказывать рабочую историю</p>
-        <p>claude-mem - плагин, то есть дополнение к Claude Code. Он сохраняет наблюдения между сессиями (отдельными рабочими разговорами): замечает действия инструмента, делает короткие сводки и подставляет нужные сведения при следующем запуске. Это как блокнот коллеги: он записывает важные решения и перед новой встречей открывает нужную страницу</p>
-        <p>Но это не дословная стенограмма всего разговора. Плагин сохраняет наблюдения и сводки, поэтому важные решения всё равно стоит держать в файлах проекта. Перед установкой посмотри в настройках, где будут храниться наблюдения и какой сервис будет обрабатывать память</p>
-        <div class="info-card"><p><b>Как начать:</b> В Claude Code введи <span class="path">/plugin marketplace add thedotmack/claude-mem</span>, затем <span class="path">/plugin install claude-mem</span> и перезапусти Claude Code. Результат: сведения о прошлых разговорах будут появляться в новых. Другой способ - запустить в терминале <span class="path">npx claude-mem install</span> и выбрать сервис памяти в ходе установки. Оба маршрута описаны в <a href="https://github.com/thedotmack/claude-mem#quick-start">инструкции проекта claude-mem</a>. Обычная команда <span class="path">npm install -g claude-mem</span> устанавливает библиотеку, но не подключает плагин к разговорам</p></div>
+        <p>claude-mem - плагин, то есть дополнение к Claude Code. Он <strong>сохраняет наблюдения между сессиями</strong> (отдельными рабочими разговорами): замечает действия инструмента, делает короткие сводки и подставляет нужные сведения при следующем запуске.</p>
+        <p>Это как блокнот коллеги: он записывает важные решения и перед новой встречей открывает нужную страницу</p>
+        <aside class="notice"><p>Но это не дословная стенограмма всего разговора. Плагин сохраняет наблюдения и сводки, поэтому <strong>важные решения всё равно стоит держать в файлах проекта.</strong></p>
+        <p>Перед установкой посмотри в настройках, где будут храниться наблюдения и какой сервис будет обрабатывать память</p></aside>
+        <div class="step">
+          <h3>Как начать:</h3>
+          <p>В Claude Code введи</p>
+          <div class="prompt-box no-copy"><pre><code>/plugin marketplace add thedotmack/claude-mem</code>,</pre></div>
+          <p>затем</p>
+          <div class="prompt-box no-copy"><pre><code>/plugin install claude-mem</code></pre></div>
+          <p>и перезапусти Claude Code.</p>
+          <div class="result"><p><strong>Результат:</strong> сведения о прошлых разговорах будут появляться в новых.</p></div>
+          <p>Другой способ - запустить в терминале</p>
+          <div class="prompt-box no-copy"><pre><code>npx claude-mem install</code></pre></div>
+          <p>и выбрать сервис памяти в ходе установки.</p>
+          <p>Оба маршрута описаны в <a href="https://github.com/thedotmack/claude-mem#quick-start">инструкции проекта claude-mem</a>.</p>
+          <aside class="notice"><p>Обычная команда <span class="path">npm install -g claude-mem</span> устанавливает библиотеку, но не подключает плагин к разговорам</p></aside>
+          </div>
       </section>
 
       <section class="content-section" id="headroom">
 <h2>Headroom: когда мешают длинные технические отчёты</h2>
         <p>Просишь Claude Code найти ошибку, а он приносит длинный лог или сотни строк результатов поиска. Ему приходится учитывать весь этот текст в дальнейшей работе, и место для полезного разговора сокращается</p>
-        <p>Headroom - программа на твоём компьютере, которая сжимает материалы до того, как их увидит нейросеть. Она определяет, перед ней лог, код или обычный текст, и подбирает способ сжатия. Полный исходник остаётся локально: если понадобится деталь, его можно запросить обратно. Представь папку с бумагами, к которой приложили короткое содержание и сохранили оригиналы под рукой</p>
-        <p>Headroom не добавляет Claude Code новый лимит и не гарантирует одинаковую экономию на каждом тексте. Режим <span class="path">wrap</span>, в котором Claude Code запускается через Headroom, вдобавок устанавливает Serena, отдельную программу для поиска по коду. Этот шаг можно отключить параметром <span class="path">--code-memory none</span></p>
-        <div class="info-card"><p><b>Как начать:</b> Открой <a href="https://github.com/headroomlabs-ai/headroom#get-started-60-seconds">инструкцию проекта Headroom</a>. Для приведённой там команды нужен <a href="https://docs.astral.sh/uv/getting-started/installation/">uv, установщик программ для Python</a>. После его установки введи в терминале <span class="path">uv tool install --python 3.13 "headroom-ai[all]"</span>. Затем запусти <span class="path">headroom wrap claude</span>: команда запустит Headroom на твоём компьютере и откроет Claude Code через него. Выполни <span class="path">headroom doctor</span>, чтобы проверить подключение. Результат: Claude Code получает сжатые материалы, а полный текст можно вернуть при необходимости. Для следующего разговора снова запускай <span class="path">headroom wrap claude</span></p></div>
+        <p>Headroom - программа на твоём компьютере, которая <strong>сжимает материалы до того, как их увидит нейросеть.</strong> Она определяет, перед ней лог, код или обычный текст, и подбирает способ сжатия.</p>
+        <p><strong>Полный исходник остаётся локально:</strong> если понадобится деталь, его можно запросить обратно. Представь папку с бумагами, к которой приложили короткое содержание и сохранили оригиналы под рукой</p>
+        <aside class="notice"><p><strong>Headroom не добавляет Claude Code новый лимит</strong> и не гарантирует одинаковую экономию на каждом тексте.</p>
+        <p>Режим <span class="path">wrap</span>, в котором Claude Code запускается через Headroom, вдобавок устанавливает Serena, отдельную программу для поиска по коду. Этот шаг можно отключить параметром <span class="path">--code-memory none</span></p></aside>
+        <div class="step">
+          <h3>Как начать:</h3>
+          <p>Открой <a href="https://github.com/headroomlabs-ai/headroom#get-started-60-seconds">инструкцию проекта Headroom</a>.</p>
+          <aside class="setup-note"><p>Для приведённой там команды нужен <a href="https://docs.astral.sh/uv/getting-started/installation/">uv, установщик программ для Python</a>.</p></aside>
+          <p>После его установки введи в терминале</p>
+          <div class="prompt-box no-copy"><pre><code>uv tool install --python 3.13 "headroom-ai[all]"</code>.</pre></div>
+          <p>Затем запусти</p>
+          <div class="prompt-box no-copy"><pre><code>headroom wrap claude</code>:</pre></div>
+          <p>команда запустит Headroom на твоём компьютере и откроет Claude Code через него.</p>
+          <p>Выполни</p>
+          <div class="prompt-box no-copy"><pre><code>headroom doctor</code>,</pre></div>
+          <p>чтобы проверить подключение.</p>
+          <div class="result"><p><strong>Результат:</strong> Claude Code получает сжатые материалы, а полный текст можно вернуть при необходимости.</p></div>
+          <p>Для следующего разговора снова запускай</p>
+          <div class="prompt-box no-copy"><pre><code>headroom wrap claude</code></pre></div>
+          </div>
       </section>
 
       <section class="content-section" id="setup">
 <h2>Claude Code Setup: когда неясно, чем дополнить проект</h2>
         <p>Открываешь каталог расширений Claude Code и не понимаешь, что из него пригодится твоему проекту. Список большой, а задача у тебя вполне конкретная</p>
-        <p>Claude Code Setup - официальный плагин Anthropic, который просматривает файлы проекта и предлагает подходящие настройки работы. Он может посоветовать скилл (готовую инструкцию для повторяющейся задачи), хук (действие, которое запускается автоматически), команду, отдельного помощника или MCP-сервер для подключения внешнего инструмента. Похоже на мастера, который сначала осматривает рабочее место, а уже потом говорит, какой инструмент добавить</p>
-        <p>Плагин не устанавливает всё предложенное и не меняет файлы за тебя. Его задача - дать рекомендации, из которых ты выбираешь нужное</p>
-        <div class="info-card"><p><b>Как начать:</b> Открой <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup">страницу проекта Claude Code Setup от Anthropic</a>, установи этот плагин из официального каталога Claude Code и напиши <span class="path">recommend automations for this project</span>. Результат: Claude Code предложит подходящие дополнения по категориям. Возьми одно, которое помогает с текущей задачей, и реши, нужно ли его подключать</p></div>
+        <p>Claude Code Setup - <strong>официальный плагин Anthropic</strong>, который просматривает файлы проекта и предлагает подходящие настройки работы.</p>
+        <p>Он может посоветовать скилл (готовую инструкцию для повторяющейся задачи), хук (действие, которое запускается автоматически), команду, отдельного помощника или MCP-сервер для подключения внешнего инструмента.</p>
+        <p>Похоже на мастера, который сначала осматривает рабочее место, а уже потом говорит, какой инструмент добавить</p>
+        <aside class="notice"><p><strong>Плагин не устанавливает всё предложенное и не меняет файлы за тебя.</strong> Его задача - дать рекомендации, из которых ты выбираешь нужное</p></aside>
+        <div class="step">
+          <h3>Как начать:</h3>
+          <p>Открой <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup">страницу проекта Claude Code Setup от Anthropic</a>, установи этот плагин из официального каталога Claude Code и напиши</p>
+          <div class="prompt-box no-copy"><pre><code>recommend automations for this project</code>.</pre></div>
+          <div class="result"><p><strong>Результат:</strong> Claude Code предложит подходящие дополнения по категориям.</p></div>
+          <p>Возьми одно, которое помогает с текущей задачей, и реши, нужно ли его подключать</p>
+          </div>
       </section>
 
       <section class="content-section" id="observer">
 <h2>Task Observer: когда одни и те же правки повторяются</h2>
         <p>Ты снова исправляешь Claude Code одну и ту же ошибку: просишь короче, возвращаешь нужный тон или напоминаешь о пропущенном шаге. После нескольких задач хочется, чтобы эта поправка попала в постоянные инструкции</p>
-        <p>Task Observer - скилл, то есть папка с инструкциями для ИИ-помощника. Пока ты работаешь, он замечает повторяющиеся действия, твои исправления и пробелы в других скиллах. Затем записывает наблюдения и предлагает, какую инструкцию создать или поправить. Это как редактор, который ведёт список повторных замечаний, чтобы следующую работу начать уже с учётом них</p>
-        <p>Сам Task Observer не переписывает твои скиллы. Предложения остаются на твоём рассмотрении. И простое копирование папки ещё не включает наблюдение: по инструкции проекта нужно отдельно настроить запуск скилла в новых разговорах</p>
-        <div class="info-card"><p><b>Как начать:</b> Установи комплект командой <span class="path">npx skills add rebelytics/one-skill-to-rule-them-all --skill task-observer</span> или скачай его со <a href="https://github.com/rebelytics/one-skill-to-rule-them-all#installation">страницы проекта Task Observer от rebelytics</a>, сохранив вместе <span class="path">SKILL.md</span>, <span class="path">references/</span> и <span class="path">scripts/</span>. Затем добавь правило запуска по файлу <span class="path">references/environments.md</span> и проверь его в новом разговоре. Результат: после нескольких рабочих разговоров в <span class="path">skill-observations/observation-log/</span> появятся записи, которые можно просмотреть перед правкой скиллов</p></div>
+        <p>Task Observer - скилл, то есть папка с инструкциями для ИИ-помощника. Пока ты работаешь, он <strong>замечает повторяющиеся действия, твои исправления и пробелы в других скиллах.</strong></p>
+        <p>Затем записывает наблюдения и предлагает, какую инструкцию создать или поправить. Это как редактор, который ведёт список повторных замечаний, чтобы следующую работу начать уже с учётом них</p>
+        <aside class="notice"><p><strong>Сам Task Observer не переписывает твои скиллы.</strong> Предложения остаются на твоём рассмотрении.</p>
+        <p>И простое копирование папки ещё не включает наблюдение: по инструкции проекта <strong>нужно отдельно настроить запуск скилла в новых разговорах</strong></p></aside>
+        <div class="step">
+          <h3>Как начать:</h3>
+          <p>Установи комплект командой</p>
+          <div class="prompt-box no-copy"><pre><code>npx skills add rebelytics/one-skill-to-rule-them-all --skill task-observer</code></pre></div>
+          <p>или скачай его со <a href="https://github.com/rebelytics/one-skill-to-rule-them-all#installation">страницы проекта Task Observer от rebelytics</a>, сохранив вместе <span class="path">SKILL.md</span>, <span class="path">references/</span> и <span class="path">scripts/</span>.</p>
+          <p>Затем добавь правило запуска по файлу <span class="path">references/environments.md</span> и проверь его в новом разговоре.</p>
+          <div class="result"><p><strong>Результат:</strong> после нескольких рабочих разговоров в <span class="path">skill-observations/observation-log/</span> появятся записи, которые можно просмотреть перед правкой скиллов</p></div>
+          </div>
       </section>
       <section class="content-section" id="itog"><h2>С чего начать сегодня</h2>
-        <p>Проверь одну помеху на ближайшей задаче. Для каждого случая ниже есть страница создателей инструмента с подробной инструкцией</p>
+        <p><strong>Проверь одну помеху на ближайшей задаче.</strong> Для каждого случая ниже есть страница создателей инструмента с подробной инструкцией</p>
         <ul class="start-list">
-          <li>Кончился лимит Claude Code: OmniRoute. <a href="https://github.com/diegosouzapw/OmniRoute">Проект diegosouzapw</a></li>
-          <li>Новый чат не помнит прошлые решения: claude-mem. <a href="https://github.com/thedotmack/claude-mem">Проект thedotmack</a></li>
-          <li>Длинные технические отчёты заполняют разговор: Headroom. <a href="https://github.com/headroomlabs-ai/headroom">Проект headroomlabs-ai</a></li>
-          <li>Не знаешь, какие дополнения нужны проекту: Claude Code Setup. <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup">Проект Anthropic</a></li>
-          <li>Повторяешь одну и ту же правку: Task Observer. <a href="https://github.com/rebelytics/one-skill-to-rule-them-all">Проект rebelytics</a></li>
+          <li>Кончился лимит Claude Code: <strong>OmniRoute</strong>. <a href="https://github.com/diegosouzapw/OmniRoute">Проект diegosouzapw</a></li>
+          <li>Новый чат не помнит прошлые решения: <strong>claude-mem</strong>. <a href="https://github.com/thedotmack/claude-mem">Проект thedotmack</a></li>
+          <li>Длинные технические отчёты заполняют разговор: <strong>Headroom</strong>. <a href="https://github.com/headroomlabs-ai/headroom">Проект headroomlabs-ai</a></li>
+          <li>Не знаешь, какие дополнения нужны проекту: <strong>Claude Code Setup</strong>. <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup">Проект Anthropic</a></li>
+          <li>Повторяешь одну и ту же правку: <strong>Task Observer</strong>. <a href="https://github.com/rebelytics/one-skill-to-rule-them-all">Проект rebelytics</a></li>
         </ul>
       </section>
       <section class="help-banner" aria-label="Если что-то не получается">
@@ -195,7 +275,7 @@
           <div class="bubble claude"><span class="who">Claude</span>Конечно. Начнём с первого шага, а после каждого я спрошу, что у тебя получилось, и скажу, что делать дальше</div>
         </div>
       </section>
-      <section class="next-read" aria-label="Дальше по теме"><h2>Шесть скиллов</h2><p>С чего начать, если скиллов у тебя пока нет? В инструкции <a href="../shest-skillov/">«Шесть скиллов»</a> собраны самые универсальные, которые стоит поставить первыми, и по шагам показано, как их найти, подключить и вызвать</p></section>
+      <section class="next-read" aria-label="Дальше по теме"><h2>Шесть скиллов</h2><p>С чего начать, если скиллов у тебя пока нет? <span class="why">В инструкции <a href="../shest-skillov/">«Шесть скиллов»</a> собраны самые универсальные, которые стоит поставить первыми, и по шагам показано, как их найти, подключить и вызвать</span></p></section>
       <section class="cta" aria-label="Концентрат"><p class="section-label">Бесплатный Концентрат</p><h2>Claude Code прокачан. Что ему поручить?</h2><p>Дополнения делают одного помощника сильнее. Следующий шаг - несколько агентов, которые делят работу: один пишет, второй проверяет, третий доводит. Как собрать такую команду, разберут на Концентрате 13 октября в 19:00 МСК, а 14-го покажут шесть способов на ней заработать.</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Занять место</a><p class="cta-note" style="font-size: 13px; margin-top: 12px; line-height: 1.5;">Регистрация на сайте до 14 октября, участие бесплатное</p></section>
     </main>
     <aside class="related-plaque" aria-label="Подсказка по выбору">
