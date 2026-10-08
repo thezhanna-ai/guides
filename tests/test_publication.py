@@ -119,7 +119,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_partner_ctas_are_nonempty_and_point_to_the_practice(self):
         for page, doc in self.docs.items():
-            if page == ROOT / "politika/index.html":
+            if page == ROOT / "politika/index.html" or page.parent.name == "chatgpt-composio-prilozheniya":
                 continue
             links = [n for n in doc.root.all(tag="a") if "data-partner" in n.attrs or
                      "theivansergeev.com" in n.attrs.get("href", "")]
@@ -133,6 +133,12 @@ class PublicationTest(unittest.TestCase):
                     self.assertEqual(parse_qs(url.query), {"gcpc": ["16fff"]})
                     self.assertEqual(url.fragment, "")
                     self.assertIn("data-partner", link.attrs)
+
+    def test_svyaz_has_no_partner_ad_or_foreign_author(self):
+        html = (ROOT / "claude-ai/chatgpt-composio-prilozheniya/index.html").read_text()
+        self.assertNotRegex(html.lower(), r"иван|theivansergeev|data-partner|источник-ролик")
+        self.assertNotIn('class="cta"', html)
+        self.assertIn('name="robots" content="noindex, nofollow"', html)
 
     def test_all_inline_javascript_parses_in_node(self):
         scripts = []

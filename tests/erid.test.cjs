@@ -7,7 +7,7 @@ const test = require('node:test');
 const root = path.resolve(__dirname, '..');
 const pages = ['index.html', ...fs.readdirSync(path.join(root, 'claude-ai'))
   .map(slug => `claude-ai/${slug}/index.html`)
-  .filter(file => fs.existsSync(path.join(root, file))), 'scripts/shablon_glavnoy.html'];
+  .filter(file => fs.existsSync(path.join(root, file)) && file !== "claude-ai/chatgpt-composio-prilozheniya/index.html"), 'scripts/shablon_glavnoy.html'];
 const disclosure = 'Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm';
 
 function scripts(html) {
