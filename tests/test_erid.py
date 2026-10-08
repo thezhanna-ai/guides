@@ -9,7 +9,7 @@ from test_site import ImageDocument, ROOT, PARTNER_LINK
 TITLE = "Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?"
 COPY = ("Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: "
         "13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября")
-DISCLOSURE = "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid:"
+DISCLOSURE = "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: ERID_PLACEHOLDER"
 
 
 class EridTest(unittest.TestCase):
@@ -42,19 +42,22 @@ class EridTest(unittest.TestCase):
                     self.assertNotIn("На Концентрат", header.text_content())
                 self.assertEqual([n.tag for n in block.children], ["h2", "p", "a", "p"])
                 self.assertEqual(len(block.all(klass="ad-disclosure")), 1)
-                tokens = [n for n in block.all(tag="span") if "data-erid" in n.attrs]
-                self.assertEqual(len(tokens), 1)
+                disclosure = block.all(klass="ad-disclosure")[0]
+                self.assertEqual(disclosure.children, [])
+                self.assertEqual(disclosure.text_content(), DISCLOSURE)
                 self.assertNotIn("style", block.all(klass="ad-disclosure")[0].attrs)
 
-    def test_erid_has_one_editable_constant_and_safe_rendering(self):
+    def test_erid_is_static_in_html_without_javascript_regression(self):
         for page in self.pages:
             with self.subTest(page=str(page.relative_to(ROOT))):
                 html = page.read_text()
-                self.assertEqual(len(re.findall(r'var ERID = "[^"\n]+";', html)), 1)
+                self.assertNotRegex(html, r'\b(?:var|let|const)\s+ERID\b')
                 self.assertEqual(len(re.findall(r'var PARTNER_LINK = "[^"\n]+";', html)), 1)
-                self.assertLessEqual(html.count("ERID_PLACEHOLDER"), 1)
-                self.assertIn('document.querySelectorAll("[data-erid]")', html)
-                self.assertIn("label.textContent = ERID;", html)
+                self.assertEqual(html.count("ERID_PLACEHOLDER"), 1)
+                self.assertIn(f'<p class="ad-disclosure">{DISCLOSURE}</p>', html)
+                self.assertNotIn("data-erid", html)
+                scripts = re.findall(r'<script\b[^>]*>(.*?)</script>', html, re.S | re.I)
+                self.assertFalse(any("ERID" in body or "ad-disclosure" in body for body in scripts))
 
     def test_ad_copy_and_disclosure_share_readable_size_and_color(self):
         for page in self.pages:
@@ -84,7 +87,7 @@ class EridTest(unittest.TestCase):
                     self.assertEqual(block.parent.attrs.get("id"), "lager",
                                      "Поиск скрывает вопрос и рекламный блок вместе")
 
-    def test_generator_retains_the_creative_and_constants(self):
+    def test_generator_retains_the_creative_and_static_disclosure(self):
         spec = importlib.util.spec_from_file_location("erid_generator", ROOT / "scripts/sobrat_glavnuyu.py")
         generator = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(generator)
