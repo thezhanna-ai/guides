@@ -1,0 +1,217 @@
+[
+  {
+    "method": "initialize",
+    "params": {
+      "protocolVersion": "2024-11-05",
+      "capabilities": {},
+      "clientInfo": {
+        "name": "article-verification",
+        "version": "20261008"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "protocolVersion": "2024-11-05",
+        "serverInfo": {
+          "name": "ruflo",
+          "version": "3.0.0"
+        },
+        "capabilities": {
+          "tools": {
+            "listChanged": true
+          },
+          "resources": {
+            "subscribe": true,
+            "listChanged": true
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "tools/list",
+    "params": {},
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "tool_count": 358,
+        "selected": [
+          {
+            "name": "memory_store",
+            "description": "Persistent key-value store with vector embedding — survives across sessions and is searchable by meaning, not just by file path. Use when native Write is wrong because the data is not a file (e.g. a learned pattern, a decision, a budget config) AND you need to recall it later by semantic query, not by path. Defaults to namespace=\"default\". Upsert semantics: writing an existing key updates it (matching the CLI `memory store` default); pass `upsert: false` to force strict-insert instead.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "Memory key (unique within namespace)"
+                },
+                "value": {
+                  "description": "Value to store (string or object)"
+                },
+                "namespace": {
+                  "type": "string",
+                  "description": "Namespace for organization (default: \"default\")"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Optional tags for filtering"
+                },
+                "ttl": {
+                  "type": "number",
+                  "description": "Time-to-live in seconds (optional)"
+                },
+                "upsert": {
+                  "type": "boolean",
+                  "description": "Update existing key instead of failing (default: true, matching CLI `memory store`; set false for strict-insert). #2775 parity."
+                },
+                "provenance_type": {
+                  "type": "string",
+                  "enum": [
+                    "user_claim",
+                    "agent_output",
+                    "system_observation",
+                    "tool_result",
+                    "unknown"
+                  ],
+                  "description": "ADR-323: who/what produced this value, so shared-namespace retrieval can filter by trust level instead of conflating a user's stated claim with an agent's own output. Default: \"unknown\"."
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          {
+            "name": "memory_retrieve",
+            "description": "Read back a value previously stored via memory_store, by exact (namespace, key) — lossless, includes metadata. Use when native Read is wrong because the value is not a file (it lives in the .swarm/memory.db SQLite store) AND you know the exact key. For semantic lookup by meaning, use memory_search.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "Memory key"
+                },
+                "namespace": {
+                  "type": "string",
+                  "description": "Namespace (default: \"default\")"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "method": "tools/call",
+    "params": {
+      "name": "memory_store",
+      "arguments": {
+        "key": "uley-20261008-probe",
+        "value": "Article probe 2026-10-08: requirement shared between sessions",
+        "namespace": "article-verification"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"key\": \"uley-20261008-probe\",\n  \"namespace\": \"article-verification\",\n  \"stored\": true,\n  \"storedAt\": \"2026-10-08T11:34:26.930Z\",\n  \"hasEmbedding\": true,\n  \"embeddingDimensions\": 384,\n  \"provenanceType\": \"unknown\",\n  \"backend\": \"sqlite (bridge, brute-force cosine)\",\n  \"storeTime\": \"172.70ms\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  },
+  {
+    "method": "tools/call",
+    "params": {
+      "name": "memory_retrieve",
+      "arguments": {
+        "key": "uley-20261008-probe",
+        "namespace": "article-verification"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"key\": \"uley-20261008-probe\",\n  \"namespace\": \"article-verification\",\n  \"value\": \"Article probe 2026-10-08: requirement shared between sessions\",\n  \"tags\": [],\n  \"storedAt\": 1791459266925,\n  \"updatedAt\": 1791459266930,\n  \"accessCount\": 1,\n  \"hasEmbedding\": true,\n  \"found\": true,\n  \"backend\": \"sqlite (bridge, brute-force cosine)\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  },
+  {
+    "method": "initialize",
+    "params": {
+      "protocolVersion": "2024-11-05",
+      "capabilities": {},
+      "clientInfo": {
+        "name": "article-verification",
+        "version": "20261008"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "protocolVersion": "2024-11-05",
+        "serverInfo": {
+          "name": "ruflo",
+          "version": "3.0.0"
+        },
+        "capabilities": {
+          "tools": {
+            "listChanged": true
+          },
+          "resources": {
+            "subscribe": true,
+            "listChanged": true
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "tools/call",
+    "params": {
+      "name": "memory_retrieve",
+      "arguments": {
+        "key": "uley-20261008-probe",
+        "namespace": "article-verification"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"key\": \"uley-20261008-probe\",\n  \"namespace\": \"article-verification\",\n  \"value\": \"Article probe 2026-10-08: requirement shared between sessions\",\n  \"tags\": [],\n  \"storedAt\": 1791459266925,\n  \"updatedAt\": 1791459266930,\n  \"accessCount\": 2,\n  \"hasEmbedding\": true,\n  \"found\": true,\n  \"backend\": \"sqlite (bridge, brute-force cosine)\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  }
+]

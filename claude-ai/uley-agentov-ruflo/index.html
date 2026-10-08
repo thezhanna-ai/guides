@@ -1,20 +1,19 @@
 <!doctype html>
 <html lang="ru" data-theme="light"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Улей агентов в Claude Code: Ruflo одной командой</title>
-<meta name="description" content="Как подключить Ruflo к Claude Code: настройка, MCP, первая командная задача с кодом и проверкой, общая память и продолжение в новом чате.">
-<meta name="robots" content="noindex, nofollow">
+<title>Улей агентов Ruflo: первая команда и память между чатами</title>
+<meta name="description" content="Как подключить Ruflo 3.55.0 к Claude Code, выполнить задачу с исполнителем и проверяющим и прочитать общую память в новом чате. Цены на 08.10.2026.">
 <meta name="theme-color" content="#F8F7F2">
 <meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
-<meta property="og:title" content="Улей агентов в Claude Code: Ruflo одной командой">
-<meta property="og:description" content="Как подключить Ruflo к Claude Code: настройка, MCP, первая командная задача с кодом и проверкой, общая память и продолжение в новом чате.">
+<meta property="og:title" content="Улей агентов Ruflo: первая команда и память между чатами">
+<meta property="og:description" content="Как подключить Ruflo 3.55.0 к Claude Code, выполнить задачу с исполнителем и проверяющим и прочитать общую память в новом чате. Цены на 08.10.2026.">
 <meta property="og:url" content="https://pronovoe.com/claude-ai/uley-agentov-ruflo/">
 <meta property="og:image" content="https://pronovoe.com/claude-ai/uley-agentov-ruflo/assets/oblozhka.webp">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="840">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pronovoe.com/claude-ai/uley-agentov-ruflo/assets/oblozhka.webp">
-<meta property="og:image:alt" content="Деревянная рамка с восковыми сотами и пчёлами на тёмно-бирюзовом столе">
+<meta property="og:image:alt" content="Пчёлы на медовых сотах в деревянной рамке на тёмном бирюзовом столе">
 <link rel="canonical" href="https://pronovoe.com/claude-ai/uley-agentov-ruflo/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
 <style>
     :root {
@@ -240,49 +239,68 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
     .mobile-toc { margin-top: 26px }
     @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
 
-/* Плашки команд и подтверждение копирования из общей оболочки. */
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
 .code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
 .code-card pre { margin: 0 }
-.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 112px; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px; background: #E86F4A; color: #102F30 }
-.code-card .copy-button:hover { background: #F28A68 }
-.code-card .copy-button:active { background: #FFD1BF }
-.code-card .copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
 @media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
-</style></head><body>
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<meta name="robots" content="noindex, nofollow">
+<!-- privacy:head:start -->
+<link rel="stylesheet" href="/assets/privacy.css">
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+</head><body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
 <div class="header-actions"><div class="handout-title">УЛЕЙ</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
-<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
-<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
-<a href="#ustanovka">Шаг 1. Подготовь Ruflo</a>
-<a href="#mcp">Шаг 2. Проверь MCP</a>
-<a href="#instrumenty">Шаг 3. Проверь инструменты</a>
-<a href="#zadacha">Шаг 4. Собери страницу командой</a>
+</div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Перед настройкой</a>
+<a href="#ustanovka">Шаг 1. Подготовь Ruflo одной командой</a>
+<a href="#mcp">Шаг 2. Проверь подключение MCP</a>
+<a href="#instrumenty">Шаг 3. Дай Claude Code обратиться к Ruflo</a>
+<a href="#zadacha">Шаг 4. Собери страницу силами команды</a>
+<a href="#stoimost">Сколько стоит</a>
 <a href="#oshibki">Если не получилось</a>
-<a href="#obshchiy-kontekst">Шаг 5. Передай контекст новому чату</a>
-<a href="#svoi-proekt">Собери инструмент под своё дело</a>
-<a href="#dalshe">Дальше по теме</a></nav><main>
-<header id="nachalo"><p class="eyebrow">Инструкция · Ruflo в Claude Code</p>
-<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Деревянная рамка с восковыми сотами и пчёлами на тёмно-бирюзовом столе" loading="eager" decoding="async" fetchpriority="high"><figcaption>Соты с пчёлами: у каждого своя работа внутри общего улья</figcaption></figure>
-<h1 class="article-title-v2">Улей агентов в Claude Code: Ruflo одной командой</h1>
-<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
-<p class="lead">Когда Claude Code приходится и планировать, и писать код, и проверять себя, как раздать работу помощникам и не потерять общий контекст? Ruflo позволяет собрать такую команду внутри проекта.</p>
-<p>Здесь всё происходит внутри Claude Code из терминала, без отдельной панели управления командой. Пройдём от настройки одной командой до небольшой страницы, которую исполнитель соберёт, а другой агент проверит. В последнем шаге проверим, что следующий чат получит требования и результат этой работы.</p>
-<p><a href="https://github.com/ruvnet/ruflo/blob/main/CHANGELOG.md">Ruflo, бывший Claude Flow</a>, - программа на компьютере, которая помогает распределять задания между агентами и хранить сведения об их работе. Агент здесь - отдельный ИИ-помощник с порученной ролью. Координатор связывает части задачи и отдаёт замечания исполнителю. Это похоже на редакцию: один пишет, другой проверяет, редактор собирает окончательный вариант.</p>
-<div class="warn-card"><p>Улей лишний, когда нужно переименовать заголовок или исправить одну фразу: один агент обычно сделает это быстрее, чем команда распределит роли и обменяется результатами. Ruflo не снимает лимит Claude Code, а несколько исполнителей расходуют его на свою работу. Полезнее разделять задачу, где есть отдельные части и нужен независимый взгляд. <a href="https://code.claude.com/docs/en/sub-agents#choose-between-subagents-and-main-conversation">Anthropic описывает</a>, для какой работы подходят субагенты и какие у них ограничения.</p></div>
-<p class="meta">АКТУАЛЬНО НА 6 ОКТЯБРЯ 2026</p></header>
-<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Что нужно до начала</a>
-<a href="#ustanovka">Шаг 1. Подготовь Ruflo</a>
-<a href="#mcp">Шаг 2. Проверь MCP</a>
-<a href="#instrumenty">Шаг 3. Проверь инструменты</a>
-<a href="#zadacha">Шаг 4. Собери страницу командой</a>
+<a href="#obshchiy-kontekst">Шаг 5. Передай общий контекст новому чату</a>
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
+<a href="#dalshe">Дальше по теме</a></nav><main><header id="nachalo"><p class="eyebrow">Инструкция · Claude Code и Ruflo</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Пчёлы на медовых сотах в деревянной рамке на тёмном бирюзовом столе" loading="eager" decoding="async" fetchpriority="high"><figcaption>Одна задача, отдельные исполнители и проверка памяти в новом чате</figcaption></figure>
+<h1 class="article-title-v2">Улей агентов Ruflo: первая команда и память между чатами</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 sans-serif">Средний уровень</p>
+<p class="lead">Как проверить, что команда агентов сохранила общее задание, когда прежний чат уже закрыт? <b>Подключим Ruflo и дадим исполнителю и проверяющему одну учебную задачу.</b> Последний шаг покажет, какие сведения удастся получить в новом разговоре.</p>
+<p>Ruflo, прежнее название Claude Flow, добавляет к Claude Code инструменты координации и памяти. Само появление ролей в списке ещё не показывает выполненную работу. Здесь у команды будет результат, который можно открыть.</p>
+<p class="meta">АКТУАЛЬНО НА 8 ОКТЯБРЯ 2026</p></header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Перед настройкой</a>
+<a href="#ustanovka">Шаг 1. Подготовь Ruflo одной командой</a>
+<a href="#mcp">Шаг 2. Проверь подключение MCP</a>
+<a href="#instrumenty">Шаг 3. Дай Claude Code обратиться к Ruflo</a>
+<a href="#zadacha">Шаг 4. Собери страницу силами команды</a>
+<a href="#stoimost">Сколько стоит</a>
 <a href="#oshibki">Если не получилось</a>
-<a href="#obshchiy-kontekst">Шаг 5. Передай контекст новому чату</a>
-<a href="#svoi-proekt">Собери инструмент под своё дело</a>
+<a href="#obshchiy-kontekst">Шаг 5. Передай общий контекст новому чату</a>
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
 <a href="#dalshe">Дальше по теме</a></nav></details><article>
 <section class="content-section" id="podgotovka">
-<h2>Что нужно до начала</h2>
+<h2>Перед настройкой</h2>
 <p>Нужен Claude Code, который запускается командой <code>claude</code> и отвечает после входа. Если есть только расширение в VS Code, проверь и терминальную команду: <a href="https://code.claude.com/docs/en/setup">она устанавливается отдельно</a>. Начать можно с <a href="../claude-i-codex-v-vscode/">инструкции по установке Claude Code</a>. Доступ к моделям работает по условиям твоего аккаунта, Ruflo его не заменяет.</p>
 <p>Также нужен Node.js версии 20 или выше и npm версии 9 или выше. Это <a href="https://github.com/ruvnet/ruflo/blob/main/docs/USERGUIDE.md#prerequisites">требования Ruflo</a>. Скачай Node.js с пометкой LTS («с долгой поддержкой») <a href="https://nodejs.org/en/download">с официального сайта</a>. Вместе с ним устанавливается npm, а <code>npx</code> позволяет запустить нужный пакет без отдельной глобальной установки.</p>
 <p>Для первого опыта создай пустую папку <code>ruflo-test</code> и открой её в VS Code через <b>File → Open Folder</b> («Файл → Открыть папку»). Дальше выбери <b>Terminal → New Terminal</b> («Терминал → Новый терминал»). <a href="https://code.visualstudio.com/docs/terminal/basics">Терминал</a> - нижняя панель, куда вводятся команды. Запускай их из этой папки, каждую отдельно, нажимая Enter:</p>
@@ -295,10 +313,12 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 
 <section class="content-section" id="ustanovka">
 <h2>Шаг 1. Подготовь Ruflo одной командой</h2>
-<p>В терминале папки <code>ruflo-test</code> запусти <a href="https://github.com/ruvnet/ruflo#cli-install">короткую инициализацию из README Ruflo</a>:</p>
-<div class="code-card"><pre id="ruflo-init"><code>npx ruflo@latest init --no-global</code></pre><button class="copy-button" type="button" data-copy-target="ruflo-init" aria-label="Скопировать инициализацию Ruflo" aria-live="polite">Скопировать</button></div>
-<p>Если npm спросит о загрузке пакета, проверь, что назван <code>ruflo</code>, введи <code>y</code> и нажми Enter. Дождись завершения команды. Флаг <code>--no-global</code> <a href="https://github.com/ruvnet/ruflo/blob/main/v3/@claude-flow/cli/src/commands/init.ts">отключает добавление указателя Ruflo в общие инструкции Claude Code</a>. Правила учебного проекта останутся в его папке. Здесь используется короткий вариант настройки, чтобы не выбирать параметры команды до первой задачи. Интерактивный вариант из того же README называется <code>npx ruflo@latest init wizard</code>.</p>
+<p>В <a href="https://github.com/ruvnet/ruflo">свежем README</a> есть путь через плагины Claude Code и путь через терминальную программу. Здесь используем второй: он даёт прямое подключение MCP и проектную память для нашей проверки. На 8 октября актуальный выпуск npm - <b>3.55.0</b>, его номер закреплён в команде инициализации и ручного подключения ниже.</p>
+<p>В терминале папки <code>ruflo-test</code> запусти короткую инициализацию:</p>
+<div class="code-card"><pre id="ruflo-init"><code>npx -y ruflo@3.55.0 init --no-global --no-mods --no-codex-detect --no-skills-sh --no-signup</code></pre><button class="copy-button" type="button" data-copy-target="ruflo-init" aria-label="Скопировать инициализацию Ruflo" aria-live="polite">Скопировать</button></div>
+<p><code>-y</code> подтверждает загрузку пакета Ruflo. Остальные флаги оставляют настройку для нашего проекта: <code>--no-global</code> отключает указатель в общих инструкциях, <code>--no-mods</code> - установку дополнительных модов, <code>--no-codex-detect</code> - автоматическую настройку Codex, <code>--no-skills-sh</code> и <code>--no-signup</code> - дополнительные установку скилла и предложение регистрации. Их назначение описано в <a href="https://github.com/ruvnet/ruflo/blob/main/v3/@claude-flow/cli/src/commands/init.ts">команде init</a> и проверено в справке выпуска 3.55.0. Дождись сообщения об успешном завершении.</p>
 <p>Инициализация создаёт инструкции для Claude Code и служебные папки проекта. <a href="https://github.com/ruvnet/ruflo/blob/main/docs/STATUS.md#usage-at-a-glance">Среди них</a> - <code>CLAUDE.md</code> с правилами работы и <code>.claude-flow/</code> с настройками. Папки с точкой могут быть скрыты в файловом менеджере. Команда готовит инструменты; конкретная работа начнётся, когда ты отправишь задачу.</p>
+<p>Открой <code>.mcp.json</code> в VS Code: инициализация создаёт сервер <code>claude-flow</code> с пакетом <code>ruflo@latest</code>. Это запуск актуального выпуска на момент обращения. Ручная команда в следующем шаге закреплена на 3.55.0 и нужна только при отсутствии записи.</p>
 <div class="result"><p><b>Результат:</b> команда завершилась без ошибки, а в папке проекта появился <code>CLAUDE.md</code> с упоминанием Ruflo или Claude Flow. Дальше проверим, что Claude Code может обращаться к его инструментам.</p></div>
 </section>
 
@@ -306,10 +326,10 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <h2>Шаг 2. Проверь подключение MCP</h2>
 <p><b>MCP</b> - способ подключить дополнительные инструменты к Claude Code. Через него Ruflo даёт доступ к координации и общей памяти. В терминале той же папки введи:</p>
 <div class="code-card"><pre id="mcp-list"><code>claude mcp list</code></pre><button class="copy-button" type="button" data-copy-target="mcp-list" aria-label="Скопировать список подключений MCP" aria-live="polite">Скопировать</button></div>
-<p>Найди подключение <code>claude-flow</code> или <code>ruflo</code> и проверь, что рядом успешное соединение: <b>Connected</b> («Подключено»). Имя <code>claude-flow</code> осталось в <a href="https://github.com/ruvnet/ruflo#mcp-server">команде текущего README</a>, хотя пакет называется <code>ruflo</code>.</p>
+<p>Найди подключение <code>claude-flow</code> или <code>ruflo</code> и проверь, что рядом успешное соединение: <b>Connected</b> («Подключено»). Имя <code>claude-flow</code> осталось в <a href="https://github.com/ruvnet/ruflo#mcp-server">команде текущего README</a>, хотя пакет называется <code>ruflo</code>. Если уже установлен плагин Ruflo, сначала проверь его сервер: второе подключение к той же памяти не добавляй.</p>
 <p>Если вместо соединения видишь <b>Pending approval</b> («Ожидает одобрения»), запусти <code>claude</code> из этой папки и одобри проектный сервер Ruflo, который только что настроили. Затем выйди через <code>/exit</code> и повтори <code>claude mcp list</code>. <a href="https://code.claude.com/docs/en/mcp#server-status">Так Claude Code разрешает подключения из настроек проекта</a>.</p>
 <p>Если ни одного из этих подключений нет, добавь сервер командой ниже и снова выполни <code>claude mcp list</code>. Флаг <code>-y</code> разрешает npx загрузить пакет без вопроса, на который фоновый сервер не сможет ответить:</p>
-<div class="code-card"><pre id="mcp-add"><code>claude mcp add claude-flow -- npx -y ruflo@latest mcp start</code></pre><button class="copy-button" type="button" data-copy-target="mcp-add" aria-label="Скопировать подключение Ruflo" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="mcp-add"><code>claude mcp add claude-flow -- npx -y ruflo@3.55.0 mcp start</code></pre><button class="copy-button" type="button" data-copy-target="mcp-add" aria-label="Скопировать подключение Ruflo" aria-live="polite">Скопировать</button></div>
 <p>Если подключение уже есть, но не работает, второй сервер не добавляй. Причину разбираем в блоке <a href="#oshibki">«Если не получилось»</a>. Проверка списка серверов и команда <code>/mcp</code> описаны в <a href="https://code.claude.com/docs/en/mcp#managing-your-servers">справке Claude Code</a>.</p>
 <div class="result"><p><b>Результат:</b> в списке есть Ruflo и подтверждено соединение. Одной записи с названием сервера недостаточно.</p></div>
 </section>
@@ -328,8 +348,9 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 
 <section class="content-section" id="zadacha">
 <h2>Шаг 4. Собери страницу силами команды</h2>
-<p>Возьмём маленькую задачу, результат которой можно открыть: страницу с чек-листом подготовки короткого видео. Для неё не нужны внешние сервисы. Claude Code будет координатором, отдельный исполнитель напишет код, а проверяющий прочитает его и вернёт замечания.</p>
-<p>Это существенное различие: <a href="https://github.com/ruvnet/ruflo/blob/main/CLAUDE.md#claude-code-vs-mcp-tools">Ruflo координирует работу, а Claude Code выполняет её</a>. Вызов <code>agent_spawn</code> («зарегистрировать роль агента») сам по себе не доказывает, что отдельный исполнитель написал код. Для выполнения нужны <a href="https://code.claude.com/docs/en/sub-agents">субагенты Claude Code</a> - отдельные помощники со своим заданием и контекстом.</p>
+<p>Учебная задача этой статьи - страница с чек-листом подготовки короткого видео, которую можно открыть в браузере. Для неё не нужны внешние сервисы. Claude Code будет координатором, отдельный исполнитель напишет код, а проверяющий прочитает его и вернёт замечания.</p>
+<p><a href="https://github.com/ruvnet/ruflo/blob/main/CLAUDE.md#claude-code-vs-mcp-tools">Ruflo координирует работу, а Claude Code выполняет её</a>. Вызов <code>agent_spawn</code> («зарегистрировать роль агента») сам по себе не доказывает, что отдельный исполнитель написал код. Для выполнения нужны <a href="https://code.claude.com/docs/en/sub-agents">субагенты Claude Code</a> - отдельные помощники со своим заданием и контекстом.</p>
+<p>Для памяти нужны два инструмента: <code>memory_store</code> («записать») сохраняет значение под ключом, <code>memory_retrieve</code> («прочитать») возвращает его по ключу и пространству имён. Пространство имён - группа записей одной задачи. Этот интерфейс доступен в MCP выпуска 3.55.0.</p>
 <p>Отправь в чат Claude Code весь запрос:</p>
 <div class="code-card"><pre id="team-task"><code>Собери в текущем учебном проекте локальную страницу demo/index.html «Готово ли видео к выпуску?». На ней шесть пунктов: понятный звук, читаемый текст, проверенные факты, права на музыку, правильный формат, просмотр целиком. У каждого пункта флажок. Показывай число отмеченных пунктов из шести и кнопку «Сбросить». Всё должно работать при открытии файла в браузере, без сети и установки библиотек.
 
@@ -344,15 +365,26 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <div class="result"><p><b>Результат:</b> страница открывается, счётчик и сброс работают. В чате видны отдельные задания исполнителю и проверяющему, в <code>demo/review.md</code> - проверки, а у Ruflo - успешные обращения к памяти. Теперь осталось выяснить, переживёт ли общий контекст новый чат.</p></div>
 </section>
 
+<section class="content-section" id="stoimost">
+<h2>Сколько стоит</h2>
+<p><b>Сверка: 8 октября 2026 года, суммы в долларах США.</b> Для выбранного маршрута нужна локальная программа Ruflo и доступ к Claude Code.</p>
+<ul>
+<li><b>Ruflo: $0 за пакет.</b> Он распространяется по <a href="https://github.com/ruvnet/ruflo/blob/main/LICENSE">лицензии MIT</a>. У установки через npm и локального MCP-сервера нет отдельной месячной подписки. Хранилище этой проверки находится в папке проекта на твоём компьютере.</li>
+<li><b>Claude Code:</b> Pro стоит $20 в месяц при помесячном расчёте или $200 за год. На странице годового тарифа месячный эквивалент округлён до $17. Max начинается со $100 в месяц. Claude Code входит в эти тарифы, а <a href="https://claude.com/pricing">лимиты использования</a> зависят от выбранного плана.</li>
+<li><b>Субагенты:</b> отдельного тарифа Ruflo за каждую роль нет. Их запросы учитываются в <a href="https://code.claude.com/docs/en/sub-agents">тех же лимитах Claude Code</a>, что и работа координатора. Если Claude Code подключён через API, расход идёт по тарифам выбранной модели за входной и выходной текст, а не по фиксированной цене команды.</li>
+</ul>
+<p>Для учебной страницы не нужны внешние API, облачные сервисы Ruflo и дополнительные ключи. При уже доступном Claude Code можно начать с локального пакета за $0. Команда агентов расходует запросы модели: число ролей не даёт гарантии экономии.</p>
+</section>
+
 <section class="content-section" id="oshibki">
 <h2>Если не получилось</h2>
 <details class="check-panel"><summary>Инициализация завершилась ошибкой</summary>
 <p>В обычном терминале папки <code>ruflo-test</code> запусти <a href="https://github.com/ruvnet/ruflo/wiki/Troubleshooting">диагностику Ruflo</a>:</p>
-<div class="code-card"><pre id="doctor"><code>npx ruflo@latest doctor</code></pre><button class="copy-button" type="button" data-copy-target="doctor" aria-label="Скопировать диагностику Ruflo" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="doctor"><code>npx -y ruflo@3.55.0 doctor</code></pre><button class="copy-button" type="button" data-copy-target="doctor" aria-label="Скопировать диагностику Ruflo" aria-live="polite">Скопировать</button></div>
 <p>Сохрани полный текст ошибки и результат диагностики. Отправь их Claude Code с просьбой объяснить причину и дать одно действие для исправления. Не повторяй установку с <code>--force</code> («принудительно»), пока не понятно, какие настройки она заменит.</p>
 </details>
 <details class="check-panel"><summary>Сервер есть в списке, но соединения нет</summary>
-<p>Выйди из Claude Code через <code>/exit</code> и снова проверь <code>node --version</code> в этом же терминале. Затем выполни <code>npx ruflo@latest doctor</code>. После исправления ошибки повтори <code>claude mcp list</code>, запусти <code>claude</code> и проверь <code>/mcp</code>. <a href="https://github.com/ruvnet/ruflo/wiki/Troubleshooting#mcp-server-issues">Разработчики рекомендуют</a> начать с версии Node.js и регистрации сервера. До успешного вызова из шага 3 к командной задаче не переходи.</p>
+<p>Выйди из Claude Code через <code>/exit</code> и снова проверь <code>node --version</code> в этом же терминале. Затем выполни <code>npx -y ruflo@3.55.0 doctor</code>. После исправления ошибки повтори <code>claude mcp list</code>, запусти <code>claude</code> и проверь <code>/mcp</code>. <a href="https://github.com/ruvnet/ruflo/wiki/Troubleshooting#mcp-server-issues">Разработчики рекомендуют</a> начать с версии Node.js и регистрации сервера. До успешного вызова из шага 3 к командной задаче не переходи.</p>
 </details>
 <details class="check-panel"><summary>Claude пишет «команда создана», а файл делает сам</summary>
 <p>Попроси показать реальные задания субагентам Claude Code, их ответы и вызовы Ruflo. Если есть только регистрации ролей, верни запрос из шага 4 и попроси выполнить часть с запуском исполнителей. Отдельный ответ координатора со списком ролей ещё не даёт подтверждения командной работы.</p>
@@ -369,28 +401,86 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 
 По полученным записям объясни, какую страницу собирала команда, где лежит результат, какие проверки прошли и что осталось проверить вручную. Затем открой demo/brief.md и demo/review.md и сравни с памятью. Покажи расхождения. Пока не меняй файлы.</code></pre><button class="copy-button" type="button" data-copy-target="memory-check" aria-label="Скопировать проверку общей памяти в новом чате" aria-live="polite">Скопировать</button></div>
 <p><b>Вот как исполнители сохраняют общий контекст:</b> координатор записывает требования в общую память, перед каждой передачей работы достаёт их и передаёт конкретному помощнику, а после проверки сохраняет итог. У субагентов <a href="https://code.claude.com/docs/en/sub-agents">свой контекст</a>, поэтому не рассчитывай, что они автоматически знают весь разговор. Общая память полезна, когда команда действительно записывает и читает её.</p>
-<p>Если новый чат вернул требования и итог через Ruflo, а файлы им соответствуют, у тебя есть весь рабочий круг: задание, отдельные исполнители, проверенный результат и контекст для продолжения. В следующем проекте этот же запрос можно заменить своей задачей, сохранив порядок передачи требований и проверки.</p>
+<p>Сравни две записи с файлами. Требования должны содержать все шесть пунктов, а итог - пути страницы и отчёта проверки. Если запись нашлась, но описывает другой результат, вернись в прежнюю задачу и исправь её содержимое.</p>
 <div class="result"><p><b>Результат:</b> новый чат прочитал обе записи через Ruflo и назвал результат прошлой работы без пересказа с твоей стороны. Видно, что именно хранится в общей памяти и как это получает следующий исполнитель.</p></div>
 </section>
+
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
-<p class="help-title">Запнулся? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
-<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу [желаемый результат] с Ruflo в Claude Code. Сейчас вижу [текущий экран или сообщение], уже выполнено [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа.</p></div>
-<div class="bubble claude"><span class="who">Claude</span>Уточни, на каком шаге остановились и что сейчас видно. Начнём с одного действия.</div></div>
-<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
+<p class="help-title">Сложно пройти шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию.</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Настраиваю Ruflo в Claude Code. Сначала спроси, какой шаг выполняю и какой текст ошибки вижу. Объясни по одному шагу и после каждого жди моего ответа. Не показывай ключи и пароли.</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Пришли текст ошибки, только без ключей и личных данных.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с Ruflo" aria-live="polite">Скопировать</button>
 </section>
-<section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент под своё дело</h2>
-<p>На ИИ-Лагере показывают, как собрать сайт, бота или калькулятор с Claude Code и Codex. Это ИИ-помощники, которым ты описываешь задачу словами, а они пишут код. На практикуме этот путь проходят по шагам, без программирования.</p>
-<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
-<section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><ul>
-<li><a href="../claude-i-codex-v-vscode/"><span class="title">Claude Code и Codex в VS Code</span><span class="why">Если терминальная команда claude не запускается, начни с установки и входа.</span></a></li>
-<li><a href="../pyat-skillov-claude-code/"><span class="title">Пять скиллов для Claude Code</span><span class="why">Поиск инструментов, планирование и проверка дизайна для следующих задач команды.</span></a></li>
-</ul></section>
-</article>
-</main><aside class="related-plaque" aria-label="Соседняя статья">
-      <p class="plaque-label">Перед установкой</p><h2>Claude Code в VS Code</h2>
+<p class="cta-question">Команда сохранила результат. Как поручить ей работу для своего проекта?</p>
+<section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
+<section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим.</p><ul><li><a href="../shtat-agentov-paperclip/"><span class="title">Штат агентов в Paperclip</span><span class="why">Раздай работу нескольким помощникам и проверь вклад каждого в общий результат.</span></a></li><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Закрой секретные файлы от Claude Code</span><span class="why">Настрой доступ агента к файлам до подключения следующих инструментов.</span></a></li></ul></section>
+</article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Перед подключением</p><h2>Claude Code в VS Code</h2>
       <p><a href="../claude-i-codex-v-vscode/">Открыть инструкцию</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint"></p></div>
 <script>
-var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+(function () {
+  var viewer = document.getElementById("viewer");
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+  var lastFocused;
+  function open(img) {
+    lastFocused = document.activeElement;
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewer.setAttribute("open", "");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    big.src = img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    viewer.removeAttribute("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Увеличить";
+    button.setAttribute("aria-label", "Увеличить: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
 document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
 var themeButton = document.querySelector(".theme-toggle");
 var savedTheme = "light";
@@ -445,4 +535,22 @@ addEventListener("scroll", updateReadingState, { passive: true });
         }
       });
     });</script>
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline" class="cookie-close" aria-label="Закрыть без аналитики" title="Закрыть без аналитики"><span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
 </body></html>
