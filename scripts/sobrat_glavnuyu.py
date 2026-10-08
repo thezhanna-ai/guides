@@ -326,7 +326,7 @@ def sobrat_razdel(razdel, po_trassam, oblozhki):
 
 
 def sobrat_filtry():
-    punkty = ['        <option value="all">Все метки</option>']
+    punkty = ['        <option value="all">Все темы</option>']
     for kod, (nazvanie, podpis) in METKI.items():
         tekst = nazvanie + (" (%s)" % podpis if podpis else "")
         punkty.append('        <option value="%s">%s</option>' % (kod, ekranirovat(tekst)))
