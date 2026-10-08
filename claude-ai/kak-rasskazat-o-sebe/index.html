@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Что рассказать Claude один раз, чтобы он помнил: заполнить инструкции, включить память, перенести данные из ChatGPT и находить старые разговоры">
   <meta name="theme-color" content="#F8F7F2">
-  <meta property="og:title" content="Claude помнит о тебе: что рассказать один раз">
+  <meta property="og:title" content="Память Claude: что рассказать о себе один раз">
   <meta property="og:description" content="Пошаговая настройка инструкций, памяти и поиска по прошлым чатам Claude для новичка">
-  <title>Claude помнит о тебе: что рассказать один раз</title>
+  <title>Память Claude: что рассказать о себе один раз</title>
   <link href="../../assets/fonts/fonts.css" rel="stylesheet">
   <style>
     :root {
@@ -309,10 +309,70 @@
     @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
 </style>
 <!-- erid:style:end -->
+
+
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/kak-rasskazat-o-sebe/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/kak-rasskazat-o-sebe/#article",
+      "headline": "Claude помнит о тебе: что рассказать один раз",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/kak-rasskazat-o-sebe/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-08",
+      "image": "https://pronovoe.com/claude-ai/kak-rasskazat-o-sebe/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/kak-rasskazat-o-sebe/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Claude помнит о тебе: что рассказать один раз",
+          "item": "https://pronovoe.com/claude-ai/kak-rasskazat-o-sebe/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/kak-rasskazat-o-sebe/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как включить память в Claude?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Открой Settings, затем Memory и включи Generate memory from chats. По мере общения ниже появятся темы, которые можно просмотреть, уточнить или удалить. Чувствительные темы включаются отдельно: оставь их переключатель выключенным, если такая память тебе не нужна."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -383,16 +443,23 @@
           <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Портрет слона как образ памяти для статьи о сохранённых сведениях пользователя в Claude" loading="eager" decoding="async" fetchpriority="high"><figcaption>Настройки имени, правил ответа и памяти, чтобы не объяснять всё заново</figcaption></figure>
 <h1 class="article-title-v2">Claude помнит о тебе: что рассказать один раз</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
-          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 11 СЕНТЯБРЯ 2026</p>
+<!-- seo:answer:start -->
+<p class="quick-answer" style="margin:20px 0">Как настроить память Claude о себе, чтобы не повторять контекст в каждом чате? Начни с General и расскажи, чем занимаешься и какие ответы тебе подходят. Затем открой Memory и посмотри сохранённые сведения. Ниже эти настройки разделены: личные инструкции и память помогают по-разному, а старый разговор можно найти отдельно.</p>
+<!-- seo:answer:end -->
+<p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 11 СЕНТЯБРЯ 2026</p>
 
 
           <p class="lead">Эта настройка нужна, чтобы Claude помнил, кто ты, чем занимаешься и какие ответы тебе подходят. Тогда в новых чатах он сможет приводить примеры из твоей области, а тебе не придётся каждый раз заново объяснять свой контекст</p>
           <aside class="route-note" aria-label="Короткий маршрут">
-            <h2>Короткий маршрут</h2>
+            <h2>Память Claude: короткий маршрут настройки</h2>
             <p>Settings → General → имя и Instructions for Claude → оформление и шрифт → Memory → поиск по прошлым чатам → проверка в новом чате</p>
           </aside>
           <p class="purpose">Если вход в Claude ещё не настроен, сначала пройди <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. Там проверишь доступ и первый чат, а сюда вернёшься, чтобы настроить имя, инструкции и память</p>
-        </header>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Claude помнит о тебе: что рассказать один раз</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header>
 
         <section class="content-section" id="general">
           <p class="section-label">Настройки профиля</p>
@@ -410,7 +477,7 @@
           <p class="purpose">Имя и описание работы помогают Claude понимать, с кем он разговаривает. Инструкции задают постоянные правила: на каком языке отвечать, насколько подробно писать и какие задачи ты обычно решаешь</p>
           <figure>
             <div class="shot">
-              <img src="assets/claude-general-example.png" alt="Учебный пример заполненных настроек General в Claude">
+              <img src="assets/claude-general-example.png" alt="Учебный пример заполненных настроек General в Claude" width="1416" height="1111" loading="lazy" decoding="async">
               <span class="annotation general-nav" data-n="1" aria-hidden="true"></span>
               <span class="annotation general-profile" data-n="2" aria-hidden="true"></span>
               <span class="annotation general-display" data-n="3" aria-hidden="true"></span>
@@ -473,7 +540,7 @@
           <p>Для этого и нужна память. Claude сам откладывает из разговоров твои проекты, предпочтения и важные факты, и в следующем чате продолжает с учётом того, что уже знает</p>
           <figure>
             <div class="shot">
-              <img src="assets/claude-memory.png" alt="Экран Memory в настройках Claude с четырьмя пояснениями">
+              <img src="assets/claude-memory.png" alt="Экран Memory в настройках Claude с четырьмя пояснениями" width="1928" height="1514" loading="lazy" decoding="async">
               <span class="annotation memory-nav" data-n="1" aria-hidden="true"></span>
               <span class="annotation memory-generate" data-n="2" aria-hidden="true"></span>
               <span class="annotation memory-sensitive" data-n="3" aria-hidden="true"></span>
@@ -507,7 +574,7 @@
             <p>Открой <span class="path">Settings → Memory</span> и найди список <b>Topics</b>. В нём Claude группирует сохранённые записи по темам. Нажми на нужную тему, чтобы прочитать её содержимое</p>
             <figure>
               <div class="shot">
-                <img src="assets/claude-memory-topics-example.svg" alt="Учебный пример списка Topics в памяти Claude">
+                <img src="assets/claude-memory-topics-example.svg" alt="Учебный пример списка Topics в памяти Claude" width="1600" height="1000" loading="lazy" decoding="async">
                 <span class="annotation topics-nav" data-n="1" aria-hidden="true"></span>
                 <span class="annotation topics-first" data-n="2" aria-hidden="true"></span>
               </div>
@@ -520,7 +587,7 @@
             <p>Внутри темы прочитай каждую запись. Карандаш открывает редактирование, корзина удаляет ненужный или неверный факт. То же самое можно попросить прямо в чате: «Исправь в памяти…» или «Забудь…»</p>
             <figure>
               <div class="shot">
-                <img src="assets/claude-memory-topic-detail-example.svg" alt="Учебный пример записей внутри темы памяти Claude">
+                <img src="assets/claude-memory-topic-detail-example.svg" alt="Учебный пример записей внутри темы памяти Claude" width="1600" height="1000" loading="lazy" decoding="async">
                 <span class="annotation detail-records" data-n="3" aria-hidden="true"></span>
                 <span class="annotation detail-actions" data-n="4" aria-hidden="true"></span>
               </div>
@@ -557,7 +624,7 @@
             <p>Открой <a href="https://claude.ai/settings/memory">Memory в настройках Claude</a>, нажми <b>Start import</b> и скопируй готовый запрос, который покажет Claude</p>
             <figure>
               <div class="shot">
-                <img src="assets/claude-memory-import-example.svg" alt="Учебный экран импорта памяти в Claude с запросом, полем для ответа ChatGPT и кнопкой Add to memory">
+                <img src="assets/claude-memory-import-example.svg" alt="Учебный экран импорта памяти в Claude с запросом, полем для ответа ChatGPT и кнопкой Add to memory" width="1600" height="1000" loading="lazy" decoding="async">
                 <span class="annotation import-copy" data-n="1" aria-hidden="true"></span>
                 <span class="annotation import-paste" data-n="2" aria-hidden="true"></span>
                 <span class="annotation import-submit" data-n="3" aria-hidden="true"></span>
@@ -580,7 +647,7 @@
             <p>Открой <a href="https://chatgpt.com/">ChatGPT</a> в новой вкладке, создай новый чат, вставь запрос из Claude и отправь его</p>
             <figure>
               <div class="shot">
-                <img src="assets/chatgpt-memory-export-prompt.png" alt="Запрос на выгрузку контекста вставлен в новый чат ChatGPT">
+                <img src="assets/chatgpt-memory-export-prompt.png" alt="Запрос на выгрузку контекста вставлен в новый чат ChatGPT" width="1386" height="828" loading="lazy" decoding="async">
                 <span class="annotation chatgpt-prompt" data-n="1" aria-hidden="true"></span>
                 <span class="annotation chatgpt-send" data-n="2" aria-hidden="true"></span>
               </div>
@@ -593,7 +660,7 @@
             <p>Когда ChatGPT сформирует ответ, проверь его и скопируй весь блок целиком</p>
             <figure>
               <div class="shot response-shot">
-                <img src="assets/chatgpt-memory-export-result-redacted.png" alt="Ответ ChatGPT с собранным контекстом без личного имени">
+                <img src="assets/chatgpt-memory-export-result-redacted.png" alt="Ответ ChatGPT с собранным контекстом без личного имени" width="1130" height="1392" loading="lazy" decoding="async">
                 <span class="annotation chatgpt-result" data-n="1" aria-hidden="true"></span>
                 <span class="annotation chatgpt-copy" data-n="2" aria-hidden="true"></span>
               </div>
@@ -643,7 +710,7 @@
             <p>А вот если ты не хочешь, чтобы Claude вообще заглядывал в прошлые разговоры, его отключают одним движением. Переключатель лежит там же, где память: <span class="path">Settings → Memory</span>, самый первый пункт <b>Search and reference chats</b></p>
             <figure>
               <div class="shot">
-                <img src="assets/claude-search-chats.png" alt="Экран Settings, раздел Memory: включённый переключатель Search and reference chats первым в списке">
+                <img src="assets/claude-search-chats.png" alt="Экран Settings, раздел Memory: включённый переключатель Search and reference chats первым в списке" width="1864" height="770" loading="lazy" decoding="async">
                 <span class="annotation search-nav" data-n="1" aria-hidden="true"></span>
                 <span class="annotation search-toggle" data-n="2" aria-hidden="true"></span>
               </div>
@@ -713,10 +780,16 @@
           </ul>
         </section>
 
-        <p class="cta-question">Claude тебя помнит. Что ему теперь поручить?</p>
-<section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
 
-        <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев<!-- privacy:footer:start -->
+<!-- seo:faq:start -->
+<section class="seo-faq" aria-label="Вопросы из поиска" style="margin:36px 0"><h2>Что ещё спрашивают</h2><details class="faq-item"><summary>Как включить память в Claude?</summary><p>Открой Settings, затем Memory и включи Generate memory from chats. По мере общения ниже появятся темы, которые можно просмотреть, уточнить или удалить. Чувствительные темы включаются отдельно: оставь их переключатель выключенным, если такая память тебе не нужна.</p></details></section>
+<!-- seo:faq:end -->
+<!-- seo:related:start -->
+<section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/pervyy-proekt-v-claude/">Первый проект в Claude: своя папка с памятью</a></li></ul></section>
+<!-- seo:related:end -->
+<p class="cta-question">Claude тебя помнит. Что ему теперь поручить?</p>
+<section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
+<footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев<!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>

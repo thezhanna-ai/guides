@@ -861,8 +861,8 @@ class GuidesSiteTest(unittest.TestCase):
             ".route-map-row { grid-template-columns: 1fr }",
         ):
             self.assertIn(phrase, html)
-        self.assertIn("../svoy-server-dlya-claude/index.html", ACCESS.read_text(encoding="utf-8"))
-        self.assertIn("../podklyuchenie-iz-rossii/index.html", html)
+        self.assertIn('href="../svoy-server-dlya-claude/"', ACCESS.read_text(encoding="utf-8"))
+        self.assertIn('href="../podklyuchenie-iz-rossii/"', html)
 
     def test_interactive_colors_meet_required_contrast(self):
         for page in (ACCESS, PROFILE):

@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#F8F7F2">
   <meta name="description" content="Как поставить Claude задачу на каждый понедельник в 7:30: Gmail, Google Calendar и проверка Scheduled">
-  <meta property="og:title" content="Как поставить Клоду задачу по расписанию">
+  <meta property="og:title" content="Задачи по расписанию в Claude: письма и встречи">
   <meta property="og:description" content="Пошаговая настройка плана недели по расписанию с Gmail и Google Calendar">
-  <title>Как поставить Клоду задачу по расписанию</title>
+  <title>Задачи по расписанию в Claude: письма и встречи</title>
   <link href="../../assets/fonts/fonts.css" rel="stylesheet">
   <style>
     :root { --emerald:#102F30; --emerald-mid:#1F4A43; --paper:#F8F7F2; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F; --ink:#1E2926; --muted:#62706A; --line:#D5C9B7; --white:#FFFFFF }
@@ -137,10 +137,86 @@
     @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
 </style>
 <!-- erid:style:end -->
+
+
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/#article",
+      "headline": "Письма и встречи к 7:30. Поставь Клоду задачу по расписанию",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-08",
+      "image": "https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Письма и встречи к 7:30. Поставь Клоду задачу по расписанию",
+          "item": "https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/raspisanie-zadach-v-claude/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Нет Schedule в обычном чате",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "проверь платный тариф и версию интерфейса. Если виден переключатель Chat/Cowork, путь к Scheduled проходит через Cowork. Обычный Chat в прежнем интерфейсе не сохраняет автоматическое расписание"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Задача создана, но нет писем или встреч",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "проверь, есть ли они за указанные дни, оба коннектора и нужный Google-аккаунт"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "В карточке неверное время",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "открой Scheduled и поправь день, время и часовой пояс"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -151,21 +227,30 @@
       <details class="mobile-toc"><summary>Содержание</summary><a href="#nachalo">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</a><a href="#dostup">1. Убедись, что расписание доступно</a><a href="#istochniki">2. Подключи Gmail и Google Calendar</a><a href="#zadacha">3. Создай задачу на каждый понедельник</a><a href="#proverka">4. Проверь, что будильник заведён</a><a href="#primer">Пример с пустой почтой</a><a href="#oshibki">Если кнопки или результата нет</a><a href="#sources">Источники</a></details>
       <header id="nachalo"><p class="eyebrow">Claude.ai · Серия 17</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Электронный будильник на 7:30 для задачи Claude по расписанию с письмами и встречами" loading="eager" decoding="async" fetchpriority="high"><figcaption>Подключение почты и встреч, настройка времени запуска и проверка созданной задачи</figcaption></figure>
 <h1 class="article-title-v2">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</h1>
-<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<!-- seo:answer:start -->
+<p class="quick-answer" style="margin:20px 0">Как поставить задачи по расписанию в Claude для почты и календаря? Сначала убедись, что расписание доступно в аккаунте, затем подключи Gmail и Google Calendar. Создай повторяющуюся задачу и посмотри её настройки. Ниже есть пример понедельничного разбора и развилки для случая, когда кнопки или результата выполнения нет.</p>
+<!-- seo:answer:end -->
+<p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p>
 
-<p class="lead">Один раз задай Клоду работу на понедельник: разобрать письма за выходные и собрать план недели из календаря. Когда подключены Gmail и Google Calendar, такая задача может выполняться, даже если ноутбук закрыт</p><aside class="route-note"><h2>Короткий маршрут</h2><p>Проверь доступ → подключи Gmail и Google Calendar → создай задачу Scheduled → проверь расписание и результат</p></aside></header>
+<p class="lead">Один раз задай Клоду работу на понедельник: разобрать письма за выходные и собрать план недели из календаря. Когда подключены Gmail и Google Calendar, такая задача может выполняться, даже если ноутбук закрыт</p><aside class="route-note"><h2>Задачи по расписанию в Claude: короткий маршрут</h2><p>Проверь доступ → подключи Gmail и Google Calendar → создай задачу Scheduled → проверь расписание и результат</p></aside>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Письма и встречи к 7:30. Поставь Клоду задачу по расписанию</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header>
       <section class="content-section" id="dostup">
         <p class="section-label">Сначала проверь</p><h2>1. Убедись, что расписание доступно</h2>
         <p>Задачи Scheduled доступны на платных тарифах Pro, Max, Team и Enterprise. Если под полем сообщения виден переключатель <span class="path">Chat / Cowork</span>, у тебя прежний интерфейс: обычный Chat в нём не создаёт задачу Scheduled. В обновлённом интерфейсе, где этого переключателя нет, задачу можно поставить на расписание прямо из разговора</p>
-        <figure class="shot"><img src="assets/01-chat-cowork.png" alt="Реальный экран Claude с переключателем Chat и Cowork под полем ввода" loading="lazy"><figcaption>На снимке из аккаунта автора виден прежний интерфейс Chat / Cowork</figcaption></figure>
+        <figure class="shot"><img src="assets/01-chat-cowork.png" alt="Реальный экран Claude с переключателем Chat и Cowork под полем ввода" loading="lazy" width="1502" height="618"><figcaption>На снимке из аккаунта автора виден прежний интерфейс Chat / Cowork</figcaption></figure>
         <p>Свой тариф видно внизу меню профиля, рядом с именем. Все тарифы открываются пунктом View all plans. Путь к созданию Scheduled зависит от версии интерфейса</p>
-        <figure class="shot"><img src="assets/02-profile-menu.png" alt="Меню профиля Claude с пунктом View all plans" loading="lazy" style="width:400px"><figcaption>Меню профиля: тарифы открываются пунктом View all plans. Снимок из аккаунта автора статьи</figcaption></figure>
+        <figure class="shot"><img src="assets/02-profile-menu.png" alt="Меню профиля Claude с пунктом View all plans" loading="lazy" style="width:400px" width="514" height="458"><figcaption>Меню профиля: тарифы открываются пунктом View all plans. Снимок из аккаунта автора статьи</figcaption></figure>
         <div class="info-card"><p>Результат: ты знаешь тариф и видишь, какой интерфейс открыт. Это помогает найти правильный путь к Scheduled</p></div>
       </section>
-      <section class="content-section" id="istochniki"><p class="section-label">Без данных план будет пустым</p><h2>2. Подключи Gmail и Google Calendar</h2><p>В чате нажми <span class="path">+</span>, открой <span class="path">Connectors</span> и включи <span class="path">Gmail</span> и <span class="path">Google Calendar</span> по отдельности. Проверить подключения можно также через меню профиля <span class="path">Settings → Connectors</span>. При первом обращении к сервису войди в нужный Google-аккаунт и подтверди подключение. На Team и Enterprise коннекторы сначала должен разрешить Owner или Primary Owner организации</p><figure class="shot"><img src="assets/03-connectors.png" alt="Настройки Claude Connectors: Gmail и Google Calendar отмечены как Connected" loading="lazy"><figcaption>На реальном экране Settings → Connectors у Gmail и Google Calendar стоят галочки в колонке Status. Это признак подключения обоих сервисов, а не список найденных писем или событий. Снимок из аккаунта автора статьи</figcaption></figure><p>Проверь каждый источник до создания расписания. Отправь в чат проверочный запрос ниже. Если писем или событий сейчас нет, это нормальный ответ: главное, чтобы Клод проверил источники и не придумал данные</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-check">Скопировать</button><pre id="prompt-check">Проверь подключённые Gmail и Google Calendar. Покажи письма за последние два дня: отправитель, тема и ссылка на письмо. Затем покажи события этой недели: дата, время и ссылка на событие. Если писем или событий нет, так и скажи. Если нет доступа к источнику, сообщи об этом отдельно. Ничего не отправляй и не меняй</pre></div><div class="info-card"><p>Результат: Клод обращается к обоим источникам. Если он нашёл письма и события, указывает ссылки на них. Если выборка пустая, прямо сообщает об этом</p></div></section>
+      <section class="content-section" id="istochniki"><p class="section-label">Без данных план будет пустым</p><h2>2. Подключи Gmail и Google Calendar</h2><p>В чате нажми <span class="path">+</span>, открой <span class="path">Connectors</span> и включи <span class="path">Gmail</span> и <span class="path">Google Calendar</span> по отдельности. Проверить подключения можно также через меню профиля <span class="path">Settings → Connectors</span>. При первом обращении к сервису войди в нужный Google-аккаунт и подтверди подключение. На Team и Enterprise коннекторы сначала должен разрешить Owner или Primary Owner организации</p><figure class="shot"><img src="assets/03-connectors.png" alt="Настройки Claude Connectors: Gmail и Google Calendar отмечены как Connected" loading="lazy" width="1822" height="1144"><figcaption>На реальном экране Settings → Connectors у Gmail и Google Calendar стоят галочки в колонке Status. Это признак подключения обоих сервисов, а не список найденных писем или событий. Снимок из аккаунта автора статьи</figcaption></figure><p>Проверь каждый источник до создания расписания. Отправь в чат проверочный запрос ниже. Если писем или событий сейчас нет, это нормальный ответ: главное, чтобы Клод проверил источники и не придумал данные</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-check">Скопировать</button><pre id="prompt-check">Проверь подключённые Gmail и Google Calendar. Покажи письма за последние два дня: отправитель, тема и ссылка на письмо. Затем покажи события этой недели: дата, время и ссылка на событие. Если писем или событий нет, так и скажи. Если нет доступа к источнику, сообщи об этом отдельно. Ничего не отправляй и не меняй</pre></div><div class="info-card"><p>Результат: Клод обращается к обоим источникам. Если он нашёл письма и события, указывает ссылки на них. Если выборка пустая, прямо сообщает об этом</p></div></section>
       <section class="content-section" id="zadacha">
         <p class="section-label">Создание Scheduled</p><h2>3. Создай задачу на каждый понедельник</h2>
-        <p>В новом интерфейсе без переключателя Chat/Cowork вставь запрос в обычный разговор. В прежнем интерфейсе открой <span class="path">Cowork → Scheduled → New task → Create with Claude</span> и дай Клоду тот же запрос. Если Cowork недоступен, обычный Chat пока не сохранит автоматическое расписание</p><figure class="shot"><img src="assets/04-scheduled-menu.png" alt="Claude: под полем ввода выбран Cowork, в меню слева раздел Scheduled" loading="lazy"><figcaption>Под полем ввода выбран Cowork, слева в меню раздел Scheduled. Снимок из аккаунта автора статьи</figcaption></figure><figure class="shot"><img src="assets/05-scheduled-new-task.png" alt="Раздел Scheduled tasks с кнопкой New task справа вверху" loading="lazy"><figcaption>Раздел Scheduled: справа вверху кнопка New task, ниже готовые примеры задач. Снимок из аккаунта автора статьи</figcaption></figure>
+        <p>В новом интерфейсе без переключателя Chat/Cowork вставь запрос в обычный разговор. В прежнем интерфейсе открой <span class="path">Cowork → Scheduled → New task → Create with Claude</span> и дай Клоду тот же запрос. Если Cowork недоступен, обычный Chat пока не сохранит автоматическое расписание</p><figure class="shot"><img src="assets/04-scheduled-menu.png" alt="Claude: под полем ввода выбран Cowork, в меню слева раздел Scheduled" loading="lazy" width="1762" height="1414"><figcaption>Под полем ввода выбран Cowork, слева в меню раздел Scheduled. Снимок из аккаунта автора статьи</figcaption></figure><figure class="shot"><img src="assets/05-scheduled-new-task.png" alt="Раздел Scheduled tasks с кнопкой New task справа вверху" loading="lazy" width="1600" height="1444"><figcaption>Раздел Scheduled: справа вверху кнопка New task, ниже готовые примеры задач. Снимок из аккаунта автора статьи</figcaption></figure>
         <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-schedule">Скопировать</button><pre id="prompt-schedule">Создай повторяющуюся задачу на каждый понедельник в 7:30 утра по моему часовому поясу. Проверь подключённый Gmail: найди важные письма, пришедшие в субботу и воскресенье. Проверь подключённый Google Calendar: найди события предстоящей недели. Собери короткий план недели: что требует ответа, какие встречи и сроки ждут меня, к чему подготовиться в среду. Укажи ссылки на найденные письма и события. Если писем или событий нет, прямо сообщи об этом. Если к Gmail или Calendar нет доступа, тоже скажи об этом вместо выдуманного плана. Письма не отправляй и события не меняй</pre></div>
         <p>Ответь на уточняющие вопросы Claude. Проверь название задачи, инструкцию, день, время и часовой пояс. Если всё верно, нажми <span class="path">Schedule</span></p>
         <div class="info-card"><p>Результат: задача появилась в Scheduled. Сам отправленный запрос без подтверждения кнопкой Schedule не означает, что запуск сохранён</p></div>
@@ -176,15 +261,19 @@
         <p>После первого запуска открой результат. Там должны быть найденные письма за выходные и события недели со ссылками либо честное сообщение, что за выбранный период ничего не найдено. Если источники не подключились, исправь доступ и повтори запуск. Задача выполняется на стороне Claude, поэтому ноутбук может быть закрыт</p>
         <div class="info-card"><p>Результат: задача видна в Scheduled с правильным временем. После запуска план опирается на подключённые источники</p></div>
       </section>
-      <section class="content-section" id="primer"><p class="section-label">Когда в почте и календаре пусто</p><h2>Пример с пустой почтой</h2><p>Для пробного запуска можно временно добавить в Google Calendar три вымышленных события на следующую неделю. Пометь каждое словом «ТЕСТ», чтобы потом быстро найти и удалить:</p><ul><li>Понедельник, 11:00 - ТЕСТ: звонок по проекту</li><li>Среда, 15:00 - ТЕСТ: маникюр</li><li>Пятница, 18:00 - ТЕСТ: оплатить коммунальные услуги</li></ul><figure class="shot"><img src="assets/06-otvet-claude-test.png" alt="Ответ Claude: календарь недели с тестовыми событиями и ссылками Открыть событие" loading="lazy" style="width:480px"><figcaption>Настоящий ответ Claude по тестовым событиям в календаре автора: дни, время и ссылка на каждое событие. Показано начало списка</figcaption></figure><div class="info-card"><p>В своём ответе проверь, что ссылки открывают нужные события, и удали тестовые записи после проверки</p></div><p>Можно обойтись и без тестовых событий. Тогда пустой список встреч будет корректным результатом, если Claude действительно проверил календарь</p></section>
+      <section class="content-section" id="primer"><p class="section-label">Когда в почте и календаре пусто</p><h2>Пример с пустой почтой</h2><p>Для пробного запуска можно временно добавить в Google Calendar три вымышленных события на следующую неделю. Пометь каждое словом «ТЕСТ», чтобы потом быстро найти и удалить:</p><ul><li>Понедельник, 11:00 - ТЕСТ: звонок по проекту</li><li>Среда, 15:00 - ТЕСТ: маникюр</li><li>Пятница, 18:00 - ТЕСТ: оплатить коммунальные услуги</li></ul><figure class="shot"><img src="assets/06-otvet-claude-test.png" alt="Ответ Claude: календарь недели с тестовыми событиями и ссылками Открыть событие" loading="lazy" style="width:480px" width="1032" height="437"><figcaption>Настоящий ответ Claude по тестовым событиям в календаре автора: дни, время и ссылка на каждое событие. Показано начало списка</figcaption></figure><div class="info-card"><p>В своём ответе проверь, что ссылки открывают нужные события, и удали тестовые записи после проверки</p></div><p>Можно обойтись и без тестовых событий. Тогда пустой список встреч будет корректным результатом, если Claude действительно проверил календарь</p></section>
       <section class="content-section" id="oshibki">
         <p class="section-label">Если что-то не сошлось</p><h2>Если кнопки или результата нет</h2>
         <details class="faq-item"><summary>Нет Schedule в обычном чате</summary><p>проверь платный тариф и версию интерфейса. Если виден переключатель Chat/Cowork, путь к Scheduled проходит через Cowork. Обычный Chat в прежнем интерфейсе не сохраняет автоматическое расписание</p></details><details class="faq-item"><summary>Задача создана, но нет писем или встреч</summary><p>проверь, есть ли они за указанные дни, оба коннектора и нужный Google-аккаунт</p></details><details class="faq-item"><summary>В карточке неверное время</summary><p>открой Scheduled и поправь день, время и часовой пояс</p></details>
       </section>
       <section class="content-section" id="sources"><p class="section-label">Проверено 26 сентября 2026</p><h2>Источники</h2><ul class="sources"><li><a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork">Claude Help Center: тарифы, создание и проверка Scheduled tasks</a></li><li><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors">Claude Help Center: Gmail и Google Calendar, меню Connectors</a></li><li><a href="https://support.claude.com/en/articles/16761823-claude-cowork-and-chat-are-one-claude">Claude Help Center: постепенный переход к объединённому интерфейсу и общие лимиты</a></li><li><a href="https://support.claude.com/en/articles/8114491-get-started-with-claude">Claude Help Center: повторные вопросы и лимиты Free</a></li><li><a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan">Claude Help Center: лимиты Pro</a></li></ul></section>
-      <p class="cta-question">Письма разобраны к утру. Что ещё можно отдать?</p>
+
+<!-- seo:related:start -->
+<section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/whatsapp-nomer-dlya-agenta/">Свой номер WhatsApp для ИИ-агента: пошагово</a></li></ul></section>
+<!-- seo:related:end -->
+<p class="cta-question">Письма разобраны к утру. Что ещё можно отдать?</p>
 <section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
-    </article></main>
+</article></main>
     <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Дальше по теме</p>
       <h2>Gmail, Google Drive и Calendar внутри Claude</h2>

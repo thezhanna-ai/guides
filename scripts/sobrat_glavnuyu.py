@@ -34,6 +34,7 @@ def privacy_fragment(name):
 
 def dobavit_privacy(html):
     """Один локальный загрузчик и одна плашка, без внешних запросов из HTML."""
+    html = ubrat_seo(html)
     html = re.sub(r'<!-- privacy:(head|footer|banner):start -->.*?<!-- privacy:\1:end -->\s*',
                   '', html, flags=re.S)
     head = ('<!-- privacy:head:start -->\n'
@@ -55,7 +56,7 @@ def dobavit_privacy(html):
 
 
 def sobrat_politiku():
-    return dobavit_privacy(privacy_fragment('shablon_politiki.html') + '\n')
+    return seo_for_page(dobavit_privacy(privacy_fragment('shablon_politiki.html') + '\n'), 'politika/index.html')
 
 SHAPKA = {
     "nadzagolovok": "Инструкции по нейросетям",
@@ -379,7 +380,7 @@ def sobrat_stranicu():
     po_trassam = zagruzit_statyi()
     oblozhki = zagruzit_oblozhki()
     shablon = (KORNI / "scripts" / "shablon_glavnoy.html").read_text(encoding="utf-8")
-    return dobavit_privacy(shablon.format(
+    return seo_for_page(dobavit_privacy(shablon.format(
         title=ekranirovat(SHAPKA["title"]),
         description=ekranirovat(SHAPKA["description"]),
         nadzagolovok=ekranirovat(SHAPKA["nadzagolovok"]),
@@ -399,7 +400,7 @@ def sobrat_stranicu():
         kontakt=ekranirovat(SHAPKA["kontakt"]),
         avtor_tekst=ekranirovat(SHAPKA["avtor_tekst"]),
         podval_avtor=ekranirovat(SHAPKA["podval_avtor"]),
-    ))
+    )), "index.html")
 
 
 METKA_STIL = {
@@ -507,11 +508,157 @@ def sobrat_serii(stranicy):
     return stranicy
 
 
+def seo_lastmod(metadata):
+    """Сохранённая дата значимой правки. Пересборка не обновляет её сама."""
+    from datetime import date
+    value = metadata.get('lastmod', '')
+    if value:
+        date.fromisoformat(value)
+    return value
+
+
+def seo_plain(fragment):
+    from html import unescape
+    fragment = re.sub(r'<(script|style)\b[^>]*>.*?</\1>', '', fragment, flags=re.S | re.I)
+    fragment = re.sub(r'</?(?:p|div|li|ul|ol|pre|blockquote)\b[^>]*>|<br\b[^>]*>', ' ', fragment, flags=re.I)
+    return ' '.join(unescape(re.sub(r'<[^>]+>', '', fragment)).split())
+
+
+def ubrat_seo(html):
+    for part in ('schema', 'canonical', 'breadcrumbs', 'answer', 'related', 'faq'):
+        html = re.sub(r'\s*<!-- seo:' + part + r':start -->.*?<!-- seo:' + part + r':end -->\s*', '\n', html, flags=re.S)
+    return html
+
+
+def seo_for_page(html, rel):
+    source = KORNI / 'data' / 'seo.json'
+    metadata = json.loads(source.read_text(encoding='utf-8')) if source.exists() else {}
+    return dobavit_seo(html, DOMEN + rel.removesuffix('index.html'), metadata[rel]) if rel in metadata else html
+
+
+def dobavit_seo(html, url, metadata):
+    """Разметка берёт заголовок и FAQ из текущего видимого HTML."""
+    from html import escape
+    html = ubrat_seo(html)
+    canonical = '<!-- seo:canonical:start -->\n<link rel="canonical" href="' + escape(url, quote=True) + '">\n<!-- seo:canonical:end -->'
+    pattern = r'<link\b(?=[^>]*\brel\s*=\s*[\'"]canonical[\'"])[^>]*>'
+    html = re.sub(pattern, '', html, flags=re.I)
+    html = re.sub(r'\s*</head>', '\n' + canonical + '\n</head>', html, count=1)
+    for field, tag in [('title', 'title'), ('description', 'description')]:
+        if not metadata.get(field):
+            continue
+        value = escape(metadata[field], quote=True)
+        if tag == 'title':
+            html = re.sub(r'<title>.*?</title>', '<title>' + value + '</title>', html, count=1, flags=re.S)
+            html = re.sub(r'(<meta\b[^>]*property="og:title"[^>]*content=")[^"]*(")', lambda m: m[1] + value + m[2], html)
+        else:
+            html = re.sub(r'(<meta\b[^>]*name="description"[^>]*content=")[^"]*(")', lambda m: m[1] + value + m[2], html)
+            html = re.sub(r'(<meta\b[^>]*property="og:description"[^>]*content=")[^"]*(")', lambda m: m[1] + value + m[2], html)
+    heading = re.search(r'<h1\b[^>]*>(.*?)</h1>', html, re.S | re.I)
+    if not heading:
+        raise ValueError(url + ': отсутствует H1')
+    title = seo_plain(heading[1])
+    graph = []
+    is_article = '/claude-ai/' in url
+    if is_article:
+        answer = metadata.get('quick_answer')
+        if answer:
+            if not 40 <= len(answer.split()) <= 60:
+                raise ValueError(url + ': быстрый ответ должен содержать 40-60 слов')
+            fragment = '\n<!-- seo:answer:start -->\n<p class="quick-answer" style="margin:20px 0">' + escape(answer) + '</p>\n<!-- seo:answer:end -->'
+            badge = re.match(r'\s*<p\b[^>]*class="[^"]*uroven-metka[^"]*"[^>]*>.*?</p>', html[heading.end():], re.S)
+            end = heading.end() + (badge.end() if badge else 0)
+            html = html[:end] + fragment + html[end:]
+        crumbs = '<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">' + escape(title) + '</span></nav>'
+        end = re.search(r'<h1\b[^>]*>.*?</h1>', html, re.S).end()
+        # После вводных абзацев, перед первым разделом: не разрывает обложку и H1.
+        header_end = html.find('</header>', end)
+        end = header_end if header_end != -1 else html.find('</main>', end)
+        if end == -1:
+            end = html.find('</body>')
+        html = html[:end] + '\n<!-- seo:breadcrumbs:start -->\n' + crumbs + '\n<!-- seo:breadcrumbs:end -->\n' + html[end:]
+        related = []
+        for item in metadata.get('related', []):
+            href = item['url']
+            if not re.fullmatch(r'/claude-ai/[a-z0-9]+(?:-[a-z0-9]+)*/', href):
+                raise ValueError('Неверный адрес тематической ссылки: ' + href)
+            slug = href.strip('/').split('/')[-1]
+            if re.search(r'href=[\'"](?:\.\./|/claude-ai/)' + re.escape(slug) + r'/[\'"]', html):
+                continue
+            related.append('<li><a href="' + href + '">' + escape(item['title']) + '</a></li>')
+        if related:
+            fragment = '<!-- seo:related:start -->\n<section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul>' + ''.join(related) + '</ul></section>\n<!-- seo:related:end -->'
+            # Перед финальной рекламной связкой, не разрывает вопрос, CTA и footer
+            ends = [html.find(t) for t in ('<p class="cta-question"', '<section class="cta"', '</article>', '</main>', '<footer') if html.find(t) != -1]
+            end = min(ends) if ends else html.find('</body>')
+            html = html[:end] + '\n' + fragment + '\n' + html[end:]
+        article = {'@type': 'Article', '@id': url + '#article', 'headline': title, 'mainEntityOfPage': url, 'inLanguage': 'ru', 'author': {'@type': 'Person', 'name': 'Жанна Слепова', 'url': DOMEN + '#about'}}
+        modified = seo_lastmod(metadata)
+        if modified:
+            article['dateModified'] = modified
+        image = re.search(r'<meta\b[^>]*property="og:image"[^>]*content="([^"]+)"', html)
+        if image:
+            from html import unescape
+            article['image'] = unescape(image[1])
+        graph.append(article)
+        graph.append({'@type': 'BreadcrumbList', '@id': url + '#breadcrumbs', 'itemListElement': [{'@type': 'ListItem', 'position': 1, 'name': 'Инструкции по нейросетям', 'item': DOMEN}, {'@type': 'ListItem', 'position': 2, 'name': title, 'item': url}]})
+        search_faq = metadata.get('search_faq', [])
+        if search_faq:
+            details = ''.join('<details class="faq-item"><summary>' + escape(x['question']) + '</summary><p>' + escape(x['answer']) + '</p></details>' for x in search_faq)
+            fragment = '<!-- seo:faq:start -->\n<section class="seo-faq" aria-label="Вопросы из поиска" style="margin:36px 0"><h2>Что ещё спрашивают</h2>' + details + '</section>\n<!-- seo:faq:end -->'
+            ends = [html.find(t) for t in ('<!-- seo:related:start -->', '<p class="cta-question"', '<section class="cta"', '</article>', '</main>', '<footer') if html.find(t) != -1]
+            end = min(ends) if ends else html.find('</body>')
+            html = html[:end] + '\n' + fragment + '\n' + html[end:]
+        questions = []
+        for detail in re.findall(r'<details\b[^>]*class="[^"]*\bfaq-item\b[^"]*"[^>]*>(.*?)</details>', html, re.S):
+            summary = re.search(r'<summary\b[^>]*>(.*?)</summary>', detail, re.S)
+            if not summary:
+                raise ValueError(url + ': FAQ без вопроса')
+            questions.append({'@type': 'Question', 'name': seo_plain(summary[1]), 'acceptedAnswer': {'@type': 'Answer', 'text': seo_plain(re.sub(r'<button\b[^>]*>.*?</button>', '', detail[summary.end():], flags=re.S))}})
+        if questions:
+            graph.append({'@type': 'FAQPage', '@id': url + '#faq', 'mainEntity': questions})
+    else:
+        graph.append({'@type': 'CollectionPage' if url == DOMEN else 'WebPage', '@id': url + '#page', 'name': title, 'url': url, 'inLanguage': 'ru'})
+    # JSON inside HTML must not permit </script> or markup injection.
+    schema = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, indent=2).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
+    block = '<!-- seo:schema:start -->\n<script type="application/ld+json" id="seo-schema">\n' + schema + '\n</script>\n<!-- seo:schema:end -->\n'
+    return html.replace('</head>', block + '</head>', 1)
+
+
+def sobrat_seo(stranicy):
+    source = KORNI / 'data' / 'seo.json'
+    metadata = json.loads(source.read_text(encoding='utf-8')) if source.exists() else {}
+    for page, html in list(stranicy.items()):
+        if page.suffix != '.html':
+            continue
+        rel = page.relative_to(KORNI).as_posix()
+        # Сохраняет поведение сборщика у ещё не настроенных копий и тестовых фикстур.
+        if rel in metadata:
+            stranicy[page] = dobavit_seo(html, DOMEN + rel.removesuffix('index.html'), metadata[rel])
+    if metadata:
+        from html import escape
+        xml = stranicy[KORNI / 'sitemap.xml']
+        def dated(match):
+            url = match[1]
+            rel = url.removeprefix(DOMEN) + 'index.html'
+            modified = seo_lastmod(metadata.get(rel, {}))
+            return '<url><loc>' + url + '</loc>' + ('<lastmod>' + escape(modified) + '</lastmod>' if modified else '') + '</url>'
+        stranicy[KORNI / 'sitemap.xml'] = re.sub(r'<url><loc>(.*?)</loc></url>', dated, xml)
+    bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'Anthropic-ai', 'PerplexityBot', 'Google-Extended', 'GoogleOther']
+    stranicy[KORNI / 'robots.txt'] = 'User-agent: *\nAllow: /\n\n' + ''.join('User-agent: ' + bot + '\nAllow: /\n\n' for bot in bots) + 'Sitemap: ' + DOMEN + 'sitemap.xml\n'
+    registry = json.loads(REESTR.read_text(encoding='utf-8'))['statyi']
+    live = [x for x in registry if x.get('status') == 'live' and not x.get('noindex_reason')]
+    lines = ['# Про новое', '', '> Инструкции по нейросетям для людей без опыта программирования. Автор: Жанна Слепова', '', '%d инструкций. Выбор материалов: [каталог](%s)' % (len(live), DOMEN), '', '## Начать', '', '- [Доступ к Claude](%sclaude-ai/podklyuchenie-iz-rossii/)' % DOMEN, '- [Первый проект](%sclaude-ai/pervyy-proekt-v-claude/)' % DOMEN, '- [Скиллы Claude Code](%sclaude-ai/pyat-skillov-claude-code/)' % DOMEN, '', '## Служебные сведения', '', '- [XML-карта всех канонических страниц](%ssitemap.xml)' % DOMEN, '- [Политика данных](%spolitika/)' % DOMEN, '', 'Контакт: pronovoe.site@yandex.ru', '']
+    # Полный корпус уже в sitemap; llms содержит выбранные входы, а не её дубль.
+    stranicy[KORNI / 'llms.txt'] = '\n'.join(lines)
+    return stranicy
+
+
 def main():
     stranica = sobrat_stranicu()
     podpisi = sobrat_metki_urovnya(sobrat_podpisi())
-    rezultaty = sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
-                             KORNI / "politika" / "index.html": sobrat_politiku()})
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
     proverka = "--proverit" in sys.argv
 
     if proverka:
@@ -521,7 +668,7 @@ def main():
             print("Главная совпадает с реестром")
             print("Подписи %d статей совпадают с реестром" % len(podpisi))
             print("Индексация %d статей, sitemap.xml и robots.txt совпадают с реестром"
-                  % (len(rezultaty) - 4))
+                  % (len(json.loads(REESTR.read_text(encoding="utf-8"))["statyi"])))
             print("Политика данных и общие блоки согласия совпадают с шаблонами")
             return 0
         for page in razlichiya:
@@ -534,7 +681,7 @@ def main():
             page.parent.mkdir(parents=True, exist_ok=True)
             page.write_text(html, encoding="utf-8")
     print("Подписи %d статей собраны из реестра" % len(podpisi))
-    print("Индексация %d статей, sitemap.xml и robots.txt собраны из реестра" % (len(rezultaty) - 4))
+    print("Индексация %d статей, sitemap.xml и robots.txt собраны из реестра" % (len(json.loads(REESTR.read_text(encoding="utf-8"))["statyi"])))
     print("Политика данных и общие блоки согласия собраны из шаблонов")
     po_trassam = zagruzit_statyi()
     vsego = sum(len(v) for v in po_trassam.values())

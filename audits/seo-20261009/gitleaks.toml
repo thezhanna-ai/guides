@@ -1,0 +1,12 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "IndexNow requires this public verification token to be served on the website; it is not an authentication secret"
+condition = "AND"
+paths = ['data/indexnow\.json$', 'audits/seo-20261009/indexnow-dry-run\.json$']
+regexes = ['29e2ef192d471921d2f7b2404cb1d633']
+
+[[allowlists]]
+description = "Unpublished captcha response cache, excluded from Git via .gitignore"
+paths = ['audits/seo-20261009/yandex-site\.html$']

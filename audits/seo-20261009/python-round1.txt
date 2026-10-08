@@ -1,0 +1,73 @@
+...F...............F...........F...........F.........................................................................FFF
+======================================================================
+FAIL: test_generator_retains_the_creative_and_static_disclosure (test_erid.EridTest.test_generator_retains_the_creative_and_static_disclosure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_erid.py", line 94, in test_generator_retains_the_creative_and_static_disclosure
+    self.assertEqual(generator.sobrat_stranicu(), (ROOT / "index.html").read_text())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '<!do[24452 chars]->\n</head>\n<body>\n  <header class="cover">\[65926 chars]l>\n' != '<!do[24452 chars]->\n<link rel="canonical" href="https://pronov[66360 chars]l>\n'
+
+======================================================================
+FAIL: test_policy_is_generated_and_in_sitemap_without_article_card (test_privacy.PrivacyTest.test_policy_is_generated_and_in_sitemap_without_article_card)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_privacy.py", line 67, in test_policy_is_generated_and_in_sitemap_without_article_card
+    self.assertEqual(module.sobrat_politiku(), (ROOT / 'politika/index.html').read_text())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '<!do[320 chars]2">\n<link rel="canonical" href="https://prono[26178 chars]l>\n' != '<!do[320 chars]2">\n\n<title>Политика обработки персональных [26584 chars]l>\n'
+Diff is 27305 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_article_schema_and_faq_are_visible_and_exact (test_seo.SeoTest.test_article_schema_and_faq_are_visible_and_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_seo.py", line 48, in test_article_schema_and_faq_are_visible_and_exact
+    self.assertEqual(schema['acceptedAnswer']['text'], ' '.join(node.all(tag='p')[0].text_content().split()))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'Сделай один отдельный постер только по прикреплённой фотографииКопировать' != 'Сделай один отдельный постер только по прикреплённой фотографии'
+- Сделай один отдельный постер только по прикреплённой фотографииКопировать
+?                                                                ----------
++ Сделай один отдельный постер только по прикреплённой фотографии
+
+
+======================================================================
+FAIL: test_generator_is_reproducible_and_missing_or_unsafe_images_get_placeholders (test_site.ArticleImagesTest.test_generator_is_reproducible_and_missing_or_unsafe_images_get_placeholders)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_site.py", line 340, in test_generator_is_reproducible_and_missing_or_unsafe_images_get_placeholders
+    self.assertEqual(self.generator.sobrat_stranicu(), HOME.read_text())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '<!do[24452 chars]->\n</head>\n<body>\n  <header class="cover">\[65926 chars]l>\n' != '<!do[24452 chars]->\n<link rel="canonical" href="https://pronov[66360 chars]l>\n'
+
+======================================================================
+FAIL: test_level_mark_right_after_article_title (test_site.RubrikiIMetkiTest.test_level_mark_right_after_article_title) (slug='shest-skillov')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_site.py", line 1389, in test_level_mark_right_after_article_title
+    self.assertTrue(after.startswith('<p class="uroven-metka %s"' % a["uroven"]))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_level_mark_right_after_article_title (test_site.RubrikiIMetkiTest.test_level_mark_right_after_article_title) (slug='svoy-sayt-ne-bliznec')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_site.py", line 1389, in test_level_mark_right_after_article_title
+    self.assertTrue(after.startswith('<p class="uroven-metka %s"' % a["uroven"]))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_level_mark_right_after_article_title (test_site.RubrikiIMetkiTest.test_level_mark_right_after_article_title) (slug='kopirovat-stil-foto-v-chatgpt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_site.py", line 1389, in test_level_mark_right_after_article_title
+    self.assertTrue(after.startswith('<p class="uroven-metka %s"' % a["uroven"]))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 118 tests in 2.248s
+
+FAILED (failures=7)
