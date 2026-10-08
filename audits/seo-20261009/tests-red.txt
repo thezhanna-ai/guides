@@ -1,0 +1,55 @@
+FFEEE
+======================================================================
+ERROR: test_llms_and_bot_controls_exist (test_seo.SeoTest.test_llms_and_bot_controls_exist)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_seo.py", line 53, in test_llms_and_bot_controls_exist
+    llms = (ROOT / 'llms.txt').read_text()
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/zslepova/IvanOS/.worktrees/seo-audit/llms.txt'
+
+======================================================================
+ERROR: test_missing_or_invalid_lastmod_does_not_get_today (test_seo.SeoTest.test_missing_or_invalid_lastmod_does_not_get_today)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_seo.py", line 69, in test_missing_or_invalid_lastmod_does_not_get_today
+    self.assertEqual(module.seo_lastmod({}), '')
+                     ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'indexing_generator' has no attribute 'seo_lastmod'
+
+======================================================================
+ERROR: test_schema_serialization_cannot_end_script (test_seo.SeoTest.test_schema_serialization_cannot_end_script)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_seo.py", line 63, in test_schema_serialization_cannot_end_script
+    result = module.dobavit_seo(html, 'https://pronovoe.com/claude-ai/test/', {'lastmod': '2026-10-08', 'quick_answer': ' '.join(['слово'] * 40)})
+             ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'indexing_generator' has no attribute 'dobavit_seo'
+
+======================================================================
+FAIL: test_all_47_canonical_pages_have_dated_sitemap (test_seo.SeoTest.test_all_47_canonical_pages_have_dated_sitemap)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_seo.py", line 21, in test_all_47_canonical_pages_have_dated_sitemap
+    self.assertIsNotNone(date, url)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+AssertionError: unexpectedly None : https://pronovoe.com/
+
+======================================================================
+FAIL: test_article_schema_and_faq_are_visible_and_exact (test_seo.SeoTest.test_article_schema_and_faq_are_visible_and_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/seo-audit/tests/test_seo.py", line 32, in test_article_schema_and_faq_are_visible_and_exact
+    self.assertEqual(len(scripts), 1, str(path))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : /Users/zslepova/IvanOS/.worktrees/seo-audit/claude-ai/pdf-v-markdown-markitdown/index.html
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.004s
+
+FAILED (failures=2, errors=3)

@@ -3,6 +3,7 @@ import contextlib
 import importlib.util
 import io
 import json
+import re
 from pathlib import Path
 import shutil
 import tempfile
@@ -59,7 +60,8 @@ class IndexingTest(unittest.TestCase):
         self.assertEqual(urls, expected)
         self.assertEqual(len(urls), len(set(urls)))
         self.assertEqual(len(urls), 52)
-        self.assertNotIn("lastmod", (ROOT / "sitemap.xml").read_text())
+        self.assertEqual(len(tree_dates := ET.fromstring((ROOT / "sitemap.xml").read_text()).findall("s:url/s:lastmod", NS)), len(expected))
+        self.assertTrue(all(re.fullmatch(r"\d{4}-\d{2}-\d{2}", x.text) for x in tree_dates))
 
     def test_robots_announces_sitemap_without_blocking_noindex_crawling(self):
         text = (ROOT / "robots.txt").read_text()

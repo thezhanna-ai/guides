@@ -175,7 +175,7 @@
     figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
     :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
 </style>
-<link rel="canonical" href="https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/">
+
 
 
   <meta property="og:image" content="https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/assets/oblozhka.webp">
@@ -207,30 +207,77 @@
     @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
 </style>
 <!-- erid:style:end -->
+
+
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/#article",
+      "headline": "Как скопировать стиль любого фото в ChatGPT: один промпт и JSON",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-09",
+      "image": "https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Как скопировать стиль любого фото в ChatGPT: один промпт и JSON",
+          "item": "https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
   <div class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Гайды по нейросетям</a><div class="header-actions"><span class="handout-title">Стиль любого фото</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button></div></div></div></div>
   <div class="page-shell">
-    <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p><a href="#primery">Что получится из одного фото</a><a href="#chto-ponadobitsya">Что понадобится</a><a href="#chto-takoe-json">Что такое JSON простыми словами</a><a href="#shag-1-retsept">Шаг 1. Получи рецепт образца</a><a href="#shag-2-kopirovanie">Шаг 2. Скопируй JSON</a><a href="#shag-3-svoy-foto">Шаг 3. Перенеси стиль на своё фото</a><a href="#odezhda-i-fon">Как поменять ещё и одежду с фоном</a><a href="#odna-fraza">Одна фраза на все случаи</a><a href="#esli-ne-poluchaetsya">Если что-то не получается</a><a href="#stalo-ponyatnee">Стало понятнее?</a></nav>
+    <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p><a href="#primery">Скопировать стиль фото в ChatGPT: что получится</a><a href="#chto-ponadobitsya">Что понадобится</a><a href="#chto-takoe-json">Что такое JSON простыми словами</a><a href="#shag-1-retsept">Шаг 1. Получи рецепт образца</a><a href="#shag-2-kopirovanie">Шаг 2. Скопируй JSON</a><a href="#shag-3-svoy-foto">Шаг 3. Перенеси стиль на своё фото</a><a href="#odezhda-i-fon">Как поменять ещё и одежду с фоном</a><a href="#odna-fraza">Одна фраза на все случаи</a><a href="#esli-ne-poluchaetsya">Если что-то не получается</a><a href="#stalo-ponyatnee">Стало понятнее?</a></nav>
     <main>
       <p class="eyebrow">ФОТО / стиль любого снимка</p>
       <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Исходный портрет мужчины и два его результата с перенесённым фотографическим стилем в ChatGPT" loading="eager" decoding="async" fetchpriority="high"><figcaption>Рецепт образца в JSON, применение к своему снимку и смена одежды с фоном</figcaption></figure>
 <h1 class="article-title-v2">Как скопировать стиль любого фото в ChatGPT: один промпт и JSON</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
-
-
-      <p class="lead">Есть обычное фото: ты у окна, с друзьями, на прогулке. А хочется чего-то творческого: кадр как из журнала, из кино или из студии со светом. Раньше за этим шли к фотографу и дизайнеру. Сейчас нейросети исполняют такие желания как золотая рыбка, за пару минут</p>
+<!-- seo:answer:start -->
+<p class="quick-answer" style="margin:20px 0">Как скопировать стиль фото в ChatGPT, сохранив свой снимок основой? Сначала прикрепи изображение-образец и попроси описать его стиль в JSON, то есть в записи с отдельными полями. Затем перенеси эту запись в новый запрос со своим фото. Ниже есть готовые фразы и отдельная развилка для одежды и фона</p>
+<!-- seo:answer:end -->
+<p class="lead">Есть обычное фото: ты у окна, с друзьями, на прогулке. А хочется чего-то творческого: кадр как из журнала, из кино или из студии со светом. Раньше за этим шли к фотографу и дизайнеру. Сейчас нейросети исполняют такие желания как золотая рыбка, за пару минут</p>
       <p class="lead">Нужно всего две вещи: найти образ, который нравится, и сделать три шага в ChatGPT. Все фразы ниже готовые, их можно просто скопировать</p>
 
 
       <a class="quick-link" href="#shag-1-retsept">К первому шагу ↓</a>
-      <details class="mobile-toc"><summary>Содержание статьи</summary><a href="#primery">Что получится из одного фото</a><a href="#chto-ponadobitsya">Что понадобится</a><a href="#chto-takoe-json">Что такое JSON простыми словами</a><a href="#shag-1-retsept">Шаг 1. Получи рецепт образца</a><a href="#shag-2-kopirovanie">Шаг 2. Скопируй JSON</a><a href="#shag-3-svoy-foto">Шаг 3. Перенеси стиль на своё фото</a><a href="#odezhda-i-fon">Как поменять ещё и одежду с фоном</a><a href="#odna-fraza">Одна фраза на все случаи</a><a href="#esli-ne-poluchaetsya">Если что-то не получается</a><a href="#stalo-ponyatnee">Стало понятнее?</a></details>
-      <section class="content-section" id="primery"><h2>Что получится из одного фото</h2>
+      <details class="mobile-toc"><summary>Содержание статьи</summary><a href="#primery">Скопировать стиль фото в ChatGPT: что получится</a><a href="#chto-ponadobitsya">Что понадобится</a><a href="#chto-takoe-json">Что такое JSON простыми словами</a><a href="#shag-1-retsept">Шаг 1. Получи рецепт образца</a><a href="#shag-2-kopirovanie">Шаг 2. Скопируй JSON</a><a href="#shag-3-svoy-foto">Шаг 3. Перенеси стиль на своё фото</a><a href="#odezhda-i-fon">Как поменять ещё и одежду с фоном</a><a href="#odna-fraza">Одна фраза на все случаи</a><a href="#esli-ne-poluchaetsya">Если что-то не получается</a><a href="#stalo-ponyatnee">Стало понятнее?</a></details>
+      <section class="content-section" id="primery"><h2>Скопировать стиль фото в ChatGPT: что получится</h2>
       <p class="section-intro">Одно и то же фото и четыре разных образца: летний журнальный кадр, вечер в кафе, красный студийный свет и Томас Шелби из «Острых козырьков»</p>
       <figure class="shot-fig ishodnoe"><div class="shot"><img src="assets/primer-do.webp" alt="Исходное фото: парень с букетом на цветочном рынке" loading="lazy" width="900" height="684"><button class="zoom" type="button" aria-label="Открыть крупнее: Исходное фото">Открыть крупнее</button></div><figcaption>Исходное фото</figcaption></figure>
       <div class="gallery">
@@ -309,7 +356,11 @@
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
-    </main>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Как скопировать стиль любого фото в ChatGPT: один промпт и JSON</span></nav>
+<!-- seo:breadcrumbs:end -->
+</main>
     <aside class="related-plaque" aria-label="Похожая инструкция">
       <p class="plaque-label">Ещё про фото</p>
       <h2>Постер из одного фото</h2>

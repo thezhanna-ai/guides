@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Артефакты в Claude: как вынести чек-лист или калькулятор из переписки в отдельное окно, править словами и отдать работу по ссылке">
   <meta name="theme-color" content="#F8F7F2">
-  <meta property="og:title" content="Артефакты: ответ Клода в отдельном окне, а не в переписке">
+  <meta property="og:title" content="Артефакты в Claude: ответ в отдельном окне">
   <meta property="og:description" content="Что такое артефакт, как попросить его словами, как работать прямо в окне и когда открывать доступ по ссылке">
-  <title>Артефакты: ответ Клода в отдельном окне, а не в переписке</title>
+  <title>Артефакты в Claude: ответ в отдельном окне</title>
   <link href="../../assets/fonts/fonts.css" rel="stylesheet">
   <style>
     :root {
@@ -268,10 +268,118 @@
     @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
 </style>
 <!-- erid:style:end -->
+
+
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/artefakty-v-claude/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/artefakty-v-claude/#article",
+      "headline": "Артефакты: ответ Клода в отдельном окне, а не в переписке",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/artefakty-v-claude/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-09",
+      "image": "https://pronovoe.com/claude-ai/artefakty-v-claude/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/artefakty-v-claude/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Артефакты: ответ Клода в отдельном окне, а не в переписке",
+          "item": "https://pronovoe.com/claude-ai/artefakty-v-claude/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/artefakty-v-claude/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Нужен ли платный тариф",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Артефакты работают на бесплатном тарифе, на Pro и Max, а также в командных"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что вообще может стать артефактом",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Документ или текст, таблица, схема и блок-схема, картинка-рисунок, страница сайта и небольшое работающее приложение вроде калькулятора"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Работает ли без интернета",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Чтобы открыть - нет: артефакт лежит на серверах Клода, и телефон, и браузер тянут его оттуда. А вот дальше интернет уже не нужен: сам расчёт идёт внутри твоего устройства, числа в чат не уходят и лимиты на это не тратятся"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли вернуть прошлую версию",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да, словами в чат: «верни предыдущий вариант». Клод помнит, каким артефакт был до правки, и вернёт его в то же окно"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужен ли аккаунт тому, кому дал ссылку",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "На бесплатном, Pro и Max - нет, человек просто открывает страницу. В командных и корпоративных тарифах вход в свой рабочий аккаунт потребуется"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как убрать артефакт из общего доступа",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Публикацию можно отменить, но повторно опубликовать тот же артефакт уже не выйдет. Нужен снова общий доступ - придётся сделать новый"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Где найти артефакт через неделю",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "В разделе Artifacts в меню слева - там собраны все, и закрытые тоже. Или в том чате, где он появился, по карточке в переписке"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -340,16 +448,21 @@
           <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Ноутбук с настоящим скрином артефакта Claude на столе с лампой" loading="eager" decoding="async" fetchpriority="high"><figcaption>Инструмент с полями и переключателями, собранный в чате, к которому можно вернуться</figcaption></figure>
 <h1 class="article-title-v2">Артефакты: ответ Клода в отдельном окне, а не в переписке</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
-
-          <p class="lead">Все разговоры с Клодом лежат в общем списке чатов. Месяц назад в чате считалась смета на ремонт: прикидка по обоям, итоговая сумма, чат закрыт. За месяц планы поменялись: обои разонравились ещё до покупки, теперь стены будут крашеные. Расчёт нужен тот же, меняется в нём один пункт. Но чтобы поменять этот пункт, надо найти тот чат среди десятков, вспомнить свои же условия, дописать новые и ждать, пока Клод посчитает всё заново</p>
+<!-- seo:answer:start -->
+<p class="quick-answer" style="margin:20px 0">Как вынести ответ в артефакт в Claude и вернуться к нему позже? Попроси сделать результат в отдельном окне: документ, страницу или инструмент с полями. Дальше можно менять его в том же разговоре. Созданные работы ищи в разделе Artifacts слева, а условия общего доступа смотри перед публикацией ссылки</p>
+<!-- seo:answer:end -->
+<p class="lead">Все разговоры с Клодом лежат в общем списке чатов. Месяц назад в чате считалась смета на ремонт: прикидка по обоям, итоговая сумма, чат закрыт. За месяц планы поменялись: обои разонравились ещё до покупки, теперь стены будут крашеные. Расчёт нужен тот же, меняется в нём один пункт. Но чтобы поменять этот пункт, надо найти тот чат среди десятков, вспомнить свои же условия, дописать новые и ждать, пока Клод посчитает всё заново</p>
           <p class="lead">То же самое с планом питания: его составляли под прежний вес, вес с тех пор изменился, и весь план надо пересчитывать - хотя меняется в нём одна цифра</p>
           <p class="lead">Клода можно попросить сразу дать не ответ в чате, а создать «артефакт». Это рабочий документ: он сохранится в разделе Артефакты, и ты сможешь открыть его оттуда, когда угодно. Внутри переключаешь обои на краску, вписываешь цену - сумма меняется сама. Вписываешь сегодняшний вес - меняется расчёт. Чат для этого открывать не надо, цифры правишь прямо в документе</p>
           <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 18 СЕНТЯБРЯ 2026</p>
 
-        </header>
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Артефакты: ответ Клода в отдельном окне, а не в переписке</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header>
 
         <div class="route-note">
-          <h2>Короткий маршрут</h2>
+          <h2>Артефакты в Claude: короткий маршрут</h2>
           <p>Написать в чате «сделай это артефактом» → ответ откроется окном справа → работать прямо в окне → кнопка <span class="path">Share</span> и доступ <span class="path">Anyone with the link</span>, если отдаёшь другому</p>
         </div>
 
@@ -379,7 +492,7 @@
             <p>Иногда Клод открывает окно сам - когда ответ получается большим и самостоятельным: документ, таблица, страница, схема. Но полагаться на это не стоит: короткий список он спокойно напишет в чат. Надёжнее сказать прямо - «сделай это артефактом» или «вынеси в отдельное окно». Работает и с тем, что уже написано выше: попроси вынести готовый ответ, и он переедет в панель</p>
             <figure>
               <div class="shot">
-                <img src="assets/01-zapros.png" alt="Запрос в чате: сделай чек-лист артефактом">
+                <img src="assets/01-zapros.png" alt="Запрос в чате: сделай чек-лист артефактом" width="1350" height="1080" loading="lazy" decoding="async">
               </div>
               <figcaption>Слова «сделай артефактом» в конце обычной просьбы. Ничего технического писать не надо</figcaption>
             </figure>
@@ -393,7 +506,7 @@
             <p>Дальше ты просто говоришь в чат, что поменять: «добавь пункт про документы», «убери последние два», «сделай короче». Клод правит то же окно, а не присылает новую копию. Прошлый вариант не теряется: попроси словами - «верни, как было» или «покажи предыдущий вариант», и Клод вернёт его в то же окно</p>
             <figure>
               <div class="shot">
-                <img src="assets/02-panel.png" alt="Экран разделён: слева переписка с Клодом, справа панель с калькулятором">
+                <img src="assets/02-panel.png" alt="Экран разделён: слева переписка с Клодом, справа панель с калькулятором" width="1676" height="1506" loading="lazy" decoding="async">
               </div>
               <figcaption>Так это выглядит целиком: слева переписка, справа сам артефакт. В чате остаётся только карточка с названием и пометкой <span class="path">Only you</span> - это закрытый доступ. Правки идут словами в чат, меняется содержимое панели справа</figcaption>
             </figure>
@@ -407,7 +520,7 @@
             <p>Артефактом пользуются там, где он открылся: вводишь числа в калькулятор, ставишь галочки в чек-листе, читаешь документ. Стрелка в углу разворачивает панель на весь экран - так удобнее, когда полей много. Расчёт при этом идёт внутри твоего устройства: лимиты Клода на это не тратятся, и каждое новое число не уходит в чат</p>
             <figure>
               <div class="shot">
-                <img src="assets/03-raschet.png" alt="Калькулятор в панели артефакта: введены размеры комнаты, снизу посчитанный итог">
+                <img src="assets/03-raschet.png" alt="Калькулятор в панели артефакта: введены размеры комнаты, снизу посчитанный итог" width="1098" height="792" loading="lazy" decoding="async">
               </div>
               <figcaption>Поля заполнены, итог внизу пересчитывается сам. Чат в это время не трогаем: правки словами нужны, только когда меняется сам калькулятор, а не числа в нём</figcaption>
             </figure>
@@ -421,7 +534,7 @@
             <p>Ссылка у артефакта есть сразу, но по умолчанию она закрыта: под ней так и написано - <span class="path">Only you can open this link</span>. Открывается она только в твоём аккаунте. Чтобы отдать работу человеку, нажми <span class="path">Share</span> вверху панели, в списке <span class="path">Who has access</span> смени <span class="path">Only you</span> на <span class="path">Anyone with the link</span> и нажми <span class="path">Copy link</span></p>
             <figure>
               <div class="shot compact">
-                <img src="assets/04-dostup.png" alt="Окно Share: список доступа, пункты Only people invited и Anyone with the link">
+                <img src="assets/04-dostup.png" alt="Окно Share: список доступа, пункты Only people invited и Anyone with the link" width="816" height="624" loading="lazy" decoding="async">
               </div>
               <figcaption>Список доступа раскрыт. <span class="path">Anyone with the link</span> - любой, у кого есть адрес, откроет и попользуется, но менять содержимое не сможет: под пунктом так и написано «can view, but not edit»</figcaption>
             </figure>
@@ -446,7 +559,7 @@
           <p>Артефакты не разбросаны по чатам: у них есть собственный раздел <span class="path">Artifacts</span> в меню слева. Там лежат все - и те, что открыты другим людям, и закрытые, которые видишь только ты. Закрытые помечены замочком. Не надо вспоминать, в каком разговоре собирался калькулятор: открываешь раздел и находишь его по названию</p>
           <figure>
             <div class="shot">
-              <img src="assets/05-razdel.png" alt="Раздел Artifacts в меню слева: список артефактов, калькулятор с замочком">
+              <img src="assets/05-razdel.png" alt="Раздел Artifacts в меню слева: список артефактов, калькулятор с замочком" width="1410" height="1082" loading="lazy" decoding="async">
             </div>
             <figcaption>Раздел <span class="path">Artifacts</span> открыт. Внизу списка калькулятор с замочком - он закрытый, но в разделе всё равно лежит. Вкладки сверху делят список: <span class="path">Yours</span> - твои, <span class="path">Shared with you</span> - то, чем поделились с тобой</figcaption>
           </figure>
@@ -458,7 +571,7 @@
           <p>У названия раздела есть плюсик. Он создаёт пустой артефакт сразу, минуя переписку: выбираешь <span class="path">Document</span>, <span class="path">Slides</span> или <span class="path">Design</span>, и открывается чистое окно, а Клод встаёт сбоку помощником. Удобно, когда заранее знаешь, что делаешь документ или презентацию, и не хочешь начинать с разговора</p>
           <figure>
             <div class="shot compact">
-              <img src="assets/06-plyus.png" alt="Меню плюсика у раздела Artifacts: Document, Slides, Design">
+              <img src="assets/06-plyus.png" alt="Меню плюсика у раздела Artifacts: Document, Slides, Design" width="768" height="516" loading="lazy" decoding="async">
             </div>
             <figcaption>Три типа пустого артефакта. Внизу подписано, что получится: чистый артефакт, а Клод рядом</figcaption>
           </figure>
@@ -607,10 +720,12 @@
           </ul>
         </section>
 
-        <p class="cta-question">Калькулятор в артефакте готов. Можно ли на этом заработать?</p>
+<!-- seo:related:start -->
+<section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/golosovoy-vvod-v-claude/">Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона</a></li></ul></section>
+<!-- seo:related:end -->
+<p class="cta-question">Калькулятор в артефакте готов. Можно ли на этом заработать?</p>
 <section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
-
-        <footer class="foot">Интерфейс Клода со временем меняется: кнопки могут переехать, а названия поменяться. Эта статья подготовлена по состоянию на 18 сентября 2026<!-- privacy:footer:start -->
+<footer class="foot">Интерфейс Клода со временем меняется: кнопки могут переехать, а названия поменяться. Эта статья подготовлена по состоянию на 18 сентября 2026<!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>

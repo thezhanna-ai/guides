@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Как поднять личный VPN на своём сервере через AmneziaVPN, запустить Claude Code в облаке Anthropic или на своём VPS и управлять им с телефона через Remote Control">
   <meta name="theme-color" content="#F8F7F2">
-  <meta property="og:title" content="Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона">
+  <meta property="og:title" content="Свой сервер для Claude: VPN и работа с телефона">
   <meta property="og:description" content="Как поднять личный VPN на своём сервере через AmneziaVPN, запустить Claude Code в облаке Anthropic или на своём VPS и управлять им с телефона через Remote Control">
-  <title>Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона</title>
+  <title>Свой сервер для Claude: VPN и работа с телефона</title>
   <link href="../../assets/fonts/fonts.css" rel="stylesheet">
   <script>
     try {
@@ -376,10 +376,56 @@
     @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
 </style>
 <!-- erid:style:end -->
+
+
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/svoy-server-dlya-claude/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/svoy-server-dlya-claude/#article",
+      "headline": "Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/svoy-server-dlya-claude/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-09",
+      "image": "https://pronovoe.com/claude-ai/svoy-server-dlya-claude/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/svoy-server-dlya-claude/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона",
+          "item": "https://pronovoe.com/claude-ai/svoy-server-dlya-claude/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -439,17 +485,24 @@
           <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Серверный модуль, от которого тянутся два оранжевых облачка чата, для статьи о своём сервере для Claude" loading="eager" decoding="async" fetchpriority="high"><figcaption>Личный VPN через AmneziaVPN, Claude Code в облаке или на своём сервере</figcaption></figure>
           <h1 class="article-title-v2">Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
-          <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · 29 СЕНТЯБРЯ 2026</p>
+<!-- seo:answer:start -->
+<p class="quick-answer" style="margin:20px 0">Зачем нужен свой сервер для Claude и какой путь выбрать? Личный VPN меняет подключение к сети, а запуск Claude Code на сервере меняет место работы агента и файлов. Ниже эти варианты разделены вместе с облаком Anthropic. Сначала найди свою задачу, затем переходи к установке: сервер не отменяет правила доступности сервиса</p>
+<!-- seo:answer:end -->
+<p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · 29 СЕНТЯБРЯ 2026</p>
           <p class="lead">Вчера Claude открывался, сегодня показывает ошибку региона, а после смены VPN снова работает. Часто дело не в аккаунте, а в адресе: общий VPN меняет его без спроса, и одним адресом пользуются тысячи людей. Эту случайность можно убрать, а заодно получить Claude Code, который работает, пока ноутбук закрыт</p>
           <p>Свой сервер не делает Claude умнее и не отменяет правил Anthropic. Он даёт другое: один постоянный адрес, который меняется только по твоему решению, и рабочее место, которое не зависит от крышки ноутбука. Ниже три способа это собрать, от самого простого до самого самостоятельного</p>
           <aside class="setup-note">
             <p><b>Если на экране уже ошибка 403, отказ оплаты или форма апелляции,</b> сначала пройди <a href="../claude-iz-rossii-bez-banov/">разбор ограничений доступа</a>. Эта инструкция снижает риски на будущее, но не возвращает отключённый аккаунт</p>
           </aside>
           <aside class="route-note" aria-label="Связь с предыдущей статьёй">
-            <h2>Сначала нужен обычный вход</h2>
-            <p>Если аккаунта Claude ещё нет, начни со статьи <a href="../podklyuchenie-iz-rossii/index.html">«Как подключить Claude из России»</a>. Сюда возвращайся, когда вход уже работает и хочется перейти от отдельных чатов к постоянной работе с файлами и Claude Code</p>
+            <h2>Свой сервер для Claude: сначала нужен обычный вход</h2>
+            <p>Если аккаунта Claude ещё нет, начни со статьи <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. Сюда возвращайся, когда вход уже работает и хочется перейти от отдельных чатов к постоянной работе с файлами и Claude Code</p>
           </aside>
-        </header>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header>
 
         <section class="content-section" id="zachem-server">
           <p class="section-label">Глава 1</p>
@@ -490,21 +543,21 @@
             <article class="route-card">
               <p class="route-kicker">На твоём устройстве</p>
               <h3>Проект и Claude Code на компьютере</h3>
-              <div class="shot route-illustration-wrap"><img class="route-illustration" src="assets/route-local.png" alt="Человек за ноутбуком: папка проекта и Claude Code на компьютере, запрос уходит к модели Claude в облаке Anthropic и возвращается ответом"></div>
+              <div class="shot route-illustration-wrap"><img class="route-illustration" src="assets/route-local.png" alt="Человек за ноутбуком: папка проекта и Claude Code на компьютере, запрос уходит к модели Claude в облаке Anthropic и возвращается ответом" width="1672" height="941" loading="lazy" decoding="async"></div>
               <p class="route-card-copy">Файлы и Claude Code у тебя. Выключишь компьютер - задача остановится. Свой VPN на сервере здесь только проводит соединение</p>
               <a class="route-card-link" href="#svoy-vpn">Шаг 2. Свой VPN через AmneziaVPN</a>
-            </article>
+</article>
             <article class="route-card">
               <p class="route-kicker">Через сайт Claude</p>
               <h3>Проект из GitHub, работа на сервере Anthropic</h3>
-              <div class="shot route-illustration-wrap"><img class="route-illustration" src="assets/route-anthropic.png" alt="Человек отправляет задачу в браузере, проект берётся из GitHub, Claude Code и копия проекта работают на сервере внутри облака Anthropic"></div>
+              <div class="shot route-illustration-wrap"><img class="route-illustration" src="assets/route-anthropic.png" alt="Человек отправляет задачу в браузере, проект берётся из GitHub, Claude Code и копия проекта работают на сервере внутри облака Anthropic" width="1672" height="941" loading="lazy" decoding="async"></div>
               <p class="route-card-copy">После запуска компьютер можно выключить: облачная задача продолжит выполняться. Свой сервер не нужен</p>
               <a class="route-card-link" href="#oblako">Claude Code в облаке Anthropic</a>
             </article>
             <article class="route-card">
               <p class="route-kicker">Через свой сервер</p>
               <h3>Проект и Claude Code работают на твоём VPS</h3>
-              <div class="shot route-illustration-wrap"><img class="route-illustration" src="assets/route-vps.png" alt="Человек открывает claude.ai/code в браузере, файлы проекта, Claude Code и Remote Control находятся на своём VPS, модель Claude отдельно в облаке Anthropic"></div>
+              <div class="shot route-illustration-wrap"><img class="route-illustration" src="assets/route-vps.png" alt="Человек открывает claude.ai/code в браузере, файлы проекта, Claude Code и Remote Control находятся на своём VPS, модель Claude отдельно в облаке Anthropic" width="1672" height="941" loading="lazy" decoding="async"></div>
               <p class="route-card-copy">Сервер продолжает работу после выключения компьютера, а сессию можно открыть с телефона. GitHub для этого способа не обязателен. Сообщения между телефоном и сервером проходят через сервис Anthropic, файлы и команды остаются на сервере</p>
               <a class="route-card-link" href="#claude-code-na-servere">Claude Code на своём VPS и работа с телефона</a>
             </article>
@@ -603,7 +656,7 @@
               <li>Нажми большую кнопку «Подключиться» на главном экране</li>
             </ol>
             <figure>
-              <div class="shot"><img src="assets/amnezia-self-hosted-forma.png" alt="Три экрана AmneziaVPN: кнопка добавления соединения, пункт Self-hosted VPN и форма Configure your server с полями IP-адреса, SSH Username и пароля"></div>
+              <div class="shot"><img src="assets/amnezia-self-hosted-forma.png" alt="Три экрана AmneziaVPN: кнопка добавления соединения, пункт Self-hosted VPN и форма Configure your server с полями IP-адреса, SSH Username и пароля" width="2874" height="1860" loading="lazy" decoding="async"></div>
               <figcaption>Путь до формы: плюс → «Self-hosted VPN» → поля IP-адреса, SSH-пользователя и пароля. Кадр из <a href="https://docs.amnezia.org/documentation/instructions/install-vpn-on-server/" target="_blank" rel="noopener">документации Amnezia</a> на английском, в русской версии приложения подписи другие, порядок тот же. Пример IP на снимке не подходит для твоего подключения</figcaption>
             </figure>
           </div>

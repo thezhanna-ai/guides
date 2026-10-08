@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#F8F7F2">
   <meta name="description" content="Как настроить стиль ответа Claude: образец текста, короткие правила и проверка на одном запросе">
-  <meta property="og:title" content="Как научить Claude писать в твоём стиле">
+  <meta property="og:title" content="Свой стиль ответов Claude: настройка по образцу">
   <meta property="og:description" content="Образец, короткие правила, Instructions for Claude и проверка на одном запросе">
-  <title>Как научить Claude писать в твоём стиле</title>
+  <title>Свой стиль ответов Claude: настройка по образцу</title>
   <link href="../../assets/fonts/fonts.css" rel="stylesheet">
   <style>
     :root { --emerald:#102F30; --emerald-mid:#1F4A43; --paper:#F8F7F2; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F; --ink:#1E2926; --muted:#62706A; --line:#D5C9B7; --white:#FFFFFF }
@@ -139,10 +139,56 @@
     @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
 </style>
 <!-- erid:style:end -->
+
+
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/svoy-stil-otvetov/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/svoy-stil-otvetov/#article",
+      "headline": "Как научить Клода писать в твоём стиле",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/svoy-stil-otvetov/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-09",
+      "image": "https://pronovoe.com/claude-ai/svoy-stil-otvetov/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/svoy-stil-otvetov/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Как научить Клода писать в твоём стиле",
+          "item": "https://pronovoe.com/claude-ai/svoy-stil-otvetov/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -153,10 +199,19 @@
       <details class="mobile-toc"><summary>Содержание</summary><a href="#stil">Как научить Клода писать в твоём стиле</a><a href="#do">1. Сохрани исходный ответ</a><a href="#sample">2. Выбери образец</a><a href="#rules">3. Сформулируй правила</a><a href="#settings">4. Открой Instructions for Claude</a><a href="#compare">5. Повтори запрос и сравни</a><a href="#sources">Источники</a></details>
       <header id="stil"><p class="eyebrow">Claude.ai · Серия 16</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Одинаково крупные начальные фрагменты настоящих ответов Claude показывают смену манеры письма" loading="eager" decoding="async" fetchpriority="high"><figcaption>Образец текста, правила подачи и сравнение двух ответов на один запрос</figcaption></figure>
 <h1 class="article-title-v2">Как научить Клода писать в твоём стиле</h1>
-<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<!-- seo:answer:start -->
+<p class="quick-answer" style="margin:20px 0">Как сохранить свой стиль ответов Claude, чтобы не править каждый текст заново? Возьми свой образец, попроси выделить правила подачи и перенеси их в Instructions for Claude. Затем повтори исходный запрос. Ниже пять шагов помогают отделить случайно удачный ответ от настройки, которая будет работать и в следующих разговорах</p>
+<!-- seo:answer:end -->
+<p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p>
 
-<p class="lead">Просишь Клода написать пост, а получаешь чужой текст: длинный, с заголовком, эмодзи и обращением на «вы». Переписываешь его руками, а в следующем чате всё повторяется. Кажется, что надо каждый раз объяснять заново, но Клод просто не знает, как звучишь ты. За пять шагов покажешь ему свой образец, сохранишь правила в настройках, и тот же запрос вернётся заметно ближе к твоей подаче</p><aside class="route-note"><h2>Короткий маршрут</h2><p>Исходный ответ → образец нужной подачи → правила → Settings → Account → Instructions for Claude → тот же запрос ещё раз</p></aside></header>
-      <section class="content-section" id="do"><p class="section-label">Точка сравнения</p><h2>1. Сохрани исходный ответ</h2><p>Открой обычный чат Claude и отправь рабочий запрос. Сохрани сам запрос дословно и полученный ответ. В примере это пост про осеннюю хандру. В конце повторишь запрос без изменений, чтобы увидеть разницу</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-demo">Скопировать</button><pre id="prompt-demo">Напиши короткий пост про осеннюю хандру. Простым человеческим языком</pre></div><figure class="shot"><img src="assets/otvet-do.png" alt="Реальный длинный ответ Claude до настройки"><figcaption>Ответ до настройки - сохрани его для сравнения</figcaption></figure></section>
+<p class="lead">Просишь Клода написать пост, а получаешь чужой текст: длинный, с заголовком, эмодзи и обращением на «вы». Переписываешь его руками, а в следующем чате всё повторяется. Кажется, что надо каждый раз объяснять заново, но Клод просто не знает, как звучишь ты. За пять шагов покажешь ему свой образец, сохранишь правила в настройках, и тот же запрос вернётся заметно ближе к твоей подаче</p><aside class="route-note"><h2>Свой стиль ответов Claude: короткий маршрут</h2><p>Исходный ответ → образец нужной подачи → правила → Settings → Account → Instructions for Claude → тот же запрос ещё раз</p></aside>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Как научить Клода писать в твоём стиле</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header>
+      <section class="content-section" id="do"><p class="section-label">Точка сравнения</p><h2>1. Сохрани исходный ответ</h2><p>Открой обычный чат Claude и отправь рабочий запрос. Сохрани сам запрос дословно и полученный ответ. В примере это пост про осеннюю хандру. В конце повторишь запрос без изменений, чтобы увидеть разницу</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-demo">Скопировать</button><pre id="prompt-demo">Напиши короткий пост про осеннюю хандру. Простым человеческим языком</pre></div><figure class="shot"><img src="assets/otvet-do.png" alt="Реальный длинный ответ Claude до настройки" width="1124" height="1248" loading="lazy" decoding="async"><figcaption>Ответ до настройки - сохрани его для сравнения</figcaption></figure></section>
       <section class="content-section" id="sample"><p class="section-label">Ориентир для подачи</p><h2>2. Выбери образец</h2><p>Возьми короткий текст с нужной интонацией: своё письмо, пост или отрывок книги. Он нужен как пример подачи. Если берёшь чужой текст, выдели особенности, которые хочешь повторить</p><p>Стиль складывается из обращения, слов, ритма и структуры. Краткость - только один из признаков. Выбери один небольшой образец, по которому эти особенности хорошо видны</p></section>
       <section class="content-section" id="rules"><p class="section-label">Проверяемые правила</p><h2>3. Сформулируй правила</h2><p>В отдельном чате покажи образец и попроси Клода назвать конкретные особенности. Исправь неверные выводы, затем запиши только те правила, которые подходят для будущих разговоров</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-reading">Скопировать</button><pre id="prompt-reading">Ниже образец нужной мне подачи. Перечисли, что в нём характерно: длина абзацев, тон, лексика и структура. Отдельно назови, в чём не уверен. Пока не пиши новый текст
 
@@ -167,12 +222,16 @@
 В ответах используй короткие абзацы и обычные слова. Убирай воду и канцелярит. Не начинай с «важно отметить» и не добавляй общий вывод ради объёма. Не придумывай факты. Если в запросе указан объём, соблюдай его
 
 Когда пишешь текст от моего имени, ориентируйся на тон, лексику и структуру образца. Не копируй его дословно и не переноси из него факты в новый текст</pre></div><p>Если важна длина конкретного ответа, назови её и в самом запросе: например, «три коротких абзаца»</p></section>
-      <section class="content-section" id="settings"><p class="section-label">Реальный путь в интерфейсе</p><h2>4. Открой Instructions for Claude</h2><p>Нажми свои инициалы в левом нижнем углу. Открой <span class="path">Settings → Account → Instructions for Claude</span> и вставь подготовленный блок. На показанном экране поле находится на странице Account</p><p>Эти инструкции Claude учитывает во всех чатах аккаунта. Оставь здесь то, что подходит постоянно. После ввода закрой настройки, снова открой это поле и убедись, что текст сохранился. Если интерфейс поменяется, ищи в Settings поле с тем же названием</p><figure class="shot"><img src="assets/instructions-account.png" alt="Реальная запись экрана: выбран Account и видно поле Instructions for Claude"><figcaption>Account и поле Instructions for Claude</figcaption></figure></section>
-      <section class="content-section" id="compare"><p class="section-label">Результат виден в ответе</p><h2>5. Повтори запрос и сравни</h2><p>Открой новый чат и отправь сохранённый запрос без изменений. Сверь ответ с конкретными правилами: обращение на «ты» или «вы», длина абзацев, характерные слова, заголовки и шутки. Проверь, сохранился ли смысл. Если какой-то признак не совпал, уточни одно правило в настройке и повтори запрос</p><figure class="shot"><img src="assets/otvet-posle.png" alt="Реальный более короткий ответ Claude после настройки"><figcaption>В этом примере исчезли заголовок, эмодзи и призыв к комментариям; обращение сменилось с «вы» на «ты»</figcaption></figure><p>Результат: ты видишь, какие правила Клод применил, и знаешь, что уточнить. Для своего текста сверяй свои признаки подачи</p></section>
+      <section class="content-section" id="settings"><p class="section-label">Реальный путь в интерфейсе</p><h2>4. Открой Instructions for Claude</h2><p>Нажми свои инициалы в левом нижнем углу. Открой <span class="path">Settings → Account → Instructions for Claude</span> и вставь подготовленный блок. На показанном экране поле находится на странице Account</p><p>Эти инструкции Claude учитывает во всех чатах аккаунта. Оставь здесь то, что подходит постоянно. После ввода закрой настройки, снова открой это поле и убедись, что текст сохранился. Если интерфейс поменяется, ищи в Settings поле с тем же названием</p><figure class="shot"><img src="assets/instructions-account.png" alt="Реальная запись экрана: выбран Account и видно поле Instructions for Claude" width="1080" height="1920" loading="lazy" decoding="async"><figcaption>Account и поле Instructions for Claude</figcaption></figure></section>
+      <section class="content-section" id="compare"><p class="section-label">Результат виден в ответе</p><h2>5. Повтори запрос и сравни</h2><p>Открой новый чат и отправь сохранённый запрос без изменений. Сверь ответ с конкретными правилами: обращение на «ты» или «вы», длина абзацев, характерные слова, заголовки и шутки. Проверь, сохранился ли смысл. Если какой-то признак не совпал, уточни одно правило в настройке и повтори запрос</p><figure class="shot"><img src="assets/otvet-posle.png" alt="Реальный более короткий ответ Claude после настройки" width="1634" height="1188" loading="lazy" decoding="async"><figcaption>В этом примере исчезли заголовок, эмодзи и призыв к комментариям; обращение сменилось с «вы» на «ты»</figcaption></figure><p>Результат: ты видишь, какие правила Клод применил, и знаешь, что уточнить. Для своего текста сверяй свои признаки подачи</p></section>
       <section class="content-section" id="sources"><p class="section-label">Официальная справка</p><h2>Источники</h2><ul class="sources"><li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Claude Help Center: Instructions for Claude и персонализация</a></li></ul></section>
-      <p class="cta-question">Claude пишет твоим голосом. Сколько текстов он может выпустить?</p>
+
+<!-- seo:related:start -->
+<section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/incognito-chat-v-claude/">Инкогнито в Claude: разговор, который не попадёт в память</a></li></ul></section>
+<!-- seo:related:end -->
+<p class="cta-question">Claude пишет твоим голосом. Сколько текстов он может выпустить?</p>
 <section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
-    </article></main>
+</article></main>
     <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Ещё одна настройка</p>
       <h2>Расскажи Claude о себе</h2>

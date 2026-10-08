@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Удаление данных в Claude: как сохранить копию, убрать чаты, отдельно проверить память и удалить аккаунт">
-  <meta property="og:title" content="Удаление данных в Claude">
+  <meta property="og:title" content="Удаление данных в Claude: чаты, память и аккаунт">
   <meta property="og:description" content="Как сохранить копию данных, удалить чаты и проверить память Claude">
   <meta name="theme-color" content="#F8F7F2">
-  <title>Удаление данных в Claude</title>
+  <title>Удаление данных в Claude: чаты, память и аккаунт</title>
   <link href="../../assets/fonts/fonts.css" rel="stylesheet">
   <style>
     :root { --paper:#F8F7F2; --white:#FFFFFF; --ink:#1E2926; --emerald:#102F30; --mid:#1F4A43; --muted:#62706A; --line:#D5C9B7; --info:#E2E8E9; --info-line:#BBC7CA; --accent:#E86F4A; --accent-dark:#8F371F }
@@ -152,10 +152,56 @@
     @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
 </style>
 <!-- erid:style:end -->
+
+
 <!-- privacy:head:start -->
 <link rel="stylesheet" href="/assets/privacy.css">
 <script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/dannye-v-claude/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/dannye-v-claude/#article",
+      "headline": "Удаление данных в Claude",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/dannye-v-claude/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-09",
+      "image": "https://pronovoe.com/claude-ai/dannye-v-claude/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/dannye-v-claude/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Удаление данных в Claude",
+          "item": "https://pronovoe.com/claude-ai/dannye-v-claude/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
@@ -165,24 +211,27 @@
   </div></div>
   <div class="page-shell">
     <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p>
-      <a href="#kopiya">Сначала сохрани нужные переписки</a><a href="#chat">Как удалить чаты из истории Claude</a><a href="#memory">Удаление чувствительных сведений из памяти Claude</a><a href="#account">Закрытие аккаунта Claude</a><a href="#itog">Что именно удаляется после каждого шага</a><a href="#sources">Официальные источники</a>
+      <a href="#kopiya">Удаление данных в Claude: сначала сохрани нужные переписки</a><a href="#chat">Как удалить чаты из истории Claude</a><a href="#memory">Удаление чувствительных сведений из памяти Claude</a><a href="#account">Закрытие аккаунта Claude</a><a href="#itog">Что именно удаляется после каждого шага</a><a href="#sources">Официальные источники</a>
     </nav>
     <main>
       <header id="nachalo"><p class="eyebrow">CLAUDE.AI · ЧАТЫ, ПАМЯТЬ, АККАУНТ</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Современный шредер с измельчённым обезличенным текстом как образ удаления данных в Claude" loading="eager" decoding="async" fetchpriority="high"><figcaption>Сохранение копии переписок, очистка чатов, отдельная проверка памяти и закрытие аккаунта</figcaption></figure>
 <h1 class="article-title-v2">Удаление данных в Claude</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4F1E8;color:#2F7448;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
-
-
-        <p class="lead">Ты удаляешь из истории Claude чат с чувствительными деталями о себе или работе, чтобы они больше не всплывали. Но позже Claude может снова упомянуть одну из них в новом разговоре: она могла сохраниться в памяти. Ниже покажу, как убрать такие сведения и при этом не потерять переписки, которые захочешь перечитать</p>
+<!-- seo:answer:start -->
+<p class="quick-answer" style="margin:20px 0">Почему удаление данных в Claude иногда не заканчивается удалением чата? Сведения могут остаться в памяти отдельно от переписки. Сначала сохрани разговоры, которые ещё нужны, затем выбери, что убрать: чат, чувствительные сведения или весь аккаунт. Ниже у каждого действия свой результат, чтобы не удалить больше, чем собираешься</p>
+<!-- seo:answer:end -->
+<p class="lead">Ты удаляешь из истории Claude чат с чувствительными деталями о себе или работе, чтобы они больше не всплывали. Но позже Claude может снова упомянуть одну из них в новом разговоре: она могла сохраниться в памяти. Ниже покажу, как убрать такие сведения и при этом не потерять переписки, которые захочешь перечитать</p>
         <p class="meta">ОБНОВЛЕНО 28 СЕНТЯБРЯ 2026</p>
 
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Удаление данных в Claude</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header>
+      <details class="mobile-toc"><summary>Содержание статьи</summary><a href="#kopiya">Удаление данных в Claude: сначала сохрани нужные переписки</a><a href="#chat">Как удалить чаты из истории Claude</a><a href="#memory">Удаление чувствительных сведений из памяти Claude</a><a href="#account">Закрытие аккаунта Claude</a><a href="#itog">Что именно удаляется после каждого шага</a><a href="#sources">Официальные источники</a></details>
 
-      </header>
-      <details class="mobile-toc"><summary>Содержание статьи</summary><a href="#kopiya">Сначала сохрани нужные переписки</a><a href="#chat">Как удалить чаты из истории Claude</a><a href="#memory">Удаление чувствительных сведений из памяти Claude</a><a href="#account">Закрытие аккаунта Claude</a><a href="#itog">Что именно удаляется после каждого шага</a><a href="#sources">Официальные источники</a></details>
-
-      <section class="content-section" id="kopiya"><h2>Сначала сохрани нужные переписки</h2>
+      <section class="content-section" id="kopiya"><h2>Удаление данных в Claude: сначала сохрани нужные переписки</h2>
         <p>Если позже захочешь перечитать разговор или найти в нём ответ Claude, сохрани копию до удаления. В приложении Claude на iPhone и Android запросить архив нельзя. Открой Claude на компьютере в браузере или приложении Claude Desktop, нажми свои инициалы в левом нижнем углу и перейди в <span class="path">Settings → Privacy</span>. В блоке <b>Your data</b> нажми <span class="path">Export data</span></p>
-        <figure class="shot"><div class="annotated-frame export-frame" data-frame="export"><img src="assets/export-data-screen.png" alt="Экран Privacy в Claude; кнопка Export data выделена скруглённой рамкой" loading="lazy"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span></div><figcaption>Privacy: экспорт находится в блоке Your data</figcaption></figure>
+        <figure class="shot"><div class="annotated-frame export-frame" data-frame="export"><img src="assets/export-data-screen.png" alt="Экран Privacy в Claude; кнопка Export data выделена скруглённой рамкой" loading="lazy" width="1244" height="1070"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span></div><figcaption>Privacy: экспорт находится в блоке Your data</figcaption></figure>
         <p>Когда архив будет готов, Claude пришлёт письмо со ссылкой на почту твоего аккаунта. Открой письмо и перейди по ссылке: отдельную кнопку в Claude искать не нужно. Для скачивания нужно быть в том же аккаунте Claude, из которого был запрошен экспорт. Ссылка работает 24 часа после того, как пришло письмо. Скачанный файл ищи в папке загрузок браузера, обычно она называется «Загрузки». Открой архив и убедись, что нужные разговоры сохранились, прежде чем удалять их из Claude</p>
         <div class="result"><p>Результат: у тебя есть копия переписок. Сам запрос экспорта ничего не удаляет, а скачанный архив нельзя импортировать в другой личный аккаунт Claude</p></div>
         <div class="info-card"><p>На личных тарифах экспорт запрашивает владелец аккаунта. Для Team и Enterprise выгрузка данных организации доступна Primary Owner</p></div>
@@ -191,11 +240,11 @@
       <section class="content-section" id="chat"><h2>Как удалить чаты из истории Claude</h2>
         <div class="step"><h3>Удаление одного чата</h3>
           <p>Найди разговор в левой колонке Claude, наведи указатель на его название и нажми <span class="path">⋮</span>. Выбери <span class="path">Delete</span>, затем ещё раз нажми <span class="path">Delete</span> в окне подтверждения</p>
-          <figure class="shot"><div class="annotated-frame chat-frame" data-frame="chat"><img src="assets/delete-chat-screen.png" alt="Экран тестового чата Claude; действие Delete выделено скруглённой рамкой" loading="lazy"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span></div><figcaption>Меню разговора в боковой колонке</figcaption></figure>
+          <figure class="shot"><div class="annotated-frame chat-frame" data-frame="chat"><img src="assets/delete-chat-screen.png" alt="Экран тестового чата Claude; действие Delete выделено скруглённой рамкой" loading="lazy" width="1288" height="1080"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span></div><figcaption>Меню разговора в боковой колонке</figcaption></figure>
         </div>
         <div class="step"><h3>Удаление нескольких чатов сразу</h3>
           <p>Открой <span class="path">Chats and tasks</span> в левой колонке. Наведи указатель на первый чат, нажми <span class="path">⋮ → Select</span> и отметь галочками остальные чаты, которые хочешь удалить. Перед подтверждением посмотри на галочки и названия: среди выделенных не должно быть разговора, который ты собираешься оставить. Затем нажми красную кнопку <span class="path">Delete</span> вверху страницы и ещё раз <span class="path">Delete</span> в окне подтверждения</p>
-          <figure class="shot multiple"><img src="assets/delete-multiple-chats-screen.png" alt="Экран выбора нескольких чатов Claude: шесть разговоров отмечены галочками, названия видны, вверху находится красная кнопка Delete" loading="lazy"><figcaption>Перед Delete проверь, какие разговоры отмечены галочками</figcaption></figure>
+          <figure class="shot multiple"><img src="assets/delete-multiple-chats-screen.png" alt="Экран выбора нескольких чатов Claude: шесть разговоров отмечены галочками, названия видны, вверху находится красная кнопка Delete" loading="lazy" width="1400" height="1268"><figcaption>Перед Delete проверь, какие разговоры отмечены галочками</figcaption></figure>
         </div>
         <div class="result"><p>Результат: выбранные чаты исчезают из истории сразу. По данным Anthropic, их удаление из внутренних систем может занять до 30 дней. Сведения, которые Claude успел сохранить в памяти, удаляются отдельно</p></div>
       </section>
@@ -203,7 +252,7 @@
       <section class="content-section" id="memory"><h2>Удаление чувствительных сведений из памяти Claude</h2>
         <p>После удаления чатов открой <span class="path">Settings → Memory</span>. Здесь две разные настройки: <b>Search and reference chats</b> разрешает Claude искать сведения в прошлых разговорах, а <b>Generate memory from chats</b> создаёт отдельные записи памяти. Удаление чата из истории не удаляет факты, которые уже попали в память</p>
         <p>Ниже есть переключатель <b>Include sensitive topics in memory</b>. Выключи его, и Claude не будет сохранять в память темы вроде здоровья или убеждений</p>
-        <figure class="shot"><div class="annotated-frame memory-frame" data-frame="memory"><img src="assets/memory-settings-screen.png" alt="Экран Memory в Claude; выбранный раздел обведён скруглённой рамкой, Generate memory from chats подчёркнут" loading="lazy"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span><span class="old-underline" aria-hidden="true"></span><span class="new-underline" aria-hidden="true"></span></div><figcaption>Memory: создание памяти выделено оранжевой линией</figcaption></figure>
+        <figure class="shot"><div class="annotated-frame memory-frame" data-frame="memory"><img src="assets/memory-settings-screen.png" alt="Экран Memory в Claude; выбранный раздел обведён скруглённой рамкой, Generate memory from chats подчёркнут" loading="lazy" width="1302" height="740"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span><span class="old-underline" aria-hidden="true"></span><span class="new-underline" aria-hidden="true"></span></div><figcaption>Memory: создание памяти выделено оранжевой линией</figcaption></figure>
         <p>Если ниже виден список <b>Topics</b>, найди тему с чувствительной деталью, которую хочешь убрать, открой её и нажми <b>Delete</b>. Если хочешь удалить всю сохранённую память, нажми переключатель <b>Generate memory from chats</b> и выбери <b>Reset memory</b></p>
         <div class="warn-card"><p><b>Перед Reset memory:</b> это действие необратимо и удаляет также память проектов. Если хочешь удалить только одну чувствительную деталь, сначала ищи её в Topics</p></div>
         <p><b>Pause memory</b> не удаляет прежние записи. Этот вариант лишь приостанавливает использование памяти и создание новых записей</p>
@@ -213,7 +262,7 @@
       <section class="content-section" id="account"><h2>Закрытие аккаунта Claude</h2>
         <p>Если ты хочешь закрыть учётную запись целиком, сначала скачай архив с нужными разговорами. Удаление аккаунта необратимо: после него ты потеряешь доступ к чатам, проектам и другим сохранённым данным</p>
         <p>Открой <span class="path">Settings → Account</span> и найди внизу кнопку <span class="path">Delete account</span>. На скрине она неактивна, потому что в этом аккаунте действует подписка Pro. Если у тебя Pro или Max, сначала открой <span class="path">Settings → Billing</span>, отмени подписку и дождись конца оплаченного периода. После этого вернись в Account, нажми <b>Delete account</b> и следуй шагам подтверждения</p>
-        <figure class="shot"><div class="annotated-frame account-frame" data-frame="account"><img src="assets/delete-account-screen.png" alt="Экран Account в Claude; личные инструкции скрыты, Delete account выделена скруглённой рамкой" loading="lazy"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span></div><figcaption>Account: личные инструкции закрыты, расположение кнопки сохранено</figcaption></figure>
+        <figure class="shot"><div class="annotated-frame account-frame" data-frame="account"><img src="assets/delete-account-screen.png" alt="Экран Account в Claude; личные инструкции скрыты, Delete account выделена скруглённой рамкой" loading="lazy" width="1318" height="1053"><span class="frame-mask" aria-hidden="true"></span><span class="round-frame" aria-hidden="true"></span></div><figcaption>Account: личные инструкции закрыты, расположение кнопки сохранено</figcaption></figure>
         <div class="result"><p>Результат: после подтверждения аккаунт удаляется, а войти в него и восстановить переписки уже нельзя</p></div>
       </section>
 
@@ -227,10 +276,14 @@
       </section>
 
       <section class="next-read" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><a href="../kak-rasskazat-o-sebe/"><span class="title">Как рассказать Claude о себе</span><span class="why">Проверь, какие сведения и правила ответа остаются в настройках после очистки памяти</span></a></section>
-      <p class="cta-question">Лишнее удалено. Что теперь доверить Claude?</p>
+
+<!-- seo:related:start -->
+<section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/otozvat-ssylku-na-chat-claude/">Как отозвать публичную ссылку на чат Claude</a></li></ul></section>
+<!-- seo:related:end -->
+<p class="cta-question">Лишнее удалено. Что теперь доверить Claude?</p>
 <section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
       <p class="foot">Материал подготовлен по интерфейсу Claude и справке Anthropic на 28 сентября 2026 года</p>
-    </main>
+</main>
     <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">ПО ТЕМЕ</p>
       <h2>Приватный чат в Claude</h2>
