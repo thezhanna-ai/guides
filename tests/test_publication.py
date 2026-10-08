@@ -134,10 +134,12 @@ class PublicationTest(unittest.TestCase):
                     self.assertEqual(url.fragment, "")
                     self.assertIn("data-partner", link.attrs)
 
-    def test_svyaz_has_no_partner_ad_or_foreign_author(self):
+    def test_svyaz_has_koncentrat_cta_and_no_foreign_author_in_text(self):
         html = (ROOT / "claude-ai/chatgpt-composio-prilozheniya/index.html").read_text()
-        self.assertNotRegex(html.lower(), r"иван|theivansergeev|data-partner|источник-ролик")
-        self.assertNotIn('class="cta"', html)
+        self.assertIn('class="cta" id="svoi-proekt" aria-label="Концентрат"', html)
+        self.assertIn('erid: 2VtzqviiWtm', html)
+        before_cta = html.split('<p class="cta-question">')[0].lower()
+        self.assertNotRegex(before_cta.split("<main>")[1], r"иван|theivansergeev|data-partner|источник-ролик")
         self.assertIn('name="robots" content="noindex, nofollow"', html)
 
     def test_all_inline_javascript_parses_in_node(self):

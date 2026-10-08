@@ -271,7 +271,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 </head><body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
-<div class="header-actions"><div class="handout-title">СВЯЗЬ</div><div class="header-controls">
+<div class="header-actions"><div class="handout-title">ChatGPT в твоих приложениях</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
 </div></div></div></header>
 <div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#ustroystvo">Как Composio связывает ChatGPT с приложениями</a>
@@ -282,7 +282,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <a href="#notion">Шаг 4. Подключи Notion, если используешь его</a>
 <a href="#chernovik">Шаг 5. Создай черновик и открой его в Gmail</a>
 <a href="#stoimost">Сколько это стоит</a>
-<a href="#oshibki">Если подключение или чтение не получилось</a>
+<a href="#oshibki">Если не получилось</a>
 <a href="#pomoshch">Сложно пройти шаг?</a>
 <a href="#dalshe">Дальше по теме</a></nav><main><header id="nachalo"><p class="eyebrow">Инструкция · ChatGPT и приложения</p>
 <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Латунный штекер с коралловым плетёным кабелем подключён к розетке на тёмном бирюзовом столе" loading="eager" decoding="async" fetchpriority="high"><figcaption>От подключения Composio до черновика, который можно открыть в Gmail</figcaption></figure>
@@ -300,7 +300,7 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <a href="#notion">Шаг 4. Подключи Notion, если используешь его</a>
 <a href="#chernovik">Шаг 5. Создай черновик и открой его в Gmail</a>
 <a href="#stoimost">Сколько это стоит</a>
-<a href="#oshibki">Если подключение или чтение не получилось</a>
+<a href="#oshibki">Если не получилось</a>
 <a href="#pomoshch">Сложно пройти шаг?</a>
 <a href="#dalshe">Дальше по теме</a></nav></details><article><section class="content-section" id="ustroystvo">
 <h2>Как Composio связывает ChatGPT с приложениями</h2>
@@ -313,16 +313,15 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <ul>
 <li><b>ChatGPT в браузере.</b> Открой <a href="https://chatgpt.com/plugins">каталог Plugins</a> («Плагины») своим аккаунтом. Каталог есть на разных тарифах. Какие плагины ты можешь подключить, зависит от аккаунта и рабочего пространства. Подробнее об этом - в <a href="https://help.openai.com/en/articles/20001256-plugins-in-chatgpt">справке OpenAI</a>.</li>
 <li><b>Аккаунт Composio.</b> Если его нет, создай его по ссылке регистрации на <a href="https://composio.dev/mcp">странице Composio</a>. Если подключаешь рабочий аккаунт, проверь, разрешает ли организация использовать Composio.</li>
-<li><b>Gmail в соседней вкладке.</b> Открой ту почту, которую хочешь подключить. Если будешь подключать Notion, понадобится его аккаунт и доступ к нужной странице.</li>
+<li><b>Gmail в соседней вкладке.</b> Открой ту почту, которую хочешь подключить. Если будешь подключать Notion (онлайн-блокнот для заметок, задач и баз знаний), понадобится его аккаунт и доступ к нужной странице.</li>
 </ul>
 <p>Пароли вводи только на странице входа соответствующего сервиса. OAuth - способ разрешить приложению доступ без передачи пароля в чат. На странице сервиса ты выбираешь аккаунт и подтверждаешь запрошенные права. <a href="https://composio.dev/toolkits/gmail/framework/chatgpt">Так Composio подключает Gmail</a>.</p>
 </section>
 <section class="content-section" id="composio">
 <h2>Шаг 1. Подключи Composio через Plugins</h2>
 <p><b>Открой Plugins («Плагины») и найди Composio через Search plugins («Поиск плагинов»).</b> У Composio уже есть <a href="https://chatgpt.com/plugins/plugin_asdk_app_6a58503580c08191b78cc5bdaf4eba6e">карточка в каталоге ChatGPT</a>. Открой её и нажми Install plugin («Установить плагин»), если эта кнопка доступна. В появившемся окне войди в Composio и нажми Allow access («Разрешить доступ»). Дальше переходи к шагу 2.</p>
-<figure><div class="shot"><img src="assets/01-chatgpt-katalog-plaginov.webp" width="1470" height="759" loading="lazy" decoding="async" alt="Каталог ChatGPT Plugins с полем Search plugins и кнопкой Add"></div><figcaption>Каталог Plugins в ChatGPT</figcaption></figure>
 <p><b>Если подключаешь Composio вручную через MCP, открой форму добавления сервера.</b> На странице Plugins нажми Add («Добавить»), затем Add custom MCP server («Добавить свой MCP-сервер»). Откроется форма подключения.</p>
-<figure><div class="shot"><img src="assets/02-chatgpt-add-menu.webp" width="1470" height="759" loading="lazy" decoding="async" alt="Меню Add в ChatGPT Plugins: Create plugin, Upload и Add custom MCP server"></div><figcaption>Add → Add custom MCP server</figcaption></figure>
+<figure><div class="shot"><img src="assets/02-chatgpt-add-menu-verh.webp" width="950" height="215" loading="lazy" decoding="async" alt="Меню Add в ChatGPT Plugins: Create plugin, Upload и Add custom MCP server"></div><figcaption>Add → Add custom MCP server</figcaption></figure>
 <p>Открой <a href="https://composio.dev/mcp">страницу MCP Composio</a> и нажми Copy URL («Скопировать адрес»). Вернись к форме ChatGPT и заполни её:</p>
 <figure><div class="shot"><img src="assets/05-composio-mcp-url.webp" width="1470" height="759" loading="lazy" decoding="async" alt="Официальная страница Composio MCP с адресом connect.composio.dev/mcp и кнопкой Copy URL"></div><figcaption>Один адрес для подключения Composio</figcaption></figure>
 <ol>
@@ -354,18 +353,18 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 </section>
 <section class="content-section" id="notion">
 <h2>Шаг 4. Подключи Notion, если используешь его</h2>
-<p><b>Доступ к Notion нужно разрешить отдельно.</b> В том же чате выбери Composio и попроси подключить Notion со ссылкой авторизации. Открой её, выбери нужное рабочее пространство и разреши доступ к странице, которую хочешь читать. В <a href="https://www.notion.com/help/add-and-manage-connections-with-the-api">справке Notion</a> объяснено: подключение получает доступ только к разрешённым страницам.</p>
+<p>Notion - онлайн-блокнот, где хранят заметки, планы и базы знаний. Если твои записи там, ChatGPT сможет находить нужную страницу и пересказывать её прямо в чате. <b>Доступ к Notion нужно разрешить отдельно.</b> В том же чате выбери Composio и попроси подключить Notion со ссылкой авторизации. Открой её, выбери нужное рабочее пространство и разреши доступ к странице, которую хочешь читать. В <a href="https://www.notion.com/help/add-and-manage-connections-with-the-api">справке Notion</a> объяснено: подключение получает доступ только к разрешённым страницам.</p>
 <p>Вернись в чат и напиши точное название этой страницы. Попроси Composio найти её и показать заголовок с первым абзацем, ничего не меняя. Открой оригинал в Notion и сравни текст. Если Notion не используешь, этот шаг можно пропустить: для проверки Gmail он не нужен. Возможности поиска и чтения приведены в <a href="https://composio.dev/toolkits/notion/framework/chatgpt">каталоге Composio для Notion</a>.</p>
 <div class="result"><p><b>Результат:</b> ChatGPT читает выбранную страницу, и текст совпадает с Notion. Разрешения Gmail и Notion действуют отдельно.</p></div>
 </section>
 <section class="content-section" id="chernovik">
 <h2>Шаг 5. Создай черновик и открой его в Gmail</h2>
-<p>ChatGPT уже читает твою почту. Теперь поручим ему сохранить письмо и проверим, появилось ли оно в Gmail. У Composio есть <a href="https://docs.composio.dev/toolkits/gmail">Create email draft («Создать черновик письма»)</a>. <b>Для этого у подключения должно быть право создавать черновики.</b> Если ручной MCP может только читать данные, остановись на шаге 3.</p>
+<p>ChatGPT уже читает твою почту. Теперь проверим, может ли он в ней работать: написать письмо и сохранить его в Gmail. <b>Черновик - самая безопасная проверка: письмо появляется в твоей почте, но никому не уходит.</b> Получилось - значит, дальше ChatGPT может готовить за тебя ответы и письма, а отправку ты оставляешь за собой. У Composio есть <a href="https://docs.composio.dev/toolkits/gmail">Create email draft («Создать черновик письма»)</a>. <b>Для этого у подключения должно быть право создавать черновики.</b> Если ручной MCP может только читать данные, остановись на шаге 3.</p>
 <p>В том же чате напиши свой адрес Gmail, проверенный в шаге 2, затем выбери Composio и отправь запрос:</p>
 <div class="code-card"><pre id="gmail-draft"><code>Используй Composio и подключённый Gmail. Создай ровно один новый черновик письма. Получатель: мой адрес Gmail из предыдущего сообщения. Если адрес не указан, сначала спроси его. Тема: Проверка связи ChatGPT и Gmail. Текст: Это тестовый черновик, созданный через Composio. Не отправляй письмо, не добавляй других получателей и не меняй существующие письма. Покажи идентификатор сохранённого черновика. Если запись недоступна, сообщи причину.</code></pre><button class="copy-button" type="button" data-copy-target="gmail-draft" aria-label="Скопировать запрос создания черновика без отправки" aria-live="polite">Скопировать</button></div>
 <p>Если ChatGPT показывает подтверждение действия, сверь тему, получателя и действие. Разреши только создание черновика. Если предлагается отправка, отклони её. <a href="https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt">OpenAI описывает подтверждения действий и ограничения записи</a> в справке MCP.</p>
 <p><b>Открой Gmail, обнови страницу и зайди в Drafts («Черновики»).</b> Найди тему «Проверка связи ChatGPT и Gmail», открой письмо и сравни текст и получателя. Письма нет - попроси Composio найти черновик по точной теме и показать его идентификатор; текст в чате сам по себе не доказывает, что черновик сохранён.</p>
-<div class="result"><p><b>Результат:</b> в Gmail открыт новый черновик с твоим адресом и тестовым текстом, письмо не отправлено. Теперь письмо не нужно переносить из чата вручную. Если черновик открывается в самом Gmail, значит, он сохранён.</p></div>
+<div class="result"><p><b>Результат:</b> в Gmail открыт новый черновик с твоим адресом и тестовым текстом, письмо не отправлено. Значит, ChatGPT через Composio не только читает почту, но и пишет в ней: дальше можно поручать ему ответы на письма, а «Отправить» нажимать уже после проверки.</p></div>
 </section>
 <section class="content-section" id="stoimost">
 <h2>Сколько это стоит</h2>
@@ -378,13 +377,19 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <p>Может ли ручной MCP менять данные, зависит от тарифа и прав в рабочем пространстве. Подробнее - в шаге 1. Если установишь плагин из каталога, проверь, какие действия доступны в твоём аккаунте. Даже с подпиской нужно отдельно разрешить доступ к Gmail.</p>
 </section>
 <section class="content-section" id="oshibki">
-<h2>Если подключение или чтение не получилось</h2>
-<ul>
-<li><b>ChatGPT отвечает общими советами вместо данных из почты.</b> Проверь, что Composio выбран через <code>@</code>, и повтори запрос чтения. Если появился запрос авторизации, заверши шаг 2.</li>
-<li><b>Google отклоняет разрешение.</b> Прочитай причину на странице входа. Если это рабочий аккаунт, организация может ограничивать доступ. Подробнее - в <a href="https://help.openai.com/en/articles/20001494-connecting-and-managing-app-accounts-in-chatgpt">справке о подключении аккаунтов</a>. Обратись к администратору с текстом отказа.</li>
-<li><b>Notion не находит страницу.</b> Проверь рабочее пространство и доступ подключения к самой странице. Страница может называться так же, но находиться в другом пространстве или быть недоступной подключению.</li>
-<li><b>Composio сообщает о лимите.</b> Открой свой аккаунт Composio и сравни расход с <a href="https://composio.dev/pricing">условиями тарифа</a>. Если лимит закончился, повторять запрос бесполезно.</li>
-</ul>
+<h2>Если не получилось</h2>
+<details class="check-panel"><summary>ChatGPT отвечает общими советами вместо данных из почты</summary>
+<p>Проверь, что Composio выбран через <code>@</code>, и повтори запрос чтения. Если появился запрос авторизации, заверши шаг 2.</p>
+</details>
+<details class="check-panel"><summary>Google отклоняет разрешение</summary>
+<p>Прочитай причину на странице входа. Если это рабочий аккаунт, организация может ограничивать доступ. Подробнее - в <a href="https://help.openai.com/en/articles/20001494-connecting-and-managing-app-accounts-in-chatgpt">справке о подключении аккаунтов</a>. Обратись к администратору с текстом отказа.</p>
+</details>
+<details class="check-panel"><summary>Notion не находит страницу</summary>
+<p>Проверь рабочее пространство и доступ подключения к самой странице. Страница может называться так же, но находиться в другом пространстве или быть недоступной подключению.</p>
+</details>
+<details class="check-panel"><summary>Composio сообщает о лимите</summary>
+<p>Открой свой аккаунт Composio и сравни расход с <a href="https://composio.dev/pricing">условиями тарифа</a>. Если лимит закончился, повторять запрос бесполезно.</p>
+</details>
 <p>Если нужно отозвать доступ Google, используй <a href="https://support.google.com/accounts/answer/13533235?hl=ru">управление сторонними подключениями</a> своего Google-аккаунта. Отключение приложения не удаляет уже созданный черновик из почты.</p>
 </section>
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
@@ -392,6 +397,8 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Настраиваю Composio в ChatGPT для Gmail. Помоги разобраться по одному действию. Сначала спроси, какой экран или текст ошибки я вижу. Не отправляй письма, не меняй настройки и не показывай пароли.</p></div><div class="bubble claude"><span class="who">ChatGPT</span>Начнём с экрана, который открыт. Пришли текст ошибки без личных данных.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с Composio" aria-live="polite">Скопировать</button>
 </section>
+<p class="cta-question">ChatGPT работает в твоей почте. А что ещё он может делать за тебя?</p>
+<section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Связка работает. Как собрать из таких связок систему, которая приводит клиентов?</h2><p>Подключить сервис - половина дела. Дальше нужен порядок, в котором ИИ-агенты сами ведут задачи от заявки до ответа клиенту. Это разбирают на Концентрате Ивана Сергеева: 13 октября - команда ИИ-агентов, 14 октября - шесть способов заработать на нейросетях. Онлайн, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
 <section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Ещё две инструкции, которые пригодятся после подключения.</p><ul><li><a href="../shtat-agentov-paperclip/"><span class="title">Штат агентов в Paperclip</span><span class="why">Раздай задачи нескольким помощникам и посмотри, что сделал каждый.</span></a></li><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Закрой секретные файлы от Claude Code</span><span class="why">Укажи, какие файлы агенту разрешено читать, прежде чем подключать новые инструменты.</span></a></li></ul></section>
 </article></main>
 <aside class="related-plaque" aria-label="Соседняя статья">
@@ -459,6 +466,8 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
     }
   });
 })();
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
 var themeButton = document.querySelector(".theme-toggle");
 var savedTheme = "light";
 try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
