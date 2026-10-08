@@ -1,20 +1,19 @@
 <!doctype html>
 <html lang="ru" data-theme="light"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Четыре MCP для Claude Code: поиск, браузер, страницы и свежая документация</title>
-<meta name="description" content="Как подключить Perplexity, Playwright, Firecrawl и Context7 к Claude Code. Команды, ключи API и проверка четырёх MCP на одной задаче с официальными источниками.">
-<meta name="robots" content="noindex, nofollow">
+<title>Четыре MCP для Claude Code: от поиска до проверки инструкции</title>
+<meta name="description" content="Подключение Perplexity, Playwright, Firecrawl и Context7 к Claude Code. Четыре проверки на документации Next.js, стоимость и лимиты на 08.10.2026.">
 <meta name="theme-color" content="#F8F7F2">
 <meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
-<meta property="og:title" content="Четыре MCP для Claude Code: поиск, браузер, страницы и свежая документация">
-<meta property="og:description" content="Как подключить Perplexity, Playwright, Firecrawl и Context7 к Claude Code. Команды, ключи API и проверка четырёх MCP на одной задаче с официальными источниками.">
+<meta property="og:title" content="Четыре MCP для Claude Code: от поиска до проверки инструкции">
+<meta property="og:description" content="Подключение Perplexity, Playwright, Firecrawl и Context7 к Claude Code. Четыре проверки на документации Next.js, стоимость и лимиты на 08.10.2026.">
 <meta property="og:url" content="https://pronovoe.com/claude-ai/chetyre-mcp-claude-code/">
 <meta property="og:image" content="https://pronovoe.com/claude-ai/chetyre-mcp-claude-code/assets/oblozhka.webp">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="840">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pronovoe.com/claude-ai/chetyre-mcp-claude-code/assets/oblozhka.webp">
-<meta property="og:image:alt" content="Металлический USB-хаб с четырьмя подключёнными кабелями на тёмно-бирюзовом столе">
+<meta property="og:image:alt" content="Четыре плетёных кабеля соединены с металлическим хабом на тёмном бирюзовом столе">
 <link rel="canonical" href="https://pronovoe.com/claude-ai/chetyre-mcp-claude-code/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
 <style>
     :root {
@@ -245,38 +244,62 @@ figure + .result, figure + p, figure + ol { margin-top: 20px }
 .code-card pre { margin: 0 }
 .code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
 @media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
-</style></head><body>
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<meta name="robots" content="noindex, nofollow">
+<!-- privacy:head:start -->
+<link rel="stylesheet" href="/assets/privacy.css">
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+</head><body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
-<div class="header-actions"><div class="handout-title">ЧЕТЫРЕ</div><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button><a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></div></div></div></header>
-<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Что нужно до начала</a>
+<div class="header-actions"><div class="handout-title">ЧЕТЫРЕ</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+</div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Перед подключением</a>
 <a href="#perplexity">Шаг 1. Perplexity: найди источник свежего ответа</a>
 <a href="#playwright">Шаг 2. Playwright: открой страницу глазами помощника</a>
 <a href="#firecrawl">Шаг 3. Firecrawl: прочитай страницу целиком</a>
 <a href="#context7">Шаг 4. Context7: найди документацию нужной версии</a>
+<a href="#stoimost">Сколько стоит</a>
 <a href="#oshibki">Если подключение не заработало</a>
 <a href="#vmeste">Шаг 5. Проверь четыре MCP на одной задаче</a>
-<a href="#svoi-proekt">Собери инструмент под своё дело</a>
-<a href="#dalshe">Дальше по теме</a></nav>
-<main><header id="nachalo"><p class="eyebrow">Инструкция · Четыре MCP для Claude Code</p>
-<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Металлический USB-хаб с четырьмя подключёнными кабелями на тёмно-бирюзовом столе" loading="eager" decoding="async" fetchpriority="high"><figcaption>Подключение четырёх серверов и проверка поиска, браузера, чтения страниц и документации</figcaption></figure>
-<h1 class="article-title-v2">Четыре MCP для Claude Code: поиск, браузер, страницы и свежая документация</h1>
-<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
-<p class="lead">Claude Code отвечает уверенно, а команда из его ответа не работает: документация уже изменилась. Четыре MCP для Claude Code помогут найти источник, открыть страницу, прочитать её и получить подходящий пример. Но как увидеть, что ответ действительно относится к нужной версии?</p>
-<p>Ниже подключим Perplexity, Playwright, Firecrawl и Context7. Каждый проверим отдельной просьбой, а в последнем шаге дадим им одну задачу и сравним результаты. Тогда станет видно, на какой документ опирается помощник.</p>
-<p><b>MCP</b> - стандарт подключения внешних инструментов к ИИ-помощнику; сервер MCP передаёт ему доступные команды. В этой статье три сервера работают удалённо, а Playwright запускает браузер на твоём компьютере. Общую схему объясняет <a href="https://code.claude.com/docs/en/mcp">справка Claude Code</a>.</p>
-<p class="meta">АКТУАЛЬНО НА 6 ОКТЯБРЯ 2026</p></header>
-<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Что нужно до начала</a>
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
+<a href="#dalshe">Дальше по теме</a></nav><main><header id="nachalo"><p class="eyebrow">Инструкция · Claude Code и MCP</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Четыре плетёных кабеля соединены с металлическим хабом на тёмном бирюзовом столе" loading="eager" decoding="async" fetchpriority="high"><figcaption>Поиск источника, браузер, чтение страницы и документация нужной версии</figcaption></figure>
+<h1 class="article-title-v2">Четыре MCP для Claude Code: от поиска до проверки инструкции</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 sans-serif">Средний уровень</p>
+<p class="lead">У ответа Claude Code может быть ссылка на документацию, а пример всё равно относится к другой версии. <b>Как обнаружить это до изменения файлов проекта?</b> Подключим четыре инструмента и в конце проверим одну инструкцию по её источникам.</p>
+<p>MCP - стандарт подключения внешних инструментов к помощнику. Здесь поиск, браузер, чтение страниц и документация будут отдельными серверами, каждый со своей проверкой.</p>
+<p class="meta">АКТУАЛЬНО НА 8 ОКТЯБРЯ 2026</p></header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Перед подключением</a>
 <a href="#perplexity">Шаг 1. Perplexity: найди источник свежего ответа</a>
 <a href="#playwright">Шаг 2. Playwright: открой страницу глазами помощника</a>
 <a href="#firecrawl">Шаг 3. Firecrawl: прочитай страницу целиком</a>
 <a href="#context7">Шаг 4. Context7: найди документацию нужной версии</a>
+<a href="#stoimost">Сколько стоит</a>
 <a href="#oshibki">Если подключение не заработало</a>
 <a href="#vmeste">Шаг 5. Проверь четыре MCP на одной задаче</a>
-<a href="#svoi-proekt">Собери инструмент под своё дело</a>
-<a href="#dalshe">Дальше по теме</a></nav></details><article>
-<section class="content-section" id="podgotovka">
-<h2>Что нужно до начала</h2>
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
+<a href="#dalshe">Дальше по теме</a></nav></details><article><section class="content-section" id="podgotovka">
+<h2>Перед подключением</h2>
 <p>Все подключения ниже делаем в <b>Claude Code</b>, помощнике для работы с папкой проекта. Обычный чат на сайте Claude.ai настраивается иначе. Если Claude Code ещё нет, начни со статьи <a href="../claude-i-codex-v-vscode/">«Claude Code и Codex в VS Code»</a>. Для команд понадобится и программа <code>claude</code> в терминале: если установлено только расширение VS Code, добавь её по <a href="https://code.claude.com/docs/en/setup">официальной инструкции установки</a>.</p>
 <p>Открой папку проекта в VS Code. В меню <a href="https://code.visualstudio.com/docs/terminal/basics">Terminal → New Terminal («Терминал → Новый терминал»)</a> открой окно для команд. Вставляй команды по одной и нажимай Enter. Для проверки набери:</p>
 <div class="code-card"><pre id="versions"><code>claude --version
@@ -288,18 +311,18 @@ npx --version</code></pre><button class="copy-button" type="button" data-copy-ta
 <p>Если нужное имя уже есть, пропусти его установку и перейди к проверке в соответствующем шаге. Параметр <code>--scope user</code> в наших командах делает подключение доступным тебе во всех проектах, а не только в этой папке. Настройки сохраняются в личном файле <code>~/.claude.json</code>, как описано в <a href="https://code.claude.com/docs/en/mcp#user-scope">справке Anthropic</a>.</p>
 <p>Команды с <code>claude mcp add</code> вводятся в терминале, а просьбы помощнику и <code>/mcp</code> - внутри Claude Code. Для этих проверок запускай его командой <code>claude</code> в терминале той же папки. Чтобы добавить следующий сервер, закончи сеанс командой <code>/exit</code>, введи команду подключения и снова запусти <code>claude</code>.</p>
 <div class="warn-card"><p><b>Ключ API - секрет для доступа к сервису.</b> В командах ниже вместо <code>YOUR_API_KEY</code> вставляется твой настоящий ключ. Меняй только эти слова, оставляй кавычки и пробел после <code>Bearer</code>. Делай замену в терминале на своём компьютере, не в чате помощника. Не показывай ключ на скринах, в переписке и в файлах, которые отправляешь другим. Если ключ уже виден посторонним, отзови его в кабинете сервиса и создай новый.</p></div>
-<p>Для выбранного подключения Perplexity понадобится ключ API; для Firecrawl используем вход через аккаунт, для Context7 - ключ из его кабинета. Условия вызовов и остаток лимита смотри в каждом сервисе: подключение к Claude Code не отменяет его ограничения.</p>
+<p>Для Perplexity и Context7 подготовь ключи из их кабинетов. Firecrawl подключим через вход в аккаунт, без вставки ключа в команду. Суммы и лимиты ниже относятся к вызовам сервисов отдельно от Claude Code.</p>
 <p>В Codex эти же серверы тоже подключаются, но команды и файл настроек другие; ниже весь маршрут относится к Claude Code.</p>
 </section>
 
 <section class="content-section" id="perplexity">
 <h2>Шаг 1. Perplexity: найди источник свежего ответа</h2>
-<p>Ты спрашиваешь, что изменилось в программе, а Claude Code отвечает без даты и ссылки. Проверять ответ приходится вручную. <b>Perplexity MCP подключает к помощнику веб-поиск Perplexity:</b> Claude Code отправляет поисковый запрос и получает найденные страницы. Сервис работает удалённо, на серверах Perplexity. Его назначение и инструменты описаны в <a href="https://github.com/perplexityai/modelcontextprotocol">официальном README</a>.</p>
-<p>Это похоже на помощника, который приносит тебе адреса нужных документов. Найденная ссылка ещё не означает, что документ подходит: дата и первоисточник требуют внимания. Для технических вопросов проси официальную документацию или страницу выпуска, а не случайный пересказ.</p>
+<p>Для инструкции по свежей версии программы нужен источник с датой выпуска. <b>Perplexity MCP подключает к помощнику веб-поиск Perplexity:</b> Claude Code отправляет поисковый запрос и получает найденные страницы. Сервис работает удалённо, на серверах Perplexity. Его назначение и инструменты описаны в <a href="https://github.com/perplexityai/modelcontextprotocol">официальном README</a>.</p>
+<p>Для нашего запроса выберем <code>perplexity_search</code>: он возвращает найденные страницы. У Perplexity есть и инструменты с развёрнутым ответом, но для первой проверки нужен официальный адрес и дата.</p>
 <p>Открой <a href="https://console.perplexity.ai/">кабинет Perplexity API</a>, войди и создай ключ API. Путь к этому кабинету указан в <a href="https://github.com/perplexityai/modelcontextprotocol#get-your-api-key">инструкции сервера</a>. Скопируй ключ, вернись в терминал VS Code и подставь его вместо <code>YOUR_API_KEY</code>:</p>
 <div class="code-card"><pre id="perplexity-add"><code>claude mcp add --scope user --transport http perplexity https://api.perplexity.ai/mcp --header "Authorization: Bearer YOUR_API_KEY"</code></pre><button class="copy-button" type="button" data-copy-target="perplexity-add" aria-label="Скопировать подключение Perplexity" aria-live="polite">Скопировать</button></div>
 <p>Это удалённое подключение с заголовком авторизации из <a href="https://github.com/perplexityai/modelcontextprotocol#remote-mcp-server">README Perplexity</a>. После сообщения <code>Added</code> («Добавлено») запусти <code>claude</code>, введи <code>/mcp</code> и найди <code>perplexity</code>. Затем отправь помощнику:</p>
-<div class="code-card"><pre id="perplexity-check"><code>Через Perplexity найди последний стабильный выпуск Next.js на официальном сайте или в официальном GitHub vercel/next.js. Покажи номер версии, дату выпуска и ссылку на первоисточник. Не выбирай canary (тестовую сборку) или предварительный выпуск. Назови вызванный инструмент Perplexity.</code></pre><button class="copy-button" type="button" data-copy-target="perplexity-check" aria-label="Скопировать проверку поиска" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="perplexity-check"><code>Через Perplexity инструментом perplexity_search найди последний стабильный выпуск Next.js на официальном сайте или в официальном GitHub vercel/next.js. Покажи номер версии, дату выпуска и ссылку на первоисточник. Не выбирай canary (тестовую сборку) или предварительный выпуск. Назови вызванный инструмент Perplexity.</code></pre><button class="copy-button" type="button" data-copy-target="perplexity-check" aria-label="Скопировать проверку поиска" aria-live="polite">Скопировать</button></div>
 <p>Next.js - инструмент для создания сайтов; здесь он нужен только как общий пример, ставить его для проверки MCP не нужно. В следующих запросах встретится <b>App Router</b> - способ организации страниц в Next.js: их адреса задаются папками и файлами. Это объясняется в <a href="https://nextjs.org/docs/app/getting-started/layouts-and-pages">документации Next.js</a>. Сохрани ответ Perplexity, версия пригодится в последнем шаге.</p>
 <div class="result"><p><b>Результат:</b> в чате виден вызов инструмента Perplexity, а в ответе есть версия, дата и официальный источник. Теперь найденную страницу можно открыть и увидеть.</p></div>
 </section>
@@ -307,7 +330,7 @@ npx --version</code></pre><button class="copy-button" type="button" data-copy-ta
 <section class="content-section" id="playwright">
 <h2>Шаг 2. Playwright: открой страницу глазами помощника</h2>
 <p>Адрес сайта уже есть, но тебе нужно увидеть страницу и проверить, что на ней написано. <b>Playwright MCP запускает браузер на твоём компьютере и даёт Claude Code команды для работы с ним.</b> Помощник читает структуру страницы, может нажимать кнопки и сохранять скриншоты. Механизм описан в <a href="https://github.com/microsoft/playwright-mcp">README Microsoft</a>.</p>
-<p>Это как дать помощнику место за соседним компьютером: он открывает сайт и показывает, что увидел. Для сайтов с авторизацией по-прежнему нужен вход, а ограничения доступа самого сайта остаются. Подключение не обещает доступ к любой странице.</p>
+<p>Проверим браузер на публичной документации, где вход не нужен. Скриншот появится в папке проекта: его можно открыть и сравнить с ответом помощника.</p>
 <p>Выйди из сеанса Claude Code через <code>/exit</code> и введи в терминале:</p>
 <div class="code-card"><pre id="playwright-add"><code>claude mcp add --scope user playwright -- npx -y @playwright/mcp@latest</code></pre><button class="copy-button" type="button" data-copy-target="playwright-add" aria-label="Скопировать подключение Playwright" aria-live="polite">Скопировать</button></div>
 <p>Пакет взят из <a href="https://github.com/microsoft/playwright-mcp#claude-code">README Playwright MCP</a>. Разделитель <code>--</code> передаёт оставшуюся команду программе запуска, это <a href="https://code.claude.com/docs/en/mcp#option-3-add-a-local-stdio-server">синтаксис Claude Code</a>. Ключ API для этого подключения не нужен.</p>
@@ -321,12 +344,12 @@ npx --version</code></pre><button class="copy-button" type="button" data-copy-ta
 <section class="content-section" id="firecrawl">
 <h2>Шаг 3. Firecrawl: прочитай страницу целиком</h2>
 <p>На скриншоте видна часть страницы, а для ответа нужны все её пояснения и примеры. <b>Firecrawl MCP передаёт Claude Code содержимое страниц через удалённый сервис Firecrawl.</b> Команда <code>scrape</code> читает один адрес, <code>map</code> ищет адреса внутри сайта, <code>crawl</code> собирает содержимое нескольких страниц. Это описано в <a href="https://github.com/firecrawl/firecrawl-mcp-server#how-to-choose-a-tool">официальном README</a>.</p>
-<p>Это похоже на читателя, который убирает меню и украшения и приносит тебе текст. Firecrawl также поддерживает действия на страницах, но для этой проверки используем чтение, а браузер оставляем Playwright. Закрытые страницы и ограничения доступа не исчезают. Перенос дизайна сайта он тоже не обещает.</p>
+<p>Начнём с одного адреса: Firecrawl вернёт содержимое, пригодное для чтения в чате. Не запускай обход всего сайта для проверки одной страницы.</p>
 <p>Для полного набора подключим Firecrawl через аккаунт. В терминале после <code>/exit</code> введи:</p>
 <div class="code-card"><pre id="firecrawl-add"><code>claude mcp add --scope user --transport http firecrawl https://mcp.firecrawl.dev/v2/mcp-oauth</code></pre><button class="copy-button" type="button" data-copy-target="firecrawl-add" aria-label="Скопировать подключение Firecrawl" aria-live="polite">Скопировать</button></div>
 <p>Адрес взят из <a href="https://github.com/firecrawl/firecrawl-mcp-server#installation">README</a>, а команду для Claude Code даёт <a href="https://docs.firecrawl.dev/quickstarts/claude-code">официальная инструкция Firecrawl</a>. Этот адрес не надо открывать как обычный сайт.</p>
 <p>Запусти <code>claude</code>, введи <code>/mcp</code>, выбери <code>firecrawl</code> и пройди предложенный вход в браузере. Если аккаунта нет, создай его в ходе входа. Подтверди подключение аккаунта, вернись в Claude Code и отправь:</p>
-<div class="code-card"><pre id="firecrawl-check"><code>Через Firecrawl прочитай https://nextjs.org/docs/app/getting-started/layouts-and-pages инструментом scrape. Верни заголовок, ссылку и объяснение из страницы о том, какой файл создаёт страницу сайта. Покажи один пример из документации. Не запускай crawl всего сайта.</code></pre><button class="copy-button" type="button" data-copy-target="firecrawl-check" aria-label="Скопировать проверку чтения страницы" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="firecrawl-check"><code>Через Firecrawl прочитай https://nextjs.org/docs/app/getting-started/layouts-and-pages инструментом firecrawl_scrape. Верни заголовок, ссылку и объяснение из страницы о том, какой файл создаёт страницу сайта. Покажи один пример из документации. Не запускай crawl всего сайта.</code></pre><button class="copy-button" type="button" data-copy-target="firecrawl-check" aria-label="Скопировать проверку чтения страницы" aria-live="polite">Скопировать</button></div>
 <details class="check-panel"><summary>Если нужен ключ API вместо входа через аккаунт</summary>
 <p>Выбери этот путь только вместо основного. Создай ключ в <a href="https://www.firecrawl.dev/app/api-keys">кабинете Firecrawl</a>. Если запись <code>firecrawl</code> уже существует, сначала удали только её командой <code>claude mcp remove --scope user firecrawl</code>. Вместо <code>YOUR_API_KEY</code> вставь ключ в терминале:</p>
 <div class="code-card"><pre id="firecrawl-key"><code>claude mcp add --scope user --transport http firecrawl https://mcp.firecrawl.dev/v2/mcp --header "Authorization: Bearer YOUR_API_KEY"</code></pre><button class="copy-button" type="button" data-copy-target="firecrawl-key" aria-label="Скопировать вариант Firecrawl с ключом" aria-live="polite">Скопировать</button></div>
@@ -339,13 +362,26 @@ npx --version</code></pre><button class="copy-button" type="button" data-copy-ta
 <section class="content-section" id="context7">
 <h2>Шаг 4. Context7: найди документацию нужной версии</h2>
 <p>Даже официальный пример может относиться к другой версии программы. <b>Context7 MCP приносит в чат документацию библиотек и примеры кода.</b> Библиотека - готовый набор функций для разработки, который подключают к проекту. Context7 сначала находит её по названию, затем запрашивает нужные сведения из документации. Версию можно указать в запросе, как объясняется в <a href="https://github.com/upstash/context7#specify-a-version">README Context7</a>.</p>
-<p>Это как справочник с нужным изданием: название то же, но инструкции внутри могут отличаться. Context7 работает с доступными ему библиотеками, а не со всеми приложениями. Если точная версия не найдена, попроси сообщить об этом и перейти к её официальной документации. Авторы <a href="https://github.com/upstash/context7#disclaimer">не гарантируют полноту и точность всех материалов</a>.</p>
+<p>Это как справочник с нужным изданием: название то же, но инструкции внутри могут отличаться. Context7 работает с доступными ему библиотеками, а не со всеми приложениями. Если точная версия не найдена, попроси сообщить об этом и перейти к её официальной документации. В <a href="https://github.com/upstash/context7#specify-a-version">README</a> есть запросы под версию; наличие документации конкретного выпуска проверим в ответе сервера.</p>
 <p>Открой <a href="https://context7.com/dashboard">кабинет Context7</a>, войди и создай ключ API. Выйди из Claude Code через <code>/exit</code>, затем вставь ключ вместо <code>YOUR_API_KEY</code> в терминале:</p>
 <div class="code-card"><pre id="context7-add"><code>claude mcp add --scope user --header "Authorization: Bearer YOUR_API_KEY" --transport http context7 https://mcp.context7.com/mcp</code></pre><button class="copy-button" type="button" data-copy-target="context7-add" aria-label="Скопировать подключение Context7" aria-live="polite">Скопировать</button></div>
 <p>Это ручное подключение из <a href="https://context7.com/docs/resources/all-clients#claude-code">официальной справки для Claude Code</a>; его адрес и заголовок также указаны в <a href="https://github.com/upstash/context7#installation">README</a>. Снова запусти <code>claude</code>, открой <code>/mcp</code> и найди <code>context7</code>.</p>
-<p>Для проверки возьмём ту же задачу с Next.js. Не нужно самому искать версию в файлах:</p>
+<p>Для проверки возьмём ту же задачу с Next.js. Context7 сначала вызывает <code>resolve-library-id</code> («найти библиотеку»), затем <code>query-docs</code> («запросить документацию»). Версию в проекте помощник найдёт сам:</p>
 <div class="code-card"><pre id="context7-check"><code>Через Context7 найди документацию Next.js App Router о создании новой страницы. Если в этой папке есть проект Next.js, сначала определи установленную версию по файлам зависимостей. Если такого проекта нет, возьми последний стабильный выпуск, проверь его через Perplexity. Укажи версию, выбранную библиотеку Context7, ссылку на документацию и пример создания страницы /about. Если документации именно этой версии нет, скажи об этом и не выдавай пример другой версии за подходящий.</code></pre><button class="copy-button" type="button" data-copy-target="context7-check" aria-label="Скопировать проверку документации" aria-live="polite">Скопировать</button></div>
 <div class="result"><p><b>Результат:</b> видны вызовы Context7, в ответе названы библиотека, версия и источник примера. Если точная версия недоступна, это указано прямо. Все четыре подключения готовы к одной общей проверке.</p></div>
+</section>
+
+<section class="content-section" id="stoimost">
+<h2>Сколько стоит</h2>
+<p><b>Сверка: 8 октября 2026 года, суммы в долларах США.</b> Подключение MCP не включает расходы на Claude Code и внешние сервисы в одну подписку.</p>
+<ul>
+<li><b>Claude Code:</b> Pro стоит $20 в месяц при помесячном расчёте или $200 за год. На годовом тарифе сайт округляет месячный эквивалент до $17. Claude Code входит в Pro; лимиты использования сохраняются. Источник: <a href="https://claude.com/pricing">тарифы Claude</a>.</li>
+<li><b>Perplexity:</b> стандартный <code>perplexity_search</code> через Search API стоит $5 за 1 000 успешных запросов, Fast Search - $1 за 1 000. Это разные режимы поиска. Инструменты с ответом модели используют Agent API: стоимость зависит от модели, объёма текста и вызванных инструментов. У обычного поиска внутри Agent API отдельная ставка $0,0025 за вызов сверх текста модели. Источник: <a href="https://docs.perplexity.ai/docs/getting-started/pricing">тарифы API</a>. Для проверки нужны кредиты API в выбранной организации.</li>
+<li><b>Playwright MCP:</b> $0 за сам пакет, отдельного тарифа за вызовы локального сервера нет. Работает на твоём компьютере. Лицензия Apache 2.0 указана в <a href="https://github.com/microsoft/playwright-mcp">репозитории Microsoft</a>; использование Claude Code учитывается отдельно.</li>
+<li><b>Firecrawl:</b> Free стоит $0 и даёт 1 000 кредитов каждый месяц без банковской карты. Обычное чтение одной страницы расходует 1 кредит. Hobby: $19 в месяц или эквивалент $16 в месяц при годовом расчёте, 5 000 кредитов в месяц. Для нескольких чтений документации хватит Free, пока есть остаток. Источник: <a href="https://www.firecrawl.dev/pricing">тарифы Firecrawl</a>, действующие с 4 сентября 2026 года.</li>
+<li><b>Context7:</b> Free стоит $0 и включает 1 000 вызовов API в месяц к публичным библиотекам. Pro: $10 за пользователя в месяц, 2 000 вызовов; сверх них $5 за 1 000 вызовов. Поиск библиотеки и запрос документации считаются отдельными вызовами, поэтому один вопрос может расходовать несколько. Источник: <a href="https://context7.com/plans">тарифы Context7</a>.</li>
+</ul>
+<p>У Perplexity вход через аккаунт тоже возможен, но он относится к организации API и её расходам. В этой инструкции оставляем ручной путь с ключом из <a href="https://docs.perplexity.ai/docs/getting-started/integrations/mcp-server">официальной справки</a>. Для Firecrawl и Context7 начни с имеющегося лимита Free; увеличивать тариф ради подключения не требуется.</p>
 </section>
 
 <section class="content-section" id="oshibki">
@@ -365,11 +401,11 @@ npx --version</code></pre><button class="copy-button" type="button" data-copy-ta
 <section class="content-section" id="vmeste">
 <h2>Шаг 5. Проверь четыре MCP на одной задаче</h2>
 <p>Теперь проверим исходную проблему: как получить инструкцию по созданию страницы в Next.js и увидеть, что она опирается на нужную версию. Этот тест не меняет файлы проекта. Он соединяет найденный источник, прочитанный текст, открытую страницу и пример из документации.</p>
-<p>Если сейчас ты внутри Claude Code, закончи сеанс командой <code>/exit</code>. В терминале той же папки запусти новый сеанс командой <code>claude</code> и отправь один запрос:</p>
+<p>Если сейчас открыт сеанс Claude Code, закончи сеанс командой <code>/exit</code>. В терминале той же папки запусти новый сеанс командой <code>claude</code> и отправь один запрос:</p>
 <div class="code-card"><pre id="together-check"><code>Проверь все четыре MCP на одной задаче: как создать страницу /about в Next.js App Router. Файлы проекта пока не меняй.
 
-1. Через Perplexity найди последний стабильный выпуск Next.js, дату и официальный источник. Если в папке есть проект Next.js, отдельно определи его установленную версию по файлам зависимостей и используй её для примера. Если проекта нет, используй найденную стабильную версию.
-2. Через Firecrawl прочитай официальную страницу https://nextjs.org/docs/app/getting-started/layouts-and-pages. Покажи, к какой версии относится этот документ, если это указано, и какое объяснение создания страницы ты взял оттуда.
+1. Через Perplexity инструментом perplexity_search найди последний стабильный выпуск Next.js, дату и официальный источник. Если в папке есть проект Next.js, отдельно определи его установленную версию по файлам зависимостей и используй её для примера. Если проекта нет, используй найденную стабильную версию.
+2. Через Firecrawl прочитай официальную страницу https://nextjs.org/docs/app/getting-started/layouts-and-pages. Покажи, к какой версии относится этот документ, если это указано, и какое объяснение создания страницы там содержится.
 3. Через Playwright открой этот же адрес, покажи адрес после переходов, заголовок и сохрани скриншот в папке проекта. Формы не отправляй.
 4. Через Context7 найди документацию выбранной версии Next.js и пример страницы /about. Сравни с прочитанным документом. Если документации точной версии нет или источники расходятся, назови ограничение и проверь официальный источник для нужной версии. Не подменяй её другой молча.
 
@@ -379,24 +415,81 @@ npx --version</code></pre><button class="copy-button" type="button" data-copy-ta
 </section>
 
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
-<p class="help-title">Запнулся? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
-<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу [желаемый результат] с одним из четырёх MCP в Claude Code. Сейчас вижу [текущий экран или сообщение], уже выполнено [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа.</p></div>
-<div class="bubble claude"><span class="who">Claude</span>Уточни, какой инструмент настраиваем и что сейчас видно. Начнём с одного действия.</div></div>
-<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
+<p class="help-title">Сложно пройти шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию.</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Подключаю четыре MCP к Claude Code. Сначала спроси, какой сервер настраиваю и какой текст ошибки вижу. Объясни по одному шагу и после каждого жди моего ответа. Не меняй подключения и не расходуй кредиты API без моего слова. Не показывай ключи и пароли.</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Пришли текст ошибки, только без ключей и личных данных.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с четырьмя MCP" aria-live="polite">Скопировать</button>
 </section>
-<section class="cta" id="svoi-proekt" aria-label="ИИ-Лагерь"><p class="section-label">Практикум</p><h2>Собери инструмент под своё дело</h2>
-<p>Теперь можно применить поиск, браузер и документацию к своему проекту. На ИИ-Лагере показывают, как с Claude Code и Codex собрать сайт под оффер и бота с цепочкой сообщений. Ты описываешь задачу словами, а помощник пишет код. Программа и условия - на странице практикума.</p>
-<a class="press-button" data-partner href="https://theivansergeev.com/ailager/?gcpc=16fff">На ИИ-Лагерь</a></section>
-<section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><ul>
-<li><a href="../web-search-v-claude/"><span class="title">Веб-поиск в Claude.ai</span><span class="why">Как включать поиск в обычном чате на сайте Claude. Это другой продукт и другой способ настройки.</span></a></li>
-<li><a href="../pyat-instrumentov-claude-code/"><span class="title">Пять дополнений для Claude Code: что каждое решает</span><span class="why">Другие инструменты для лимитов, памяти проекта и повторных правок.</span></a></li>
-<li><a href="../claude-i-codex-v-vscode/"><span class="title">Claude Code и Codex в VS Code</span><span class="why">Установка помощников и первый запуск в папке проекта.</span></a></li>
-</ul></section></article>
-</main><aside class="related-plaque" aria-label="Соседняя статья">
-      <p class="plaque-label">Перед установкой</p><h2>Claude Code в VS Code</h2>
+<p class="cta-question">Источники проверены. Как применить эти инструменты к своему проекту?</p>
+<section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
+<section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим.</p><ul><li><a href="../shtat-agentov-paperclip/"><span class="title">Штат агентов в Paperclip</span><span class="why">Раздай работу нескольким помощникам и проверь вклад каждого в общий результат.</span></a></li><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Закрой секретные файлы от Claude Code</span><span class="why">Настрой доступ агента к файлам до подключения следующих инструментов.</span></a></li></ul></section>
+</article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Перед подключением</p><h2>Claude Code в VS Code</h2>
       <p><a href="../claude-i-codex-v-vscode/">Открыть инструкцию</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint"></p></div>
 <script>
-var PARTNER_LINK = "https://theivansergeev.com/ailager/?gcpc=16fff";
+(function () {
+  var viewer = document.getElementById("viewer");
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+  var lastFocused;
+  function open(img) {
+    lastFocused = document.activeElement;
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewer.setAttribute("open", "");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    big.src = img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    viewer.removeAttribute("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Увеличить";
+    button.setAttribute("aria-label", "Увеличить: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
 document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
 var themeButton = document.querySelector(".theme-toggle");
 var savedTheme = "light";
@@ -451,4 +544,22 @@ addEventListener("scroll", updateReadingState, { passive: true });
         }
       });
     });</script>
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline" class="cookie-close" aria-label="Закрыть без аналитики" title="Закрыть без аналитики"><span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
 </body></html>
