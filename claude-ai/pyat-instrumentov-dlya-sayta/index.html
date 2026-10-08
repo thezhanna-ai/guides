@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="ru"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Пять инструментов для сайта в Claude Code и Codex</title>
+<meta content="Проверка кнопок, заявок, безопасности и оформления сайта: Playwright CLI, Supabase, Strix, SkillUI и Context7. Установка с агентом и вручную." name="description"/>
+<meta content="#F8F7F2" name="theme-color"/>
+<link href="../../assets/fonts/fonts.css" rel="stylesheet"/>
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+</style><!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<link href="https://pronovoe.com/claude-ai/pyat-instrumentov-dlya-sayta/" rel="canonical"/><meta content="Пять инструментов для сайта" property="og:title"/><meta content="article" property="og:type"/><meta content="https://pronovoe.com/claude-ai/pyat-instrumentov-dlya-sayta/" property="og:url"/><meta content="https://pronovoe.com/claude-ai/pyat-instrumentov-dlya-sayta/assets/oblozhka.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="https://pronovoe.com/claude-ai/pyat-instrumentov-dlya-sayta/assets/oblozhka.webp" name="twitter:image"/><style>    .github-shot { margin: 24px 0; max-width: 100% }
+    .github-shot .shot { position: relative; width: 100%; max-width: 100% }
+    .github-shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .github-shot figcaption { margin-top: 10px; color: var(--muted); font: 400 14px/1.5 Spectral, Georgia, serif; overflow-wrap: anywhere }
+    .github-shot .zoom { position: absolute; right: 10px; bottom: 10px; min-height: 44px; padding: 9px 15px; border: 0; border-radius: 9px; background: #102F30; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; opacity: 0 }
+    @media (hover: none), (max-width: 860px) { .github-shot .zoom { opacity: 1; position: static; width: 100%; margin-top: 8px } }
+    dialog.image-viewer { max-width: calc(100vw - 32px); max-height: calc(100vh - 32px); padding: 60px 16px 16px; background: #102F30; border: 1px solid #BBC7CA; border-radius: 12px; color: #FFFFFF }
+    dialog.image-viewer::backdrop { background: rgba(0,0,0,.85) }
+    .image-viewer img { display: block; max-width: 100%; max-height: calc(100vh - 115px); width: auto; height: auto; margin: auto }
+    .image-viewer .viewer-close { position: absolute; right: 12px; top: 8px; min-height: 44px; padding: 6px 14px; border: 0; border-radius: 6px; background: #E86F4A; color: #102F30; cursor: pointer }
+    .image-viewer .viewer-close:focus-visible { outline: 3px solid #FFFFFF; outline-offset: 3px }
+.code-card{position:relative;padding:48px 20px 18px}.code-card pre{margin:0}.code-card .copy-button{position:absolute;top:9px;right:10px;min-width:0;min-height:30px;padding:5px 10px;font-size:12px;background:#E86F4A;color:#102F30}.command-label{margin:18px 0 -8px;font-size:13px}.notice{margin:24px 0;padding:14px 18px;border:1px solid var(--info-line);border-left:6px solid #E86F4A;border-radius:11px;background:var(--info)}.notice p:last-child{margin:0}.notice-title{font-family:Arial,sans-serif}.shot{position:relative;margin:24px 0}.shot img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:11px}.shot figcaption{margin-top:10px;color:var(--muted);font:14px/1.5 Spectral,serif}.shot .zoom{position:absolute;right:10px;bottom:44px;min-height:40px;padding:8px 12px;border:0;border-radius:9px;background:#102F30;color:#F8F7F2;opacity:0}.shot:hover .zoom,.shot:focus-within .zoom{opacity:1}.content-section{scroll-margin-top:85px}h4{font:700 17px/1.4 Arial,sans-serif;color:var(--emerald)}.result{margin:18px 0;color:var(--emerald);border-left:3px solid #5F7F68;padding-left:15px}.registration-note{font-size:13px}.section-label{font:700 12px/1.4 Arial,sans-serif}.cover-v2 img{display:block;width:100%;height:auto;border-radius:14px}@media(hover:none),(max-width:860px){.shot .zoom{opacity:1;position:static;width:100%;margin-top:8px}}
+</style><meta content="1600" property="og:image:width"/><meta content="840" property="og:image:height"/><!-- privacy:head:start -->
+<link rel="stylesheet" href="/assets/privacy.css">
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+</head><body>
+<div aria-hidden="true" class="progress"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">ПЯТЬ</div><div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div></div></div></header>
+<div class="page-shell"><nav aria-label="Содержание" class="toc"><p>СОДЕРЖАНИЕ</p><a href="#instruments">Пять задач сайта</a><a href="#stoimost">Сколько это стоит</a><a href="#agent-path">Два пути установки</a><a href="#terminal">Где вводить команды</a><a href="#playwright">1. Playwright CLI</a><a href="#supabase">2. Supabase</a><a href="#strix">3. Strix</a><a href="#skillui">4. SkillUI</a><a href="#context7">5. Context7</a><a href="#itog">С чего начать</a></nav>
+<main><header class="article-header" id="nachalo"><p class="eyebrow">САЙТ С CLAUDE CODE И CODEX</p><figure class="cover cover-v2"><img alt="Ноутбук, лупа, замок, блокнот, кисть и линейка на тёмном столе для проверки сайта" decoding="async" fetchpriority="high" height="840" loading="eager" src="assets/oblozhka.webp" width="1600"/><figcaption>Проверка кнопок, сохранения заявок, безопасности и оформления сайта</figcaption></figure><h1 class="article-title-v2">Пять инструментов для сайта в Claude Code и Codex</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p><p>Сайт выглядит готовым, а <strong>кнопка не нажимается, заявка не сохраняется</strong> и на телефоне съезжают отступы. Как найти причину и проверить исправление, если ты собираешь сайт с Claude Code или Codex и не читаешь код?</p><p>Ниже пять инструментов: каждый проверяет свою часть сайта и даёт <strong>результат, который можно увидеть</strong>. Один из них стоит подключить до первой правки кода: это <a href="#context7">Context7, раздел 5</a>. В <a href="#itog">последнем разделе</a> разберём, почему порядок подключения помогает избежать повторных ошибок.</p><p class="meta">Инструкции и условия сервисов: 08.10.2026.</p></header><details class="mobile-toc"><summary>Содержание статьи</summary><a href="#instruments">Пять задач сайта</a><a href="#stoimost">Сколько это стоит</a><a href="#agent-path">Два пути установки</a><a href="#terminal">Где вводить команды</a><a href="#playwright">1. Playwright CLI</a><a href="#supabase">2. Supabase</a><a href="#strix">3. Strix</a><a href="#skillui">4. SkillUI</a><a href="#context7">5. Context7</a><a href="#itog">С чего начать</a></details><section class="content-section" id="instruments"><h2>Какие инструменты понадобятся</h2><ul class="tool-list"><li><strong>Playwright CLI</strong> открывает браузер и повторяет действия посетителя, чтобы проверить кнопки и формы.</li></ul><ul class="tool-list"><li><strong>Supabase</strong> хранит данные сайта, в том числе заявки из формы.</li></ul><ul class="tool-list"><li><strong>Strix</strong> ищет уязвимости и проверяет, можно ли ими воспользоваться.</li></ul><ul class="tool-list"><li><strong>SkillUI</strong> извлекает дизайн-систему понравившегося сайта: цвета, шрифты, размеры и отступы.</li></ul><ul class="tool-list"><li><strong>Context7</strong> подгружает документацию библиотек, с которыми работает агент.</li></ul><p><strong>Все пять устанавливать необязательно.</strong> Выбирай по задаче: если потерялась заявка, начинай с её сохранения; если ничего не происходит после нажатия кнопки, проверяй форму.</p></section><section class="content-section" id="stoimost"><h2>Сколько это стоит</h2>
+<p><strong>Установка инструментов и работа ИИ-модели - разные расходы.</strong> Условия ниже проверены 08.10.2026. Запросы в Claude Code или Codex расходуют лимит твоего аккаунта по его тарифу.</p>
+<ul class="tool-list"><li><strong>Playwright CLI:</strong> локальная программа работает без подписки на отдельный сервис. <a href="https://github.com/microsoft/playwright-cli/blob/main/LICENSE">Лицензия Microsoft</a>.</li><li><strong>SkillUI:</strong> извлекает оформление без подписки и без API-ключа модели. <a href="https://skillui.vercel.app/">Условия разработчика</a>.</li><li><strong>Strix:</strong> локальная программа работает без подписки на Strix Cloud. Нужен API-ключ модели (секретный код доступа программы к нейросети). Проверка тратит лимит и рассчитывается отдельно по тарифу провайдера. Подписка ChatGPT не включает использование API. <a href="https://github.com/usestrix/strix#ways-to-run-strix">Варианты Strix</a>, <a href="https://help.openai.com/en/articles/9039756-managing-billing-for-chatgpt-and-the-api-platform">учёт расходов OpenAI</a>.</li><li><strong>Supabase:</strong> локальная база работает без подписки на облачный сервис. В облаке есть уровень Free («без подписки») с ограничениями; при росте проекта действуют тарифы сервиса. <a href="https://supabase.com/docs/guides/local-development">Локальная разработка</a>, <a href="https://supabase.com/pricing">условия Supabase</a>.</li><li><strong>Context7:</strong> уровень Free («без подписки») даёт доступ к открытой документации и тратит месячный лимит обращений. После исчерпания действует ограничение, расширение доступа - по тарифу сервиса. <a href="https://context7.com/plans">Условия Context7</a>.</li></ul>
+<p><strong>Docker Desktop - отдельная программа</strong> для локального Supabase и Strix. Для личного использования доступен план без подписки; условия для организаций отличаются. <a href="https://www.docker.com/pricing/">Тарифы Docker, проверка 08.10.2026</a>.</p></section><section class="content-section" id="agent-path"><h2>Два пути установки</h2>
+<h3>Путь 1: агент ставит сам</h3>
+<p>Открой <strong>чат Claude Code или Codex в папке сайта</strong> и поручай установку агенту. Готовые запросы для чата есть в каждом разделе ниже: скопируй подходящий целиком.</p>
+<p><strong>Попроси показывать команды и ждать разрешения.</strong> Проверь настройки доступа агента: одного текста в чате недостаточно, чтобы включить подтверждения. Как выбрать режим: <a href="https://code.claude.com/docs/en/permissions">Claude Code</a> и <a href="https://learn.chatgpt.com/docs/agent-approvals-security">Codex</a>.</p>
+<h3>Путь 2: выполняешь установку самостоятельно</h3>
+<p><strong>Пошаговая инструкция для каждого инструмента - ниже, в разделах 1-5, под подзаголовком «Если вводишь своими руками».</strong> Ничего не нужно знать заранее.</p>
+<aside aria-label="Что может пойти не так" class="notice"><p class="notice-title"><strong>Что может пойти не так</strong></p><p>Команды выполняются по-настоящему и меняют файлы или устанавливают программы. <strong>Сохрани копию проекта</strong>, читай команду перед разрешением и не включай режим «всё без спроса». Непонятно - спроси агента «что она сделает?».</p></aside>
+<h3>Где нужны твои действия</h3>
+<ul class="tool-list"><li><strong>Установка обычных программ:</strong> выбери свою систему на странице Node.js или Docker Desktop. Пароль от компьютера вводи в окне установки.</li><li><strong>Ключ модели для Strix:</strong> получи его у провайдера и введи в терминал по шагу 4.</li><li><strong>Вход в Context7:</strong> заверши авторизацию в браузере.</li><li><strong>Облачный Supabase:</strong> создай проект сервиса для опубликованного сайта. Локальную базу сначала проверим на компьютере.</li></ul></section><section class="content-section" id="terminal"><h2>Где вводить команды</h2><p><strong>Ниже два вида блоков:</strong> команды для терминала и текст, который нужно отправить агенту в чат. Терминал - панель, где программы запускаются текстовыми командами.</p><ol class="step-list" start="1"><li>Открой папку своего сайта в редакторе. В VS Code нажми правой кнопкой на папку в левой панели и выбери <strong>Open in Integrated Terminal</strong> («Открыть во встроенном терминале»). Работа в новом терминале начнётся из выбранной папки.</li></ol><figure class="shot"><img alt="В меню папки выбери Open in Integrated Terminal" loading="lazy" src="article-assets/open-terminal.jpg"/><button aria-haspopup="dialog" aria-label="Увеличить скриншот: В меню папки выбери Open in Integrated Terminal" class="zoom" type="button">Увеличить</button><figcaption>В меню папки выбери Open in Integrated Terminal («Открыть во встроенном терминале»)</figcaption></figure><p>На скриншоте выделен нужный пункт. Источник: <strong><a href="https://code.visualstudio.com/docs/terminal/basics">официальная документация VS Code</a></strong>.</p><p class="result"><strong>Результат:</strong> Внизу редактора открыт терминал выбранной папки.</p><ol class="step-list" start="2"><li>В терминал вставляй по одной команде и нажимай <strong>Enter</strong> («Ввод»). Дождись завершения, затем вводи следующую. Блоки с подписью «Отправь в чат» копируй в разговор с Claude Code или Codex.</li></ol><p class="result"><strong>Результат:</strong> После выполнения команды снова появляется строка ввода; запрос для чата находится в разговоре с агентом.</p><ol class="step-list" start="3"><li>Для SkillUI, Playwright CLI и приведённого ниже способа установки Supabase нужен Node.js. Проверь его двумя командами:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-1"><code>node --version
+npm --version</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-1" type="button">Скопировать</button></div><p>Для этого набора нужен <strong>Node.js 20 или новее</strong>: это требование <a href="https://supabase.com/docs/guides/local-development/cli/getting-started">Supabase CLI</a> (CLI означает управление программой через команды). Node.js запускает такие программы, а npm устанавливает их. Если команда не найдена или версия ниже, установи LTS-версию (версию с длительной поддержкой) с <a href="https://nodejs.org/en/download">официальной страницы Node.js</a>, выбрав свою операционную систему. После установки открой новый терминал.</p><p class="result"><strong>Результат:</strong> Обе команды показывают номера версий, версия Node.js не ниже 20.</p><ol class="step-list" start="4"><li>Перед изменениями сохрани текущую версию сайта. Форму проверяй с тестовыми данными.</li></ol><p class="result"><strong>Результат:</strong> В отдельной папке есть копия сайта, а для формы подготовлены тестовые данные.</p></section><section class="content-section" id="playwright"><h2>1. Playwright CLI для проверки кнопок и форм</h2><p><strong>Форма на месте, но кнопка «Отправить» ничего не делает.</strong> Или на компьютере всё работает, а на телефоне кнопку закрывает другой блок. Playwright CLI открывает браузер, нажимает кнопки, заполняет поля и сохраняет скриншоты. Агент проверяет тот же путь, по которому идёт посетитель.</p><p><strong>Playwright проверяет действия в браузере.</strong> Сохранение заявки нужно отдельно подтвердить в базе: сообщение «Отправлено» само по себе этого не доказывает.</p><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-2"><code>Установи Playwright CLI командой npm install -g @playwright/cli@latest
+и его навык для агентов командой playwright-cli install --skills.
+Перед каждой командой покажи её и дождись моего разрешения.
+В конце проверь, что playwright-cli --help работает.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-2" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Агент показывает справку playwright-cli и подтверждение установки навыка.</p><h3>Если вводишь своими руками</h3><ol class="step-list" start="1"><li>В терминале установи инструмент:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-3"><code>npm install -g @playwright/cli@latest</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-3" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Установка заканчивается без ошибки и возвращается строка ввода.</p><ol class="step-list" start="2"><li>Открой справку и добавь навык для агента:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-4"><code>playwright-cli --help
+playwright-cli install --skills</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-4" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Терминал показывает справку Playwright CLI и подтверждает установку навыка.</p><ol class="step-list" start="3"><li>Запусти свой сайт. Если не знаешь как, отправь агенту: «Запусти этот проект для проверки в браузере и покажи адрес страницы с формой».</li></ol><p class="result"><strong>Результат:</strong> В браузере открывается страница твоего проекта по адресу, который показал агент.</p><ol class="step-list" start="4"><li>Когда сайт запущен, отправь в чат:</li></ol><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-5"><code>Проверь форму на запущенном сайте через playwright-cli.
+Сначала прочитай playwright-cli --help.
+Открой адрес моего проекта с параметром --headed,
+чтобы мне были видны браузер и твои действия.
+Заполни поля тестовыми данными и нажми «Отправить».
+Проверь результат, ошибки консоли и сохрани скриншот.
+Повтори проверку при ширине экрана телефона.
+Покажи, на каком шаге возникла проблема и как её исправить.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-5" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Агент показывает скриншот, результат отправки формы и найденные ошибки для компьютера и телефона.</p><ol class="step-list" start="5"><li>После исправления попроси повторить тот же сценарий. Посетитель должен заполнить форму, нажать кнопку и получить понятный результат. Сохранение заявки отдельно проверь в Supabase.</li></ol><p><strong>Для знакомства с инструментом можно открыть официальный демонстрационный сайт:</strong></p><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-6"><code>playwright-cli open https://demo.playwright.dev/todomvc/ --headed
+playwright-cli screenshot
+playwright-cli close</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-6" type="button">Скопировать</button></div><p>Подробнее: <strong><a href="https://github.com/microsoft/playwright-cli">Playwright CLI от Microsoft</a></strong>.</p><p class="result"><strong>Результат:</strong> После повторной отправки виден понятный ответ формы; запись в базе проверишь в следующем разделе.</p></section><section class="content-section" id="supabase"><h2>2. Supabase для сохранения заявок</h2><p><strong>Посетитель заполнил форму и увидел «Отправлено», а ты нигде не находишь его заявку.</strong> Нужно связать форму с базой данных и убедиться, что отправка действительно создаёт запись. Начнём с базы на компьютере, чтобы проверить подключение до публикации сайта.</p><p><strong>Supabase хранит записи после подключения формы.</strong> Сам инструмент не добавляет отправку на сайт: это изменение делает агент, а ты проверяешь новую строку в таблице.</p><p><strong>Для пути через агента сначала установи и запусти Docker Desktop по ссылке в шаге 1 ниже.</strong> Затем отправь в чат:</p><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-7"><code>Установи Supabase CLI в этом проекте:
+npm install supabase --save-dev.
+Docker Desktop уже запущен.
+Перед каждой командой покажи её и дождись моего разрешения.
+Проверь справку командой npx supabase --help.
+Если папка supabase уже есть, сначала проверь её настройки.
+Если её нет, создай настройки командой npx supabase init.
+Запусти локальную базу командой npx supabase start.
+Дождись завершения и покажи адрес Studio из вывода.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-7" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Агент показывает адрес Studio запущенной локальной базы.</p><h3>Если вводишь своими руками</h3><ol class="step-list" start="1"><li>Установи и запусти <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>. Он нужен для запуска локальной базы и других компонентов Supabase. На странице установки выбери вариант для своей системы.</li></ol><p class="result"><strong>Результат:</strong> Docker Desktop открыт, среда запуска контейнеров готова к работе.</p><ol class="step-list" start="2"><li>В терминале проекта введи по очереди:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-8"><code>npm install supabase --save-dev
+npx supabase --help</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-8" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Команда npx supabase --help выводит справку.</p><ol class="step-list" start="3"><li>Создай настройки Supabase и запусти его:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-9"><code>npx supabase init
+npx supabase start</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-9" type="button">Скопировать</button></div><p>Если в проекте уже есть папка <strong><code class="path">supabase</code></strong>, попроси агента проверить её настройки перед повторной инициализацией. Первый запуск загружает компоненты базы, поэтому дождись завершения.</p><p class="result"><strong>Результат:</strong> В проекте есть папка supabase, в терминале - адреса запущенных сервисов.</p><ol class="step-list" start="4"><li>В выводе найди строку <strong>Studio</strong> («Панель базы»), скопируй адрес и открой его в браузере. Обычно это <code class="path">http://127.0.0.1:54323</code>. Studio - панель, в которой можно смотреть таблицы и сохранённые записи.</li></ol><p class="result"><strong>Результат:</strong> В браузере открыта панель Studio со списком разделов базы.</p><ol class="step-list" start="5"><li>Отправь в чат:</li></ol><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-10"><code>Подключи форму на моём сайте к локальному Supabase.
+Создай таблицу leads для заявок и сохраняй в неё поля этой формы.
+Посетитель должен отправлять заявку, но не видеть чужие записи.
+Секретные ключи оставь на сервере.
+Если запись не сохранилась, покажи ошибку вместо «Отправлено».
+Сначала покажи план изменений.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-10" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Агент показывает изменения формы и таблицу leads («Заявки»), куда будет записывать данные.</p><ol class="step-list" start="6"><li>После подключения отправь тестовую заявку. В Studio открой <strong>Table Editor</strong> («Редактор таблиц»), выбери таблицу <strong>leads</strong> («Заявки») в схеме <strong>public</strong> (раздел таблиц базы) и найди новую строку. Обнови страницу: запись должна остаться.</li></ol><aside class="notice"><p class="notice-title"><strong>Опубликованному сайту нужна облачная база</strong></p><p><strong>Локальная база нужна для разработки: выключенный компьютер не сможет принимать заявки.</strong> Подключи облачный проект Supabase, попроси агента настроить права доступа и повтори тестовую отправку. <a href="https://supabase.com/docs/guides/deployment">Публикация Supabase</a>.</p></aside><p>Подробнее: <strong><a href="https://supabase.com/docs/guides/local-development/cli/getting-started">установка и запуск Supabase CLI</a></strong>, <a href="https://supabase.com/docs/guides/database/tables">работа с таблицами</a>, <a href="https://supabase.com/docs/guides/database/postgres/row-level-security">права доступа</a>.</p><p class="result"><strong>Результат:</strong> В таблице leads видна новая строка с тестовыми данными, она остаётся после обновления страницы.</p></section><section class="content-section" id="strix"><h2>3. Strix для проверки безопасности</h2><p>Снаружи сайт работает, но ошибка в коде может открыть доступ к данным. <strong>Strix - программа для проверки безопасности</strong>: она ищет такие места и пытается подтвердить находки.</p><aside class="notice"><p class="notice-title"><strong>Проверку запускай только на своём проекте или с разрешения владельца</strong></p><p>Для начала используй <strong>тестовую копию</strong>: проверка выполняет реальные действия. Границы проверки описаны в <a href="https://docs.strix.ai/usage/cli">справке Strix</a>.</p></aside><p><strong>Отчёт Strix не гарантирует отсутствие всех уязвимостей.</strong> Агент должен разобрать находки, предложить исправления и повторить проверку после изменений.</p><p>Для локального запуска нужны <strong>работающий Docker, Python 3.12 или новее и API-ключ модели</strong>. Python - среда, в которой запускается Strix. Установи и запусти <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>, а Python и pipx подготовь по шагу 1. Требование версии: <a href="https://github.com/usestrix/strix/blob/main/pyproject.toml">пакет Strix</a>. Расходы модели разобраны в разделе <a href="#stoimost">«Сколько это стоит»</a>.</p><p><strong>После подготовки отправь агенту</strong> запрос ниже. Он установит программу, а ключ ты введёшь самостоятельно по шагу 4.</p><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-11"><code>Установи только программу Strix командой pipx install strix-agent.
+Перед каждой командой покажи её и дождись моего разрешения.
+Проверь, что strix --help работает.
+Если strix не найдена, используй pipx ensurepath
+и попроси меня открыть новый терминал для повторной проверки.
+Ключ введу своими руками по шагу 4.
+Не запрашивай ключ в чате и не запускай проверку сайта.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-11" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Агент показывает справку strix; проверка сайта ещё не запускалась.</p><h3>Если вводишь своими руками</h3><ol class="step-list" start="1"><li>Для установки используем <strong>pipx</strong>: он устанавливает Python-программы в отдельное окружение. Если Python или pipx ещё нет, установи их по <a href="https://www.python.org/downloads/">инструкции Python</a> и <a href="https://pipx.pypa.io/stable/how-to/install-pipx.html">инструкции pipx</a>, выбрав вариант для своей системы.</li></ol><p class="result"><strong>Результат:</strong> В новом терминале доступны Python версии 3.12 или новее и команда pipx.</p><ol class="step-list" start="2"><li>На <a href="https://docs.strix.ai/quickstart">странице Quick Start</a> открой вкладку <strong>pipx</strong> в блоке <strong>Installation</strong> («Установка»). Команду можно скопировать кнопкой справа.</li></ol><figure class="shot"><img alt="В разделе Installation выбери pipx и скопируй команду кнопкой справа" loading="lazy" src="article-assets/strix-install.jpg"/><button aria-haspopup="dialog" aria-label="Увеличить скриншот: В разделе Installation выбери pipx и скопируй команду кнопкой справа" class="zoom" type="button">Увеличить</button><figcaption>В разделе Installation («Установка») выбери pipx и скопируй команду кнопкой справа</figcaption></figure><p class="result"><strong>Результат:</strong> На официальной странице видна команда pipx install strix-agent.</p><ol class="step-list" start="3"><li>В терминале выполни:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-12"><code>pipx install strix-agent
+strix --help</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-12" type="button">Скопировать</button></div><p>Если команда <strong><code class="path">strix</code></strong> не найдена, выполни <code class="path">pipx ensurepath</code> и открой новый терминал.</p><p class="result"><strong>Результат:</strong> Команда strix --help показывает справку.</p><ol class="step-list" start="4"><li>Получи API-ключ у своего провайдера модели. В примере используется OpenAI. Выбери команды по названию оболочки в терминале.</li></ol><p><strong>Bash или zsh:</strong></p><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-13"><code>export STRIX_LLM="openai/gpt-5.4"
+printf 'Вставь API-ключ и нажми Enter: '
+read -r -s LLM_API_KEY
+export LLM_API_KEY</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-13" type="button">Скопировать</button></div><p><strong>PowerShell:</strong></p><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-14"><code>$env:STRIX_LLM = "openai/gpt-5.4"
+$key = Read-Host "Вставь API-ключ и нажми Enter" -AsSecureString
+$env:LLM_API_KEY = [System.Net.NetworkCredential]::new("", $key).Password</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-14" type="button">Скопировать</button></div><aside class="notice"><p class="notice-title"><strong>Ключ вводи в терминал, а не в чат с агентом</strong></p><p>В обоих вариантах ввод скрыт. <strong>Не вставляй ключ в переписку.</strong> Он даёт программе доступ к модели через твой аккаунт.</p></aside><p class="result"><strong>Результат:</strong> Терминал возвращается к строке ввода после скрытого ввода ключа; в переписке ключа нет.</p><ol class="step-list" start="5"><li>В той же вкладке терминала, из папки тестового проекта, запусти проверку:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-15"><code>strix --target .</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-15" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> В терминале виден ход проверки; после завершения появляется папка strix_runs с отчётом.</p><ol class="step-list" start="6"><li>По завершении открой папку <code class="path">strix_runs</code>, затем папку этой проверки. Отправь в чат:</li></ol><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-16"><code>Прочитай отчёт последней проверки в strix_runs.
+Объясни найденные уязвимости: что может сделать посторонний
+и какое изменение закроет проблему.
+Сначала покажи предлагаемые исправления.
+После исправлений повторно проверь найденные уязвимости.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-16" type="button">Скопировать</button></div><p><strong>После работы закрой вкладку терминала с ключом.</strong> Исправления нужно проверить повторным запуском.</p><p>Подробнее: <strong><a href="https://docs.strix.ai/quickstart">Strix Quick Start</a></strong>, <a href="https://github.com/usestrix/strix/blob/main/pyproject.toml">требования Python</a>, <a href="https://docs.strix.ai/llm-providers/openai">подключение OpenAI</a>.</p><p class="result"><strong>Результат:</strong> Агент объясняет находки отчёта и показывает, что изменилось после повторной проверки.</p></section><section class="content-section" id="skillui"><h2>4. SkillUI для цветов, шрифтов и отступов</h2><p>На одной странице кнопки круглые, на другой квадратные, заголовки разного размера. <strong>SkillUI - программа, которая извлекает оформление сайта-образца</strong> и сохраняет его в файлы. Агент читает цвета, шрифты и отступы перед правкой твоей страницы.</p><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-17"><code>Установи SkillUI командой npm install -g skillui.
+Перед каждой командой покажи её и дождись моего разрешения.
+В конце проверь, что skillui --help работает.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-17" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Агент показывает справку skillui.</p><h3>Если вводишь своими руками</h3><ol class="step-list" start="1"><li>В терминале установи инструмент и открой справку:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-18"><code>npm install -g skillui
+skillui --help</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-18" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Команда skillui --help показывает справку.</p><ol class="step-list" start="2"><li>Выбери сайт, оформление которого подходит твоему проекту. Ниже пример с Linear. Замени его адрес своим:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-19"><code>skillui --url https://linear.app --out ./design-reference --name my-site</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-19" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Внутри design-reference появляется папка my-site-design.</p><ol class="step-list" start="3"><li>В левой панели редактора открой <strong>design-reference/my-site-design</strong>. Команда создаёт вложенную папку: <code>--out</code> задаёт родительскую, а <code>--name my-site</code> - имя. Найди <strong>SKILL.md</strong> и <strong>references/DESIGN.md</strong> с цветами, шрифтами и отступами. <a href="https://github.com/amaancoderx/npxskillui/blob/main/src/cli.ts">Как SkillUI записывает файлы</a>.</li></ol><p class="result"><strong>Результат:</strong> В редакторе открыты SKILL.md и references/DESIGN.md с описанием оформления.</p><ol class="step-list" start="4"><li>Отправь в чат:</li></ol><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-20"><code>Прочитай SKILL.md и references/DESIGN.md
+в папке design-reference/my-site-design.
+Приведи оформление моего сайта к этим цветам, шрифтам и отступам.
+Сохрани мои тексты, структуру и назначение кнопок.
+Сначала покажи, какие изменения предлагаешь.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-20" type="button">Скопировать</button></div><p><strong>После правки открой страницу на компьютере и телефоне:</strong> заголовки, кнопки и расстояния между блоками должны следовать одному стилю. SkillUI извлекает оформление, а изменения в твоём сайте вносит агент.</p><p>Подробнее: <strong><a href="https://github.com/amaancoderx/npxskillui">SkillUI на GitHub</a></strong>.</p><p class="result"><strong>Результат:</strong> На компьютере и телефоне видны согласованные цвета, шрифты и отступы; назначение кнопок сохранено.</p></section><section class="content-section" id="context7"><h2>5. Context7 для документации под версию проекта</h2><p><strong>Ты просишь исправить сайт, а агент предлагает знакомый ему пример кода.</strong> Только в твоей версии библиотеки эта команда уже изменилась. Пока агент опирается на старую память, правки могут возвращать ту же ошибку.</p><p><strong>Context7 передаёт агенту документацию библиотек</strong> (готовых частей, из которых собран сайт). Подключение через MCP (способ дать агенту доступ к внешнему инструменту) настраивается отдельно для Claude Code и Codex. Затем агент должен определить версию в проекте и найти подходящий пример.</p><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-21"><code>Добавь подключение Context7 к текущему агенту.
+Перед каждой командой покажи её и дождись моего разрешения.
+Если работаешь в Codex, используй команду:
+codex mcp add context7 --url https://mcp.context7.com/mcp/oauth
+Затем начни вход командой codex mcp login context7.
+Вход в браузере завершу своими руками.
+После моего подтверждения проверь codex mcp list.
+Если работаешь в Claude Code, используй команду:
+claude mcp add --scope user --transport http context7 https://mcp.context7.com/mcp/oauth
+Затем объясни, как выбрать context7 и Authenticate через /mcp.
+Авторизацию в браузере пройду своими руками.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-21" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> После твоего входа агент показывает активное подключение context7.</p><h3>Если вводишь своими руками</h3><h4>В Codex</h4><ol class="step-list" start="1"><li>В терминале добавь Context7:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-22"><code>codex mcp add context7 --url https://mcp.context7.com/mcp/oauth</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-22" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Context7 добавлен в список подключений Codex.</p><ol class="step-list" start="2"><li>Начни вход:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-23"><code>codex mcp login context7</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-23" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Терминал показывает ссылку для входа; открой её, если браузер не открылся сам.</p><ol class="step-list" start="3"><li>Заверши авторизацию на странице Context7, которая откроется в браузере.</li></ol><p class="result"><strong>Результат:</strong> Страница входа сообщает об успешной авторизации.</p><ol class="step-list" start="4"><li>Проверь список подключений:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-24"><code>codex mcp list</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-24" type="button">Скопировать</button></div><p>В списке должен появиться <strong><code class="path">context7</code></strong>. Открой новый чат Codex в папке проекта.</p><p class="result"><strong>Результат:</strong> Команда показывает context7; новый чат видит подключение.</p><h4>В Claude Code</h4><ol class="step-list" start="1"><li>В терминале добавь Context7:</li></ol><p class="command-label"><strong>Введи в терминал</strong></p><div class="code-card"><pre id="command-25"><code>claude mcp add --scope user --transport http context7 https://mcp.context7.com/mcp/oauth</code></pre><button aria-label="Скопировать: введи в терминал" aria-live="polite" class="copy-button" data-copy-target="command-25" type="button">Скопировать</button></div><p class="result"><strong>Результат:</strong> Терминал подтверждает добавление context7 в Claude Code.</p><ol class="step-list" start="2"><li>В Claude Code введи <code class="path">/mcp</code>, выбери <strong>context7</strong>, затем пункт авторизации <strong>Authenticate</strong> («Авторизоваться») и заверши вход в браузере.</li></ol><p class="result"><strong>Результат:</strong> После входа список MCP показывает авторизованный Context7.</p><ol class="step-list" start="3"><li>Вернись в Claude Code и убедись, что подключение активно.</li></ol><p class="result"><strong>Результат:</strong> В новом разговоре агент видит инструменты Context7.</p><h3>Что попросить у агента</h3><p class="command-label"><strong>Отправь в чат</strong></p><div class="code-card"><pre id="command-26"><code>Перед изменением кода определи установленную версию нужной библиотеки
+по файлу зависимостей проекта.
+Через Context7 найди документацию для этой версии.
+Покажи версию и ссылку, затем предложи решение моей задачи.
+Если документации для точной версии нет, проверь официальный сайт.</code></pre><button aria-label="Скопировать: отправь в чат" aria-live="polite" class="copy-button" data-copy-target="command-26" type="button">Скопировать</button></div><p><strong>Посмотри, какую версию и источник указал агент.</strong> После изменения кода запусти сайт и проверь сценарий, ради которого делалась правка.</p><p class="result"><strong>Результат:</strong> Агент показывает версию библиотеки и ссылку на документацию, а исправленный сценарий проходит проверку на сайте.</p><p>Подробнее: <strong><a href="https://context7.com/docs/resources/all-clients">подключение Context7 к клиентам</a></strong>, <a href="https://developers.openai.com/codex/mcp/">MCP в Codex</a>, <a href="https://code.claude.com/docs/en/mcp">MCP в Claude Code</a>.</p></section><section class="content-section" id="itog"><h2>Почему пятый инструмент стоит подключить первым</h2><p><strong>Context7 нужен до написания кода</strong>: агент должен определить версию библиотеки и прочитать подходящую документацию. Иначе он может снова предложить команду, которая в твоём проекте уже не работает.</p><p>Поэтому начни с <strong>Context7 из раздела 5</strong>, затем выбери инструмент под свою проблему. Playwright проверяет путь посетителя, Supabase позволяет увидеть сохранённую заявку, Strix ищет уязвимости, а SkillUI даёт образец оформления. После каждой правки повтори действие посетителя и посмотри на результат.</p></section><section aria-label="Если что-то не получается" class="help-banner" id="pomoshch"><p class="help-title">Запнулся? Спроси своего агента. <span class="accent">Попроси идти по одному действию</span></p><div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу проверить форму моего сайта. Проведи по шагам через Playwright CLI и Supabase. Я новичок: объясняй, куда нажать и что должно появиться, после каждого действия дождись моего ответа.</p></div><div class="bubble claude"><span class="who">Агент</span>Сначала открой папку сайта в редакторе. Напиши, что сейчас видно в терминале.</div></div><button aria-label="Скопировать запрос помощи" aria-live="polite" class="copy-button" data-copy-target="help-prompt" type="button">Скопировать</button></section><p class="cta-question">Проверку формы можно поручать после каждого изменения сайта.</p><section aria-label="Концентрат" class="cta" id="koncentrat"><p class="section-label">Бесплатный Концентрат</p><h2>Сайт собран. Как поручить его проверки команде ИИ-агентов?</h2><p><strong>Ты знаешь, чем проверить кнопки и заявки.</strong> Дальше можно собрать команду ИИ-агентов для таких проверок. На Концентрате три вечера, 13-15 октября в 19:00 по Москве, онлайн: работа с командой агентов в Claude Code, Codex и ChatGPT.</p><a class="press-button" data-partner="" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Занять место</a><p class="registration-note">Регистрация на сайте до 14 октября, участие бесплатное</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Перед установкой</p><h2>Claude Code в VS Code</h2>
+      <p><a href="../claude-i-codex-v-vscode/">Открыть инструкцию</a></p></aside></div>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<script>
+</script>
+<script defer="" src="../../assets/promty-foto.js"></script><!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline" class="cookie-close" aria-label="Закрыть без аналитики" title="Закрыть без аналитики"><span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>
+
