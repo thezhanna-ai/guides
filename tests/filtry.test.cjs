@@ -72,8 +72,8 @@ function page() {
   };
 }
 
-test('Начальная страница: 47 карточек и пять рубрик', () => {
-  const p = page(); assert.equal(p.visible().length, 47); assert.equal(p.sections.length, 5);
+test('Начальная страница: 48 карточек и пять рубрик', () => {
+  const p = page(); assert.equal(p.visible().length, 48); assert.equal(p.sections.length, 5);
   assert.deepEqual(p.sections.map(s => s.attrs['data-section']), ['start', 'kazhdyy-den', 'kartinki', 'vaybkoding', 'servisy']);
 });
 
@@ -112,7 +112,7 @@ test('Поиск и фильтры скрывают весь блок с воп�
 
 test('Стирание запроса возвращает карточки и пустые разделы', () => {
   const p = page(); p.search('zzzzzzнебывает'); p.search('');
-  assert.equal(p.visible().length, 47); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 48); assert.ok(p.sections.every(s => s.style.display !== 'none'));
   assert.ok(!p.noResults.classes.has('show'));
 });
 
@@ -138,14 +138,14 @@ test('Регрессия: совпадение без выбранной мет�
   assert.equal(p.visible().length, 0); assert.ok(p.noResults.classes.has('show'));
 });
 
-test('«Все метки» после фильтра возвращает 47 карточек и все рубрики', () => {
+test('«Все метки» после фильтра возвращает 48 карточек и все рубрики', () => {
   const p = page(); p.filter('codex'); p.filter('all');
-  assert.equal(p.visible().length, 47); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 48); assert.ok(p.sections.every(s => s.style.display !== 'none'));
 });
 
 test('«Другое» снимает метку и ставит курсор в поле поиска', () => {
   const p = page(); p.filter('codex'); p.filter('drugoe');
-  assert.equal(p.visible().length, 47); assert.ok(p.input.focused);
+  assert.equal(p.visible().length, 48); assert.ok(p.input.focused);
 });
 
 test('Кнопка «Найти» открывает единственный результат', () => {
@@ -179,7 +179,7 @@ test('Все кодовые слова реальных live-статей нах
     for (const article of registry.filter(a => a.status === 'live' && a.kod_slovo === code)) {
       assert.ok(p.visible().some(link => link.attrs.href === articleHref(article.slug)), code + ': ' + article.slug);
     }
-    assert.ok(p.visible().every(link => link.classes.has('kod-hit')));
+    assert.ok(p.visible().every(link => link.classes.has('kod-hit') || link.attrs['data-metki'].split(' ').includes('sravnenie')));
     assert.ok(!p.noResults.classes.has('show'));
   }
 });
@@ -259,4 +259,16 @@ test('Стирание кодового слова снимает подсвет
 test('Поисковый ввод с разметкой остаётся данными', () => {
   const p = page(); p.search('<img src=x onerror=alert(1)>');
   assert.equal(p.window.location.href, ''); assert.ok(!/innerHTML|eval\(/.test(script));
+});
+
+
+test('Сравнение моделей: ровно ЭВОЛЮЦИЯ, МОНТАЖ и МОДЕЛЬ', () => {
+  const p = page(); p.filter('sravnenie');
+  assert.deepEqual(p.visible().map(link => link.attrs['data-kod']).sort(), ['МОДЕЛЬ', 'МОНТАЖ', 'ЭВОЛЮЦИЯ']);
+});
+
+test('Эволюция находится по кодовому слову и открывается через Enter', () => {
+  const p = page(); p.search('эволюция');
+  assert.deepEqual(p.visible().map(link => link.attrs.href), [articleHref('opus-55-protiv-gpt-6-astra')]);
+  p.key('Enter'); assert.equal(p.window.location.href, articleHref('opus-55-protiv-gpt-6-astra'));
 });
