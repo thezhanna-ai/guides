@@ -172,7 +172,7 @@ class ArticleImagesTest(unittest.TestCase):
 
     def test_image_manifest_covers_all_29_approved_articles_and_excludes_new_article(self):
         self.assertEqual(len(self.eligible), 41)
-        self.assertEqual(set(self.covers), {a["slug"] for a in self.eligible} | {a["slug"] for a in self.articles if a.get("seriya") == "Промпты для картинок в ChatGPT"})
+        self.assertEqual(set(self.covers), {a["slug"] for a in self.articles if a["status"] in {"live", "gotova"}})
         self.assertEqual(len(self.manifest), 47)
         self.assertTrue(all(row["number"] < 49 for row in self.manifest))
         for article in self.eligible:
@@ -302,8 +302,7 @@ class ArticleImagesTest(unittest.TestCase):
     def test_catalog_uses_captioned_article_covers_and_only_live_links(self):
         doc = ImageDocument(HOME.read_text())
         cards = doc.root.all(klass="guide-link")
-        live = [a for a in self.articles if a["status"] == "live"
-                and (a in self.eligible or a.get("seriya") == "Промпты для картинок в ChatGPT")]
+        live = [a for a in self.articles if a["status"] == "live"]
         expected = ["claude-ai/" + a["slug"] + "/" for section in self.generator.RAZDELY
                     for track in section["trassy"] for a in live if a["rubrika"] == track["trassa"]]
         self.assertEqual([card.attrs["href"] for card in cards], expected)

@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Четыре MCP для Claude Code: от поиска до проверки инструкции</title>
+<meta name="description" content="Подключение Perplexity, Playwright, Firecrawl и Context7 к Claude Code. Четыре проверки на документации Next.js, стоимость и лимиты на 08.10.2026.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Четыре MCP для Claude Code: от поиска до проверки инструкции">
+<meta property="og:description" content="Подключение Perplexity, Playwright, Firecrawl и Context7 к Claude Code. Четыре проверки на документации Next.js, стоимость и лимиты на 08.10.2026.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/chetyre-mcp-claude-code/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/chetyre-mcp-claude-code/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/chetyre-mcp-claude-code/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Четыре плетёных кабеля соединены с металлическим хабом на тёмном бирюзовом столе">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/chetyre-mcp-claude-code/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<!-- privacy:head:start -->
+<link rel="stylesheet" href="/assets/privacy.css">
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+</head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">Четыре MCP для Claude Code</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+</div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Перед подключением</a>
+<a href="#perplexity">Шаг 1. Perplexity: найди источник свежего ответа</a>
+<a href="#playwright">Шаг 2. Playwright: открой страницу глазами помощника</a>
+<a href="#firecrawl">Шаг 3. Firecrawl: прочитай страницу целиком</a>
+<a href="#context7">Шаг 4. Context7: найди документацию нужной версии</a>
+<a href="#vmeste">Шаг 5. Проверь четыре MCP на одной задаче</a>
+<a href="#stoimost">Сколько стоит</a>
+<a href="#oshibki">Если подключение не заработало</a>
+
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
+<a href="#dalshe">Дальше по теме</a></nav><main><header id="nachalo"><p class="eyebrow">Инструкция · Claude Code и MCP</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Четыре плетёных кабеля соединены с металлическим хабом на тёмном бирюзовом столе" loading="eager" decoding="async" fetchpriority="high"><figcaption>Поиск источника, браузер, чтение страницы и документация нужной версии</figcaption></figure>
+<h1 class="article-title-v2">Четыре MCP для Claude Code: от поиска до проверки инструкции</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
+<p class="lead">Claude Code дал ссылку на документацию. Как понять, что пример из неё подходит твоей версии? Подключим четыре инструмента и в конце проверим одну инструкцию, прежде чем менять проект.</p>
+<p>MCP подключает внешние инструменты к помощнику. Perplexity найдёт источник, Playwright откроет страницу, Firecrawl прочитает её целиком, а Context7 поможет проверить документацию нужной версии.</p>
+<p>Playwright бесплатный, Firecrawl и Context7 для этой проверки укладываются в бесплатный лимит, а Perplexity платный: 5 $ за 1 000 запросов, нужны кредиты API.</p>
+<p class="meta">АКТУАЛЬНО НА 8 ОКТЯБРЯ 2026</p></header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Перед подключением</a>
+<a href="#perplexity">Шаг 1. Perplexity: найди источник свежего ответа</a>
+<a href="#playwright">Шаг 2. Playwright: открой страницу глазами помощника</a>
+<a href="#firecrawl">Шаг 3. Firecrawl: прочитай страницу целиком</a>
+<a href="#context7">Шаг 4. Context7: найди документацию нужной версии</a>
+<a href="#vmeste">Шаг 5. Проверь четыре MCP на одной задаче</a>
+<a href="#stoimost">Сколько стоит</a>
+<a href="#oshibki">Если подключение не заработало</a>
+
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
+<a href="#dalshe">Дальше по теме</a></nav></details><article><section class="content-section" id="podgotovka">
+<h2>Перед подключением</h2>
+<p>Открой Claude Code: это помощник, который работает с папкой проекта. Обычный чат на Claude.ai подключается иначе. Если Claude Code ещё нет, начни со статьи <a href="../claude-i-codex-v-vscode/">«Claude Code и Codex в VS Code»</a>. Для команд нужна программа <code>claude</code> в терминале. Одного расширения VS Code мало: добавь программу по <a href="https://code.claude.com/docs/en/setup">инструкции установки</a>.</p>
+<p>Открой папку проекта в VS Code. Выбери Terminal → New Terminal («Терминал → Новый терминал»). В нижней панели вводи команды по одной, после каждой нажимай Enter:</p>
+<div class="code-card"><pre id="versions"><code>claude --version
+node --version
+npx --version</code></pre><button class="copy-button" type="button" data-copy-target="versions" aria-label="Скопировать проверку программ" aria-live="polite">Скопировать</button></div>
+<p>Каждая команда должна показать версию. Для Playwright MCP нужен Node.js версии 18 или новее. Если <code>node</code> или <code>npx</code> не найдены, скачай Node.js с пометкой LTS («с долгой поддержкой») <a href="https://nodejs.org/en/download">с официального сайта</a>. После установки открой новый терминал.</p>
+<p>Теперь посмотри, какие MCP у тебя уже есть:</p>
+<div class="code-card"><pre id="list-before"><code>claude mcp list</code></pre><button class="copy-button" type="button" data-copy-target="list-before" aria-label="Скопировать список подключений" aria-live="polite">Скопировать</button></div>
+<p>Нужное имя уже в списке? Пропусти его установку и сразу выполни проверку из соответствующего шага. Флаг <code>--scope user</code> делает подключение доступным тебе во всех проектах. Настройки сохраняются в твоём файле <code>~/.claude.json</code>.</p>
+<p>Команды <code>claude mcp add</code> вводи в терминале. Запросы помощнику и <code>/mcp</code> - в чате после запуска <code>claude</code>. Для следующего подключения выйди из чата через <code>/exit</code>, вставь команду установки и снова запусти <code>claude</code> в той же папке.</p>
+<div class="warn-card"><p>Ключ API даёт доступ к сервису. Вместо <code>YOUR_API_KEY</code> подставь свой ключ. Меняй только эти слова: кавычки и пробел после <code>Bearer</code> оставь. Вставляй ключ в терминале своего компьютера. Не отправляй его в чат, на скринах или в файлах для других людей. Если ключ уже увидел кто-то посторонний, отзови его в кабинете сервиса и создай новый.</p></div>
+<p>Для Perplexity и Context7 понадобятся ключи из их кабинетов. Firecrawl подключим через вход в аккаунт. Расходы этих сервисов считаются отдельно от Claude Code.</p>
+<p>Эти серверы можно подключить и к Codex. Там другие команды и файл настроек. Здесь все шаги рассчитаны на Claude Code.</p>
+</section>
+
+<section class="content-section" id="perplexity">
+<h2>Шаг 1. Perplexity: найди источник свежего ответа</h2>
+<p>Для свежей инструкции сначала нужен свежий источник. Perplexity добавляет к Claude Code поиск в интернете: помощник отправляет запрос на серверы Perplexity и получает найденные страницы.</p>
+<p>Возьмём инструмент <code>perplexity_search</code>. Он вернёт страницы, где можно проверить дату и версию. У Perplexity есть и инструменты с готовым развёрнутым ответом. Сейчас нам нужен сам официальный источник.</p>
+<figure class="shot"><img src="assets/01-perplexity-mcp.jpg" width="1280" height="720" alt="Страница Perplexity API с адресом MCP и ссылкой Generate API Key" loading="lazy" decoding="async"><figcaption>Generate API Key («Создать ключ API») ведёт в кабинет. Здесь выбираем подключение с ключом.</figcaption></figure>
+<p><b>Открой <a href="https://console.perplexity.ai/">кабинет Perplexity API</a>, войди и создай ключ.</b> Скопируй его и вернись в терминал VS Code. В команде ниже замени <code>YOUR_API_KEY</code> своим ключом:</p>
+<div class="code-card"><pre id="perplexity-add"><code>claude mcp add --scope user --transport http perplexity https://api.perplexity.ai/mcp --header "Authorization: Bearer YOUR_API_KEY"</code></pre><button class="copy-button" type="button" data-copy-target="perplexity-add" aria-label="Скопировать подключение Perplexity" aria-live="polite">Скопировать</button></div>
+<p>Дождись <code>Added</code> («Добавлено»). Запусти <code>claude</code>, введи <code>/mcp</code> и найди <code>perplexity</code>. Отправь помощнику запрос:</p>
+<div class="code-card"><pre id="perplexity-check"><code>Через Perplexity инструментом perplexity_search найди последний стабильный выпуск Next.js на официальном сайте или в официальном GitHub vercel/next.js. Покажи номер версии, дату выпуска и ссылку на первоисточник. Не выбирай canary (тестовую сборку) или предварительный выпуск. Назови вызванный инструмент Perplexity.</code></pre><button class="copy-button" type="button" data-copy-target="perplexity-check" aria-label="Скопировать проверку поиска" aria-live="polite">Скопировать</button></div>
+<p>Next.js используют для создания сайтов. Для этой проверки ставить его не нужно. В следующих шагах встретится App Router: он задаёт адреса страниц через папки и файлы. Сохрани найденную версию Next.js, она понадобится в конце.</p>
+<div class="result"><p><b>Результат: Perplexity вернул версию Next.js, дату и официальный источник.</b> В чате виден вызов инструмента. Дальше откроем страницу в браузере.</p></div>
+</section>
+
+<section class="content-section" id="playwright">
+<h2>Шаг 2. Playwright: открой страницу глазами помощника</h2>
+<p>Playwright откроет браузер на твоём компьютере. Claude Code сможет читать страницу, нажимать кнопки и сохранять скрины. Так ты увидишь, что помощник действительно открыл нужный сайт.</p>
+<p>Возьмём публичную документацию: входить в аккаунт не придётся. Скрин появится в папке проекта, и ты сможешь сравнить его с ответом.</p>
+<p><b>Выйди из чата через <code>/exit</code> и вставь в терминал команду подключения:</b></p>
+<div class="code-card"><pre id="playwright-add"><code>claude mcp add --scope user playwright -- npx -y @playwright/mcp@latest</code></pre><button class="copy-button" type="button" data-copy-target="playwright-add" aria-label="Скопировать подключение Playwright" aria-live="polite">Скопировать</button></div>
+<p>После <code>--</code> стоит команда, которую Claude Code запустит как MCP-сервер. Ключ API здесь не нужен. Если понадобится другой способ установки, открой <a href="https://github.com/microsoft/playwright-mcp#claude-code">страницу Playwright MCP</a>.</p>
+<figure class="shot"><img src="assets/02-nextjs-page.jpg" width="1265" height="712" alt="Публичная документация Next.js: Layouts and Pages и выбранная версия" loading="lazy" decoding="async"><figcaption>Так выглядит страница Layouts and Pages («Макеты и страницы»), которую должен открыть Playwright. Версия указана слева.</figcaption></figure>
+<p>Снова запусти <code>claude</code>. Открой <code>/mcp</code>, найди <code>playwright</code> и отправь запрос:</p>
+<div class="code-card"><pre id="playwright-check"><code>Через Playwright открой https://nextjs.org/docs/app/getting-started/layouts-and-pages. Покажи фактический адрес после открытия, заголовок страницы и сохрани скриншот в папке проекта. Назови файл скриншота. Ничего не отправляй через формы.</code></pre><button class="copy-button" type="button" data-copy-target="playwright-check" aria-label="Скопировать проверку браузера" aria-live="polite">Скопировать</button></div>
+<p>Открой сохранённый скрин в VS Code. Сравни заголовок на нём с ответом помощника. Браузер не установлен? Попроси Claude Code установить его через инструмент сервера и повторить проверку. Если останется ошибка, передай её через блок помощи ниже.</p>
+<p>У Playwright есть два способа управления браузером: MCP и CLI. Если CLI уже установлен, MCP всё равно нужно отдельно добавить в список подключений.</p>
+<div class="result"><p><b>Результат: страница открыта, а сохранённый скрин можно посмотреть.</b> В ответе видны адрес и заголовок. Теперь прочитаем не только экран, но и остальной текст страницы.</p></div>
+</section>
+
+<section class="content-section" id="firecrawl">
+<h2>Шаг 3. Firecrawl: прочитай страницу целиком</h2>
+<p>Firecrawl передаст Claude Code текст страницы, включая пояснения и примеры. Он работает через удалённый сервис. <code>scrape</code> читает один адрес, <code>map</code> находит адреса внутри сайта, а <code>crawl</code> собирает несколько страниц.</p>
+<p>Сейчас прочитаем одну страницу. Обходить весь сайт для этого не нужно.</p>
+<p><b>Выйди из чата через <code>/exit</code> и добавь Firecrawl командой ниже.</b> Затем войдём в аккаунт, чтобы получить полный набор инструментов:</p>
+<div class="code-card"><pre id="firecrawl-add"><code>claude mcp add --scope user --transport http firecrawl https://mcp.firecrawl.dev/v2/mcp-oauth</code></pre><button class="copy-button" type="button" data-copy-target="firecrawl-add" aria-label="Скопировать подключение Firecrawl" aria-live="polite">Скопировать</button></div>
+<p>Этот адрес нужен MCP-серверу. В браузерную строку его вставлять не нужно. Другие варианты подключения есть в <a href="https://docs.firecrawl.dev/quickstarts/claude-code">инструкции Firecrawl</a>.</p>
+<figure class="shot"><img src="assets/03-firecrawl-connect.jpg" width="1265" height="712" alt="Официальная инструкция Firecrawl с подключением и входом через /mcp" loading="lazy" decoding="async"><figcaption>Sign in and verify («Войти и проверить»): открой /mcp, выбери firecrawl и заверши вход в браузере.</figcaption></figure>
+<p>Запусти <code>claude</code>, введи <code>/mcp</code> и выбери <code>firecrawl</code>. Открой предложенную ссылку и войди в браузере. Если аккаунта нет, создай его. Разреши подключение аккаунта, вернись в Claude Code и отправь:</p>
+<div class="code-card"><pre id="firecrawl-check"><code>Через Firecrawl прочитай https://nextjs.org/docs/app/getting-started/layouts-and-pages инструментом firecrawl_scrape. Верни заголовок, ссылку и объяснение из страницы о том, какой файл создаёт страницу сайта. Покажи один пример из документации. Не запускай crawl всего сайта.</code></pre><button class="copy-button" type="button" data-copy-target="firecrawl-check" aria-label="Скопировать проверку чтения страницы" aria-live="polite">Скопировать</button></div>
+<details class="check-panel"><summary>Если нужен ключ API вместо входа через аккаунт</summary>
+<p>Это замена входу через аккаунт. Создай ключ в <a href="https://www.firecrawl.dev/app/api-keys">кабинете Firecrawl</a>. Если <code>firecrawl</code> уже в списке, удали только его: <code>claude mcp remove --scope user firecrawl</code>. Вставь ключ вместо <code>YOUR_API_KEY</code> в терминале:</p>
+<div class="code-card"><pre id="firecrawl-key"><code>claude mcp add --scope user --transport http firecrawl https://mcp.firecrawl.dev/v2/mcp --header "Authorization: Bearer YOUR_API_KEY"</code></pre><button class="copy-button" type="button" data-copy-target="firecrawl-key" aria-label="Скопировать вариант Firecrawl с ключом" aria-live="polite">Скопировать</button></div>
+<p>Запусти Claude Code снова и повтори запрос чтения. Один сервис подключай одним способом, чтобы не путаться между двумя записями.</p>
+</details>
+<p>Если позже понадобятся несколько страниц, попроси <code>map</code> показать их адреса. Выбери нужные и ограничь <code>crawl</code> этим числом. Без ключа и аккаунта доступны только чтение страницы, поиск и обработка файлов. Для полного набора используй подключение с входом.</p>
+<div class="result"><p><b>Результат: Firecrawl вернул текст и пример с нужной страницы.</b> В чате виден вызов инструмента. Осталось проверить, подходит ли пример твоей версии программы.</p></div>
+</section>
+
+<section class="content-section" id="context7">
+<h2>Шаг 4. Context7: найди документацию нужной версии</h2>
+<p>Context7 находит документацию библиотек и приносит примеры в чат. Библиотека - готовый набор функций, который подключают к проекту. Помощник сначала найдёт её по названию, затем запросит нужный раздел. В запросе можно указать версию.</p>
+<p>У разных версий могут быть разные команды и примеры. Context7 знает доступные ему библиотеки, но не все приложения. Если нужной версии нет, попроси сказать об этом и проверить её официальную документацию.</p>
+<p><b>Открой <a href="https://context7.com/dashboard">кабинет Context7</a>, войди и создай ключ API.</b> Выйди из Claude Code через <code>/exit</code>. В терминале замени <code>YOUR_API_KEY</code> своим ключом:</p>
+<div class="code-card"><pre id="context7-add"><code>claude mcp add --scope user --header "Authorization: Bearer YOUR_API_KEY" --transport http context7 https://mcp.context7.com/mcp</code></pre><button class="copy-button" type="button" data-copy-target="context7-add" aria-label="Скопировать подключение Context7" aria-live="polite">Скопировать</button></div>
+<p>Запусти <code>claude</code>, открой <code>/mcp</code> и найди <code>context7</code>. Если понадобится помощь с подключением, открой <a href="https://context7.com/docs/resources/all-clients#claude-code">инструкцию для Claude Code</a>.</p>
+<figure class="shot"><img src="assets/04-context7-tools.jpg" width="1265" height="712" alt="Документация Context7: resolve-library-id, query-docs и версии библиотеки" loading="lazy" decoding="async"><figcaption>resolve-library-id находит библиотеку. query-docs читает документацию, в том числе по ID с версией.</figcaption></figure>
+<p>Проверим документацию Next.js. Инструмент <code>resolve-library-id</code> найдёт библиотеку, а <code>query-docs</code> запросит её документацию. Если в папке уже есть проект Next.js, помощник определит его версию по файлам. Отправь:</p>
+<div class="code-card"><pre id="context7-check"><code>Через Context7 найди документацию Next.js App Router о создании новой страницы. Если в этой папке есть проект Next.js, сначала определи установленную версию по файлам зависимостей. Если такого проекта нет, возьми последний стабильный выпуск, проверь его через Perplexity. Укажи версию, выбранную библиотеку Context7, ссылку на документацию и пример создания страницы /about. Если документации именно этой версии нет, скажи об этом и не выдавай пример другой версии за подходящий.</code></pre><button class="copy-button" type="button" data-copy-target="context7-check" aria-label="Скопировать проверку документации" aria-live="polite">Скопировать</button></div>
+<div class="result"><p><b>Результат: в ответе есть библиотека, версия и источник примера.</b> Видны вызовы Context7. Если точной версии нет, помощник сообщил об этом. Теперь проверим все четыре инструмента на одной задаче.</p></div>
+</section>
+
+<section class="content-section" id="vmeste">
+<h2>Шаг 5. Проверь четыре MCP на одной задаче</h2>
+<p>Теперь попросим инструкцию для страницы Next.js и проверим, подходит ли она нужной версии. Помощник найдёт источник, прочитает его, откроет в браузере и сравнит с документацией. Файлы проекта пока менять не будем.</p>
+<p><code>/about</code> - адрес новой страницы, для которой мы просим инструкцию.</p>
+<p><b>Выйди через <code>/exit</code> и запусти новый чат командой <code>claude</code> в той же папке.</b> Скопируй и отправь весь запрос:</p>
+<div class="code-card"><pre id="together-check"><code>Проверь все четыре MCP на одной задаче: как создать страницу /about в Next.js App Router. Файлы проекта пока не меняй.
+
+1. Через Perplexity инструментом perplexity_search найди последний стабильный выпуск Next.js, дату и официальный источник. Если в папке есть проект Next.js, отдельно определи его установленную версию по файлам зависимостей и используй её для примера. Если проекта нет, используй найденную стабильную версию.
+2. Через Firecrawl прочитай официальную страницу https://nextjs.org/docs/app/getting-started/layouts-and-pages. Покажи, к какой версии относится этот документ, если это указано, и какое объяснение создания страницы там содержится.
+3. Через Playwright открой этот же адрес, покажи адрес после переходов, заголовок и сохрани скриншот в папке проекта. Формы не отправляй.
+4. Через Context7 найди документацию выбранной версии Next.js и пример страницы /about. Сравни с прочитанным документом. Если документации точной версии нет или источники расходятся, назови ограничение и проверь официальный источник для нужной версии. Не подменяй её другой молча.
+
+В конце покажи таблицу: MCP, какой инструмент вызван, результат, источник или файл. Дай короткую инструкцию для /about с версией и ссылкой на подходящий официальный документ. Если этап не выполнен, отметь его отдельно: не называй весь тест успешным.</code></pre><button class="copy-button" type="button" data-copy-target="together-check" aria-label="Скопировать общую проверку четырёх MCP" aria-live="polite">Скопировать</button></div>
+<p>Прочитай итоговую таблицу. У Perplexity должны быть версия и официальный источник. У Firecrawl - текст страницы. У Playwright - открытый адрес и файл скрина. У Context7 - документация выбранной версии или объяснение, почему её нет. Если один этап не прошёл, повтори только его проверку.</p>
+<div class="result"><p><b>Результат: ты получил инструкцию для <code>/about</code> с версией и официальной ссылкой.</b> Все четыре инструмента вызваны, их ответы видны в таблице. Теперь понятно, подходит ли пример твоему проекту, прежде чем ты начнёшь менять файлы.</p></div>
+</section>
+
+<section class="content-section" id="stoimost">
+<h2>Сколько стоит</h2>
+<p>Цены на 8 октября 2026 года, в долларах США. Claude Code и внешние сервисы оплачиваются отдельно.</p>
+<ul>
+<li><b>Claude Code:</b> Pro стоит $20 в месяц или $200 за год. На сайте годовая цена округлена до $17 в месяц. Claude Code входит в Pro, но лимиты остаются. Условия можно посмотреть в <a href="https://claude.com/pricing">тарифах Claude</a>.</li>
+<li><b>Perplexity:</b> обычный <code>perplexity_search</code> через Search API стоит $5 за 1 000 успешных запросов. Fast Search - $1 за 1 000. Это разные режимы.<p>Инструменты с ответом модели работают через Agent API. Цена зависит от модели, объёма текста и вызванных инструментов. Обычный поиск внутри Agent API стоит $0,0025 за вызов, сверх стоимости текста модели. Для проверки нужны кредиты API в выбранной организации. Суммы есть в <a href="https://docs.perplexity.ai/docs/getting-started/pricing">тарифах API</a>.</p></li>
+<li><b>Playwright MCP:</b> $0 за пакет. Сервер работает на твоём компьютере, отдельной платы за его вызовы нет. Пакет выпускается под лицензией Apache 2.0. Запросы к Claude Code учитываются отдельно.</li>
+<li><b>Firecrawl:</b> Free даёт 1 000 кредитов каждый месяц за $0, без банковской карты. Обычное чтение одной страницы расходует 1 кредит.<p>Hobby стоит $19 в месяц или $16 в месяц при оплате за год. Ты получаешь 5 000 кредитов в месяц. Для нескольких страниц начни с оставшегося Free. Это <a href="https://www.firecrawl.dev/pricing">тарифы Firecrawl</a>, действующие с 4 сентября 2026 года.</p></li>
+<li><b>Context7:</b> Free стоит $0 и даёт 1 000 вызовов API в месяц к публичным библиотекам. Pro - $10 за пользователя в месяц и 2 000 вызовов. Сверх них - $5 за 1 000.<p>Поиск библиотеки и чтение документации считаются отдельно, поэтому один вопрос может потратить несколько вызовов. Остаток и условия смотри в <a href="https://context7.com/plans">тарифах Context7</a>.</p></li>
+</ul>
+<p>В Perplexity можно войти и через аккаунт. Такой вход тоже связан с организацией API и её расходами. Здесь используем ключ. Для Firecrawl и Context7 начни с оставшегося лимита Free: повышать тариф ради подключения не нужно.</p>
+</section>
+
+<section class="content-section" id="oshibki">
+<h2>Если подключение не заработало</h2>
+<p>Открой <code>/mcp</code> и посмотри состояние сервера. <code>Connected</code> означает «Подключено», <code>Needs authentication</code> - «Нужен вход», <code>Failed to connect</code> - «Не удалось подключиться». Даже при <code>Connected</code> выполни запрос из нужного шага: он проверит, отвечает ли инструмент.</p>
+<figure class="shot"><img src="assets/05-mcp-status.jpg" width="1265" height="712" alt="Справка Claude Code с состояниями подключения MCP" loading="lazy" decoding="async"><figcaption>Connected («Подключено»), Needs authentication («Нужен вход»), Failed to connect («Не удалось подключиться»).</figcaption></figure>
+<details class="check-panel"><summary>Имя сервера уже существует</summary>
+<p>Запусти <code>claude</code>, открой <code>/mcp</code> и найди это имя. Проверь существующее подключение. Если нужно заменить адрес, удали только этот сервер, указав то же место хранения, где ты его добавил. Для нашего Firecrawl команда такая: <code>claude mcp remove --scope user firecrawl</code>. Затем подключи его заново.</p>
+</details>
+<details class="check-panel"><summary>Ошибка 401 или 403</summary>
+<p>У Perplexity и Context7 проверь ключ в кабинете и пробел после <code>Bearer</code> в команде. Если ключ неверный, удали только это подключение в исходном scope («месте хранения»). Добавь его с новым ключом и перезапусти чат. У Firecrawl с входом через аккаунт повтори авторизацию в <code>/mcp</code>.</p>
+</details>
+<details class="check-panel"><summary>Лимит исчерпан или инструмент не вызывается</summary>
+<p>Сервис пишет о лимите? Открой его кабинет и проверь остаток. Если сервер подключён, но Claude отвечает сам, повтори запрос со словами «через Perplexity», «через Playwright», «через Firecrawl» или «через Context7». Попроси назвать вызванный инструмент. Если появится ошибка, скопируй её без ключа и отправь через блок помощи.</p>
+</details>
+</section>
+
+
+
+<section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
+<p class="help-title">Сложно пройти шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию.</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Подключаю четыре MCP к Claude Code. Сначала спроси, какой сервер настраиваю и какой текст ошибки вижу. Объясни по одному шагу и после каждого жди моего ответа. Не меняй подключения и не расходуй кредиты API без моего слова. Не показывай ключи и пароли.</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Пришли текст ошибки, только без ключей и личных данных.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с четырьмя MCP" aria-live="polite">Скопировать</button>
+</section>
+<p class="cta-question">Ты получил инструкцию для своей версии. Как применить эти инструменты к своему проекту?</p>
+<section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
+<section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим.</p><ul><li><a href="../shtat-agentov-paperclip/"><span class="title">Штат агентов в Paperclip</span><span class="why">Раздай работу нескольким помощникам и проверь вклад каждого в общий результат.</span></a></li><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Закрой секретные файлы от Claude Code</span><span class="why">Настрой доступ агента к файлам до подключения следующих инструментов.</span></a></li></ul></section>
+</article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Полезно знать</p><h2>Пять дополнений для Claude Code</h2>
+      <p><a href="../pyat-instrumentov-claude-code/">Открыть инструкцию</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint"></p></div>
+<script>
+(function () {
+  var viewer = document.getElementById("viewer");
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+  var lastFocused;
+  function open(img) {
+    lastFocused = document.activeElement;
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewer.setAttribute("open", "");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    big.src = img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    viewer.removeAttribute("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Увеличить";
+    button.setAttribute("aria-label", "Увеличить: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline" class="cookie-close" aria-label="Закрыть без аналитики" title="Закрыть без аналитики"><span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>

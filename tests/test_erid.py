@@ -21,7 +21,7 @@ class EridTest(unittest.TestCase):
                      ROOT / "scripts/shablon_glavnoy.html"]
 
     def test_every_partner_page_and_template_has_exactly_one_marked_creative(self):
-        self.assertEqual(len(self.pages), 49)
+        self.assertEqual(len(self.pages), 51)
         for page in self.pages:
             with self.subTest(page=str(page.relative_to(ROOT))):
                 html = page.read_text()

@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Улей агентов Ruflo: первая команда и память между чатами</title>
+<meta name="description" content="Как подключить Ruflo 3.55.0 к Claude Code, выполнить задачу с исполнителем и проверяющим и прочитать общую память в новом чате. Цены на 08.10.2026.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Улей агентов Ruflo: первая команда и память между чатами">
+<meta property="og:description" content="Как подключить Ruflo 3.55.0 к Claude Code, выполнить задачу с исполнителем и проверяющим и прочитать общую память в новом чате. Цены на 08.10.2026.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/uley-agentov-ruflo/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/uley-agentov-ruflo/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/uley-agentov-ruflo/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Пчёлы на медовых сотах в деревянной рамке на тёмном бирюзовом столе">
+<link rel="canonical" href="https://pronovoe.com/claude-ai/uley-agentov-ruflo/"><link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<!-- privacy:head:start -->
+<link rel="stylesheet" href="/assets/privacy.css">
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+</head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">Команда агентов с общей памятью</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+</div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Перед настройкой</a>
+<a href="#ustanovka">Шаг 1. Подготовь Ruflo одной командой</a>
+<a href="#mcp">Шаг 2. Проверь подключение MCP</a>
+<a href="#instrumenty">Шаг 3. Дай Claude Code обратиться к Ruflo</a>
+<a href="#zadacha">Шаг 4. Собери страницу силами команды</a>
+<a href="#obshchiy-kontekst">Шаг 5. Передай общий контекст новому чату</a>
+<a href="#stoimost">Сколько стоит</a>
+<a href="#oshibki">Если не получилось</a>
+
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
+<a href="#dalshe">Дальше по теме</a></nav><main><header id="nachalo"><p class="eyebrow">Инструкция · Claude Code и Ruflo</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Пчёлы на медовых сотах в деревянной рамке на тёмном бирюзовом столе" loading="eager" decoding="async" fetchpriority="high"><figcaption>Одна задача, отдельные исполнители и проверка памяти в новом чате</figcaption></figure>
+<h1 class="article-title-v2">Улей агентов Ruflo: первая команда и память между чатами</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
+<p class="lead">Закроешь чат с командой агентов, а в следующем снова придётся объяснять задание? Подключим Ruflo, поручим помощникам одну страницу и в конце проверим, что они сохранили.</p>
+<p>Ruflo, раньше Claude Flow, помогает Claude Code раздавать работу и хранить общую память. Один помощник соберёт страницу, другой проверит. Ты откроешь результат в браузере, а затем начнёшь новый чат.</p>
+<p>Ruflo бесплатный: для этой инструкции нужен только твой тариф Claude Code.</p>
+<p class="meta">АКТУАЛЬНО НА 8 ОКТЯБРЯ 2026</p></header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Перед настройкой</a>
+<a href="#ustanovka">Шаг 1. Подготовь Ruflo одной командой</a>
+<a href="#mcp">Шаг 2. Проверь подключение MCP</a>
+<a href="#instrumenty">Шаг 3. Дай Claude Code обратиться к Ruflo</a>
+<a href="#zadacha">Шаг 4. Собери страницу силами команды</a>
+<a href="#obshchiy-kontekst">Шаг 5. Передай общий контекст новому чату</a>
+<a href="#stoimost">Сколько стоит</a>
+<a href="#oshibki">Если не получилось</a>
+
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
+<a href="#dalshe">Дальше по теме</a></nav></details><article>
+<section class="content-section" id="podgotovka">
+<h2>Перед настройкой</h2>
+<p>Проверь, что Claude Code запускается командой <code>claude</code> и отвечает после входа. Если у тебя пока только расширение VS Code, установи ещё <a href="https://code.claude.com/docs/en/setup">программу для терминала</a>. Начать с нуля поможет <a href="../claude-i-codex-v-vscode/">инструкция по установке Claude Code</a>. Ruflo работает вместе с ним: доступ к моделям по-прежнему зависит от твоего аккаунта.</p>
+<p>Понадобятся Node.js версии 20 или выше и npm версии 9 или выше. Скачай Node.js с пометкой LTS («с долгой поддержкой») <a href="https://nodejs.org/en/download">с официального сайта</a>. npm установится вместе с ним. Команда <code>npx</code> позволит запускать Ruflo без отдельной установки для всего компьютера.</p>
+<figure class="shot"><img src="assets/00-node-download.jpg" width="1250" height="720" alt="Страница загрузки Node.js с выбором LTS и кнопками установщика" loading="lazy" decoding="async"><figcaption>На странице Node.js выбери LTS и свою систему. Ниже есть готовый установщик.</figcaption></figure>
+<p>Создай пустую папку <code>ruflo-test</code>. В VS Code выбери File → Open Folder («Файл → Открыть папку») и открой её. Затем выбери Terminal → New Terminal («Терминал → Новый терминал»). Внизу появится панель для команд. Вставляй их по одной и после каждой нажимай Enter:</p>
+<div class="code-card"><pre id="node-version"><code>node --version</code></pre><button class="copy-button" type="button" data-copy-target="node-version" aria-label="Скопировать проверку Node.js" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="npm-version"><code>npm --version</code></pre><button class="copy-button" type="button" data-copy-target="npm-version" aria-label="Скопировать проверку npm" aria-live="polite">Скопировать</button></div>
+<div class="code-card"><pre id="claude-version"><code>claude --version</code></pre><button class="copy-button" type="button" data-copy-target="claude-version" aria-label="Скопировать проверку Claude Code" aria-live="polite">Скопировать</button></div>
+<p>Первые две команды покажут версии Node.js и npm, третья - Claude Code. Сравни их с требованиями выше. Если видишь <code>command not found</code> («команда не найдена»), установи нужную программу и открой новый терминал. Продолжай, когда все три команды выведут версии.</p>
+<p>Команды установки вводи в терминале. Запросы помощнику отправляй в чат, который откроется после команды <code>claude</code>. Чтобы вернуться из чата к обычным командам, введи <code>/exit</code>.</p>
+</section>
+
+<section class="content-section" id="ustanovka">
+<h2>Шаг 1. Подготовь Ruflo одной командой</h2>
+<p>Ruflo можно поставить через плагины Claude Code или через терминал. Здесь выберем терминал: так подключим его инструменты и сохраним память в папке проекта. В командах ниже закреплена версия <code>3.55.0</code>, актуальная на 8 октября.</p>
+<figure class="shot"><img src="assets/01-ruflo-install.jpg" width="880" height="700" alt="Официальная страница Ruflo: установка через терминал и MCP-сервер" loading="lazy" decoding="async"><figcaption>Раздел CLI Install на странице Ruflo. Для этой инструкции используй команду ниже с версией 3.55.0.</figcaption></figure>
+<p><b>В терминале папки <code>ruflo-test</code> вставь эту команду и нажми Enter:</b></p>
+<div class="code-card"><pre id="ruflo-init"><code>npx -y ruflo@3.55.0 init --no-global --no-mods --no-codex-detect --no-skills-sh --no-signup</code></pre><button class="copy-button" type="button" data-copy-target="ruflo-init" aria-label="Скопировать инициализацию Ruflo" aria-live="polite">Скопировать</button></div>
+<p>Флаг <code>-y</code> разрешает загрузить пакет Ruflo. <code>--no-global</code> убирает указатель из общих инструкций, <code>--no-mods</code> отключает дополнительные моды, <code>--no-codex-detect</code> - автоматическую настройку Codex. <code>--no-skills-sh</code> пропускает дополнительную установку скилла, а <code>--no-signup</code> - предложение регистрации. Дождись сообщения, что настройка завершена.</p>
+<p>В папке появятся <code>CLAUDE.md</code> с правилами для Claude Code и <code>.claude-flow/</code> с настройками Ruflo. Папки с точкой могут быть скрыты в файловом менеджере. Задачу ты дашь позже, пока мы готовим проект.</p>
+<p>Открой файл <code>.mcp.json</code> в VS Code. В нём будет подключение <code>claude-flow</code>, которое запускает <code>ruflo@latest</code>: последнюю версию на момент запуска. Команда в следующем шаге закрепляет <code>3.55.0</code>. Она нужна только тогда, когда подключения ещё нет.</p>
+<div class="result"><p><b>Результат: в папке появился <code>CLAUDE.md</code> с упоминанием Ruflo или Claude Flow.</b> Теперь выясним, видит ли его Claude Code.</p></div>
+</section>
+
+<section class="content-section" id="mcp">
+<h2>Шаг 2. Проверь подключение MCP</h2>
+<p>MCP подключает к Claude Code дополнительные инструменты. Через него Ruflo помогает раздавать задания и сохранять общую память. <b>В том же терминале посмотри список подключений:</b></p>
+<div class="code-card"><pre id="mcp-list"><code>claude mcp list</code></pre><button class="copy-button" type="button" data-copy-target="mcp-list" aria-label="Скопировать список подключений MCP" aria-live="polite">Скопировать</button></div>
+<p>Найди <code>claude-flow</code> или <code>ruflo</code>. Рядом должно быть <code>Connected</code> («Подключено»). <code>claude-flow</code> - прежнее имя, оно осталось в команде подключения. Если уже установлен плагин Ruflo, проверь его сервер. Второе подключение к той же памяти не нужно.</p>
+<p>Видишь <code>Pending approval</code> («Ожидает одобрения»)? Запусти <code>claude</code> из этой папки и разреши подключение Ruflo для учебного проекта. Введи <code>/exit</code> и ещё раз выполни <code>claude mcp list</code>.</p>
+<p>Если Ruflo в списке нет, добавь его командой ниже. Затем повтори <code>claude mcp list</code>. Флаг <code>-y</code> разрешает загрузку пакета: сервер работает в фоне и не сможет спросить тебя об этом сам.</p>
+<div class="code-card"><pre id="mcp-add"><code>claude mcp add claude-flow -- npx -y ruflo@3.55.0 mcp start</code></pre><button class="copy-button" type="button" data-copy-target="mcp-add" aria-label="Скопировать подключение Ruflo" aria-live="polite">Скопировать</button></div>
+<p>Если подключение есть, но выдаёт ошибку, перейди к <a href="#oshibki">блоку «Если не получилось»</a>. Второй сервер ошибку не исправит. Другие команды управления есть в <a href="https://code.claude.com/docs/en/mcp#managing-your-servers">справке Claude Code</a>.</p>
+<div class="result"><p><b>Результат: рядом с Ruflo видно <code>Connected</code> («Подключено»).</b> В следующем шаге попросим его выполнить действие.</p></div>
+</section>
+
+<section class="content-section" id="instrumenty">
+<h2>Шаг 3. Дай Claude Code обратиться к Ruflo</h2>
+<p><b>Запусти Claude Code из этой же папки:</b></p>
+<div class="code-card"><pre id="claude-start"><code>claude</code></pre><button class="copy-button" type="button" data-copy-target="claude-start" aria-label="Скопировать запуск Claude Code" aria-live="polite">Скопировать</button></div>
+<figure class="shot"><img src="assets/02-mcp-status.jpg" width="1265" height="712" alt="Справка Claude Code с состояниями Connected, Needs authentication и Pending approval" loading="lazy" decoding="async"><figcaption>В справке Claude Code показаны состояния MCP. В своём чате открой /mcp и найди Ruflo.</figcaption></figure>
+<p>Если он попросит доверять папке или подключению, прочитай запрос и подтверди только этот учебный проект. В открывшемся чате введи:</p>
+<div class="code-card"><pre id="mcp-panel"><code>/mcp</code></pre><button class="copy-button" type="button" data-copy-target="mcp-panel" aria-label="Скопировать окно состояния MCP" aria-live="polite">Скопировать</button></div>
+<p>Найди Ruflo и список его инструментов. Отправь запрос ниже: он попросит помощника прочитать состояние или память, ничего не создавая.</p>
+<div class="code-card"><pre id="tools-check"><code>Проверь подключённый MCP-сервер Ruflo: он может называться claude-flow или ruflo. Найди в его доступном списке инструменты координации и общей памяти. Выполни один доступный запрос чтения состояния или списка записей памяти, без создания агентов и файлов. Покажи название вызванного инструмента и его результат. Если вызов не прошёл, покажи точную ошибку. Не считай список инструментов доказательством успешного вызова.</code></pre><button class="copy-button" type="button" data-copy-target="tools-check" aria-label="Скопировать проверку инструментов Ruflo" aria-live="polite">Скопировать</button></div>
+<p>Посмотри, какой инструмент вызвал помощник и что вернул Ruflo. В новом проекте список памяти может быть пустым: ты ещё ничего туда не записывал. Ошибка вместо ответа означает, что сначала нужно наладить подключение.</p>
+<div class="result"><p><b>Результат: в чате видны вызов инструмента Ruflo и его ответ.</b> Связь работает, можно давать первую задачу.</p></div>
+</section>
+
+<section class="content-section" id="zadacha">
+<h2>Шаг 4. Собери страницу силами команды</h2>
+<p>Соберём страницу с чек-листом подготовки короткого видео. Ты сможешь открыть её в браузере и отмечать готовые пункты. Внешние сервисы ей не нужны. Claude Code раздаст работу: один помощник напишет страницу, другой проверит её.</p>
+<p>Ruflo помогает распределять задания и хранить требования. Работу выполняют субагенты Claude Code: отдельные помощники, каждый со своим заданием и чатом. Команда <code>agent_spawn</code> только регистрирует роль агента. После неё нужно ещё запустить помощника с конкретным заданием.</p>
+<p>Требования сохраним в памяти Ruflo. Инструмент <code>memory_store</code> записывает их под ключом, а <code>memory_retrieve</code> читает по тому же ключу. Пространство имён объединяет записи одной задачи. Эти инструменты доступны в MCP версии <code>3.55.0</code>.</p>
+<p><b>Скопируй весь запрос ниже и отправь его в чат Claude Code:</b></p>
+<div class="code-card"><pre id="team-task"><code>Собери в текущем учебном проекте локальную страницу demo/index.html «Готово ли видео к выпуску?». На ней шесть пунктов: понятный звук, читаемый текст, проверенные факты, права на музыку, правильный формат, просмотр целиком. У каждого пункта флажок. Показывай число отмеченных пунктов из шести и кнопку «Сбросить». Всё должно работать при открытии файла в браузере, без сети и установки библиотек.
+
+Ты координатор. Используй подключённый Ruflo для координации и общей памяти. Сначала сохрани требования в demo/brief.md и в памяти Ruflo под ключом uley-demo-brief, в пространстве имён uley-demo. Пространство имён - общая группа записей для этой задачи. Проверь чтением, что запись сохранилась. Если память недоступна, остановись и покажи ошибку.
+
+Дай отдельному субагенту Claude Code написать demo/index.html по этому заданию. После его завершения дай другому субагенту проверить файл по demo/brief.md: наличие шести пунктов, подсчёт, сброс, работу без внешних зависимостей. Перед каждой передачей задания достань требования из памяти Ruflo и передай их исполнителю. Регистрации ролей в Ruflo недостаточно: запусти настоящие задания субагентам Claude Code. Не допускай одновременного редактирования одного файла.
+
+Пусть проверяющий сохранит замечания и выполненные проверки в demo/review.md. Верни замечания исполнителю, добейся исправлений и повторной проверки. Если браузер недоступен, отдели проверку кода от ручной проверки, не называй клики выполненными.
+
+Сохрани итог в памяти Ruflo под ключом uley-demo-result, в том же пространстве uley-demo: что собрано, пути файлов, результаты проверок, что ещё требует ручного просмотра. Покажи успешные вызовы записи и чтения, роли, реальные задания субагентам и итоговый список файлов. В demo/README.md напиши, как открыть страницу и проверить её. Не подключай внешние API и ничего не публикуй.</code></pre><button class="copy-button" type="button" data-copy-target="team-task" aria-label="Скопировать первую командную задачу" aria-live="polite">Скопировать</button></div>
+<p>Когда помощники закончат, найди <code>demo/index.html</code> в папке <code>ruflo-test</code> и открой двойным щелчком. Отметь любые два пункта: счётчик должен показать 2 из 6. Нажми «Сбросить»: флажки снимутся, счётчик вернётся к 0 из 6. Если что-то не работает, опиши это Claude Code и попроси исправить страницу и проверить ещё раз.</p>
+<div class="result"><p><b>Результат: страница открывается, счётчик и кнопка «Сбросить» работают.</b> В чате видны задания двум помощникам, в <code>demo/review.md</code> - проверки, а у Ruflo - запись и чтение памяти. Осталась последняя проверка: что произойдёт, если закрыть чат?</p></div>
+</section>
+
+<section class="content-section" id="obshchiy-kontekst">
+<h2>Шаг 5. Передай общий контекст новому чату</h2>
+<p><b>Закрой чат командой <code>/exit</code> и снова запусти <code>claude</code> в папке <code>ruflo-test</code>.</b> В новом чате отправь:</p>
+<div class="code-card"><pre id="memory-check"><code>Через подключённый MCP-сервер Ruflo прочитай записи uley-demo-brief и uley-demo-result из пространства имён uley-demo. Сначала покажи успешные вызовы и содержимое записей, не подменяй их чтением файлов. Если запись не найдена, покажи ошибку и остановись.
+
+По полученным записям объясни, какую страницу собирала команда, где лежит результат, какие проверки прошли и что осталось проверить вручную. Затем открой demo/brief.md и demo/review.md и сравни с памятью. Покажи расхождения. Пока не меняй файлы.</code></pre><button class="copy-button" type="button" data-copy-target="memory-check" aria-label="Скопировать проверку общей памяти в новом чате" aria-live="polite">Скопировать</button></div>
+<p>У каждого субагента свой чат: он не видит весь твой разговор с координатором. Поэтому координатор сначала сохраняет требования, затем читает их перед передачей задания помощнику. После проверки он записывает итог. Так следующий помощник получает нужные сведения из общей памяти.</p>
+<p>Сравни две записи с файлами. В задании должны быть все шесть пунктов чек-листа. В итоге - пути страницы и отчёта проверки. Если запись описывает другой результат, попроси исправить её.</p>
+<div class="result"><p><b>Результат: новый чат прочитал обе записи через Ruflo и показал, что собрала команда.</b> Тебе не пришлось пересказывать задание. Теперь можно продолжить работу с сохранёнными требованиями и результатами проверки.</p></div>
+</section>
+
+<section class="content-section" id="stoimost">
+<h2>Сколько стоит</h2>
+<p>Цены на 8 октября 2026 года, в долларах США. Отдельно считаются локальный пакет Ruflo и доступ к Claude Code.</p>
+<ul>
+<li><b>Ruflo: $0 за пакет.</b> Это бесплатная программа с <a href="https://github.com/ruvnet/ruflo/blob/main/LICENSE">лицензией MIT</a>. Установка через npm и локальный MCP-сервер не требуют месячной подписки. В этом примере память хранится в папке проекта на твоём компьютере.</li>
+<li><b>Claude Code:</b> Pro стоит $20 в месяц или $200 за год. На сайте годовую цену показывают как $17 в месяц после округления. Max - от $100 в месяц. Claude Code входит в эти планы, но у каждого свои <a href="https://claude.com/pricing">лимиты</a>.</li>
+<li><b>Субагенты:</b> Ruflo не берёт плату за каждую роль. Запросы помощников расходуют те же лимиты Claude Code, что и запросы координатора. Если работаешь через API, платишь по тарифу выбранной модели за входной и выходной текст. Фиксированной цены за команду нет.</li>
+</ul>
+<p>Для этой учебной страницы не нужны внешние API, облачные сервисы Ruflo и дополнительные ключи. Если Claude Code у тебя уже есть, начни с локального Ruflo за $0. Помощники расходуют запросы модели, поэтому больше ролей не означает меньше расходов.</p>
+</section>
+
+<section class="content-section" id="oshibki">
+<h2>Если не получилось</h2>
+<details class="check-panel"><summary>Инициализация завершилась ошибкой</summary>
+<p>В терминале папки <code>ruflo-test</code> запусти диагностику:</p>
+<div class="code-card"><pre id="doctor"><code>npx -y ruflo@3.55.0 doctor</code></pre><button class="copy-button" type="button" data-copy-target="doctor" aria-label="Скопировать диагностику Ruflo" aria-live="polite">Скопировать</button></div>
+<p>Скопируй полный текст ошибки и результат диагностики. Отправь Claude Code и попроси объяснить причину, затем дать одно действие для исправления. Не добавляй <code>--force</code> («принудительно») к установке, пока не выяснишь, какие настройки она заменит.</p>
+</details>
+<details class="check-panel"><summary>Сервер есть в списке, но соединения нет</summary>
+<p>Введи <code>/exit</code>, чтобы выйти из чата. В этом же терминале проверь <code>node --version</code> и запусти <code>npx -y ruflo@3.55.0 doctor</code>. Исправь указанную ошибку, повтори <code>claude mcp list</code>, запусти <code>claude</code> и открой <code>/mcp</code>. Начни с версии Node.js и подключения сервера. К командной задаче возвращайся после успешного вызова из шага 3.</p>
+</details>
+<details class="check-panel"><summary>Claude пишет «команда создана», а файл делает сам</summary>
+<p>Попроси Claude Code показать задания субагентам, их ответы и обращения к Ruflo. Если в ответе только список ролей, снова отправь запрос из шага 4. Попроси выполнить часть, где отдельные помощники пишут и проверяют файл.</p>
+</details>
+<details class="check-panel"><summary>Ruflo не возвращает сохранённое задание</summary>
+<p>Попроси прочитать ключ <code>uley-demo-brief</code> в пространстве <code>uley-demo</code>. Используй тот же MCP-сервер, через который сохранял запись: у другого подключения может быть другая память. Ruflo умеет читать по ключу и искать записи. Если поиск пуст, попробуй чтение по точному ключу.</p>
+</details>
+</section>
+
+
+
+<section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
+<p class="help-title">Сложно пройти шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию.</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Настраиваю Ruflo в Claude Code. Сначала спроси, какой шаг выполняю и какой текст ошибки вижу. Объясни по одному шагу и после каждого жди моего ответа. Не показывай ключи и пароли.</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Пришли текст ошибки, только без ключей и личных данных.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с Ruflo" aria-live="polite">Скопировать</button>
+</section>
+<p class="cta-question">Команда сохранила результат. Как поручить ей работу для своего проекта?</p>
+<section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
+<section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим.</p><ul><li><a href="../shtat-agentov-paperclip/"><span class="title">Штат агентов в Paperclip</span><span class="why">Раздай работу нескольким помощникам и проверь вклад каждого в общий результат.</span></a></li><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Закрой секретные файлы от Claude Code</span><span class="why">Настрой доступ агента к файлам до подключения следующих инструментов.</span></a></li></ul></section>
+</article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Полезно знать</p><h2>Штат ИИ-агентов в Claude Code</h2>
+      <p><a href="../shtat-agentov-paperclip/">Открыть инструкцию</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint"></p></div>
+<script>
+(function () {
+  var viewer = document.getElementById("viewer");
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+  var lastFocused;
+  function open(img) {
+    lastFocused = document.activeElement;
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewer.setAttribute("open", "");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    big.src = img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    viewer.removeAttribute("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Увеличить";
+    button.setAttribute("aria-label", "Увеличить: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline" class="cookie-close" aria-label="Закрыть без аналитики" title="Закрыть без аналитики"><span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>
