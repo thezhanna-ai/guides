@@ -21,6 +21,8 @@ links = []
 image_stats = collections.Counter()
 protected = []
 heading_changes = []
+copy_review_path = ROOT / 'audits/seo-20261009/publication-copy-review.json'
+copy_review = {x['page']: x for x in json.loads(copy_review_path.read_text())} if copy_review_path.exists() else {}
 intro_changes = {x['page'] for x in json.loads((ROOT / 'audits/seo-20261009/intro-dovodka.json').read_text()) if x['changed']}
 
 def intro(soup):
@@ -91,11 +93,19 @@ for page in paths:
     if not old_cta or old_cta != new_cta:errors.append(rel + ': protected CTA bytes changed')
     # Own marker stripping is independent of the production generator
     stripped = re.sub(r'<!-- seo:[a-z]+:start -->.*?<!-- seo:[a-z]+:end -->', '', raw, flags=re.S)
-    old_prose = BeautifulSoup(before,'html.parser')
+    # Пункт 10 разрешает только перечисленные редакторские сокращения соседних абзацев
+    expected_before = before
+    for change in copy_review.get(rel, {}).get('adjacent_edits', []):
+        if expected_before.count(change['before']) != 1 or raw.count(change['after']) != 1:
+            errors.append(rel + ': approved adjacent edit mismatch')
+        expected_before = expected_before.replace(change['before'], change['after'], 1)
+    old_prose = BeautifulSoup(expected_before,'html.parser')
     new_prose = BeautifulSoup(stripped,'html.parser')
     if rel.startswith('claude-ai/'):
         old_intro, new_intro = intro(old_prose), intro(new_prose)
         old_text, new_text = [x.get_text(' ', strip=True) for x in (old_intro, new_intro)]
+        if rel in copy_review and (new_text != copy_review[rel]['intro_after'] or not new_text.endswith('.')):
+            errors.append(rel + ': approved intro/period mismatch')
         if not 40 <= len(new_text.split()) <= 60:errors.append(rel + ': intro word count')
         if re.split(r'(?<=[.!?])\s',old_text,maxsplit=1)[0] != re.split(r'(?<=[.!?])\s',new_text,maxsplit=1)[0]:errors.append(rel + ': original first sentence changed')
         if soup.select('.quick-answer') or '<!-- seo:answer:start -->' in raw:errors.append(rel + ': separate quick answer remains')
@@ -127,10 +137,16 @@ for e in entries:
     url=e.find('s:loc',ns).text
     if e.find('s:lastmod',ns).text!=metadata[url.removeprefix(BASE)+'index.html']['lastmod']:errors.append('lastmod mismatch '+url)
 # All tracked image files remain byte-identical to the source commit
-binary_changes = subprocess.check_output(['git','diff','--name-only','2b5a5e2'],text=True).splitlines()
+binary_changes = subprocess.check_output(['git','diff','--name-only','--diff-filter=M','2b5a5e2'],text=True).splitlines()
 changed_images = [x for x in binary_changes if Path(x).suffix.lower() in ('.png','.jpg','.jpeg','.webp','.svg','.gif')]
+# Производная мобильная обложка добавлена пунктом 9; исходники остаются неизменными
+added = subprocess.check_output(['git','diff','--name-only','--diff-filter=A','2b5a5e2'], text=True).splitlines()
+added_images = [x for x in added if Path(x).suffix.lower() in ('.png','.jpg','.jpeg','.webp','.svg','.gif')]
+if added_images != ['assets/glavnaya/hero-mobile.webp']: errors.append('Unexpected added images ' + str(added_images))
+from PIL import Image
+if Image.open(ROOT/'assets/glavnaya/hero-mobile.webp').size != (780,488): errors.append('Mobile hero dimensions')
 if changed_images:errors.append('Image source bytes changed '+str(changed_images))
 result={'pages':len(records),'errors':errors,'images':dict(image_stats),'changed_source_images':changed_images,'records':records,'protected_content':protected,'heading_changes':heading_changes,'links':links}
-(ROOT/'audits/seo-20261009/static-dovodka.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+(ROOT/'audits/seo-20261009/static-publication.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({'pages':len(records),'errors':errors,'images':dict(image_stats),'source_images_changed':changed_images,'min_article_inlinks':min(x['inlinks_articles'] for x in records if '/claude-ai/' in x['url'])},ensure_ascii=False,indent=2))
 raise SystemExit(bool(errors))
