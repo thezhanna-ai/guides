@@ -10,7 +10,18 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link href="assets/fonts/fonts.css" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/glavnaya/hero-mobile.webp" media="(max-width: 600px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/glavnaya/hero.webp" media="(min-width: 600.01px)" fetchpriority="high">
+  <link rel="preload" as="font" href="assets/fonts/unbounded-700-home.woff2" type="font/woff2" crossorigin>
   <style>
+    /* Локальные поднаборы главной: исходные шрифты статей остаются прежними */
+    @font-face { font-family: 'Spectral'; font-style: normal; font-weight: 300; font-display: swap; src: url('assets/fonts/spectral-300-home.woff2') format('woff2') }
+    @font-face { font-family: 'Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/unbounded-700-home.woff2') format('woff2') }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/jetbrains-mono-500-home.woff2') format('woff2') }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/jetbrains-mono-700-home.woff2') format('woff2') }
+    /* Метрики рассчитаны по этим шрифтам и текстам первого экрана, см. home-manifest.json */
+    @font-face { font-family: 'Unbounded Fallback'; src: local('Arial'); size-adjust: 139.396%; ascent-override: 71.38%; descent-override: 17.576%; line-gap-override: 0% }
+    @font-face { font-family: 'Spectral Fallback'; src: local('Georgia'); size-adjust: 97.705%; ascent-override: 108.387%; descent-override: 47.387%; line-gap-override: 0% }
     :root {
       --ink: #102F30;
       --text: #24302D;
@@ -215,10 +226,10 @@
     .pill { display: inline-block; margin: 0 0 34px; padding: 8px 14px; border: 1px solid rgba(243,239,230,.18); border-radius: 999px;
       background: rgba(255,255,255,.04); color: #EDE7DA; font: 500 12.5px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase }
     .cover h1 { position: relative; max-width: none; margin: 0; padding-left: 26px; color: #F7F3EA;
-      font: 700 clamp(40px, 5.4vw, 74px)/1.04 Unbounded, -apple-system, BlinkMacSystemFont, sans-serif; letter-spacing: -.02em; text-wrap: balance }
+      font: 700 clamp(40px, 5.4vw, 74px)/1.04 Unbounded, 'Unbounded Fallback', -apple-system, BlinkMacSystemFont, sans-serif; letter-spacing: -.02em; text-wrap: balance }
     .cover h1::before { content: ""; position: absolute; left: 0; top: .12em; bottom: .1em; width: 3px; border-radius: 2px; background: var(--hot) }
     .cover h1 em { font-style: normal; color: var(--hot) }
-    .cover .lead { max-width: 520px; margin: 30px 0 0 26px; color: rgba(243,239,230,.84); font: 300 22px/1.5 Spectral, Georgia, serif }
+    .cover .lead { max-width: 520px; margin: 30px 0 0 26px; color: rgba(243,239,230,.84); font: 300 22px/1.5 Spectral, 'Spectral Fallback', Georgia, serif }
     .cover-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin: 40px 0 0 26px }
     .btn-main { display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; border-radius: 12px;
       background: linear-gradient(115deg, #FBAD52 0%, #F68C3E 48%, var(--hot) 100%); color: #FFFFFF;
@@ -379,8 +390,11 @@
 <body>
   <header class="cover">
     <figure class="cover-scene">
+      <picture>
+      <source media="(max-width: 600px)" srcset="assets/glavnaya/hero-mobile.webp" width="780" height="488">
       <img class="hero-image" src="assets/glavnaya/hero.webp" width="1600" height="1000" fetchpriority="high" decoding="async"
            alt="Дирижёр управляет созданием картинок, видео и звука: готовые результаты на экранах и аудиоустройствах">
+      </picture>
     </figure>
     <div class="cover-bar">
       <a class="brand" href="./">pronovoe.com</a>

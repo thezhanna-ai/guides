@@ -73,7 +73,7 @@ class IndexingTest(unittest.TestCase):
         root = Path(directory).resolve()
         for folder in ("scripts", "data"):
             (root / folder).mkdir()
-        for name in ("data/statyi.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "index.html"):
+        for name in ("data/statyi.json", "data/seo.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "index.html"):
             shutil.copyfile(ROOT / name, root / name)
         for a in json.loads((root / "data/statyi.json").read_text())["statyi"]:
             target = root / "claude-ai" / a["slug"] / "index.html"
@@ -103,6 +103,10 @@ class IndexingTest(unittest.TestCase):
             page = root / "claude-ai/novaya-statya/index.html"
             page.parent.mkdir()
             shutil.copyfile(root / "claude-ai" / source["slug"] / "index.html", page)
+            seo_path = root / 'data/seo.json'
+            seo = json.loads(seo_path.read_text())
+            seo['claude-ai/novaya-statya/index.html'] = dict(seo['claude-ai/' + source['slug'] + '/index.html'])
+            seo_path.write_text(json.dumps(seo, ensure_ascii=False))
             url = BASE + "claude-ai/novaya-statya/"
             for status, reason in (("live", ""), ("gotova", ""), ("draft", ""),
                                    ("live", "Высокий риск: проверка"), ("live", "")):
@@ -159,7 +163,9 @@ class IndexingTest(unittest.TestCase):
             html = page.read_text().replace("</head>", '<meta name="robots" content="index,follow">\n</head>')
             page.write_text(html)
             self.assertEqual(self.run_generator(root), 0)
-            self.assertEqual(page.read_text(), generator().dobavit_privacy(html))
+            module = generator()
+            metadata = json.loads((root / 'data/seo.json').read_text())['claude-ai/podklyuchenie-iz-rossii/index.html']
+            self.assertEqual(page.read_text(), module.dobavit_seo(module.dobavit_privacy(html), BASE + 'claude-ai/podklyuchenie-iz-rossii/', metadata))
             self.assertEqual(robots(page.read_text()), ["index,follow"])
 
 

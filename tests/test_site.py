@@ -489,6 +489,7 @@ class ArticleImagesTest(unittest.TestCase):
                  patch.object(self.generator, "sobrat_podpisi", return_value={article: "Новая подпись"}), \
                  patch.object(self.generator, "sobrat_indeksaciyu", side_effect=dict), \
                  patch.object(self.generator, "sobrat_serii", side_effect=dict), \
+                 patch.object(self.generator, "sobrat_seo", side_effect=dict), \
                  patch.object(self.generator.sys, "argv", ["sobrat_glavnuyu.py", "--proverit"]), \
                  patch("builtins.print"):
                 self.assertEqual(self.generator.main(), 1)

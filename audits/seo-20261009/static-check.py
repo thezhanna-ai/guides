@@ -21,6 +21,13 @@ links = []
 image_stats = collections.Counter()
 protected = []
 heading_changes = []
+intro_changes = {x['page'] for x in json.loads((ROOT / 'audits/seo-20261009/intro-dovodka.json').read_text()) if x['changed']}
+
+def intro(soup):
+    heading = soup.find('h1')
+    following = list(heading.find_all_next('p'))
+    lead = next((x for x in following if set(x.get('class', [])) & {'lead', 'intro-lede'}), None)
+    return lead if lead is not None else next(x for x in following if not set(x.get('class', [])) & {'meta', 'uroven-metka', 'sun-caption'})
 
 def text(soup):
     # Сравниваем исходную прозу, исключая явно разрешённые поисковые заголовки и TOC
@@ -84,12 +91,22 @@ for page in paths:
     if not old_cta or old_cta != new_cta:errors.append(rel + ': protected CTA bytes changed')
     # Own marker stripping is independent of the production generator
     stripped = re.sub(r'<!-- seo:[a-z]+:start -->.*?<!-- seo:[a-z]+:end -->', '', raw, flags=re.S)
-    original_prose = text(BeautifulSoup(before,'html.parser'))
-    current_prose = text(BeautifulSoup(stripped,'html.parser'))
+    old_prose = BeautifulSoup(before,'html.parser')
+    new_prose = BeautifulSoup(stripped,'html.parser')
+    if rel.startswith('claude-ai/'):
+        old_intro, new_intro = intro(old_prose), intro(new_prose)
+        old_text, new_text = [x.get_text(' ', strip=True) for x in (old_intro, new_intro)]
+        if not 40 <= len(new_text.split()) <= 60:errors.append(rel + ': intro word count')
+        if re.split(r'(?<=[.!?])\s',old_text,maxsplit=1)[0] != re.split(r'(?<=[.!?])\s',new_text,maxsplit=1)[0]:errors.append(rel + ': original first sentence changed')
+        if soup.select('.quick-answer') or '<!-- seo:answer:start -->' in raw:errors.append(rel + ': separate quick answer remains')
+        if rel in intro_changes:
+            old_intro.decompose();new_intro.decompose()
+    original_prose = text(old_prose)
+    current_prose = text(new_prose)
     prose_equal = original_prose == current_prose
-    if not prose_equal:errors.append(rel + ': original prose changed outside headings/TOC')
+    if not prose_equal:errors.append(rel + ': original prose changed outside authorized intro/headings/TOC')
     protected.append({'page':rel,'cta_sha256_before':[hashlib.sha256(x.encode()).hexdigest() for x in old_cta], 'cta_sha256_after':[hashlib.sha256(x.encode()).hexdigest() for x in new_cta],'prose_equal':prose_equal})
-    records.append({'path':rel,'url':url,'title':soup.title.get_text(),'description':soup.select_one('meta[name="description"]')['content'],'h1':h1[0].get_text(' ',strip=True),'quick_words':len((soup.select_one('.quick-answer') or BeautifulSoup('','html.parser')).get_text(' ',strip=True).split()),'schema_types':[x['@type'] for x in graph]})
+    records.append({'path':rel,'url':url,'title':soup.title.get_text(),'description':soup.select_one('meta[name="description"]')['content'],'h1':h1[0].get_text(' ',strip=True),'intro_words':len(intro(soup).get_text(' ',strip=True).split()) if rel.startswith('claude-ai/') else None,'schema_types':[x['@type'] for x in graph]})
 # Homepage has CTA; policy deliberately has no advertising block
 errors = [x for x in errors if x != 'politika/index.html: protected CTA bytes changed']
 for field in ('title','description'):
@@ -114,6 +131,6 @@ binary_changes = subprocess.check_output(['git','diff','--name-only','2b5a5e2'],
 changed_images = [x for x in binary_changes if Path(x).suffix.lower() in ('.png','.jpg','.jpeg','.webp','.svg','.gif')]
 if changed_images:errors.append('Image source bytes changed '+str(changed_images))
 result={'pages':len(records),'errors':errors,'images':dict(image_stats),'changed_source_images':changed_images,'records':records,'protected_content':protected,'heading_changes':heading_changes,'links':links}
-(ROOT/'audits/seo-20261009/static-check.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+(ROOT/'audits/seo-20261009/static-dovodka.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({'pages':len(records),'errors':errors,'images':dict(image_stats),'source_images_changed':changed_images,'min_article_inlinks':min(x['inlinks_articles'] for x in records if '/claude-ai/' in x['url'])},ensure_ascii=False,indent=2))
 raise SystemExit(bool(errors))

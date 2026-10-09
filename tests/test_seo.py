@@ -6,6 +6,8 @@ import unittest
 import xml.etree.ElementTree as ET
 from test_site import ImageDocument, ROOT
 from test_indexing import generator, NS
+import test_indexing
+import tempfile
 
 
 def plain(html):
@@ -16,7 +18,8 @@ def plain(html):
 class SeoTest(unittest.TestCase):
     def test_all_canonical_pages_have_dated_sitemap(self):
         items = ET.fromstring((ROOT / 'sitemap.xml').read_text()).findall('s:url', NS)
-        self.assertEqual(len(items), len(json.loads((ROOT / "data/seo.json").read_text())))
+        live = [x for x in json.loads((ROOT / 'data/statyi.json').read_text())['statyi'] if x['status'] == 'live' and not x.get('noindex_reason')]
+        self.assertEqual(len(items), len(live) + 2)
         for item in items:
             url = item.find('s:loc', NS).text
             date = item.find('s:lastmod', NS)
@@ -27,7 +30,12 @@ class SeoTest(unittest.TestCase):
             self.assertEqual([n.attrs.get('href') for n in doc.root.all(tag='link') if n.attrs.get('rel') == 'canonical'], [url])
 
     def test_article_schema_and_faq_are_visible_and_exact(self):
-        for path in ROOT.glob('claude-ai/*/index.html'):
+        metadata = json.loads((ROOT / 'data/seo.json').read_text())
+        registry = json.loads((ROOT / 'data/statyi.json').read_text())['statyi']
+        for row in registry:
+            if row['status'] != 'live':
+                continue
+            path = ROOT / 'claude-ai' / row['slug'] / 'index.html'
             html = path.read_text()
             doc = ImageDocument(html)
             scripts = [n for n in doc.root.all(tag='script') if n.attrs.get('id') == 'seo-schema']
@@ -36,11 +44,20 @@ class SeoTest(unittest.TestCase):
             article = next(x for x in graph if x['@type'] == 'Article')
             h1 = plain(re.search(r'<h1\b[^>]*>(.*?)</h1>', html, re.S)[1])
             self.assertEqual(article['headline'], ' '.join(h1.split()))
-            answers = doc.root.all(klass='quick-answer')
-            self.assertEqual(len(answers), 1, str(path))
-            self.assertTrue(40 <= len(answers[0].text_content().split()) <= 60, str(path))
-            # Фактическое соседство H1 и ответа, а не наличие где-то в странице
-            self.assertRegex(html, r'</h1>\s*(?:<p\b[^>]*uroven-metka[^>]*>.*?</p>\s*)?<!-- seo:answer:start -->\s*<p class="quick-answer"')
+            self.assertEqual(doc.root.all(klass='quick-answer'), [], str(path))
+            self.assertNotIn('<!-- seo:answer:start -->', html)
+            # Проверяем видимое исходное вступление, без метки уровня и даты
+            nodes = doc.root.all()
+            heading = doc.root.all(tag='h1')[0]
+            following = nodes[nodes.index(heading) + 1:]
+            first_section = next((i for i, node in enumerate(following) if node.tag == 'h2'), len(following))
+            paragraphs = [p for p in following[:first_section] if p.tag == 'p']
+            intro = next((p for p in paragraphs if set(p.attrs.get('class', '').split()) & {'lead', 'intro-lede'}), None)
+            if intro is None:
+                intro = next(p for p in paragraphs if not set(p.attrs.get('class', '').split()) & {'uroven-metka', 'meta', 'sun-caption'})
+            self.assertTrue(40 <= len(intro.text_content().split()) <= 60, str(path))
+            self.assertTrue(20 <= len(doc.root.all(tag='title')[0].text_content()) <= 65, str(path))
+            self.assertEqual(article['dateModified'], metadata[path.relative_to(ROOT).as_posix()]['lastmod'])
             faq_nodes = doc.root.all(tag='details', klass='faq-item')
             faqs = [x for x in graph if x['@type'] == 'FAQPage']
             self.assertEqual(len(faqs), int(bool(faq_nodes)))
@@ -73,7 +90,7 @@ class SeoTest(unittest.TestCase):
     def test_schema_serialization_cannot_end_script(self):
         module = generator()
         html = '<html><head><title>x</title></head><body><h1>Текст &lt;/script&gt;</h1></body></html>'
-        result = module.dobavit_seo(html, 'https://pronovoe.com/claude-ai/test/', {'lastmod': '2026-10-08', 'quick_answer': ' '.join(['слово'] * 40)})
+        result = module.dobavit_seo(html, 'https://pronovoe.com/claude-ai/test/', {'lastmod': '2026-10-08'})
         self.assertIn('\\u003c/script', result)
         self.assertEqual(len(re.findall(r'</script>', result)), 1)
 
@@ -82,6 +99,90 @@ class SeoTest(unittest.TestCase):
         self.assertEqual(module.seo_lastmod({}), '')
         with self.assertRaises(ValueError):
             module.seo_lastmod({'lastmod': '2026-99-99'})
+
+    def test_new_live_article_without_seo_blocks_build_without_writing_any_file(self):
+        helper = test_indexing.IndexingTest()
+        with tempfile.TemporaryDirectory() as directory:
+            root = helper.fixture(directory)
+            registry_path = root / 'data/statyi.json'
+            registry = json.loads(registry_path.read_text())
+            row = dict(registry['statyi'][0], slug='new-unconfigured', status='live')
+            registry['statyi'].append(row)
+            registry_path.write_text(json.dumps(registry))
+            page = root / 'claude-ai/new-unconfigured/index.html'
+            page.parent.mkdir()
+            page.write_bytes((root / 'claude-ai' / registry['statyi'][0]['slug'] / 'index.html').read_bytes())
+            before = {p: p.read_bytes() for p in root.rglob('*') if p.is_file()}
+            with self.assertRaisesRegex(ValueError, 'data/seo.json'):
+                helper.run_generator(root)
+            self.assertEqual(before, {p: p.read_bytes() for p in root.rglob('*') if p.is_file()})
+
+    def test_live_publication_rejects_missing_date_short_title_or_intro(self):
+        helper = test_indexing.IndexingTest()
+        for problem in ['missing_date', 'invalid_date', 'short_title', 'long_title', 'short_intro', 'long_intro']:
+            with self.subTest(problem=problem), tempfile.TemporaryDirectory() as directory:
+                root = helper.fixture(directory)
+                seo_path = root / 'data/seo.json'
+                meta = json.loads(seo_path.read_text())
+                rel = 'claude-ai/podklyuchenie-iz-rossii/index.html'
+                if problem == 'missing_date':
+                    meta[rel].pop('lastmod')
+                elif problem == 'invalid_date':
+                    meta[rel]['lastmod'] = '2026-02-30'
+                elif problem.endswith('title'):
+                    meta[rel]['title'] = 'Коротко' if problem == 'short_title' else 'я' * 66
+                else:
+                    page = root / rel
+                    source = page.read_text()
+                    a, b, _ = generator().seo_intro(source)
+                    value = 'Мало слов' if problem == 'short_intro' else ' '.join(['слово'] * 61)
+                    page.write_text(source[:a] + '<p class="lead">' + value + '</p>' + source[b:])
+                seo_path.write_text(json.dumps(meta))
+                before = {p: p.read_bytes() for p in root.rglob('*') if p.is_file()}
+                with self.assertRaises(ValueError):
+                    helper.run_generator(root)
+                self.assertEqual(before, {p: p.read_bytes() for p in root.rglob('*') if p.is_file()})
+
+    def test_publication_gate_rejects_deleted_canonical_or_invalid_jsonld(self):
+        module = generator()
+        rel = 'claude-ai/podklyuchenie-iz-rossii/index.html'
+        source = (ROOT / rel).read_text()
+        meta = json.loads((ROOT / 'data/seo.json').read_text())[rel]
+        url = module.DOMEN + rel.removesuffix('index.html')
+        for bad in [re.sub(r'<link rel="canonical"[^>]+>', '', source),
+                    re.sub(r'(<script[^>]+id="seo-schema">).*?(</script>)', r'\1{}\2', source, flags=re.S)]:
+            with self.assertRaises(ValueError):
+                module.proverit_seo_statyi(bad, meta, url)
+
+    def test_intro_reader_skips_dates_badges_captions_and_stops_at_first_section(self):
+        module = generator()
+        source = '<h1>Название</h1><p class="uroven-metka">Уровень</p><p class="meta">Дата</p><p class="sun-caption">Подпись</p><p class="intro-lede">Вступление</p><h2>Раздел</h2><p class="lead">Не вступление</p>'
+        self.assertEqual(module.seo_intro(source)[2], 'Вступление')
+        with self.assertRaises(ValueError):
+            module.seo_intro('<h1>Название</h1><p class="meta">Дата</p><h2>Раздел</h2><p>Основной текст</p>')
+
+    def test_check_mode_detects_removed_seo_markup_without_repairing_files(self):
+        helper = test_indexing.IndexingTest()
+        with tempfile.TemporaryDirectory() as directory:
+            root = helper.fixture(directory)
+            page = root / 'claude-ai/podklyuchenie-iz-rossii/index.html'
+            original = page.read_text()
+            for pattern in [r'<!-- seo:canonical:start -->.*?<!-- seo:canonical:end -->',
+                            r'<!-- seo:schema:start -->.*?<!-- seo:schema:end -->']:
+                page.write_text(re.sub(pattern, '', original, flags=re.S))
+                before = {p: p.read_bytes() for p in root.rglob('*') if p.is_file()}
+                self.assertEqual(helper.run_generator(root, check=True), 1)
+                self.assertEqual(before, {p: p.read_bytes() for p in root.rglob('*') if p.is_file()})
+
+    def test_rejects_an_extra_answer_but_allows_discussing_its_class_in_text(self):
+        module = generator()
+        rel = 'claude-ai/podklyuchenie-iz-rossii/index.html'
+        source = (ROOT / rel).read_text()
+        metadata = json.loads((ROOT / 'data/seo.json').read_text())[rel]
+        url = module.DOMEN + rel.removesuffix('index.html')
+        module.proverit_seo_statyi(source.replace('</body>', '<pre>quick-answer</pre></body>'), metadata, url)
+        with self.assertRaisesRegex(ValueError, 'отдельный быстрый ответ'):
+            module.proverit_seo_statyi(source.replace('</body>', '<p class="quick-answer">Повтор</p></body>'), metadata, url)
 
 
 

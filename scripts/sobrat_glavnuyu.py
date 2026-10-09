@@ -513,6 +513,8 @@ def seo_lastmod(metadata):
     from datetime import date
     value = metadata.get('lastmod', '')
     if value:
+        if not isinstance(value, str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', value):
+            raise ValueError('lastmod: нужна дата YYYY-MM-DD')
         date.fromisoformat(value)
     return value
 
@@ -522,6 +524,56 @@ def seo_plain(fragment):
     fragment = re.sub(r'<(script|style)\b[^>]*>.*?</\1>', '', fragment, flags=re.S | re.I)
     fragment = re.sub(r'</?(?:p|div|li|ul|ol|pre|blockquote)\b[^>]*>|<br\b[^>]*>', ' ', fragment, flags=re.I)
     return ' '.join(unescape(re.sub(r'<[^>]+>', '', fragment)).split())
+
+
+def seo_intro(html):
+    """Исходное вступление после H1. Метка уровня, дата и подпись не являются им."""
+    heading = re.search(r'<h1\b[^>]*>.*?</h1>', html, re.S | re.I)
+    if not heading:
+        raise ValueError('Отсутствует H1')
+    start = heading.end()
+    section = re.search(r'<h2\b', html[start:], re.I)
+    end = start + section.start() if section else len(html)
+    paragraphs = list(re.finditer(r'<p\b([^>]*)>(.*?)</p>', html[start:end], re.S | re.I))
+    candidates = []
+    for paragraph in paragraphs:
+        classes = re.search(r'\bclass=[\'\"](.*?)[\'\"]', paragraph[1])
+        classes = set(classes[1].split()) if classes else set()
+        if classes & {'lead', 'intro-lede'}:
+            return start + paragraph.start(), start + paragraph.end(), paragraph[2]
+        if not classes & {'uroven-metka', 'meta', 'sun-caption', 'motion-note', 'source-note'}:
+            candidates.append(paragraph)
+    if not candidates:
+        raise ValueError('После H1 отсутствует вступление')
+    paragraph = candidates[0]
+    return start + paragraph.start(), start + paragraph.end(), paragraph[2]
+
+
+def proverit_seo_statyi(html, metadata, url):
+    """Гейт штатной публикации: проверяет результат, прежде чем сборка пишет файлы."""
+    modified = seo_lastmod(metadata)
+    if not modified:
+        raise ValueError(url + ': обязательный lastmod отсутствует')
+    title = re.search(r'<title\b[^>]*>(.*?)</title>', html, re.S | re.I)
+    if not title or not 20 <= len(seo_plain(title[1])) <= 65:
+        raise ValueError(url + ': title должен содержать 20-65 знаков')
+    if not 40 <= len(seo_plain(seo_intro(html)[2]).split()) <= 60:
+        raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+    classes = re.findall(r'<[a-z][^>]*\bclass=[\'\"]([^\'\"]*)[\'\"]', html, re.I)
+    if any('quick-answer' in value.split() for value in classes) or '<!-- seo:answer:start -->' in html:
+        raise ValueError(url + ': отдельный быстрый ответ повторяет вступление')
+    canonical = re.findall(r'<link\b(?=[^>]*\brel=[\'\"]canonical[\'\"])[^>]*\bhref=[\'\"]([^\'\"]+)[\'\"][^>]*>', html, re.I)
+    if canonical != [url]:
+        raise ValueError(url + ': требуется один canonical этой статьи')
+    scripts = re.findall(r'<script\b[^>]*\bid=[\'\"]seo-schema[\'\"][^>]*>(.*?)</script>', html, re.S | re.I)
+    try:
+        if len(scripts) != 1:
+            raise ValueError('Нужен один блок JSON-LD')
+        articles = [x for x in json.loads(scripts[0])['@graph'] if x.get('@type') == 'Article']
+        if len(articles) != 1 or articles[0].get('mainEntityOfPage') != url or articles[0].get('dateModified') != modified:
+            raise ValueError('JSON-LD не соответствует статье и lastmod')
+    except (ValueError, KeyError, TypeError) as error:
+        raise ValueError(url + ': некорректный JSON-LD') from error
 
 
 def ubrat_seo(html):
@@ -561,14 +613,6 @@ def dobavit_seo(html, url, metadata):
     graph = []
     is_article = '/claude-ai/' in url
     if is_article:
-        answer = metadata.get('quick_answer')
-        if answer:
-            if not 40 <= len(answer.split()) <= 60:
-                raise ValueError(url + ': быстрый ответ должен содержать 40-60 слов')
-            fragment = '\n<!-- seo:answer:start -->\n<p class="quick-answer" style="margin:20px 0">' + escape(answer) + '</p>\n<!-- seo:answer:end -->'
-            badge = re.match(r'\s*<p\b[^>]*class="[^"]*uroven-metka[^"]*"[^>]*>.*?</p>', html[heading.end():], re.S)
-            end = heading.end() + (badge.end() if badge else 0)
-            html = html[:end] + fragment + html[end:]
         crumbs = '<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">' + escape(title) + '</span></nav>'
         end = re.search(r'<h1\b[^>]*>.*?</h1>', html, re.S).end()
         # После вводных абзацев, перед первым разделом: не разрывает обложку и H1.
@@ -628,13 +672,23 @@ def dobavit_seo(html, url, metadata):
 def sobrat_seo(stranicy):
     source = KORNI / 'data' / 'seo.json'
     metadata = json.loads(source.read_text(encoding='utf-8')) if source.exists() else {}
+    registry = json.loads(REESTR.read_text(encoding='utf-8'))['statyi']
+    live_paths = {'claude-ai/' + x['slug'] + '/index.html' for x in registry if x.get('status') == 'live'}
+    missing = live_paths - metadata.keys()
+    if missing:
+        raise ValueError('Live-статья без записи data/seo.json: ' + ', '.join(sorted(missing)))
     for page, html in list(stranicy.items()):
         if page.suffix != '.html':
             continue
         rel = page.relative_to(KORNI).as_posix()
-        # Сохраняет поведение сборщика у ещё не настроенных копий и тестовых фикстур.
         if rel in metadata:
-            stranicy[page] = dobavit_seo(html, DOMEN + rel.removesuffix('index.html'), metadata[rel])
+            url = DOMEN + rel.removesuffix('index.html')
+            result = dobavit_seo(html, url, metadata[rel])
+            if rel in live_paths:
+                proverit_seo_statyi(result, metadata[rel], url)
+            stranicy[page] = result
+    if live_paths - {p.relative_to(KORNI).as_posix() for p in stranicy}:
+        raise ValueError('Live-статья отсутствует в результатах сборки')
     if metadata:
         from html import escape
         xml = stranicy[KORNI / 'sitemap.xml']
@@ -646,7 +700,6 @@ def sobrat_seo(stranicy):
         stranicy[KORNI / 'sitemap.xml'] = re.sub(r'<url><loc>(.*?)</loc></url>', dated, xml)
     bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'Anthropic-ai', 'PerplexityBot', 'Google-Extended', 'GoogleOther']
     stranicy[KORNI / 'robots.txt'] = 'User-agent: *\nAllow: /\n\n' + ''.join('User-agent: ' + bot + '\nAllow: /\n\n' for bot in bots) + 'Sitemap: ' + DOMEN + 'sitemap.xml\n'
-    registry = json.loads(REESTR.read_text(encoding='utf-8'))['statyi']
     live = [x for x in registry if x.get('status') == 'live' and not x.get('noindex_reason')]
     lines = ['# Про новое', '', '> Инструкции по нейросетям для людей без опыта программирования. Автор: Жанна Слепова', '', '%d инструкций. Выбор материалов: [каталог](%s)' % (len(live), DOMEN), '', '## Начать', '', '- [Доступ к Claude](%sclaude-ai/podklyuchenie-iz-rossii/)' % DOMEN, '- [Первый проект](%sclaude-ai/pervyy-proekt-v-claude/)' % DOMEN, '- [Скиллы Claude Code](%sclaude-ai/pyat-skillov-claude-code/)' % DOMEN, '', '## Служебные сведения', '', '- [XML-карта всех канонических страниц](%ssitemap.xml)' % DOMEN, '- [Политика данных](%spolitika/)' % DOMEN, '', 'Контакт: pronovoe.site@yandex.ru', '']
     # Полный корпус уже в sitemap; llms содержит выбранные входы, а не её дубль.
