@@ -21,6 +21,10 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from optimize_reading_images import optimize_html
+from color_tokens import embed_palette, palette_entries, tokenize_html
+
 KORNI = Path(__file__).resolve().parent.parent
 REESTR = KORNI / "data" / "statyi.json"
 OBLOZHKI = KORNI / "data" / "OBLOZHKI.json"
@@ -32,9 +36,47 @@ def privacy_fragment(name):
     return (KORNI / "scripts" / name).read_text(encoding="utf-8").strip()
 
 
+def dobavit_quality(html):
+    """Embed the shared accessibility styles at their existing cascade position."""
+    pattern = re.compile(r'<!-- quality:start -->.*?<!-- quality:end -->|<link\b(?=[^>]*\bhref=[\'\"]/assets/quality\.css[\'\"])[^>]*>', re.S)
+    if not pattern.search(html):
+        return html
+    css = (KORNI / "assets" / "quality.css").read_text(encoding="utf-8").strip()
+    block = '<!-- quality:start -->\n<style id="guide-quality">\n' + css + '\n</style>\n<!-- quality:end -->'
+    return pattern.sub(lambda _: block, html)
+
+
+def dobavit_critical_styles(html):
+    """Keep small local styles at the same cascade position without a blocking request."""
+    from urllib.parse import urljoin
+    for name, path in (('fonts', 'assets/fonts/fonts.css'), ('privacy-style', 'assets/privacy.css')):
+        href = r'(?:/|(?:\.\./)*)' + re.escape(path)
+        pattern = re.compile(
+            r'<!-- critical:' + name + r':start -->.*?<!-- critical:' + name + r':end -->'
+            r'|<link\b(?=[^>]*\brel\s*=[\'\"]stylesheet[\'\"])(?=[^>]*\bhref\s*=[\'\"]'
+            + href + r'[\'\"])[^>]*>', re.S | re.I)
+        if not pattern.search(html):
+            continue
+        css = (KORNI / path).read_text(encoding='utf-8').strip()
+        if name == 'fonts':
+            # External CSS URLs resolve relative to its file; embedded CSS uses the page.
+            css = re.sub(r'url\(([\'\"])([^\'\"]+)\1\)',
+                         lambda m: 'url(' + m[1] + urljoin('/assets/fonts/', m[2]) + m[1] + ')', css)
+        block = ('<!-- critical:' + name + ':start -->\n<style id="guide-' + name + '">\n'
+                 + css + '\n</style>\n<!-- critical:' + name + ':end -->')
+        html = pattern.sub(lambda _: block, html)
+    return html
+
+
+def dobavit_palette(html):
+    """Use reviewed exact primitives, before all existing stylesheet positions."""
+    css = (KORNI / "assets/palette.css").read_text(encoding="utf-8")
+    return embed_palette(tokenize_html(html, palette_entries(css)), css)
+
+
 def dobavit_privacy(html):
     """Один локальный загрузчик и одна плашка, без внешних запросов из HTML."""
-    html = ubrat_seo(html)
+    html = dobavit_quality(ubrat_seo(html))
     html = re.sub(r'<!-- privacy:(head|footer|banner):start -->.*?<!-- privacy:\1:end -->\s*',
                   '', html, flags=re.S)
     head = ('<!-- privacy:head:start -->\n'
@@ -52,7 +94,8 @@ def dobavit_privacy(html):
             raise ValueError('Для политики нужен один закрывающий тег ' + tag)
     html = re.sub(r'</head\s*>', lambda _: head + '</head>', html, flags=re.I)
     html = re.sub(r'</footer\s*>', lambda _: footer + '</footer>', html, flags=re.I)
-    return re.sub(r'</body\s*>', lambda _: privacy_fragment('privacy-banner.html') + '\n</body>', html, flags=re.I)
+    html = re.sub(r'</body\s*>', lambda _: privacy_fragment('privacy-banner.html') + '\n</body>', html, flags=re.I)
+    return dobavit_palette(dobavit_critical_styles(html))
 
 
 def sobrat_politiku():
@@ -380,7 +423,7 @@ def sobrat_stranicu():
     po_trassam = zagruzit_statyi()
     oblozhki = zagruzit_oblozhki()
     shablon = (KORNI / "scripts" / "shablon_glavnoy.html").read_text(encoding="utf-8")
-    return seo_for_page(dobavit_privacy(shablon.format(
+    return optimize_html(seo_for_page(dobavit_privacy(shablon.format(
         title=ekranirovat(SHAPKA["title"]),
         description=ekranirovat(SHAPKA["description"]),
         nadzagolovok=ekranirovat(SHAPKA["nadzagolovok"]),
@@ -400,7 +443,7 @@ def sobrat_stranicu():
         kontakt=ekranirovat(SHAPKA["kontakt"]),
         avtor_tekst=ekranirovat(SHAPKA["avtor_tekst"]),
         podval_avtor=ekranirovat(SHAPKA["podval_avtor"]),
-    )), "index.html")
+    )), "index.html"), "index.html")
 
 
 METKA_STIL = {

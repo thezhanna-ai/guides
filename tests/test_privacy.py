@@ -26,7 +26,8 @@ class PrivacyTest(unittest.TestCase):
             self.assertIn(text, html)
         self.assertNotRegex(html, r'\[НУЖНО|\[НУЖНА|\{\{|\u2014|\u2013')
         fonts = [n.attrs['href'] for n in doc.root.all(tag='link') if n.attrs.get('href', '').endswith('fonts.css')]
-        self.assertEqual(fonts, ['/assets/fonts/fonts.css'])
+        self.assertEqual(fonts, [])
+        self.assertEqual(html.count('<style id="guide-fonts">'), 1)
 
     def test_all_content_pages_have_footer_controls_banner_and_local_assets(self):
         registry = json.loads((ROOT / 'data/statyi.json').read_text())['statyi']
@@ -45,7 +46,8 @@ class PrivacyTest(unittest.TestCase):
                 scripts = [n for n in doc.root.all(tag='script') if n.attrs.get('src') == '/assets/privacy.js']
                 self.assertEqual(len(scripts), 1)
                 self.assertIn('defer', scripts[0].attrs)
-                self.assertEqual(html.count('href="/assets/privacy.css"'), 1)
+                self.assertNotIn('href="/assets/privacy.css"', html)
+                self.assertEqual(html.count('<style id="guide-privacy-style">'), 1)
                 self.assertNotRegex(html, r'mc\.yandex\.|metrika/tag|\bym\s*\(')
                 self.assertNotRegex(html, r'<(?:script|img|iframe)[^>]+https?://')
                 self.assertNotIn('METRIKA_ID', html)

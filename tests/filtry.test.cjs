@@ -32,7 +32,7 @@ class Element {
   }
 }
 
-function page() {
+function page(source = script, reducedMotion = false) {
   const sections = fixture.sections.map(row => {
     const section = new Element({'data-section': row.tag});
     section.tracks = row.tracks.map(row => {
@@ -57,14 +57,14 @@ function page() {
       return {'.guide-link': links, '.track': tracks, '.tool-block': sections}[selector];
     },
   };
-  const window = {location: {href: ''}};
+  const window = {location: {href: ''}, matchMedia(query) { assert.equal(query, '(prefers-reduced-motion: reduce)'); return {matches: reducedMotion}; }};
   const state = {};
   vm.createContext(state);
   Object.assign(state, {document, window});
-  vm.runInContext(script, state);
+  vm.runInContext(source, state);
   return {
     sections, tracks, links, select, go, input, noResults, lager, window, state,
-    key(key) { if (input.listeners.keydown) input.listeners.keydown({key}); },
+    key(key) { if (input.listeners.keydown) input.listeners.keydown({type: 'keydown', key}); },
     search(value) { input.value = value; input.listeners.input(); },
     filter(tag) { select.value = tag; select.listeners.change(); },
     find() { go.listeners.click(); },
@@ -278,3 +278,50 @@ test('Опубликованная КОМАНДА находится и подс
   assert.deepEqual(p.visible().filter(link => link.classes.has('kod-hit')).map(link => link.attrs.href),
     [articleHref('komanda-ii-agentov-dlya-bloga')]);
 });
+
+// Регрессия F3: выполняем изменённый источник генерации до пересборки index.html
+const template = fs.readFileSync(path.join(root, 'scripts/shablon_glavnoy.html'), 'utf8');
+const templateScript = template.match(/<script>([\s\S]*?)<\/script>/)[1].replaceAll('{{', '{').replaceAll('}}', '}');
+for (const query of ['голосовой', 'проект', 'zzzzzzнебывает', '']) {
+  test('Enter и Найти выполняют одно действие на свежем значении поля: ' + query, () => {
+    const outcomes = ['keydown', 'click'].map(type => {
+      const p = page(templateScript);
+      const scrolled = [];
+      p.links.forEach(link => {link.scrollIntoView = () => scrolled.push(link.attrs.href);});
+      p.input.value = query;
+      const event = {type, key: 'Enter', preventDefault() {this.prevented = true;}};
+      (type === 'keydown' ? p.input : p.go).listeners[type](event);
+      assert.equal(event.prevented, true);
+      return {href: p.window.location.href, visible: p.visible().map(link => link.attrs.href), scrolled};
+    });
+    assert.deepEqual(outcomes[0], outcomes[1]);
+    if (query === 'голосовой') assert.equal(outcomes[0].href, articleHref('golosovoy-vvod-v-claude'));
+    if (query === 'проект') assert.equal(outcomes[0].scrolled.length, 1);
+    if (query === 'zzzzzzнебывает') assert.equal(outcomes[0].scrolled.length, 0);
+  });
+}
+
+test('Клавиши кроме Enter не отправляют поиск и не меняют результаты', () => {
+  const p = page(templateScript); p.input.value = 'голосовой';
+  p.input.listeners.keydown({type: 'keydown', key: 'a', preventDefault() {throw Error('unexpected submit');}});
+  assert.equal(p.visible().length, 51); assert.equal(p.window.location.href, '');
+});
+
+// Reduced motion must change actual JS scrolling, while keeping result selection intact
+for (const reducedMotion of [false, true]) {
+  for (const type of ['keydown', 'click']) {
+    test('Поиск: ' + type + ', reduced motion ' + reducedMotion + ' сохраняет выбор и прокрутку', () => {
+      const p = page(templateScript, reducedMotion);
+      const scrolls = [];
+      p.links.forEach(link => {link.scrollIntoView = options => scrolls.push({href: link.attrs.href, options});});
+      p.input.value = 'проект';
+      (type === 'keydown' ? p.input : p.go).listeners[type]({type, key: 'Enter', preventDefault() {}});
+      assert.ok(p.visible().length > 1);
+      assert.equal(p.window.location.href, '');
+      assert.equal(scrolls.length, 1);
+      assert.equal(scrolls[0].href, p.visible()[0].attrs.href);
+      assert.equal(scrolls[0].options.behavior, reducedMotion ? 'auto' : 'smooth');
+      assert.equal(scrolls[0].options.block, 'center');
+    });
+  }
+}

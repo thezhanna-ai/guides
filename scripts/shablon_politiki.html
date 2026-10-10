@@ -50,7 +50,7 @@
     a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
     a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
     .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
-    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
     .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
     .header-actions { display: flex; align-items: center; gap: 12px }
@@ -58,10 +58,10 @@
     .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
     .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
     .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
-    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
     .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
-    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
-    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
     .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
     .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
@@ -88,7 +88,7 @@
     .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     .route-note p { margin: 0; color: var(--muted) }
     .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
-    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
     .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
     .result p { margin: 0 }
 /* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
@@ -106,16 +106,16 @@
     figure { margin: 28px 0 0 }
     .shot { width: min(100%, 650px) }
     .shot.vertical { width: min(100%, 380px) }
-    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
     figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
-    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: #102F30; color: #F8F7F2 }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: var(--guide-color-forest); color: var(--guide-color-paper) }
     h3 + .prompt-box { margin-top: 12px }
     .prompt-box + h3 { margin-top: 46px }
     .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
-    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: #102F30; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 #8F371F; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
-    .copy-button:hover { background: #F28A68 }
-    .copy-button:active { background: #FFD1BF; box-shadow: 0 1px 0 #8F371F; transform: translateY(2px) }
-    .copy-button.is-copied { background: #FFD1BF; box-shadow: 0 0 0 3px rgba(255, 209, 191, .34); transform: translateY(1px) }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: var(--guide-color-forest); font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 var(--guide-color-brand-ink); cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: var(--guide-color-brand-hover) }
+    .copy-button:active { background: var(--guide-color-brand-pressed); box-shadow: 0 1px 0 var(--guide-color-brand-ink); transform: translateY(2px) }
+    .copy-button.is-copied { background: var(--guide-color-brand-pressed); box-shadow: 0 0 0 3px var(--guide-color-brand-pressed-alpha-34); transform: translateY(1px) }
     .check-panel h3 { margin-bottom: 10px }
     .checklist { margin: 0; padding: 0; list-style: none }
     .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
@@ -126,13 +126,13 @@
     .related-plaque p { margin: 0 }
     .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
     .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
-    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
-    .cta h2 { color: #FFFFFF }
-    .cta p { color: #F0E8D8 }
-    .cta .section-label { color: #F0E8D8 }
-    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
-    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
-    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
     .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
     @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
     @media (max-width: 860px) {
@@ -153,7 +153,7 @@
       .content-section { margin-top: 52px }
       .cta { padding: 26px 22px 28px }
     }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42) } .copy-button.is-copied { box-shadow: 0 0 0 3px rgba(255, 209, 191, .34) } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) } .copy-button.is-copied { box-shadow: 0 0 0 3px var(--guide-color-brand-pressed-alpha-34) } }
 
     .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
     .next-read h2 { margin: 0 0 4px; font-size: 20px }
@@ -173,25 +173,26 @@
     /* Увеличение скриншотов */
     .shot { position: relative }
     .shot-image { position: relative; width: max-content; max-width: 100% }
-    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #102F30; color: #F8F7F2; font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest); color: var(--guide-color-paper); font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
     .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
     .shot .zoom:hover { background: var(--accent) }
     @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
-    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
     .viewer[open] { display: grid }
-    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
     .viewer-scroll img { display: block; max-width: none; height: auto }
     .viewer.fits .viewer-scroll img { margin: 0 auto }
-    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
-    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
 
-    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
-    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
-    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
 
     h1.article-h1 { font-family: Spectral, Georgia, serif; font-weight: 300; font-size: clamp(34px, 3.13vw, 44px); line-height: 1.12; letter-spacing: -.02em }
     .policy-email { overflow-wrap: anywhere }
 </style>
+<link rel="stylesheet" href="/assets/quality.css">
 </head>
 <body>
 <header class="masthead"><div class="masthead-inner">

@@ -12,26 +12,26 @@
   viewer.appendChild(closeButton);
   viewer.appendChild(big);
   document.body.appendChild(viewer);
-  var previousFocus;
+  var viewerModal = GuideImageViewer.mount(viewer, closeViewer);
+  function closeViewer() { viewerModal.close(); big.removeAttribute('src'); }
   document.querySelectorAll('.shot .zoom').forEach(function (button) {
     button.addEventListener('click', function () {
       var img = button.parentElement.querySelector('img');
-      previousFocus = button;
-      big.src = img.currentSrc || img.src;
+
+      big.src = img.dataset.fullSrc || img.currentSrc || img.src;
       big.alt = img.alt;
-      viewer.showModal();
+      viewerModal.open(img);
       closeButton.focus();
     });
   });
-  closeButton.addEventListener('click', function () { viewer.close(); });
+  closeButton.addEventListener('click', function () { closeViewer(); });
   viewer.addEventListener('click', function (event) {
     if (event.target !== viewer) return;
     var rect = viewer.getBoundingClientRect();
     if (event.clientX < rect.left || event.clientX > rect.right ||
-        event.clientY < rect.top || event.clientY > rect.bottom) viewer.close();
+        event.clientY < rect.top || event.clientY > rect.bottom) closeViewer();
   });
   viewer.addEventListener('close', function () {
-    big.removeAttribute('src');
-    if (previousFocus) previousFocus.focus();
+    if (!viewer.hasAttribute('open')) big.removeAttribute('src');
   });
 })();

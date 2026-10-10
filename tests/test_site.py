@@ -235,7 +235,8 @@ class ArticleImagesTest(unittest.TestCase):
         for article in self.eligible:
             html = (ROOT / "claude-ai" / article["slug"] / "index.html").read_text()
             with self.subTest(slug=article["slug"]):
-                self.assertIn('href="../../assets/fonts/fonts.css"', html)
+                self.assertIn('<style id="guide-fonts">', html)
+                self.assertIn("url('/assets/fonts/spectral-300.woff2')", html)
                 self.assertRegex(html, r"h1\.article-title-v2\s*\{[^}]*font-family: Spectral[^}]*font-size: 46px[^}]*font-weight: 300[^}]*line-height: 1\.07")
                 self.assertRegex(html, r"@media \(max-width: 860px\)\s*\{\s*h1\.article-title-v2\s*\{[^}]*font-size: clamp\(30px, 7\.5vw, 46px\)[^}]*line-height: 1\.1")
                 self.assertRegex(html, r"figure\.cover-v2 figcaption\s*\{[^}]*color: var\(--muted[^}]*font: 400 14px/1\.5 Spectral")

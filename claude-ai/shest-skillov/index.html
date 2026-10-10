@@ -5,6 +5,211 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Шесть скиллов Claude: что делает каждый, как подключить через Manage Plugins и что написать, чтобы он заработал">
 <title>6 скиллов Claude: как найти, подключить и вызвать</title>
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
 <style>
   :root {
     --paper: #F2E9D8;
@@ -61,7 +266,7 @@
   .intro {
     position: relative;
     background:
-      radial-gradient(ellipse at 20% 0%, rgba(217,113,31,0.06), transparent 55%),
+      radial-gradient(ellipse at 20% 0%, var(--guide-color-sun-alpha-06), var(--guide-color-transparent) 55%),
       var(--paper);
     padding: 32px 20px 24px;
     overflow: hidden;
@@ -72,8 +277,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      repeating-linear-gradient(0deg, rgba(43,38,34,0.025) 0px, rgba(43,38,34,0.025) 1px, transparent 1px, transparent 3px),
-      repeating-linear-gradient(90deg, rgba(43,38,34,0.02) 0px, rgba(43,38,34,0.02) 1px, transparent 1px, transparent 3px);
+      repeating-linear-gradient(0deg, var(--guide-color-warm-ink-alpha-025) 0px, var(--guide-color-warm-ink-alpha-025) 1px, var(--guide-color-transparent) 1px, var(--guide-color-transparent) 3px),
+      repeating-linear-gradient(90deg, var(--guide-color-warm-ink-alpha-02) 0px, var(--guide-color-warm-ink-alpha-02) 1px, var(--guide-color-transparent) 1px, var(--guide-color-transparent) 3px);
     pointer-events: none;
   }
 
@@ -135,7 +340,7 @@
     left: 50%;
     width: 3px;
     height: 48%;
-    background: linear-gradient(to top, transparent, var(--accent));
+    background: linear-gradient(to top, var(--guide-color-transparent), var(--accent));
     transform-origin: bottom center;
     border-radius: 3px;
   }
@@ -143,7 +348,7 @@
   .phone-mock {
     position: relative;
     z-index: 1;
-    background: #1C140E;
+    background: var(--guide-color-warm-black);
     border-radius: 22px;
     padding: 14px;
     max-width: 320px;
@@ -152,8 +357,8 @@
   }
 
   @keyframes phone-breathe {
-    0%, 100% { transform: translateX(64px) scale(1); box-shadow: 0 24px 48px rgba(43,38,34,0.22); }
-    50%      { transform: translateX(64px) scale(1.02); box-shadow: 0 28px 56px rgba(43,38,34,0.28); }
+    0%, 100% { transform: translateX(64px) scale(1); box-shadow: 0 24px 48px var(--guide-color-warm-ink-alpha-22); }
+    50%      { transform: translateX(64px) scale(1.02); box-shadow: 0 28px 56px var(--guide-color-warm-ink-alpha-28); }
   }
 
   .phone-mock-bar {
@@ -169,9 +374,9 @@
     border-radius: 50%;
   }
 
-  .phone-mock-bar span:nth-child(1) { background: #E5645A; }
-  .phone-mock-bar span:nth-child(2) { background: #E5B84B; }
-  .phone-mock-bar span:nth-child(3) { background: #5FB86A; }
+  .phone-mock-bar span:nth-child(1) { background: var(--guide-color-terminal-red); }
+  .phone-mock-bar span:nth-child(2) { background: var(--guide-color-terminal-yellow); }
+  .phone-mock-bar span:nth-child(3) { background: var(--guide-color-terminal-green); }
 
   .phone-mock .bubble {
     max-width: 92%;
@@ -189,7 +394,7 @@
     border: 1px solid var(--line);
     border-radius: 999px;
     padding: 6px 14px;
-    background: rgba(255,255,255,0.35);
+    background: var(--guide-color-white-alpha-35);
   }
 
   .eyebrow::before {
@@ -221,10 +426,10 @@
     font-style: italic;
     font-size: 14.5px;
     color: var(--ink-soft);
-    background: rgba(255,255,255,0.4);
+    background: var(--guide-color-white-alpha-4);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid var(--guide-color-white-alpha-5);
     border-radius: 999px;
     padding: 6px 16px;
     display: inline-block;
@@ -260,8 +465,8 @@
     position: absolute;
     inset: 30%;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #FFB86B, var(--accent) 70%);
-    box-shadow: 0 0 18px rgba(217,113,31,0.35);
+    background: radial-gradient(circle at 35% 30%, var(--guide-color-terminal-orange), var(--accent) 70%);
+    box-shadow: 0 0 18px var(--guide-color-sun-alpha-35);
   }
 
   .sun-rays {
@@ -276,7 +481,7 @@
     left: 50%;
     width: 2px;
     height: 38%;
-    background: linear-gradient(to top, transparent, var(--accent));
+    background: linear-gradient(to top, var(--guide-color-transparent), var(--accent));
     transform-origin: bottom center;
     border-radius: 3px;
     opacity: 0.7;
@@ -301,7 +506,7 @@
   .roller-track {
     position: relative;
     height: 2px;
-    background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 12px);
+    background: repeating-linear-gradient(90deg, var(--accent) 0 6px, var(--guide-color-transparent) 6px 12px);
     margin: 0 0 26px;
   }
 
@@ -336,7 +541,7 @@
 
   /* Блок "как подключить" — пошаговая инструкция */
   .howto-box {
-    background: rgba(255,255,255,0.5);
+    background: var(--guide-color-white-alpha-5);
     border: 1.5px solid var(--line);
     border-radius: 18px;
     padding: 20px 20px 22px;
@@ -365,7 +570,7 @@
     height: 24px;
     border-radius: 50%;
     background: var(--accent);
-    color: #FFF6EA;
+    color: var(--guide-color-warm-paper-highlight);
     font-size: 12px;
     font-weight: 800;
     display: flex;
@@ -393,7 +598,7 @@
   .howto-cmd code {
     font-family: "SF Mono", monospace;
     font-size: 12.5px;
-    color: #F0E6D8;
+    color: var(--guide-color-warm-paper-layer);
     flex: 1;
     overflow-x: auto;
     white-space: nowrap;
@@ -404,7 +609,7 @@
     font-size: 11px;
     font-weight: 700;
     color: var(--accent);
-    background: rgba(217,113,31,0.15);
+    background: var(--guide-color-sun-alpha-15);
     border: none;
     border-radius: 6px;
     padding: 5px 9px;
@@ -421,7 +626,7 @@
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--line);
-    box-shadow: 5px 7px 16px rgba(43,38,34,0.28);
+    box-shadow: 5px 7px 16px var(--guide-color-warm-ink-alpha-28);
   }
 
   .howto-shot img {
@@ -436,7 +641,7 @@
     height: 26px;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 0 rgba(217,113,31,0.5);
+    box-shadow: 0 0 0 var(--guide-color-sun-alpha-5);
     animation: pulse-dot 1.6s ease-out infinite;
   }
 
@@ -448,9 +653,9 @@
   }
 
   @keyframes pulse-dot {
-    0%   { box-shadow: 0 0 0 0 rgba(217,113,31,0.55); }
-    70%  { box-shadow: 0 0 0 14px rgba(217,113,31,0); }
-    100% { box-shadow: 0 0 0 0 rgba(217,113,31,0); }
+    0%   { box-shadow: 0 0 0 0 var(--guide-color-sun-alpha-55); }
+    70%  { box-shadow: 0 0 0 14px var(--guide-color-sun-alpha-0); }
+    100% { box-shadow: 0 0 0 0 var(--guide-color-sun-alpha-0); }
   }
 
   .howto-or {
@@ -493,7 +698,7 @@
     display: block;
     text-decoration: none;
     color: var(--ink);
-    background: rgba(255,255,255,0.55);
+    background: var(--guide-color-white-alpha-55);
     border: 1.5px solid var(--line);
     border-radius: 13px;
     padding: 8px 6px;
@@ -509,8 +714,8 @@
   .lepestok:nth-child(6) { animation-delay: 2s; }
 
   @keyframes breathe {
-    0%, 100% { transform: scale(1); box-shadow: 0 2px 8px rgba(43,38,34,0.06); }
-    50%      { transform: scale(1.035); box-shadow: 0 4px 14px rgba(217,113,31,0.16); }
+    0%, 100% { transform: scale(1); box-shadow: 0 2px 8px var(--guide-color-warm-ink-alpha-06); }
+    50%      { transform: scale(1.035); box-shadow: 0 4px 14px var(--guide-color-sun-alpha-16); }
   }
 
   .lepestok:active { transform: scale(0.97); }
@@ -559,12 +764,12 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(1px 1px at 15% 20%, rgba(217,169,78,0.5), transparent),
-      radial-gradient(1px 1px at 70% 45%, rgba(217,169,78,0.35), transparent),
-      radial-gradient(1px 1px at 40% 75%, rgba(217,169,78,0.4), transparent),
-      radial-gradient(1px 1px at 85% 85%, rgba(217,169,78,0.3), transparent),
-      radial-gradient(1px 1px at 25% 55%, rgba(217,169,78,0.3), transparent),
-      radial-gradient(1px 1px at 60% 15%, rgba(217,169,78,0.4), transparent);
+    background-image: radial-gradient(1px 1px at 15% 20%, var(--guide-color-sun-glow-alpha-5), var(--guide-color-transparent)),
+      radial-gradient(1px 1px at 70% 45%, var(--guide-color-sun-glow-alpha-35), var(--guide-color-transparent)),
+      radial-gradient(1px 1px at 40% 75%, var(--guide-color-sun-glow-alpha-4), var(--guide-color-transparent)),
+      radial-gradient(1px 1px at 85% 85%, var(--guide-color-sun-glow-alpha-3), var(--guide-color-transparent)),
+      radial-gradient(1px 1px at 25% 55%, var(--guide-color-sun-glow-alpha-3), var(--guide-color-transparent)),
+      radial-gradient(1px 1px at 60% 15%, var(--guide-color-sun-glow-alpha-4), var(--guide-color-transparent));
     background-size: 100% 100%;
     pointer-events: none;
   }
@@ -582,7 +787,7 @@
   .skill-card {
     position: relative;
     background: var(--panel);
-    border: 1px solid rgba(217,169,78,0.16);
+    border: 1px solid var(--guide-color-sun-glow-alpha-16);
     border-radius: 22px;
     padding: 30px 26px 28px;
     overflow: hidden;
@@ -596,7 +801,7 @@
     left: -20%;
     width: 70%;
     height: 70%;
-    background: radial-gradient(circle, rgba(217,169,78,0.22), transparent 70%);
+    background: radial-gradient(circle, var(--guide-color-sun-glow-alpha-22), var(--guide-color-transparent) 70%);
     pointer-events: none;
   }
 
@@ -605,7 +810,7 @@
     position: absolute;
     inset: 0;
     border-radius: 22px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    box-shadow: inset 0 1px 0 var(--guide-color-white-alpha-04);
     pointer-events: none;
   }
 
@@ -666,8 +871,8 @@
   }
 
   .chat-demo {
-    background: rgba(0,0,0,0.32);
-    border: 1px solid rgba(217,169,78,0.18);
+    background: var(--guide-color-black-alpha-32);
+    border: 1px solid var(--guide-color-sun-glow-alpha-18);
     border-radius: 14px;
     padding: 16px;
     margin-top: 6px;
@@ -685,14 +890,14 @@
   .bubble:last-child { margin-bottom: 0; }
 
   .bubble.me {
-    background: rgba(217,169,78,0.18);
+    background: var(--guide-color-sun-glow-alpha-18);
     color: var(--cream-text);
     margin-left: auto;
     border-bottom-right-radius: 4px;
   }
 
   .bubble.claude {
-    background: rgba(255,255,255,0.07);
+    background: var(--guide-color-white-alpha-07);
     color: var(--cream-text);
     border-bottom-left-radius: 4px;
   }
@@ -735,8 +940,8 @@
     flex-shrink: 0;
     width: 0;
     height: 0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
+    border-top: 5px solid var(--guide-color-transparent);
+    border-bottom: 5px solid var(--guide-color-transparent);
     border-left: 8px solid var(--gold);
   }
 
@@ -765,8 +970,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      repeating-linear-gradient(0deg, rgba(43,38,34,0.025) 0px, rgba(43,38,34,0.025) 1px, transparent 1px, transparent 3px),
-      repeating-linear-gradient(90deg, rgba(43,38,34,0.02) 0px, rgba(43,38,34,0.02) 1px, transparent 1px, transparent 3px);
+      repeating-linear-gradient(0deg, var(--guide-color-warm-ink-alpha-025) 0px, var(--guide-color-warm-ink-alpha-025) 1px, var(--guide-color-transparent) 1px, var(--guide-color-transparent) 3px),
+      repeating-linear-gradient(90deg, var(--guide-color-warm-ink-alpha-02) 0px, var(--guide-color-warm-ink-alpha-02) 1px, var(--guide-color-transparent) 1px, var(--guide-color-transparent) 3px);
     pointer-events: none;
   }
 
@@ -789,7 +994,7 @@
     border: 1px solid var(--line);
     border-radius: 999px;
     padding: 6px 14px;
-    background: rgba(255,255,255,0.4);
+    background: var(--guide-color-white-alpha-4);
     margin-bottom: 18px;
   }
 
@@ -866,12 +1071,12 @@
   .tariff {
     border-radius: 20px;
     padding: 26px 24px;
-    background: rgba(255,255,255,0.5);
+    background: var(--guide-color-white-alpha-5);
     border: 1.5px solid var(--line);
   }
 
   .tariff.paid {
-    background: linear-gradient(160deg, rgba(217,113,31,0.1), rgba(255,255,255,0.5));
+    background: linear-gradient(160deg, var(--guide-color-sun-alpha-1), var(--guide-color-white-alpha-5));
     border: 1.5px solid var(--accent);
   }
 
@@ -899,20 +1104,20 @@
 
   .cta-button {
     display: inline-block;
-    background: linear-gradient(160deg, var(--accent), #B85A16);
-    color: #FFF6EA;
+    background: linear-gradient(160deg, var(--accent), var(--guide-color-sun-deep));
+    color: var(--guide-color-warm-paper-highlight);
     font-weight: 800;
     font-size: 17px;
     text-decoration: none;
     padding: 18px 40px;
     border-radius: 999px;
-    box-shadow: 0 10px 28px rgba(217,113,31,0.3);
+    box-shadow: 0 10px 28px var(--guide-color-sun-alpha-3);
     transition: transform 0.12s ease, box-shadow 0.12s ease;
   }
 
   .cta-button:active {
     transform: scale(0.96);
-    box-shadow: 0 5px 14px rgba(217,113,31,0.35);
+    box-shadow: 0 5px 14px var(--guide-color-sun-alpha-35);
   }
 
   .codeword-note {
@@ -950,25 +1155,25 @@
   .help-demo {
     max-width: 560px;
     margin: 26px auto 0;
-    background: rgba(0,0,0,0.28);
-    border: 1px solid rgba(217,169,78,0.2);
+    background: var(--guide-color-black-alpha-28);
+    border: 1px solid var(--guide-color-sun-glow-alpha-2);
     border-radius: 14px;
     padding: 16px;
     text-align: left;
   }
 
     .next-read { max-width: 760px; margin: 0 auto; padding: 40px 22px 10px; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif }
-    .next-read h2 { margin: 0 0 4px; font-size: 22px; color: var(--ink, #1C140E) }
+    .next-read h2 { margin: 0 0 4px; font-size: 22px; color: var(--ink, var(--guide-color-warm-black)) }
     .next-read .next-sub { margin: 0 0 18px; font-size: 15px; opacity: .72 }
     .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
-    .next-read a { display: block; padding: 16px 18px; border: 1px solid #E9DDC6; border-left: 4px solid #D9711F;
-      border-radius: 12px; background: #FFF6EA; color: #1C140E; font-weight: 700; text-decoration: none; transition: transform .12s ease }
+    .next-read a { display: block; padding: 16px 18px; border: 1px solid var(--guide-color-warm-border-light); border-left: 4px solid var(--guide-color-sun);
+      border-radius: 12px; background: var(--guide-color-warm-paper-highlight); color: var(--guide-color-warm-black); font-weight: 700; text-decoration: none; transition: transform .12s ease }
     .next-read a:hover { transform: translateY(-1px) }
     .next-read .why { display: block; margin-top: 5px; font-weight: 400; font-size: 14px; opacity: .74 }
 
-    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
-    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
-    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
 </style>
 
   <meta property="og:image" content="https://pronovoe.com/claude-ai/shest-skillov/assets/oblozhka.webp">
@@ -976,7 +1181,78 @@
   <meta property="og:image:height" content="840">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://pronovoe.com/claude-ai/shest-skillov/assets/oblozhka.webp">
-  <link href="../../assets/fonts/fonts.css" rel="stylesheet">
+  <!-- critical:fonts:start -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
 
   <style id="shapka-b">
     figure.cover-v2 { margin: 22px 0 26px }
@@ -1003,8 +1279,131 @@
 <!-- erid:style:end -->
 
 
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
 <!-- privacy:head:start -->
-<link rel="stylesheet" href="/assets/privacy.css">
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer;
+}
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+/* Отказ - крестик: одна заметная кнопка «Понятно», выбор по закону остаётся */
+.cookie-actions { align-items: center }
+.cookie-actions .cookie-close {
+  min-width: 44px; padding: 0; border-color: var(--guide-color-transparent); background: var(--guide-color-transparent);
+  color: var(--muted, var(--guide-color-muted)); font: 400 26px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+.cookie-actions .cookie-close:hover { border-color: var(--guide-color-transparent); color: var(--ink, var(--guide-color-ink)) }
+@media (max-width: 600px) {
+  .cookie-actions { flex-wrap: nowrap }
+  .cookie-actions .cookie-close { flex: 0 0 44px }
+}
+</style>
+<!-- critical:privacy-style:end -->
 <script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
 <!-- seo:canonical:start -->
@@ -1054,6 +1453,7 @@
 </head>
 <body>
 
+<div role="main" style="display:contents">
 <div class="intro">
 
   <div class="intro-layout">
@@ -1061,7 +1461,7 @@
     <div class="eyebrow">инструкция · 6 claude skills</div>
     <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Шесть закрытых книг с одной коралловой книгой как образ готовых инструкций Claude" loading="eager" decoding="async" fetchpriority="high"><figcaption>Готовые инструкции для дизайна, подключения сервисов и проверки сайтов с живыми примерами</figcaption></figure>
 <h1 class="intro-title article-title-v2">Как найти, подключить и вызвать <span class="accent">6 скиллов</span> Claude</h1>
-<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E4EDF5;color:#2C6FA6;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
 <div class="intro-subtitle-wrap"><span class="intro-subtitle">мини-гайд для новичков</span></div>
 
 
@@ -1090,7 +1490,7 @@
     <p class="intro-lede">Вот именно об этом почему-то никто не рассказывает.</p>
 
     <h2>Скиллы Claude: как найти, подключить и вызвать</h2>
-<div class="howto-box" style="background: rgba(217,113,31,0.08); border-color: var(--accent); margin-top: 18px;">
+<div class="howto-box" style="background: var(--guide-color-sun-alpha-08); border-color: var(--accent); margin-top: 18px;">
       <p class="howto-title" style="margin-bottom: 8px;">Важно перед стартом</p>
       <p class="howto-text" style="font-size: 14px;">Все скрины и шаги ниже показаны в <strong>VS Code</strong> — именно в нём мы занимаемся вайб-кодингом с <strong>Claude Code</strong>. Это пространство, где можно собирать сайты, боты и что угодно ещё словами, без единой строчки программирования и без знания кода. Почему именно VS Code: он лучше всего работает с файлами на компьютере, умеет переключаться между разными вкладками/файлами и держит настроенный «контекст проекта» (то есть память и структуру папок) — этого нет ни в браузере, ни в обычном desktop-приложении Claude</p>
       <p style="margin-top: 12px; font-size: 12.5px; font-style: italic; color: var(--ink-soft); border-left: 2px solid var(--accent); padding-left: 10px;"><span style="color: var(--accent); font-style: normal;">*</span> То же самое можно сделать и в отдельном приложении на компьютере, и в браузере по адресу claude.ai/code — это один и тот же инструмент с одинаковыми возможностями, просто кнопки и окна там будут выглядеть немного иначе, чем на скринах ниже. А вот обычный чат на claude.ai (без «/code» в адресе) — это ДРУГОЙ продукт, там скиллов и команды «/pl» нет</p>
@@ -1216,7 +1616,7 @@
       <a href="#docx-pdf" class="lepestok"><span class="num">06</span><span class="name">docx / xlsx / pdf</span><span class="desc">готовые файлы без Word и Excel</span></a>
     </div>
   </div>
-</div>
+<!-- The former unmatched div end tag is omitted so the main landmark covers the whole article. -->
 
 <div class="fade-to-dark"></div>
 
@@ -1363,21 +1763,21 @@
   </div>
 </div>
 
-<a href="../pyat-instrumentov-claude-code/" style="display:block;max-width:760px;margin:0 auto 14px;padding:18px 20px;border:1px solid #E9DDC6;border-left:4px solid #D9711F;border-radius:12px;background:#FFF6EA;color:#1C140E;text-decoration:none;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif">
-  <span style="display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8F371F">Ещё пять полезных дополнений</span>
+<a href="../pyat-instrumentov-claude-code/" style="display:block;max-width:760px;margin:0 auto 14px;padding:18px 20px;border:1px solid var(--guide-color-warm-border-light);border-left:4px solid var(--guide-color-sun);border-radius:12px;background:var(--guide-color-warm-paper-highlight);color:var(--guide-color-warm-black);text-decoration:none;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif">
+  <span style="display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--guide-color-brand-ink)">Ещё пять полезных дополнений</span>
   <span style="display:block;margin-top:6px;font-size:18px;font-weight:700">Пять дополнений для Claude Code: что каждое решает →</span>
   <span style="display:block;margin-top:5px;font-size:14px;opacity:.74">Кончился лимит, Claude не помнит прошлый чат, разговор разросся: что поставить под каждую ситуацию</span>
 </a>
 
-<a href="../svoy-sayt-ne-bliznec/" style="display:block;max-width:760px;margin:0 auto;padding:18px 20px;border:1px solid #E9DDC6;border-left:4px solid #D9711F;border-radius:12px;background:#FFF6EA;color:#1C140E;text-decoration:none;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif">
-  <span style="display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8F371F">Соседняя инструкция</span>
+<a href="../svoy-sayt-ne-bliznec/" style="display:block;max-width:760px;margin:0 auto;padding:18px 20px;border:1px solid var(--guide-color-warm-border-light);border-left:4px solid var(--guide-color-sun);border-radius:12px;background:var(--guide-color-warm-paper-highlight);color:var(--guide-color-warm-black);text-decoration:none;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif">
+  <span style="display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--guide-color-brand-ink)">Соседняя инструкция</span>
   <span style="display:block;margin-top:6px;font-size:18px;font-weight:700">Свой сайт, а не очередной близнец →</span>
   <span style="display:block;margin-top:5px;font-size:14px;opacity:.74">Что собрать в Claude Code первым делом: сайт за вечер, без вёрстки руками</span>
 </a>
 
 <p class="cta-question">Скиллы подключены. Как собрать из них команду?</p>
 <section class="cta" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
-
+</div>
 <footer class="privacy-site-footer">
 <!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>

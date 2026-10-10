@@ -50,11 +50,14 @@ class LegalCorrectionsTest(unittest.TestCase):
             links = ImageDocument(path.read_text()).root.all(tag="link")
             fonts = [n.attrs["href"] for n in links if n.attrs.get("href", "").endswith("/fonts/fonts.css")]
             with self.subTest(path=path.relative_to(ROOT)):
-                self.assertEqual(len(fonts), 1)
-                base = ROOT if path.parent.name == "scripts" else path.parent
-                target = ROOT / fonts[0].lstrip("/") if fonts[0].startswith("/") else base / fonts[0]
-                self.assertEqual(target.resolve(), ROOT / "assets/fonts/fonts.css")
-                self.assertTrue(target.is_file())
+                if path.parent.name == "scripts":
+                    self.assertEqual(len(fonts), 1)
+                    target = ROOT / fonts[0].lstrip("/") if fonts[0].startswith("/") else ROOT / fonts[0]
+                    self.assertEqual(target.resolve(), ROOT / "assets/fonts/fonts.css")
+                    self.assertTrue(target.is_file())
+                else:
+                    self.assertEqual(fonts, [])
+                    self.assertEqual(path.read_text().count('<style id="guide-fonts">'), 1)
 
     def test_no_google_fonts_resources_in_site_html_css_js_or_generator(self):
         paths = [ROOT / "index.html"]

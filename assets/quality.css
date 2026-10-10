@@ -1,0 +1,66 @@
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }

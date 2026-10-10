@@ -71,9 +71,10 @@ class IndexingTest(unittest.TestCase):
 
     def fixture(self, directory):
         root = Path(directory).resolve()
-        for folder in ("scripts", "data"):
+        for folder in ("scripts", "data", "assets"):
             (root / folder).mkdir()
-        for name in ("data/statyi.json", "data/seo.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "index.html"):
+        (root / "assets/fonts").mkdir()
+        for name in ("assets/palette.css", "assets/quality.css", "assets/privacy.css", "assets/fonts/fonts.css", "data/statyi.json", "data/seo.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "index.html"):
             shutil.copyfile(ROOT / name, root / name)
         for a in json.loads((root / "data/statyi.json").read_text())["statyi"]:
             target = root / "claude-ai" / a["slug"] / "index.html"
