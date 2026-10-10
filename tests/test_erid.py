@@ -21,7 +21,7 @@ class EridTest(unittest.TestCase):
                      ROOT / "scripts/shablon_glavnoy.html"]
 
     def test_every_partner_page_and_template_has_exactly_one_marked_creative(self):
-        self.assertEqual(len(self.pages), 51)
+        self.assertEqual(len(self.pages), 52)
         for page in self.pages:
             with self.subTest(page=str(page.relative_to(ROOT))):
                 html = page.read_text()
@@ -41,6 +41,12 @@ class EridTest(unittest.TestCase):
                         "Бесплатный Концентрат",
                         "Ты знаешь, чем проверить кнопки и заявки. Дальше можно собрать команду ИИ-агентов для таких проверок. На Концентрате три вечера, 13-15 октября в 19:00 по Москве, онлайн: работа с командой агентов в Claude Code, Codex и ChatGPT.",
                         "Регистрация на сайте до 14 октября, участие бесплатное",
+                        DISCLOSURE])
+                elif page.parent.name == "komanda-ii-agentov-dlya-bloga":
+                    self.assertEqual(block.all(tag="h2")[0].text_content(),
+                                     "Поручения составлены. Как запустить свою команду ИИ-агентов?")
+                    self.assertEqual([p.text_content().strip() for p in block.all(tag="p")], [
+                        "У тебя есть карточка публикации и роли исполнителей. Теперь нужно подключить помощников, настроить передачу файлов и проверить, что руководитель принимает всю работу. Как собрать команду ИИ-агентов, где главный агент Hermes раздаёт задачи Claude Code и Codex, разбирают на Концентрате Ивана Сергеева 13 октября. Онлайн, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября",
                         DISCLOSURE])
                 else:
                     self.assertEqual(block.all(tag="h2")[0].text_content(), TITLE)
