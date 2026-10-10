@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Оценка внешности по фото в ChatGPT: 15 критериев и балл из 10</title>
+<meta name="description" content="Полный промпт для оценки внешности по фото в ChatGPT: 15 критериев, пример отчёта 8,7/10 и дополнение для резюме или творческого проекта. Условия и лимиты.">
+<meta name="theme-color" content="#F8F7F2">
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Оценка внешности по фото в ChatGPT: 15 критериев и балл из 10">
+<meta property="og:description" content="Полный промпт для оценки внешности по фото в ChatGPT: 15 критериев, пример отчёта 8,7/10 и дополнение для резюме или творческого проекта. Условия и лимиты.">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/otsenka-vneshnosti-po-foto-v-chatgpt/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/otsenka-vneshnosti-po-foto-v-chatgpt/assets/oblozhka.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/otsenka-vneshnosti-po-foto-v-chatgpt/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Портрет женщины в тёмном жакете рядом с заголовком «Оценка лица» на бирюзовом фоне">
+<link href="../../assets/fonts/fonts.css" rel="stylesheet">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, transparent); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 #0A2424; transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: #1F4A43; color: #FFFFFF }
+    .masthead .press-button:hover { background: #1F4A43; color: #FFC6AD; box-shadow: 0 2px 0 #0A2424 }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, transparent); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: #FFFFFF }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF }
+    .cta p { color: #F0E8D8 }
+    .cta .section-label { color: #F0E8D8 }
+    .cta .press-button { background: var(--accent); color: #102F30; box-shadow: 0 3px 0 #8F371F }
+    .cta .press-button:hover { background: #F28A68; color: #102F30; box-shadow: 0 2px 0 #8F371F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:#FFD1BF;color:#102F30;box-shadow:inset 0 0 0 3px rgba(16,47,48,.42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:rgba(232,111,74,.15)}to{background:transparent}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #F8F7F2; font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: #102F30 }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: #FFFFFF; -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: #F8F7F2; color: #102F30; font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: #C9D6D2; font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: #F28A68; color: #102F30; transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: #2B5B52; color: #FFFFFF }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+    .help-banner { background: #102F30; color: #FFFFFF; border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: #FFFFFF }
+    .help-banner .accent { color: #FFAB8A }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: #1F4A43 }
+    .help-demo .claude { background: #F8F7F2; color: #102F30 }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: transparent }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px rgba(16, 47, 48, .16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px rgba(0, 0, 0, .3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: #1F4A43; color: #FFFFFF; font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 #102F30 }
+.copy-button:hover { background: #2B5B52; transform: translateY(1px); box-shadow: 0 2px 0 #102F30 }
+.copy-button:active { background: #FFD1BF; color: #102F30; transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.copy-button.is-copied { background: #DCEAE4; color: #102F30; outline: 3px solid #FFAB8A }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid #48605C; border-radius: 11px; background: #102F30; color: #EDF1EE }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<style>
+.code-card { width: 100%; padding: 48px 18px 18px; background: #102F30; color: #F8F7F2; text-align: left }
+.code-card .copy-button { background: #E86F4A; color: #102F30; min-width: 130px; box-shadow: 0 3px 0 #8F371F }
+.code-card .copy-button:hover { background: #FF9A78; box-shadow: 0 2px 0 #8F371F }
+.code-card .copy-button:active { background: #FFD1BF; box-shadow: inset 0 0 0 3px rgba(16,47,48,.42) }
+.code-card .copy-button.is-copied { background: #DCEAE4; outline: 3px solid #FFAB8A }
+.help-banner h2 { color: #FFFFFF }
+.help-banner p { color: #F8F7F2; text-align: left }
+.info-card + p, .warn-card + p { margin-top: 25px }
+.koncentrat-context { margin-top: 42px }
+@media (max-width: 600px) { .code-card { padding: 48px 14px 14px } }
+</style><meta name="robots" content="noindex, nofollow">
+<!-- privacy:head:start -->
+<link rel="stylesheet" href="/assets/privacy.css">
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+</head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">Оценка лица в ChatGPT</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+</div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#kak-ustroeno">Как устроена оценка внешности по фото</a>
+<a href="#podgotovka">Что нужно до начала</a>
+<a href="#shag-1">Шаг 1. Открой ChatGPT</a>
+<a href="#shag-2">Шаг 2. Загрузи фото</a>
+<a href="#shag-3">Шаг 3. Вставь полный промпт</a>
+<a href="#shag-4">Шаг 4. Дождись картинки с отчётом</a>
+<a href="#shag-5">Шаг 5. Открой отчёт крупнее и сохрани</a>
+<a href="#stoimost">Сколько это стоит</a>
+<a href="#esli-ne-poluchaetsya">Если отчёт не появился</a>
+<a href="#pomoshch">Нужна подсказка по текущему экрану?</a>
+<a href="#svoya-zadacha">Как изменить промпт под свою задачу</a>
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a></nav><main><article><header id="nachalo"><div class="eyebrow">Инструкция · ChatGPT и фотографии</div><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Портрет женщины в тёмном жакете рядом с заголовком «Оценка лица» на бирюзовом фоне" loading="eager" decoding="async" fetchpriority="high"><figcaption>Фото для разбора: 15 критериев, итоговый балл и дополнение под назначение снимка</figcaption></figure><h1 class="article-title-v2">Оценка внешности по фото в ChatGPT: 15 критериев и балл из 10</h1><div class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:#E3ECDD;color:#365846;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,Arial,sans-serif">Начальный уровень</div><p class="lead">Хочется понять, как выглядишь на фото со стороны, а спросить некого или ответят из вежливости? Один промпт просит ChatGPT разобрать портрет по 15 критериям и собрать сильные стороны, рекомендации и итоговый балл из 10 на одной картинке. Ниже полный запрос и пример отчёта. А в конце допишешь свою задачу, чтобы спросить, что менять в кадре для резюме или страницы проекта.</p>
+<p>Загрузить фото и создать картинку можно без подписки, в пределах лимитов Free. <a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq">Справка OpenAI</a>, условия на 10.10.2026.</p><div class="meta">АКТУАЛЬНО НА 10 ОКТЯБРЯ 2026</div>
+</header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#kak-ustroeno">Как устроена оценка внешности по фото</a>
+<a href="#podgotovka">Что нужно до начала</a>
+<a href="#shag-1">Шаг 1. Открой ChatGPT</a>
+<a href="#shag-2">Шаг 2. Загрузи фото</a>
+<a href="#shag-3">Шаг 3. Вставь полный промпт</a>
+<a href="#shag-4">Шаг 4. Дождись картинки с отчётом</a>
+<a href="#shag-5">Шаг 5. Открой отчёт крупнее и сохрани</a>
+<a href="#stoimost">Сколько это стоит</a>
+<a href="#esli-ne-poluchaetsya">Если отчёт не появился</a>
+<a href="#pomoshch">Нужна подсказка по текущему экрану?</a>
+<a href="#svoya-zadacha">Как изменить промпт под свою задачу</a>
+<a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a></nav></details><section class="content-section" id="kak-ustroeno"><h2>Как устроена оценка внешности по фото</h2>
+<p><b>ChatGPT - это нейросеть, с которой можно переписываться на сайте.</b> Ты отправляешь фото и промпт, то есть текст задания. ChatGPT рассматривает снимок и создаёт картинку-отчёт: рядом с портретом стоят наблюдения, оценки и советы. Такая картинка с разбором называется инфографикой. <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">Как ChatGPT читает фотографии</a> и <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">как создаёт изображения</a>.</p>
+<p><b>Разбор относится к одному снимку.</b> На другом фото, при другом свете или ракурсе оценка может отличаться. Число с десятичной запятой выглядит точным, но это субъективное впечатление нейросети. Промпт просит объяснить балл и не оценивать то, чего в кадре не видно.</p>
+<div class="warn-card"><p><b>Оценка не медицинская и не научная.</b> Она не определяет здоровье, характер или ценность человека. Фразы о «внутренней силе» в примере ниже тоже относятся к впечатлению от картинки. Чужое фото загружай только с согласия человека на нём. OpenAI предупреждает, что <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">описание изображения может содержать ошибки</a>.</p></div>
+</section>
+<section class="content-section" id="podgotovka"><h2>Что нужно до начала</h2>
+<ul><li><b>Аккаунт ChatGPT.</b> Ниже маршрут на сайте chatgpt.com. На кадрах показана программа ChatGPT для Mac, поэтому название пункта загрузки отличается.</li><li><b>Один портрет.</b> Выбери снимок, на котором видно лицо. Если часть лица закрыта, промпт просит отметить это вместо выдуманной оценки.</li><li><b>Файл фото.</b> ChatGPT принимает PNG, JPEG и неподвижный GIF; размер одного изображения до 20 МБ. <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">Форматы и размер фото в справке OpenAI</a>.</li></ul>
+</section>
+<section class="content-section" id="shag-1"><h2>Шаг 1. Открой ChatGPT</h2>
+<p><b>Открой <a href="https://chatgpt.com/">chatgpt.com</a> и войди в аккаунт.</b> Если аккаунта ещё нет, выбери регистрацию и пройди подсказки сайта. Начни новый чат через New chat («Новый чат»). Внизу находится поле сообщения, туда пойдут фото и текст задания. <a href="https://help.openai.com/en/articles/12677804-what-is-chatgpt-faq">Как начать разговор в ChatGPT</a>.</p><div class="result"><p><b>Результат:</b> ты в новом чате своего аккаунта и можешь прикрепить фотографию.</p></div>
+</section>
+<section class="content-section" id="shag-2"><h2>Шаг 2. Загрузи фото</h2>
+<p><b>Нажми «+» у поля сообщения</b> и выбери Add photos &amp; files («Добавить фото и файлы»). Найди портрет на устройстве и прикрепи его. На показанном экране Mac пункт называется «Загрузить фото». Можно также перетащить файл в поле сообщения. <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">Способы прикрепить изображение</a>.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/shag-2-menu.webp" width="832" height="190" alt="Меню у поля сообщения ChatGPT на Mac: пункт «Загрузить фото»" loading="lazy" decoding="async"></div><figcaption>Пункт «Загрузить фото» в меню ChatGPT для Mac.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/shag-2-foto.webp" width="832" height="320" alt="Миниатюра портрета прикреплена к пустому полю сообщения ChatGPT" loading="lazy" decoding="async"></div><figcaption>Фото уже прикреплено, текст задания ещё не вставлен.</figcaption></figure>
+<div class="result"><p><b>Результат:</b> рядом с полем сообщения видна миниатюра твоего портрета.</p></div>
+</section>
+<section class="content-section" id="shag-3"><h2>Шаг 3. Вставь полный промпт</h2>
+<p><b>Нажми «Скопировать» на плашке ниже.</b> Вернись в ChatGPT и вставь текст в поле сообщения рядом с прикреплённым фото: Ctrl+V на Windows или Cmd+V на Mac. Отправь сообщение кнопкой со стрелкой вверх. Фото и весь промпт должны уйти вместе.</p>
+<div class="code-card"><pre id="prompt-main"><code>По прикреплённой фотографии создай подробный персональный отчёт «ЭСТЕТИЧЕСКИЙ АНАЛИЗ ЛИЦА»: анализ внешности, оценки по отдельным критериям, сильные стороны, рекомендации и общий вывод. Оцени человека именно на этом фото. Сохрани его лицо, черты, причёску и выражение, не улучшай и не заменяй портрет другим человеком
+
+Разбери следующие критерии:
+1. Симметрия лица
+2. Соотношение верхней, средней и нижней третей лица
+3. Общие пропорции лица
+4. Форма глаз и расстояние между ними
+5. Форма носа и её сочетание с остальными чертами
+6. Форма и пропорции губ
+7. Линия нижней челюсти
+8. Форма и пропорции подбородка
+9. Выраженность скул
+10. Видимая текстура и ровность тона кожи
+11. Линия роста волос
+12. Причёска и то, как она обрамляет лицо
+13. Ухоженность и оформление внешности
+14. Общая гармония черт
+15. Фотогеничность на представленном снимке
+
+По каждому критерию дай краткое наблюдение и свою оценку от 1 до 10 с одним знаком после запятой. Не задавай автоматически высокие баллы и не подгоняй вывод под желаемую оценку. Если какой-то критерий не виден из-за ракурса, света или закрытой части лица, прямо укажи это вместо выдуманной оценки
+
+Отдельно составь блоки «Сильные стороны», «Что можно улучшить», «Практические рекомендации». Советы должны следовать из конкретных наблюдений: подходящая укладка и форма причёски, оформление бровей, макияж при необходимости, визуальная подача кожи, осанка, выражение лица и подача на фотографии. Для каждого совета объясни, какую особенность он подчёркивает или какую проблему кадра решает. Не делай медицинских выводов, не назначай процедуры и не выводи необходимость похудения по портрету
+
+В конце дай общую субъективную оценку привлекательности от 1 до 10 и вывод из 2-3 предложений: какие черты определяют впечатление и какое из предложенных изменений сильнее всего повлияет на визуальную подачу. Объясни итоговый балл, он должен соответствовать разбору
+
+Оформи результат как одну большую вертикальную журнальную инфографику на русском языке. Белый фон, чёрная типографика, крупный заголовок с засечками, аккуратный шрифт основного текста, тонкие линии, небольшие контурные иконки, карточки со скруглениями и достаточно свободного места. Слева крупный портрет по плечи с подписями вокруг лица и направляющими к соответствующим чертам. Обозначь верхнюю, среднюю и нижнюю трети лица. Справа размести оценки всех критериев, сверху справа крупно покажи итоговый балл /10. Под портретом размести сильные стороны и зоны для улучшения, в нижней части рекомендации и общий вывод
+
+Весь текст должен быть читаемым, без наложений и обрезанных блоков. Используй столько высоты, сколько нужно для полного отчёта. Не сокращай список критериев ради компактной картинки. Внизу добавь короткую подпись «Субъективная оценка ИИ по одной фотографии». Создай саму инфографику, а не только описание её дизайна</code></pre><button class="copy-button" type="button" data-copy-target="prompt-main" aria-label="Скопировать: основной промпт оценки внешности" aria-live="polite">Скопировать</button></div>
+<figure class="shot-fig"><div class="shot"><img src="assets/shag-3-prompt.webp" width="832" height="570" alt="Прикреплённый портрет и начало промпта «ЭСТЕТИЧЕСКИЙ АНАЛИЗ ЛИЦА» в поле ChatGPT" loading="lazy" decoding="async"></div><figcaption>Портрет и начало полного промпта в одном сообщении.</figcaption></figure>
+<div class="result"><p><b>Результат:</b> в чате появилось твоё сообщение с фотографией и заданием на отчёт по 15 критериям.</p></div>
+</section>
+<section class="content-section" id="shag-4"><h2>Шаг 4. Дождись картинки с отчётом</h2>
+<p><b>Дождись изображения в ответе.</b> Создание картинки может занять несколько минут. <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">OpenAI о времени создания изображений</a>. Вот пример по промпту выше: итог <b>8,7/10</b>, справа все 15 критериев, ниже сильные стороны и рекомендации.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/shag-4-otchet-v-chate.webp" width="832" height="780" alt="В ответе ChatGPT появилась вертикальная инфографика с портретом и итогом 8,7/10" loading="lazy" decoding="async"></div><figcaption>Готовая инфографика в чате ChatGPT.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/otchet-gpt.webp" width="1024" height="1536" alt="Отчёт «ЭСТЕТИЧЕСКИЙ АНАЛИЗ ЛИЦА»: портрет, 15 критериев, сильные стороны, рекомендации и итог 8,7/10" loading="lazy" decoding="async"></div><figcaption>Пример результата: итог 8,7/10 и полный разбор по 15 критериям.</figcaption></figure>
+<p>Баллы на этой картинке относятся к показанному фото. <b>Твоему портрету ChatGPT может дать другой балл и другие рекомендации.</b> Если текст мелкий, нажми «Открыть крупнее» на изображении. Здесь также доступен <a href="assets/otchet-gpt-original.png">исходный отчёт в PNG</a>.</p>
+<div class="result"><p><b>Результат:</b> в чате есть картинка с портретом, оценками и общим выводом. Если пришёл только текст, открой раздел <a href="#esli-ne-poluchaetsya">«Если отчёт не появился»</a>.</p></div>
+</section>
+<section class="content-section" id="shag-5"><h2>Шаг 5. Открой отчёт крупнее и сохрани</h2>
+<p><b>Нажми на готовую картинку в ChatGPT.</b> Откроется изображение с кнопками управления. Выбери Save («Сохранить»), чтобы скачать его на устройство. <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">Как открыть и сохранить созданную картинку</a>.</p>
+<p>На кадре с Mac показан другой способ: нажать на изображение правой кнопкой и выбрать <b>«Сохранить изображение как…»</b>. В окне сохранения выбери папку и подтверди сохранение.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/shag-5-sohranit.webp" width="544" height="300" alt="Контекстное меню готового отчёта на Mac: выбран пункт «Сохранить изображение как…»" loading="lazy" decoding="async"></div><figcaption>Пункт сохранения готового отчёта на Mac.</figcaption></figure>
+<div class="result"><p><b>Результат:</b> файл с отчётом лежит в выбранной папке на устройстве и открывается отдельно от чата.</p></div>
+</section>
+<section class="content-section" id="stoimost"><h2>Сколько это стоит</h2>
+<p><b>Подписка для этого задания не обязательна.</b> На тарифе Free («Без подписки») доступны загрузка фото и создание изображений. <a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq">Возможности Free в справке OpenAI</a> и <a href="https://openai.com/chatgpt/pricing/">сравнение тарифов ChatGPT</a>. Проверка условий: 10.10.2026.</p>
+<ul><li><b>Загрузка файлов на Free:</b> до трёх в день. В часы высокой нагрузки OpenAI может уменьшить лимит. <a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt">Лимиты загрузки файлов</a>, проверка 10.10.2026.</li><li><b>Создание картинок:</b> отдельный лимит. Фиксированное число изображений для Free в этой справке не указано. Если лимит закончится, ChatGPT сообщит об этом; следующую попытку нужно отложить. <a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq">Как работают лимиты Free</a>, проверка 10.10.2026.</li><li><b>ChatGPT Plus:</b> 20 $ в месяц по справке OpenAI. Лимиты выше, но у Plus они тоже есть и могут меняться. Для первого разбора можно начать с Free. <a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus">Условия Plus</a>, проверка 10.10.2026.</li></ul>
+</section>
+<section class="content-section" id="esli-ne-poluchaetsya"><h2>Если отчёт не появился</h2>
+<div class="warn-card"><p><b>Пришёл текст вместо картинки или ChatGPT отказался от оценки?</b> Отправь в тот же чат следующим сообщением фразу ниже. Она уточняет формат ответа и не гарантирует, что ChatGPT изменит отказ.</p></div>
+<div class="code-card"><pre id="prompt-format"><code>Оформи результат картинкой-инфографикой, как в задании</code></pre><button class="copy-button" type="button" data-copy-target="prompt-format" aria-label="Скопировать: запрос картинки вместо текста" aria-live="polite">Скопировать</button></div>
+<p>Если отказ остаётся, не рассчитывай на эту фразу как на способ получить оценку. Если закончился лимит создания картинок, новая фраза его не отменит.</p>
+</section>
+<section class="help-banner" id="pomoshch"><h2>Нужна подсказка по текущему экрану?</h2>
+<p>Опиши ChatGPT, на каком действии возникла трудность. <b>Вместо текста в квадратных скобках впиши свою ситуацию</b> и отправь запрос в чат. Личные данные и пароли в описание не добавляй.</p>
+<div class="code-card"><pre id="prompt-help"><code>Хочу получить картинку с разбором своего фото. Сейчас у меня на экране [что видно]. Уже сделано [какие действия]. Не понимаю [что именно]. Объясни, что нажать или написать дальше, по одному шагу, и после каждого шага жди моего ответа.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-help" aria-label="Скопировать: просьбу о помощи" aria-live="polite">Скопировать</button></div>
+</section>
+<section class="content-section" id="svoya-zadacha"><h2>Как изменить промпт под свою задачу</h2>
+<p>Баллы отвечают на вопрос, какое впечатление производит портрет. Для выбора фото в резюме или на страницу проекта нужен другой вопрос: <b>что поменять в этом кадре под его назначение?</b> Дополнение ниже просит разобрать саму фотографию и связать каждую рекомендацию с задачей.</p>
+<p><b>Скопируй дополнение целиком.</b> В нём уже есть два варианта: резюме и страница творческого или танцевального проекта. Если нужны именно они, оставь текст как есть.</p>
+<div class="code-card"><pre id="prompt-addition"><code>Дополнительно оцени саму фотографию: освещение и тени на лице, ракурс, выражение, кадрирование, фон, одежду и общее впечатление от образа. Покажи, что относится к чертам лица, а что связано со съёмкой и оформлением кадра
+
+Добавь блок «Как использовать это фото» с двумя вариантами: фотография для резюме и фотография для страницы творческого или танцевального проекта. По каждому варианту объясни, что в текущем снимке подходит для этой задачи, что мешает и какие конкретные изменения можно попробовать. Рассмотри свет, укладку, одежду, фон, выражение лица и ракурс. Не считай строгий или свободный образ универсально лучшим, объясняй выбор назначением фотографии
+
+Выбери до трёх наиболее полезных изменений для каждого варианта. Для каждого напиши: что видно сейчас -&gt; что изменить -&gt; как это поможет именно этой задаче. Отдели то, что можно поправить в существующем файле, от того, для чего нужно переснять фотографию. Не обещай точную прибавку к баллу или успех в трудоустройстве. Заверши кратким выводом, для какой из двух задач текущий снимок подходит лучше и какое изменение попробовать первым. Размести этот блок в нижней части инфографики, сохранив все основные критерии и общий балл</code></pre><button class="copy-button" type="button" data-copy-target="prompt-addition" aria-label="Скопировать: дополнение под назначение фотографии" aria-live="polite">Скопировать</button></div>
+<p><b>Куда вставить дополнение:</b></p>
+<ol><li><b>Отчёт уже получен.</b> Вернись в тот же чат ChatGPT. Вставь дополнение в пустое поле нового сообщения под ответом и отправь.</li><li><b>Первый запрос ещё не отправлен.</b> Вставь дополнение в самый конец основного промпта, после слов «Создай саму инфографику, а не только описание её дизайна». Отправь этот общий текст вместе с фото.</li></ol>
+<p><b>Как вписать свою задачу:</b></p>
+<ul><li><b>Фото для резюме.</b> Оставь этот вариант, если хочешь разбор снимка для отклика на работу.</li><li><b>Страница танцевального или творческого проекта.</b> Оставь этот вариант для фотографии на странице проекта.</li><li><b>Другое назначение.</b> Замени названия двух вариантов на свои, например «фото для страницы преподавателя» и «фото для афиши выступления».</li></ul>
+<p>Нужна только одна задача? В строке «с двумя вариантами» напиши <b>«с одним вариантом: фотография для…»</b> и назови назначение.</p><p>Затем согласуй остальные фразы с одной задачей:</p><ul><li>«По каждому варианту» замени на «Для этой задачи».</li><li>«для каждого варианта» замени на «для этой задачи».</li><li>«Для каждого напиши» замени на «Для этой задачи напиши».</li><li>Вместо просьбы выбрать лучшую из двух задач попроси назвать первое изменение для твоей задачи.</li></ul><p>Так в запросе останется одно назначение снимка.</p>
+<p>Кадрирование в дополнении означает, какие части снимка оставить и где провести его границы. Запрос просит рассмотреть:</p>
+<ul><li>свет и тени на лице;</li><li>одежду и укладку;</li><li>фон и границы кадра;</li><li>выражение лица и ракурс.</li></ul>
+<p>Для каждого варианта запрос просит выбрать до трёх изменений и объяснить, как они помогут именно этой задаче. Отдельно он просит разделить <b>«можно поправить файл» и «нужно переснять фото»</b>. Точной прибавки к баллу или успеха в трудоустройстве дополнение не обещает.</p>
+<div class="result"><p><b>Результат:</b> в ChatGPT отправлен запрос с назначением твоего снимка. Теперь вопрос касается конкретных изменений в кадре для твоей задачи.</p></div>
+</section></article><p class="koncentrat-context">На Концентрате 13 октября покажут, как собрать команду ИИ-агентов. 14 октября разберут шесть способов заработать с их помощью, а 15 октября соберут контент-завод для роликов, каруселей и статей. Онлайн, в 19:00 МСК.</p><p class="cta-question">Фото разобрано. А как готовить материалы для проекта каждую неделю?</p><section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section></main>
+<aside class="related-plaque" aria-label="Похожая инструкция">
+      <p class="plaque-label">Ещё про фото</p>
+      <h2>Перенеси стиль на свой снимок</h2>
+      <p><a href="../kopirovat-stil-foto-v-chatgpt/">Как скопировать свет, цвета и фон фото через ChatGPT</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint"></p></div>
+<script>
+(function () {
+  var viewer = document.getElementById("viewer");
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+  var lastFocused;
+  function open(img) {
+    lastFocused = document.activeElement;
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewer.setAttribute("open", "");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    big.src = img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    viewer.removeAttribute("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline" class="cookie-close" aria-label="Закрыть без аналитики" title="Закрыть без аналитики"><span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>
