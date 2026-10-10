@@ -170,9 +170,10 @@ class ArticleImagesTest(unittest.TestCase):
     def rows(self, article):
         return [row for row in self.manifest if row["article"] == article["title"]]
 
-    def test_image_manifest_covers_all_29_approved_articles_and_excludes_new_article(self):
+    def test_image_manifest_covers_approved_articles_and_explicit_draft_covers(self):
         self.assertEqual(len(self.eligible), 41)
-        self.assertEqual(set(self.covers), {a["slug"] for a in self.articles if a["status"] in {"live", "gotova"}})
+        self.assertEqual(set(self.covers), {a["slug"] for a in self.articles
+                                         if a["status"] in {"live", "gotova"} or a.get("oblozhka")})
         self.assertEqual(len(self.manifest), 47)
         self.assertTrue(all(row["number"] < 49 for row in self.manifest))
         for article in self.eligible:
@@ -289,6 +290,51 @@ class ArticleImagesTest(unittest.TestCase):
                         parsed = urlparse(value)
                         self.assertEqual(parsed.netloc, "pronovoe.com")
                         self.assertTrue((ROOT / parsed.path.lstrip("/")).is_file())
+
+    def test_komanda_draft_cover_has_consistent_page_social_schema_and_card(self):
+        slug = "komanda-ii-agentov-dlya-bloga"
+        article = next(a for a in self.articles if a["slug"] == slug)
+        cover = self.covers[slug]
+        self.assertEqual(article["oblozhka"], cover["image"])
+        page = ROOT / "claude-ai" / slug / "index.html"
+        html = page.read_text()
+        doc = ImageDocument(html)
+        figures = doc.root.all(klass="cover-v2")
+        self.assertEqual(len(figures), 1)
+        h1 = doc.root.all(tag="h1")[0]
+        siblings = h1.parent.children
+        self.assertIs(siblings[siblings.index(h1) - 1], figures[0])
+        image = figures[0].all(tag="img")[0].attrs
+        self.assertEqual(image["src"], "assets/oblozhka.webp")
+        self.assertEqual(image["alt"], cover["alt"])
+        self.assertEqual((image["width"], image["height"]), ("1600", "840"))
+        self.assertEqual(image["loading"], "eager")
+        self.assertEqual(figures[0].all(tag="figcaption")[0].text_content(), article["podpis"])
+        expected_url = "https://pronovoe.com/" + cover["image"]
+        for key, value in {"og:image": expected_url, "twitter:image": expected_url,
+                           "og:image:width": "1600", "og:image:height": "840",
+                           "twitter:card": "summary_large_image", "og:image:alt": cover["alt"]}.items():
+            tags = [n for n in doc.root.all(tag="meta")
+                    if n.attrs.get("property", n.attrs.get("name")) == key]
+            self.assertEqual([n.attrs["content"] for n in tags], [value])
+        schemas = [json.loads(s) for s in re.findall(
+            r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', html, re.S)]
+        articles = [node for schema in schemas for node in schema.get("@graph", [schema])
+                    if node.get("@type") == "Article"]
+        self.assertEqual([node.get("image") for node in articles], [expected_url])
+        card = ImageDocument(self.generator.sobrat_kartochku(article, self.covers))
+        self.assertEqual(card.root.all(tag="img")[0].attrs["src"], cover["image"])
+
+    def test_komanda_cover_does_not_publish_the_draft(self):
+        slug = "komanda-ii-agentov-dlya-bloga"
+        article = next(a for a in self.articles if a["slug"] == slug)
+        self.assertEqual(article["status"], "draft")
+        self.assertEqual(article["vydacha"], "net")
+        self.assertNotIn(slug, HOME.read_text())
+        self.assertNotIn(slug, (ROOT / "sitemap.xml").read_text())
+        doc = ImageDocument((ROOT / "claude-ai" / slug / "index.html").read_text())
+        robots = [n.attrs["content"] for n in doc.root.all(tag="meta") if n.attrs.get("name") == "robots"]
+        self.assertEqual(robots, ["noindex, nofollow"])
 
     def test_cover_styles_remain_local_responsive_and_support_dark_theme(self):
         for article in self.eligible:
