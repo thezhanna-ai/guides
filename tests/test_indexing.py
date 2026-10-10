@@ -59,7 +59,7 @@ class IndexingTest(unittest.TestCase):
                              if a["status"] == "live" and not a.get("noindex_reason")]
         self.assertEqual(urls, expected)
         self.assertEqual(len(urls), len(set(urls)))
-        self.assertEqual(len(urls), 52)
+        self.assertEqual(len(urls), 53)
         self.assertEqual(len(tree_dates := ET.fromstring((ROOT / "sitemap.xml").read_text()).findall("s:url/s:lastmod", NS)), len(expected))
         self.assertTrue(all(re.fullmatch(r"\d{4}-\d{2}-\d{2}", x.text) for x in tree_dates))
 

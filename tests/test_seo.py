@@ -52,7 +52,8 @@ class SeoTest(unittest.TestCase):
             following = nodes[nodes.index(heading) + 1:]
             first_section = next((i for i, node in enumerate(following) if node.tag == 'h2'), len(following))
             paragraphs = [p for p in following[:first_section] if p.tag == 'p']
-            intro = next((p for p in paragraphs if set(p.attrs.get('class', '').split()) & {'lead', 'intro-lede'}), None)
+            multipart = doc.root.all(klass='seo-intro')
+            intro = multipart[0] if multipart else next((p for p in paragraphs if set(p.attrs.get('class', '').split()) & {'lead', 'intro-lede'}), None)
             if intro is None:
                 intro = next(p for p in paragraphs if not set(p.attrs.get('class', '').split()) & {'uroven-metka', 'meta', 'sun-caption'})
             self.assertTrue(40 <= len(intro.text_content().split()) <= 60, str(path))
@@ -81,7 +82,7 @@ class SeoTest(unittest.TestCase):
 
     def test_llms_and_bot_controls_exist(self):
         llms = (ROOT / 'llms.txt').read_text()
-        self.assertIn('50 инструкций', llms)
+        self.assertIn('51 инструкций', llms)
         self.assertEqual(llms.count('https://pronovoe.com/claude-ai/'), 3)
         robots = (ROOT / 'robots.txt').read_text()
         for bot in ['GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot']:
@@ -160,6 +161,43 @@ class SeoTest(unittest.TestCase):
         self.assertEqual(module.seo_intro(source)[2], 'Вступление')
         with self.assertRaises(ValueError):
             module.seo_intro('<h1>Название</h1><p class="meta">Дата</p><h2>Раздел</h2><p>Основной текст</p>')
+
+    def test_explicit_multipart_intro_preserves_separate_paragraphs(self):
+        module = generator()
+        fragment = '<p class="lead">Кто соберёт публикацию?</p><p>Текст уже есть.</p>'
+        source = '<h1>Название</h1><div class="seo-intro">' + fragment + '</div><p>Обещание результата.</p><h2>Раздел</h2>'
+        start, end, value = module.seo_intro(source)
+        self.assertEqual(value, fragment)
+        self.assertEqual(source[start:end], '<div class="seo-intro">' + fragment + '</div>')
+        self.assertEqual(module.seo_plain(value), 'Кто соберёт публикацию? Текст уже есть.')
+
+    def test_multipart_intro_rejects_ambiguous_or_out_of_scope_wrappers(self):
+        module = generator()
+        block = '<div class="seo-intro"><p>Текст</p></div>'
+        for source in [block + '<h1>Название</h1><p class="lead">Вступление</p>',
+                       '<h1>Название</h1><p class="lead">Вступление</p><h2>Раздел</h2>' + block,
+                       '<h1>Название</h1>' + block + block,
+                       '<h1>Название</h1><div class="seo-intro"><p>Текст</p>',
+                       '<h1>Название</h1><div class="seo-intro"><div><p>Текст</p></div></div>']:
+            with self.subTest(source=source), self.assertRaises(ValueError):
+                module.seo_intro(source)
+
+    def test_multipart_intro_keeps_word_count_publication_gate(self):
+        module = generator()
+        rel = 'claude-ai/podklyuchenie-iz-rossii/index.html'
+        source = (ROOT / rel).read_text()
+        meta = json.loads((ROOT / 'data/seo.json').read_text())[rel]
+        url = module.DOMEN + rel.removesuffix('index.html')
+        start, end, _ = module.seo_intro(source)
+        for count in [39, 40, 60, 61]:
+            fragment = '<div class="seo-intro"><p class="lead">' + ' '.join(['слово'] * 9) + '</p><p>' + ' '.join(['слово'] * (count - 9)) + '</p></div>'
+            page = source[:start] + fragment + source[end:]
+            with self.subTest(count=count):
+                if count in [40, 60]:
+                    module.proverit_seo_statyi(page, meta, url)
+                else:
+                    with self.assertRaisesRegex(ValueError, '40-60'):
+                        module.proverit_seo_statyi(page, meta, url)
 
     def test_check_mode_detects_removed_seo_markup_without_repairing_files(self):
         helper = test_indexing.IndexingTest()

@@ -35,7 +35,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"} and not a.get("seriya")}
-        self.assertEqual(len(ready), 43)
+        self.assertEqual(len(ready), 44)
         self.assertEqual(set(self.covers), ready | {a["slug"] for a in self.registry
                                                   if a.get("seriya") == "Промпты для картинок в ChatGPT" or a.get("oblozhka")})
         self.assertEqual(len(self.pages), 2 + len(self.registry))

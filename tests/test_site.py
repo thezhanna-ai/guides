@@ -291,7 +291,7 @@ class ArticleImagesTest(unittest.TestCase):
                         self.assertEqual(parsed.netloc, "pronovoe.com")
                         self.assertTrue((ROOT / parsed.path.lstrip("/")).is_file())
 
-    def test_komanda_draft_cover_has_consistent_page_social_schema_and_card(self):
+    def test_komanda_cover_has_consistent_page_social_schema_and_card(self):
         slug = "komanda-ii-agentov-dlya-bloga"
         article = next(a for a in self.articles if a["slug"] == slug)
         cover = self.covers[slug]
@@ -325,16 +325,27 @@ class ArticleImagesTest(unittest.TestCase):
         card = ImageDocument(self.generator.sobrat_kartochku(article, self.covers))
         self.assertEqual(card.root.all(tag="img")[0].attrs["src"], cover["image"])
 
-    def test_komanda_cover_does_not_publish_the_draft(self):
+    def test_komanda_authorized_publication_has_card_sitemap_and_indexing(self):
         slug = "komanda-ii-agentov-dlya-bloga"
         article = next(a for a in self.articles if a["slug"] == slug)
-        self.assertEqual(article["status"], "draft")
-        self.assertEqual(article["vydacha"], "net")
-        self.assertNotIn(slug, HOME.read_text())
-        self.assertNotIn(slug, (ROOT / "sitemap.xml").read_text())
+        self.assertEqual(article["status"], "live")
+        self.assertEqual(article["vydacha"], "zhivaya")
+        self.assertEqual(article["data_publikacii"], "2026-10-10")
+        self.assertEqual(article["blokirovka"], "")
+        self.assertIn(slug, HOME.read_text())
+        self.assertIn(slug, (ROOT / "sitemap.xml").read_text())
         doc = ImageDocument((ROOT / "claude-ai" / slug / "index.html").read_text())
         robots = [n.attrs["content"] for n in doc.root.all(tag="meta") if n.attrs.get("name") == "robots"]
-        self.assertEqual(robots, ["noindex, nofollow"])
+        self.assertFalse(any(re.search(r'\b(noindex|nofollow|none)\b', value) for value in robots))
+        url = "https://pronovoe.com/claude-ai/" + slug + "/"
+        self.assertEqual([n.attrs.get("href") for n in doc.root.all(tag="link")
+                          if n.attrs.get("rel") == "canonical"], [url])
+        intro = doc.root.all(klass="seo-intro")
+        self.assertEqual(len(intro), 1)
+        paragraphs = intro[0].all(tag="p")
+        self.assertEqual(len(paragraphs), 2)
+        self.assertEqual(paragraphs[0].text_content(), "Кто соберёт публикацию, если каждый агент делает свою часть?")
+        self.assertEqual(sum(len(p.text_content().split()) for p in paragraphs), 42)
 
     def test_cover_styles_remain_local_responsive_and_support_dark_theme(self):
         for article in self.eligible:

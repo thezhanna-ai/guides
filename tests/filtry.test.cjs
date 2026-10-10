@@ -72,8 +72,8 @@ function page() {
   };
 }
 
-test('Начальная страница: 50 карточек и пять рубрик', () => {
-  const p = page(); assert.equal(p.visible().length, 50); assert.equal(p.sections.length, 5);
+test('Начальная страница: 51 карточка и пять рубрик', () => {
+  const p = page(); assert.equal(p.visible().length, 51); assert.equal(p.sections.length, 5);
   assert.deepEqual(p.sections.map(s => s.attrs['data-section']), ['start', 'kazhdyy-den', 'kartinki', 'vaybkoding', 'servisy']);
 });
 
@@ -112,7 +112,7 @@ test('Поиск и фильтры скрывают весь блок с воп�
 
 test('Стирание запроса возвращает карточки и пустые разделы', () => {
   const p = page(); p.search('zzzzzzнебывает'); p.search('');
-  assert.equal(p.visible().length, 50); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 51); assert.ok(p.sections.every(s => s.style.display !== 'none'));
   assert.ok(!p.noResults.classes.has('show'));
 });
 
@@ -138,14 +138,14 @@ test('Регрессия: совпадение без выбранной мет�
   assert.equal(p.visible().length, 0); assert.ok(p.noResults.classes.has('show'));
 });
 
-test('«Все метки» после фильтра возвращает 50 карточек и все рубрики', () => {
+test('«Все метки» после фильтра возвращает 51 карточку и все рубрики', () => {
   const p = page(); p.filter('codex'); p.filter('all');
-  assert.equal(p.visible().length, 50); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 51); assert.ok(p.sections.every(s => s.style.display !== 'none'));
 });
 
 test('«Другое» снимает метку и ставит курсор в поле поиска', () => {
   const p = page(); p.filter('codex'); p.filter('drugoe');
-  assert.equal(p.visible().length, 50); assert.ok(p.input.focused);
+  assert.equal(p.visible().length, 51); assert.ok(p.input.focused);
 });
 
 test('Кнопка «Найти» открывает единственный результат', () => {
@@ -271,4 +271,10 @@ test('Эволюция находится по кодовому слову и о
   const p = page(); p.search('эволюция');
   assert.deepEqual(p.visible().map(link => link.attrs.href), [articleHref('opus-55-protiv-gpt-6-astra')]);
   p.key('Enter'); assert.equal(p.window.location.href, articleHref('opus-55-protiv-gpt-6-astra'));
+});
+
+test('Опубликованная КОМАНДА находится и подсвечивается по кодовому слову', () => {
+  const p = page(); p.search('команда');
+  assert.deepEqual(p.visible().filter(link => link.classes.has('kod-hit')).map(link => link.attrs.href),
+    [articleHref('komanda-ii-agentov-dlya-bloga')]);
 });

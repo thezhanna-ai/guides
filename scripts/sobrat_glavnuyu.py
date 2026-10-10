@@ -534,6 +534,15 @@ def seo_intro(html):
     start = heading.end()
     section = re.search(r'<h2\b', html[start:], re.I)
     end = start + section.start() if section else len(html)
+    # Вопрос и следующий абзац могут быть отдельными p одного вступления.
+    opening = '<div class="seo-intro">'
+    if opening in html:
+        a = html.index(opening)
+        b = html.find('</div>', a + len(opening))
+        if (html.count(opening) != 1 or a < start or b == -1 or b + len('</div>') > end
+                or re.search(r'<div\b', html[a + len(opening):b], re.I)):
+            raise ValueError('Нужен один блок seo-intro после H1 и до первого раздела, без вложенных div')
+        return a, b + len('</div>'), html[a + len(opening):b]
     paragraphs = list(re.finditer(r'<p\b([^>]*)>(.*?)</p>', html[start:end], re.S | re.I))
     candidates = []
     for paragraph in paragraphs:
