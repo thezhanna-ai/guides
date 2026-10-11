@@ -687,12 +687,12 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#shag-3">Шаг 2. Отправь промпт</a>
 <a href="#shag-4">Шаг 3. Получи отчёт</a>
 <a href="#shag-5">Шаг 4. Сохрани картинку</a>
+<a href="#svoya-zadacha">Шаг 5. Подгони фото под свою цель</a>
 <a href="#stoimost">Сколько это стоит</a>
 <a href="#esli-ne-poluchaetsya">Если отчёт не появился</a>
-<a href="#pomoshch">Нужна подсказка по текущему экрану?</a>
-<a href="#svoya-zadacha">Как подогнать фото под свою задачу</a>
+<a href="#pomoshch">Застрял на каком-то шаге?</a>
 <a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a></nav><main><article><header id="nachalo"><div class="eyebrow">Инструкция · ChatGPT и фотографии</div><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Один отчёт ChatGPT: крупный портрет с подписями вокруг лица, 15 оценок и итог 8,7/10 рядом с заголовком «Оценка лица»" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-480.webp 480w, assets/oblozhka.reading-960.webp 960w, assets/oblozhka.webp 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Фото для разбора: 15 критериев, итоговый балл и дополнение под назначение снимка</figcaption></figure><h1 class="article-title-v2">Оценка внешности по фото в ChatGPT: 15 критериев и балл из 10</h1>
-<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><p class="lead">Хочется понять, какое впечатление производит твоё фото в резюме или на странице проекта? ChatGPT можно попросить разобрать портрет по 15 критериям и поставить балл из 10. Но как из этих оценок выбрать изменения, которые нужны именно твоему снимку?</p>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><p class="lead">Фото для резюме или страницы проекта вроде нормальное, но что-то в нём не так, а что именно, непонятно. ChatGPT разберёт портрет по 15 критериям, поставит балл из 10 и подскажет, что поправить в кадре. Покажу, как получить такой отчёт и как потом заточить его под твою задачу</p>
 <div class="meta">АКТУАЛЬНО НА 11 ОКТЯБРЯ 2026</div>
 </header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#kak-ustroeno">Что покажет разбор</a>
 <a href="#podgotovka">Что нужно до начала</a>
@@ -700,24 +700,24 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#shag-3">Шаг 2. Отправь промпт</a>
 <a href="#shag-4">Шаг 3. Получи отчёт</a>
 <a href="#shag-5">Шаг 4. Сохрани картинку</a>
+<a href="#svoya-zadacha">Шаг 5. Подгони фото под свою цель</a>
 <a href="#stoimost">Сколько это стоит</a>
 <a href="#esli-ne-poluchaetsya">Если отчёт не появился</a>
-<a href="#pomoshch">Нужна подсказка по текущему экрану?</a>
-<a href="#svoya-zadacha">Как подогнать фото под свою задачу</a>
+<a href="#pomoshch">Застрял на каком-то шаге?</a>
 <a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a></nav></details><section class="content-section" id="kak-ustroeno"><h2>Что покажет разбор</h2>
-<p>По фото и промпту (тексту задания) ChatGPT может создать картинку-отчёт с портретом, оценками и рекомендациями. Справка OpenAI: <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">разбор фотографий</a> и <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">создание изображений</a>.</p>
-<div class="warn-card"><p><b>Баллы субъективны и относятся только к этому снимку.</b> Свет и ракурс влияют на впечатление, а в разборе возможны <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">ошибки</a>. Он не определяет здоровье или характер человека. Чужое фото загружай с согласия человека на нём.</p></div>
+<p>На выходе одна картинка: твой портрет, оценки по 15 пунктам, сильные стороны и то, что можно улучшить. Пример с баллом 8,7 ниже, в шаге 3. По фото и промпту (тексту задания) ChatGPT <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">создаёт такую картинку</a> сам, подробности в справке OpenAI про <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">разбор фотографий</a>.</p>
+<div class="warn-card"><p><b>Баллы субъективны и относятся только к одному снимку.</b> Свет и ракурс влияют на впечатление, а в разборе возможны <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">ошибки</a>. О здоровье и характере он не говорит. Чужое фото загружай только с согласия человека на нём.</p></div>
 </section>
 <section class="content-section" id="podgotovka"><h2>Что нужно до начала</h2>
 <p>Аккаунт ChatGPT и фото, на котором хорошо видно лицо.</p>
-<p class="next-hook">Фото есть? Тогда первый шаг займёт минуту, а дальше всё решит одно сообщение.</p>
+<p class="next-hook">Фото есть? Загрузка займёт минуту, а разбор запустит одно сообщение.</p>
 </section>
 <section class="content-section" id="shag-1"><h2>Шаг 1. Загрузи портрет</h2>
-<p>Открой <a href="https://chatgpt.com/">chatgpt.com</a>, войди в аккаунт и начни новый чат. Фото можно загрузить из файлов (подойдут PNG, JPEG и неподвижный GIF до 20 МБ) или снять камерой прямо с телефона: свежее селфи тоже подходит. Главное, чтобы лицо было хорошо видно, а качество снимка было хорошим. Оба варианта есть в одном меню у поля сообщения. <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">Форматы, размер и способы загрузки</a>.</p>
+<p>Открой <a href="https://chatgpt.com/">chatgpt.com</a>, начни новый чат и прикрепи портрет: файлом или свежим снимком с камеры телефона. Подойдёт обычное фото, где лицо видно целиком и без сильных теней. <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">Форматы и размер</a>: PNG, JPEG или неподвижный GIF до 20 МБ.</p>
 <figure class="shot-fig" id="shag-2"><div class="shot"><img src="assets/shag-2-menu.webp" width="832" height="190" alt="Меню у поля сообщения ChatGPT на Mac: пункт «Загрузить фото»" loading="lazy" decoding="async"></div><figcaption>Меню у поля сообщения: фото можно загрузить или сделать снимок камерой.</figcaption></figure>
 <figure class="shot-fig"><div class="shot"><img src="assets/shag-2-foto.webp" width="832" height="320" alt="Миниатюра портрета прикреплена к пустому полю сообщения ChatGPT" loading="lazy" decoding="async"></div><figcaption>Фото уже прикреплено, текст задания ещё не вставлен.</figcaption></figure>
 <div class="result"><p><b>Результат:</b> в поле сообщения видна миниатюра портрета.</p></div>
-<p class="next-hook">Фото на месте, но с одним фото ChatGPT выдаст общие слова. Чтобы получить разбор по 15 пунктам, нужен точный текст задания.</p>
+<p class="next-hook">Если отправить фото без задания, получишь пару общих фраз. Разбор по 15 пунктам даёт точный промпт ниже.</p>
 </section>
 <section class="content-section" id="shag-3"><h2>Шаг 2. Отправь промпт</h2>
 <p>Скопируй промпт полностью, вставь его в поле сообщения под фотографией и отправь.</p>
@@ -751,49 +751,24 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 Весь текст должен быть читаемым, без наложений и обрезанных блоков. Используй столько высоты, сколько нужно для полного отчёта. Не сокращай список критериев ради компактной картинки. Внизу добавь короткую подпись «Субъективная оценка ИИ по одной фотографии». Создай саму инфографику, а не только описание её дизайна</code></pre><button class="copy-button" type="button" data-copy-target="prompt-main" aria-label="Скопировать: основной промпт оценки внешности" aria-live="polite">Скопировать</button></div>
 <figure class="shot-fig"><div class="shot"><img src="assets/shag-3-prompt.webp" width="832" height="570" alt="Прикреплённый портрет и начало промпта «ЭСТЕТИЧЕСКИЙ АНАЛИЗ ЛИЦА» в поле ChatGPT" loading="lazy" decoding="async"></div><figcaption>Портрет и начало полного промпта в одном сообщении.</figcaption></figure>
 <div class="result"><p><b>Результат:</b> в отправленном сообщении есть фото и все 15 критериев.</p></div>
-<p class="next-hook">Сообщение ушло. Осталось дождаться ответа и увидеть, какой балл получит фото.</p>
+<p class="next-hook">Сообщение ушло. Несколько минут, и узнаешь, что в твоём лице цепляет сильнее всего.</p>
 </section>
 <section class="content-section" id="shag-4"><h2>Шаг 3. Получи отчёт</h2>
 <p>Создание картинки может занять <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">несколько минут</a>. В примере ниже итог <b>8,7/10</b>.</p>
 <figure class="shot-fig"><div class="shot"><img src="assets/shag-4-otchet-v-chate.webp" width="832" height="780" alt="В ответе ChatGPT появилась вертикальная инфографика с портретом и итогом 8,7/10" loading="lazy" decoding="async"></div><figcaption>Готовая инфографика в чате ChatGPT.</figcaption></figure>
 <figure class="shot-fig"><div class="shot"><img src="assets/otchet-gpt.webp" width="1024" height="1536" alt="Отчёт «ЭСТЕТИЧЕСКИЙ АНАЛИЗ ЛИЦА»: портрет, 15 критериев, сильные стороны, рекомендации и итог 8,7/10" loading="lazy" decoding="async"></div><figcaption>Пример полного отчёта.</figcaption></figure>
-<p>Рассмотри <a href="assets/otchet-gpt-original.png">исходный отчёт в PNG</a> или нажми «Открыть крупнее» на картинке.</p>
+<p>Чтобы прочитать мелкий текст, открой картинку крупнее или <a href="assets/otchet-gpt-original.png">исходный отчёт в PNG</a>.</p>
 <div class="result"><p><b>Результат:</b> готовая инфографика. Вместо картинки пришёл текст? Открой <a href="#esli-ne-poluchaetsya">«Если отчёт не появился»</a>.</p></div>
 <p class="next-hook">Отчёт готов, но пока он только в чате. Как забрать его себе, чтобы не потерять, покажем в последнем шаге.</p>
 </section>
 <section class="content-section" id="shag-5"><h2>Шаг 4. Сохрани картинку</h2>
-<p>Открой картинку в ChatGPT и выбери <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">Save («Сохранить»)</a>. На скриншоте с Mac показан вариант через правую кнопку мыши: «Сохранить изображение как…».</p>
+<p>Открой картинку и сохрани её на устройство: кнопка <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">«Сохранить»</a> или правый клик по картинке.</p>
 <figure class="shot-fig"><div class="shot"><img src="assets/shag-5-sohranit.webp" width="544" height="300" alt="Контекстное меню готового отчёта на Mac: выбран пункт «Сохранить изображение как…»" loading="lazy" decoding="async"></div><figcaption>Пункт сохранения готового отчёта на Mac.</figcaption></figure>
 <div class="result"><p><b>Результат:</b> скачанный отчёт открывается на устройстве.</p></div>
-<p class="next-hook">Но у этого отчёта есть слабое место: ChatGPT не знает, для чего тебе фото. Как это исправить, расскажем ниже, а сначала коротко о цене.</p>
+<p class="next-hook">Но ChatGPT оценил лицо в вакууме, а фото тебе нужно для конкретного дела. Ещё одно сообщение, и разбор станет прицельным.</p>
 </section>
-<section class="content-section" id="stoimost"><h2>Сколько это стоит</h2>
-<ul>
-<li><b>Free: 0 $.</b> Загрузка фото и создание картинок доступны без подписки, с отдельными лимитами. <a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq">Условия Free</a>.</li>
-<li><b>Go: 8 $ в месяц в США.</b> В других странах цена может отличаться. Генераций картинок больше, чем на Free. <a href="https://openai.com/index/introducing-chatgpt-go/">Цена Go</a> и <a href="https://help.openai.com/en/articles/11989085-what-is-chatgpt-go">актуальные условия</a>.</li>
-<li><b>Plus: 20 $ в месяц.</b> Расширенные возможности создания изображений, с лимитами, которые могут меняться. <a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus">Условия Plus</a>.</li>
-</ul>
-<p>Фиксированное число картинок и единое окно сброса для этих тарифов OpenAI в справке не указывает. Если лимит исчерпан, ориентируйся на уведомление в ChatGPT. У Free есть и отдельный лимит <a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt">загрузки файлов: до трёх в день</a>, в часы пик он может снижаться. Условия на 11.10.2026.</p>
-</section>
-<section class="content-section" id="esli-ne-poluchaetsya"><h2>Если отчёт не появился</h2>
-<details class="check-panel"><summary>Пришёл текст вместо картинки</summary>
-<p>Уточни формат в том же чате:</p>
-<div class="code-card"><pre id="prompt-format"><code>Оформи результат картинкой-инфографикой, как в задании</code></pre><button class="copy-button" type="button" data-copy-target="prompt-format" aria-label="Скопировать: запрос картинки вместо текста" aria-live="polite">Скопировать</button></div>
-</details>
-<details class="check-panel"><summary>ChatGPT отказался от оценки</summary>
-<p>Уточнение формата ответа не гарантирует, что ChatGPT изменит отказ.</p>
-</details>
-<details class="check-panel"><summary>Закончился лимит картинок</summary>
-<p>Дождись сброса лимита. Повторный запрос его не отменяет.</p>
-</details>
-</section>
-<section class="help-banner" id="pomoshch"><h2 class="help-title">Нужна подсказка по текущему экрану?</h2>
-<p>Опиши свою ситуацию в запросе ниже.</p>
-<div class="code-card"><pre id="prompt-help"><code>Хочу получить картинку с разбором своего фото. Сейчас у меня на экране [что видно]. Уже сделано [какие действия]. Не понимаю [что именно]. Объясни, что нажать или написать дальше, по одному шагу, и после каждого шага жди моего ответа.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-help" aria-label="Скопировать: просьбу о помощи" aria-live="polite">Скопировать</button></div>
-</section>
-<section class="content-section" id="svoya-zadacha"><h2>Как подогнать фото под свою задачу</h2>
-<p>Общий разбор оценивает лицо само по себе. Но фото нужно для дела: для резюме, сайта или страницы проекта, и офисный стиль подходит не везде. Видишь, что снимок «не то», а что именно поправить, непонятно.</p>
-<p>Выход простой: попроси ChatGPT разобрать фото под твою цель. Он покажет, что подходит, что мешает, что можно исправить в файле, а что лучше переснять. В дополнении ниже два примера, резюме и страница творческого проекта. Для своей цели замени их на нужную.</p>
+<section class="content-section" id="svoya-zadacha"><h2>Шаг 5. Подгони фото под свою цель</h2>
+<p>Общий разбор не знает, зачем тебе фото. А строгий портрет для резюме и живой кадр для страницы танцевального проекта решают разные задачи. Допиши цель, и ChatGPT покажет, что в снимке работает на неё, что мешает и что можно исправить в файле, а что лучше переснять. В дополнении ниже два примера, резюме и страница творческого проекта. Для своей цели замени их на нужную.</p>
 <div class="code-card"><pre id="prompt-addition"><code>Дополнительно оцени саму фотографию: освещение и тени на лице, ракурс, выражение, кадрирование, фон, одежду и общее впечатление от образа. Покажи, что относится к чертам лица, а что связано со съёмкой и оформлением кадра
 
 Добавь блок «Как использовать это фото» с двумя вариантами: фотография для резюме и фотография для страницы творческого или танцевального проекта. По каждому варианту объясни, что в текущем снимке подходит для этой задачи, что мешает и какие конкретные изменения можно попробовать. Рассмотри свет, укладку, одежду, фон, выражение лица и ракурс. Не считай строгий или свободный образ универсально лучшим, объясняй выбор назначением фотографии
@@ -801,7 +776,33 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 Выбери до трёх наиболее полезных изменений для каждого варианта. Для каждого напиши: что видно сейчас -&gt; что изменить -&gt; как это поможет именно этой задаче. Отдели то, что можно поправить в существующем файле, от того, для чего нужно переснять фотографию. Не обещай точную прибавку к баллу или успех в трудоустройстве. Заверши кратким выводом, для какой из двух задач текущий снимок подходит лучше и какое изменение попробовать первым. Размести этот блок в нижней части инфографики, сохранив все основные критерии и общий балл</code></pre><button class="copy-button" type="button" data-copy-target="prompt-addition" aria-label="Скопировать: дополнение под назначение фотографии" aria-live="polite">Скопировать</button></div>
 <p>Отправь дополнение в тот же чат после отчёта или добавь его в конец основного промпта до отправки.</p>
 <div class="result"><p><b>Результат:</b> рекомендации для твоей задачи: что поправить в файле, а что переснять.</p></div>
-</section></article><p class="cta-question">Фото разобрано. А как готовить материалы для проекта каждую неделю?</p><section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
+<p class="next-hook">Осталось два практических вопроса: сколько это стоит и что делать, если отчёт не пришёл.</p>
+</section>
+<section class="content-section" id="stoimost"><h2>Сколько это стоит</h2>
+<ul>
+<li><b>Free: 0 $.</b> Загрузка фото и создание картинок доступны без подписки, с отдельными лимитами. <a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq">Условия Free</a>.</li>
+<li><b>Go: 8 $ в месяц в США.</b> В других странах цена может отличаться. Генераций картинок больше, чем на Free. <a href="https://openai.com/index/introducing-chatgpt-go/">Цена Go</a> и <a href="https://help.openai.com/en/articles/11989085-what-is-chatgpt-go">актуальные условия</a>.</li>
+<li><b>Plus: 20 $ в месяц.</b> Расширенные возможности создания изображений, с лимитами, которые могут меняться. <a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus">Условия Plus</a>.</li>
+</ul>
+<p>Точного числа картинок OpenAI не называет: кончился лимит, ChatGPT сам об этом напишет. На Free <a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt">файлы можно загружать до трёх в день</a>, в часы пик лимит может быть ниже. Условия на 11.10.2026.</p>
+</section>
+<section class="content-section" id="esli-ne-poluchaetsya"><h2>Если отчёт не появился</h2>
+<details class="check-panel"><summary>Пришёл текст вместо картинки</summary>
+<p>Уточни формат в том же чате:</p>
+<div class="code-card"><pre id="prompt-format"><code>Оформи результат картинкой-инфографикой, как в задании</code></pre><button class="copy-button" type="button" data-copy-target="prompt-format" aria-label="Скопировать: запрос картинки вместо текста" aria-live="polite">Скопировать</button></div>
+</details>
+<details class="check-panel"><summary>ChatGPT отказался от оценки</summary>
+<p>Такое бывает. Попробуй другой снимок, где лицо видно крупнее и без фильтров, или начни новый чат.</p>
+</details>
+<details class="check-panel"><summary>Закончился лимит картинок</summary>
+<p>Дождись сброса лимита. Повторный запрос его не отменяет.</p>
+</details>
+</section>
+<section class="help-banner" id="pomoshch"><h2 class="help-title">Застрял на каком-то шаге?</h2>
+<p>Опиши свою ситуацию в запросе ниже.</p>
+<div class="code-card"><pre id="prompt-help"><code>Хочу получить картинку с разбором своего фото. Сейчас у меня на экране [что видно]. Уже сделано [какие действия]. Не понимаю [что именно]. Объясни, что нажать или написать дальше, по одному шагу, и после каждого шага жди моего ответа.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-help" aria-label="Скопировать: просьбу о помощи" aria-live="polite">Скопировать</button></div>
+</section>
+</article><p class="cta-question">Фото готово. Следующий шаг: чтобы нейросети не только оформляли проект, но и приводили в него клиентов.</p><section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
 </main>
 <aside class="related-plaque" aria-label="Похожая инструкция">
       <p class="plaque-label">Ещё про фото</p>
