@@ -246,7 +246,20 @@ class ArticleImagesTest(unittest.TestCase):
     def test_v2_cover_files_match_imported_sha256(self):
         for slug, cover in self.covers.items():
             with self.subTest(slug=slug):
-                self.assertEqual((cover["width"], cover["height"]), (1600, 840))
+                if cover.get("source_frame"):
+                    # Lecture frames retain their native dimensions instead of being upscaled.
+                    source = cover["source_frame"]
+                    self.assertEqual((cover["width"], cover["height"]),
+                                     (source["width"], source["height"]))
+                    self.assertTrue(source["video"])
+                    self.assertGreaterEqual(source["seconds"], 0)
+                    import struct
+                    frame_bytes = (ROOT / cover["image"]).read_bytes()
+                    self.assertEqual(frame_bytes[:8], b"\x89PNG\r\n\x1a\n")
+                    self.assertEqual(struct.unpack(">II", frame_bytes[16:24]),
+                                     (source["width"], source["height"]))
+                else:
+                    self.assertEqual((cover["width"], cover["height"]), (1600, 840))
                 self.assertEqual(hashlib.sha256((ROOT / cover["image"]).read_bytes()).hexdigest(), cover["sha256"])
 
     def test_middle_scenes_follow_the_named_sections_including_carousel_exception(self):
