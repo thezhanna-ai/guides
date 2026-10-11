@@ -370,6 +370,7 @@
     .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
     .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
     .result p { margin: 0 }
+.next-hook { margin: 20px 0 0; font-weight: 700; font-style: italic }
 
     .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
     .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
@@ -689,7 +690,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#stoimost">Сколько это стоит</a>
 <a href="#esli-ne-poluchaetsya">Если отчёт не появился</a>
 <a href="#pomoshch">Нужна подсказка по текущему экрану?</a>
-<a href="#svoya-zadacha">Что изменить на фото для твоей задачи</a>
+<a href="#svoya-zadacha">Как подогнать фото под свою задачу</a>
 <a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a></nav><main><article><header id="nachalo"><div class="eyebrow">Инструкция · ChatGPT и фотографии</div><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Один отчёт ChatGPT: крупный портрет с подписями вокруг лица, 15 оценок и итог 8,7/10 рядом с заголовком «Оценка лица»" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-480.webp 480w, assets/oblozhka.reading-960.webp 960w, assets/oblozhka.webp 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Фото для разбора: 15 критериев, итоговый балл и дополнение под назначение снимка</figcaption></figure><h1 class="article-title-v2">Оценка внешности по фото в ChatGPT: 15 критериев и балл из 10</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><p class="lead">Хочется понять, какое впечатление производит твоё фото в резюме или на странице проекта? ChatGPT можно попросить разобрать портрет по 15 критериям и поставить балл из 10. Но как из этих оценок выбрать изменения, которые нужны именно твоему снимку?</p>
 <div class="meta">АКТУАЛЬНО НА 11 ОКТЯБРЯ 2026</div>
@@ -702,23 +703,24 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#stoimost">Сколько это стоит</a>
 <a href="#esli-ne-poluchaetsya">Если отчёт не появился</a>
 <a href="#pomoshch">Нужна подсказка по текущему экрану?</a>
-<a href="#svoya-zadacha">Что изменить на фото для твоей задачи</a>
+<a href="#svoya-zadacha">Как подогнать фото под свою задачу</a>
 <a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a></nav></details><section class="content-section" id="kak-ustroeno"><h2>Что покажет разбор</h2>
 <p>По фото и промпту (тексту задания) ChatGPT может создать картинку-отчёт с портретом, оценками и рекомендациями. Справка OpenAI: <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">разбор фотографий</a> и <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">создание изображений</a>.</p>
 <div class="warn-card"><p><b>Баллы субъективны и относятся только к этому снимку.</b> Свет и ракурс влияют на впечатление, а в разборе возможны <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">ошибки</a>. Он не определяет здоровье или характер человека. Чужое фото загружай с согласия человека на нём.</p></div>
 </section>
 <section class="content-section" id="podgotovka"><h2>Что нужно до начала</h2>
-<p>Аккаунт ChatGPT и портрет с хорошо видимым лицом. Подойдут PNG, JPEG или неподвижный GIF до 20 МБ. <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">Форматы и размер фото</a>.</p>
+<p>Аккаунт ChatGPT и фото, на котором хорошо видно лицо.</p>
+<p class="next-hook">Фото есть? Тогда первый шаг займёт минуту, а дальше всё решит одно сообщение.</p>
 </section>
 <section class="content-section" id="shag-1"><h2>Шаг 1. Загрузи портрет</h2>
-<p>Открой <a href="https://chatgpt.com/">chatgpt.com</a>, войди в аккаунт и начни новый чат. Прикрепи портрет через «+» → Add photos &amp; files («Добавить фото и файлы») или перетащи его в поле сообщения. <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">Способы загрузки</a>.</p>
-<p id="shag-2">На скриншотах ниже приложение ChatGPT для Mac: там пункт называется «Загрузить фото».</p>
-<figure class="shot-fig"><div class="shot"><img src="assets/shag-2-menu.webp" width="832" height="190" alt="Меню у поля сообщения ChatGPT на Mac: пункт «Загрузить фото»" loading="lazy" decoding="async"></div><figcaption>Пункт «Загрузить фото» в меню ChatGPT для Mac.</figcaption></figure>
+<p>Открой <a href="https://chatgpt.com/">chatgpt.com</a>, войди в аккаунт и начни новый чат. Фото можно загрузить из файлов (подойдут PNG, JPEG и неподвижный GIF до 20 МБ) или снять камерой прямо с телефона: свежее селфи тоже подходит. Главное, чтобы лицо было хорошо видно, а качество снимка было хорошим. Оба варианта есть в одном меню у поля сообщения. <a href="https://help.openai.com/en/articles/8400551-chatgpt-image-inputs-faq">Форматы, размер и способы загрузки</a>.</p>
+<figure class="shot-fig" id="shag-2"><div class="shot"><img src="assets/shag-2-menu.webp" width="832" height="190" alt="Меню у поля сообщения ChatGPT на Mac: пункт «Загрузить фото»" loading="lazy" decoding="async"></div><figcaption>Меню у поля сообщения: фото можно загрузить или сделать снимок камерой.</figcaption></figure>
 <figure class="shot-fig"><div class="shot"><img src="assets/shag-2-foto.webp" width="832" height="320" alt="Миниатюра портрета прикреплена к пустому полю сообщения ChatGPT" loading="lazy" decoding="async"></div><figcaption>Фото уже прикреплено, текст задания ещё не вставлен.</figcaption></figure>
 <div class="result"><p><b>Результат:</b> в поле сообщения видна миниатюра портрета.</p></div>
+<p class="next-hook">Фото на месте, но с одним фото ChatGPT выдаст общие слова. Чтобы получить разбор по 15 пунктам, нужен точный текст задания.</p>
 </section>
 <section class="content-section" id="shag-3"><h2>Шаг 2. Отправь промпт</h2>
-<p>Скопируй полный промпт ниже и отправь его вместе с портретом.</p>
+<p>Скопируй промпт полностью, вставь его в поле сообщения под фотографией и отправь.</p>
 <div class="code-card"><pre id="prompt-main"><code>По прикреплённой фотографии создай подробный персональный отчёт «ЭСТЕТИЧЕСКИЙ АНАЛИЗ ЛИЦА»: анализ внешности, оценки по отдельным критериям, сильные стороны, рекомендации и общий вывод. Оцени человека именно на этом фото. Сохрани его лицо, черты, причёску и выражение, не улучшай и не заменяй портрет другим человеком
 
 Разбери следующие критерии:
@@ -749,6 +751,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 Весь текст должен быть читаемым, без наложений и обрезанных блоков. Используй столько высоты, сколько нужно для полного отчёта. Не сокращай список критериев ради компактной картинки. Внизу добавь короткую подпись «Субъективная оценка ИИ по одной фотографии». Создай саму инфографику, а не только описание её дизайна</code></pre><button class="copy-button" type="button" data-copy-target="prompt-main" aria-label="Скопировать: основной промпт оценки внешности" aria-live="polite">Скопировать</button></div>
 <figure class="shot-fig"><div class="shot"><img src="assets/shag-3-prompt.webp" width="832" height="570" alt="Прикреплённый портрет и начало промпта «ЭСТЕТИЧЕСКИЙ АНАЛИЗ ЛИЦА» в поле ChatGPT" loading="lazy" decoding="async"></div><figcaption>Портрет и начало полного промпта в одном сообщении.</figcaption></figure>
 <div class="result"><p><b>Результат:</b> в отправленном сообщении есть фото и все 15 критериев.</p></div>
+<p class="next-hook">Сообщение ушло. Осталось дождаться ответа и увидеть, какой балл получит фото.</p>
 </section>
 <section class="content-section" id="shag-4"><h2>Шаг 3. Получи отчёт</h2>
 <p>Создание картинки может занять <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">несколько минут</a>. В примере ниже итог <b>8,7/10</b>.</p>
@@ -756,11 +759,13 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <figure class="shot-fig"><div class="shot"><img src="assets/otchet-gpt.webp" width="1024" height="1536" alt="Отчёт «ЭСТЕТИЧЕСКИЙ АНАЛИЗ ЛИЦА»: портрет, 15 критериев, сильные стороны, рекомендации и итог 8,7/10" loading="lazy" decoding="async"></div><figcaption>Пример полного отчёта.</figcaption></figure>
 <p>Рассмотри <a href="assets/otchet-gpt-original.png">исходный отчёт в PNG</a> или нажми «Открыть крупнее» на картинке.</p>
 <div class="result"><p><b>Результат:</b> готовая инфографика. Вместо картинки пришёл текст? Открой <a href="#esli-ne-poluchaetsya">«Если отчёт не появился»</a>.</p></div>
+<p class="next-hook">Отчёт готов, но пока он только в чате. Как забрать его себе, чтобы не потерять, покажем в последнем шаге.</p>
 </section>
 <section class="content-section" id="shag-5"><h2>Шаг 4. Сохрани картинку</h2>
 <p>Открой картинку в ChatGPT и выбери <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">Save («Сохранить»)</a>. На скриншоте с Mac показан вариант через правую кнопку мыши: «Сохранить изображение как…».</p>
 <figure class="shot-fig"><div class="shot"><img src="assets/shag-5-sohranit.webp" width="544" height="300" alt="Контекстное меню готового отчёта на Mac: выбран пункт «Сохранить изображение как…»" loading="lazy" decoding="async"></div><figcaption>Пункт сохранения готового отчёта на Mac.</figcaption></figure>
 <div class="result"><p><b>Результат:</b> скачанный отчёт открывается на устройстве.</p></div>
+<p class="next-hook">Но у этого отчёта есть слабое место: ChatGPT не знает, для чего тебе фото. Как это исправить, расскажем ниже, а сначала коротко о цене.</p>
 </section>
 <section class="content-section" id="stoimost"><h2>Сколько это стоит</h2>
 <ul>
@@ -786,8 +791,9 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p>Опиши свою ситуацию в запросе ниже.</p>
 <div class="code-card"><pre id="prompt-help"><code>Хочу получить картинку с разбором своего фото. Сейчас у меня на экране [что видно]. Уже сделано [какие действия]. Не понимаю [что именно]. Объясни, что нажать или написать дальше, по одному шагу, и после каждого шага жди моего ответа.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-help" aria-label="Скопировать: просьбу о помощи" aria-live="polite">Скопировать</button></div>
 </section>
-<section class="content-section" id="svoya-zadacha"><h2>Что изменить на фото для твоей задачи</h2>
-<p>В дополнении два варианта: резюме и страница проекта. Для другой задачи впиши своё назначение вместо них.</p>
+<section class="content-section" id="svoya-zadacha"><h2>Как подогнать фото под свою задачу</h2>
+<p>Общий разбор оценивает лицо само по себе. Но фото нужно для дела: для резюме, сайта или страницы проекта, и офисный стиль подходит не везде. Видишь, что снимок «не то», а что именно поправить, непонятно.</p>
+<p>Выход простой: попроси ChatGPT разобрать фото под твою цель. Он покажет, что подходит, что мешает, что можно исправить в файле, а что лучше переснять. В дополнении ниже два примера, резюме и страница творческого проекта. Для своей цели замени их на нужную.</p>
 <div class="code-card"><pre id="prompt-addition"><code>Дополнительно оцени саму фотографию: освещение и тени на лице, ракурс, выражение, кадрирование, фон, одежду и общее впечатление от образа. Покажи, что относится к чертам лица, а что связано со съёмкой и оформлением кадра
 
 Добавь блок «Как использовать это фото» с двумя вариантами: фотография для резюме и фотография для страницы творческого или танцевального проекта. По каждому варианту объясни, что в текущем снимке подходит для этой задачи, что мешает и какие конкретные изменения можно попробовать. Рассмотри свет, укладку, одежду, фон, выражение лица и ракурс. Не считай строгий или свободный образ универсально лучшим, объясняй выбор назначением фотографии
