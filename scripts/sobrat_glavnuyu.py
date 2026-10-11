@@ -31,6 +31,38 @@ OBLOZHKI = KORNI / "data" / "OBLOZHKI.json"
 GLAVNAYA = KORNI / "index.html"
 DOMEN = "https://pronovoe.com/"
 
+# Раздатки опубликованных рилзов 01-15, а не вся трасса knopka-za-knopkoy.
+# Источник: реестр раздаток и ТАБЛИЦА-15-REELS-И-НОВЫЕ-CTA.md в IvanOS.
+# 02-04 и 13 используют одну статью КЛОД, поэтому страниц только 12.
+KNOPKA_01_15 = frozenset({
+    "podklyuchenie-iz-rossii",          # 01
+    "kak-rasskazat-o-sebe",            # 02, 03, 04, 13
+    "vybor-modeli-i-effort",           # 05
+    "pervyy-proekt-v-claude",          # 06
+    "podklyuchit-gmail-drive-calendar", # 07
+    "web-search-v-claude",             # 08
+    "golosovoy-vvod-v-claude",          # 09
+    "skrinshot-vmesto-obyasneniy",      # 10
+    "gotovye-fayly-excel-word-pdf",     # 11
+    "artefakty-v-claude",              # 12
+    "incognito-chat-v-claude",         # 14
+    "pdf-v-markdown-markitdown",       # 15
+})
+
+
+def dobavit_shapku(html, slug):
+    """Убирает скопированную подпись серии у остальных и новых статей."""
+    if slug in KNOPKA_01_15:
+        return html
+    brand = re.compile(
+        r'(<(?:header|div)\b[^>]*\bclass="masthead"[^>]*>'
+        r'(?:(?!</header>|<main\b).)*?)'
+        r'<(div|a)\b[^>]*\bclass="brand"[^>]*>\s*'
+        r'Claude\.ai: кнопка за кнопкой\s*</\2>', re.S)
+    # Та же разметка и класс, что у ЧЕТЫРЕ; CSS шапки остаётся на месте.
+    return brand.sub(lambda m: m[1] +
+        '<a class="brand" href="../../">Инструкции по нейросетям</a>', html, count=1)
+
 
 def privacy_fragment(name):
     return (KORNI / "scripts" / name).read_text(encoding="utf-8").strip()
@@ -508,7 +540,7 @@ def sobrat_indeksaciyu(podpisi):
             if not re.search(r"</head\s*>", html, re.I):
                 raise ValueError("%s: отсутствует закрывающий тег head" % slug)
             html = re.sub(r"</head\s*>", zapret + "\n</head>", html, count=1, flags=re.I)
-        stranicy[page] = dobavit_privacy(html)
+        stranicy[page] = dobavit_privacy(dobavit_shapku(html, slug))
 
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
