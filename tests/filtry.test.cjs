@@ -72,8 +72,8 @@ function page(source = script, reducedMotion = false) {
   };
 }
 
-test('Начальная страница: 52 карточка и пять рубрик', () => {
-  const p = page(); assert.equal(p.visible().length, 52); assert.equal(p.sections.length, 5);
+test('Начальная страница: 51 карточка и пять рубрик', () => {
+  const p = page(); assert.equal(p.visible().length, 51); assert.equal(p.sections.length, 5);
   assert.deepEqual(p.sections.map(s => s.attrs['data-section']), ['start', 'kazhdyy-den', 'kartinki', 'vaybkoding', 'servisy']);
 });
 
@@ -112,7 +112,7 @@ test('Поиск и фильтры скрывают весь блок с воп�
 
 test('Стирание запроса возвращает карточки и пустые разделы', () => {
   const p = page(); p.search('zzzzzzнебывает'); p.search('');
-  assert.equal(p.visible().length, 52); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 51); assert.ok(p.sections.every(s => s.style.display !== 'none'));
   assert.ok(!p.noResults.classes.has('show'));
 });
 
@@ -138,14 +138,14 @@ test('Регрессия: совпадение без выбранной мет�
   assert.equal(p.visible().length, 0); assert.ok(p.noResults.classes.has('show'));
 });
 
-test('«Все метки» после фильтра возвращает 52 карточку и все рубрики', () => {
+test('«Все метки» после фильтра возвращает 51 карточку и все рубрики', () => {
   const p = page(); p.filter('codex'); p.filter('all');
-  assert.equal(p.visible().length, 52); assert.ok(p.sections.every(s => s.style.display !== 'none'));
+  assert.equal(p.visible().length, 51); assert.ok(p.sections.every(s => s.style.display !== 'none'));
 });
 
 test('«Другое» снимает метку и ставит курсор в поле поиска', () => {
   const p = page(); p.filter('codex'); p.filter('drugoe');
-  assert.equal(p.visible().length, 52); assert.ok(p.input.focused);
+  assert.equal(p.visible().length, 51); assert.ok(p.input.focused);
 });
 
 test('Кнопка «Найти» открывает единственный результат', () => {
@@ -304,7 +304,7 @@ for (const query of ['голосовой', 'проект', 'zzzzzzнебывае
 test('Клавиши кроме Enter не отправляют поиск и не меняют результаты', () => {
   const p = page(templateScript); p.input.value = 'голосовой';
   p.input.listeners.keydown({type: 'keydown', key: 'a', preventDefault() {throw Error('unexpected submit');}});
-  assert.equal(p.visible().length, 52); assert.equal(p.window.location.href, '');
+  assert.equal(p.visible().length, 51); assert.equal(p.window.location.href, '');
 });
 
 // Reduced motion must change actual JS scrolling, while keeping result selection intact
