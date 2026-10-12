@@ -56,14 +56,44 @@ class CoverStandardTest(unittest.TestCase):
             self.assertEqual([b[2]-b[0] for b in frames], [300, 300], f'{slug}: ширина рамок различается')
             self.assertEqual([b[3]-b[1] for b in frames], [300, 300], f'{slug}: высота рамок различается')
             self.assertEqual(m['pair']['label_baselines'], [630, 630], f'{slug}: подписи не на одной базовой линии')
-        toy = layouts[SERIES[4]]
-        self.assertTrue(all('proba-2-' in p['path'] for p in toy['sources']), 'ИГРУШКА А: нужна девушка и CHIBI, а не отклонённые мужчины')
-        for slug, probe in zip(SERIES, [1, 3, 1, 1, 2, 3, 3]):
-            self.assertTrue(all(f'proba-{probe}-' in p['path'] for p in layouts[slug]['sources']),
-                            f'{slug}: выбрана другая пара, существующий сюжет нельзя подменять')
-        alternative = json.loads((ROOT / 'tasks/content/2026-10-12-oblozhki-standart/IGRUSHKA-B-layout.json').read_text())
-        self.assertEqual(alternative['pair'], reference, 'ИГРУШКА Б: геометрия отличается от серии')
-        self.assertTrue(all('proba-3-' in p['path'] for p in alternative['sources']), 'ИГРУШКА Б: нужна проба 3 с вязаной куклой')
+
+    def test_carousel_sources_and_full_resolution_hashes(self):
+        _, layouts = self.layouts()
+        selection = json.loads((ROOT / 'tasks/content/2026-10-12-oblozhki-standart/carousel-selection.json').read_text())
+        expected = {SERIES[2]: '3-onemainshot.png', SERIES[3]: '4-threadart.png',
+                    SERIES[4]: '5-blisterpack-foto-blur.png',
+                    SERIES[5]: '6-kitchenview-foto2-blur.png',
+                    SERIES[6]: '7-revealparts-foto-blur.png'}
+        for row in selection['covers']:
+            if row['slug'] not in expected:
+                continue
+            meta = layouts[row['slug']]
+            self.assertEqual([x['path'] for x in meta['sources']], [x['path'] for x in row['sources']])
+            self.assertEqual(Path(row['sources'][1]['workspace_path']).name, expected[row['slug']])
+            for actual, declared in zip(meta['sources'], row['sources']):
+                self.assertEqual(actual['sha256'], declared['sha256'])
+                self.assertEqual(hashlib.sha256((ROOT / actual['path']).read_bytes()).hexdigest(), declared['sha256'])
+            self.assertEqual(meta['carousel'], row['carousel'])
+        self.assertIn('devushka-roliki-11745764.jpg', selection['covers'][4]['sources'][0]['workspace_path'])
+
+    @unittest.skipIf(Image is None, 'Pillow нужен для сверки реальных фото')
+    def test_selected_photos_really_appear_in_cover_frames(self):
+        from PIL import ImageOps, ImageDraw, ImageChops
+        reg, layouts = self.layouts()
+        for slug in SERIES[2:]:
+            meta = layouts[slug]
+            cover = Image.open(ROOT / reg[slug]['image']).convert('RGB')
+            for box, item in zip(meta['pair']['frames'], meta['sources']):
+                source = Image.open(ROOT / item['path']).convert('RGB')
+                fitted = ImageOps.contain(source, (294, 294), Image.Resampling.LANCZOS)
+                x, y = box[0] + (300-fitted.width)//2, box[1] + (300-fitted.height)//2
+                diff = ImageChops.difference(cover.crop((x, y, x+fitted.width, y+fitted.height)), fitted)
+                # Заголовок рисуется поверх рамки по принятому стандарту.
+                mask = Image.new('L', fitted.size, 255)
+                draw = ImageDraw.Draw(mask)
+                for left, top, right, bottom in meta['title_boxes']:
+                    draw.rectangle((left-x, top-y, right-x, bottom-y), fill=0)
+                self.assertIsNone(ImageChops.multiply(diff, mask.convert('RGB')).getbbox(), slug)
 
     def test_responsive_images_og_and_homepage(self):
         reg, _ = self.layouts()
@@ -76,7 +106,7 @@ class CoverStandardTest(unittest.TestCase):
             page = (ROOT / f'claude-ai/{slug}/index.html').read_text()
             self.assertIn('https://pronovoe.com/' + key, page, f'{slug}: OG ссылается не на актуальную обложку')
         page = (ROOT / f'claude-ai/{SERIES[4]}/index.html').read_text()
-        self.assertTrue('alt="Девушка на роликах и её фигурка CHIBI: проба 2"' in page,
+        self.assertTrue('alt="Девушка на роликах и фигурка Roller Girl в блистере"' in page,
                         'ИГРУШКА: alt должен описывать новую пару')
 
     @unittest.skipIf(Image is None, 'Pillow отсутствует в этом интерпретаторе; пиксельный тест выполняется в Python 3.12')
@@ -102,6 +132,15 @@ class CoverStandardTest(unittest.TestCase):
         for item in unchanged:
             self.assertEqual(hashlib.sha256((ROOT/item['image']).read_bytes()).hexdigest(), item['sha256'],
                              f'{item["image"]}: обложку за пределами задания нельзя пересобирать')
+
+    def test_this_update_keeps_all_48_other_cover_pixels_and_files(self):
+        base = 'e0e4ceaf8a916d172ed96273c1f52b1f885ea54f'
+        registry = json.loads(subprocess.check_output(['git', 'show', base+':data/OBLOZHKI.json'], cwd=ROOT))
+        changed = set(SERIES[2:])
+        unchanged = [item for slug, item in registry.items() if slug not in changed]
+        self.assertEqual(len(unchanged), 48)
+        for item in unchanged:
+            self.assertEqual(hashlib.sha256((ROOT/item['image']).read_bytes()).hexdigest(), item['sha256'])
 
     def test_validator_rejects_drift_with_russian_message(self):
         path = ROOT / 'scripts/build_cover_standard.py'

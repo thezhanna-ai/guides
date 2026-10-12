@@ -2,8 +2,8 @@
 """Общий layout ЧЕТЫРЕ; только существующие пробы и иллюстрации.
 
 python3.12 scripts/build_cover_standard.py
-Pillow нужен только для сборки. Игрушка А устанавливается в локальную ветку,
-Б сохраняется рядом для выбора. Все исходники зафиксированы на BASE.
+Pillow нужен только для сборки. Источники серии закреплены в carousel-selection.json
+побайтовыми копиями и SHA-256; прочие сцены берутся из BASE.
 """
 import hashlib
 import html
@@ -37,7 +37,8 @@ SERIES = [
     ('promty-eda-dom-chatgpt', 48, 'Еда и дом'),
     ('promty-retro-ustroystvo-chatgpt', 48, 'Ретро и устройство'),
 ]
-PROBES = [1, 3, 1, 1, 2, 3, 3]
+PROBES = [1, 3, 1, 1, 2, 3, 3]  # Резерв только для slide-01 без фотографии
+SELECTION = OUT / 'carousel-selection.json'
 OTHER = [
     ('raspisanie-zadach-v-claude', 'Кнопка за кнопкой', 'Задачи по\nрасписанию', 'План недели готов к 7:30'),
     ('zagruzka-faylov-v-claude', 'Кнопка за кнопкой', 'Загрузка\nфайлов', 'Один файл или целая пачка'),
@@ -99,6 +100,16 @@ def source(meta, path, crop=None):
     return im
 
 
+def selected_source(meta, item):
+    from PIL import Image
+    data = (ROOT / item['path']).read_bytes()
+    if sha(data) != item['sha256']:
+        raise ValueError(f"{meta['slug']}: исходник не совпадает с выбранным SHA-256")
+    im = Image.open(io.BytesIO(data)).convert('RGB')
+    meta['sources'].append(dict(item, revision='workspace-copy', size=list(im.size)))
+    return im
+
+
 def render(slug, section, title, subtitle, probe=None):
     from PIL import Image, ImageDraw, ImageOps
     canvas = Image.new('RGB', (1600, 840), BACKGROUND)
@@ -110,8 +121,13 @@ def render(slug, section, title, subtitle, probe=None):
     assets = f'claude-ai/{slug}/assets/'
     if probe:
         meta['pair'] = PAIR
+        selection = json.loads(SELECTION.read_text())['covers']
+        row = next(item for item in selection if item['slug'] == slug)
+        meta['carousel'] = row['carousel']
+        meta['selection_status'] = row['status']
         for index, state in enumerate(('do', 'posle')):
-            im = source(meta, assets + f'proba-{probe}-{state}.webp')
+            im = (selected_source(meta, row['sources'][index]) if row['sources']
+                  else source(meta, assets + f'proba-{probe}-{state}.webp'))
             box = PAIR['frames'][index]
             # Целое фото внутри одинаковой рамки: без обрезки ног, лица или надписей.
             fitted = ImageOps.contain(im, (294, 294), Image.Resampling.LANCZOS)
@@ -172,14 +188,11 @@ def main():
     inventory = {}
     for (slug, count, subtitle), probe in zip(SERIES, PROBES):
         title = f'{count} ' + ('промптов' if count == 48 else 'промпта') + '\nдля фото'
-        toy = slug == SERIES[4][0]
         image, meta = render(slug, 'CHATGPT', title, subtitle, probe)
-        if toy:
-            alt, altmeta = render(slug, 'CHATGPT', title, subtitle, 3)
-            alt.save(OUT/'IGRUSHKA-B.webp', 'WEBP', lossless=True, method=6)
-            altmeta['image_sha256'] = sha((OUT/'IGRUSHKA-B.webp').read_bytes())
-            write_json(OUT/'IGRUSHKA-B-layout.json', altmeta)
-            registry[slug]['alt'] = 'Девушка на роликах и её фигурка CHIBI: проба 2'
+        if slug == SERIES[3][0]:
+            registry[slug]['alt'] = 'Портрет до и после превращения в вышитую тканевую нашивку'
+        if slug == SERIES[4][0]:
+            registry[slug]['alt'] = 'Девушка на роликах и фигурка Roller Girl в блистере'
             registry[slug]['source_alt'] = registry[slug]['alt']
         install(slug, image, meta, registry, inventory)
     for slug, section, title, subtitle in OTHER:
@@ -193,22 +206,23 @@ def main():
     opt.MANIFEST.write_text(json.dumps(old_manifest, ensure_ascii=False, indent=2)+'\n')
     opt.apply_articles()
     write_json(ROOT/'data/OBLOZHKI.json', registry)
-    # Подпись и alt должны описывать новую, разрешённую пару ИГРУШКИ.
+    # Подписи, alt и OG описывают выбранную обложку, текст статьи сохранён.
     articles_path = ROOT/'data/statyi.json'
     articles = json.loads(articles_path.read_text())
-    toy_slug = SERIES[4][0]
+    series_slugs = {item[0] for item in SERIES}
     for article in articles['statyi']:
-        if article['slug'] == toy_slug:
-            article['podpis'] = registry[toy_slug]['alt']
+        if article['slug'] in series_slugs:
+            article['podpis'] = registry[article['slug']]['alt']
     articles_path.write_text(json.dumps(articles, ensure_ascii=False, indent=1)+'\n')
-    page = ROOT/f'claude-ai/{toy_slug}/index.html'
-    content = page.read_text()
-    alt_text = html.escape(registry[toy_slug]['alt'], quote=True)
-    content = re.sub(r'(<figure\b[^>]*class="cover cover-v2"[^>]*>\s*<img\b[^>]*\balt=")[^"]*(")',
-                     lambda m: m[1]+alt_text+m[2], content, count=1)
-    content = re.sub(r'(<meta\b[^>]*property="og:image:alt"[^>]*content=")[^"]*(")',
-                     lambda m: m[1]+alt_text+m[2], content, count=1)
-    page.write_text(content)
+    for slug in series_slugs:
+        page = ROOT/f'claude-ai/{slug}/index.html'
+        content = page.read_text()
+        alt_text = html.escape(registry[slug]['alt'], quote=True)
+        content = re.sub(r'(<figure\b[^>]*class="cover cover-v2"[^>]*>\s*<img\b[^>]*\balt=")[^"]*(")',
+                         lambda m: m[1]+alt_text+m[2], content, count=1)
+        content = re.sub(r'(<meta\b[^>]*property="og:image:alt"[^>]*content=")[^"]*(")',
+                         lambda m: m[1]+alt_text+m[2], content, count=1)
+        page.write_text(content)
     subprocess.run(['python3.14', str(ROOT/'scripts/sobrat_glavnuyu.py')], cwd=ROOT, check=True)
 
 

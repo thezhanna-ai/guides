@@ -88,30 +88,43 @@ for slug, item in registry.items():
                  'glyph_height_px':glyph_height,'method':method,'background_sample':hexbg,'background_ranges_rgb':ranges,
                  'background_flat':flat,'deviations':reasons,'changed':slug in changed})
 build.write_json(OUT/'audit.json',{'base':build.BASE,'count':len(rows),'method':'Три фоновых участка 40x80 слева, мода RGB и диапазон. Кегль из layout; без него оценка по глифам, помечена отдельно. Текст внутри фото не считается фоном полотна.','#102F30':'Палитра сборщика ЧЕТЫРЕ; сама историческая сцена ЧЕТЫРЕ имеет градиент','covers':rows})
-# Вставляем реальные карточки со всей CSS главной; старые изображения инлайн из BASE.
-old=build.original('index.html').decode();new=(ROOT/'index.html').read_text()
-css=re.search(r'<style>(.*?)</style>',new,re.S)[1]
-def card(slug, version, variant=None):
-    page=old if version=='old' else new
-    a=next(x for x in re.findall(r'<a\b[^>]*class="guide-link[^>]*>.*?</a>',page,re.S) if f'href="claude-ai/{slug}/"' in x)
-    key=registry[slug]['image'];raw=build.original(key) if version=='old' else (ROOT/key).read_bytes()
-    if variant:raw=(OUT/variant).read_bytes()
-    data='data:image/webp;base64,'+base64.b64encode(raw).decode()
-    a=re.sub(r'\s(?:srcset|sizes|data-full-src)="[^"]*"','',a)
-    a=re.sub(r'src="[^"]*"',lambda m:'src="'+data+'"',a,count=1)
-    a=a.replace('loading="lazy"','loading="eager"').replace('decoding="async"','decoding="sync"')
-    return a
-html=['<!doctype html><html lang="ru"><meta charset="utf-8"><title>Обложки: сейчас и стало</title><style>'+css+'''
-body{padding:20px}main{width:1120px;margin:0}h1{font-size:28px;max-width:none}.review-label{font-size:17px;margin:22px 0 8px}.guides{margin-top:0}.slot-label{font-size:13px;min-height:28px;margin:0 0 6px;color:var(--muted)}.guide-link{pointer-events:none}.review-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.review-grid .guide-link{height:calc(100% - 34px)}
-</style><main><h1>Один стандарт обложек</h1><p>Настоящий HTML и CSS карточек главной, 264,5 × 138,86 px для изображения<br>Сверху «сейчас», ниже «стало». ИГРУШКА: А и Б отдельно внизу</p>''']
-labels=dict((s,t) for s,n,t in build.SERIES);labels.update((s,t.replace('\n',' ')) for s,section,t,sub in build.OTHER)
-for offset in range(0,len(changed),4):
-    group=changed[offset:offset+4]
-    for version,caption in [('old','Сейчас'),('new','Стало')]:
-        html.append('<p class="review-label">'+caption+'</p><div class="review-grid">')
-        for slug in group:html.append('<div><p class="slot-label">'+labels[slug]+'</p>'+card(slug,version)+'</div>')
-        html.append('</div>')
-slug=build.SERIES[4][0]
-html.append('<p class="review-label">ИГРУШКА: два варианта для выбора</p><div class="review-grid"><div><p class="slot-label">А: девушка → фигурка CHIBI, проба 2</p>'+card(slug,'new')+'</div><div><p class="slot-label">Б: девушка → вязаная кукла, проба 3</p>'+card(slug,'new','IGRUSHKA-B.webp')+'</div></div><p id=qa>Загружаются 24 изображения...</p><button id=saveqa>Сохранить замеры карточек</button></main><script>Promise.all([...document.images].map(i=>i.decode())).then(()=>{window.reviewChecks={pass:true,cards:[...document.querySelectorAll(".guide-cover")].map(i=>({width:i.getBoundingClientRect().width,height:i.getBoundingClientRect().height,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight}))};document.querySelector("#qa").textContent="PASS: 24 изображения загружены, размер обложки "+window.reviewChecks.cards[0].width+" × "+window.reviewChecks.cards[0].height+" CSS px"}).catch(e=>{document.querySelector("#qa").textContent="ОШИБКА: "+e});document.querySelector("#saveqa").onclick=()=>{let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(window.reviewChecks,null,2)],{type:"application/json"}));a.download="oblozhki-browser-checks.json";a.click()};</script></html>')
-(OUT/'comparison.html').write_text('\n'.join(line.rstrip() for line in ''.join(html).splitlines())+'\n')
-print('AUDIT',len(rows),'covers;',sum(bool(x['deviations']) for x in rows),'with deviations; comparison.html generated')
+# Семь slide-01 рядом с актуальными карточками, без вариантов А/Б.
+selection = json.loads((OUT/'carousel-selection.json').read_text())['covers']
+current = json.loads((ROOT/'data/OBLOZHKI.json').read_text())
+new = (ROOT/'index.html').read_text()
+css = re.search(r'<style>(.*?)</style>', new, re.S)[1]
+labels = ['СВЕТ', 'ВИТРИНА', 'АФИША', 'КИСТЬ', 'ИГРУШКА', 'КУХНЯ', 'РЕТРО']
+page = ['<!doctype html><html lang="ru"><meta charset="utf-8"><title>Карусель и статья</title><style>'+css+
+        'body{padding:20px}.comparison{display:grid;grid-template-columns:168px 264.5px;gap:24px;margin:26px 0}.carousel{width:168px;height:210px;object-fit:contain}.guide-link{pointer-events:none}h1{font-size:28px}</style><main><h1>Карусель и обложка статьи</h1><p>СВЕТ и ВИТРИНА: в slide-01 нет фото, сохранены прежние пары</p>']
+canvas = Image.new('RGB', (1000, 1980), '#efece4')
+draw = ImageDraw.Draw(canvas)
+titlefont = build.font('section', 27)
+smallfont = build.font('site', 18)
+draw.text((30, 20), 'КАРУСЕЛЬ И ОБЛОЖКА СТАТЬИ', font=titlefont, fill='#102F30')
+draw.text((30, 65), 'Slide-01 слева, обложка статьи справа. Полные фото без обрезки', font=smallfont, fill='#102F30')
+for i, row in enumerate(selection):
+    slug = row['slug']
+    y = 115 + i*265
+    draw.text((30, y), labels[i], font=titlefont, fill='#102F30')
+    photo = Image.open(ROOT/row['carousel']['path']).convert('RGB').resize((168,210), Image.Resampling.LANCZOS)
+    canvas.paste(photo, (30,y+42))
+    cover = Image.open(ROOT/current[slug]['image']).convert('RGB').resize((400,210), Image.Resampling.LANCZOS)
+    canvas.paste(cover, (225,y+42))
+    draw.text((650,y+65), '1600 × 840', font=smallfont, fill='#102F30')
+    if row['status'] == 'confirmed':
+        draw.text((650,y+110), 'Та же фотография', font=smallfont, fill='#102F30')
+        draw.text((650,y+140), 'на первом слайде', font=smallfont, fill='#102F30')
+    else:
+        for j,line in enumerate(['В slide-01 нет фото', 'Прежняя пара', 'сохранена']):
+            draw.text((650,y+110+j*30), line, font=smallfont, fill='#984025')
+    card = next(x for x in re.findall(r'<a\b[^>]*class="guide-link[^>]*>.*?</a>',new,re.S) if f'href="claude-ai/{slug}/"' in x)
+    card = re.sub(r'\s(?:srcset|sizes|data-full-src)="[^"]*"', '', card)
+    card = re.sub(r'src="[^"]*"', lambda m:'src="data:image/webp;base64,'+base64.b64encode((ROOT/current[slug]['image']).read_bytes()).decode()+'"',card,count=1)
+    card = card.replace('loading="lazy"','loading="eager"')
+    slide = base64.b64encode((ROOT/row['carousel']['path']).read_bytes()).decode()
+    note = 'Та же фотография' if row['status']=='confirmed' else 'Slide-01 без фото, прежняя пара сохранена'
+    page.append('<h2>'+labels[i]+'</h2><p>'+note+'</p><div class="comparison"><img class="carousel" src="data:image/png;base64,'+slide+'">'+card+'</div>')
+page.append('</main></html>')
+(OUT/'comparison.html').write_text(''.join(page)+'\n')
+canvas.save(OUT/'LIST.png')
+print('LIST.png: 7 rows, slide-01 + cover; comparison.html: real homepage cards at 264.5 CSS px')
