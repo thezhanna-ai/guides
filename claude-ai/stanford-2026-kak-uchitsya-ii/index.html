@@ -1,0 +1,1071 @@
+<!doctype html><html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как учится ИИ: конспект лекции Стэнфорда 2026</title><meta name="description" content="8 мыслей из вводной лекции CS229 2026: опыт, ImageNet, слова, инструкции и обучение на своих попытках. Таймкоды и три пары промптов без формул."><meta name="theme-color" content="#F8F7F2">
+<!-- critical:fonts:start -->
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="Как учится ИИ: конспект лекции Стэнфорда 2026"><meta property="og:description" content="8 мыслей из вводной лекции CS229 2026: опыт, ImageNet, слова, инструкции и обучение на своих попытках. Таймкоды и три пары промптов без формул."><meta property="og:url" content="https://pronovoe.com/claude-ai/stanford-2026-kak-uchitsya-ii/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/stanford-2026-kak-uchitsya-ii/assets/oblozhka.png"><meta property="og:image:alt" content="Титульный слайд Machine Learning, CS229/STAT229: преподаватели Тэнъюй Ма и Крис Ре"><meta property="og:image:width" content="480"><meta property="og:image:height" content="300"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://pronovoe.com/claude-ai/stanford-2026-kak-uchitsya-ii/assets/oblozhka.png">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .lead > .seo-intro { display: inline }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none; width: min(100%, 480px) }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+.faq-item summary { padding: 13px 44px 13px 18px; position: relative; color: var(--emerald); font: 750 17px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer; list-style: none }
+.faq-item summary::-webkit-details-marker { display: none }
+.faq-item summary::after { content: "+"; position: absolute; top: 50%; right: 17px; transform: translateY(-50%); color: var(--accent-dark); font: 700 22px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+.faq-item[open] summary::after { content: "\2212" }
+.faq-item p { margin: 0; padding: 0 18px 15px }
+.shot:has(img[src="assets/share-okno.webp"]) img { width: 510px }
+.shot:has(img[src="assets/dostup-vybor.webp"]) img { width: 520px }
+.shot:has(img[src="assets/privacy-manage.webp"]) img { width: 520px }
+.shot:has(img[src="assets/shared-chats.webp"]) img { width: 520px }
+.shot:has(img[src="assets/pismo.webp"]) img { width: 440px }
+
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+
+.shot:has(img[src="assets/privacy-manage.webp"]) .zoom { display: none }
+    .code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; margin: 16px 0 20px; padding: 14px 128px 14px 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    .code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+    @media (max-width: 600px) { .code-card { padding: 46px 14px 14px } }
+    .cta { padding: 22px 22px 18px }
+    .cta .press-button, .cta .press-button:hover { min-height: 46px; padding: 0 20px; background: var(--guide-color-brand); color: var(--guide-color-forest-night); font-size: 15px; box-shadow: 0 3px 0 var(--guide-color-coral-deep) }
+    .cta .press-button + p { margin-top: 18px }
+    .press-button:hover, .copy-button:hover { background: var(--guide-color-brand); color: var(--guide-color-forest-night) }
+    .cta p:last-child { margin-bottom: 0 }
+    .cta h2 { font-size: 20px; line-height: 1.3; margin-bottom: 10px }
+    .cta p:not(.section-label) { font-size: 16px; line-height: 1.5; margin: 0 0 12px }
+    body:has(#cookie-banner:not([hidden])) .toc { max-height: calc(100vh - 190px) }
+    #pamyatka .help-banner { text-align: left; padding: 22px 24px; border-radius: 11px; background: var(--info); color: var(--ink); border: 1px solid var(--info-line) }
+    #pamyatka-text p { margin: 0 0 14px; font-size: 17px; line-height: 1.4 }
+    #pamyatka-text p:last-child { margin-bottom: 0 }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+
+
+<style>
+.table-wrap { overflow-x: auto; margin: 18px 0 24px }
+.table-wrap table { width: 100%; border-collapse: collapse }
+.table-wrap th, .table-wrap td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top }
+.table-wrap th { color: var(--emerald); background: var(--info) }
+.table-wrap td:first-child { white-space: nowrap }
+</style>
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
+<!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer;
+}
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+/* Отказ - крестик: одна заметная кнопка «Понятно», выбор по закону остаётся */
+.cookie-actions { align-items: center }
+.cookie-actions .cookie-close {
+  min-width: 44px; padding: 0; border-color: var(--guide-color-transparent); background: var(--guide-color-transparent);
+  color: var(--muted, var(--guide-color-muted)); font: 400 26px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+.cookie-actions .cookie-close:hover { border-color: var(--guide-color-transparent); color: var(--ink, var(--guide-color-ink)) }
+@media (max-width: 600px) {
+  .cookie-actions { flex-wrap: nowrap }
+  .cookie-actions .cookie-close { flex: 0 0 44px }
+}
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/stanford-2026-kak-uchitsya-ii/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/stanford-2026-kak-uchitsya-ii/#article",
+      "headline": "Как учится ИИ: конспект лекции Стэнфорда 2026",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/stanford-2026-kak-uchitsya-ii/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-13",
+      "image": "https://pronovoe.com/claude-ai/stanford-2026-kak-uchitsya-ii/assets/oblozhka.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/stanford-2026-kak-uchitsya-ii/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Как учится ИИ: конспект лекции Стэнфорда 2026",
+          "item": "https://pronovoe.com/claude-ai/stanford-2026-kak-uchitsya-ii/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+</head><body><div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a><div class="header-actions"><div class="handout-title">Лекция Стэнфорда</div><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">О лекции</a>
+<a href="#original">Как смотреть по-русски</a>
+<a href="#karta">Карта лекции</a>
+<a href="#konspekt">Конспект: 8 мыслей</a>
+<a href="#opyt" class="toc-sub">1. Опыт и результат</a>
+<a href="#prompt" class="toc-sub">2. Один чат, разные задачи</a>
+<a href="#skorost" class="toc-sub">3. Скорость обучения</a>
+<a href="#imagenet" class="toc-sub">4. Миллион картинок</a>
+<a href="#slova" class="toc-sub">5. Связи между словами</a>
+<a href="#instrukcii" class="toc-sub">6. Выполнение инструкций</a>
+<a href="#mysli" class="toc-sub">7. Как нейросеть «думает»</a>
+<a href="#popytki" class="toc-sub">8. Обучение на своих попытках</a>
+<a href="#practice">Три приёма до и после</a>
+<a href="#sources">Источники</a></nav><main><details class="mobile-toc"><summary>Содержание конспекта</summary><nav aria-label="Содержание на телефоне"><a href="#nachalo">О лекции</a>
+<a href="#original">Как смотреть по-русски</a>
+<a href="#karta">Карта лекции</a>
+<a href="#konspekt">Конспект: 8 мыслей</a>
+<a href="#opyt">1. Нейросеть учится на опыте, а обучение оценивают по результату</a>
+<a href="#prompt">2. Один чат принимает разные задания обычными словами</a>
+<a href="#skorost">3. Обучение дорогое, его стараются ускорить</a>
+<a href="#imagenet">4. Картинки с подписью учат узнавать предметы</a>
+<a href="#slova">5. В обычных текстах нейросеть находит связи без подписей</a>
+<a href="#instrukcii">6. Выполнять просьбы нейросеть доучивают специально</a>
+<a href="#mysli">7. Даже когда «думает», нейросеть пишет текст по шагам</a>
+<a href="#popytki">8. Собственные попытки проверяют, на удачных учат снова</a>
+<a href="#practice">Три приёма до и после</a>
+<a href="#sources">Источники</a></nav></details><article>
+<header id="nachalo">
+<p class="eyebrow">Конспект · Стэнфорд · CS229 · 2026</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.png" alt="Титульный слайд Machine Learning, CS229/STAT229: преподаватели Тэнъюй Ма и Крис Ре" width="480" height="300" loading="eager" fetchpriority="high" decoding="async"><figcaption>Титульный слайд исходной лекции: Тэнъюй Ма, CS229, Стэнфорд, 2026 год</figcaption></figure>
+<h1 class="article-title-v2">Как учится ИИ: конспект лекции Стэнфорда 2026</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<p class="meta">Тэнъюй Ма · весна 2026 года · 37 минут · конспект по-русски · ОБНОВЛЕНО 13 ОКТЯБРЯ 2026</p>
+<div class="lead"><div class="seo-intro">Спрашиваешь ChatGPT простую вещь, а он то пишет простыню на три экрана, то уверенно ошибается, то на один и тот же вопрос отвечает по-разному. Чтобы понять, почему так, нужно знать, как его учили. В первой лекции Стэнфорда 2026 года это показано без формул: на картинках, словах и роботе, который пытается ходить.</div> Нейросеть - то, что стоит за ChatGPT и Claude. Она не знает ничего заранее: её учат на примерах. Но откуда взять примеры, если правильного решения ещё никто не придумал?</div>
+<div class="info-card"><p><b>Что за лекция.</b> Это введение в курс Стэнфорда CS229 «Машинное обучение». Восемь мыслей ниже объясняют, как учат нейросеть, без формул</p></div>
+<p>Можно посмотреть запись по ссылкам или прочитать конспект. Первые три мысли про основу: что значит «научилась», зачем один чат на разные задачи и почему обучение ускоряют. Дальше четыре способа учить нейросеть: по картинкам с подписями, по обычным текстам, по просьбам и по её собственным удачным попыткам. Между третьим и четвёртым способом стоит короткая остановка: что происходит, когда чат «думает». В конце три приёма с настоящими ответами «до» и «после» для твоего чата</p>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Как учится ИИ: конспект лекции Стэнфорда 2026</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header>
+
+<section class="content-section" id="original"><p class="section-label">Оригинал</p><h2>Где смотреть лекцию на русском</h2>
+<p>Запись называется <a href="https://www.youtube.com/watch?v=DATnpGoGhM8">Stanford CS229 Machine Learning | Spring 2026 | Lecture 1: Introduction</a>. Её опубликовал канал Stanford Online, читает Тэнъюй Ма. Это обзор курса «Машинное обучение»: от первых определений до нейросетей, которые решают задачи и собирают примеры для следующего обучения</p>
+<ul>
+<li><p><b>Английский голос и русский текст.</b> Основной путь: шестерёнка → Субтитры → английские → снова шестерёнка → Субтитры → Перевести → Русский. Если пункта «Перевести» не видно, открой лекцию в браузере на компьютере</p></li>
+<li><p><b>Русский голос.</b> У этой записи на YouTube нет русской звуковой дорожки: проверено 12 октября 2026 года. Голос в оригинале английский</p></li>
+<li><p><b>Перевод другим голосом.</b> В Яндекс Браузере открой эту же ссылку и воспользуйся переводом видео, если он доступен для записи. Автоматический перевод иногда путает специальные слова, поэтому в конспекте они объяснены обычным русским языком</p></li>
+</ul>
+<div class="info-card"><p><b>Если времени мало:</b> начни <a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=330s">с 05:30</a>, после организационного вступления. А для главного примера в конце открой <a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1906s">31:46-33:58</a>: там Ма разбирает задачу без готовых решений и показывает, что делать дальше</p></div>
+</section>
+
+<section class="content-section" id="karta"><p class="section-label">Карта лекции</p><h2>Что идёт в лекции по минутам</h2>
+<p>Нажми на время, чтобы открыть запись с нужного места. В этой таблице порядок записи, а в конспекте ниже мысли собраны по темам</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Время</th><th scope="col">О чём речь</th></tr></thead><tbody>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=0s">00:00-05:30</a></td><td>Преподаватели, подготовка, правила работы с ИИ и зачем учиться самостоятельно</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=330s">05:30</a></td><td>Что считать обучением: опыт, задача и улучшение результата</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=473s">07:53</a></td><td>Способы обучения и почему они пересекаются</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=590s">09:50</a></td><td>Примеры с правильным ответом: цена дома, тип жилья, объект на картинке</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=932s">15:32</a></td><td>ImageNet: миллион картинок и рост качества распознавания</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1210s">20:10</a></td><td>Обучение без подписей: группы похожих объектов и документов</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1443s">24:03</a></td><td>Слова как точки: страны, столицы и отношения между ними</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1554s">25:54</a></td><td>Один чат для разных вопросов и обучение выполнению просьб</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1682s">28:02</a></td><td>Получение изображений, затем робот и последовательность действий</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1816s">30:16</a></td><td>«Думающая» нейросеть: текст внутри решения и случайность выбора</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1906s">31:46</a></td><td>Задача без готового решения: где взять материал для обучения</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=2156s">35:56</a></td><td>Зачем ускорять обучение и обсуждать влияние ИИ на работу людей</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="content-section" id="konspekt"><p class="section-label">Конспект</p><h2>Главное из лекции: 8 мыслей</h2>
+<p>Восемь мыслей, от простого способа учить к сложному</p>
+<ol>
+<li><a href="#opyt">Нейросеть учится на опыте, а обучение оценивают по результату</a></li>
+<li><a href="#prompt">Один чат принимает разные задания обычными словами</a></li>
+<li><a href="#skorost">Обучение дорогое, его стараются ускорить</a></li>
+<li><a href="#imagenet">Картинки с подписью учат узнавать предметы</a></li>
+<li><a href="#slova">В обычных текстах нейросеть находит связи без подписей</a></li>
+<li><a href="#instrukcii">Выполнять просьбы нейросеть доучивают специально</a></li>
+<li><a href="#mysli">Даже когда «думает», нейросеть пишет текст по шагам</a></li>
+<li><a href="#popytki">Собственные попытки проверяют, на удачных учат снова</a></li>
+</ol>
+</section>
+
+<section class="content-section" id="opyt"><p class="section-label"><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=330s">Смотреть с 05:30</a></p><h2>Мысль 1. Нейросеть учится на опыте, а обучение оценивают по результату</h2>
+<p>Нейросеть научилась, если после обучения у неё получается лучше. Но «лучше» сначала надо измерить: иначе непонятно, учится она или нет</p>
+<h3>Как это видно в шахматах</h3>
+<p>Представь, что нейросеть учат играть в шахматы. Опыт для неё - сыгранные партии. Чтобы понять, научилась ли она, считают долю побед: сколько партий из ста она выиграла. Допустим, после ста партий она выигрывает по-прежнему редко: значит, не научилась. Если выигрывает вдвое чаще, научилась. Само число сыгранных партий ничего не говорит: можно сыграть тысячу и не стать лучше. Цифры для примера</p>
+<div class="result"><p><b>Как это связано с твоим чатом:</b> заранее реши, по чему поймёшь, что ответ хороший: понятно, коротко, точно</p></div>
+</section>
+
+<section class="content-section" id="prompt"><p class="section-label"><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=260s">Смотреть с 04:20</a> · <a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=433s">07:13</a></p><h2>Мысль 2. Один чат принимает разные задания обычными словами</h2>
+<p>Один и тот же чат принимает разные задания, описанные обычными словами. Чтобы сменить задачу, достаточно написать другую просьбу</p>
+<h3>Что изменилось</h3>
+<p>Раньше нейросеть учили одной задаче, и вопрос был заранее известен: «что на картинке?» или «сколько стоит дом?». В ChatGPT на слайде другая подсказка: «Ask anything», то есть «Спроси что угодно». Одна и та же нейросеть может объяснить слово, написать письмо и сократить длинный текст</p>
+</section>
+
+<section class="content-section" id="skorost"><p class="section-label"><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=2156s">Смотреть с 35:56</a></p><h2>Мысль 3. Обучение дорогое, его стараются ускорить</h2>
+<p>Обучение нейросети - это огромные вычисления, поэтому оно дорогое. Лектор называет такие цифры: ускорить обучение вдвое для OpenAI, которая делает ChatGPT, значит сэкономить миллиарды долларов. Даже 20% уже ощутимо. А для исследователя это время: если его способ вдвое быстрее, он успевает проверить идею за год, а другому нужно два. В курсе этому отведена отдельная тема: как заставить программы и оборудование работать быстрее. Ма говорит об их совместной работе, но конкретный способ ускорения в этой вводной лекции не разбирает</p>
+</section>
+
+<section class="content-section" id="imagenet"><p class="section-label"><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=932s">Смотреть с 15:32</a></p><h2>Мысль 4. Картинки с подписью учат узнавать предметы</h2>
+<p>Первый способ: нейросети показывают примеры с правильным ответом. Это обучение, при котором есть, с чем сравнить её ответ и увидеть ошибку; в следующей мысли будет обучение без подписей</p>
+<h3>Птицы, кошки и собаки</h3>
+<p>На картинке птица, а рядом её название; на другой кошка, на третьей собака. Нейросети показывают много таких пар, и на них она учится узнавать предметы. <b>Картинка задаёт вопрос, подпись даёт правильный ответ</b></p>
+<p>Важно, что потом ей показывают новую картинку без подсказки. Она должна назвать предмет сама. Так можно увидеть, научилась ли она узнавать его, а не просто повторять подпись рядом со знакомой фотографией</p>
+<figure class="shot"><div class="shot"><img src="assets/imagenet.png" width="480" height="228" alt="Фрагмент слайда ImageNet: фотографии птиц, кошек и собак с названиями категорий" loading="lazy" decoding="async"></div><figcaption>17:00. На слайде пары «фотография и название объекта»: фламинго, разные кошки и породы собак</figcaption></figure>
+<h3>Зачем понадобился миллион картинок</h3>
+<p>ImageNet - набор из миллиона картинок с подписями, который собрала команда Фей-Фей Ли, профессора Стэнфорда. Следующий по размеру набор был примерно в 20 раз меньше, около 50 тысяч. На ImageNet обучили нейросеть AlexNet распознавать предметы: точность выросла примерно с половины до 95% и выше (числа лектор назвал по памяти)</p>
+<p>Точность здесь - доля картинок, на которых предмет назван правильно. Это ответ на вопрос из первой мысли: как измерить «лучше»</p>
+<h3>Чему её учили</h3>
+<p>AlexNet умела одно: назвать, что на фото. Спросить у неё что-то другое про ту же фотографию было нельзя: она училась одной конкретной работе. Умение узнавать птиц, кошек и собак само по себе не учит выполнять любую просьбу</p>
+<div class="result"><p><b>Как это связано с твоим чатом:</b> если чат хорошо сделал одно, например сократил текст, это не значит, что он так же хорошо посчитает сдачу: важное проверяй отдельно</p></div>
+</section>
+
+<section class="content-section" id="slova"><p class="section-label"><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1443s">Смотреть с 24:03</a></p><h2>Мысль 5. В обычных текстах нейросеть находит связи без подписей</h2>
+<p>Второй способ: нейросеть учат на обычных текстах без специально добавленных подписей. В этих текстах уже встречаются слова и связи между ними, которые она может найти</p>
+<h3>Карта слов</h3>
+<p>Слова нейросеть тоже превращает в точки на карте: слова со схожим смыслом оказываются рядом. На слайде лекции так расставлены страны и столицы. От Италии к Риму идёт стрелка. От Франции к Парижу - стрелка в ту же сторону. От Германии к Берлину - тоже. Поэтому, если взять страну и пройти в этом направлении, скорее всего придёшь к её столице</p>
+<figure class="shot"><div class="shot"><img src="assets/slova.png" width="640" height="360" alt="Слайд Word Embeddings: Италия, Франция, Германия и направления к Риму, Парижу, Берлину" loading="lazy" decoding="async"></div><figcaption>24:42. Точки обозначают страны и столицы, похожие направления соединяют Италию с Римом, Францию с Парижем, Германию с Берлином</figcaption></figure>
+<h3>Кто составил список столиц</h3>
+<p>Никто не составлял список «страна - столица». Нейросеть увидела эту связь в обычных текстах, например в Википедии, где про Рим пишут «столица Италии». К словам никто не добавлял правильный ответ, как добавляют подпись к фотографии кошки: поэтому это называют обучением без подписей</p>
+<div class="result"><p><b>Как это связано с твоим чатом:</b> слова со схожим смыслом для нейросети близки, поэтому вопрос, написанный своими словами, обычно работает</p></div>
+</section>
+
+
+<section class="content-section" id="instrukcii"><p class="section-label"><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1628s">Смотреть с 27:08</a></p><h2>Мысль 6. Выполнять просьбы нейросеть доучивают специально</h2>
+<p>Третий способ: нейросеть доучивают выполнять просьбы. Ей показывают пары «просьба и хороший ответ на неё», как - подробнее разобрано в <a href="../stanford-kak-sozdayut-chatgpt/">первом конспекте Стэнфорда</a>. Раньше нейросети плохо слушались инструкций, поэтому OpenAI и Anthropic, разработчики ChatGPT и Claude, специально их этому доучивали</p>
+<h3>Как просьба меняет ответ</h3>
+<p>Сравни «Объясни, что такое нейросеть» и «Объясни, что такое нейросеть: три предложения, без терминов, один пример с кухни». В обоих случаях тема одна, но во втором названы условия: сколько написать, какие слова использовать и какой пример дать</p>
+<p>Первый вопрос оставляет выбор за нейросетью: можно начать с определения, описать устройство или перейти к сложным подробностям. Во втором вопросе человек заранее описал, какой ответ ему нужен. Посмотреть реальные ответы можно в <a href="#priem-1">приёме 1</a></p>
+<div class="warn-card"><p><b>Короткий ответ тоже может содержать ошибку.</b> После проверки длины и понятности проверь содержание</p></div>
+<div class="result"><p><b>Как это связано с твоим чатом:</b> условия ответа пиши прямо в просьбе</p></div>
+</section>
+
+<section class="content-section" id="mysli"><p class="section-label"><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1816s">Смотреть с 30:16</a></p><h2>Мысль 7. Даже когда «думает», нейросеть пишет текст по шагам</h2>
+<p>Когда чат «думает», нейросеть пишет текст по шагам, и часть этого текста тебе не показывают. Каждый написанный шаг влияет на следующий</p>
+<h3>Почему шаги связаны</h3>
+<p>Сначала лектор показывает робота, который учится ходить: каждое его движение зависит от предыдущего, а при неудачном шаге он может упасть, и продолжить уже трудно. С текстом похоже: нейросеть пишет ответ по одному слову или части слова, и написанное раньше влияет на то, что будет дальше. А в выборе следующего слова есть доля случайности, поэтому один и тот же вопрос иногда даёт разные ответы</p>
+<figure class="shot"><div class="shot"><img src="assets/robot.png" width="640" height="360" alt="Слайд с обучением робота ходить вправо: фигура на клетчатой площадке, попытка 210" loading="lazy" decoding="async"></div><figcaption>29:49. На экране пример обучения робота ходить вправо, показан Iteration 210 («210-й этап обучения»)</figcaption></figure>
+<h3>Что можно сделать в чате</h3>
+<p>Попроси расписать решение по шагам: так проще увидеть, где ошибка</p>
+<div class="result"><p><b>Как это связано с твоим чатом:</b> проси объяснение, в котором можно проверить шаги</p></div>
+</section>
+
+<section class="content-section" id="popytki"><p class="section-label"><a href="https://www.youtube.com/watch?v=DATnpGoGhM8&amp;t=1906s">Смотреть с 31:46</a></p><h2>Мысль 8. Собственные попытки проверяют, на удачных учат снова</h2>
+<p>Четвёртый способ: нейросеть учат на её собственных удачных попытках. Раньше ей давали уже собранные картинки или тексты, теперь новые примеры можно получить из её решений</p>
+<h3>Задачи есть, готового решения нет</h3>
+<p>Лектор берёт математические утверждения, которые нужно доказать, а готовых доказательств нет. Нейросеть пишет доказательства сама. Каждое проверяют: подходит оно или нет. Неверные выбрасывают, верные становятся новыми примерами для обучения</p>
+<p>Как именно проверяют, вводная лекция не разбирает, важен порядок: для следующего обучения берут только попытки, которые прошли проверку</p>
+<p>Пример наш: это как ученик, который решает задачи, проверяет решения и запоминает только верные</p>
+<h3>Четыре действия по кругу</h3>
+<ol>
+<li><b>Нейросеть решает задачи.</b> Предлагает варианты, среди которых могут быть ошибки</li>
+<li><b>Решения проверяют.</b> Правильные отбирают для нового обучения</li>
+<li><b>Разработчики обучают нейросеть на отобранных верных решениях</b></li>
+<li><b>Нейросеть снова пробует.</b> Её новые удачные решения могут стать примерами для следующего круга</li>
+</ol>
+<p><b>Нейросеть сама помогает собрать примеры, на которых её учат.</b> Ответ на вопрос из начала статьи появляется здесь: когда готового решения нет, попытки предлагают, проверяют и используют дальше</p>
+<div class="warn-card"><p><b>Обычная переписка не выполняет это обучение.</b> После отбора разработчики отдельно обучают нейросеть. Просьба «попробуй ещё раз» даёт новый ответ, но не означает, что этот этап обучения произошёл</p></div>
+<div class="result"><p><b>Как это связано с твоим чатом:</b> получи варианты и выбери по понятному условию</p></div>
+</section>
+
+<section class="content-section" id="practice"><p class="section-label">Для своего чата</p><h2>Проверь лекцию в своём чате: три приёма до и после</h2>
+<p>Все восемь мыслей сводятся к одному: нейросеть выдаёт то, чему её учили, и то, что ты ей задал. Это легко увидеть самому: задай вопрос как обычно, потом в новом чате тот же вопрос с дополнительным уточнением и сравни ответы. Работает в ChatGPT, Claude и любом другом чат-боте</p>
+<p>Запросы ниже наши, не из лекции. Ответы Claude даны выдержками из настоящих ответов, у тебя они получатся по-своему</p>
+<h3>Приём 1. Скажи, какой ответ нужен</h3>
+<p>Почему это работает: нейросеть специально учили выполнять условия (<a href="#instrukcii">мысль 6</a>). Поэтому сразу напиши в вопросе, какой длины нужен ответ и как объяснить</p>
+<p><b>Было:</b> только тема</p>
+<div class="code-card"><pre id="priem-1-do"><code>Объясни, что такое нейросеть</code></pre><button class="copy-button" type="button" data-copy-target="priem-1-do" aria-label="Скопировать первый запрос до уточнения" aria-live="polite">Скопировать</button></div>
+<p><b>Стало:</b> тема и условия ответа</p>
+<div class="code-card"><pre id="priem-1"><code>Объясни, что такое нейросеть: три предложения, без терминов, один пример с кухни</code></pre><button class="copy-button" type="button" data-copy-target="priem-1" aria-label="Скопировать запрос с явными инструкциями" aria-live="polite">Скопировать</button></div>
+<div class="info-card" id="otvet-1a"><p><b>Ответ без дополнительного уточнения (выдержка, всего 401 слово)</b></p><p><b>Нейросеть</b> (искусственная нейронная сеть) — это математическая модель, которая учится находить закономерности в данных. Идея взята у мозга, но устроена она гораздо проще: это не «искусственный мозг», а большая функция с настраиваемыми параметрами.</p></div>
+<div class="info-card" id="otvet-1b"><p><b>Ответ с дополнительным уточнением, целиком (64 слова)</b></p><p>Нейросеть — это программа, которая учится на множестве примеров, постепенно подмечая, что в них важно, а что нет. Её не программируют правилами вручную: ей много раз показывают правильные ответы, и она сама подстраивается, пока не начнёт угадывать верно. Это как начинающий повар, который сотни раз пробует суп и слушает, «пересолено» или «в самый раз», а потом уже сам, без подсказок, чувствует, сколько соли нужно.</p></div>
+<p><b>До и после. Проверка в Claude 12 октября.</b> Без дополнительного уточнения пришло 401 слово: длинное объяснение устройства нейросети, формула и специальные названия. С дополнительным уточнением 64 слова, три предложения и один пример: начинающий повар пробует суп, слушает «пересолено» или «в самый раз» и постепенно учится выбирать количество соли</p>
+<div class="result"><p><b>Результат:</b> ответ стал короче и проще. Проверь три условия:</p><ul><li><b>Длина:</b> три предложения</li><li><b>Слова:</b> без специальных терминов</li><li><b>Пример:</b> понятен по обычной работе на кухне</li></ul></div>
+<h3>Приём 2. Попроси решить по шагам и проверить</h3>
+<p>Почему это работает: нейросеть пишет ответ шаг за шагом, и ошибку в шагах увидеть проще, чем в одном итоговом числе. Попроси: «Реши по шагам и проверь ответ». Проверка обратным действием здесь - сложить сдачу и чек и получить исходные 2000 рублей</p>
+<p><b>Было:</b> задача без отдельной просьбы о проверке</p>
+<div class="code-card"><pre id="priem-2-do"><code>В кафе купили 3 кофе по 285 рублей и 2 круассана по 190 рублей. На весь чек действует скидка 15%. Сколько сдачи с 2000 рублей?</code></pre><button class="copy-button" type="button" data-copy-target="priem-2-do" aria-label="Скопировать второй запрос до уточнения" aria-live="polite">Скопировать</button></div>
+<p><b>Стало:</b> та же задача с проверкой</p>
+<div class="code-card"><pre id="priem-2"><code>В кафе купили 3 кофе по 285 рублей и 2 круассана по 190 рублей. На весь чек действует скидка 15%. Сколько сдачи с 2000 рублей? Реши по шагам, в конце проверь ответ обратным действием</code></pre><button class="copy-button" type="button" data-copy-target="priem-2" aria-label="Скопировать запрос на объяснение и проверку" aria-live="polite">Скопировать</button></div>
+<p><b>До и после. Проверка в Claude 12 октября.</b> Оба ответа верны: сдача 950,25 рубля. Без дополнительного уточнения тоже были шаги расчёта. С дополнительным уточнением в конце появились проверки: сдача 950,25 плюс чек 1049,75 дают 2000 рублей; чек после скидки пересчитывается обратно, и получается исходная сумма 1235 рублей</p>
+<div class="info-card" id="otvet-2b"><p><b>Проверка из ответа с дополнительным уточнением (выдержка)</b></p><ol><li>Сдача + оплата = исходная сумма:<br>950,25 + 1049,75 = 2000 ✅</li><li>Оплата ÷ 0,85 = чек без скидки:<br>1049,75 ÷ 0,85 = 1235 ✅</li><li>Чек без скидки раскладывается на покупки:<br>1235 − 380 = 855, 855 ÷ 3 = 285 ✅; 380 ÷ 2 = 190 ✅</li></ol></div>
+<div class="result"><p><b>Результат:</b> цифра сдачи в обоих ответах одна. Но во втором её можно проверить за десять секунд, не пересчитывая всю задачу заново. Для денег всё равно сверь калькулятором</p></div>
+<h3>Приём 3. Попроси несколько вариантов и выбор по критерию</h3>
+<p>Почему это работает: предложить решения и отобрать подходящие - разные действия (<a href="#popytki">мысль 8</a>). В лекции сначала получают много попыток, потом отбирают удачные. В чате попроси несколько вариантов и выбор по условию, которое задал ты. Здесь выбираем название, понятное с первого раза</p>
+<p>В чате ты просишь нейросеть выбрать и сам решаешь, согласен ли с выбором. Отдельное обучение на удачных попытках из мысли 8 проводят разработчики</p>
+<p><b>Было:</b> просьба придумать название</p>
+<div class="code-card"><pre id="priem-3-do"><code>Придумай название для моего канала про личные финансы для мам в декрете</code></pre><button class="copy-button" type="button" data-copy-target="priem-3-do" aria-label="Скопировать третий запрос до уточнения" aria-live="polite">Скопировать</button></div>
+<p><b>Стало:</b> варианты, слабые места и условие выбора</p>
+<div class="code-card"><pre id="priem-3"><code>Придумай пять названий для моего канала про личные финансы для мам в декрете. У каждого назови слабое место. Выбери лучшее по критерию «понятно с первого раза» и объясни выбор</code></pre><button class="copy-button" type="button" data-copy-target="priem-3" aria-label="Скопировать запрос на варианты и отбор" aria-live="polite">Скопировать</button></div>
+<p><b>До и после. Проверка в Claude 12 октября.</b> Без дополнительного уточнения пришли 12 названий и три «фаворита». Среди них «Пока малыш спит» и «Не декрет, а депозит»; слабые места не перечислены. С дополнительным уточнением пришли пять вариантов, у каждого назван недостаток, а по условию «понятно с первого раза» выбрано «Деньги в декрете»</p>
+<div class="info-card" id="otvet-3a"><p><b>Без дополнительного уточнения (выдержка): три «фаворита»</b></p><ol><li><b>«Декрет в плюсе»</b>: сразу понятна аудитория и обещание, звучит позитивно.</li><li><b>«Пока малыш спит»</b>: очень узнаваемо для мам, вызывает улыбку и подходит под формат коротких постов.</li><li><b>«Не декрет, а депозит»</b>: запоминается и хорошо работает как слоган.</li></ol></div>
+<div class="info-card" id="otvet-3b"><p><b>С дополнительным уточнением (выдержка): выбор и причина</b></p><p><b>«Деньги в декрете».</b></p><p>Почему:</p><ul><li><b>Работает в поиске.</b> Мама набирает «деньги декрет», «финансы в декрете» и находит канал по прямому совпадению.</li><li><b>Не сужает тему.</b> В отличие от «Декретного бюджета», сюда помещаются экономия, пособия, подработка и первые инвестиции.</li></ul><p>Сухость, главный минус этого варианта, легко компенсировать описанием канала или подзаголовком.</p></div>
+<p>Во втором ответе объяснён выбор: в названии прямо видны тема и аудитория. Главный минус тоже признан: оно звучит сухо. У варианта «Мама считает» замечена двусмысленность: это может быть и счёт для детей, и бухгалтерия, поэтому личные финансы не очевидны</p>
+<div class="result"><p><b>Результат:</b> видно, почему выбрано именно это название:</p><ul><li><b>Тема:</b> понятно, что канал про деньги</li><li><b>Аудитория:</b> понятно, для кого он</li><li><b>Недостаток:</b> известен до окончательного выбора</li></ul></div>
+</section>
+
+<section class="content-section" id="sources"><p class="section-label">Источники</p><h2>Откуда взят конспект</h2>
+<p>Конспект подготовлен по записи вводной лекции Stanford CS229 весны 2026 года: английской речи и показанным слайдам. Это пересказ выбранных мыслей без формул, а не полный перевод. Таймкоды ведут к соответствующим местам оригинала; примеры запросов для чата составлены для этой статьи</p>
+<ul class="sources"><li><a href="https://www.youtube.com/watch?v=DATnpGoGhM8">Оригинальная лекция Stanford Online: Lecture 1, Introduction</a></li><li><a href="https://cs229.stanford.edu/index.html-spr26">Курс CS229 весны 2026 года: программа и материалы Стэнфорда</a></li></ul>
+</section>
+<section class="next-read" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">Как применить инструкции и проверку в своём чате</p><ul><li><a href="../svoy-stil-otvetov/"><span class="title">Как научить Claude писать в твоём стиле</span><span class="why">Закрепить требования к длине и манере ответов для следующих разговоров</span></a></li><li><a href="../vybor-modeli-i-effort/"><span class="title">Как выбрать модель для своей задачи</span><span class="why">Какую нейросеть включить для простой работы, а какую для сложной</span></a></li></ul></section>
+<p class="cta-question">Осталось решить, какую работу отдать нейросети</p>
+<section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
+<footer class="foot">Конспект подготовлен 13 октября 2026 года. Лекция и сравнения лектора относятся к весне 2026 года<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+</article></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Применить рассуждение</p>
+      <h2>Нейросеть и глубина рассуждений под задачу</h2>
+      <p><a href="../vybor-modeli-i-effort/">Открыть статью</a></p>
+</aside></div><div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+</div>
+<script src="../../assets/image-viewer.js"></script>
+<script>
+var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline" class="cookie-close" aria-label="Закрыть без аналитики" title="Закрыть без аналитики"><span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>

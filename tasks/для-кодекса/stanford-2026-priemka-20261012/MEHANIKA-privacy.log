@@ -1,0 +1,23 @@
+COMMAND: node --test tests/privacy.test.cjs
+
+✔ no network before consent, even with a valid ID (1.148708ms)
+✔ empty ID never loads, before/after click or on a returning visit (1.088708ms)
+✔ accepted choice is stored; valid ID loads once and initializes after load (0.362417ms)
+✔ explicit refusal persists and makes no requests, including next visit (0.429375ms)
+✔ returning consent loads; unknown storage values do not consent (1.120666ms)
+✔ invalid IDs cannot load a script (1.926125ms)
+✔ blocked localStorage does not imply consent and still allows a session choice (0.225875ms)
+✔ footer reopens settings; refusing destroys loaded counter and reloads (0.23825ms)
+✔ refusal during script download cannot initialize from a late onload (0.255292ms)
+✔ storage refusal in another tab stops the counter; unrelated keys do nothing (0.29325ms)
+✔ clearing storage in another tab revokes consent (0.211208ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 39.233792
+
+EXIT CODE: 0

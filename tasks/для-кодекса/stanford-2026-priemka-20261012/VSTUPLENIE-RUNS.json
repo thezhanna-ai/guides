@@ -1,0 +1,64 @@
+{
+  "html_sha256": "ddcd0d88510c521d3d07f347e206f1bc1579308bcb7fc86ead88f299c574d6e5",
+  "runs": [
+    {
+      "name": "proverka",
+      "command": "python3 tasks/для-кодекса/stanford-2026-konspekt/proverka.py",
+      "exit_code": 0,
+      "log": "VSTUPLENIE-proverka.log"
+    },
+    {
+      "name": "unittest",
+      "command": "python3.12 -m unittest discover -s tests",
+      "exit_code": 0,
+      "log": "VSTUPLENIE-unittest.log"
+    },
+    {
+      "name": "erid",
+      "command": "node --test tests/erid.test.cjs",
+      "exit_code": 0,
+      "log": "VSTUPLENIE-erid.log"
+    },
+    {
+      "name": "filtry",
+      "command": "node --test tests/filtry.test.cjs",
+      "exit_code": 0,
+      "log": "VSTUPLENIE-filtry.log"
+    },
+    {
+      "name": "image-viewer",
+      "command": "node --test tests/image-viewer.test.cjs",
+      "exit_code": 0,
+      "log": "VSTUPLENIE-image-viewer.log"
+    },
+    {
+      "name": "privacy",
+      "command": "node --test tests/privacy.test.cjs",
+      "exit_code": 0,
+      "log": "VSTUPLENIE-privacy.log"
+    },
+    {
+      "name": "sobrat-glavnuyu",
+      "command": "python3 scripts/sobrat_glavnuyu.py --proverit",
+      "exit_code": 0,
+      "log": "VSTUPLENIE-sobrat-glavnuyu.log"
+    },
+    {
+      "name": "diff-check",
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log": "VSTUPLENIE-diff-check.log"
+    }
+  ],
+  "expected_initial_failure": {
+    "command": "python3 tasks/для-кодекса/stanford-2026-konspekt/proverka.py",
+    "error": "AssertionError: ('help-banner', {'new': 0, 'reference': 1})",
+    "resolution": "Article-specific expectation changed to zero; explicit absence of removed IDs and anchor added"
+  },
+  "environment_failure": {
+    "command": "python3 -m unittest discover -s tests",
+    "python": "3.9.6",
+    "error": "TypeError: zip() takes no keyword arguments",
+    "resolution": "Repeated unchanged tests with installed Python 3.12; 160 tests OK"
+  }
+}
