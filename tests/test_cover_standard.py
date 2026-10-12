@@ -177,12 +177,22 @@ class CoverStandardTest(unittest.TestCase):
             self.assertEqual(hashlib.sha256((ROOT/item['image']).read_bytes()).hexdigest(), item['sha256'],
                              f'{item["image"]}: обложку за пределами задания нельзя пересобирать')
 
-    def test_this_update_keeps_all_46_other_cover_pixels_and_files(self):
-        base = '0c6dc66'
+    def test_chat_cover_labels_match_originals(self):
+        spec = importlib.util.spec_from_file_location('cover_standard', ROOT / 'scripts/build_cover_standard.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        _, layouts = self.layouts()
+        sections = {slug: section for slug, section, _, _ in module.OTHER}
+        for slug in OTHER[:2]:
+            self.assertEqual(sections[slug], 'CLAUDE · ЧАТ', f'{slug}: сборщик изменил исходную метку')
+            self.assertEqual(layouts[slug]['section'], 'CLAUDE · ЧАТ', f'{slug}: на обложке должна быть исходная метка')
+
+    def test_this_update_keeps_all_51_other_cover_pixels_and_files(self):
+        base = '978bf55fb97ebc77c85adbfedda5fcb3fe478b94'
         registry = json.loads(subprocess.check_output(['git', 'show', base+':data/OBLOZHKI.json'], cwd=ROOT))
-        changed = set(SERIES)
+        changed = set(OTHER[:2])
         unchanged = [item for slug, item in registry.items() if slug not in changed]
-        self.assertEqual(len(unchanged), 46)
+        self.assertEqual(len(unchanged), 51)
         for item in unchanged:
             self.assertEqual(hashlib.sha256((ROOT/item['image']).read_bytes()).hexdigest(), item['sha256'])
 

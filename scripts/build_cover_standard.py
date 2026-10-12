@@ -47,8 +47,8 @@ SERIES = [
 PROBES = [1, 3, 1, 1, 2, 3, 3]  # Резерв только для slide-01 без фотографии
 SELECTION = OUT / 'carousel-selection.json'
 OTHER = [
-    ('raspisanie-zadach-v-claude', 'Кнопка за кнопкой', 'Задачи по\nрасписанию', 'План недели готов к 7:30'),
-    ('zagruzka-faylov-v-claude', 'Кнопка за кнопкой', 'Загрузка\nфайлов', 'Один файл или целая пачка'),
+    ('raspisanie-zadach-v-claude', 'CLAUDE · ЧАТ', 'Задачи по\nрасписанию', 'План недели готов к 7:30'),
+    ('zagruzka-faylov-v-claude', 'CLAUDE · ЧАТ', 'Загрузка\nфайлов', 'Один файл или целая пачка'),
     ('opus-55-protiv-gpt-6-astra', 'Claude Code · Codex', 'Opus\nпротив Astra', 'Один промпт, два видео'),
     ('konspekt-rechi-v-chatgpt', 'CHATGPT', 'Пять\nконспектов', 'Как запомнить длинный текст?'),
 ]
