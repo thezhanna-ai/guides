@@ -154,7 +154,12 @@ for section_id in ['opyt', 'prompt', 'skorost', 'imagenet', 'slova', 'instrukcii
         assert count == 0, ('unexpected_h3_in_thought_3', count)
     else:
         assert count >= 1, ('thought_without_h3', section_id)
+# ТЗ 12.10 «Вступление» удаляет памятку только из этой статьи
+assert 'pamyatka' not in ids and 'pamyatka-text' not in ids
+assert not any(a.attrs.get('href') == '#pamyatka' for a in doc.root.all(tag='a'))
 for label,counts in results['formatting'].items():
-    if label != 'h3':
+    if label == 'help-banner':
+        assert counts['new'] == 0, (label,counts)
+    elif label != 'h3':
         assert counts['new'] >= counts['reference'], (label,counts)
 print(json.dumps(results,ensure_ascii=False,indent=2))
