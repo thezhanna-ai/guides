@@ -99,7 +99,10 @@ results['draft_state'] = {k:row[k] for k in ['status','vydacha','kod_slovo']}
 results['noindex'] = '<meta name="robots" content="noindex, nofollow">' in source
 results['absent_from_home'] = f'href="claude-ai/{SLUG}/"' not in (ROOT/'index.html').read_text()
 results['absent_from_sitemap'] = SLUG not in (ROOT/'sitemap.xml').read_text()
-assert 0.85 <= results['words_new']/results['words_reference'] <= 1.15
+# ТЗ второй переписки задаёт абсолютный диапазон и сокращает мысли 2/3
+# вместо старого нижнего допуска и сравнения общего числа h3 с образцом
+results['word_range'] = {'minimum': 2400, 'maximum': 3200}
+assert 2400 <= results['words_new'] <= 3200
 for k in ['long_dashes_entire_html','foreign_names_outside_ad','price_words_outside_ad','step_zero','gendered_reader_forms','gendered_reflexive_address','formula_markers_in_article','paragraph_final_dots','prompt_final_dots','paragraph_bad_endings']:
     assert results[k] == 0, (k,results[k])
 assert results['metadata_description_match']
@@ -107,6 +110,14 @@ assert results['cta_byte_match'] and len(results['thoughts']) == 8
 assert results['noindex'] and results['absent_from_home'] and results['absent_from_sitemap']
 assert results['draft_state'] == {'status':'draft','vydacha':'net','kod_slovo':'МОЗГ'}
 assert not results['broken_local_fragments'] and not results['broken_copy_targets']
+results['thought_h3_counts'] = {}
+for section_id in ['opyt', 'prompt', 'skorost', 'imagenet', 'slova', 'instrukcii', 'mysli', 'popytki']:
+    section = re.search(r'<section\b[^>]*id="' + section_id + r'"[^>]*>(.*?)</section>', article, re.S)
+    assert section, ('missing_thought', section_id)
+    count = len(re.findall(r'<h3\b', section[1]))
+    results['thought_h3_counts'][section_id] = count
+    assert count >= 1, ('thought_without_h3', section_id)
 for label,counts in results['formatting'].items():
-    assert counts['new'] >= counts['reference'], (label,counts)
+    if label != 'h3':
+        assert counts['new'] >= counts['reference'], (label,counts)
 print(json.dumps(results,ensure_ascii=False,indent=2))

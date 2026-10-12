@@ -1,0 +1,24 @@
+COMMAND: node tests/privacy.test.cjs
+CWD: /Users/zslepova/IvanOS/.worktrees/stanford-2026-konspekt
+EXIT_CODE: 0
+HTML_SHA256: 697bfd0d8e25438947168a09633d57d15002514bffcdbe5513163ab2cd173d00
+OUTPUT:
+✔ no network before consent, even with a valid ID (2.233208ms)
+✔ empty ID never loads, before/after click or on a returning visit (2.369583ms)
+✔ accepted choice is stored; valid ID loads once and initializes after load (0.940959ms)
+✔ explicit refusal persists and makes no requests, including next visit (1.032667ms)
+✔ returning consent loads; unknown storage values do not consent (2.557792ms)
+✔ invalid IDs cannot load a script (4.567542ms)
+✔ blocked localStorage does not imply consent and still allows a session choice (0.529333ms)
+✔ footer reopens settings; refusing destroys loaded counter and reloads (0.640459ms)
+✔ refusal during script download cannot initialize from a late onload (0.592959ms)
+✔ storage refusal in another tab stops the counter; unrelated keys do nothing (0.692958ms)
+✔ clearing storage in another tab revokes consent (0.523125ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 21.496959
