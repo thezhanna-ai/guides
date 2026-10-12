@@ -1,0 +1,37 @@
+.....EFF..
+======================================================================
+ERROR: test_selected_photos_really_appear_in_cover_frames (test_cover_standard.CoverStandardTest.test_selected_photos_really_appear_in_cover_frames)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/oblozhki-standart-20261012/tests/test_cover_standard.py", line 102, in test_selected_photos_really_appear_in_cover_frames
+    centering=tuple(meta['crop_centers'][index]))
+                    ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'crop_centers'
+
+======================================================================
+FAIL: test_series_frames_have_no_background_bands (test_cover_standard.CoverStandardTest.test_series_frames_have_no_background_bands)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/oblozhki-standart-20261012/tests/test_cover_standard.py", line 126, in test_series_frames_have_no_background_bands
+    self.assertNotEqual(photo.crop((x,0,x+1,photo.height)).getextrema(),
+AssertionError: ((16, 16), (47, 47), (48, 48)) == ((16, 16), (47, 47), (48, 48)) : promty-sveta-dlya-foto-chatgpt
+
+======================================================================
+FAIL: test_series_geometry_and_titles (test_cover_standard.CoverStandardTest.test_series_geometry_and_titles)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/.worktrees/oblozhki-standart-20261012/tests/test_cover_standard.py", line 57, in test_series_geometry_and_titles
+    self.assertEqual([b[2]-b[0] for b in frames], [269.5, 269.5], f'{slug}: ширина рамок различается')
+AssertionError: Lists differ: [300, 300] != [269.5, 269.5]
+
+First differing element 0:
+300
+269.5
+
+- [300, 300]
++ [269.5, 269.5] : promty-sveta-dlya-foto-chatgpt: ширина рамок различается
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.499s
+
+FAILED (failures=2, errors=1)

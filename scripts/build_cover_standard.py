@@ -9,6 +9,7 @@ import hashlib
 import html
 import io
 import json
+import math
 from pathlib import Path
 import re
 import subprocess
@@ -24,10 +25,16 @@ FONTS = {
     'subtitle': {'family': 'Spectral', 'weight': 400, 'size': 42},
     'site': {'family': 'JetBrains Mono', 'weight': 400, 'size': 30},
 }
-PAIR = {'frames': [[884, 260, 1184, 560], [1244, 260, 1544, 560]],
-        'label_centers': [1034, 1394], 'label_baselines': [630, 630],
+# Дробные координаты сохраняют равные рамки и точные поля 40/48 px
+PAIR = {'frames': [[973, 256+1/3, 1242.5, 615+2/3],
+                   [1282.5, 256+1/3, 1552, 615+2/3]],
+        'label_centers': [1107.75, 1417.25], 'label_baselines': [672, 672],
         'label_font': {'family': 'JetBrains Mono', 'weight': 400, 'size': 42},
-        'border': {'width': 3, 'color': '#BBC7CA'}, 'fit': 'contain'}
+        'border': {'width': 3, 'color': '#BBC7CA'}, 'fit': 'fit'}
+CROP_CENTERS = {
+    'promty-igrushki-personazhi-chatgpt': [[0.5, 0.5], [0.5, 0.65]],
+    'promty-retro-ustroystvo-chatgpt': [[0.5, 0.5], [0.5, 0.5]],
+}
 SERIES = [
     ('promty-sveta-dlya-foto-chatgpt', 48, 'Свет и камера'),
     ('promty-tovar-reklama-chatgpt', 72, 'Товар и реклама'),
@@ -65,8 +72,11 @@ def validate_layout(meta):
         raise ValueError(f'{slug}: шрифты или кегли отличаются от канона')
     if meta['background'] != BACKGROUND:
         raise ValueError(f'{slug}: фон отличается от ЧЕТЫРЕ')
-    if meta.get('pair') is not None and meta['pair'] != PAIR:
-        raise ValueError(f'{slug}: рамки или базовая линия было/стало отличаются от серии')
+    if meta.get('pair') is not None:
+        if meta['pair'] != PAIR:
+            raise ValueError(f'{slug}: рамки или базовая линия было/стало отличаются от серии')
+        if max(box[2] for box in meta['title_boxes']) >= PAIR['frames'][0][0]:
+            raise ValueError(f'{slug}: заголовок заходит на рамки серии')
 
 
 def font(kind, size=None):
@@ -121,6 +131,13 @@ def render(slug, section, title, subtitle, probe=None):
     assets = f'claude-ai/{slug}/assets/'
     if probe:
         meta['pair'] = PAIR
+        meta['crop_centers'] = CROP_CENTERS.get(slug, [[0.5, 0.5], [0.5, 0.5]])
+        # Только фото и рамки в масштабе 6: половины и трети пикселя точны
+        scale = 6
+        left = PAIR['frames'][0][0]
+        top = int(PAIR['frames'][0][1])
+        pair_size = (PAIR['frames'][1][2]-left, math.ceil(PAIR['frames'][0][3])-top)
+        pair_canvas = Image.new('RGB', tuple(n*scale for n in pair_size), BACKGROUND)
         selection = json.loads(SELECTION.read_text())['covers']
         row = next(item for item in selection if item['slug'] == slug)
         meta['carousel'] = row['carousel']
@@ -129,16 +146,24 @@ def render(slug, section, title, subtitle, probe=None):
             im = (selected_source(meta, row['sources'][index]) if row['sources']
                   else source(meta, assets + f'proba-{probe}-{state}.webp'))
             box = PAIR['frames'][index]
-            # Целое фото внутри одинаковой рамки: без обрезки ног, лица или надписей.
-            fitted = ImageOps.contain(im, (294, 294), Image.Resampling.LANCZOS)
-            canvas.paste(fitted, (box[0]+(300-fitted.width)//2, box[1]+(300-fitted.height)//2))
+            size = tuple(round((box[i+2]-box[i])*scale) for i in (0, 1))
+            fitted = ImageOps.fit(im, size, Image.Resampling.LANCZOS,
+                                  centering=tuple(meta['crop_centers'][index]))
+            xy = (round((box[0]-left)*scale), round((box[1]-top)*scale))
+            pair_canvas.paste(fitted, xy)
+            ImageDraw.Draw(pair_canvas).rectangle(
+                (*xy, xy[0]+size[0]-1, xy[1]+size[1]-1),
+                outline=PAIR['border']['color'], width=PAIR['border']['width']*scale)
+        canvas.paste(pair_canvas.resize(pair_size, Image.Resampling.LANCZOS), (left, top))
         d = ImageDraw.Draw(canvas)
-        for box in PAIR['frames']:
-            d.rectangle((box[0], box[1], box[2]-1, box[3]-1), outline='#BBC7CA', width=3)
         for i, label in enumerate(('было', 'стало')):
-            d.text((PAIR['label_centers'][i], 630), label, font=font('site', 42), fill='#F8F7F2', anchor='ms')
-        d.line((1196, 410, 1230, 410), fill='#E86F4A', width=4)
-        d.line((1218, 398, 1230, 410, 1218, 422), fill='#E86F4A', width=4)
+            d.text((PAIR['label_centers'][i], PAIR['label_baselines'][i]), label,
+                   font=font('site', PAIR['label_font']['size']), fill='#F8F7F2', anchor='ms')
+        arrow_x = (PAIR['frames'][0][2]+PAIR['frames'][1][0])/2
+        arrow_y = (PAIR['frames'][0][1]+PAIR['frames'][0][3])/2
+        d.line((arrow_x-12, arrow_y, arrow_x+12, arrow_y), fill='#E86F4A', width=4)
+        d.line((arrow_x+2, arrow_y-10, arrow_x+12, arrow_y, arrow_x+2, arrow_y+10),
+               fill='#E86F4A', width=4)
     elif slug == 'konspekt-rechi-v-chatgpt':
         im = source(meta, assets+'oblozhka-v4.webp', [760, 150, 1600, 760])
         im = ImageOps.contain(im, (740, 640), Image.Resampling.LANCZOS)
@@ -154,7 +179,7 @@ def render(slug, section, title, subtitle, probe=None):
         canvas.paste(im, (700, 0), mask)
         meta['scene_box'] = [700, 0, 1600, 840]
         meta['scene_feather_px'] = 180
-    # Единственная левая вёрстка, после иллюстрации: длинный заголовок может налезать.
+    # Общая левая вёрстка. Наложение допустимо только на одиночную сцену, не на пару.
     furniture = Image.new('RGBA', canvas.size)
     d = ImageDraw.Draw(furniture)
     label = section.upper()

@@ -101,7 +101,7 @@ draw = ImageDraw.Draw(canvas)
 titlefont = build.font('section', 27)
 smallfont = build.font('site', 18)
 draw.text((30, 20), 'КАРУСЕЛЬ И ОБЛОЖКА СТАТЬИ', font=titlefont, fill='#102F30')
-draw.text((30, 65), 'Slide-01 слева, обложка статьи справа. Полные фото без обрезки', font=smallfont, fill='#102F30')
+draw.text((30, 65), 'Slide-01 слева, обложка статьи справа. Рамки 3:4, фото без пустых полос', font=smallfont, fill='#102F30')
 for i, row in enumerate(selection):
     slug = row['slug']
     y = 115 + i*265

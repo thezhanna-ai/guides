@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 import io
+import math
 from pathlib import Path
 import subprocess
 import unittest
@@ -53,9 +54,29 @@ class CoverStandardTest(unittest.TestCase):
             self.assertEqual(m['title'], title, f'{slug}: пропали число или назначение промптов')
             self.assertEqual(m['pair'], reference, f'{slug}: рамки или базовая линия было/стало отличаются от серии')
             frames = m['pair']['frames']
-            self.assertEqual([b[2]-b[0] for b in frames], [300, 300], f'{slug}: ширина рамок различается')
-            self.assertEqual([b[3]-b[1] for b in frames], [300, 300], f'{slug}: высота рамок различается')
-            self.assertEqual(m['pair']['label_baselines'], [630, 630], f'{slug}: подписи не на одной базовой линии')
+            self.assertEqual([b[2]-b[0] for b in frames], [269.5, 269.5], f'{slug}: ширина рамок различается')
+            for box in frames:
+                self.assertAlmostEqual((box[2]-box[0])/(box[3]-box[1]), 3/4)
+            self.assertEqual(frames[0][0], 973)
+            self.assertEqual(frames[1][2], 1600-48)
+            self.assertEqual(frames[1][0]-frames[0][2], 40)
+            self.assertEqual(m['pair']['label_baselines'], [672, 672], f'{slug}: подписи не на одной базовой линии')
+            self.assertEqual(m['pair']['fit'], 'fit')
+            self.assertLess(max(b[2] for b in m['title_boxes']), frames[0][0])
+            self.assertAlmostEqual((frames[0][1]+frames[0][3])/2, (270+602)/2)
+
+    @unittest.skipIf(Image is None, 'Pillow нужен для измерения заголовка')
+    def test_series_frame_starts_40_pixels_after_widest_title(self):
+        from PIL import ImageDraw
+        spec = importlib.util.spec_from_file_location('cover_standard', ROOT / 'scripts/build_cover_standard.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        draw = ImageDraw.Draw(Image.new('RGB', (1600,840)))
+        _, layouts = self.layouts()
+        right = max(draw.textbbox((128,270), line, font=module.font('title'), anchor='lt')[2]
+                    for slug in SERIES for line in layouts[slug]['title'].splitlines())
+        for slug in SERIES:
+            self.assertEqual(layouts[slug]['pair']['frames'][0][0], right+40)
 
     def test_carousel_sources_and_full_resolution_hashes(self):
         _, layouts = self.layouts()
@@ -78,22 +99,45 @@ class CoverStandardTest(unittest.TestCase):
 
     @unittest.skipIf(Image is None, 'Pillow нужен для сверки реальных фото')
     def test_selected_photos_really_appear_in_cover_frames(self):
-        from PIL import ImageOps, ImageDraw, ImageChops
+        from PIL import ImageOps, ImageChops
         reg, layouts = self.layouts()
-        for slug in SERIES[2:]:
+        for slug in SERIES:
             meta = layouts[slug]
             cover = Image.open(ROOT / reg[slug]['image']).convert('RGB')
-            for box, item in zip(meta['pair']['frames'], meta['sources']):
-                source = Image.open(ROOT / item['path']).convert('RGB')
-                fitted = ImageOps.contain(source, (294, 294), Image.Resampling.LANCZOS)
-                x, y = box[0] + (300-fitted.width)//2, box[1] + (300-fitted.height)//2
-                diff = ImageChops.difference(cover.crop((x, y, x+fitted.width, y+fitted.height)), fitted)
-                # Заголовок рисуется поверх рамки по принятому стандарту.
-                mask = Image.new('L', fitted.size, 255)
-                draw = ImageDraw.Draw(mask)
-                for left, top, right, bottom in meta['title_boxes']:
-                    draw.rectangle((left-x, top-y, right-x, bottom-y), fill=0)
-                self.assertIsNone(ImageChops.multiply(diff, mask.convert('RGB')).getbbox(), slug)
+            expected_pair = Image.new('RGB', (3474, 2160), '#102F30')
+            for index, item in enumerate(meta['sources']):
+                if item['revision'] == 'workspace-copy':
+                    data = (ROOT / item['path']).read_bytes()
+                else:
+                    data = subprocess.check_output(['git', 'show', item['revision']+':'+item['path']], cwd=ROOT)
+                source = Image.open(io.BytesIO(data)).convert('RGB')
+                fitted = ImageOps.fit(source, (1617, 2156), Image.Resampling.LANCZOS,
+                                      centering=tuple(meta['crop_centers'][index]))
+                expected_pair.paste(fitted, (1857*index, 2))
+            expected_pair = expected_pair.resize((579, 360), Image.Resampling.LANCZOS)
+            for box in meta['pair']['frames']:
+                # Реальное фото во всей рамке; исключается только край обводки/сглаживания
+                inner = (math.ceil(box[0])+6, math.ceil(box[1])+6,
+                         math.floor(box[2])-6, math.floor(box[3])-6)
+                expected = expected_pair.crop((inner[0]-973, inner[1]-256,
+                                              inner[2]-973, inner[3]-256))
+                self.assertIsNone(ImageChops.difference(cover.crop(inner), expected).getbbox(), slug)
+
+    @unittest.skipIf(Image is None, 'Pillow нужен для проверки пустых полос')
+    def test_series_frames_have_no_background_bands(self):
+        reg, layouts = self.layouts()
+        background = (16, 47, 48)
+        for slug in SERIES:
+            cover = Image.open(ROOT / reg[slug]['image']).convert('RGB')
+            for box in layouts[slug]['pair']['frames']:
+                photo = cover.crop((math.ceil(box[0])+4, math.ceil(box[1])+4,
+                                    math.floor(box[2])-4, math.floor(box[3])-4))
+                for y in range(photo.height):
+                    self.assertNotEqual(photo.crop((0,y,photo.width,y+1)).getextrema(),
+                                        tuple((c,c) for c in background), slug)
+                for x in range(photo.width):
+                    self.assertNotEqual(photo.crop((x,0,x+1,photo.height)).getextrema(),
+                                        tuple((c,c) for c in background), slug)
 
     def test_responsive_images_og_and_homepage(self):
         reg, _ = self.layouts()
@@ -133,12 +177,12 @@ class CoverStandardTest(unittest.TestCase):
             self.assertEqual(hashlib.sha256((ROOT/item['image']).read_bytes()).hexdigest(), item['sha256'],
                              f'{item["image"]}: обложку за пределами задания нельзя пересобирать')
 
-    def test_this_update_keeps_all_48_other_cover_pixels_and_files(self):
-        base = 'e0e4ceaf8a916d172ed96273c1f52b1f885ea54f'
+    def test_this_update_keeps_all_46_other_cover_pixels_and_files(self):
+        base = '0c6dc66'
         registry = json.loads(subprocess.check_output(['git', 'show', base+':data/OBLOZHKI.json'], cwd=ROOT))
-        changed = set(SERIES[2:])
+        changed = set(SERIES)
         unchanged = [item for slug, item in registry.items() if slug not in changed]
-        self.assertEqual(len(unchanged), 48)
+        self.assertEqual(len(unchanged), 46)
         for item in unchanged:
             self.assertEqual(hashlib.sha256((ROOT/item['image']).read_bytes()).hexdigest(), item['sha256'])
 
@@ -150,7 +194,8 @@ class CoverStandardTest(unittest.TestCase):
         spec.loader.exec_module(module)
         _, layouts = self.layouts()
         for field, value, message in [('background', '#000000', 'фон'), ('fonts', {}, 'шрифты'),
-                                      ('pair', {}, 'рамки')]:
+                                      ('pair', {}, 'рамки'),
+                                      ('title_boxes', [[128,270,974,360]], 'заголовок')]:
             bad = copy.deepcopy(layouts[SERIES[0]])
             bad[field] = value
             with self.assertRaisesRegex(ValueError, message):
