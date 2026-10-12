@@ -368,7 +368,7 @@ class ArticleImagesTest(unittest.TestCase):
             slug = card.attrs["href"].split("/")[1]
             with self.subTest(slug=slug):
                 image = card.all(tag="img")[0].attrs
-                self.assertEqual(image["src"], "claude-ai/" + slug + "/assets/oblozhka.webp")
+                self.assertEqual(image["src"], self.covers[slug]["image"])
                 article = next(a for a in live if a["slug"] == slug)
                 self.assertEqual(image["alt"], article["title"] + ". " + self.covers[slug]["alt"])
                 self.assertEqual(card.attrs["aria-label"], article["title"])
