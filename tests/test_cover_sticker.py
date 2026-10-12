@@ -119,7 +119,8 @@ class CoverStickerTest(unittest.TestCase):
                          {key: value for key, value in baseline_reading.items() if key not in sticker_keys})
         for item in unchanged:
             self.assertEqual(sha((ROOT / item['image']).read_bytes()), item['sha256'])
-        changed = set(subprocess.check_output(['git', 'diff', '--name-only', base, '--', 'claude-ai'], cwd=ROOT).decode().splitlines())
+        # Новые статьи добавляют свои картинки; существующие WebP по-прежнему защищены.
+        changed = set(subprocess.check_output(['git', 'diff', '--name-only', '--diff-filter=MDR', base, '--', 'claude-ai'], cwd=ROOT).decode().splitlines())
         allowed = {f'claude-ai/{slug}/assets/oblozhka.webp' for slug in SERIES}
         allowed.update(f'claude-ai/{slug}/assets/oblozhka.reading-{width}.webp' for slug in SERIES for width in (480, 960, 1600))
         self.assertFalse({path for path in changed if path.endswith('.webp')} - allowed)

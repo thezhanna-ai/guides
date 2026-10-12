@@ -67,7 +67,7 @@ class PaletteTests(unittest.TestCase):
 
     def test_complete_shipped_css_and_templates_use_palette_without_color_literals_in_values(self):
         pages = [ROOT / 'index.html', ROOT / 'politika/index.html', *ROOT.glob('claude-ai/*/index.html')]
-        self.assertEqual(56, len(pages))
+        self.assertEqual(57, len(pages))
         for page in pages:
             with self.subTest(page=page.relative_to(ROOT)):
                 source = page.read_text()
