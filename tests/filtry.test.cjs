@@ -77,6 +77,18 @@ test('Начальная страница: 53 карточки и пять ру�
   assert.deepEqual(p.sections.map(s => s.attrs['data-section']), ['start', 'kazhdyy-den', 'kartinki', 'vaybkoding', 'servisy']);
 });
 
+test('Название уровня не входит в видимый текст карточек и поиск', () => {
+  const p = page();
+  for (const name of ['Начальный уровень', 'Средний уровень']) {
+    assert.ok(p.links.every(link => !link.textContent.includes(name)));
+    p.search(name);
+    assert.equal(p.visible().length, 0);
+    assert.ok(p.noResults.classes.has('show'));
+  }
+  p.search('');
+  assert.equal(p.visible().length, 53);
+});
+
 test('Каждое настоящее название статьи находится целиком', () => {
   const p = page();
   for (const link of p.links) {

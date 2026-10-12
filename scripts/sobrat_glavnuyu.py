@@ -323,15 +323,15 @@ def sobrat_kartochku(statya, oblozhki):
     podpis_urovnya = ""
     if uroven in UROVNI:
         podpis_urovnya = (
-            '<span class="guide-level {kod}"><span class="track-dot {kod}" aria-hidden="true"></span>'
-            '{nazvanie} уровень</span>'
+            '<span class="guide-level track-dot {kod}" role="img" '
+            'title="{nazvanie} уровень" aria-label="{nazvanie} уровень"></span>'
         ).format(kod=uroven, nazvanie=UROVNI[uroven][0])
     metki = statya.get("metki", [])
     return (
         '          <a class="guide-link" data-tags="{tags}" data-metki="{metki}" data-kod="{kod}" '
         'data-poisk="{poisk}" aria-label="{title}" href="claude-ai/{slug}/">'
         '{media}<span class="guide-body">{instrumenty}<span class="guide-summary">{summary}</span>'
-        '<span class="guide-meta">{uroven}<span class="kind {klass}">{podpis}</span></span>'
+        '<span class="guide-meta"><span class="kind {klass}">{podpis}</span>{uroven}</span>'
         '</span></a>'
     ).format(
         tags=ekranirovat(statya["tags"]),

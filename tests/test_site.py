@@ -1428,12 +1428,46 @@ class RubrikiIMetkiTest(unittest.TestCase):
             a = by_slug[card.attrs["href"].split("/")[1]]
             with self.subTest(slug=a["slug"]):
                 self.assertEqual(card.attrs["data-metki"].split(), a["metki"])
+                meta = card.all(klass="guide-meta")[0]
+                kind = card.all(klass="kind")[0]
+                self.assertIs(meta.children[0], kind)
+                self.assertEqual(kind.text_content(), self.gen.TIPY[a["tip"]][0])
                 if not a["uroven"]:
                     self.assertEqual(card.all(klass="guide-level"), [])
+                    self.assertEqual(meta.children, [kind])
                     continue
                 level = card.all(klass="guide-level")[0]
+                self.assertEqual(meta.children, [kind, level])
                 self.assertIn(a["uroven"], level.attrs["class"].split())
-                self.assertEqual(level.text_content().strip(), self.gen.UROVNI[a["uroven"]][0] + " уровень")
+                self.assertIn("track-dot", level.attrs["class"].split())
+                self.assertEqual(level.text_content(), "")
+                self.assertEqual(level.children, [])
+                name = self.gen.UROVNI[a["uroven"]][0] + " уровень"
+                self.assertEqual(level.attrs["title"], name)
+                self.assertEqual(level.attrs["aria-label"], name)
+                self.assertEqual(level.attrs["role"], "img")
+                self.assertNotIn("aria-hidden", level.attrs)
+                self.assertNotIn(name, card.text_content())
+
+    def test_card_levels_share_colors_with_header_legend(self):
+        html = HOME.read_text(encoding="utf-8")
+        doc = ImageDocument(html)
+        legend = doc.root.all(klass="levels")[0]
+        dots = legend.all(klass="track-dot")
+        self.assertEqual(len(dots), len(self.gen.UROVNI))
+        for code, (name, _) in self.gen.UROVNI.items():
+            dot = next(d for d in dots if code in d.attrs["class"].split())
+            self.assertIn(name, dot.parent.text_content())
+            self.assertIn(".track-dot.%s { background: var(--%s) }" % (code, code), html)
+
+    def test_card_generator_omits_dot_without_a_known_level(self):
+        for value in (None, "", "unknown"):
+            with self.subTest(level=value):
+                card = ImageDocument(self.gen.sobrat_kartochku(dict(self.live[0], uroven=value), {}))
+                self.assertEqual(card.root.all(klass="guide-level"), [])
+                meta = card.root.all(klass="guide-meta")[0]
+                self.assertEqual(len(meta.children), 1)
+                self.assertIn("kind", meta.children[0].attrs["class"].split())
 
     def test_level_mark_right_after_article_title(self):
         for a in self.live:
