@@ -116,7 +116,11 @@ for section_id in ['opyt', 'prompt', 'skorost', 'imagenet', 'slova', 'instrukcii
     assert section, ('missing_thought', section_id)
     count = len(re.findall(r'<h3\b', section[1]))
     results['thought_h3_counts'][section_id] = count
-    assert count >= 1, ('thought_without_h3', section_id)
+    # ТЗ третьего круга заменяет весь текст мысли 3 одним абзацем без h3
+    if section_id == 'skorost':
+        assert count == 0, ('unexpected_h3_in_thought_3', count)
+    else:
+        assert count >= 1, ('thought_without_h3', section_id)
 for label,counts in results['formatting'].items():
     if label != 'h3':
         assert counts['new'] >= counts['reference'], (label,counts)

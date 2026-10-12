@@ -1,0 +1,30 @@
+COMMAND: ['node', 'tests/image-viewer.test.cjs']
+EXIT_CODE: 0
+HTML_SHA256: 4e1afe833658133796d89175a6aa98414fa05ddf4c330cc8a1261c00edadc70a
+STDOUT:
+✔ Модалка div, nested=false: фон inert и точное восстановление (1.303833ms)
+✔ Модалка div, nested=false: обе стороны Tab и Escape (2.682458ms)
+✔ Модалка div, nested=true: фон inert и точное восстановление (1.813625ms)
+✔ Модалка div, nested=true: обе стороны Tab и Escape (1.252791ms)
+✔ Модалка dialog, nested=false: фон inert и точное восстановление (1.164ms)
+✔ Модалка dialog, nested=false: обе стороны Tab и Escape (0.711375ms)
+✔ Модалка dialog, nested=true: фон inert и точное восстановление (0.365708ms)
+✔ Модалка dialog, nested=true: обе стороны Tab и Escape (0.300166ms)
+✔ Все настоящие inline просмотрщики используют общий lifecycle и оригинальное изображение (60.155459ms)
+✔ Disabled элемент пропускается, внешний фокус возвращается в модалку (0.552792ms)
+✔ Native cancel закрывает через общий lifecycle и не теряет предшествующий inert (0.383083ms)
+✔ Удалённый trigger не получает фокус при закрытии (0.424917ms)
+✔ Каждая статья с native dialog подключает helper до promty-foto.js (19.149625ms)
+✔ Регрессия: zakryt-sekrety закрывает контейнер viewer до footer и содержит hint для onload (0.358792ms)
+✔ Регрессия: queued native close предыдущего открытия не снимает inert/overflow нового (0.451542ms)
+✔ Регрессия: promty-foto не очищает новое изображение по предыдущему queued close (1.025375ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 97.749125
+
+STDERR:
