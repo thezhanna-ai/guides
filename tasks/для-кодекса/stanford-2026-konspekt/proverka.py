@@ -105,7 +105,7 @@ for k in ['long_dashes_entire_html','foreign_names_outside_ad','price_words_outs
 assert results['metadata_description_match']
 assert results['cta_byte_match'] and len(results['thoughts']) == 8
 assert results['noindex'] and results['absent_from_home'] and results['absent_from_sitemap']
-assert results['draft_state'] == {'status':'draft','vydacha':'net','kod_slovo':''}
+assert results['draft_state'] == {'status':'draft','vydacha':'net','kod_slovo':'МОЗГ'}
 assert not results['broken_local_fragments'] and not results['broken_copy_targets']
 for label,counts in results['formatting'].items():
     assert counts['new'] >= counts['reference'], (label,counts)
