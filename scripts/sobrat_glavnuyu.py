@@ -252,6 +252,7 @@ def zagruzit_statyi():
     reestr = json.loads(REESTR.read_text(encoding="utf-8"))
     po_trassam = {}
     for statya in reestr["statyi"]:
+        tekst_iz_reestra(statya, "kratko", 80)
         if statya.get("status") != "live":
             continue
         neizvestnye = [m for m in statya.get("metki", []) if m not in METKI]
@@ -271,8 +272,11 @@ def zagruzit_oblozhki():
 
 def tekst_iz_reestra(statya, pole, limit):
     tekst = statya.get(pole)
+    if isinstance(tekst, str) and len(tekst) > limit:
+        raise ValueError("%s: поле %s содержит %d знаков, максимум %d"
+                         % (statya["slug"], pole, len(tekst), limit))
     if (not isinstance(tekst, str) or not tekst.strip() or tekst != tekst.strip()
-            or len(tekst) > limit or "\n" in tekst or "\r" in tekst):
+            or "\n" in tekst or "\r" in tekst):
         raise ValueError("%s: поле %s должно содержать одну строку от 1 до %d знаков"
                          % (statya["slug"], pole, limit))
     return tekst
@@ -347,7 +351,7 @@ def sobrat_kartochku(statya, oblozhki):
         kod=ekranirovat(statya.get("kod_slovo", "")),
         poisk=ekranirovat(" ".join([statya["title"], *statya.get("ponyatiya", []),
                                     *(METKI[m][0] for m in metki)])),
-        summary=ekranirovat(tekst_iz_reestra(statya, "kratko", 85)),
+        summary=ekranirovat(tekst_iz_reestra(statya, "kratko", 80)),
     )
 
 

@@ -464,7 +464,7 @@ class ArticleImagesTest(unittest.TestCase):
     def test_registry_captions_and_summaries_are_short_finished_unique_lines(self):
         for article in self.eligible:
             with self.subTest(slug=article["slug"]):
-                for field, limit in (("podpis", 100), ("kratko", 85)):
+                for field, limit in (("podpis", 100), ("kratko", 80)):
                     text = article[field]
                     self.assertIsInstance(text, str)
                     self.assertTrue(text.strip())
@@ -475,13 +475,75 @@ class ArticleImagesTest(unittest.TestCase):
                     self.assertNotEqual(text.casefold(), self.covers[article["slug"]]["subtitle"].casefold())
                 self.assertNotEqual(article["podpis"], article["kratko"])
 
+    def test_all_registry_summaries_are_at_most_80_characters(self):
+        for article in self.articles:
+            text = article["kratko"]
+            with self.subTest(slug=article["slug"]):
+                self.assertLessEqual(len(text), 80,
+                    "%s: kratko содержит %d знаков, максимум 80" % (article["slug"], len(text)))
+
+    def test_home_summaries_are_plain_spans_without_individual_styles(self):
+        doc = ImageDocument(HOME.read_text(encoding="utf-8"))
+        cards = doc.root.all(klass="guide-link")
+        live = [a for a in self.articles if a["status"] == "live"]
+        self.assertEqual(len(cards), len(live))
+        self.assertEqual(len(doc.root.all(klass="guide-summary")), len(cards))
+        for card in cards:
+            slug = card.attrs["href"].split("/")[1]
+            with self.subTest(slug=slug):
+                summaries = card.all(klass="guide-summary")
+                self.assertEqual(len(summaries), 1, slug)
+                summary = summaries[0]
+                self.assertEqual(summary.tag, "span", slug)
+                self.assertEqual(summary.attrs.get("class", "").split(), ["guide-summary"], slug)
+                self.assertNotIn("style", summary.attrs, slug)
+                self.assertEqual(summary.children, [], slug)
+
+    def test_template_has_one_shared_summary_font_size(self):
+        template = (ROOT / "scripts/shablon_glavnoy.html").read_text(encoding="utf-8")
+        css = "\n".join(re.findall(r"<style\b[^>]*>(.*?)</style>", template, re.S))
+        css = re.sub(r"/\*.*?\*/", "", css, flags=re.S).replace("{{", "{").replace("}}", "}")
+        sizes = []
+        for selector, declarations in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
+            if not re.search(r"\.guide-summary(?![\w-])", selector):
+                continue
+            self.assertNotRegex(declarations, r"(?:^|;)\s*font\s*:", selector)
+            for size in re.findall(r"(?:^|;)\s*font-size\s*:\s*([^;]+)", declarations):
+                self.assertEqual(selector.strip(), ".guide-summary",
+                                 "Размер подписи должен быть общим для всех карточек")
+                sizes.append(size.strip())
+        self.assertEqual(sizes, ["14.5px"], "Нужно ровно одно правило размера .guide-summary: 14.5px")
+
+    def test_card_generator_accepts_80_and_rejects_81_characters(self):
+        article = dict(self.eligible[0], kratko="я" * 80)
+        doc = ImageDocument(self.generator.sobrat_kartochku(article, {}))
+        self.assertEqual(doc.root.all(klass="guide-summary")[0].text_content(), article["kratko"])
+        article["kratko"] += "я"
+        with self.assertRaisesRegex(ValueError, article["slug"] + r".*81.*80"):
+            self.generator.sobrat_kartochku(article, {})
+
+    def test_build_and_check_reject_overlong_summaries_before_writing_even_for_drafts(self):
+        for status in ("live", "gotova", "draft"):
+            for argv in (["sobrat_glavnuyu.py"], ["sobrat_glavnuyu.py", "--proverit"]):
+                with self.subTest(status=status, argv=argv), tempfile.TemporaryDirectory() as folder:
+                    home = Path(folder) / "index.html"
+                    home.write_text("Исходная главная", encoding="utf-8")
+                    article = dict(self.eligible[0], status=status, kratko="я" * 81)
+                    with patch.object(self.generator, "REESTR") as registry, \
+                         patch.object(self.generator, "GLAVNAYA", home), \
+                         patch.object(self.generator.sys, "argv", argv):
+                        registry.read_text.return_value = json.dumps({"statyi": [article]})
+                        with self.assertRaisesRegex(ValueError, article["slug"] + r".*81.*80"):
+                            self.generator.main()
+                    self.assertEqual(home.read_text(encoding="utf-8"), "Исходная главная")
+
     def test_summary_css_has_no_clipping_or_ellipsis(self):
         rule = re.search(r"\.guide-summary\s*\{([^}]+)\}", HOME.read_text()).group(1)
         self.assertNotRegex(rule, r"line-clamp|box-orient|overflow:\s*hidden|text-overflow|max-height|(?:^|;)\s*height:")
         self.assertIn("display: block", rule)
 
     def test_generator_rejects_missing_empty_or_overlong_registry_text(self):
-        for field, limit in (("podpis", 100), ("kratko", 85)):
+        for field, limit in (("podpis", 100), ("kratko", 80)):
             for value in (None, "", "   ", 42, "я" * (limit + 1), "две\nстроки"):
                 with self.subTest(field=field, value=value):
                     article = dict(self.eligible[0], **{field: value})
