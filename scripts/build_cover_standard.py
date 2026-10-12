@@ -50,7 +50,6 @@ OTHER = [
     ('raspisanie-zadach-v-claude', 'CLAUDE · ЧАТ', 'Задачи по\nрасписанию', 'План недели готов к 7:30'),
     ('zagruzka-faylov-v-claude', 'CLAUDE · ЧАТ', 'Загрузка\nфайлов', 'Один файл или целая пачка'),
     ('opus-55-protiv-gpt-6-astra', 'Claude Code · Codex', 'Opus\nпротив Astra', 'Один промпт, два видео'),
-    ('konspekt-rechi-v-chatgpt', 'CHATGPT', 'Пять\nконспектов', 'Как запомнить длинный текст?'),
 ]
 
 
@@ -164,11 +163,6 @@ def render(slug, section, title, subtitle, probe=None):
         d.line((arrow_x-12, arrow_y, arrow_x+12, arrow_y), fill='#E86F4A', width=4)
         d.line((arrow_x+2, arrow_y-10, arrow_x+12, arrow_y, arrow_x+2, arrow_y+10),
                fill='#E86F4A', width=4)
-    elif slug == 'konspekt-rechi-v-chatgpt':
-        im = source(meta, assets+'oblozhka-v4.webp', [760, 150, 1600, 760])
-        im = ImageOps.contain(im, (740, 640), Image.Resampling.LANCZOS)
-        canvas.paste(im, (840, 170))
-        meta['scene_box'] = [840, 170, 840+im.width, 170+im.height]
     else:
         # Сцена без заголовков. Плавное соединение иллюстрации и однотонного полотна.
         im = source(meta, assets+'oblozhka-scena.webp', [700, 0, 1600, 840])
@@ -223,7 +217,7 @@ def main():
     for slug, section, title, subtitle in OTHER:
         image, meta = render(slug, section, title, subtitle)
         install(slug, image, meta, registry, inventory)
-    # Ограничиваем штатный генератор только 11 обложками. Остальные изображения неизменны.
+    # Ограничиваем штатный генератор только 10 обложками. Остальные изображения неизменны.
     opt.inventory = lambda: inventory
     opt.TEXT_PATHS.update(inventory)  # lossless: метки и число должны сохраниться
     generated = opt.generate()

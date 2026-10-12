@@ -19,7 +19,7 @@ SERIES = ['promty-sveta-dlya-foto-chatgpt', 'promty-tovar-reklama-chatgpt',
           'promty-igrushki-personazhi-chatgpt', 'promty-eda-dom-chatgpt',
           'promty-retro-ustroystvo-chatgpt']
 OTHER = ['raspisanie-zadach-v-claude', 'zagruzka-faylov-v-claude',
-         'opus-55-protiv-gpt-6-astra', 'konspekt-rechi-v-chatgpt']
+         'opus-55-protiv-gpt-6-astra']
 
 
 class CoverStandardTest(unittest.TestCase):
@@ -168,11 +168,11 @@ class CoverStandardTest(unittest.TestCase):
                 expected = image.resize((variant['width'], variant['height']), Image.Resampling.LANCZOS)
                 self.assertEqual(actual.tobytes(), expected.tobytes(), f'{slug}: размер {variant["width"]} повреждает изображение или текст')
 
-    def test_other_42_covers_are_unchanged(self):
+    def test_other_43_covers_are_unchanged(self):
         base = 'a059df2e01d424be6922cb59c4c4e078a2579daa'
         registry = json.loads(subprocess.check_output(['git', 'show', base+':data/OBLOZHKI.json'], cwd=ROOT))
         unchanged = [item for slug, item in registry.items() if slug not in SERIES + OTHER]
-        self.assertEqual(len(unchanged), 42, 'Число обложек за пределами задания изменилось')
+        self.assertEqual(len(unchanged), 43, 'Число обложек за пределами задания изменилось')
         for item in unchanged:
             self.assertEqual(hashlib.sha256((ROOT/item['image']).read_bytes()).hexdigest(), item['sha256'],
                              f'{item["image"]}: обложку за пределами задания нельзя пересобирать')
@@ -187,14 +187,38 @@ class CoverStandardTest(unittest.TestCase):
             self.assertEqual(sections[slug], 'CLAUDE · ЧАТ', f'{slug}: сборщик изменил исходную метку')
             self.assertEqual(layouts[slug]['section'], 'CLAUDE · ЧАТ', f'{slug}: на обложке должна быть исходная метка')
 
-    def test_this_update_keeps_all_51_other_cover_pixels_and_files(self):
-        base = '978bf55fb97ebc77c85adbfedda5fcb3fe478b94'
+    def test_this_update_keeps_all_52_other_cover_pixels_and_files(self):
+        base = 'e2f0969ad3d51b550c0453c15e401b802f82d88b'
         registry = json.loads(subprocess.check_output(['git', 'show', base+':data/OBLOZHKI.json'], cwd=ROOT))
-        changed = set(OTHER[:2])
+        changed = {'konspekt-rechi-v-chatgpt'}
         unchanged = [item for slug, item in registry.items() if slug not in changed]
-        self.assertEqual(len(unchanged), 51)
+        self.assertEqual(len(unchanged), 52)
         for item in unchanged:
             self.assertEqual(hashlib.sha256((ROOT/item['image']).read_bytes()).hexdigest(), item['sha256'])
+
+    def test_konspekt_preserves_accepted_cover_and_is_excluded_from_standard_build(self):
+        slug = 'konspekt-rechi-v-chatgpt'
+        key = f'claude-ai/{slug}/assets/oblozhka-v4.webp'
+        accepted = subprocess.check_output(['git', 'show', 'b57f531:'+key], cwd=ROOT)
+        self.assertEqual(hashlib.sha256((ROOT / key).read_bytes()).hexdigest(), hashlib.sha256(accepted).hexdigest())
+        registry = json.loads((ROOT / 'data/OBLOZHKI.json').read_text())
+        old = json.loads(subprocess.check_output(['git', 'show', 'b57f531:data/OBLOZHKI.json'], cwd=ROOT))
+        self.assertEqual(registry[slug], old[slug])
+        self.assertFalse((ROOT / f'claude-ai/{slug}/assets/oblozhka-layout.json').exists())
+        spec = importlib.util.spec_from_file_location('cover_standard', ROOT / 'scripts/build_cover_standard.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        self.assertNotIn(slug, [row[0] for row in module.SERIES + module.OTHER])
+        reading = json.loads((ROOT / 'data/reading-images.json').read_text())['images'][key]
+        self.assertEqual(reading['original_bytes'], len(accepted))
+        for width in (480, 960, 1600):
+            variant = (ROOT / key).with_name(f'oblozhka-v4.reading-{width}.webp')
+            self.assertTrue(variant.is_file())
+            if Image is not None:
+                with Image.open(ROOT / key) as original, Image.open(variant) as actual:
+                    expected = original.convert('RGB').resize((width, round(840*width/1600)), Image.Resampling.LANCZOS)
+                    self.assertEqual(actual.convert('RGB').tobytes(), expected.tobytes())
+        self.assertIn(key, (ROOT / 'index.html').read_text())
 
     def test_validator_rejects_drift_with_russian_message(self):
         path = ROOT / 'scripts/build_cover_standard.py'
