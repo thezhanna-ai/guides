@@ -14,7 +14,7 @@ except ImportError:
     Image = None
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCES = ROOT / 'tasks/content/2026-10-12-oblozhki-stiker'
+SOURCES = ROOT / 'tasks/content/2026-10-13-oblozhki-veer'
 SERIES = ['promty-sveta-dlya-foto-chatgpt', 'promty-tovar-reklama-chatgpt',
           'promty-blog-biznes-chatgpt', 'promty-risunok-zhivopis-chatgpt',
           'promty-igrushki-personazhi-chatgpt', 'promty-eda-dom-chatgpt',
@@ -40,7 +40,10 @@ class CoverStickerTest(unittest.TestCase):
                 self.assertEqual(sha(cover.read_bytes()), row['webp_sha256'])
                 self.assertEqual(registry[slug]['sha256'], row['webp_sha256'])
                 meta = json.loads((ROOT / registry[slug]['layout']).read_text())
-                self.assertEqual(meta['standard'], 'carousel-sticker-v1')
+                self.assertEqual(meta['standard'], 'carousel-sticker-veer-v1')
+                self.assertEqual(meta['source'], (SOURCES / f'{slug}.png').relative_to(ROOT).as_posix())
+                self.assertEqual(meta['source_sha256'], row['png_sha256'])
+                self.assertEqual(meta['rgb_sha256'], row['rgb_sha256'])
                 self.assertEqual(meta['image_sha256'], row['webp_sha256'])
 
     @unittest.skipIf(Image is None, 'Pillow нужен для SHA-256 декодированных пикселей')
@@ -74,7 +77,7 @@ class CoverStickerTest(unittest.TestCase):
         homepage = (ROOT / 'index.html').read_text()
         for slug, row in self.rows().items():
             with self.subTest(slug=slug):
-                expected = f"Обложка карусели: {row['sticker_text']}, рядом фото стало"
+                expected = f"Стикер: {row['sticker_text']}; фото было и стало"
                 self.assertEqual(registry[slug]['alt'], expected)
                 escaped = html.escape(expected, quote=True)
                 page = (ROOT / f'claude-ai/{slug}/index.html').read_text()
@@ -101,7 +104,7 @@ class CoverStickerTest(unittest.TestCase):
                         self.assertEqual(sha(actual.convert('RGB').tobytes()), sha(expected.tobytes()))
 
     def test_other_46_covers_and_reading_files_are_unchanged(self):
-        base = '64557444515145e3e4b32c2ec128e552be96e3a4'
+        base = 'c0ab717cc816d8d788ce2eac6f536f89ac9c2b6f'
         registry = json.loads(subprocess.check_output(['git', 'show', base+':data/OBLOZHKI.json'], cwd=ROOT))
         unchanged = [item for slug, item in registry.items() if slug not in SERIES]
         self.assertEqual(len(unchanged), 46)
