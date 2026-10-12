@@ -1,0 +1,50 @@
+[
+  {
+    "name": "PROVERKA",
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3.12 tasks/для-кодекса/stanford-2026-konspekt/proverka.py",
+    "exit_code": 0,
+    "html_sha256": "992a8c969526c616422577bcbc79dc24dfbf59b3aa47cb47786a9e3f3428aa13"
+  },
+  {
+    "name": "PYTHON",
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3.12 -m unittest discover -s tests -p 'test_*.py'",
+    "exit_code": 0,
+    "html_sha256": "992a8c969526c616422577bcbc79dc24dfbf59b3aa47cb47786a9e3f3428aa13"
+  },
+  {
+    "name": "NODE-ERID",
+    "command": "node tests/erid.test.cjs",
+    "exit_code": 0,
+    "html_sha256": "992a8c969526c616422577bcbc79dc24dfbf59b3aa47cb47786a9e3f3428aa13"
+  },
+  {
+    "name": "NODE-FILTRY",
+    "command": "node tests/filtry.test.cjs",
+    "exit_code": 0,
+    "html_sha256": "992a8c969526c616422577bcbc79dc24dfbf59b3aa47cb47786a9e3f3428aa13"
+  },
+  {
+    "name": "NODE-IMAGE-VIEWER",
+    "command": "node tests/image-viewer.test.cjs",
+    "exit_code": 0,
+    "html_sha256": "992a8c969526c616422577bcbc79dc24dfbf59b3aa47cb47786a9e3f3428aa13"
+  },
+  {
+    "name": "NODE-PRIVACY",
+    "command": "node tests/privacy.test.cjs",
+    "exit_code": 0,
+    "html_sha256": "992a8c969526c616422577bcbc79dc24dfbf59b3aa47cb47786a9e3f3428aa13"
+  },
+  {
+    "name": "GLAVNAYA",
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3.12 scripts/sobrat_glavnuyu.py --proverit",
+    "exit_code": 0,
+    "html_sha256": "992a8c969526c616422577bcbc79dc24dfbf59b3aa47cb47786a9e3f3428aa13"
+  },
+  {
+    "name": "DIFF-CHECK",
+    "command": "git diff --check",
+    "exit_code": 0,
+    "html_sha256": "992a8c969526c616422577bcbc79dc24dfbf59b3aa47cb47786a9e3f3428aa13"
+  }
+]

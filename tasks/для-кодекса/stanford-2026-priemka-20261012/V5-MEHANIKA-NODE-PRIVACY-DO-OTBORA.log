@@ -1,0 +1,19 @@
+✔ no network before consent, even with a valid ID (2.656375ms)
+✔ empty ID never loads, before/after click or on a returning visit (3.204292ms)
+✔ accepted choice is stored; valid ID loads once and initializes after load (1.768791ms)
+✔ explicit refusal persists and makes no requests, including next visit (0.589833ms)
+✔ returning consent loads; unknown storage values do not consent (1.654333ms)
+✔ invalid IDs cannot load a script (5.444667ms)
+✔ blocked localStorage does not imply consent and still allows a session choice (0.489208ms)
+✔ footer reopens settings; refusing destroys loaded counter and reloads (1.125375ms)
+✔ refusal during script download cannot initialize from a late onload (0.862959ms)
+✔ storage refusal in another tab stops the counter; unrelated keys do nothing (0.594ms)
+✔ clearing storage in another tab revokes consent (0.990583ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 26.251666

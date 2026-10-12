@@ -20,6 +20,31 @@ ref_article = re.search(r'<article>(.*?)</article>', reference, re.S)[1]
 cta_pattern = r'<section class="cta"[^>]*>.*?</section>'
 cta = re.search(cta_pattern, source, re.S)[0]
 prose = re.sub(cta_pattern, '', article, flags=re.S)
+# ТЗ четвёртого круга требует дословные ответы, включая их пунктуацию
+# Исключение допускается только после сверки каждого блока с первичными PROGONY
+quote_dir = ROOT / 'tasks/для-кодекса/stanford-2026-priemka-20261012'
+quote_manifest = json.loads((quote_dir / 'V5-CITATY.json').read_text())
+assert [q['id'] for q in quote_manifest] == ['otvet-1a', 'otvet-1b', 'otvet-2b', 'otvet-3a', 'otvet-3b']
+quote_blocks = []
+for q in quote_manifest:
+    fixture = (quote_dir / 'PROGONY' / q['fixture']).read_text()
+    assert hashlib.sha256(fixture.encode()).hexdigest() == q['source_sha256']
+    assert all(part in fixture for part in q['parts'])
+    expected = '<div class="info-card" id="' + q['id'] + '"><p><b>' + q['label'] + '</b></p>' + q['body'] + '</div>'
+    assert source.count(expected) == 1, ('quote_not_verbatim', q['id'])
+    def visible(value):
+        value = re.sub(r'^\d+\. |^- ', '', value, flags=re.M)
+        value = value.replace('**', '')
+        value = re.sub(r'<br>|</(?:p|li)>', ' ', value)
+        return ' '.join(html.unescape(re.sub(r'<[^>]+>', '', value)).split())
+    assert visible(q['body']) == visible('\n'.join(q['parts'])), ('quote_text_changed', q['id'])
+    quote_blocks.append(expected)
+editorial_source = source
+editorial_prose = prose
+for block in quote_blocks:
+    editorial_prose = editorial_prose.replace(block, '')
+    editorial_source = editorial_source.replace(block, '')
+
 doc = ImageDocument(source)
 text = ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', prose)).split())
 
@@ -32,8 +57,12 @@ results = {
     'words_reference': words(ref_article),
     'word_difference_percent': round((words(article) / words(ref_article) - 1) * 100, 2),
     'long_dashes_entire_html': len(re.findall('[—–]', source)),
+    'long_dashes_editorial_html': len(re.findall('[—–]', editorial_source)),
+    'quote_block_count': len(quote_blocks),
+    'quotes_verified_against_PROGONY': True,
     'foreign_names_outside_ad': len(re.findall(r'иван|сергеев|ivan_ai', text, re.I)),
     'price_words_outside_ad': len(re.findall(r'бесплатн|платн|оплат|платить', text, re.I)),
+    'price_words_in_verified_quotes': len(re.findall(r'бесплатн|платн|оплат|платить', html.unescape(re.sub(r'<[^>]+>', ' ', ''.join(quote_blocks))), re.I)),
     'step_zero': len(re.findall(r'Шаг\s*0', text, re.I)),
     'gendered_reader_forms': len(re.findall(r'\bты\s+[а-яё]+(?:л|ла|ли)\b', text, re.I)),
     'gendered_reflexive_address': len(re.findall(r'тебя\s+самого|нужно\s+самому|учиться\s+самому', text, re.I)),
@@ -49,7 +78,7 @@ results = {
     'broken_copy_targets': [],
     'image_dimensions': {},
 }
-for attrs, body in re.findall(r'<p\b([^>]*)>(.*?)</p>', prose, re.S):
+for attrs, body in re.findall(r'<p\b([^>]*)>(.*?)</p>', editorial_prose, re.S):
     if re.search(r'class="(?:eyebrow|meta|section-label|uroven-metka|cta-question|next-sub)(?: |")', attrs):
         continue
     value = html.unescape(re.sub(r'<[^>]+>', '', body)).strip()
@@ -103,7 +132,11 @@ results['absent_from_sitemap'] = SLUG not in (ROOT/'sitemap.xml').read_text()
 # вместо старого нижнего допуска и сравнения общего числа h3 с образцом
 results['word_range'] = {'minimum': 2400, 'maximum': 3200}
 assert 2400 <= results['words_new'] <= 3200
-for k in ['long_dashes_entire_html','foreign_names_outside_ad','price_words_outside_ad','step_zero','gendered_reader_forms','gendered_reflexive_address','formula_markers_in_article','paragraph_final_dots','prompt_final_dots','paragraph_bad_endings']:
+assert results['long_dashes_entire_html'] == sum(len(re.findall('[—–]', b)) for b in quote_blocks)
+# «Оплата» в 2b требуется дословным ТЗ; общий счёт сохранён
+assert results['price_words_in_verified_quotes'] == 2
+assert results['price_words_outside_ad'] == results['price_words_in_verified_quotes']
+for k in ['long_dashes_editorial_html','foreign_names_outside_ad','step_zero','gendered_reader_forms','gendered_reflexive_address','formula_markers_in_article','paragraph_final_dots','prompt_final_dots','paragraph_bad_endings']:
     assert results[k] == 0, (k,results[k])
 assert results['metadata_description_match']
 assert results['cta_byte_match'] and len(results['thoughts']) == 8
