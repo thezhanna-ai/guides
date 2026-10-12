@@ -694,7 +694,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#glavnoe">Шаг 5. Найди одно дело, которое продвинет остальные</a>
 <a href="#pomoshch">Не получается продолжить?</a>
 <a href="#istochniki">Источники</a>
-<a href="#dalshe">Дальше по теме</a></nav><main><article><header id="nachalo"><p class="eyebrow">Инструкция · ChatGPT.</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="На столе разложены стикеры, блокнот со списком дел и телефон с чатом" loading="eager" decoding="async" fetchpriority="high"><figcaption>Список дел, стикеры и телефон: разбираем задачи в одном чате</figcaption></figure><h1 class="article-title-v2">Разобрать завал дел в ChatGPT: 4 запроса в одном чате</h1><div class="seo-intro"><p class="lead">Дел столько, что начинаешь и не заканчиваешь, перепрыгиваешь на другое, а отложишь - забудешь. Как разобраться, за что браться первым?</p><p>Четыре запроса в одном чате ChatGPT помогут собрать список, составить план на день и передать часть подготовки нейросети. Последний запрос покажет, какое дело продвинет остальные.</p></div>
+<a href="#dalshe">Дальше по теме</a></nav><main><article><header id="nachalo"><p class="eyebrow">Инструкция · ChatGPT.</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="На столе разложены стикеры, блокнот со списком дел и телефон с чатом" loading="eager" decoding="async" fetchpriority="high"><figcaption>Список дел, стикеры и телефон: разбираем задачи в одном чате</figcaption></figure><h1 class="article-title-v2">Разобрать завал дел в ChatGPT: 4 запроса в одном чате</h1><div class="seo-intro"><p class="lead">Дел столько, что начинаешь и не заканчиваешь, перепрыгиваешь на другое, а отложишь - забудешь. Как разобраться, за что браться первым?</p><p>Четыре запроса в одном чате ChatGPT помогут собрать мысли, составить план на день и передать часть подготовки нейросети. Последний запрос покажет, какое дело продвинет остальные.</p></div>
 <p>Всё ниже можно сделать <b>на <a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq">ChatGPT Free</a> без подписки</b>. <a href="https://help.openai.com/en/articles/20001274-chatgpt-voice">Голосовой режим</a> там доступен с лимитами.</p><p class="meta">ОБНОВЛЕНО 12 ОКТЯБРЯ 2026.</p>
 </header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#kak-ustroeno">Как устроено: все запросы в одном чате</a>
 <a href="#stoimost">Сколько это стоит</a>
@@ -722,7 +722,11 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p>Открой ChatGPT и войди в свой аккаунт. Начни новый разговор: в нём соберём все дела. Если говорить сейчас неудобно, можно сразу перейти к следующему шагу и отвечать текстом.</p>
 <ul><li><b>На телефоне</b>: в приложении ChatGPT для iOS или Android нажми значок <a href="https://help.openai.com/en/articles/20001274-chatgpt-voice">Voice</a> («Голос») в строке сообщения. Разреши доступ к микрофону; при первом запуске выбери голос.</li>
 <li><b>В браузере</b>: открой <a href="https://chatgpt.com/">chatgpt.com</a> и нажми значок <a href="https://help.openai.com/en/articles/20001274-chatgpt-voice">Voice</a> («Голос») в поле запроса. Если браузер спросит доступ к микрофону, разреши его.</li></ul>
-<p>Voice запускает разговор с ответами вслух. Значок микрофона для диктовки превращает запись в текст сообщения; это другая кнопка. После запуска Voice произнеси запрос из следующего шага.</p>
+<p>Кнопка Voice («Голос»), чёрный кружок со значком звуковой волны справа в поле, видна, только когда поле ввода пустое; пока в нём есть текст или выбран GPT (специальный помощник в ChatGPT), на её месте стрелка отправки, а микрофон рядом служит для диктовки.</p>
+<p>Voice запускает разговор с ответами вслух. После запуска Voice произнеси запрос из следующего шага.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/voice-brauzer.webp" width="1222" height="1128" alt="Кнопка Voice справа в пустом поле браузера, рядом микрофон диктовки." loading="lazy" decoding="async"></div><figcaption>Кнопка Voice справа в пустом поле браузера, рядом микрофон диктовки.</figcaption></figure>
+<figure class="shot-fig"><div class="shot vertical"><img src="assets/voice-telefon.webp" width="1206" height="2622" alt="Кнопка Voice в приложении ChatGPT на телефоне." loading="lazy" decoding="async"></div><figcaption>Кнопка Voice в приложении ChatGPT на телефоне.</figcaption></figure>
+
 <div class="result"><b>Результат:</b> ChatGPT слышит твой запрос и отвечает голосом. Если микрофон не работает, отправь запрос текстом и продолжай в этом же чате.</div>
 </section>
 <section class="content-section" id="spisok"><h2>Шаг 2. Собери единый список дел</h2>
@@ -730,8 +734,15 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <div class="code-card"><pre id="prompt-1"><code>Расспроси меня, что сломано, не работает, не закончено, висит в голове. Собери единый список.
 
 Задавай по одному вопросу и жди моего ответа. Я могу говорить вперемешку: не требуй порядка. Уточняй, что именно нужно закончить, есть ли срок и от чего зависит задача. Не придумывай дел и сроков. Когда я скажу «это всё», объедини повторы и верни нумерованный список. Если сведений не хватает, отметь, что уточнить.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-1" aria-label="Скопировать запрос: единый список" aria-live="polite">Скопировать</button></div>
+<figure class="shot-fig"><div class="shot"><img src="assets/zapros-1.webp" width="1222" height="1128" alt="Первый запрос вставлен в новый чат." loading="lazy" decoding="async"></div><figcaption>Первый запрос вставлен в новый чат.</figcaption></figure>
+
 <p>Отвечай на вопросы и <b>наговаривай вперемешку</b>: что сломано, что не закончено, о чём постоянно вспоминаешь. Сортировать заранее не нужно. Когда больше ничего не приходит в голову, скажи «это всё» и дождись списка.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/otvet-vpermeshku.webp" width="1204" height="1236" alt="ChatGPT задаёт первый вопрос, в поле сообщения ответ, наговорённый вперемешку." loading="lazy" decoding="async"></div><figcaption>ChatGPT задаёт первый вопрос, в поле сообщения ответ, наговорённый вперемешку.</figcaption></figure>
+
 <p>Чтобы прочитать список, заверши голосовой разговор кнопкой выхода из Voice. Останься в этой переписке: дальше будем отправлять запросы текстом. <b>Поправь пропуски и ошибки</b> прямо здесь, чтобы план строился по твоим делам.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/spisok-1.webp" width="1204" height="968" alt="Единый список из 7 дел: первые четыре пункта." loading="lazy" decoding="async"></div><figcaption>Единый список из 7 дел: первые четыре пункта.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/spisok-2.webp" width="1204" height="1238" alt="Продолжение списка: срок указан только у дела, для которого он назван." loading="lazy" decoding="async"></div><figcaption>Продолжение списка: срок указан только у дела, для которого он назван.</figcaption></figure>
+
 <div class="result"><b>Результат:</b> в чате есть один нумерованный список без повторов. У каждого дела понятно, что надо закончить; неизвестные сроки отмечены для уточнения.</div>
 </section>
 <section class="content-section" id="plan"><h2>Шаг 3. Получи план на день</h2>
@@ -742,7 +753,12 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 Для трёх задач назови, что именно подготовишь прямо в чате и какие сведения нужны от меня. Если подходящих задач меньше трёх, скажи об этом, не выдумывай их.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-2" aria-label="Скопировать запрос: план на день" aria-live="polite">Скопировать</button></div>
 <p>Ответь, сколько времени доступно сегодня и какие сроки нельзя сдвинуть. Если ChatGPT приписывает делу срок или неверно понимает зависимость, исправь это сообщением в том же разговоре.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/plan-1.webp" width="1330" height="898" alt="После уточнения времени и сроков ChatGPT составляет план на 2 часа, начиная с коротких дел." loading="lazy" decoding="async"></div><figcaption>После уточнения времени и сроков ChatGPT составляет план на 2 часа, начиная с коротких дел.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/plan-2.webp" width="1330" height="1038" alt="Продолжение плана: у каждого дела первый шаг и условие «готово, когда»." loading="lazy" decoding="async"></div><figcaption>Продолжение плана: у каждого дела первый шаг и условие «готово, когда».</figcaption></figure>
+
 <p><b>Дела до десяти минут идут первыми</b>, как в запросе. Но следом проверь, какие задачи зависят друг от друга. В конце ChatGPT предложит подготовить до трёх задач из списка. Эти задачи понадобятся на следующем шаге.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/tri-zadachi.webp" width="1330" height="1158" alt="Три задачи, которые ChatGPT готовит в чате, и сведения, нужные от человека." loading="lazy" decoding="async"></div><figcaption>Три задачи, которые ChatGPT готовит в чате, и сведения, нужные от человека.</figcaption></figure>
+
 <div class="result"><b>Результат:</b> есть план с конкретными первыми действиями, отдельный список отложенного и задачи, для которых ChatGPT может подготовить результат в чате.</div>
 </section>
 <section class="content-section" id="peredacha"><h2>Шаг 4. Передай подготовку и разбери повторяющиеся задачи</h2>
@@ -769,8 +785,12 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p>Ответ почти всегда неприятный: дольше всего откладываешь именно это дело.</p>
 <p>Мы все знаем, что у нас висит, но порой нужен волшебный пинок, чтобы разгрести эту свалку. ChatGPT может побыть этим волшебником.</p>
 <p>Проверь в объяснении, <b>какие дела правда зависят от выбранного</b>; если связь неверна, поправь её в том же чате.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/odno-delo-1.webp" width="1330" height="1160" alt="ChatGPT выбирает подготовку замены рекламного блока: у этого дела жёсткий срок." loading="lazy" decoding="async"></div><figcaption>ChatGPT выбирает подготовку замены рекламного блока: у этого дела жёсткий срок.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/odno-delo-2.webp" width="1330" height="640" alt="Первый шаг и критерий завершения; прямой зависимости остальных задач нет." loading="lazy" decoding="async"></div><figcaption>Первый шаг и критерий завершения; прямой зависимости остальных задач нет.</figcaption></figure>
+<p>В этом примере ChatGPT выбрал дело с жёстким сроком и честно сказал, что остальные от него не зависят, поэтому объяснение и стоит проверять.</p>
+
 <p>С него и начни.</p>
-<div class="result"><b>Результат:</b> выбрано одно дело, названы зависимые от него задачи и первый шаг. Понятно, что выполнить сейчас и как увидеть, что этот шаг закончен.</div>
+<div class="result"><b>Результат:</b> выбрано одно дело, проверены зависимости или их отсутствие и назван первый шаг. Понятно, что выполнить сейчас и как увидеть, что этот шаг закончен.</div>
 </section>
 <section class="content-section" id="pomoshch"><h2>Не получается продолжить?</h2>
 <p>Напиши в том же чате, где остановка. <b>Заполни скобки</b> в запросе своими словами, чтобы ChatGPT объяснил именно твой следующий шаг.</p>
@@ -785,7 +805,70 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Следующий шаг.</p><h2>Задачи по расписанию в Claude</h2>
       <p><a href="../raspisanie-zadach-v-claude/">Настроить повторяющуюся задачу</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint"></p></div>
+<script src="../../assets/image-viewer.js"></script>
 <script>
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
 var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
 document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
 var themeButton = document.querySelector(".theme-toggle");
