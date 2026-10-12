@@ -704,7 +704,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#pomoshch">Что написать, если непонятно, как продолжить?</a>
 <a href="#dalshe">Что ещё можно поручить нейросети</a></nav></details>
 <section class="content-section" id="kak-ustroeno"><h2>Почему все вопросы задаём в одном чате</h2>
-<p><b>Все четыре запроса отправляй по очереди в одном чате</b>. Тогда при обсуждении плана можно сослаться на уже составленный список, а при выборе первого дела учесть сроки и зависимости из разговора.</p>
+<p><b>Все четыре запроса отправляй по очереди в одном чате</b>. ChatGPT помнит, что уже обсуждалось в этом чате, поэтому составит план по твоему списку, а главное дело выберет с учётом сроков, которые уже прозвучали.</p>
 
 
 </section>
@@ -713,28 +713,27 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p>Открой ChatGPT и начни новый разговор. Если говорить неудобно, перейди к следующему шагу и отправляй запросы текстом.</p>
 <ul><li><b>На телефоне</b>: в приложении ChatGPT для iOS или Android нажми значок Voice («Голос») в строке сообщения. Разреши доступ к микрофону; при первом запуске выбери голос.</li>
 <li><b>В браузере</b>: открой chatgpt.com и нажми значок Voice («Голос») в поле запроса. Если браузер спросит доступ к микрофону, разреши его.</li></ul>
-<p>Кнопка Voice («Голос») справа в пустом поле сообщения: чёрный кружок со звуковой волной. Микрофон рядом служит для диктовки. Если видишь стрелку отправки, очисти поле; если открыт отдельный GPT, специальный помощник, вернись в обычный чат.</p>
-<p>Первый запрос для разговора приведён в следующем шаге.</p>
-<figure class="shot-fig"><div class="shot"><img src="assets/voice-brauzer.webp" width="1222" height="1128" alt="Справа в пустом поле кнопка Voice для разговора. Рядом микрофон, чтобы надиктовать сообщение." loading="lazy" decoding="async"></div><figcaption>Voice в браузере: кнопка со звуковой волной.</figcaption></figure>
-<figure class="shot-fig"><div class="shot vertical"><img src="assets/voice-telefon.webp" width="1206" height="2622" alt="На телефоне кнопка Voice тоже справа в поле сообщения." loading="lazy" decoding="async"></div><figcaption>Voice в приложении на телефоне.</figcaption></figure>
+<p>Кнопка Voice («Голос») находится справа в пустом поле сообщения, это чёрный кружок со звуковой волной. Микрофон рядом служит для диктовки. Если видишь стрелку отправки, очисти поле; если открыт отдельный GPT, специальный помощник, вернись в обычный чат.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/voice-brauzer.webp" width="1222" height="1128" alt="Справа в пустом поле кнопка Voice для разговора. Рядом микрофон, чтобы надиктовать сообщение." loading="lazy" decoding="async"></div><figcaption>В браузере кнопка Voice находится справа в поле сообщения, это чёрный кружок со звуковой волной.</figcaption></figure>
+<figure class="shot-fig"><div class="shot vertical"><img src="assets/voice-telefon.webp" width="1206" height="2622" alt="На телефоне кнопка Voice тоже справа в поле сообщения." loading="lazy" decoding="async"></div><figcaption>На телефоне кнопка Voice находится справа в поле сообщения.</figcaption></figure>
 
-<div class="result"><b>Результат:</b> голосовой режим открыт. Если микрофон не работает, продолжи текстом в этом же чате.</div>
+<div class="result"><b>Результат:</b> ты можешь разговаривать с ChatGPT в голосовом режиме. Если микрофон не работает, продолжи текстом в этом же чате.</div>
 </section>
 <section class="content-section" id="spisok"><h2>Шаг 2. Расскажи о делах и попроси записать их списком</h2>
 <p><b>Сохрани первый запрос в заметках</b>, чтобы вернуться к нему, когда дела снова накопятся. Произнеси его в голосовом режиме или скопируй и отправь текстом.</p>
 <div class="code-card"><pre id="prompt-1"><code>Расспроси меня, что сломано, не работает, не закончено, висит в голове. Собери единый список.
 
 Задавай по одному вопросу и жди моего ответа. Я могу говорить вперемешку: не требуй порядка. Уточняй, что именно нужно закончить, есть ли срок и от чего зависит задача. Не придумывай дел и сроков. Когда я скажу «это всё», объедини повторы и верни нумерованный список. Если сведений не хватает, отметь, что уточнить.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-1" aria-label="Скопировать запрос: единый список" aria-live="polite">Скопировать</button></div>
-<figure class="shot-fig"><div class="shot"><img src="assets/zapros-1.webp" width="1222" height="1128" alt="Первый запрос уже в поле сообщения. Осталось отправить." loading="lazy" decoding="async"></div><figcaption>Первый запрос: собрать список дел.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/zapros-1.webp" width="1222" height="1128" alt="Первый запрос уже в поле сообщения. Осталось отправить." loading="lazy" decoding="async"></div><figcaption>Первым запросом мы просим ChatGPT собрать список дел.</figcaption></figure>
 
-<p><b>Рассказывай о делах в любом порядке</b>, отвечая на вопросы ChatGPT. Когда закончишь, скажи «это всё»: по этому запросу он может объединить повторы и собрать список.</p>
-<figure class="shot-fig"><div class="shot"><img src="assets/otvet-vpermeshku.webp" width="1204" height="1236" alt="ChatGPT спрашивает, какое дело первым приходит в голову. В поле сообщения несколько дел вперемешку." loading="lazy" decoding="async"></div><figcaption>Ответ на первый вопрос: дела вперемешку.</figcaption></figure>
+<p><b>Рассказывай о делах в любом порядке</b>, отвечая на вопросы ChatGPT. Когда закончишь, скажи «это всё»: ChatGPT соберёт все дела в один список и уберёт повторы.</p>
+<figure class="shot-fig"><div class="shot"><img src="assets/otvet-vpermeshku.webp" width="1204" height="1236" alt="ChatGPT спрашивает, какое дело первым приходит в голову. В поле сообщения несколько дел вперемешку." loading="lazy" decoding="async"></div><figcaption>В ответ на первый вопрос мы перечисляем дела в том порядке, в котором вспоминаем.</figcaption></figure>
 
 <p>Выйди из Voice и прочитай список в том же чате. Если ChatGPT что-то пропустил или понял не так, <b>поправь его сообщением</b>.</p>
-<figure class="shot-fig"><div class="shot"><img src="assets/spisok-1.webp" width="1204" height="968" alt="ChatGPT собрал семь дел. Здесь первые четыре." loading="lazy" decoding="async"></div><figcaption>Список из семи дел: пункты 1-4.</figcaption></figure>
-<figure class="shot-fig"><div class="shot"><img src="assets/spisok-2.webp" width="1204" height="1238" alt="Здесь остальные дела. Срок есть только там, где он был назван в разговоре." loading="lazy" decoding="async"></div><figcaption>Пункты 5-7 и вопросы о недостающих данных.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/spisok-1.webp" width="1204" height="968" alt="ChatGPT собрал семь дел. Здесь первые четыре." loading="lazy" decoding="async"></div><figcaption>ChatGPT собрал семь дел, здесь он перечислил первые четыре.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/spisok-2.webp" width="1204" height="1238" alt="Здесь остальные дела. Срок есть только там, где он был назван в разговоре." loading="lazy" decoding="async"></div><figcaption>Здесь ChatGPT перечислил остальные три дела и спросил, каких сведений не хватает.</figcaption></figure>
 
-<div class="result"><b>Результат:</b> список дел с указанными сроками и вопросами о том, что ещё уточнить. Сверь его со своим рассказом.</div>
+<div class="result"><b>Результат:</b> у тебя есть список всех дел, и видно, где срок ещё нужно уточнить. Сверь его со своим рассказом.</div>
 </section>
 <section class="content-section" id="plan"><h2>Шаг 3. Попроси составить план на день</h2>
 <p><b>Отправь второй запрос в том же чате</b>: попроси составить план на сегодня по списку дел.</p>
@@ -744,13 +743,13 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 Для трёх задач назови, что именно подготовишь прямо в чате и какие сведения нужны от меня. Если подходящих задач меньше трёх, скажи об этом, не выдумывай их.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-2" aria-label="Скопировать запрос: план на день" aria-live="polite">Скопировать</button></div>
 <p>Расскажи, сколько времени у тебя сегодня есть и что нельзя отложить. Если ChatGPT придумал срок или перепутал, какое дело надо сделать раньше другого, поправь его в этом же чате.</p>
-<figure class="shot-fig"><div class="shot"><img src="assets/plan-1.webp" width="1330" height="898" alt="На дела есть два часа. ChatGPT начинает план с коротких задач." loading="lazy" decoding="async"></div><figcaption>План на два часа: сначала короткие задачи.</figcaption></figure>
-<figure class="shot-fig"><div class="shot"><img src="assets/plan-2.webp" width="1330" height="1038" alt="У каждого дела есть первый шаг и объяснение, когда его можно считать законченным." loading="lazy" decoding="async"></div><figcaption>Первый шаг и условие завершения каждого дела.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/plan-1.webp" width="1330" height="898" alt="На дела есть два часа. ChatGPT начинает план с коротких задач." loading="lazy" decoding="async"></div><figcaption>ChatGPT составил план на два часа и предложил начать с коротких задач.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/plan-2.webp" width="1330" height="1038" alt="У каждого дела есть первый шаг и объяснение, когда его можно считать законченным." loading="lazy" decoding="async"></div><figcaption>Для каждого дела ChatGPT указал первый шаг и объяснил, когда дело можно считать законченным.</figcaption></figure>
 
 <p>Проверь, можно ли выполнить <b>дела до десяти минут</b> сразу или для них нужно сначала закончить что-то другое. В конце ответа ChatGPT предложит до трёх задач, для которых может что-то подготовить в чате.</p>
-<figure class="shot-fig"><div class="shot"><img src="assets/tri-zadachi.webp" width="1330" height="1158" alt="ChatGPT предлагает три дела, за которые может взяться, и спрашивает, что ему для этого нужно." loading="lazy" decoding="async"></div><figcaption>Три возможных поручения и нужные для них сведения.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/tri-zadachi.webp" width="1330" height="1158" alt="ChatGPT предлагает три дела, за которые может взяться, и спрашивает, что ему для этого нужно." loading="lazy" decoding="async"></div><figcaption>ChatGPT предложил три дела, за которые может взяться, и спросил, какие сведения нужны для каждого.</figcaption></figure>
 
-<div class="result"><b>Результат:</b> предложенный план на день и задачи, которые можно поручить ChatGPT. Проверь, учтены ли твои сроки и время; дела, которые не помещаются в день, должны остаться отдельным списком.</div>
+<div class="result"><b>Результат:</b> у тебя есть план на день, а ChatGPT предложил, какие задачи можно ему поручить. Проверь, учтены ли твои сроки и время; дела, которые не помещаются в день, должны остаться отдельным списком.</div>
 </section>
 <section class="content-section" id="peredacha"><h2>Шаг 4. Попроси нейросеть сделать часть дел за тебя</h2>
 <p>Что из плана можно поручить нейросети, а для каких дел нужна настройка или твоё участие? Отправь <b>третий запрос в тот же чат</b>.</p>
@@ -771,15 +770,15 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <div class="code-card"><pre id="prompt-4"><code>Какое одно дело сегодня продвинет остальные?
 
 Выбери его из нашего списка с учётом сроков и зависимостей. Коротко объясни, какие другие дела оно позволит начать или закончить. Если данных не хватает, сначала задай один уточняющий вопрос. Не выбирай задачу только потому, что она лёгкая. Дай первый конкретный шаг, который я могу выполнить сейчас, и скажи, как проверить его завершение.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-4" aria-label="Скопировать запрос: одно главное дело" aria-live="polite">Скопировать</button></div>
+<p>С него и начни.</p>
 <p>Ответ почти всегда неприятный: дольше всего откладываешь именно это дело.</p>
 <p>Мы все знаем, что у нас висит, но порой нужен волшебный пинок, чтобы разгрести эту свалку. ChatGPT может побыть этим волшебником.</p>
 <p>Прочитай обоснование выбора: <b>есть ли у дела жёсткий срок или от него зависят другие задачи?</b> Если ChatGPT ошибся, поправь в том же чате.</p>
-<figure class="shot-fig"><div class="shot"><img src="assets/odno-delo-1.webp" width="1330" height="1160" alt="ChatGPT предлагает сначала заняться рекламным блоком: его нужно заменить к указанному сроку." loading="lazy" decoding="async"></div><figcaption>Подготовка замены рекламы: выбор из-за срока.</figcaption></figure>
-<figure class="shot-fig"><div class="shot"><img src="assets/odno-delo-2.webp" width="1330" height="640" alt="ChatGPT объясняет, с чего начать и когда первый шаг будет закончен. Остальные дела от этого не зависят." loading="lazy" decoding="async"></div><figcaption>Первый шаг: проверить материалы для нового блока.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/odno-delo-1.webp" width="1330" height="1160" alt="ChatGPT предлагает сначала заняться рекламным блоком: его нужно заменить к указанному сроку." loading="lazy" decoding="async"></div><figcaption>ChatGPT предложил сначала подготовить замену рекламного блока, потому что у этого дела есть срок.</figcaption></figure>
+<figure class="shot-fig"><div class="shot"><img src="assets/odno-delo-2.webp" width="1330" height="640" alt="ChatGPT объясняет, с чего начать и когда первый шаг будет закончен. Остальные дела от этого не зависят." loading="lazy" decoding="async"></div><figcaption>ChatGPT предложил первым шагом проверить материалы для нового рекламного блока.</figcaption></figure>
 <p>В этом примере ChatGPT предложил сначала подготовить замену рекламного блока из-за срока 14 октября. Прямой зависимости с остальными делами нет: в ответе он сам это отмечает.</p>
 
-<p>С него и начни.</p>
-<div class="result"><b>Результат:</b> предложено одно дело, причина выбора и первый шаг. Проверь обоснование по своему списку.</div>
+<div class="result"><b>Результат:</b> ChatGPT предложил одно дело, объяснил свой выбор и указал первый шаг. Проверь обоснование по своему списку.</div>
 </section>
 <section class="content-section" id="pomoshch"><h2>Что написать, если непонятно, как продолжить?</h2>
 <p>Напиши в том же чате, на каком действии возникла трудность. В запросе ниже <b>замени текст в квадратных скобках на свои слова</b>.</p>
@@ -787,7 +786,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </section>
 
 <aside class="tariff-note" id="stoimost" aria-label="Памятка о тарифах ChatGPT">
-<p>Free доступен без подписки; Go и Plus дают расширенные возможности и лимиты по подписке. Голосовой режим на Free доступен с лимитами.</p>
+<p>ChatGPT Free работает без подписки, голосовой режим на нём с лимитами. Go и Plus дают больше возможностей и лимитов.</p>
 </aside>
 <section class="content-section" id="dalshe"><h2>Что ещё можно поручить нейросети</h2>
 <div class="next-read"><p class="next-sub">Выбери, с чем хочешь разобраться дальше.</p><ul><li><a href="../raspisanie-zadach-v-claude/"><span class="title">Поставь Claude задачу по расписанию</span><span class="why">Попроси Claude выполнять задачу по расписанию, чтобы не напоминать каждый раз.</span></a></li><li><a href="../claude-i-codex-v-vscode/"><span class="title">Claude Code и Codex в одном VS Code</span><span class="why">Установи помощников на компьютер и попроси поработать с файлами твоего проекта.</span></a></li></ul></div>
