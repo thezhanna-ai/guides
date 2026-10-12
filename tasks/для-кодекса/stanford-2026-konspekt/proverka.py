@@ -1,4 +1,4 @@
-"""Mechanical evidence for this draft; run from the worktree without a browser."""
+"""Mechanical evidence for this published article; run from the worktree without a browser."""
 from pathlib import Path
 import hashlib
 import html
@@ -124,7 +124,7 @@ results['metadata_description_match'] = all(
     html.unescape(re.search(pattern, source)[1]) == row['description']
     for pattern in [r'<meta name="description" content="([^"]+)"', r'<meta property="og:description" content="([^"]+)"']
 )
-results['draft_state'] = {k:row[k] for k in ['status','vydacha','kod_slovo']}
+results['publication_state'] = {k:row[k] for k in ['status','vydacha','kod_slovo','data_publikacii']}
 results['noindex'] = '<meta name="robots" content="noindex, nofollow">' in source
 results['absent_from_home'] = f'href="claude-ai/{SLUG}/"' not in (ROOT/'index.html').read_text()
 results['absent_from_sitemap'] = SLUG not in (ROOT/'sitemap.xml').read_text()
@@ -140,8 +140,8 @@ for k in ['long_dashes_editorial_html','foreign_names_outside_ad','step_zero','g
     assert results[k] == 0, (k,results[k])
 assert results['metadata_description_match']
 assert results['cta_byte_match'] and len(results['thoughts']) == 8
-assert results['noindex'] and results['absent_from_home'] and results['absent_from_sitemap']
-assert results['draft_state'] == {'status':'draft','vydacha':'net','kod_slovo':'МОЗГ'}
+assert not results['noindex'] and not results['absent_from_home'] and not results['absent_from_sitemap']
+assert results['publication_state'] == {'status':'live','vydacha':'zhivaya','kod_slovo':'МОЗГ','data_publikacii':'2026-10-13'}
 assert not results['broken_local_fragments'] and not results['broken_copy_targets']
 results['thought_h3_counts'] = {}
 for section_id in ['opyt', 'prompt', 'skorost', 'imagenet', 'slova', 'instrukcii', 'mysli', 'popytki']:

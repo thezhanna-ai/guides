@@ -19,7 +19,7 @@ class EridTest(unittest.TestCase):
                      ROOT / "scripts/shablon_glavnoy.html"]
 
     def test_every_partner_page_and_template_has_exactly_one_marked_creative(self):
-        self.assertEqual(len(self.pages), 55)
+        self.assertEqual(len(self.pages), 56)
         for page in self.pages:
             with self.subTest(page=str(page.relative_to(ROOT))):
                 html = page.read_text()
@@ -64,7 +64,7 @@ class EridTest(unittest.TestCase):
                     self.assertEqual(re.sub(rb' id="[^"]*"', b"", block, count=1),
                                      re.sub(rb' id="[^"]*"', b"", standard, count=1))
                 count += 1
-        self.assertEqual(count, 53)
+        self.assertEqual(count, 54)
 
     def test_erid_is_static_in_html_without_javascript_regression(self):
         for page in self.pages:

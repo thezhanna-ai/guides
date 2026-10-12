@@ -389,7 +389,8 @@ class ArticleImagesTest(unittest.TestCase):
                 self.assertEqual(card.attrs.get("data-kod", ""), article.get("kod_slovo", ""))
                 for term in article["ponyatiya"]:
                     self.assertIn(term, card.attrs["data-poisk"])
-                self.assertEqual((image["width"], image["height"]), ("1600", "840"))
+                self.assertEqual((image["width"], image["height"]),
+                                 (str(self.covers[slug]["width"]), str(self.covers[slug]["height"])))
                 summaries = card.all(klass="guide-summary")
                 self.assertEqual(len(summaries), 1)
                 self.assertEqual(summaries[0].text_content(), article["kratko"])
