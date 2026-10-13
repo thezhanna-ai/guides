@@ -17,7 +17,7 @@ SERIES = ['promty-sveta-dlya-foto-chatgpt', 'promty-tovar-reklama-chatgpt',
           'promty-igrushki-personazhi-chatgpt', 'promty-eda-dom-chatgpt',
           'promty-retro-ustroystvo-chatgpt']
 OTHER = ['raspisanie-zadach-v-claude', 'zagruzka-faylov-v-claude',
-         'opus-55-protiv-gpt-6-astra']
+         'opus-55-protiv-gpt-6-astra', 'agent-reach-materialy-dlya-posta']
 
 
 class CoverStandardTest(unittest.TestCase):

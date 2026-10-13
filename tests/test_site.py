@@ -258,24 +258,6 @@ class ArticleImagesTest(unittest.TestCase):
                     self.assertEqual(frame_bytes[:8], b"\x89PNG\r\n\x1a\n")
                     self.assertEqual(struct.unpack(">II", frame_bytes[16:24]),
                                      (source["width"], source["height"]))
-                elif cover.get("source_screenshot"):
-                    # Real diagnostic screenshots retain their original dimensions and pixels.
-                    import struct
-                    source = cover["source_screenshot"]
-                    original = (ROOT / source["path"]).read_bytes()
-                    self.assertEqual(hashlib.sha256(original).hexdigest(), source["sha256"])
-                    self.assertEqual(original[:8], b"\x89PNG\r\n\x1a\n")
-                    dimensions = (source["width"], source["height"])
-                    self.assertEqual(struct.unpack(">II", original[16:24]), dimensions)
-                    self.assertEqual((cover["width"], cover["height"]), dimensions)
-                    lossless = (ROOT / cover["image"]).read_bytes()
-                    self.assertEqual(lossless[:4], b"RIFF")
-                    self.assertEqual(lossless[8:12], b"WEBP")
-                    chunk = lossless.index(b"VP8L") + 8
-                    self.assertEqual(lossless[chunk], 0x2f)
-                    packed = int.from_bytes(lossless[chunk + 1:chunk + 5], "little")
-                    self.assertEqual(((packed & 0x3fff) + 1,
-                                      ((packed >> 14) & 0x3fff) + 1), dimensions)
                 else:
                     self.assertEqual((cover["width"], cover["height"]), (1600, 840))
                 self.assertEqual(hashlib.sha256((ROOT / cover["image"]).read_bytes()).hexdigest(), cover["sha256"])

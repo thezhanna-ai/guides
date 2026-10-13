@@ -115,8 +115,11 @@ class CoverStickerTest(unittest.TestCase):
         for slug, item in registry.items():
             if slug not in SERIES:
                 self.assertEqual(current_registry[slug], item)
-        self.assertEqual({key: value for key, value in current_reading.items() if key not in sticker_keys},
-                         {key: value for key, value in baseline_reading.items() if key not in sticker_keys})
+        # Preserve every pre-existing entry while allowing covers for new articles.
+        protected_keys = set(baseline_reading) - sticker_keys
+        self.assertTrue(protected_keys <= set(current_reading))
+        self.assertEqual({key: current_reading[key] for key in protected_keys},
+                         {key: baseline_reading[key] for key in protected_keys})
         for item in unchanged:
             self.assertEqual(sha((ROOT / item['image']).read_bytes()), item['sha256'])
         # Новые статьи добавляют свои картинки; существующие WebP по-прежнему защищены.
