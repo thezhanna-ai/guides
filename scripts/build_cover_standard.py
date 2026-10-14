@@ -139,10 +139,14 @@ def render(slug, section, title, subtitle):
     meta['subtitle_lines'] = subtitle_lines
     meta['subtitle_size'] = 64
     meta['subtitle_boxes'] = []
-    for i, line in enumerate(subtitle_lines):
-        xy = (128, 563 + i * 70)
-        d.text(xy, line, font=sf, fill='#BBC7CA', anchor='lt')
-        meta['subtitle_boxes'].append(list(d.textbbox(xy, line, font=sf, anchor='lt')))
+    # Keep line spacing independent of capitals, ascenders and descenders.
+    first_baseline = 563 - sf.getbbox(subtitle_lines[0], anchor='ls')[1]
+    meta['subtitle_baselines'] = [first_baseline + i * 70 for i in range(len(subtitle_lines))]
+    meta['subtitle_line_step'] = 70
+    for baseline, line in zip(meta['subtitle_baselines'], subtitle_lines):
+        xy = (128, baseline)
+        d.text(xy, line, font=sf, fill='#BBC7CA', anchor='ls')
+        meta['subtitle_boxes'].append(list(d.textbbox(xy, line, font=sf, anchor='ls')))
     d.ellipse((105, 754, 115, 764), fill='#E86F4A')
     tracked(d, (132, 743), 'pronovoe.com', font('site'), '#BBC7CA', 0)
     validate_layout(meta)
