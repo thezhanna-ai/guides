@@ -33,6 +33,13 @@ class CoverReadabilityTest(unittest.TestCase):
                 self.assertGreaterEqual(box[1], 468 if slug == 'konspekt-rechi-v-chatgpt' else 485 if slug == 'pyat-instrumentov-dlya-sayta' else 540, slug)
                 self.assertLessEqual(box[3], 710, slug)
                 draw.rectangle(box, fill=255)
+            if 'title_edit' in edit:
+                self.assertEqual(slug, 'konspekt-rechi-v-chatgpt')
+                for box in edit['title_edit']['allowed_boxes']:
+                    self.assertGreaterEqual(box[1], 170)
+                    self.assertLessEqual(box[2], 755)
+                    self.assertLessEqual(box[3], 445)
+                    draw.rectangle(box, fill=255)
             difference = ImageChops.difference(old, new)
             self.assertIsNone(Image.composite(Image.new('RGB', old.size), difference, mask).getbbox(), slug)
             self.assertIsNotNone(difference.getbbox(), slug)
