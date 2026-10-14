@@ -16,14 +16,14 @@ FOOTNOTE = "*Meta признана экстремистской организа
 
 
 class LegalCorrectionsTest(unittest.TestCase):
-    def test_concentrat_uses_requested_copy_and_no_old_promises_remain(self):
+    def test_master_group_uses_requested_copy_and_no_old_promises_remain(self):
         for slug in ("shest-skillov", "svoy-sayt-ne-bliznec"):
             html = (ROOT / "claude-ai" / slug / "index.html").read_text()
             with self.subTest(slug=slug):
-                self.assertIn("13-15 октября, 19:00 по Москве", html)
-                self.assertIn("Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу", html)
+                self.assertIn("Как собрать продажи своего дела на ИИ?", html)
+                self.assertIn("Это разбирают в мастер-группе Ивана Сергеева", html)
                 self.assertNotIn("За 3-4 дня в лагере", html)
-                self.assertIn("Зарегистрироваться", html)
+                self.assertIn("Заполнить анкету предзаписи", html)
                 self.assertIn("Реклама. ИП Сергеев И. С., ИНН 352511695540. erid:", html)
         for path in [ROOT / "index.html", *ROOT.glob("claude-ai/*/index.html"), *ROOT.glob("scripts/shablon_*.html")]:
             with self.subTest(path=path.relative_to(ROOT)):

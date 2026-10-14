@@ -845,8 +845,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Настраиваю Composio в ChatGPT для Gmail. Помоги разобраться по одному действию. Сначала спроси, какой экран или текст ошибки я вижу. Не отправляй письма, не меняй настройки и не показывай пароли.</p></div><div class="bubble claude"><span class="who">ChatGPT</span>Начнём с экрана, который открыт. Пришли текст ошибки без личных данных.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с Composio" aria-live="polite">Скопировать</button>
 </section>
-<p class="cta-question">ChatGPT работает в твоей почте. А что ещё он может делать за тебя?</p>
-<section class="cta" id="svoi-proekt" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
+<p class="cta-question" id="svoi-proekt">ChatGPT работает в твоей почте. А что ещё он может делать за тебя?</p>
+<section class="cta" aria-label="Мастер-группа Ивана Сергеева"><h2>Как собрать продажи своего дела на ИИ?</h2><p>Товары, услуги, консультации или своё обучение: в любом деле клиенту нужно узнать о тебе, понять пользу и решиться купить. Какую часть этой работы можно отдать нейросетям?</p><p>Это разбирают в мастер-группе Ивана Сергеева: предложение для клиентов, продающий сайт, автоворонка и контент собираются в одну систему продаж на ИИ, без продюсера и технаря. Набор открывается редко, а предзапись доступна всегда. Люди из списка узнают о наборе первыми и получают лучшую цену и бонусы. Анкета займёт около двух минут, оплачивать ничего не нужно.</p><a class="press-button" data-partner href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzquqo4SZ</p></section>
 <section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Ещё две инструкции, которые пригодятся после подключения.</p><ul><li><a href="../shtat-agentov-paperclip/"><span class="title">Штат агентов в Paperclip</span><span class="why">Раздай задачи нескольким помощникам и посмотри, что сделал каждый.</span></a></li><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Закрой секретные файлы от Claude Code</span><span class="why">Укажи, какие файлы агенту разрешено читать, прежде чем подключать новые инструменты.</span></a></li></ul></section>
 </article></main>
 <aside class="related-plaque" aria-label="Соседняя статья">
@@ -916,7 +916,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
     }
   });
 })();
-var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+var PARTNER_LINK = "https://theivansergeev.com/zapis/?gcpc=16fff";
 document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
 var themeButton = document.querySelector(".theme-toggle");
 var savedTheme = "light";

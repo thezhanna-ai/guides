@@ -8,7 +8,7 @@ const root = path.resolve(__dirname, '..');
 const pages = ['index.html', ...fs.readdirSync(path.join(root, 'claude-ai'))
   .map(slug => `claude-ai/${slug}/index.html`)
   .filter(file => fs.existsSync(path.join(root, file)) && file !== "claude-ai/chatgpt-composio-prilozheniya/index.html"), 'scripts/shablon_glavnoy.html'];
-const disclosure = 'Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm';
+const disclosure = 'Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzquqo4SZ';
 
 function scripts(html) {
   return [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
@@ -34,7 +34,8 @@ for (const file of pages) {
     const labels = [...html.matchAll(/<p class="ad-disclosure">([\s\S]*?)<\/p>/g)];
     assert.equal(labels.length, 1);
     assert.equal(labels[0][1], disclosure, 'The full label must be plain text without running JS');
-    assert.equal((html.match(/2VtzqviiWtm/g) || []).length, 1);
+    assert.equal((html.match(/2Vtzquqo4SZ/g) || []).length, 1);
+    assert.doesNotMatch(html, /2VtzqviiWtm/);
     assert.doesNotMatch(html, /\b(?:var|let|const)\s+ERID\b|data-erid/);
     const bodies = scripts(html.replace(/\{\{/g, '{').replace(/\}\}/g, '}'));
     assert.ok(bodies.every(body => !/ERID|ad-disclosure/.test(body)), 'No label initializer remains');
@@ -43,7 +44,7 @@ for (const file of pages) {
     const declaration = partner.match(/var PARTNER_LINK = "[^"\n]+";/)[0];
     const binding = partner.match(/document\.querySelectorAll\("a?\[data-partner\]"\)\.forEach\(function\s*\((\w+)\)\s*\{\s*\1\.href = PARTNER_LINK;\s*\}\);/)[0];
     assert.equal(bindPartner(`${declaration}\n${binding}`).href,
-      'https://theivansergeev.com/koncentrat/?gcpc=16fff');
+      'https://theivansergeev.com/zapis/?gcpc=16fff');
     assert.doesNotThrow(() => bindPartner(`${declaration}\n${binding}`, true));
   });
 }

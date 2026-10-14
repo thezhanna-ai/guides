@@ -130,16 +130,16 @@ class PublicationTest(unittest.TestCase):
                     self.assertTrue(link.attrs.get("href", "").strip())
                     self.assertTrue(link.text_content().strip())
                     url = urlsplit(link.attrs["href"])
-                    self.assertEqual((url.scheme, url.netloc, url.path), ("https", "theivansergeev.com", "/koncentrat/"))
+                    self.assertEqual((url.scheme, url.netloc, url.path), ("https", "theivansergeev.com", "/zapis/"))
                     self.assertEqual(parse_qs(url.query), {"gcpc": ["16fff"]})
                     self.assertEqual(url.fragment, "")
                     self.assertIn("data-partner", link.attrs)
 
-    def test_svyaz_has_koncentrat_cta_and_no_foreign_author_in_text(self):
+    def test_svyaz_has_master_group_cta_and_no_foreign_author_in_text(self):
         html = (ROOT / "claude-ai/chatgpt-composio-prilozheniya/index.html").read_text()
-        self.assertIn('class="cta" id="svoi-proekt" aria-label="Концентрат"', html)
-        self.assertIn('erid: 2VtzqviiWtm', html)
-        before_cta = html.split('<p class="cta-question">')[0].lower()
+        self.assertIn('class="cta" aria-label="Мастер-группа Ивана Сергеева"', html)
+        self.assertIn('erid: 2Vtzquqo4SZ', html)
+        before_cta = re.split(r'<p class="cta-question"[^>]*>', html, maxsplit=1)[0].lower()
         self.assertNotRegex(before_cta.split("<main>")[1], r"иван|theivansergeev|data-partner|источник-ролик")
         self.assertNotIn('noindex', html)
 
