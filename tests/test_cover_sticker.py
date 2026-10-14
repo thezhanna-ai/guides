@@ -103,29 +103,31 @@ class CoverStickerTest(unittest.TestCase):
                         expected = source.convert('RGB').resize((width, round(840*width/1600)), Image.Resampling.LANCZOS)
                         self.assertEqual(sha(actual.convert('RGB').tobytes()), sha(expected.tobytes()))
 
-    def test_other_46_covers_and_reading_files_are_unchanged(self):
-        base = 'c0ab717cc816d8d788ce2eac6f536f89ac9c2b6f'
+    def test_existing_covers_only_allow_approved_caption_updates(self):
+        policy = json.loads((ROOT / 'data/cover-readability.json').read_text())
+        base = policy['base']
         registry = json.loads(subprocess.check_output(['git', 'show', base+':data/OBLOZHKI.json'], cwd=ROOT))
-        unchanged = [item for slug, item in registry.items() if slug not in SERIES]
-        self.assertEqual(len(unchanged), 46)
         current_registry = json.loads((ROOT / 'data/OBLOZHKI.json').read_text())
         baseline_reading = json.loads(subprocess.check_output(['git', 'show', base+':data/reading-images.json'], cwd=ROOT))['images']
         current_reading = json.loads((ROOT / 'data/reading-images.json').read_text())['images']
-        sticker_keys = {registry[slug]['image'] for slug in SERIES}
+        edited_keys = {item['image'] for item in policy['updated'].values()}
         for slug, item in registry.items():
-            if slug not in SERIES:
-                self.assertEqual(current_registry[slug], item)
-        # Preserve every pre-existing entry while allowing covers for new articles.
-        protected_keys = set(baseline_reading) - sticker_keys
+            actual = dict(current_registry[slug])
+            if slug in policy['updated']:
+                self.assertEqual(actual['sha256'], policy['updated'][slug]['result_sha256'])
+                actual['sha256'] = item['sha256']
+            self.assertEqual(actual, item, slug)
+        protected_keys = set(baseline_reading) - edited_keys
         self.assertTrue(protected_keys <= set(current_reading))
         self.assertEqual({key: current_reading[key] for key in protected_keys},
                          {key: baseline_reading[key] for key in protected_keys})
-        for item in unchanged:
-            self.assertEqual(sha((ROOT / item['image']).read_bytes()), item['sha256'])
-        # Новые статьи добавляют свои картинки; существующие WebP по-прежнему защищены.
+        for slug, digest in policy['preserved'].items():
+            self.assertEqual(sha((ROOT / registry[slug]['image']).read_bytes()), digest)
         changed = set(subprocess.check_output(['git', 'diff', '--name-only', '--diff-filter=MDR', base, '--', 'claude-ai'], cwd=ROOT).decode().splitlines())
-        allowed = {f'claude-ai/{slug}/assets/oblozhka.webp' for slug in SERIES}
-        allowed.update(f'claude-ai/{slug}/assets/oblozhka.reading-{width}.webp' for slug in SERIES for width in (480, 960, 1600))
+        allowed = set(edited_keys)
+        for key in edited_keys:
+            original = Path(key)
+            allowed.update(str(original.with_name(original.stem + '.reading-' + str(w) + '.webp')) for w in (480, 960, 1600))
         self.assertFalse({path for path in changed if path.endswith('.webp')} - allowed)
 
 
