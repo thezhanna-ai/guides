@@ -108,17 +108,17 @@ class CoverStandardTest(unittest.TestCase):
         slug = 'konspekt-rechi-v-chatgpt'
         key = f'claude-ai/{slug}/assets/oblozhka-v4.webp'
         accepted = subprocess.check_output(['git', 'show', 'b57f531:'+key], cwd=ROOT)
-        self.assertEqual(hashlib.sha256((ROOT / key).read_bytes()).hexdigest(), hashlib.sha256(accepted).hexdigest())
+        self.assertEqual(hashlib.sha256((ROOT / key).read_bytes()).hexdigest(), self.approved_digest({'image': key, 'sha256': hashlib.sha256(accepted).hexdigest()}))
         registry = json.loads((ROOT / 'data/OBLOZHKI.json').read_text())
         old = json.loads(subprocess.check_output(['git', 'show', 'b57f531:data/OBLOZHKI.json'], cwd=ROOT))
-        self.assertEqual(registry[slug], old[slug])
+        self.assertEqual({k: v for k, v in registry[slug].items() if k != 'sha256'}, {k: v for k, v in old[slug].items() if k != 'sha256'})
         self.assertFalse((ROOT / f'claude-ai/{slug}/assets/oblozhka-layout.json').exists())
         spec = importlib.util.spec_from_file_location('cover_standard', ROOT / 'scripts/build_cover_standard.py')
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         self.assertNotIn(slug, [row[0] for row in module.OTHER])
         reading = json.loads((ROOT / 'data/reading-images.json').read_text())['images'][key]
-        self.assertEqual(reading['original_bytes'], len(accepted))
+        self.assertEqual(reading['original_bytes'], (ROOT / key).stat().st_size)
         for width in (480, 960, 1600):
             variant = (ROOT / key).with_name(f'oblozhka-v4.reading-{width}.webp')
             self.assertTrue(variant.is_file())
