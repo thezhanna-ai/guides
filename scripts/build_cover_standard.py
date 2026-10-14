@@ -19,7 +19,7 @@ BACKGROUND = '#102F30'
 FONTS = {
     'title': {'family': 'Unbounded', 'weight': 700, 'size': 96},
     'section': {'family': 'JetBrains Mono', 'weight': 500, 'size': 28},
-    'subtitle': {'family': 'Spectral', 'weight': 400, 'size': 42},
+    'subtitle': {'family': 'Spectral', 'weight': 400, 'size': 64},
     'site': {'family': 'JetBrains Mono', 'weight': 400, 'size': 30},
 }
 # Готовые обложки каруселей защищены от стандартной пересборки
@@ -126,7 +126,23 @@ def render(slug, section, title, subtitle):
         d.text(xy, line, font=tf, fill='#E86F4A' if i == 0 else '#F8F7F2', anchor='lt')
         meta['title_boxes'].append(list(d.textbbox(xy, line, font=tf, anchor='lt')))
     d.rectangle((104, 268, 108, max(b[3] for b in meta['title_boxes'])+10), fill='#E86F4A')
-    d.text((128, 563), subtitle, font=font('subtitle'), fill='#BBC7CA', anchor='lt')
+    sf = font('subtitle')
+    subtitle_lines = [subtitle]
+    if sf.getlength(subtitle) > 740:
+        words = subtitle.split()
+        candidates = [[' '.join(words[:i]), ' '.join(words[i:])] for i in range(1, len(words))]
+        if not candidates:
+            raise ValueError('Подзаголовок не помещается без уменьшения кегля')
+        subtitle_lines = min(candidates, key=lambda lines: max(sf.getlength(line) for line in lines))
+    if max(sf.getlength(line) for line in subtitle_lines) > 740:
+        raise ValueError('Подзаголовок не помещается в две строки при кегле 64')
+    meta['subtitle_lines'] = subtitle_lines
+    meta['subtitle_size'] = 64
+    meta['subtitle_boxes'] = []
+    for i, line in enumerate(subtitle_lines):
+        xy = (128, 563 + i * 70)
+        d.text(xy, line, font=sf, fill='#BBC7CA', anchor='lt')
+        meta['subtitle_boxes'].append(list(d.textbbox(xy, line, font=sf, anchor='lt')))
     d.ellipse((105, 754, 115, 764), fill='#E86F4A')
     tracked(d, (132, 743), 'pronovoe.com', font('site'), '#BBC7CA', 0)
     validate_layout(meta)
@@ -134,6 +150,10 @@ def render(slug, section, title, subtitle):
 
 
 def main():
+    # Legacy BASE predates approved scene changes. Never overwrite published
+    # covers by replaying that old composition after a typography-only update.
+    if (ROOT / 'data/cover-readability.json').exists():
+        raise SystemExit('Защита текущих обложек: массовая пересборка из старого BASE запрещена. Используйте текущий оригинал и сохраните пиксели вне области текста.')
     import optimize_reading_images as opt
     OUT.mkdir(parents=True, exist_ok=True)
     registry = json.loads((ROOT/'data/OBLOZHKI.json').read_text())
@@ -165,7 +185,7 @@ def install(slug, image, meta, registry, inventory):
     registry[slug].update(subtitle=meta['subtitle'], sha256=meta['image_sha256'],
                           layout=layout.relative_to(ROOT).as_posix())
     inventory[key] = {'article': True, 'cover': True, 'pages': [f'claude-ai/{slug}/index.html']}
-    print('Собрана:', slug, '96 / 28 / 42 / 30, фон', BACKGROUND)
+    print('Собрана:', slug, '96 / 28 / 64 / 30, фон', BACKGROUND)
 
 
 if __name__ == '__main__':

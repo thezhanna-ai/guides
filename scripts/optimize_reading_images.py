@@ -7,6 +7,7 @@ Builder: optimize_html(html, 'index.html') after rendering the homepage.
 Original files and links to them are retained. Pillow needed only for --generate.
 """
 import argparse
+import hashlib
 import html as html_module
 import json
 import re
@@ -74,20 +75,23 @@ def inventory():
 
 def generate():
     from PIL import Image
+    typography_policy = ROOT / 'data/cover-readability.json'
+    typography_keys = ({entry['image'] for entry in json.loads(typography_policy.read_text())['updated'].values()}
+                       if typography_policy.exists() else set())
     result = {'version': 1, 'threshold_bytes': 300000,
               'policy': 'Article text uses native-resolution lossless WebP with exact decoded pixels and ICC, except Opus video cover and comparison with inspected lossless960/native candidates and no480 for reading. Three already lossy WebP posters use inspected native-resolution quality88/90/89 recompression when lossless grows the file; exact lossless reference assets retained for validation. Card covers use adaptive WebP quality95 or lossless with original native fallback; every cover label has a visual crop comparison. Originals retained.',
               'images': {}}
     for key, meta in inventory().items():
         original = ROOT / key
         image = Image.open(original).convert('RGBA' if 'A' in Image.open(original).getbands() else 'RGB')
-        text = original.suffix.lower() == '.png' or key in TEXT_PATHS
+        text = original.suffix.lower() == '.png' or key in TEXT_PATHS or key in typography_keys
         # Text covers also retain native resolution, to avoid blurring tiny letters.
         widths = (sorted(set(min(image.width, n) for n in (480, 960, image.width))) if meta['cover'] else [image.width]) if text else sorted(set(min(image.width, n) for n in (480, 960)))
         if text and key in RESPONSIVE_ARTICLE_TEXT and not meta['cover']:
             widths = sorted(set(min(image.width, n) for n in (960, image.width)))
         variants = []
         for width in widths:
-            card_lossy = key in CARD_LOSSY_TEXT and width < image.width
+            card_lossy = key in CARD_LOSSY_TEXT and key not in typography_keys and width < image.width
             path = original.with_name(original.stem + ('.reading-card-' if card_lossy else '.reading-') + str(width) + '.webp')
             resized = image if width == image.width else image.resize((width, round(image.height * width / image.width)), Image.Resampling.LANCZOS)
             resized.save(path, 'WEBP', lossless=text and not card_lossy, quality=95, method=6, icc_profile=image.info.get('icc_profile', b''), exact=True)
@@ -127,6 +131,8 @@ def generate():
                                 'article_min_width': 960 if key in RESPONSIVE_ARTICLE_TEXT else None,
                                 'lossless': text, 'variants': variants}
         item = result['images'][key]
+        if key in typography_keys:
+            item['cache_version'] = hashlib.sha256(original.read_bytes()).hexdigest()[:12]
         native = {'path': native_path, 'width': image.width, 'height': image.height,
                   'bytes': item['native_reading_bytes'], 'native_resolution': True,
                   'decoded_pixels_identical': text and not native_quality,
@@ -163,9 +169,14 @@ def reading_attributes(src, page_path='index.html', manifest=None):
         variants = ([v for v in variants if v['width'] >= 960]
                     if key in RESPONSIVE_ARTICLE_TEXT else variants[-1:])
     sizes = '(max-width: 860px) calc(100vw - 40px), 320px' if page_path == 'index.html' else '(max-width: 860px) calc(100vw - 40px), 780px'
-    return {'src': src,
-            'srcset': ', '.join(relative_url(v['path'], page_path) + ' ' + str(v['width']) + 'w' for v in variants),
-            'sizes': sizes, 'data-full-src': src}
+    # Content-address the revised typography so cached old covers cannot survive
+    # a deployment. Keep data-full-src canonical for idempotent rebuilding.
+    version = item.get('cache_version')
+    def versioned(url):
+        return urlsplit(url).path + '?v=' + version if version else url
+    return {'src': urlsplit(src).path if version else src,
+            'srcset': ', '.join(versioned(relative_url(v['path'], page_path)) + ' ' + str(v['width']) + 'w' for v in variants),
+            'sizes': sizes, 'data-full-src': urlsplit(src).path if version else src}
 
 
 def optimize_html(content, page_path='index.html', manifest=None):
