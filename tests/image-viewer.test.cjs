@@ -75,7 +75,7 @@ test('Все настоящие inline просмотрщики использу
     assert.ok(/img\.dataset\.fullSrc\s*\|\|\s*img\.currentSrc\s*\|\|\s*img\.src/.test(html), name);
     assert.ok(!/document\.body\.style\.overflow\s*=/.test(html), name);
   }
-  assert.equal(count, 39);
+  assert.equal(count, 40);
 });
 
 test('Disabled элемент пропускается, внешний фокус возвращается в модалку', () => {
