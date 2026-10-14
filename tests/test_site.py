@@ -23,7 +23,7 @@ VOICE = ROOT / "claude-ai" / "golosovoy-vvod-v-claude" / "index.html"
 
 PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES, VOICE)
 GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES, VOICE)
-PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff"
+PARTNER_LINK = "https://theivansergeev.com/zapis/?gcpc=16fff"
 # Верхняя ссылка оглавления ведёт на <header>, а не на раздел, и из-под
 # критерия дословного совпадения toc-заголовок выведена явно
 HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "web-search", "connectors", "o-sebe", "podklyuchenie", "guides", "golos"}
@@ -697,9 +697,10 @@ class GuidesSiteTest(unittest.TestCase):
             "Как проверить доступ самому:",
             "myaccount.google.com/connections",
             "Почта и календарь подключены. Кто разберёт их за тебя?",
-            "Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу",
-            "13-15 октября, 19:00 по Москве",
-            "Зарегистрироваться",
+            "Как собрать продажи своего дела на ИИ?",
+            "Товары, услуги, консультации или своё обучение",
+            "Это разбирают в мастер-группе Ивана Сергеева",
+            "Заполнить анкету предзаписи",
             "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid:",
         ):
             self.assertIn(phrase, html)
@@ -845,10 +846,10 @@ class GuidesSiteTest(unittest.TestCase):
         html = SEARCH.read_text(encoding="utf-8")
         cta = html.split('<section class="cta"', 1)[1].split("</section>", 1)[0]
         for phrase in (
-            "Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?",
-            "Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве",
-            "Участие бесплатное, регистрация на сайте до 14 октября",
-            "Зарегистрироваться",
+            "Как собрать продажи своего дела на ИИ?",
+            "Товары, услуги, консультации или своё обучение",
+            "Это разбирают в мастер-группе Ивана Сергеева",
+            "Заполнить анкету предзаписи",
             "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid:",
         ):
             self.assertIn(phrase, cta)
@@ -970,11 +971,11 @@ class GuidesSiteTest(unittest.TestCase):
     def test_server_and_access_partner_ctas_follow_series_layout(self):
         server = SERVER.read_text(encoding="utf-8")
         access = ACCESS.read_text(encoding="utf-8")
-        self.assertRegex(server, r'<p class="partner-line">Сервер даёт место для работы Claude Code\.[^<]*посмотреть программу</p>')
+        self.assertNotIn('<p class="partner-line">', server)
         self.assertNotIn("mid-cta", server)
         for html in (server, access):
             with self.subTest(page="server" if html is server else "access"):
-                self.assertRegex(html, r'<p class="cta-question">[^<]+</p>\s*<section class="cta" aria-label="Концентрат"><h2>[^<]+</h2><p>[^<]+</p><a class="press-button" data-partner href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама\.[^<]+2VtzqviiWtm</p></section>\s*<footer class="foot">')
+                self.assertRegex(html, r'<p class="cta-question"(?: id="svoi-proekt")?>[^<]+</p>\s*<section class="cta" aria-label="Мастер-группа Ивана Сергеева"><h2>[^<]+</h2><p>[^<]+</p><p>[^<]+</p><a class="press-button" data-partner href="https://theivansergeev\.com/zapis/\?gcpc=16fff">Заполнить анкету предзаписи</a><p class="ad-disclosure">Реклама\.[^<]+2Vtzquqo4SZ</p></section>\s*<footer class="foot">')
                 self.assertIn(".cta .press-button:active", html)
 
     def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):

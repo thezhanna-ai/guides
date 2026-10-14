@@ -732,8 +732,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- seo:related:start -->
 <section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/promty-blog-biznes-chatgpt/">72 промпта для блога в ChatGPT: постеры, соцсети и объёмные буквы</a></li></ul></section>
 <!-- seo:related:end -->
-<p class="cta-question">Постер готов. А если их нужно на месяц вперёд?</p>
-<section class="cta" id="next" aria-label="Концентрат"><h2>Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</h2><p>Концентрат - онлайн-мероприятие Ивана Сергеева по вайбмаркетингу: 13-15 октября, 19:00 по Москве. Участие бесплатное, регистрация на сайте до 14 октября</p><a class="press-button" data-partner href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Зарегистрироваться</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqviiWtm</p></section>
+<p class="cta-question" id="next">Постер готов. А если их нужно на месяц вперёд?</p>
+<section class="cta" aria-label="Мастер-группа Ивана Сергеева"><h2>Как собрать продажи своего дела на ИИ?</h2><p>Товары, услуги, консультации или своё обучение: в любом деле клиенту нужно узнать о тебе, понять пользу и решиться купить. Какую часть этой работы можно отдать нейросетям?</p><p>Это разбирают в мастер-группе Ивана Сергеева: предложение для клиентов, продающий сайт, автоворонка и контент собираются в одну систему продаж на ИИ, без продюсера и технаря. Набор открывается редко, а предзапись доступна всегда. Люди из списка узнают о наборе первыми и получают лучшую цену и бонусы. Анкета займёт около двух минут, оплачивать ничего не нужно.</p><a class="press-button" data-partner href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzquqo4SZ</p></section>
 <section class="content-section" id="prompt"><h2>Теперь забери полный запрос для своего фото</h2><p class="section-intro">Два готовых промпта находятся ниже: английский и русский. Выбери язык, на котором тебе удобнее читать и при необходимости править запрос. Скопируй одну версию целиком, прикрепи одно фото и отправь выбранный текст без сокращений</p>
 <div class="prompt-card"><div class="prompt-head"><span>English</span><button class="copy" type="button" data-copy-target="poster-prompt-en" aria-label="Скопировать английский промпт">Копировать</button></div><div class="prompt-body" id="poster-prompt-en">Transform each uploaded photo into a single, standalone high-end art poster per photo. Do not create a collage of multiple photos. The overall composition should be in a 3:4 vertical format, strictly divided into equal 50:50 halves at the top and bottom.
 
@@ -780,7 +780,7 @@ Design it with the serene, sense-of-place aesthetic of an international architec
 <script src="../../assets/image-viewer.js"></script>
 <script>
 (function () {
-  var PARTNER_LINK = "https://theivansergeev.com/koncentrat/?gcpc=16fff";
+  var PARTNER_LINK = "https://theivansergeev.com/zapis/?gcpc=16fff";
   document.querySelectorAll("a[data-partner]").forEach(function (link) { link.href = PARTNER_LINK; });
   var root = document.documentElement;
   var button = document.querySelector('.theme-toggle');
