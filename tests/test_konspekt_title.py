@@ -18,7 +18,7 @@ class KonspektTitleTest(unittest.TestCase):
         old = Image.open(io.BytesIO(old_bytes)).convert('RGB')
         new = Image.open(ROOT / edit['image']).convert('RGB')
         allowed = Image.new('L', old.size)
-        for box in title['allowed_boxes']:
+        for box in title['allowed_boxes'] + edit.get('label_edit', {}).get('allowed_boxes', []):
             ImageDraw.Draw(allowed).rectangle(box, fill=255)
         difference = ImageChops.difference(old, new)
         self.assertIsNone(Image.composite(Image.new('RGB', old.size), difference, allowed).getbbox())
@@ -40,3 +40,27 @@ class KonspektTitleTest(unittest.TestCase):
         # No opaque letters from the former oversized second line survive below the new title.
         below = new.crop((55, 398, 725, 420))
         self.assertLess(below.getchannel('R').getextrema()[1], 100)
+
+    def test_label_move_retains_current_title_caption_and_notebook(self):
+        edit = json.loads((ROOT / 'data/cover-readability.json').read_text())['updated']['konspekt-rechi-v-chatgpt']
+        label = edit['label_edit']
+        source = subprocess.check_output(['git', 'show', label['base'] + ':' + edit['image']], cwd=ROOT)
+        self.assertEqual(hashlib.sha256(source).hexdigest(), label['source_sha256'])
+        old = Image.open(io.BytesIO(source)).convert('RGB')
+        new = Image.open(ROOT / edit['image']).convert('RGB')
+        allowed = Image.new('L', old.size)
+        for box in label['allowed_boxes']:
+            ImageDraw.Draw(allowed).rectangle(box, fill=255)
+        difference = ImageChops.difference(old, new)
+        self.assertIsNone(Image.composite(Image.new('RGB', old.size), difference, allowed).getbbox())
+        self.assertEqual(new.crop((55, 48, 210, 90)).getchannel('R').getextrema()[1] < 90, True)
+        dy = label['delta_y']
+        count = 0
+        for y in range(48, 90):
+            for x in range(55, 210):
+                pixel = old.getpixel((x, y))
+                if min(pixel) > 90:
+                    self.assertEqual(new.getpixel((x, y + dy)), pixel)
+                    count += 1
+        self.assertGreater(count, 1000)
+        self.assertEqual(label['visible_top'], 121)
