@@ -566,6 +566,7 @@
     .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
     .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
     .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
     .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
     .cta .ad-disclosure { overflow-wrap: anywhere }
     @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
@@ -996,7 +997,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/svoy-stil-otvetov/">Как научить Claude писать в твоём стиле</a></li></ul></section>
 <!-- seo:related:end -->
 <p class="cta-question">Первый проект создан. Каким будет следующий?</p>
-<section class="cta" aria-label="Мастер-группа Ивана Сергеева"><h2>Как собрать продажи своего дела на ИИ?</h2><p>Товары, услуги, консультации или своё обучение: в любом деле клиенту нужно узнать о тебе, понять пользу и решиться купить. Какую часть этой работы можно отдать нейросетям?</p><p>Это разбирают в мастер-группе Ивана Сергеева: предложение для клиентов, продающий сайт, автоворонка и контент собираются в одну систему продаж на ИИ, без продюсера и технаря. Набор открывается редко, а предзапись доступна всегда. Люди из списка узнают о наборе первыми и получают лучшую цену и бонусы. Анкета займёт около двух минут, оплачивать ничего не нужно.</p><a class="press-button" data-partner href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzquqo4SZ</p></section>
+<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев<!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
@@ -1070,8 +1071,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 /* Партнёрская ссылка задаётся ЗДЕСЬ и только здесь.
    Все кнопки с признаком data-partner получают её отсюда,
    поэтому менять адрес нужно в одной строке, а не в разметке */
-var PARTNER_LINK = "https://theivansergeev.com/zapis/?gcpc=16fff";
-document.querySelectorAll("a[data-partner]").forEach(function (a) { a.href = PARTNER_LINK; });
+var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
 
 var themeButton = document.querySelector(".theme-toggle");
 var savedTheme = localStorage.getItem("guide-theme") || "light";

@@ -20,11 +20,12 @@ class LegalCorrectionsTest(unittest.TestCase):
         for slug in ("shest-skillov", "svoy-sayt-ne-bliznec"):
             html = (ROOT / "claude-ai" / slug / "index.html").read_text()
             with self.subTest(slug=slug):
-                self.assertIn("Как собрать продажи своего дела на ИИ?", html)
-                self.assertIn("Это разбирают в мастер-группе Ивана Сергеева", html)
+                self.assertIn("Что можно делать с нейросетями, если не знаешь кода?", html)
+                self.assertIn("Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана", html)
                 self.assertNotIn("За 3-4 дня в лагере", html)
+                self.assertIn("Забрать Концентрат", html)
                 self.assertIn("Заполнить анкету предзаписи", html)
-                self.assertIn("Реклама. ИП Сергеев И. С., ИНН 352511695540. erid:", html)
+                self.assertIn("Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q", html)
         for path in [ROOT / "index.html", *ROOT.glob("claude-ai/*/index.html"), *ROOT.glob("scripts/shablon_*.html")]:
             with self.subTest(path=path.relative_to(ROOT)):
                 html = path.read_text()
