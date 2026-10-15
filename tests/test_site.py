@@ -23,7 +23,10 @@ VOICE = ROOT / "claude-ai" / "golosovoy-vvod-v-claude" / "index.html"
 
 PAGES = (HOME, ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES, VOICE)
 GUIDE_PAGES = (ACCESS, PROFILE, MODEL, PROJECT, SERVER, SEARCH, SERVICES, VOICE)
-PARTNER_LINK = "https://theivansergeev.com/zapis/?gcpc=16fff"
+PARTNER_LINKS = {
+    "koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff",
+    "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff",
+}
 # Верхняя ссылка оглавления ведёт на <header>, а не на раздел, и из-под
 # критерия дословного совпадения toc-заголовок выведена явно
 HEADER_ANCHORS = {"vybor-modeli", "pervyy-proekt", "web-search", "connectors", "o-sebe", "podklyuchenie", "guides", "golos"}
@@ -697,9 +700,10 @@ class GuidesSiteTest(unittest.TestCase):
             "Как проверить доступ самому:",
             "myaccount.google.com/connections",
             "Почта и календарь подключены. Кто разберёт их за тебя?",
-            "Как собрать продажи своего дела на ИИ?",
-            "Товары, услуги, консультации или своё обучение",
-            "Это разбирают в мастер-группе Ивана Сергеева",
+            "Что можно делать с нейросетями, если не знаешь кода?",
+            "Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева",
+            "Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана",
+            "Забрать Концентрат",
             "Заполнить анкету предзаписи",
             "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid:",
         ):
@@ -846,9 +850,10 @@ class GuidesSiteTest(unittest.TestCase):
         html = SEARCH.read_text(encoding="utf-8")
         cta = html.split('<section class="cta"', 1)[1].split("</section>", 1)[0]
         for phrase in (
-            "Как собрать продажи своего дела на ИИ?",
-            "Товары, услуги, консультации или своё обучение",
-            "Это разбирают в мастер-группе Ивана Сергеева",
+            "Что можно делать с нейросетями, если не знаешь кода?",
+            "Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева",
+            "Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана",
+            "Забрать Концентрат",
             "Заполнить анкету предзаписи",
             "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid:",
         ):
@@ -975,7 +980,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertNotIn("mid-cta", server)
         for html in (server, access):
             with self.subTest(page="server" if html is server else "access"):
-                self.assertRegex(html, r'<p class="cta-question"(?: id="svoi-proekt")?>[^<]+</p>\s*<section class="cta" aria-label="Мастер-группа Ивана Сергеева"><h2>[^<]+</h2><p>[^<]+</p><p>[^<]+</p><a class="press-button" data-partner href="https://theivansergeev\.com/zapis/\?gcpc=16fff">Заполнить анкету предзаписи</a><p class="ad-disclosure">Реклама\.[^<]+2Vtzquqo4SZ</p></section>\s*<footer class="foot">')
+                self.assertRegex(html, r'<p class="cta-question"(?: id="svoi-proekt")?>[^<]+</p>\s*<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>[^<]+</h2><p>[^<]+</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">Забрать Концентрат</a><p>[^<]+</p><a class="press-button" data-partner="zapis" href="https://theivansergeev\.com/zapis/\?gcpc=16fff">Заполнить анкету предзаписи</a><p>[^<]+</p><p class="ad-disclosure">Реклама\.[^<]+2Vtzqvk2p6q</p></section>\s*<footer class="foot">')
                 self.assertIn(".cta .press-button:active", html)
 
     def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):
@@ -1124,10 +1129,11 @@ class GuidesSiteTest(unittest.TestCase):
         for page in GUIDE_PAGES:
             html = page.read_text(encoding="utf-8")
             with self.subTest(page=page.parent.name):
-                self.assertIn(PARTNER_LINK.replace("&", "&amp;"), html)
+                for expected in PARTNER_LINKS.values():
+                    self.assertIn(expected.replace("&", "&amp;"), html)
                 for link in self.parse(page).links:
                     if "theivansergeev.com" in link:
-                        self.assertEqual(link, PARTNER_LINK, page)
+                        self.assertIn(link, PARTNER_LINKS.values(), page)
 
 
     def test_partner_link_is_defined_in_one_place_per_page(self):
@@ -1135,19 +1141,17 @@ class GuidesSiteTest(unittest.TestCase):
 
         Правило автора: адрес партнёрской ссылки живёт в одном месте страницы,
         остальные кнопки берут его оттуда. Поэтому на странице обязана быть
-        константа PARTNER_LINK, каждая партнёрская кнопка обязана нести признак
-        data-partner, и адрес обязан встречаться в разметке не чаще, чем есть
-        таких кнопок плюс сама константа
+        карта PARTNER_LINKS, каждая партнёрская кнопка обязана нести именованный
+        data-partner, а оба адреса обязаны совпадать с зарегистрированными целями
         """
         for page in GUIDE_PAGES:
             html = page.read_text(encoding="utf-8")
             with self.subTest(page=page.parent.name):
-                self.assertIn("var PARTNER_LINK =", html, f"{page}: нет единой константы")
-                buttons = len(re.findall(r"<a\b[^>]*\bdata-partner\b", html))
-                self.assertGreater(buttons, 0, f"{page}: нет кнопок с data-partner")
-                for link in self.parse(page).links:
-                    if "theivansergeev.com" in link:
-                        self.assertEqual(link, PARTNER_LINK, page)
+                normalized = html.replace("{{", "{").replace("}}", "}")
+                declaration = 'var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};'
+                self.assertIn(declaration, normalized, f"{page}: нет единой карты")
+                buttons = re.findall(r'<a\b[^>]*\bdata-partner="([^"]+)"[^>]*>', html)
+                self.assertEqual(buttons, ["koncentrat", "zapis"])
 
     def test_no_foreign_specifics_leak_into_public_pages(self):
         for page in PAGES:

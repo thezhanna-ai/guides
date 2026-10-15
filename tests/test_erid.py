@@ -3,16 +3,20 @@ import importlib.util
 import re
 import unittest
 
-from test_site import ImageDocument, ROOT, PARTNER_LINK
+from test_site import ImageDocument, ROOT, PARTNER_LINKS
 
 
-TITLE = "Как собрать продажи своего дела на ИИ?"
+TITLE = "Что можно делать с нейросетями, если не знаешь кода?"
 COPY = [
-    "Товары, услуги, консультации или своё обучение: в любом деле клиенту нужно узнать о тебе, понять пользу и решиться купить. Какую часть этой работы можно отдать нейросетям?",
-    "Это разбирают в мастер-группе Ивана Сергеева: предложение для клиентов, продающий сайт, автоворонка и контент собираются в одну систему продаж на ИИ, без продюсера и технаря. Набор открывается редко, а предзапись доступна всегда. Люди из списка узнают о наборе первыми и получают лучшую цену и бонусы. Анкета займёт около двух минут, оплачивать ничего не нужно.",
+    "Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽",
+    "Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество",
+    "Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно",
 ]
-DISCLOSURE = "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzquqo4SZ"
-BUTTON = "Заполнить анкету предзаписи"
+DISCLOSURE = "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q"
+BUTTONS = [
+    ("koncentrat", "Забрать Концентрат"),
+    ("zapis", "Заполнить анкету предзаписи"),
+]
 
 
 class EridTest(unittest.TestCase):
@@ -20,6 +24,7 @@ class EridTest(unittest.TestCase):
     def setUpClass(cls):
         cls.pages = [ROOT / "index.html", *sorted(ROOT.glob("claude-ai/*/index.html")),
                      ROOT / "scripts/shablon_glavnoy.html"]
+        assert len(cls.pages) == 59
 
     def test_every_partner_page_and_template_has_exactly_one_marked_creative(self):
         for page in self.pages:
@@ -32,17 +37,24 @@ class EridTest(unittest.TestCase):
                 self.assertEqual(block.all(tag="h2")[0].text_content(), TITLE)
                 self.assertEqual([p.text_content().strip() for p in block.all(tag="p")],
                                  [*COPY, DISCLOSURE])
-                links = [a for a in doc.root.all(tag="a") if "data-partner" in a.attrs
-                         or "theivansergeev.com" in a.attrs.get("href", "")]
-                self.assertEqual(len(links), 1)
-                self.assertIn(links[0], block.all(tag="a"))
-                self.assertEqual(links[0].attrs["href"], PARTNER_LINK)
-                self.assertIn("data-partner", links[0].attrs)
-                self.assertEqual(links[0].text_content(), BUTTON)
+                links = block.all(tag="a")
+                self.assertEqual(len(links), 2)
+                self.assertEqual(
+                    [(link.attrs.get("data-partner"), link.text_content()) for link in links],
+                    BUTTONS,
+                )
+                for link in links:
+                    self.assertEqual(link.attrs["href"], PARTNER_LINKS[link.attrs["data-partner"]])
+                outside = [a for a in doc.root.all(tag="a")
+                           if "data-partner" in a.attrs and a not in links]
+                self.assertEqual(outside, [])
                 for header in doc.root.all(tag="header"):
                     self.assertFalse(any("data-partner" in a.attrs for a in header.all(tag="a")))
                     self.assertNotIn("На Концентрат", header.text_content())
-                self.assertEqual([n.tag for n in block.children], ["h2", "p", "p", "a", "p"])
+                self.assertEqual(
+                    [n.tag for n in block.children],
+                    ["h2", "p", "a", "p", "a", "p", "p"],
+                )
                 self.assertEqual(len(block.all(klass="ad-disclosure")), 1)
                 disclosure = block.all(klass="ad-disclosure")[0]
                 self.assertEqual(disclosure.children, [])
@@ -66,9 +78,13 @@ class EridTest(unittest.TestCase):
             with self.subTest(page=str(page.relative_to(ROOT))):
                 html = page.read_text()
                 self.assertNotRegex(html, r'\b(?:var|let|const)\s+ERID\b')
-                self.assertEqual(len(re.findall(r'var PARTNER_LINK = "[^"\n]+";', html)), 1)
-                self.assertEqual(html.count("2Vtzquqo4SZ"), 1)
+                normalized = html.replace("{{", "{").replace("}}", "}")
+                declaration = "var PARTNER_LINKS = " + repr(PARTNER_LINKS).replace("'", '"') + ";"
+                self.assertIn(declaration, normalized)
+                self.assertEqual(html.count("2Vtzqvk2p6q"), 1)
+                self.assertNotIn("2Vtzquqo4SZ", html)
                 self.assertNotIn("2VtzqviiWtm", html)
+                self.assertNotRegex(html, r'var PARTNER_LINK\s*=')
                 self.assertIn(f'<p class="ad-disclosure">{DISCLOSURE}</p>', html)
                 self.assertNotIn("data-erid", html)
                 scripts = re.findall(r'<script\b[^>]*>(.*?)</script>', html, re.S | re.I)
