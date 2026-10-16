@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Как сохранить лицо, волосы, одежду, свет и ракурс персонажа, меняя только мимику. Базовый промпт, лист 3x3 и девять точных вариантов">
+  <meta name="theme-color" content="#F8F7F2">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="1 персонаж, 9 выражений лица">
+  <meta property="og:description" content="Эталон персонажа, лист 3x3 и девять промптов, которые меняют только мимику">
+  <meta property="og:url" content="https://pronovoe.com/claude-ai/mimika-personazha-chatgpt/">
+  <meta property="og:image" content="https://pronovoe.com/claude-ai/mimika-personazha-chatgpt/assets/oblozhka.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Один седовласый мужчина с тремя разными выражениями лица">
+
+  <title>1 персонаж, 9 выражений лица</title>
+  <!-- critical:fonts:start -->
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+<style>
+    @font-face{font-family:Spectral;src:url('/assets/fonts/spectral-400.woff2') format('woff2');font-weight:400;font-display:swap}
+    @font-face{font-family:Spectral;src:url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');font-weight:600;font-display:swap}
+    @font-face{font-family:Unbounded;src:url('/assets/fonts/unbounded-700.woff2') format('woff2');font-weight:700;font-display:swap}
+    @font-face{font-family:JetBrains;src:url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');font-weight:500;font-display:swap}
+    :root{--paper:#f8f7f2;--ink:#1e2926;--muted:#62706a;--forest:#102f30;--line:#d5c9b7;--accent:#e86f4a;--mint:#e8efec;--card:#fff;--shadow:rgba(16,47,48,.12)}
+    html[data-theme="dark"]{--paper:#162221;--ink:#f8f7f2;--muted:#b8c3be;--forest:#a8d0be;--line:#476b64;--accent:#ff9a78;--mint:#203b38;--card:#1d2d2b;--shadow:rgba(0,0,0,.28)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:19px/1.68 Spectral,Georgia,serif}a{color:var(--forest);text-underline-offset:3px}img{max-width:100%;height:auto}
+    .masthead{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.masthead-inner{max-width:1200px;min-height:64px;margin:auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-family:Unbounded,sans-serif;font-size:14px;text-decoration:none}.head-note{font-size:13px;color:var(--muted)}.theme-toggle{min-width:42px;min-height:42px;border:1px solid var(--line);border-radius:50%;background:var(--card);color:var(--ink);cursor:pointer}
+    .page-shell{max-width:1180px;margin:auto;padding:52px 24px 90px;display:grid;grid-template-columns:230px minmax(0,760px);gap:62px}.toc{position:sticky;top:92px;align-self:start;font:600 13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.toc strong{display:block;margin-bottom:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.toc a{display:block;padding:7px 0;text-decoration:none;border-bottom:1px solid var(--line)}.mobile-toc{display:none}
+    .crumbs{font:600 13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted);margin-bottom:22px}.crumbs a{color:inherit}.eyebrow{font:700 12px/1.3 JetBrains,monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}h1,h2,h3{font-family:Unbounded,-apple-system,sans-serif;line-height:1.16;letter-spacing:-.025em}h1{font-size:48px;margin:12px 0 18px}h2{font-size:30px;margin:68px 0 20px}h3{font-size:21px;margin:38px 0 14px}.lead{font-size:23px;line-height:1.55}.quick{padding:22px 24px;border-left:5px solid var(--accent);background:var(--mint);border-radius:0 12px 12px 0;margin:28px 0}.quick strong{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}figure.cover{margin:22px 0 26px}figure.cover img,.visual img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 55px var(--shadow)}:root[data-theme="dark"] figure.cover img{box-shadow:0 18px 55px var(--shadow)}figcaption{font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted);margin-top:9px}.shot{position:relative}.shot .zoom{margin-top:10px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+    .prompt-box{position:relative;margin:18px 0 28px;padding:22px 22px 18px;background:var(--guide-color-forest);color:var(--guide-color-paper);border-radius:12px;box-shadow:0 12px 34px var(--shadow)}.prompt-box pre{margin:0;padding-top:34px;white-space:pre-wrap;overflow-wrap:anywhere;font:500 14px/1.62 JetBrains,monospace}.copy{position:absolute;right:12px;top:12px;padding:7px 10px;border:1px solid var(--guide-color-white-alpha-35);border-radius:7px;background:var(--guide-color-white-alpha-09);color:var(--guide-color-white);cursor:pointer;font:700 12px/1 -apple-system,sans-serif}.copy[data-copied="true"]{background:var(--guide-color-emerald)}.checklist{padding:0;list-style:none;counter-reset:steps}.checklist li{counter-increment:steps;position:relative;padding:14px 16px 14px 58px;margin:10px 0;background:var(--card);border:1px solid var(--line);border-radius:11px}.checklist li:before{content:counter(steps);position:absolute;left:17px;top:13px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:var(--guide-color-white);font:700 13px/1 JetBrains,monospace}.note{padding:18px 20px;background:var(--mint);border:1px solid var(--line);border-radius:11px}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:22px}.visual{margin:0}.related{margin-top:55px;padding:25px;background:var(--mint);border:1px solid var(--line);border-radius:12px}.related li{margin:8px 0}.cta{margin-top:64px;padding:34px;background:var(--forest);color:var(--paper);border-radius:16px}.cta h2{margin-top:0;color:inherit}.cta a{color:inherit}.press-button{display:inline-block;margin:8px 8px 8px 0;padding:13px 18px;border-radius:9px;background:var(--accent);color:var(--guide-color-white)!important;text-decoration:none;font:700 14px/1.3 -apple-system,sans-serif}.ad-disclosure{font:12px/1.45 -apple-system,sans-serif;opacity:.8}.sources{font-size:16px}.foot{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);font:13px/1.5 -apple-system,sans-serif;color:var(--muted)}.privacy-footer{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:12px}.privacy-footer button{padding:0;border:0;background:var(--guide-color-transparent);color:var(--muted);text-decoration:underline;cursor:pointer}.cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:40;max-width:800px;margin:auto;padding:17px 18px;background:var(--guide-color-forest);color:var(--guide-color-white);border-radius:12px;box-shadow:0 15px 40px var(--guide-color-black-alpha-28);font:14px/1.45 -apple-system,sans-serif}.cookie-banner[hidden]{display:none}.cookie-banner button{margin:10px 8px 0 0;padding:9px 13px;border:0;border-radius:7px;cursor:pointer}.cookie-accept{background:var(--guide-color-coral);color:var(--guide-color-white)}.viewer{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:64px 18px 18px;background:var(--guide-color-forest-surface-alpha-97)}.viewer[open]{display:flex}.viewer img{max-height:calc(100vh - 110px);max-width:calc(100vw - 36px);object-fit:contain}.viewer-close{position:absolute;top:15px;right:15px;width:44px;height:44px;border:0;border-radius:50%;font-size:24px;cursor:pointer}a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    @media(max-width:900px){body{font-size:17px}.page-shell{display:block;padding:30px 16px 65px}.toc{display:none}.mobile-toc{display:block;margin:22px 0 30px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font:600 14px/1.5 -apple-system,sans-serif}.mobile-toc a{display:block;padding:6px 0}h1{font-size:34px}.lead{font-size:20px}.gallery{grid-template-columns:1fr}.head-note{display:none}}
+  </style>
+<!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer;
+}
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+/* Отказ - крестик: одна заметная кнопка «Понятно», выбор по закону остаётся */
+.cookie-actions { align-items: center }
+.cookie-actions .cookie-close {
+  min-width: 44px; padding: 0; border-color: var(--guide-color-transparent); background: var(--guide-color-transparent);
+  color: var(--muted, var(--guide-color-muted)); font: 400 26px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+.cookie-actions .cookie-close:hover { border-color: var(--guide-color-transparent); color: var(--ink, var(--guide-color-ink)) }
+@media (max-width: 600px) {
+  .cookie-actions { flex-wrap: nowrap }
+  .cookie-actions .cookie-close { flex: 0 0 44px }
+}
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/mimika-personazha-chatgpt/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/mimika-personazha-chatgpt/#article",
+      "headline": "1 персонаж, 9 выражений лица",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/mimika-personazha-chatgpt/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-17",
+      "image": "https://pronovoe.com/claude-ai/mimika-personazha-chatgpt/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/mimika-personazha-chatgpt/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "1 персонаж, 9 выражений лица",
+          "item": "https://pronovoe.com/claude-ai/mimika-personazha-chatgpt/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+</head>
+<body>
+  <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Гайды по нейросетям</a><span class="head-note">Мимика одного персонажа</span><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button></div></header>
+  <div class="page-shell">
+    <nav class="toc" aria-label="Содержание"><strong>В статье</strong><a href="#bystryy-start">Быстрый старт</a><a href="#etalon">Эталон</a><a href="#list-3x3">Лист 3x3</a><a href="#devyat-promptov">9 промптов</a><a href="#anti-drift">Как убрать дрейф</a><a href="#primery">4 персонажа</a><a href="#ogranicheniya">Ограничения</a><a href="#istochniki">Источники</a></nav>
+    <main>
+      <div class="crumbs"><a href="../../">Главная</a> / Картинки / Мимика персонажа</div>
+      <p class="eyebrow">Практика · ChatGPT Images</p>
+      <h1>1 персонаж, 9 выражений лица</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+
+      <p class="lead">Сохрани один удачный портрет как эталон и каждый раз прикладывай именно его. В промпте перечисляй лицо, возраст, волосы, одежду, объектив, свет, фон и кадрирование. Затем меняй только положение бровей, век, глаз, носа и губ. Так мимика меняется заметно, а сам персонаж остаётся узнаваемым.</p>
+      <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1200" height="630" alt="Один седовласый мужчина с нейтральным взглядом, улыбкой и прищуром" loading="eager" decoding="async" fetchpriority="high"><figcaption>Эталон персонажа, лист 3x3 и девять промптов для видимой мимики</figcaption></figure>
+      <details class="mobile-toc"><summary>Открыть содержание</summary><a href="#bystryy-start">Быстрый старт</a><a href="#etalon">Эталон</a><a href="#list-3x3">Лист 3x3</a><a href="#devyat-promptov">9 промптов</a><a href="#anti-drift">Как убрать дрейф</a><a href="#primery">4 персонажа</a><a href="#ogranicheniya">Ограничения</a></details>
+
+      <section id="bystryy-start">
+        <h2>Что сделать прямо сейчас</h2>
+        <p>Сохрани один удачный портрет, открой новый чат, прикрепи этот портрет и вставь базовый промпт ниже. Он фиксирует лицо, волосы, одежду, свет, фон, ракурс и кадрирование. После него добавь одно описание мимики или сразу запроси лист 3x3.</p>
+        <div class="quick"><strong>Признак удачного результата.</strong> Во всех девяти ячейках тот же персонаж смотрит в камеру с одной высоты, а меняются только брови, глаза и губы.</div>
+        <p>Если лицо поплыло, не исправляй неудачный результат. Открой новый чат и снова приложи исходный эталон. Так мы собрали четыре серии: взрослого мужчину, взрослую женщину, девочку и мультяшного корги.</p>
+      </section>
+
+      <section id="etalon">
+        <h2>Сначала зафиксируй эталон</h2>
+        <figure class="visual"><div class="shot"><img src="assets/etalon-muzhchina.webp" width="900" height="1125" alt="Эталон седовласого мужчины с длинными волосами и аккуратной бородой"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>Лицо, возраст, волосы, одежда, ракурс, объектив, свет, фон, положение головы и кадрирование фиксируются до смены мимики.</figcaption></figure>
+        <p>Наш эталон: вымышленный персонаж около 60 лет, длинные свободные седые волосы чуть выше плеч, короткая аккуратная седая борода, чёрная фактурная футболка с пуговицами, прямой взгляд, кадр по грудь, объектив 85 мм, мягкий свет сверху слева, нейтральный серый фон.</p>
+        <h3>Базовый промпт фиксации</h3>
+        <div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Используй прикреплённое изображение как единственный визуальный эталон персонажа. Сохрани без изменений: форму лица, возраст, цвет глаз, длину и укладку волос, бороду (если есть), одежду, телосложение, положение головы, направление взгляда, расстояние до камеры, кадрирование по грудь, перспективу объектива 85 мм, мягкий свет сверху слева, нейтральный серый фон и цветокоррекцию. Голова вертикальна, плечи симметричны, взгляд направлен в камеру. Не меняй личность, возраст, причёску, одежду, свет, фон, ракурс и пропорции. Меняй только указанное выражение лица через брови, веки, глаза, нос и губы.</pre></div>
+      </section>
+
+      <section id="list-3x3">
+        <h2>Один промпт на весь лист 3x3</h2>
+        <figure class="visual"><div class="shot"><img src="assets/muzhchina-3x3.webp" width="900" height="1125" alt="Лист 3x3 с девятью выражениями лица одного седовласого мужчины"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>Лист помогает быстро сравнить диапазон мимики, не меняя сцену.</figcaption></figure>
+        <div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Используй прикреплённый эталон и создай ровный лист 3x3 с девятью портретами одного и того же персонажа. Во всех ячейках сохрани без изменений лицо, возраст, волосы, бороду (если есть), одежду, положение головы, прямой ракурс, кадрирование по грудь, объектив 85 мм, мягкий свет сверху слева, нейтральный серый фон и цветокоррекцию. Меняется только мимика.
+
+Слева направо, сверху вниз:
+1. Спокойный прямой взгляд, расслабленные брови и губы.
+2. Лёгкая закрытая улыбка, уголки губ слегка подняты.
+3. Широкая естественная улыбка с видимыми зубами.
+4. Брови подняты, глаза широко раскрыты, рот чуть приоткрыт.
+5. Брови сведены к переносице, губы ровные, взгляд прямой.
+6. Губы плотно сжаты, брови почти нейтральны.
+7. Внутренние уголки бровей приподняты, уголки губ опущены.
+8. Нос сморщен, верхняя губа слегка поднята, глаза прищурены.
+9. Глаза прищурены, одна сторона губ поднята в сдержанной полуулыбке.
+
+Одинаковый масштаб лица во всех девяти ячейках. Не добавляй новые аксессуары и не меняй фон.</pre></div>
+      </section>
+
+      <section id="devyat-promptov">
+        <h2>Девять отдельных промптов для мимики</h2>
+        <p>К каждому варианту прикладывай исходный эталон, а не предыдущую генерацию. Мы называем только то, что видно на лице, без психологических диагнозов.</p>
+        <h3>1. Спокойный прямой взгляд</h3><div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Сохрани персонажа, одежду, свет, фон, ракурс, объектив, положение головы и кадрирование точно как в эталоне. Измени только выражение лица: расслабленные брови, открытые глаза, ровные закрытые губы, прямой спокойный взгляд в камеру.</pre></div>
+        <h3>2. Лёгкая закрытая улыбка</h3><div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Сохрани персонажа, одежду, свет, фон, ракурс, объектив, положение головы и кадрирование точно как в эталоне. Измени только выражение лица: уголки губ слегка подняты, губы закрыты, щёки приподняты совсем немного, глаза смотрят прямо в камеру.</pre></div>
+        <h3>3. Широкая улыбка</h3><div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Сохрани персонажа, одежду, свет, фон, ракурс, объектив, положение головы и кадрирование точно как в эталоне. Измени только выражение лица: широкая естественная улыбка с видимыми зубами, щёки подняты, у внешних уголков глаз лёгкие складки.</pre></div>
+        <h3>4. Поднятые брови</h3><div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Сохрани персонажа, одежду, свет, фон, ракурс, объектив, положение головы и кадрирование точно как в эталоне. Измени только выражение лица: обе брови подняты, глаза широко раскрыты, верхние веки видны, рот слегка приоткрыт.</pre></div>
+        <h3>5. Сведённые брови</h3><div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Сохрани персонажа, одежду, свет, фон, ракурс, объектив, положение головы и кадрирование точно как в эталоне. Измени только выражение лица: брови сведены к переносице и слегка опущены, взгляд прямой, губы закрыты и остаются ровными.</pre></div>
+        <h3>6. Поджатые губы</h3><div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Сохрани персонажа, одежду, свет, фон, ракурс, объектив, положение головы и кадрирование точно как в эталоне. Измени только выражение лица: губы плотно сжаты в тонкую ровную линию, челюсть не выдвигать, брови и глаза почти нейтральны.</pre></div>
+        <h3>7. Опущенные уголки губ</h3><div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Сохрани персонажа, одежду, свет, фон, ракурс, объектив, положение головы и кадрирование точно как в эталоне. Измени только выражение лица: внутренние уголки бровей немного подняты, нижние веки мягкие, уголки закрытых губ опущены.</pre></div>
+        <h3>8. Сморщенный нос</h3><div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Сохрани персонажа, одежду, свет, фон, ракурс, объектив, положение головы и кадрирование точно как в эталоне. Измени только выражение лица: нос сморщен, верхняя губа слегка поднята, глаза прищурены, брови чуть опущены.</pre></div>
+        <h3>9. Прищур с полуулыбкой</h3><div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Сохрани персонажа, одежду, свет, фон, ракурс, объектив, положение головы и кадрирование точно как в эталоне. Измени только выражение лица: глаза узко прищурены, одна сторона губ слегка поднята в сдержанной асимметричной полуулыбке.</pre></div>
+      </section>
+
+      <section id="anti-drift">
+        <h2>Как уменьшить изменение лица, одежды и света</h2>
+        <ol class="checklist"><li>Всегда возвращайся к одному исходному эталону. Не делай третью картинку из второй, а четвёртую из третьей.</li><li>Перечисляй постоянные признаки отдельно. Фраза «тот же персонаж» слабее, чем список из лица, возраста, волос, одежды, света, фона, ракурса и кадрирования.</li><li>Меняй одну переменную за раз. Не проси одновременно новую мимику, позу, одежду и место.</li><li>Слово «грусть» слишком расплывчато. Опиши положение бровей и уголков губ: внутренние уголки бровей подняты, уголки губ опущены.</li><li>Если важен один кадр, генерируй его отдельно. Лист 3x3 удобен для выбора, но в маленьких ячейках у модели меньше места для деталей.</li><li>При заметном дрейфе начинай новый чат с исходным эталоном и базовым промптом.</li></ol>
+      </section>
+
+      <section id="primery">
+        <h2>Проверили на четырёх разных персонажах</h2>
+        <p>На листе с седовласым мужчиной во всех девяти кадрах сохраняются волосы, борода и одежда. Меняются брови, глаза и уголки губ.</p>
+        <p>У женщины во всех кадрах остаются прежними причёска и одежда. Меняется взгляд и выражение лица.</p>
+        <p>У девочки с двумя круглыми пучками показаны те же девять вариантов эмоций. Пучки и жёлтая футболка остаются на месте.</p>
+        <p>Мультяшная корги тоже умеет улыбаться. На её листе выражение читается даже по положению ушей, при этом окрас и платок остаются теми же.</p>
+        <div class="gallery">
+          <figure class="visual"><div class="shot"><img src="assets/zhenshchina-3x3.webp" width="900" height="1125" alt="Девять выражений лица одной взрослой женщины"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>У женщины сохраняются причёска и одежда, а взгляд и выражение лица меняются.</figcaption></figure>
+          <figure class="visual"><div class="shot"><img src="assets/devochka-3x3.webp" width="900" height="1125" alt="Девять выражений лица одной темнокожей девочки с двумя пучками"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>У девочки с двумя пучками показаны девять вариантов эмоций в той же жёлтой футболке.</figcaption></figure>
+          <figure class="visual"><div class="shot"><img src="assets/korgi-3x3.webp" width="900" height="1125" alt="Девять вариантов мимики одного мультяшного корги"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>Корги улыбается, а разницу между выражениями видно даже по положению ушей.</figcaption></figure>
+          <figure class="visual"><div class="shot"><img src="assets/muzhchina-3x3.webp" width="900" height="1125" alt="Девять выражений лица одного седовласого мужчины"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>У седовласого мужчины меняются брови, глаза и губы, но волосы, борода и одежда остаются прежними.</figcaption></figure>
+        </div>
+      </section>
+
+      <section id="ogranicheniya">
+        <h2>Честные ограничения генерации</h2>
+        <p>Генерация не даёт пиксельной копии лица. Между ячейками могут немного меняться форма глаз, зубы, морщины, длина отдельных прядей и ширина лица. Чем сильнее мимика, тем выше риск дрейфа. Текстовые подписи внутри картинки тоже могут ошибаться, поэтому для публикации лучше наложить подписи отдельно после генерации.</p>
+        <p>Редактор ChatGPT может затронуть область шире выделенной. Если нужна серия для рекламы, а не быстрый визуальный тест, выбери лучшие кадры и проверь лицо, одежду, свет и ракурс вручную перед публикацией.</p>
+        <div class="note"><strong>Короткое правило.</strong> Лист 3x3 нужен для поиска мимики. Финальный рекламный кадр лучше генерировать отдельно из исходного эталона.</div>
+      </section>
+
+      <section id="esli-ne-poluchaetsya">
+        <h2>Если результат всё равно плывёт</h2>
+        <div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Я создаю серию одного персонажа по прикреплённому эталону. Сравни новый результат с эталоном по восьми пунктам: форма лица, возраст, глаза, волосы, одежда, свет, фон, ракурс. Назови только отличия и перепиши мой промпт так, чтобы исправить их. Веди меня по одному изменению за раз и жди моего ответа.</pre></div>
+      </section>
+
+      <aside class="related" id="dalshe"><h2>Что логично попробовать дальше</h2><ul><li><a href="../kopirovat-stil-foto-v-chatgpt/">Скопировать стиль одного фото на своё</a>.</li><li><a href="../promty-sveta-dlya-foto-chatgpt/">Поменять свет и камеру готовыми промптами</a>.</li><li><a href="../promty-igrushki-personazhi-chatgpt/">Собрать персонажа в игрушечном стиле</a>.</li><li><a href="../postery-iz-odnogo-foto/">Сделать постер из одного снимка</a>.</li></ul></aside>
+
+      <section class="sources" id="istochniki"><h2>Источники</h2><ul><li><a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">OpenAI Help Center: Images in ChatGPT</a>.</li><li><a href="https://openai.com/index/introducing-4o-image-generation/">OpenAI: Introducing 4o Image Generation</a>.</li><li><a href="https://openai.com/index/gpt-4o-image-generation-system-card-addendum/">OpenAI: GPT-4o image generation system card addendum</a>.</li><li><a href="https://help.openai.com/en/articles/8400551-image-inputs-for-chatgpt-faq">OpenAI Help Center: ChatGPT Image Inputs FAQ</a>.</li><li><a href="https://help.openai.com/en/articles/20001052-file-storage-and-library-in-chatgpt/">OpenAI Help Center: File storage and Library in ChatGPT</a>.</li></ul></section>
+
+      <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
+
+      <footer class="foot">Интерфейс может меняться. Документ от 16 октября 2026.<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">1 персонаж, 9 выражений лица</span></nav>
+<!-- seo:breadcrumbs:end -->
+</main>
+  </div>
+
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Изображение крупнее"><button class="viewer-close" type="button" aria-label="Закрыть">×</button><img alt=""></div>
+  <script src="../../assets/image-viewer.js"></script>
+  <script>
+    var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+    (function(){
+      var themeButton=document.querySelector('.theme-toggle');
+      var saved=localStorage.getItem('guide-theme');
+      if(saved) document.documentElement.dataset.theme=saved;
+      themeButton.addEventListener('click',function(){var next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;localStorage.setItem('guide-theme',next)});
+      document.querySelectorAll('.copy').forEach(function(button){button.addEventListener('click',async function(){var text=button.parentElement.querySelector('pre').innerText;await navigator.clipboard.writeText(text);button.textContent='Скопировано';button.dataset.copied='true';setTimeout(function(){button.textContent='Копировать';button.dataset.copied='false'},1600)})});
+      var viewer=document.getElementById('viewer'),viewerImg=viewer.querySelector('img');
+      var viewerModal=GuideImageViewer.mount(viewer,closeViewer);
+      function closeViewer(){if(viewerModal.close())viewerImg.removeAttribute('src')}
+      document.querySelectorAll(".shot img").forEach(function(img){var button=img.parentElement.querySelector('button');button.className = "zoom";button.addEventListener('click',function(){viewerImg.src=img.dataset.fullSrc || img.currentSrc || img.src;viewerImg.alt=img.alt;viewerModal.open(img)})});
+      viewer.querySelector('.viewer-close').addEventListener('click',closeViewer);viewer.addEventListener('click',function(e){if(e.target===viewer)closeViewer()});
+    })();
+  </script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
+      <button type="button" id="cookie-decline" class="cookie-close" aria-label="Закрыть без аналитики" title="Закрыть без аналитики"><span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body>
+</html>
