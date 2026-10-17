@@ -480,6 +480,35 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
       .prompt-box { padding: 56px 16px 18px }
       .prompt-box pre { font-size: 15px; line-height: 1.65 }
     }
+    /* Оформление статьи совпадает с редакционным эталоном «Курьер» */
+    :root { --emerald: #102F30; --emerald-mid: #1F4A43; --info: #E2E8E9; --info-line: #BBC7CA; --accent-dark: #8F371F }
+    html[data-theme="dark"] { --emerald: #DCEAE4; --emerald-mid: #A8D0BE; --info: #243735; --info-line: #48605C; --accent-dark: #FF9A78 }
+    body { font-size: 18.4px; line-height: 1.65; -webkit-text-size-adjust: 100% }
+    .masthead { background: var(--paper); backdrop-filter: none }
+    .masthead-inner { max-width: 1200px; min-height: 65px; padding: 0 20px }
+    .brand { color: var(--emerald); font: 750 18px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .handout-title { color: var(--accent-dark); font-weight: 750 }
+    .theme-toggle { width: 40px; height: 40px; min-width: 40px; min-height: 40px; border: 0; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .page-shell { max-width: 1244px; padding: 42px 20px 90px; grid-template-columns: 210px minmax(0, 720px); gap: 32px }
+    .toc { top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); padding: 4px 18px 10px 0; border-right: 1px solid var(--line) }
+    .toc-label { margin: 0 0 15px; font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em }
+    .toc a { margin: 0; padding: 8px 0 8px 12px; font-size: 13.5px; line-height: 1.32 }
+    .toc a.active { color: var(--accent-dark) }
+    .eyebrow { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    p { margin-bottom: 20px }
+    .lead { max-width: 690px; margin: 20px 0 0; font-size: inherit; line-height: inherit }
+    .related-plaque { border-color: var(--info-line); background: var(--info) }
+    .related-plaque .plaque-label { color: var(--accent-dark); font-family: ui-monospace, monospace }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .seo-related { border-color: var(--info-line); background: var(--info) }
+    .content-section { margin: 66px 0 0; padding-top: 0; border-top: 0 }
+    .cta { border-radius: 14px }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } }
+    @media (min-width: 861px) and (max-width: 1199px) { .toc { width: 240px; margin-left: 0 } }
+    @media (max-width: 860px) { body { font-size: 17px; line-height: 1.62 } .masthead-inner { min-height: 60px; padding: 0 14px } .brand { max-width: 120px; font-size: 14px } .page-shell { display: block; padding: 24px 14px 68px } .toc { display: none } .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; background: var(--guide-color-transparent) } .related-plaque { margin-top: 46px } h1 { font-size: clamp(27px, 4.4vw, 37.6px); line-height: 1.16 } h2 { font-size: 27px } .content-section { margin-top: 52px } .cta { padding: 26px 22px 28px } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } * { transition: none !important } }
   </style>
 <!-- erid:style:start -->
