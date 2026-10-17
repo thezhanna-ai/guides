@@ -35,7 +35,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"} and not a.get("seriya")}
-        self.assertEqual(len(ready), 52)
+        self.assertEqual(len(ready), 53)
         self.assertEqual(set(self.covers), ready | {a["slug"] for a in self.registry
                                                   if a.get("seriya") == "Промпты для картинок в ChatGPT" or a.get("oblozhka")})
         self.assertEqual(len(self.pages), 2 + len(self.registry))
@@ -115,6 +115,8 @@ class PublicationTest(unittest.TestCase):
                         self.assertTrue(button.text_content().strip())
                     elif "zoom" in classes:
                         self.assertEqual(len(button.parent.all(tag="img")), 1)
+                    elif "checklist-copy" in classes:
+                        self.assertEqual(len(button.parent.parent.all(tag="li")), 3)
                     else:
                         self.assertTrue(classes & {"theme-toggle", "viewer-close", "search-go"}, "Неизвестный тип кнопки")
 
