@@ -294,57 +294,288 @@
 }
 </style>
 <!-- critical:fonts:end -->
+<style>@layer article-content {
+@font-face{font-family:Spectral;src:url('/assets/fonts/spectral-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Spectral;src:url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:Unbounded;src:url('/assets/fonts/unbounded-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:JetBrains;src:url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');font-weight:500;font-display:swap}
+:root{--paper:#f8f7f2;--ink:#1e2926;--muted:#62706a;--forest:#102f30;--line:#d5c9b7;--accent:#e86f4a;--mint:#e8efec;--card:#fff;--shadow:rgba(16,47,48,.12)}
+html[data-theme="dark"]{--paper:#162221;--ink:#f8f7f2;--muted:#b8c3be;--forest:#a8d0be;--line:#476b64;--accent:#ff9a78;--mint:#203b38;--card:#1d2d2b;--shadow:rgba(0,0,0,.28)}
+*{box-sizing:border-box}
+.head-note{font-size:13px;color:var(--muted)}
+.crumbs{font:600 13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted);margin-bottom:22px}
+.crumbs a{color:inherit}
+.quick{padding:22px 24px;border-left:5px solid var(--accent);background:var(--mint);border-radius:0 12px 12px 0;margin:28px 0}
+.quick strong{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.shot{position:relative}
+.shot .zoom{margin-top:10px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+.prompt-box{position:relative;margin:18px 0 28px;padding:22px 22px 18px;background:var(--guide-color-forest);color:var(--guide-color-paper);border-radius:12px;box-shadow:0 12px 34px var(--shadow)}
+.prompt-box pre{margin:0;padding-top:34px;white-space:pre-wrap;overflow-wrap:anywhere;font:500 14px/1.62 JetBrains,monospace}
+.copy{position:absolute;right:12px;top:12px;padding:7px 10px;border:1px solid var(--guide-color-white-alpha-35);border-radius:7px;background:var(--guide-color-white-alpha-09);color:var(--guide-color-white);cursor:pointer;font:700 12px/1 -apple-system,sans-serif}
+.copy[data-copied="true"]{background:var(--guide-color-emerald)}
+.checklist{padding:0;list-style:none;counter-reset:steps}
+.checklist li{counter-increment:steps;position:relative;padding:14px 16px 14px 58px;margin:10px 0;background:var(--card);border:1px solid var(--line);border-radius:11px}
+.checklist li:before{content:counter(steps);position:absolute;left:17px;top:13px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:var(--guide-color-white);font:700 13px/1 JetBrains,monospace}
+.note{padding:18px 20px;background:var(--mint);border:1px solid var(--line);border-radius:11px}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.visual{margin:0}
+.related{margin-top:55px;padding:25px;background:var(--mint);border:1px solid var(--line);border-radius:12px}
+.related li{margin:8px 0}
+.sources{font-size:16px}
+@media(max-width:900px){.gallery{grid-template-columns:1fr}
+.head-note{display:none}}
+}</style>
+<style>@layer article-content {
+:root{--emerald:#102F30;--emerald-mid:#1F4A43;--info:#E2E8E9;--info-line:#BBC7CA;--paper-2:#F0E8D8;--accent-dark:#8F371F;--white:#FFFFFF}
+:root[data-theme="dark"]{--emerald:#DCEAE4;--emerald-mid:#A8D0BE;--info:#243735;--info-line:#48605C;--paper-2:#253331;--accent-dark:#FF9A78;--white:#20302E}
+.related{margin-top:52px;padding:18px 20px;background:var(--info);border-color:var(--info-line)}
+.related h2{margin:0 0 18px;font-size:29px;line-height:1.2;color:var(--emerald)}
+.related ul{margin:0;padding-left:22px}
+.related li{margin:8px 0}
+@media (max-width:860px){.related h2{font-size:27px}}
+}</style>
 <style>
-    @font-face{font-family:Spectral;src:url('/assets/fonts/spectral-400.woff2') format('woff2');font-weight:400;font-display:swap}
-    @font-face{font-family:Spectral;src:url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');font-weight:600;font-display:swap}
-    @font-face{font-family:Unbounded;src:url('/assets/fonts/unbounded-700.woff2') format('woff2');font-weight:700;font-display:swap}
-    @font-face{font-family:JetBrains;src:url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');font-weight:500;font-display:swap}
-    :root{--paper:#f8f7f2;--ink:#1e2926;--muted:#62706a;--forest:#102f30;--line:#d5c9b7;--accent:#e86f4a;--mint:#e8efec;--card:#fff;--shadow:rgba(16,47,48,.12)}
-    html[data-theme="dark"]{--paper:#162221;--ink:#f8f7f2;--muted:#b8c3be;--forest:#a8d0be;--line:#476b64;--accent:#ff9a78;--mint:#203b38;--card:#1d2d2b;--shadow:rgba(0,0,0,.28)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:19px/1.68 Spectral,Georgia,serif}a{color:var(--forest);text-underline-offset:3px}img{max-width:100%;height:auto}
-    .masthead{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.masthead-inner{max-width:1200px;min-height:64px;margin:auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-family:Unbounded,sans-serif;font-size:14px;text-decoration:none}.head-note{font-size:13px;color:var(--muted)}.theme-toggle{min-width:42px;min-height:42px;border:1px solid var(--line);border-radius:50%;background:var(--card);color:var(--ink);cursor:pointer}
-    .page-shell{max-width:1180px;margin:auto;padding:52px 24px 90px;display:grid;grid-template-columns:230px minmax(0,760px);gap:62px}.toc{position:sticky;top:92px;align-self:start;font:600 13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.toc strong{display:block;margin-bottom:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.toc a{display:block;padding:7px 0;text-decoration:none;border-bottom:1px solid var(--line)}.mobile-toc{display:none}
-    .crumbs{font:600 13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted);margin-bottom:22px}.crumbs a{color:inherit}.eyebrow{font:700 12px/1.3 JetBrains,monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}h1,h2,h3{font-family:Unbounded,-apple-system,sans-serif;line-height:1.16;letter-spacing:-.025em}h1{font-size:48px;margin:12px 0 18px}h2{font-size:30px;margin:68px 0 20px}h3{font-size:21px;margin:38px 0 14px}.lead{font-size:23px;line-height:1.55}.quick{padding:22px 24px;border-left:5px solid var(--accent);background:var(--mint);border-radius:0 12px 12px 0;margin:28px 0}.quick strong{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}figure.cover{margin:22px 0 26px}figure.cover img,.visual img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 55px var(--shadow)}:root[data-theme="dark"] figure.cover img{box-shadow:0 18px 55px var(--shadow)}figcaption{font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted);margin-top:9px}.shot{position:relative}.shot .zoom{margin-top:10px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
-    .prompt-box{position:relative;margin:18px 0 28px;padding:22px 22px 18px;background:var(--guide-color-forest);color:var(--guide-color-paper);border-radius:12px;box-shadow:0 12px 34px var(--shadow)}.prompt-box pre{margin:0;padding-top:34px;white-space:pre-wrap;overflow-wrap:anywhere;font:500 14px/1.62 JetBrains,monospace}.copy{position:absolute;right:12px;top:12px;padding:7px 10px;border:1px solid var(--guide-color-white-alpha-35);border-radius:7px;background:var(--guide-color-white-alpha-09);color:var(--guide-color-white);cursor:pointer;font:700 12px/1 -apple-system,sans-serif}.copy[data-copied="true"]{background:var(--guide-color-emerald)}.checklist{padding:0;list-style:none;counter-reset:steps}.checklist li{counter-increment:steps;position:relative;padding:14px 16px 14px 58px;margin:10px 0;background:var(--card);border:1px solid var(--line);border-radius:11px}.checklist li:before{content:counter(steps);position:absolute;left:17px;top:13px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:var(--guide-color-white);font:700 13px/1 JetBrains,monospace}.note{padding:18px 20px;background:var(--mint);border:1px solid var(--line);border-radius:11px}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:22px}.visual{margin:0}.related{margin-top:55px;padding:25px;background:var(--mint);border:1px solid var(--line);border-radius:12px}.related li{margin:8px 0}.cta{margin-top:64px;padding:34px;background:var(--forest);color:var(--paper);border-radius:16px}.cta h2{margin-top:0;color:inherit}.cta a{color:inherit}.press-button{display:inline-block;margin:8px 8px 8px 0;padding:13px 18px;border-radius:9px;background:var(--accent);color:var(--guide-color-white)!important;text-decoration:none;font:700 14px/1.3 -apple-system,sans-serif}.ad-disclosure{font:12px/1.45 -apple-system,sans-serif;opacity:.8}.sources{font-size:16px}.foot{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);font:13px/1.5 -apple-system,sans-serif;color:var(--muted)}.privacy-footer{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:12px}.privacy-footer button{padding:0;border:0;background:var(--guide-color-transparent);color:var(--muted);text-decoration:underline;cursor:pointer}.cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:40;max-width:800px;margin:auto;padding:17px 18px;background:var(--guide-color-forest);color:var(--guide-color-white);border-radius:12px;box-shadow:0 15px 40px var(--guide-color-black-alpha-28);font:14px/1.45 -apple-system,sans-serif}.cookie-banner[hidden]{display:none}.cookie-banner button{margin:10px 8px 0 0;padding:9px 13px;border:0;border-radius:7px;cursor:pointer}.cookie-accept{background:var(--guide-color-coral);color:var(--guide-color-white)}.viewer{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:64px 18px 18px;background:var(--guide-color-forest-surface-alpha-97)}.viewer[open]{display:flex}.viewer img{max-height:calc(100vh - 110px);max-width:calc(100vw - 36px);object-fit:contain}.viewer-close{position:absolute;top:15px;right:15px;width:44px;height:44px;border:0;border-radius:50%;font-size:24px;cursor:pointer}a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-    @media(max-width:900px){body{font-size:17px}.page-shell{display:block;padding:30px 16px 65px}.toc{display:none}.mobile-toc{display:block;margin:22px 0 30px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font:600 14px/1.5 -apple-system,sans-serif}.mobile-toc a{display:block;padding:6px 0}h1{font-size:34px}.lead{font-size:20px}.gallery{grid-template-columns:1fr}.head-note{display:none}}
-  </style>
-  <style>
-    :root{--emerald:#102F30;--emerald-mid:#1F4A43;--info:#E2E8E9;--info-line:#BBC7CA;--paper-2:#F0E8D8;--accent-dark:#8F371F;--white:#FFFFFF}
-    :root[data-theme="dark"]{--emerald:#DCEAE4;--emerald-mid:#A8D0BE;--info:#243735;--info-line:#48605C;--paper-2:#253331;--accent-dark:#FF9A78;--white:#20302E}
-    body{font-size:18.4px;line-height:1.65;-webkit-text-size-adjust:100%}
-    .masthead{background:var(--paper)}
-    .masthead-inner{max-width:1200px;min-height:65px;padding:0 20px;gap:20px}
-    .brand{color:var(--emerald);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:18px;font-weight:750}
-    .header-actions{display:flex;align-items:center;gap:12px}
-    .header-controls{display:flex;align-items:center;gap:12px}
-    .handout-title{color:var(--accent-dark);font-size:13px;font-weight:750}
-    .theme-toggle{width:40px;min-width:40px;min-height:40px;border:0;border-radius:10px;background:var(--info);color:var(--emerald);box-shadow:0 3px 0 var(--info-line)}
-    .page-shell{max-width:1244px;padding:42px 20px 90px;grid-template-columns:210px minmax(0,720px);gap:32px;align-items:start}
-    .toc{top:84px;width:260px;max-height:calc(100vh - 104px);margin-left:max(-50px,calc((100vw - 1284px)/-2));overflow-y:auto;padding:4px 18px 10px 0;border-right:1px solid var(--line)}
-    .toc .toc-label{margin:0 0 15px;color:var(--muted);font:700 11px/1.2 ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase}
-    .toc a{padding:8px 0 8px 12px;border-bottom:0;color:var(--muted);font-size:13.5px;line-height:1.32}
-    .related-plaque{grid-column:2;padding:14px 16px;border:1px solid var(--info-line);border-radius:11px;background:var(--info)}
-    .related-plaque p{margin:0}
-    .related-plaque .plaque-label{margin-bottom:5px;color:var(--accent-dark);font:700 11px/1.3 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
-    .related-plaque h2{margin:0 0 8px;font:750 18px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
-    figure.cover-v2{margin:22px 0 26px}
-    figure.cover-v2 img{border:0;border-radius:14px;box-shadow:none}
-    :root[data-theme="dark"] figure.cover-v2 img{box-shadow:none}
-    figure.cover-v2 figcaption{margin-top:11px;color:var(--muted);font:400 14px/1.5 Spectral,Georgia,serif}
-    h1.article-title-v2{margin:0;font-family:Spectral,Georgia,serif;font-size:46px;font-weight:300;line-height:1.07;letter-spacing:-.3px;text-wrap:balance}
-    h1.article-title-v2{font-family:Unbounded,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:37.6px;font-weight:700;line-height:1.13;letter-spacing:-.752px;color:var(--emerald)}
-    .lead{max-width:690px;margin:20px 0 0;font-size:inherit;line-height:inherit}
-    .related{margin-top:52px;padding:18px 20px;background:var(--info);border-color:var(--info-line)}
-    .related h2{margin:0 0 18px;font-size:29px;line-height:1.2;color:var(--emerald)}
-    .related ul{margin:0;padding-left:22px}
-    .related li{margin:8px 0}
-    article > section:not(.cta) > h2{margin-top:66px}
-    .cta .ad-disclosure{font-size:16px;line-height:1.5;opacity:1}
-    .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px }
-    @media (min-width:1200px){.page-shell{grid-template-columns:210px minmax(0,720px) 180px}.related-plaque{grid-column:3;grid-row:1;position:sticky;top:84px}.header-actions{margin-right:8px}.header-controls { width: 180px }.toc{margin-left:max(-50px,calc(630px - 50vw))}}
-    @media (min-width:861px) and (max-width:1199px){.toc{width:240px;margin-left:0}}
-    @media (max-width:860px){body{font-size:17px;line-height:1.62}.masthead-inner{min-height:60px;padding:0 14px}.brand{max-width:120px;font-size:14px;line-height:1.15}.handout-title{display:none}.page-shell{display:block;padding:24px 14px 68px}.toc{display:none}.related-plaque{margin-top:46px}.mobile-toc{display:block;margin:26px 0 30px}.cta{padding:26px 22px 28px}h1.article-title-v2{font-size:clamp(27px,4.4vw,37.6px);line-height:1.16}.related h2{font-size:27px}article > section:not(.cta) > h2{margin-top:52px}}
-  </style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: fit-content; max-width: 100% }
+    .shot img { display: block; width: auto; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot:has(img[src="assets/voice-brauzer.webp"]) img { width: 560px }
+    .shot:has(img[src="assets/voice-telefon.webp"]) img { width: 300px }
+    .shot:has(img[src="assets/zapros-1.webp"]) img { width: 620px }
+    .shot:has(img[src="assets/otvet-vpermeshku.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-1.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-2.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/plan-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/plan-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/tri-zadachi.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px; font-size: 17px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { background: var(--guide-color-coral); color: var(--guide-color-forest); position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+.code-card .copy-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest) }
+.code-card .copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest) }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
 <!-- erid:style:start -->
 <style>
     .cta-question { margin: 70px 0 0 }
@@ -431,7 +662,20 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
-<!-- privacy:head:start -->
+
+<style id="konspekt-editorial">
+.konspekt-example { max-width: 700px; margin: 24px auto 38px }
+.konspekt-example .shot img { width: 100%; height: auto; max-height: none; object-fit: contain }
+.tariff-note { margin-top: 42px; padding: 18px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; line-height: 1.6 }
+.tariff-note p { font-size: inherit; line-height: inherit; margin: 0 0 12px }
+.tariff-note .note-label { font-weight: 400 }
+.tariff-note ul { margin: 0; padding-left: 22px }
+.tariff-note li { margin: 0 0 14px; font-size: inherit; line-height: inherit }
+</style>
+<style>.shot img{width:650px}.code-card pre{overflow-wrap:anywhere;white-space:pre-wrap}.tariff-note{margin-top:32px}</style>
+<style id="article-content-only">
+.related{margin:46px 0 0;padding:24px;border:1px solid var(--sage-line);border-radius:14px;background:var(--sage-note)}.related h2{margin:0 0 12px}.related ul{margin:0;padding-left:22px}
+</style><!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
 /* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
@@ -546,15 +790,16 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 }
 </script>
 <!-- seo:schema:end -->
-</head>
-<body>
-  <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a><div class="header-actions"><div class="handout-title">1 персонаж, 9 выражений лица</div><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button></div></div></div></header>
-  <div class="page-shell">
-    <nav class="toc" aria-label="Содержание"><p class="toc-label">В статье</p><a href="#bystryy-start">Быстрый старт</a><a href="#etalon">Эталон</a><a href="#list-3x3">Лист 3x3</a><a href="#devyat-promptov">9 промптов</a><a href="#anti-drift">Как убрать дрейф</a><a href="#primery">4 персонажа</a><a href="#ogranicheniya">Ограничения</a><a href="#istochniki">Источники</a></nav>
-    <main><article><header id="nachalo">
+</head><body>
+<div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">1 персонаж, 9 выражений лица</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+</div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">В статье</p><a href="#bystryy-start">Быстрый старт</a><a href="#etalon">Эталон</a><a href="#list-3x3">Лист 3x3</a><a href="#devyat-promptov">9 промптов</a><a href="#anti-drift">Как убрать дрейф</a><a href="#primery">4 персонажа</a><a href="#ogranicheniya">Ограничения</a><a href="#istochniki">Источники</a></nav><main><article><header id="nachalo">
       <p class="eyebrow">Практика · ChatGPT Images</p>
       <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Один седовласый мужчина с нейтральным взглядом, улыбкой и прищуром" loading="eager" decoding="async" fetchpriority="high"><figcaption>Эталон персонажа, лист 3x3 и девять промптов для видимой мимики</figcaption></figure>
-      <h1 class="article-title-v2">1 персонаж, 9 выражений лица</h1>
+      <h1>1 персонаж, 9 выражений лица</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
 
       <p class="lead">Сохрани один удачный портрет как эталон и каждый раз прикладывай именно его. В промпте перечисляй лицо, возраст, волосы, одежду, объектив, свет, фон и кадрирование. Затем меняй только положение бровей, век, глаз, носа и губ. Так мимика меняется заметно, а сам персонаж остаётся узнаваемым.</p>
@@ -574,7 +819,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
       <section id="etalon">
         <h2>Сначала зафиксируй эталон</h2>
-        <figure class="visual"><div class="shot"><img src="assets/etalon-muzhchina.webp" width="900" height="1125" alt="Эталон седовласого мужчины с длинными волосами и аккуратной бородой"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>Лицо, возраст, волосы, одежда, ракурс, объектив, свет, фон, положение головы и кадрирование фиксируются до смены мимики.</figcaption></figure>
+        <figure class="visual"><div class="shot"><img src="assets/etalon-muzhchina.webp" width="900" height="1125" alt="Эталон седовласого мужчины с длинными волосами и аккуратной бородой"></div><figcaption>Лицо, возраст, волосы, одежда, ракурс, объектив, свет, фон, положение головы и кадрирование фиксируются до смены мимики.</figcaption></figure>
         <p>Наш эталон: вымышленный персонаж около 60 лет, длинные свободные седые волосы чуть выше плеч, короткая аккуратная седая борода, чёрная фактурная футболка с пуговицами, прямой взгляд, кадр по грудь, объектив 85 мм, мягкий свет сверху слева, нейтральный серый фон.</p>
         <h3>Базовый промпт фиксации</h3>
         <div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Используй прикреплённое изображение как единственный визуальный эталон персонажа. Сохрани без изменений: форму лица, возраст, цвет глаз, длину и укладку волос, бороду (если есть), одежду, телосложение, положение головы, направление взгляда, расстояние до камеры, кадрирование по грудь, перспективу объектива 85 мм, мягкий свет сверху слева, нейтральный серый фон и цветокоррекцию. Голова вертикальна, плечи симметричны, взгляд направлен в камеру. Не меняй личность, возраст, причёску, одежду, свет, фон, ракурс и пропорции. Меняй только указанное выражение лица через брови, веки, глаза, нос и губы.</pre></div>
@@ -582,7 +827,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
       <section id="list-3x3">
         <h2>Один промпт на весь лист 3x3</h2>
-        <figure class="visual"><div class="shot"><img src="assets/muzhchina-3x3.webp" width="900" height="1125" alt="Лист 3x3 с девятью выражениями лица одного седовласого мужчины"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>Лист помогает быстро сравнить диапазон мимики, не меняя сцену.</figcaption></figure>
+        <figure class="visual"><div class="shot"><img src="assets/muzhchina-3x3.webp" width="900" height="1125" alt="Лист 3x3 с девятью выражениями лица одного седовласого мужчины"></div><figcaption>Лист помогает быстро сравнить диапазон мимики, не меняя сцену.</figcaption></figure>
         <div class="prompt-box"><button class="copy" type="button">Копировать</button><pre>Используй прикреплённый эталон и создай ровный лист 3x3 с девятью портретами одного и того же персонажа. Во всех ячейках сохрани без изменений лицо, возраст, волосы, бороду (если есть), одежду, положение головы, прямой ракурс, кадрирование по грудь, объектив 85 мм, мягкий свет сверху слева, нейтральный серый фон и цветокоррекцию. Меняется только мимика.
 
 Слева направо, сверху вниз:
@@ -625,10 +870,10 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <p>У девочки с двумя круглыми пучками показаны те же девять вариантов эмоций. Пучки и жёлтая футболка остаются на месте.</p>
         <p>Мультяшная корги тоже умеет улыбаться. На её листе выражение читается даже по положению ушей, при этом окрас и платок остаются теми же.</p>
         <div class="gallery">
-          <figure class="visual"><div class="shot"><img src="assets/zhenshchina-3x3.webp" width="900" height="1125" alt="Девять выражений лица одной взрослой женщины"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>У женщины сохраняются причёска и одежда, а взгляд и выражение лица меняются.</figcaption></figure>
-          <figure class="visual"><div class="shot"><img src="assets/devochka-3x3.webp" width="900" height="1125" alt="Девять выражений лица одной темнокожей девочки с двумя пучками"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>У девочки с двумя пучками показаны девять вариантов эмоций в той же жёлтой футболке.</figcaption></figure>
-          <figure class="visual"><div class="shot"><img src="assets/korgi-3x3.webp" width="900" height="1125" alt="Девять вариантов мимики одного мультяшного корги"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>Корги улыбается, а разницу между выражениями видно даже по положению ушей.</figcaption></figure>
-          <figure class="visual"><div class="shot"><img src="assets/muzhchina-3x3.webp" width="900" height="1125" alt="Девять выражений лица одного седовласого мужчины"><button class="zoom" type="button">Открыть крупнее</button></div><figcaption>У седовласого мужчины меняются брови, глаза и губы, но волосы, борода и одежда остаются прежними.</figcaption></figure>
+          <figure class="visual"><div class="shot"><img src="assets/zhenshchina-3x3.webp" width="900" height="1125" alt="Девять выражений лица одной взрослой женщины"></div><figcaption>У женщины сохраняются причёска и одежда, а взгляд и выражение лица меняются.</figcaption></figure>
+          <figure class="visual"><div class="shot"><img src="assets/devochka-3x3.webp" width="900" height="1125" alt="Девять выражений лица одной темнокожей девочки с двумя пучками"></div><figcaption>У девочки с двумя пучками показаны девять вариантов эмоций в той же жёлтой футболке.</figcaption></figure>
+          <figure class="visual"><div class="shot"><img src="assets/korgi-3x3.webp" width="900" height="1125" alt="Девять вариантов мимики одного мультяшного корги"></div><figcaption>Корги улыбается, а разницу между выражениями видно даже по положению ушей.</figcaption></figure>
+          <figure class="visual"><div class="shot"><img src="assets/muzhchina-3x3.webp" width="900" height="1125" alt="Девять выражений лица одного седовласого мужчины"></div><figcaption>У седовласого мужчины меняются брови, глаза и губы, но волосы, борода и одежда остаются прежними.</figcaption></figure>
         </div>
       </section>
 
@@ -649,35 +894,137 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       <section id="voprosy"><h2>Короткий ответ</h2><details class="faq-item"><summary>Как сохранить одного персонажа, меняя только мимику?</summary><p>Сохрани первый удачный портрет как эталон. Для каждого нового результата прикладывай именно его, перечисляй неизменяемые признаки и меняй одной фразой только брови, глаза и губы. Не продолжай цепочку от очередной генерации: так ошибки лица не накапливаются.</p></details></section>
       <section class="sources" id="istochniki"><h2>Источники</h2><ul><li><a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">OpenAI Help Center: Images in ChatGPT</a>.</li><li><a href="https://openai.com/index/introducing-4o-image-generation/">OpenAI: Introducing 4o Image Generation</a>.</li><li><a href="https://openai.com/index/gpt-4o-image-generation-system-card-addendum/">OpenAI: GPT-4o image generation system card addendum</a>.</li><li><a href="https://help.openai.com/en/articles/8400551-image-inputs-for-chatgpt-faq">OpenAI Help Center: ChatGPT Image Inputs FAQ</a>.</li><li><a href="https://help.openai.com/en/articles/20001052-file-storage-and-library-in-chatgpt/">OpenAI Help Center: File storage and Library in ChatGPT</a>.</li></ul></section>
 
-      <p class="cta-question" id="svoi-proekt">Как поручить нейросетям работу над своим проектом?</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section></article>
+      <p class="cta-question" id="svoi-proekt">Как поручить нейросетям работу над своим проектом?</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section></article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Ещё про картинки</p><h2>Скопировать стиль фото</h2>
+      <p><a href="../kopirovat-stil-foto-v-chatgpt/">Как повторить стиль снимка в ChatGPT</a></p></aside></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint"></p></div>
+<script src="../../assets/image-viewer.js"></script>
+<script>
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
 
-      <footer class="foot">Интерфейс может меняться. Документ от 16 октября 2026.<!-- privacy:footer:start -->
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
-</main><aside class="related-plaque" aria-label="Соседняя статья">
-      <p class="plaque-label">Ещё про картинки</p><h2>Скопировать стиль фото</h2>
-      <p><a href="../kopirovat-stil-foto-v-chatgpt/">Как повторить стиль снимка в ChatGPT</a></p></aside>
-  </div>
-
-  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Изображение крупнее"><button class="viewer-close" type="button" aria-label="Закрыть">×</button><img alt=""></div>
-  <script src="../../assets/image-viewer.js"></script>
-  <script>
-    var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
-    document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
-    (function(){
-      var themeButton=document.querySelector('.theme-toggle');
-      var saved=localStorage.getItem('guide-theme');
-      if(saved) document.documentElement.dataset.theme=saved;
-      themeButton.addEventListener('click',function(){var next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;localStorage.setItem('guide-theme',next)});
-      document.querySelectorAll('.copy').forEach(function(button){button.addEventListener('click',async function(){var text=button.parentElement.querySelector('pre').innerText;await navigator.clipboard.writeText(text);button.textContent='Скопировано';button.dataset.copied='true';setTimeout(function(){button.textContent='Копировать';button.dataset.copied='false'},1600)})});
-      var viewer=document.getElementById('viewer'),viewerImg=viewer.querySelector('img');
-      var viewerModal=GuideImageViewer.mount(viewer,closeViewer);
-      function closeViewer(){if(viewerModal.close())viewerImg.removeAttribute('src')}
-      document.querySelectorAll(".shot img").forEach(function(img){var button=img.parentElement.querySelector('button');button.className = "zoom";button.addEventListener('click',function(){viewerImg.src=img.dataset.fullSrc || img.currentSrc || img.src;viewerImg.alt=img.alt;viewerModal.open(img)})});
-      viewer.querySelector('.viewer-close').addEventListener('click',closeViewer);viewer.addEventListener('click',function(e){if(e.target===viewer)closeViewer()});
-    })();
-  </script>
+<script>
+</script>
+<script>document.querySelectorAll('.prompt-box .copy').forEach(function(button){button.addEventListener('click',function(){var text=button.parentElement.querySelector('pre').innerText;navigator.clipboard.writeText(text).then(function(){button.textContent='Скопировано';button.dataset.copied='true';setTimeout(function(){button.textContent='Копировать';button.dataset.copied='false'},1600)})})});</script>
 <!-- privacy:banner:start -->
 <aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
   <div class="cookie-inner">
@@ -689,5 +1036,4 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   </div>
 </aside>
 <!-- privacy:banner:end -->
-</body>
-</html>
+</body></html>
