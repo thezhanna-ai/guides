@@ -1447,19 +1447,21 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   <p>Игра объясняет награды, штрафы и конфликт короткого пути с безопасностью. Робот не понимает бурю как человек. Он складывает числа, поставленные разработчиком</p>
   <p>Начни с прогноза SHORTCUT и варианта Low -2. Затем переключи Safety на High -12 и повтори запуск</p>
   <p>Сейчас доступен публичный игровой прототип: на странице написано «No account · 5-minute mission». Аккаунт и оплата для этой миссии не нужны</p>
-  <p>При -2 опасный и безопасный варианты получают по +4, и робот выбирает первый путь через бурю. При -12 он доходит до маяка за 10 шагов</p>
+  <div class="result"><p><b>Результат: при -2 робот идёт через бурю, при -12 доходит до маяка за 10 шагов.</b> При -2 опасный и безопасный варианты получают по +4, и робот выбирает первый путь через бурю</p></div>
+  <details class="check-panel"><summary>Это обучение ChatGPT?</summary>
   <p>Это не обучение ChatGPT. Игра показывает детерминированную формулу оценки: разработчик задаёт числа, а программа каждый раз выбирает ход с лучшей суммой</p>
+  </details>
   <figure class="fig" data-own="screenshot">
     <a class="zoom" href="assets/igry-pro-ii-agent-maze-storm.webp" target="_blank" rel="noopener" aria-label="Открыть картинку в полном размере"><picture>
       <source srcset="assets/igry-pro-ii-agent-maze-storm.webp" type="image/webp">
-      <img src="assets/igry-pro-ii-agent-maze-storm.jpg" alt="Agent Maze после выбора короткого пути: робот остановился в буре со штрафом минус два балла" width="1080" height="576" loading="lazy" decoding="async">
+      <img src="assets/igry-pro-ii-agent-maze-storm.jpg" alt="Agent Maze со штрафом Low -2: робот стоит на красной клетке бури, справа выбран прогноз SHORTCUT" width="880" height="516" loading="lazy" decoding="async">
     </picture></a>
     <figcaption>При небольшой потере путь через бурю остаётся выгодным по формуле, хотя миссия останавливается</figcaption>
   </figure>
   <figure class="fig" data-own="screenshot">
     <a class="zoom" href="assets/igry-pro-ii-agent-maze-beacon.webp" target="_blank" rel="noopener" aria-label="Открыть картинку в полном размере"><picture>
       <source srcset="assets/igry-pro-ii-agent-maze-beacon.webp" type="image/webp">
-      <img src="assets/igry-pro-ii-agent-maze-beacon.jpg" alt="Agent Maze после увеличения потери: робот обошёл бурю и дошёл до маяка за десять шагов" width="1080" height="576" loading="lazy" decoding="async">
+      <img src="assets/igry-pro-ii-agent-maze-beacon.jpg" alt="Agent Maze со штрафом High -12: робот обошёл бурю по клеткам 1-10 и стоит на маяке, справа надпись Beacon reached" width="1080" height="829" loading="lazy" decoding="async">
     </picture></a>
     <figcaption>После увеличения потери до 12 баллов безопасный обход выигрывает, на экране появляется Beacon reached</figcaption>
   </figure>
@@ -1468,8 +1470,11 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   <p>Открой <a href="https://playplain.com/bpe-tokenization/" rel="noopener nofollow" target="_blank">BPE Tokenization в PlayPlain</a> в браузере. Это простой опыт с английским словом, вход в аккаунт не требуется</p>
   <p>Он показывает, что модель получает слово частями, которые называют токенами. Буквы внутри крупного фрагмента учебная модель не пересчитывает по отдельности</p>
   <p>Оставь <code>strawberry</code> и букву <code>r</code>: сначала увидишь «token-level guess: 2 · truth: 3». Затем нажми <code>spell it out first</code>. Слово разложится по буквам, и ответ станет 3</p>
+  <div class="result"><p><b>Результат: «token-level guess: 2» сменился на правильный ответ 3.</b> Каждая буква стала отдельным элементом</p></div>
   <p>Интерактив сейчас запускается без входа и оплаты. Кнопка Sign in есть, но для опыта со strawberry она не понадобилась</p>
+  <details class="check-panel"><summary>Это настоящий токенизатор ChatGPT?</summary>
   <p>У опыта есть важная оговорка. PlayPlain использует учебный словарь примерно из 300 элементов, который имитирует принцип GPT-style BPE. Он объясняет механизм, но не показывает закрытый токенизатор конкретной модели байт в байт</p>
+  </details>
   <figure class="fig" data-own="screenshot">
     <a class="zoom" href="assets/igry-pro-ii-playplain-wrong.webp" target="_blank" rel="noopener" aria-label="Открыть картинку в полном размере"><picture>
       <source srcset="assets/igry-pro-ii-playplain-wrong.webp" type="image/webp">
@@ -1480,7 +1485,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   <figure class="fig" data-own="screenshot">
     <a class="zoom" href="assets/igry-pro-ii-playplain-correct.webp" target="_blank" rel="noopener" aria-label="Открыть картинку в полном размере"><picture>
       <source srcset="assets/igry-pro-ii-playplain-correct.webp" type="image/webp">
-      <img src="assets/igry-pro-ii-playplain-correct.jpg" alt="PlayPlain разбил strawberry по буквам и показал правильный результат: три буквы r" width="1080" height="960" loading="lazy" decoding="async">
+      <img src="assets/igry-pro-ii-playplain-correct.jpg" alt="PlayPlain разбил strawberry по буквам и показал правильный результат: три буквы r" width="1080" height="540" loading="lazy" decoding="async">
     </picture></a>
     <figcaption>После команды spell it out first каждая буква становится отдельным элементом, и ответ меняется на 3</figcaption>
   </figure>
@@ -1489,8 +1494,10 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   <p>В <a href="https://artsexperiments.withgoogle.com/artpalette/" rel="noopener nofollow" target="_blank">Art Palette</a> можно увидеть результат сразу: выбираешь пять цветов, а ниже меняется подборка картин. Сложность простая</p>
   <p>Так работает поиск похожих объектов по признакам. Здесь признак наглядный: пять цветов, а не сюжет картины</p>
   <p>Для запуска достаточно браузера и кнопки Surprise Me. Её можно нажать вместо ручного выбора цветов или загрузки изображения: пять цветов наверху сменятся, а ниже появится другой набор работ</p>
+  <details class="check-panel"><summary>Что уходит в Google, если загрузить своё фото</summary>
   <p>Эксперимент сейчас открывается без аккаунта и оплаты. Если загрузить изображение, страница сообщает, что в Google отправляется его палитра, фото не используется для других целей, а цвета хранятся только во время поиска совпадений</p>
-  <p>Этот опыт удобен тем, что результат понятен без терминов: меняется выбранный набор признаков, и алгоритм перестраивает выдачу</p>
+  </details>
+  <div class="result"><p><b>Результат: пять цветов наверху сменились, ниже другой набор картин.</b> Меняется выбранный набор признаков, и алгоритм перестраивает выдачу</p></div>
   <figure class="fig" data-own="screenshot">
     <a class="zoom" href="assets/igry-pro-ii-art-palette-before.webp" target="_blank" rel="noopener" aria-label="Открыть картинку в полном размере"><picture>
       <source srcset="assets/igry-pro-ii-art-palette-before.webp" type="image/webp">
@@ -1510,6 +1517,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   <p>В <a href="https://alphaludo.in/play" rel="noopener nofollow" target="_blank">AlphaLudo</a> нейросеть оценивает допустимые ходы и вероятность победы в лудо, где часть событий зависит от кубика. Если правила лудо незнакомы, сложность средняя</p>
   <p>Нужен браузер с JavaScript. Первая загрузка занимает около 6 МБ. Для объёмной доски нужен WebGL, но предусмотрен плоский режим</p>
   <p>Начни с кубика: нажми его, сделай доступный ход и следи за строкой «Who's winning». Она меняется после ходов и показывает оценку самой сети</p>
+  <div class="result"><p><b>Результат: после твоего хода строка «Who's winning» показывает новые шансы.</b></p></div>
   <p>По описанию автора, аккаунт, сервер и оплата не нужны. Игра работает на устройстве, не отправляет ходы на сервер и не использует аналитику, cookies или tracking</p>
   <p>Твоя партия не дообучает сеть. В браузере работает уже обученная модель, поэтому одинаковая позиция даёт одинаковый выбор при полной силе</p>
 </section><section id="agent-breaker-uchebnye-ataki-na-ii">
@@ -1517,6 +1525,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   <p>В <a href="https://play.lakera.ai/agent-breaker" rel="noopener nofollow" target="_blank">Agent Breaker</a> агент читает документы и описания инструментов. Игра показывает prompt injection: текст, который выглядит как данные, агент может принять за команду</p>
   <p>Это опыт средней или высокой сложности. Понадобятся браузер, английский интерфейс и внимательное чтение цели уровня</p>
   <p>Начни с Curs-ed CodeReview, открой Level 1 Novice и прочитай Attack Objective. Цель написана слева, результат атаки появляется в макете приложения справа</p>
+  <div class="result"><p><b>Результат: в макете приложения справа видно, чем закончилась атака.</b></p></div>
   <p>Каталог и первый уровень сейчас открываются без аккаунта и оплаты</p>
   <p>Работай только внутри учебной площадки. То, что разрешено целью игры, не даёт разрешения атаковать чужие сайты, ботов или аккаунты</p>
 </section><section id="tensor-trust-zaschita-prompta-protiv-ataki">
@@ -1524,13 +1533,15 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   <p>В <a href="https://tensortrust.ai/" rel="noopener nofollow" target="_blank">Tensor Trust</a> один игрок пишет защитное правило и вымышленный пароль, а другой пытается заставить модель сказать «access granted» без правильного пароля. Сложность средняя</p>
   <p>Для запуска нужен аккаунт и согласие с условиями исследовательского проекта. На публичной странице нет цены и шага оплаты, но при создании аккаунта пользователь соглашается на использование данных в исследовании</p>
   <p>Первый шаг - прочитать <a href="https://tensortrust.ai/consent_and_terms.cfm" rel="noopener nofollow" target="_blank">Consent and Terms</a>. Затем используй только вымышленные данные, создай простое защитное правило и посмотри, как другие игроки пытаются его обойти</p>
-  <p>Тексты, отправленные в игру, планируют публиковать для исследования вместе со временем отправки и случайными идентификаторами. Реальные пароли, имена и другую личную информацию туда вводить нельзя</p>
+  <div class="warn-card"><p>Тексты, отправленные в игру, планируют публиковать для исследования вместе со временем отправки и случайными идентификаторами. Реальные пароли, имена и другую личную информацию туда вводить нельзя</p></div>
 </section><section id="steerscope-posmotret-prognoz-po-sloyam-i">
   <h2 class="num">Steerscope: посмотреть прогноз по слоям и изменить направление</h2>
   <p>На <a href="https://millerharry.github.io/steerscope/" rel="noopener nofollow" target="_blank">Steerscope</a> показаны прогнозы следующего токена от нижних слоёв к верхним и влияние управления направлением активаций (steering) на продолжение. Это самый сложный опыт в списке</p>
   <p>Для запуска нужен современный браузер. Для полноценного локального вывода автор указывает WebGPU и совместимый GPU, но текущая предварительная версия открывается без аккаунта и оплаты. Автор заявляет локальные вычисления без платы за посещение</p>
   <p>Начни с готовой фразы: нажми токен в продолжении, посмотри лестницу из 25 слоёв и подвигай один ползунок, например Formality</p>
+  <details class="check-panel"><summary>Steerscope показывает настоящую модель?</summary>
   <p>Над демо стоит надпись «Illustrative preview». Подключение настоящей модели и показ её промежуточных расчётов ещё в работе. Сейчас это интерактивное объяснение интерфейса, а не полностью готовый прибор для чтения внутренних состояний модели</p>
+  </details>
 </section><section id="kak-vybrat-pervuyu-igru">
   <h2 class="num">Как выбрать первую игру</h2>
   <p>Для первого захода бери одну из трёх простых игр. В Agent Maze меняется решение робота, в PlayPlain видна ошибка подсчёта букв, а в Art Palette результат меняется вместе с цветами</p>
@@ -1621,6 +1632,13 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Figry-pro-ii%2F&title=7%20%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%8B%D1%85%20%D0%B8%D0%B3%D1%80%20%D0%BF%D1%80%D0%BE%20%D0%98%D0%98%3A%20%D1%87%D1%82%D0%BE%20%D0%BF%D0%BE%D0%BF%D1%80%D0%BE%D0%B1%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D0%B8%20%D1%87%D0%B5%D0%BC%D1%83%20%D0%BE%D0%BD%D0%B8%20%D0%BD%D0%B0%D1%83%D1%87%D0%B0%D1%82" target="_blank" rel="noopener">VK</a>
       </div>
 
+      <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
+<p class="help-title">Непонятно, что на экране? Спроси Claude. <span class="accent">Попроси объяснить по одному шагу.</span></p>
+<div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Открываю одну из игр про ИИ: Agent Maze, PlayPlain или Art Palette. Сначала спроси, какую игру я открыл и что вижу на экране. Объясняй простыми словами по одному шагу и после каждого жди моего ответа. Не проси вводить пароли и личные данные.</p></div>
+<div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Напиши название игры и опиши, что видишь.</div></div>
+<button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи по играм" aria-live="polite">Скопировать</button>
+</section>
+
       <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 
     </article></main>
@@ -1634,6 +1652,37 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
 <p class="viewer-hint"></p></div>
 <script src="../../assets/image-viewer.js"></script>
+<script>
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
 <script>
 (function () {
   var viewer = document.getElementById("viewer");
