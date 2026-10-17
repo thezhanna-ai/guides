@@ -1560,4 +1560,5 @@ class RubrikiIMetkiTest(unittest.TestCase):
                 self.assertEqual(html.count('class="uroven-metka'), 1)
                 after = html.split("</h1>", 1)[1].lstrip()
                 self.assertTrue(after.startswith('<p class="uroven-metka %s"' % a["uroven"]))
-                self.assertIn(">%s уровень</p>" % self.gen.UROVNI[a["uroven"]][0], after.split("\n", 1)[0])
+                label = a.get("uroven_nadpis", self.gen.UROVNI[a["uroven"]][0] + " уровень")
+                self.assertIn(">%s</p>" % label, after.split("\n", 1)[0])

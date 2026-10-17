@@ -509,7 +509,8 @@ def sobrat_metki_urovnya(stranicy):
             raise ValueError("%s: нет заголовка h1 для метки уровня" % statya["slug"])
         metka = ('\n<p class="uroven-metka %s" style="display:inline-block;margin:16px 0 0;padding:5px 12px;'
                  'border-radius:999px;%s;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,'
-                 'Arial,sans-serif">%s уровень</p>' % (uroven, METKA_STIL[uroven], UROVNI[uroven][0]))
+                 'Arial,sans-serif">%s</p>' % (uroven, METKA_STIL[uroven],
+                                               ekranirovat(statya.get('uroven_nadpis', UROVNI[uroven][0] + ' уровень'))))
         html = html.replace("</h1>", "</h1>" + metka, 1)
         stranicy[page] = html
     return stranicy
