@@ -24,7 +24,7 @@ class EridTest(unittest.TestCase):
     def setUpClass(cls):
         cls.pages = [ROOT / "index.html", *sorted(ROOT.glob("claude-ai/*/index.html")),
                      ROOT / "scripts/shablon_glavnoy.html"]
-        assert len(cls.pages) == 62
+        assert len(cls.pages) == 63
 
     def test_every_partner_page_and_template_has_exactly_one_marked_creative(self):
         for page in self.pages:
@@ -109,7 +109,7 @@ class EridTest(unittest.TestCase):
             with self.subTest(page=str(page.relative_to(ROOT))):
                 doc = ImageDocument(page.read_text())
                 block = doc.root.all(klass="cta")[0]
-                if page == ROOT / "claude-ai/igry-pro-ii/index.html":
+                if page in (ROOT / "claude-ai/igry-pro-ii/index.html", ROOT / "claude-ai/trellis-2-3d-model-iz-foto/index.html"):
                     self.assertIs(block.parent.children[-1], block)
                     continue
                 question = block.parent.children[block.parent.children.index(block) - 1]
