@@ -1633,7 +1633,7 @@ class SvodkaDraftTest(unittest.TestCase):
             "PowerShell",
             "python.org",
             "cd /путь/к/svodka",
-            'export SEC_USER_AGENT="Имя Фамилия почта"',
+            'export SEC_USER_AGENT="Имя Фамилия почта@пример.ru"',
             "https://www.alphavantage.co/support/#api-key",
             "python3 agent1_podachi.py",
             "python3 agent2_ceny.py",
