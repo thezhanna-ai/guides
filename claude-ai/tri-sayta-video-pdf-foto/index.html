@@ -1308,11 +1308,11 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       <section id="vectispdf">
         <p class="eyebrow">Документы</p>
         <h2>VectisPDF: документ до редактирования и после экспорта</h2>
-        <p><a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a> открывает PDF в браузере. Там можно добавить или исправить текст, выделить фрагмент, удалить закрытые данные при экспорте, переставить страницы и объединить несколько документов.</p>
+        <p><a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a> открывает PDF в браузере. Здесь два действия, которые доходят до готового файла: удалить фрагмент так, чтобы его нельзя было восстановить (режим Redact), и объединить несколько PDF в один.</p>
         <ol>
           <li><b>Нажми Select PDF</b>. Выбранный документ откроется в редакторе</li>
           <li><b>Открой Viewer &amp; Text и выбери Redact</b>. Обведи фрагмент, который надо удалить. При экспорте сервис стирает эти данные из файла. Обычная чёрная плашка исходный текст не удаляет</li>
-          <li><b>Задай имя и нажми Export PDF</b>. Исправленный документ скачается со всеми страницами</li>
+          <li><b>Задай имя и нажми Export PDF</b>. PDF с удалённым фрагментом скачается со всеми страницами</li>
           <li><b>Для объединения открой Merge / Split</b>. Добавь второй PDF и экспортируй общий файл на 26 страниц</li>
         </ol>
         <figure class="fig visual-wide" data-own="screenshot"><img src="assets/vectispdf-export-clean.webp" width="1280" height="800" alt="Интерфейс VectisPDF с выбранным режимом Redact и кнопкой Export PDF" loading="lazy" decoding="async"><figcaption>На реальном экране редактора видно: открыт документ 1 of 12, выбран Redact, справа доступен Export PDF</figcaption></figure>
@@ -1320,7 +1320,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <figure class="fig" data-own="result"><img src="assets/vectis-before-crop.webp" width="560" height="240" alt="Участок исходного PDF с подписью под обложкой и соседним заголовком до скрытия" loading="lazy" decoding="async"><figcaption>До: под обложкой читается строка «7 бесплатных игр про ИИ: что попробовать и чему они научат»</figcaption></figure>
           <figure class="fig" data-own="result"><img src="assets/vectis-after-crop.webp" width="560" height="240" alt="Тот же участок PDF после экспорта из VectisPDF, строка закрыта чёрной плашкой, ниже виден соседний заголовок" loading="lazy" decoding="async"><figcaption>После: на том же месте чёрная плашка. Это видимое изменение в экспортированном PDF</figcaption></figure>
         </div>
-        <div class="result"><p><b>Что получилось:</b> исправленный PDF сохранил 12 страниц, а два документа объединились в один. Водяного знака в готовых файлах нет.</p><p><a class="proof-link" href="assets/vectis-edited-12-pages.pdf" target="_blank" rel="noopener">Открыть исправленный PDF</a><a class="proof-link" href="assets/vectis-merged-26-pages.pdf" target="_blank" rel="noopener">Открыть объединённый PDF</a></p></div>
+        <div class="result"><p><b>Что получилось:</b> PDF с удалённым фрагментом сохранил 12 страниц, а два документа объединились в один. Водяного знака в готовых файлах нет.</p><p><a class="proof-link" href="assets/vectis-edited-12-pages.pdf" target="_blank" rel="noopener">Открыть PDF с удалённым фрагментом</a><a class="proof-link" href="assets/vectis-merged-26-pages.pdf" target="_blank" rel="noopener">Открыть объединённый PDF</a></p></div>
         <div class="warn-card"><p><b>Где неудобно:</b> на экране шириной 540 пикселей редактор попросил открыть сайт на компьютере. Распознавание текста на скане (OCR) сработало внутри редактора, но отдельный файл с этим текстом получить не удалось.</p></div>
       </section>
 
@@ -1346,7 +1346,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <ol>
           <li><b>Картинки из видео:</b> Video2Frames → Serial → интервал → Start Serial Extraction → Export ZIP</li>
           <li><b>Раскадровка одним файлом:</b> Video2Frames → Export PDF</li>
-          <li><b>Правка документа:</b> VectisPDF → Viewer &amp; Text → нужный инструмент → Export PDF</li>
+          <li><b>Удалить фрагмент:</b> VectisPDF → Viewer &amp; Text → Redact → обвести фрагмент → Export PDF</li>
           <li><b>Объединение документов:</b> VectisPDF → Merge / Split → Add PDF → Export PDF</li>
           <li><b>Данные фотографии:</b> TimeStamp Camera → EXIF viewer → Date &amp; Time, Camera, GPS</li>
           <li><b>Очистка фотографии:</b> Strip metadata instead → Choose photos → Download cleaned file</li>
