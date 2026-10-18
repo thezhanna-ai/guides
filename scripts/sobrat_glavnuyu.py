@@ -739,7 +739,7 @@ def dobavit_seo(html, url, metadata):
         if search_faq:
             details = ''.join('<details class="faq-item"><summary>' + escape(x['question']) + '</summary><p>' + escape(x['answer']) + '</p></details>' for x in search_faq)
             fragment = '<!-- seo:faq:start -->\n<section class="seo-faq" aria-label="Вопросы из поиска" style="margin:36px 0"><h2>Что ещё спрашивают</h2>' + details + '</section>\n<!-- seo:faq:end -->'
-            ends = [html.find(t) for t in ('<!-- seo:related:start -->', '<p class="cta-question"', '<section class="cta"', '</article>', '</main>', '<footer') if html.find(t) != -1]
+            ends = [html.find(t) for t in ('<div class="share-row">', '<!-- seo:related:start -->', '<p class="cta-question"', '<section class="cta"', '</article>', '</main>', '<footer') if html.find(t) != -1]
             end = min(ends) if ends else html.find('</body>')
             html = html[:end] + '\n' + fragment + '\n' + html[end:]
         questions = []

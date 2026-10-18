@@ -643,6 +643,7 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
@@ -753,7 +754,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#leader">Кто руководит командой</a><a href="#task">Какое задание получает Hermes</a><a href="#roles">Кто за что отвечает</a><a href="#materials">Какие материалы нужны исполнителям</a><a href="#review">Как проходят проверка и исправления</a><a href="#seo">Кто готовит страницу и проверяет SEO</a><a href="#acceptance">Как Hermes принимает общий результат</a><a href="#sources">Где посмотреть технические подробности</a><a href="#memo">Памятка для своей команды</a></nav><main>
 <!-- komanda:source:start -->
 <header id="intro"><p class="eyebrow">Практика с ИИ · Команда ИИ-агентов</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Гермес с крылатым шлемом держит деревянную вагу: на нитях три современных робота с подписями Claude Code, Codex и ChatGPT" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=d15df649e5cd 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Поручения, материалы, передача файлов и приёмка публикации руководителем команды</figcaption></figure>
-<h1 class="article-title-v2">Как работает команда ИИ-агентов: разбор на примере блога</h1>
+<h1 class="article-standard-h1">Как работает команда ИИ-агентов: разбор на примере блога</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p><p class="meta">Разбор на одном примере · Задание для копирования</p><div class="seo-intro"><p class="lead">Кто соберёт публикацию, если каждый агент делает свою часть?</p>
 <p>Текст уже есть в одном чате. Картинка готова в другом. В третьем нашлись замечания, после которых нужно переписать вступление. Ты переносишь материалы, объясняешь, что изменилось, и следишь, чтобы в публикацию попала последняя версия.</p></div>
 <div class="check-panel"><p>Разберём на одном примере, как поручить подготовку статьи команде ИИ-помощников: <strong>от выбора содержания до текста, иллюстрации и страницы сайта</strong>. Проследим, кто получает общее задание, кто выполняет отдельные поручения и кто возвращает тебе собранный результат.</p></div>
@@ -762,8 +763,19 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Как работает команда ИИ-агентов: разбор на примере блога</span></nav>
 <!-- seo:breadcrumbs:end -->
 </header>
+
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkomanda-ii-agentov-dlya-bloga%2F&amp;text=%D0%9A%D0%B0%D0%BA%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%98%D0%98-%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%3A%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%B5%20%D0%B1%D0%BB%D0%BE%D0%B3%D0%B0" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%98%D0%98-%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%3A%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%B5%20%D0%B1%D0%BB%D0%BE%D0%B3%D0%B0%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkomanda-ii-agentov-dlya-bloga%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkomanda-ii-agentov-dlya-bloga%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%98%D0%98-%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%3A%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%B5%20%D0%B1%D0%BB%D0%BE%D0%B3%D0%B0" target="_blank" rel="noopener">VK</a>
+      </div>
+
 <details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#leader">Кто руководит командой</a><a href="#task">Какое задание получает Hermes</a><a href="#roles">Кто за что отвечает</a><a href="#materials">Какие материалы нужны исполнителям</a><a href="#review">Как проходят проверка и исправления</a><a href="#seo">Кто готовит страницу и проверяет SEO</a><a href="#acceptance">Как Hermes принимает общий результат</a><a href="#sources">Где посмотреть технические подробности</a><a href="#memo">Памятка для своей команды</a></nav></details>
-<article><section class="content-section" id="leader"><h2>Кто руководит командой</h2><p>В нашем примере руководитель команды - <strong>Hermes Agent, отдельный ИИ-помощник</strong>. Ты ставишь ему общую задачу, а Hermes распределяет работу между Claude Code, Codex и помощником для создания иллюстраций. Затем Hermes собирает результаты, возвращает исполнителям замечания и проверяет весь комплект перед тем, как показать его тебе.</p>
+<article>
+
+
+<section class="content-section" id="leader"><h2>Кто руководит командой</h2><p>В нашем примере руководитель команды - <strong>Hermes Agent, отдельный ИИ-помощник</strong>. Ты ставишь ему общую задачу, а Hermes распределяет работу между Claude Code, Codex и помощником для создания иллюстраций. Затем Hermes собирает результаты, возвращает исполнителям замечания и проверяет весь комплект перед тем, как показать его тебе.</p>
 <p>ИИ-агент здесь означает помощника, который может выполнять действия через доступные ему инструменты: читать материалы проекта, работать с файлами или запускать другую программу. Для нашего примера предположим, что у Hermes уже настроены подключения к исполнителям и доступ к папке проекта. Эта статья объясняет организацию работы; способы установки и подключения вынесены в необязательные справочные ссылки ниже.</p>
 <p><strong>Ты остаёшься владельцем блога</strong>: задаёшь цель, передаёшь свои материалы и решаешь, публиковать ли результат. Hermes отвечает за выполнение всей задачи. Claude Code и Codex выполняют поручения Hermes. Читатель будущей статьи - ещё один участник этой истории: именно для него команда готовит понятный и полезный материал.</p>
 <div class="warn-card"><p>Это схема с разными ИИ-помощниками. Встроенные субагенты внутри одного Claude Code - другой способ распределения работы. Здесь рассматриваем именно команду, в которой Hermes обращается к отдельным исполнителям.</p></div></section><section class="content-section" id="task"><h2>Какое задание получает Hermes</h2><p>Допустим, ты ведёшь блог для людей, которые только начинают пользоваться ИИ. Ты просишь Hermes подготовить статью о том, как превратить расшифровку собственной голосовой заметки в связный пост. У читателя уже есть текст расшифровки; статья должна объяснить, что передать помощнику, как сформулировать просьбу и что проверить в получившемся посте.</p>
@@ -818,12 +830,23 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 Публикуй только после моего разрешения.</code></pre></div>
 <p>Передай такое задание Hermes и попроси его <strong>сначала подтвердить, какие исполнители и материалы ему доступны</strong>. Так ты увидишь, какую часть работы команда сможет выполнить, до того как начнётся подготовка публикации.</p>
 </section>
+
+
+
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
 <p class="help-title">Сложно пройти шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию.</span></p>
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Объясни по одному шагу и после каждого жди моего ответа. Не показывай ключи и пароли.</p></div>
 <div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Пришли текст ошибки, только без ключей и личных данных.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
 </section>
+
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkomanda-ii-agentov-dlya-bloga%2F&amp;text=%D0%9A%D0%B0%D0%BA%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%98%D0%98-%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%3A%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%B5%20%D0%B1%D0%BB%D0%BE%D0%B3%D0%B0" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%98%D0%98-%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%3A%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%B5%20%D0%B1%D0%BB%D0%BE%D0%B3%D0%B0%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkomanda-ii-agentov-dlya-bloga%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkomanda-ii-agentov-dlya-bloga%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%98%D0%98-%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%3A%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%B5%20%D0%B1%D0%BB%D0%BE%D0%B3%D0%B0" target="_blank" rel="noopener">VK</a>
+      </div>
+
 <p class="cta-question" id="svoi-proekt">В начале у нас были текст в одном чате, картинка в другом и замечания в третьем. Теперь Hermes организует передачу между исполнителями, каждый участник сохраняет свой результат, а ты получаешь одну собранную публикацию вместо работы по её сборке.</p>
 <!-- komanda:source:end -->
 

@@ -725,6 +725,7 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
@@ -883,7 +884,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <header class="article-header" data-handout-title="Свой сервер для Claude">
           <p class="eyebrow">Технические настройки, которые снижают риски</p>
           <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Серверный модуль, от которого тянутся два оранжевых облачка чата, для статьи о своём сервере для Claude" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=29ff6f389646 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Личный VPN через AmneziaVPN, Claude Code в облаке или на своём сервере</figcaption></figure>
-          <h1 class="article-title-v2">Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона</h1>
+          <h1 class="article-standard-h1">Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
 <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · 29 СЕНТЯБРЯ 2026</p>
           <p class="lead">Вчера Claude открывался, сегодня показывает ошибку региона, а после смены VPN снова работает. Часто дело не в аккаунте, а в адресе: общий VPN меняет его без спроса, и одним адресом пользуются тысячи людей. Эту случайность можно убрать, а заодно получить Claude Code, который работает, пока ноутбук закрыт</p>
@@ -901,7 +902,14 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- seo:breadcrumbs:end -->
 </header>
 
-        <section class="content-section" id="zachem-server">
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-server-dlya-claude%2F&amp;text=%D0%A1%D0%B2%D0%BE%D0%B9%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%20%D0%B4%D0%BB%D1%8F%20Claude%3A%20%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B9%20VPN%2C%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE%20Anthropic%20%D0%B8%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D1%81%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D0%B0" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%A1%D0%B2%D0%BE%D0%B9%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%20%D0%B4%D0%BB%D1%8F%20Claude%3A%20%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B9%20VPN%2C%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE%20Anthropic%20%D0%B8%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D1%81%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D0%B0%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-server-dlya-claude%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-server-dlya-claude%2F&amp;title=%D0%A1%D0%B2%D0%BE%D0%B9%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%20%D0%B4%D0%BB%D1%8F%20Claude%3A%20%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B9%20VPN%2C%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE%20Anthropic%20%D0%B8%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D1%81%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D0%B0" target="_blank" rel="noopener">VK</a>
+      </div>
+
+<section class="content-section" id="zachem-server">
           <p class="section-label">Глава 1</p>
           <h2>Зачем свой сервер, если есть VPN</h2>
           <p class="purpose">VPN был включён, страна не менялась, а доступ всё равно пропал. Разовая проверка не показывает, переключал ли VPN-сервис тебя на другой свой сервер при переподключении или после обрыва. Свой VPS убирает именно эту неопределённость: адрес закреплён за тобой</p>
@@ -1338,7 +1346,17 @@ claude remote-control</pre>
           </ul>
         </section>
 
-        <p class="cta-question">Сервер работает круглые сутки. Чем его занять?</p>
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-server-dlya-claude%2F&amp;text=%D0%A1%D0%B2%D0%BE%D0%B9%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%20%D0%B4%D0%BB%D1%8F%20Claude%3A%20%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B9%20VPN%2C%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE%20Anthropic%20%D0%B8%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D1%81%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D0%B0" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%A1%D0%B2%D0%BE%D0%B9%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%20%D0%B4%D0%BB%D1%8F%20Claude%3A%20%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B9%20VPN%2C%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE%20Anthropic%20%D0%B8%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D1%81%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D0%B0%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-server-dlya-claude%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-server-dlya-claude%2F&amp;title=%D0%A1%D0%B2%D0%BE%D0%B9%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%20%D0%B4%D0%BB%D1%8F%20Claude%3A%20%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B9%20VPN%2C%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE%20Anthropic%20%D0%B8%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D1%81%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D0%B0" target="_blank" rel="noopener">VK</a>
+      </div>
+
+<p class="cta-question">Сервер работает круглые сутки. Чем его занять?</p>
+
+
+
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
         <footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев<!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>

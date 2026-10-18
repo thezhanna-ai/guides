@@ -1,0 +1,48 @@
+/* H1 и шаринг: вычисленные значения эталона Trellis 2 на 390 и 1440 px */
+h1.article-standard-h1 {
+  margin: 0 !important;
+  color: #102f30 !important;
+  font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: clamp(27px, 4.4vw, 37.6px) !important;
+  font-weight: 700 !important;
+  line-height: 1.13 !important;
+  letter-spacing: -0.752px !important;
+  text-wrap: balance;
+}
+
+@media (max-width: 860px) {
+  h1.article-standard-h1 {
+    line-height: 1.16 !important;
+  }
+}
+
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #d5c9b7;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f4a43;
+  font-family: "JetBrains Mono", JetBrainsMono-fb, ui-monospace, SFMono-Regular, monospace;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .share-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}

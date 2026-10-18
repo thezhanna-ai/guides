@@ -556,6 +556,7 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
@@ -666,7 +667,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
     <main>
       <p class="eyebrow">ФОТО / стиль любого снимка</p>
       <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Исходный портрет мужчины и два его результата с перенесённым фотографическим стилем в ChatGPT" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=e893dcf5b22e 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Рецепт образца в JSON, применение к своему снимку и смена одежды с фоном</figcaption></figure>
-<h1 class="article-title-v2">Как скопировать стиль любого фото в ChatGPT: один промпт и JSON</h1>
+<h1 class="article-standard-h1">Как скопировать стиль любого фото в ChatGPT: один промпт и JSON</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
 <p class="lead">Есть обычное фото: ты у окна, с друзьями, на прогулке. А хочется чего-то творческого: кадр как из журнала, из кино или из студии со светом. Раньше за этим шли к фотографу и дизайнеру. Сейчас нейросети исполняют такие желания как золотая рыбка, за пару минут</p>
       <p class="lead">Нужно всего две вещи: найти образ, который нравится, и сделать три шага в ChatGPT. Все фразы ниже готовые, их можно просто скопировать</p>
@@ -674,7 +675,15 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
       <a class="quick-link" href="#shag-1-retsept">К первому шагу ↓</a>
       <details class="mobile-toc"><summary>Содержание статьи</summary><a href="#primery">Скопировать стиль фото в ChatGPT: что получится</a><a href="#chto-ponadobitsya">Что понадобится</a><a href="#chto-takoe-json">Что такое JSON простыми словами</a><a href="#shag-1-retsept">Шаг 1. Получи рецепт образца</a><a href="#shag-2-kopirovanie">Шаг 2. Скопируй JSON</a><a href="#shag-3-svoy-foto">Шаг 3. Перенеси стиль на своё фото</a><a href="#odezhda-i-fon">Как поменять ещё и одежду с фоном</a><a href="#odna-fraza">Одна фраза на все случаи</a><a href="#esli-ne-poluchaetsya">Если что-то не получается</a><a href="#stalo-ponyatnee">Стало понятнее?</a></details>
-      <section class="content-section" id="primery"><h2>Скопировать стиль фото в ChatGPT: что получится</h2>
+
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkopirovat-stil-foto-v-chatgpt%2F&amp;text=%D0%9A%D0%B0%D0%BA%20%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%B8%D0%BB%D1%8C%20%D0%BB%D1%8E%D0%B1%D0%BE%D0%B3%D0%BE%20%D1%84%D0%BE%D1%82%D0%BE%20%D0%B2%20ChatGPT%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%20%D0%B8%20JSON" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%B8%D0%BB%D1%8C%20%D0%BB%D1%8E%D0%B1%D0%BE%D0%B3%D0%BE%20%D1%84%D0%BE%D1%82%D0%BE%20%D0%B2%20ChatGPT%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%20%D0%B8%20JSON%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkopirovat-stil-foto-v-chatgpt%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkopirovat-stil-foto-v-chatgpt%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%B8%D0%BB%D1%8C%20%D0%BB%D1%8E%D0%B1%D0%BE%D0%B3%D0%BE%20%D1%84%D0%BE%D1%82%D0%BE%20%D0%B2%20ChatGPT%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%20%D0%B8%20JSON" target="_blank" rel="noopener">VK</a>
+      </div>
+
+<section class="content-section" id="primery"><h2>Скопировать стиль фото в ChatGPT: что получится</h2>
       <p class="section-intro">Одно и то же фото и четыре разных образца: летний журнальный кадр, вечер в кафе, красный студийный свет и Томас Шелби из «Острых козырьков»</p>
       <figure class="shot-fig ishodnoe"><div class="shot"><img src="assets/primer-do.webp" alt="Исходное фото: парень с букетом на цветочном рынке" loading="lazy" width="900" height="684"><button class="zoom" type="button" aria-label="Открыть крупнее: Исходное фото">Открыть крупнее</button></div><figcaption>Исходное фото</figcaption></figure>
       <div class="gallery">
@@ -743,11 +752,22 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       <p class="result"><strong>Результат:</strong> одна фраза, а меняется ровно столько, сколько разрешено</p>
       <p>Многие делают проще: прикрепляют два фото и пишут «сделай моё так же, как на первом». Это не то же самое. Так ChatGPT подхватывает стиль на глаз, а JSON раскладывает образец по полочкам: свет, цвета, ракурс, фон, настроение. Поэтому атмосфера переносится намного точнее</p>
       </section>
-      <section class="help-banner" id="esli-ne-poluchaetsya"><h2>Если что-то не получается</h2>
+
+
+
+<section class="help-banner" id="esli-ne-poluchaetsya"><h2>Если что-то не получается</h2>
       <p>Спроси прямо у ChatGPT, он проведёт по шагам:</p>
       <div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-4">Скопировать</button><pre id="prompt-4">Я хочу перенести стиль одного фото на другое через JSON. Веди меня по шагам, я новичок</pre></div>
       </section>
-      <p class="cta-question" id="stalo-ponyatnee">Стиль скопирован. А если фото нужно десять в неделю?</p>
+
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkopirovat-stil-foto-v-chatgpt%2F&amp;text=%D0%9A%D0%B0%D0%BA%20%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%B8%D0%BB%D1%8C%20%D0%BB%D1%8E%D0%B1%D0%BE%D0%B3%D0%BE%20%D1%84%D0%BE%D1%82%D0%BE%20%D0%B2%20ChatGPT%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%20%D0%B8%20JSON" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%B8%D0%BB%D1%8C%20%D0%BB%D1%8E%D0%B1%D0%BE%D0%B3%D0%BE%20%D1%84%D0%BE%D1%82%D0%BE%20%D0%B2%20ChatGPT%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%20%D0%B8%20JSON%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkopirovat-stil-foto-v-chatgpt%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkopirovat-stil-foto-v-chatgpt%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%B8%D0%BB%D1%8C%20%D0%BB%D1%8E%D0%B1%D0%BE%D0%B3%D0%BE%20%D1%84%D0%BE%D1%82%D0%BE%20%D0%B2%20ChatGPT%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%20%D0%B8%20JSON" target="_blank" rel="noopener">VK</a>
+      </div>
+
+<p class="cta-question" id="stalo-ponyatnee">Стиль скопирован. А если фото нужно десять в неделю?</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
       <footer class="foot">Интерфейс может меняться. Документ от 1 октября 2026<!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>

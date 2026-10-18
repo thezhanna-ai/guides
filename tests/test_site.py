@@ -234,17 +234,22 @@ class ArticleImagesTest(unittest.TestCase):
                 self.assertNotEqual(article["podpis"], self.covers[article["slug"]]["subtitle"])
                 self.assertNotEqual(captions[0].text_content().strip(), h1.text_content().strip())
 
-    def test_header_typography_matches_variant_b_including_mobile_and_font_loading(self):
+    def test_header_typography_matches_global_standard_and_keeps_cover_contract(self):
+        shared = (ROOT / "assets/article-sharing.css").read_text()
+        self.assertRegex(shared, r"h1\.article-standard-h1\s*\{[^}]*font-family: Unbounded")
+        self.assertRegex(shared, r"h1\.article-standard-h1\s*\{[^}]*font-size: clamp\(27px, 4\.4vw, 37\.6px\)")
+        self.assertRegex(shared, r"h1\.article-standard-h1\s*\{[^}]*font-weight: 700")
+        self.assertRegex(shared, r"h1\.article-standard-h1\s*\{[^}]*line-height: 1\.13")
+        self.assertRegex(shared, r"@media \(max-width: 860px\)\s*\{\s*h1\.article-standard-h1\s*\{[^}]*line-height: 1\.16")
         for article in self.eligible:
             html = (ROOT / "claude-ai" / article["slug"] / "index.html").read_text()
             with self.subTest(slug=article["slug"]):
                 self.assertIn('<style id="guide-fonts">', html)
-                self.assertIn("url('/assets/fonts/spectral-300.woff2')", html)
-                self.assertRegex(html, r"h1\.article-title-v2\s*\{[^}]*font-family: Spectral[^}]*font-size: 46px[^}]*font-weight: 300[^}]*line-height: 1\.07")
-                self.assertRegex(html, r"@media \(max-width: 860px\)\s*\{\s*h1\.article-title-v2\s*\{[^}]*font-size: clamp\(30px, 7\.5vw, 46px\)[^}]*line-height: 1\.1")
+                self.assertIn("url('/assets/fonts/unbounded-700.woff2')", html)
+                self.assertIn('../../assets/article-sharing.css', html)
                 self.assertRegex(html, r"figure\.cover-v2 figcaption\s*\{[^}]*color: var\(--muted[^}]*font: 400 14px/1\.5 Spectral")
                 self.assertRegex(html, r"figure\.cover-v2 img\s*\{[^}]*border-radius: 14px[^}]*box-shadow: none")
-                self.assertIn("article-title-v2", ImageDocument(html).root.all(tag="h1")[0].attrs["class"].split())
+                self.assertIn("article-standard-h1", ImageDocument(html).root.all(tag="h1")[0].attrs["class"].split())
 
     def test_v2_cover_files_match_imported_sha256(self):
         for slug, cover in self.covers.items():

@@ -610,6 +610,7 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
@@ -729,7 +730,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#pomoshch">Сложно пройти шаг?</a>
 <a href="#dalshe">Дальше по теме</a></nav><main><header id="nachalo"><p class="eyebrow">Инструкция · ChatGPT и приложения</p>
 <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Латунный штекер с коралловым плетёным кабелем подключён к розетке на тёмном бирюзовом столе" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=077f15b64fd4 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>От подключения Composio до черновика, который можно открыть в Gmail</figcaption></figure>
-<h1 class="article-title-v2">Как подключить ChatGPT к Gmail и Notion через Composio</h1>
+<h1 class="article-standard-h1">Как подключить ChatGPT к Gmail и Notion через Composio</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
 <p class="lead">ChatGPT отвечает советами, а письма, задачи и документы ты всё равно переносишь руками. Здесь подключим Composio и проверим его на почте и страницах Notion. В конце заглянем в Gmail: появился ли там черновик, который мы попросили создать прямо в чате, или задание ещё осталось только словами.</p>
 <p>У Composio 1500+ приложений, доступ к нужным аккаунтам ты разрешаешь отдельно.</p>
@@ -740,7 +741,16 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Как подключить ChatGPT к Gmail и Notion через Composio</span></nav>
 <!-- seo:breadcrumbs:end -->
-</header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#ustroystvo">Как Composio связывает ChatGPT с приложениями</a>
+</header>
+
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchatgpt-composio-prilozheniya%2F&amp;text=%D0%9A%D0%B0%D0%BA%20%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D1%8C%20ChatGPT%20%D0%BA%20Gmail%20%D0%B8%20Notion%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20Composio" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D1%8C%20ChatGPT%20%D0%BA%20Gmail%20%D0%B8%20Notion%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20Composio%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchatgpt-composio-prilozheniya%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchatgpt-composio-prilozheniya%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D1%8C%20ChatGPT%20%D0%BA%20Gmail%20%D0%B8%20Notion%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20Composio" target="_blank" rel="noopener">VK</a>
+      </div>
+
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#ustroystvo">Как Composio связывает ChatGPT с приложениями</a>
 <a href="#podgotovka">Что нужно до начала</a>
 <a href="#composio">Шаг 1. Подключи Composio через Plugins</a>
 <a href="#gmail">Шаг 2. Разреши Composio доступ к Gmail</a>
@@ -750,7 +760,10 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#stoimost">Сколько это стоит</a>
 <a href="#oshibki">Если не получилось</a>
 <a href="#pomoshch">Сложно пройти шаг?</a>
-<a href="#dalshe">Дальше по теме</a></nav></details><article><section class="content-section" id="ustroystvo">
+<a href="#dalshe">Дальше по теме</a></nav></details><article>
+
+
+<section class="content-section" id="ustroystvo">
 <h2>Как Composio связывает ChatGPT с приложениями</h2>
 <p><b>Composio - сервис, который передаёт команды из чата в твои приложения.</b> ChatGPT выбирает действие, а Composio выполняет его в подключённом аккаунте. Composio подключаешь один раз, затем отдельно разрешаешь ему доступ к Gmail и Notion. <a href="https://composio.dev/toolkits/composio/framework/chatgpt">Composio описывает такой порядок в своей инструкции</a>.</p>
 <p>Плагин - дополнение к ChatGPT, которое добавляет ему новые инструменты. MCP - способ, которым помощник обращается к внешним инструментам. У Composio есть <a href="https://composio.dev/mcp">плагин для ChatGPT и Codex и отдельный MCP-адрес</a>. Выбери один из двух способов подключения ниже. Оба подключают Composio, поэтому использовать их вместе не нужно.</p>
@@ -841,11 +854,22 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </details>
 <p>Если нужно отозвать доступ Google, используй <a href="https://support.google.com/accounts/answer/13533235?hl=ru">управление сторонними подключениями</a> своего Google-аккаунта. Отключение приложения не удаляет уже созданный черновик из почты.</p>
 </section>
+
+
+
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
 <p class="help-title">Сложно пройти шаг? Спроси ChatGPT. <span class="accent">Попроси идти по одному действию.</span></p>
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Настраиваю Composio в ChatGPT для Gmail. Помоги разобраться по одному действию. Сначала спроси, какой экран или текст ошибки я вижу. Не отправляй письма, не меняй настройки и не показывай пароли.</p></div><div class="bubble claude"><span class="who">ChatGPT</span>Начнём с экрана, который открыт. Пришли текст ошибки без личных данных.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с Composio" aria-live="polite">Скопировать</button>
 </section>
+
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchatgpt-composio-prilozheniya%2F&amp;text=%D0%9A%D0%B0%D0%BA%20%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D1%8C%20ChatGPT%20%D0%BA%20Gmail%20%D0%B8%20Notion%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20Composio" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D1%8C%20ChatGPT%20%D0%BA%20Gmail%20%D0%B8%20Notion%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20Composio%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchatgpt-composio-prilozheniya%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchatgpt-composio-prilozheniya%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D1%8C%20ChatGPT%20%D0%BA%20Gmail%20%D0%B8%20Notion%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20Composio" target="_blank" rel="noopener">VK</a>
+      </div>
+
 <p class="cta-question" id="svoi-proekt">ChatGPT работает в твоей почте. А что ещё он может делать за тебя?</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 <section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Ещё две инструкции, которые пригодятся после подключения.</p><ul><li><a href="../shtat-agentov-paperclip/"><span class="title">Штат агентов в Paperclip</span><span class="why">Раздай задачи нескольким помощникам и посмотри, что сделал каждый.</span></a></li><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Закрой секретные файлы от Claude Code</span><span class="why">Укажи, какие файлы агенту разрешено читать, прежде чем подключать новые инструменты.</span></a></li></ul></section>

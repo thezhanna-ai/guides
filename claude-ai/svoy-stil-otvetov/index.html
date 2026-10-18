@@ -488,6 +488,7 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
@@ -598,7 +599,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
     <main><article>
       <details class="mobile-toc"><summary>Содержание</summary><a href="#stil">Как научить Клода писать в твоём стиле</a><a href="#do">1. Сохрани исходный ответ</a><a href="#sample">2. Выбери образец</a><a href="#rules">3. Сформулируй правила</a><a href="#settings">4. Открой Instructions for Claude</a><a href="#compare">5. Повтори запрос и сравни</a><a href="#sources">Источники</a></details>
       <header id="stil"><p class="eyebrow">Claude.ai · Серия 16</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Одинаково крупные начальные фрагменты настоящих ответов Claude показывают смену манеры письма" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=eeaa04ca70ce 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Образец текста, правила подачи и сравнение двух ответов на один запрос</figcaption></figure>
-<h1 class="article-title-v2">Как научить Клода писать в твоём стиле</h1>
+<h1 class="article-standard-h1">Как научить Клода писать в твоём стиле</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
 <p class="meta">ФАКТЫ ПРОВЕРЕНЫ 26 СЕНТЯБРЯ 2026</p>
 
@@ -608,7 +609,15 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Как научить Клода писать в твоём стиле</span></nav>
 <!-- seo:breadcrumbs:end -->
 </header>
-      <section class="content-section" id="do"><p class="section-label">Точка сравнения</p><h2>1. Сохрани исходный ответ</h2><p>Открой обычный чат Claude и отправь рабочий запрос. Сохрани сам запрос дословно и полученный ответ. В примере это пост про осеннюю хандру. В конце повторишь запрос без изменений, чтобы увидеть разницу</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-demo">Скопировать</button><pre id="prompt-demo">Напиши короткий пост про осеннюю хандру. Простым человеческим языком</pre></div><figure class="shot"><img src="assets/otvet-do.png" alt="Реальный длинный ответ Claude до настройки" width="1124" height="1248" loading="lazy" decoding="async" srcset="assets/otvet-do.reading-1124.webp 1124w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/otvet-do.png"><figcaption>Ответ до настройки - сохрани его для сравнения</figcaption></figure></section>
+
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-stil-otvetov%2F&amp;text=%D0%9A%D0%B0%D0%BA%20%D0%BD%D0%B0%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%9A%D0%BB%D0%BE%D0%B4%D0%B0%20%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%20%D0%B2%20%D1%82%D0%B2%D0%BE%D1%91%D0%BC%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D0%BD%D0%B0%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%9A%D0%BB%D0%BE%D0%B4%D0%B0%20%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%20%D0%B2%20%D1%82%D0%B2%D0%BE%D1%91%D0%BC%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-stil-otvetov%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-stil-otvetov%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D0%BD%D0%B0%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%9A%D0%BB%D0%BE%D0%B4%D0%B0%20%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%20%D0%B2%20%D1%82%D0%B2%D0%BE%D1%91%D0%BC%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5" target="_blank" rel="noopener">VK</a>
+      </div>
+
+<section class="content-section" id="do"><p class="section-label">Точка сравнения</p><h2>1. Сохрани исходный ответ</h2><p>Открой обычный чат Claude и отправь рабочий запрос. Сохрани сам запрос дословно и полученный ответ. В примере это пост про осеннюю хандру. В конце повторишь запрос без изменений, чтобы увидеть разницу</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-demo">Скопировать</button><pre id="prompt-demo">Напиши короткий пост про осеннюю хандру. Простым человеческим языком</pre></div><figure class="shot"><img src="assets/otvet-do.png" alt="Реальный длинный ответ Claude до настройки" width="1124" height="1248" loading="lazy" decoding="async" srcset="assets/otvet-do.reading-1124.webp 1124w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/otvet-do.png"><figcaption>Ответ до настройки - сохрани его для сравнения</figcaption></figure></section>
       <section class="content-section" id="sample"><p class="section-label">Ориентир для подачи</p><h2>2. Выбери образец</h2><p>Возьми короткий текст с нужной интонацией: своё письмо, пост или отрывок книги. Он нужен как пример подачи. Если берёшь чужой текст, выдели особенности, которые хочешь повторить</p><p>Стиль складывается из обращения, слов, ритма и структуры. Краткость - только один из признаков. Выбери один небольшой образец, по которому эти особенности хорошо видны</p></section>
       <section class="content-section" id="rules"><p class="section-label">Проверяемые правила</p><h2>3. Сформулируй правила</h2><p>В отдельном чате покажи образец и попроси Клода назвать конкретные особенности. Исправь неверные выводы, затем запиши только те правила, которые подходят для будущих разговоров</p><div class="prompt-box"><button class="copy-button" type="button" data-copy-target="prompt-reading">Скопировать</button><pre id="prompt-reading">Ниже образец нужной мне подачи. Перечисли, что в нём характерно: длина абзацев, тон, лексика и структура. Отдельно назови, в чём не уверен. Пока не пиши новый текст
 
@@ -623,10 +632,20 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       <section class="content-section" id="compare"><p class="section-label">Результат виден в ответе</p><h2>5. Повтори запрос и сравни</h2><p>Открой новый чат и отправь сохранённый запрос без изменений. Сверь ответ с конкретными правилами: обращение на «ты» или «вы», длина абзацев, характерные слова, заголовки и шутки. Проверь, сохранился ли смысл. Если какой-то признак не совпал, уточни одно правило в настройке и повтори запрос</p><figure class="shot"><img src="assets/otvet-posle.png" alt="Реальный более короткий ответ Claude после настройки" width="1634" height="1188" loading="lazy" decoding="async" srcset="assets/otvet-posle.reading-1634.webp 1634w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/otvet-posle.png"><figcaption>В этом примере исчезли заголовок, эмодзи и призыв к комментариям; обращение сменилось с «вы» на «ты»</figcaption></figure><p>Результат: ты видишь, какие правила Клод применил, и знаешь, что уточнить. Для своего текста сверяй свои признаки подачи</p></section>
       <section class="content-section" id="sources"><p class="section-label">Официальная справка</p><h2>Источники</h2><ul class="sources"><li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Claude Help Center: Instructions for Claude и персонализация</a></li></ul></section>
 
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-stil-otvetov%2F&amp;text=%D0%9A%D0%B0%D0%BA%20%D0%BD%D0%B0%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%9A%D0%BB%D0%BE%D0%B4%D0%B0%20%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%20%D0%B2%20%D1%82%D0%B2%D0%BE%D1%91%D0%BC%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D0%BD%D0%B0%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%9A%D0%BB%D0%BE%D0%B4%D0%B0%20%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%20%D0%B2%20%D1%82%D0%B2%D0%BE%D1%91%D0%BC%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-stil-otvetov%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-stil-otvetov%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D0%BD%D0%B0%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%9A%D0%BB%D0%BE%D0%B4%D0%B0%20%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%20%D0%B2%20%D1%82%D0%B2%D0%BE%D1%91%D0%BC%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5" target="_blank" rel="noopener">VK</a>
+      </div>
+
 <!-- seo:related:start -->
 <section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/incognito-chat-v-claude/">Инкогнито в Claude: разговор, который не попадёт в память</a></li></ul></section>
 <!-- seo:related:end -->
 <p class="cta-question">Claude пишет твоим голосом. Сколько текстов он может выпустить?</p>
+
+
+
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 </article></main>
     <aside class="related-plaque" aria-label="Соседняя статья">

@@ -610,6 +610,7 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
@@ -729,7 +730,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
 <a href="#dalshe">Дальше по теме</a></nav><main><header id="nachalo"><p class="eyebrow">Инструкция · Claude Code и MCP</p>
 <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Четыре плетёных кабеля соединены с металлическим хабом на тёмном бирюзовом столе" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=23a03ec8db35 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Поиск источника, браузер, чтение страницы и документация нужной версии</figcaption></figure>
-<h1 class="article-title-v2">Четыре MCP для Claude Code: от поиска до проверки инструкции</h1>
+<h1 class="article-standard-h1">Четыре MCP для Claude Code: от поиска до проверки инструкции</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
 <p class="lead">Claude Code дал ссылку на документацию. Как понять, что пример из неё подходит твоей версии? Подключим четыре инструмента и в конце проверим одну инструкцию, прежде чем менять проект. Получишь ссылку на первоисточник и объяснение на его основе, чтобы решить, можно ли применять предложенный пример к своей задаче.</p>
 <p>MCP подключает внешние инструменты к помощнику. Perplexity найдёт источник, Playwright откроет страницу, Firecrawl прочитает её целиком, а Context7 поможет проверить документацию нужной версии.</p>
@@ -739,7 +740,16 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Четыре MCP для Claude Code: от поиска до проверки инструкции</span></nav>
 <!-- seo:breadcrumbs:end -->
-</header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Перед подключением</a>
+</header>
+
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchetyre-mcp-claude-code%2F&amp;text=%D0%A7%D0%B5%D1%82%D1%8B%D1%80%D0%B5%20MCP%20%D0%B4%D0%BB%D1%8F%20Claude%20Code%3A%20%D0%BE%D1%82%20%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0%20%D0%B4%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8%20%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%A7%D0%B5%D1%82%D1%8B%D1%80%D0%B5%20MCP%20%D0%B4%D0%BB%D1%8F%20Claude%20Code%3A%20%D0%BE%D1%82%20%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0%20%D0%B4%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8%20%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchetyre-mcp-claude-code%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchetyre-mcp-claude-code%2F&amp;title=%D0%A7%D0%B5%D1%82%D1%8B%D1%80%D0%B5%20MCP%20%D0%B4%D0%BB%D1%8F%20Claude%20Code%3A%20%D0%BE%D1%82%20%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0%20%D0%B4%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8%20%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener">VK</a>
+      </div>
+
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Перед подключением</a>
 <a href="#perplexity">Шаг 1. Perplexity: найди источник свежего ответа</a>
 <a href="#playwright">Шаг 2. Playwright: открой страницу глазами помощника</a>
 <a href="#firecrawl">Шаг 3. Firecrawl: прочитай страницу целиком</a>
@@ -749,7 +759,10 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#oshibki">Если подключение не заработало</a>
 
 <a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
-<a href="#dalshe">Дальше по теме</a></nav></details><article><section class="content-section" id="podgotovka">
+<a href="#dalshe">Дальше по теме</a></nav></details><article>
+
+
+<section class="content-section" id="podgotovka">
 <h2>Перед подключением</h2>
 <p>Открой Claude Code: это помощник, который работает с папкой проекта. Обычный чат на Claude.ai подключается иначе. Если Claude Code ещё нет, начни со статьи <a href="../claude-i-codex-v-vscode/">«Claude Code и Codex в VS Code»</a>. Для команд нужна программа <code>claude</code> в терминале. Одного расширения VS Code мало: добавь программу по <a href="https://code.claude.com/docs/en/setup">инструкции установки</a>.</p>
 <p>Открой папку проекта в VS Code. Выбери Terminal → New Terminal («Терминал → Новый терминал»). В нижней панели вводи команды по одной, после каждой нажимай Enter:</p>
@@ -873,12 +886,23 @@ npx --version</code></pre><button class="copy-button" type="button" data-copy-ta
 
 
 
+
+
+
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
 <p class="help-title">Сложно пройти шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию.</span></p>
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Подключаю четыре MCP к Claude Code. Сначала спроси, какой сервер настраиваю и какой текст ошибки вижу. Объясни по одному шагу и после каждого жди моего ответа. Не меняй подключения и не расходуй кредиты API без моего слова. Не показывай ключи и пароли.</p></div>
 <div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Пришли текст ошибки, только без ключей и личных данных.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с четырьмя MCP" aria-live="polite">Скопировать</button>
 </section>
+
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchetyre-mcp-claude-code%2F&amp;text=%D0%A7%D0%B5%D1%82%D1%8B%D1%80%D0%B5%20MCP%20%D0%B4%D0%BB%D1%8F%20Claude%20Code%3A%20%D0%BE%D1%82%20%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0%20%D0%B4%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8%20%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%A7%D0%B5%D1%82%D1%8B%D1%80%D0%B5%20MCP%20%D0%B4%D0%BB%D1%8F%20Claude%20Code%3A%20%D0%BE%D1%82%20%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0%20%D0%B4%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8%20%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchetyre-mcp-claude-code%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fchetyre-mcp-claude-code%2F&amp;title=%D0%A7%D0%B5%D1%82%D1%8B%D1%80%D0%B5%20MCP%20%D0%B4%D0%BB%D1%8F%20Claude%20Code%3A%20%D0%BE%D1%82%20%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0%20%D0%B4%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8%20%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener">VK</a>
+      </div>
+
 <p class="cta-question" id="svoi-proekt">Ты получил инструкцию для своей версии. Как применить эти инструменты к своему проекту?</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 <section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим.</p><ul><li><a href="../shtat-agentov-paperclip/"><span class="title">Штат агентов в Paperclip</span><span class="why">Раздай работу нескольким помощникам и проверь вклад каждого в общий результат.</span></a></li><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Закрой секретные файлы от Claude Code</span><span class="why">Настрой доступ агента к файлам до подключения следующих инструментов.</span></a></li></ul></section>

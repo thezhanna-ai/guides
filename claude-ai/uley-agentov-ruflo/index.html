@@ -610,6 +610,7 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
@@ -729,7 +730,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
 <a href="#dalshe">Дальше по теме</a></nav><main><header id="nachalo"><p class="eyebrow">Инструкция · Claude Code и Ruflo</p>
 <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Пчёлы на медовых сотах в деревянной рамке на тёмном бирюзовом столе" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=7c0c6be0c3f4 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Одна задача, отдельные исполнители и проверка памяти в новом чате</figcaption></figure>
-<h1 class="article-title-v2">Улей агентов Ruflo: первая команда и память между чатами</h1>
+<h1 class="article-standard-h1">Улей агентов Ruflo: первая команда и память между чатами</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
 <p class="lead">Закроешь чат с командой агентов, а в следующем снова придётся объяснять задание? Подключим Ruflo и проверим, как помощники продолжают работу после перерыва. В конце у тебя будет готовая страница и запись о проделанной работе: сравнишь её с результатом на экране и увидишь, чего не хватает для следующего задания.</p>
 <p>Ruflo, раньше Claude Flow, помогает Claude Code раздавать работу и хранить общую память. Один помощник соберёт страницу, другой проверит. Ты откроешь результат в браузере, а затем начнёшь новый чат.</p>
@@ -739,7 +740,16 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Улей агентов Ruflo: первая команда и память между чатами</span></nav>
 <!-- seo:breadcrumbs:end -->
-</header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Перед настройкой</a>
+</header>
+
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fuley-agentov-ruflo%2F&amp;text=%D0%A3%D0%BB%D0%B5%D0%B9%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%20Ruflo%3A%20%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%B8%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%20%D0%BC%D0%B5%D0%B6%D0%B4%D1%83%20%D1%87%D0%B0%D1%82%D0%B0%D0%BC%D0%B8" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%A3%D0%BB%D0%B5%D0%B9%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%20Ruflo%3A%20%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%B8%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%20%D0%BC%D0%B5%D0%B6%D0%B4%D1%83%20%D1%87%D0%B0%D1%82%D0%B0%D0%BC%D0%B8%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fuley-agentov-ruflo%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fuley-agentov-ruflo%2F&amp;title=%D0%A3%D0%BB%D0%B5%D0%B9%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%20Ruflo%3A%20%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%B8%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%20%D0%BC%D0%B5%D0%B6%D0%B4%D1%83%20%D1%87%D0%B0%D1%82%D0%B0%D0%BC%D0%B8" target="_blank" rel="noopener">VK</a>
+      </div>
+
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Перед настройкой</a>
 <a href="#ustanovka">Шаг 1. Подготовь Ruflo одной командой</a>
 <a href="#mcp">Шаг 2. Проверь подключение MCP</a>
 <a href="#instrumenty">Шаг 3. Дай Claude Code обратиться к Ruflo</a>
@@ -750,6 +760,9 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 <a href="#svoi-proekt">Инструкция пройдена. А как сделать, чтобы нейросети приводили клиентов?</a>
 <a href="#dalshe">Дальше по теме</a></nav></details><article>
+
+
+
 <section class="content-section" id="podgotovka">
 <h2>Перед настройкой</h2>
 <p>Проверь, что Claude Code запускается командой <code>claude</code> и отвечает после входа. Если у тебя пока только расширение VS Code, установи ещё <a href="https://code.claude.com/docs/en/setup">программу для терминала</a>. Начать с нуля поможет <a href="../claude-i-codex-v-vscode/">инструкция по установке Claude Code</a>. Ruflo работает вместе с ним: доступ к моделям по-прежнему зависит от твоего аккаунта.</p>
@@ -861,12 +874,23 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 
 
+
+
+
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
 <p class="help-title">Сложно пройти шаг? Спроси Claude. <span class="accent">Попроси идти по одному действию.</span></p>
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Настраиваю Ruflo в Claude Code. Сначала спроси, какой шаг выполняю и какой текст ошибки вижу. Объясни по одному шагу и после каждого жди моего ответа. Не показывай ключи и пароли.</p></div>
 <div class="bubble claude"><span class="who">Claude</span>Начнём с экрана, который у тебя открыт. Пришли текст ошибки, только без ключей и личных данных.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи с Ruflo" aria-live="polite">Скопировать</button>
 </section>
+
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fuley-agentov-ruflo%2F&amp;text=%D0%A3%D0%BB%D0%B5%D0%B9%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%20Ruflo%3A%20%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%B8%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%20%D0%BC%D0%B5%D0%B6%D0%B4%D1%83%20%D1%87%D0%B0%D1%82%D0%B0%D0%BC%D0%B8" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%A3%D0%BB%D0%B5%D0%B9%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%20Ruflo%3A%20%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%B8%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%20%D0%BC%D0%B5%D0%B6%D0%B4%D1%83%20%D1%87%D0%B0%D1%82%D0%B0%D0%BC%D0%B8%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fuley-agentov-ruflo%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fuley-agentov-ruflo%2F&amp;title=%D0%A3%D0%BB%D0%B5%D0%B9%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%20Ruflo%3A%20%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%B8%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%20%D0%BC%D0%B5%D0%B6%D0%B4%D1%83%20%D1%87%D0%B0%D1%82%D0%B0%D0%BC%D0%B8" target="_blank" rel="noopener">VK</a>
+      </div>
+
 <p class="cta-question" id="svoi-proekt">Команда сохранила результат. Как поручить ей работу для своего проекта?</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 <section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим.</p><ul><li><a href="../shtat-agentov-paperclip/"><span class="title">Штат агентов в Paperclip</span><span class="why">Раздай работу нескольким помощникам и проверь вклад каждого в общий результат.</span></a></li><li><a href="../zakryt-sekrety-ot-claude-code/"><span class="title">Закрой секретные файлы от Claude Code</span><span class="why">Настрой доступ агента к файлам до подключения следующих инструментов.</span></a></li></ul></section>

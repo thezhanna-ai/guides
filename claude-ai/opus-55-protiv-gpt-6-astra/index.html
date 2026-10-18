@@ -625,6 +625,7 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
@@ -739,7 +740,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#dalshe">Дальше по теме</a></nav>
 <main><header id="nachalo"><p class="eyebrow">Разбор · Claude Opus 5.5 и GPT-6 Astra</p>
 <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Opus против Astra: справа два горизонтальных кадра с кузнецом на 9,5 секунды, сверху Claude Opus 5.5, снизу GPT-6 Astra" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-960.webp?v=5a03a73557cb 960w, assets/oblozhka.reading-1600.webp?v=5a03a73557cb 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Один промпт, два видео: сюжет и восемь требований к свету и движению</figcaption></figure>
-<h1 class="article-title-v2">Claude Opus 5.5 и GPT-6 Astra: один промпт, два видео</h1>
+<h1 class="article-standard-h1">Claude Opus 5.5 и GPT-6 Astra: один промпт, два видео</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
 <p class="lead">Claude Opus 5.5 или GPT-6 Astra: кому доверить сложное задание, если в ответе важно и понятное видео, и каждая деталь промпта? Здесь обе модели получили один текст про эволюцию человека, нарисованную точкой света. Ты увидишь два результата и сможешь повторить сравнение на своей задаче.</p>
 <p>Первый просмотр помогает выбрать видео, которое нравится. Проверка по пунктам промпта может изменить этот выбор. Посмотрим, совпадут ли эти два впечатления.</p>
@@ -749,6 +750,14 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Claude Opus 5.5 и GPT-6 Astra: один промпт, два видео</span></nav>
 <!-- seo:breadcrumbs:end -->
 </header>
+
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fopus-55-protiv-gpt-6-astra%2F&amp;text=Claude%20Opus%205.5%20%D0%B8%20GPT-6%20Astra%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%2C%20%D0%B4%D0%B2%D0%B0%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=Claude%20Opus%205.5%20%D0%B8%20GPT-6%20Astra%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%2C%20%D0%B4%D0%B2%D0%B0%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fopus-55-protiv-gpt-6-astra%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fopus-55-protiv-gpt-6-astra%2F&amp;title=Claude%20Opus%205.5%20%D0%B8%20GPT-6%20Astra%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%2C%20%D0%B4%D0%B2%D0%B0%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE" target="_blank" rel="noopener">VK</a>
+      </div>
+
 <details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#prompt">Одно задание для двух моделей</a>
 <a href="#video">Два видео на одном экране</a>
 <a href="#story">Сюжет, точка и движение камеры</a>
@@ -758,6 +767,9 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#svoi-proekt">От одного видео к своим инструментам</a>
 <a href="#dalshe">Дальше по теме</a></nav></details>
 <article>
+
+
+
 <section class="content-section" id="prompt">
 <p class="section-label">Условия опыта</p><h2>Одно задание для двух моделей</h2>
 <p>Обе версии сделаны 2 октября 2026 года. Claude Opus 5.5 работал в Claude Code, GPT-6 Astra в Codex. Это помощники, которые выполняют задания в папке на компьютере и пишут код. Claude работал в отдельном чате и не открывал папку второй версии. Обеим моделям дали этот промпт дословно, без переписывания:</p>
@@ -835,12 +847,23 @@ The trails hang in 3D and the camera follows them, shot like long-exposure photo
 <p class="result"><b>Результат:</b> у тебя есть основание для выбора модели на своей задаче. Ты видишь и качество истории, и цену пропущенной детали.</p>
 </section>
 
+
+
+
 <section class="help-banner" id="pomoshch" aria-label="Если что-то не получается">
 <p class="help-title">Что-то не получается? Спроси Claude. <span class="accent">Попроси идти по одному действию</span></p>
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Хочу [желаемый результат] через HyperFrames. Сейчас вижу [экран или сообщение], уже выполнено [действия], непонятно [место затруднения]. Объясни по одному шагу и после каждого дождись моего ответа.</p></div>
 <div class="bubble claude"><span class="who">Claude</span>Начнём с того, что сейчас видно на экране. Дальше по одному действию.</div></div>
 <button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос помощи" aria-live="polite">Скопировать</button>
 </section>
+
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fopus-55-protiv-gpt-6-astra%2F&amp;text=Claude%20Opus%205.5%20%D0%B8%20GPT-6%20Astra%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%2C%20%D0%B4%D0%B2%D0%B0%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=Claude%20Opus%205.5%20%D0%B8%20GPT-6%20Astra%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%2C%20%D0%B4%D0%B2%D0%B0%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fopus-55-protiv-gpt-6-astra%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fopus-55-protiv-gpt-6-astra%2F&amp;title=Claude%20Opus%205.5%20%D0%B8%20GPT-6%20Astra%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%2C%20%D0%B4%D0%B2%D0%B0%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE" target="_blank" rel="noopener">VK</a>
+      </div>
+
 <p class="cta-question" id="svoi-proekt">Модели сравнимы. Как распределить задачи между ИИ-агентами?</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 <section class="next-read" id="dalshe"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><ul>
