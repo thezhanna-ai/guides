@@ -1614,6 +1614,46 @@ class SvodkaDraftTest(unittest.TestCase):
         self.assertNotIn("<h2>Наш прогон</h2>", self.source)
         self.assertNotIn('<section id="progon">', self.source)
 
+    def test_svodka_newcomer_path_is_complete(self):
+        match = re.search(
+            r'<pre data-source="zapusk\.sh"[^>]*><code>(.*?)</code></pre>',
+            self.source,
+            flags=re.S,
+        )
+        self.assertIsNotNone(match)
+        embedded = html.unescape(match.group(1)).rstrip("\n")
+        original = (self.SOURCE / "zapusk.sh").read_text(encoding="utf-8").rstrip("\n")
+        self.assertEqual(embedded, original)
+
+        preparation = self.source.index("Как сохранить код в файлы")
+        first_step = self.source.index("<b>Шаг 1.</b>")
+        self.assertLess(preparation, first_step)
+        for text in (
+            "Cmd+Пробел",
+            "PowerShell",
+            "python.org",
+            "cd /путь/к/svodka",
+            'export SEC_USER_AGENT="Имя Фамилия почта"',
+            "https://www.alphavantage.co/support/#api-key",
+            "python3 agent1_podachi.py",
+            "python3 agent2_ceny.py",
+            "python3 agent3_kalendar.py",
+            "python3 agent4_svodka.py",
+            "01-podachi.json",
+            "02-ceny.json",
+            "03-kalendar.json",
+            "SVODKA.txt",
+        ):
+            with self.subTest(text=text):
+                self.assertIn(text, html.unescape(self.source))
+
+        self.assertIn(
+            "<p>Сводка только переносит открытые данные, решения по ним принимаешь ты</p>",
+            self.source,
+        )
+        self.assertIn("<summary>Нужно уметь программировать?</summary>", self.source)
+        self.assertIn("покажи её агенту", self.source)
+
     def test_svodka_has_article_howto_and_matching_faq_schema(self):
         scripts = [json.loads(block) for block in re.findall(
             r'<script type="application/ld\+json"(?: id="[^"]+")?>(.*?)</script>',
@@ -1624,9 +1664,17 @@ class SvodkaDraftTest(unittest.TestCase):
         types = {node.get("@type") for node in nodes}
         self.assertTrue({"Article", "HowTo", "FAQPage"} <= types)
         faq = next(node for node in nodes if node.get("@type") == "FAQPage")
-        for item in faq["mainEntity"]:
-            self.assertIn("<summary>%s</summary>" % item["name"], self.source)
-            self.assertIn("<p>%s</p>" % item["acceptedAnswer"]["text"], self.source)
+        faq_section = self.source.split('<section id="faq">', 1)[1].split("</section>", 1)[0]
+        visible = re.findall(
+            r"<details open><summary>(.*?)</summary><p>(.*?)</p></details>",
+            faq_section,
+            flags=re.S,
+        )
+        schema = [
+            (item["name"], item["acceptedAnswer"]["text"])
+            for item in faq["mainEntity"]
+        ]
+        self.assertEqual(visible, schema)
 
     def test_svodka_forbidden_attribution_is_absent_but_ad_renders_exactly(self):
         self.assertIsNone(re.search(r"иван|сергеев|theivansergeev", self.source, flags=re.I))

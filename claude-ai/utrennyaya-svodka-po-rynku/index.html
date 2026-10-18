@@ -1259,6 +1259,14 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
             "@type": "Answer",
             "text": "Нет. Для работы при выключенном ноутбуке нужна облачная машина, которая остаётся включённой и запускает четыре команды по расписанию"
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужно уметь программировать?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Достаточно скопировать пять файлов, поменять список тикеров в строке TICKERS и запустить bash zapusk.sh. Если что-то упало, скопируй ошибку целиком и покажи её агенту по запросу внизу статьи"
+          }
         }
       ]
     }
@@ -1415,8 +1423,13 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 <section id="ustanovka">
 <h2>Как собрать сводку</h2>
-<p><b>Шаг 1.</b> Сначала проверь SEC. Поиск сортирует ответ по совпадению слов, а не по свежести, поэтому запрос по названию компании может вытащить подачу десятилетней давности. Ищи по коду CIK компании и задавай окно дат, как в программах ниже. Ключ для Full-Text Search не нужен, но нужен заголовок <code>User-Agent</code> с именем и почтой. Если подпись убрать, вместо данных придёт страница <code>Undeclared Automated Tool</code></p>
-<p><b>Шаг 2.</b> Получи ключ Alpha Vantage и сохрани его в переменной среды. В текст программы ключ не вставляй</p>
+<h3>Как сохранить код в файлы</h3>
+<p>Создай папку <code>svodka</code>. Для каждого блока ниже открой любой текстовый редактор, вставь код и сохрани файл под именем из заголовка блока. Например, первый блок сохрани как <code>agent1_podachi.py</code></p>
+<p>На Mac открой программу «Терминал»: нажми Cmd+Пробел, набери «Терминал» и нажми Enter. На Windows открой PowerShell. Перейди в созданную папку командой <code>cd /путь/к/svodka</code>, подставив настоящий путь к ней. На Mac Python уже есть, на Windows установи его с <a href="https://www.python.org/downloads/" rel="noopener nofollow" target="_blank">python.org</a></p>
+<p><b>Шаг 1.</b> Сначала проверь SEC. Поиск сортирует ответ по совпадению слов, а не по свежести, поэтому запрос по названию компании может вытащить подачу десятилетней давности. Ищи по коду CIK компании и задавай окно дат, как в программах ниже. Ключ для Full-Text Search не нужен, но нужен заголовок <code>User-Agent</code> с именем и почтой. Если подпись убрать, вместо данных придёт страница <code>Undeclared Automated Tool</code>. Перед запуском подставь свои имя и почту через переменную <code>SEC_USER_AGENT</code></p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">команда</span><button class="copy-btn" type="button" data-copy-target="code-sec-user-agent">Скопировать</button></div><pre id="code-sec-user-agent"><code>export SEC_USER_AGENT="Имя Фамилия почта"</code></pre></div>
+<p>Вместо переменной можно заменить <code>Имя Фамилия твоя@почта.ru</code> прямо в строке <code>USER_AGENT</code> двух программ: <code>agent1_podachi.py</code> и <code>agent3_kalendar.py</code></p>
+<p><b>Шаг 2.</b> Получи ключ Alpha Vantage на <a href="https://www.alphavantage.co/support/#api-key" rel="noopener nofollow" target="_blank">странице выдачи ключа</a>: заполни форму с почтой, и ключ сразу появится на странице. Сохрани его в переменной среды. В текст программы ключ не вставляй</p>
 <div class="code-block"><div class="code-bar"><span class="code-lang">команда</span><button class="copy-btn" type="button" data-copy-target="code-env">Скопировать</button></div><pre id="code-env"><code>read -sr ALPHAVANTAGE_KEY &amp;&amp; export ALPHAVANTAGE_KEY</code></pre></div>
 <p>Без переменной программа возьмёт значение <code>demo</code>. Оно отдаёт примеры по IBM и MSFT, а на AAPL может вернуть объяснение, что demo-значение оставлено только для примеров</p>
 <p><b>Шаг 3.</b> Положи четыре программы и <code>zapusk.sh</code> в одну папку. Выполни <code>bash zapusk.sh</code>. Скрипт очистит экран, запустит программы по порядку и после четвёртого шага покажет <code>SVODKA.txt</code></p>
@@ -1775,6 +1788,41 @@ def run(today=None, output_dir=None):
 
 if __name__ == "__main__":
     run()</code></pre></div>
+<h3>5. Запуск по порядку</h3>
+<div class="code-block"><div class="code-bar"><span class="code-lang">zapusk.sh</span><button class="copy-btn" type="button" data-copy-target="code-zapusk">Скопировать</button></div><pre data-source="zapusk.sh" id="code-zapusk"><code>#!/usr/bin/env bash
+set -u
+
+cd "$(dirname "$0")"
+clear
+
+printf '1/4 подачи SEC... '
+python3 agent1_podachi.py >/dev/null
+printf 'готово\n'
+sleep 1
+
+printf '2/4 цены... '
+python3 agent2_ceny.py >/dev/null
+printf 'готово\n'
+sleep 1
+
+printf '3/4 отчётность... '
+python3 agent3_kalendar.py >/dev/null
+printf 'готово\n'
+sleep 1
+
+printf '4/4 сводка... '
+python3 agent4_svodka.py >/dev/null
+printf 'готово\n\n'
+sleep 1
+
+cat SVODKA.txt</code></pre></div>
+<p>Если <code>bash zapusk.sh</code> не сработал, запусти четыре команды по очереди в той же папке:</p>
+<ol>
+<li><code>python3 agent1_podachi.py</code> создаст <code>01-podachi.json</code></li>
+<li><code>python3 agent2_ceny.py</code> создаст <code>02-ceny.json</code></li>
+<li><code>python3 agent3_kalendar.py</code> создаст <code>03-kalendar.json</code></li>
+<li><code>python3 agent4_svodka.py</code> создаст <code>SVODKA.txt</code></li>
+</ol>
 </section>
 
 <section id="raspisanie">
@@ -1797,7 +1845,7 @@ if __name__ == "__main__":
 <details class="check-panel"><summary>Хочется попросить модель дописать число</summary><p>Не проси. Выдуманная цифра не превращается в рыночные данные. В этой схеме пропуск остаётся пропуском, а решение по сводке принимает человек</p></details>
 </section>
 
-<section id="ne-sovet"><h2>Это не торговый совет</h2><p>Сводка переносит открытые данные в один текстовый файл. Она не принимает решения, не покупает и не продаёт бумаги. Человек проверяет источник и решает сам</p></section>
+<section id="ne-sovet"><h2>Это не торговый совет</h2><p>Сводка только переносит открытые данные, решения по ним принимаешь ты</p></section>
 
 <div class="article-meta"><span>12 мин чтения</span><span><a href="/">На главную</a></span></div>
 
@@ -1810,7 +1858,7 @@ if __name__ == "__main__":
 <li>6:15 - собрать SVODKA.txt и прочитать ЧЕГО НЕ ХВАТИЛО</li>
 </ul></div></section>
 
-<section id="faq"><h2>Частые вопросы</h2><div class="faq"><details open><summary>Это заменяет терминал Bloomberg?</summary><p>Нет. По словам самого Roan, место в терминале Bloomberg обходится в 27 660 долларов в год, а эта схема переносит только несколько видов открытых данных. Она не повторяет весь терминал и не даёт советов по торговле</p></details><details open><summary>Для SEC нужен ключ?</summary><p>Нет. Нужен заголовок User-Agent с именем и почтой, а запросы надо держать в пределах 10 в секунду. Без подписи SEC возвращает страницу Undeclared Automated Tool</p></details><details open><summary>Где хранить ключ Alpha Vantage?</summary><p>В переменной среды ALPHAVANTAGE_KEY. В программе остаётся только запасное значение demo, которое работает для примеров и может отказать по AAPL</p></details><details open><summary>Что будет, если источник не ответит?</summary><p>Сборщик запишет поле oshibka в свой JSON, а четвёртая программа перенесёт пропуск в раздел ЧЕГО НЕ ХВАТИЛО. Она не подставит придуманное число</p></details><details open><summary>Будет ли сводка собираться при выключенном ноутбуке?</summary><p>Нет. Для работы при выключенном ноутбуке нужна облачная машина, которая остаётся включённой и запускает четыре команды по расписанию</p></details></div></section>
+<section id="faq"><h2>Частые вопросы</h2><div class="faq"><details open><summary>Это заменяет терминал Bloomberg?</summary><p>Нет. По словам самого Roan, место в терминале Bloomberg обходится в 27 660 долларов в год, а эта схема переносит только несколько видов открытых данных. Она не повторяет весь терминал и не даёт советов по торговле</p></details><details open><summary>Для SEC нужен ключ?</summary><p>Нет. Нужен заголовок User-Agent с именем и почтой, а запросы надо держать в пределах 10 в секунду. Без подписи SEC возвращает страницу Undeclared Automated Tool</p></details><details open><summary>Где хранить ключ Alpha Vantage?</summary><p>В переменной среды ALPHAVANTAGE_KEY. В программе остаётся только запасное значение demo, которое работает для примеров и может отказать по AAPL</p></details><details open><summary>Что будет, если источник не ответит?</summary><p>Сборщик запишет поле oshibka в свой JSON, а четвёртая программа перенесёт пропуск в раздел ЧЕГО НЕ ХВАТИЛО. Она не подставит придуманное число</p></details><details open><summary>Будет ли сводка собираться при выключенном ноутбуке?</summary><p>Нет. Для работы при выключенном ноутбуке нужна облачная машина, которая остаётся включённой и запускает четыре команды по расписанию</p></details><details open><summary>Нужно уметь программировать?</summary><p>Нет. Достаточно скопировать пять файлов, поменять список тикеров в строке TICKERS и запустить bash zapusk.sh. Если что-то упало, скопируй ошибку целиком и покажи её агенту по запросу внизу статьи</p></details></div></section>
 <div class="share-row">
         <span class="eyebrow">Поделиться</span>
         <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Futrennyaya-svodka-po-rynku%2F&amp;text=%D0%A3%D1%82%D1%80%D0%B5%D0%BD%D0%BD%D1%8F%D1%8F%20%D1%81%D0%B2%D0%BE%D0%B4%D0%BA%D0%B0%20%D0%BF%D0%BE%20%D1%80%D1%8B%D0%BD%D0%BA%D1%83%3A%204%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B%20%D0%B1%D0%B5%D0%B7%20%D0%B2%D1%8B%D0%B4%D1%83%D0%BC%D0%BE%D0%BA" target="_blank" rel="noopener">Telegram</a>
