@@ -1427,10 +1427,11 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p>Создай папку <code>svodka</code>. Для каждого блока ниже открой текстовый редактор, вставь код и сохрани файл под именем из заголовка блока. На Mac в TextEdit сначала выбери «Формат → Конвертировать в простой текст» или нажми Cmd+Shift+T, а потом сохраняй. Имя файла должно заканчиваться на <code>.py</code>, а не на <code>.rtf</code> или <code>.txt</code>. Если файл сохранился неправильно, при запуске Python покажет <code>SyntaxError</code> в первой строке: пересохрани файл как простой текст. На Windows открой Блокнот и выбери тип файла «Все файлы». Например, первый блок сохрани как <code>agent1_podachi.py</code></p>
 <p>На Mac открой программу «Терминал»: нажми Cmd+Пробел, набери «Терминал» и нажми Enter. Не набирай <code>cd /путь/к/svodka</code> вручную: набери <code>cd </code> с пробелом, перетащи папку <code>svodka</code> мышкой в окно Терминала и нажми Enter. Если при первом <code>python3</code> появилось окно «установить инструменты разработчика командной строки», нажми «Установить», дождись конца и повтори команду. На Windows открой PowerShell и установи Python с <a href="https://www.python.org/downloads/" rel="noopener nofollow" target="_blank">python.org</a></p>
 <p><b>Шаг 1.</b> Задай подпись для SEC одной командой</p>
-<div class="code-block"><div class="code-bar"><span class="code-lang">команда</span><button class="copy-btn" type="button" data-copy-target="code-sec-user-agent">Скопировать</button></div><pre id="code-sec-user-agent"><code>export SEC_USER_AGENT="Имя Фамилия почта@пример.ru"</code></pre></div>
+<p>Имя и почту пиши латиницей, кириллицу SEC не примет</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">команда</span><button class="copy-btn" type="button" data-copy-target="code-sec-user-agent">Скопировать</button></div><pre id="code-sec-user-agent"><code>export SEC_USER_AGENT="Your Name you@example.com"</code></pre></div>
 <p>На экране ничего не появится, это нормально</p>
 <p>Поиск SEC сортирует ответ по совпадению слов, а не по свежести, поэтому ищи по коду CIK компании и задавай окно дат, как в программах ниже. Ключ для Full-Text Search не нужен, но нужен заголовок <code>User-Agent</code> с именем и почтой. Если подпись убрать, вместо данных придёт страница <code>Undeclared Automated Tool</code></p>
-<p>Вместо переменной можно заменить <code>Имя Фамилия твоя@почта.ru</code> прямо в строке <code>USER_AGENT</code> двух программ: <code>agent1_podachi.py</code> и <code>agent3_kalendar.py</code></p>
+<p>Вместо переменной можно заменить <code>Your Name you@example.com</code> прямо в строке <code>USER_AGENT</code> двух программ: <code>agent1_podachi.py</code> и <code>agent3_kalendar.py</code></p>
 <p><b>Шаг 2.</b> Получи ключ Alpha Vantage на <a href="https://www.alphavantage.co/support/#api-key" rel="noopener nofollow" target="_blank">странице выдачи ключа</a>: ключ - строка из латинских букв и цифр, скопируй её целиком. Заполни форму с почтой, и ключ сразу появится на странице. Сохрани его в переменной среды. В текст программы ключ не вставляй</p>
 <div class="code-block"><div class="code-bar"><span class="code-lang">команда</span><button class="copy-btn" type="button" data-copy-target="code-env">Скопировать</button></div><pre id="code-env"><code>read -sr ALPHAVANTAGE_KEY &amp;&amp; export ALPHAVANTAGE_KEY</code></pre></div>
 <p>Вставь ключ и нажми Enter. Символы на экране не появятся, так и должно быть</p>
@@ -1463,7 +1464,7 @@ from urllib.request import Request, urlopen
 
 TICKERS = ("AAPL", "MSFT", "IBM")
 CIKS = {"AAPL": "0000320193", "MSFT": "0000789019", "IBM": "0000051143"}
-USER_AGENT = os.environ.get("SEC_USER_AGENT", "Имя Фамилия твоя@почта.ru")
+USER_AGENT = os.environ.get("SEC_USER_AGENT", "Your Name you@example.com")
 OUTPUT_NAME = "01-podachi.json"
 
 
@@ -1634,7 +1635,7 @@ from urllib.request import Request, urlopen
 
 TICKERS = ("AAPL", "MSFT", "IBM")
 CIKS = {"AAPL": "0000320193", "MSFT": "0000789019", "IBM": "0000051143"}
-USER_AGENT = os.environ.get("SEC_USER_AGENT", "Имя Фамилия твоя@почта.ru")
+USER_AGENT = os.environ.get("SEC_USER_AGENT", "Your Name you@example.com")
 OUTPUT_NAME = "03-kalendar.json"
 
 
@@ -1850,8 +1851,8 @@ exit "$status"</code></pre></div>
 </ol>
 <h3>Если у тебя Windows (PowerShell)</h3>
 <p>В PowerShell из папки <code>svodka</code> выполни команды по очереди:</p>
-<div class="code-block"><div class="code-bar"><span class="code-lang">PowerShell</span><button class="copy-btn" type="button" data-copy-target="code-powershell">Скопировать</button></div><pre id="code-powershell"><code>$env:ALPHAVANTAGE_KEY="твой_ключ"
-$env:SEC_USER_AGENT="Имя Фамилия почта@пример.ru"
+<div class="code-block"><div class="code-bar"><span class="code-lang">PowerShell</span><button class="copy-btn" type="button" data-copy-target="code-powershell">Скопировать</button></div><pre id="code-powershell"><code>$env:ALPHAVANTAGE_KEY="YOUR_KEY"
+$env:SEC_USER_AGENT="Your Name you@example.com"
 python agent1_podachi.py
 python agent2_ceny.py
 python agent3_kalendar.py
@@ -1863,11 +1864,11 @@ Get-Content SVODKA.txt</code></pre></div>
 <section id="raspisanie">
 <h2>Расписание на будни</h2>
 <p>Сборщики запускаются с интервалом в две минуты, сводка после них: 6:05, 6:07, 6:09 и 6:15 по будням. В Терминале выполни <code>EDITOR=nano crontab -e</code> и вставь четыре строки:</p>
-<div class="code-block"><div class="code-bar"><span class="code-lang">crontab.txt</span><button class="copy-btn" type="button" data-copy-target="code-crontab">Скопировать</button></div><pre id="code-crontab"><code>5 6 * * 1-5 cd "$HOME/svodka" &amp;&amp; ALPHAVANTAGE_KEY=твой_ключ SEC_USER_AGENT="Имя Фамилия почта" python3 agent1_podachi.py
-7 6 * * 1-5 cd "$HOME/svodka" &amp;&amp; ALPHAVANTAGE_KEY=твой_ключ SEC_USER_AGENT="Имя Фамилия почта" python3 agent2_ceny.py
-9 6 * * 1-5 cd "$HOME/svodka" &amp;&amp; ALPHAVANTAGE_KEY=твой_ключ SEC_USER_AGENT="Имя Фамилия почта" python3 agent3_kalendar.py
-15 6 * * 1-5 cd "$HOME/svodka" &amp;&amp; ALPHAVANTAGE_KEY=твой_ключ SEC_USER_AGENT="Имя Фамилия почта" python3 agent4_svodka.py</code></pre></div>
-<p>Замени <code>твой_ключ</code>, имя и почту своими данными. Если папка лежит не в домашней папке, замени <code>$HOME/svodka</code> её путём. Сохрани файл: нажми Ctrl+O, затем Enter. Выйди из nano сочетанием Ctrl+X</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">crontab.txt</span><button class="copy-btn" type="button" data-copy-target="code-crontab">Скопировать</button></div><pre id="code-crontab"><code>5 6 * * 1-5 cd "$HOME/svodka" &amp;&amp; ALPHAVANTAGE_KEY=YOUR_KEY SEC_USER_AGENT="Your Name you@example.com" python3 agent1_podachi.py
+7 6 * * 1-5 cd "$HOME/svodka" &amp;&amp; ALPHAVANTAGE_KEY=YOUR_KEY SEC_USER_AGENT="Your Name you@example.com" python3 agent2_ceny.py
+9 6 * * 1-5 cd "$HOME/svodka" &amp;&amp; ALPHAVANTAGE_KEY=YOUR_KEY SEC_USER_AGENT="Your Name you@example.com" python3 agent3_kalendar.py
+15 6 * * 1-5 cd "$HOME/svodka" &amp;&amp; ALPHAVANTAGE_KEY=YOUR_KEY SEC_USER_AGENT="Your Name you@example.com" python3 agent4_svodka.py</code></pre></div>
+<p>Замени <code>YOUR_KEY</code>, имя и почту своими данными. Если папка лежит не в домашней папке, замени <code>$HOME/svodka</code> её путём. Сохрани файл: нажми Ctrl+O, затем Enter. Выйди из nano сочетанием Ctrl+X</p>
 <p>На следующее утро выполни <code>cat ~/svodka/SVODKA.txt</code>. В первой строке должна стоять сегодняшняя дата</p>
 <p>Облачная машина нужна только в одном случае: сводка должна собираться, пока ноутбук выключен</p>
 </section>
@@ -1875,6 +1876,7 @@ Get-Content SVODKA.txt</code></pre></div>
 <section id="chto-lomaetsya">
 <h2>Что ломается и что делать</h2>
 <details class="check-panel"><summary>SEC вернул Undeclared Automated Tool</summary><p>Проверь заголовок User-Agent. В нём должны быть имя и почта. SEC разрешает до 10 запросов в секунду, но запрос без подписи блокирует даже при низкой частоте</p></details>
+<details class="check-panel"><summary>В сводке «нет подач SEC», а в <code>01-podachi.json</code> ошибка <code>latin-1</code></summary><p>Подпись написана кириллицей. Перепиши имя и почту латиницей и запусти снова</p></details>
 <details class="check-panel"><summary>Alpha Vantage отказал по AAPL</summary><p>Ключ demo оставлен для примеров. Задай свой ключ через ALPHAVANTAGE_KEY. Лимит Alpha Vantage: 25 запросов в сутки и 5 в минуту</p></details>
 <details class="check-panel"><summary>Цифры отстают</summary><p>На бесплатных тарифах часть данных приходит с задержкой 15-20 минут. Для утренней сводки это не страшно, для слежения за позицией в моменте критично. Смотри поле <code>otstavanie_dney</code>: в понедельник отставание на три дня нормально из-за выходных, а в среду два дня означают, что источник отдаёт старую цену</p></details>
 <details class="check-panel"><summary>Лимит кончился к обеду</summary><p>25 запросов Alpha Vantage в сутки уйдут к обеду, если опрашивать десять бумаг каждый час. Поэтому эта схема собирает сводку один раз утром</p></details>
