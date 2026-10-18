@@ -1390,7 +1390,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <h1 class="article-standard-h1">Утренняя сводка по рынку: 4 программы без выдумок</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
 <p class="lead">У вирусного «Bloomberg на роботах» есть одна деталь, после которой обещанная экономия перестаёт быть готовым рецептом. Рабочая версия проще: три программы сохраняют подачи SEC, цену и объём, число форм 10-Q и 8-K за 14 дней. Четвёртая не ходит в сеть, читает три JSON-файла и пишет <code>SVODKA.txt</code>. Если источник отказал, в отчёте остаётся строка «нет цены», а не придуманное число</p>
-<div class="quick-answer"><p>Сохрани четыре файла из раздела с кодом в одну папку, задай <code>ALPHAVANTAGE_KEY</code> в переменной среды и запусти <code>bash zapusk.sh</code>. На экране появятся четыре короткие строки о ходе работы, затем готовая сводка с именем файла-источника у каждой цифры</p></div>
+<div class="quick-answer"><p>Короткий путь: открой Терминал → <a href="#ustanovka">вставь команды из шагов 1-3</a> → увидишь сводку</p></div>
 <details class="mobile-toc"><summary>Открыть содержание</summary><nav aria-label="Содержание на телефоне"><a href="#virusnoe-obeshchanie">Что не сходится в вирусном обещании</a><a href="#skhema">Схема из четырёх программ</a><a href="#ustanovka">Как собрать сводку</a><a href="#kod">Код четырёх программ</a><a href="#raspisanie">Расписание на будни</a><a href="#chto-lomaetsya">Что ломается</a><a href="#faq">Частые вопросы</a></nav></details>
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Утренняя сводка по рынку: 4 программы без выдумок</span></nav></header>
 <div class="share-row">
@@ -1425,7 +1425,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <h2>Как собрать сводку</h2>
 <h3>Как сохранить код в файлы</h3>
 <p>Создай папку <code>svodka</code>. Для каждого блока ниже открой текстовый редактор, вставь код и сохрани файл под именем из заголовка блока. На Mac в TextEdit сначала выбери «Формат → Конвертировать в простой текст» или нажми Cmd+Shift+T, а потом сохраняй. Имя файла должно заканчиваться на <code>.py</code>, а не на <code>.rtf</code> или <code>.txt</code>. Если файл сохранился неправильно, при запуске Python покажет <code>SyntaxError</code> в первой строке: пересохрани файл как простой текст. На Windows открой Блокнот и выбери тип файла «Все файлы». Например, первый блок сохрани как <code>agent1_podachi.py</code></p>
-<p>На Mac открой программу «Терминал»: нажми Cmd+Пробел, набери «Терминал» и нажми Enter. Не набирай <code>cd /путь/к/svodka</code> вручную: набери <code>cd </code> с пробелом, перетащи папку <code>svodka</code> мышкой в окно Терминала и нажми Enter. На Windows открой PowerShell. На Mac Python уже есть, на Windows установи его с <a href="https://www.python.org/downloads/" rel="noopener nofollow" target="_blank">python.org</a></p>
+<p>На Mac открой программу «Терминал»: нажми Cmd+Пробел, набери «Терминал» и нажми Enter. Не набирай <code>cd /путь/к/svodka</code> вручную: набери <code>cd </code> с пробелом, перетащи папку <code>svodka</code> мышкой в окно Терминала и нажми Enter. Если при первом <code>python3</code> появилось окно «установить инструменты разработчика командной строки», нажми «Установить», дождись конца и повтори команду. На Windows открой PowerShell и установи Python с <a href="https://www.python.org/downloads/" rel="noopener nofollow" target="_blank">python.org</a></p>
 <p><b>Шаг 1.</b> Задай подпись для SEC одной командой</p>
 <div class="code-block"><div class="code-bar"><span class="code-lang">команда</span><button class="copy-btn" type="button" data-copy-target="code-sec-user-agent">Скопировать</button></div><pre id="code-sec-user-agent"><code>export SEC_USER_AGENT="Имя Фамилия почта@пример.ru"</code></pre></div>
 <p>На экране ничего не появится, это нормально</p>
@@ -1437,6 +1437,12 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p>Ключ и подпись, заданные командами, живут до закрытия окна Терминала. В новом окне повтори команды из шагов 1-2. Для расписания ключ уже вписан в строки <code>crontab</code></p>
 <p>Без переменной программа возьмёт значение <code>demo</code>. Оно отдаёт примеры по IBM и MSFT, а на AAPL может вернуть объяснение, что demo-значение оставлено только для примеров</p>
 <p><b>Шаг 3.</b> Положи четыре программы и <code>zapusk.sh</code> в одну папку. Выполни <code>bash zapusk.sh</code>. Скрипт очистит экран, запустит программы по порядку и после четвёртого шага покажет <code>SVODKA.txt</code></p>
+<p>Так выглядят строки в готовой сводке:</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">шаблон строк</span></div><pre><code>MSFT: $цена; объём …; отставание 1 дн. (источник: 02-ceny.json)
+
+ЧЕГО НЕ ХВАТИЛО
+нет цены по AAPL (источник: 02-ceny.json)</code></pre></div>
+<p>Если вместо сводки видишь <code>No such file</code>, ты находишься не в той папке. Вернись к команде <code>cd</code> из подготовки выше, перетащи папку <code>svodka</code> в Терминал и повтори шаг 3</p>
 </section>
 
 <section id="kod">
@@ -1799,27 +1805,42 @@ set -u
 cd "$(dirname "$0")"
 clear
 
-printf '1/4 подачи SEC... '
-python3 agent1_podachi.py >/dev/null
-printf 'готово\n'
+status=0
+
+run_step() {
+  local label="$1"
+  local script="$2"
+
+  printf '%s\n' "$label"
+  if python3 "$script"; then
+    printf '%s готово\n' "$label"
+  else
+    printf '%s ошибка, смотри текст выше\n' "$label"
+    return 1
+  fi
+}
+
+run_step '1/4 подачи SEC...' agent1_podachi.py || status=1
 sleep 1
 
-printf '2/4 цены... '
-python3 agent2_ceny.py >/dev/null
-printf 'готово\n'
+run_step '2/4 цены...' agent2_ceny.py || status=1
 sleep 1
 
-printf '3/4 отчётность... '
-python3 agent3_kalendar.py >/dev/null
-printf 'готово\n'
+run_step '3/4 отчётность...' agent3_kalendar.py || status=1
 sleep 1
 
-printf '4/4 сводка... '
-python3 agent4_svodka.py >/dev/null
-printf 'готово\n\n'
+run_step '4/4 сводка...' agent4_svodka.py || status=1
 sleep 1
 
-cat SVODKA.txt</code></pre></div>
+printf '\n'
+if [[ -f SVODKA.txt ]]; then
+  cat SVODKA.txt
+else
+  printf 'сводка не собралась, смотри ошибку выше\n'
+  status=1
+fi
+
+exit "$status"</code></pre></div>
 <p>Если <code>bash zapusk.sh</code> не сработал, запусти четыре команды по очереди в той же папке:</p>
 <ol>
 <li><code>python3 agent1_podachi.py</code> создаст <code>01-podachi.json</code></li>
@@ -1848,7 +1869,7 @@ Get-Content SVODKA.txt</code></pre></div>
 15 6 * * 1-5 cd "$HOME/svodka" &amp;&amp; ALPHAVANTAGE_KEY=твой_ключ SEC_USER_AGENT="Имя Фамилия почта" python3 agent4_svodka.py</code></pre></div>
 <p>Замени <code>твой_ключ</code>, имя и почту своими данными. Если папка лежит не в домашней папке, замени <code>$HOME/svodka</code> её путём. Сохрани файл: нажми Ctrl+O, затем Enter. Выйди из nano сочетанием Ctrl+X</p>
 <p>На следующее утро выполни <code>cat ~/svodka/SVODKA.txt</code>. В первой строке должна стоять сегодняшняя дата</p>
-<p>Облачная машина нужна только в одном случае: сводка должна собираться, пока ноутбук выключен. На выключенном компьютере cron не запустится</p>
+<p>Облачная машина нужна только в одном случае: сводка должна собираться, пока ноутбук выключен</p>
 </section>
 
 <section id="chto-lomaetsya">
@@ -1858,7 +1879,7 @@ Get-Content SVODKA.txt</code></pre></div>
 <details class="check-panel"><summary>Цифры отстают</summary><p>На бесплатных тарифах часть данных приходит с задержкой 15-20 минут. Для утренней сводки это не страшно, для слежения за позицией в моменте критично. Смотри поле <code>otstavanie_dney</code>: в понедельник отставание на три дня нормально из-за выходных, а в среду два дня означают, что источник отдаёт старую цену</p></details>
 <details class="check-panel"><summary>Лимит кончился к обеду</summary><p>25 запросов Alpha Vantage в сутки уйдут к обеду, если опрашивать десять бумаг каждый час. Поэтому эта схема собирает сводку один раз утром</p></details>
 <details class="check-panel"><summary>В сводке пустой раздел</summary><p>Открой три JSON-файла. У отказавшего источника будет поле <code>oshibka</code> с текстом ответа. Четвёртая программа переносит пропуск в раздел ЧЕГО НЕ ХВАТИЛО и не заменяет его догадкой</p></details>
-<details class="check-panel"><summary>Хочется попросить модель дописать число</summary><p>Не проси. Выдуманная цифра не превращается в рыночные данные. В этой схеме пропуск остаётся пропуском, а решение по сводке принимает человек</p></details>
+<details class="check-panel"><summary>Хочется попросить модель дописать число</summary><p>Не проси. В этой схеме пропуск остаётся пропуском, а решение по сводке принимает человек</p></details>
 </section>
 
 <section id="ne-sovet"><h2>Это не торговый совет</h2><p>Сводка только переносит открытые данные, решения по ним принимаешь ты</p></section>
