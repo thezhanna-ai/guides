@@ -1113,6 +1113,19 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .share-row{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}.share-btn{display:inline-flex;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--white)}.quick-answer,.game-card,.game-note{border-color:var(--line);background:var(--info)}
 article .cta{margin-top:16px}
 </style><link rel="stylesheet" href="../../assets/article-sharing.css">
+<style>
+.proof-video{width:100%;height:auto;display:block;background:var(--guide-color-forest-deep);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--lift-1),var(--edge)}
+.video-proof-wrap{max-width:430px;margin-left:auto;margin-right:auto}.frames-proof{max-width:680px;margin-left:auto;margin-right:auto}
+.proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:var(--rhythm-block) 0}
+.proof-grid .fig{margin:0}.proof-grid .fig:last-child:nth-child(odd){grid-column:1/-1;max-width:620px}
+.proof-table{width:100%;border-collapse:collapse;margin:var(--rhythm-block) 0;font-size:.96rem}
+.proof-table th,.proof-table td{padding:12px 14px;border:1px solid var(--line);vertical-align:top;text-align:left}
+.proof-table th{background:var(--panel);color:var(--ink);font-weight:800}
+.proof-table td:first-child{font-weight:700;color:var(--ink)}
+.proof-link{display:inline-block;margin:.4rem .55rem .25rem 0;padding:.65rem .85rem;border:1px solid var(--accent);border-radius:999px;font-weight:750;text-decoration:none}
+@media(max-width:640px){.proof-grid{grid-template-columns:1fr}.proof-grid .fig:last-child:nth-child(odd){grid-column:auto}.proof-table{display:block;overflow-x:auto;white-space:normal}}
+@media(min-width:1244px){.page-shell{margin-left:calc((100vw - 1244px)/2);margin-right:calc((100vw - 1244px)/2)}}
+</style>
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
@@ -1219,7 +1232,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "name": "Нужно ли регистрироваться на этих сайтах?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Нет. Во время проверки Video2Frames, VectisPDF и TimeStamp Camera Photo Tools открыли основные функции без аккаунта."
+            "text": "Нет. Во время проверки Video2Frames, VectisPDF и TimeStamp Camera Photo Tools открыли основные функции без аккаунта"
           }
         },
         {
@@ -1227,7 +1240,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "name": "Можно ли работать с телефона?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Video2Frames и TimeStamp Camera открываются на узком экране. VectisPDF при ширине 540 пикселей попросил перейти на компьютер."
+            "text": "Video2Frames и TimeStamp Camera открываются на узком экране. VectisPDF при ширине 540 пикселей попросил перейти на компьютер"
           }
         },
         {
@@ -1235,7 +1248,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "name": "Какой экспорт Video2Frames использовать?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ZIP подходит для отдельных JPEG, PDF - для одной раскадровки. Export Audio в моём тесте не создал файл."
+            "text": "ZIP подходит для отдельных JPEG, PDF для одной раскадровки. Export Audio в проверке не создал файл"
           }
         },
         {
@@ -1243,7 +1256,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "name": "Удаляет ли VectisPDF скрытый текст?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Режим Redact сообщает, что отмеченные данные удаляются из содержимого при экспорте. Это безопаснее, чем просто положить поверх текста чёрный прямоугольник."
+            "text": "Режим Redact сообщает, что отмеченные данные удаляются из содержимого при экспорте. Это безопаснее, чем положить поверх текста чёрный прямоугольник"
           }
         }
       ]
@@ -1258,7 +1271,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <div class="header-actions"><div class="handout-title">3 сайта для контента</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
 </div></div></div></header>
-<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">В статье</p><a href="#tri-zadachi-bez-ustanovki">Три задачи без установки программ</a><a href="#video2frames">Video2Frames: кадры из ролика</a><a href="#vectispdf">VectisPDF: правка и сборка PDF</a><a href="#timestamp-camera">TimeStamp Camera: данные фотографии</a><a href="#chto-vybrat">Что выбрать для своей задачи</a><a href="#chastye-voprosy">Частые вопросы</a></nav><main><article>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">В статье</p><a href="#video2frames">Video2Frames: исходник и 15 кадров</a><a href="#vectispdf">VectisPDF: PDF до и после</a><a href="#timestamp-camera">TimeStamp Camera: 13 тегов и очищенный файл</a><a href="#proverka">Как проверить результат</a><a href="#chto-lomaetsya">Что может не сработать</a><a href="#pamyatka">Памятка на один экран</a><a href="#chastye-voprosy">Частые вопросы</a></nav><main><article>
       <nav class="breadcrumbs" aria-label="Хлебные крошки">
         <ol><li><a href="/">Главная</a></li><li><span aria-current="page">Три сайта для контента: кадры из видео, правка PDF и данные фото</span></li></ol>
       </nav>
@@ -1266,9 +1279,9 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       <header id="nachalo"><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Ноутбук на деревянном столе с реальными страницами Video2Frames, VectisPDF и TimeStamp Camera" loading="eager" decoding="async" fetchpriority="high"><figcaption>Кадры из ролика, правка PDF и очистка данных фото в браузере</figcaption></figure>
       <h1 class="article-standard-h1">Три сайта для контента: кадры из видео, правка PDF и данные фото</h1>
       <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
-      <p class="lead">Иногда для публикации не хватает одного кадра, одной правки в PDF или уверенности, что фотография не выдаёт место съёмки. Для каждой из этих задач есть отдельный сайт, который работает прямо в браузере. Но у одного инструмента есть ограничение, которое проявилось только после нажатия кнопки экспорта.</p>
-      <p>Ниже три сервиса, которые я проверила на собственных файлах 18 октября 2026 года. Показываю экраны своей проверки: что загрузить, куда нажать, какой файл получится и где кнопка обещает больше, чем делает.</p>
-      <details class="mobile-toc"><summary>Открыть содержание</summary><nav aria-label="Содержание на телефоне"><a href="#tri-zadachi-bez-ustanovki">Три задачи без установки программ</a><a href="#video2frames">Video2Frames: кадры из ролика</a><a href="#vectispdf">VectisPDF: правка и сборка PDF</a><a href="#timestamp-camera">TimeStamp Camera: данные фотографии</a><a href="#chto-vybrat">Что выбрать для своей задачи</a><a href="#chastye-voprosy">Частые вопросы</a></nav></details>
+      <p class="lead">В первый сайт я загрузила ролик длиной 57,4 секунды. Через несколько нажатий получила 15 отдельных кадров и PDF на 15 страниц. Ниже можно включить тот самый исходник, посмотреть все извлечённые кадры и только потом решать, нужен ли сервис</p>
+      <p>Так же разбираю ещё две задачи: показываю PDF до и после редактирования и фотографию, в которой нашлись дата, модель телефона и координаты. У каждого сайта есть короткая инструкция и видимый результат</p>
+      <details class="mobile-toc"><summary>Открыть содержание</summary><nav aria-label="Содержание на телефоне"><a href="#video2frames">Video2Frames: исходник и 15 кадров</a><a href="#vectispdf">VectisPDF: PDF до и после</a><a href="#timestamp-camera">TimeStamp Camera: 13 тегов и очищенный файл</a><a href="#proverka">Как проверить результат</a><a href="#chto-lomaetsya">Что может не сработать</a><a href="#pamyatka">Памятка на один экран</a><a href="#chastye-voprosy">Частые вопросы</a></nav></details>
 
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Три сайта для контента: кадры из видео, правка PDF и данные фото</span></nav>
@@ -1282,70 +1295,93 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Ftri-sayta-video-pdf-foto%2F&amp;title=%D0%A2%D1%80%D0%B8%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BD%D1%82%D0%B0%3A%20%D0%BA%D0%B0%D0%B4%D1%80%D1%8B%20%D0%B8%D0%B7%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%2C%20%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0%20PDF%20%D0%B8%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D0%BE%D1%82%D0%BE" target="_blank" rel="noopener">VK</a>
       </div>
 
-      <section id="tri-zadachi-bez-ustanovki">
-        <p class="eyebrow">Коротко о трёх сайтах</p>
-        <h2>Три задачи без установки программ</h2>
-        <p>Video2Frames раскладывает ролик на отдельные изображения. VectisPDF закрывает другую часть работы: текст, скрытие фрагментов, порядок страниц и объединение документов. TimeStamp Camera показывает метаданные снимка и удаляет их перед публикацией.</p>
-        <p>Общая логика простая: файл выбирается на компьютере, обработка идёт в браузере, результат скачивается обратно. Аккаунт ни одному из трёх сервисов в моём тесте не понадобился. Отличия начинаются там, где нужен конкретный формат результата.</p>
-      </section>
-
       <section id="video2frames">
         <p class="eyebrow">Видео</p>
-        <h2>Video2Frames: достать нужные кадры из ролика</h2>
-        <p><a href="https://videotoframes.app/" rel="noopener nofollow" target="_blank">Video2Frames</a> пригодится, когда из вертикального ролика нужны обложки, стоп-кадры для карусели или раскадровка. Сайт принимает MP4, MOV и WebM, а интерфейс можно переключить на русский язык.</p>
+        <h2>Video2Frames: вот исходный ролик, а ниже все 15 кадров</h2>
+        <p><a href="https://videotoframes.app/" rel="noopener nofollow" target="_blank">Video2Frames</a> раскладывает видео на отдельные изображения. Это пригодится, когда нужна обложка, стоп-кадры для карусели, раскадровка для согласования или один момент из ролика без попыток поймать его скриншотом</p>
+        <figure class="fig video-proof-wrap" data-own="video"><video class="proof-video" controls preload="metadata" poster="assets/video-original-poster.webp"><source src="assets/video-original.mp4" type="video/mp4">Ваш браузер не поддерживает встроенное видео</video><figcaption>Полный исходник проверки: MP4, 57,4 секунды. Именно его сервис разложил на кадры через каждые четыре секунды</figcaption></figure>
         <ol>
-          <li><b>Открой сайт и выбери ролик.</b> Файл загружается в окно браузера. Для теста я использовала MP4 длительностью 57,4 секунды.</li>
-          <li><b>Выбери режим Serial и задай интервал.</b> При интервале четыре секунды сервис извлёк 15 кадров.</li>
-          <li><b>Нажми Start Serial Extraction.</b> После обработки появится сетка превью, по которой сразу видно, попали ли в выборку нужные моменты.</li>
-          <li><b>Скачай ZIP или PDF.</b> ZIP сохранил 15 отдельных JPEG, PDF собрал те же 15 кадров в документ на 15 страниц.</li>
+          <li><b>Открой сайт и нажми на поле выбора видео</b>. Подходят MP4, MOV и WebM. После выбора над ползунком появилась длительность 57,4 секунды</li>
+          <li><b>Переключись на Serial</b>. Этот режим берёт кадры с одинаковым интервалом. Я поставила четыре секунды</li>
+          <li><b>Нажми Start Serial Extraction</b>. Сервис показал сообщение: извлечено 15 изображений</li>
+          <li><b>Выбери формат</b>. Export ZIP скачивает отдельные JPEG, Export PDF собирает их в один документ</li>
         </ol>
-        <figure class="fig" data-own="screenshot"><img src="assets/video2frames-export.webp" width="995" height="1450" alt="Экран Video2Frames с кадром ролика и кнопками Export ZIP, Export PDF и Export Audio" loading="lazy" decoding="async"><figcaption>После извлечения кадров доступны ZIP и PDF. Коралловой рамкой отмечена кнопка экспорта PDF.</figcaption></figure>
-        <div class="result"><p><b>Результат проверки:</b> из ролика длиной 57,4 секунды получились 15 JPEG в ZIP и PDF на 15 страниц. Имена кадров и порядок сохранились.</p></div>
-        <div class="warn-card"><p><b>Ограничение:</b> сайт указывает предел ролика до 10 минут. Кнопка Export Audio в моём тесте появилась, но файл не создался из-за ошибки MediaRecorder. Поэтому для реальной работы здесь надёжно рассчитывать на кадры и PDF, а не на извлечение звука.</p></div>
+        <figure class="fig" data-own="screenshot"><img src="assets/video2frames-export.webp" width="995" height="1450" alt="Экран Video2Frames с кадром ролика и кнопками Export ZIP, Export PDF и Export Audio" loading="lazy" decoding="async"><figcaption>После обработки под предпросмотром появляются три кнопки. Для отдельных картинок нужна Export ZIP, для раскадровки одним файлом нужна Export PDF</figcaption></figure>
+        <figure class="fig frames-proof" data-own="result"><img src="assets/video-frames-15.webp" width="828" height="1912" alt="Пятнадцать кадров, извлечённых Video2Frames из исходного ролика с интервалом четыре секунды" loading="lazy" decoding="async"><figcaption>На изображении содержимое готового PDF: 15 кадров от 00:00 до 00:56 с шагом четыре секунды</figcaption></figure>
+        <div class="result"><p><b>Что получилось:</b> ZIP с 15 JPEG и PDF на 15 страниц. В кадрах видны разные сцены ролика, а не пятнадцать копий одного экрана</p><p><a class="proof-link" href="assets/video-frames-15.pdf" target="_blank" rel="noopener">Открыть готовый PDF на 15 страниц</a></p></div>
+        <div class="warn-card"><p><b>Где не сработало:</b> кнопка Export Audio была на месте, но файл не создался из-за ошибки MediaRecorder. Для кадров и PDF сервис сработал, для звука в этой проверке нет</p></div>
       </section>
 
       <section id="vectispdf">
         <p class="eyebrow">Документы</p>
-        <h2>VectisPDF: исправить, скрыть и объединить PDF</h2>
-        <p><a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a> открывает цифровые и отсканированные PDF прямо в браузере. В редакторе есть правка текста, добавление текста, выделение, необратимое скрытие фрагмента, перестановка страниц и объединение нескольких документов.</p>
+        <h2>VectisPDF: документ до редактирования и после экспорта</h2>
+        <p><a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a> открывает PDF в браузере. Там можно добавить или исправить текст, выделить фрагмент, удалить закрытые данные при экспорте, переставить страницы и объединить несколько документов</p>
         <ol>
-          <li><b>Нажми Select PDF и открой документ.</b> В тесте это был файл на 12 страниц.</li>
-          <li><b>Перейди в Viewer &amp; Text.</b> Для удаления конфиденциального фрагмента выбери Redact и обведи нужную область. Сервис предупреждает, что данные будут удалены из файла при экспорте, а не просто закрыты чёрной плашкой.</li>
-          <li><b>Задай имя и нажми Export PDF.</b> Исправленный документ скачался с теми же 12 страницами.</li>
-          <li><b>Для сборки документов открой Merge / Split.</b> Добавь второй PDF, расположи страницы и экспортируй итог. Два тестовых документа объединились в файл на 26 страниц.</li>
+          <li><b>Нажми Select PDF</b>. В проверке был документ на 12 страниц</li>
+          <li><b>Открой Viewer &amp; Text и выбери Redact</b>. Обведи фрагмент, который надо удалить. Сервис предупреждает, что при экспорте данные стираются из файла, а не остаются под чёрной плашкой</li>
+          <li><b>Задай имя и нажми Export PDF</b>. Исправленный документ скачался с теми же 12 страницами</li>
+          <li><b>Для объединения открой Merge / Split</b>. Добавь второй PDF и экспортируй общий файл. В проверке получилось 26 страниц</li>
         </ol>
-        <figure class="fig" data-own="screenshot"><img src="assets/vectispdf-export.webp" width="1280" height="800" alt="Интерфейс VectisPDF с режимом Redact и кнопкой Export PDF" loading="lazy" decoding="async"><figcaption>Реальный экран после скрытия фрагмента. Коралловая рамка показывает кнопку Export PDF.</figcaption></figure>
-        <div class="result"><p><b>Результат проверки:</b> исправленный PDF сохранил 12 страниц, а объединённый документ получил 26 страниц. В скачанных файлах не появилось водяного знака.</p></div>
-        <div class="warn-card"><p><b>Ограничение:</b> на ширине 540 пикселей редактор просит открыть сайт на компьютере, поэтому с телефона он неудобен. OCR распознал текст скана и показал его в редакторе, но отдельный скачиваемый результат OCR в тесте получить не удалось.</p></div>
+        <figure class="fig" data-own="screenshot"><img src="assets/vectispdf-export.webp" width="1280" height="800" alt="Интерфейс VectisPDF с режимом Redact и кнопкой Export PDF" loading="lazy" decoding="async"><figcaption>В левом столбце видно 1 of 12, сверху выбран Redact, справа готова кнопка Export PDF</figcaption></figure>
+        <div class="proof-grid">
+          <figure class="fig" data-own="result"><img src="assets/vectis-before.webp" width="820" height="1160" alt="Первая страница исходного PDF до правки в VectisPDF" loading="lazy" decoding="async"><figcaption>До: исходная первая страница документа</figcaption></figure>
+          <figure class="fig" data-own="result"><img src="assets/vectis-after.webp" width="820" height="1160" alt="Первая страница PDF после постоянного скрытия фрагмента в VectisPDF" loading="lazy" decoding="async"><figcaption>После: отмеченный фрагмент удалён при экспорте, документ сохранил 12 страниц</figcaption></figure>
+        </div>
+        <div class="result"><p><b>Что получилось:</b> отдельный исправленный PDF на 12 страниц и объединённый PDF на 26 страниц. Водяного знака в готовых файлах нет</p><p><a class="proof-link" href="assets/vectis-edited-12-pages.pdf" target="_blank" rel="noopener">Открыть исправленный PDF</a><a class="proof-link" href="assets/vectis-merged-26-pages.pdf" target="_blank" rel="noopener">Открыть объединённый PDF</a></p></div>
+        <div class="warn-card"><p><b>Где неудобно:</b> на экране шириной 540 пикселей редактор попросил открыть сайт на компьютере. Распознавание текста на скане (OCR) сработало внутри редактора, но отдельный файл с этим текстом получить не удалось</p></div>
       </section>
 
       <section id="timestamp-camera">
         <p class="eyebrow">Фотографии</p>
-        <h2>TimeStamp Camera: проверить, что фотография рассказывает о тебе</h2>
-        <p>Фотография может хранить больше, чем видно в кадре: дату, модель камеры, параметры съёмки и GPS-координаты. Раздел <a href="https://timestampcamera.net/photo-tools" rel="noopener nofollow" target="_blank">Photo Tools на сайте TimeStamp Camera</a> показывает эти поля и там же удаляет их перед отправкой снимка в соцсеть, чат или объявление.</p>
+        <h2>TimeStamp Camera: фотография та же, данных внутри уже нет</h2>
+        <p>Внешне фотография не меняется, но внутри файла могут лежать дата, модель камеры и GPS-координаты. Раздел <a href="https://timestampcamera.net/photo-tools" rel="noopener nofollow" target="_blank">Photo Tools на сайте TimeStamp Camera</a> сначала показывает эти поля, затем удаляет их перед публикацией</p>
         <ol>
-          <li><b>Открой EXIF viewer и выбери фотографию.</b> Подходят JPEG, PNG, HEIC и TIFF.</li>
-          <li><b>Проверь группы Date &amp; Time, Camera и GPS.</b> В тестовом JPEG сервис показал дату съёмки, камеру (Apple iPhone 15) и координаты.</li>
-          <li><b>Нажми Strip metadata instead.</b> Откроется удаление метаданных без перехода в отдельную программу.</li>
-          <li><b>Скачай очищенную копию.</b> В тесте число обнаруженных тегов изменилось с 13 до 0.</li>
+          <li><b>Открой EXIF viewer и выбери фотографию</b>. Подходят JPEG, PNG, HEIC и TIFF</li>
+          <li><b>Проверь Date &amp; Time, Camera и GPS</b>. В нашем JPEG сервис нашёл дату, Apple iPhone 15 и координаты</li>
+          <li><b>Нажми Strip metadata instead</b>. Откроется окно удаления данных</li>
+          <li><b>Выбери фото и скачай очищенную копию</b>. Счётчик показал: 1 файл обработан, 13 тегов удалено</li>
         </ol>
-        <figure class="fig" data-own="screenshot"><img src="assets/timestamp-strip.webp" width="1020" height="1110" alt="Страница EXIF viewer на TimeStamp Camera с кнопкой Strip metadata instead" loading="lazy" decoding="async"><figcaption>Плашка перевода Chrome вырезана. Коралловая рамка отмечает переход к удалению метаданных.</figcaption></figure>
-        <figure class="fig" data-own="screenshot"><img src="assets/timestamp-exif.webp" width="962" height="970" alt="Таблица EXIF на TimeStamp Camera с датой съёмки, камерой Apple iPhone 15 и GPS-координатами" loading="lazy" decoding="async"><figcaption>Результат проверки EXIF: дата съёмки, камера Apple iPhone 15 и координаты выделены коралловыми рамками.</figcaption></figure>
-        <div class="result"><p><b>Результат проверки:</b> исходный JPEG содержал 13 EXIF-тегов, а скачанная очищенная копия - ни одного. Само изображение осталось доступно как обычный файл.</p></div>
-        <div class="warn-card"><p><b>Ограничение:</b> файл обрабатывается локально, но при показе названия места координаты отправляются картографическому сервису Nominatim. Если важно не передавать даже координаты, не запрашивай подпись места и сразу переходи к удалению метаданных.</p></div>
+        <figure class="fig" data-own="screenshot"><img src="assets/timestamp-exif.webp" width="962" height="970" alt="Таблица EXIF на TimeStamp Camera с датой съёмки, камерой Apple iPhone 15 и GPS-координатами" loading="lazy" decoding="async"><figcaption>До очистки: дата 18.10.2026, Apple iPhone 15 и GPS-координаты читаются прямо из файла</figcaption></figure>
+        <figure class="fig" data-own="result"><img src="assets/timestamp-strip-process.webp" width="1200" height="2098" alt="Последовательность удаления EXIF в TimeStamp Camera от выбора фотографии до сообщения об удалении 13 тегов" loading="lazy" decoding="async"><figcaption>Живая последовательность проверки: выбор фотографии, обработка и финальная строка 13 metadata tags stripped</figcaption></figure>
+        <div class="result"><p><b>Что получилось:</b> исходный JPEG содержал 13 тегов, очищенная копия не содержит EXIF. Сервис убирает только данные файла, пиксели остаются на месте</p><p><a class="proof-link" href="assets/timestamp-tagged.jpg" target="_blank" rel="noopener">Открыть исходный JPEG</a><a class="proof-link" href="assets/timestamp-cleaned.jpg" target="_blank" rel="noopener">Открыть очищенный JPEG</a></p></div>
+        <div class="warn-card"><p><b>Где нужна осторожность:</b> файл обрабатывается локально, но при показе названия места координаты отправляются картографическому сервису Nominatim. Если не хочется передавать координаты, не запрашивай подпись места и сразу переходи к очистке</p></div>
       </section>
 
-      <section id="chto-vybrat">
-        <p class="eyebrow">Выбор</p>
-        <h2>Что выбрать для своей задачи</h2>
-        <ul>
-          <li><b>Нужны картинки из видео:</b> Video2Frames, режим Serial, затем ZIP.</li>
-          <li><b>Нужно отправить раскадровку одним файлом:</b> Video2Frames, затем PDF.</li>
-          <li><b>Нужно исправить или собрать документ:</b> VectisPDF на компьютере.</li>
-          <li><b>Нужно безопасно опубликовать фото:</b> сначала EXIF viewer, затем Strip metadata.</li>
-        </ul>
-        <p>Именно последняя проверка чаще всего остаётся незаметной. Кадр и PDF человек открывает глазами, а координаты внутри фотографии не видны до тех пор, пока их не прочитает сервис. Поэтому перед публичной загрузкой снимка полезно проверять не только то, что попало в кадр, но и то, что осталось внутри файла.</p>
-        <div class="result"><p><b>Итог:</b> Video2Frames готовит визуальные материалы, VectisPDF собирает документ, а TimeStamp Camera проверяет файл перед публикацией. Три отдельные задачи закрываются без установки программ.</p></div>
+      <section id="proverka">
+        <p class="eyebrow">Проверка</p>
+        <h2>Как понять, что сервис сделал задачу, а не только показал красивую кнопку</h2>
+        <table class="proof-table"><thead><tr><th>Задача</th><th>Что должно появиться</th><th>Что появилось у нас</th></tr></thead><tbody>
+          <tr><td>Достать кадры</td><td>Разные изображения по всей длине ролика</td><td>15 кадров с отметками от 00:00 до 00:56</td></tr>
+          <tr><td>Собрать раскадровку</td><td>Один PDF с теми же кадрами</td><td>15 страниц, по одному кадру на страницу</td></tr>
+          <tr><td>Исправить PDF</td><td>Скачиваемый документ с сохранёнными страницами</td><td>12 страниц после правки, без водяного знака</td></tr>
+          <tr><td>Объединить PDF</td><td>Один файл вместо двух</td><td>26 страниц в итоговом документе</td></tr>
+          <tr><td>Очистить фото</td><td>Копия без EXIF</td><td>13 тегов удалено, изображение осталось целым</td></tr>
+        </tbody></table>
+      </section>
+
+      <section id="chto-lomaetsya">
+        <p class="eyebrow">Ограничения</p>
+        <h2>Что может не сработать</h2>
+        <table class="proof-table"><thead><tr><th>Сервис</th><th>Проблема</th><th>Что делать</th></tr></thead><tbody>
+          <tr><td>Video2Frames</td><td>Export Audio не создал файл</td><td>Использовать сервис для кадров и PDF, звук извлекать другим инструментом</td></tr>
+          <tr><td>VectisPDF</td><td>На телефоне редактор просит открыть компьютер</td><td>Редактировать на ноутбуке или большом планшете</td></tr>
+          <tr><td>VectisPDF OCR</td><td>Текст со скана виден в редакторе, отдельного файла с распознанным текстом нет</td><td>Не рассчитывать на этот режим как на отдельный конвертер сканов</td></tr>
+          <tr><td>TimeStamp Camera</td><td>Название места запрашивается через Nominatim</td><td>Не включать расшифровку места, если координаты нельзя передавать наружу</td></tr>
+        </tbody></table>
+      </section>
+
+      <section id="pamyatka">
+        <p class="eyebrow">Сохранить</p>
+        <h2>Памятка на один экран</h2>
+        <ol>
+          <li><b>Картинки из видео:</b> Video2Frames → Serial → интервал → Start Serial Extraction → Export ZIP</li>
+          <li><b>Раскадровка одним файлом:</b> Video2Frames → Export PDF</li>
+          <li><b>Правка документа:</b> VectisPDF → Viewer &amp; Text → нужный инструмент → Export PDF</li>
+          <li><b>Объединение документов:</b> VectisPDF → Merge / Split → Add PDF → Export PDF</li>
+          <li><b>Проверка фотографии:</b> TimeStamp Camera → EXIF viewer → Date &amp; Time, Camera, GPS</li>
+          <li><b>Очистка фотографии:</b> Strip metadata instead → Choose photos → Download cleaned file</li>
+        </ol>
+        <p>Самая полезная проверка остаётся последней: кадр и PDF видны сразу, а координаты внутри фотографии никак себя не выдают</p>
       </section>
 
       <section class="tariff-note" aria-label="Условия сервисов на дату проверки">
@@ -1361,10 +1397,10 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <p class="eyebrow">FAQ</p>
         <h2>Частые вопросы</h2>
         <div class="faq-list">
-          <details class="faq-item" open><summary>Нужно ли регистрироваться на этих сайтах?</summary><p>Нет. Во время проверки Video2Frames, VectisPDF и TimeStamp Camera Photo Tools открыли основные функции без аккаунта.</p></details>
-          <details class="faq-item" open><summary>Можно ли работать с телефона?</summary><p>Video2Frames и TimeStamp Camera открываются на узком экране. VectisPDF при ширине 540 пикселей попросил перейти на компьютер.</p></details>
-          <details class="faq-item" open><summary>Какой экспорт Video2Frames использовать?</summary><p>ZIP подходит для отдельных JPEG, PDF - для одной раскадровки. Export Audio в моём тесте не создал файл.</p></details>
-          <details class="faq-item" open><summary>Удаляет ли VectisPDF скрытый текст?</summary><p>Режим Redact сообщает, что отмеченные данные удаляются из содержимого при экспорте. Это безопаснее, чем просто положить поверх текста чёрный прямоугольник.</p></details>
+          <details class="faq-item" open><summary>Нужно ли регистрироваться на этих сайтах?</summary><p>Нет. Во время проверки Video2Frames, VectisPDF и TimeStamp Camera Photo Tools открыли основные функции без аккаунта</p></details>
+          <details class="faq-item" open><summary>Можно ли работать с телефона?</summary><p>Video2Frames и TimeStamp Camera открываются на узком экране. VectisPDF при ширине 540 пикселей попросил перейти на компьютер</p></details>
+          <details class="faq-item" open><summary>Какой экспорт Video2Frames использовать?</summary><p>ZIP подходит для отдельных JPEG, PDF для одной раскадровки. Export Audio в проверке не создал файл</p></details>
+          <details class="faq-item" open><summary>Удаляет ли VectisPDF скрытый текст?</summary><p>Режим Redact сообщает, что отмеченные данные удаляются из содержимого при экспорте. Это безопаснее, чем положить поверх текста чёрный прямоугольник</p></details>
         </div>
       </section>
 
@@ -1372,9 +1408,9 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <p class="eyebrow">Источники</p>
         <h2>Официальные страницы</h2>
         <ul>
-          <li><a href="https://videotoframes.app/" rel="noopener nofollow" target="_blank">Video2Frames</a>.</li>
-          <li><a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a>.</li>
-          <li><a href="https://timestampcamera.net/photo-tools" rel="noopener nofollow" target="_blank">TimeStamp Camera Photo Tools</a>.</li>
+          <li><a href="https://videotoframes.app/" rel="noopener nofollow" target="_blank">Video2Frames</a></li>
+          <li><a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a></li>
+          <li><a href="https://timestampcamera.net/photo-tools" rel="noopener nofollow" target="_blank">TimeStamp Camera Photo Tools</a></li>
         </ul>
       </section>
 
