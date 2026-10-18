@@ -1391,6 +1391,15 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
 <p class="lead">У вирусного «Bloomberg на роботах» есть одна деталь, после которой обещанная экономия перестаёт быть готовым рецептом. Рабочая версия проще: три программы сохраняют подачи SEC, цену и объём, число форм 10-Q и 8-K за 14 дней. Четвёртая не ходит в сеть, читает три JSON-файла и пишет <code>SVODKA.txt</code>. Если источник отказал, в отчёте остаётся строка «нет цены», а не придуманное число</p>
 <div class="quick-answer"><p>Короткий путь: открой Терминал → <a href="#ustanovka">вставь команды из шагов 1-3</a> → увидишь сводку</p></div>
+<section id="bystryy-start">
+<h2>Быстрый старт</h2>
+<p>Сохрани пять файлов из раздела с кодом <a href="#kod">«Код четырёх программ»</a> в папку <code>svodka</code> и выполни:</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Терминал</span><button class="copy-btn" type="button" data-copy-target="code-bystryy-start">Скопировать</button></div><pre id="code-bystryy-start"><code>mkdir -p ~/svodka &amp;&amp; cd ~/svodka
+export SEC_USER_AGENT="Your Name you@example.com"
+read -sr ALPHAVANTAGE_KEY &amp;&amp; export ALPHAVANTAGE_KEY
+bash zapusk.sh</code></pre></div>
+<p>Через несколько секунд на экране будет сводка. Подробно каждый шаг - ниже</p>
+</section>
 <details class="mobile-toc"><summary>Открыть содержание</summary><nav aria-label="Содержание на телефоне"><a href="#virusnoe-obeshchanie">Что не сходится в вирусном обещании</a><a href="#skhema">Схема из четырёх программ</a><a href="#ustanovka">Как собрать сводку</a><a href="#kod">Код четырёх программ</a><a href="#raspisanie">Расписание на будни</a><a href="#chto-lomaetsya">Что ломается</a><a href="#faq">Частые вопросы</a></nav></details>
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Утренняя сводка по рынку: 4 программы без выдумок</span></nav></header>
 <div class="share-row">
