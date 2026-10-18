@@ -1,4 +1,5 @@
 from html.parser import HTMLParser
+import html
 from pathlib import Path
 import importlib.util
 import hashlib
@@ -1567,3 +1568,69 @@ class RubrikiIMetkiTest(unittest.TestCase):
                 self.assertTrue(after.startswith('<p class="uroven-metka %s"' % a["uroven"]))
                 label = a.get("uroven_nadpis", self.gen.UROVNI[a["uroven"]][0] + " уровень")
                 self.assertIn(">%s</p>" % label, after.split("\n", 1)[0])
+
+
+class SvodkaDraftTest(unittest.TestCase):
+    SLUG = "utrennyaya-svodka-po-rynku"
+    PAGE = ROOT / "claude-ai" / SLUG / "index.html"
+    SOURCE = ROOT.parents[1] / "tasks/content/2026-10-18-svodka-bloomberg-rilz/svodka"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.source = cls.PAGE.read_text(encoding="utf-8")
+        cls.registry = json.loads((ROOT / "data/statyi.json").read_text(encoding="utf-8"))["statyi"]
+
+    def test_svodka_slug_is_a_non_published_draft(self):
+        row = next(item for item in self.registry if item["slug"] == self.SLUG)
+        self.assertEqual(row["status"], "draft")
+        self.assertEqual(row["vydacha"], "net")
+        self.assertEqual(row["kod_slovo"], "СВОДКА")
+
+    def test_svodka_page_keeps_shell_share_cover_and_unbounded_h1(self):
+        self.assertIn('<div class="header-controls">', self.source)
+        self.assertIn('<h1 class="article-standard-h1">', self.source)
+        self.assertEqual(self.source.count("Поделиться"), 2)
+        self.assertIn('width="1600" height="840"', self.source)
+        self.assertTrue((self.PAGE.parent / "assets/oblozhka.webp").is_file())
+
+    def test_svodka_embeds_exact_programs_and_has_no_run_section(self):
+        for filename in (
+            "agent1_podachi.py",
+            "agent2_ceny.py",
+            "agent3_kalendar.py",
+            "agent4_svodka.py",
+        ):
+            with self.subTest(filename=filename):
+                match = re.search(
+                    r'<pre data-source="%s"[^>]*><code>(.*?)</code></pre>' % re.escape(filename),
+                    self.source,
+                    flags=re.S,
+                )
+                self.assertIsNotNone(match)
+                embedded = html.unescape(match.group(1)).rstrip("\n")
+                original = (self.SOURCE / filename).read_text(encoding="utf-8").rstrip("\n")
+                self.assertEqual(embedded, original)
+        self.assertNotIn("<!-- ПРОГОН: заполняет этап 2 по живой записи -->", self.source)
+        self.assertNotIn("<h2>Наш прогон</h2>", self.source)
+        self.assertNotIn('<section id="progon">', self.source)
+
+    def test_svodka_has_article_howto_and_matching_faq_schema(self):
+        scripts = [json.loads(block) for block in re.findall(
+            r'<script type="application/ld\+json"(?: id="[^"]+")?>(.*?)</script>',
+            self.source,
+            flags=re.S,
+        )]
+        nodes = [node for script in scripts for node in script.get("@graph", [script])]
+        types = {node.get("@type") for node in nodes}
+        self.assertTrue({"Article", "HowTo", "FAQPage"} <= types)
+        faq = next(node for node in nodes if node.get("@type") == "FAQPage")
+        for item in faq["mainEntity"]:
+            self.assertIn("<summary>%s</summary>" % item["name"], self.source)
+            self.assertIn("<p>%s</p>" % item["acceptedAnswer"]["text"], self.source)
+
+    def test_svodka_forbidden_attribution_is_absent_but_ad_renders_exactly(self):
+        self.assertIsNone(re.search(r"иван|сергеев|theivansergeev", self.source, flags=re.I))
+        rendered = html.unescape(self.source)
+        self.assertIn("Концентрат Ивана Сергеева", rendered)
+        self.assertIn("Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q", rendered)
+        self.assertIn("https://theivansergeev.com/koncentrat/?gcpc=16fff", rendered)
