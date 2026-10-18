@@ -27,7 +27,7 @@ class TriSaytaPravka7Test(unittest.TestCase):
     def test_vectis_copy_tells_only_what_export_proved(self):
         self.assertIn("Пример, до:", self.visible)
         self.assertIn("Пример, после:", self.visible)
-        self.assertIn("pdftotext", self.visible)
+        self.assertNotIn("pdftotext", self.html)
         self.assertNotIn("при экспорте сервис стирает эти данные из файла", self.visible)
         self.assertNotIn("Обычная чёрная плашка исходный текст не удаляет", self.visible)
         self.assertNotIn("Открыть PDF с удалённым фрагментом", self.visible)
