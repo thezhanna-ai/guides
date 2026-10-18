@@ -1249,7 +1249,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "name": "Удаляет ли VectisPDF скрытый текст?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Режим Redact сообщает, что отмеченные данные удаляются из содержимого при экспорте. Это безопаснее, чем положить поверх текста чёрный прямоугольник."
+            "text": "Режим Redact сообщает, что отмеченные данные удаляются из содержимого при экспорте. Однако pdftotext всё ещё извлекает скрытую строку из экспортированного файла этого примера. Чёрная плашка появилась, а удаление текста не подтверждено."
           }
         }
       ]
@@ -1264,7 +1264,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <div class="header-actions"><div class="handout-title">3 сайта для контента</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
 </div></div></div></header>
-<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">В статье</p><a href="#video2frames">Video2Frames: кадры из ролика</a><a href="#vectispdf">VectisPDF: PDF до и после</a><a href="#timestamp-camera">TimeStamp Camera: данные фотографии</a><a href="#pamyatka">Памятка на один экран</a><a href="#chastye-voprosy">Частые вопросы</a></nav><main><article>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">В статье</p><a href="#video2frames">Video2Frames: кадры из ролика</a><a href="#vectispdf">VectisPDF: PDF до и после</a><a href="#timestamp-camera">TimeStamp Camera: как удалить метаданные из фотографии</a><a href="#pamyatka">Памятка на один экран</a><a href="#chastye-voprosy">Частые вопросы</a></nav><main><article>
       <nav class="breadcrumbs" aria-label="Хлебные крошки">
         <ol><li><a href="/">Главная</a></li><li><span aria-current="page">Три сайта для контента: кадры из видео, правка PDF и данные фото</span></li></ol>
       </nav>
@@ -1274,7 +1274,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
       <p class="lead">Хочешь разобрать чужой монтаж по кадрам, поправить PDF без программы или выложить фотографию и не выдать координаты дома? Для каждой задачи здесь есть короткий путь в браузере.</p>
       <p>Ниже можно пройти действия по кнопкам и увидеть файл. Самое неожиданное скрывается внутри фотографии: вместе с ней легко опубликовать дату съёмки, модель телефона и точные координаты.</p>
-      <details class="mobile-toc"><summary>Открыть содержание</summary><nav aria-label="Содержание на телефоне"><a href="#video2frames">Video2Frames: кадры из ролика</a><a href="#vectispdf">VectisPDF: PDF до и после</a><a href="#timestamp-camera">TimeStamp Camera: данные фотографии</a><a href="#pamyatka">Памятка на один экран</a><a href="#chastye-voprosy">Частые вопросы</a></nav></details>
+      <details class="mobile-toc"><summary>Открыть содержание</summary><nav aria-label="Содержание на телефоне"><a href="#video2frames">Video2Frames: кадры из ролика</a><a href="#vectispdf">VectisPDF: PDF до и после</a><a href="#timestamp-camera">TimeStamp Camera: как удалить метаданные из фотографии</a><a href="#pamyatka">Памятка на один экран</a><a href="#chastye-voprosy">Частые вопросы</a></nav></details>
 
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Три сайта для контента: кадры из видео, правка PDF и данные фото</span></nav>
@@ -1308,34 +1308,34 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       <section id="vectispdf">
         <p class="eyebrow">Документы</p>
         <h2>VectisPDF: документ до редактирования и после экспорта</h2>
-        <p><a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a> открывает PDF в браузере. Здесь два действия, которые доходят до готового файла: удалить фрагмент так, чтобы его нельзя было восстановить (режим Redact), и объединить несколько PDF в один.</p>
+        <p><a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a> открывает PDF в браузере. Здесь можно закрыть фрагмент чёрной плашкой в режиме Redact и объединить несколько PDF в один. Сервис пишет, что отмеченные данные удаляются из содержимого при экспорте. Однако pdftotext всё ещё извлекает скрытую строку из экспортированного файла этого примера, поэтому подтверждена только плашка, а не удаление текста.</p>
         <ol>
           <li><b>Нажми Select PDF</b>. Выбранный документ откроется в редакторе</li>
-          <li><b>Открой Viewer &amp; Text и выбери Redact</b>. Обведи фрагмент, который надо удалить. При экспорте сервис стирает эти данные из файла. Обычная чёрная плашка исходный текст не удаляет</li>
-          <li><b>Задай имя и нажми Export PDF</b>. PDF с удалённым фрагментом скачается со всеми страницами</li>
+          <li><b>Открой Viewer &amp; Text и выбери Redact</b>. Обведи фрагмент, который надо закрыть. Сервис сообщает, что при экспорте отмеченные данные удаляются из содержимого, но файл этого примера сохранил строку для извлечения через pdftotext</li>
+          <li><b>Задай имя и нажми Export PDF</b>. PDF с чёрной плашкой скачается со всеми страницами</li>
           <li><b>Для объединения открой Merge / Split</b>. Добавь второй PDF и экспортируй общий файл на 26 страниц</li>
         </ol>
         <figure class="fig visual-wide" data-own="screenshot"><img src="assets/vectispdf-export-clean.webp" width="1280" height="800" alt="Интерфейс VectisPDF с выбранным режимом Redact и кнопкой Export PDF" loading="lazy" decoding="async"><figcaption>На реальном экране редактора видно: открыт документ 1 of 12, выбран Redact, справа доступен Export PDF</figcaption></figure>
-        <div class="proof-compare" aria-label="Сравнение одного участка PDF до и после постоянного скрытия">
-          <figure class="fig" data-own="result"><img src="assets/vectis-before-crop.webp" width="560" height="240" alt="Участок исходного PDF с подписью под обложкой и соседним заголовком до скрытия" loading="lazy" decoding="async"><figcaption>До: под обложкой читается строка «7 бесплатных игр про ИИ: что попробовать и чему они научат»</figcaption></figure>
-          <figure class="fig" data-own="result"><img src="assets/vectis-after-crop.webp" width="560" height="240" alt="Тот же участок PDF после экспорта из VectisPDF, строка закрыта чёрной плашкой, ниже виден соседний заголовок" loading="lazy" decoding="async"><figcaption>После: на том же месте чёрная плашка. Это видимое изменение в экспортированном PDF</figcaption></figure>
+        <div class="proof-compare" aria-label="Сравнение одного участка PDF до и после экспорта с чёрной плашкой">
+          <figure class="fig" data-own="result"><img src="assets/vectis-before-crop.webp" width="1152" height="240" alt="Участок исходного PDF с полной строкой под обложкой и верхом соседнего заголовка" loading="lazy" decoding="async"><figcaption>Пример, до: под обложкой читается строка «7 бесплатных игр про ИИ: что попробовать и чему они научат»</figcaption></figure>
+          <figure class="fig" data-own="result"><img src="assets/vectis-after-crop.webp" width="1152" height="240" alt="Тот же широкий участок PDF после экспорта из VectisPDF, строка закрыта чёрной плашкой" loading="lazy" decoding="async"><figcaption>Пример, после: на том же месте чёрная плашка. Это видимое изменение в экспортированном PDF</figcaption></figure>
         </div>
-        <div class="result"><p><b>Что получилось:</b> PDF с удалённым фрагментом сохранил 12 страниц, а два документа объединились в один. Водяного знака в готовых файлах нет.</p><p><a class="proof-link" href="assets/vectis-edited-12-pages.pdf" target="_blank" rel="noopener">Открыть PDF с удалённым фрагментом</a><a class="proof-link" href="assets/vectis-merged-26-pages.pdf" target="_blank" rel="noopener">Открыть объединённый PDF</a></p></div>
+        <div class="result"><p><b>Что получилось:</b> экспортированный PDF сохранил 12 страниц и показал чёрную плашку на выбранном фрагменте. При извлечении через pdftotext скрытая строка осталась доступна. Два добавленных документа объединились в один PDF на 26 страниц. Водяного знака в готовых файлах нет.</p></div>
         <div class="warn-card"><p><b>Где неудобно:</b> на экране шириной 540 пикселей редактор попросил открыть сайт на компьютере. Распознавание текста на скане (OCR) сработало внутри редактора, но отдельный файл с этим текстом получить не удалось.</p></div>
       </section>
 
       <section id="timestamp-camera">
         <p class="eyebrow">Фотографии</p>
-        <h2>TimeStamp Camera: фотография та же, данных внутри уже нет</h2>
-        <p>Внешне фотография не меняется, но внутри файла могут лежать дата, модель камеры и GPS-координаты. Раздел <a href="https://timestampcamera.net/photo-tools" rel="noopener nofollow" target="_blank">Photo Tools на сайте TimeStamp Camera</a> сначала показывает эти поля, затем удаляет их перед публикацией.</p>
+        <h2>TimeStamp Camera: как удалить метаданные из фотографии</h2>
+        <p>В каждую фотографию с телефона записываются метаданные (EXIF): дата и время съёмки, модель телефона, а часто и GPS-координаты места. На снимке их не видно, но они остаются в файле и уходят вместе с ним. Раздел <a href="https://timestampcamera.net/photo-tools" rel="noopener nofollow" target="_blank">Photo Tools на сайте TimeStamp Camera</a> показывает эти данные и удаляет их из файла. Выложить очищенную копию ты можешь сам, куда хочешь.</p>
         <ol>
           <li><b>Открой EXIF viewer и выбери фотографию</b>. Подходят JPEG, PNG, HEIC и TIFF</li>
           <li><b>Проверь Date &amp; Time, Camera и GPS</b>. Сервис покажет дату, модель телефона и координаты, если они записаны в файле</li>
           <li><b>Нажми Strip metadata instead</b>. Откроется окно удаления данных</li>
-          <li><b>Выбери фото и скачай очищенную копию</b>. После обработки счётчик тегов должен обнулиться</li>
+          <li>Каждая запись метаданных, например дата или модель телефона, называется тегом. <b>Выбери фото и скачай очищенную копию</b>. После обработки сервис покажет, сколько записей метаданных удалено (в примере 13)</li>
         </ol>
         <figure class="fig visual-medium" data-own="screenshot"><img src="assets/timestamp-exif-clean.webp" width="980" height="954" alt="Таблица EXIF на TimeStamp Camera с датой съёмки, камерой Apple iPhone 15 и GPS-координатами" loading="lazy" decoding="async"><figcaption>До очистки: дата 18.10.2026, Apple iPhone 15 и GPS-координаты читаются прямо из файла</figcaption></figure>
-        <figure class="fig visual-medium" data-own="result"><img src="assets/timestamp-result-clean.webp" width="1000" height="470" alt="Результат очистки в TimeStamp Camera: один файл обработан, 13 тегов удалено" loading="lazy" decoding="async"><figcaption>После очистки сервис сообщает: 1 file processed, 13 metadata tags stripped. Счётчик ниже меняется на 0 tags.</figcaption></figure>
+        <figure class="fig visual-medium" data-own="result"><img src="assets/timestamp-result-clean.webp" width="1000" height="470" alt="Результат очистки в TimeStamp Camera: один файл обработан, 13 записей метаданных удалено" loading="lazy" decoding="async"><figcaption>После очистки: 1 file processed, 13 metadata tags stripped: удалено 13 записей метаданных, в таблице ниже их остаётся 0</figcaption></figure>
         <div class="result"><p><b>Что получилось:</b> в очищенной копии EXIF больше нет. Сервис убрал данные файла, а пиксели фотографии оставил на месте.</p><p><a class="proof-link" href="assets/timestamp-tagged.jpg" target="_blank" rel="noopener">Открыть исходный JPEG</a><a class="proof-link" href="assets/timestamp-cleaned.jpg" target="_blank" rel="noopener">Открыть очищенный JPEG</a></p></div>
         <div class="warn-card"><p><b>Где нужна осторожность:</b> файл обрабатывается локально, но при показе названия места координаты отправляются картографическому сервису Nominatim. Если не хочется передавать координаты, не запрашивай подпись места и сразу переходи к очистке.</p></div>
       </section>
@@ -1345,11 +1345,11 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <h2>Памятка на один экран</h2>
         <ol>
           <li><b>Картинки из видео:</b> Video2Frames → Serial → интервал → Start Serial Extraction → Export ZIP</li>
-          <li><b>Раскадровка одним файлом:</b> Video2Frames → Export PDF</li>
-          <li><b>Удалить фрагмент:</b> VectisPDF → Viewer &amp; Text → Redact → обвести фрагмент → Export PDF</li>
-          <li><b>Объединение документов:</b> VectisPDF → Merge / Split → Add PDF → Export PDF</li>
-          <li><b>Данные фотографии:</b> TimeStamp Camera → EXIF viewer → Date &amp; Time, Camera, GPS</li>
-          <li><b>Очистка фотографии:</b> Strip metadata instead → Choose photos → Download cleaned file</li>
+          <li><b>Раскадровка видео одним файлом:</b> Video2Frames → Export PDF</li>
+          <li><b>PDF - удалить фрагмент:</b> VectisPDF → Viewer &amp; Text → Redact → обвести фрагмент → Export PDF</li>
+          <li><b>PDF - объединение документов:</b> VectisPDF → Merge / Split → Add PDF → Export PDF</li>
+          <li><b>Метаданные фотографии:</b> TimeStamp Camera → EXIF viewer → Date &amp; Time, Camera, GPS</li>
+          <li><b>Очистка метаданных фотографии:</b> Strip metadata instead → Choose photos → Download cleaned file</li>
         </ol>
         <p>Самое полезное остаётся последним: кадр и PDF видны сразу, а координаты внутри фотографии никак себя не выдают.</p>
       </section>
@@ -1369,7 +1369,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <div class="faq-list">
           <details class="faq-item" open><summary>Нужно ли регистрироваться на этих сайтах?</summary><p>Нет. Основные функции всех трёх сайтов открываются без аккаунта</p></details>
           <details class="faq-item" open><summary>Можно ли работать с телефона?</summary><p>Video2Frames и TimeStamp Camera открываются на узком экране. VectisPDF при ширине 540 пикселей попросил перейти на компьютер.</p></details>
-          <details class="faq-item" open><summary>Удаляет ли VectisPDF скрытый текст?</summary><p>Режим Redact сообщает, что отмеченные данные удаляются из содержимого при экспорте. Это безопаснее, чем положить поверх текста чёрный прямоугольник.</p></details>
+          <details class="faq-item" open><summary>Удаляет ли VectisPDF скрытый текст?</summary><p>Режим Redact сообщает, что отмеченные данные удаляются из содержимого при экспорте. Однако pdftotext всё ещё извлекает скрытую строку из экспортированного файла этого примера. Чёрная плашка появилась, а удаление текста не подтверждено.</p></details>
         </div>
       </section>
 
