@@ -1233,7 +1233,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "name": "Нужно ли регистрироваться на этих сайтах?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Нет. Во время проверки Video2Frames, VectisPDF и TimeStamp Camera Photo Tools открыли основные функции без аккаунта."
+            "text": "Нет. Основные функции всех трёх сайтов открываются без аккаунта"
           }
         },
         {
@@ -1301,7 +1301,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         </ol>
         <figure class="fig visual-narrow" data-own="screenshot"><img src="assets/video2frames-export-clean.webp" width="1020" height="530" alt="Кнопки Export ZIP, Export PDF и Export Audio в Video2Frames после извлечения кадров" loading="lazy" decoding="async"><figcaption>После обработки появляются три варианта выгрузки. ZIP сохраняет отдельные картинки, PDF собирает раскадровку одним файлом</figcaption></figure>
         <figure class="fig frames-proof" data-own="result"><img src="assets/video-frames-15.webp" width="828" height="1912" alt="Пятнадцать кадров, извлечённых Video2Frames из исходного ролика с интервалом четыре секунды" loading="lazy" decoding="async"><figcaption>В готовом PDF видны разные сцены от начала до конца ролика с шагом четыре секунды.</figcaption></figure>
-        <div class="result"><p><b>Что получилось:</b> ZIP с отдельными JPEG и PDF, где каждый кадр занимает свою страницу. Повторов одного экрана нет.</p><p><a class="proof-link" href="assets/video-frames-15.pdf" target="_blank" rel="noopener">Открыть готовый PDF</a></p></div>
+        <div class="result"><p><b>Что получилось:</b> ZIP с отдельными JPEG и PDF, где каждый кадр занимает свою страницу.</p><p><a class="proof-link" href="assets/video-frames-15.pdf" target="_blank" rel="noopener">Открыть готовый PDF</a></p></div>
         <div class="warn-card"><p><b>Где не сработало:</b> кнопка Export Audio была на месте, но файл не появился из-за ошибки MediaRecorder. Для звука понадобится другой инструмент.</p></div>
       </section>
 
@@ -1317,8 +1317,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         </ol>
         <figure class="fig visual-wide" data-own="screenshot"><img src="assets/vectispdf-export-clean.webp" width="1280" height="800" alt="Интерфейс VectisPDF с выбранным режимом Redact и кнопкой Export PDF" loading="lazy" decoding="async"><figcaption>На реальном экране редактора видно: открыт документ 1 of 12, выбран Redact, справа доступен Export PDF</figcaption></figure>
         <div class="proof-compare" aria-label="Сравнение одного участка PDF до и после постоянного скрытия">
-          <figure class="fig" data-own="result"><img src="assets/vectis-before-crop.webp" width="500" height="75" alt="Узкий участок исходного PDF с подписью под обложкой до скрытия" loading="lazy" decoding="async"><figcaption>До: под обложкой читается строка «7 бесплатных игр про ИИ: что попробовать и чему они научат»</figcaption></figure>
-          <figure class="fig" data-own="result"><img src="assets/vectis-after-crop.webp" width="500" height="75" alt="Тот же участок PDF после экспорта из VectisPDF, строка закрыта чёрной плашкой" loading="lazy" decoding="async"><figcaption>После: на том же месте чёрная плашка. Это видимое изменение в экспортированном PDF</figcaption></figure>
+          <figure class="fig" data-own="result"><img src="assets/vectis-before-crop.webp" width="560" height="240" alt="Участок исходного PDF с подписью под обложкой и соседним заголовком до скрытия" loading="lazy" decoding="async"><figcaption>До: под обложкой читается строка «7 бесплатных игр про ИИ: что попробовать и чему они научат»</figcaption></figure>
+          <figure class="fig" data-own="result"><img src="assets/vectis-after-crop.webp" width="560" height="240" alt="Тот же участок PDF после экспорта из VectisPDF, строка закрыта чёрной плашкой, ниже виден соседний заголовок" loading="lazy" decoding="async"><figcaption>После: на том же месте чёрная плашка. Это видимое изменение в экспортированном PDF</figcaption></figure>
         </div>
         <div class="result"><p><b>Что получилось:</b> исправленный PDF сохранил 12 страниц, а два документа объединились в один. Водяного знака в готовых файлах нет.</p><p><a class="proof-link" href="assets/vectis-edited-12-pages.pdf" target="_blank" rel="noopener">Открыть исправленный PDF</a><a class="proof-link" href="assets/vectis-merged-26-pages.pdf" target="_blank" rel="noopener">Открыть объединённый PDF</a></p></div>
         <div class="warn-card"><p><b>Где неудобно:</b> на экране шириной 540 пикселей редактор попросил открыть сайт на компьютере. Распознавание текста на скане (OCR) сработало внутри редактора, но отдельный файл с этим текстом получить не удалось.</p></div>
@@ -1348,13 +1348,13 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <li><b>Раскадровка одним файлом:</b> Video2Frames → Export PDF</li>
           <li><b>Правка документа:</b> VectisPDF → Viewer &amp; Text → нужный инструмент → Export PDF</li>
           <li><b>Объединение документов:</b> VectisPDF → Merge / Split → Add PDF → Export PDF</li>
-          <li><b>Проверка фотографии:</b> TimeStamp Camera → EXIF viewer → Date &amp; Time, Camera, GPS</li>
+          <li><b>Данные фотографии:</b> TimeStamp Camera → EXIF viewer → Date &amp; Time, Camera, GPS</li>
           <li><b>Очистка фотографии:</b> Strip metadata instead → Choose photos → Download cleaned file</li>
         </ol>
-        <p>Самая полезная проверка остаётся последней: кадр и PDF видны сразу, а координаты внутри фотографии никак себя не выдают.</p>
+        <p>Самое полезное остаётся последним: кадр и PDF видны сразу, а координаты внутри фотографии никак себя не выдают.</p>
       </section>
 
-      <section class="tariff-note" aria-label="Условия сервисов на дату проверки">
+      <section class="tariff-note" aria-label="Условия сервисов на 18 октября 2026 года">
         <p><span class="note-label">Условия на 18 октября 2026 года:</span></p>
         <ul>
           <li>Video2Frames: на официальной странице указаны «Free forever», работа в браузере, без загрузки файла на сервер и без регистрации; ограничение ролика - до 10 минут.</li>
@@ -1367,7 +1367,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <p class="eyebrow">FAQ</p>
         <h2>Частые вопросы</h2>
         <div class="faq-list">
-          <details class="faq-item" open><summary>Нужно ли регистрироваться на этих сайтах?</summary><p>Нет. Во время проверки Video2Frames, VectisPDF и TimeStamp Camera Photo Tools открыли основные функции без аккаунта.</p></details>
+          <details class="faq-item" open><summary>Нужно ли регистрироваться на этих сайтах?</summary><p>Нет. Основные функции всех трёх сайтов открываются без аккаунта</p></details>
           <details class="faq-item" open><summary>Можно ли работать с телефона?</summary><p>Video2Frames и TimeStamp Camera открываются на узком экране. VectisPDF при ширине 540 пикселей попросил перейти на компьютер.</p></details>
           <details class="faq-item" open><summary>Удаляет ли VectisPDF скрытый текст?</summary><p>Режим Redact сообщает, что отмеченные данные удаляются из содержимого при экспорте. Это безопаснее, чем положить поверх текста чёрный прямоугольник.</p></details>
         </div>
@@ -1390,7 +1390,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Ftri-sayta-video-pdf-foto%2F&amp;title=%D0%A2%D1%80%D0%B8%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BD%D1%82%D0%B0%3A%20%D0%BA%D0%B0%D0%B4%D1%80%D1%8B%20%D0%B8%D0%B7%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%2C%20%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0%20PDF%20%D0%B8%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D0%BE%D1%82%D0%BE" target="_blank" rel="noopener">VK</a>
       </div>
 
-      <p class="cta-question">Эти три сайта готовят материал: кадры, документ и фотографию без лишних данных. Дальше его можно передать нейросети и продолжить работу. Как ИИ-агенты собирают такие цепочки без кода, показывают в Концентрате.</p>
+      <p class="cta-question">Эти сайты только готовят материал: кадры, документ, чистую фотографию. Дальше с ним работает нейросеть: разбирает монтаж по кадрам, сводит документы, пишет подписи. Что она умеет, если не знаешь кода, показано ниже.</p>
       <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
     </article></main>
     <aside class="related-plaque" aria-label="Соседняя статья">
