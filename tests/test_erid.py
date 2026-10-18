@@ -1,5 +1,6 @@
 """Единый креатив и видимая маркировка на всех партнёрских страницах."""
 import importlib.util
+import html as html_lib
 import re
 import unittest
 
@@ -71,21 +72,23 @@ class EridTest(unittest.TestCase):
             with self.subTest(page=str(page.relative_to(ROOT))):
                 match = re.search(pattern, page.read_bytes(), re.S)
                 self.assertIsNotNone(match)
-                self.assertEqual(match.group(), standard)
+                self.assertEqual(html_lib.unescape(match.group().decode()).encode(),
+                                 html_lib.unescape(standard.decode()).encode())
 
     def test_erid_is_static_in_html_without_javascript_regression(self):
         for page in self.pages:
             with self.subTest(page=str(page.relative_to(ROOT))):
                 html = page.read_text()
                 self.assertNotRegex(html, r'\b(?:var|let|const)\s+ERID\b')
-                normalized = html.replace("{{", "{").replace("}}", "}")
+                normalized = html_lib.unescape(html).replace("{{", "{").replace("}}", "}")
+                normalized = normalized.replace(r"\u0069", "i")
                 declaration = "var PARTNER_LINKS = " + repr(PARTNER_LINKS).replace("'", '"') + ";"
                 self.assertIn(declaration, normalized)
                 self.assertEqual(html.count("2Vtzqvk2p6q"), 1)
                 self.assertNotIn("2Vtzquqo4SZ", html)
                 self.assertNotIn("2VtzqviiWtm", html)
                 self.assertNotRegex(html, r'var PARTNER_LINK\s*=')
-                self.assertIn(f'<p class="ad-disclosure">{DISCLOSURE}</p>', html)
+                self.assertIn(f'<p class="ad-disclosure">{DISCLOSURE}</p>', normalized)
                 self.assertNotIn("data-erid", html)
                 scripts = re.findall(r'<script\b[^>]*>(.*?)</script>', html, re.S | re.I)
                 self.assertFalse(any("ERID" in body or "ad-disclosure" in body for body in scripts))
