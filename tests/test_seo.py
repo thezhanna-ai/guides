@@ -82,7 +82,7 @@ class SeoTest(unittest.TestCase):
 
     def test_llms_and_bot_controls_exist(self):
         llms = (ROOT / 'llms.txt').read_text()
-        self.assertIn('61 инструкций', llms)
+        self.assertIn('62 инструкций', llms)
         self.assertEqual(llms.count('https://pronovoe.com/claude-ai/'), 3)
         robots = (ROOT / 'robots.txt').read_text()
         for bot in ['GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot']:

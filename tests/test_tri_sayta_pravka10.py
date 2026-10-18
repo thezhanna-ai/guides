@@ -108,10 +108,10 @@ class TriSaytaPravka10Test(unittest.TestCase):
         for section_id in ("video2frames", "vectispdf", "timestamp-camera"):
             self.assertRegex(
                 self.html,
-                rf'<section id="{section_id}" class="tool-section">\s*<p class="eyebrow">',
+                rf'<section id="{section_id}" class="tool-section content-section">\s*<p class="eyebrow">',
             )
-        self.assertIn(".tool-section>.eyebrow{margin-top:48px}", self.html)
-        self.assertIn(".tool-section>.eyebrow{margin-top:36px}", self.html)
+        self.assertIn(".content-section { margin-top: 66px }", self.html)
+        self.assertIn(".content-section { margin-top: 52px }", self.html)
 
     def test_required_relative_downloads_exist(self):
         downloads = {

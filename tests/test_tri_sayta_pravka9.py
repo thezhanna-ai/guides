@@ -32,7 +32,10 @@ class TriSaytaPravka9Test(unittest.TestCase):
         if vectis_match is None:
             raise AssertionError("VectisPDF section not found")
         cls.vectis = vectis_match.group(1)
-        cls.memory = cls.html.split('<section id="pamyatka">', 1)[1].split("</section>", 1)[0]
+        memory_match = re.search(r'<section id="pamyatka"[^>]*>(.*?)</section>', cls.html, re.S)
+        if memory_match is None:
+            raise AssertionError("Memory section not found")
+        cls.memory = memory_match.group(1)
         schema_match = re.search(
             r'<script type="application/ld\+json"[^>]*>(.*?)</script>',
             cls.html,
