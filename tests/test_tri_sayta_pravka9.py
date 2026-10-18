@@ -28,7 +28,10 @@ class TriSaytaPravka9Test(unittest.TestCase):
     def setUpClass(cls):
         cls.html = PAGE.read_text(encoding="utf-8")
         cls.visible = visible_text(cls.html)
-        cls.vectis = cls.html.split('<section id="vectispdf">', 1)[1].split("</section>", 1)[0]
+        vectis_match = re.search(r'<section id="vectispdf"[^>]*>(.*?)</section>', cls.html, re.S)
+        if vectis_match is None:
+            raise AssertionError("VectisPDF section not found")
+        cls.vectis = vectis_match.group(1)
         cls.memory = cls.html.split('<section id="pamyatka">', 1)[1].split("</section>", 1)[0]
         schema_match = re.search(
             r'<script type="application/ld\+json"[^>]*>(.*?)</script>',
@@ -48,14 +51,14 @@ class TriSaytaPravka9Test(unittest.TestCase):
             "Close, затем Select PDF document",
             "Compress PDF выбери Maximum (JPEG)",
             "Compress & Download",
-            "если слово не находится, текст удалён",
+            "закрытое слово больше не находится",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, vectis_text)
 
     def test_intro_and_result_explain_direct_and_rasterized_exports(self):
         vectis_text = visible_text(self.vectis)
-        self.assertIn("В этом примере экспорта после обычного Export PDF", vectis_text)
+        self.assertIn("поиск по документу всё равно его найдёт", vectis_text)
         self.assertIn("После повторного открытия файла и Compress PDF → Maximum (JPEG)", vectis_text)
         self.assertIn("каждая страница стала изображением", vectis_text)
         self.assertNotIn("проверенном", vectis_text.lower())
@@ -73,13 +76,13 @@ class TriSaytaPravka9Test(unittest.TestCase):
         }
         self.assertEqual(answers["Удаляет ли VectisPDF скрытый текст?"], FAQ_ANSWER)
 
-    def test_memory_was_not_changed_for_the_new_workflow(self):
+    def test_memory_contains_the_complete_two_step_workflow(self):
         memory_text = visible_text(self.memory)
         self.assertIn(
             "PDF - удалить фрагмент: VectisPDF → Viewer & Text → Redact → обвести фрагмент → Export PDF",
             memory_text,
         )
-        self.assertNotIn("Maximum (JPEG)", memory_text)
+        self.assertIn("Maximum (JPEG)", memory_text)
 
     def test_registered_ad_block_is_byte_identical(self):
         block = re.search(

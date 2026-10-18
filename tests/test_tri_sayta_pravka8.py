@@ -42,8 +42,8 @@ class TriSaytaPravka8Test(unittest.TestCase):
 
     def test_visible_vectis_copy_states_the_verified_limit(self):
         for phrase in (
-            "В этом примере экспорта после обычного Export PDF",
-            "текст под ней по-прежнему находился поиском и копировался",
+            "Визуально текст исчезнет, но поиск по документу всё равно его найдёт",
+            "поиск покажет, что текст всё ещё внутри",
             "Текст под ней остался в файле и находится поиском",
             "обычный Export PDF сохранил 12 страниц и показал чёрную плашку, но оставил текст доступным для поиска",
             FAQ_ANSWER,
@@ -61,7 +61,9 @@ class TriSaytaPravka8Test(unittest.TestCase):
         self.assertEqual(answers["Удаляет ли VectisPDF скрытый текст?"], FAQ_ANSWER)
 
     def test_redact_result_labels_do_not_claim_deletion(self):
-        vectis = self.html.split('<section id="vectispdf">', 1)[1].split("</section>", 1)[0]
+        vectis_match = re.search(r'<section id="vectispdf"[^>]*>(.*?)</section>', self.html, re.S)
+        self.assertIsNotNone(vectis_match)
+        vectis = vectis_match.group(1)
         heading = re.search(r"<h2>(.*?)</h2>", vectis, re.S).group(1)
         after_caption = re.search(
             r'<img src="assets/vectis-after-crop\.webp".*?<figcaption>(.*?)</figcaption>',

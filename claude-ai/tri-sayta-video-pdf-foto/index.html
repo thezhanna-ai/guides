@@ -1124,7 +1124,8 @@ article .cta{margin-top:16px}
 .proof-table th{background:var(--panel);color:var(--ink);font-weight:800}
 .proof-table td:first-child{font-weight:700;color:var(--ink)}
 .proof-link{display:inline-block;margin:.4rem .55rem .25rem 0;padding:.65rem .85rem;border:1px solid var(--accent);border-radius:999px;font-weight:750;text-decoration:none}
-@media(max-width:640px){.video-proof-wrap{max-width:250px}.frames-proof{max-width:470px}.visual-narrow{max-width:360px}.visual-medium{max-width:410px}.visual-wide{max-width:100%}.proof-table{display:block;overflow-x:auto;white-space:normal}}
+.tool-section>.eyebrow{margin-top:48px}
+@media(max-width:640px){.tool-section>.eyebrow{margin-top:36px}.video-proof-wrap{max-width:250px}.frames-proof{max-width:470px}.visual-narrow{max-width:360px}.visual-medium{max-width:410px}.visual-wide{max-width:100%}.proof-table{display:block;overflow-x:auto;white-space:normal}}
 @media(min-width:1244px){.page-shell{margin-left:calc((100vw - 1244px)/2);margin-right:calc((100vw - 1244px)/2)}}
 </style>
 <!-- privacy:head:start -->
@@ -1288,10 +1289,10 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Ftri-sayta-video-pdf-foto%2F&amp;title=%D0%A2%D1%80%D0%B8%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BD%D1%82%D0%B0%3A%20%D0%BA%D0%B0%D0%B4%D1%80%D1%8B%20%D0%B8%D0%B7%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%2C%20%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0%20PDF%20%D0%B8%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D0%BE%D1%82%D0%BE" target="_blank" rel="noopener">VK</a>
       </div>
 
-      <section id="video2frames">
+      <section id="video2frames" class="tool-section">
         <p class="eyebrow">Видео</p>
         <h2>Video2Frames: исходный ролик и готовая раскадровка</h2>
-        <p><a href="https://videotoframes.app/" rel="noopener nofollow" target="_blank">Video2Frames</a> раскладывает видео на отдельные изображения. Это пригодится для обложки, карусели, раскадровки или одного точного момента из ролика.</p>
+        <p>Хочешь разобрать чужой ролик по кадрам: посмотреть, как собран монтаж вирусного или просто интересного видео, и вытащить нужные моменты? Делать десятки скриншотов вручную долго. <a href="https://videotoframes.app/" rel="noopener nofollow" target="_blank">Video2Frames</a> раскладывает ролик на отдельные изображения и собирает их в PDF.</p>
         <figure class="fig video-proof-wrap" data-own="video"><video class="proof-video" controls preload="metadata" poster="assets/video-original-poster.webp"><source src="assets/video-original.mp4" type="video/mp4">Видео не открывается в этом браузере</video><figcaption>Исходный MP4 длится 57,4 секунды. Сервис разложил его на кадры через каждые четыре секунды.</figcaption></figure>
         <ol>
           <li><b>Открой сайт и нажми на поле выбора видео</b>. Подходят MP4, MOV и WebM. После выбора над ползунком появилась длительность 57,4 секунды</li>
@@ -1305,17 +1306,17 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <div class="warn-card"><p><b>Где не сработало:</b> кнопка Export Audio была на месте, но файл не появился из-за ошибки MediaRecorder. Для звука понадобится другой инструмент.</p></div>
       </section>
 
-      <section id="vectispdf">
+      <section id="vectispdf" class="tool-section">
         <p class="eyebrow">Документы</p>
         <h2>VectisPDF: документ до редактирования и после экспорта</h2>
-        <p><a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a> открывает PDF в браузере. Здесь можно закрыть фрагмент чёрной плашкой в режиме Redact и объединить несколько PDF в один. В этом примере экспорта после обычного Export PDF плашка осталась на месте, но текст под ней по-прежнему находился поиском и копировался. Рабочий выход есть внутри сервиса: повторно открыть экспортированный PDF и превратить все страницы в JPEG через Maximum (JPEG). После этого строка закрыта, а текстового слоя в документе больше нет.</p>
+        <p>Нужно быстро скрыть кусок текста в PDF, а программы-редактора, где можно просто стереть строку, под рукой нет. На <a href="https://vectispdf.com/" rel="noopener nofollow" target="_blank">VectisPDF</a> нужное место можно закрыть чёрной плашкой. Визуально текст исчезнет, но поиск по документу всё равно его найдёт. Чтобы убрать и поисковый слой, PDF нужно сохранить, снова открыть на сайте и сжать страницы в картинки. Плашка останется и выглядит неаккуратно, поэтому об этом лучше помнить. Ещё сайт умеет объединять несколько PDF в один.</p>
         <ol>
-          <li><b>Нажми Select PDF document</b>. Выбранный документ откроется в редакторе</li>
-          <li><b>Открой Viewer &amp; Text и выбери Redact</b>. Обведи фрагмент, который надо закрыть. На его месте появится чёрная плашка</li>
-          <li><b>Задай имя и нажми Export PDF</b>. PDF с чёрной плашкой скачается со всеми страницами. Открой готовый файл, нажми Ctrl+F и введи слово из закрытой строки. Если поиск его находит, текст остался в файле</li>
-          <li><b>Нажми Close, затем Select PDF document и заново открой экспортированный PDF</b>. Перейди в Tools, в блоке Compress PDF выбери Maximum (JPEG) и нажми Compress &amp; Download. Этот шаг превращает все страницы в изображения, поэтому поиск и копирование перестают работать во всём документе</li>
-          <li><b>Открой итоговый PDF и снова нажми Ctrl+F</b>. Введи слово из закрытой строки: если слово не находится, текст удалён</li>
-          <li><b>Для объединения открой Merge / Split</b>. Добавь второй PDF и экспортируй общий файл на 26 страниц</li>
+          <li><b>Нажми Select PDF document</b>, чтобы открыть нужный файл в редакторе</li>
+          <li><b>Открой Viewer &amp; Text и выбери Redact</b>. Обведи текст, который хочешь скрыть: на его месте появится чёрная плашка</li>
+          <li><b>Задай имя и нажми Export PDF</b>, чтобы скачать документ с плашкой. Открой файл и найди закрытое слово через Ctrl+F: поиск покажет, что текст всё ещё внутри</li>
+          <li><b>Нажми Close, затем Select PDF document и снова открой скачанный PDF</b>. Перейди в Tools, в блоке Compress PDF выбери Maximum (JPEG) и нажми Compress &amp; Download. Страницы станут картинками, поэтому поиск не найдёт текст; минус: во всём файле нельзя будет выделить и скопировать текст</li>
+          <li><b>Открой итоговый PDF и снова нажми Ctrl+F</b>, чтобы убедиться: закрытое слово больше не находится</li>
+          <li><b>Для объединения открой Merge / Split</b>. Добавь второй PDF и экспортируй общий файл, чтобы получить оба документа одним файлом</li>
         </ol>
         <figure class="fig visual-wide" data-own="screenshot"><img src="assets/vectispdf-export-clean.webp" width="1280" height="800" alt="Интерфейс VectisPDF с выбранным режимом Redact и кнопкой Export PDF" loading="lazy" decoding="async"><figcaption>На реальном экране редактора видно: открыт документ 1 of 12, выбран Redact, справа доступен Export PDF</figcaption></figure>
         <div class="proof-compare" aria-label="Сравнение одного участка PDF до и после экспорта с чёрной плашкой">
@@ -1326,10 +1327,10 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <div class="warn-card"><p><b>Где неудобно:</b> на экране шириной 540 пикселей редактор попросил открыть сайт на компьютере. Распознавание текста на скане (OCR) сработало внутри редактора, но отдельный файл с этим текстом получить не удалось.</p></div>
       </section>
 
-      <section id="timestamp-camera">
+      <section id="timestamp-camera" class="tool-section">
         <p class="eyebrow">Фотографии</p>
         <h2>TimeStamp Camera: как удалить метаданные из фотографии</h2>
-        <p>В каждую фотографию с телефона записываются метаданные (EXIF): дата и время съёмки, модель телефона, а часто и GPS-координаты места. На снимке их не видно, но они остаются в файле и уходят вместе с ним. Раздел <a href="https://timestampcamera.net/photo-tools" rel="noopener nofollow" target="_blank">Photo Tools на сайте TimeStamp Camera</a> показывает эти данные и удаляет их из файла. Выложить очищенную копию ты можешь сам, куда хочешь.</p>
+        <p>Выкладываешь фото в чат или объявление и не уверен, что вместе с ним не уйдёт место съёмки? Внутри файла могут быть записаны метаданные (EXIF): дата и время, модель телефона и GPS-координаты. Раздел <a href="https://timestampcamera.net/photo-tools" rel="noopener nofollow" target="_blank">Photo Tools на сайте TimeStamp Camera</a> показывает эти данные и удаляет их перед публикацией, а само фото оставляет прежним.</p>
         <ol>
           <li><b>Открой EXIF viewer и выбери фотографию</b>. Подходят JPEG, PNG, HEIC и TIFF</li>
           <li><b>Проверь Date &amp; Time, Camera и GPS</b>. Сервис покажет дату, модель телефона и координаты, если они записаны в файле</li>
