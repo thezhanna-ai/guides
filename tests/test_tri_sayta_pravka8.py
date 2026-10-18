@@ -12,8 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "claude-ai" / "tri-sayta-video-pdf-foto" / "index.html"
 CTA_SHA256 = "4417f2b5a164ec481550b1caa304f1142ca6c91eeb7318edd94cd8b1c97204ac"
 FAQ_ANSWER = (
-    "Нет. Плашка закрывает фрагмент глазам, но текст под ней остаётся в файле, "
-    "его можно найти поиском. Для настоящего удаления нужен другой режим или программа"
+    "Да, если сначала закрыть фрагмент через Redact и Export PDF, затем заново открыть "
+    "этот PDF и выбрать Tools → Compress PDF → Maximum (JPEG) → Compress & Download. "
+    "Обычная плашка Redact текст не стирает"
 )
 
 
@@ -41,10 +42,10 @@ class TriSaytaPravka8Test(unittest.TestCase):
 
     def test_visible_vectis_copy_states_the_verified_limit(self):
         for phrase in (
-            "текст под ней по-прежнему можно найти поиском и скопировать",
-            "Для настоящего удаления этот режим не подходит",
+            "В этом примере экспорта после обычного Export PDF",
+            "текст под ней по-прежнему находился поиском и копировался",
             "Текст под ней остался в файле и находится поиском",
-            "Текст под плашкой остался в файле, его можно найти поиском и скопировать",
+            "обычный Export PDF сохранил 12 страниц и показал чёрную плашку, но оставил текст доступным для поиска",
             FAQ_ANSWER,
         ):
             with self.subTest(phrase=phrase):
