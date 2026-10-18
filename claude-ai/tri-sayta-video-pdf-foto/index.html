@@ -1115,15 +1115,16 @@ article .cta{margin-top:16px}
 </style><link rel="stylesheet" href="../../assets/article-sharing.css">
 <style>
 .proof-video{width:100%;height:auto;display:block;background:var(--guide-color-forest-deep);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--lift-1),var(--edge)}
-.video-proof-wrap{max-width:430px;margin-left:auto;margin-right:auto}.frames-proof{max-width:680px;margin-left:auto;margin-right:auto}
-.proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:var(--rhythm-block) 0}
-.proof-grid .fig{margin:0}.proof-grid .fig:last-child:nth-child(odd){grid-column:1/-1;max-width:620px}
+.video-proof-wrap{max-width:280px;margin-left:auto;margin-right:auto}.frames-proof{max-width:520px;margin-left:auto;margin-right:auto}
+.visual-narrow{max-width:420px;margin-left:auto;margin-right:auto}.visual-medium{max-width:480px;margin-left:auto;margin-right:auto}.visual-wide{max-width:680px;margin-left:auto;margin-right:auto}
+.proof-compare{display:grid;grid-template-columns:1fr;gap:14px;max-width:560px;margin:var(--rhythm-block) auto}
+.proof-compare .fig{margin:0}
 .proof-table{width:100%;border-collapse:collapse;margin:var(--rhythm-block) 0;font-size:.96rem}
 .proof-table th,.proof-table td{padding:12px 14px;border:1px solid var(--line);vertical-align:top;text-align:left}
 .proof-table th{background:var(--panel);color:var(--ink);font-weight:800}
 .proof-table td:first-child{font-weight:700;color:var(--ink)}
 .proof-link{display:inline-block;margin:.4rem .55rem .25rem 0;padding:.65rem .85rem;border:1px solid var(--accent);border-radius:999px;font-weight:750;text-decoration:none}
-@media(max-width:640px){.proof-grid{grid-template-columns:1fr}.proof-grid .fig:last-child:nth-child(odd){grid-column:auto}.proof-table{display:block;overflow-x:auto;white-space:normal}}
+@media(max-width:640px){.video-proof-wrap{max-width:250px}.frames-proof{max-width:470px}.visual-narrow{max-width:360px}.visual-medium{max-width:410px}.visual-wide{max-width:100%}.proof-table{display:block;overflow-x:auto;white-space:normal}}
 @media(min-width:1244px){.page-shell{margin-left:calc((100vw - 1244px)/2);margin-right:calc((100vw - 1244px)/2)}}
 </style>
 <!-- privacy:head:start -->
@@ -1306,7 +1307,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <li><b>Нажми Start Serial Extraction</b>. Сервис показал сообщение: извлечено 15 изображений</li>
           <li><b>Выбери формат</b>. Export ZIP скачивает отдельные JPEG, Export PDF собирает их в один документ</li>
         </ol>
-        <figure class="fig" data-own="screenshot"><img src="assets/video2frames-export.webp" width="995" height="1450" alt="Экран Video2Frames с кадром ролика и кнопками Export ZIP, Export PDF и Export Audio" loading="lazy" decoding="async"><figcaption>После обработки под предпросмотром появляются три кнопки. Для отдельных картинок нужна Export ZIP, для раскадровки одним файлом нужна Export PDF</figcaption></figure>
+        <figure class="fig visual-narrow" data-own="screenshot"><img src="assets/video2frames-export-clean.webp" width="1020" height="530" alt="Кнопки Export ZIP, Export PDF и Export Audio в Video2Frames после извлечения кадров" loading="lazy" decoding="async"><figcaption>После обработки появляются три варианта выгрузки. ZIP сохраняет отдельные картинки, PDF собирает раскадровку одним файлом</figcaption></figure>
         <figure class="fig frames-proof" data-own="result"><img src="assets/video-frames-15.webp" width="828" height="1912" alt="Пятнадцать кадров, извлечённых Video2Frames из исходного ролика с интервалом четыре секунды" loading="lazy" decoding="async"><figcaption>На изображении содержимое готового PDF: 15 кадров от 00:00 до 00:56 с шагом четыре секунды</figcaption></figure>
         <div class="result"><p><b>Что получилось:</b> ZIP с 15 JPEG и PDF на 15 страниц. В кадрах видны разные сцены ролика, а не пятнадцать копий одного экрана</p><p><a class="proof-link" href="assets/video-frames-15.pdf" target="_blank" rel="noopener">Открыть готовый PDF на 15 страниц</a></p></div>
         <div class="warn-card"><p><b>Где не сработало:</b> кнопка Export Audio была на месте, но файл не создался из-за ошибки MediaRecorder. Для кадров и PDF сервис сработал, для звука в этой проверке нет</p></div>
@@ -1322,10 +1323,10 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <li><b>Задай имя и нажми Export PDF</b>. Исправленный документ скачался с теми же 12 страницами</li>
           <li><b>Для объединения открой Merge / Split</b>. Добавь второй PDF и экспортируй общий файл. В проверке получилось 26 страниц</li>
         </ol>
-        <figure class="fig" data-own="screenshot"><img src="assets/vectispdf-export.webp" width="1280" height="800" alt="Интерфейс VectisPDF с режимом Redact и кнопкой Export PDF" loading="lazy" decoding="async"><figcaption>В левом столбце видно 1 of 12, сверху выбран Redact, справа готова кнопка Export PDF</figcaption></figure>
-        <div class="proof-grid">
-          <figure class="fig" data-own="result"><img src="assets/vectis-before.webp" width="820" height="1160" alt="Первая страница исходного PDF до правки в VectisPDF" loading="lazy" decoding="async"><figcaption>До: исходная первая страница документа</figcaption></figure>
-          <figure class="fig" data-own="result"><img src="assets/vectis-after.webp" width="820" height="1160" alt="Первая страница PDF после постоянного скрытия фрагмента в VectisPDF" loading="lazy" decoding="async"><figcaption>После: отмеченный фрагмент удалён при экспорте, документ сохранил 12 страниц</figcaption></figure>
+        <figure class="fig visual-wide" data-own="screenshot"><img src="assets/vectispdf-export-clean.webp" width="1280" height="800" alt="Интерфейс VectisPDF с выбранным режимом Redact и кнопкой Export PDF" loading="lazy" decoding="async"><figcaption>На реальном экране редактора видно: открыт документ 1 of 12, выбран Redact, справа доступен Export PDF</figcaption></figure>
+        <div class="proof-compare" aria-label="Сравнение одного участка PDF до и после постоянного скрытия">
+          <figure class="fig" data-own="result"><img src="assets/vectis-before-crop.webp" width="500" height="75" alt="Узкий участок исходного PDF с подписью под обложкой до скрытия" loading="lazy" decoding="async"><figcaption>До: под обложкой читается строка «7 бесплатных игр про ИИ: что попробовать и чему они научат»</figcaption></figure>
+          <figure class="fig" data-own="result"><img src="assets/vectis-after-crop.webp" width="500" height="75" alt="Тот же участок PDF после экспорта из VectisPDF, строка закрыта чёрной плашкой" loading="lazy" decoding="async"><figcaption>После: на том же месте чёрная плашка. Это видимое изменение в экспортированном PDF</figcaption></figure>
         </div>
         <div class="result"><p><b>Что получилось:</b> отдельный исправленный PDF на 12 страниц и объединённый PDF на 26 страниц. Водяного знака в готовых файлах нет</p><p><a class="proof-link" href="assets/vectis-edited-12-pages.pdf" target="_blank" rel="noopener">Открыть исправленный PDF</a><a class="proof-link" href="assets/vectis-merged-26-pages.pdf" target="_blank" rel="noopener">Открыть объединённый PDF</a></p></div>
         <div class="warn-card"><p><b>Где неудобно:</b> на экране шириной 540 пикселей редактор попросил открыть сайт на компьютере. Распознавание текста на скане (OCR) сработало внутри редактора, но отдельный файл с этим текстом получить не удалось</p></div>
@@ -1341,8 +1342,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <li><b>Нажми Strip metadata instead</b>. Откроется окно удаления данных</li>
           <li><b>Выбери фото и скачай очищенную копию</b>. Счётчик показал: 1 файл обработан, 13 тегов удалено</li>
         </ol>
-        <figure class="fig" data-own="screenshot"><img src="assets/timestamp-exif.webp" width="962" height="970" alt="Таблица EXIF на TimeStamp Camera с датой съёмки, камерой Apple iPhone 15 и GPS-координатами" loading="lazy" decoding="async"><figcaption>До очистки: дата 18.10.2026, Apple iPhone 15 и GPS-координаты читаются прямо из файла</figcaption></figure>
-        <figure class="fig" data-own="result"><img src="assets/timestamp-strip-process.webp" width="1200" height="2098" alt="Последовательность удаления EXIF в TimeStamp Camera от выбора фотографии до сообщения об удалении 13 тегов" loading="lazy" decoding="async"><figcaption>Живая последовательность проверки: выбор фотографии, обработка и финальная строка 13 metadata tags stripped</figcaption></figure>
+        <figure class="fig visual-medium" data-own="screenshot"><img src="assets/timestamp-exif-clean.webp" width="980" height="954" alt="Таблица EXIF на TimeStamp Camera с датой съёмки, камерой Apple iPhone 15 и GPS-координатами" loading="lazy" decoding="async"><figcaption>До очистки: дата 18.10.2026, Apple iPhone 15 и GPS-координаты читаются прямо из файла</figcaption></figure>
+        <figure class="fig visual-medium" data-own="result"><img src="assets/timestamp-result-clean.webp" width="1000" height="470" alt="Результат очистки в TimeStamp Camera: один файл обработан, 13 тегов удалено" loading="lazy" decoding="async"><figcaption>После очистки сервис сообщает: 1 file processed, 13 metadata tags stripped. Ниже в файле счётчик меняется с 13 tags на 0 tags</figcaption></figure>
         <div class="result"><p><b>Что получилось:</b> исходный JPEG содержал 13 тегов, очищенная копия не содержит EXIF. Сервис убирает только данные файла, пиксели остаются на месте</p><p><a class="proof-link" href="assets/timestamp-tagged.jpg" target="_blank" rel="noopener">Открыть исходный JPEG</a><a class="proof-link" href="assets/timestamp-cleaned.jpg" target="_blank" rel="noopener">Открыть очищенный JPEG</a></p></div>
         <div class="warn-card"><p><b>Где нужна осторожность:</b> файл обрабатывается локально, но при показе названия места координаты отправляются картографическому сервису Nominatim. Если не хочется передавать координаты, не запрашивай подпись места и сразу переходи к очистке</p></div>
       </section>
