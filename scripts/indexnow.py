@@ -17,7 +17,15 @@ def publication_errors(payload, get):
         raise ValueError('Неверный host или ключ IndexNow')
     if payload.get('keyLocation') != 'https://pronovoe.com/' + payload['key'] + '.txt':
         raise ValueError('Ключ должен быть на pronovoe.com')
-    expected = {'https://pronovoe.com/' + x.removesuffix('index.html') for x in json.loads((ROOT / 'data/seo.json').read_text())}
+    seo_paths = set(json.loads((ROOT / 'data/seo.json').read_text()))
+    registry = json.loads((ROOT / 'data/statyi.json').read_text())['statyi']
+    indexable_paths = {'index.html', 'politika/index.html'} | {
+        'claude-ai/' + article['slug'] + '/index.html'
+        for article in registry if article.get('status') == 'live'
+    }
+    if not indexable_paths <= seo_paths:
+        raise ValueError('Опубликованная страница отсутствует в реестре SEO')
+    expected = {'https://pronovoe.com/' + x.removesuffix('index.html') for x in indexable_paths}
     if set(payload['urlList']) != expected or len(payload['urlList']) != len(expected):
         raise ValueError('Список IndexNow должен совпадать с реестром SEO')
     errors = []
