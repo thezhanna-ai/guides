@@ -76,7 +76,7 @@ test('Все настоящие inline просмотрщики использу
     assert.ok(!/document\.body\.style\.overflow\s*=/.test(html), name);
   }
   // The 15-prompts page now uses the same Kurer shell and shared viewer lifecycle.
-  assert.equal(count, 46);
+  assert.equal(count, 47);
 });
 
 test('Disabled элемент пропускается, внешний фокус возвращается в модалку', () => {
