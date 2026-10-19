@@ -1171,7 +1171,7 @@ body { overflow-x: hidden }
 .tool-table .tool-shot img { display: block; width: 100%; height: auto; max-height: 210px; object-fit: contain; border-radius: 8px }
 .tool-table .portrait-shot img { max-height: 360px }
 .where { display: block; margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.45 }
-.quick-answer { padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel) }
+.quick-answer { padding: 52px 20px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel) }
 .quick-answer p:last-child { margin-bottom: 0 }
 .cover-v2 img { width: 100%; max-height: 760px; object-fit: cover; object-position: center 18% }
 .table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain }
@@ -1283,6 +1283,23 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 }
 </script>
 <!-- seo:schema:end -->
+<style id="tool-cards">
+.bul + p { margin-top: 18px }
+.fix-card { padding: 18px 0; border-top: 1px solid var(--line) }
+.fix-card p { margin: 0 0 8px }
+.fix-card p:last-child { margin: 0 }
+.tool-cards { margin: 24px 0 0 }
+.tool-card { padding: 26px 0; border-top: 1px solid var(--line) }
+.tool-card h3 { margin: 0 0 12px; text-align: left }
+.tool-card .tool-shot { margin: 0 0 14px }
+.tool-card .tool-shot img { display: block; width: 100%; height: auto; max-height: 260px; object-fit: contain; object-position: left; border-radius: 8px }
+.tool-card .portrait-shot img { max-height: 420px }
+.tool-card p { margin: 0 0 12px }
+.tool-card .code-block { margin: 14px 0 }
+.tool-card pre { overflow-x: auto }
+.tool-card pre code { white-space: pre }
+.tool-note, .tool-need { font-size: .95em }
+</style>
 </head><body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
@@ -1308,9 +1325,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Обложка «22 установки Claude Code по ролям» с ведущей на светлом фоне" loading="eager" decoding="async" fetchpriority="high"><figcaption>22 дополнения для разработки, маркетинга и операций с актуальными командами установки</figcaption></figure>
 <h1 class="article-standard-h1">22 установки Claude Code: что поставить по ролям</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
-<p class="lead">В Claude Code можно поставить столько дополнений, что настройка легко превращается в отдельную профессию. Самое неприятное начинается позже: всё установлено, а какую кнопку нажать для своей задачи, по-прежнему непонятно</p>
-<p>Набор разложен не по популярности и не по числу звёзд на GitHub, а по работе. Одна роль пишет и проверяет код, вторая ищет идеи и собирает контент, третья держит документы и память проекта. В конце останется короткий набор, с которого можно начать без новых оплат и регистраций</p>
-<p>Сначала не ставь всё подряд. Возьми одно дополнение и проверь его на задаче, результат которой можно открыть глазами</p>
+<p class="lead">Дополнений к Claude Code столько, что их можно ставить неделю. А потом всё стоит, и непонятно, что из этого запускать под свою задачу. Поэтому здесь они разложены не по популярности и не по звёздам на GitHub, а по работе: код, контент, документы и память проекта</p>
 <details class="mobile-toc"><summary>Открыть содержание</summary><nav aria-label="Содержание на телефоне"><a href="#pervaya-zadacha">С чего начать</a><a href="#razrabotchiki">Для разработчиков</a><a href="#marketologi">Для маркетологов</a><a href="#operacii">Для операций</a><a href="#proverka">Как проверить установку</a><a href="#bez-oplaty">Без оплаты и аккаунтов</a><a href="#lomaetsya">Что ломается</a><a href="#pamyatka">Памятка</a><a href="#faq">Частые вопросы</a></nav></details>
 
 <!-- seo:breadcrumbs:start -->
@@ -1327,10 +1342,14 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 <section id="pervaya-zadacha">
 <h2>Первое дополнение: результат за две строки</h2>
-<p>Открой Claude Code и поставь официальный набор Anthropic для документов. Первая строка подключает каталог, вторая ставит навыки для презентаций, таблиц, PDF и Word</p>
-<div class="code-block"><div class="code-bar"><span class="code-lang">Внутри Claude Code</span><button class="copy-btn" type="button" data-copy-target="code-document-skills">Скопировать</button></div><pre id="code-document-skills"><code>/plugin marketplace add anthropics/skills
-/plugin install document-skills@anthropic-agent-skills</code></pre></div>
-<p>Теперь дай задачу: <code>Сделай презентацию на 3 слайда «План запуска онлайн-курса»: цель, три шага, сроки. Сохрани файлом plan.pptx в текущей папке</code>. Через несколько минут в папке появится <code>plan.pptx</code>. Открывается файл, значит дополнение не просто установилось, а уже работает</p>
+<p>Открой «Терминал» на Mac или PowerShell на Windows и вставь две строки по очереди, после каждой Enter. Они ставят официальный набор Anthropic для презентаций, таблиц, PDF и Word</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Терминал</span><button class="copy-btn" type="button" data-copy-target="code-document-skills">Скопировать</button></div><pre id="code-document-skills"><code>claude plugin marketplace add anthropics/skills
+claude plugin install document-skills@anthropic-agent-skills</code></pre></div>
+<p>После первой строки появится «Successfully added marketplace», после второй «Successfully installed plugin». Теперь напиши <code>claude</code> и нажми Enter. При первом запуске Claude Code попросит войти в аккаунт Claude и спросит, доверяешь ли ты этой папке: соглашайся</p>
+<p>Дай задачу: <code>Сделай презентацию на 3 слайда «План запуска онлайн-курса»: цель, три шага, сроки. Сохрани файлом plan.pptx в текущей папке</code>. Спросит разрешение создать файл: соглашайся. Через несколько минут появится <code>plan.pptx</code>. Он ляжет в папку, из которой запущен Claude Code: если запускал сразу после открытия Терминала, это твоя домашняя папка. Файл открывается: дополнение работает</p>
+<p>Терминал ответил <code>command not found: claude</code>? Значит, Claude Code ещё не установлен. Он входит только в платные тарифы Claude, на бесплатном его нет. Поставь его одной строкой с <a href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener">официальной страницы</a>, потом закрой и снова открой окно для команд</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Терминал на Mac</span><button class="copy-btn" type="button" data-copy-target="code-install-mac">Скопировать</button></div><pre id="code-install-mac"><code>curl -fsSL https://claude.ai/install.sh | bash</code></pre></div>
+<div class="code-block"><div class="code-bar"><span class="code-lang">PowerShell на Windows</span><button class="copy-btn" type="button" data-copy-target="code-install-win">Скопировать</button></div><pre id="code-install-win"><code>irm https://claude.ai/install.ps1 | iex</code></pre></div>
 </section>
 
 <section id="kak-chitat">
@@ -1339,57 +1358,207 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p><code>/plugin ...</code> вводят внутри уже запущенного Claude Code. Косая черта означает команду самого агента</p>
 <p><code>claude plugin ...</code> вводят в обычном терминале. Здесь <code>claude</code> запускается как программа</p>
 </div>
-<p>Если вставить команду с косой чертой в терминал, оболочка не поймёт её. Если написать терминальную команду прямо в чат Claude Code, агент воспримет её как текст. В таблицах место запуска подписано рядом с каждой командой</p>
+<p>Если вставить команду с косой чертой в терминал, оболочка не поймёт её. Если написать терминальную команду прямо в чат Claude Code, агент воспримет её как текст. Над каждой командой ниже подписано, где её запускать</p>
 </section>
 
 <section id="razrabotchiki">
 <h2>Для разработчиков: от плана до проверки интерфейса</h2>
-<p>Этот блок берёт на себя дисциплину разработки: сначала прояснить задачу, потом собрать интерфейс, проверить браузером, прочитать файлы и при необходимости подключить второго агента</p>
-<div class="tablebox"><div class="tablewrap"><div class="table-scroll"><table class="tool-table">
-<thead><tr><th scope="col">Дополнение</th><th scope="col">Что делает</th><th scope="col">Как поставить</th><th scope="col">Что нужно</th></tr></thead>
-<tbody>
-<tr><td><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener nofollow">1. Superpowers</a><figure class="shot tool-shot"><a class="zoom" href="assets/01-superpowers.png"><img src="assets/01-superpowers.png" width="2200" height="660" alt="Карточка репозитория Superpowers" loading="lazy" decoding="async"></a></figure></td><td>Ведёт разработку через план, тесты, отладку и проверку результата, чтобы агент не прыгал сразу в код</td><td><code>/plugin install superpowers@claude-plugins-official</code><span class="where">Внутри Claude Code</span></td><td>Claude Code</td></tr>
-<tr><td><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener nofollow">2. G-Stack</a><figure class="shot tool-shot"><a class="zoom" href="assets/02-gstack.png"><img src="assets/02-gstack.png" width="2200" height="660" alt="Карточка репозитория G-Stack" loading="lazy" decoding="async"></a></figure></td><td>Добавляет рабочие роли для планирования, ревью, QA и выпуска продукта</td><td><code>git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack<br>cd ~/.claude/skills/gstack<br>./setup</code><span class="where">В терминале</span></td><td>Git и Bun</td></tr>
-<tr><td><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill" target="_blank" rel="noopener nofollow">3. UI UX Pro Max</a><figure class="shot tool-shot"><a class="zoom" href="assets/03-ui-ux-pro-max.png"><img src="assets/03-ui-ux-pro-max.png" width="2200" height="660" alt="Карточка репозитория UI UX Pro Max" loading="lazy" decoding="async"></a></figure></td><td>Подсказывает стили, палитры, шрифты и паттерны интерфейса для разных типов сайтов</td><td><code>/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill<br>/plugin install ui-ux-pro-max@ui-ux-pro-max-skill</code><span class="where">Внутри Claude Code</span></td><td>Claude Code</td></tr>
-<tr><td><a href="https://github.com/Leonxlnx/taste-skill" target="_blank" rel="noopener nofollow">4. Taste Skill</a><figure class="shot tool-shot"><a class="zoom" href="assets/04-taste-skill.png"><img src="assets/04-taste-skill.png" width="2200" height="660" alt="Карточка репозитория Taste Skill" loading="lazy" decoding="async"></a></figure></td><td>Убирает типовой ИИ-дизайн и задаёт более строгие правила для фронтенда</td><td><code>npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"</code><span class="where">В терминале</span></td><td>Node.js и npm</td></tr>
-<tr><td><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener nofollow">5. Impeccable</a><figure class="shot tool-shot"><a class="zoom" href="assets/05-impeccable.png"><img src="assets/05-impeccable.png" width="2200" height="660" alt="Карточка репозитория Impeccable" loading="lazy" decoding="async"></a></figure></td><td>Даёт команды для аудита и точечной полировки уже собранного интерфейса</td><td><code>npx impeccable install</code><span class="where">В терминале, затем внутри Claude Code: <code>/impeccable init</code></span></td><td>Node.js и npm</td></tr>
-<tr><td><a href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener nofollow">6. Codex</a><figure class="shot tool-shot"><a class="zoom" href="assets/06-codex-plugin.png"><img src="assets/06-codex-plugin.png" width="2200" height="660" alt="Карточка официального плагина Codex для Claude Code" loading="lazy" decoding="async"></a></figure></td><td>Подключает Codex как второго агента для параллельной работы и независимой проверки</td><td><code>/plugin marketplace add openai/codex-plugin-cc<br>/plugin install codex@openai-codex<br>/reload-plugins<br>/codex:setup</code><span class="where">Внутри Claude Code</span></td><td>Node.js 18.18+, аккаунт ChatGPT. Работа расходует лимиты ChatGPT</td></tr>
-<tr><td><a href="https://github.com/microsoft/playwright-mcp" target="_blank" rel="noopener nofollow">7. Playwright MCP</a><figure class="shot tool-shot"><a class="zoom" href="assets/07-playwright-mcp.png"><img src="assets/07-playwright-mcp.png" width="2200" height="660" alt="Карточка репозитория Playwright MCP" loading="lazy" decoding="async"></a></figure></td><td>Даёт агенту браузер: открыть страницу, нажать кнопку, заполнить форму и проверить результат</td><td><code>claude mcp add playwright npx @playwright/mcp@latest</code><span class="where">В терминале</span></td><td>Node.js 18+</td></tr>
-<tr><td><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener nofollow">8. Anthropic Skills</a><figure class="shot tool-shot"><a class="zoom" href="assets/08-anthropic-skills.png"><img src="assets/08-anthropic-skills.png" width="2200" height="660" alt="Карточка официального репозитория Anthropic Skills" loading="lazy" decoding="async"></a></figure></td><td>Создаёт и редактирует презентации, таблицы, PDF и документы</td><td><code>/plugin marketplace add anthropics/skills<br>/plugin install document-skills@anthropic-agent-skills</code><span class="where">Внутри Claude Code</span></td><td>Claude Code</td></tr>
-<tr><td><a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener nofollow">9. MarkItDown</a><figure class="shot tool-shot"><a class="zoom" href="assets/09-markitdown.png"><img src="assets/09-markitdown.png" width="2200" height="660" alt="Карточка репозитория MarkItDown" loading="lazy" decoding="async"></a></figure></td><td>Переводит PDF, Word, PowerPoint, Excel, изображения и другие файлы в Markdown, который удобно читать агенту</td><td><code>pip install 'markitdown[all]'</code><span class="where">В терминале</span></td><td>Python 3.10-3.14</td></tr>
-</tbody></table></div></div></div>
+<p>Здесь всё для разработки: прояснить задачу, собрать интерфейс, проверить его в браузере, прочитать файлы и позвать второго агента на проверку</p>
+<div class="tool-cards">
+<div class="tool-card">
+<h3><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener nofollow">1. Superpowers</a></h3>
+<figure class="shot tool-shot"><img src="assets/01-superpowers.png" width="2200" height="660" alt="Карточка репозитория Superpowers" loading="lazy" decoding="async"></figure>
+<p>Ведёт разработку через план, тесты, отладку и проверку результата, чтобы агент не прыгал сразу в код</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Внутри Claude Code</span><button class="copy-btn" type="button" data-copy-target="code-tool-1">Скопировать</button></div><pre id="code-tool-1"><code>/plugin install superpowers@claude-plugins-official</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> ничего, кроме Claude Code</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener nofollow">2. G-Stack</a></h3>
+<figure class="shot tool-shot"><img src="assets/02-gstack.png" width="2200" height="660" alt="Карточка репозитория G-Stack" loading="lazy" decoding="async"></figure>
+<p>Добавляет рабочие роли для планирования, ревью, QA и выпуска продукта</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-2">Скопировать</button></div><pre id="code-tool-2"><code>git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack
+cd ~/.claude/skills/gstack
+./setup</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Git и Bun</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill" target="_blank" rel="noopener nofollow">3. UI UX Pro Max</a></h3>
+<figure class="shot tool-shot"><img src="assets/03-ui-ux-pro-max.png" width="2200" height="660" alt="Карточка репозитория UI UX Pro Max" loading="lazy" decoding="async"></figure>
+<p>Подсказывает стили, палитры, шрифты и паттерны интерфейса для разных типов сайтов</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Внутри Claude Code</span><button class="copy-btn" type="button" data-copy-target="code-tool-3">Скопировать</button></div><pre id="code-tool-3"><code>/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
+/plugin install ui-ux-pro-max@ui-ux-pro-max-skill</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> ничего, кроме Claude Code</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/Leonxlnx/taste-skill" target="_blank" rel="noopener nofollow">4. Taste Skill</a></h3>
+<figure class="shot tool-shot"><img src="assets/04-taste-skill.png" width="2200" height="660" alt="Карточка репозитория Taste Skill" loading="lazy" decoding="async"></figure>
+<p>Убирает типовой ИИ-дизайн и задаёт более строгие правила для фронтенда</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-4">Скопировать</button></div><pre id="code-tool-4"><code>npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Node.js и npm</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener nofollow">5. Impeccable</a></h3>
+<figure class="shot tool-shot"><img src="assets/05-impeccable.png" width="2200" height="660" alt="Карточка репозитория Impeccable" loading="lazy" decoding="async"></figure>
+<p>Даёт команды для аудита и точечной полировки уже собранного интерфейса</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-5">Скопировать</button></div><pre id="code-tool-5"><code>npx impeccable install</code></pre></div>
+<p class="tool-note">Потом внутри Claude Code: <code>/impeccable init</code></p>
+<p class="tool-need"><strong>Что нужно:</strong> Node.js и npm</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener nofollow">6. Codex</a></h3>
+<figure class="shot tool-shot"><img src="assets/06-codex-plugin.png" width="2200" height="660" alt="Карточка официального плагина Codex для Claude Code" loading="lazy" decoding="async"></figure>
+<p>Подключает Codex как второго агента для параллельной работы и независимой проверки</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Внутри Claude Code</span><button class="copy-btn" type="button" data-copy-target="code-tool-6">Скопировать</button></div><pre id="code-tool-6"><code>/plugin marketplace add openai/codex-plugin-cc
+/plugin install codex@openai-codex
+/reload-plugins
+/codex:setup</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Node.js 18.18+, аккаунт ChatGPT. Работа расходует лимиты ChatGPT</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/microsoft/playwright-mcp" target="_blank" rel="noopener nofollow">7. Playwright MCP</a></h3>
+<figure class="shot tool-shot"><img src="assets/07-playwright-mcp.png" width="2200" height="660" alt="Карточка репозитория Playwright MCP" loading="lazy" decoding="async"></figure>
+<p>Даёт агенту браузер: открыть страницу, нажать кнопку, заполнить форму и проверить результат</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-7">Скопировать</button></div><pre id="code-tool-7"><code>claude mcp add playwright npx @playwright/mcp@latest</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Node.js 18+</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener nofollow">8. Anthropic Skills</a></h3>
+<figure class="shot tool-shot"><img src="assets/08-anthropic-skills.png" width="2200" height="660" alt="Карточка официального репозитория Anthropic Skills" loading="lazy" decoding="async"></figure>
+<p>Создаёт и редактирует презентации, таблицы, PDF и документы</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Внутри Claude Code</span><button class="copy-btn" type="button" data-copy-target="code-tool-8">Скопировать</button></div><pre id="code-tool-8"><code>/plugin marketplace add anthropics/skills
+/plugin install document-skills@anthropic-agent-skills</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> ничего, кроме Claude Code</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener nofollow">9. MarkItDown</a></h3>
+<figure class="shot tool-shot"><img src="assets/09-markitdown.png" width="2200" height="660" alt="Карточка репозитория MarkItDown" loading="lazy" decoding="async"></figure>
+<p>Переводит PDF, Word, PowerPoint, Excel, изображения и другие файлы в Markdown, который удобно читать агенту</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-9">Скопировать</button></div><pre id="code-tool-9"><code>pip install 'markitdown[all]'</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Python 3.10-3.14</p>
+</div>
+</div>
 </section>
 
 <section id="marketologi">
 <h2>Для маркетологов: от исследования до готового визуала</h2>
-<p>Здесь стек уже выходит за пределы текста. Он умеет провести аудит, собрать данные, найти свежие обсуждения, сделать изображение и упаковать результат в видео. Именно в этом блоке появляются внешние аккаунты и кредиты</p>
-<div class="tablebox"><div class="tablewrap"><div class="table-scroll"><table class="tool-table">
-<thead><tr><th scope="col">Дополнение</th><th scope="col">Что делает</th><th scope="col">Как поставить</th><th scope="col">Что нужно</th></tr></thead>
-<tbody>
-<tr><td><a href="https://github.com/coreyhaines31/marketingskills" target="_blank" rel="noopener nofollow">10. Marketing Skills</a><figure class="shot tool-shot"><a class="zoom" href="assets/10-marketingskills.png"><img src="assets/10-marketingskills.png" width="2200" height="660" alt="Карточка репозитория Marketing Skills" loading="lazy" decoding="async"></a></figure></td><td>Добавляет сценарии для позиционирования, копирайтинга, конверсии, запуска и аналитики</td><td><code>claude plugin marketplace add coreyhaines31/marketingskills<br>claude plugin install marketing-skills@marketingskills</code><span class="where">В терминале</span></td><td>Claude Code</td></tr>
-<tr><td><a href="https://github.com/AgriciDaniel/claude-seo" target="_blank" rel="noopener nofollow">11. Claude SEO</a><figure class="shot tool-shot"><a class="zoom" href="assets/11-claude-seo.png"><img src="assets/11-claude-seo.png" width="2200" height="660" alt="Карточка репозитория Claude SEO" loading="lazy" decoding="async"></a></figure></td><td>Проводит технический, контентный и локальный SEO-аудит через набор специализированных команд</td><td><code>/plugin marketplace add AgriciDaniel/claude-seo<br>/plugin install claude-seo@agricidaniel-claude-seo<br>/seo setup</code><span class="where">Внутри Claude Code</span></td><td>Git, Python 3.10+. Внешние ключи нужны только для дополнительных источников данных</td></tr>
-<tr><td><a href="https://github.com/blader/humanizer" target="_blank" rel="noopener nofollow">12. Humanizer</a><figure class="shot tool-shot"><a class="zoom" href="assets/12-humanizer.png"><img src="assets/12-humanizer.png" width="2200" height="660" alt="Карточка репозитория Humanizer" loading="lazy" decoding="async"></a></figure></td><td>Находит канцелярит, шаблонные связки и признаки машинного текста, затем предлагает правку</td><td><code>npx skills add blader/humanizer --global</code><span class="where">В терминале</span></td><td>Node.js и npm</td></tr>
-<tr><td><a href="https://docs.apify.com/agents/plugins" target="_blank" rel="noopener nofollow">13. Apify</a><figure class="shot tool-shot"><a class="zoom" href="assets/13-apify-mcp.png"><img src="assets/13-apify-mcp.png" width="2200" height="660" alt="Карточка дополнения Apify" loading="lazy" decoding="async"></a></figure></td><td>Запускает готовые сборщики сайтов и соцсетей прямо из Claude Code</td><td><code>/plugin marketplace add apify/apify-claude-code-plugin<br>/plugin install apify@apify<br>/reload-plugins<br>/mcp</code><span class="where">Внутри Claude Code, затем авторизация</span></td><td>Аккаунт Apify. Запуски расходуют кредиты</td></tr>
-<tr><td><a href="https://github.com/higgsfield-ai/skills" target="_blank" rel="noopener nofollow">14. GPT Image 2</a><figure class="shot tool-shot portrait-shot"><a class="zoom" href="assets/14-gpt-image-2.png"><img src="assets/14-gpt-image-2.png" width="1080" height="1920" alt="Кадр с GPT Image 2 в наборе моделей Higgsfield" loading="lazy" decoding="async"></a></figure></td><td>Генерирует и редактирует изображения, хорошо держит текст, композицию и продуктовые сцены</td><td><strong>Отдельной официальной установки для Claude Code нет</strong><span class="where">Доступ появляется через Higgsfield из следующей строки</span></td><td>Аккаунт Higgsfield и кредиты</td></tr>
-<tr><td><a href="https://github.com/higgsfield-ai/skills" target="_blank" rel="noopener nofollow">15. Higgsfield</a><figure class="shot tool-shot"><a class="zoom" href="assets/15-higgsfield-skills.png"><img src="assets/15-higgsfield-skills.png" width="2200" height="660" alt="Карточка официальных навыков Higgsfield" loading="lazy" decoding="async"></a></figure></td><td>Подключает генерацию изображений, видео, звука и рабочих сценариев Higgsfield</td><td><code>curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh<br>higgsfield auth login<br>claude plugin marketplace add higgsfield-ai/skills<br>claude plugin install higgsfield@higgsfield</code><span class="where">В терминале</span></td><td>Аккаунт Higgsfield. Генерации расходуют кредиты</td></tr>
-<tr><td><a href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener nofollow">16. Hyperframes</a><figure class="shot tool-shot"><a class="zoom" href="assets/16-hyperframes.png"><img src="assets/16-hyperframes.png" width="2200" height="660" alt="Карточка репозитория Hyperframes" loading="lazy" decoding="async"></a></figure></td><td>Собирает программные ролики с анимацией, титрами, графикой и медиа</td><td><code>claude plugin marketplace add heygen-com/hyperframes<br>claude plugin install hyperframes@hyperframes</code><span class="where">В терминале</span></td><td>Node.js 22+, npm и FFmpeg</td></tr>
-<tr><td><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener nofollow">17. Last 30 Days</a><figure class="shot tool-shot"><a class="zoom" href="assets/17-last30days.png"><img src="assets/17-last30days.png" width="2200" height="660" alt="Карточка репозитория Last 30 Days" loading="lazy" decoding="async"></a></figure></td><td>Собирает свежие обсуждения и сигналы за последние 30 дней из открытых источников</td><td><code>/plugin marketplace add mvanhorn/last30days-skill<br>/plugin install last30days</code><span class="where">Внутри Claude Code</span></td><td>Для Reddit, Hacker News, Polymarket и GitHub отдельные аккаунты не нужны. Дополнительные источники настраиваются отдельно</td></tr>
-<tr><td><a href="https://github.com/PleasePrompto/notebooklm-skill" target="_blank" rel="noopener nofollow">18. NotebookLM</a><figure class="shot tool-shot"><a class="zoom" href="assets/18-notebooklm-skill.png"><img src="assets/18-notebooklm-skill.png" width="2200" height="660" alt="Карточка архивного репозитория NotebookLM skill" loading="lazy" decoding="async"></a></figure></td><td>Передаёт источники в NotebookLM и помогает работать с блокнотами из Claude Code</td><td><code>mkdir -p ~/.claude/skills<br>git clone https://github.com/PleasePrompto/notebooklm-skill ~/.claude/skills/notebooklm</code><span class="where">В терминале</span></td><td>Google-аккаунт. Репозиторий архивирован 10 сентября 2026 года и может перестать работать после изменений NotebookLM</td></tr>
-</tbody></table></div></div></div>
+<p>Эти дополнения работают не только с текстом: проверяют сайт для поиска, собирают данные, находят свежие обсуждения, делают картинки и видео. Здесь же появляются внешние аккаунты и платные кредиты</p>
+<div class="tool-cards">
+<div class="tool-card">
+<h3><a href="https://github.com/coreyhaines31/marketingskills" target="_blank" rel="noopener nofollow">10. Marketing Skills</a></h3>
+<figure class="shot tool-shot"><img src="assets/10-marketingskills.png" width="2200" height="660" alt="Карточка репозитория Marketing Skills" loading="lazy" decoding="async"></figure>
+<p>Добавляет сценарии для позиционирования, копирайтинга, конверсии, запуска и аналитики</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-10">Скопировать</button></div><pre id="code-tool-10"><code>claude plugin marketplace add coreyhaines31/marketingskills
+claude plugin install marketing-skills@marketingskills</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> ничего, кроме Claude Code</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/AgriciDaniel/claude-seo" target="_blank" rel="noopener nofollow">11. Claude SEO</a></h3>
+<figure class="shot tool-shot"><img src="assets/11-claude-seo.png" width="2200" height="660" alt="Карточка репозитория Claude SEO" loading="lazy" decoding="async"></figure>
+<p>Проводит технический, контентный и локальный SEO-аудит через набор специализированных команд</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Внутри Claude Code</span><button class="copy-btn" type="button" data-copy-target="code-tool-11">Скопировать</button></div><pre id="code-tool-11"><code>/plugin marketplace add AgriciDaniel/claude-seo
+/plugin install claude-seo@agricidaniel-claude-seo
+/seo setup</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Git, Python 3.10+. Внешние ключи нужны только для дополнительных источников данных</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/blader/humanizer" target="_blank" rel="noopener nofollow">12. Humanizer</a></h3>
+<figure class="shot tool-shot"><img src="assets/12-humanizer.png" width="2200" height="660" alt="Карточка репозитория Humanizer" loading="lazy" decoding="async"></figure>
+<p>Находит канцелярит, шаблонные связки и признаки машинного текста, затем предлагает правку</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-12">Скопировать</button></div><pre id="code-tool-12"><code>npx skills add blader/humanizer --global</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Node.js и npm</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://docs.apify.com/agents/plugins" target="_blank" rel="noopener nofollow">13. Apify</a></h3>
+<figure class="shot tool-shot"><img src="assets/13-apify-mcp.png" width="2200" height="660" alt="Карточка дополнения Apify" loading="lazy" decoding="async"></figure>
+<p>Запускает готовые сборщики сайтов и соцсетей прямо из Claude Code</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Внутри Claude Code</span><button class="copy-btn" type="button" data-copy-target="code-tool-13">Скопировать</button></div><pre id="code-tool-13"><code>/plugin marketplace add apify/apify-claude-code-plugin
+/plugin install apify@apify
+/reload-plugins
+/mcp</code></pre></div>
+<p class="tool-note">Потом авторизация</p>
+<p class="tool-need"><strong>Что нужно:</strong> Аккаунт Apify. Запуски расходуют кредиты</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/higgsfield-ai/skills" target="_blank" rel="noopener nofollow">14. GPT Image 2</a></h3>
+<figure class="shot tool-shot"><img src="assets/14-gpt-image-2.png" width="824" height="247" alt="Карточка GPT Image 2: картинки с читаемым текстом через Higgsfield" loading="lazy" decoding="async"></figure>
+<p>Генерирует и редактирует изображения, хорошо держит текст, композицию и продуктовые сцены</p>
+<p class="tool-note"><strong>Как поставить:</strong> отдельного подключения к Claude Code у GPT Image 2 нет. Модель работает через Higgsfield, он следующий в списке</p>
+<p class="tool-need"><strong>Что нужно:</strong> Аккаунт Higgsfield и кредиты</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/higgsfield-ai/skills" target="_blank" rel="noopener nofollow">15. Higgsfield</a></h3>
+<figure class="shot tool-shot"><img src="assets/15-higgsfield-skills.png" width="2200" height="660" alt="Карточка официальных навыков Higgsfield" loading="lazy" decoding="async"></figure>
+<p>Подключает генерацию изображений, видео, звука и рабочих сценариев Higgsfield</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-15">Скопировать</button></div><pre id="code-tool-15"><code>curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh
+higgsfield auth login
+claude plugin marketplace add higgsfield-ai/skills
+claude plugin install higgsfield@higgsfield</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Аккаунт Higgsfield. Генерации расходуют кредиты</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener nofollow">16. Hyperframes</a></h3>
+<figure class="shot tool-shot"><img src="assets/16-hyperframes.png" width="2200" height="660" alt="Карточка репозитория Hyperframes" loading="lazy" decoding="async"></figure>
+<p>Собирает программные ролики с анимацией, титрами, графикой и медиа</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-16">Скопировать</button></div><pre id="code-tool-16"><code>claude plugin marketplace add heygen-com/hyperframes
+claude plugin install hyperframes@hyperframes</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Node.js 22+, npm и FFmpeg</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener nofollow">17. Last 30 Days</a></h3>
+<figure class="shot tool-shot"><img src="assets/17-last30days.png" width="2200" height="660" alt="Карточка репозитория Last 30 Days" loading="lazy" decoding="async"></figure>
+<p>Собирает свежие обсуждения и сигналы за последние 30 дней из открытых источников</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Внутри Claude Code</span><button class="copy-btn" type="button" data-copy-target="code-tool-17">Скопировать</button></div><pre id="code-tool-17"><code>/plugin marketplace add mvanhorn/last30days-skill
+/plugin install last30days</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Для Reddit, Hacker News, Polymarket и GitHub отдельные аккаунты не нужны. Дополнительные источники настраиваются отдельно</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/PleasePrompto/notebooklm-skill" target="_blank" rel="noopener nofollow">18. NotebookLM</a></h3>
+<figure class="shot tool-shot"><img src="assets/18-notebooklm-skill.png" width="2200" height="660" alt="Карточка архивного репозитория NotebookLM skill" loading="lazy" decoding="async"></figure>
+<p>Передаёт источники в NotebookLM и помогает работать с блокнотами из Claude Code</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-18">Скопировать</button></div><pre id="code-tool-18"><code>mkdir -p ~/.claude/skills
+git clone https://github.com/PleasePrompto/notebooklm-skill ~/.claude/skills/notebooklm</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Google-аккаунт. Репозиторий архивирован 10 сентября 2026 года и может перестать работать после изменений NotebookLM</p>
+</div>
+</div>
 </section>
 
 <section id="operacii">
 <h2>Для операций: документы, память и простые действия</h2>
-<p>Последние четыре дополнения не делают красивую обложку и не проверяют CSS. Они убирают другое раздражение: повторно объяснять контекст, вручную перекладывать файлы и держать рабочие договорённости в голове</p>
-<div class="tablebox"><div class="tablewrap"><div class="table-scroll"><table class="tool-table">
-<thead><tr><th scope="col">Дополнение</th><th scope="col">Что делает</th><th scope="col">Как поставить</th><th scope="col">Что нужно</th></tr></thead>
-<tbody>
-<tr><td><a href="https://github.com/makenotion/claude-code-notion-plugin" target="_blank" rel="noopener nofollow">19. Notion MCP</a><figure class="shot tool-shot"><a class="zoom" href="assets/19-notion-mcp.png"><img src="assets/19-notion-mcp.png" width="2200" height="660" alt="Карточка официального плагина Notion для Claude Code" loading="lazy" decoding="async"></a></figure></td><td>Читает и создаёт страницы, базы и задачи в рабочем пространстве Notion</td><td><code>/plugin marketplace add makenotion/claude-code-notion-plugin<br>/plugin install notion-workspace-plugin@notion-plugin-marketplace</code><span class="where">Внутри Claude Code, затем перезапуск и OAuth</span></td><td>Аккаунт Notion и права на нужные страницы</td></tr>
-<tr><td><a href="https://github.com/thedotmack/claude-mem" target="_blank" rel="noopener nofollow">20. Claude Mem</a><figure class="shot tool-shot"><a class="zoom" href="assets/20-claude-mem.png"><img src="assets/20-claude-mem.png" width="2200" height="660" alt="Карточка репозитория Claude Mem" loading="lazy" decoding="async"></a></figure></td><td>Сохраняет контекст между сессиями и возвращает прошлые решения, когда они снова нужны</td><td><code>npx claude-mem install</code><span class="where">В терминале, затем перезапуск Claude Code</span></td><td>Node.js 20+. Bun и uv установщик подтянет при необходимости</td></tr>
-<tr><td><a href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener nofollow">21. Caveman</a><figure class="shot tool-shot"><a class="zoom" href="assets/21-caveman.png"><img src="assets/21-caveman.png" width="2200" height="660" alt="Карточка репозитория Caveman" loading="lazy" decoding="async"></a></figure></td><td>Заставляет Claude отвечать коротко, «по-пещерному», и тратить меньше лимита на каждый ответ</td><td><code>claude plugin marketplace add JuliusBrussee/caveman
-claude plugin install caveman@caveman</code><span class="where">В терминале</span></td><td>Claude Code. Отдельный аккаунт не нужен</td></tr>
-<tr><td><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener nofollow">22. Google Drive</a><figure class="shot tool-shot portrait-shot"><a class="zoom" href="assets/22-google-drive.png"><img src="assets/22-google-drive.png" width="1080" height="1920" alt="Кадр с подключением Google Drive к Claude" loading="lazy" decoding="async"></a></figure></td><td>Даёт Claude доступ к разрешённым файлам Google Drive и поддерживает их актуальный текстовый контекст</td><td><strong>Команды установки нет</strong><span class="where">На claude.ai открой «Поиск и инструменты» → «Добавить коннекторы» → Google Drive</span></td><td>Google-аккаунт и подходящий платный план Claude.ai. Доступ ограничен твоими разрешениями</td></tr>
-</tbody></table></div></div></div>
+<p>Последние четыре нужны, чтобы не объяснять Claude одно и то же в каждом новом окне, не перекладывать файлы руками, не держать договорённости в голове и тратить меньше лимита</p>
+<div class="tool-cards">
+<div class="tool-card">
+<h3><a href="https://github.com/makenotion/claude-code-notion-plugin" target="_blank" rel="noopener nofollow">19. Notion MCP</a></h3>
+<figure class="shot tool-shot"><img src="assets/19-notion-mcp.png" width="2200" height="660" alt="Карточка официального плагина Notion для Claude Code" loading="lazy" decoding="async"></figure>
+<p>Читает и создаёт страницы, базы и задачи в рабочем пространстве Notion</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">Внутри Claude Code</span><button class="copy-btn" type="button" data-copy-target="code-tool-19">Скопировать</button></div><pre id="code-tool-19"><code>/plugin marketplace add makenotion/claude-code-notion-plugin
+/plugin install notion-workspace-plugin@notion-plugin-marketplace</code></pre></div>
+<p class="tool-note">Потом перезапуск и OAuth</p>
+<p class="tool-need"><strong>Что нужно:</strong> Аккаунт Notion и права на нужные страницы</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/thedotmack/claude-mem" target="_blank" rel="noopener nofollow">20. Claude Mem</a></h3>
+<figure class="shot tool-shot"><img src="assets/20-claude-mem.png" width="2200" height="660" alt="Карточка репозитория Claude Mem" loading="lazy" decoding="async"></figure>
+<p>Сохраняет контекст между сессиями и возвращает прошлые решения, когда они снова нужны</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-20">Скопировать</button></div><pre id="code-tool-20"><code>npx claude-mem install</code></pre></div>
+<p class="tool-note">Потом перезапуск Claude Code</p>
+<p class="tool-need"><strong>Что нужно:</strong> Node.js 20+. Bun и uv установщик подтянет при необходимости</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener nofollow">21. Caveman</a></h3>
+<figure class="shot tool-shot"><img src="assets/21-caveman.png" width="2200" height="660" alt="Карточка репозитория Caveman" loading="lazy" decoding="async"></figure>
+<p>Заставляет Claude отвечать коротко, «по-пещерному», и тратить меньше лимита на каждый ответ</p>
+<div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="code-tool-21">Скопировать</button></div><pre id="code-tool-21"><code>claude plugin marketplace add JuliusBrussee/caveman
+claude plugin install caveman@caveman</code></pre></div>
+<p class="tool-need"><strong>Что нужно:</strong> Claude Code. Отдельный аккаунт не нужен</p>
+</div>
+<div class="tool-card">
+<h3><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener nofollow">22. Google Drive</a></h3>
+<figure class="shot tool-shot"><img src="assets/22-google-drive.png" width="829" height="247" alt="Карточка Google Drive: коннектор Claude к файлам Диска" loading="lazy" decoding="async"></figure>
+<p>Даёт Claude доступ к разрешённым файлам Google Drive и поддерживает их актуальный текстовый контекст</p>
+<p class="tool-note"><strong>Как поставить:</strong> командой не ставится. Включи коннектор Google Drive на сайте claude.ai, в Claude Code он появится сам. Проверка: команда <code>/mcp</code> внутри Claude Code</p>
+<p class="tool-need"><strong>Что нужно:</strong> Google-аккаунт и подходящий платный план Claude.ai. Доступ ограничен твоими разрешениями</p>
+</div>
+</div>
 </section>
 
 <section id="proverka">
@@ -1397,46 +1566,44 @@ claude plugin install caveman@caveman</code><span class="where">В термин�
 <p>Для плагинов открой обычный терминал и выполни:</p>
 <div class="code-block"><div class="code-bar"><span class="code-lang">Терминал</span><button class="copy-btn" type="button" data-copy-target="code-plugin-list">Скопировать</button></div><pre id="code-plugin-list"><code>claude plugin list</code></pre></div>
 <p>Найди нужное имя и строку <code>Status: ✔ enabled</code>. Если плагин есть, но выключен, перезапусти Claude Code и проверь список ещё раз</p>
-<p>Навыки, поставленные через <code>npx skills add</code>, программы из <code>pip</code>, MCP-серверы и коннекторы в этот список не обязаны попадать. MCP проверяется командой <code>claude mcp list</code>, а навык лучше проверять маленькой задачей с видимым файлом или ответом</p>
+<p>Навыки, поставленные через <code>npx skills add</code>, программы из <code>pip</code>, MCP-серверы и коннекторы в этот список не обязаны попадать. MCP проверяется командой <code>claude mcp list</code>, а навык проверяется маленькой задачей: появился файл или ответ, значит работает</p>
 </section>
 
 <section id="bez-oplaty">
 <h2>Что ставить, если не хочется платить и заводить аккаунты</h2>
 <p>Из этих 22 дополнений пятнадцать работают без отдельной оплаты и без входа в сторонний сервис: Superpowers, G-Stack, UI UX Pro Max, Taste Skill, Impeccable, Playwright MCP, Anthropic Skills, MarkItDown, Marketing Skills, Claude SEO в базовом режиме, Humanizer, Hyperframes, Last 30 Days с открытыми источниками, Claude Mem и Caveman</p>
-<p>Это не означает, что сам Claude Code ничего не стоит. Здесь учтены только дополнительные сервисы поверх твоего обычного доступа к Claude Code. Codex не вошёл в пятнадцать: ему нужен аккаунт ChatGPT, а работа расходует его лимиты</p>
-<p>Самая спокойная стартовая связка выглядит так: Superpowers держит порядок работы, Anthropic Skills делает документы, Playwright MCP проверяет браузер, Humanizer чистит текст, Last 30 Days ищет свежие сигналы. Остальное добавляй, когда появилась конкретная задача, а не свободное место в списке</p>
+<p>Сам Claude Code при этом платный. Здесь учтены только дополнительные сервисы поверх твоего обычного доступа к Claude Code. Codex не вошёл в пятнадцать: ему нужен аккаунт ChatGPT, а работа расходует его лимиты</p>
+<p>Для начала хватит пяти: Superpowers держит порядок работы, Anthropic Skills делает документы, Playwright MCP проверяет браузер, Humanizer чистит текст, Last 30 Days ищет свежие сигналы. Остальное ставь, когда появится задача под него</p>
 </section>
 
 <section id="drugoy-sluchay">
 <h2>Если у тебя другой случай</h2>
-<p>Не ищи роль с идеальным названием. Смотри на действие, которое повторяется каждую неделю</p>
+<p>Подбери по задаче, которая у тебя повторяется:</p>
 <ul class="bul">
 <li>Нужно работать с документами и презентациями: начни с Anthropic Skills и MarkItDown</li>
-<li>Нужно собирать сайты и проверять их глазами: Superpowers, UI UX Pro Max и Playwright MCP</li>
+<li>Нужно собирать сайты и сразу смотреть, как они выглядят: Superpowers, UI UX Pro Max и Playwright MCP</li>
 <li>Нужно искать темы и писать материалы: Marketing Skills, Last 30 Days и Humanizer</li>
 <li>Нужно не терять договорённости между чатами: Claude Mem, Notion MCP или Google Drive в зависимости от того, где уже лежат данные</li>
 </ul>
-<p>Одна повторяющаяся задача полезнее десяти установок «на всякий случай». Если дополнение просит доступ к рабочим данным, сначала проверь издателя и выдай только те разрешения, без которых задача не выполняется</p>
+<p>Если дополнение просит доступ к рабочим данным, сначала проверь издателя и выдай только те разрешения, без которых задача не выполняется</p>
 </section>
 
 <section id="lomaetsya">
 <h2>Что ломается и что делать</h2>
-<div class="tablebox"><div class="tablewrap"><div class="table-scroll"><table class="fix">
-<thead><tr><th scope="col">Что видишь</th><th scope="col">Почему так</th><th scope="col">Что сделать</th></tr></thead>
-<tbody>
-<tr><td><code>command not found: /plugin</code></td><td>Команда для Claude Code попала в обычный терминал</td><td>Запусти <code>claude</code> и повтори команду внутри сеанса</td></tr>
-<tr><td>Claude отвечает текстом на <code>claude plugin ...</code></td><td>Терминальная команда попала в чат агента</td><td>Выйди в обычный терминал и выполни команду там</td></tr>
-<tr><td>Плагин установлен, но команды нет</td><td>Сеанс не перечитал список плагинов</td><td>Выполни <code>/reload-plugins</code> или перезапусти Claude Code, затем проверь <code>claude plugin list</code></td></tr>
-<tr><td>MCP есть, но просит вход</td><td>Сервер подключён, а OAuth ещё не завершён</td><td>Открой <code>/mcp</code>, выбери сервис и пройди авторизацию в браузере</td></tr>
-<tr><td><code>npx</code>, <code>pip</code> или <code>git</code> не найдены</td><td>Не установлена требуемая программа</td><td>Сверь колонку «Что нужно», поставь зависимость и повтори одну команду</td></tr>
-<tr><td>Claude Mem не поднимается после установки</td><td>Не хватает среды или сломалась локальная служба</td><td>Выполни <code>npx claude-mem doctor</code>, затем повтори <code>npx claude-mem install</code></td></tr>
-<tr><td>Higgsfield или Apify останавливает задачу</td><td>Закончились кредиты или истекла авторизация</td><td>Проверь статус аккаунта и остаток кредитов, затем повтори только неудачный запуск</td></tr>
-<tr><td>NotebookLM перестал работать</td><td>Репозиторий архивирован и больше не получает исправления</td><td>Не передавай ему критический процесс. Используй веб-интерфейс NotebookLM или замени шаг на Anthropic Skills и Google Drive</td></tr>
-</tbody></table></div></div></div>
+<div class="fix-cards">
+<div class="fix-card"><p class="fix-see"><strong>Видишь:</strong> <code>command not found: /plugin</code></p><p><strong>Почему:</strong> Команда для Claude Code попала в обычный терминал</p><p><strong>Что сделать:</strong> Запусти <code>claude</code> и повтори команду внутри сеанса</p></div>
+<div class="fix-card"><p class="fix-see"><strong>Видишь:</strong> Claude отвечает текстом на <code>claude plugin ...</code></p><p><strong>Почему:</strong> Терминальная команда попала в чат агента</p><p><strong>Что сделать:</strong> Выйди в обычный терминал и выполни команду там</p></div>
+<div class="fix-card"><p class="fix-see"><strong>Видишь:</strong> Плагин установлен, но команды нет</p><p><strong>Почему:</strong> Сеанс не перечитал список плагинов</p><p><strong>Что сделать:</strong> Выполни <code>/reload-plugins</code> или перезапусти Claude Code, затем проверь <code>claude plugin list</code></p></div>
+<div class="fix-card"><p class="fix-see"><strong>Видишь:</strong> MCP есть, но просит вход</p><p><strong>Почему:</strong> Сервер подключён, а OAuth ещё не завершён</p><p><strong>Что сделать:</strong> Открой <code>/mcp</code>, выбери сервис и пройди авторизацию в браузере</p></div>
+<div class="fix-card"><p class="fix-see"><strong>Видишь:</strong> <code>npx</code>, <code>pip</code> или <code>git</code> не найдены</p><p><strong>Почему:</strong> Не установлена требуемая программа</p><p><strong>Что сделать:</strong> Сверь строку «Что нужно» у этого дополнения, поставь зависимость и повтори одну команду</p></div>
+<div class="fix-card"><p class="fix-see"><strong>Видишь:</strong> Claude Mem не поднимается после установки</p><p><strong>Почему:</strong> Не хватает среды или сломалась локальная служба</p><p><strong>Что сделать:</strong> Выполни <code>npx claude-mem doctor</code>, затем повтори <code>npx claude-mem install</code></p></div>
+<div class="fix-card"><p class="fix-see"><strong>Видишь:</strong> Higgsfield или Apify останавливает задачу</p><p><strong>Почему:</strong> Закончились кредиты или истекла авторизация</p><p><strong>Что сделать:</strong> Проверь статус аккаунта и остаток кредитов, затем повтори только неудачный запуск</p></div>
+<div class="fix-card"><p class="fix-see"><strong>Видишь:</strong> NotebookLM перестал работать</p><p><strong>Почему:</strong> Репозиторий архивирован и больше не получает исправления</p><p><strong>Что сделать:</strong> Не передавай ему критический процесс. Используй веб-интерфейс NotebookLM или замени шаг на Anthropic Skills и Google Drive</p></div>
+</div>
 </section>
 
 <section id="pamyatka">
-<h2>Памятка: ставить не 22, а следующий нужный инструмент</h2>
+<h2>Памятка: что ставить дальше</h2>
 <p>Сохрани список и отмечай только то, под что уже есть задача</p>
 <div class="checklist"><div class="checklist-head"><p class="eyebrow">22 дополнения по ролям</p><button type="button" class="checklist-copy" data-copy-target="ustanovki-checklist">Скопировать список</button></div>
 <ul id="ustanovki-checklist">
@@ -1471,11 +1638,11 @@ claude plugin install caveman@caveman</code><span class="where">В термин�
 <details open><summary>Нужно ставить все 22 дополнения?</summary><p>Нет. Выбери одну повторяющуюся задачу, поставь одно дополнение и проверь на маленьком результате. Следующее добавляй только когда стало понятно, чего не хватает</p></details>
 <details open><summary>Чем навык отличается от MCP и плагина?</summary><p>Навык учит агента порядку работы, MCP даёт доступ к внешнему инструменту, а плагин может упаковать команды, навыки, MCP и настройки вместе. Поэтому способы установки и проверки различаются</p></details>
 <details open><summary>Почему часть команд начинается с косой черты?</summary><p>Это команды внутри Claude Code. Команды, которые начинаются с <code>claude</code>, <code>npx</code>, <code>pip</code>, <code>git</code> или <code>curl</code>, выполняются в обычном терминале</p></details>
-<details open><summary>GPT Image 2 можно подключить к Claude Code напрямую?</summary><p>Официального отдельного подключения в этой подборке нет. Модель вызывается через Higgsfield, поэтому нужны его CLI, аккаунт и кредиты</p></details>
-<details open><summary>Google Drive ставится командой?</summary><p>Нет. Подключи Google Drive как коннектор на claude.ai через меню «Поиск и инструменты». Claude увидит только те файлы, к которым у подключённого Google-аккаунта есть доступ</p></details>
+<details open><summary>GPT Image 2 можно подключить к Claude Code напрямую?</summary><p>Отдельного подключения у GPT Image 2 нет. Модель работает через Higgsfield, поэтому нужны его программа, аккаунт и кредиты</p></details>
+<details open><summary>Google Drive ставится командой?</summary><p>Нет. Включи коннектор Google Drive на сайте claude.ai, в Claude Code он появится сам. Claude увидит только те файлы, к которым у подключённого Google-аккаунта есть доступ</p></details>
 <details open><summary>NotebookLM skill безопасно брать в постоянный процесс?</summary><p>Нет. Репозиторий архивирован 10 сентября 2026 года. Его можно попробовать, но критическую работу лучше не завязывать на инструмент без обновлений</p></details>
 <details open><summary>Можно ли удалить дополнение позже?</summary><p>Да. Плагин удаляется через менеджер плагинов Claude Code, MCP через список подключений, а навык через папку, куда он был установлен. Перед удалением сохрани собственные настройки и файлы</p></details>
-<details open><summary>С чего начать прямо сейчас?</summary><p>С Anthropic Skills и задачи на <code>plan.pptx</code>. Получишь видимый файл, сразу поймёшь разницу между «поставилось» и «работает», а потом выберешь следующий инструмент по роли</p></details>
+<details open><summary>С чего начать прямо сейчас?</summary><p>С Anthropic Skills и задачи на <code>plan.pptx</code>. Получишь файл, откроешь его и сразу увидишь, работает ли дополнение. Следующее выбирай по своей роли</p></details>
 </div>
 </section>
 
@@ -1486,12 +1653,12 @@ claude plugin install caveman@caveman</code><span class="where">В термин�
 <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2F22-ustanovki-claude-code%2F&amp;title=22%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8%20Claude%20Code%20%D0%BF%D0%BE%20%D1%80%D0%BE%D0%BB%D1%8F%D0%BC" target="_blank" rel="noopener">VK</a>
 </div>
 
-<section class="help-banner" id="pomoshch" aria-label="Если не получается выбрать дополнение"><p class="help-title">Не понимаешь, что ставить первым? <span class="accent">Покажи агенту одну повторяющуюся задачу</span></p><div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Вот задача, которую я повторяю каждую неделю: [опиши задачу]. Выбери одно дополнение из этой статьи, объясни выбор и дай только первый шаг установки. Новые платные сервисы не предлагай без предупреждения</p></div><div class="bubble claude"><span class="who">Агент</span>Сначала отделю нужное действие от привычного названия роли и проверю требования</div></div><button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос для выбора дополнения" aria-live="polite">Скопировать</button></section>
+<section class="help-banner" id="pomoshch" aria-label="Если не получается выбрать дополнение"><p class="help-title">Не понимаешь, что ставить первым? <span class="accent">Покажи агенту одну повторяющуюся задачу</span></p><div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Вот задача, которую я повторяю каждую неделю: [опиши задачу]. Выбери одно дополнение из этой статьи, объясни выбор и дай только первый шаг установки. Новые платные сервисы не предлагай без предупреждения</p></div><div class="bubble claude"><span class="who">Агент</span>Разберу задачу, предложу одно дополнение и первый шаг установки</div></div><button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос для выбора дополнения" aria-live="polite">Скопировать</button></section>
 
 <p class="cta-question">Дополнения уже стоят, но сами они работу не начинают. Теперь нужно разложить неделю на реальные задачи и решить, что именно кому отдать</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат &#1048;&#1074;&#1072;&#1085;&#1072; &#1057;&#1077;&#1088;&#1075;&#1077;&#1077;&#1074;&#1072;. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivan&#115;ergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу &#1048;&#1074;&#1072;&#1085;&#1072;: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivan&#115;ergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 
-<div class="article-meta"><span>18 мин чтения</span><span><a href="/">На главную</a></span></div>
+<div class="article-meta"><span>10 мин чтения</span><span><a href="/">На главную</a></span></div>
 </article></main>
 <aside class="related-plaque" aria-label="Соседняя статья">
       <p class="plaque-label">Следующий шаг</p>
