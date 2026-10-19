@@ -337,6 +337,11 @@
     .step:first-of-type { margin-top:0; border-top:0; padding-top:0 }
     .step h3 { margin-top:0 }
     .path { padding:2px 5px; border-radius:4px; background:var(--info); font:650 .87em/1.4 ui-monospace,monospace }
+    .table-wrap { max-width:100%; overflow-x:auto; margin-top:22px; border:1px solid var(--line); border-radius:12px; -webkit-overflow-scrolling:touch }
+    .table-wrap table { width:100%; min-width:660px; border-collapse:collapse; font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .table-wrap th,.table-wrap td { padding:13px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top }
+    .table-wrap th { color:var(--emerald); background:var(--info) }
+    .table-wrap tr:last-child td { border-bottom:0 }
     .info-card,.warn-card { margin:24px 0; padding:11px 18px; border:1px solid var(--info-line); border-radius:11px; background:var(--info) }
     .warn-card { border-left:6px solid var(--accent) }
     .info-card p,.warn-card p { margin:0 }
@@ -573,7 +578,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-11",
+      "dateModified": "2026-10-18",
       "image": "https://pronovoe.com/claude-ai/pyat-instrumentov-claude-code/assets/oblozhka.webp"
     },
     {
@@ -606,20 +611,14 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
     <div class="header-actions"><span class="handout-title">Пять дополнений для Claude Code</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button></div></div>
   </div></div>
   <div class="page-shell">
-    <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p><a href="#omniroute">Дополнения для Claude Code: OmniRoute при исчерпании лимита</a><a href="#claude-mem">claude-mem: когда надоело объяснять проект с нуля</a><a href="#headroom">Headroom: когда мешают длинные технические отчёты</a><a href="#setup">Claude Code Setup: когда неясно, чем дополнить проект</a><a href="#observer">Task Observer: когда одни и те же правки повторяются</a><a href="#itog">С чего начать сегодня</a></nav>
+    <nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">Пять дополнений</a><a href="#vybor">С чего начать</a><a href="#playwright">Playwright</a><a href="#supabase">Supabase MCP</a><a href="#strix">Strix</a><a href="#skillui">Skill UI</a><a href="#context7">Context7</a><a href="#proverka">Проверка</a><a href="#lomaetsya">Что ломается</a><a href="#zapros">Общий прогон</a><a href="#pamyatka">Памятка</a><a href="#faq">Вопросы</a><a href="#drugie">Ещё пять вариантов</a></nav>
     <main>
+      <article>
       <header id="nachalo"><p class="eyebrow">CLAUDE CODE · ПЯТЬ ИНСТРУМЕНТОВ</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Пять объёмных частей дополняют один пазл как образ расширения возможностей Claude Code" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=e2eccaba065b 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Пять частых неприятностей в Claude Code и по одному дополнению на каждую</figcaption></figure>
 <h1 class="article-standard-h1">Пять дополнений для Claude Code: что каждое решает</h1>
 <p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
-<p class="lead">Работаешь в Claude Code, а одна и та же помеха снова обрывает задачу. Какое дополнение поможет продолжить именно тебе? Найди свою ситуацию и открой нужный раздел. Здесь есть варианты для лимитов, памяти и длинных отчётов. Начни с одного подходящего инструмента: у каждого своя работа и ограничения.</p>
-        <ul class="problem-list">
-          <li><a href="#omniroute"><strong>Claude Code остановился посреди задачи: закончился лимит.</strong> Как продолжить работу, пока он не обновился?</a></li>
-          <li><a href="#claude-mem">Открываешь новый чат, а <strong>Claude не помнит, что вы решили вчера.</strong> Приходится всё пересказывать заново</a></li>
-          <li><a href="#headroom">Чат разросся: в нём <strong>длинные логи (технические отчёты).</strong> Claude Code перечитывает их и тратит токены (части текста, по которым считают расход)</a></li>
-          <li><a href="#setup">Не знаешь, <strong>какие скиллы (готовые инструкции) и подключения нужны твоему проекту</strong></a></li>
-          <li><a href="#observer">Раз за разом поправляешь агента, то есть Claude Code, <strong>в одном и том же</strong></a></li>
-        </ul>
-        <p class="meta">ПОДГОТОВЛЕНО 29 СЕНТЯБРЯ 2026</p>
+<p class="lead">После каждой правки ты снова открываешь сайт руками, ищешь свежую команду в документации и боишься пропустить дыру перед запуском. Пять дополнений забирают по одной такой ручной работе. Но название в списке ещё не доказывает установку: для каждого дополнения ниже есть первый результат и отдельная команда проверки</p>
+        <p class="meta">ОБНОВЛЕНО 18 ОКТЯБРЯ 2026</p>
 
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Пять дополнений для Claude Code: что каждое решает</span></nav>
@@ -633,49 +632,170 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpyat-instrumentov-claude-code%2F&amp;title=%D0%9F%D1%8F%D1%82%D1%8C%20%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9%20%D0%B4%D0%BB%D1%8F%20Claude%20Code%3A%20%D1%87%D1%82%D0%BE%20%D0%BA%D0%B0%D0%B6%D0%B4%D0%BE%D0%B5%20%D1%80%D0%B5%D1%88%D0%B0%D0%B5%D1%82" target="_blank" rel="noopener">VK</a>
       </div>
 
-<details class="mobile-toc"><summary>Содержание статьи</summary><a href="#omniroute">Дополнения для Claude Code: OmniRoute при исчерпании лимита</a><a href="#claude-mem">claude-mem: когда надоело объяснять проект с нуля</a><a href="#headroom">Headroom: когда мешают длинные технические отчёты</a><a href="#setup">Claude Code Setup: когда неясно, чем дополнить проект</a><a href="#observer">Task Observer: когда одни и те же правки повторяются</a><a href="#itog">С чего начать сегодня</a></details>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#vybor">С чего начать</a><a href="#playwright">Playwright</a><a href="#supabase">Supabase MCP</a><a href="#strix">Strix</a><a href="#skillui">Skill UI</a><a href="#context7">Context7</a><a href="#proverka">Проверка</a><a href="#lomaetsya">Что ломается</a><a href="#zapros">Общий прогон</a><a href="#pamyatka">Памятка</a><a href="#faq">Вопросы</a><a href="#drugie">Ещё пять вариантов</a></nav></details>
 
 
+
+<section class="content-section" id="vybor"><p class="eyebrow">Одна ручная работа за раз</p><h2>С чего начать</h2>
+<p>Поставь сначала то дополнение, которое закрывает сегодняшнюю помеху. Для команд ниже нужен локальный Claude Code в папке проекта. Playwright требует Node.js 20+, Context7 - Node.js 22.13+</p>
+<div class="table-wrap"><table><thead><tr><th>Что делаешь руками</th><th>Что подключить</th><th>Что изменится</th></tr></thead><tbody>
+<tr><td>Кликаешь сайт после каждой правки</td><td>Playwright CLI</td><td>Агент открывает страницу, нажимает элементы и сохраняет снимок</td></tr>
+<tr><td>Заходишь в панель базы ради таблиц</td><td>Supabase MCP</td><td>Claude читает схему и выполняет разрешённые действия</td></tr>
+<tr><td>Проверяешь проект на уязвимости</td><td>Strix</td><td>Получаешь отчёт с шагами воспроизведения и уровнем опасности</td></tr>
+<tr><td>Собираешь стиль сайта вручную</td><td>Skill UI</td><td>В проекте появляется дизайн-система и кадры страницы</td></tr>
+<tr><td>Ищешь актуальный синтаксис библиотек</td><td>Context7</td><td>Claude получает свежую документацию из источника</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="content-section" id="playwright"><p class="eyebrow">Шаг 1</p><h2>Playwright: сайт проверяет себя сам</h2>
+<p>Когда кнопки приходится нажимать после каждой правки, установи браузерный CLI и его скилл в текущий проект</p>
+<div class="step"><h3>Установка и первый результат</h3><ol class="start-list">
+<li><p>В терминале выполни</p><div class="prompt-box no-copy"><pre><code>npm install -g @playwright/cli@latest
+playwright-cli install --skills</code></pre></div></li>
+<li><p>Открой тестовую страницу и сделай снимок</p><div class="prompt-box no-copy"><pre><code>playwright-cli open https://example.com
+playwright-cli screenshot
+playwright-cli close</code></pre></div></li>
+</ol><div class="result"><p><strong>Что увидишь:</strong> после открытия появятся адрес, заголовок и путь к снимку структуры в <span class="path">.playwright-cli</span>, а команда screenshot положит туда изображение</p></div></div>
+<p>Скилл должен лежать в <span class="path">.claude/skills/playwright-cli</span> текущего проекта. Если Claude Code открыт в другой папке, он эту инструкцию не увидит</p>
+<p class="source-note">Источник на 18.10.2026: <a href="https://github.com/microsoft/playwright/blob/main/docs/src/getting-started-cli.md" target="_blank" rel="noopener noreferrer">официальная инструкция Playwright CLI для coding agents</a></p>
+</section>
+
+<section class="content-section" id="supabase"><p class="eyebrow">Шаг 2</p><h2>Supabase MCP: база данных из разговора</h2>
+<p>Если приложение хранит пользователей, заказы или записи, MCP даёт Claude Code доступ к одному указанному проекту Supabase без ручного перехода между окнами</p>
+<div class="step"><h3>Подключение и проверка</h3><ol class="start-list">
+<li><p>Открой Settings → General в Supabase, скопируй Reference ID и подставь вместо <span class="path">&lt;ID&gt;</span>. Затем добавь подключение только в настройки текущей папки Claude Code</p><div class="prompt-box no-copy"><pre><code>claude mcp add --scope project --transport http supabase "https://mcp.supabase.com/mcp?project_ref=&lt;ID&gt;&amp;read_only=true&amp;features=docs,database,development"</code></pre></div></li>
+<li><p>Запусти Claude Code из этой папки, открой <span class="path">/mcp</span>, выбери Supabase и пройди вход в браузере</p></li>
+<li><p>Попроси показать список таблиц, ничего не создавая</p></li>
+</ol><div class="result"><p><strong>Что увидишь:</strong> команда добавит сервер в <span class="path">.mcp.json</span>, а после входа статус сменится на Connected</p></div></div>
+<aside class="notice"><p>В первом подключении уже включён <span class="path">read_only=true</span>. Он оставляет чтение схемы и данных, но закрывает изменения. Переподключай сервер с правом записи только для отдельной осознанной задачи</p></aside>
+<p class="source-note">Источник на 18.10.2026: <a href="https://supabase.com/docs/guides/getting-started/mcp" target="_blank" rel="noopener noreferrer">официальная документация Supabase MCP</a></p>
+</section>
+
+<section class="content-section" id="strix"><p class="eyebrow">Шаг 3</p><h2>Strix: отчёт о дырах до публикации</h2>
+<p>Когда проект уже принимает данные или деньги, обычной проверки интерфейса мало. Strix запускает агентов безопасности в Docker-песочнице и сохраняет найденные уязвимости отдельными файлами</p>
+<aside class="notice"><p>Проверяй только свой проект или цель, на которую у тебя есть письменное разрешение. Для локального запуска нужны работающий Docker и доступ к выбранной модели. Папка монтируется в песочницу с правом записи, поэтому используй чистый сохранённый checkout без незакоммиченных файлов</p></aside>
+<div class="step"><h3>Установка и безопасный первый запуск</h3><ol class="start-list">
+<li><p>Установи текущую CLI по официальной строке</p><div class="prompt-box no-copy"><pre><code>curl -sSL https://strix.ai/install | bash</code></pre></div></li>
+<li><p>Задай модель и ключ в переменных окружения по инструкции Strix. Ключ считай паролем и не сохраняй в файлах проекта</p></li>
+<li><p>Запусти короткую проверку чистой копии проекта. Параметр <span class="path">--max-budget 10</span> ограничивает расходы модели десятью долларами</p><div class="prompt-box no-copy"><pre><code>strix -n -t ./ --scan-mode quick --max-budget 10</code></pre></div></li>
+</ol><div class="result"><p><strong>Что увидишь:</strong> отчёт <span class="path">penetration_test_report.md</span>, JSON и SARIF появятся внутри <span class="path">strix_runs/</span>. Открой <span class="path">strix_runs/&lt;run&gt;/run.json</span>: код 0 не доказывает отсутствия дыр, если проверка остановилась по бюджету или покрыла только часть проекта</p></div></div>
+<p class="source-note">Источник на 18.10.2026: <a href="https://github.com/usestrix/strix" target="_blank" rel="noopener noreferrer">официальный репозиторий Strix</a></p>
+</section>
+
+<section class="content-section" id="skillui"><p class="eyebrow">Шаг 4</p><h2>Skill UI: оформление сайта превращается в инструкции</h2>
+<p>Если нравится чужая система цвета, шрифтов и отступов, Skill UI делает снимки страницы и записывает найденные правила в папку, которую прочитает агент</p>
+<div class="step"><h3>Снять стиль и проверить файлы</h3><ol class="start-list">
+<li><p>В папке проекта выполни</p><div class="prompt-box no-copy"><pre><code>npx -y skillui@latest --url https://адрес-сайта --mode ultra --screens 3 --out ./out</code></pre></div></li>
+<li><p>Если команда пишет, что Playwright не установлен, выполни <span class="path">npm install playwright</span>, затем <span class="path">npx playwright install chromium</span> и повтори запуск</p></li>
+<li><p>Открой созданную папку в <span class="path">out</span> и проверь <span class="path">DESIGN.md</span>, <span class="path">SKILL.md</span> и папку <span class="path">screens</span></p></li>
+</ol><div class="result"><p><strong>Что увидишь:</strong> в папке <span class="path">out</span> появятся правила цветов и шрифтов, повторяющиеся блоки и кадры страницы</p></div></div>
+<aside class="notice"><p>Инструмент также может положить копию скилла в общую папку Claude. Если стиль нужен только одному проекту, проверь эту папку после запуска</p></aside>
+<p class="source-note">Источник на 18.10.2026: <a href="https://github.com/amaancoderx/npxskillui" target="_blank" rel="noopener noreferrer">репозиторий пакета Skill UI</a></p>
+</section>
+
+<section class="content-section" id="context7"><p class="eyebrow">Шаг 5</p><h2>Context7: свежая документация вместо догадок</h2>
+<p>Последняя помеха появляется тише остальных: команда выглядит правдоподобно, но относится к старой версии библиотеки. Context7 подставляет документацию из текущего источника прямо в задачу</p>
+<div class="step"><h3>Подключение и первый запрос</h3><ol class="start-list">
+<li><p>Запусти официальный мастер настройки</p><div class="prompt-box no-copy"><pre><code>npx ctx7 setup --claude</code></pre></div></li>
+<li><p>Выбери MCP или режим CLI со скиллом, пройди вход по ссылке и дождись записи настройки</p></li>
+<li><p>Попроси актуальный пример для главной библиотеки проекта и добавь слова <span class="path">use context7</span></p></li>
+</ol><div class="result"><p><strong>Что увидишь:</strong> ответ с актуальным синтаксисом и ссылками на документацию проекта вместо команды из памяти модели</p></div></div>
+<p class="source-note">Источник на 18.10.2026: <a href="https://github.com/upstash/context7/blob/master/docs/clients/claude-code.mdx" target="_blank" rel="noopener noreferrer">официальная инструкция Context7 для Claude Code</a></p>
+</section>
+
+<section class="content-section" id="proverka"><p class="eyebrow">До первой большой задачи</p><h2>Проверь, что все пять на месте</h2>
+<div class="table-wrap"><table><thead><tr><th>Дополнение</th><th>Проверка</th><th>Исправный результат</th></tr></thead><tbody>
+<tr><td>Playwright</td><td><span class="path">playwright-cli --version</span></td><td>Номер версии</td></tr>
+<tr><td>Supabase MCP</td><td><span class="path">claude mcp list</span></td><td>Supabase со статусом Connected</td></tr>
+<tr><td>Strix</td><td><span class="path">strix --version</span>, затем <span class="path">docker info</span></td><td>Номер версии Strix и успешный ответ Docker</td></tr>
+<tr><td>Skill UI</td><td><span class="path">npx -y skillui@latest --version</span></td><td>Номер версии</td></tr>
+<tr><td>Context7</td><td>MCP: <span class="path">claude mcp list</span><br>CLI: файл <span class="path">~/.claude/skills/find-docs/SKILL.md</span>, затем <span class="path">ctx7 library react</span> и <span class="path">ctx7 docs &lt;ID&gt; "useEffect cleanup"</span></td><td>MCP подключён либо CLI возвращает библиотеку и документацию</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="content-section" id="lomaetsya"><p class="eyebrow">Сообщение на экране важнее догадки</p><h2>Что ломается и что делать</h2>
+<div class="table-wrap"><table><thead><tr><th>Что видно</th><th>Что это значит</th><th>Что сделать</th></tr></thead><tbody>
+<tr><td><span class="path">command not found: playwright-cli</span></td><td>Глобальная команда не попала в текущую оболочку</td><td>Проверь Node.js 20+, открой новое окно терминала и повтори версию</td></tr>
+<tr><td>Supabase Pending approval</td><td>MCP добавлен, но вход ещё не подтверждён</td><td>Открой <span class="path">/mcp</span>, выбери Supabase и пройди вход</td></tr>
+<tr><td>Strix не стартует</td><td>Docker выключен, нет ключа модели или неверна цель</td><td>Запусти Docker, проверь переменные и используй чистую сохранённую копию проекта без незакоммиченных файлов</td></tr>
+<tr><td>Skill UI пропустил computed styles</td><td>В проекте нет Playwright или Chromium</td><td>Выполни <span class="path">npm install playwright</span> и <span class="path">npx playwright install chromium</span></td></tr>
+<tr><td>Context7 не появляется в MCP</td><td>Выбран режим CLI со скиллом либо настройка не завершилась</td><td>Проверь выбранный режим и повтори <span class="path">npx ctx7 setup --claude</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section class="content-section" id="zapros"><p class="eyebrow">Первый общий прогон</p><h2>Запрос для Claude Code после установки</h2>
+<p>Открой Claude Code в папке проекта, замени адрес сайта и вставь запрос целиком</p>
+<div class="prompt-box no-copy"><pre><code>Проверь пять дополнений в этом проекте: playwright-cli, Supabase MCP, Strix, Skill UI и Context7. По каждому напиши: доступен или нет и чем это подтверждено
+
+Затем:
+1. Через playwright-cli открой https://адрес-сайта и проверь главные кнопки
+2. Через Supabase покажи список таблиц, но ничего не создавай и не меняй
+3. Через Context7 возьми свежую документацию по главной библиотеке проекта
+4. Составь команду Skill UI для этого адреса, но сначала покажи, какие файлы появятся
+5. Составь команду Strix для чистой копии проекта, объясни область и бюджет, но не запускай без моего подтверждения
+
+В конце дай пять строк: дополнение, что уже проверено, что предлагаешь следующим</code></pre></div>
+<p>Хороший ответ сначала покажет пять доказательств установки. Действия, которые меняют данные или запускают проверку безопасности, останутся на подтверждении</p>
+</section>
+
+<section class="content-section" id="pamyatka"><p class="eyebrow">Один экран на новый проект</p><h2>Памятка пяти дополнений</h2>
+<ul class="start-list">
+<li>Playwright: установить скилл, открыть страницу и сохранить screenshot</li>
+<li>Supabase MCP: указать <span class="path">project_ref</span>, включить read-only и пройти вход через <span class="path">/mcp</span></li>
+<li>Strix: запускать на разрешённой цели и чистом checkout, с Docker и ограниченным бюджетом, затем читать <span class="path">run.json</span></li>
+<li>Skill UI: снять страницу в <span class="path">out</span>, проверить DESIGN.md, SKILL.md и кадры</li>
+<li>Context7: выполнить <span class="path">npx ctx7 setup --claude</span> и проверить выбранный режим реальной командой</li>
+</ul>
+</section>
+
+<section class="content-section seo-faq" id="faq" aria-label="Частые вопросы"><p class="eyebrow">До установки всех пяти</p><h2>Частые вопросы</h2>
+<details><summary>Обязательно ставить все пять?</summary><p>Нет. Начни с ручной работы, которую повторяешь сегодня. База и проверка безопасности нужны проекту позже, чем браузерная проверка или свежая документация</p></details>
+<details><summary>Где взять project_ref для Supabase?</summary><p>Открой нужный проект, затем Settings → General и скопируй Reference ID. Он ограничит MCP одним проектом организации</p></details>
+<details><summary>Что означает бюджет Strix в 10 долларов?</summary><p>Это верхний предел расходов модели на один запуск. Если бюджет закончился раньше, код 0 не доказывает, что весь проект проверен</p></details>
+<details><summary>Можно ли запускать Strix на чужом сайте?</summary><p>Только с письменным разрешением владельца. Инструмент имитирует действия атакующего, поэтому обычной публичной ссылки недостаточно</p></details>
+<details><summary>Как проверить Context7 в режиме CLI?</summary><p>Убедись, что создан скилл find-docs, затем получи ID через <span class="path">ctx7 library</span> и запроси документацию через <span class="path">ctx7 docs</span></p></details>
+</section>
+
+<section class="content-section" id="drugie"><p class="eyebrow">Если болит другое</p><h2>Ещё пять вариантов из прежней подборки</h2><p>Если в первой пятёрке нет твоей помехи, проверь ещё пять инструментов: для лимитов моделей, памяти между разговорами, длинных отчётов, подбора настроек и повторяющихся исправлений. Выбери один под текущую задачу, ставить все десять сразу не нужно</p></section>
 
 <section class="content-section" id="omniroute">
 <h2>Дополнения для Claude Code: OmniRoute при исчерпании лимита</h2>
-        <p>Бывало так: задача на середине, а Claude Code пишет, что лимит кончился. Остаётся ждать, пока он обновится</p>
+        <p>Задача остановилась на середине: Claude Code пишет, что лимит кончился. Без другого подключения остаётся ждать обновления</p>
         <figure class="github-shot">
           <div class="shot"><img src="assets/live-omniroute.webp" width="1280" height="800" alt="Страница репозитория OmniRoute на GitHub" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="Увеличить скрин страницы OmniRoute">Увеличить</button></div>
           <figcaption>Страница OmniRoute на GitHub</figcaption>
         </figure>
         <p>Здесь выручает OmniRoute. Он ставится на твой компьютер и работает посредником между Claude Code и нейросетями, такого посредника называют шлюзом. Запросы идут через него, а он решает, какая модель (вариант нейросети) ответит</p>
-        <p>Среди бесплатных вариантов есть OpenCode Free: для него не нужна регистрация или ключ этого сервиса.</p>
-        <p>Порядок выбора, по описанию разработчика: <strong>сначала твоя подписка, если она добавлена в OmniRoute</strong>, потом подключённые тобой платные сервисы, затем дешёвые модели и бесплатные. Кончился лимит на одном уровне - запрос может уйти на следующий</p>
+        <p>Свежая установка может не иметь ни одной цели без ключа. Сначала подключи хотя бы одного провайдера, условия и лимиты которого тебе подходят</p>
+        <p>В режиме <span class="path">auto</span> OmniRoute ранжирует доступные подключения динамически. Порядок с приоритетом подписки и более дешёвых моделей относится к стратегии <span class="path">auto/thrifty</span>. Если нужна гарантированная модель, выбери или закрепи её явно</p>
         <p>Это похоже на диспетчера такси: ты вызываешь машину, а какая из свободных приедет, решает диспетчер</p>
-        <aside class="notice"><p><strong>OmniRoute не делает Claude безлимитным.</strong> Если не добавить в него свою подписку Claude, Claude Code перестанет отвечать через Claude совсем: ответы пойдут от других, обычно более слабых моделей. Добавь подписку, и Claude будет отвечать первым, а остальные подхватят только после лимита</p>
-        <p>Разработчик пишет о суммарной бесплатной квоте свыше полутора миллиардов токенов, но <strong>это сумма по сервисам, а не твой личный лимит.</strong> У каждого сервиса свои условия и правила обращения с твоими данными</p></aside>
+        <aside class="notice"><p><strong>OmniRoute не делает Claude безлимитным.</strong> Ответит та модель, которую выбрал текущий режим маршрутизации. Для задачи, где важен конкретный Claude, закрепи его вручную</p>
+        <p>У каждого подключённого сервиса свои лимиты, качество моделей и правила обращения с данными. Проверь их до отправки закрытого кода</p></aside>
         <div class="step">
           <h3>Как начать:</h3>
-          <aside class="setup-note"><p>Если Node.js ещё нет на компьютере, <a href="https://nodejs.org/en/download">установи его с официального сайта</a>.</p></aside>
+          <aside class="setup-note"><p>OmniRoute требует Node.js в диапазоне <span class="path">&gt;=22.22.2 &lt;23</span> или <span class="path">&gt;=24.0.0 &lt;27</span>. Если Node.js ещё нет на компьютере, <a href="https://nodejs.org/en/download">установи его с официального сайта</a></p></aside>
           <ol class="start-list" start="1">
             <li>
-              <p>Открой терминал (окно для ввода команд), установи OmniRoute командой</p>
-              <div class="prompt-box no-copy"><pre><code>npm i -g omniroute</code></pre></div>
-              <p>и запусти его командой</p>
-              <div class="prompt-box no-copy"><pre><code>omniroute</code></pre></div>
+              <p>Открой терминал, установи OmniRoute глобально и запусти его</p>
+              <div class="prompt-box no-copy"><pre><code>npm install -g omniroute
+omniroute</code></pre></div>
             </li>
             <li>
-              <p>В браузере открой <span class="path">http://localhost:20128</span>.</p>
+              <p>В браузере открой <span class="path">http://localhost:20128</span></p>
             </li>
             <li>
-              <p>В разделе <span class="path">Providers</span> (подключения к нейросетям) выбери <span class="path">OpenCode Free</span> без регистрации и ключа этого сервиса.</p>
+              <p>В разделе <span class="path">Providers</span> подключи сервис со своим ключом или подпиской и проверь, что он доступен</p>
             </li>
             <li>
-              <p>Если подключаешь Claude Code вручную, скопируй ключ из раздела <span class="path">Endpoints</span> (адреса для подключения): это локальный ключ OmniRoute, а не ключ OpenCode Free.</p>
+              <p>Если подключаешь Claude Code вручную, скопируй ключ из раздела <span class="path">Endpoints</span>: это локальный ключ OmniRoute</p>
             </li>
             <li>
               <p>Для быстрого запуска введи в терминале</p>
               <div class="prompt-box no-copy"><pre><code>omniroute launch</code></pre></div>
-              <p>Команда откроет Claude Code и сама передаст ему нужный адрес и локальный ключ.</p>
+              <p>Команда откроет Claude Code и передаст ему нужный адрес и локальный ключ</p>
             </li>
           </ol>
-          <div class="result"><p><strong>Результат:</strong> Claude Code начнёт отправлять запросы через OmniRoute к подключённой модели.</p></div>
+          <div class="result"><p><strong>Результат:</strong> Claude Code начнёт отправлять запросы через OmniRoute к подключённой модели</p></div>
           <p>Шаги подключения есть в <a href="https://github.com/diegosouzapw/OmniRoute#-quick-start">инструкции проекта OmniRoute</a>, запуск Claude Code описан в <a href="https://github.com/diegosouzapw/OmniRoute/blob/release/v3.8.51/docs/guides/CLAUDE-CODE-CONFIGURATION.md#quick-start">инструкции того же проекта для Claude Code</a></p>
         </div>
       </section>
@@ -687,9 +807,9 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <div class="shot"><img src="assets/live-claude-mem.webp" width="1280" height="800" alt="Страница репозитория claude-mem на GitHub" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="Увеличить скрин страницы claude-mem">Увеличить</button></div>
           <figcaption>Страница claude-mem на GitHub</figcaption>
         </figure>
-        <p>claude-mem - плагин, то есть дополнение к Claude Code. Он <strong>сохраняет наблюдения между сессиями</strong> (отдельными рабочими разговорами): замечает действия инструмента, делает короткие сводки и подставляет нужные сведения при следующем запуске.</p>
+        <p>claude-mem - плагин, то есть дополнение к Claude Code. Он <strong>сохраняет наблюдения между сессиями</strong> (отдельными рабочими разговорами): замечает действия инструмента, делает короткие сводки и подставляет нужные сведения при следующем запуске</p>
         <p>Это как блокнот коллеги: он записывает важные решения и перед новой встречей открывает нужную страницу</p>
-        <aside class="notice"><p>Но это не дословная стенограмма всего разговора. Плагин сохраняет наблюдения и сводки, поэтому <strong>важные решения всё равно стоит держать в файлах проекта.</strong></p>
+        <aside class="notice"><p>Но это не дословная стенограмма всего разговора. Плагин сохраняет наблюдения и сводки, поэтому <strong>важные решения всё равно стоит держать в файлах проекта</strong></p>
         <p>Перед установкой посмотри в настройках, где будут храниться наблюдения и какой сервис будет обрабатывать память</p></aside>
         <div class="step">
           <h3>Как начать:</h3>
@@ -703,18 +823,18 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
               <div class="prompt-box no-copy"><pre><code>/plugin install claude-mem</code></pre></div>
             </li>
             <li>
-              <p>и перезапусти Claude Code.</p>
+              <p>и перезапусти Claude Code</p>
             </li>
           </ol>
-          <div class="result"><p><strong>Результат:</strong> сведения о прошлых разговорах будут появляться в новых.</p></div>
+          <div class="result"><p><strong>Результат:</strong> сведения о прошлых разговорах будут появляться в новых</p></div>
           <ol class="start-list" start="1">
             <li>
               <p>Другой способ - запустить в терминале</p>
               <div class="prompt-box no-copy"><pre><code>npx claude-mem install</code></pre></div>
-              <p>и выбрать сервис памяти в ходе установки.</p>
+              <p>и выбрать сервис памяти в ходе установки</p>
             </li>
           </ol>
-          <p>Оба маршрута описаны в <a href="https://github.com/thedotmack/claude-mem#quick-start">инструкции проекта claude-mem</a>.</p>
+          <p>Оба маршрута описаны в <a href="https://github.com/thedotmack/claude-mem#quick-start">инструкции проекта claude-mem</a></p>
           <aside class="notice"><p>Обычная команда <span class="path">npm install -g claude-mem</span> устанавливает библиотеку, но не подключает плагин к разговорам</p></aside>
         </div>
       </section>
@@ -726,16 +846,16 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <div class="shot"><img src="assets/live-headroom.webp" width="1280" height="800" alt="Страница репозитория Headroom на GitHub" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="Увеличить скрин страницы Headroom">Увеличить</button></div>
           <figcaption>Страница Headroom на GitHub</figcaption>
         </figure>
-        <p>Headroom - программа на твоём компьютере, которая <strong>сжимает материалы до того, как их увидит нейросеть.</strong> Она определяет, перед ней лог, код или обычный текст, и подбирает способ сжатия.</p>
-        <p><strong>Полный исходник остаётся локально:</strong> если понадобится деталь, его можно запросить обратно. Представь папку с бумагами, к которой приложили короткое содержание и сохранили оригиналы под рукой</p>
-        <aside class="notice"><p><strong>Headroom не добавляет Claude Code новый лимит</strong> и не гарантирует одинаковую экономию на каждом тексте.</p>
+        <p>Headroom - программа на твоём компьютере, которая <strong>сжимает материалы до того, как их увидит нейросеть.</strong> Она определяет, перед ней лог, код или обычный текст, и подбирает способ сжатия</p>
+        <p><strong>Полный исходник остаётся локально.</strong> Рядом хранится короткое содержание, а нужную деталь можно запросить обратно</p>
+        <aside class="notice"><p><strong>Headroom не добавляет Claude Code новый лимит</strong> и не гарантирует одинаковую экономию на каждом тексте</p>
         <p>Режим <span class="path">wrap</span>, в котором Claude Code запускается через Headroom, вдобавок устанавливает Serena, отдельную программу для поиска по коду. Этот шаг можно отключить параметром <span class="path">--code-memory none</span></p></aside>
         <div class="step">
           <h3>Как начать:</h3>
           <ol class="start-list" start="1">
             <li>
-              <p>Открой <a href="https://github.com/headroomlabs-ai/headroom#get-started-60-seconds">инструкцию проекта Headroom</a>.</p>
-              <aside class="setup-note"><p>Для приведённой там команды нужен <a href="https://docs.astral.sh/uv/getting-started/installation/">uv, установщик программ для Python</a>.</p></aside>
+              <p>Открой <a href="https://github.com/headroomlabs-ai/headroom#get-started-60-seconds">инструкцию проекта Headroom</a></p>
+              <aside class="setup-note"><p>Для приведённой там команды нужен <a href="https://docs.astral.sh/uv/getting-started/installation/">uv, установщик программ для Python</a></p></aside>
             </li>
             <li>
               <p>После его установки введи в терминале</p>
@@ -744,15 +864,15 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
             <li>
               <p>Затем запусти</p>
               <div class="prompt-box no-copy"><pre><code>headroom wrap claude</code></pre></div>
-              <p>команда запустит Headroom на твоём компьютере и откроет Claude Code через него.</p>
+              <p>команда запустит Headroom на твоём компьютере и откроет Claude Code через него</p>
             </li>
             <li>
               <p>Выполни</p>
               <div class="prompt-box no-copy"><pre><code>headroom doctor</code></pre></div>
-              <p>чтобы проверить подключение.</p>
+              <p>чтобы проверить подключение</p>
             </li>
           </ol>
-          <div class="result"><p><strong>Результат:</strong> Claude Code получает сжатые материалы, а полный текст можно вернуть при необходимости.</p></div>
+          <div class="result"><p><strong>Результат:</strong> Claude Code получает сжатые материалы, а полный текст можно вернуть при необходимости</p></div>
           <ol class="start-list" start="5">
             <li>
               <p>Для следующего разговора снова запускай</p>
@@ -769,19 +889,21 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <div class="shot"><img src="assets/live-claude-code-setup.webp" width="1280" height="800" alt="Страница репозитория Claude Code Setup на GitHub" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="Увеличить скрин страницы Claude Code Setup">Увеличить</button></div>
           <figcaption>Страница Claude Code Setup на GitHub</figcaption>
         </figure>
-        <p>Claude Code Setup - <strong>официальный плагин Anthropic</strong>, который просматривает файлы проекта и предлагает подходящие настройки работы.</p>
-        <p>Он может посоветовать скилл (готовую инструкцию для повторяющейся задачи), хук (действие, которое запускается автоматически), команду, отдельного помощника или MCP-сервер для подключения внешнего инструмента.</p>
+        <p>Claude Code Setup - <strong>официальный плагин Anthropic</strong>, который просматривает файлы проекта и предлагает подходящие настройки работы</p>
+        <p>Он может посоветовать скилл (готовую инструкцию для повторяющейся задачи), хук (действие, которое запускается автоматически), команду, отдельного помощника или MCP-сервер для подключения внешнего инструмента</p>
         <p>Похоже на мастера, который сначала осматривает рабочее место, а уже потом говорит, какой инструмент добавить</p>
         <aside class="notice"><p><strong>Плагин не устанавливает всё предложенное и не меняет файлы за тебя.</strong> Его задача - дать рекомендации, из которых ты выбираешь нужное</p></aside>
         <div class="step">
           <h3>Как начать:</h3>
           <ol class="start-list" start="1">
             <li>
-              <p>Открой <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup">страницу проекта Claude Code Setup от Anthropic</a>, установи этот плагин из официального каталога Claude Code и напиши</p>
+              <p>Открой Claude Code в папке проекта и установи плагин из официального каталога</p>
+              <div class="prompt-box no-copy"><pre><code>/plugin install claude-code-setup@claude-plugins-official</code></pre></div>
+              <p>Открой <span class="path">/plugins</span>, убедись, что Claude Code Setup находится в Installed, затем напиши</p>
               <div class="prompt-box no-copy"><pre><code>recommend automations for this project</code></pre></div>
             </li>
           </ol>
-          <div class="result"><p><strong>Результат:</strong> Claude Code предложит подходящие дополнения по категориям.</p></div>
+          <div class="result"><p><strong>Результат:</strong> Claude Code предложит подходящие дополнения по категориям</p></div>
           <ol class="start-list" start="2">
             <li>
               <p>Возьми одно, которое помогает с текущей задачей, и реши, нужно ли его подключать</p>
@@ -797,9 +919,9 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <div class="shot"><img src="assets/live-task-observer.webp" width="1280" height="800" alt="Страница репозитория Task Observer на GitHub" loading="lazy" decoding="async"><button class="zoom" type="button" aria-label="Увеличить скрин страницы Task Observer">Увеличить</button></div>
           <figcaption>Страница Task Observer на GitHub</figcaption>
         </figure>
-        <p>Task Observer - скилл, то есть папка с инструкциями для ИИ-помощника. Пока ты работаешь, он <strong>замечает повторяющиеся действия, твои исправления и пробелы в других скиллах.</strong></p>
+        <p>Task Observer - скилл, то есть папка с инструкциями для ИИ-помощника. Пока ты работаешь, он <strong>замечает повторяющиеся действия, твои исправления и пробелы в других скиллах</strong></p>
         <p>Затем записывает наблюдения и предлагает, какую инструкцию создать или поправить. Это как редактор, который ведёт список повторных замечаний, чтобы следующую работу начать уже с учётом них</p>
-        <aside class="notice"><p><strong>Сам Task Observer не переписывает твои скиллы.</strong> Предложения остаются на твоём рассмотрении.</p>
+        <aside class="notice"><p><strong>Сам Task Observer не переписывает твои скиллы.</strong> Предложения остаются на твоём рассмотрении</p>
         <p>И простое копирование папки ещё не включает наблюдение: по инструкции проекта <strong>нужно отдельно настроить запуск скилла в новых разговорах</strong></p></aside>
         <div class="step">
           <h3>Как начать:</h3>
@@ -807,17 +929,17 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
             <li>
               <p>Установи комплект командой</p>
               <div class="prompt-box no-copy"><pre><code>npx skills add rebelytics/one-skill-to-rule-them-all --skill task-observer</code></pre></div>
-              <p>или скачай его со <a href="https://github.com/rebelytics/one-skill-to-rule-them-all#installation">страницы проекта Task Observer от rebelytics</a>, сохранив вместе <span class="path">SKILL.md</span>, <span class="path">references/</span> и <span class="path">scripts/</span>.</p>
+              <p>или скачай его со <a href="https://github.com/rebelytics/one-skill-to-rule-them-all#installation">страницы проекта Task Observer от rebelytics</a>, сохранив вместе <span class="path">SKILL.md</span>, <span class="path">references/</span> и <span class="path">scripts/</span></p>
             </li>
             <li>
-              <p>Затем добавь правило запуска по файлу <span class="path">references/environments.md</span> и проверь его в новом разговоре.</p>
+              <p>Затем добавь правило запуска по файлу <span class="path">references/environments.md</span> и проверь его в новом разговоре</p>
             </li>
           </ol>
           <div class="result"><p><strong>Результат:</strong> после нескольких рабочих разговоров в <span class="path">skill-observations/observation-log/</span> появятся записи, которые можно просмотреть перед правкой скиллов</p></div>
         </div>
       </section>
       <section class="content-section" id="itog"><h2>С чего начать сегодня</h2>
-        <p><strong>Проверь одну помеху на ближайшей задаче.</strong> Для каждого случая ниже есть страница создателей инструмента с подробной инструкцией</p>
+        <p><strong>На ближайшей задаче выбери одну помеху, которую хочешь убрать.</strong> Для каждого случая ниже есть страница создателей инструмента с подробной инструкцией</p>
         <ul class="start-list">
           <li>Кончился лимит Claude Code: <strong>OmniRoute</strong>. <a href="https://github.com/diegosouzapw/OmniRoute">Проект diegosouzapw</a></li>
           <li>Новый чат не помнит прошлые решения: <strong>claude-mem</strong>. <a href="https://github.com/thedotmack/claude-mem">Проект thedotmack</a></li>
@@ -827,10 +949,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         </ul>
       </section>
 
-
-
 <section class="help-banner" aria-label="Если что-то не получается">
-        <p>Запнулся на любом шаге или кажется сложно? Просто спроси у самого Claude Code. <span class="accent">Он проведёт по шагам сам, не торопясь</span></p>
+        <p>Запнулся на любом шаге или кажется сложно? Спроси у Claude Code. <span class="accent">Он проведёт дальше по шагам, не торопясь</span></p>
         <div class="help-demo">
           <div class="bubble me"><span class="who">Ты</span>Я новичок и ничего не понимаю: куда нажать, что написать, куда пойти. Хочу поставить OmniRoute. Проведи меня по шагам</div>
           <div class="bubble claude"><span class="who">Claude</span>Конечно. Начнём с первого шага, а после каждого я спрошу, что у тебя получилось, и скажу, что делать дальше</div>
@@ -848,8 +968,9 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- seo:related:start -->
 <section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/shtat-agentov-paperclip/">Штат ИИ-агентов в Claude Code: ставишь одну цель, а работу делит команда</a></li><li><a href="/claude-ai/pyat-instrumentov-dlya-sayta/">Пять инструментов для сайта в Claude Code и Codex</a></li><li><a href="/claude-ai/chetyre-mcp-claude-code/">Четыре MCP для Claude Code: от поиска до проверки инструкции</a></li></ul></section>
 <!-- seo:related:end -->
-<p class="cta-question">Claude Code прокачан. Что ему поручить?</p>
+<p class="cta-question">Пять дополнений уже проверяют сайт, подключают базу, находят уязвимости, снимают дизайн и сверяют документацию. Дальше их можно соединить в одну цепочку и запускать без кода продукты, сайты и воронки</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
+</article>
 </main>
     <aside class="related-plaque" aria-label="Подсказка по выбору">
       <p class="plaque-label">ПЕРВЫЙ ШАГ</p>
