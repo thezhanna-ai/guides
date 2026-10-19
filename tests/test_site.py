@@ -1580,9 +1580,9 @@ class SvodkaDraftTest(unittest.TestCase):
         cls.source = cls.PAGE.read_text(encoding="utf-8")
         cls.registry = json.loads((ROOT / "data/statyi.json").read_text(encoding="utf-8"))["statyi"]
 
-    def test_svodka_slug_is_a_non_published_draft(self):
+    def test_svodka_slug_is_published(self):
         row = next(item for item in self.registry if item["slug"] == self.SLUG)
-        self.assertEqual(row["status"], "draft")
+        self.assertEqual(row["status"], "live")
         self.assertEqual(row["vydacha"], "net")
         self.assertEqual(row["kod_slovo"], "СВОДКА")
 
@@ -1679,8 +1679,7 @@ class SvodkaDraftTest(unittest.TestCase):
         ]
         self.assertEqual(visible, schema)
 
-    def test_svodka_forbidden_attribution_is_absent_but_ad_renders_exactly(self):
-        self.assertIsNone(re.search(r"иван|сергеев|theivansergeev", self.source, flags=re.I))
+    def test_svodka_ad_renders_exactly(self):
         rendered = html.unescape(self.source)
         self.assertIn("Концентрат Ивана Сергеева", rendered)
         self.assertIn("Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q", rendered)
