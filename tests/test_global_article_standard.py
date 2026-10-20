@@ -27,7 +27,7 @@ def article_path(url):
 class GlobalArticleStandardTest(unittest.TestCase):
     def test_sitemap_contains_the_complete_article_cohort(self):
         urls = article_urls()
-        self.assertEqual(len(urls), 66)
+        self.assertEqual(len(urls), 67)
         self.assertEqual(len(urls), len(set(urls)))
         for url in urls:
             self.assertTrue(article_path(url).is_file(), url)
