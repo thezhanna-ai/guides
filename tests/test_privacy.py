@@ -8,6 +8,19 @@ from test_indexing import generator, locations, BASE
 
 
 class PrivacyTest(unittest.TestCase):
+    def test_cookie_choices_are_visible_equal_buttons_using_site_tokens(self):
+        for page in self.pages():
+            with self.subTest(page=page.relative_to(ROOT)):
+                doc = ImageDocument(page.read_text())
+                buttons = {n.attrs.get('id'): n for n in doc.root.all(tag='button')}
+                for id, label in [('cookie-accept', 'Принять'), ('cookie-decline', 'Отказаться')]:
+                    self.assertEqual(buttons[id].text_content(), label)
+                    self.assertNotIn('aria-label', buttons[id].attrs)
+                    self.assertNotIn('cookie-close', buttons[id].attrs.get('class', ''))
+        css = (ROOT / 'assets/privacy.css').read_text()
+        self.assertIn('var(--guide-font-ui)', css)
+        self.assertNotIn('.cookie-close', css)
+
     def pages(self):
         return [ROOT / 'index.html', ROOT / 'politika/index.html'] + sorted((ROOT / 'claude-ai').glob('*/index.html'))
 

@@ -86,7 +86,7 @@ class IndexingTest(unittest.TestCase):
         module = generator()
         with patch.multiple(module, KORNI=root, REESTR=root / "data/statyi.json",
                             OBLOZHKI=root / "data/OBLOZHKI.json", GLAVNAYA=root / "index.html"), \
-                patch("sys.argv", ["sobrat_glavnuyu.py"] + (["--proverit"] if check else [])), \
+                patch("sys.argv", ["sobrat_glavnuyu.py", "--vse-stati"] + (["--proverit"] if check else [])), \
                 contextlib.redirect_stdout(io.StringIO()):
             return module.main()
 

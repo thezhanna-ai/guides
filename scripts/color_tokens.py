@@ -181,8 +181,13 @@ def tokenize_html(source, entries):
 
 
 def embed_palette(source, palette_css):
-    block = '<!-- palette:start -->\n<style id="guide-palette">\n' + palette_css.strip() + '\n</style>\n<!-- palette:end -->\n'
-    source = re.sub(r'<!-- palette:start -->.*?<!-- palette:end -->\s*', '', source, flags=re.S)
+    style = '<style id="guide-palette">\n' + palette_css.strip() + '\n</style>'
+    # Old pages may contain article styles inside the palette comment markers.
+    # Own only the palette style element; deleting the whole range loses CSS.
+    existing = re.compile(r'<style\b(?=[^>]*\bid=[\'\"]guide-palette[\'\"])[^>]*>.*?</style>', re.S | re.I)
+    if existing.search(source):
+        return existing.sub(lambda _: style, source)
+    block = '<!-- palette:start -->\n' + style + '\n<!-- palette:end -->\n'
     m = re.search(r'<style\b|<link\b(?=[^>]*\brel=[\'\"]stylesheet[\'\"])', source, re.I)
     if not m:
         raise ValueError('Palette requires an existing stylesheet position')

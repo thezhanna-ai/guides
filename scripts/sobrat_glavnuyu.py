@@ -2,8 +2,10 @@
 """Сборка index.html из реестра data/statyi.json.
 
 Руками index.html НЕ править: любая правка затрётся следующей сборкой.
-Новая статья = запись в реестре, потом `python3 scripts/sobrat_glavnuyu.py`.
+Новая статья = запись в реестре, потом `python3 scripts/sobrat_glavnuyu.py --statya SLUG`.
 Краткое содержание карточек и подписи обложек = kratko и podpis в реестре.
+Без флага сборка пишет только общие файлы. --statya SLUG разрешает запись
+выбранной статьи, --vse-stati явно разрешает массовое обновление статей.
 Сборка также обновляет figcaption обложки cover-v2 и robots-метатеги статей,
 sitemap.xml и robots.txt. Индексация: status=live без noindex_reason.
 Обложки статей = data/OBLOZHKI.json (slug, путь, alt и размер).
@@ -108,9 +110,7 @@ def dobavit_palette(html):
 
 def dobavit_privacy(html):
     """Один локальный загрузчик и одна плашка, без внешних запросов из HTML."""
-    html = dobavit_quality(ubrat_seo(html))
-    html = re.sub(r'<!-- privacy:(head|footer|banner):start -->.*?<!-- privacy:\1:end -->\s*',
-                  '', html, flags=re.S)
+    html = dobavit_quality(html)
     head = ('<!-- privacy:head:start -->\n'
             '<link rel="stylesheet" href="/assets/privacy.css">\n'
             '<script defer src="/assets/privacy.js"></script>\n'
@@ -124,9 +124,14 @@ def dobavit_privacy(html):
     for tag in ('head', 'footer', 'body'):
         if len(re.findall(r'</' + tag + r'\s*>', html, re.I)) != 1:
             raise ValueError('Для политики нужен один закрывающий тег ' + tag)
-    html = re.sub(r'</head\s*>', lambda _: head + '</head>', html, flags=re.I)
-    html = re.sub(r'</footer\s*>', lambda _: footer + '</footer>', html, flags=re.I)
-    html = re.sub(r'</body\s*>', lambda _: privacy_fragment('privacy-banner.html') + '\n</body>', html, flags=re.I)
+    # Replace blocks in place: independent scripts following them keep position.
+    for part, tag, block in [('head', 'head', head), ('footer', 'footer', footer),
+                             ('banner', 'body', privacy_fragment('privacy-banner.html') + '\n')]:
+        pattern = re.compile(r'<!-- privacy:' + part + r':start -->.*?<!-- privacy:' + part + r':end -->\s*', re.S)
+        if pattern.search(html):
+            html = pattern.sub(lambda _: block, html)
+        else:
+            html = re.sub(r'</' + tag + r'\s*>', lambda m: block + m[0], html, flags=re.I)
     return dobavit_palette(dobavit_critical_styles(html))
 
 
@@ -680,11 +685,24 @@ def seo_for_page(html, rel):
 def dobavit_seo(html, url, metadata):
     """Разметка берёт заголовок и FAQ из текущего видимого HTML."""
     from html import escape
+    old_faq = re.search(r'<!-- seo:faq:start -->.*?<!-- seo:faq:end -->', html, re.S)
+    # Keep generated metadata at its existing cascade/DOM positions. Other
+    # authors' JSON-LD scripts and styles may follow these generated blocks.
+    anchors = {}
+    for part in ('canonical', 'schema', 'breadcrumbs', 'faq'):
+        marker = '<!-- seo:' + part + ':anchor -->'
+        pattern = r'<!-- seo:' + part + r':start -->.*?<!-- seo:' + part + r':end -->'
+        if re.search(pattern, html, re.S):
+            html = re.sub(pattern, lambda _: marker, html, count=1, flags=re.S)
+            anchors[part] = marker
     html = ubrat_seo(html)
     canonical = '<!-- seo:canonical:start -->\n<link rel="canonical" href="' + escape(url, quote=True) + '">\n<!-- seo:canonical:end -->'
     pattern = r'<link\b(?=[^>]*\brel\s*=\s*[\'"]canonical[\'"])[^>]*>'
     html = re.sub(pattern, '', html, flags=re.I)
-    html = re.sub(r'\s*</head>', '\n' + canonical + '\n</head>', html, count=1)
+    if 'canonical' in anchors:
+        html = html.replace(anchors['canonical'], canonical, 1)
+    else:
+        html = re.sub(r'\s*</head>', '\n' + canonical + '\n</head>', html, count=1)
     for field, tag in [('title', 'title'), ('description', 'description')]:
         if not metadata.get(field):
             continue
@@ -709,7 +727,11 @@ def dobavit_seo(html, url, metadata):
         end = header_end if header_end != -1 else html.find('</main>', end)
         if end == -1:
             end = html.find('</body>')
-        html = html[:end] + '\n<!-- seo:breadcrumbs:start -->\n' + crumbs + '\n<!-- seo:breadcrumbs:end -->\n' + html[end:]
+        fragment = '<!-- seo:breadcrumbs:start -->\n' + crumbs + '\n<!-- seo:breadcrumbs:end -->'
+        if 'breadcrumbs' in anchors:
+            html = html.replace(anchors['breadcrumbs'], fragment, 1)
+        else:
+            html = html[:end] + '\n' + fragment + '\n' + html[end:]
         related = []
         for item in metadata.get('related', []):
             href = item['url']
@@ -739,9 +761,19 @@ def dobavit_seo(html, url, metadata):
         if search_faq:
             details = ''.join('<details class="faq-item"><summary>' + escape(x['question']) + '</summary><p>' + escape(x['answer']) + '</p></details>' for x in search_faq)
             fragment = '<!-- seo:faq:start -->\n<section class="seo-faq" aria-label="Вопросы из поиска" style="margin:36px 0"><h2>Что ещё спрашивают</h2>' + details + '</section>\n<!-- seo:faq:end -->'
+            if old_faq:
+                items = re.findall(r'<details\b[^>]*class="[^"]*\bfaq-item\b[^"]*"[^>]*>\s*<summary\b[^>]*>(.*?)</summary>(.*?)</details>', old_faq[0], re.S)
+                visible = [{'question': seo_plain(q), 'answer': seo_plain(a)} for q, a in items]
+                if visible == search_faq:
+                    fragment = old_faq[0]
             ends = [html.find(t) for t in ('<div class="share-row">', '<!-- seo:related:start -->', '<p class="cta-question"', '<section class="cta"', '</article>', '</main>', '<footer') if html.find(t) != -1]
             end = min(ends) if ends else html.find('</body>')
-            html = html[:end] + '\n' + fragment + '\n' + html[end:]
+            if 'faq' in anchors:
+                html = html.replace(anchors['faq'], fragment, 1)
+            else:
+                html = html[:end] + '\n' + fragment + '\n' + html[end:]
+        elif 'faq' in anchors:
+            html = html.replace(anchors['faq'], '', 1)
         questions = []
         for detail in re.findall(r'<details\b[^>]*class="[^"]*\bfaq-item\b[^"]*"[^>]*>(.*?)</details>', html, re.S):
             summary = re.search(r'<summary\b[^>]*>(.*?)</summary>', detail, re.S)
@@ -755,7 +787,8 @@ def dobavit_seo(html, url, metadata):
     # JSON inside HTML must not permit </script> or markup injection.
     schema = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, indent=2).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     block = '<!-- seo:schema:start -->\n<script type="application/ld+json" id="seo-schema">\n' + schema + '\n</script>\n<!-- seo:schema:end -->\n'
-    return html.replace('</head>', block + '</head>', 1)
+    return (html.replace(anchors['schema'], block.rstrip(), 1) if 'schema' in anchors
+            else html.replace('</head>', block + '</head>', 1))
 
 
 def sobrat_seo(stranicy):
@@ -797,11 +830,30 @@ def sobrat_seo(stranicy):
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--proverit', action='store_true', help='Проверить без записи')
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument('--statya', metavar='SLUG', help='Собрать только эту статью и общие индексы')
+    scope.add_argument('--vse-stati', action='store_true', help='Явно обновить все статьи общими шаблонами')
+    args = parser.parse_args()
+    if args.statya:
+        registry = json.loads(REESTR.read_text(encoding='utf-8'))['statyi']
+        if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', args.statya) or args.statya not in {x['slug'] for x in registry}:
+            parser.error('Неизвестный или некорректный slug статьи')
     stranica = sobrat_stranicu()
     podpisi = sobrat_metki_urovnya(sobrat_podpisi())
     rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
                              KORNI / "politika" / "index.html": sobrat_politiku()}))
-    proverka = "--proverit" in sys.argv
+    proverka = args.proverit
+    # Global calculation still validates the registry before any write. Only an
+    # explicit scope can authorize writes to article files, even when stale.
+    def selected(page):
+        rel = page.relative_to(KORNI)
+        return rel.parts[0] != 'claude-ai' or args.vse_stati or (
+            args.statya and rel == Path('claude-ai') / args.statya / 'index.html')
+    if args.statya or not proverka:
+        rezultaty = {page: html for page, html in rezultaty.items() if selected(page)}
 
     if proverka:
         razlichiya = [page for page, html in rezultaty.items()
@@ -822,8 +874,7 @@ def main():
         if not page.exists() or page.read_text(encoding="utf-8") != html:
             page.parent.mkdir(parents=True, exist_ok=True)
             page.write_text(html, encoding="utf-8")
-    print("Подписи %d статей собраны из реестра" % len(podpisi))
-    print("Индексация %d статей, sitemap.xml и robots.txt собраны из реестра" % (len(json.loads(REESTR.read_text(encoding="utf-8"))["statyi"])))
+    print("Область записи статей: " + ('все (явно)' if args.vse_stati else args.statya or 'ни одной'))
     print("Политика данных и общие блоки согласия собраны из шаблонов")
     po_trassam = zagruzit_statyi()
     vsego = sum(len(v) for v in po_trassam.values())

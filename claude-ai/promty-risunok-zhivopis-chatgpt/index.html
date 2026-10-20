@@ -613,6 +613,8 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
 /* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
 body { padding-bottom: var(--cookie-height, 0px) }
 html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
@@ -624,7 +626,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   border-top: 1px solid var(--line, var(--guide-color-paper-border));
   padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
   box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
-  font: 400 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font: 400 14px/1.45 var(--guide-font-ui);
 }
 .cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
 .cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
@@ -633,7 +635,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 .cookie-actions button {
   min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
   border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
-  font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer;
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
 }
 .cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
 .cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
@@ -641,7 +643,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 }
 .privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
 .privacy-footer a, .privacy-footer button {
-  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
   text-decoration: underline; text-underline-offset: 3px;
 }
 .privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
@@ -652,17 +654,6 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 }
 @media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
 .privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
-/* Отказ - крестик: одна заметная кнопка «Понятно», выбор по закону остаётся */
-.cookie-actions { align-items: center }
-.cookie-actions .cookie-close {
-  min-width: 44px; padding: 0; border-color: var(--guide-color-transparent); background: var(--guide-color-transparent);
-  color: var(--muted, var(--guide-color-muted)); font: 400 26px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-}
-.cookie-actions .cookie-close:hover { border-color: var(--guide-color-transparent); color: var(--ink, var(--guide-color-ink)) }
-@media (max-width: 600px) {
-  .cookie-actions { flex-wrap: nowrap }
-  .cookie-actions .cookie-close { flex: 0 0 44px }
-}
 </style>
 <!-- critical:privacy-style:end -->
 <script defer src="/assets/privacy.js"></script>
@@ -854,10 +845,10 @@ addEventListener("scroll", updateReadingState, { passive: true });
 <!-- privacy:banner:start -->
 <aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
   <div class="cookie-inner">
-    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Понятно», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
     <div class="cookie-actions">
-      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Понятно</button>
-      <button type="button" id="cookie-decline" class="cookie-close" aria-label="Закрыть без аналитики" title="Закрыть без аналитики"><span aria-hidden="true">×</span></button>
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
     </div>
   </div>
 </aside>
