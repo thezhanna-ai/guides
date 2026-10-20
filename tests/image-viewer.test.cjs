@@ -75,8 +75,8 @@ test('Все настоящие inline просмотрщики использу
     assert.ok(/img\.dataset\.fullSrc\s*\|\|\s*img\.currentSrc\s*\|\|\s*img\.src/.test(html), name);
     assert.ok(!/document\.body\.style\.overflow\s*=/.test(html), name);
   }
-  // The photo-effects draft also uses the Kurer shell and shared viewer lifecycle.
-  assert.equal(count, 48);
+  // Published photo-effects and Motion pages use the shared viewer lifecycle.
+  assert.equal(count, 49);
 });
 
 test('Disabled элемент пропускается, внешний фокус возвращается в модалку', () => {
