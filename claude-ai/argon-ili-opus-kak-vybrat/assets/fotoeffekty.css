@@ -1,0 +1,14 @@
+/* Only this article's comparison rows; house shell is inherited unchanged. */
+.photo-effect-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start;margin-top:24px}
+.photo-effect-media,.photo-effect-prompt{min-width:0}
+.photo-effect-media .shot{width:100%;max-width:none;margin:0 0 20px}
+.photo-effect-media .shot img{display:block;width:100%;height:auto}
+.photo-effect-media figcaption{font-size:16px;line-height:1.4}
+.photo-effect-prompt .code-card{display:block;width:100%;max-width:none;box-sizing:border-box;margin:0;padding:58px 18px 18px}
+.photo-effect-prompt .effect-command{font:16px/1.65 "JetBrains Mono",ui-monospace,monospace;white-space:normal;overflow-wrap:anywhere;color:inherit;margin:0}
+.photo-effect-prompt pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.6;margin:18px 0 0;padding:0;overflow:visible}
+.photo-effect-prompt .copy-button{min-height:40px}
+.photo-prompt-full{margin-top:20px;border-top:1px solid var(--line);padding-top:14px}
+.photo-prompt-full summary{font:600 15px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif;cursor:pointer;color:inherit}
+.photo-effect-result{margin-top:20px}
+@media(max-width:700px){.photo-effect-row{grid-template-columns:minmax(0,1fr);gap:12px}.photo-effect-media .shot{margin-bottom:16px}.photo-effect-prompt .code-card{padding:62px 16px 16px}.photo-effect-prompt pre{font-size:15px}.photo-effect-prompt .effect-command{font-size:16px}}

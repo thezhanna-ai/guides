@@ -1,0 +1,825 @@
+<!doctype html><html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать</title>
+
+<meta name="theme-color" content="#F8F7F2">
+
+
+
+
+
+
+
+
+
+
+<!-- critical:fonts:start -->
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: fit-content; max-width: 100% }
+    .shot img { display: block; width: auto; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot:has(img[src="assets/voice-brauzer.webp"]) img { width: 560px }
+    .shot:has(img[src="assets/voice-telefon.webp"]) img { width: 300px }
+    .shot:has(img[src="assets/zapros-1.webp"]) img { width: 620px }
+    .shot:has(img[src="assets/otvet-vpermeshku.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-1.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-2.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/plan-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/plan-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/tri-zadachi.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px; font-size: 17px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { background: var(--guide-color-coral); color: var(--guide-color-forest); position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+.code-card .copy-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest) }
+.code-card .copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest) }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
+
+<style id="konspekt-editorial">
+.konspekt-example { max-width: 700px; margin: 24px auto 38px }
+.konspekt-example .shot img { width: 100%; height: auto; max-height: none; object-fit: contain }
+.tariff-note { margin-top: 42px; padding: 18px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; line-height: 1.6 }
+.tariff-note p { font-size: inherit; line-height: inherit; margin: 0 0 12px }
+.tariff-note .note-label { font-weight: 400 }
+.tariff-note ul { margin: 0; padding-left: 22px }
+.tariff-note li { margin: 0 0 14px; font-size: inherit; line-height: inherit }
+</style>
+<style>.shot img{width:650px}.code-card pre{overflow-wrap:anywhere;white-space:pre-wrap}.tariff-note{margin-top:32px}</style>
+<link rel="stylesheet" href="../../assets/article-sharing.css">
+<!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/argon-ili-opus-kak-vybrat/">
+<!-- seo:canonical:end -->
+
+<link rel="stylesheet" href="assets/fotoeffekty.css">
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/argon-ili-opus-kak-vybrat/#article",
+      "headline": "Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/argon-ili-opus-kak-vybrat/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-22",
+      "image": "https://pronovoe.com/claude-ai/argon-ili-opus-kak-vybrat/assets/oblozhka.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/argon-ili-opus-kak-vybrat/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать",
+          "item": "https://pronovoe.com/claude-ai/argon-ili-opus-kak-vybrat/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+<style>.night-draft{padding:10px 18px;border:1px solid var(--line);font:600 13px/1.5 Arial;color:var(--muted);margin:20px 0}.night-cover{display:flex;gap:24px;align-items:center;margin:24px 0}.night-cover img{width:210px;max-width:42%;height:auto;border-radius:12px}.night-cover p{font-size:19px}.role-prep{border-left:3px solid var(--accent);padding-left:18px}.draft-limit{background:var(--paper-2);padding:18px;border-radius:12px}.article-standard-h1{overflow-wrap:anywhere}.content-section h3{font-size:23px;line-height:1.3}.code-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px}.code-card pre{padding:20px;margin:0;font-size:15px;line-height:1.65}.code-card button{min-height:44px}.night-table{overflow-x:auto}.night-table table{min-width:520px;width:100%;border-collapse:collapse}.night-table th,.night-table td{text-align:left;padding:16px;border-bottom:1px solid var(--line);vertical-align:top}.night-table tr:nth-child(even){background:var(--paper-2)}.tariff-note{font-size:15px}.tariff-note p{font-size:inherit}@media(max-width:600px){.night-cover{gap:16px}.night-cover img{width:130px}.night-cover p{font-size:16px}.toc{max-height:82vh;overflow:auto}.night-table th,.night-table td{padding:12px}.code-card pre{font-size:14px;padding:15px}}</style><style>.cover-v2{margin:28px 0}.cover-v2 img{display:block;max-width:100%;height:auto;max-height:440px;object-fit:contain;margin:auto}.page-shell main{min-width:0}</style><meta name="description" content="Сравнение Gemini 4 Argon и Claude Opus 5.5 по задачам: таблицы результатов тестов, доступ к моделям и тарифы API до и после подорожания Argon."><style>body{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1,"onum" 0}article strong{font-weight:600}.night-table table{min-width:660px;table-layout:fixed;font-size:17px;line-height:1.5}.night-table th,.night-table td{overflow-wrap:break-word}.night-table th:first-child{width:28%}.night-table thead{background:var(--info)}.night-table tbody th{font-weight:600}.numeric-table table{min-width:560px}.numeric-table th:first-child{width:50%}.numeric-table td{text-align:center;font-variant-numeric:lining-nums tabular-nums}:root{--score-high:#16713D}html[data-theme="dark"]{--score-high:#8BCBA0}.score-winner{color:var(--score-high);font-weight:400;white-space:nowrap}.night-table{border:1px solid var(--line);border-radius:11px}.night-table:focus-visible{outline:2px solid var(--accent);outline-offset:4px}.table-scroll-hint{display:none}.next-grid{display:grid;gap:12px}.next-card{display:grid;gap:6px;padding:18px;border:1px solid var(--sage-line);border-radius:10px;background:var(--paper);text-decoration:none}.next-card span{color:var(--muted)}.preview-status{max-width:1244px;margin:18px auto 0;padding:0 20px;color:var(--muted);font:13px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif}.share-btn:disabled{cursor:default;opacity:.75}.cover-v2{margin-bottom:20px}@media(max-width:700px){.table-scroll-hint{display:block;font:13px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif;color:var(--muted)}.preview-status{padding:0 14px}.night-table table{font-size:16px}}</style><meta property="og:type" content="article"><meta property="og:title" content="Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать"><meta property="og:description" content="Сравнение Gemini 4 Argon и Claude Opus 5.5 по задачам: таблицы результатов тестов, доступ к моделям и тарифы API до и после подорожания Argon."><meta property="og:url" content="https://pronovoe.com/claude-ai/argon-ili-opus-kak-vybrat/"><meta property="og:image" content="https://pronovoe.com/claude-ai/argon-ili-opus-kak-vybrat/assets/oblozhka.png"><meta name="twitter:card" content="summary_large_image"></head><body><div class="progress" aria-hidden="true"></div><header class="masthead"><div class="masthead-inner"><a class="brand" href="/">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать</div><div class="header-controls">
+<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+</div></div></div></header><div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">В статье</p><a href="#kod">Доработка кода и сложные технические задания</a><a href="#web-prilozhenie">Веб-приложение по описанию</a><a href="#dostup">Доступ к моделям</a><a href="#shpargalka">Шпаргалка по задачам</a><a href="#do-30-noyabrya">Выбор до 30 ноября 2026 года</a><a href="#s-1-dekabrya">Изменения с 1 декабря 2026 года</a></nav><main><article><header id="nachalo"><p class="eyebrow">Нейросети · Сравнение моделей</p><h1 class="article-standard-h1">Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p><p>У одной модели выше результат в тесте на код. У другой тоже есть победа, только в другом наборе задач. А с декабря объявленные ставки Argon обещают довести до нынешних ставок Opus. Так что выбирать для своей работы: новый Gemini 4 Argon или Claude Opus 5.5?</p>
+<p>Сначала посмотрим, что именно им поручали. Затем соберём задачи в одну таблицу и разберём два решения: пока у Argon действует вводная цена и после объявленного подорожания. Данные и тарифы сверены 22 октября 2026 года.</p><figure class="cover-v2"><img src="assets/oblozhka.png?light=5" width="1600" height="840" alt="Argon или Opus: модель под твою задачу"><figcaption>Результаты тестов, задачи, доступ к моделям и тарифы API</figcaption></figure><div class="share-row share-top"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fargon-ili-opus-kak-vybrat%2F&amp;text=Gemini%204%20Argon%20%D0%B8%D0%BB%D0%B8%20Claude%20Opus%205.5%3A%20%D0%BA%D0%B0%D0%BA%D1%83%D1%8E%20%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=Gemini%204%20Argon%20%D0%B8%D0%BB%D0%B8%20Claude%20Opus%205.5%3A%20%D0%BA%D0%B0%D0%BA%D1%83%D1%8E%20%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fargon-ili-opus-kak-vybrat%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fargon-ili-opus-kak-vybrat%2F&amp;title=Gemini%204%20Argon%20%D0%B8%D0%BB%D0%B8%20Claude%20Opus%205.5%3A%20%D0%BA%D0%B0%D0%BA%D1%83%D1%8E%20%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C" target="_blank" rel="noopener">VK</a></div>
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#kod">Доработка кода и сложные технические задания</a><a href="#web-prilozhenie">Веб-приложение по описанию</a><a href="#dostup">Доступ к моделям</a><a href="#shpargalka">Шпаргалка по задачам</a><a href="#do-30-noyabrya">Выбор до 30 ноября 2026 года</a><a href="#s-1-dekabrya">Изменения с 1 декабря 2026 года</a></nav></details><section class="content-section" id="kod"><h2>Доработка кода и сложные технические задания</h2><p>Допустим, у тебя уже есть программа и нужно добавить функцию или переделать часть её работы. Модели придётся разобраться в файлах, внести изменения и проверить результат. Для самостоятельной работы ей помогает программа-агент: она даёт доступ к файлам, запуску команд и другим инструментам. Поэтому на результат влияет и модель, и программа, в которой она работает.</p>
+<p>Цифры взяты из опубликованных отчётов, своих сравнительных прогонов здесь нет. В <a href="https://deepmind.google/models/evals-methodology/gemini-4-argon" target="_blank" rel="noopener">методике Google</a> указано, какие результаты компания получила сама, а какие взяла из отчётов других разработчиков и открытых рейтингов. Это помогает выбрать кандидатов, но не обещает такой же результат на твоём задании.</p>
+<p>В опубликованной Google сводке есть несколько проверок такой работы. У них разные задания и правила оценки:</p>
+<p class="table-scroll-hint">На телефоне таблицу можно листать вбок</p><div class="night-table numeric-table" role="region" aria-label="Сравнение моделей" tabindex="0"><table><thead><tr><th scope="col">Тест и тип работы</th><th scope="col">Gemini 4 Argon</th><th scope="col">Claude Opus 5.5</th></tr></thead><tbody><tr><th scope="row"><a href="https://deepswe.datacurve.ai/" target="_blank" rel="noopener">DeepSWE v1.1</a>: длительная инженерная работа с существующими программными проектами</th><td><span class="score-winner">77,9%</span></td><td>74,2%</td></tr><tr><th scope="row"><a href="https://www.frontierswe.com/blog/v2" target="_blank" rel="noopener">FrontierSWE v2</a>: сложные инженерные и исследовательские проекты. Оценка учитывает и частично выполненную работу</th><td>55,0%</td><td><span class="score-winner">62,3%</span></td></tr><tr><th scope="row">Terminal-Bench 4.0: разнообразные технические задания, выполняемые через команды</th><td>57,4%</td><td><span class="score-winner">66,4%</span></td></tr></tbody></table></div>
+<p>Числа приведены по <a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener">сводке Google</a>, описания тестов - по ссылкам в таблице.</p>
+<div class="warn-card"><p>Эти наборы не делят всю работу на «короткую» и «длинную». Файлы и команды тоже используют в разных тестах. Поэтому по признаку «пусть модель долго работает сама» или «ей нужен терминал» победителя назначить нельзя.</p></div>
+<p>Для существующего проекта обе модели остаются кандидатами. Если Opus уже успешно ведёт твою программу, одного преимущества Argon в DeepSWE недостаточно, чтобы переносить работу. Если выбираешь с нуля, у Argon сейчас ниже стандартные ставки API; этот аргумент действует вместе с качеством результата, а не заменяет его.</p></section><section class="content-section" id="web-prilozhenie"><h2>Веб-приложение по описанию</h2><p>Здесь задача другая: готовой программы ещё нет. Ты описываешь, что должно получиться, а модель собирает приложение с нуля. Дальше важно, работают ли предусмотренные действия: можно ли нажать кнопку, заполнить форму и получить нужный результат.</p>
+<p>Именно создание веб-приложений проверяет Vibe Code Bench. Результаты опубликованы в <a href="https://www.vals.ai/benchmarks/vibe-code" target="_blank" rel="noopener">таблице Vals AI</a>:</p>
+<p class="table-scroll-hint">На телефоне таблицу можно листать вбок</p><div class="night-table numeric-table" role="region" aria-label="Сравнение моделей" tabindex="0"><table><thead><tr><th scope="col">Тест и тип работы</th><th scope="col">Gemini 4 Argon</th><th scope="col">Claude Opus 5.5</th></tr></thead><tbody><tr><th scope="row">Vibe Code Bench: создание веб-приложения с нуля по описанию</th><td><span class="score-winner">91,91%</span></td><td>90,29%</td></tr></tbody></table></div>
+<p>Это баллы по проверяемым действиям в приложениях, а не обещание, что модель без ошибок сделает девять сайтов из десяти. Численно Argon немного впереди, результаты близки.</p>
+<p>Для первого веб-приложения обе модели остаются кандидатами. Если у тебя есть доступ к обеим и оплата идёт через API, до конца ноября можно начать с Argon из-за меньших ставок. Если работа уже включена в твою подписку Claude, сначала посмотри её условия: покупка отдельного доступа к Argon может не дать экономии.</p></section><section class="content-section" id="dostup"><h2>Доступ к моделям</h2><p>Argon и Opus - названия моделей. Gemini, Claude, AI Studio и программы для работы с агентами - разные способы к ним обращаться. От выбранного способа зависят доступ, лимиты и оплата.</p>
+<p>У Google Argon можно открыть в приложении Gemini с подпиской Pro или Ultra, а для работы разработчика - в Google AI Studio и через платный Gemini API. Бесплатного тарифа API для этой модели нет. России нет в официальном списке стран Gemini API и AI Studio. Если нужного доступа у тебя нет, одна выгодная ставка ещё не делает Argon доступным вариантом (<a href="https://blog.google/innovation-and-ai/products/gemini-app/gemini-4-argon-availability/" target="_blank" rel="noopener">доступ в Gemini</a>, <a href="https://ai.google.dev/gemini-api/docs/models/gemini-4-argon" target="_blank" rel="noopener">карточка модели</a>, <a href="https://ai.google.dev/gemini-api/docs/available-regions" target="_blank" rel="noopener">регионы Google</a>).</p>
+<p>API - это обращения к модели из программы. В таком режиме отдельно считают объём отправленного текста и ответа. Подписка на приложение устроена иначе. Поэтому приведённые ниже цены нельзя переносить на стоимость подписки Gemini или Claude.</p></section><section class="content-section" id="shpargalka"><h2>Шпаргалка по задачам</h2><p>Галочка означает модель, которую есть основание рассмотреть для этой работы. Причина указана в той же клетке. Если галочки у обеих, опубликованные данные не дают достаточного основания исключить одну из них.</p>
+<p class="table-scroll-hint">На телефоне таблицу можно листать вбок</p><div class="night-table" role="region" aria-label="Сравнение моделей" tabindex="0"><table><thead><tr><th scope="col">Твоя задача</th><th scope="col">Gemini 4 Argon</th><th scope="col">Claude Opus 5.5</th></tr></thead><tbody><tr><th scope="row">Собрать веб-приложение с нуля по описанию</th><td>✅ Можно начать с него: немного выше балл Vibe Code Bench. До конца ноября ниже стандартный тариф API</td><td>✅ Тоже кандидат: близкий результат в том же тесте. Если уже работаешь в Claude, разница в баллах сама по себе не требует перехода</td></tr><tr><th scope="row">Доработать код готовой программы или самостоятельно выполнить сложное техническое задание</th><td>✅ Кандидат: выше результат в DeepSWE. Подходит для рассмотрения и на длительную работу</td><td>✅ Кандидат: выше в FrontierSWE и Terminal-Bench. Общего победителя по всем этим задачам нет</td></tr><tr><th scope="row">Написать пост, письмо или сценарий</th><td>Эти тесты не сравнивают качество обычных текстов. Оснований назначить победителя здесь нет</td><td>Эти тесты не сравнивают качество обычных текстов. Оснований назначить победителя здесь нет</td></tr></tbody></table></div>
+<p>Основа первых двух строк - <a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener">сводка Google</a> и <a href="https://www.vals.ai/benchmarks/vibe-code" target="_blank" rel="noopener">Vibe Code Bench</a>. Для постов и писем переносить оценки программирования на качество текста было бы догадкой.</p></section><section class="content-section" id="do-30-noyabrya"><h2>Выбор до 30 ноября 2026 года</h2><p>В стандартном API Argon стоит $2 за миллион входных токенов и $10 за миллион выходных. У Opus 5.5 текущие базовые ставки - $4 и $20. Токен - небольшой фрагмент текста; в выход Argon включаются и токены, потраченные на рассуждение (<a href="https://ai.google.dev/gemini-api/docs/pricing#gemini-4-argon" target="_blank" rel="noopener">Google</a>, <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener">Anthropic</a>).</p>
+<p>Если обе модели доступны, справляются с твоей работой и ты платишь за API, у Argon до конца ноября есть ценовой аргумент: одинаковое количество входных и выходных токенов стоит вдвое меньше. Начать с него разумно, например, при создании веб-приложения. Итоговый счёт за законченную работу зависит ещё от объёма ответов, повторных попыток и исправлений.</p>
+<p>Если уже работаешь в Claude по подписке, не покупай доступ к другой модели только ради сравнения этих ставок. Сначала учитывай доступный лимит и то, получается ли у тебя нужная работа. Цены API сами по себе не показывают выгоду смены подписки.</p></section><section class="content-section" id="s-1-dekabrya"><h2>Изменения с 1 декабря 2026 года</h2><p>Google объявил повышение стандартных ставок Argon до $4 за миллион входных токенов и $20 за миллион выходных. Они сравняются с нынешними базовыми ставками Opus 5.5. При таком условии выбирать Argon только из-за более низкой цены за токен уже не получится (<a href="https://ai.google.dev/gemini-api/docs/pricing#gemini-4-argon" target="_blank" rel="noopener">объявленные цены Google</a>).</p>
+<div class="warn-card"><p>Это сравнение текущих версий по объявленным условиям. К декабрю Anthropic может выпустить следующий Opus, Google - обновить свою модель, а любая из компаний - изменить тарифы. Если это произойдёт, сравнение нужно пересмотреть по новым данным. Заранее отдавать будущую победу одной из моделей нельзя.</p></div>
+<p>Если версии и тарифы сохранятся, после подорожания начинай с той модели, которая уже успешно делает твою работу. При выборе с нуля для нового веб-приложения обе остаются кандидатами; для сложного инженерного проекта у Opus есть преимущество в FrontierSWE, у Argon - в DeepSWE. Равные ставки за токен также не означают одинаковый итоговый счёт: модели могут расходовать разное количество токенов и делать разное число попыток.</p>
+</section><p class="cta-question">Выбор модели помогает начать. Дальше нужно объяснить нейросети, что ты хочешь получить, и понять, как проверить её работу. Ниже можно посмотреть, как нейросети собирают сайты, контент и другие продукты, даже если ты не знаешь кода.</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section><section class="next-read" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><div class="next-grid"><a class="next-card" href="/claude-ai/opus-55-protiv-gpt-6-astra/"><strong>Claude Opus 5.5 или GPT-6 Astra</strong><span>Сравнение на одном промпте</span></a></div></section><div class="share-row"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fargon-ili-opus-kak-vybrat%2F&amp;text=Gemini%204%20Argon%20%D0%B8%D0%BB%D0%B8%20Claude%20Opus%205.5%3A%20%D0%BA%D0%B0%D0%BA%D1%83%D1%8E%20%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=Gemini%204%20Argon%20%D0%B8%D0%BB%D0%B8%20Claude%20Opus%205.5%3A%20%D0%BA%D0%B0%D0%BA%D1%83%D1%8E%20%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fargon-ili-opus-kak-vybrat%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fargon-ili-opus-kak-vybrat%2F&amp;title=Gemini%204%20Argon%20%D0%B8%D0%BB%D0%B8%20Claude%20Opus%205.5%3A%20%D0%BA%D0%B0%D0%BA%D1%83%D1%8E%20%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C" target="_blank" rel="noopener">VK</a></div></article></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Полезно знать</p><h2>Как выбрать модель и effort</h2>
+      <p><a href="/claude-ai/vybor-modeli-i-effort/">Открыть статью</a></p></aside></div><script>var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script><footer class="privacy-site-footer"><!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer><!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>

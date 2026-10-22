@@ -15,7 +15,7 @@ class QualityStylesTests(unittest.TestCase):
     def test_all_shipped_pages_embed_current_styles_without_an_external_request(self):
         css = (ROOT / 'assets/quality.css').read_text().strip()
         pages = [ROOT / 'index.html', ROOT / 'politika/index.html', *ROOT.glob('claude-ai/*/index.html')]
-        self.assertEqual(69, len(pages))
+        self.assertEqual(71, len(pages))
         for page in pages:
             with self.subTest(page=page.relative_to(ROOT)):
                 source = page.read_text()
@@ -52,7 +52,7 @@ class CriticalStylesTests(unittest.TestCase):
                                 lambda m: 'url(' + m[1] + urljoin('/assets/fonts/', m[2]) + m[1] + ')', fonts)
         privacy = (ROOT / 'assets/privacy.css').read_text().strip()
         pages = [ROOT / 'index.html', ROOT / 'politika/index.html', *ROOT.glob('claude-ai/*/index.html')]
-        self.assertEqual(69, len(pages))
+        self.assertEqual(71, len(pages))
         for page in pages:
             with self.subTest(page=page.relative_to(ROOT)):
                 source = page.read_text()
