@@ -25,7 +25,7 @@ class EridTest(unittest.TestCase):
     def setUpClass(cls):
         cls.pages = [ROOT / "index.html", *sorted(ROOT.glob("claude-ai/*/index.html")),
                      ROOT / "scripts/shablon_glavnoy.html"]
-        assert len(cls.pages) == 70
+        assert len(cls.pages) == 69
 
     def test_every_partner_page_and_template_has_exactly_one_marked_creative(self):
         for page in self.pages:
