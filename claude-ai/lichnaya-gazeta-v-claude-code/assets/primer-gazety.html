@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Моя газета</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 210mm;
+    min-height: 297mm;
+    background: #f8f2e4;
+    color: #221d16;
+    font-family: Georgia, "Times New Roman", serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    padding: 12mm 13mm 10mm;
+    display: flex;
+    flex-direction: column;
+  }
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 2px solid #221d16;
+    padding-bottom: 4px;
+  }
+  .masthead h1 {
+    font-size: 40px;
+    margin: 0;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .masthead .date {
+    font-size: 12px;
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    color: #4a4237;
+  }
+  .kicker {
+    border-bottom: 1px solid #c9bda2;
+    padding: 3px 0 5px;
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c05610;
+    display: flex;
+    justify-content: space-between;
+  }
+  .lead {
+    border-bottom: 1px solid #c9bda2;
+    padding: 9px 0 10px;
+  }
+  .lead p {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: #2a241b;
+  }
+  .lead .big {
+    font-size: 18px;
+    font-weight: 700;
+    color: #c05610;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    flex: 1;
+    padding-top: 9px;
+  }
+  .col {
+    padding: 0 10px;
+    border-right: 1px solid #c9bda2;
+  }
+  .col:first-child { padding-left: 0; }
+  .col:last-child { padding-right: 0; border-right: none; }
+  article { padding-bottom: 11px; margin-bottom: 11px; border-bottom: 1px solid #d9cfb8; }
+  article:last-child { border-bottom: none; }
+  article h2 {
+    font-size: 16.5px;
+    line-height: 1.18;
+    margin: 0 0 5px;
+    font-weight: 700;
+  }
+  article .tag {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #c05610;
+    display: block;
+    margin-bottom: 3px;
+  }
+  article p {
+    font-size: 13.2px;
+    line-height: 1.46;
+    margin: 0 0 5px;
+    color: #2a241b;
+  }
+  article a.src {
+    font-size: 9.5px;
+    color: #6a5d46;
+    word-break: break-all;
+    text-decoration: none;
+    border-bottom: 1px dotted #b7a988;
+  }
+  .watch {
+    background: #f2e9d3;
+    padding: 8px 9px;
+    border: 1px solid #d9cfb8;
+  }
+  .watch a { color: #6a3a20; text-decoration-thickness: .5px; }
+  .watch h2 { color: #c05610; }
+  .watch ul { margin: 4px 0 5px; padding-left: 16px; }
+  .watch li { font-size: 12.5px; line-height: 1.4; margin-bottom: 4px; color: #2a241b; }
+  .footer {
+    border-top: 2px solid #221d16;
+    margin-top: 6px;
+    padding-top: 6px;
+    font-size: 9.5px;
+    color: #4a4237;
+    line-height: 1.5;
+  }
+  .footer .stamp {
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    color: #c05610;
+    font-size: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <h1>Моя газета</h1>
+    <div class="date">20 октября 2026</div>
+  </div>
+  <div class="kicker">
+    <span>Личный выпуск</span>
+    <span>ИИ-инструменты · контент · работа с Claude</span>
+  </div>
+
+  <div class="lead">
+    <p><span class="big">Три источника говорят об ИИ с разных сторон</span>: одни обещают скорость и низкую цену, другие показывают изменения в рабочих инструментах. Что из этого стоит проверить на своей задаче?</p>
+  </div>
+
+  <div class="cols">
+
+    <div class="col">
+      <article>
+        <span class="tag">GitHub · релиз</span>
+        <h2>Claude Code дорос до v2.1.304</h2>
+        <p>Релиз от 19 октября 2026. Появился <code>/auto-mode-setup</code> - настройка, которая читает проект и недавние сессии, чтобы объяснить авто-режиму твоё окружение. На планах Pro и Max теперь предупреждают, если возврат к давно неактивному разговору заметно съест твой пятичасовой лимит</p>
+        <p>Из починок: команда <code>rm -r</code> на смонтированном диске снова спрашивает подтверждение, а <code>/usage</code> показывает, когда закончится ограничение по данным, вместо расплывчатого «попробуйте позже». В Code Review добавили уровни проверки Quick, Standard и Deep</p>
+        <a class="src" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.304">github.com/anthropics/claude-code/releases/tag/v2.1.304</a>
+      </article>
+      <article>
+        <span class="tag">GitHub · релиз</span>
+        <h2>А днём раньше вышла v2.1.303</h2>
+        <p>Релиз от 18 октября 2026 короткий: в описании только «Bug fixes and reliability improvements», то есть исправления и работа над стабильностью. Новые функции в этом описании не перечислены</p>
+        <a class="src" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.303">github.com/anthropics/claude-code/releases/tag/v2.1.303</a>
+      </article>
+    </div>
+
+    <div class="col">
+      <article>
+        <span class="tag">В выпуске TLDR · 20 октября</span>
+        <h2>MiniMax M3.1 Flash обещает дешевле и быстрее</h2>
+        <p>В выпуске TLDR пишут про MiniMax M3.1 Flash: по словам разработчиков модель ускоряет онлайн-вывод почти в три раза и срезает стоимость использования на 70 процентов. Доступна через MiniMax API, тариф M Plan и MiniMax Code, веса обещают выложить позже</p>
+        <a class="src" href="https://tldr.tech/ai/2026-10-20">tldr.tech/ai/2026-10-20</a>
+      </article>
+      <article>
+        <span class="tag">В выпуске TLDR · 20 октября</span>
+        <h2>Exa 3.0 и поиск как инструмент для работы</h2>
+        <p>В выпуске TLDR отмечают Exa 3.0: по их заявке движок лидирует на тестах по коду, финансам, глубокому исследованию и анализу компаний. В релиз входит режим поиска Exa Lite. По данным рассылки, собственный индекс Exa отслеживает больше 2 триллионов адресов</p>
+        <a class="src" href="https://tldr.tech/ai/2026-10-20">tldr.tech/ai/2026-10-20</a>
+      </article>
+    </div>
+
+    <div class="col">
+      <article class="watch">
+        <span class="tag">Что посмотреть · YouTube Anthropic</span>
+        <h2>Три ролика на канале</h2>
+        <p>Три темы с канала Anthropic. Ниже названия и ссылки на видео, без пересказа их содержания</p>
+        <ul>
+          <li><a href="https://www.youtube.com/watch?v=DdCEmlAydcw">Внутри лаборатории молекулярной биологии Anthropic</a></li>
+          <li><a href="https://www.youtube.com/watch?v=ROF2Nv_KjOM">Представляем Claude Fable 5.1</a></li>
+          <li><a href="https://www.youtube.com/watch?v=UxJZrCFzTHY">Model Hardware Standard: управление физическим оборудованием с помощью ИИ</a></li>
+        </ul>
+        <a class="src" href="https://www.youtube.com/@anthropic-ai/videos">youtube.com/@anthropic-ai/videos</a>
+      </article>
+      <article>
+        <span class="tag">В выпуске TLDR · полезный вывод</span>
+        <h2>Бенчмарки могут вести не туда</h2>
+        <p>В выпуске TLDR разбирают материал про то, как тесты формируют ожидания от моделей. Главная мысль простая: плохо составленный бенчмарк способен толкнуть индустрию в неверную сторону</p>
+        <p>Для работы это значит одно: прежде чем верить громкой цифре из чужого рейтинга, проверь на своей задаче, измеряет ли тест то, что нужно именно тебе</p>
+        <a class="src" href="https://tldr.tech/ai/2026-10-20">tldr.tech/ai/2026-10-20</a>
+      </article>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div>Источники: рассылка TLDR AI за 20 октября 2026 (tldr.tech/ai/2026-10-20) · релизы GitHub anthropics/claude-code v2.1.304 и v2.1.303 (18-19 октября 2026) · канал Anthropic на YouTube, только метаданные (youtube.com/@anthropic-ai/videos)</div>
+    <div class="stamp">Ручной запуск • 3 публичных источника • 1 страница</div>
+  </div>
+
+</div>
+</body>
+</html>
