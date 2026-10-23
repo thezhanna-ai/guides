@@ -176,8 +176,11 @@ class ArticleImagesTest(unittest.TestCase):
 
     def test_image_manifest_covers_approved_articles_and_explicit_draft_covers(self):
         self.assertEqual(len(self.eligible), 41)
+        optional_without_cover = {a["slug"] for a in self.articles
+                                  if a.get("oblozhka") is False and a["slug"] not in self.covers}
         self.assertEqual(set(self.covers), {a["slug"] for a in self.articles
-                                         if a["status"] in {"live", "gotova"} or a.get("oblozhka")})
+                                         if (a["status"] in {"live", "gotova"} or a.get("oblozhka"))
+                                         and a["slug"] not in optional_without_cover})
         self.assertEqual(len(self.manifest), 47)
         self.assertTrue(all(row["number"] < 49 for row in self.manifest))
         for article in self.eligible:
@@ -389,6 +392,13 @@ class ArticleImagesTest(unittest.TestCase):
         for card in cards:
             slug = card.attrs["href"].split("/")[1]
             with self.subTest(slug=slug):
+                if slug not in self.covers:
+                    article = next(a for a in live if a["slug"] == slug)
+                    self.assertIs(article.get("oblozhka"), False)
+                    self.assertEqual(card.all(tag="img"), [])
+                    self.assertEqual(len(card.all(klass="guide-placeholder")), 1)
+                    self.assertEqual(card.attrs["aria-label"], article["title"])
+                    continue
                 image = card.all(tag="img")[0].attrs
                 self.assertEqual(image["src"], self.covers[slug]["image"])
                 article = next(a for a in live if a["slug"] == slug)

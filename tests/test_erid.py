@@ -2,6 +2,7 @@
 import importlib.util
 import html as html_lib
 import re
+import json
 import unittest
 
 from test_site import ImageDocument, ROOT, PARTNER_LINKS
@@ -25,7 +26,7 @@ class EridTest(unittest.TestCase):
     def setUpClass(cls):
         cls.pages = [ROOT / "index.html", *sorted(ROOT.glob("claude-ai/*/index.html")),
                      ROOT / "scripts/shablon_glavnoy.html"]
-        assert len(cls.pages) == 71
+        assert len(cls.pages) == len(json.loads((ROOT / 'data/statyi.json').read_text())['statyi']) + 2
 
     def test_every_partner_page_and_template_has_exactly_one_marked_creative(self):
         for page in self.pages:

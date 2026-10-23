@@ -1,4 +1,5 @@
 import html
+import json
 import re
 import unittest
 import urllib.parse
@@ -27,7 +28,7 @@ def article_path(url):
 class GlobalArticleStandardTest(unittest.TestCase):
     def test_sitemap_contains_the_complete_article_cohort(self):
         urls = article_urls()
-        self.assertEqual(len(urls), 69)
+        self.assertEqual(len(urls), sum(a['status'] == 'live' and not a.get('noindex_reason') for a in json.loads((ROOT / 'data/statyi.json').read_text())['statyi']))
         self.assertEqual(len(urls), len(set(urls)))
         for url in urls:
             self.assertTrue(article_path(url).is_file(), url)
