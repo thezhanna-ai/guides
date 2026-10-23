@@ -76,7 +76,7 @@ test('Все настоящие inline просмотрщики использу
     assert.ok(!/document\.body\.style\.overflow\s*=/.test(html), name);
   }
   // Published photo-effects and Motion pages use the shared viewer lifecycle.
-  assert.equal(count, 51);
+  assert.ok(count >= 51, "Existing inline viewers remain covered when new articles are added");
 });
 
 test('Disabled элемент пропускается, внешний фокус возвращается в модалку', () => {

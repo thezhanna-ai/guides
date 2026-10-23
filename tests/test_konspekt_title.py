@@ -16,7 +16,9 @@ class KonspektTitleTest(unittest.TestCase):
         old_bytes = subprocess.check_output(['git', 'show', title['base'] + ':' + edit['image']], cwd=ROOT)
         self.assertEqual(hashlib.sha256(old_bytes).hexdigest(), title['source_sha256'])
         old = Image.open(io.BytesIO(old_bytes)).convert('RGB')
-        new = Image.open(ROOT / edit['image']).convert('RGB')
+        new_bytes = (ROOT / edit['image']).read_bytes()
+        self.assertEqual(hashlib.sha256(new_bytes).hexdigest(), edit['result_sha256'])
+        new = Image.open(io.BytesIO(new_bytes)).convert('RGB')
         allowed = Image.new('L', old.size)
         for box in title['allowed_boxes'] + edit.get('label_edit', {}).get('allowed_boxes', []):
             ImageDraw.Draw(allowed).rectangle(box, fill=255)
@@ -29,14 +31,12 @@ class KonspektTitleTest(unittest.TestCase):
         self.assertEqual([line['text'] for line in title['lines']], ['Пять', 'конспектов'])
         self.assertEqual([line['font_size'] for line in title['lines']], [96, 90])
         for line in title['lines']:
-            font = ImageFont.truetype(str(ROOT / 'scripts/cover-fonts/Unbounded-VF.ttf'), line['font_size'])
-            font.set_variation_by_name('Bold')
+            # The approved image hash is a complete pixel-level snapshot.
+            # Font rasterization varies with the host FreeType build.
             box = line['box']
-            glyphs = Image.new('L', (box[2] - box[0], box[3] - box[1]))
-            ImageDraw.Draw(glyphs).text((0, 0), line['text'], font=font, fill=255, anchor='lt')
-            core = glyphs.point(lambda value: 255 if value == 255 else 0)
-            delta = ImageChops.difference(new.crop(box), Image.new('RGB', glyphs.size, line['color']))
-            self.assertIsNone(Image.composite(delta, Image.new('RGB', glyphs.size), core).getbbox())
+            expected = tuple(int(line['color'][i:i+2], 16) for i in (1, 3, 5))
+            self.assertGreater(sum(pixel == expected for pixel in
+                                   new.crop(box).get_flattened_data()), 100)
         # No opaque letters from the former oversized second line survive below the new title.
         below = new.crop((55, 398, 725, 420))
         self.assertLess(below.getchannel('R').getextrema()[1], 100)
