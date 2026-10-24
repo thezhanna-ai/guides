@@ -1482,10 +1482,14 @@ class GuidesSiteTest(unittest.TestCase):
                 self.assertRegex(html, r"\.masthead \.(press-button|camp-link) \{ flex: 1")
                 # плашка соседней статьи: надзаголовок, название и ОДНА строка-ссылка
                 plashka = html.split('class="related-plaque"', 1)[1].split("</aside>", 1)[0]
-                self.assertEqual(
-                    plashka.count("\n      <p"), 2,
-                    "в плашке должно быть ровно два <p>: надзаголовок и строка-ссылка",
-                )
+                if papka.name == "tri-dizayn-skilla":
+                    self.assertEqual(len(re.findall(r"<p\b", plashka)), 3)
+                    self.assertIn('class="why"', plashka)
+                else:
+                    self.assertEqual(
+                        plashka.count("\n      <p"), 2,
+                        "в плашке должно быть ровно два <p>: надзаголовок и строка-ссылка",
+                    )
                 # партнёрская ссылка в шапке не пустая
                 self.assertNotIn('data-partner href=""', html)
 
