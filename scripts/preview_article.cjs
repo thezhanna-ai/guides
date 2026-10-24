@@ -32,7 +32,7 @@ async function readyArticle(page, url) {
     }
     await document.fonts.ready;
     const body = getComputedStyle(document.body);
-    const paragraph = document.querySelector('main p') || document.querySelector('p');
+    const paragraph = [...document.querySelectorAll('main p')].find(element => /Spectral/i.test(getComputedStyle(element).fontFamily));
     const text = paragraph && getComputedStyle(paragraph);
     return {
       status: document.fonts.status, loaded,
@@ -47,6 +47,7 @@ async function readyArticle(page, url) {
   assert.equal(result.status, 'loaded');
   assert.ok(result.loaded.every(face => face.ready), JSON.stringify(result.loaded));
   assert.match(result.family, /Spectral/i, 'Use the actual article font');
+  assert.match(result.paragraphFamily, /Spectral/i, 'Check article prose rather than a UI label');
   assert.match(result.headingFamily, /Unbounded/i, 'Use the actual article heading');
   assert.match(result.numerals, /"lnum"(?: 1)?/, 'Use lining numerals');
   assert.match(result.paragraphNumerals, /"lnum"(?: 1)?/, 'Article text must inherit lining numerals');
@@ -57,7 +58,8 @@ async function readyArticle(page, url) {
   return {...result, fontResponses};
 }
 
-function serveSite() {
+function serveSite(siteRoot = root) {
+  const root = siteRoot;
   const types = {'.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.woff2': 'font/woff2', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon'};
   return http.createServer((request, response) => {
     try {
@@ -84,7 +86,13 @@ async function main() {
   let browser;
   try {
     await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
-    browser = await chromium.launch({headless: true, ...(process.env.SITE_CHROMIUM ? {executablePath: process.env.SITE_CHROMIUM} : {})});
+    if (process.env.SITE_CDP_URL) {
+      const endpoint = new URL(process.env.SITE_CDP_URL);
+      assert.ok(endpoint.protocol === 'http:' && endpoint.hostname === '127.0.0.1', 'CDP must use local loopback HTTP');
+      browser = await chromium.connectOverCDP(endpoint.href);
+    } else {
+      browser = await chromium.launch({headless: true, ...(process.env.SITE_CHROMIUM ? {executablePath: process.env.SITE_CHROMIUM} : {channel: 'chrome'})});
+    }
     const results = [];
     fs.mkdirSync(output, {recursive: true});
     for (const viewport of [{width: 390, height: 844}, {width: 1440, height: 1000}]) {
