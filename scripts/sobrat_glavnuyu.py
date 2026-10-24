@@ -339,7 +339,7 @@ def sobrat_kartochku(statya, oblozhki):
     return (
         '          <a class="guide-link" data-tags="{tags}" data-metki="{metki}" data-kod="{kod}" '
         'data-poisk="{poisk}" aria-label="{title}" href="claude-ai/{slug}/">'
-        '{media}<span class="guide-body">{instrumenty}<span class="guide-summary">{summary}</span>'
+        '{media}<span class="guide-body">{instrumenty}<span class="guide-title">{title}</span><span class="guide-summary">{summary}</span>'
         '<span class="guide-meta"><span class="kind {klass}">{podpis}</span>{uroven}</span>'
         '</span></a>'
     ).format(
@@ -419,6 +419,16 @@ def sobrat_filtry():
     return "\n".join(punkty)
 
 
+def sobrat_filtry_knopki():
+    punkty = [('all', 'Все темы')]
+    punkty.extend((kod, nazvanie + (' (%s)' % podpis if podpis else ''))
+                  for kod, (nazvanie, podpis) in METKI.items())
+    punkty.append(('drugoe', 'Другое: своё слово'))
+    return '\n'.join('      <button class="tag-btn" type="button" data-filter="%s" aria-pressed="%s">%s</button>'
+                     % (kod, 'true' if kod == 'all' else 'false', ekranirovat(tekst))
+                     for kod, tekst in punkty)
+
+
 def sobrat_navigaciyu():
     return "\n".join(
         '        <a href="#r-%s">%s</a>' % (razdel["tag"], ekranirovat(razdel["zagolovok"]))
@@ -478,6 +488,7 @@ def sobrat_stranicu():
         intro=ekranirovat(SHAPKA["intro"]),
         urovni=sobrat_urovni(),
         filtry=sobrat_filtry(),
+        filtry_knopki=sobrat_filtry_knopki(),
         razdely="\n\n".join(sobrat_razdel(r, po_trassam, oblozhki) for r in RAZDELY),
         podval=ekranirovat(SHAPKA["podval"]),
         avtor_imya=ekranirovat(SHAPKA["avtor_imya"]),

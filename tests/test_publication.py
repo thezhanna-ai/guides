@@ -119,6 +119,11 @@ class PublicationTest(unittest.TestCase):
                         self.assertEqual(len(button.parent.all(tag="img")), 1)
                     elif "checklist-copy" in classes:
                         self.assertEqual(len(button.parent.parent.all(tag="li")), 3)
+                    elif "tag-btn" in classes:
+                        options = {option.attrs.get("value") for option in doc.root.all(tag="option")}
+                        self.assertIn(button.attrs.get("data-filter"), options)
+                        self.assertIn(button.attrs.get("aria-pressed"), {"true", "false"})
+                        self.assertTrue(button.text_content().strip())
                     else:
                         self.assertTrue(classes & {"theme-toggle", "viewer-close", "search-go"}, "Неизвестный тип кнопки")
 

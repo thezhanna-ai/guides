@@ -413,8 +413,7 @@ class ArticleImagesTest(unittest.TestCase):
                 summaries = card.all(klass="guide-summary")
                 self.assertEqual(len(summaries), 1)
                 self.assertEqual(summaries[0].text_content(), article["kratko"])
-                self.assertNotIn(article["title"], card.text_content())
-                self.assertEqual(card.all(klass="guide-title"), [])
+                self.assertEqual(card.all(klass="guide-title")[0].text_content(), article["title"])
                 self.assertTrue((ROOT / image["src"]).is_file())
                 self.assertEqual(image["loading"], "lazy")
         hero = doc.root.all(klass="hero-image")[0].attrs
