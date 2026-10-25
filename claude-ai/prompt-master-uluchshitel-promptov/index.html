@@ -2184,8 +2184,9 @@ article figure.shot:has(img[src="assets/add.webp"]) { max-width: 74%; }
 article figure.shot:has(img[src="assets/add.webp"]) img { max-width: min(100%, 308px); }
 article figure.shot figcaption { max-width: 560px; }
 /* Как .fig .zoom в tri-dizayn-skilla: кнопка привязана к изображению, подпись снаружи */
-article figure.shot .shot-media { display: block; position: relative; width: fit-content; max-width: min(100%, 560px); }
+article figure.shot .shot-media { display: block; position: relative; width: 100%; max-width: min(100%, 560px); }
 article figure.shot:has(img[src="assets/add.webp"]) .shot-media { max-width: min(100%, 308px); }
+article figure.shot .zoom { left: auto; right: 10px; width: auto; max-width: calc(100% - 20px); box-sizing: border-box; white-space: nowrap; letter-spacing: normal; }
 /* Мягкое чередование как tri-dizayn-skilla и «Темы для контента» */
 article .table-wrap { overflow-x: auto; margin: 24px 0; }
 article .table-wrap table { width: 100%; border-collapse: collapse; }
@@ -2216,29 +2217,29 @@ article .callout p { margin: 0; }
 <p>Это полный пакет: папка <code>prompt-master</code>, внутри <code>SKILL.md</code>, <code>README.md</code>, <code>LICENSE</code> и папка <code>references</code> с файлами <code>templates.md</code> и <code>patterns.md</code>. Архив всего репозитория с лишней внешней папкой не подменяет этот ZIP.</p>
 <h3 id="customize">Шаг 2. Открой Customize → Skills</h3>
 <aside class="callout"><p>В левой колонке Claude нажми <strong>Customize</strong>, затем вкладку <strong>Skills</strong>. В нашей записи пункт Customize находится под Scheduled, над More. Можно сразу открыть <a href="https://claude.ai/customize/skills">страницу Skills</a>.</p></aside>
-<figure class="shot"><img src="assets/customize.webp" width="1128" height="303" alt="Слева пункт Customize, справа открытая вкладка Skills. Личные чаты ниже границы кадра" loading="lazy"><figcaption>Слева пункт Customize, справа открытая вкладка Skills. Личные чаты ниже границы кадра</figcaption></figure>
+<figure class="shot"><img src="assets/customize.webp" width="2256" height="606" alt="Слева пункт Customize, справа открытая вкладка Skills. Личные чаты ниже границы кадра" loading="lazy"><figcaption>Слева пункт Customize, справа открытая вкладка Skills. Личные чаты ниже границы кадра</figcaption></figure>
 <aside class="callout"><p>Если Skills не видно или навыки неактивны, открой Settings → Capabilities и включи Code execution and file creation. В обновлённых настройках это может называться Create and edit files. В рабочем аккаунте доступом может управлять организация. <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude">Справка Claude</a> описывает оба варианта.</p></aside>
 <h3 id="add">Шаг 3. Нажми Add → Upload a skill</h3>
 <p>Справа над списком нажми <strong>+ Add</strong>. В выпавшем меню выбери <strong>Upload skill</strong> (в другом варианте интерфейса: Upload a skill). В справке путь может включать промежуточную кнопку Create skill. Ориентир - загрузка своего ZIP, а не создание навыка с нуля.</p>
-<figure class="shot"><img src="assets/add.webp" width="308" height="222" alt="Меню Add: выбери Upload skill для загрузки готового навыка" loading="lazy"><figcaption>Меню Add: выбери Upload skill для загрузки готового навыка</figcaption></figure>
+<figure class="shot"><img src="assets/add.webp" width="616" height="444" alt="Меню Add: выбери Upload skill для загрузки готового навыка" loading="lazy"><figcaption>Меню Add: выбери Upload skill для загрузки готового навыка</figcaption></figure>
 <h3 id="upload">Шаг 4. Выбери ZIP и нажми Upload</h3>
 <p>На странице Upload a skill нажми область Skill file или перетащи в неё скачанный <code>Prompt-Master-Claude.zip</code>. Это загрузка файла в раздел навыков, не вложение в обычное сообщение.</p>
-<figure class="shot"><img src="assets/upload.webp" width="764" height="605" alt="Upload a skill: область, куда нужно перетащить ZIP" loading="lazy"><figcaption>Upload a skill: область, куда нужно перетащить ZIP</figcaption></figure>
+<figure class="shot"><img src="assets/upload.webp" width="1528" height="1210" alt="Upload a skill: область, куда нужно перетащить ZIP" loading="lazy"><figcaption>Upload a skill: область, куда нужно перетащить ZIP</figcaption></figure>
 <p>После выбора файла появится Preview с названием <code>prompt-master</code>. Проверь имя и нажми <strong>Upload</strong> внизу. Дождись завершения загрузки.</p>
-<figure class="shot"><img src="assets/selected.webp" width="772" height="902" alt="ZIP выбран, в Preview распознан prompt-master. Следующее действие - Upload" loading="lazy"><figcaption>ZIP выбран, в Preview распознан prompt-master. Следующее действие - Upload</figcaption></figure>
+<figure class="shot"><img src="assets/selected.webp" width="1544" height="1804" alt="ZIP выбран, в Preview распознан prompt-master. Следующее действие - Upload" loading="lazy"><figcaption>ZIP выбран, в Preview распознан prompt-master. Следующее действие - Upload</figcaption></figure>
 <h3 id="enable">Шаг 5. Убедись, что навык включён</h3>
 <p>После загрузки откроется карточка <code>prompt-master</code>. Переключатель справа сверху должен быть включён. В Contents видны SKILL.md и references: это подтверждает, что загрузился полный пакет. Вернуться к нему можно через Skills → Yours.</p>
-<figure class="shot"><img src="assets/installed.webp" width="762" height="576" alt="Карточка установленного prompt-master: переключатель включён, файлы пакета видны в Contents" loading="lazy"><figcaption>Карточка установленного prompt-master: переключатель включён, файлы пакета видны в Contents</figcaption></figure>
+<figure class="shot"><img src="assets/installed.webp" width="1524" height="1152" alt="Карточка установленного prompt-master: переключатель включён, файлы пакета видны в Contents" loading="lazy"><figcaption>Карточка установленного prompt-master: переключатель включён, файлы пакета видны в Contents</figcaption></figure>
 <h3 id="first">Шаг 6. Отправь свою корявую фразу</h3>
 <p>Начни новый чат. В поле сообщения напиши <code>/prompt-master</code>, затем задачу своими словами. Вот наша исходная фраза из записи, с исходными ошибками:</p>
 <pre data-lang="Вставь в новый чат Claude" class="reader-prompt"><code class="language-text">/prompt-master сделай мне пост про то что я устала и ничего не успеваю но чтобы было не нытьё а полезно и коротко и для инсты</code></pre>
-<figure class="shot"><img src="assets/input.webp" width="680" height="315" alt="Наша короткая просьба в поле сообщения Claude перед ответом навыка" loading="lazy"><figcaption>Наша короткая просьба в поле сообщения Claude перед ответом навыка</figcaption></figure>
+<figure class="shot"><img src="assets/input.webp" width="1360" height="630" alt="Наша короткая просьба в поле сообщения Claude перед ответом навыка" loading="lazy"><figcaption>Наша короткая просьба в поле сообщения Claude перед ответом навыка</figcaption></figure>
 <p>Claude сначала уточнил, <strong>для какой нейросети нужен промпт</strong>. Выбрали Claude. Это обязательная проверка целевого инструмента в правилах навыка: один и тот же запрос не стоит бездумно переносить между разными задачами и сервисами.</p>
-<figure class="shot"><img src="assets/question.png" width="1140" height="566" alt="Настоящий уточняющий вопрос Prompt Master: для какой нейросети нужен промпт?" loading="lazy"><figcaption>Настоящий уточняющий вопрос Prompt Master: для какой нейросети нужен промпт?</figcaption></figure>
+<figure class="shot"><img src="assets/question.png" width="2280" height="1132" alt="Настоящий уточняющий вопрос Prompt Master: для какой нейросети нужен промпт?" loading="lazy"><figcaption>Настоящий уточняющий вопрос Prompt Master: для какой нейросети нужен промпт?</figcaption></figure>
 <aside class="callout"><p>Если команда не подставляется или навык не применяется, напиши явно: «Используй навык prompt-master. Улучши мой запрос для Claude: …» и добавь свою фразу. Проверь, что переключатель навыка включён. Само появление длинного ответа ещё не доказывает применение навыка.</p></aside>
 <h3 id="result">Шаг 7. Забери запрос, заполни поля и выполни задачу</h3>
 <p>В нашем ответе пять блоков. <code>task</code> описывает задачу, <code>constraints</code> - ограничения, <code>voice_example</code> - пример голоса, <code>audience</code> - читателя, <code>output_format</code> - вид результата. Названия могут меняться: правила навыка требуют один готовый блок запроса, а не неизменные пять заголовков для любой задачи.</p>
-<figure class="shot"><img src="assets/task.webp" width="797" height="239" alt="Блок task из настоящего ответа: какую задачу нужно выполнить. Полный запрос ниже" loading="lazy"><figcaption>Блок task из настоящего ответа: какую задачу нужно выполнить. Полный запрос ниже</figcaption></figure>
+<figure class="shot"><img src="assets/task.webp" width="1594" height="478" alt="Блок task из настоящего ответа: какую задачу нужно выполнить. Полный запрос ниже" loading="lazy"><figcaption>Блок task из настоящего ответа: какую задачу нужно выполнить. Полный запрос ниже</figcaption></figure>
 <p>Ниже текст блоков из записи. В примере голоса одно слово заменено на «инструкция», остальные формулировки сохранены. Это ответ нейросети, а не редакционные рекомендации: обещание уместиться «без ещё» и все ограничения длины нужно проверять на площадке. Название площадки и знаки внутри цитаты сохранены, чтобы её можно было сверить с кадрами.</p>
 <pre data-lang="Ответ Claude: с пояснённым словом в примере голоса" class="reader-prompt"><code class="language-text">&lt;task&gt;
 Напиши короткий пост для Instagram на тему: я устала и ничего не успеваю. Пост должен быть полезным, а не жалобой. Читатель должен узнать себя и унести 2–3 конкретных приёма, которые можно применить сегодня.
@@ -2271,12 +2272,12 @@ article .callout p { margin: 0; }
 3. Один вариант первой строки на замену, если основная покажется слабой.
 Больше ничего не добавляй.
 &lt;/output_format&gt;</code></pre>
-<figure class="shot"><img src="assets/voice.webp" width="796" height="129" alt="Незаполненное поле AUDIENCE: сюда нужно вписать свою аудиторию" loading="lazy"><figcaption>Незаполненное поле AUDIENCE: сюда нужно вписать свою аудиторию</figcaption></figure>
+<figure class="shot"><img src="assets/voice.webp" width="1592" height="258" alt="Незаполненное поле AUDIENCE: сюда нужно вписать свою аудиторию" loading="lazy"><figcaption>Незаполненное поле AUDIENCE: сюда нужно вписать свою аудиторию</figcaption></figure>
 <p>Вместо <code>[AUDIENCE]</code> нужно указать, кто читает текст. Мы ответили: «все, кто работает в Клоде». Claude начал заменять блок аудитории. На кадре полностью читается начало:</p>
 <pre data-lang="Видимый фрагмент уточнения" class="reader-prompt"><code class="language-text">&lt;audience&gt;
 Люди, которые работают в Claude каждый день: пишут тексты, ведут проекты, разбирают задачи. Они уже умеют пользоваться нейросетью, поэтому хотя бы один приём должен быть про то, как переложить на Claude часть рутины,</code></pre>
 <aside class="callout"><p>Это именно фрагмент: запись заканчивается во время ответа, продолжение здесь не додумано. Для своего запроса впиши законченную фразу, например <code>[люди, которые ежедневно пишут тексты и ведут проекты в Claude]</code>, и убери скобки.</p></aside>
-<figure class="shot"><img src="assets/audience.webp" width="828" height="490" alt="Уточнение аудитории в нашей записи. Окончание ответа в кадр не попало" loading="lazy"><figcaption>Уточнение аудитории в нашей записи. Окончание ответа в кадр не попало</figcaption></figure>
+<figure class="shot"><img src="assets/audience.webp" width="1656" height="980" alt="Уточнение аудитории в нашей записи. Окончание ответа в кадр не попало" loading="lazy"><figcaption>Уточнение аудитории в нашей записи. Окончание ответа в кадр не попало</figcaption></figure>
 <p>Скопируй весь готовый запрос, замени аудиторию и свой пример голоса, открой <strong>новый чат</strong> выбранной нейросети и отправь запрос уже без команды <code>/prompt-master</code>. Теперь ты просишь выполнить задачу. До этого шага у тебя был запрос для поста, а не сам пост.</p>
 <aside class="related-plaque" aria-label="Соседняя статья"><p class="plaque-label">Соседняя статья</p><p class="plaque-title"><a href="/claude-ai/svoy-stil-otvetov/">Как научить Claude писать в твоём стиле</a></p><p class="why">Когда запрос уже собран, добавь образец своего текста и настрой стиль ответа</p></aside>
 <h3 id="three">Три первые задачи: скопируй и вставь в Claude</h3>
