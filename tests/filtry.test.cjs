@@ -52,10 +52,13 @@ function page(source = script, reducedMotion = false) {
   const input = new Element(); input.value = ''; input.focused = false; input.focus = () => { input.focused = true; };
   const noResults = new Element();
   const lager = new Element();
+  const resultCount = new Element();
+  const orientation = new Element();
+  const buttons = [...html.matchAll(/<button class="tag-btn"[^>]+data-filter="([^"]+)"/g)].map(match => new Element({'data-filter': match[1]}));
   const document = {
-    getElementById(id) { return {'guide-search': input, 'metka': select, 'search-go': go, 'lager': lager}[id] || noResults; },
+    getElementById(id) { return {'guide-search': input, 'metka': select, 'search-go': go, 'lager': lager, 'result-count': resultCount, 'catalog-orientation': orientation}[id] || noResults; },
     querySelectorAll(selector) {
-      return {'.guide-link': links, '.track': tracks, '.tool-block': sections}[selector];
+      return {'.guide-link': links, '.track': tracks, '.tool-block': sections, '.tag-btn': buttons}[selector];
     },
   };
   const window = {location: {href: ''}, matchMedia(query) { assert.equal(query, '(prefers-reduced-motion: reduce)'); return {matches: reducedMotion}; }};
@@ -64,8 +67,8 @@ function page(source = script, reducedMotion = false) {
   Object.assign(state, {document, window});
   vm.runInContext(source, state);
   return {
-    sections, tracks, links, select, go, input, noResults, lager, window, state,
-    key(key) { if (input.listeners.keydown) input.listeners.keydown({type: 'keydown', key}); },
+    sections, tracks, links, select, go, input, noResults, lager, resultCount, orientation, buttons, window, state,
+    key(key) { if (input.listeners.keydown) input.listeners.keydown({type: 'keydown', key, preventDefault() {}}); },
     search(value) { input.value = value; input.listeners.input(); },
     filter(tag) { select.value = tag; select.listeners.change(); },
     find() { go.listeners.click(); },
@@ -248,7 +251,7 @@ test('Общее кодовое слово сохраняет несколько
 
 test('Enter открывает единственный результат, обычная клавиша ничего не открывает', () => {
   const p = page(); p.search('ujkjcjdjq'); assert.equal(p.visible().length, 1);
-  p.key('Escape'); assert.equal(p.window.location.href, '');
+  p.key('x'); assert.equal(p.window.location.href, '');
   p.key('Enter'); assert.equal(p.window.location.href, articleHref('golosovoy-vvod-v-claude'));
 });
 
@@ -338,3 +341,40 @@ for (const reducedMotion of [false, true]) {
     });
   }
 }
+
+
+test('Счётчик и пояснения соответствуют видимым результатам, Escape сохраняет фильтр', () => {
+  const p = page();
+  p.search('несуществующийслучайныйзапрос');
+  assert.equal(p.visible().length, 0);
+  assert.equal(p.resultCount.textContent, 'Найдено инструкций: 0');
+  assert.equal(p.orientation.hidden, true);
+  assert.ok(p.noResults.classes.has('show'));
+  p.key('Escape');
+  assert.equal(p.input.value, '');
+  assert.equal(p.visible().length, liveCount);
+  assert.equal(p.resultCount.textContent, 'Найдено инструкций: ' + liveCount);
+  assert.equal(p.orientation.hidden, false);
+  p.filter('claude-chat');
+  const expected = p.visible().length;
+  p.search('несуществующийслучайныйзапрос');
+  p.key('Escape');
+  assert.equal(p.visible().length, expected);
+  assert.equal(p.select.value, 'claude-chat');
+  assert.equal(p.orientation.hidden, true);
+});
+
+test('Лента кнопок использует действующий поиск и синхронизирует aria-pressed', () => {
+  const p = page();
+  const claude = p.buttons.find(button => button.getAttribute('data-filter') === 'claude-chat');
+  claude.listeners.click();
+  assert.equal(p.select.value, 'claude-chat');
+  assert.equal(claude.getAttribute('aria-pressed'), 'true');
+  assert.equal(p.buttons.filter(button => button.getAttribute('aria-pressed') === 'true').length, 1);
+  p.search('ДОСТУП');
+  assert.ok(p.visible().length > 0, 'кодовое слово работает при выбранной теме');
+  p.buttons.find(button => button.getAttribute('data-filter') === 'all').listeners.click();
+  p.key('Escape');
+  assert.equal(p.visible().length, liveCount);
+  assert.equal(p.orientation.hidden, false);
+});

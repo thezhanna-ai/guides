@@ -356,6 +356,84 @@
     @media (max-width: 900px) {{ .novoe-list {{ grid-template-columns: 1fr }} }}
     /* Карточки без второй рамки вокруг: рубрика держится заголовком */
     .track {{ margin-top: 6px; padding: 0; border: 0; background: var(--guide-color-transparent) }}
+    /* Пачка 1: действующий каталог и поиск, компактная оболочка */
+    .cover-body {{ padding: 28px 0 30px }}
+    .cover-copy {{ max-width: 54% }}
+    .pill {{ margin-bottom: 16px; font-size: 11px }}
+    .cover h1 {{ font-size: clamp(30px, 3.2vw, 44px) }}
+    .cover .lead {{ margin-top: 14px; font-size: 18px }}
+    .cover-scene {{ width: min(40%, 450px); transform: translateY(-42%); overflow: visible }}
+    .cover-scene::before {{ content: none }}
+    .cover-scene picture {{ display: block; position: relative; isolation: isolate }}
+    .cover-scene picture::before {{ content: ""; position: absolute; inset: -142.11% -190.38% -142.86% -70.19%; z-index: -1;
+      background: url("assets/glavnaya/hero-fon.webp") 0 0 / 100% 100% no-repeat;
+      mask-image: linear-gradient(90deg, var(--guide-color-transparent), var(--guide-color-black) 15%, var(--guide-color-black) 80%, var(--guide-color-transparent)), linear-gradient(0deg, var(--guide-color-transparent), var(--guide-color-black) 25%, var(--guide-color-black) 75%, var(--guide-color-transparent)); mask-composite: intersect }}
+    .cover-scene img {{ width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: contain;
+      mask-image: linear-gradient(90deg, var(--guide-color-transparent), var(--guide-color-black) 10%, var(--guide-color-black) 90%, var(--guide-color-transparent)), linear-gradient(0deg, var(--guide-color-transparent), var(--guide-color-black) 12%, var(--guide-color-black) 88%, var(--guide-color-transparent)); mask-composite: intersect;
+      -webkit-mask-image: linear-gradient(90deg, var(--guide-color-transparent), var(--guide-color-black) 10%, var(--guide-color-black) 90%, var(--guide-color-transparent)), linear-gradient(0deg, var(--guide-color-transparent), var(--guide-color-black) 12%, var(--guide-color-black) 88%, var(--guide-color-transparent)); -webkit-mask-composite: source-in }}
+    .catalog-search {{ width: min(1120px, calc(100% - 40px)); margin: 24px auto 0 }}
+    .search-label {{ display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; color: var(--ink) }}
+    .catalog-search .toolbar {{ margin: 0; flex-wrap: nowrap }}
+    .catalog-search .search-input {{ min-height: 56px; box-shadow: none; border: 1px solid var(--sage-line) }}
+    .catalog-search .search-input:focus-visible {{ outline: 3px solid var(--guide-color-brand-ink); outline-offset: 3px }}
+    .catalog-search .cover-hint {{ margin: 10px 0 0; color: var(--muted) }}
+    .result-count {{ min-height: 22px; margin: 8px 0 0; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums }}
+    .tag-filters {{ display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px }}
+    .tag-btn {{ min-height: 44px; padding: 8px 15px; border: 1px solid var(--sage-line); border-radius: 999px; background: var(--guide-color-transparent); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer }}
+    .tag-btn[aria-pressed="true"] {{ background: var(--ink); color: var(--paper); border-color: var(--ink) }}
+    .tag-btn:focus-visible, .search-go:focus-visible {{ outline: 3px solid var(--guide-color-brand-ink); outline-offset: 3px }}
+    .after-cover {{ padding-top: 22px; gap: 24px }}
+    .after-cover .intro, .levels {{ font-size: 14px; line-height: 1.5 }}
+    .levels li {{ margin-top: 5px }}
+    .tool-block {{ margin-top: 36px }}
+    .track {{ padding: 0; border: 0; border-radius: 0; box-shadow: none; background: var(--guide-color-transparent) }}
+    .section-icon, .guide-link, .novoe-link {{ box-shadow: none }}
+    .section-icon {{ width: 52px; height: 52px }}
+    .guide-link {{ border: 0; border-radius: 12px; background: var(--card) }}
+    .guide-title {{ display: none }}
+    .guide-link:hover, .novoe-link:hover {{ transform: none; box-shadow: none }}
+    .guide-link, .novoe-link, .tag-btn, .search-go {{ transition: transform 160ms cubic-bezier(.23,1,.32,1) }}
+    .guide-link:active:not(:focus-visible), .novoe-link:active:not(:focus-visible), .tag-btn:active:not(:focus-visible), .search-go:active:not(:focus-visible) {{ transform: scale(.97) }}
+    .after-cover[hidden] {{ display: none }}
+    @media (max-width: 900px) {{
+      .cover-copy {{ max-width: 58% }}
+      .cover-scene {{ inset: 50% 20px auto auto; width: 38%; height: auto; aspect-ratio: 16 / 10; transform: translateY(-42%) }}
+    }}
+    @media (max-width: 720px) {{
+      .catalog-search {{ width: calc(100% - 32px); margin-top: 20px }}
+      .catalog-search .search-input {{ flex: 1 1 0; width: 100%; font-size: 16px; padding: 14px }}
+      .catalog-search .search-go {{ padding: 0 16px }}
+      .tag-filters {{ flex-wrap: nowrap; overflow-x: auto; padding: 4px 3px 8px; scrollbar-width: thin }}
+      .tag-btn {{ flex: none; white-space: nowrap }}
+      .guide-link {{ flex-direction: row; min-height: 122px; align-items: stretch }}
+      .guide-cover {{ width: 112px; height: auto; align-self: center; aspect-ratio: 1600 / 840; object-fit: contain }}
+      .guide-body {{ min-width: 0; padding: 13px; gap: 10px }}
+      .guide-link.kod-hit {{ position: relative }}
+      .guide-link.kod-hit .guide-body {{ padding-bottom: 28px }}
+      .guide-link.kod-hit::after {{ position: absolute; right: 13px; bottom: 6px; padding: 0; font-size: 10px }}
+      .guide-title {{ display: block; font-size: 15px; line-height: 1.35; overflow-wrap: anywhere }}
+      .guide-summary {{ display: none }}
+      .guide-tools {{ font-size: 10px }}
+      .guide-meta {{ gap: 6px; flex-wrap: wrap }}
+      .kind {{ font-size: 9px; height: 22px; padding: 0 7px }}
+      .guides {{ gap: 12px }}
+      .after-cover {{ width: calc(100% - 32px); gap: 14px; padding-top: 18px }}
+    }}
+    @media (max-width: 600px) {{
+      .cover-body {{ padding: 156px 0 22px }}
+      .cover-copy {{ max-width: none }}
+      .cover-bar {{ padding: 16px 0 }}
+      .cover-scene {{ inset: 54px 0 auto; width: 100%; height: 144px; aspect-ratio: auto; transform: none }}
+      .cover-scene picture {{ width: 230.4px; margin: 0 auto }}
+      .cover h1 {{ font-size: 30px }}
+      .cover .lead {{ margin-top: 12px; font-size: 17px; line-height: 1.4 }}
+      .cover-foot {{ padding: 12px 0; font-size: 11px }}
+      .pill {{ margin-bottom: 12px; font-size: 10px }}
+    }}
+    @media (prefers-reduced-motion: reduce) {{
+      .guide-link, .novoe-link, .tag-btn, .search-go,
+      .guide-link:active:not(:focus-visible), .novoe-link:active:not(:focus-visible), .tag-btn:active:not(:focus-visible), .search-go:active:not(:focus-visible) {{ transition: none; transform: none }}
+    }}
   </style>
 <!-- erid:style:start -->
 <style>
@@ -392,14 +470,7 @@
         <p class="pill">{nadzagolovok}</p>
         <h1>{h1} <em>{h1_akcent}</em></h1>
         <p class="lead">{lead}</p>
-        <div class="toolbar" role="search">
-          <input class="search-input" type="search" id="guide-search" placeholder="Тема или слово" aria-label="Поиск по теме или слову из поста или видео">
-          <select class="metka-select" id="metka" aria-label="Метка">
-{filtry}
-          </select>
-          <button class="search-go" id="search-go" type="button">Найти</button>
-        </div>
-        <p class="cover-hint">Например: доступ, голосовой ввод, свой сайт</p>
+
       </div>
     </div>
     <div class="cover-foot"><span><b>{chislo}</b> {chislo_slovo}</span>
@@ -408,7 +479,22 @@
       </nav>
     </div>
   </header>
-  <section class="after-cover" aria-label="Инструкции по нейросетям">
+  <section class="catalog-search" aria-label="Поиск и фильтры">
+    <label class="search-label" for="guide-search">Поиск по инструкциям</label>
+        <div class="toolbar" role="search" aria-label="Поиск инструкций">
+          <input class="search-input" type="search" id="guide-search" placeholder="Тема или слово" aria-label="Поиск по теме или слову из поста или видео">
+          <select hidden class="metka-select" id="metka" aria-label="Метка">
+{filtry}
+          </select>
+          <button class="search-go" id="search-go" type="button">Найти</button>
+        </div>
+        <p class="cover-hint">Например: доступ, голосовой ввод, свой сайт</p>
+    <div class="tag-filters" role="group" aria-label="Темы инструкций">
+{filtry_knopki}
+    </div>
+    <p class="result-count" id="result-count" role="status" aria-live="polite" aria-atomic="true">Найдено инструкций: {chislo}</p>
+  </section>
+  <section id="catalog-orientation" class="after-cover" aria-label="Инструкции по нейросетям">
     <p class="intro">{intro}</p>
     <div class="levels-box">
       <p class="intro">Инструкции размечены по уровню опыта:</p>
@@ -452,6 +538,9 @@
     var noResults = document.getElementById('no-results');
     var lager = document.getElementById('lager');
     var activeTag = 'all';
+    var tagButtons = document.querySelectorAll('.tag-btn');
+    var resultCount = document.getElementById('result-count');
+    var orientation = document.getElementById('catalog-orientation');
 
     // Поиск прощает: е/ё, и/й, мягкий знак, одну опечатку в слове от 4 букв,
     // латиницу (транслит «dostup» и забытую раскладку «ljcneg»)
@@ -576,6 +665,9 @@
       }});
 
       var filtering = searching || activeTag !== 'all';
+      if (resultCount) resultCount.textContent = 'Найдено инструкций: ' + visibleCount;
+      if (orientation) orientation.hidden = filtering;
+      tagButtons.forEach(function (button) {{ button.setAttribute('aria-pressed', String(button.getAttribute('data-filter') === metkaSelect.value)); }});
       noResults.classList.toggle('show', visibleCount === 0 && filtering);
       // Пока человек ищет, блок практикума не отодвигает найденное вниз
       if (lager) lager.hidden = filtering;
@@ -597,6 +689,12 @@
     }}
 
     function submitSearch(event) {{
+      if (event && event.type === 'keydown' && event.key === 'Escape') {{
+        event.preventDefault();
+        searchInput.value = '';
+        applyFilters();
+        return;
+      }}
       if (event && event.type === 'keydown' && event.key !== 'Enter') return;
       if (event && event.preventDefault) event.preventDefault();
       applyFilters();
@@ -606,6 +704,15 @@
     }}
     searchInput.addEventListener('keydown', submitSearch);
     if (searchGo) searchGo.addEventListener('click', submitSearch);
+
+    tagButtons.forEach(function (button) {{
+      button.addEventListener('click', function () {{
+        metkaSelect.value = button.getAttribute('data-filter');
+        activeTag = metkaSelect.value === 'drugoe' ? 'all' : metkaSelect.value;
+        if (metkaSelect.value === 'drugoe') searchInput.focus();
+        applyFilters();
+      }});
+    }});
 
     // «Другое» = своё слово: метки не фильтруют, курсор в поле поиска
     if (metkaSelect) metkaSelect.addEventListener('change', function () {{

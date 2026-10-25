@@ -799,10 +799,12 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 .cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
 .cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
 .cookie-actions button {
-  min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  flex: 1 1 0; width: 124px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
   border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
   font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
 }
+#cookie-accept { background: var(--guide-color-brand); color: var(--guide-color-forest); border-color: var(--guide-color-brand) }
+#cookie-decline { background: var(--guide-color-slate-paper); color: var(--guide-color-forest); border-color: var(--guide-color-slate-paper) }
 .cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
 .cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
   outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;

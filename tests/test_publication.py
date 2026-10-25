@@ -120,6 +120,11 @@ class PublicationTest(unittest.TestCase):
                     elif "checklist-copy" in classes:
                         expected = 7 if page.parent.name == "prompt-master-uluchshitel-promptov" else 3
                         self.assertEqual(len(button.parent.parent.all(tag="li")), expected)
+                    elif "tag-btn" in classes:
+                        options = {option.attrs.get("value") for option in doc.root.all(tag="option")}
+                        self.assertIn(button.attrs.get("data-filter"), options)
+                        self.assertIn(button.attrs.get("aria-pressed"), {"true", "false"})
+                        self.assertTrue(button.text_content().strip())
                     else:
                         self.assertTrue(classes & {"theme-toggle", "viewer-close", "search-go"}, "Неизвестный тип кнопки")
 
