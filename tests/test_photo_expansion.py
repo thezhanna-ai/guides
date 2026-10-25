@@ -48,11 +48,32 @@ class PhotoExpansion(unittest.TestCase):
         self.assertEqual(link['href'], '/claude-ai/kopirovat-stil-foto-v-chatgpt/')
         self.assertTrue((ROOT / link['href'].strip('/') / 'index.html').is_file())
 
+    def test_seo_title_changes_without_rewriting_visible_heading_or_intro(self):
+        page = BeautifulSoup((ROOT / PAGE).read_text(), 'html.parser')
+        self.assertEqual(page.title.text,
+                         '10 промптов для правки фото в ChatGPT: одежда, цвет и фон')
+        self.assertTrue(20 <= len(page.title.text) <= 65)
+        self.assertEqual(page.h1.get_text(' ', strip=True),
+                         '10 промптов для правки фото в ChatGPT: одежда, цвет, фон и формат кадра')
+        intro = page.select_one('.seo-intro')
+        self.assertEqual([p.get_text() for p in intro.select('p')], [
+            'Просишь поправить фон, а заодно получаешь новое лицо? Ниже десять правок на наших фотографиях. В конце соберём проверку, которая помогает заметить лишние изменения до скачивания',
+            'У каждого запроса есть фото до и после, а рядом указано, что сравнить с исходником. Иди по порядку: сначала загрузи фото, выбери одну правку и только после сравнения сохраняй результат',
+        ])
+        self.assertTrue(40 <= len(intro.get_text(' ', strip=True).split()) <= 60)
+        self.assertEqual(page.select_one('.cover figcaption').text,
+                         'Десять наших пар до и после и готовые запросы')
+        self.assertEqual(len(page.select('script[type="application/ld+json"]')), 1)
+        self.assertEqual(page.select_one('meta[property="og:image"]')['content'],
+                         'https://pronovoe.com/claude-ai/promty-pravki-foto-chatgpt/assets/oblozhka-10.webp')
+
     def test_approved_page_is_preserved_byte_for_byte(self):
+        # Approved visible content plus the SEO-only revision of 26 October
+        # (short title, combined intro wrapper, standard generated JSON-LD).
         import hashlib
         self.assertEqual(
             hashlib.sha256((ROOT / PAGE).read_bytes()).hexdigest(),
-            'd38feda432148004f340ef9f29887aa6a829a9e5439bda06ac2b205b4d61da41',
+            '6b80a2bc52df47d980388c35b4d415a0e8060785ca46070e513664591fecca2c',
             'Publication must preserve the approved text, prompts, markup and examples',
         )
 

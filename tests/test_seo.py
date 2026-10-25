@@ -38,26 +38,6 @@ class SeoTest(unittest.TestCase):
             path = ROOT / 'claude-ai' / row['slug'] / 'index.html'
             html = path.read_text()
             doc = ImageDocument(html)
-            if row['slug'] == 'promty-pravki-foto-chatgpt':
-                # Preserve the approved custom schema instead of imposing the
-                # generator's serialization. Full HTML is hash-locked separately.
-                from bs4 import BeautifulSoup
-                soup = BeautifulSoup(html, 'html.parser')
-                blocks = soup.select('script[type="application/ld+json"]')
-                self.assertEqual(len(blocks), 1)
-                graph = json.loads(blocks[0].string)['@graph']
-                articles = [x for x in graph if x['@type'] == 'Article']
-                self.assertEqual(len(articles), 1)
-                self.assertEqual(articles[0]['headline'], soup.h1.get_text(' ', strip=True))
-                self.assertEqual(articles[0]['mainEntityOfPage'], 'https://pronovoe.com/claude-ai/' + row['slug'] + '/')
-                self.assertEqual(articles[0]['image'], soup.select_one('meta[property="og:image"]')['content'])
-                faq = next(x for x in graph if x['@type'] == 'FAQPage')
-                visible = soup.select('details.faq-item')
-                self.assertEqual(len(faq['mainEntity']), len(visible))
-                for item, detail in zip(faq['mainEntity'], visible, strict=True):
-                    self.assertEqual(item['name'], detail.summary.get_text(' ', strip=True))
-                    self.assertEqual(item['acceptedAnswer']['text'], detail.p.get_text(' ', strip=True))
-                continue
             scripts = [n for n in doc.root.all(tag='script') if n.attrs.get('id') == 'seo-schema']
             self.assertEqual(len(scripts), 1, str(path))
             graph = json.loads(scripts[0].text)['@graph']
