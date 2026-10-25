@@ -76,7 +76,7 @@ test('Все настоящие inline просмотрщики использу
     assert.ok(!/document\.body\.style\.overflow\s*=/.test(html), name);
   }
   // Prompt Master adds one article using the existing shared viewer lifecycle.
-  assert.equal(count, 55);
+  assert.equal(count, 56);
 });
 
 test('Disabled элемент пропускается, внешний фокус возвращается в модалку', () => {

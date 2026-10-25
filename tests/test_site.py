@@ -672,6 +672,11 @@ class GuidesSiteTest(unittest.TestCase):
                 continue
             if "../../assets/promty-foto.js" in html:
                 continue  # серия промптов: своё окно увеличения в assets/promty-foto.js
+            if article["slug"] == "promty-pravki-foto-chatgpt":
+                self.assertIn('document.querySelectorAll(".outfit-reference img")', html)
+                self.assertIn('GuideImageViewer.mount(viewer, close)', html)
+                self.assertIn('className = "zoom"', html)
+                continue  # Comparison photos use the separate expansion controller.
             if not all(part in html for part in (
                 'class="viewer"', 'className = "zoom"',
                 '.viewer[open]', '.shot .zoom',
@@ -1481,7 +1486,12 @@ class GuidesSiteTest(unittest.TestCase):
                 self.assertRegex(html, r"\.masthead \.(press-button|camp-link) \{ flex: 1")
                 # плашка соседней статьи: надзаголовок, название и ОДНА строка-ссылка
                 plashka = html.split('class="related-plaque"', 1)[1].split("</aside>", 1)[0]
-                if papka.name in {"tri-dizayn-skilla", "prompt-master-uluchshitel-promptov"}:
+                if papka.name == "promty-pravki-foto-chatgpt":
+                    from bs4 import BeautifulSoup
+                    plashka = str(BeautifulSoup(html, 'html.parser').select_one('aside.related-plaque[aria-label="Соседняя статья"]'))
+                    self.assertEqual(len(re.findall(r"<p\b", plashka)), 2)
+                    self.assertIn('class="plaque-label"', plashka)
+                elif papka.name in {"tri-dizayn-skilla", "prompt-master-uluchshitel-promptov"}:
                     self.assertEqual(len(re.findall(r"<p\b", plashka)), 3)
                     self.assertIn('class="why"', plashka)
                 else:

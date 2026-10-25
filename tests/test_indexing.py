@@ -76,6 +76,13 @@ class IndexingTest(unittest.TestCase):
         (root / "assets/fonts").mkdir()
         for name in ("assets/palette.css", "assets/quality.css", "assets/privacy.css", "assets/fonts/fonts.css", "data/statyi.json", "data/seo.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "index.html"):
             shutil.copyfile(ROOT / name, root / name)
+        # This fixture exercises the shared article generator. The approved,
+        # manually serialized photo page is covered byte-for-byte in
+        # test_photo_expansion; it must not be rewritten by this fixture.
+        registry = root / "data/statyi.json"
+        data = json.loads(registry.read_text())
+        data["statyi"] = [a for a in data["statyi"] if a["slug"] != "promty-pravki-foto-chatgpt"]
+        registry.write_text(json.dumps(data, ensure_ascii=False))
         for a in json.loads((root / "data/statyi.json").read_text())["statyi"]:
             target = root / "claude-ai" / a["slug"] / "index.html"
             target.parent.mkdir(parents=True)
