@@ -50,13 +50,14 @@ function page(source = script, reducedMotion = false) {
   const select = new Element(); select.value = 'all';
   const go = new Element();
   const input = new Element(); input.value = ''; input.focused = false; input.focus = () => { input.focused = true; };
+  const reset = new Element();
   const noResults = new Element();
   const lager = new Element();
   const resultCount = new Element();
   const orientation = new Element();
   const buttons = [...html.matchAll(/<button class="tag-btn"[^>]+data-filter="([^"]+)"/g)].map(match => new Element({'data-filter': match[1]}));
   const document = {
-    getElementById(id) { return {'guide-search': input, 'metka': select, 'search-go': go, 'lager': lager, 'result-count': resultCount, 'catalog-orientation': orientation}[id] || noResults; },
+    getElementById(id) { return {'search-reset': reset, 'guide-search': input, 'metka': select, 'search-go': go, 'lager': lager, 'result-count': resultCount, 'catalog-orientation': orientation}[id] || noResults; },
     querySelectorAll(selector) {
       return {'.guide-link': links, '.track': tracks, '.tool-block': sections, '.tag-btn': buttons}[selector];
     },
@@ -67,7 +68,7 @@ function page(source = script, reducedMotion = false) {
   Object.assign(state, {document, window});
   vm.runInContext(source, state);
   return {
-    sections, tracks, links, select, go, input, noResults, lager, resultCount, orientation, buttons, window, state,
+    sections, tracks, links, select, go, input, reset, noResults, lager, resultCount, orientation, buttons, window, state,
     key(key) { if (input.listeners.keydown) input.listeners.keydown({type: 'keydown', key, preventDefault() {}}); },
     search(value) { input.value = value; input.listeners.input(); },
     filter(tag) { select.value = tag; select.listeners.change(); },
@@ -377,4 +378,57 @@ test('Лента кнопок использует действующий пои
   p.key('Escape');
   assert.equal(p.visible().length, liveCount);
   assert.equal(p.orientation.hidden, false);
+});
+
+for (const [label, source] of [['HTML', script], ['шаблон', templateScript]]) {
+  for (const query of ['сдфгву', 'СДФГВУ', 'claxdx', 'clde', 'chxtgpx', 'голасавой']) {
+    test('№08: раскладка или две правки: ' + query + ' ' + label, () => {
+      const p = page(source); p.search(query);
+      const term = query === 'chxtgpx' ? 'chatgpt' : query === 'голасавой' ? 'golosovoy-vvod-v-claude' : 'claude';
+      assert.ok(p.visible().some(link => link.attrs.href.includes(term)), query);
+    });
+  }
+  test('№08: явный сброс очищает запрос, фильтр, подсветку и пустое состояние', () => {
+    const p = page(source); p.filter('codex'); p.search('zzzzzzнебывает');
+    p.reset.listeners.click();
+    assert.equal(p.input.value, ''); assert.equal(p.select.value, 'all');
+    assert.equal(p.visible().length, liveCount); assert.equal(p.input.focused, true);
+    assert.ok(!p.noResults.classes.has('show'));
+    assert.ok(p.links.every(link => !link.classes.has('kod-hit')));
+    assert.equal(p.buttons.find(b => b.attrs['data-filter'] === 'all').attrs['aria-pressed'], 'true');
+  });
+}
+
+for (const query of ['ФОТО', 'ДИЗАЙН', 'claude', 'клод', 'chatgpt', 'чатгпт', 'clade', 'claudexx', 'clau', 'срфепзе']) {
+  test('№08: сервисы и слова комментариев: ' + query, () => {
+    const p = page(); p.search(query); assert.ok(p.visible().length > 0, query);
+    if (['ФОТО', 'ДИЗАЙН'].includes(query)) {
+      p.filter('codex');
+      const expected = p.links.filter(l => l.attrs['data-kod'] === query);
+      assert.ok(expected.length > 0);
+      assert.ok(expected.every(l => p.visible().includes(l) && l.classes.has('kod-hit')));
+    }
+  });
+}
+
+test('№08: пределы двух правок и короткие слова', () => {
+  const p = page();
+  for (const word of ['claxdx', 'claudexx', 'clau', 'clde']) assert.ok(p.state.typoMatches(word, 'claude'));
+  assert.ok(!p.state.typoMatches('xyzude', 'claude'));
+  assert.ok(!p.state.typoMatches('кот', 'код'));
+});
+
+if (process.env.SEARCH_REPORT) {
+  const rows = ['claude', 'клод', 'chatgpt', 'чатгпт', 'сдфгву', 'срфепзе', 'clade', 'claxdx', 'claudexx', 'голасавой', 'ФОТО', 'ДИЗАЙН', 'zzzzzzнебывает'].map(query => {
+    const p = page(); p.search(query);
+    return {query, found: p.visible().map(l => ({title: l.attrs['aria-label'], href: l.attrs.href}))};
+  });
+  fs.writeFileSync(process.env.SEARCH_REPORT, JSON.stringify(rows, null, 2));
+}
+
+test('№08: русские названия и обратная раскладка дают те же результаты', () => {
+  for (const queries of [['claude', 'клод', 'сдфгву'], ['chatgpt', 'чатгпт', 'срфепзе']]) {
+    const results = queries.map(q => {const p = page(); p.search(q); return p.visible().map(l => l.attrs.href);});
+    assert.deepEqual(results[0], results[1]); assert.deepEqual(results[0], results[2]);
+  }
 });
