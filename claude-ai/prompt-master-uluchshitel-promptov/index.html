@@ -2183,6 +2183,9 @@ article figure.shot img { width: auto; max-width: min(100%, 560px); height: auto
 article figure.shot:has(img[src="assets/add.webp"]) { max-width: 74%; }
 article figure.shot:has(img[src="assets/add.webp"]) img { max-width: min(100%, 308px); }
 article figure.shot figcaption { max-width: 560px; }
+/* Как .fig .zoom в tri-dizayn-skilla: кнопка привязана к изображению, подпись снаружи */
+article figure.shot .shot-media { display: block; position: relative; width: fit-content; max-width: min(100%, 560px); }
+article figure.shot:has(img[src="assets/add.webp"]) .shot-media { max-width: min(100%, 308px); }
 /* Мягкое чередование как tri-dizayn-skilla и «Темы для контента» */
 article .table-wrap { overflow-x: auto; margin: 24px 0; }
 article .table-wrap table { width: 100%; border-collapse: collapse; }
@@ -2411,7 +2414,11 @@ article .callout p { margin: 0; }
     button.textContent = "Открыть крупнее";
     button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
     button.addEventListener("click", function () { open(img); });
-    img.parentElement.appendChild(button);
+    var media = document.createElement("span");
+    media.className = "shot-media";
+    img.parentElement.insertBefore(media, img);
+    media.appendChild(img);
+    media.appendChild(button);
   });
   viewer.addEventListener("click", function (event) {
     if (event.target === viewer || event.target === closeButton) close();
