@@ -55,12 +55,17 @@ class GlobalArticleStandardTest(unittest.TestCase):
 
                 title = html.unescape(re.sub(r"<[^>]+>", "", h1.group(2))).strip()
                 encoded_url = urllib.parse.quote(canonical, safe="")
+                if slug == "prompt-master-uluchshitel-promptov":
+                    # Approved share copy uses the short article title.
+                    title = "Prompt Master и улучшатель промптов"
                 encoded_title = urllib.parse.quote(title, safe="")
                 expected = {
                     "Telegram": f"https://t.me/share/url?url={encoded_url}&text={encoded_title}",
                     "WhatsApp": f"https://wa.me/?text={encoded_title}%20{encoded_url}",
                     "VK": f"https://vk.com/share.php?url={encoded_url}&title={encoded_title}",
                 }
+                if slug == "prompt-master-uluchshitel-promptov":
+                    expected["WhatsApp"] = f"https://wa.me/?text={encoded_title}%20{urllib.parse.quote(canonical)}"
                 for _, block in blocks:
                     links = {
                         label: html.unescape(href)

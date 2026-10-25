@@ -35,7 +35,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"} and not a.get("seriya")}
-        self.assertEqual(len(ready), 65)
+        self.assertEqual(len(ready), 66)
         optional_without_cover = {a["slug"] for a in self.registry
                                   if a.get("oblozhka") is False and a["slug"] not in self.covers}
         self.assertEqual(set(self.covers), (ready | {a["slug"] for a in self.registry
@@ -118,7 +118,8 @@ class PublicationTest(unittest.TestCase):
                     elif "zoom" in classes:
                         self.assertEqual(len(button.parent.all(tag="img")), 1)
                     elif "checklist-copy" in classes:
-                        self.assertEqual(len(button.parent.parent.all(tag="li")), 3)
+                        expected = 7 if page.parent.name == "prompt-master-uluchshitel-promptov" else 3
+                        self.assertEqual(len(button.parent.parent.all(tag="li")), expected)
                     else:
                         self.assertTrue(classes & {"theme-toggle", "viewer-close", "search-go"}, "Неизвестный тип кнопки")
 

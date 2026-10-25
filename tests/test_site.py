@@ -1482,7 +1482,7 @@ class GuidesSiteTest(unittest.TestCase):
                 self.assertRegex(html, r"\.masthead \.(press-button|camp-link) \{ flex: 1")
                 # плашка соседней статьи: надзаголовок, название и ОДНА строка-ссылка
                 plashka = html.split('class="related-plaque"', 1)[1].split("</aside>", 1)[0]
-                if papka.name == "tri-dizayn-skilla":
+                if papka.name in {"tri-dizayn-skilla", "prompt-master-uluchshitel-promptov"}:
                     self.assertEqual(len(re.findall(r"<p\b", plashka)), 3)
                     self.assertIn('class="why"', plashka)
                 else:

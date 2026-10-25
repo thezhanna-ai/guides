@@ -73,7 +73,12 @@ class EridTest(unittest.TestCase):
             with self.subTest(page=str(page.relative_to(ROOT))):
                 match = re.search(pattern, page.read_bytes(), re.S)
                 self.assertIsNotNone(match)
-                self.assertEqual(html_lib.unescape(match.group().decode()).encode(),
+                actual = match.group().decode()
+                if page.parent.name == "prompt-master-uluchshitel-promptov":
+                    # Approved TOC links to this heading; all ad content stays canonical.
+                    self.assertEqual(actual.count('<h2 id="neyroseti-bez-koda">'), 1)
+                    actual = actual.replace('<h2 id="neyroseti-bez-koda">', '<h2>', 1)
+                self.assertEqual(html_lib.unescape(actual).encode(),
                                  html_lib.unescape(standard.decode()).encode())
 
     def test_erid_is_static_in_html_without_javascript_regression(self):

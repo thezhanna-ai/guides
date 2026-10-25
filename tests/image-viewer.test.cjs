@@ -75,8 +75,8 @@ test('Все настоящие inline просмотрщики использу
     assert.ok(/img\.dataset\.fullSrc\s*\|\|\s*img\.currentSrc\s*\|\|\s*img\.src/.test(html), name);
     assert.ok(!/document\.body\.style\.overflow\s*=/.test(html), name);
   }
-  // Published photo-effects and Motion pages use the shared viewer lifecycle.
-  assert.equal(count, 54);
+  // Prompt Master adds one article using the existing shared viewer lifecycle.
+  assert.equal(count, 55);
 });
 
 test('Disabled элемент пропускается, внешний фокус возвращается в модалку', () => {
