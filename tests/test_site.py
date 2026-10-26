@@ -1491,7 +1491,7 @@ class GuidesSiteTest(unittest.TestCase):
                     plashka = str(BeautifulSoup(html, 'html.parser').select_one('aside.related-plaque[aria-label="Соседняя статья"]'))
                     self.assertEqual(len(re.findall(r"<p\b", plashka)), 2)
                     self.assertIn('class="plaque-label"', plashka)
-                elif papka.name in {"tri-dizayn-skilla", "prompt-master-uluchshitel-promptov"}:
+                elif papka.name in {"tri-dizayn-skilla", "prompt-master-uluchshitel-promptov", "runway-iz-claude"}:
                     self.assertEqual(len(re.findall(r"<p\b", plashka)), 3)
                     self.assertIn('class="why"', plashka)
                 else:
