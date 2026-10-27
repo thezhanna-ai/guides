@@ -395,6 +395,10 @@
     .guide-link, .novoe-link, .tag-btn, .search-go {{ transition: transform 160ms cubic-bezier(.23,1,.32,1) }}
     .guide-link:active:not(:focus-visible), .novoe-link:active:not(:focus-visible), .tag-btn:active:not(:focus-visible), .search-go:active:not(:focus-visible) {{ transform: scale(.97) }}
     .after-cover[hidden] {{ display: none }}
+    #search-results[hidden] {{ display: none }}
+    /* Главная сохраняет бумажный фон и при сохранённой тёмной теме статей. */
+    html[data-theme="dark"] .catalog-search :focus-visible,
+    html[data-theme="dark"] #search-results :focus-visible {{ outline-color: var(--ink) }}
     @media (max-width: 900px) {{
       .cover-copy {{ max-width: 58% }}
       .cover-scene {{ inset: 50% 20px auto auto; width: 38%; height: auto; aspect-ratio: 16 / 10; transform: translateY(-42%) }}
@@ -506,6 +510,7 @@
   </section>
 
   <main>
+    <div class="guides" id="search-results" role="region" aria-label="Результаты поиска" hidden></div>
     <section class="novoe" id="novoe" aria-label="Новое на сайте">
       <p class="novoe-label">Новое на сайте</p>
       <div class="novoe-list">
@@ -536,6 +541,9 @@
     var metkaSelect = document.getElementById('metka');
     var searchGo = document.getElementById('search-go');
     var guideLinks = document.querySelectorAll('.guide-link');
+    var searchResults = document.getElementById('search-results');
+    var guideHomes = Array.prototype.map.call(guideLinks, function (link) {{ return link.parentNode; }});
+    var rankedLinks = [];
     var noResults = document.getElementById('no-results');
     var lager = document.getElementById('lager');
     var activeTag = 'all';
@@ -652,10 +660,27 @@
       return kod !== '' && (query === kod || (kod.length >= 4 && query.indexOf(' ') === -1 && typoMatches(query, kod)));
     }}
 
+    // Точные совпадения всегда выше нечётких; при равенстве сохраняем порядок каталога.
+    function relevance(link, queries) {{
+      var title = sinonimy(normalize(link.getAttribute('aria-label') || ''));
+      var text = sinonimy(normalize(link.textContent + ' ' + (link.getAttribute('data-poisk') || '')));
+      var kod = sinonimy(normalize(link.getAttribute('data-kod') || ''));
+      return queries.reduce(function (score, query) {{
+        query = sinonimy(query);
+        if (sinonimy(query) === kod) return Math.max(score, 4);
+        if (query.split(' ').every(function (word) {{ return title.indexOf(word) !== -1; }})) return Math.max(score, 3);
+        if (query.split(' ').every(function (word) {{ return text.indexOf(word) !== -1; }})) return Math.max(score, 2);
+        return score;
+      }}, 1);
+    }}
+
     function applyFilters() {{
       var queries = variants(searchInput.value);
       var searching = queries.length > 0;
       var visibleCount = 0;
+
+      // Возвращаем настоящие ссылки, а не копии: сброс сохраняет каталог и обработчики.
+      guideLinks.forEach(function (link, index) {{ guideHomes[index].appendChild(link); }});
 
       guideLinks.forEach(function (link) {{
         var text = normalize(link.textContent + ' ' + (link.getAttribute('data-poisk') || ''));
@@ -685,8 +710,15 @@
         var tracks = block.querySelectorAll('.track');
         var anyTrack = false;
         tracks.forEach(function (t) {{ if (t.style.display !== 'none') anyTrack = true; }});
-        block.style.display = anyTrack ? '' : 'none';
+        block.style.display = anyTrack && !searching ? '' : 'none';
       }});
+
+      rankedLinks = Array.prototype.filter.call(guideLinks, function (link) {{ return link.style.display !== 'none'; }});
+      searchResults.hidden = !searching;
+      if (searching) {{
+        rankedLinks.sort(function (a, b) {{ return relevance(b, queries) - relevance(a, queries); }});
+        rankedLinks.forEach(function (link) {{ searchResults.appendChild(link); }});
+      }}
 
       var filtering = searching || activeTag !== 'all';
       if (resultCount) resultCount.textContent = 'Найдено инструкций: ' + visibleCount;
@@ -709,7 +741,7 @@
     searchInput.addEventListener('input', applyFilters);
 
     function shownLinks() {{
-      return Array.prototype.filter.call(guideLinks, function (l) {{ return l.style.display !== 'none' && l.closest('.tool-block').style.display !== 'none'; }});
+      return rankedLinks;
     }}
 
     // Enter или «Найти» при единственном найденном гайде открывает его

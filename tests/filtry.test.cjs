@@ -26,6 +26,10 @@ class Element {
   setAttribute(name, value) { this.attrs[name] = value; }
   addEventListener(event, fn) { this.listeners[event] = fn; }
   querySelectorAll(selector) { return selector === '.track' ? this.tracks : this.links; }
+  appendChild(link) {
+    if (link.parentNode) link.parentNode.links = link.parentNode.links.filter(item => item !== link);
+    this.links.push(link); link.parentNode = this;
+  }
   closest(selector) { assert.equal(selector, '.tool-block'); return this.section; }
   querySelector(selector) {
     assert.equal(selector, '.guide-link.kod-hit');
@@ -39,7 +43,7 @@ function page(source = script, reducedMotion = false) {
     section.tracks = row.tracks.map(row => {
       const track = new Element();
       track.links = row.links.map(row => {
-        const link = new Element(row.attrs, row.text); link.section = section; return link;
+        const link = new Element(row.attrs, row.text); link.section = section; link.parentNode = track; return link;
       });
       return track;
     });
@@ -51,13 +55,14 @@ function page(source = script, reducedMotion = false) {
   const go = new Element();
   const input = new Element(); input.value = ''; input.focused = false; input.focus = () => { input.focused = true; };
   const reset = new Element();
+  const results = new Element(); results.links = []; results.hidden = true;
   const noResults = new Element();
   const lager = new Element();
   const resultCount = new Element();
   const orientation = new Element();
   const buttons = [...html.matchAll(/<button class="tag-btn"[^>]+data-filter="([^"]+)"/g)].map(match => new Element({'data-filter': match[1]}));
   const document = {
-    getElementById(id) { return {'search-reset': reset, 'guide-search': input, 'metka': select, 'search-go': go, 'lager': lager, 'result-count': resultCount, 'catalog-orientation': orientation}[id] || noResults; },
+    getElementById(id) { return {'search-results': results, 'search-reset': reset, 'guide-search': input, 'metka': select, 'search-go': go, 'lager': lager, 'result-count': resultCount, 'catalog-orientation': orientation}[id] || noResults; },
     querySelectorAll(selector) {
       return {'.guide-link': links, '.track': tracks, '.tool-block': sections, '.tag-btn': buttons}[selector];
     },
@@ -68,12 +73,12 @@ function page(source = script, reducedMotion = false) {
   Object.assign(state, {document, window});
   vm.runInContext(source, state);
   return {
-    sections, tracks, links, select, go, input, reset, noResults, lager, resultCount, orientation, buttons, window, state,
+    sections, tracks, links, select, go, input, reset, noResults, lager, resultCount, orientation, buttons, window, state, results,
     key(key) { if (input.listeners.keydown) input.listeners.keydown({type: 'keydown', key, preventDefault() {}}); },
     search(value) { input.value = value; input.listeners.input(); },
     filter(tag) { select.value = tag; select.listeners.change(); },
     find() { go.listeners.click(); },
-    visible() { return links.filter(link => link.style.display !== 'none' && link.section.style.display !== 'none'); },
+    visible() { return (results.hidden ? links : results.links).filter(link => link.style.display !== 'none'); },
   };
 }
 
@@ -299,6 +304,29 @@ test('Опубликованная КОМАНДА находится и подс
 // Регрессия F3: выполняем изменённый источник генерации до пересборки index.html
 const template = fs.readFileSync(path.join(root, 'scripts/shablon_glavnoy.html'), 'utf8');
 const templateScript = template.match(/<script>([\s\S]*?)<\/script>/)[1].replaceAll('{{', '{').replaceAll('}}', '}');
+for (const [label, source] of [['HTML', script], ['шаблон', templateScript]]) {
+  test('Регрессия ФОТО: код, точный заголовок и тема идут раньше нечётких совпадений ' + label, () => {
+    const p = page(source); p.search('ФОТО');
+    assert.equal(p.visible().length, 25);
+    assert.ok(p.visible().slice(0, 2).every(link => link.attrs['data-kod'] === 'ФОТО'));
+    const exact = p.visible().filter(link => p.state.normalize(link.attrs['data-poisk']).includes('фото'));
+    assert.deepEqual(p.visible().slice(0, exact.length), exact);
+    assert.ok(p.visible()[0].attrs.href.includes('foto'));
+    const scrolled = [];
+    p.links.forEach(link => { link.scrollIntoView = () => scrolled.push(link); });
+    p.key('Enter'); assert.equal(scrolled[0], p.visible()[0]);
+  });
+  test('Ранжирование не дублирует карточки и восстанавливает каталог после Escape ' + label, () => {
+    const p = page(source);
+    for (const query of ['ФОТО', 'клод', 'дизайн', 'ФОТО']) {
+      p.search(query); assert.equal(new Set(p.visible()).size, p.visible().length);
+    }
+    p.key('Escape');
+    assert.deepEqual(p.visible(), p.links);
+    assert.ok(p.results.hidden);
+    assert.deepEqual(p.tracks.flatMap(track => track.links), p.links);
+  });
+}
 for (const query of ['голосовой', 'проект', 'zzzzzzнебывает', '']) {
   test('Enter и Найти выполняют одно действие на свежем значении поля: ' + query, () => {
     const outcomes = ['keydown', 'click'].map(type => {
