@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="ru"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
 <title>Клод перестаёт поддакивать: три режима Frank</title>
 <meta name="description" content="Установи Frank в Claude Code и выбери один из трёх режимов честной критики. Команды, примеры ответов и настройка Claude и ChatGPT">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -430,7 +429,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 html[data-theme="dark"]{--paper:#162221;--ink:#EDF1EE;--forest:#DCEAE4;--muted:#B8C3BE;--line:#3C504C;--soft:#243735;--article-info:#243735;--article-info-line:#48605C;--article-white:#20302E}
 body{font:18.4px/1.65 Spectral,Georgia,serif;-webkit-text-size-adjust:100%;font-feature-settings:"lnum" 1}
 a{color:var(--guide-color-forest-hover);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:4px;font-weight:600}
-html[data-theme="dark"] a{color:#A8D0BE}
+html[data-theme="dark"] a{color:var(--guide-color-mint-on-dark)}
 html[data-theme="dark"] :is(.hero .eyebrow,.handout-title,.plaque-label){color:var(--guide-color-brand-on-dark)}
 html[data-theme="dark"] .theme-toggle:is(:hover,:active){color:var(--guide-color-forest)}
 html[data-theme="dark"] :is(a,button,summary):focus-visible{outline-color:var(--guide-color-brand-on-dark)}
@@ -442,9 +441,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .header-actions,.header-controls{display:flex;align-items:center;gap:12px}.handout-title{color:var(--guide-color-brand-ink);font:750 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 .theme-toggle,.masthead .press-button{min-height:40px;border:0;border-radius:9px;font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;cursor:pointer;transition:background .14s ease,transform .14s ease,box-shadow .14s ease}
 .theme-toggle{width:40px;flex:none;background:var(--article-info);color:var(--forest);box-shadow:0 3px 0 var(--article-info-line)}
-.masthead .press-button{display:inline-flex;align-items:center;justify-content:center;padding:0 13px;background:var(--guide-color-forest-hover);color:#FFFFFF;text-decoration:none;box-shadow:0 3px 0 var(--guide-color-forest-deep)}
+.masthead .press-button{display:inline-flex;align-items:center;justify-content:center;padding:0 13px;background:var(--guide-color-forest-hover);color:var(--guide-color-white);text-decoration:none;box-shadow:0 3px 0 var(--guide-color-forest-deep)}
 .theme-toggle:hover{background:var(--guide-color-slate-highlight);transform:translateY(1px);box-shadow:0 2px 0 var(--article-info-line)}.theme-toggle:active{background:var(--guide-color-white);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--article-info-line)}
-.masthead .press-button:hover{background:var(--guide-color-teal-deep);color:#FFFFFF;transform:translateY(1px);box-shadow:0 2px 0 var(--guide-color-forest-deep)}.masthead .press-button:active{background:var(--guide-color-teal-light-muted);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--guide-color-forest-deep)}
+.masthead .press-button:hover{background:var(--guide-color-teal-deep);color:var(--guide-color-white);transform:translateY(1px);box-shadow:0 2px 0 var(--guide-color-forest-deep)}.masthead .press-button:active{background:var(--guide-color-teal-light-muted);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--guide-color-forest-deep)}
 .layout{max-width:1244px;margin:auto;padding:42px 20px 90px;display:grid;grid-template-columns:210px minmax(0,720px) 180px;gap:32px;align-items:start}
 .layout main{max-width:720px;min-width:0}.toc{position:sticky;top:84px;align-self:start;width:260px;max-height:calc(100vh - 100px);overflow-y:auto;border-left:0;border-right:1px solid var(--line);padding:4px 18px 10px 0;font:14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 .toc .toc-label{margin:0 0 15px;color:var(--muted);font:700 11px/1.2 ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase}
@@ -457,27 +456,119 @@ h2{margin:0 0 18px;color:var(--forest);font:700 clamp(24px,3vw,29px)/1.2 Unbound
 p{margin:0 0 20px}.hero .lead{margin:20px 0;color:var(--forest);font-size:22px;line-height:1.48}.crumb{margin:8px 0 0;color:var(--muted);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.crumb a{color:var(--muted)}
 article>section{margin-top:58px}article>section>.eyebrow{margin-bottom:10px}section>p:last-child{margin-bottom:0}
 code,pre{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}p code{padding:2px 5px;border:1px solid var(--line);border-radius:4px;background:var(--soft);font-size:.84em;overflow-wrap:anywhere}
-.code-block{overflow:hidden;margin:20px 0 24px;border:1px solid #34504C;border-radius:12px;background:#102F30;color:#F8F7F2}
-.code-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:5px 12px;border-bottom:1px solid #34504C;font:700 12px/1.2 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#B8C3BE}
-.copy-btn{flex:none;min-width:132px;min-height:40px;padding:0 12px;border:0;border-radius:8px;background:#FF7A4D;color:#102F30;font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;box-shadow:0 3px 0 #B4471F;cursor:pointer;transition:background .14s ease,transform .14s ease,box-shadow .14s ease}
-.copy-btn:hover{background:#F28A68;transform:translateY(1px);box-shadow:0 2px 0 #B4471F}.copy-btn:active{background:#FFC6AD;transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px #8F371F}.copy-btn:focus-visible{outline:3px solid #F8F7F2;outline-offset:4px}.copy-btn.is-copied{background:#FFD1BF;box-shadow:0 0 0 3px rgba(255,209,191,.55)}
+.code-block{overflow:hidden;margin:20px 0 24px;border:1px solid var(--guide-color-teal-shadow);border-radius:12px;background:var(--guide-color-forest);color:var(--guide-color-paper)}
+.code-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:5px 12px;border-bottom:1px solid var(--guide-color-teal-shadow);font:700 12px/1.2 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--guide-color-muted-on-dark)}
+.copy-btn{flex:none;min-width:132px;min-height:40px;padding:0 12px;border:0;border-radius:8px;background:var(--guide-color-brand);color:var(--guide-color-forest);font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;box-shadow:0 3px 0 var(--guide-color-coral-deep);cursor:pointer;transition:background .14s ease,transform .14s ease,box-shadow .14s ease}
+.copy-btn:hover{background:var(--guide-color-brand-hover);transform:translateY(1px);box-shadow:0 2px 0 var(--guide-color-coral-deep)}.copy-btn:active{background:var(--guide-color-brand-tint);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--guide-color-brand-ink)}.copy-btn:focus-visible{outline:3px solid var(--guide-color-paper);outline-offset:4px}.copy-btn.is-copied{background:var(--guide-color-brand-pressed);box-shadow:0 0 0 3px var(--guide-color-brand-pressed-alpha-55)}
 .code-block pre{margin:0;padding:15px 18px;white-space:pre-wrap;overflow-wrap:anywhere;font:500 14px/1.58 'JetBrains Mono',ui-monospace,monospace}.code-block pre code{font:inherit;background:none;border:0;padding:0}
-.result-note{margin:18px 0 0;padding:2px 0 2px 15px;border-left:3px solid #31795D;color:var(--ink)}.result-note strong{color:var(--forest)}
+.result-note{margin:18px 0 0;padding:2px 0 2px 15px;border-left:3px solid var(--guide-color-emerald);color:var(--ink)}.result-note strong{color:var(--forest)}
 .mode-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}.mode-card{min-width:0;padding:17px;border:1px solid var(--line);border-radius:11px;background:var(--article-white)}
 .mode-tag{display:inline-block;padding:3px 7px;border-radius:5px;background:var(--article-info);color:var(--forest);font:700 12px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.mode-card h3{margin:12px 0 10px;font:700 16px/1.3 'JetBrains Mono',ui-monospace,monospace;letter-spacing:0;overflow-wrap:anywhere}.mode-card p{margin:0 0 14px;font:16px/1.5 Spectral,Georgia,serif}.mode-card small{color:var(--muted);font:14px/1.4 Spectral,Georgia,serif}.example{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}.example b{display:block;color:var(--forest);font:700 13px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.example p{margin:5px 0 14px}
 .faq details{margin:10px 0;padding:13px 16px;border:1px solid var(--line);border-radius:10px;background:var(--article-white)}.faq summary{font:700 16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;cursor:pointer}.faq details p{margin:14px 0 0}
 .seo-related{padding:14px 18px;border:1px solid var(--article-info-line);border-radius:11px;background:var(--article-info)}.seo-related h2{margin:0 0 9px;font:700 19px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.seo-related ul{margin:0;padding-left:20px}.seo-related li{margin:5px 0}
 .related-stack{grid-column:3;grid-row:1;position:sticky;top:84px;align-self:start}.related-stack .related-plaque{margin:0 0 12px;padding:12px 14px;border:1px solid var(--article-info-line);border-radius:11px;background:var(--article-info)}.related-plaque h2{margin:4px 0 7px;color:var(--forest);font:750 17px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.related-plaque p{margin:0;font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
-.cta-question{margin:62px 0 0;padding:0;border:0;background:none;font-size:18px}.cta-question+.cta{margin-top:16px}.cta .press-button{min-height:46px;box-shadow:0 3px 0 #B4471F}.cta .press-button:hover{background:#F28A68;transform:translateY(1px);box-shadow:0 2px 0 #B4471F}.cta .press-button:active{background:#FFD1BF;transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px #8F371F}
+.cta-question{margin:62px 0 0;padding:0;border:0;background:none;font-size:18px}.cta-question+.cta{margin-top:16px}.cta .press-button{min-height:46px;box-shadow:0 3px 0 var(--guide-color-coral-deep)}.cta .press-button:hover{background:var(--guide-color-brand-hover);transform:translateY(1px);box-shadow:0 2px 0 var(--guide-color-coral-deep)}.cta .press-button:active{background:var(--guide-color-brand-pressed);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--guide-color-brand-ink)}
 @media(min-width:1200px){.header-controls{width:180px;margin-right:clamp(0px,calc(100vw - 1214px),30px)}.header-controls .press-button{flex:1}.toc{margin-left:max(-50px,calc(630px - 50vw));width:calc(210px - max(-50px,calc(630px - 50vw)))}}
 @media(min-width:861px) and (max-width:1199px){.layout{grid-template-columns:210px minmax(0,720px)}.toc{width:240px}.related-stack{grid-column:2;position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px}}
 @media(max-width:860px){body{font-size:17px;line-height:1.6}.masthead-inner{min-height:60px;padding:0 14px}.masthead .brand{font-size:14px;max-width:145px}.handout-title,.toc{display:none}.header-controls{width:auto;gap:8px}.theme-toggle{width:38px}.masthead .press-button{min-height:38px;padding:0 10px;font-size:12px}.layout{display:block;padding:24px 14px 68px}.mobile-toc{display:block;margin:0 0 30px;padding:13px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.mobile-toc summary{color:var(--forest);font-weight:700;cursor:pointer}.mobile-toc a{display:block;padding:7px 0}.hero{padding:0}.hero .lead{font-size:20px}article>section{margin-top:50px}.mode-grid{grid-template-columns:1fr}.mode-card{padding:17px}.mode-card p{font-size:17px}.related-stack{display:block;margin-top:32px}.copy-btn{min-width:128px;min-height:40px}.code-bar{min-height:52px}.code-block pre{padding:13px 15px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.theme-toggle,.masthead .press-button,.copy-btn,.cta .press-button{transition:none!important;transform:none!important}}
-</style></head><body>
+</style>
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/klod-ne-poddakivaet/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/klod-ne-poddakivaet/#article",
+      "headline": "Клод перестаёт поддакивать",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/klod-ne-poddakivaet/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-27"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/klod-ne-poddakivaet/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Клод перестаёт поддакивать",
+          "item": "https://pronovoe.com/claude-ai/klod-ne-poddakivaet/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/klod-ne-poddakivaet/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Скилл платный?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Frank опубликован с лицензией MIT и не содержит отдельного платного сервиса. Доступ к Claude Code и его лимиты зависят от твоего аккаунта"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Он сломает обычные ответы?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Скилл задаёт манеру ответа в текущей сессии. Его можно выключить фразой stop frank или normal mode"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно включить на одну задачу?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Отправь /frank, задай вопрос, затем напиши stop frank"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему Клод всё равно соглашается?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Frank не спорит с хорошо обоснованной идеей ради эффекта. Если согласие кажется необоснованным, попроси назвать сильнейший риск и доказательства"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
+</head><body>
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="/">Инструкции по нейросетям</a><div class="header-actions"><span class="handout-title">Клод перестаёт поддакивать</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" href="#install">К инструкции</a></div></div></div></header>
 <div class="layout"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#article-top">Клод перестаёт поддакивать</a><a href="#start">Зачем нужен Frank</a><a href="#install">1. Установи Frank в Claude Code</a><a href="#activate">2. Включи Frank</a><a href="#modes">3. Выбери степень прямоты</a><a href="#lite">/frank lite</a><a href="#full">/frank full</a><a href="#ultra">/frank ultra</a><a href="#disable">4. Выключи Frank</a><a href="#without-code">Если нет Claude Code</a><a href="#check">Проверь ответ на своей идее</a><a href="#trouble">Если Клод снова поддакивает</a><a href="#memo">Памятка перед следующей задачей</a><a href="#faq">Частые вопросы</a><a href="#help">Если нужна помощь</a><a href="#more">Ещё по теме</a><a href="#next">Что можно делать с нейросетями, если не знаешь кода?</a></nav><main><article>
-<header class="hero" id="article-top"><span class="eyebrow">Claude Code · честная обратная связь</span><h1 class="article-standard-h1">Клод перестаёт поддакивать</h1><p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,Arial,sans-serif">Начальный уровень</p><p class="lead">Приносишь сырую идею, а Клод отвечает: «Отличная мысль». Приятно, пока не начнёшь тратить время на слабый план</p><p>В разговоре с ИИ легко принять поддержку за проверку идеи. Без конкретных возражений слабые места плана остаются незаметными. Ниже включим скилл Frank в Claude Code, сравним три степени прямоты и покажем вариант для обычных чатов Claude и ChatGPT</p><figure class="cover"><img src="assets/oblozhka.webp" width="1600" height="840" loading="eager" decoding="async" alt="Два человека обсуждают идею при тёплом свете на тёмно-зелёном фоне"><figcaption>Честный ответ полезнее автоматического согласия</figcaption></figure><nav class="crumb" aria-label="Хлебные крошки"><a href="/">Инструкции по нейросетям</a> / Клод перестаёт поддакивать</nav></header>
+<header class="hero" id="article-top"><span class="eyebrow">Claude Code · честная обратная связь</span><h1 class="article-standard-h1">Клод перестаёт поддакивать</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><div class="seo-intro"><p class="lead">Приносишь сырую идею, а Клод отвечает: «Отличная мысль». Приятно, пока не начнёшь тратить время на слабый план</p><p>В разговоре с ИИ легко принять поддержку за проверку идеи. Без конкретных возражений слабые места плана остаются незаметными. Ниже включим скилл Frank в Claude Code, сравним три степени прямоты и покажем вариант для обычных чатов Claude и ChatGPT</p></div><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" loading="eager" decoding="async" alt="Два человека обсуждают идею при тёплом свете на тёмно-зелёном фоне"><figcaption>Честный ответ полезнее автоматического согласия</figcaption></figure><!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Клод перестаёт поддакивать</span></nav>
+<!-- seo:breadcrumbs:end --></header>
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fklod-ne-poddakivaet%2F&amp;text=%D0%9A%D0%BB%D0%BE%D0%B4%20%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D1%82%D0%B0%D1%91%D1%82%20%D0%BF%D0%BE%D0%B4%D0%B4%D0%B0%D0%BA%D0%B8%D0%B2%D0%B0%D1%82%D1%8C" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%BB%D0%BE%D0%B4%20%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D1%82%D0%B0%D1%91%D1%82%20%D0%BF%D0%BE%D0%B4%D0%B4%D0%B0%D0%BA%D0%B8%D0%B2%D0%B0%D1%82%D1%8C%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fklod-ne-poddakivaet%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fklod-ne-poddakivaet%2F&amp;title=%D0%9A%D0%BB%D0%BE%D0%B4%20%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D1%82%D0%B0%D1%91%D1%82%20%D0%BF%D0%BE%D0%B4%D0%B4%D0%B0%D0%BA%D0%B8%D0%B2%D0%B0%D1%82%D1%8C" target="_blank" rel="noopener">VK</a>
+      </div>
 <details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#article-top">Клод перестаёт поддакивать</a><a href="#start">Зачем нужен Frank</a><a href="#install">1. Установи Frank в Claude Code</a><a href="#activate">2. Включи Frank</a><a href="#modes">3. Выбери степень прямоты</a><a href="#lite">/frank lite</a><a href="#full">/frank full</a><a href="#ultra">/frank ultra</a><a href="#disable">4. Выключи Frank</a><a href="#without-code">Если нет Claude Code</a><a href="#check">Проверь ответ на своей идее</a><a href="#trouble">Если Клод снова поддакивает</a><a href="#memo">Памятка перед следующей задачей</a><a href="#faq">Частые вопросы</a><a href="#help">Если нужна помощь</a><a href="#more">Ещё по теме</a><a href="#next">Что можно делать с нейросетями, если не знаешь кода?</a></nav></details>
 <section id="start"><h2>Зачем нужен Frank</h2><p>Frank - открытый скилл для ИИ-ассистента: набор инструкций, который убирает пустую похвалу и просит назвать главный риск. Он не проверяет факты за тебя, зато помогает увидеть возражение, которое иначе можно пропустить</p><p>Для следующих шагов нужен установленный Claude Code. Если его ещё нет, начни с <a href="/claude-ai/claude-i-codex-v-vscode/">инструкции установки Claude Code в VS Code</a>. Если работаешь только в браузере, переходи к разделу <a href="#without-code">«Если нет Claude Code»</a></p></section>
 <section id="install"><h2>1. Установи Frank в Claude Code</h2><p>Открой в VS Code папку проекта, где работаешь с Claude Code, затем выбери в верхнем меню Terminal → New Terminal («Терминал» → «Создать терминал»). Командная строка откроется снизу в этой папке. Вставь команду и нажми Enter</p><div class="code-block"><div class="code-bar"><span class="code-lang">В терминале</span><button class="copy-btn" type="button" data-copy-target="install-command">Скопировать</button></div><pre id="install-command"><code>npx skills add huxleyli15/frank</code></pre></div><p>Если появится вопрос о запуске пакета <code>skills</code>, введи <code>y</code> и нажми Enter. В установщике выбери навык <code>frank</code> и агент Claude Code. По умолчанию установка относится к текущей папке проекта, поэтому затем открой Claude Code в ней же. Дождись сообщения о завершении установки</p><p>Если нужен отдельный терминал: на Mac нажми Cmd+Пробел, набери «Терминал» и нажми Enter; на Windows открой «Пуск», набери PowerShell и запусти Windows PowerShell. Но для установки в нужную папку проще использовать терминал VS Code, как выше</p><p>Если появляется <code>npx: command not found</code> или сообщение, что <code>npx</code> не найден, установи Node.js версии LTS с <a href="https://nodejs.org/en/download">официальной страницы</a>, закрой и заново открой терминал, затем повтори команду</p><p>Необязательные подробности установки и исходник навыка есть в <a href="https://github.com/huxleyli15/frank#install">README Frank</a></p><p>Если устанавливаешь вручную, скопируй файл <code>frank/SKILL.md</code> из репозитория в папку <code>~/.claude/skills/frank/</code>. Это путь из README для Claude Code; в итоге файл должен находиться по адресу <code>~/.claude/skills/frank/SKILL.md</code></p><p class="result-note"><strong>Результат:</strong> Frank добавлен к навыкам Claude Code, теперь его можно вызвать в чате</p></section>
@@ -501,13 +592,19 @@ code,pre{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospac
 <section id="check"><h2>Проверь ответ на своей идее</h2><p>После включения Frank или сохранения инструкции открой чат и отправь идею, в которой есть спорное место. Можно взять пример выше: «Хочу сделать сайт для всех». Посмотри, называет ли ответ конкретный риск, объясняет ли причину и предлагает ли следующий шаг</p><p>Для проверки постоянных настроек начни новый чат. Если правило осталось только в старом разговоре, вернись в настройки и проверь, сохранился ли там текст. Одно возражение ещё не доказывает, что совет верен: факты и выводы всё равно нужно проверять</p><p class="result-note"><strong>Результат:</strong> вместо общей похвалы у тебя есть конкретное слабое место идеи и действие, которое поможет его проверить</p></section>
 <section id="trouble"><h2>Если Клод снова поддакивает</h2><p>В длинном разговоре напомни о нужном разборе отдельным сообщением. Выбери запрос под свою ситуацию и отправь его в тот же чат Claude или ChatGPT</p><div class="code-block"><div class="code-bar"><span class="code-lang">Найти слабые места</span><button class="copy-btn" type="button" data-copy-target="risk-prompt">Скопировать</button></div><pre id="risk-prompt"><code>Найди три слабых места в моей идее. Для каждого объясни риск и предложи, как его проверить. Не придумывай возражения, если для них нет оснований</code></pre></div><div class="code-block"><div class="code-bar"><span class="code-lang">Проверить аргумент</span><button class="copy-btn" type="button" data-copy-target="counter-prompt">Скопировать</button></div><pre id="counter-prompt"><code>Назови сильнейший контрдовод к моей позиции. Что я упускаю? Отдели факты от предположений и предложи более сильный вариант</code></pre></div><div class="code-block"><div class="code-bar"><span class="code-lang">Убрать пустую похвалу</span><button class="copy-btn" type="button" data-copy-target="flattery-prompt">Скопировать</button></div><pre id="flattery-prompt"><code>Перепиши предыдущий ответ без пустой похвалы. Начни с главного риска и пометь, где факт, где вероятный вывод, а где догадка</code></pre></div><p>Если ответ стал грубым, напомни: «Критикуй идею без оскорблений». Само несогласие не означает ошибку, но и резкий тон не делает вывод правильным. Попроси назвать доводы. В Claude Code можно также перейти на <code>/frank lite</code></p></section>
 <section id="memo"><h2>Памятка перед следующей задачей</h2><ul><li>В Claude Code установи Frank один раз в папку проекта, затем включай его командой <code>/frank</code> в нужном чате</li><li>Начни с <code>full</code>, выбери <code>lite</code> для мягкого тона или <code>ultra</code> для строгого разбора</li><li>В браузере сохрани готовую инструкцию в настройках или отправь её сообщением для одной задачи</li><li>Проверяй аргументы и метки уверенности. Для выключения Frank напиши <code>stop frank</code></li></ul></section>
-<section id="faq" class="faq"><h2>Частые вопросы</h2><details><summary>Скилл платный?</summary><p>Frank опубликован с лицензией MIT и не содержит отдельного платного сервиса. Доступ к Claude Code и его лимиты зависят от твоего аккаунта</p></details><details><summary>Он сломает обычные ответы?</summary><p>Нет. Скилл задаёт манеру ответа в текущей сессии. Его можно выключить фразой <code>stop frank</code> или <code>normal mode</code></p></details><details><summary>Можно включить на одну задачу?</summary><p>Да. Отправь <code>/frank</code>, задай вопрос, затем напиши <code>stop frank</code></p></details><details><summary>Почему Клод всё равно соглашается?</summary><p>Frank не спорит с хорошо обоснованной идеей ради эффекта. Если согласие кажется необоснованным, попроси назвать сильнейший риск и доказательства</p></details></section>
+<section id="faq" class="faq"><h2>Частые вопросы</h2><details class="faq-item"><summary>Скилл платный?</summary><p>Frank опубликован с лицензией MIT и не содержит отдельного платного сервиса. Доступ к Claude Code и его лимиты зависят от твоего аккаунта</p></details><details class="faq-item"><summary>Он сломает обычные ответы?</summary><p>Нет. Скилл задаёт манеру ответа в текущей сессии. Его можно выключить фразой <code>stop frank</code> или <code>normal mode</code></p></details><details class="faq-item"><summary>Можно включить на одну задачу?</summary><p>Да. Отправь <code>/frank</code>, задай вопрос, затем напиши <code>stop frank</code></p></details><details class="faq-item"><summary>Почему Клод всё равно соглашается?</summary><p>Frank не спорит с хорошо обоснованной идеей ради эффекта. Если согласие кажется необоснованным, попроси назвать сильнейший риск и доказательства</p></details></section>
 <section id="help"><h2>Если нужна помощь</h2><p>Если запутался на установке или включении, отправь Клоду такой запрос. Замени текст в скобках своей ситуацией</p><div class="code-block"><div class="code-bar"><span class="code-lang">Помощь по шагам</span><button class="copy-btn" type="button" data-copy-target="help-prompt">Скопировать</button></div><pre id="help-prompt"><code>Хочу [включить Frank в Claude Code]. Сейчас вижу [сообщение или экран], уже выполнено [действия], непонятно [на каком месте остановился]. Объясняй по одному шагу и после каждого жди моего ответа</code></pre></div></section>
 <section id="more" class="seo-related"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/pyat-skillov-claude-code/">Пять скиллов для Claude Code</a></li><li><a href="/claude-ai/22-ustanovki-claude-code/">22 установки Claude Code по ролям</a></li><li><a href="/claude-ai/svoy-stil-otvetov/">Свой стиль ответов Claude</a></li></ul></section>
 
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fklod-ne-poddakivaet%2F&amp;text=%D0%9A%D0%BB%D0%BE%D0%B4%20%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D1%82%D0%B0%D1%91%D1%82%20%D0%BF%D0%BE%D0%B4%D0%B4%D0%B0%D0%BA%D0%B8%D0%B2%D0%B0%D1%82%D1%8C" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%BB%D0%BE%D0%B4%20%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D1%82%D0%B0%D1%91%D1%82%20%D0%BF%D0%BE%D0%B4%D0%B4%D0%B0%D0%BA%D0%B8%D0%B2%D0%B0%D1%82%D1%8C%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fklod-ne-poddakivaet%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fklod-ne-poddakivaet%2F&amp;title=%D0%9A%D0%BB%D0%BE%D0%B4%20%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D1%82%D0%B0%D1%91%D1%82%20%D0%BF%D0%BE%D0%B4%D0%B4%D0%B0%D0%BA%D0%B8%D0%B2%D0%B0%D1%82%D1%8C" target="_blank" rel="noopener">VK</a>
+      </div>
 <p class="cta-question">Один честный ответ уже помогает проверить идею. Следующий шаг - направить эту проверку на работу: продукт, сайт и контент. Ниже - что нейросеть умеет, если не знаешь кода</p>
 <section id="next" class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
-</article></main><aside class="related-stack" aria-label="Читайте рядом"><div class="related-plaque"><p class="plaque-label">Перед началом</p><h2>Пять скиллов</h2><p><a href="/claude-ai/pyat-skillov-claude-code/">Что такое скиллы в Claude Code и как их ставить</a></p></div><div class="related-plaque"><p class="plaque-label">Следующий шаг</p><h2>Свой стиль ответов</h2><p><a href="/claude-ai/svoy-stil-otvetov/">Как настроить манеру ответа Claude</a></p></div></aside></div><footer class="foot">Черновик для чтения · 27 октября 2026 · На сайт не опубликован<!-- privacy:footer:start -->
+</article></main><aside class="related-stack" aria-label="Читайте рядом"><div class="related-plaque"><p class="plaque-label">Перед началом</p><h2>Пять скиллов</h2><p><a href="/claude-ai/pyat-skillov-claude-code/">Что такое скиллы в Claude Code и как их ставить</a></p></div><div class="related-plaque"><p class="plaque-label">Следующий шаг</p><h2>Свой стиль ответов</h2><p><a href="/claude-ai/svoy-stil-otvetov/">Как настроить манеру ответа Claude</a></p></div></aside></div><footer class="foot">Про новое · 27 октября 2026<!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>

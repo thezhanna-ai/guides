@@ -71,14 +71,18 @@ class EridTest(unittest.TestCase):
                  ROOT / "scripts/shablon_glavnoy.html"]
         for page in pages:
             with self.subTest(page=str(page.relative_to(ROOT))):
-                if page.parent.name == "promty-pravki-foto-chatgpt":
+                if page.parent.name in {"promty-pravki-foto-chatgpt", "klod-ne-poddakivaet"}:
                     # Approved HTML is serialized: attribute order and whitespace
                     # differ. Compare the complete advertising DOM with standard.
                     from bs4 import BeautifulSoup
                     actual = BeautifulSoup(page.read_text(), 'html.parser').select_one('section.cta')
                     expected = BeautifulSoup(standard, 'html.parser').select_one('section.cta')
-                    self.assertEqual(actual.h2.get('id'), 'section-26')
-                    del actual.h2['id']  # Approved TOC target; ad text/links stay canonical.
+                    if page.parent.name == "klod-ne-poddakivaet":
+                        self.assertEqual(actual.get('id'), 'next')
+                        del actual['id']  # Existing TOC target; retain the approved ad bytes.
+                    else:
+                        self.assertEqual(actual.h2.get('id'), 'section-26')
+                        del actual.h2['id']  # Approved TOC target; ad text/links stay canonical.
                     def signature(node):
                         return (node.name, dict(node.attrs),
                                 [' '.join(str(c).split()) if not getattr(c, 'name', None)
