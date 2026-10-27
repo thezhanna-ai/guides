@@ -1285,9 +1285,9 @@ article .night-table .mobile-table-card:nth-child(even) {
 .impeccable-table td:first-child{font-family:var(--font-mono);font-size:.875rem}
 .impeccable-table tbody tr:nth-child(odd){background:var(--white)}
 .impeccable-table tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-2) 25%,var(--white))}
-:root[data-theme="dark"] .impeccable-table tbody tr:nth-child(even){background:color-mix(in srgb,var(--article-table-dark) 25%,var(--white))}
+
 @media(max-width:600px){.impeccable-table th,.impeccable-table td{padding:12px 10px}.impeccable-table th:first-child,.impeccable-table td:first-child{width:6.25rem}}
-@media(max-width:600px){.table-wrap{overflow-x:visible}.table-wrap table,.table-wrap tbody,.table-wrap tr,.table-wrap td{display:block;width:auto}.table-wrap thead{display:none}.table-wrap tr{border-bottom:1px solid var(--line);padding:10px 0}.table-wrap td{border:0;padding:3px 0}.table-wrap td::before{content:attr(data-label);display:block;font-size:.8em;opacity:.65}}.table-wrap thead th{background:var(--info)}.table-wrap tbody tr:nth-child(odd){background:var(--white)}.table-wrap tbody tr:nth-child(even){background:color-mix(in srgb,#2C403C 25%,var(--white))}</style><style id="article-v3">
+@media(max-width:600px){.table-wrap{overflow-x:visible}.table-wrap table,.table-wrap tbody,.table-wrap tr,.table-wrap td{display:block;width:auto}.table-wrap thead{display:none}.table-wrap tr{border-bottom:1px solid var(--line);padding:10px 0}.table-wrap td{border:0;padding:3px 0}.table-wrap td::before{content:attr(data-label);display:block;font-size:.8em;opacity:.65}}.table-wrap thead th{background:var(--info)}.table-wrap tbody tr:nth-child(odd){background:var(--white)}</style><style id="article-v3">
     .faq-item { margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); overflow: hidden }
 
     .faq-item summary { padding: 13px 44px 13px 18px; position: relative; color: var(--emerald); font: 750 17px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer; list-style: none }
@@ -1937,7 +1937,7 @@ article .related-plaque p { margin: 0 }
 article .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
 article .related-plaque .plaque-title { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
 article .related-plaque .why { color: var(--muted); font-size: 16px }
-</style><link href="../../assets/article-sharing.css" rel="stylesheet"/><meta content="Как подключить Runway к Claude и делать картинки и видео в одном чате: подключение, готовые запросы, что работает на бесплатном и платном тарифе, примеры" name="description"/><style id="article-colors">:root{--article-table-dark:#2C403C;--article-prompt-bg:#173f39;--article-prompt-ink:#f5f6ed}</style><!-- privacy:head:start -->
+</style><link href="../../assets/article-sharing.css" rel="stylesheet"/><meta content="Как подключить Runway к Claude и делать картинки и видео в одном чате: подключение, готовые запросы, что работает на бесплатном и платном тарифе, примеры" name="description"/><style id="article-colors">:root{--article-prompt-bg:#173f39;--article-prompt-ink:#f5f6ed}</style><!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">
 /* Shared UI font token uses the site's existing system font stack. */
@@ -1985,12 +1985,104 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 .privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
 </style>
 <!-- critical:privacy-style:end -->
-<script defer="" src="/assets/privacy.js"></script>
+<script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
 <!-- seo:canonical:start -->
-<link href="https://pronovoe.com/claude-ai/runway-iz-claude/" rel="canonical"/>
+<link rel="canonical" href="https://pronovoe.com/claude-ai/runway-iz-claude/">
 <!-- seo:canonical:end -->
 <!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/runway-iz-claude/#article",
+      "headline": "Runway в Claude: снимаем видео прямо в чате",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/runway-iz-claude/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-27"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/runway-iz-claude/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Runway в Claude: снимаем видео прямо в чате",
+          "item": "https://pronovoe.com/claude-ai/runway-iz-claude/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/runway-iz-claude/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как подключить Runway к Claude: 3 шага",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Открой Claude и в левой панели нажми Customize Перейди на вкладку Connectors, справа сверху нажми + Add и выбери Add custom connector. В новой версии меню этот пункт называется Custom → Web В поле имени впиши Runway, в поле адреса вставь https://mcp.runwayml.com/mcp и нажми Continue, затем Connect. Откроется вход в Runway: войди своим аккаунтом и разреши доступ. После этого Runway появится в списке Connectors Проверь, что всё работает: открой новый чат в Claude и отправь запрос ниже. Он ничего не создаёт и не тратит кредиты Проверь подключение Runway: какой у меня тариф, сколько осталось кредитов и какие нейросети для картинок и видео мне доступны. Ничего не создавай Если вход в Runway не прошёл, разбор частых ошибок в подробной инструкции по подключению"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужен платный Claude?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. На бесплатном тарифе Claude можно добавить одно своё подключение, Runway как раз им и будет"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно сделать видео бесплатно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. На бесплатном тарифе Runway делаются картинки, видео открывается на платном. Какой у тебя тариф, покажет запрос проверки из блока «Как подключить Runway к Claude»"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько стоит одно видео?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Цена в кредитах Runway зависит от нейросети и длины ролика. Попроси Claude назвать её до запуска, как в запросе из шага 2"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно выбрать конкретную нейросеть?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да, назови её в запросе: «через Kling», «через Veo», «через GPT Image». Если на твоём тарифе её нет, Claude скажет об этом до запуска"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Работает ли из России?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Runway подключается через Claude, поэтому сначала нужен рабочий доступ к самому Claude. Как его настроить, в нашей инструкции по доступу"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <!-- seo:schema:end -->
 <!-- erid:style:start -->
 <style>
@@ -2035,13 +2127,13 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </style></head><body><div aria-hidden="true" class="progress"></div><header class="masthead"><div class="masthead-inner"><a class="brand" href="/">Инструкции по нейросетям</a>
 <div class="header-actions"><div class="handout-title">Runway в Claude</div><div class="header-controls">
 <button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
-</div></div></div></header><div class="page-shell"><nav aria-label="Содержание" class="toc"><p class="toc-label">Содержание</p><ul class="toc-steps"><li><a href="#prepare">Что понадобится</a></li><li><a href="#kartinka">Шаг 1. Попроси картинку</a></li><li><a href="#video">Шаг 2. Попроси видео по картинке</a></li><li class="toc-sub"><a href="#tarif">Бесплатный и платный тариф</a></li><li><a href="#primery">Примеры результатов</a></li><li><a href="#zaprosy">Что ещё можно попросить</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#related">Ещё по теме</a></li><li><a href="#section-26">Что можно делать с нейросетями, если не знаешь кода?</a></li></ul></nav><main><article><header id="nachalo"><p class="eyebrow">CLAUDE · RUNWAY · ВИДЕО</p><h1 class="article-standard-h1">Runway в Claude: снимаем видео прямо в чате</h1>
-<p class="uroven-metka green" style='display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif'>Начальный уровень</p><p class="lead">Как делать картинки и видео нейросетями и не ходить по десятку сайтов?</p><p>Runway - сервис, где в одном месте собраны нейросети для видео и картинок: собственные модели Runway, Kling, Veo, Seedance, GPT Image, Nano Banana и другие. Обычно с ними работают на сайте: выбираешь модель, загружаешь файл, ждёшь, скачиваешь результат и несёшь его в следующий сервис</p><p>Если подключить Runway к Claude, всё это делается в одном чате. Ты словами описываешь, что нужно, а Claude сам делает картинку и сам делает по ней видео. Ниже: как подключить Runway, что написать Claude и какие получаются результаты</p>
+</div></div></div></header><div class="page-shell"><nav aria-label="Содержание" class="toc"><p class="toc-label">Содержание</p><ul class="toc-steps"><li><a href="#prepare">Что понадобится</a></li><li><a href="#kartinka">Шаг 1. Попроси картинку</a></li><li><a href="#video">Шаг 2. Попроси видео по картинке</a></li><li class="toc-sub"><a href="#tarif">Бесплатный и платный тариф</a></li><li><a href="#primery">Примеры результатов</a></li><li><a href="#zaprosy">Что ещё можно попросить</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#related">Ещё по теме</a></li></ul></nav><main><article><header id="nachalo"><p class="eyebrow">CLAUDE · RUNWAY · ВИДЕО</p><h1 class="article-standard-h1">Runway в Claude: снимаем видео прямо в чате</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><div class="seo-intro"><p class="lead">Как делать картинки и видео нейросетями и не ходить по десятку сайтов?</p><p>Runway - сервис, где в одном месте собраны нейросети для видео и картинок: собственные модели Runway, Kling, Veo, Seedance, GPT Image, Nano Banana и другие. Обычно с ними работают на сайте: выбираешь модель, загружаешь файл, ждёшь, скачиваешь результат и несёшь его в следующий сервис</p></div><p>Если подключить Runway к Claude, всё это делается в одном чате. Ты словами описываешь, что нужно, а Claude сам делает картинку и сам делает по ней видео. Ниже: как подключить Runway, что написать Claude и какие получаются результаты</p>
 <figure class="cover-v2"><img src="assets/oblozhka.png" width="1600" height="840" alt="Runway в Claude: картинки и видео в одном чате"><figcaption>Подключение, готовые запросы, тарифы и примеры</figcaption></figure><div class="share-row share-top"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Frunway-iz-claude%2F&amp;text=Runway%20%D0%B2%20Claude%3A%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%20%D0%B2%20%D1%87%D0%B0%D1%82%D0%B5" rel="noopener" target="_blank">Telegram</a><a class="share-btn" href="https://wa.me/?text=Runway%20%D0%B2%20Claude%3A%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%20%D0%B2%20%D1%87%D0%B0%D1%82%D0%B5%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Frunway-iz-claude%2F" rel="noopener" target="_blank">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Frunway-iz-claude%2F&amp;title=Runway%20%D0%B2%20Claude%3A%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%20%D0%B2%20%D1%87%D0%B0%D1%82%D0%B5" rel="noopener" target="_blank">VK</a></div>
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Runway в Claude: снимаем видео прямо в чате</span></nav>
 <!-- seo:breadcrumbs:end -->
-</header><details class="mobile-toc"><summary>Содержание</summary><nav aria-label="Содержание на телефоне"><ul class="toc-steps"><li><a href="#prepare">Что понадобится</a></li><li><a href="#kartinka">Шаг 1. Попроси картинку</a></li><li><a href="#video">Шаг 2. Попроси видео по картинке</a></li><li class="toc-sub"><a href="#tarif">Бесплатный и платный тариф</a></li><li><a href="#primery">Примеры результатов</a></li><li><a href="#zaprosy">Что ещё можно попросить</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#related">Ещё по теме</a></li><li><a href="#section-26">Что можно делать с нейросетями, если не знаешь кода?</a></li></ul></nav></details><section class="content-section"><h2 id="prepare">Что понадобится</h2><ol><li><b>Аккаунт Claude</b> в браузере или настольном приложении: <a href="https://claude.ai/">claude.ai</a>. Для одного подключения хватает и бесплатного тарифа</li><li><b>Аккаунт Runway</b>: <a href="https://app.runwayml.com/">app.runwayml.com</a>. Картинки делаются и на бесплатном тарифе, видео только на платном</li><li><b>Runway, подключённый к Claude.</b> Это делается один раз, инструкция в блоке ниже. Код, терминал и ключи не нужны</li></ol>
+</header><details class="mobile-toc"><summary>Содержание</summary><nav aria-label="Содержание на телефоне"><ul class="toc-steps"><li><a href="#prepare">Что понадобится</a></li><li><a href="#kartinka">Шаг 1. Попроси картинку</a></li><li><a href="#video">Шаг 2. Попроси видео по картинке</a></li><li class="toc-sub"><a href="#tarif">Бесплатный и платный тариф</a></li><li><a href="#primery">Примеры результатов</a></li><li><a href="#zaprosy">Что ещё можно попросить</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#related">Ещё по теме</a></li></ul></nav></details><section class="content-section"><h2 id="prepare">Что понадобится</h2><ol><li><b>Аккаунт Claude</b> в браузере или настольном приложении: <a href="https://claude.ai/">claude.ai</a>. Для одного подключения хватает и бесплатного тарифа</li><li><b>Аккаунт Runway</b>: <a href="https://app.runwayml.com/">app.runwayml.com</a>. Картинки делаются и на бесплатном тарифе, видео только на платном</li><li><b>Runway, подключённый к Claude.</b> Это делается один раз, инструкция в блоке ниже. Код, терминал и ключи не нужны</li></ol>
 <details class="faq-item"><summary>Как подключить Runway к Claude: 3 шага</summary><ol><li>Открой <a href="https://claude.ai/">Claude</a> и в левой панели нажми <b>Customize</b></li><li>Перейди на вкладку <b>Connectors</b>, справа сверху нажми <b>+ Add</b> и выбери <b>Add custom connector</b>. В новой версии меню этот пункт называется <b>Custom → Web</b></li><li>В поле имени впиши <b>Runway</b>, в поле адреса вставь <code>https://mcp.runwayml.com/mcp</code> и нажми <b>Continue</b>, затем <b>Connect</b>. Откроется вход в Runway: войди своим аккаунтом и разреши доступ. После этого Runway появится в списке Connectors</li></ol><p>Проверь, что всё работает: открой новый чат в Claude и отправь запрос ниже. Он ничего не создаёт и не тратит кредиты</p><pre data-lang="ЗАПРОС В CLAUDE">Проверь подключение Runway: какой у меня тариф, сколько осталось кредитов и какие нейросети для картинок и видео мне доступны. Ничего не создавай</pre><p>Если вход в Runway не прошёл, разбор частых ошибок в <a href="podklyuchenie.html">подробной инструкции по подключению</a></p></details>
 <aside class="related-plaque"><p class="plaque-label">Ещё подключения</p><p class="plaque-title"><a href="/claude-ai/podklyuchit-gmail-drive-calendar/">Gmail, Google Drive и Calendar внутри Claude</a></p><p class="why">Так же подключаются почта, документы и календарь</p></aside></section>
 <section class="content-section"><h2 id="kartinka">Шаг 1. Попроси картинку</h2><p>Открой новый чат в <a href="https://claude.ai/">Claude</a> и опиши, какая картинка нужна. Слово «Runway» в запросе подскажет Claude, через какой сервис работать</p><pre data-lang="ЗАПРОС В CLAUDE">Сделай через Runway вертикальную картинку 9:16: чашка кофе с лёгким паром на деревянном подоконнике, утреннее солнце, рядом растение и тетрадь с ручкой. Реалистичное фото</pre><p>Claude сам выберет нейросеть, создаст картинку и покажет её в чате. Хочешь, чтобы рисовал именно GPT, допиши в запрос «через GPT Image». Так же можно назвать любую другую модель из Runway</p><figure class="fig runway-side"><a class="zoom" href="images/claude-runway-kofe.webp" aria-label="Открыть крупнее: чашка кофе на подоконнике"><img src="images/claude-runway-kofe.webp" alt="Чашка кофе с паром на деревянном подоконнике, рядом растение и тетрадь с ручкой" width="720" height="1290" loading="lazy" decoding="async"/></a><figcaption>Эту картинку Claude сделал через Runway по запросу выше, на бесплатном тарифе Runway</figcaption></figure></section>
@@ -2060,7 +2152,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <section aria-label="Ещё по теме" class="seo-related"><h2 id="related">Ещё по теме</h2><ul><li><a href="/claude-ai/besplatnye-video-iz-teksta/">Видео из текста: как получить MP4 и сравнить 9 сервисов</a></li><li><a href="/claude-ai/podklyuchit-gmail-drive-calendar/">Gmail, Google Drive и Calendar внутри Claude</a></li><li><a href="/claude-ai/kopirovat-stil-foto-v-chatgpt/">Скопировать стиль фото в ChatGPT</a></li></ul></section>
 
 <p class="cta-question">Один чат вместо пяти вкладок: картинку и видео делает Claude, а ты только описываешь, что нужно. Что ещё можно поручить нейросетям, если не знаешь кода, ниже</p>
-<section aria-label="Концентрат и мастер-группа Ивана Сергеева" class="cta"><h2 id="section-26">Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section><div class="share-row"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Frunway-iz-claude%2F&amp;text=Runway%20%D0%B2%20Claude%3A%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%20%D0%B2%20%D1%87%D0%B0%D1%82%D0%B5" rel="noopener" target="_blank">Telegram</a><a class="share-btn" href="https://wa.me/?text=Runway%20%D0%B2%20Claude%3A%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%20%D0%B2%20%D1%87%D0%B0%D1%82%D0%B5%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Frunway-iz-claude%2F" rel="noopener" target="_blank">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Frunway-iz-claude%2F&amp;title=Runway%20%D0%B2%20Claude%3A%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%20%D0%B2%20%D1%87%D0%B0%D1%82%D0%B5" rel="noopener" target="_blank">VK</a></div></article></main><aside aria-label="Соседняя статья" class="related-plaque"><p class="plaque-label">Полезно знать</p><h2>Видео из текста: 9 сервисов</h2><p><a href="/claude-ai/besplatnye-video-iz-teksta/">Открыть статью</a></p></aside></div><div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog"><button aria-label="Закрыть" class="viewer-close" type="button">✕</button><div class="viewer-scroll" tabindex="0"><img alt=""/></div><p class="viewer-hint"></p></div><script src="../../assets/image-viewer.js"></script><script>
+<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section><div class="share-row"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Frunway-iz-claude%2F&amp;text=Runway%20%D0%B2%20Claude%3A%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%20%D0%B2%20%D1%87%D0%B0%D1%82%D0%B5" rel="noopener" target="_blank">Telegram</a><a class="share-btn" href="https://wa.me/?text=Runway%20%D0%B2%20Claude%3A%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%20%D0%B2%20%D1%87%D0%B0%D1%82%D0%B5%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Frunway-iz-claude%2F" rel="noopener" target="_blank">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Frunway-iz-claude%2F&amp;title=Runway%20%D0%B2%20Claude%3A%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%20%D0%B2%20%D1%87%D0%B0%D1%82%D0%B5" rel="noopener" target="_blank">VK</a></div></article></main><aside aria-label="Соседняя статья" class="related-plaque"><p class="plaque-label">Полезно знать</p><h2>Видео из текста: 9 сервисов</h2><p><a href="/claude-ai/besplatnye-video-iz-teksta/">Открыть статью</a></p></aside></div><div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog"><button aria-label="Закрыть" class="viewer-close" type="button">✕</button><div class="viewer-scroll" tabindex="0"><img alt=""/></div><p class="viewer-hint"></p></div><script src="../../assets/image-viewer.js"></script><script>
 (function () {
   var viewer = document.getElementById("viewer");
       var viewerModal = GuideImageViewer.mount(viewer, close);
@@ -2357,17 +2449,17 @@ revealPreparationFromHash();
   }
 })();
 </script><footer class="privacy-site-footer"><!-- privacy:footer:start -->
-<div class="privacy-footer"><a href="/politika/">Политика данных</a><button data-cookie-settings="" type="button">Настройки аналитики</button></div>
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer><!-- privacy:banner:start -->
-<aside aria-label="Выбор аналитики" class="cookie-banner" hidden="" id="cookie-banner">
-<div class="cookie-inner">
-<p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
-<div class="cookie-actions">
-<button aria-describedby="cookie-description" id="cookie-accept" type="button">Принять</button>
-<button aria-describedby="cookie-description" id="cookie-decline" type="button">Отказаться</button>
-</div>
-</div>
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
 </aside>
 <!-- privacy:banner:end -->
 </body></html>
