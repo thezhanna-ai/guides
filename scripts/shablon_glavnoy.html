@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="assets/home-theme.js"></script>
   <title>{title}</title>
   <meta name="description" content="{description}">
   <!-- Страница собрана из data/statyi.json скриптом scripts/sobrat_glavnuyu.py
@@ -23,6 +24,7 @@
     @font-face {{ font-family: 'Unbounded Fallback'; src: local('Arial'); size-adjust: 139.396%; ascent-override: 71.38%; descent-override: 17.576%; line-gap-override: 0% }}
     @font-face {{ font-family: 'Spectral Fallback'; src: local('Georgia'); size-adjust: 97.705%; ascent-override: 108.387%; descent-override: 47.387%; line-gap-override: 0% }}
     :root {{
+      color-scheme: light;
       --ink: #102F30;
       --text: #24302D;
       --paper: #F8F7F2;
@@ -43,6 +45,20 @@
       --guide-gap: 18px;
       --guide-cover-width: 1600;
       --guide-cover-height: 840;
+    }}
+    /* Та же семантическая палитра, что у статей и политики сайта. */
+    :root[data-theme="dark"] {{
+      color-scheme: dark;
+      --paper: #162221;
+      --paper-2: #253331;
+      --card: #20302E;
+      --text: #EDF1EE;
+      --ink: #DCEAE4;
+      --muted: #B7C2BD;
+      --sage: #243735;
+      --sage-line: #48605C;
+      --line: #3C504C;
+      --accent-dark: #FF9A78;
     }}
     * {{ box-sizing: border-box }}
     body {{
@@ -220,6 +236,10 @@
     .brand {{ display: inline-flex; align-items: center; gap: 10px; color: var(--guide-color-hero-paper); font: 500 14px/1 "JetBrains Mono", ui-monospace, monospace;
       letter-spacing: .04em; text-decoration: none }}
     .brand::before {{ content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--hot) }}
+    .theme-toggle {{ flex: none; width: 44px; min-height: 44px; border: 1px solid var(--guide-color-hero-paper-alpha-72); border-radius: 10px;
+      background: var(--guide-color-forest); color: var(--guide-color-paper); font: 750 20px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; cursor: pointer }}
+    .theme-toggle:hover {{ background: var(--guide-color-forest-hover) }}
+    .theme-toggle:focus-visible {{ outline: 3px solid var(--guide-color-brand-on-dark); outline-offset: 4px }}
     .bar-link {{ color: var(--guide-color-hero-paper-alpha-72); font: 500 13px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .06em; text-decoration: none }}
     .bar-link:hover {{ color: var(--guide-color-hero-paper) }}
     .cover-body {{ position: relative; z-index: 3; width: min(1200px, calc(100% - 64px)); margin: 0 auto; padding: 92px 0 96px; max-width: 1200px }}
@@ -396,7 +416,17 @@
     .guide-link:active:not(:focus-visible), .novoe-link:active:not(:focus-visible), .tag-btn:active:not(:focus-visible), .search-go:active:not(:focus-visible) {{ transform: scale(.97) }}
     .after-cover[hidden] {{ display: none }}
     #search-results[hidden] {{ display: none }}
-    /* Главная сохраняет бумажный фон и при сохранённой тёмной теме статей. */
+    html[data-theme="dark"] .search-input,
+    html[data-theme="dark"] .metka-select {{ background-color: var(--card) }}
+    html[data-theme="dark"] .search-input::placeholder {{ color: var(--muted); opacity: 1 }}
+    html[data-theme="dark"] .search-go {{ color: var(--guide-color-forest) }}
+    html[data-theme="dark"] .kind-instr,
+    html[data-theme="dark"] .soon {{ color: var(--muted) }}
+    html[data-theme="dark"] .guide-tools,
+    html[data-theme="dark"] .guide-link.kod-hit::after,
+    html[data-theme="dark"] .avtor-label,
+    html[data-theme="dark"] .novoe-label,
+    html[data-theme="dark"] .podval-kontakt a {{ color: var(--accent-dark) }}
     html[data-theme="dark"] .catalog-search :focus-visible,
     html[data-theme="dark"] #search-results :focus-visible {{ outline-color: var(--ink) }}
     @media (max-width: 900px) {{
@@ -468,6 +498,7 @@
     </figure>
     <div class="cover-bar">
       <a class="brand" href="./">pronovoe.com</a>
+      <button class="theme-toggle" type="button" aria-label="Тёмная тема" aria-pressed="false" title="Переключить тему">◐</button>
     </div>
     <div class="cover-body">
       <div class="cover-copy">
