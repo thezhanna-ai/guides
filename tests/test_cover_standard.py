@@ -85,6 +85,17 @@ class CoverStandardTest(unittest.TestCase):
             self.assertEqual(hashlib.sha256((ROOT/item['image']).read_bytes()).hexdigest(), self.approved_digest(item),
                              f'{item["image"]}: обложку за пределами задания нельзя пересобирать')
 
+    def test_moroni_cover_matches_registry(self):
+        slug = 'stanford-cs230-karera-v-ii'
+        reg = json.loads((ROOT / 'data/OBLOZHKI.json').read_text())[slug]
+        layout = json.loads((ROOT / reg['layout']).read_text())
+        data = (ROOT / reg['image']).read_bytes()
+        digest = hashlib.sha256(data).hexdigest()
+        self.assertEqual(digest, reg['sha256'])
+        self.assertEqual(digest, layout['image_sha256'])
+        if Image is not None:
+            self.assertEqual(Image.open(ROOT / reg['image']).size, (1600, 840))
+
     def test_chat_cover_labels_match_originals(self):
         spec = importlib.util.spec_from_file_location('cover_standard', ROOT / 'scripts/build_cover_standard.py')
         module = importlib.util.module_from_spec(spec)
