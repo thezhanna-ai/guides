@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="theme-color" content="#F8F7F2">
+
+
+  <title>Логотип в Claude: 7 промптов по шагам</title>
+  <!-- critical:fonts:start -->
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+  <style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+    /* ссылка должна читаться как ссылка: цветом её не опознать - контраст
+       emerald-mid к тексту всего 1.51 при норме 3.0, поэтому подчёркивание */
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .route-note { margin: 31px 0 34px; padding: 2px 0 4px 24px; border-left: 3px solid var(--accent) }
+    .route-note h2 { margin-bottom: 9px; font: 750 20px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .route-note p { margin: 0; color: var(--muted) }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+/* блоки разведены по таблице 7.1 канона: фон = вес, полоса слева = характер.
+       .info-card - полезное уточнение, фон без полосы
+       .warn-card - оговорка или предупреждение, фон плюс оранжевая полоса
+       .check-panel - читатель отмечает пункты, поэтому БЕЛАЯ карточка */
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .check-panel { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .warn-card p { margin: 0 }
+    /* абзац после блока слипался с ним: у блоков margin-bottom 0,
+       а у p margin-top 0. Зазор был 0 px при 25 px между абзацами */
+    .info-card + p, .warn-card + p, .check-panel + p { margin-top: 25px }
+    /* раскрывающиеся вопросы: канон, п.6 и тёплый бумажный #F0E8D8 под нейтральные
+       раскрывающиеся блоки. Не серо-голубая плашка: та под информационные врезки */
+    .faq-item { margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); overflow: hidden }
+    .faq-item summary { padding: 13px 44px 13px 18px; position: relative; color: var(--emerald); font: 750 17px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer; list-style: none }
+    .faq-item summary::-webkit-details-marker { display: none }
+    .faq-item summary::after { content: "+"; position: absolute; top: 50%; right: 17px; transform: translateY(-50%); color: var(--accent-dark); font: 700 22px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .faq-item[open] summary::after { content: "−" }
+    .faq-item p { margin: 0; padding: 0 18px 15px }
+    /* кнопка "Открыть крупнее" на скринах: приём с сайта Ивана. Скрины в
+       примерах шириной 1200-2000 px на телефоне ужимаются до 18-29%, текст
+       в них не прочитать. На мыши кнопка появляется при наведении, на
+       телефоне (нет hover) видна всегда */
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--emerald); color: var(--guide-color-paper); font: 750 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; cursor: pointer; opacity: 0; transition: opacity .14s ease, background .14s ease }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    .shot .zoom:hover { background: var(--accent) }
+    /* без мыши кнопку не навести, поэтому на телефоне она видна всегда.
+       Условие продублировано по ширине: hover:none не срабатывает в эмуляции */
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    /* полноэкранный просмотр */
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    /* в окне картинка показывается в НАТУРАЛЬНОМ размере с прокруткой: на телефоне
+       ужать её в экран - значит не увеличить ничего. Прокручиваем пальцем */
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; text-align: center }
+    .limit-card { margin-top: 24px; padding: 13px 18px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .limit-card p { margin: 0 }
+    .limit-card h3 { margin-bottom: 7px }
+    .tune-card { margin-top: 26px; padding: 15px 20px 3px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 11px; background: var(--white) }
+    .tune-card h3 { margin-bottom: 9px }
+    .tune-card .result { margin-bottom: 17px }
+    .info-card p { margin: 0 }
+    /* после серо-голубой врезки идёт заголовок - без отбивки блоки слипаются */
+    .info-card + h3 { margin-top: 38px }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .annotation { position: absolute; border: 3px solid var(--accent); border-radius: 9px; box-shadow: 0 0 0 3px var(--guide-color-paper-alpha-88); pointer-events: none }
+    .annotation::before { content: attr(data-n); position: absolute; top: -38px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--guide-color-white); box-shadow: 0 0 0 3px var(--guide-color-white-alpha-95); font: 800 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    /* пометки на скрине запроса: показывают, что данные в примере условные */
+    .annotation.uslovnym { left: 62.94%; top: 35.80%; width: 31.72%; height: 6.65% }
+    .annotation.naprimer { left: 4.85%; top: 43.50%; width: 15.21%; height: 6.34% }
+    /* на скрине запроса кружки-цифры не ставим: картинка на телефоне мелкая,
+       кружок неизбежно накрывает слова. Рамки говорят сами за себя, а что
+       именно выделено - сказано в подписи под картинкой */
+    .annotation.uslovnym::before, .annotation.naprimer::before { content: none }
+    /* тумблер создания файлов в разделе Capabilities */
+    .annotation.tumbler { left: 92.56%; top: 38.20%; width: 5.94%; height: 9.67% }
+    .annotation.tumbler::before { top: 50%; left: -38px; bottom: auto; transform: translateY(-50%) }
+    .shot.vertical { width: min(100%, 380px) }
+    /* мелкие врезки: скрин интерфейса не увеличиваем искусственно, кегль
+       внутри картинки должен читаться заодно с основным текстом статьи */
+    .shot.compact { width: min(100%, 430px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .prompt-box { position: relative; margin-top: 24px; padding: 57px 22px 23px; border-radius: 12px; background: var(--guide-color-forest); color: var(--guide-color-paper) }
+    h3 + .prompt-box { margin-top: 12px }
+    .prompt-box + h3 { margin-top: 46px }
+    .prompt-box pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.58 ui-monospace, SFMono-Regular, Menlo, monospace }
+    .copy-button { position: absolute; top: 13px; right: 13px; min-width: 132px; min-height: 34px; padding: 0 13px; border: 0; border-radius: 8px; background: var(--accent); color: var(--guide-color-forest); font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; box-shadow: 0 3px 0 var(--guide-color-brand-ink); cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .copy-button:hover { background: var(--guide-color-brand-hover) }
+    .copy-button:active { background: var(--guide-color-brand-pressed); box-shadow: 0 1px 0 var(--guide-color-brand-ink); transform: translateY(2px) }
+    .copy-button.is-copied { background: var(--guide-color-brand-pressed); box-shadow: 0 0 0 3px var(--guide-color-brand-pressed-alpha-34); transform: translateY(1px) }
+    .check-panel h3 { margin-bottom: 10px }
+    .checklist { margin: 0; padding: 0; list-style: none }
+    .checklist li { position: relative; margin: 8px 0; padding-left: 28px }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 900 }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    /* Партнёрская врезка в середине длинной статьи: узкая строка без заливки.
+       Намеренно тише финального блока - это попутное предложение, а не вывод */
+    .partner-line { margin: 46px 0; padding: 15px 0 15px 16px; border-left: 3px solid var(--line);
+      color: var(--muted); font-size: 15.5px; line-height: 1.5 }
+    .partner-line a { color: var(--accent-dark); font-weight: 700; text-decoration: underline;
+      text-underline-offset: 3px }
+    .partner-line a:hover { color: var(--accent) }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+      .annotation { border-width: 2px }
+      .annotation::before { top: -30px; width: 22px; height: 22px; font-size: 11px }
+      .annotation.askshot::before, .annotation.upgrade::before { top: 50%; left: -30px }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .theme-toggle, .theme-toggle:hover, .press-button, .press-button:hover, .press-button:active, .copy-button, .copy-button:hover, .copy-button:active, .copy-button.is-copied { transition: none; transform: none } .cta .press-button:active { box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) } .copy-button.is-copied { box-shadow: 0 0 0 3px var(--guide-color-brand-pressed-alpha-34) } }
+
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    /* карточка должна читаться как ссылка, а не как серый блок текста.
+       text-decoration НАСЛЕДУЕТСЯ, поэтому подчёркиваем только .title */
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+    @media (min-width: 861px) and (max-width: 1199px) { .toc { width: 240px; margin-left: 0 } }
+    @media (min-width: 1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+    @media (min-width: 1200px) and (max-width: 1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+</style>
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://pronovoe.com/claude-ai/artefakty-v-claude/assets/oblozhka.webp">
+
+  <style id="shapka-b">
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+  </style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+
+
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
+<!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  flex: 1 1 0; width: 124px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+#cookie-accept { background: var(--guide-color-brand); color: var(--guide-color-forest); border-color: var(--guide-color-brand) }
+#cookie-decline { background: var(--guide-color-slate-paper); color: var(--guide-color-forest); border-color: var(--guide-color-slate-paper) }
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/logotip-v-claude-7-promptov/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/logotip-v-claude-7-promptov/#article",
+      "headline": "Логотип в Claude: 7 промптов по шагам",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/logotip-v-claude-7-promptov/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-28",
+      "image": "https://pronovoe.com/claude-ai/logotip-v-claude-7-promptov/assets/logo-full.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/logotip-v-claude-7-promptov/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Логотип в Claude: 7 промптов по шагам",
+          "item": "https://pronovoe.com/claude-ai/logotip-v-claude-7-promptov/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/logotip-v-claude-7-promptov/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Пример исправления: подпись обрезана справа",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "В ранней попытке для этой марки Claude выдал SVG с холстом 420 × 160. Длинная подпись не поместилась: её конец оказался за правой границей. Первый файл: последняя часть подписи не видна. Мы вернули замечание об обрезанной строке и попросили увеличить холст и выдать полный SVG заново. В следующем ответе Claude задал размер 640 × 180. Следующий файл: название и подпись помещаются. Это пример исправления границ файла, а не выбранная финальная концепция. Такое же действие нужно повторить со своим результатом: открыть файл, назвать видимый недостаток и запросить исправленный полный код. Сам факт появления SVG ещё не означает, что композиция получилась удачной."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли получить SVG прямо в Claude?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Попроси полный SVG-код, скопируй его в файл с расширением .svg и открой в браузере. Если появился только текст с идеями, повтори просьбу о коде файла."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему один запрос не даёт нужный результат?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "В коротком запросе мало условий для выбора формы. Семь шагов последовательно уточняют марку, выбранный стиль, буквы, символ, цвет и ограничения. После открытия файла всё равно нужно оценить получившийся рисунок."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Для чего хранить и SVG, и PNG?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SVG нужен для масштабирования и правок контуров. PNG проще открыть, отправить и поставить в макет, который принимает изображения. Экспорт PNG не заменяет исходный SVG."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли сразу отправить файл в печать?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Сначала уточни требования типографии. Может понадобиться другой цветовой режим, минимальная толщина линий или подготовка под конкретный способ нанесения."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+<meta name="description" content="Семь промптов для логотипа в Claude: основа бренда, монограмма, буквы, цвета и критика. Пример ТИХАЯ ЧАША, SVG и прозрачный PNG."><meta property="og:title" content="Логотип в Claude: 7 промптов по шагам"><meta property="og:description" content="Семь промптов для логотипа в Claude: основа бренда, монограмма, буквы, цвета и критика. Пример ТИХАЯ ЧАША, SVG и прозрачный PNG."><meta property="og:image" content="https://pronovoe.com/claude-ai/logotip-v-claude-7-promptov/assets/logo-full.png"><meta property="og:url" content="https://pronovoe.com/claude-ai/logotip-v-claude-7-promptov/">
+<style>
+:root{--logo-example-paper:#F4EEE6;--logo-example-peach-overlay:rgba(255,209,191,.09)}
+main{min-width:0}.article-intro>p:first-of-type{margin-top:0}.breadcrumbs{margin:18px 0;font:14px/1.5 Arial,sans-serif}.article-intro .meta{margin:16px 0 22px}.selected-logo{max-width:430px;margin:28px auto}.selected-logo.cover-v2{margin:28px auto}.selected-logo img{background:var(--logo-example-paper)}.prompt-value{color:var(--guide-color-brand-pressed);background:var(--logo-example-peach-overlay);border-radius:3px}.content-section h2{margin-bottom:18px}.content-section>p{margin-bottom:20px}.prompt-box+.result{margin-top:20px}.result{margin-bottom:24px}.faq-item{background:var(--white)}.checklist-canon{padding:14px 22px;border:1px solid var(--line);border-radius:11px;background:var(--white)}.checklist-canon li{margin:9px 0}.prompt-box{background:var(--guide-color-forest)}.prompt-box pre{font-family:'JetBrains Mono',monospace;font-size:14px}.copy-button:active{background:var(--guide-color-brand-pressed);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42)}.theme-toggle:hover{background:var(--paper-2)}.theme-toggle:active{background:var(--line);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--accent)}.brand{text-decoration:none}.header-controls{justify-content:flex-end}.header-controls .press-button{white-space:nowrap}section[id]{scroll-margin-top:90px}.content-section table{display:block;max-width:100%;overflow:auto;border-collapse:collapse;font-size:16px}.content-section th,.content-section td{border:1px solid var(--line);padding:10px;text-align:left}.content-section th{background:var(--info)}.content-section tbody tr:nth-child(odd){background:var(--white)}.content-section tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-2) 25%,var(--white))}@media(max-width:860px){.selected-logo{max-width:350px}.masthead-inner{gap:12px}.header-controls{gap:9px}.header-controls .press-button{font-size:12px;padding:0 11px}.prompt-box{padding:57px 17px 20px}.prompt-box pre{font-size:14px}.content-section h2{font-size:25px}.mobile-toc nav{max-height:65vh;overflow:auto}}@media(prefers-reduced-motion:reduce){.theme-toggle:active,.copy-button:active{transform:none}}
+@media(min-width:861px) and (max-width:1199px){.toc{width:210px}}@media(min-width:1200px){.toc{width:calc(210px - max(-50px, calc(630px - 50vw)))}}.shot-image{position:relative}.shot-image>.zoom{bottom:10px;right:10px}html[data-theme="dark"] h1.article-standard-h1{color:var(--emerald)!important}.prompt-box .copy-button:hover{background:var(--guide-color-brand-hover);transform:translateY(1px);box-shadow:0 2px 0 var(--guide-color-brand-ink)}.prompt-box .copy-button:active{background:var(--guide-color-brand-pressed);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42)}.prompt-box .copy-button.is-copied{background:var(--guide-color-brand-pressed);box-shadow:0 0 0 3px var(--guide-color-brand-pressed-alpha-34)}.example-repair>p{padding:0 18px 15px}.example-repair figure{margin:12px 18px 22px}.icon-size-demo{margin:24px 0}.icon-sizes{display:flex;gap:36px;align-items:flex-end}.icon-sizes>div{display:flex;align-items:center;gap:12px;min-height:44px}.icon-sizes img{flex:none;width:auto;max-width:none;height:auto}.icon-sizes span{font:14px/1.4 Arial,sans-serif}.example-repair .shot{width:calc(100% - 36px);max-width:calc(100% - 36px)}.icon-sizes img{background:var(--logo-example-paper)}@media(prefers-reduced-motion:reduce){.prompt-box .copy-button:hover,.prompt-box .copy-button:active,.prompt-box .copy-button.is-copied{transform:none;transition:none}}</style></head><body><div class="progress" aria-hidden="true"></div><header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a><div class="header-actions"><div class="handout-title">Логотип в Claude: 7 промптов</div><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button><a class="press-button" href="#sohranit-svg">К файлам</a></div></div></div></header><div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">Логотип в Claude: 7 промптов по шагам</a><a href="#podgotovka">Перед первым запросом</a><a href="#osnova-brenda">1. Основа бренда</a><a href="#minimalizm">2. Стиль логотипа</a><a href="#slovesnyy-znak">3. Словесный знак</a><a href="#smysl-simvola">4. Смысл символа</a><a href="#razmery">5. Работа в любом размере</a><a href="#cveta">6. Цвета по психологии восприятия</a><a href="#kritika">7. Критика как креативный директор</a><a href="#sohranit-svg">Как получить файл из ответа Claude</a><a href="#proverka">Что проверить перед использованием</a><a href="#oshibki">Если файл получился не таким, как ожидалось</a><a href="#checklist">Памятка перед использованием логотипа</a><a href="#faq">Частые вопросы</a><a href="#istochniki">Источники</a></nav><main><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#nachalo">Логотип в Claude: 7 промптов по шагам</a><a href="#podgotovka">Перед первым запросом</a><a href="#osnova-brenda">1. Основа бренда</a><a href="#minimalizm">2. Стиль логотипа</a><a href="#slovesnyy-znak">3. Словесный знак</a><a href="#smysl-simvola">4. Смысл символа</a><a href="#razmery">5. Работа в любом размере</a><a href="#cveta">6. Цвета по психологии восприятия</a><a href="#kritika">7. Критика как креативный директор</a><a href="#sohranit-svg">Как получить файл из ответа Claude</a><a href="#proverka">Что проверить перед использованием</a><a href="#oshibki">Если файл получился не таким, как ожидалось</a><a href="#checklist">Памятка перед использованием логотипа</a><a href="#faq">Частые вопросы</a><a href="#istochniki">Источники</a></nav></details><article><section id="nachalo" class="article-intro"><p class="eyebrow">Claude · Логотип</p><h1 class="article-standard-h1">Логотип в Claude: 7 промптов по шагам</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Логотип в Claude: 7 промптов по шагам</span></nav>
+<!-- seo:breadcrumbs:end --><p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · 28 ОКТЯБРЯ 2026</p>
+<p class="lead">Когда просишь «сделай красивый логотип», трудно понять, почему получился именно такой знак и что в нём исправлять. Эти семь запросов помогают последовательно выбрать характер марки, форму символа, написание названия и цвета, а затем получить SVG и проверить его на реальном файле.</p>
+<figure class="shot selected-logo cover-v2"><div class="shot-image"><img src="assets/logo-full.png" width="1380" height="1590" alt="Концепция логотипа ТИХАЯ ЧАША" decoding="async"></div><figcaption>Выбранная концепция вымышленной марки «ТИХАЯ ЧАША».</figcaption></figure>
+<p>Для примера возьмём вымышленную марку «ТИХАЯ ЧАША». Она делает керамику для дома. Выбранная концепция - монограмма из букв Т и Ч: нижний изгиб напоминает открытую чашу, а тонкая ветка дополняет знак. Под ним стоят полное название и подпись «КЕРАМИКА ДЛЯ ДОМА».</p>
+<p><a href="assets/logo-full.svg">Открыть SVG логотипа</a> · <a href="assets/logo-icon.svg">Открыть SVG символа</a> · <a href="assets/logo-full.png">Скачать прозрачный PNG</a>.</p>
+<div class="share-row share-top"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Flogotip-v-claude-7-promptov%2F&amp;text=%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF%20%D0%B2%20Claude%3A%207%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D0%BE%D0%B2%20%D0%BF%D0%BE%20%D1%88%D0%B0%D0%B3%D0%B0%D0%BC" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF%20%D0%B2%20Claude%3A%207%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D0%BE%D0%B2%20%D0%BF%D0%BE%20%D1%88%D0%B0%D0%B3%D0%B0%D0%BC%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Flogotip-v-claude-7-promptov%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Flogotip-v-claude-7-promptov%2F&amp;title=%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF%20%D0%B2%20Claude%3A%207%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D0%BE%D0%B2%20%D0%BF%D0%BE%20%D1%88%D0%B0%D0%B3%D0%B0%D0%BC" target="_blank" rel="noopener">VK</a></div></section><section class="content-section" id="podgotovka"><h2>Перед первым запросом</h2>
+<p>Для работы нужен аккаунт в <a href="https://claude.ai/">Claude</a>. Если вход ещё не настроен, сначала открой инструкцию <a href="../podklyuchenie-iz-rossii/">«Claude из России: подключение без блокировок»</a>. Затем создай новый чат. Запиши точное название, что продаёшь, кому и где будешь использовать знак. Отправляй запросы по порядку в одном разговоре: так Claude сможет дорабатывать выбранное решение.</p>
+<p>Монограмма - знак из начальных букв названия. SVG - формат, в котором линии и буквы описаны контурами: такой файл можно увеличивать без пиксельной сетки. PNG - изображение для просмотра и отправки; у него может быть прозрачный фон.</p>
+<p>Значения в квадратных скобках замени на свои. Внутри скобок уже стоят данные учебной марки.</p>
+<p>Ниже показаны промпты для твоего чата и ответы из разбора выбранной монограммы «ТИХОЙ ЧАШИ». Ответы Claude сокращены по смыслу; после них отдельно указано, что мы оставляем в учебном примере. Для своей марки замени название, товар, аудиторию и желаемый характер оформления. После каждого ответа выбери подходящий вариант и напиши Claude, что именно оставляешь. Следующий запрос должен продолжать твой выбор, иначе модель может начать другую концепцию.</p>
+</section><section class="content-section" id="osnova-brenda"><h2>1. Основа бренда</h2>
+<p>Сначала Claude должен понять задачу марки и предложить варианты устройства логотипа. Словесный знак состоит из названия, монограмма - из его начальных букв, отдельный символ может стоять рядом с названием. Пока выбираем именно устройство знака; художественный стиль уточним следующим запросом.</p>
+<div class="prompt-box"><button type="button" class="copy-button" data-copy-target="prompt-1" aria-label="Скопировать запрос 1">Скопировать</button><pre id="prompt-1">Разработай концепцию логотипа для «<span class="prompt-value">[ТИХАЯ ЧАША]</span>». Это <span class="prompt-value">[авторская керамика для дома]</span>. Покупатели <span class="prompt-value">[ценят простые формы, тактильность и долговечность]</span>. Логотип нужен для <span class="prompt-value">[упаковки, бирки и аватарки]</span>. Сравни три направления: словесный знак, монограмму и отдельный символ рядом с названием. Для каждого опиши смысл, форму, преимущества и слабое место. Пока не выбирай окончательный стиль и цвет. Дай варианты, чтобы я мог выбрать направление
+</pre></div>
+<p><strong>Ответ Claude:</strong> марка рассчитана на покупателей, которым близки спокойное оформление дома и сдержанная эстетика. Керамика связана с повседневной паузой и вниманием к материалу.</p>
+<div class="result"><p><strong>Результат:</strong> мы выбираем монограмму ТЧ, потому что хотим связать символ с названием и использовать его отдельно на бирке и в аватарке.</p></div>
+<p>Посмотри варианты Claude и выбери один под свою задачу. Следующий промпт начинается с выбранного направления. В нашем примере это «монограмма ТЧ»; если выбрано название без символа, впиши «словесный знак».</p>
+</section><section class="content-section" id="minimalizm"><h2>2. Стиль логотипа</h2>
+<p>На первом шаге ты выбрал, из чего состоит логотип. Сейчас выбираешь художественный стиль. И монограмма, и полное название могут быть строгими геометрическими, рукописными или выполненными в ретро-стиле. Люксовый минимализм - ещё один возможный вариант оформления.</p>
+<p>Для учебной «ТИХОЙ ЧАШИ» мы выбираем люксовый минимализм: в брифе спокойная керамика, простые формы и внимание к материалу. Поэтому в показанном образце используем изящные буквы, сдержанный цвет и свободное поле. Это выбор для этой марки, а не обязательное условие работы в Claude.</p>
+<p>Перед отправкой замени стиль в скобках на нужный тебе. Например, для другой задачи здесь могут стоять «игривый иллюстративный стиль», «ретро» или «строгая геометрия». Если пока не знаешь, попроси Claude сравнить три стиля для твоего брифа и выбери один из ответа.</p>
+<div class="prompt-box"><button type="button" class="copy-button" data-copy-target="prompt-2" aria-label="Скопировать запрос 2">Скопировать</button><pre id="prompt-2">Продолжим выбранное направление: <span class="prompt-value">[монограмма ТЧ]</span> для «<span class="prompt-value">[ТИХАЯ ЧАША]</span>». Желаемый стиль - <span class="prompt-value">[люксовый минимализм]</span>. Он должен передавать <span class="prompt-value">[спокойствие, внимание к материалу и сдержанность]</span>. Предложи три варианта в этом стиле. Для каждого опиши форму, толщину линий, характер букв и количество деталей. Объясни, как вариант соответствует брифу. Пока не выбирай окончательный цвет
+</pre></div>
+<p><strong>Ответ Claude:</strong> ограничить состав монограммой ТЧ, тонкой веткой и названием с увеличенными интервалами. Свободное поле и соотношение широких и тонких штрихов должны заменить дополнительные украшения.</p>
+<div class="result"><p><strong>Результат:</strong> для нашего примера оставляем контраст тонких и широких штрихов, изящное начертание и свободное пространство. Нам не нужны тяжёлая рамка и множество украшений.</p></div>
+<p>Выбери один из предложенных вариантов и сообщи Claude, что сохраняешь. Дальше дорабатывай его в том же стиле. Если хочется сменить стиль, сделай это сейчас и повтори этот шаг, прежде чем переходить к буквам и символу.</p>
+</section><section class="content-section" id="slovesnyy-znak"><h2>3. Словесный знак</h2>
+<p>После выбора стиля отдельно уточняем написание полного названия. Оно понадобится и в логотипе с символом, и в варианте без него. Подпись под названием необязательна: если её не будет, замени значение в скобках на «без подписи».</p>
+<div class="prompt-box"><button type="button" class="copy-button" data-copy-target="prompt-3" aria-label="Скопировать запрос 3">Скопировать</button><pre id="prompt-3">Для выбранной концепции в согласованном стиле разработай написание «<span class="prompt-value">[ТИХАЯ ЧАША]</span>». Подпись под названием - <span class="prompt-value">[КЕРАМИКА ДЛЯ ДОМА]</span>. Предложи три варианта начертания, которые соответствуют нашему стилю. Сравни форму кириллических букв, насыщенность и интервалы. Покажи, как название сочетается с выбранным направлением логотипа. Сохрани название и подпись целиком, с полями справа и слева. Объясни сильные и слабые стороны вариантов
+</pre></div>
+<p><strong>Ответ Claude:</strong> подпись нужно сделать второстепенной по отношению к монограмме и увеличить интервалы между её буквами. Здесь важно проверить сам рисунок букв: антиква означает шрифт с засечками, гротеск - без них.</p>
+<div class="result"><p><strong>Результат:</strong> в нашем примере выбираем заглавные буквы с засечками и увеличенными интервалами. Подпись делаем заметно мельче и проще по форме, чтобы она оставалась второстепенной.</p></div>
+<p>Прочитай название и подпись без подсказки. Выбери начертание и напиши Claude, какое оставляешь. Если буквы трудно разобрать, попроси упростить их в рамках выбранного стиля.</p>
+</section><section class="content-section" id="smysl-simvola"><h2>4. Смысл символа</h2>
+<p>Этот шаг зависит от выбранного направления. Для монограммы уточняем буквы, для отдельного символа - его форму и связь с товаром. Если ты выбрал только название, не добавляй символ автоматически: попроси объяснить смысл деталей самого написания. В промпте замени оба поля: тип знака и идею, которую должны выражать его детали.</p>
+<div class="prompt-box"><button type="button" class="copy-button" data-copy-target="prompt-4" aria-label="Скопировать запрос 4">Скопировать</button><pre id="prompt-4">Уточни смысл нашей выбранной концепции: <span class="prompt-value">[монограмма ТЧ]</span>. Связь с маркой должна выражаться через <span class="prompt-value">[нижний изгиб Ч, похожий на неглубокую открытую чашу]</span>. Сохрани читаемость и согласованный стиль. Объясни, какие детали нужны для узнавания, а какие можно убрать. Предложи вариант с минимумом дополнительных элементов и назови риск сходства с другими знаками. Если мы выбрали только словесный знак без символа, разбери детали написания и не добавляй иконку без моего выбора
+</pre></div>
+<p><strong>Ответ Claude:</strong> нижняя дуга Ч может напоминать чашу, а ветка - добавлять природный мотив. При этом ветка остаётся дополнительной деталью, а не основанием узнаваемости.</p>
+<div class="result"><p><strong>Результат:</strong> в показанном образце чаша встроена в изгиб Ч. Ветку оставляем как дополнительный мотив. Основной знак должен сохранять смысл и без неё.</p></div>
+<p>Опиши себе, что видно в символе без пояснения. Если видишь другой предмет или не можешь прочитать буквы, верни это наблюдение Claude и выбери исправленный вариант до следующего шага.</p>
+</section><section class="content-section" id="razmery"><h2>5. Работа в любом размере</h2>
+<p>Теперь определяем версии для тех мест, которые указаны в брифе. Длинное название на упаковке и крошечная иконка требуют разной детализации. Компактная версия не обязана быть отдельной монограммой, если ты выбрал другой тип знака.</p>
+<div class="prompt-box"><button type="button" class="copy-button" data-copy-target="prompt-5" aria-label="Скопировать запрос 5">Скопировать</button><pre id="prompt-5">Для согласованной концепции «<span class="prompt-value">[ТИХАЯ ЧАША]</span>» опиши полную версию для <span class="prompt-value">[упаковки и страницы сайта]</span> и компактную для <span class="prompt-value">[аватарки и иконки]</span>. Сохрани выбранный стиль. Объясни, какие элементы оставить, убрать или утолщить в размерах 32 × 32 и 16 × 16 пикселей. Если в нашей концепции нет отдельного символа, предложи компактное решение на её основе, не меняя направление без согласования. На этом шаге дай описание каждой версии и отличий. SVG-код подготовим после критики, читаемость проверим на файле
+</pre></div>
+<p><strong>Ответ Claude:</strong> на 32 пикселях оставить монограмму и дугу-чашу, упростив ветку; на 16 пикселях убрать ветку и весь текст. Мелкие детали иначе потеряются при уменьшении.</p>
+<div class="result"><p><strong>Результат:</strong> для нашего примера полный знак включает монограмму, название и подпись. Для маленькой версии убираем текст, а затем ветку и мелкие изгибы. Это решения для выбранной монограммы ТЧ.</p></div>
+<p>Для этой страницы отдельно сохранена компактная монограмма без ветки и текста. Ниже она показана в своих настоящих размерах, без увеличения:</p>
+<figure class="icon-size-demo"><div class="icon-sizes"><div><img src="assets/logo-icon-32.png" width="32" height="32" alt="Компактная монограмма ТЧ в размере 32 на 32 пикселя"><span>32 × 32</span></div><div><img src="assets/logo-icon-16.png" width="16" height="16" alt="Компактная монограмма ТЧ в размере 16 на 16 пикселей"><span>16 × 16</span></div></div><figcaption>В этих версиях убраны ветка и подписи. В 16 пикселях тонкие засечки заметно теряются: для маленькой иконки ориентируйся на узнавание букв, а не на сохранность декора.</figcaption></figure>
+
+<p>Сверь предложенные версии со своими местами использования. Если тебе нужна только вывеска, не придумывай иконку ради этого примера. Если иконка нужна, оставь её отдельной задачей для финального SVG.</p>
+</section><section class="content-section" id="cveta"><h2>6. Цвета по психологии восприятия</h2>
+<p>Цвет выбираем под характер марки и уже согласованную форму. Спокойная коричневая палитра подходит нашему учебному примеру; для другого настроения нужно заменить пожелания в промпте.</p>
+<div class="prompt-box"><button type="button" class="copy-button" data-copy-target="prompt-6" aria-label="Скопировать запрос 6">Скопировать</button><pre id="prompt-6">Подбери три палитры для согласованной концепции «<span class="prompt-value">[ТИХАЯ ЧАША]</span>». Нужное впечатление - <span class="prompt-value">[спокойствие, тепло и связь с материалом]</span>. Сохрани выбранный стиль. Для каждой палитры дай основной цвет, фон и необязательный акцент с HEX-кодами. Объясни предполагаемые ассоциации и место каждого цвета. Предусмотри одноцветную версию. Не обещай одинаковой психологической реакции у всех покупателей
+</pre></div>
+<p><strong>Ответ Claude:</strong> коричневый #634A32 связать с глиной, терракотовый #C97B4A использовать как тёплый акцент, светлый #F4EEE6 оставить фоном. Акцент не должен конкурировать с основной монограммой.</p>
+<div class="result"><p><strong>Результат:</strong> для нашего образца выбираем коричневый #634A32 для знака и светлый #F4EEE6 для фона. Терракотовый #C97B4A можно оставить для упаковки. В самом логотипе используем один коричневый.</p></div>
+<p>Сравни палитры рядом с товаром и на предполагаемом фоне. Сообщи Claude коды выбранной палитры, чтобы в финале он использовал их, а не предложил новые цвета.</p>
+</section><section class="content-section" id="kritika"><h2>7. Критика как креативный директор</h2>
+<p>К этому моменту у тебя согласованы направление, стиль, буквы, детали, версии и палитра. Теперь просим проверить, как они работают вместе, и внести конкретные правки перед выдачей файла. В последнем поле промпта перечисли только те версии, которые тебе нужны.</p>
+<div class="prompt-box"><button type="button" class="copy-button" data-copy-target="prompt-7" aria-label="Скопировать запрос 7">Скопировать</button><pre id="prompt-7">Раскритикуй согласованную концепцию «<span class="prompt-value">[ТИХАЯ ЧАША]</span>» как креативный директор. Проверь соответствие исходному брифу и выбранному стилю, читаемость названия, смысл деталей, расстояния и компактную версию. Назови главные недостатки и предложи до трёх правок, не меняя выбранное направление. Внеси правки и выдай полный SVG-код каждой согласованной версии: <span class="prompt-value">[полный логотип с названием и подписью; отдельная монограмма]</span>. Используй выбранную палитру, xmlns и viewBox. Оставь прозрачный фон и достаточные поля. Нужны векторные контуры, без встроенной растровой картинки и внешних файлов. Каждый SVG помести в отдельный блок кода
+</pre></div>
+<p><strong>Ответ Claude:</strong> ветка может конфликтовать с дугой Ч при уменьшении, а слишком большие интервалы могут визуально разделить подпись. Нужно зафиксировать положение ветки в полной версии и ограничить интервалы подписи.</p>
+<div class="result"><p><strong>Результат:</strong> в нашем примере проверяем, не сливается ли ветка с изгибом Ч, не выходит ли подпись за край и какие детали теряются при уменьшении. Правка должна отвечать на конкретный недостаток: удалить элемент, изменить расстояние или увеличить поле.</p></div>
+<p>Сверь исправленный вариант с решениями предыдущих шагов. Если Claude внезапно сменил стиль или добавил невыбранную деталь, попроси вернуть согласованный вариант. После этого переходи к сохранению SVG.</p>
+</section><section class="content-section" id="sohranit-svg"><h2>Как получить файл из ответа Claude</h2>
+<p>После седьмого запроса в ответе должен появиться полный код, который начинается с тега SVG и заканчивается закрывающим тегом. Если Claude дал только описание, напиши: «Теперь выдай полный SVG-код выбранного варианта в отдельном блоке, чтобы я мог сохранить файл».</p>
+<ol>
+<li>Скопируй код первого SVG в текстовый файл и сохрани его как logo-full.svg. Проверь, что к имени не добавилось .txt.</li>
+<li>Если заказывалась компактная версия и Claude выдал второй блок, сохрани его как logo-icon.svg. Если нужна только одна версия, второго файла не требуется.</li>
+<li>Открой оба файла в браузере. Прочитай название и подпись целиком, посмотри на пропорции и расстояния между элементами.</li>
+<li>Если видишь ошибку, прикрепи изображение результата в этот же чат и назови её точно: «Подпись обрезана справа», «Символ ниже названия» или «В маленьком размере буквы слились». Попроси исправленный полный SVG.</li>
+<li>Для PNG вернись в тот же чат и отправь запрос ниже. Claude должен приложить отдельный файл logo-full.png, а не только показать код или описание. Нажми на приложенный файл и скачай его. SVG сохрани как исходник.</li>
+</ol>
+<div class="prompt-box"><button type="button" class="copy-button" data-copy-target="prompt-8" aria-label="Скопировать запрос 8">Скопировать</button><pre id="prompt-8">Возьми согласованный SVG последней версии и конвертируй его в PNG шириной <span class="prompt-value">[1600]</span> пикселей. Сохрани пропорции и прозрачный фон. Не меняй форму, буквы, цвета и расположение. Создай настоящий файл logo-full.png и приложи его к ответу для скачивания
+</pre></div>
+<p>Если вместо файла Claude снова дал описание, открой Settings → Capabilities и проверь, что включено Create and edit files (в другой раскладке Code execution and file creation). Затем вернись в тот же чат и повтори запрос на PNG. Названия настройки приведены в <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">официальной справке о создании файлов</a>.</p>
+<p>Открой скачанный PNG. Белая страница просмотрщика ещё не означает белый фон самого файла: проверь изображение на цветной подложке. Если фон оказался частью изображения, верни PNG в чат и попроси убрать фоновый прямоугольник, сохранив знак.</p>
+<details class="faq-item example-repair">
+<summary>Пример исправления: подпись обрезана справа</summary>
+
+<p>В ранней попытке для этой марки Claude выдал SVG с холстом 420 × 160. Длинная подпись не поместилась: её конец оказался за правой границей.</p>
+
+<figure class="shot"><div class="shot-image"><img src="assets/example-crop-before.png" width="1260" height="480" alt="Ранний SVG: конец подписи обрезан правой границей" loading="lazy"></div><figcaption>Первый файл: последняя часть подписи не видна.</figcaption></figure>
+
+<p>Мы вернули замечание об обрезанной строке и попросили увеличить холст и выдать полный SVG заново. В следующем ответе Claude задал размер 640 × 180.</p>
+
+<figure class="shot"><div class="shot-image"><img src="assets/example-crop-after.png" width="1280" height="360" alt="Исправленный SVG: подпись видна целиком" loading="lazy"></div><figcaption>Следующий файл: название и подпись помещаются. Это пример исправления границ файла, а не выбранная финальная концепция.</figcaption></figure>
+
+<p>Такое же действие нужно повторить со своим результатом: открыть файл, назвать видимый недостаток и запросить исправленный полный код. Сам факт появления SVG ещё не означает, что композиция получилась удачной.</p>
+</details>
+
+<p>Векторная версия примера доступна здесь: <a href="assets/logo-full.svg">логотип в SVG</a>, <a href="assets/logo-icon.svg">символ в SVG</a>, <a href="assets/logo-full.png">прозрачный PNG</a>, <a href="assets/logo-icon-32.png">иконка 32 × 32</a>, <a href="assets/logo-icon-16.png">иконка 16 × 16</a>. В SVG используются контуры: это не картинка, помещённая внутрь файла с другим расширением.</p>
+</section><section class="content-section" id="proverka"><h2>Что проверить перед использованием</h2>
+<p>На большом изображении должны читаться название и подпись, а символ должен стоять согласованно с текстом. Если знак будет использоваться в маленьком размере, проверь отдельную упрощённую версию. Если детали исчезают, верни файл на доработку.</p>
+<p>Перед коммерческим использованием проверь сходство с зарегистрированными знаками, условия использования шрифта и требования типографии. Семь запросов помогают пройти от идеи до файла, а качество результата оценивается после его открытия.</p>
+</section><section class="content-section" id="oshibki"><h2>Если файл получился не таким, как ожидалось</h2>
+<table>
+<thead>
+<tr>
+<th>Что видно</th>
+<th>Что сделать в том же чате</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude дал только описание</td>
+<td>Попроси полный SVG-код выбранного решения в отдельном блоке.</td>
+</tr>
+<tr>
+<td>Браузер показывает текст</td>
+<td>Проверь расширение: logo-full.svg, без добавленного .txt.</td>
+</tr>
+<tr>
+<td>Подпись обрезана</td>
+<td>Попроси увеличить поле справа и ширину viewBox, затем выдать весь исправленный SVG.</td>
+</tr>
+<tr>
+<td>Символ ниже названия</td>
+<td>Попроси выровнять оптические центры символа и текстового блока.</td>
+</tr>
+<tr>
+<td>В иконке слились детали</td>
+<td>Попроси упростить согласованную компактную версию: убрать мелкие детали и проверить толщину линий.</td>
+</tr>
+<tr>
+<td>У PNG белая подложка</td>
+<td>Проверь, что в SVG нет фонового прямоугольника, и экспортируй PNG с прозрачностью.</td>
+</tr>
+</tbody></table>
+<p>Если не получается объяснить ошибку, скопируй этот запрос и заполни скобки:</p>
+<div class="prompt-box"><button type="button" class="copy-button" data-copy-target="prompt-9" aria-label="Скопировать запрос 9">Скопировать</button><pre id="prompt-9">Я хочу получить <span class="prompt-value">[логотип с читаемым названием и прозрачным фоном]</span>. Уже выполнено <span class="prompt-value">[сохранил SVG и открыл его в браузере]</span>. Сейчас вижу <span class="prompt-value">[опиши результат или приложи изображение]</span>. Не понимаю <span class="prompt-value">[что именно мешает]</span>. Объясни следующий шаг простыми словами, по одному действию. После него дождись моего ответа
+</pre></div>
+</section><section class="content-section" id="checklist"><h2>Памятка перед использованием логотипа</h2>
+<ul class="checklist-canon">
+<li>Название и, если она есть, подпись написаны без ошибок, крайние буквы видны целиком.</li>
+<li>Символ и текст согласованы по размеру и положению.</li>
+<li>Если нужны полный знак и иконка, они сохранены разными файлами.</li>
+<li>Если нужна маленькая версия, она читается в том размере, где будет использоваться.</li>
+<li>Векторный SVG и прозрачный PNG открываются после скачивания.</li>
+<li>Перед коммерческим использованием проверены сходство с другими знаками, лицензия шрифта и требования типографии.</li>
+</ul>
+</section><section class="content-section" id="faq"><h2>Частые вопросы</h2>
+<details class="faq-item"><summary>Можно ли получить SVG прямо в Claude?</summary><p>Да. Попроси полный SVG-код, скопируй его в файл с расширением .svg и открой в браузере. Если появился только текст с идеями, повтори просьбу о коде файла.</p></details>
+<details class="faq-item"><summary>Почему один запрос не даёт нужный результат?</summary><p>В коротком запросе мало условий для выбора формы. Семь шагов последовательно уточняют марку, выбранный стиль, буквы, символ, цвет и ограничения. После открытия файла всё равно нужно оценить получившийся рисунок.</p></details>
+<details class="faq-item"><summary>Для чего хранить и SVG, и PNG?</summary><p>SVG нужен для масштабирования и правок контуров. PNG проще открыть, отправить и поставить в макет, который принимает изображения. Экспорт PNG не заменяет исходный SVG.</p></details>
+<details class="faq-item"><summary>Можно ли сразу отправить файл в печать?</summary><p>Сначала уточни требования типографии. Может понадобиться другой цветовой режим, минимальная толщина линий или подготовка под конкретный способ нанесения.</p></details>
+</section><section class="content-section" id="istochniki"><h2>Источники</h2>
+<p>Дополнительные сведения о форматах и работе с результатом. Для выполнения семи запросов читать документацию отдельно не требуется.</p>
+<ul>
+<li><a href="https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them">Справка Claude об артефактах</a>: отдельное окно для результата, редактирование и экспорт.</li>
+<li><a href="https://www.w3.org/TR/SVG2/intro.html">Стандарт SVG, W3C</a>: описание векторного формата.</li>
+</ul>
+</section><section class="next-read" id="related" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><ul><li><a href="../pervyy-proekt-v-claude/"><span class="title">Первый проект в Claude: своя папка с памятью</span><span class="why">Сохрани бриф марки, палитру и версии логотипа в одном проекте, чтобы продолжать работу с теми же условиями.</span></a></li><li><a href="../gotovye-fayly-excel-word-pdf/"><span class="title">Готовые файлы: Excel, Word, PDF и презентации</span><span class="why">Следующий шаг после логотипа: подготовить документы и материалы для своего проекта.</span></a></li></ul></section><div class="share-row"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Flogotip-v-claude-7-promptov%2F&amp;text=%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF%20%D0%B2%20Claude%3A%207%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D0%BE%D0%B2%20%D0%BF%D0%BE%20%D1%88%D0%B0%D0%B3%D0%B0%D0%BC" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF%20%D0%B2%20Claude%3A%207%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D0%BE%D0%B2%20%D0%BF%D0%BE%20%D1%88%D0%B0%D0%B3%D0%B0%D0%BC%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Flogotip-v-claude-7-promptov%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Flogotip-v-claude-7-promptov%2F&amp;title=%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF%20%D0%B2%20Claude%3A%207%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D0%BE%D0%B2%20%D0%BF%D0%BE%20%D1%88%D0%B0%D0%B3%D0%B0%D0%BC" target="_blank" rel="noopener">VK</a></div><p class="cta-question">После логотипа проекту понадобятся сайт, тексты и материалы для покупателей. Ниже - что ещё можно собрать с нейросетью, если не знаешь кода.</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section><footer class="foot">Обновлено 28 октября 2026.<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer></article></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Работа с результатом</p><h2>Артефакты в Claude</h2>
+      <p><a href="../artefakty-v-claude/">Как открыть результат отдельно от переписки и дорабатывать его словами</a></p></aside></div>  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
+    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+    <div class="viewer-scroll"><img alt=""></div>
+    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+  </div>
+
+<script src="../../assets/image-viewer.js"></script>
+<script>
+    var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+    document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+
+    var themeButton = document.querySelector(".theme-toggle");
+    var savedTheme = localStorage.getItem("guide-theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+    themeButton.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("guide-theme", next);
+      themeButton.textContent = next === "dark" ? "☀" : "◐";
+    });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });
+
+
+    // "Открыть крупнее": скрины в примерах на телефоне ужимаются до 18-29%,
+    // кнопка открывает картинку во весь экран
+    (function () {
+      var viewer = document.getElementById("viewer");
+      if (!viewer) return;
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+      var big = viewer.querySelector("img");
+
+      function open(img) {
+
+        big.src = img.dataset.fullSrc || img.currentSrc || img.src; big.alt = img.alt || "";
+        big.onload = function () {
+          var box = viewer.querySelector(".viewer-scroll");
+          var room = viewer.clientWidth - 44;
+          // цель - читаемый текст, а не максимальный размер. Показываем картинку
+          // примерно вдвое крупнее, чем она стоит в тексте, но не больше её
+          // натуральной величины и не больше двух экранов по ширине
+          var inPage = img;
+          var pageWidth = inPage ? inPage.getBoundingClientRect().width : room;
+          var target = Math.min(pageWidth * 2.2, big.naturalWidth);
+          // на большом экране картинка всегда влезает целиком, без прокрутки.
+          // На узком телефоне ужать её - значит ничего не увеличить, поэтому
+          // там разрешаем выйти за экран и прокручивать пальцем
+          var wide = viewer.clientWidth >= 860;
+          target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+          // и по высоте: картинка целиком должна помещаться на экран
+          if (wide) {
+            var maxH = viewer.clientHeight - 96;
+            var byHeight = maxH * (big.naturalWidth / big.naturalHeight);
+            target = Math.min(target, byHeight);
+          }
+          big.style.width = Math.round(target) + "px";
+          viewer.classList.toggle("fits", target <= room);
+          box.scrollLeft = (target - box.clientWidth) / 2;
+          var hint = viewer.querySelector(".viewer-hint");
+          var scrolls = box.scrollWidth > box.clientWidth + 2;
+          hint.textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+        };
+        viewerModal.open(img);
+
+        viewer.querySelector(".viewer-close").focus();
+      }
+      function close() {
+        if (!viewerModal.close()) return;
+
+        big.removeAttribute("src");
+        big.style.width = "";
+
+      }
+      document.querySelectorAll(".shot img").forEach(function (img) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "zoom";
+        button.textContent = "Открыть крупнее";
+        button.addEventListener("click", function () { open(img); });
+        img.parentElement.appendChild(button);
+      });
+      viewer.addEventListener("click", function (event) {
+        if (event.target === viewer || event.target.classList.contains("viewer-close")) close();
+      });
+      addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && viewer.hasAttribute("open")) close();
+      });
+    })();
+
+    var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+    var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+    function updateReadingState() {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+      var current = sections[0];
+      sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+      links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+    }
+    updateReadingState();
+    addEventListener("scroll", updateReadingState, { passive: true });
+  </script>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body>
+</html>

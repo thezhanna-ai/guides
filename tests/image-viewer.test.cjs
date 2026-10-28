@@ -75,8 +75,8 @@ test('Все настоящие inline просмотрщики использу
     assert.ok(/img\.dataset\.fullSrc\s*\|\|\s*img\.currentSrc\s*\|\|\s*img\.src/.test(html), name);
     assert.ok(!/document\.body\.style\.overflow\s*=/.test(html), name);
   }
-  // Five AI tools adds one article using the existing shared viewer lifecycle.
-  assert.equal(count, 58);
+  // The logo article adds one page using the existing shared viewer lifecycle.
+  assert.equal(count, 59);
 });
 
 test('Disabled элемент пропускается, внешний фокус возвращается в модалку', () => {
