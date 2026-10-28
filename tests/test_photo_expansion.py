@@ -69,11 +69,12 @@ class PhotoExpansion(unittest.TestCase):
 
     def test_approved_page_is_preserved_byte_for_byte(self):
         # Approved visible content plus the SEO-only revision of 26 October
-        # (short title, combined intro wrapper, standard generated JSON-LD).
+        # (short title, combined intro wrapper, standard generated JSON-LD),
+        # plus the shared cookie-banner copy approved on 28 October.
         import hashlib
         self.assertEqual(
             hashlib.sha256((ROOT / PAGE).read_bytes()).hexdigest(),
-            '6b80a2bc52df47d980388c35b4d415a0e8060785ca46070e513664591fecca2c',
+            '67da19600e37a7655b33b8956068de0ea8602187fe60c3a12107c62035da6571',
             'Publication must preserve the approved text, prompts, markup and examples',
         )
 
