@@ -1,0 +1,20 @@
+(async()=>{
+ const check=(ok,msg)=>{if(!ok)throw Error(msg)};
+ await document.fonts.ready;
+ const section=document.querySelector('#image').closest('section'),fig=section.querySelector('figure'),link=fig.querySelector('a.zoom'),img=link.querySelector('img'),viewer=document.querySelector('#viewer');
+ img.loading='eager';await img.decode();
+ check(img.naturalWidth===2752&&img.naturalHeight===1536,'Gemini dimensions');
+ check(link.getAttribute('href')==='assets/gemini-derevo.webp','Gemini href');
+ check(fig.querySelector('figcaption').textContent==='Результат в Gemini по запросу выше','caption');
+ check(!fig.querySelector('figcaption a'),'No official video link');
+ check(!document.documentElement.scrollWidth||document.documentElement.scrollWidth<=innerWidth,'Overflow');
+ const faq=[...document.querySelectorAll('.faq-item')].find(x=>x.querySelector('summary').textContent==='На картинках показан пример про небо?');
+ faq.querySelector('summary').click();check(faq.open&&faq.textContent.includes('Картинка Gemini сделана по запросу из статьи'),'FAQ');faq.querySelector('summary').click();
+ link.focus();link.click();const big=viewer.querySelector('img');await big.decode();await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+ const rect=big.getBoundingClientRect();check(viewer.hasAttribute('open')&&big.naturalWidth===2752&&rect.width>0&&rect.top>=0&&rect.bottom<=innerHeight,'viewer visible');
+ document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));check(!viewer.hasAttribute('open')&&document.activeElement===link,'Escape and focus');
+ const f=fig.getBoundingClientRect(),i=img.getBoundingClientRect(),c=fig.querySelector('figcaption').getBoundingClientRect();
+ const result={status:'PASS',width:innerWidth,height:innerHeight,dimensions:[img.naturalWidth,img.naturalHeight],caption:fig.querySelector('figcaption').textContent,faq:faq.querySelector('p').textContent,viewer:{source:big.currentSrc||link.href,rect:rect.toJSON(),escape:true,focusRestored:true},layout:{image:i.toJSON(),caption:c.toJSON(),figure:f.toJSON()},overflow:false,fonts:document.fonts.status,userAgent:navigator.userAgent};
+ await fetch('/__gemini-result',{method:'POST',body:JSON.stringify(result)});
+ document.documentElement.style.scrollBehavior='auto';section.querySelector('.prompt-legend').scrollIntoView();scrollBy({top:-70,behavior:'instant'});console.log('GEMINI PASS',JSON.stringify(result));
+})().catch(e=>console.error('GEMINI FAIL',e));
