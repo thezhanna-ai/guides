@@ -1,2469 +1,2501 @@
 {
- "_readme": "Реестр статей сайта. ИСТОЧНИК ИСТИНЫ: из него собираются перелинковка, карточки главной и sitemap. Новая статья = новая запись ЗДЕСЬ, потом прогон скриптов. Руками index.html не править. Кодовые слова живут ЗДЕСЬ же (поле kod_slovo) - из них собирается реестр раздаток .business/marketing/РЕЕСТР-РАЗДАТОК.html. Раздатки без статьи на сайте - в .business/marketing/razdatki-bez-stati.json",
- "_polya": {
-  "slug": "папка статьи внутри claude-ai/",
-  "title": "заголовок как в <title> и на карточке главной",
-  "rubrika": "рубрика на главной: start | kazhdyy-den | kartinki | vaybkoding | servisy",
-  "metki": "метки поиска, коды из METKI в scripts/sobrat_glavnuyu.py",
-  "razdel": "старая серия статьи (для реестра раздаток): obychnyy-vhod | svoy-server | knopka-za-knopkoy | vaybkoding",
-  "uroven": "green (начальный) | blue (средний)",
-  "tip": "instr (Инструкция) | razbor (Разбор) | obzor (Обзор)",
-  "tags": "data-tags на карточке главной",
-  "ponyatiya": "что объясняет ЭТА статья. Если слово из списка встретилось в чужой статье - там просится ссылка сюда",
-  "trebuet": "что человек должен уже уметь до этой статьи - отсюда ссылка обязательна",
-  "status": "live (на сайте и на главной) | draft (папка есть, на главной нет)",
-  "blokirovka": "почему статья draft - что физически мешает публикации",
-  "zametka": "особенности статьи, которые нельзя трогать не спросив",
-  "kod_slovo": "кодовое слово для выдачи раздатки в директе. Пусто = слова нет. ЗАНЯТОЕ СЛОВО ПОВТОРНО НЕ НАЗНАЧАТЬ никогда, даже после закрытия связки: люди пишут его годами",
-  "data_vyhoda": "ГГГГ-ММ-ДД первого выхода связанного ролика/карусели в ленту. Пусто = в ленту не выходило",
-  "vydacha": "zhivaya (можно выдавать по слову или прямой ссылке) | net (выдачи нет) | vyvedena (выведено из выдачи)",
-  "reestr_razdatok": "true = включить документ в реестр раздаток даже без кодового слова; пусто = обычные правила отбора",
-  "data_publikacii": "ГГГГ-ММ-ДД публикации самой статьи; отдельно от выхода ролика или карусели",
-  "podpis": "подпись под обложкой: содержание статьи одной строкой до 100 знаков, без повтора H1 и надписей обложки",
-  "kratko": "законченная фраза для карточки главной до 85 знаков: что получишь из статьи, без повтора надписей обложки и без обрезки"
- },
- "statyi": [
-  {
-   "slug": "podklyuchenie-iz-rossii",
-   "title": "Claude из России: подключение без блокировок",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "start",
-   "metki": [
-    "claude-chat",
-    "dostup"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "dostup green",
-   "ponyatiya": [
-    "VPN",
-    "вход в Claude",
-    "регистрация",
-    "Google-аккаунт",
-    "подтверждение номера",
-    "доступ из России"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "ДОСТУП",
-   "data_vyhoda": "2026-09-08",
-   "vydacha": "zhivaya",
-   "podpis": "Проверка сети, вход через Google и подтверждение номера перед первым сообщением",
-   "kratko": "От проверки сети до первого сообщения - весь вход по шагам"
-  },
-  {
-   "slug": "svoy-server-dlya-claude",
-   "title": "Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона",
-   "razdel": "svoy-server",
-   "rubrika": "start",
-   "metki": [
-    "claude-code",
-    "dostup"
-   ],
-   "uroven": "blue",
-   "tip": "instr",
-   "tags": "dostup blue",
-   "ponyatiya": [
-    "свой сервер",
-    "VPS",
-    "постоянный IP",
-    "AmneziaVPN",
-    "Claude Code на сервере",
-    "Remote Control",
-    "сервер",
-    "свой сервер для claude",
-    "vpn для claude",
-    "стабильный доступ к claude"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "kod_slovo": "СЕРВЕР",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "data_publikacii": "2026-10-05",
-   "podpis": "Личный VPN через AmneziaVPN, Claude Code в облаке или на своём сервере",
-   "kratko": "Свой VPN и Claude Code, который работает без твоего компьютера",
-   "blokirovka": ""
-  },
-  {
-   "slug": "kak-rasskazat-o-sebe",
-   "title": "Claude помнит о тебе: что рассказать один раз",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "start",
-   "metki": [
-    "claude-chat",
-    "pamyat"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "память",
-    "Memory",
-    "инструкции о себе",
-    "General",
-    "поиск по старым чатам",
-    "перенос из ChatGPT"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "kod_slovo": "КЛОД",
-   "data_vyhoda": "2026-09-09",
-   "vydacha": "zhivaya",
-   "podpis": "Настройки имени, правил ответа и памяти, чтобы не объяснять всё заново",
-   "kratko": "Клод запомнит, кто ты, и не придётся объяснять заново"
-  },
-  {
-   "slug": "vybor-modeli-i-effort",
-   "title": "Модель и уровень effort: что включать под задачу",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "start",
-   "metki": [
-    "claude-chat",
-    "modeli",
-    "sravnenie"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "модель",
-    "Opus",
-    "Sonnet",
-    "Haiku",
-    "Fable",
-    "effort",
-    "усилие",
-    "лимиты тарифа"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "kod_slovo": "МОДЕЛЬ",
-   "data_vyhoda": "2026-09-12",
-   "vydacha": "zhivaya",
-   "podpis": "Сравнение моделей и уровней усилия для простых и сложных задач",
-   "kratko": "Сложной задаче сильная модель, простой - быстрая и экономная"
-  },
-  {
-   "slug": "podklyuchit-gmail-drive-calendar",
-   "title": "Gmail, Google Drive и Calendar внутри Claude",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "pochta"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "Gmail",
-    "Google Drive",
-    "Google Calendar",
-    "подключённые сервисы",
-    "коннекторы",
-    "доступ к почте"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "kod_slovo": "СЕРВИСЫ",
-   "data_vyhoda": "2026-09-14",
-   "vydacha": "zhivaya",
-   "podpis": "Подключение почты, файлов и встреч с проверкой доступа на трёх запросах",
-   "kratko": "Письма, файлы и встречи прямо в чате с Клодом"
-  },
-  {
-   "slug": "web-search-v-claude",
-   "title": "Веб-поиск в Claude: ответы со свежими ссылками",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "poisk"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "веб-поиск",
-    "Web search",
-    "свежие ссылки",
-    "проверка источников",
-    "актуальные данные"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "kod_slovo": "ПОИСК",
-   "data_vyhoda": "2026-09-15",
-   "vydacha": "zhivaya",
-   "podpis": "Включение поиска, запросы с датой и проверка ссылок в ответе",
-   "kratko": "Свежие сведения со ссылками, которые легко проверить"
-  },
-  {
-   "slug": "golosovoy-vvod-v-claude",
-   "title": "Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "golos"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "голосовой ввод",
-    "Dictate",
-    "Voice mode",
-    "микрофон",
-    "надиктовать",
-    "говорить вместо печатать"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "kod_slovo": "ГОЛОС",
-   "data_vyhoda": "2026-09-16",
-   "vydacha": "zhivaya",
-   "podpis": "Два режима речи, настройка микрофона и примеры голосовых запросов",
-   "kratko": "Не печатать, а говорить: два режима и настройка микрофона"
-  },
-  {
-   "slug": "skrinshot-vmesto-obyasneniy",
-   "title": "Скриншот вместо объяснений: покажи Клоду экран, где всё застопорилось",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "fayly"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "скриншот",
-    "скрин",
-    "показать экран",
-    "картинка в чат",
-    "непонятная кнопка"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "kod_slovo": "СКРИН",
-   "data_vyhoda": "2026-09-17",
-   "vydacha": "zhivaya",
-   "podpis": "Загрузка снимка экрана и запрос, по которому Клод найдёт нужную кнопку",
-   "kratko": "Снимок экрана, и Клод сам найдёт нужную кнопку"
-  },
-  {
-   "slug": "gotovye-fayly-excel-word-pdf",
-   "title": "Готовый Excel, Word, PDF или презентация - без копипаста",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "fayly"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "готовый файл",
-    "Excel",
-    "xlsx",
-    "Word",
-    "docx",
-    "PDF",
-    "презентация",
-    "pptx",
-    "формулы",
-    "скачать файл"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "kod_slovo": "ФАЙЛ",
-   "data_vyhoda": "2026-09-18",
-   "vydacha": "zhivaya",
-   "podpis": "Включение создания документов, запрос на скачивание и проверка результата",
-   "kratko": "Таблица с формулами или документ сразу файлом на скачивание"
-  },
-  {
-   "slug": "artefakty-v-claude",
-   "title": "Артефакты: ответ Клода в отдельном окне, а не в переписке",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "artefakty"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "артефакт",
-    "отдельное окно",
-    "калькулятор",
-    "чек-лист",
-    "раздел Artifacts",
-    "поделиться ссылкой",
-    "Share"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "kod_slovo": "АРТЕФАКТ",
-   "data_vyhoda": "2026-09-19",
-   "vydacha": "zhivaya",
-   "podpis": "Инструмент с полями и переключателями, собранный в чате, к которому можно вернуться",
-   "kratko": "Свой инструмент из одного запроса: открываешь и пользуешься снова"
-  },
-  {
-   "slug": "incognito-chat-v-claude",
-   "title": "Инкогнито в Claude: разговор, который не попадёт в память",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "privatnost"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "инкогнито",
-    "временный чат",
-    "приватность внутри аккаунта",
-    "история чатов",
-    "Use incognito"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "zametka": "Режим описан как приватность ВНУТРИ аккаунта, не как анонимность: Anthropic деталей хранения не раскрывает. Обещаний «данные нигде не хранятся» в тексте нет",
-   "kod_slovo": "ПРИЗРАК",
-   "data_vyhoda": "2026-09-21",
-   "vydacha": "zhivaya",
-   "podpis": "Временный разговор: включение режима, проверка истории и границы приватности",
-   "kratko": "Разговор, после которого в истории пусто"
-  },
-  {
-   "slug": "pervyy-proekt-v-claude",
-   "title": "Первый проект в Claude: своя папка с памятью",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "proekty"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "проект",
-    "New Project",
-    "база знаний",
-    "инструкции проекта",
-    "своя папка"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii",
-    "kak-rasskazat-o-sebe"
-   ],
-   "status": "live",
-   "kod_slovo": "ПРОЕКТ",
-   "data_vyhoda": "2026-09-13",
-   "vydacha": "zhivaya",
-   "podpis": "Материалы, инструкции и старые разговоры в общей папке для одной задачи",
-   "kratko": "Файлы и правила одной задачи в общей папке"
-  },
-  {
-   "slug": "shest-skillov",
-   "title": "Шесть скиллов Claude: как найти, подключить и вызвать",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "skilly",
-    "sayt"
-   ],
-   "uroven": "blue",
-   "tip": "instr",
-   "tags": "claude blue",
-   "ponyatiya": [
-    "скилл",
-    "скиллы",
-    "Manage Plugins",
-    "плагин",
-    "skill-creator",
-    "mcp-builder",
-    "frontend-design",
-    "canvas-design",
-    "webapp-testing"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "zametka": "перенесена 18.09 из репозитория 6-claude-skills-guide. Вёрстка, палитра и анимации НЕ приводятся к канону сайта - решение автора. ОДИНОКАЯ ПО СМЫСЛУ: единственная статья про Claude Code в VS Code, все остальные про чат claude.ai. Перекрёстные ссылки НЕ ставить, пока не появятся другие статьи про Code: проект в чате и папка проекта в Code - разные вещи (ошибка поймана автором 18.09)",
-   "kod_slovo": "СКИЛЛС",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "podpis": "Готовые инструкции для дизайна, подключения сервисов и проверки сайтов с живыми примерами",
-   "kratko": "Готовые инструкции для дизайна и проверки сайтов"
-  },
-  {
-   "slug": "svoy-sayt-ne-bliznec",
-   "title": "Свой сайт, а не очередной близнец",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "sayt"
-   ],
-   "uroven": "blue",
-   "tip": "instr",
-   "tags": "claude blue",
-   "ponyatiya": [
-    "свой сайт",
-    "лендинг",
-    "сайт-близнец",
-    "вёрстка словами",
-    "правки словами",
-    "Claude Code",
-    "бриф сайта"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "zametka": "перенесена 18.09 из репозитория sayt-za-vecher (код-слово САЙТ). Приведена к канону сайта 20.09 по решению автора: переключатель день-ночь, тёмная палитра, сетка 260+720, якоря под липкую шапку. Своя вёрстка блоков (мятная зона новичка, блоки промптов, 7 признаков) сохранена. Старый адрес thezhanna-ai.github.io/sayt-za-vecher/ остаётся живым. Про Claude Code в VS Code, НЕ про чат - связывать только со статьями про Code",
-   "kod_slovo": "САЙТ",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "podpis": "Образец, стартовый запрос, правки словами и проверка сайта перед показом людям",
-   "kratko": "Сайт по образцу, доведённый правками словами"
-  },
-  {
-   "slug": "pdf-v-markdown-markitdown",
-   "title": "Документы в markdown: как не сжигать лимит Claude на оформлении",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "fayly",
-    "modeli"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "markdown",
-    "токены",
-    "лимит",
-    "MarkItDown",
-    "конвертация документов",
-    "PDF",
-    "Word",
-    "Excel",
-    "загрузка файлов"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "zametka": "Статья про ЛЮБЫЕ форматы (PDF, Word, Excel, презентации) - её правка 20.09. Цифры 41 700 / 13 600 привязаны только к PDF: замер делался на нём, на других форматах не проверялся, так и написано. Звёзд у MarkItDown 185К (проверено 20.09), старая карусель говорила 110К - не повторять",
-   "kod_slovo": "PDF",
-   "data_vyhoda": "2026-09-22",
-   "vydacha": "zhivaya",
-   "podpis": "Два способа перевести PDF в текст и сравнение расхода токенов на реальном файле",
-   "kratko": "PDF в лёгкий текст: то же содержание за меньшее число токенов"
-  },
-  {
-   "slug": "whatsapp-nomer-dlya-agenta",
-   "title": "Свой номер WhatsApp для ИИ-агента: пошагово",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "bot"
-   ],
-   "uroven": "blue",
-   "tip": "instr",
-   "tags": "claude blue",
-   "ponyatiya": [
-    "WhatsApp",
-    "Kapso",
-    "номер без SIM",
-    "песочница",
-    "автоответ",
-    "WhatsApp Flows",
-    "агент в WhatsApp"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "zametka": "Раздатка к карусели «Номер WhatsApp для Клода» (опубликована 25.09). Прошла 3 круга проверки 25.09: плата Meta* с 1.10.2026 отдельно от Kapso, депозит за номер, путь при SMS по instant-setup-troubleshooting. Скрины из документации Kapso",
-   "kod_slovo": "НОМЕР",
-   "data_vyhoda": "2026-09-25",
-   "vydacha": "zhivaya",
-   "podpis": "Проверка автоответа в песочнице, подключение рабочего номера и приём заявок",
-   "kratko": "Сначала песочница, потом рабочий номер и приём заявок"
-  },
-  {
-   "slug": "urovni-vaybkodera",
-   "title": "7 уровней вайбкодера: один шаг, чтобы подняться выше",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "codex"
-   ],
-   "uroven": "",
-   "tip": "razbor",
-   "tags": "claude green",
-   "ponyatiya": [
-    "вайбкодинг",
-    "уровни вайбкодера",
-    "техзадание",
-    "агент",
-    "Codex"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "zametka": "Принята Жанной и разрешена к публикации 26.09.2026. Переносы промптов исправлены, независимые проверки логики и фактов PASS; 59 тестов и браузерная матрица 390-1440 в обеих темах пройдены. Карусель ещё ждёт просмотра Жанны, дата выхода в ленту не назначена",
-   "kod_slovo": "УРОВЕНЬ",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "podpis": "Навыки от постановки задачи до выпуска проекта, с упражнением на каждую ступень",
-   "kratko": "Где пробел в навыках и какое упражнение его закроет?"
-  },
-  {
-   "slug": "10-besplatnyh-zamen",
-   "title": "10 бесплатных замен платным нейросетям - с подвохами",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "servisy",
-   "metki": [
-    "besplatno",
-    "kartinki",
-    "video",
-    "sayt"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "бесплатные нейросети",
-    "замены платным сервисам",
-    "лимиты бесплатных тарифов"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "zametka": "Цены и лимиты сняты 24.09.2026, перепроверены 30.09, вход из России без VPN проверен Жанной 01.10. Бонус Suno Free. Опубликована 01.10.2026",
-   "kod_slovo": "ЗАМЕНА",
-   "data_vyhoda": "2026-10-01",
-   "vydacha": "zhivaya",
-   "data_publikacii": "2026-10-01",
-   "reestr_razdatok": true,
-   "podpis": "Подборка сервисов для фото, кода, видео и озвучки с лимитами бесплатных тарифов",
-   "kratko": "Бесплатная замена под задачу и честно про её лимиты"
-  },
-  {
-   "slug": "besplatnye-video-iz-teksta",
-   "title": "Видео из текста: бесплатные сервисы и подвохи",
-   "razdel": "kartinki",
-   "rubrika": "kartinki",
-   "metki": [
-    "video",
-    "besplatno"
-   ],
-   "uroven": "green",
-   "tip": "obzor",
-   "tags": "kartinki green",
-   "ponyatiya": [
-    "видео из текста",
-    "бесплатные видеосервисы",
-    "Fliki",
-    "Steve AI",
-    "ZSKY AI"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "РОЛИК",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "zametka": "Условия на 25-26.09.2026. Шесть сервисов, реальные примеры, раскадровки и платное оживление разделены. Публичный адрес проверяется перед выдачей",
-   "podpis": "Сравнение шести сервисов, примеры запросов и отдельная проверка условий скачивания",
-   "kratko": "Шесть сервисов: какой даст скачать готовый ролик?"
-  },
-  {
-   "slug": "raspisanie-zadach-v-claude",
-   "title": "Задача по расписанию в Claude: план недели к 7:30",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "raspisanie",
-    "pochta"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "claude green",
-   "ponyatiya": [
-    "Scheduled",
-    "задача по расписанию",
-    "Schedule",
-    "Cowork",
-    "Gmail",
-    "Google Calendar",
-    "коннекторы"
-   ],
-   "trebuet": [
-    "podklyuchit-gmail-drive-calendar"
-   ],
-   "status": "live",
-   "zametka": "Только Scheduled task в Claude, без Claude Code Routines (другой механизм). Факты по справке Anthropic 26.09.2026: платные тарифы, в прежнем интерфейсе путь Cowork → Scheduled → New task, задачи выполняются удалённо. Скрины из аккаунта автора, имя в меню профиля срезано. Рилз 17 «РАСПИСАНИЕ» принят автором 26.09",
-   "kod_slovo": "РАСПИСАНИЕ",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "podpis": "Подключение почты и встреч, настройка времени запуска и проверка созданной задачи",
-   "kratko": "К утру план готов: письма и встречи собраны в одно место"
-  },
-  {
-   "slug": "postery-iz-odnogo-foto",
-   "title": "Постеры из одной фотографии в ChatGPT",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "gpt green",
-   "ponyatiya": [
-    "постер из фотографии",
-    "генерация изображений ChatGPT",
-    "промпт для постера"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "zametka": "Готова к выдаче. Карусель 19.08.2026, статья опубликована 26.09.2026 по прямому разрешению Жанны после 5 кругов проверки (PASS). Скрины шагов её, из ChatGPT на Mac",
-   "kod_slovo": "ПОСТЕР",
-   "data_vyhoda": "2026-08-19",
-   "vydacha": "zhivaya",
-   "podpis": "Выбор снимка, примеры готовых постеров и полный запрос на русском и английском",
-   "kratko": "Твоё фото сверху, рисованная сцена снизу - готово за один запрос"
-  },
-  {
-   "slug": "zagruzka-faylov-v-claude",
-   "title": "Загрузка файлов в Claude: один документ и пачка файлов",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "fayly"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "загрузка файлов в Claude",
-    "несколько файлов",
-    "форматы документов",
-    "сравнение версий договора"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "zametka": "Готова к выдаче. Рилз 18 ЗАГРУЗКА, статья опубликована 26.09.2026 по прямому разрешению Жанны после 5 кругов проверки (PASS). Скрины шагов её, превью личных PDF размыты",
-   "kod_slovo": "ЗАГРУЗКА",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "podpis": "Прикрепление документов, сверка полученных вложений и вопросы по оригиналам",
-   "kratko": "Сравни несколько версий документа и найди отличия"
-  },
-  {
-   "slug": "claude-iz-rossii-bez-banov",
-   "title": "Claude из России не пускает: ошибка 403, отказ оплаты, блокировка и апелляция",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "start",
-   "metki": [
-    "claude-chat",
-    "dostup",
-    "oplata"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "claude dostup green",
-   "ponyatiya": [
-    "блокировка Claude",
-    "апелляция",
-    "экспорт данных",
-    "резервная копия"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "",
-   "data_vyhoda": "",
-   "vydacha": "net",
-   "description": "Как отличить сетевую ошибку 403, отказ оплаты и отключение аккаунта Claude, сохранить данные и подать апелляцию",
-   "podpis": "Ошибки входа и оплаты, сохранение данных и апелляция по отключённому аккаунту",
-   "kratko": "Найдёшь маршрут для своей ошибки доступа",
-   "data_publikacii": "2026-10-05"
-  },
-  {
-   "slug": "svoy-stil-otvetov",
-   "title": "Как научить Claude писать в твоём стиле",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "start",
-   "metki": [
-    "claude-chat",
-    "pamyat"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green",
-   "ponyatiya": [
-    "стиль ответов",
-    "образец текста",
-    "Instructions for Claude"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "zametka": "Готова к выдаче. Рилз 16 СТИЛЬ опубликован 26.09.2026, статья опубликована 27.09.2026 по прямому поручению Жанны после проверки (PASS). Путь Settings → Account → Instructions for Claude по её снимку, личное на скрине размыто",
-   "kod_slovo": "СТИЛЬ",
-   "data_vyhoda": "2026-09-26",
-   "vydacha": "zhivaya",
-   "podpis": "Образец текста, правила подачи и сравнение двух ответов на один запрос",
-   "kratko": "Твоя интонация в каждом будущем ответе"
-  },
-  {
-   "slug": "claude-i-codex-v-vscode",
-   "title": "Claude Code и Codex в одном VS Code: чаты и файлы рядом",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "codex"
-   ],
-   "uroven": "blue",
-   "tip": "instr",
-   "tags": "vaybkoding blue codex vscode",
-   "ponyatiya": [
-    "Claude Code и Codex",
-    "Codex в VS Code",
-    "codex exec",
-    "общие инструкции AGENTS.md"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "description": "Как держать чаты Claude Code и Codex и файлы проекта в одном окне VS Code, открывать отдельные вкладки для задач и отдельно настроить передачу заданий через CLI",
-   "zametka": "Принято Жанной 27.09.2026. Опубликованная раздатка для прямой отправки ссылки. Кодового слова нет; рилз не запущен, материалы сохранены для возможного выпуска",
-   "reestr_razdatok": true,
-   "data_publikacii": "2026-09-27",
-   "podpis": "Установка расширений, общая папка, вкладки задач и передача поручений через CLI",
-   "kratko": "Два чата и файлы проекта в одном окне VS Code"
-  },
-  {
-   "slug": "15-zadach-claude-code-codex",
-   "title": "15 этапов работы над проектом в Claude Code и Codex",
-   "description": "15 этапов работы над проектом: требования, план, интерфейс, база, безопасность, отладка, тесты, история версий и скиллы. Примеры запросов для Claude Code и Codex",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "codex"
-   ],
-   "uroven": "blue",
-   "uroven_nadpis": "Пошаговая инструкция",
-   "tip": "instr",
-   "tags": "vaybkoding blue claude code codex prompty zadachi",
-   "ponyatiya": [
-    "задачи для Claude Code",
-    "промпты для Codex",
-    "требования и критерии приёмки",
-    "проверка результата",
-    "ЗАДАЧИ"
-   ],
-   "trebuet": [
-    "claude-i-codex-v-vscode"
-   ],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ЗАДАЧИ",
-   "data_vyhoda": "",
-   "vydacha": "net",
-   "reestr_razdatok": true,
-   "data_publikacii": "2026-10-17",
-   "podpis": "15 этапов: от требований и плана до тестов, истории версий и скилла",
-   "kratko": "Порядок работы над проектом с примерами запросов и проверкой каждого этапа",
-   "zametka": "Раздатка для карусели про 15 задач Claude Code и Codex. Выдача по кодовому слову не активирована",
-   "oblozhka": true
-  },
-  {
-   "slug": "dannye-v-claude",
-   "title": "Удаление данных в Claude",
-   "razdel": "knopka-za-knopkoy",
-   "rubrika": "start",
-   "metki": [
-    "claude-chat",
-    "privatnost",
-    "pamyat"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude green data memory",
-   "ponyatiya": [
-    "экспорт данных Claude",
-    "удаление чатов Claude",
-    "память Claude",
-    "Topics",
-    "удаление аккаунта Claude"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ДАННЫЕ",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "description": "Как выгрузить данные Claude, удалить разговоры, отдельно проверить память и найти удаление аккаунта",
-   "reestr_razdatok": true,
-   "data_publikacii": "2026-09-29",
-   "zametka": "Статья принята Жанной после доработки Клодом и опубликована 29.09.2026. Связанный рилз 19 ещё не выпущен",
-   "podpis": "Сохранение копии переписок, очистка чатов, отдельная проверка памяти и закрытие аккаунта",
-   "kratko": "Личное убрать, нужные переписки сохранить"
-  },
-  {
-   "slug": "kopirovat-stil-foto-v-chatgpt",
-   "title": "Как скопировать стиль любого фото в ChatGPT",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "стиль фото в ChatGPT",
-    "JSON по фото",
-    "перенос стиля фото"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ФОТО",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "2026-10-01",
-   "data_publikacii": "2026-10-01",
-   "description": "Как скопировать стиль фото в ChatGPT через JSON: образец, своё фото, перенос света, цветов, одежды и фона",
-   "reestr_razdatok": true,
-   "zametka": "Опубликована 01.10.2026: 4 примера, результат шага 3 газета, раздел «Одна фраза на все случаи»",
-   "podpis": "Рецепт образца в JSON, применение к своему снимку и смена одежды с фоном",
-   "kratko": "Свет и цвета чужого кадра на своём фото"
-  },
-  {
-   "slug": "pyat-instrumentov-claude-code",
-   "title": "Пять дополнений для Claude Code: что каждое решает",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "skilly",
-    "modeli"
-   ],
-   "uroven": "blue",
-   "tip": "instr",
-   "tags": "vaybkoding blue claude-code plugins skills",
-   "ponyatiya": [
-    "OmniRoute",
-    "claude-mem",
-    "Headroom",
-    "Claude Code Setup",
-    "Task Observer"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "НАБОР",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "description": "Пять дополнений для Claude Code простыми словами: что каждое решает, как работает и с чего начать",
-   "zametka": "Принята Жанной и опубликована 29.09.2026. Рилз «Стоп. 5 инструментов» в работе",
-   "data_publikacii": "2026-09-29",
-   "reestr_razdatok": true,
-   "podpis": "Пять частых неприятностей в Claude Code и по одному дополнению на каждую",
-   "kratko": "Лимиты, забытый контекст, повторные правки: что с этим делать"
-  },
-  {
-   "slug": "animirovannaya-karusel",
-   "title": "Как сделать движущиеся слайды в карусели",
-   "razdel": "gpt-vaybkoding",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "codex",
-    "claude-code",
-    "kartinki",
-    "video"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "chatgpt codex blue",
-   "ponyatiya": [
-    "анимированная карусель",
-    "видео-слайды",
-    "motion-карусель"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "МОУШЕН",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "2026-10-01",
-   "data_publikacii": "2026-10-01",
-   "description": "Как сделать анимированную карусель: живой пример, запросы для ChatGPT и агента, отдельный MP4 на каждый слайд",
-   "reestr_razdatok": true,
-   "zametka": "Опубликована 01.10.2026: прогоны ChatGPT (HTML, доработка дизайна, MP4) и Codex на чужой теме",
-   "podpis": "Два пути сборки: макет в чате или отдельные MP4 через агента с проверкой стыков",
-   "kratko": "Каждый слайд становится коротким видео с плавным стыком"
-  },
-  {
-   "slug": "10-saytov-starogo-interneta",
-   "title": "10 сайтов старого интернета, которые работают до сих пор",
-   "description": "Полезные сайты, которые работают до сих пор: 10 бытовых задач, шаги для новичка, результат, регистрация и подвох каждого сервиса",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "servisy",
-   "metki": [
-    "besplatno",
-    "privatnost"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "servisy green",
-   "ponyatiya": [
-    "FilePizza",
-    "SunCalc",
-    "MyFridgeFood",
-    "GetHuman",
-    "JustDeleteMe",
-    "PDF24 Tools",
-    "Namechk",
-    "Cover Your Tracks",
-    "TinEye",
-    "IsThereAnyDeal"
-   ],
-   "trebuet": [],
-   "kod_slovo": "ЖЕМЧУГ",
-   "status": "live",
-   "vydacha": "net",
-   "data_vyhoda": "2026-10-05",
-   "reestr_razdatok": true,
-   "blokirovka": "",
-   "zametka": "Статья к карусели «10 сайтов». Факты и исходные скрины 04.10.2026. Карусель в ленту не вышла. Не публиковать без команды Жанны",
-   "podpis": "Десять сайтов на одну задачу каждый: передать файл, склеить PDF, найти свою фотографию в сети",
-   "kratko": "Десять маленьких сайтов, каждый решает одну задачу"
-  },
-  {
-   "slug": "ozhivit-maket-bez-keyframe",
-   "title": "Как оживить макет из Figma за одно нажатие: 4 варианта анимации без After Effects",
-   "razdel": "obychnyy-vhod",
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "servisy green",
-   "kod_slovo": "ЛОТТИ",
-   "status": "live",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-05",
-   "blokirovka": "",
-   "ponyatiya": [
-    "Magic Animator",
-    "Lottie JSON"
-   ],
-   "trebuet": [],
-   "podpis": "Так ожил макет карточек после одного нажатия Generate animations",
-   "kratko": "От макета в Figma до файла Lottie, который проигрывается вне редактора",
-   "rubrika": "kartinki",
-   "metki": [
-    "video"
-   ]
-  },
-  {
-   "slug": "kopiya-higgsfield-open-generative-ai",
-   "title": "Открытая копия Higgsfield: кадры как в кино без ежемесячной подписки",
-   "razdel": "obychnyy-vhod",
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "servisy green",
-   "kod_slovo": "СТУДИЯ",
-   "status": "live",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-05",
-   "blokirovka": "",
-   "ponyatiya": [
-    "Open Generative AI",
-    "Cinema Studio"
-   ],
-   "trebuet": [],
-   "podpis": "Выбор камеры в Open Generative AI: четыре барабана, по одному на настройку",
-   "kratko": "Установщик, ключ MuAPI, настройки Cinema Studio и первый сохранённый кадр",
-   "rubrika": "kartinki",
-   "metki": [
-    "kartinki",
-    "video"
-   ]
-  },
-  {
-   "slug": "otozvat-ssylku-na-chat-claude",
-   "title": "Как отозвать публичную ссылку на чат Claude",
-   "razdel": "knopka-za-knopkoy",
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "claude privacy green",
-   "kod_slovo": "ДЕЛЮСЬ",
-   "status": "live",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-06",
-   "blokirovka": "",
-   "ponyatiya": [
-    "Share chat",
-    "Only people invited",
-    "Anyone with the link",
-    "Shared chats",
-    "Unshare"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "podpis": "Разорванная цепь: доступ к переписке по ссылке закрыт",
-   "kratko": "Где увидеть все беседы, которыми делишься, и как закрыть к ним доступ",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "privatnost"
-   ]
-  },
-  {
-   "slug": "montazh-video-claude-code-codex",
-   "title": "Монтаж видео нейросетью Claude Code или Codex: один промпт, два результата",
-   "description": "Монтаж видео нейросетью Claude Code и Codex: инструменты, полный промпт, запуск в пустой папке и сравнение двух версий одного ролика по кадрам и времени.",
-   "razdel": "vaybkoding",
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "vaybkoding blue claude-code codex video",
-   "kod_slovo": "МОНТАЖ",
-   "status": "live",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "trebuet": [
-    "claude-i-codex-v-vscode"
-   ],
-   "reestr_razdatok": true,
-   "blokirovka": "",
-   "ponyatiya": [
-    "FFmpeg",
-    "whisper.cpp",
-    "HyperFrames"
-   ],
-   "podpis": "Сверху монтаж Claude Code, снизу Codex: один голос и одинаковое задание",
-   "kratko": "Полный промпт и сравнение двух монтажей одного ролика",
-   "data_publikacii": "2026-10-06",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "codex",
-    "video",
-    "sravnenie"
-   ]
-  },
-  {
-   "slug": "pyat-skillov-claude-code",
-   "title": "Пять скиллов для Claude Code: поиск, план, память, дизайн и один, который учит остальные",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "skilly"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "vaybkoding blue claude-code skills plugins",
-   "kod_slovo": "СКИЛЛЫ",
-   "status": "live",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-06",
-   "trebuet": [
-    "claude-i-codex-v-vscode"
-   ],
-   "ponyatiya": [
-    "Find Skills",
-    "Superpowers",
-    "claude-mem",
-    "Impeccable",
-    "Task Observer",
-    "скилл",
-    "плагин"
-   ],
-   "blokirovka": "",
-   "podpis": "Пять предметов на столе, по одному на каждый скилл",
-   "kratko": "Какие пять скиллов поставить и как проверить, что каждый работает"
-  },
-  {
-   "slug": "zakryt-sekrety-ot-claude-code",
-   "title": "Как закрыть секретные файлы от Claude Code",
-   "razdel": "vaybkoding",
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "vaybkoding blue claude-code privacy permissions",
-   "kod_slovo": "",
-   "status": "live",
-   "vydacha": "net",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-06",
-   "blokirovka": "",
-   "ponyatiya": [
-    "/permissions",
-    "deny",
-    "settings.json",
-    ".env",
-    "sandbox"
-   ],
-   "trebuet": [
-    "claude-i-codex-v-vscode"
-   ],
-   "podpis": "Сейф с ключом: файлы с паролями закрыты от чтения",
-   "kratko": "Правило в настройках прячет ключи от агента, песочница закрывает лазейку",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "privatnost"
-   ]
-  },
-  {
-   "slug": "promty-sveta-dlya-foto-chatgpt",
-   "title": "48 промптов для фото в ChatGPT: какой свет изменит твой снимок?",
-   "description": "48 промптов для картинок в ChatGPT: свет и камера, перевод каждого промпта, кнопки копирования и три пробы.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "Свет и камера",
-    "промпты для картинок в ChatGPT"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "vydacha": "zhivaya",
-   "kod_slovo": "СВЕТ",
-   "data_vyhoda": "",
-   "seriya": "Промпты для картинок в ChatGPT",
-   "podpis": "Портрет до и после розового и синего неона",
-   "kratko": "Свет и камера: 48 промптов с переводами и пробами",
-   "data_publikacii": "2026-10-06"
-  },
-  {
-   "slug": "promty-tovar-reklama-chatgpt",
-   "title": "72 промпта для товара в ChatGPT: от снимка до витрины",
-   "description": "72 промпта для картинок в ChatGPT: товар, реклама и упаковка, перевод каждого промпта, кнопки копирования и три пробы.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "Товар, реклама и упаковка",
-    "промпты для картинок в ChatGPT"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "vydacha": "zhivaya",
-   "kod_slovo": "ВИТРИНА",
-   "data_vyhoda": "",
-   "seriya": "Промпты для картинок в ChatGPT",
-   "podpis": "Флаконы духов до и после оформления в подарочную коробку",
-   "kratko": "Товар, реклама и упаковка: 72 промпта с переводами и пробами",
-   "data_publikacii": "2026-10-06"
-  },
-  {
-   "slug": "promty-blog-biznes-chatgpt",
-   "title": "72 промпта для блога в ChatGPT: постеры, соцсети и объёмные буквы",
-   "description": "72 промпта для картинок в ChatGPT: постеры, соцсети, надписи и 3D, перевод каждого промпта, кнопки копирования и три пробы.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "Постеры, соцсети, надписи и 3D",
-    "промпты для картинок в ChatGPT"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "vydacha": "zhivaya",
-   "kod_slovo": "АФИША",
-   "data_vyhoda": "",
-   "seriya": "Промпты для картинок в ChatGPT",
-   "podpis": "Портрет до и после превращения в кинопостер",
-   "kratko": "Постеры, соцсети, надписи и 3D: 72 промпта с переводами и пробами",
-   "data_publikacii": "2026-10-07"
-  },
-  {
-   "slug": "promty-risunok-zhivopis-chatgpt",
-   "title": "72 промпта для рисунка в ChatGPT: фото становится живописью",
-   "description": "72 промпта для картинок в ChatGPT: иллюстрация, живопись и ручная работа, перевод каждого промпта, кнопки копирования и три пробы.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "Иллюстрация, живопись и ручная работа",
-    "промпты для картинок в ChatGPT"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "vydacha": "zhivaya",
-   "kod_slovo": "КИСТЬ",
-   "data_vyhoda": "",
-   "seriya": "Промпты для картинок в ChatGPT",
-   "podpis": "Портрет до и после превращения в вышитую тканевую нашивку",
-   "kratko": "Иллюстрация, живопись и ручная работа: 72 промпта с переводами и пробами",
-   "data_publikacii": "2026-10-07"
-  },
-  {
-   "slug": "shtat-agentov-paperclip",
-   "title": "Штат ИИ-агентов в Claude Code: ставишь одну цель, а работу делит команда",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "proekty"
-   ],
-   "uroven": "blue",
-   "tip": "instr",
-   "tags": "vaybkoding blue claude-code agents paperclip",
-   "ponyatiya": [
-    "Paperclip",
-    "агент",
-    "роль",
-    "одобрение найма",
-    "бюджет"
-   ],
-   "trebuet": [
-    "claude-i-codex-v-vscode"
-   ],
-   "status": "live",
-   "kod_slovo": "ШТАТ",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "podpis": "Три штампа на столе: директор, маркетолог и инженер ставят печать на одну работу",
-   "kratko": "Три роли, одна цель и проверка общей работы по задачам и журналам",
-   "blokirovka": "",
-   "data_publikacii": "2026-10-06"
-  },
-  {
-   "slug": "stanford-kak-sozdayut-chatgpt",
-   "title": "Как создают ChatGPT: конспект лекции Стэнфорда",
-   "description": "Русский конспект лекции CS229: токены, данные, дообучение и проверка моделей. Оглавление, таймкоды и памятка без формул.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "chatgpt",
-    "claude-chat"
-   ],
-   "uroven": "green",
-   "tip": "razbor",
-   "tags": "chatgpt claude green stanford cs229 llm",
-   "ponyatiya": [
-    "токен",
-    "предобучение",
-    "SFT",
-    "RLHF",
-    "бенчмарк",
-    "Стэнфорд",
-    "CS229"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "СТЭНФОРД",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "podpis": "Титульный слайд исходной лекции: Янн Дюбуа, CS229, Стэнфорд, 2024 год",
-   "kratko": "Лекция Стэнфорда по-русски: как из текстов и оценок людей делают ChatGPT",
-   "data_publikacii": "2026-10-07"
-  },
-  {
-   "slug": "promty-igrushki-personazhi-chatgpt",
-   "title": "72 промпта для ChatGPT: игрушки и персонажи из твоего фото",
-   "description": "Игрушки и персонажи из твоего фото в ChatGPT: 72 промпта с переводами, кнопки копирования и три новых сравнения было/стало - плюш, чиби и вязаная кукла.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "Игрушки, персонажи и игры",
-    "промпты для картинок в ChatGPT"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "vydacha": "zhivaya",
-   "kod_slovo": "ИГРУШКА",
-   "data_vyhoda": "",
-   "seriya": "Промпты для картинок в ChatGPT",
-   "podpis": "Девушка на роликах и фигурка Roller Girl в блистере",
-   "kratko": "Преврати своё фото в плюш, чиби или вязаную куклу: 72 промпта с переводами",
-   "data_publikacii": "2026-10-07"
-  },
-  {
-   "slug": "promty-eda-dom-chatgpt",
-   "title": "48 промптов для еды и дома в ChatGPT: другая подача знакомых вещей",
-   "description": "48 промптов для картинок в ChatGPT: еда, кухня, дом и путешествия, перевод каждого промпта, кнопки копирования и три пробы.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "Еда, кухня, дом и путешествия",
-    "промпты для картинок в ChatGPT"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "vydacha": "zhivaya",
-   "kod_slovo": "КУХНЯ",
-   "data_vyhoda": "",
-   "seriya": "Промпты для картинок в ChatGPT",
-   "podpis": "Кухня до и после виртуального ремонта",
-   "kratko": "Еда, кухня, дом и путешествия: 48 промптов с переводами и пробами",
-   "data_publikacii": "2026-10-07"
-  },
-  {
-   "slug": "promty-retro-ustroystvo-chatgpt",
-   "title": "48 промптов для ретро в ChatGPT: состарить предмет или заглянуть внутрь",
-   "description": "48 промптов для картинок в ChatGPT: ретро и устройство предметов, перевод каждого промпта, кнопки копирования и три пробы.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "Ретро и устройство предметов",
-    "промпты для картинок в ChatGPT"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "vydacha": "zhivaya",
-   "kod_slovo": "РЕТРО",
-   "data_vyhoda": "",
-   "seriya": "Промпты для картинок в ChatGPT",
-   "podpis": "Фотоаппарат до и после эффекта разборки",
-   "kratko": "Ретро и устройство предметов: 48 промптов с переводами и пробами",
-   "data_publikacii": "2026-10-07"
-  },
-  {
-   "slug": "pyat-instrumentov-dlya-sayta",
-   "title": "Пять инструментов для сайта в Claude Code и Codex",
-   "description": "Проверка кнопок, заявок, безопасности и оформления сайта: Playwright CLI, Supabase, Strix, SkillUI и Context7. Установка с агентом и вручную.",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "codex",
-    "sayt"
-   ],
-   "uroven": "blue",
-   "tip": "instr",
-   "tags": "vaybkoding blue claude-code codex sayt",
-   "ponyatiya": [
-    "Playwright CLI",
-    "Supabase",
-    "Strix",
-    "SkillUI",
-    "Context7"
-   ],
-   "trebuet": [
-    "claude-i-codex-v-vscode"
-   ],
-   "status": "live",
-   "kod_slovo": "ПЯТЬ",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-08",
-   "vydacha": "zhivaya",
-   "reestr_razdatok": true,
-   "podpis": "Проверка кнопок, сохранения заявок, безопасности и оформления сайта",
-   "kratko": "Как проверить кнопки, заявки и безопасность сайта перед запуском"
-  },
-  {
-   "slug": "chatgpt-composio-prilozheniya",
-   "title": "Как подключить ChatGPT к Gmail и Notion через Composio",
-   "razdel": "chatgpt",
-   "rubrika": "servisy",
-   "metki": [
-    "chatgpt",
-    "pochta"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "chatgpt blue composio mcp apps",
-   "kod_slovo": "СВЯЗЬ",
-   "status": "live",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "ponyatiya": [
-    "Composio",
-    "Plugins",
-    "MCP",
-    "OAuth"
-   ],
-   "trebuet": [],
-   "reestr_razdatok": true,
-   "podpis": "От подключения Composio до черновика, который можно открыть в Gmail",
-   "kratko": "Подключи ChatGPT к почте и Notion: он сам читает письма и готовит черновики",
-   "description": "Composio в ChatGPT: каталог Plugins и форма Add custom MCP server, доступ к Gmail и Notion, проверка чтения и черновика, цены и ограничения на 08.10.2026."
-  },
-  {
-   "slug": "opus-55-protiv-gpt-6-astra",
-   "title": "Claude Opus 5.5 и GPT-6 Astra: один промпт, два видео",
-   "razdel": "kartinki",
-   "rubrika": "kartinki",
-   "metki": [
-    "kartinki",
-    "claude-code",
-    "codex",
-    "sravnenie",
-    "video"
-   ],
-   "uroven": "blue",
-   "tip": "razbor",
-   "tags": "kartinki blue claude-code codex sravnenie video",
-   "ponyatiya": [
-    "эволюция точкой света",
-    "один промпт, два видео"
-   ],
-   "trebuet": [
-    "vybor-modeli-i-effort",
-    "claude-i-codex-v-vscode"
-   ],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ЭВОЛЮЦИЯ",
-   "reestr_razdatok": true,
-   "vydacha": "zhivaya",
-   "data_vyhoda": "2026-10-03",
-   "podpis": "Один промпт, два видео: сюжет и восемь требований к свету и движению",
-   "kratko": "Claude Opus 5.5 против GPT-6 Astra: один промпт, два видео. Кто точнее?",
-   "data_publikacii": "2026-10-09",
-   "description": "Claude Opus 5.5 против GPT-6 Astra: один промпт про эволюцию, два видео и разбор, кто точнее выполнил восемь требований."
-  },
-  {
-   "slug": "uley-agentov-ruflo",
-   "title": "Улей агентов Ruflo: первая команда и память между чатами",
-   "description": "Как подключить Ruflo 3.55.0 к Claude Code, выполнить задачу с исполнителем и проверяющим и прочитать общую память в новом чате. Цены на 08.10.2026.",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "proekty"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "vaybkoding blue claude-code agents ruflo",
-   "kod_slovo": "УЛЕЙ",
-   "status": "live",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "trebuet": [
-    "claude-i-codex-v-vscode"
-   ],
-   "ponyatiya": [
-    "Ruflo",
-    "рой агентов",
-    "MCP"
-   ],
-   "reestr_razdatok": true,
-   "blokirovka": "",
-   "podpis": "Одна задача, отдельные исполнители и проверка памяти в новом чате",
-   "kratko": "Собери первую команду и проверь, что её задание сохранено между чатами",
-   "data_publikacii": "2026-10-09"
-  },
-  {
-   "slug": "chetyre-mcp-claude-code",
-   "title": "Четыре MCP для Claude Code: от поиска до проверки инструкции",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "poisk"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "vaybkoding blue claude-code mcp",
-   "kod_slovo": "ЧЕТЫРЕ",
-   "status": "live",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "trebuet": [
-    "claude-i-codex-v-vscode"
-   ],
-   "ponyatiya": [
-    "MCP",
-    "Perplexity",
-    "Playwright",
-    "Firecrawl",
-    "Context7"
-   ],
-   "blokirovka": "",
-   "podpis": "Поиск источника, браузер, чтение страницы и документация нужной версии",
-   "kratko": "Подключи четыре MCP и проверь, на чём основана инструкция Claude Code",
-   "description": "Подключение Perplexity, Playwright, Firecrawl и Context7 к Claude Code. Четыре проверки на документации Next.js, стоимость и лимиты на 08.10.2026.",
-   "data_publikacii": "2026-10-09"
-  },
-  {
-   "slug": "komanda-ii-agentov-dlya-bloga",
-   "title": "Как работает команда ИИ-агентов: разбор на примере блога",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "codex"
-   ],
-   "uroven": "blue",
-   "tip": "razbor",
-   "tags": "vaybkoding blue codex hermes blog",
-   "ponyatiya": [
-    "Hermes Agent",
-    "команда ИИ-агентов",
-    "приёмка публикации"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "КОМАНДА",
-   "data_vyhoda": "",
-   "vydacha": "zhivaya",
-   "reestr_razdatok": true,
-   "blokirovka": "",
-   "podpis": "Поручения, материалы, передача файлов и приёмка публикации руководителем команды",
-   "kratko": "Составь карточку публикации с ролями ИИ-агентов и критериями готовности",
-   "description": "Как Hermes распределяет подготовку публикации между ИИ-агентами: материалы для автора, проверка Codex, передача файлов и приёмка статьи для блога.",
-   "oblozhka": "claude-ai/komanda-ii-agentov-dlya-bloga/assets/oblozhka.webp",
-   "data_publikacii": "2026-10-10"
-  },
-  {
-   "slug": "otsenka-vneshnosti-po-foto-v-chatgpt",
-   "title": "Оценка лица в ChatGPT: 15 критериев и балл из 10",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "оценка внешности по фото",
-    "привлекательность в ChatGPT",
-    "анализ лица"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ЛИЦО",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-11",
-   "description": "Полный промпт для оценки внешности по фото в ChatGPT: 15 критериев, пример отчёта 8,7/10 и дополнение для резюме или творческого проекта. Условия и лимиты.",
-   "reestr_razdatok": true,
-   "zametka": "Полный промпт, 15 критериев и пример 8,7/10. Дополнение под резюме и творческий проект: результата дополнения пока нет. Проверка условий OpenAI 10.10.2026",
-   "podpis": "Фото для разбора: 15 критериев, итоговый балл и дополнение под назначение снимка",
-   "kratko": "Один промпт разбирает портрет по 15 критериям и ставит итоговый балл из 10",
-   "oblozhka": true
-  },
-  {
-   "slug": "konspekt-rechi-v-chatgpt",
-   "title": "Конспект в ChatGPT: 5 запросов для разных задач",
-   "description": "Пять запросов и пять готовых примеров по речи Джобса: карточки, комикс, схема для презентации, майнд-карта и скетчноут.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt image green",
-   "ponyatiya": [
-    "карточки для повторения",
-    "комикс по тексту",
-    "схема речи",
-    "майнд-карта",
-    "скетчноут"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "КОНСПЕКТ",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-12",
-   "reestr_razdatok": true,
-   "podpis": "Два варианта конспекта: карточки и рисованные заметки",
-   "kratko": "Карточки, комикс, схема, майнд-карта и скетчноут на примере речи Стива Джобса",
-   "zametka": "Переписано 12.10.2026 по правкам Жанны: пять реальных результатов, прямой PDF, небольшая памятка Free/Go/Plus; обложка с Запросом 1 и скетчноутом, без чашки",
-   "oblozhka": true
-  },
-  {
-   "slug": "stanford-2026-kak-uchitsya-ii",
-   "title": "Как учится ИИ: конспект лекции Стэнфорда 2026",
-   "description": "8 мыслей из вводной лекции CS229 2026: опыт, ImageNet, слова, инструкции и обучение на своих попытках. Таймкоды и три пары промптов без формул.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "chatgpt",
-    "claude-chat"
-   ],
-   "uroven": "green",
-   "tip": "razbor",
-   "tags": "chatgpt claude green stanford cs229 llm 2026 imagenet обучение инструкции рассуждение",
-   "ponyatiya": [
-    "машинное обучение",
-    "опыт",
-    "ImageNet",
-    "эмбеддинг",
-    "инструкции",
-    "рассуждение",
-    "обучение на собственных попытках",
-    "Стэнфорд",
-    "CS229"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "МОЗГ",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "podpis": "Титульный слайд исходной лекции: Тэнъюй Ма, CS229, Стэнфорд, 2026 год",
-   "kratko": "8 мыслей о том, как ИИ учится: от ImageNet до проверенных собственных попыток",
-   "data_publikacii": "2026-10-13",
-   "reestr_razdatok": true,
-   "oblozhka": true,
-   "blokirovka": ""
-  },
-  {
-   "slug": "razobrat-zaval-del-v-chatgpt",
-   "title": "Разобрать завал дел в ChatGPT: 4 запроса в одном чате",
-   "description": "Четыре запроса для ChatGPT или Claude: рассказать обо всех делах, составить план на день, поручить часть дел нейросети и решить, за что взяться первым.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "chatgpt",
-    "golos",
-    "proekty",
-    "claude-code",
-    "codex"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt voice projects green",
-   "ponyatiya": [
-    "разобрать завал дел",
-    "план на день",
-    "список задач",
-    "одно главное дело"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "СВАЛКА",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-13",
-   "reestr_razdatok": true,
-   "podpis": "Расскажем обо всех делах в чате и разберёмся, за что взяться первым",
-   "kratko": "4 запроса: список дел, план на день, помощь нейросети и выбор первого дела",
-   "zametka": "Рилз №59: СВАЛКА. Публикация разрешена Жанной 13.10.2026.",
-   "oblozhka": true
-  },
-  {
-   "slug": "agent-reach-materialy-dlya-posta",
-   "title": "Agent Reach: установка и 3 задания для сбора материалов",
-   "description": "Как установить Agent Reach через чат с агентом, получить субтитры YouTube и текст сайтов: три задания со ссылками на источники и настоящие экраны проверки.",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "codex",
-    "poisk"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "agent reach youtube claude code codex green",
-   "ponyatiya": [
-    "Agent Reach",
-    "субтитры YouTube",
-    "материалы для поста",
-    "КУРЬЕР"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "КУРЬЕР",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-13",
-   "reestr_razdatok": true,
-   "podpis": "Установка, три задания и настоящие экраны проверки Agent Reach",
-   "kratko": "Собрать материалы по ссылкам и проверить ответ агента",
-   "zametka": "Принято Жанной и разрешено к публикации 13.10.2026. Добавлены альтернативы и условия бесплатности Agent Reach.",
-   "oblozhka": false
-  },
-  {
-   "slug": "nalog-na-russkiy-tokeny",
-   "title": "Налог на русский: сравниваем расход токенов на четырёх языках",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "chatgpt"
-   ],
-   "razdel": "obychnyy-vhod",
-   "uroven": "green",
-   "tip": "razbor",
-   "tags": "chatgpt tokeny green",
-   "ponyatiya": [
-    "налог на русский",
-    "токены разных языков",
-    "счётчик токенов OpenAI"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-14",
-   "vydacha": "zhivaya",
-   "reestr_razdatok": true,
-   "podpis": "Три текста, четыре языка, два способа подсчёта и реальные экраны токенизатора",
-   "kratko": "Проверь, как язык запроса меняет число токенов: примеры и ручной выбор кодировки"
-  },
-  {
-   "slug": "mimika-personazha-chatgpt",
-   "title": "1 персонаж, 9 выражений лица",
-   "description": "Как сохранить лицо, волосы, одежду, свет и ракурс персонажа, меняя только мимику. Базовый промпт, лист 3x3 и девять точных вариантов.",
-   "razdel": "gpt-knopka",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "chatgpt kartinki personazh mimika green",
-   "ponyatiya": [
-    "мимика персонажа",
-    "выражения лица",
-    "стабильный персонаж",
-    "лист 3x3",
-    "один персонаж разные эмоции"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "МИМИКА",
-   "vydacha": "net",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-17",
-   "reestr_razdatok": true,
-   "podpis": "Эталон персонажа, лист 3x3 и девять промптов для видимой мимики",
-   "kratko": "Сохрани лицо и ракурс, меняя только брови, глаза и губы",
-   "zametka": "Карусель «Один персонаж, разные эмоции» не опубликована. Жанна разрешила публикацию статьи после правок 17.10.2026. Выдача по слову МИМИКА ещё не проверена.",
-   "oblozhka": true
-  },
-  {
-   "slug": "igry-pro-ii",
-   "title": "7 бесплатных игр про ИИ: что попробовать и чему они научат",
-   "description": "Семь игр и интерактивов про ИИ: что показывает каждая, с какого действия начать, насколько сложно, нужен ли аккаунт и какие условия бесплатного доступа есть",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "servisy",
-   "metki": [
-    "besplatno"
-   ],
-   "tip": "obzor",
-   "uroven": "green",
-   "tags": "ii igry besplatno servisy green",
-   "ponyatiya": [
-    "игры про ИИ",
-    "бесплатные игры про искусственный интеллект",
-    "Agent Maze"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ИГРЫ",
-   "vydacha": "net",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-17",
-   "reestr_razdatok": true,
-   "podpis": "7 бесплатных игр про ИИ: что попробовать и чему они научат",
-   "kratko": "Семь игр и интерактивов про ИИ: что показывает каждая, с какого действия начать",
-   "zametka": "Публикация статьи разрешена Жанной 17.10.2026. Выдача по слову ИГРЫ остаётся ручной",
-   "oblozhka": true
-  },
-  {
-   "slug": "trellis-2-3d-model-iz-foto",
-   "title": "Trellis 2: 3D-модель из одного фото и ещё 6 инструментов гигантов",
-   "description": "Как сделать 3D-модель из одной фотографии в Trellis 2 за две кнопки, кому такую модель продать и какие ещё открытые инструменты выложили Tencent, Alibaba, OpenAI, NVIDIA, Anthropic и Cloudflare",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "servisy",
-   "metki": [
-    "besplatno"
-   ],
-   "tip": "obzor",
-   "uroven": "green",
-   "tags": "ii 3d trellis besplatno servisy green",
-   "ponyatiya": [
-    "3D-модель из фото",
-    "Trellis 2",
-    "нейросеть для 3D-моделей"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "МОДЕЛЬ",
-   "vydacha": "net",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-17",
-   "reestr_razdatok": true,
-   "podpis": "Trellis 2: 3D-модель из одного фото и ещё 6 инструментов гигантов",
-   "kratko": "3D-модель из одного фото за две кнопки и ещё 6 открытых инструментов гигантов",
-   "zametka": "Статья к рилзу МОДЕЛЬ 17.10.2026. Выдача по слову МОДЕЛЬ ручная",
-   "oblozhka": true
-  },
-  {
-   "slug": "tri-sayta-video-pdf-foto",
-   "title": "Три сайта для контента: кадры из видео, правка PDF и данные фото",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "servisy",
-   "metki": [
-    "video",
-    "fayly",
-    "privatnost",
-    "besplatno"
-   ],
-   "uroven": "green",
-   "tip": "obzor",
-   "tags": "video pdf foto servisy green",
-   "ponyatiya": [
-    "Video2Frames",
-    "VectisPDF",
-    "TimeStamp Camera",
-    "EXIF",
-    "кадры из видео",
-    "редактирование PDF",
-    "метаданные фото"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "oblozhka": true,
-   "blokirovka": "",
-   "kod_slovo": "САЙТЫ",
-   "data_vyhoda": "2026-10-18",
-   "vydacha": "net",
-   "reestr_razdatok": true,
-   "data_publikacii": "2026-10-18",
-   "podpis": "Кадры из ролика, правка PDF и очистка данных фото в браузере",
-   "kratko": "Три проверенных сайта с шагами, результатами и честными ограничениями",
-   "zametka": "Рилз „Полезные инструменты“: Video2Frames, VectisPDF, TimeStamp Camera; выдача статьи вручную"
-  },
-  {
-   "slug": "utrennyaya-svodka-po-rynku",
-   "title": "Утренняя сводка по рынку: 4 программы без выдумок",
-   "description": "Как собрать утреннюю сводку по рынку из четырёх программ: подачи SEC, цены Alpha Vantage, отчётность за 14 дней и честный список пропусков",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "raspisanie",
-    "besplatno"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "python agents market data blue vaybkoding",
-   "ponyatiya": [
-    "утренняя сводка по рынку",
-    "SEC EDGAR",
-    "Alpha Vantage",
-    "cron"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "СВОДКА",
-   "vydacha": "net",
-   "data_vyhoda": "2026-10-19",
-   "reestr_razdatok": true,
-   "podpis": "Четыре программы собирают подачи, цены, отчётность и честный список пропусков",
-   "kratko": "Утренняя сводка по рынку из открытых данных без выдуманных цифр",
-   "zametka": "Рилз СВОДКА 19.10.2026 (пробные рилзы), карусель 20.10.2026. Выдача по слову СВОДКА ручная",
-   "oblozhka": true,
-   "data_publikacii": "2026-10-19"
-  },
-  {
-   "slug": "22-ustanovki-claude-code",
-   "title": "22 установки Claude Code по ролям: что поставить",
-   "description": "22 дополнения для Claude Code по ролям: разработка, маркетинг и операции. Актуальные команды установки, требования, ошибки и набор без новых оплат",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "skilly",
-    "besplatno"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "claude code plugins skills mcp green vaybkoding",
-   "ponyatiya": [
-    "дополнения Claude Code",
-    "плагины Claude Code",
-    "навыки Claude Code",
-    "MCP Claude Code"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "22",
-   "vydacha": "net",
-   "data_vyhoda": "2026-10-20",
-   "reestr_razdatok": true,
-   "podpis": "22 дополнения для разработки, маркетинга и операций с актуальными командами установки",
-   "kratko": "Что поставить в Claude Code под свою роль и как проверить установку",
-   "zametka": "Рилз «22 установки Claude» 20.10.2026. Выдача по слову 22 ручная",
-   "oblozhka": true,
-   "data_publikacii": "2026-10-20"
-  },
-  {
-   "slug": "10-fotoeffektov-v-chatgpt",
-   "title": "10 фотоэффектов в ChatGPT: примеры до и после и промпты",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "chatgpt kartinki green",
-   "ponyatiya": [
-    "фотоэффекты в ChatGPT",
-    "сохранение исходного кадра"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "ЭФФЕКТЫ",
-   "data_vyhoda": "",
-   "vydacha": "da",
-   "data_publikacii": "2026-10-20",
-   "blokirovka": "",
-   "podpis": "Десять сравнений одного кадра и полные запросы для редактирования своих фото",
-   "kratko": "Сравни исходник и эффект, скопируй полный русский запрос"
-  },
-  {
-   "slug": "animaciya-claude-po-obrazcu",
-   "title": "Анимация в Claude по образцу: где взять видео и запросы",
-   "description": "Как выбрать готовый пример анимации, взять запрос к нему и настроить название, цвета и содержание под свой проект. Пошагово, с проверкой результата.",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "video"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "claude-code video animation motion blue vaybkoding",
-   "ponyatiya": [
-    "анимация в Claude по образцу",
-    "запросы для анимации",
-    "экспорт анимации в MP4"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "MOTION",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "reestr_razdatok": true,
-   "podpis": "Три последовательных кадра одной анимации: знак превращается в название",
-   "kratko": "Возьми готовый пример с запросом и собери анимацию для своего проекта",
-   "zametka": "Одобрено Claude 20.10.2026: reader-judge-claude-4.json, PASS 6/6. Выдача по слову MOTION ручная",
-   "oblozhka": true,
-   "data_publikacii": "2026-10-20"
-  },
-  {
-   "slug": "pomoshchnik-haiku-claude-code",
-   "title": "Помощник Haiku в Claude Code: поиск файлов и чтение логов",
-   "description": "Готовый запрос для помощника Haiku: поиск файлов, чтение логов и проверка фактической модели в Claude Code",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "fayly"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "claude code haiku opus agents limit blue vaybkoding",
-   "ponyatiya": [
-    "Haiku 5.5",
-    "Claude Code",
-    "помощник",
-    "субагент",
-    "лимит"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "LIMIT",
-   "vydacha": "net",
-   "data_vyhoda": "2026-10-20",
-   "reestr_razdatok": true,
-   "podpis": "Готовый запрос, поиск и чтение логов, проверка реального вызова",
-   "kratko": "Помощник Haiku для простых задач в Claude Code",
-   "zametka": "Рилз Хайку LIMIT. Выдача ссылки вручную. Публикация одобрена Claude 20.10.2026, судья PASS 6/6",
-   "oblozhka": true,
-   "data_publikacii": "2026-10-20"
-  },
-  {
-   "slug": "lichnaya-gazeta-v-claude-code",
-   "title": "Личная газета в Claude Code: промпт и наш пример",
-   "description": "Собери личную газету из рассылки, YouTube и GitHub. Полный промпт для Claude Code, наш PDF, реальные подключения и порядок действий.",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code"
-   ],
-   "uroven": "blue",
-   "tip": "instr",
-   "tags": "газета личная газета claude code рассылки youtube github blue vaybkoding",
-   "ponyatiya": [
-    "Личная газета",
-    "Claude Code",
-    "промпт для газеты",
-    "газета из своих источников"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "ГАЗЕТА",
-   "vydacha": "net",
-   "data_vyhoda": "2026-10-22",
-   "reestr_razdatok": true,
-   "data_publikacii": "2026-10-22",
-   "podpis": "Промпт, реальные шаги и наш выпуск на одну страницу",
-   "kratko": "Собери газетную страницу по своим темам и источникам",
-   "blokirovka": "",
-   "zametka": "22.10.2026: Жанна прочитала исправленный черновик и прямо разрешила публикацию. Только короткая техническая проверка, без новых проверяльщиков. Выдачу включить после проверки живой ссылки Рилз отмечен опубликованным 22.10.2026 по сообщению Жанны о выкладке; повторно не выпускать. Подпись и ответ отправлены ей в @ValliBoyBot 1224 и 1225. Автоматическая выдача не активирована",
-   "oblozhka": true
-  },
-  {
-   "slug": "argon-ili-opus-kak-vybrat",
-   "title": "Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать",
-   "description": "Сравнение Gemini 4 Argon и Claude Opus 5.5 по задачам: таблицы результатов тестов, доступ к моделям и тарифы API до и после подорожания Argon.",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code"
-   ],
-   "uroven": "blue",
-   "tip": "razbor",
-   "tags": "argon opus gemini claude code blue vaybkoding",
-   "ponyatiya": [
-    "Gemini 4 Argon",
-    "сравнение Argon и Opus",
-    "DeepSWE",
-    "Terminal-Bench"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "АРГОН",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "2026-10-22",
-   "reestr_razdatok": true,
-   "data_publikacii": "2026-10-22",
-   "podpis": "Результаты тестов, задачи, доступ к моделям и тарифы API",
-   "kratko": "Сравни модели по задачам, результатам тестов, доступу и тарифам API",
-   "blokirovka": "",
-   "zametka": "Жанна согласовала статью и разрешила публикацию 22.10.2026. Рилз опубликован 22.10.2026 по её сообщению. Публичная ссылка из ответа АРГОН проверена: HTTP 200, содержимое совпадает. Выдача вручную, автоответ не включался",
-   "oblozhka": true
-  },
-  {
-   "slug": "sbor-tem-s-rynka",
-   "title": "Как собрать темы для контента: Claude, ChatGPT и Apify",
-   "description": "Два способа собрать темы для блога: ручной подбор с Claude или ChatGPT и автоматический сбор через Apify. Четыре промпта, Excel и скилл для агента.",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-chat",
-    "claude-code",
-    "codex",
-    "poisk"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "темы контент блог контент-план claude chatgpt apify парсер codex green",
-   "ponyatiya": [
-    "темы для контента",
-    "подбор тем для блога",
-    "сбор публикаций через Apify"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "СБОР",
-   "vydacha": "net",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-23",
-   "reestr_razdatok": true,
-   "oblozhka": false,
-   "podpis": "Два способа сбора, четыре промпта, расчёт нормы и таблица тем",
-   "kratko": "Собери темы из публикаций и составь план для своего блога",
-   "blokirovka": "",
-   "zametka": "Жанна прочитала статью и прямо разрешила публикацию 23.10.2026. Слайды не менять. Дополнительная независимая вычитка не нужна: текущая версия проверена, 6 CLOSED. Только техническая проверка публикации. Выдачу и автопостинг не включать"
-  },
-  {
-   "slug": "20-ii-agentov-dlya-biznesa",
-   "title": "Как собрать 20 ИИ-агентов для бизнеса",
-   "description": "20 ролей ИИ-помощников для почты, календаря, контента, счетов и работы с клиентами: готовые команды и два пути настройки",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "claude-code",
-    "pochta",
-    "fayly",
-    "raspisanie"
-   ],
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude помощники агенты бизнес почта календарь контент green",
-   "ponyatiya": [
-    "ИИ-помощники для бизнеса",
-    "20 ИИ-агентов",
-    "роли ИИ-помощников"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "",
-   "vydacha": "net",
-   "data_vyhoda": "",
-   "data_publikacii": "2026-10-23",
-   "reestr_razdatok": true,
-   "oblozhka": true,
-   "podpis": "Почта, календарь, контент, счета и работа с клиентами",
-   "kratko": "Готовые команды и два пути настройки для каждой из 20 ролей",
-   "zametka": "23.10.2026: Жанна прочитала черновик, заменила заголовок каталога на «20 ИИ-помощников для тебя и бизнеса» и прямо разрешила публикацию. Дополнительных независимых читателей не запускать. Кодовое слово не назначено, автоматическую выдачу не включать"
-  },
-  {
-   "slug": "tri-dizayn-skilla",
-   "title": "3 скилла, которые доведут дизайн сайта до ума: Taste Skill, Impeccable и навыки Эмиля Ковальски",
-   "description": "Три дизайн-скилла для Claude Code и Codex: установка, первые запросы, сравнение сайта до и после и команды Impeccable",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "codex",
-    "skilly"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "tags": "claude code codex design skills blue vaybkoding",
-   "ponyatiya": [
-    "Taste Skill",
-    "Impeccable",
-    "навыки Эмиля Ковальски"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ДИЗАЙН",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "reestr_razdatok": true,
-   "podpis": "Вкус, детали и движение для одного сайта",
-   "kratko": "Установи три навыка и доведи оформление сайта до ума",
-   "zametka": "Принятая статья. Текст, картинки и обложку не менять",
-   "oblozhka": true,
-   "data_publikacii": "2026-10-24"
-  },
-  {
-   "slug": "prompt-master-uluchshitel-promptov",
-   "title": "Улучшатель промптов: навык Prompt Master для Claude и запрос для любой нейросети",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "claude-chat",
-    "skilly"
-   ],
-   "razdel": "knopka-za-knopkoy",
-   "uroven": "green",
-   "tip": "instr",
-   "tags": "claude-chat green",
-   "ponyatiya": [
-    "Prompt Master",
-    "улучшатель промптов"
-   ],
-   "trebuet": [
-    "podklyuchenie-iz-rossii"
-   ],
-   "status": "live",
-   "oblozhka": true,
-   "blokirovka": "",
-   "kod_slovo": "ПРОМПТ",
-   "vydacha": "net",
-   "podpis": "ZIP навыка, установка в чате и запрос на четыре шага для другого сервиса",
-   "kratko": "Преврати корявую фразу в задачу с понятным результатом",
-   "data_publikacii": "2026-10-25"
-  },
-  {
-   "slug": "promty-pravki-foto-chatgpt",
-   "title": "10 промптов для правки фото в ChatGPT: одежда, цвет, фон и формат кадра",
-   "description": "Десять промптов для правки фото в ChatGPT: десять пар до и после, примерка одежды, фон, свет, чёткость и открытие глаз по образцу",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "kartinki",
-   "metki": [
-    "chatgpt",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "blue",
-   "uroven_nadpis": "Начальный уровень",
-   "tags": "chatgpt kartinki foto blue",
-   "ponyatiya": [
-    "правка фото в ChatGPT",
-    "промпты для редактирования фото"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ФОТО",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "reestr_razdatok": true,
-   "podpis": "Десять наших пар до и после и готовые запросы",
-   "kratko": "Сравни десять правок до и после и скопируй запрос для своего фото",
-   "zametka": "25.10.2026: Жанна разрешила публикацию. Утверждённые текст и фото сохранены без изменений",
-   "oblozhka": true,
-   "data_publikacii": "2026-10-25"
-  },
-  {
-   "slug": "runway-iz-claude",
-   "title": "Runway в Claude: снимаем видео прямо в чате",
-   "description": "Как подключить Runway к Claude и делать картинки и видео в одном чате: подключение, готовые запросы, что работает на бесплатном и платном тарифе, примеры",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "servisy",
-   "metki": [
-    "claude-chat",
-    "video",
-    "kartinki"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "tags": "claude video kartinki runway green",
-   "ponyatiya": [
-    "Runway в Claude",
-    "коннектор Runway"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "RUNWAY",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "2026-10-27",
-   "reestr_razdatok": true,
-   "podpis": "Подключение, готовые запросы, тарифы и примеры",
-   "kratko": "Подключи Runway и попроси Claude сделать картинку и видео в одном чате",
-   "zametka": "27.10.2026: Жанна разрешила публикацию («публикуй»). Рилз RUNWAY выходит после статьи",
-   "oblozhka": true,
-   "data_publikacii": "2026-10-27"
-  },
-  {
-   "slug": "klod-ne-poddakivaet",
-   "title": "Клод перестаёт поддакивать",
-   "description": "Установка Frank в Claude Code, три режима честной критики и запрос для Claude и ChatGPT",
-   "razdel": "vaybkoding",
-   "rubrika": "vaybkoding",
-   "metki": [
-    "claude-code",
-    "skilly"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "uroven_nadpis": "Начальный уровень",
-   "tags": "claude-code skills frank green",
-   "ponyatiya": [
-    "Frank",
-    "честная обратная связь",
-    "Claude Code"
-   ],
-   "trebuet": [
-    "Claude Code или браузерный чат"
-   ],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ФРАНК",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "reestr_razdatok": true,
-   "podpis": "Честный ответ полезнее автоматического согласия",
-   "kratko": "Установи Frank, выбери степень прямоты и отключи после задачи",
-   "zametka": "27.10.2026: Жанна разрешила публикацию. Д008. Утверждённый текст и штатный рекламный блок сохранены",
-   "oblozhka": true,
-   "data_publikacii": "2026-10-27"
-  },
-  {
-   "slug": "pyat-neyrosetey-dlya-ucheby",
-   "title": "Пять нейросетей для учёбы и работы: с чего начать",
-   "description": "Пять сервисов по задачам: текст, поиск с источниками, картинки, аудиопересказ и слайды",
-   "razdel": "obychnyy-vhod",
-   "rubrika": "start",
-   "metki": [
-    "claude-chat",
-    "poisk",
-    "kartinki",
-    "golos",
-    "fayly"
-   ],
-   "tip": "instr",
-   "uroven": "green",
-   "uroven_nadpis": "Начальный уровень",
-   "tags": "neyroseti ucheba start green",
-   "ponyatiya": [
-    "пять нейросетей для учёбы",
-    "мини-урок с нейросетями"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "blokirovka": "",
-   "kod_slovo": "ПЯТЁРКА",
-   "vydacha": "zhivaya",
-   "data_vyhoda": "",
-   "reestr_razdatok": true,
-   "podpis": "Ссылки, запросы и первые шаги для новичка",
-   "kratko": "Выбери нейросеть под задачу и проверь результат",
-   "zametka": "28.10.2026: Жанна разрешила публикацию («всё, можно публиковать»). Подготовлено локально; push выполняет Claude",
-   "oblozhka": true,
-   "data_publikacii": "2026-10-28"
-  },
-  {
-   "slug": "stanford-cs230-karera-v-ii",
-   "title": "Карьера в ИИ: конспект всей лекции Стэнфорда CS230",
-   "description": "Эндрю Ын и Лоренс Морони о карьере в ИИ: 12 мыслей, все истории лекции CS230 осени 2025 года, таймкоды, три пары запросов и памятка",
-   "razdel": "gpt-knopka",
-   "rubrika": "kazhdyy-den",
-   "metki": [
-    "chatgpt",
-    "claude-chat"
-   ],
-   "uroven": "green",
-   "tip": "razbor",
-   "tags": "chatgpt claude green stanford cs230 карьера обучение 2025 морони ын",
-   "ponyatiya": [
-    "Стэнфорд",
-    "CS230",
-    "технический долг",
-    "агентный процесс",
-    "открытые веса",
-    "самостоятельное размещение",
-    "ИИ на устройстве"
-   ],
-   "trebuet": [],
-   "status": "live",
-   "kod_slovo": "МОРОНИ",
-   "vydacha": "net",
-   "data_vyhoda": "",
-   "podpis": "Эндрю Ын на обложке по официальному превью лекции CS230 осени 2025 года",
-   "kratko": "12 мыслей из всей лекции Ына и Морони: карьера, проекты, риски и выбор задачи",
-   "data_publikacii": "2026-10-28",
-   "reestr_razdatok": true,
-   "oblozhka": true,
-   "blokirovka": "",
-   "zametka": "28.10.2026: Жанна дала прямую команду «Публикуй» после чтения и мелких правок статьи"
+  "_readme": "Реестр статей сайта. ИСТОЧНИК ИСТИНЫ: из него собираются перелинковка, карточки главной и sitemap. Новая статья = новая запись ЗДЕСЬ, потом прогон скриптов. Руками index.html не править. Кодовые слова живут ЗДЕСЬ же (поле kod_slovo) - из них собирается реестр раздаток .business/marketing/РЕЕСТР-РАЗДАТОК.html. Раздатки без статьи на сайте - в .business/marketing/razdatki-bez-stati.json",
+  "_polya": {
+    "slug": "папка статьи внутри claude-ai/",
+    "title": "заголовок как в <title> и на карточке главной",
+    "rubrika": "рубрика на главной: start | kazhdyy-den | kartinki | vaybkoding | servisy",
+    "metki": "метки поиска, коды из METKI в scripts/sobrat_glavnuyu.py",
+    "razdel": "старая серия статьи (для реестра раздаток): obychnyy-vhod | svoy-server | knopka-za-knopkoy | vaybkoding",
+    "uroven": "green (начальный) | blue (средний)",
+    "tip": "instr (Инструкция) | razbor (Разбор) | obzor (Обзор)",
+    "tags": "data-tags на карточке главной",
+    "ponyatiya": "что объясняет ЭТА статья. Если слово из списка встретилось в чужой статье - там просится ссылка сюда",
+    "trebuet": "что человек должен уже уметь до этой статьи - отсюда ссылка обязательна",
+    "status": "live (на сайте и на главной) | draft (папка есть, на главной нет)",
+    "blokirovka": "почему статья draft - что физически мешает публикации",
+    "zametka": "особенности статьи, которые нельзя трогать не спросив",
+    "kod_slovo": "кодовое слово для выдачи раздатки в директе. Пусто = слова нет. ЗАНЯТОЕ СЛОВО ПОВТОРНО НЕ НАЗНАЧАТЬ никогда, даже после закрытия связки: люди пишут его годами",
+    "data_vyhoda": "ГГГГ-ММ-ДД первого выхода связанного ролика/карусели в ленту. Пусто = в ленту не выходило",
+    "vydacha": "zhivaya (можно выдавать по слову или прямой ссылке) | net (выдачи нет) | vyvedena (выведено из выдачи)",
+    "reestr_razdatok": "true = включить документ в реестр раздаток даже без кодового слова; пусто = обычные правила отбора",
+    "data_publikacii": "ГГГГ-ММ-ДД публикации самой статьи; отдельно от выхода ролика или карусели",
+    "podpis": "подпись под обложкой: содержание статьи одной строкой до 100 знаков, без повтора H1 и надписей обложки",
+    "kratko": "законченная фраза для карточки главной до 85 знаков: что получишь из статьи, без повтора надписей обложки и без обрезки"
+  },
+  "statyi": [
+    {
+      "slug": "podklyuchenie-iz-rossii",
+      "title": "Claude из России: подключение без блокировок",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "start",
+      "metki": [
+        "claude-chat",
+        "dostup"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "dostup green",
+      "ponyatiya": [
+        "VPN",
+        "вход в Claude",
+        "регистрация",
+        "Google-аккаунт",
+        "подтверждение номера",
+        "доступ из России"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "ДОСТУП",
+      "data_vyhoda": "2026-09-08",
+      "vydacha": "zhivaya",
+      "podpis": "Проверка сети, вход через Google и подтверждение номера перед первым сообщением",
+      "kratko": "От проверки сети до первого сообщения - весь вход по шагам"
+    },
+    {
+      "slug": "svoy-server-dlya-claude",
+      "title": "Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона",
+      "razdel": "svoy-server",
+      "rubrika": "start",
+      "metki": [
+        "claude-code",
+        "dostup"
+      ],
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "dostup blue",
+      "ponyatiya": [
+        "свой сервер",
+        "VPS",
+        "постоянный IP",
+        "AmneziaVPN",
+        "Claude Code на сервере",
+        "Remote Control",
+        "сервер",
+        "свой сервер для claude",
+        "vpn для claude",
+        "стабильный доступ к claude"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "СЕРВЕР",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "data_publikacii": "2026-10-05",
+      "podpis": "Личный VPN через AmneziaVPN, Claude Code в облаке или на своём сервере",
+      "kratko": "Свой VPN и Claude Code, который работает без твоего компьютера",
+      "blokirovka": ""
+    },
+    {
+      "slug": "kak-rasskazat-o-sebe",
+      "title": "Claude помнит о тебе: что рассказать один раз",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "start",
+      "metki": [
+        "claude-chat",
+        "pamyat"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "память",
+        "Memory",
+        "инструкции о себе",
+        "General",
+        "поиск по старым чатам",
+        "перенос из ChatGPT"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "КЛОД",
+      "data_vyhoda": "2026-09-09",
+      "vydacha": "zhivaya",
+      "podpis": "Настройки имени, правил ответа и памяти, чтобы не объяснять всё заново",
+      "kratko": "Клод запомнит, кто ты, и не придётся объяснять заново"
+    },
+    {
+      "slug": "vybor-modeli-i-effort",
+      "title": "Модель и уровень effort: что включать под задачу",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "start",
+      "metki": [
+        "claude-chat",
+        "modeli",
+        "sravnenie"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "модель",
+        "Opus",
+        "Sonnet",
+        "Haiku",
+        "Fable",
+        "effort",
+        "усилие",
+        "лимиты тарифа"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "МОДЕЛЬ",
+      "data_vyhoda": "2026-09-12",
+      "vydacha": "zhivaya",
+      "podpis": "Сравнение моделей и уровней усилия для простых и сложных задач",
+      "kratko": "Сложной задаче сильная модель, простой - быстрая и экономная"
+    },
+    {
+      "slug": "podklyuchit-gmail-drive-calendar",
+      "title": "Gmail, Google Drive и Calendar внутри Claude",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "pochta"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "Gmail",
+        "Google Drive",
+        "Google Calendar",
+        "подключённые сервисы",
+        "коннекторы",
+        "доступ к почте"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "СЕРВИСЫ",
+      "data_vyhoda": "2026-09-14",
+      "vydacha": "zhivaya",
+      "podpis": "Подключение почты, файлов и встреч с проверкой доступа на трёх запросах",
+      "kratko": "Письма, файлы и встречи прямо в чате с Клодом"
+    },
+    {
+      "slug": "web-search-v-claude",
+      "title": "Веб-поиск в Claude: ответы со свежими ссылками",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "poisk"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "веб-поиск",
+        "Web search",
+        "свежие ссылки",
+        "проверка источников",
+        "актуальные данные"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "ПОИСК",
+      "data_vyhoda": "2026-09-15",
+      "vydacha": "zhivaya",
+      "podpis": "Включение поиска, запросы с датой и проверка ссылок в ответе",
+      "kratko": "Свежие сведения со ссылками, которые легко проверить"
+    },
+    {
+      "slug": "golosovoy-vvod-v-claude",
+      "title": "Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "golos"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "голосовой ввод",
+        "Dictate",
+        "Voice mode",
+        "микрофон",
+        "надиктовать",
+        "говорить вместо печатать"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "ГОЛОС",
+      "data_vyhoda": "2026-09-16",
+      "vydacha": "zhivaya",
+      "podpis": "Два режима речи, настройка микрофона и примеры голосовых запросов",
+      "kratko": "Не печатать, а говорить: два режима и настройка микрофона"
+    },
+    {
+      "slug": "skrinshot-vmesto-obyasneniy",
+      "title": "Скриншот вместо объяснений: покажи Клоду экран, где всё застопорилось",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "fayly"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "скриншот",
+        "скрин",
+        "показать экран",
+        "картинка в чат",
+        "непонятная кнопка"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "СКРИН",
+      "data_vyhoda": "2026-09-17",
+      "vydacha": "zhivaya",
+      "podpis": "Загрузка снимка экрана и запрос, по которому Клод найдёт нужную кнопку",
+      "kratko": "Снимок экрана, и Клод сам найдёт нужную кнопку"
+    },
+    {
+      "slug": "gotovye-fayly-excel-word-pdf",
+      "title": "Готовый Excel, Word, PDF или презентация - без копипаста",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "fayly"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "готовый файл",
+        "Excel",
+        "xlsx",
+        "Word",
+        "docx",
+        "PDF",
+        "презентация",
+        "pptx",
+        "формулы",
+        "скачать файл"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "ФАЙЛ",
+      "data_vyhoda": "2026-09-18",
+      "vydacha": "zhivaya",
+      "podpis": "Включение создания документов, запрос на скачивание и проверка результата",
+      "kratko": "Таблица с формулами или документ сразу файлом на скачивание"
+    },
+    {
+      "slug": "artefakty-v-claude",
+      "title": "Артефакты: ответ Клода в отдельном окне, а не в переписке",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "artefakty"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "артефакт",
+        "отдельное окно",
+        "калькулятор",
+        "чек-лист",
+        "раздел Artifacts",
+        "поделиться ссылкой",
+        "Share"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "АРТЕФАКТ",
+      "data_vyhoda": "2026-09-19",
+      "vydacha": "zhivaya",
+      "podpis": "Инструмент с полями и переключателями, собранный в чате, к которому можно вернуться",
+      "kratko": "Свой инструмент из одного запроса: открываешь и пользуешься снова"
+    },
+    {
+      "slug": "incognito-chat-v-claude",
+      "title": "Инкогнито в Claude: разговор, который не попадёт в память",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "privatnost"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "инкогнито",
+        "временный чат",
+        "приватность внутри аккаунта",
+        "история чатов",
+        "Use incognito"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "zametka": "Режим описан как приватность ВНУТРИ аккаунта, не как анонимность: Anthropic деталей хранения не раскрывает. Обещаний «данные нигде не хранятся» в тексте нет",
+      "kod_slovo": "ПРИЗРАК",
+      "data_vyhoda": "2026-09-21",
+      "vydacha": "zhivaya",
+      "podpis": "Временный разговор: включение режима, проверка истории и границы приватности",
+      "kratko": "Разговор, после которого в истории пусто"
+    },
+    {
+      "slug": "pervyy-proekt-v-claude",
+      "title": "Первый проект в Claude: своя папка с памятью",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "proekty"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "проект",
+        "New Project",
+        "база знаний",
+        "инструкции проекта",
+        "своя папка"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii",
+        "kak-rasskazat-o-sebe"
+      ],
+      "status": "live",
+      "kod_slovo": "ПРОЕКТ",
+      "data_vyhoda": "2026-09-13",
+      "vydacha": "zhivaya",
+      "podpis": "Материалы, инструкции и старые разговоры в общей папке для одной задачи",
+      "kratko": "Файлы и правила одной задачи в общей папке"
+    },
+    {
+      "slug": "shest-skillov",
+      "title": "Шесть скиллов Claude: как найти, подключить и вызвать",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "skilly",
+        "sayt"
+      ],
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "claude blue",
+      "ponyatiya": [
+        "скилл",
+        "скиллы",
+        "Manage Plugins",
+        "плагин",
+        "skill-creator",
+        "mcp-builder",
+        "frontend-design",
+        "canvas-design",
+        "webapp-testing"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "zametka": "перенесена 18.09 из репозитория 6-claude-skills-guide. Вёрстка, палитра и анимации НЕ приводятся к канону сайта - решение автора. ОДИНОКАЯ ПО СМЫСЛУ: единственная статья про Claude Code в VS Code, все остальные про чат claude.ai. Перекрёстные ссылки НЕ ставить, пока не появятся другие статьи про Code: проект в чате и папка проекта в Code - разные вещи (ошибка поймана автором 18.09)",
+      "kod_slovo": "СКИЛЛС",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "podpis": "Готовые инструкции для дизайна, подключения сервисов и проверки сайтов с живыми примерами",
+      "kratko": "Готовые инструкции для дизайна и проверки сайтов"
+    },
+    {
+      "slug": "svoy-sayt-ne-bliznec",
+      "title": "Свой сайт, а не очередной близнец",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "sayt"
+      ],
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "claude blue",
+      "ponyatiya": [
+        "свой сайт",
+        "лендинг",
+        "сайт-близнец",
+        "вёрстка словами",
+        "правки словами",
+        "Claude Code",
+        "бриф сайта"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "zametka": "перенесена 18.09 из репозитория sayt-za-vecher (код-слово САЙТ). Приведена к канону сайта 20.09 по решению автора: переключатель день-ночь, тёмная палитра, сетка 260+720, якоря под липкую шапку. Своя вёрстка блоков (мятная зона новичка, блоки промптов, 7 признаков) сохранена. Старый адрес thezhanna-ai.github.io/sayt-za-vecher/ остаётся живым. Про Claude Code в VS Code, НЕ про чат - связывать только со статьями про Code",
+      "kod_slovo": "САЙТ",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "podpis": "Образец, стартовый запрос, правки словами и проверка сайта перед показом людям",
+      "kratko": "Сайт по образцу, доведённый правками словами"
+    },
+    {
+      "slug": "pdf-v-markdown-markitdown",
+      "title": "Документы в markdown: как не сжигать лимит Claude на оформлении",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "fayly",
+        "modeli"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "markdown",
+        "токены",
+        "лимит",
+        "MarkItDown",
+        "конвертация документов",
+        "PDF",
+        "Word",
+        "Excel",
+        "загрузка файлов"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "zametka": "Статья про ЛЮБЫЕ форматы (PDF, Word, Excel, презентации) - её правка 20.09. Цифры 41 700 / 13 600 привязаны только к PDF: замер делался на нём, на других форматах не проверялся, так и написано. Звёзд у MarkItDown 185К (проверено 20.09), старая карусель говорила 110К - не повторять",
+      "kod_slovo": "PDF",
+      "data_vyhoda": "2026-09-22",
+      "vydacha": "zhivaya",
+      "podpis": "Два способа перевести PDF в текст и сравнение расхода токенов на реальном файле",
+      "kratko": "PDF в лёгкий текст: то же содержание за меньшее число токенов"
+    },
+    {
+      "slug": "whatsapp-nomer-dlya-agenta",
+      "title": "Свой номер WhatsApp для ИИ-агента: пошагово",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "bot"
+      ],
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "claude blue",
+      "ponyatiya": [
+        "WhatsApp",
+        "Kapso",
+        "номер без SIM",
+        "песочница",
+        "автоответ",
+        "WhatsApp Flows",
+        "агент в WhatsApp"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "zametka": "Раздатка к карусели «Номер WhatsApp для Клода» (опубликована 25.09). Прошла 3 круга проверки 25.09: плата Meta* с 1.10.2026 отдельно от Kapso, депозит за номер, путь при SMS по instant-setup-troubleshooting. Скрины из документации Kapso",
+      "kod_slovo": "НОМЕР",
+      "data_vyhoda": "2026-09-25",
+      "vydacha": "zhivaya",
+      "podpis": "Проверка автоответа в песочнице, подключение рабочего номера и приём заявок",
+      "kratko": "Сначала песочница, потом рабочий номер и приём заявок"
+    },
+    {
+      "slug": "urovni-vaybkodera",
+      "title": "7 уровней вайбкодера: один шаг, чтобы подняться выше",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "codex"
+      ],
+      "uroven": "",
+      "tip": "razbor",
+      "tags": "claude green",
+      "ponyatiya": [
+        "вайбкодинг",
+        "уровни вайбкодера",
+        "техзадание",
+        "агент",
+        "Codex"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "zametka": "Принята Жанной и разрешена к публикации 26.09.2026. Переносы промптов исправлены, независимые проверки логики и фактов PASS; 59 тестов и браузерная матрица 390-1440 в обеих темах пройдены. Карусель ещё ждёт просмотра Жанны, дата выхода в ленту не назначена",
+      "kod_slovo": "УРОВЕНЬ",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "podpis": "Навыки от постановки задачи до выпуска проекта, с упражнением на каждую ступень",
+      "kratko": "Где пробел в навыках и какое упражнение его закроет?"
+    },
+    {
+      "slug": "10-besplatnyh-zamen",
+      "title": "10 бесплатных замен платным нейросетям - с подвохами",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "servisy",
+      "metki": [
+        "besplatno",
+        "kartinki",
+        "video",
+        "sayt"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "бесплатные нейросети",
+        "замены платным сервисам",
+        "лимиты бесплатных тарифов"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "zametka": "Цены и лимиты сняты 24.09.2026, перепроверены 30.09, вход из России без VPN проверен Жанной 01.10. Бонус Suno Free. Опубликована 01.10.2026",
+      "kod_slovo": "ЗАМЕНА",
+      "data_vyhoda": "2026-10-01",
+      "vydacha": "zhivaya",
+      "data_publikacii": "2026-10-01",
+      "reestr_razdatok": true,
+      "podpis": "Подборка сервисов для фото, кода, видео и озвучки с лимитами бесплатных тарифов",
+      "kratko": "Бесплатная замена под задачу и честно про её лимиты"
+    },
+    {
+      "slug": "besplatnye-video-iz-teksta",
+      "title": "Видео из текста: бесплатные сервисы и подвохи",
+      "razdel": "kartinki",
+      "rubrika": "kartinki",
+      "metki": [
+        "video",
+        "besplatno"
+      ],
+      "uroven": "green",
+      "tip": "obzor",
+      "tags": "kartinki green",
+      "ponyatiya": [
+        "видео из текста",
+        "бесплатные видеосервисы",
+        "Fliki",
+        "Steve AI",
+        "ZSKY AI"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "РОЛИК",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "zametka": "Условия на 25-26.09.2026. Шесть сервисов, реальные примеры, раскадровки и платное оживление разделены. Публичный адрес проверяется перед выдачей",
+      "podpis": "Сравнение шести сервисов, примеры запросов и отдельная проверка условий скачивания",
+      "kratko": "Шесть сервисов: какой даст скачать готовый ролик?"
+    },
+    {
+      "slug": "raspisanie-zadach-v-claude",
+      "title": "Задача по расписанию в Claude: план недели к 7:30",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "raspisanie",
+        "pochta"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "claude green",
+      "ponyatiya": [
+        "Scheduled",
+        "задача по расписанию",
+        "Schedule",
+        "Cowork",
+        "Gmail",
+        "Google Calendar",
+        "коннекторы"
+      ],
+      "trebuet": [
+        "podklyuchit-gmail-drive-calendar"
+      ],
+      "status": "live",
+      "zametka": "Только Scheduled task в Claude, без Claude Code Routines (другой механизм). Факты по справке Anthropic 26.09.2026: платные тарифы, в прежнем интерфейсе путь Cowork → Scheduled → New task, задачи выполняются удалённо. Скрины из аккаунта автора, имя в меню профиля срезано. Рилз 17 «РАСПИСАНИЕ» принят автором 26.09",
+      "kod_slovo": "РАСПИСАНИЕ",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "podpis": "Подключение почты и встреч, настройка времени запуска и проверка созданной задачи",
+      "kratko": "К утру план готов: письма и встречи собраны в одно место"
+    },
+    {
+      "slug": "postery-iz-odnogo-foto",
+      "title": "Постеры из одной фотографии в ChatGPT",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "gpt green",
+      "ponyatiya": [
+        "постер из фотографии",
+        "генерация изображений ChatGPT",
+        "промпт для постера"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "zametka": "Готова к выдаче. Карусель 19.08.2026, статья опубликована 26.09.2026 по прямому разрешению Жанны после 5 кругов проверки (PASS). Скрины шагов её, из ChatGPT на Mac",
+      "kod_slovo": "ПОСТЕР",
+      "data_vyhoda": "2026-08-19",
+      "vydacha": "zhivaya",
+      "podpis": "Выбор снимка, примеры готовых постеров и полный запрос на русском и английском",
+      "kratko": "Твоё фото сверху, рисованная сцена снизу - готово за один запрос"
+    },
+    {
+      "slug": "zagruzka-faylov-v-claude",
+      "title": "Загрузка файлов в Claude: один документ и пачка файлов",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "fayly"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "загрузка файлов в Claude",
+        "несколько файлов",
+        "форматы документов",
+        "сравнение версий договора"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "zametka": "Готова к выдаче. Рилз 18 ЗАГРУЗКА, статья опубликована 26.09.2026 по прямому разрешению Жанны после 5 кругов проверки (PASS). Скрины шагов её, превью личных PDF размыты",
+      "kod_slovo": "ЗАГРУЗКА",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "podpis": "Прикрепление документов, сверка полученных вложений и вопросы по оригиналам",
+      "kratko": "Сравни несколько версий документа и найди отличия"
+    },
+    {
+      "slug": "claude-iz-rossii-bez-banov",
+      "title": "Claude из России не пускает: ошибка 403, отказ оплаты, блокировка и апелляция",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "start",
+      "metki": [
+        "claude-chat",
+        "dostup",
+        "oplata"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "claude dostup green",
+      "ponyatiya": [
+        "блокировка Claude",
+        "апелляция",
+        "экспорт данных",
+        "резервная копия"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "",
+      "data_vyhoda": "",
+      "vydacha": "net",
+      "description": "Как отличить сетевую ошибку 403, отказ оплаты и отключение аккаунта Claude, сохранить данные и подать апелляцию",
+      "podpis": "Ошибки входа и оплаты, сохранение данных и апелляция по отключённому аккаунту",
+      "kratko": "Найдёшь маршрут для своей ошибки доступа",
+      "data_publikacii": "2026-10-05"
+    },
+    {
+      "slug": "svoy-stil-otvetov",
+      "title": "Как научить Claude писать в твоём стиле",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "start",
+      "metki": [
+        "claude-chat",
+        "pamyat"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green",
+      "ponyatiya": [
+        "стиль ответов",
+        "образец текста",
+        "Instructions for Claude"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "zametka": "Готова к выдаче. Рилз 16 СТИЛЬ опубликован 26.09.2026, статья опубликована 27.09.2026 по прямому поручению Жанны после проверки (PASS). Путь Settings → Account → Instructions for Claude по её снимку, личное на скрине размыто",
+      "kod_slovo": "СТИЛЬ",
+      "data_vyhoda": "2026-09-26",
+      "vydacha": "zhivaya",
+      "podpis": "Образец текста, правила подачи и сравнение двух ответов на один запрос",
+      "kratko": "Твоя интонация в каждом будущем ответе"
+    },
+    {
+      "slug": "claude-i-codex-v-vscode",
+      "title": "Claude Code и Codex в одном VS Code: чаты и файлы рядом",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "codex"
+      ],
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "vaybkoding blue codex vscode",
+      "ponyatiya": [
+        "Claude Code и Codex",
+        "Codex в VS Code",
+        "codex exec",
+        "общие инструкции AGENTS.md"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "description": "Как держать чаты Claude Code и Codex и файлы проекта в одном окне VS Code, открывать отдельные вкладки для задач и отдельно настроить передачу заданий через CLI",
+      "zametka": "Принято Жанной 27.09.2026. Опубликованная раздатка для прямой отправки ссылки. Кодового слова нет; рилз не запущен, материалы сохранены для возможного выпуска",
+      "reestr_razdatok": true,
+      "data_publikacii": "2026-09-27",
+      "podpis": "Установка расширений, общая папка, вкладки задач и передача поручений через CLI",
+      "kratko": "Два чата и файлы проекта в одном окне VS Code"
+    },
+    {
+      "slug": "15-zadach-claude-code-codex",
+      "title": "15 этапов работы над проектом в Claude Code и Codex",
+      "description": "15 этапов работы над проектом: требования, план, интерфейс, база, безопасность, отладка, тесты, история версий и скиллы. Примеры запросов для Claude Code и Codex",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "codex"
+      ],
+      "uroven": "blue",
+      "uroven_nadpis": "Пошаговая инструкция",
+      "tip": "instr",
+      "tags": "vaybkoding blue claude code codex prompty zadachi",
+      "ponyatiya": [
+        "задачи для Claude Code",
+        "промпты для Codex",
+        "требования и критерии приёмки",
+        "проверка результата",
+        "ЗАДАЧИ"
+      ],
+      "trebuet": [
+        "claude-i-codex-v-vscode"
+      ],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ЗАДАЧИ",
+      "data_vyhoda": "",
+      "vydacha": "net",
+      "reestr_razdatok": true,
+      "data_publikacii": "2026-10-17",
+      "podpis": "15 этапов: от требований и плана до тестов, истории версий и скилла",
+      "kratko": "Порядок работы над проектом с примерами запросов и проверкой каждого этапа",
+      "zametka": "Раздатка для карусели про 15 задач Claude Code и Codex. Выдача по кодовому слову не активирована",
+      "oblozhka": true
+    },
+    {
+      "slug": "dannye-v-claude",
+      "title": "Удаление данных в Claude",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "start",
+      "metki": [
+        "claude-chat",
+        "privatnost",
+        "pamyat"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green data memory",
+      "ponyatiya": [
+        "экспорт данных Claude",
+        "удаление чатов Claude",
+        "память Claude",
+        "Topics",
+        "удаление аккаунта Claude"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ДАННЫЕ",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "description": "Как выгрузить данные Claude, удалить разговоры, отдельно проверить память и найти удаление аккаунта",
+      "reestr_razdatok": true,
+      "data_publikacii": "2026-09-29",
+      "zametka": "Статья принята Жанной после доработки Клодом и опубликована 29.09.2026. Связанный рилз 19 ещё не выпущен",
+      "podpis": "Сохранение копии переписок, очистка чатов, отдельная проверка памяти и закрытие аккаунта",
+      "kratko": "Личное убрать, нужные переписки сохранить"
+    },
+    {
+      "slug": "kopirovat-stil-foto-v-chatgpt",
+      "title": "Как скопировать стиль любого фото в ChatGPT",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "стиль фото в ChatGPT",
+        "JSON по фото",
+        "перенос стиля фото"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ФОТО",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "2026-10-01",
+      "data_publikacii": "2026-10-01",
+      "description": "Как скопировать стиль фото в ChatGPT через JSON: образец, своё фото, перенос света, цветов, одежды и фона",
+      "reestr_razdatok": true,
+      "zametka": "Опубликована 01.10.2026: 4 примера, результат шага 3 газета, раздел «Одна фраза на все случаи»",
+      "podpis": "Рецепт образца в JSON, применение к своему снимку и смена одежды с фоном",
+      "kratko": "Свет и цвета чужого кадра на своём фото"
+    },
+    {
+      "slug": "pyat-instrumentov-claude-code",
+      "title": "Пять дополнений для Claude Code: что каждое решает",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "skilly",
+        "modeli"
+      ],
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "vaybkoding blue claude-code plugins skills",
+      "ponyatiya": [
+        "OmniRoute",
+        "claude-mem",
+        "Headroom",
+        "Claude Code Setup",
+        "Task Observer"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "НАБОР",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "description": "Пять дополнений для Claude Code простыми словами: что каждое решает, как работает и с чего начать",
+      "zametka": "Принята Жанной и опубликована 29.09.2026. Рилз «Стоп. 5 инструментов» в работе",
+      "data_publikacii": "2026-09-29",
+      "reestr_razdatok": true,
+      "podpis": "Пять частых неприятностей в Claude Code и по одному дополнению на каждую",
+      "kratko": "Лимиты, забытый контекст, повторные правки: что с этим делать"
+    },
+    {
+      "slug": "animirovannaya-karusel",
+      "title": "Как сделать движущиеся слайды в карусели",
+      "razdel": "gpt-vaybkoding",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "codex",
+        "claude-code",
+        "kartinki",
+        "video"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "chatgpt codex blue",
+      "ponyatiya": [
+        "анимированная карусель",
+        "видео-слайды",
+        "motion-карусель"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "МОУШЕН",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "2026-10-01",
+      "data_publikacii": "2026-10-01",
+      "description": "Как сделать анимированную карусель: живой пример, запросы для ChatGPT и агента, отдельный MP4 на каждый слайд",
+      "reestr_razdatok": true,
+      "zametka": "Опубликована 01.10.2026: прогоны ChatGPT (HTML, доработка дизайна, MP4) и Codex на чужой теме",
+      "podpis": "Два пути сборки: макет в чате или отдельные MP4 через агента с проверкой стыков",
+      "kratko": "Каждый слайд становится коротким видео с плавным стыком"
+    },
+    {
+      "slug": "10-saytov-starogo-interneta",
+      "title": "10 сайтов старого интернета, которые работают до сих пор",
+      "description": "Полезные сайты, которые работают до сих пор: 10 бытовых задач, шаги для новичка, результат, регистрация и подвох каждого сервиса",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "servisy",
+      "metki": [
+        "besplatno",
+        "privatnost"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "servisy green",
+      "ponyatiya": [
+        "FilePizza",
+        "SunCalc",
+        "MyFridgeFood",
+        "GetHuman",
+        "JustDeleteMe",
+        "PDF24 Tools",
+        "Namechk",
+        "Cover Your Tracks",
+        "TinEye",
+        "IsThereAnyDeal"
+      ],
+      "trebuet": [],
+      "kod_slovo": "ЖЕМЧУГ",
+      "status": "live",
+      "vydacha": "net",
+      "data_vyhoda": "2026-10-05",
+      "reestr_razdatok": true,
+      "blokirovka": "",
+      "zametka": "Статья к карусели «10 сайтов». Факты и исходные скрины 04.10.2026. Карусель в ленту не вышла. Не публиковать без команды Жанны",
+      "podpis": "Десять сайтов на одну задачу каждый: передать файл, склеить PDF, найти свою фотографию в сети",
+      "kratko": "Десять маленьких сайтов, каждый решает одну задачу"
+    },
+    {
+      "slug": "ozhivit-maket-bez-keyframe",
+      "title": "Как оживить макет из Figma за одно нажатие: 4 варианта анимации без After Effects",
+      "razdel": "obychnyy-vhod",
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "servisy green",
+      "kod_slovo": "ЛОТТИ",
+      "status": "live",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-05",
+      "blokirovka": "",
+      "ponyatiya": [
+        "Magic Animator",
+        "Lottie JSON"
+      ],
+      "trebuet": [],
+      "podpis": "Так ожил макет карточек после одного нажатия Generate animations",
+      "kratko": "От макета в Figma до файла Lottie, который проигрывается вне редактора",
+      "rubrika": "kartinki",
+      "metki": [
+        "video"
+      ]
+    },
+    {
+      "slug": "kopiya-higgsfield-open-generative-ai",
+      "title": "Открытая копия Higgsfield: кадры как в кино без ежемесячной подписки",
+      "razdel": "obychnyy-vhod",
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "servisy green",
+      "kod_slovo": "СТУДИЯ",
+      "status": "live",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-05",
+      "blokirovka": "",
+      "ponyatiya": [
+        "Open Generative AI",
+        "Cinema Studio"
+      ],
+      "trebuet": [],
+      "podpis": "Выбор камеры в Open Generative AI: четыре барабана, по одному на настройку",
+      "kratko": "Установщик, ключ MuAPI, настройки Cinema Studio и первый сохранённый кадр",
+      "rubrika": "kartinki",
+      "metki": [
+        "kartinki",
+        "video"
+      ]
+    },
+    {
+      "slug": "otozvat-ssylku-na-chat-claude",
+      "title": "Как отозвать публичную ссылку на чат Claude",
+      "razdel": "knopka-za-knopkoy",
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "claude privacy green",
+      "kod_slovo": "ДЕЛЮСЬ",
+      "status": "live",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-06",
+      "blokirovka": "",
+      "ponyatiya": [
+        "Share chat",
+        "Only people invited",
+        "Anyone with the link",
+        "Shared chats",
+        "Unshare"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "podpis": "Разорванная цепь: доступ к переписке по ссылке закрыт",
+      "kratko": "Где увидеть все беседы, которыми делишься, и как закрыть к ним доступ",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "privatnost"
+      ]
+    },
+    {
+      "slug": "montazh-video-claude-code-codex",
+      "title": "Монтаж видео нейросетью Claude Code или Codex: один промпт, два результата",
+      "description": "Монтаж видео нейросетью Claude Code и Codex: инструменты, полный промпт, запуск в пустой папке и сравнение двух версий одного ролика по кадрам и времени.",
+      "razdel": "vaybkoding",
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "vaybkoding blue claude-code codex video",
+      "kod_slovo": "МОНТАЖ",
+      "status": "live",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "trebuet": [
+        "claude-i-codex-v-vscode"
+      ],
+      "reestr_razdatok": true,
+      "blokirovka": "",
+      "ponyatiya": [
+        "FFmpeg",
+        "whisper.cpp",
+        "HyperFrames"
+      ],
+      "podpis": "Сверху монтаж Claude Code, снизу Codex: один голос и одинаковое задание",
+      "kratko": "Полный промпт и сравнение двух монтажей одного ролика",
+      "data_publikacii": "2026-10-06",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "codex",
+        "video",
+        "sravnenie"
+      ]
+    },
+    {
+      "slug": "pyat-skillov-claude-code",
+      "title": "Пять скиллов для Claude Code: поиск, план, память, дизайн и один, который учит остальные",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "skilly"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "vaybkoding blue claude-code skills plugins",
+      "kod_slovo": "СКИЛЛЫ",
+      "status": "live",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-06",
+      "trebuet": [
+        "claude-i-codex-v-vscode"
+      ],
+      "ponyatiya": [
+        "Find Skills",
+        "Superpowers",
+        "claude-mem",
+        "Impeccable",
+        "Task Observer",
+        "скилл",
+        "плагин"
+      ],
+      "blokirovka": "",
+      "podpis": "Пять предметов на столе, по одному на каждый скилл",
+      "kratko": "Какие пять скиллов поставить и как проверить, что каждый работает"
+    },
+    {
+      "slug": "zakryt-sekrety-ot-claude-code",
+      "title": "Как закрыть секретные файлы от Claude Code",
+      "razdel": "vaybkoding",
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "vaybkoding blue claude-code privacy permissions",
+      "kod_slovo": "",
+      "status": "live",
+      "vydacha": "net",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-06",
+      "blokirovka": "",
+      "ponyatiya": [
+        "/permissions",
+        "deny",
+        "settings.json",
+        ".env",
+        "sandbox"
+      ],
+      "trebuet": [
+        "claude-i-codex-v-vscode"
+      ],
+      "podpis": "Сейф с ключом: файлы с паролями закрыты от чтения",
+      "kratko": "Правило в настройках прячет ключи от агента, песочница закрывает лазейку",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "privatnost"
+      ]
+    },
+    {
+      "slug": "promty-sveta-dlya-foto-chatgpt",
+      "title": "48 промптов для фото в ChatGPT: какой свет изменит твой снимок?",
+      "description": "48 промптов для картинок в ChatGPT: свет и камера, перевод каждого промпта, кнопки копирования и три пробы.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "Свет и камера",
+        "промпты для картинок в ChatGPT"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "vydacha": "zhivaya",
+      "kod_slovo": "СВЕТ",
+      "data_vyhoda": "",
+      "seriya": "Промпты для картинок в ChatGPT",
+      "podpis": "Портрет до и после розового и синего неона",
+      "kratko": "Свет и камера: 48 промптов с переводами и пробами",
+      "data_publikacii": "2026-10-06"
+    },
+    {
+      "slug": "promty-tovar-reklama-chatgpt",
+      "title": "72 промпта для товара в ChatGPT: от снимка до витрины",
+      "description": "72 промпта для картинок в ChatGPT: товар, реклама и упаковка, перевод каждого промпта, кнопки копирования и три пробы.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "Товар, реклама и упаковка",
+        "промпты для картинок в ChatGPT"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "vydacha": "zhivaya",
+      "kod_slovo": "ВИТРИНА",
+      "data_vyhoda": "",
+      "seriya": "Промпты для картинок в ChatGPT",
+      "podpis": "Флаконы духов до и после оформления в подарочную коробку",
+      "kratko": "Товар, реклама и упаковка: 72 промпта с переводами и пробами",
+      "data_publikacii": "2026-10-06"
+    },
+    {
+      "slug": "promty-blog-biznes-chatgpt",
+      "title": "72 промпта для блога в ChatGPT: постеры, соцсети и объёмные буквы",
+      "description": "72 промпта для картинок в ChatGPT: постеры, соцсети, надписи и 3D, перевод каждого промпта, кнопки копирования и три пробы.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "Постеры, соцсети, надписи и 3D",
+        "промпты для картинок в ChatGPT"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "vydacha": "zhivaya",
+      "kod_slovo": "АФИША",
+      "data_vyhoda": "",
+      "seriya": "Промпты для картинок в ChatGPT",
+      "podpis": "Портрет до и после превращения в кинопостер",
+      "kratko": "Постеры, соцсети, надписи и 3D: 72 промпта с переводами и пробами",
+      "data_publikacii": "2026-10-07"
+    },
+    {
+      "slug": "promty-risunok-zhivopis-chatgpt",
+      "title": "72 промпта для рисунка в ChatGPT: фото становится живописью",
+      "description": "72 промпта для картинок в ChatGPT: иллюстрация, живопись и ручная работа, перевод каждого промпта, кнопки копирования и три пробы.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "Иллюстрация, живопись и ручная работа",
+        "промпты для картинок в ChatGPT"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "vydacha": "zhivaya",
+      "kod_slovo": "КИСТЬ",
+      "data_vyhoda": "",
+      "seriya": "Промпты для картинок в ChatGPT",
+      "podpis": "Портрет до и после превращения в вышитую тканевую нашивку",
+      "kratko": "Иллюстрация, живопись и ручная работа: 72 промпта с переводами и пробами",
+      "data_publikacii": "2026-10-07"
+    },
+    {
+      "slug": "shtat-agentov-paperclip",
+      "title": "Штат ИИ-агентов в Claude Code: ставишь одну цель, а работу делит команда",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "proekty"
+      ],
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "vaybkoding blue claude-code agents paperclip",
+      "ponyatiya": [
+        "Paperclip",
+        "агент",
+        "роль",
+        "одобрение найма",
+        "бюджет"
+      ],
+      "trebuet": [
+        "claude-i-codex-v-vscode"
+      ],
+      "status": "live",
+      "kod_slovo": "ШТАТ",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "podpis": "Три штампа на столе: директор, маркетолог и инженер ставят печать на одну работу",
+      "kratko": "Три роли, одна цель и проверка общей работы по задачам и журналам",
+      "blokirovka": "",
+      "data_publikacii": "2026-10-06"
+    },
+    {
+      "slug": "stanford-kak-sozdayut-chatgpt",
+      "title": "Как создают ChatGPT: конспект лекции Стэнфорда",
+      "description": "Русский конспект лекции CS229: токены, данные, дообучение и проверка моделей. Оглавление, таймкоды и памятка без формул.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "chatgpt",
+        "claude-chat"
+      ],
+      "uroven": "green",
+      "tip": "razbor",
+      "tags": "chatgpt claude green stanford cs229 llm",
+      "ponyatiya": [
+        "токен",
+        "предобучение",
+        "SFT",
+        "RLHF",
+        "бенчмарк",
+        "Стэнфорд",
+        "CS229"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "СТЭНФОРД",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "podpis": "Титульный слайд исходной лекции: Янн Дюбуа, CS229, Стэнфорд, 2024 год",
+      "kratko": "Лекция Стэнфорда по-русски: как из текстов и оценок людей делают ChatGPT",
+      "data_publikacii": "2026-10-07"
+    },
+    {
+      "slug": "promty-igrushki-personazhi-chatgpt",
+      "title": "72 промпта для ChatGPT: игрушки и персонажи из твоего фото",
+      "description": "Игрушки и персонажи из твоего фото в ChatGPT: 72 промпта с переводами, кнопки копирования и три новых сравнения было/стало - плюш, чиби и вязаная кукла.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "Игрушки, персонажи и игры",
+        "промпты для картинок в ChatGPT"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "vydacha": "zhivaya",
+      "kod_slovo": "ИГРУШКА",
+      "data_vyhoda": "",
+      "seriya": "Промпты для картинок в ChatGPT",
+      "podpis": "Девушка на роликах и фигурка Roller Girl в блистере",
+      "kratko": "Преврати своё фото в плюш, чиби или вязаную куклу: 72 промпта с переводами",
+      "data_publikacii": "2026-10-07"
+    },
+    {
+      "slug": "promty-eda-dom-chatgpt",
+      "title": "48 промптов для еды и дома в ChatGPT: другая подача знакомых вещей",
+      "description": "48 промптов для картинок в ChatGPT: еда, кухня, дом и путешествия, перевод каждого промпта, кнопки копирования и три пробы.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "Еда, кухня, дом и путешествия",
+        "промпты для картинок в ChatGPT"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "vydacha": "zhivaya",
+      "kod_slovo": "КУХНЯ",
+      "data_vyhoda": "",
+      "seriya": "Промпты для картинок в ChatGPT",
+      "podpis": "Кухня до и после виртуального ремонта",
+      "kratko": "Еда, кухня, дом и путешествия: 48 промптов с переводами и пробами",
+      "data_publikacii": "2026-10-07"
+    },
+    {
+      "slug": "promty-retro-ustroystvo-chatgpt",
+      "title": "48 промптов для ретро в ChatGPT: состарить предмет или заглянуть внутрь",
+      "description": "48 промптов для картинок в ChatGPT: ретро и устройство предметов, перевод каждого промпта, кнопки копирования и три пробы.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "Ретро и устройство предметов",
+        "промпты для картинок в ChatGPT"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "vydacha": "zhivaya",
+      "kod_slovo": "РЕТРО",
+      "data_vyhoda": "",
+      "seriya": "Промпты для картинок в ChatGPT",
+      "podpis": "Фотоаппарат до и после эффекта разборки",
+      "kratko": "Ретро и устройство предметов: 48 промптов с переводами и пробами",
+      "data_publikacii": "2026-10-07"
+    },
+    {
+      "slug": "pyat-instrumentov-dlya-sayta",
+      "title": "Пять инструментов для сайта в Claude Code и Codex",
+      "description": "Проверка кнопок, заявок, безопасности и оформления сайта: Playwright CLI, Supabase, Strix, SkillUI и Context7. Установка с агентом и вручную.",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "codex",
+        "sayt"
+      ],
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "vaybkoding blue claude-code codex sayt",
+      "ponyatiya": [
+        "Playwright CLI",
+        "Supabase",
+        "Strix",
+        "SkillUI",
+        "Context7"
+      ],
+      "trebuet": [
+        "claude-i-codex-v-vscode"
+      ],
+      "status": "live",
+      "kod_slovo": "ПЯТЬ",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-08",
+      "vydacha": "zhivaya",
+      "reestr_razdatok": true,
+      "podpis": "Проверка кнопок, сохранения заявок, безопасности и оформления сайта",
+      "kratko": "Как проверить кнопки, заявки и безопасность сайта перед запуском"
+    },
+    {
+      "slug": "chatgpt-composio-prilozheniya",
+      "title": "Как подключить ChatGPT к Gmail и Notion через Composio",
+      "razdel": "chatgpt",
+      "rubrika": "servisy",
+      "metki": [
+        "chatgpt",
+        "pochta"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "chatgpt blue composio mcp apps",
+      "kod_slovo": "СВЯЗЬ",
+      "status": "live",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "ponyatiya": [
+        "Composio",
+        "Plugins",
+        "MCP",
+        "OAuth"
+      ],
+      "trebuet": [],
+      "reestr_razdatok": true,
+      "podpis": "От подключения Composio до черновика, который можно открыть в Gmail",
+      "kratko": "Подключи ChatGPT к почте и Notion: он сам читает письма и готовит черновики",
+      "description": "Composio в ChatGPT: каталог Plugins и форма Add custom MCP server, доступ к Gmail и Notion, проверка чтения и черновика, цены и ограничения на 08.10.2026."
+    },
+    {
+      "slug": "opus-55-protiv-gpt-6-astra",
+      "title": "Claude Opus 5.5 и GPT-6 Astra: один промпт, два видео",
+      "razdel": "kartinki",
+      "rubrika": "kartinki",
+      "metki": [
+        "kartinki",
+        "claude-code",
+        "codex",
+        "sravnenie",
+        "video"
+      ],
+      "uroven": "blue",
+      "tip": "razbor",
+      "tags": "kartinki blue claude-code codex sravnenie video",
+      "ponyatiya": [
+        "эволюция точкой света",
+        "один промпт, два видео"
+      ],
+      "trebuet": [
+        "vybor-modeli-i-effort",
+        "claude-i-codex-v-vscode"
+      ],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ЭВОЛЮЦИЯ",
+      "reestr_razdatok": true,
+      "vydacha": "zhivaya",
+      "data_vyhoda": "2026-10-03",
+      "podpis": "Один промпт, два видео: сюжет и восемь требований к свету и движению",
+      "kratko": "Claude Opus 5.5 против GPT-6 Astra: один промпт, два видео. Кто точнее?",
+      "data_publikacii": "2026-10-09",
+      "description": "Claude Opus 5.5 против GPT-6 Astra: один промпт про эволюцию, два видео и разбор, кто точнее выполнил восемь требований."
+    },
+    {
+      "slug": "uley-agentov-ruflo",
+      "title": "Улей агентов Ruflo: первая команда и память между чатами",
+      "description": "Как подключить Ruflo 3.55.0 к Claude Code, выполнить задачу с исполнителем и проверяющим и прочитать общую память в новом чате. Цены на 08.10.2026.",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "proekty"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "vaybkoding blue claude-code agents ruflo",
+      "kod_slovo": "УЛЕЙ",
+      "status": "live",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "trebuet": [
+        "claude-i-codex-v-vscode"
+      ],
+      "ponyatiya": [
+        "Ruflo",
+        "рой агентов",
+        "MCP"
+      ],
+      "reestr_razdatok": true,
+      "blokirovka": "",
+      "podpis": "Одна задача, отдельные исполнители и проверка памяти в новом чате",
+      "kratko": "Собери первую команду и проверь, что её задание сохранено между чатами",
+      "data_publikacii": "2026-10-09"
+    },
+    {
+      "slug": "chetyre-mcp-claude-code",
+      "title": "Четыре MCP для Claude Code: от поиска до проверки инструкции",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "poisk"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "vaybkoding blue claude-code mcp",
+      "kod_slovo": "ЧЕТЫРЕ",
+      "status": "live",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "trebuet": [
+        "claude-i-codex-v-vscode"
+      ],
+      "ponyatiya": [
+        "MCP",
+        "Perplexity",
+        "Playwright",
+        "Firecrawl",
+        "Context7"
+      ],
+      "blokirovka": "",
+      "podpis": "Поиск источника, браузер, чтение страницы и документация нужной версии",
+      "kratko": "Подключи четыре MCP и проверь, на чём основана инструкция Claude Code",
+      "description": "Подключение Perplexity, Playwright, Firecrawl и Context7 к Claude Code. Четыре проверки на документации Next.js, стоимость и лимиты на 08.10.2026.",
+      "data_publikacii": "2026-10-09"
+    },
+    {
+      "slug": "komanda-ii-agentov-dlya-bloga",
+      "title": "Как работает команда ИИ-агентов: разбор на примере блога",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "codex"
+      ],
+      "uroven": "blue",
+      "tip": "razbor",
+      "tags": "vaybkoding blue codex hermes blog",
+      "ponyatiya": [
+        "Hermes Agent",
+        "команда ИИ-агентов",
+        "приёмка публикации"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "КОМАНДА",
+      "data_vyhoda": "",
+      "vydacha": "zhivaya",
+      "reestr_razdatok": true,
+      "blokirovka": "",
+      "podpis": "Поручения, материалы, передача файлов и приёмка публикации руководителем команды",
+      "kratko": "Составь карточку публикации с ролями ИИ-агентов и критериями готовности",
+      "description": "Как Hermes распределяет подготовку публикации между ИИ-агентами: материалы для автора, проверка Codex, передача файлов и приёмка статьи для блога.",
+      "oblozhka": "claude-ai/komanda-ii-agentov-dlya-bloga/assets/oblozhka.webp",
+      "data_publikacii": "2026-10-10"
+    },
+    {
+      "slug": "otsenka-vneshnosti-po-foto-v-chatgpt",
+      "title": "Оценка лица в ChatGPT: 15 критериев и балл из 10",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "оценка внешности по фото",
+        "привлекательность в ChatGPT",
+        "анализ лица"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ЛИЦО",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-11",
+      "description": "Полный промпт для оценки внешности по фото в ChatGPT: 15 критериев, пример отчёта 8,7/10 и дополнение для резюме или творческого проекта. Условия и лимиты.",
+      "reestr_razdatok": true,
+      "zametka": "Полный промпт, 15 критериев и пример 8,7/10. Дополнение под резюме и творческий проект: результата дополнения пока нет. Проверка условий OpenAI 10.10.2026",
+      "podpis": "Фото для разбора: 15 критериев, итоговый балл и дополнение под назначение снимка",
+      "kratko": "Один промпт разбирает портрет по 15 критериям и ставит итоговый балл из 10",
+      "oblozhka": true
+    },
+    {
+      "slug": "konspekt-rechi-v-chatgpt",
+      "title": "Конспект в ChatGPT: 5 запросов для разных задач",
+      "description": "Пять запросов и пять готовых примеров по речи Джобса: карточки, комикс, схема для презентации, майнд-карта и скетчноут.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt image green",
+      "ponyatiya": [
+        "карточки для повторения",
+        "комикс по тексту",
+        "схема речи",
+        "майнд-карта",
+        "скетчноут"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "КОНСПЕКТ",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-12",
+      "reestr_razdatok": true,
+      "podpis": "Два варианта конспекта: карточки и рисованные заметки",
+      "kratko": "Карточки, комикс, схема, майнд-карта и скетчноут на примере речи Стива Джобса",
+      "zametka": "Переписано 12.10.2026 по правкам Жанны: пять реальных результатов, прямой PDF, небольшая памятка Free/Go/Plus; обложка с Запросом 1 и скетчноутом, без чашки",
+      "oblozhka": true
+    },
+    {
+      "slug": "stanford-2026-kak-uchitsya-ii",
+      "title": "Как учится ИИ: конспект лекции Стэнфорда 2026",
+      "description": "8 мыслей из вводной лекции CS229 2026: опыт, ImageNet, слова, инструкции и обучение на своих попытках. Таймкоды и три пары промптов без формул.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "chatgpt",
+        "claude-chat"
+      ],
+      "uroven": "green",
+      "tip": "razbor",
+      "tags": "chatgpt claude green stanford cs229 llm 2026 imagenet обучение инструкции рассуждение",
+      "ponyatiya": [
+        "машинное обучение",
+        "опыт",
+        "ImageNet",
+        "эмбеддинг",
+        "инструкции",
+        "рассуждение",
+        "обучение на собственных попытках",
+        "Стэнфорд",
+        "CS229"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "МОЗГ",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "podpis": "Титульный слайд исходной лекции: Тэнъюй Ма, CS229, Стэнфорд, 2026 год",
+      "kratko": "8 мыслей о том, как ИИ учится: от ImageNet до проверенных собственных попыток",
+      "data_publikacii": "2026-10-13",
+      "reestr_razdatok": true,
+      "oblozhka": true,
+      "blokirovka": ""
+    },
+    {
+      "slug": "razobrat-zaval-del-v-chatgpt",
+      "title": "Разобрать завал дел в ChatGPT: 4 запроса в одном чате",
+      "description": "Четыре запроса для ChatGPT или Claude: рассказать обо всех делах, составить план на день, поручить часть дел нейросети и решить, за что взяться первым.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "chatgpt",
+        "golos",
+        "proekty",
+        "claude-code",
+        "codex"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt voice projects green",
+      "ponyatiya": [
+        "разобрать завал дел",
+        "план на день",
+        "список задач",
+        "одно главное дело"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "СВАЛКА",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-13",
+      "reestr_razdatok": true,
+      "podpis": "Расскажем обо всех делах в чате и разберёмся, за что взяться первым",
+      "kratko": "4 запроса: список дел, план на день, помощь нейросети и выбор первого дела",
+      "zametka": "Рилз №59: СВАЛКА. Публикация разрешена Жанной 13.10.2026.",
+      "oblozhka": true
+    },
+    {
+      "slug": "agent-reach-materialy-dlya-posta",
+      "title": "Agent Reach: установка и 3 задания для сбора материалов",
+      "description": "Как установить Agent Reach через чат с агентом, получить субтитры YouTube и текст сайтов: три задания со ссылками на источники и настоящие экраны проверки.",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "codex",
+        "poisk"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "agent reach youtube claude code codex green",
+      "ponyatiya": [
+        "Agent Reach",
+        "субтитры YouTube",
+        "материалы для поста",
+        "КУРЬЕР"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "КУРЬЕР",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-13",
+      "reestr_razdatok": true,
+      "podpis": "Установка, три задания и настоящие экраны проверки Agent Reach",
+      "kratko": "Собрать материалы по ссылкам и проверить ответ агента",
+      "zametka": "Принято Жанной и разрешено к публикации 13.10.2026. Добавлены альтернативы и условия бесплатности Agent Reach.",
+      "oblozhka": false
+    },
+    {
+      "slug": "nalog-na-russkiy-tokeny",
+      "title": "Налог на русский: сравниваем расход токенов на четырёх языках",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "chatgpt"
+      ],
+      "razdel": "obychnyy-vhod",
+      "uroven": "green",
+      "tip": "razbor",
+      "tags": "chatgpt tokeny green",
+      "ponyatiya": [
+        "налог на русский",
+        "токены разных языков",
+        "счётчик токенов OpenAI"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-14",
+      "vydacha": "zhivaya",
+      "reestr_razdatok": true,
+      "podpis": "Три текста, четыре языка, два способа подсчёта и реальные экраны токенизатора",
+      "kratko": "Проверь, как язык запроса меняет число токенов: примеры и ручной выбор кодировки"
+    },
+    {
+      "slug": "mimika-personazha-chatgpt",
+      "title": "1 персонаж, 9 выражений лица",
+      "description": "Как сохранить лицо, волосы, одежду, свет и ракурс персонажа, меняя только мимику. Базовый промпт, лист 3x3 и девять точных вариантов.",
+      "razdel": "gpt-knopka",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "chatgpt kartinki personazh mimika green",
+      "ponyatiya": [
+        "мимика персонажа",
+        "выражения лица",
+        "стабильный персонаж",
+        "лист 3x3",
+        "один персонаж разные эмоции"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "МИМИКА",
+      "vydacha": "net",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-17",
+      "reestr_razdatok": true,
+      "podpis": "Эталон персонажа, лист 3x3 и девять промптов для видимой мимики",
+      "kratko": "Сохрани лицо и ракурс, меняя только брови, глаза и губы",
+      "zametka": "Карусель «Один персонаж, разные эмоции» не опубликована. Жанна разрешила публикацию статьи после правок 17.10.2026. Выдача по слову МИМИКА ещё не проверена.",
+      "oblozhka": true
+    },
+    {
+      "slug": "igry-pro-ii",
+      "title": "7 бесплатных игр про ИИ: что попробовать и чему они научат",
+      "description": "Семь игр и интерактивов про ИИ: что показывает каждая, с какого действия начать, насколько сложно, нужен ли аккаунт и какие условия бесплатного доступа есть",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "servisy",
+      "metki": [
+        "besplatno"
+      ],
+      "tip": "obzor",
+      "uroven": "green",
+      "tags": "ii igry besplatno servisy green",
+      "ponyatiya": [
+        "игры про ИИ",
+        "бесплатные игры про искусственный интеллект",
+        "Agent Maze"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ИГРЫ",
+      "vydacha": "net",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-17",
+      "reestr_razdatok": true,
+      "podpis": "7 бесплатных игр про ИИ: что попробовать и чему они научат",
+      "kratko": "Семь игр и интерактивов про ИИ: что показывает каждая, с какого действия начать",
+      "zametka": "Публикация статьи разрешена Жанной 17.10.2026. Выдача по слову ИГРЫ остаётся ручной",
+      "oblozhka": true
+    },
+    {
+      "slug": "trellis-2-3d-model-iz-foto",
+      "title": "Trellis 2: 3D-модель из одного фото и ещё 6 инструментов гигантов",
+      "description": "Как сделать 3D-модель из одной фотографии в Trellis 2 за две кнопки, кому такую модель продать и какие ещё открытые инструменты выложили Tencent, Alibaba, OpenAI, NVIDIA, Anthropic и Cloudflare",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "servisy",
+      "metki": [
+        "besplatno"
+      ],
+      "tip": "obzor",
+      "uroven": "green",
+      "tags": "ii 3d trellis besplatno servisy green",
+      "ponyatiya": [
+        "3D-модель из фото",
+        "Trellis 2",
+        "нейросеть для 3D-моделей"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "МОДЕЛЬ",
+      "vydacha": "net",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-17",
+      "reestr_razdatok": true,
+      "podpis": "Trellis 2: 3D-модель из одного фото и ещё 6 инструментов гигантов",
+      "kratko": "3D-модель из одного фото за две кнопки и ещё 6 открытых инструментов гигантов",
+      "zametka": "Статья к рилзу МОДЕЛЬ 17.10.2026. Выдача по слову МОДЕЛЬ ручная",
+      "oblozhka": true
+    },
+    {
+      "slug": "tri-sayta-video-pdf-foto",
+      "title": "Три сайта для контента: кадры из видео, правка PDF и данные фото",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "servisy",
+      "metki": [
+        "video",
+        "fayly",
+        "privatnost",
+        "besplatno"
+      ],
+      "uroven": "green",
+      "tip": "obzor",
+      "tags": "video pdf foto servisy green",
+      "ponyatiya": [
+        "Video2Frames",
+        "VectisPDF",
+        "TimeStamp Camera",
+        "EXIF",
+        "кадры из видео",
+        "редактирование PDF",
+        "метаданные фото"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "oblozhka": true,
+      "blokirovka": "",
+      "kod_slovo": "САЙТЫ",
+      "data_vyhoda": "2026-10-18",
+      "vydacha": "net",
+      "reestr_razdatok": true,
+      "data_publikacii": "2026-10-18",
+      "podpis": "Кадры из ролика, правка PDF и очистка данных фото в браузере",
+      "kratko": "Три проверенных сайта с шагами, результатами и честными ограничениями",
+      "zametka": "Рилз „Полезные инструменты“: Video2Frames, VectisPDF, TimeStamp Camera; выдача статьи вручную"
+    },
+    {
+      "slug": "utrennyaya-svodka-po-rynku",
+      "title": "Утренняя сводка по рынку: 4 программы без выдумок",
+      "description": "Как собрать утреннюю сводку по рынку из четырёх программ: подачи SEC, цены Alpha Vantage, отчётность за 14 дней и честный список пропусков",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "raspisanie",
+        "besplatno"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "python agents market data blue vaybkoding",
+      "ponyatiya": [
+        "утренняя сводка по рынку",
+        "SEC EDGAR",
+        "Alpha Vantage",
+        "cron"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "СВОДКА",
+      "vydacha": "net",
+      "data_vyhoda": "2026-10-19",
+      "reestr_razdatok": true,
+      "podpis": "Четыре программы собирают подачи, цены, отчётность и честный список пропусков",
+      "kratko": "Утренняя сводка по рынку из открытых данных без выдуманных цифр",
+      "zametka": "Рилз СВОДКА 19.10.2026 (пробные рилзы), карусель 20.10.2026. Выдача по слову СВОДКА ручная",
+      "oblozhka": true,
+      "data_publikacii": "2026-10-19"
+    },
+    {
+      "slug": "22-ustanovki-claude-code",
+      "title": "22 установки Claude Code по ролям: что поставить",
+      "description": "22 дополнения для Claude Code по ролям: разработка, маркетинг и операции. Актуальные команды установки, требования, ошибки и набор без новых оплат",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "skilly",
+        "besplatno"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "claude code plugins skills mcp green vaybkoding",
+      "ponyatiya": [
+        "дополнения Claude Code",
+        "плагины Claude Code",
+        "навыки Claude Code",
+        "MCP Claude Code"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "22",
+      "vydacha": "net",
+      "data_vyhoda": "2026-10-20",
+      "reestr_razdatok": true,
+      "podpis": "22 дополнения для разработки, маркетинга и операций с актуальными командами установки",
+      "kratko": "Что поставить в Claude Code под свою роль и как проверить установку",
+      "zametka": "Рилз «22 установки Claude» 20.10.2026. Выдача по слову 22 ручная",
+      "oblozhka": true,
+      "data_publikacii": "2026-10-20"
+    },
+    {
+      "slug": "10-fotoeffektov-v-chatgpt",
+      "title": "10 фотоэффектов в ChatGPT: примеры до и после и промпты",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "chatgpt kartinki green",
+      "ponyatiya": [
+        "фотоэффекты в ChatGPT",
+        "сохранение исходного кадра"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "ЭФФЕКТЫ",
+      "data_vyhoda": "",
+      "vydacha": "da",
+      "data_publikacii": "2026-10-20",
+      "blokirovka": "",
+      "podpis": "Десять сравнений одного кадра и полные запросы для редактирования своих фото",
+      "kratko": "Сравни исходник и эффект, скопируй полный русский запрос"
+    },
+    {
+      "slug": "animaciya-claude-po-obrazcu",
+      "title": "Анимация в Claude по образцу: где взять видео и запросы",
+      "description": "Как выбрать готовый пример анимации, взять запрос к нему и настроить название, цвета и содержание под свой проект. Пошагово, с проверкой результата.",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "video"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "claude-code video animation motion blue vaybkoding",
+      "ponyatiya": [
+        "анимация в Claude по образцу",
+        "запросы для анимации",
+        "экспорт анимации в MP4"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "MOTION",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "reestr_razdatok": true,
+      "podpis": "Три последовательных кадра одной анимации: знак превращается в название",
+      "kratko": "Возьми готовый пример с запросом и собери анимацию для своего проекта",
+      "zametka": "Одобрено Claude 20.10.2026: reader-judge-claude-4.json, PASS 6/6. Выдача по слову MOTION ручная",
+      "oblozhka": true,
+      "data_publikacii": "2026-10-20"
+    },
+    {
+      "slug": "pomoshchnik-haiku-claude-code",
+      "title": "Помощник Haiku в Claude Code: поиск файлов и чтение логов",
+      "description": "Готовый запрос для помощника Haiku: поиск файлов, чтение логов и проверка фактической модели в Claude Code",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "fayly"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "claude code haiku opus agents limit blue vaybkoding",
+      "ponyatiya": [
+        "Haiku 5.5",
+        "Claude Code",
+        "помощник",
+        "субагент",
+        "лимит"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "LIMIT",
+      "vydacha": "net",
+      "data_vyhoda": "2026-10-20",
+      "reestr_razdatok": true,
+      "podpis": "Готовый запрос, поиск и чтение логов, проверка реального вызова",
+      "kratko": "Помощник Haiku для простых задач в Claude Code",
+      "zametka": "Рилз Хайку LIMIT. Выдача ссылки вручную. Публикация одобрена Claude 20.10.2026, судья PASS 6/6",
+      "oblozhka": true,
+      "data_publikacii": "2026-10-20"
+    },
+    {
+      "slug": "lichnaya-gazeta-v-claude-code",
+      "title": "Личная газета в Claude Code: промпт и наш пример",
+      "description": "Собери личную газету из рассылки, YouTube и GitHub. Полный промпт для Claude Code, наш PDF, реальные подключения и порядок действий.",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code"
+      ],
+      "uroven": "blue",
+      "tip": "instr",
+      "tags": "газета личная газета claude code рассылки youtube github blue vaybkoding",
+      "ponyatiya": [
+        "Личная газета",
+        "Claude Code",
+        "промпт для газеты",
+        "газета из своих источников"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "ГАЗЕТА",
+      "vydacha": "net",
+      "data_vyhoda": "2026-10-22",
+      "reestr_razdatok": true,
+      "data_publikacii": "2026-10-22",
+      "podpis": "Промпт, реальные шаги и наш выпуск на одну страницу",
+      "kratko": "Собери газетную страницу по своим темам и источникам",
+      "blokirovka": "",
+      "zametka": "22.10.2026: Жанна прочитала исправленный черновик и прямо разрешила публикацию. Только короткая техническая проверка, без новых проверяльщиков. Выдачу включить после проверки живой ссылки Рилз отмечен опубликованным 22.10.2026 по сообщению Жанны о выкладке; повторно не выпускать. Подпись и ответ отправлены ей в @ValliBoyBot 1224 и 1225. Автоматическая выдача не активирована",
+      "oblozhka": true
+    },
+    {
+      "slug": "argon-ili-opus-kak-vybrat",
+      "title": "Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать",
+      "description": "Сравнение Gemini 4 Argon и Claude Opus 5.5 по задачам: таблицы результатов тестов, доступ к моделям и тарифы API до и после подорожания Argon.",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code"
+      ],
+      "uroven": "blue",
+      "tip": "razbor",
+      "tags": "argon opus gemini claude code blue vaybkoding",
+      "ponyatiya": [
+        "Gemini 4 Argon",
+        "сравнение Argon и Opus",
+        "DeepSWE",
+        "Terminal-Bench"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "АРГОН",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "2026-10-22",
+      "reestr_razdatok": true,
+      "data_publikacii": "2026-10-22",
+      "podpis": "Результаты тестов, задачи, доступ к моделям и тарифы API",
+      "kratko": "Сравни модели по задачам, результатам тестов, доступу и тарифам API",
+      "blokirovka": "",
+      "zametka": "Жанна согласовала статью и разрешила публикацию 22.10.2026. Рилз опубликован 22.10.2026 по её сообщению. Публичная ссылка из ответа АРГОН проверена: HTTP 200, содержимое совпадает. Выдача вручную, автоответ не включался",
+      "oblozhka": true
+    },
+    {
+      "slug": "sbor-tem-s-rynka",
+      "title": "Как собрать темы для контента: Claude, ChatGPT и Apify",
+      "description": "Два способа собрать темы для блога: ручной подбор с Claude или ChatGPT и автоматический сбор через Apify. Четыре промпта, Excel и скилл для агента.",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-chat",
+        "claude-code",
+        "codex",
+        "poisk"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "темы контент блог контент-план claude chatgpt apify парсер codex green",
+      "ponyatiya": [
+        "темы для контента",
+        "подбор тем для блога",
+        "сбор публикаций через Apify"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "СБОР",
+      "vydacha": "net",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-23",
+      "reestr_razdatok": true,
+      "oblozhka": false,
+      "podpis": "Два способа сбора, четыре промпта, расчёт нормы и таблица тем",
+      "kratko": "Собери темы из публикаций и составь план для своего блога",
+      "blokirovka": "",
+      "zametka": "Жанна прочитала статью и прямо разрешила публикацию 23.10.2026. Слайды не менять. Дополнительная независимая вычитка не нужна: текущая версия проверена, 6 CLOSED. Только техническая проверка публикации. Выдачу и автопостинг не включать"
+    },
+    {
+      "slug": "20-ii-agentov-dlya-biznesa",
+      "title": "Как собрать 20 ИИ-агентов для бизнеса",
+      "description": "20 ролей ИИ-помощников для почты, календаря, контента, счетов и работы с клиентами: готовые команды и два пути настройки",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "claude-code",
+        "pochta",
+        "fayly",
+        "raspisanie"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude помощники агенты бизнес почта календарь контент green",
+      "ponyatiya": [
+        "ИИ-помощники для бизнеса",
+        "20 ИИ-агентов",
+        "роли ИИ-помощников"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "",
+      "vydacha": "net",
+      "data_vyhoda": "",
+      "data_publikacii": "2026-10-23",
+      "reestr_razdatok": true,
+      "oblozhka": true,
+      "podpis": "Почта, календарь, контент, счета и работа с клиентами",
+      "kratko": "Готовые команды и два пути настройки для каждой из 20 ролей",
+      "zametka": "23.10.2026: Жанна прочитала черновик, заменила заголовок каталога на «20 ИИ-помощников для тебя и бизнеса» и прямо разрешила публикацию. Дополнительных независимых читателей не запускать. Кодовое слово не назначено, автоматическую выдачу не включать"
+    },
+    {
+      "slug": "tri-dizayn-skilla",
+      "title": "3 скилла, которые доведут дизайн сайта до ума: Taste Skill, Impeccable и навыки Эмиля Ковальски",
+      "description": "Три дизайн-скилла для Claude Code и Codex: установка, первые запросы, сравнение сайта до и после и команды Impeccable",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "codex",
+        "skilly"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "tags": "claude code codex design skills blue vaybkoding",
+      "ponyatiya": [
+        "Taste Skill",
+        "Impeccable",
+        "навыки Эмиля Ковальски"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ДИЗАЙН",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "reestr_razdatok": true,
+      "podpis": "Вкус, детали и движение для одного сайта",
+      "kratko": "Установи три навыка и доведи оформление сайта до ума",
+      "zametka": "Принятая статья. Текст, картинки и обложку не менять",
+      "oblozhka": true,
+      "data_publikacii": "2026-10-24"
+    },
+    {
+      "slug": "prompt-master-uluchshitel-promptov",
+      "title": "Улучшатель промптов: навык Prompt Master для Claude и запрос для любой нейросети",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "claude-chat",
+        "skilly"
+      ],
+      "razdel": "knopka-za-knopkoy",
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude-chat green",
+      "ponyatiya": [
+        "Prompt Master",
+        "улучшатель промптов"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "oblozhka": true,
+      "blokirovka": "",
+      "kod_slovo": "ПРОМПТ",
+      "vydacha": "net",
+      "podpis": "ZIP навыка, установка в чате и запрос на четыре шага для другого сервиса",
+      "kratko": "Преврати корявую фразу в задачу с понятным результатом",
+      "data_publikacii": "2026-10-25"
+    },
+    {
+      "slug": "promty-pravki-foto-chatgpt",
+      "title": "10 промптов для правки фото в ChatGPT: одежда, цвет, фон и формат кадра",
+      "description": "Десять промптов для правки фото в ChatGPT: десять пар до и после, примерка одежды, фон, свет, чёткость и открытие глаз по образцу",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "kartinki",
+      "metki": [
+        "chatgpt",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "blue",
+      "uroven_nadpis": "Начальный уровень",
+      "tags": "chatgpt kartinki foto blue",
+      "ponyatiya": [
+        "правка фото в ChatGPT",
+        "промпты для редактирования фото"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ФОТО",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "reestr_razdatok": true,
+      "podpis": "Десять наших пар до и после и готовые запросы",
+      "kratko": "Сравни десять правок до и после и скопируй запрос для своего фото",
+      "zametka": "25.10.2026: Жанна разрешила публикацию. Утверждённые текст и фото сохранены без изменений",
+      "oblozhka": true,
+      "data_publikacii": "2026-10-25"
+    },
+    {
+      "slug": "runway-iz-claude",
+      "title": "Runway в Claude: снимаем видео прямо в чате",
+      "description": "Как подключить Runway к Claude и делать картинки и видео в одном чате: подключение, готовые запросы, что работает на бесплатном и платном тарифе, примеры",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "servisy",
+      "metki": [
+        "claude-chat",
+        "video",
+        "kartinki"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "tags": "claude video kartinki runway green",
+      "ponyatiya": [
+        "Runway в Claude",
+        "коннектор Runway"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "RUNWAY",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "2026-10-27",
+      "reestr_razdatok": true,
+      "podpis": "Подключение, готовые запросы, тарифы и примеры",
+      "kratko": "Подключи Runway и попроси Claude сделать картинку и видео в одном чате",
+      "zametka": "27.10.2026: Жанна разрешила публикацию («публикуй»). Рилз RUNWAY выходит после статьи",
+      "oblozhka": true,
+      "data_publikacii": "2026-10-27"
+    },
+    {
+      "slug": "klod-ne-poddakivaet",
+      "title": "Клод перестаёт поддакивать",
+      "description": "Установка Frank в Claude Code, три режима честной критики и запрос для Claude и ChatGPT",
+      "razdel": "vaybkoding",
+      "rubrika": "vaybkoding",
+      "metki": [
+        "claude-code",
+        "skilly"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "uroven_nadpis": "Начальный уровень",
+      "tags": "claude-code skills frank green",
+      "ponyatiya": [
+        "Frank",
+        "честная обратная связь",
+        "Claude Code"
+      ],
+      "trebuet": [
+        "Claude Code или браузерный чат"
+      ],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ФРАНК",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "reestr_razdatok": true,
+      "podpis": "Честный ответ полезнее автоматического согласия",
+      "kratko": "Установи Frank, выбери степень прямоты и отключи после задачи",
+      "zametka": "27.10.2026: Жанна разрешила публикацию. Д008. Утверждённый текст и штатный рекламный блок сохранены",
+      "oblozhka": true,
+      "data_publikacii": "2026-10-27"
+    },
+    {
+      "slug": "pyat-neyrosetey-dlya-ucheby",
+      "title": "Пять нейросетей для учёбы и работы: с чего начать",
+      "description": "Пять сервисов по задачам: текст, поиск с источниками, картинки, аудиопересказ и слайды",
+      "razdel": "obychnyy-vhod",
+      "rubrika": "start",
+      "metki": [
+        "claude-chat",
+        "poisk",
+        "kartinki",
+        "golos",
+        "fayly"
+      ],
+      "tip": "instr",
+      "uroven": "green",
+      "uroven_nadpis": "Начальный уровень",
+      "tags": "neyroseti ucheba start green",
+      "ponyatiya": [
+        "пять нейросетей для учёбы",
+        "мини-урок с нейросетями"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "blokirovka": "",
+      "kod_slovo": "ПЯТЁРКА",
+      "vydacha": "zhivaya",
+      "data_vyhoda": "",
+      "reestr_razdatok": true,
+      "podpis": "Ссылки, запросы и первые шаги для новичка",
+      "kratko": "Выбери нейросеть под задачу и проверь результат",
+      "zametka": "28.10.2026: Жанна разрешила публикацию («всё, можно публиковать»). Подготовлено локально; push выполняет Claude",
+      "oblozhka": true,
+      "data_publikacii": "2026-10-28"
+    },
+    {
+      "slug": "logotip-v-claude-7-promptov",
+      "title": "Логотип в Claude: 7 промптов по шагам",
+      "razdel": "knopka-za-knopkoy",
+      "rubrika": "kartinki",
+      "metki": [
+        "claude-chat",
+        "kartinki"
+      ],
+      "uroven": "green",
+      "tip": "instr",
+      "tags": "claude green dizayn",
+      "ponyatiya": [
+        "логотип",
+        "SVG",
+        "монограмма",
+        "промпты для логотипа"
+      ],
+      "trebuet": [
+        "podklyuchenie-iz-rossii"
+      ],
+      "status": "live",
+      "kod_slovo": "ЛОГОТИП",
+      "vydacha": "zhivaya",
+      "reestr_razdatok": true,
+      "podpis": "Выбранная концепция вымышленной марки «ТИХАЯ ЧАША».",
+      "kratko": "Семь запросов и пример монограммы ТЧ",
+      "data_publikacii": "2026-10-28",
+      "data_vyhoda": "",
+      "oblozhka": true,
+      "zametka": "Публикация разрешена прямой командой Жанны 28.10.2026. Карусель не опубликована агентом. Ответ по слову ЛОГОТИП для ручной выдачи"
+    },
+    {
+      "slug": "stanford-cs230-karera-v-ii",
+      "title": "Карьера в ИИ: конспект всей лекции Стэнфорда CS230",
+      "description": "Эндрю Ын и Лоренс Морони о карьере в ИИ: 12 мыслей, все истории лекции CS230 осени 2025 года, таймкоды, три пары запросов и памятка",
+      "razdel": "gpt-knopka",
+      "rubrika": "kazhdyy-den",
+      "metki": [
+        "chatgpt",
+        "claude-chat"
+      ],
+      "uroven": "green",
+      "tip": "razbor",
+      "tags": "chatgpt claude green stanford cs230 карьера обучение 2025 морони ын",
+      "ponyatiya": [
+        "Стэнфорд",
+        "CS230",
+        "технический долг",
+        "агентный процесс",
+        "открытые веса",
+        "самостоятельное размещение",
+        "ИИ на устройстве"
+      ],
+      "trebuet": [],
+      "status": "live",
+      "kod_slovo": "МОРОНИ",
+      "vydacha": "net",
+      "data_vyhoda": "",
+      "podpis": "Эндрю Ын на обложке по официальному превью лекции CS230 осени 2025 года",
+      "kratko": "12 мыслей из всей лекции Ына и Морони: карьера, проекты, риски и выбор задачи",
+      "data_publikacii": "2026-10-28",
+      "reestr_razdatok": true,
+      "oblozhka": true,
+      "blokirovka": "",
+      "zametka": "28.10.2026: Жанна дала прямую команду «Публикуй» после чтения и мелких правок статьи"
+    }
+  ],
+  "serii": {
+    "Промпты для картинок в ChatGPT": [
+      {
+        "slug": "promty-sveta-dlya-foto-chatgpt",
+        "title": "Свет и камера"
+      },
+      {
+        "slug": "promty-tovar-reklama-chatgpt",
+        "title": "Товар, реклама и упаковка"
+      },
+      {
+        "slug": "promty-blog-biznes-chatgpt",
+        "title": "Постеры, соцсети, надписи и 3D"
+      },
+      {
+        "slug": "promty-risunok-zhivopis-chatgpt",
+        "title": "Иллюстрация, живопись и ручная работа"
+      },
+      {
+        "slug": "promty-igrushki-personazhi-chatgpt",
+        "title": "Игрушки, персонажи и игры"
+      },
+      {
+        "slug": "promty-eda-dom-chatgpt",
+        "title": "Еда, кухня, дом и путешествия"
+      },
+      {
+        "slug": "promty-retro-ustroystvo-chatgpt",
+        "title": "Ретро и устройство предметов"
+      }
+    ]
   }
- ],
- "serii": {
-  "Промпты для картинок в ChatGPT": [
-   {
-    "slug": "promty-sveta-dlya-foto-chatgpt",
-    "title": "Свет и камера"
-   },
-   {
-    "slug": "promty-tovar-reklama-chatgpt",
-    "title": "Товар, реклама и упаковка"
-   },
-   {
-    "slug": "promty-blog-biznes-chatgpt",
-    "title": "Постеры, соцсети, надписи и 3D"
-   },
-   {
-    "slug": "promty-risunok-zhivopis-chatgpt",
-    "title": "Иллюстрация, живопись и ручная работа"
-   },
-   {
-    "slug": "promty-igrushki-personazhi-chatgpt",
-    "title": "Игрушки, персонажи и игры"
-   },
-   {
-    "slug": "promty-eda-dom-chatgpt",
-    "title": "Еда, кухня, дом и путешествия"
-   },
-   {
-    "slug": "promty-retro-ustroystvo-chatgpt",
-    "title": "Ретро и устройство предметов"
-   }
-  ]
- }
 }
