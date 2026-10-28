@@ -35,7 +35,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"} and not a.get("seriya")}
-        self.assertEqual(len(ready), 70)  # +ПЯТЁРКА 28.10
+        self.assertEqual(len(ready), 71)  # +ЛОГОТИП 28.10
         optional_without_cover = {a["slug"] for a in self.registry
                                   if a.get("oblozhka") is False and a["slug"] not in self.covers}
         self.assertEqual(set(self.covers), (ready | {a["slug"] for a in self.registry
