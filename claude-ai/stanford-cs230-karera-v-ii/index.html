@@ -1,0 +1,1069 @@
+<!doctype html><html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Карьера в ИИ: конспект всей лекции Стэнфорда CS230</title><meta name="description" content="Эндрю Ын и Лоренс Морони о карьере в ИИ: 12 мыслей, все истории лекции CS230 осени 2025 года, таймкоды, три пары запросов и памятка"><meta name="theme-color" content="#F8F7F2">
+<!-- critical:fonts:start -->
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+<meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="Карьера в ИИ: конспект всей лекции Стэнфорда CS230"><meta property="og:description" content="Эндрю Ын и Лоренс Морони о карьере в ИИ: 12 мыслей, все истории лекции CS230 осени 2025 года, таймкоды, три пары запросов и памятка"><meta property="og:url" content="https://pronovoe.com/claude-ai/stanford-cs230-karera-v-ii/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/stanford-cs230-karera-v-ii/assets/oblozhka.webp"><meta property="og:image:alt" content="Карьера в ИИ: конспект CS230. Эндрю Ын в аудитории Стэнфорда"><meta property="og:image:width" content="1600"><meta property="og:image:height" content="840"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://pronovoe.com/claude-ai/stanford-cs230-karera-v-ii/assets/oblozhka.webp">
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .lead > .seo-intro { display: inline }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { width: min(100%, 650px) }
+    .shot { position: relative }
+    .shot.vertical { width: min(100%, 380px) }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot { width: fit-content; max-width: min(100%, 650px) }
+    .shot img { width: auto; max-width: 100% }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none; width: min(100%, 480px) }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+.faq-item summary { padding: 13px 44px 13px 18px; position: relative; color: var(--emerald); font: 750 17px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer; list-style: none }
+.faq-item summary::-webkit-details-marker { display: none }
+.faq-item summary::after { content: "+"; position: absolute; top: 50%; right: 17px; transform: translateY(-50%); color: var(--accent-dark); font: 700 22px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+.faq-item[open] summary::after { content: "\2212" }
+.faq-item p { margin: 0; padding: 0 18px 15px }
+.shot:has(img[src="assets/share-okno.webp"]) img { width: 510px }
+.shot:has(img[src="assets/dostup-vybor.webp"]) img { width: 520px }
+.shot:has(img[src="assets/privacy-manage.webp"]) img { width: 520px }
+.shot:has(img[src="assets/shared-chats.webp"]) img { width: 520px }
+.shot:has(img[src="assets/pismo.webp"]) img { width: 440px }
+
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin: 0 0 4px; font-size: 20px }
+    .next-read p.next-sub { margin: 0 0 16px; color: var(--muted); font-size: 14.5px }
+    .next-read ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
+    .next-read a { position: relative; display: block; padding: 14px 42px 14px 16px; border: 1px solid var(--sage-line); border-radius: 11px; background: var(--paper); color: var(--emerald-mid); font-weight: 700; text-decoration: none; line-height: 1.35 }
+    .next-read .title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .next-read a:hover { border-color: var(--accent); color: var(--accent-dark) }
+    .next-read .why { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; font-size: 14px }
+
+.shot:has(img[src="assets/privacy-manage.webp"]) .zoom { display: none }
+    .code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; margin: 16px 0 20px; padding: 14px 128px 14px 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    .code-card .copy-button { position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+    @media (max-width: 600px) { .code-card { padding: 46px 14px 14px } }
+    .cta { padding: 22px 22px 18px }
+    .cta .press-button, .cta .press-button:hover { min-height: 46px; padding: 0 20px; background: var(--guide-color-brand); color: var(--guide-color-forest-night); font-size: 15px; box-shadow: 0 3px 0 var(--guide-color-coral-deep) }
+    .press-button:hover, .copy-button:hover { background: var(--guide-color-brand); color: var(--guide-color-forest-night) }
+    .cta p:last-child { margin-bottom: 0 }
+    .cta h2 { font-size: 20px; line-height: 1.3; margin-bottom: 10px }
+    .cta p:not(.section-label) { font-size: 16px; line-height: 1.5; margin: 0 0 12px }
+    body:has(#cookie-banner:not([hidden])) .toc { max-height: calc(100vh - 190px) }
+    #pamyatka .help-banner { text-align: left; padding: 22px 24px; border-radius: 11px; background: var(--info); color: var(--ink); border: 1px solid var(--info-line) }
+    #pamyatka-text p { margin: 0 0 14px; font-size: 17px; line-height: 1.4 }
+    #pamyatka-text p:last-child { margin-bottom: 0 }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+
+
+<style>
+.table-wrap { overflow-x: auto; margin: 18px 0 24px }
+.table-wrap table { width: 100%; border-collapse: collapse }
+.table-wrap th, .table-wrap td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top }
+.table-wrap th { color: var(--emerald); background: var(--info) }
+.table-wrap td:first-child { white-space: nowrap }
+</style>
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
+<link rel="stylesheet" href="../../assets/article-sharing.css">
+<!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  flex: 1 1 0; width: 124px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+#cookie-accept { background: var(--guide-color-brand); color: var(--guide-color-forest); border-color: var(--guide-color-brand) }
+#cookie-decline { background: var(--guide-color-slate-paper); color: var(--guide-color-forest); border-color: var(--guide-color-slate-paper) }
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/stanford-cs230-karera-v-ii/">
+<!-- seo:canonical:end -->
+
+<meta name="robots" content="noindex, nofollow">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Карьера в ИИ: конспект всей лекции Стэнфорда CS230", "description": "Эндрю Ын и Лоренс Морони о карьере в ИИ: 12 мыслей, все истории лекции CS230 осени 2025 года, таймкоды, три пары запросов и памятка", "inLanguage": "ru", "dateModified": "2026-10-28", "image": "https://pronovoe.com/claude-ai/stanford-cs230-karera-v-ii/assets/oblozhka.webp", "author": {"@type": "Organization", "name": "Про новое"}}</script>
+</head><body><div class="progress" aria-hidden="true"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a><div class="header-actions"><div class="handout-title">Карьера в ИИ · CS230</div><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button></div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#nachalo">О лекции</a>
+<a href="#original">Как смотреть по-русски</a>
+<a href="#karta">Карта лекции</a>
+<a href="#konspekt">12 мыслей</a>
+<a href="#instrumenty" class="toc-sub">1. Возможности ИИ растут, инструменты приходится пробовать заново</a>
+<a href="#podrazdel-1" class="toc-sub">Что стало доступнее отдельному разработчику</a>
+<a href="#okruzhenie" class="toc-sub">2. Условия обучения зависят от людей рядом</a>
+<a href="#podrazdel-2" class="toc-sub">Уточни, в какой команде предстоит работать</a>
+<a href="#podrazdel-3" class="toc-sub">Усилия с учётом жизненных обстоятельств</a>
+<a href="#obshchenie" class="toc-sub">3. Команда оценивает, как с тобой обсуждать ошибки</a>
+<a href="#podrazdel-4" class="toc-sub">История сильного программиста с отказами</a>
+<a href="#rezultat" class="toc-sub">4. Показывай результат, который связан с нужной работой</a>
+<a href="#podrazdel-5" class="toc-sub">Глубина знаний и способность закончить работу</a>
+<a href="#podrazdel-6" class="toc-sub">Как проект изменил собеседование</a>
+<a href="#otvetstvennost" class="toc-sub">5. Рабочее решение проверяют вместе с его рисками</a>
+<a href="#podrazdel-7" class="toc-sub">Почему правильной цели фильтра недостаточно</a>
+<a href="#tehdolg" class="toc-sub">6. После генерации кода остаётся работа по сопровождению</a>
+<a href="#podrazdel-8" class="toc-sub">Прототип можно выбросить, зависимость организации останется</a>
+<a href="#podrazdel-9" class="toc-sub">Почему новые запросы не всегда исправляют программу</a>
+<a href="#haip" class="toc-sub">7. Громкое обещание нужно перевести в конкретную возможность</a>
+<a href="#podrazdel-10" class="toc-sub">Короткий клип и обещание полнометражного фильма</a>
+<a href="#podrazdel-11" class="toc-sub">Почему прогноз о пузыре остаётся прогнозом</a>
+<a href="#modeli" class="toc-sub">8. Способ запуска модели выбирают под требования задачи</a>
+<a href="#podrazdel-12" class="toc-sub">Когда важен контроль над данными</a>
+<a href="#podrazdel-13" class="toc-sub">Узкая специализация и зависимость от одной технологии</a>
+<a href="#podrazdel-14" class="toc-sub">Малые модели на телефоне</a>
+<a href="#video" class="toc-sub">9. Эффектный результат нужно сравнить с исходным намерением</a>
+<a href="#podrazdel-15" class="toc-sub">Две клюшки и зрители в пустой арене</a>
+<a href="#podrazdel-16" class="toc-sub">Чего это сравнение не доказывает</a>
+<a href="#obrazovanie" class="toc-sub">10. Знание своей работы помогает начать без инженерного образования</a>
+<a href="#podrazdel-17" class="toc-sub">История сертификата TensorFlow</a>
+<a href="#podrazdel-18" class="toc-sub">Хоккеист и квартальные отчёты</a>
+<a href="#nauka" class="toc-sub">11. Доступ к инструменту ещё нужно превратить в проверяемую пользу</a>
+<a href="#podrazdel-19" class="toc-sub">Один графический процессор на исследовательскую группу</a>
+<a href="#podrazdel-20" class="toc-sub">Последний вопрос: равенство или неравенство?</a>
+<a href="#zadacha" class="toc-sub">12. Начни с вопроса «зачем», затем выбирай решение</a>
+<a href="#podrazdel-21" class="toc-sub">Покажи человеку и уточни задание</a>
+<a href="#podrazdel-22" class="toc-sub">Компания попросила агента, продавцам мешала подготовка к встречам</a>
+<a href="#podrazdel-23" class="toc-sub">Четыре действия, по которым можно проверить агента</a>
+<a href="#practice">Три приёма до и после</a>
+<a href="#podrazdel-24" class="toc-sub">Приём 1. Сначала уточни, зачем нужна автоматизация</a>
+<a href="#podrazdel-25" class="toc-sub">Приём 2. Заранее опиши, какой результат можно принять</a>
+<a href="#podrazdel-26" class="toc-sub">Приём 3. Проверь, что останется после первой версии</a>
+<a href="#pamyatka">Памятка</a>
+<a href="#sources">Источники</a>
+<a href="#dalshe">Дальше по теме</a>
+<a href="#esche-po-teme">Ещё по теме</a>
+<a href="#svoi-proekt">Следующий проект</a>
+</nav><main><details class="mobile-toc"><summary>Содержание конспекта</summary><nav aria-label="Содержание на телефоне"><a href="#nachalo">О лекции</a>
+<a href="#original">Как смотреть по-русски</a>
+<a href="#karta">Карта лекции</a>
+<a href="#konspekt">12 мыслей</a>
+<a href="#instrumenty" class="toc-sub">1. Возможности ИИ растут, инструменты приходится пробовать заново</a>
+<a href="#podrazdel-1" class="toc-sub">Что стало доступнее отдельному разработчику</a>
+<a href="#okruzhenie" class="toc-sub">2. Условия обучения зависят от людей рядом</a>
+<a href="#podrazdel-2" class="toc-sub">Уточни, в какой команде предстоит работать</a>
+<a href="#podrazdel-3" class="toc-sub">Усилия с учётом жизненных обстоятельств</a>
+<a href="#obshchenie" class="toc-sub">3. Команда оценивает, как с тобой обсуждать ошибки</a>
+<a href="#podrazdel-4" class="toc-sub">История сильного программиста с отказами</a>
+<a href="#rezultat" class="toc-sub">4. Показывай результат, который связан с нужной работой</a>
+<a href="#podrazdel-5" class="toc-sub">Глубина знаний и способность закончить работу</a>
+<a href="#podrazdel-6" class="toc-sub">Как проект изменил собеседование</a>
+<a href="#otvetstvennost" class="toc-sub">5. Рабочее решение проверяют вместе с его рисками</a>
+<a href="#podrazdel-7" class="toc-sub">Почему правильной цели фильтра недостаточно</a>
+<a href="#tehdolg" class="toc-sub">6. После генерации кода остаётся работа по сопровождению</a>
+<a href="#podrazdel-8" class="toc-sub">Прототип можно выбросить, зависимость организации останется</a>
+<a href="#podrazdel-9" class="toc-sub">Почему новые запросы не всегда исправляют программу</a>
+<a href="#haip" class="toc-sub">7. Громкое обещание нужно перевести в конкретную возможность</a>
+<a href="#podrazdel-10" class="toc-sub">Короткий клип и обещание полнометражного фильма</a>
+<a href="#podrazdel-11" class="toc-sub">Почему прогноз о пузыре остаётся прогнозом</a>
+<a href="#modeli" class="toc-sub">8. Способ запуска модели выбирают под требования задачи</a>
+<a href="#podrazdel-12" class="toc-sub">Когда важен контроль над данными</a>
+<a href="#podrazdel-13" class="toc-sub">Узкая специализация и зависимость от одной технологии</a>
+<a href="#podrazdel-14" class="toc-sub">Малые модели на телефоне</a>
+<a href="#video" class="toc-sub">9. Эффектный результат нужно сравнить с исходным намерением</a>
+<a href="#podrazdel-15" class="toc-sub">Две клюшки и зрители в пустой арене</a>
+<a href="#podrazdel-16" class="toc-sub">Чего это сравнение не доказывает</a>
+<a href="#obrazovanie" class="toc-sub">10. Знание своей работы помогает начать без инженерного образования</a>
+<a href="#podrazdel-17" class="toc-sub">История сертификата TensorFlow</a>
+<a href="#podrazdel-18" class="toc-sub">Хоккеист и квартальные отчёты</a>
+<a href="#nauka" class="toc-sub">11. Доступ к инструменту ещё нужно превратить в проверяемую пользу</a>
+<a href="#podrazdel-19" class="toc-sub">Один графический процессор на исследовательскую группу</a>
+<a href="#podrazdel-20" class="toc-sub">Последний вопрос: равенство или неравенство?</a>
+<a href="#zadacha" class="toc-sub">12. Начни с вопроса «зачем», затем выбирай решение</a>
+<a href="#podrazdel-21" class="toc-sub">Покажи человеку и уточни задание</a>
+<a href="#podrazdel-22" class="toc-sub">Компания попросила агента, продавцам мешала подготовка к встречам</a>
+<a href="#podrazdel-23" class="toc-sub">Четыре действия, по которым можно проверить агента</a>
+<a href="#practice">Три приёма до и после</a>
+<a href="#podrazdel-24" class="toc-sub">Приём 1. Сначала уточни, зачем нужна автоматизация</a>
+<a href="#podrazdel-25" class="toc-sub">Приём 2. Заранее опиши, какой результат можно принять</a>
+<a href="#podrazdel-26" class="toc-sub">Приём 3. Проверь, что останется после первой версии</a>
+<a href="#pamyatka">Памятка</a>
+<a href="#sources">Источники</a>
+<a href="#dalshe">Дальше по теме</a>
+<a href="#esche-po-teme">Ещё по теме</a>
+<a href="#svoi-proekt">Следующий проект</a>
+</nav></details><article><header id="nachalo">
+<p class="eyebrow">Конспект · Стэнфорд · CS230 · осень 2025</p>
+<figure class="cover cover-v2"><img src="assets/oblozhka.webp" srcset="assets/oblozhka.reading-480.webp 480w, assets/oblozhka.reading-960.webp 960w, assets/oblozhka.reading-1600.webp 1600w" sizes="(max-width: 860px) calc(100vw - 36px), 720px" alt="Карьера в ИИ: конспект CS230. Эндрю Ын в аудитории Стэнфорда" width="1600" height="840" loading="eager" fetchpriority="high" decoding="async"><figcaption>Эндрю Ын в аудитории Стэнфорда, официальное превью лекции CS230 осени 2025 года</figcaption></figure>
+<h1 class="article-standard-h1">Карьера в ИИ: конспект всей лекции Стэнфорда CS230</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<p class="meta">Эндрю Ын и Лоренс Морони · осень 2025 года · 1 час 45 минут · конспект по-русски · 28 ОКТЯБРЯ 2026</p>
+<div class="lead"><div class="seo-intro">ИИ всё быстрее пишет программы, а выбрать, чему учиться и за что браться, от этого не легче. В лекции Стэнфорда CS230 Эндрю Ын и Лоренс Морони обсуждают карьеру в ИИ через реальные рабочие ситуации: собеседование, чужой код, подготовку к встрече и квартальный отчёт</div><p>Почему компания может получить работающую программу и всё равно остаться без нужного решения? К последней мысли этот вопрос станет конкретным заданием, которое можно разобрать в своём чате</p></div>
+<div class="info-card"><p><b>Что за лекция.</b> «Career Advice in AI», девятая лекция осеннего курса Stanford CS230 2025 года. Первые 18 минут выступает Эндрю Ын, затем слово получает Лоренс Морони. Здесь разобрана вся запись, включая вопросы до 1:45:04</p></div>
+<p>Эндрю Ын преподаёт ИИ и известен как сооснователь Coursera. Морони он представляет как преподавателя TensorFlow и PyTorch, бывшего ведущего AI advocate в Google и руководителя группы в Arm на момент выступления. Ниже их советы и истории собраны в 12 мыслей. В конце три пары запросов для любого чата и короткая памятка</p>
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Карьера в ИИ: конспект CS230</span></nav>
+</header><div class="share-row share-top"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F&amp;text=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F&amp;title=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230" target="_blank" rel="noopener">VK</a></div><section class="content-section" id="original"><p class="section-label">Оригинал</p><h2>Где смотреть лекцию на русском</h2>
+<p>Официальная запись называется <a href="https://www.youtube.com/watch?v=AuZoDsNmG_s">Stanford CS230 | Autumn 2025 | Lecture 9: Career Advice in AI</a>, канал Stanford Online. Это выступление осени 2025 года, даже если ты открываешь конспект позже</p>
+<ul><li><p><b>Английская речь и русский текст.</b> В YouTube открой шестерёнку, затем «Субтитры». Выбери английские, снова открой «Субтитры», затем «Перевести» и «Русский», если эти пункты доступны. Если перевода не видно в приложении, попробуй браузер на компьютере</p></li>
+<li><p><b>Русская звуковая дорожка.</b> Посмотри доступные языки в настройках записи. Наличие русских субтитров само по себе не означает перевода голоса</p></li>
+<li><p><b>Перевод другим голосом.</b> В Яндекс Браузере можно воспользоваться переводом видео, если он доступен для этой записи. Специальные слова автоматический перевод иногда путает, поэтому ниже они объяснены по смыслу</p></li></ul>
+<div class="info-card"><p>Если YouTube недоступен в твоём подключении, для просмотра может понадобиться VPN. Для чтения конспекта запись открывать необязательно</p></div>
+<p>Если времени мало, открой <a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=330s">05:30: как выбрать задачу</a>, затем <a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=3518s">58:38: история агента для продавцов</a> и <a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=5719s">1:35:19: хоккеист и отчёты</a>. Карта ниже охватывает и остальные части, включая заключительные вопросы</p></section><section class="content-section" id="karta"><p class="section-label">Карта лекции</p><h2>Что идёт в лекции по минутам</h2><p>Нажми на время, чтобы открыть нужный фрагмент. Таблица следует порядку записи, а мысли ниже сгруппированы по темам. Время округлено до секунды</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Время</th><th scope="col">О чём речь</th></tr></thead><tbody><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=4s">00:04</a></td><td>Зачем обсуждать карьеру в ИИ</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=59s">00:59</a></td><td>Прогресс моделей и измерение длины задач</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=161s">02:41</a></td><td>Более мощные программы и более быстрая разработка</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=330s">05:30</a></td><td>Выбор задачи, обратная связь и роль инженера</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=557s">09:17</a></td><td>Окружение, связи и выбор команды</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=925s">15:25</a></td><td>Самостоятельные проекты, ответственность и усилия</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=1113s">18:33</a></td><td>Представление Морони и история неудачных собеседований</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=1421s">23:41</a></td><td>Опыт Морони и его объяснение изменений рынка найма</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=1757s">29:17</a></td><td>Глубина знаний, польза для бизнеса и доведение до результата</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=2164s">36:04</a></td><td>Работающий продукт, риски и ответственное применение</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=2481s">41:21</a></td><td>Ошибки фильтров генерации изображений</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=2861s">47:41</a></td><td>Генерация кода и технический долг</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=3130s">52:10</a></td><td>Как отличать полезный код от будущих проблем</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=3395s">56:35</a></td><td>Хайп, соцсети и роль технического советника</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=3518s">58:38</a></td><td>Кейс: агент для подготовки к продажам</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=3734s">1:02:14</a></td><td>Четыре действия в агентном процессе</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=3926s">1:05:26</a></td><td>Обещания про кино и проверка громких демонстраций</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=4200s">1:10:00</a></td><td>Риски пузыря и ценность фундаментальных навыков</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=4468s">1:14:28</a></td><td>Облачные и самостоятельно размещаемые модели</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=4757s">1:19:17</a></td><td>Узкая специализация или разнообразие навыков</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=4889s">1:21:29</a></td><td>Малые модели и вычисления на устройствах</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=5101s">1:25:01</a></td><td>Понимание намерения и примеры генерации видео</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=5369s">1:29:29</a></td><td>Вопросы о видео, хайпе, образовании и нетехнических пользователях</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=5991s">1:39:51</a></td><td>ИИ в исследованиях и доступ к вычислениям</td></tr><tr><td><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=6194s">1:43:14</a></td><td>Социальное равенство, злоупотребления и завершение</td></tr></tbody></table></div></section><section class="content-section" id="konspekt"><p class="section-label">Конспект</p><h2>Главное из лекции: 12 мыслей</h2><p>От инструментов и общения к оценке результата. В последней мысли сходятся вступление Ына и кейс Морони о продавцах</p>
+<ol><li><a href="#instrumenty">Возможности ИИ растут, инструменты приходится пробовать заново</a></li><li><a href="#okruzhenie">Условия обучения зависят от людей рядом</a></li><li><a href="#obshchenie">Команда оценивает, как с тобой обсуждать ошибки</a></li><li><a href="#rezultat">Показывай результат, который связан с нужной работой</a></li><li><a href="#otvetstvennost">Рабочее решение проверяют вместе с его рисками</a></li><li><a href="#tehdolg">После генерации кода остаётся работа по сопровождению</a></li><li><a href="#haip">Громкое обещание нужно перевести в конкретную возможность</a></li><li><a href="#modeli">Способ запуска модели выбирают под требования задачи</a></li><li><a href="#video">Эффектный результат нужно сравнить с исходным намерением</a></li><li><a href="#obrazovanie">Знание своей работы помогает начать без инженерного образования</a></li><li><a href="#nauka">Доступ к инструменту ещё нужно превратить в проверяемую пользу</a></li><li><a href="#zadacha">Начни с вопроса «зачем», затем выбирай решение</a></li></ol></section><section class="content-section" id="instrumenty"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=59s">Смотреть с 00:59</a></p><h2>Мысль 1. Возможности ИИ растут, инструменты приходится пробовать заново</h2><p>У моделей есть тесты, в которых нельзя набрать больше 100%. Если результат приблизился к потолку, такая шкала уже плохо показывает дальнейшее улучшение. Эндрю Ын предлагает другую мерку: насколько длинную задачу способен выполнить ИИ, если оценивать её временем работы человека</p>
+<p>Он пересказывает исследование METR: доступная моделям длина задач удваивается примерно за семь месяцев. Для программирования упоминает оценку около 70 дней и сразу оговаривает, что данных здесь меньше. Это изложение исследования на момент лекции, без обещания такого ускорения для любой твоей задачи</p>
+<h3 id="podrazdel-1">Что стало доступнее отдельному разработчику</h3>
+<p>Ын выделяет два изменения. Модели умеют больше, а код приложения с их помощью пишется быстрее. Он предлагает попробовать попросить модель реализовать трансформер, устройство современной нейросети. Пример показывает, сколько технической работы теперь можно поручить инструменту</p>
+<p>Осенью 2025 года его предпочтения менялись между Claude Code и OpenAI Codex после выхода GPT-5. Про Gemini 3, вышедшую утром в день выступления, он говорит, что ещё не успел её попробовать. Эти названия передают его опыт того дня, нынешнего рейтинга в лекции нет</p>
+<p>Курсы Ын советует сочетать с собственными проектами. Изученный материал получает проверку: удалось ли что-то создать, показать людям и изменить после их замечаний? К выбору самой задачи он возвращается отдельно, и на этом построена последняя мысль конспекта</p>
+</section>
+<section class="content-section" id="okruzhenie"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=557s">Смотреть с 09:17</a></p><h2>Мысль 2. Условия обучения зависят от людей рядом</h2><p>Ын считает окружение одним из сильнейших факторов профессионального роста. Рядом с людьми, которые учатся и обсуждают сделанное, легче перенимать их рабочие привычки. В университете такую среду стоит использовать для знакомств и обмена знаниями</p>
+<p>Он ссылается на исследования связи курения с окружением, но прямо признаёт: аналогичного исследования о трудолюбии и скорости обучения он не знает. Перенос на карьеру здесь является его убеждением и наблюдением</p>
+<h3 id="podrazdel-2">Уточни, в какой команде предстоит работать</h3>
+<p>Дружеский разговор с исследователем иногда помогает раньше понять пригодность новой технологии. Ын вспоминает, как такие беседы влияли на выбор устройства его проектов. Профессиональные связи для него означают возможность учиться друг у друга</p>
+<p>При выборе работы это превращается в конкретный вопрос: кто будет рядом каждый день? Его студент принял предложение известной компании, которая заранее не назвала команду. Вместо желанной работы с ИИ он попал на Java-систему обработки платежей, около года был разочарован и ушёл. Позднее похожее случилось с другим студентом в той же компании, на другом проекте</p>
+<p>Название компании Ын не раскрывает. Он советует выяснить будущую команду до принятия предложения и разобраться, чему у неё можно научиться. Громкое имя работодателя этой информации не заменяет</p>
+<h3 id="podrazdel-3">Усилия с учётом жизненных обстоятельств</h3>
+<p>Ын рекомендует много работать тем, кому позволяют здоровье и обстоятельства. Он вспоминает усилия успешных аспирантов и пользу собственных проектов по вечерам и выходным. Неудачная попытка тоже может чему-то научить, если эксперимент не вредит другим людям</p>
+<p>Оговорку он произносит сам: дети, травмы, инвалидность и другие обстоятельства ограничивают доступное время и силы. Таких людей нужно уважать и поддерживать. Совет прилагать усилия нельзя превращать в одинаковое требование ко всем</p>
+</section>
+<section class="content-section" id="obshchenie"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=1113s">Смотреть с 18:33</a></p><h2>Мысль 3. Команда оценивает, как с тобой обсуждать ошибки</h2><p>Лоренс Морони начинает с продолжения мысли об окружении. Кандидат выбирает коллег, а коллеги выбирают человека, с которым предстоит решать задачи. Техническая подготовка важна вместе со способностью работать в команде</p>
+<h3 id="podrazdel-4">История сильного программиста с отказами</h3>
+<p>Знакомый Морони, разработчик медицинских программ, потерял работу и отслеживал более 300 вакансий. Технические задания ему давались, но после длинных серий интервью приходили отказы. Морони предложил тренировочное собеседование с трудными вопросами</p>
+<p>Выяснилось, что совет отстаивать мнение кандидат понял как необходимость враждебно отвечать на возражения. Для собеседника это выглядело как будущая проблема: каждую ошибку придётся обсуждать через конфликт</p>
+<p>По рассказу Морони, после работы над общением кандидат устроился в компанию, где ценили сотрудничество. В исходной истории есть и рост зарплаты, но один случай ничего не обещает другим кандидатам. Причину отказов Морони объясняет по своему наблюдению, официальных заключений работодателей в лекции нет</p>
+<p>Применимый вывод здесь узкий: объясняй решение, спрашивай о замечании и проверяй, что именно не устраивает коллегу. Возможность пересмотреть свою версию помогает обсуждению. Она совместима с умением защищать аргумент</p>
+</section>
+<section class="content-section" id="rezultat"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=1421s">Смотреть с 23:41</a></p><h2>Мысль 4. Показывай результат, который связан с нужной работой</h2><p>Морони работал в Microsoft, Google, Reuters и стартапах. Он признаёт трудности найма начинающих специалистов, сокращения и конкуренцию, но считает, что подходящие возможности сохраняются</p>
+<p>Рынок он объясняет через остановку активности во время пандемии, быстрый набор в 2022-2023 годах и пересмотр расходов в 2024-2025 годах. Это его интерпретация, без статистического разбора в записи. Одного слова «ИИ» в резюме, по его мысли, стало недостаточно</p>
+<h3 id="podrazdel-5">Глубина знаний и способность закончить работу</h3>
+<p>Техническая глубина для Морони включает понимание машинного обучения, устройства моделей и исследований. Эти знания нужны, чтобы оценивать новые подходы и применять их в задаче. Работодателю также важно, что удаётся довести до использования</p>
+<p>Он вспоминает собственные отказы при попытке попасть в Google менеджером продукта и последующий найм инженером. Сильные качества должны соответствовать роли. Проект в портфолио помогает заранее показать именно эту связь</p>
+<h3 id="podrazdel-6">Как проект изменил собеседование</h3>
+<p>Перед интервью в облачную команду Google Морони написал Java-приложение в их облаке и указал код в резюме. Приложение прогнозировало биржевые цены по техническому анализу. В лекции оно служит примером портфолио, точность прогнозов здесь не доказывается</p>
+<p>Интервью сосредоточилось на знакомом ему проекте: можно было объяснить принятые решения и их связь с работой команды. Морони предпочитает скромную идею, доведённую до проверяемого результата, впечатляющему замыслу без реализации. Гарантии найма этот пример не даёт</p>
+<p>С этой же позиции он обсуждает режим 996, с девяти утра до девяти вечера шесть дней в неделю. Количество часов само по себе не показывает продуктивность. В качестве личного примера он вспоминает, как писал книгу под бейсбольные матчи. Это иллюстрация различия времени и результата, без универсального рецепта совмещения дел</p>
+</section>
+<section class="content-section" id="otvetstvennost"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=2164s">Смотреть с 36:04</a></p><h2>Мысль 5. Рабочее решение проверяют вместе с его рисками</h2><p>Компании, по наблюдениям Морони, переходят от восхищения демонстрацией модели к вопросам применения. Что получает пользователь? Понятен ли интерфейс? Как решение помогает основной работе? Кто разбирает ошибки после запуска?</p>
+<p>В этом разговоре Морони также критикует смещение внимания некоторых компаний с бизнеса на корпоративный активизм и приводит конфликт в Google. Это позиция спикера. Для его карьерного аргумента существенно требование заниматься основной работой компании; обвинительные подробности рассказа здесь не воспроизводятся</p>
+<h3 id="podrazdel-7">Почему правильной цели фильтра недостаточно</h3>
+<p>Ответственное применение он связывает с работоспособностью продукта и его пригодностью для разных людей. При внедрении ИИ нужно заранее понимать, что может пойти не так и как уменьшить последствия</p>
+<p>Исторический пример из Gemini: генератор выполнял несколько запросов с описаниями происхождения героини, а на формулировках Caucasian и white отказывал. Объяснение, будто изображения людей вообще запрещены, противоречило предыдущим ответам. При запросе об ирландской женщине в показанных вариантах всякий раз получались рыжие волосы</p>
+<p>Морони видит здесь неудачную работу защиты от стереотипов. Благой замысел фильтра ещё не означает, что он обращается с разными пользователями последовательно. Вопрос из зала о самураях и исторических изображениях продолжает ту же проблему контекста</p>
+<p>Он отдельно отмечает последующие улучшения системы. Пример относится к прежнему опыту Морони, по нему нельзя судить о нынешней версии Gemini. Его рабочий совет: обнаруживать ошибки, исправлять их и давать коллегам возможность учиться на неудачах</p>
+</section>
+<section class="content-section" id="tehdolg"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=2861s">Смотреть с 47:41</a></p><h2>Мысль 6. После генерации кода остаётся работа по сопровождению</h2><p>Возможность получить код запросом не делает инженера ненужным. Морони предлагает оценивать технический долг: будущую работу, которую создаёт сегодняшнее решение. В его широком определении сюда входят исправления, документация, поддержка и новые требования</p>
+<p>Он сравнивает это с заимствованием денег: оправданность зависит от пользы и дальнейших расходов. Это аналогия для технического решения, без финансового совета. Быстрая первая версия может оказаться полезной, если понятно, зачем её создали и что понадобится после</p>
+<h3 id="podrazdel-8">Прототип можно выбросить, зависимость организации останется</h3>
+<p>В собственном приложении для кинопроизводства Морони несколько раз создавал, проверял и выбрасывал прототипы. Каждая попытка уточняла требования. Дешёвая генерация позволяла отказаться от неудачной версии</p>
+<p>Морони также описывает стартапы, которые торопятся собрать прототип и показать инвесторам. К такому плану он предлагает добавить управление последствиями созданного кода</p>
+<p>При переходе к реальной работе важны другие вопросы. Решает ли код нужную задачу? Понятны ли алгоритмы и имена переменных? Есть ли документация? Сможет ли другой человек исправить программу, когда создатель уйдёт?</p>
+<p>Опасна зависимость организации от кода, который никто больше не понимает. Морони также приводит ситуацию, когда руководитель собирает приложение в Replit, а обязанность сопровождать его передаёт инженерам. Ожидания по поддержке стоит обсудить до такого перехода</p>
+<h3 id="podrazdel-9">Почему новые запросы не всегда исправляют программу</h3>
+<p>При создании приложения для macOS модель предлагала Морони интерфейсы программирования для iOS, операционной системы iPhone. Он связывает ошибку с преобладанием телефонных примеров в обучающих данных. Последующие запросы усложняли код, часть пришлось править вручную</p>
+<p>Поток новых файлов без ясной задачи затрудняет поиск полезных частей. Морони сам использует генерацию кода, поэтому вывод лекции не в отказе от неё. Инженерная подготовка помогает решить, какую версию оставить и какие будущие затраты оправданы</p>
+</section>
+<section class="content-section" id="haip"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=3395s">Смотреть с 56:35</a></p><h2>Мысль 7. Громкое обещание нужно перевести в конкретную возможность</h2><p>Морони напоминает, что соцсети поощряют внимание и вовлечение. Точность сообщения сама по себе не гарантирует ему распространения. Он относит это и к профессиональной ленте LinkedIn</p>
+<p>Технический советник помогает коллегам понять, что скрывается за популярным обещанием. Для этого нужны основы технологии, чтение исследований и представление о сообщениях, которыми руководители руководствуются при выборе</p>
+<h3 id="podrazdel-10">Короткий клип и обещание полнометражного фильма</h3>
+<p>Неназванный руководитель компании обещал перейти от коротких видео к фильму длительностью 90 минут по одному запросу. На момент лекции Морони считает обещание несбывшимся и спрашивает, как вообще задать таким запросом полноценную историю</p>
+<p>Он предлагает описывать возможности обыденными словами: какие кадры получаются, как долго они длятся и чего в них ещё не хватает. В эффектной демонстрации «клона Minecraft» он отделяет увиденный фрагмент от полноценной игры. Так предметному специалисту проще оценить применимость</p>
+<h3 id="podrazdel-11">Почему прогноз о пузыре остаётся прогнозом</h3>
+<p>Морони сравнивает ажиотаж вокруг ИИ с пузырём доткомов, упоминает Amazon, Google и pets.com. Большие инвестиции и множество похожих продуктов, по его мнению, могут расходиться с реальной пользой решений</p>
+<p>Аналогия с «Титаником» касается управления рисками: наблюдателей мало назначить, их нужно подготовить и снабдить средствами работы. Ожидание пузыря в этом фрагменте является оценкой Морони. Даты кризиса и гарантированной судьбы отдельных компаний лекция не устанавливает</p>
+<p>Для карьеры он предлагает сохранять применимые основы и расширять навыки. Тогда смена модного инструмента оставит возможность работать с другим</p>
+</section>
+<section class="content-section" id="modeli"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=4468s">Смотреть с 1:14:28</a></p><h2>Мысль 8. Способ запуска модели выбирают под требования задачи</h2><p>Морони ожидает развития двух направлений: крупных моделей во внешних сервисах и моделей, которые организация размещает сама. Он уточняет термины. «Открытые веса» означают доступные параметры обученной модели; возможность самостоятельного размещения описывает, где её можно запустить</p>
+<h3 id="podrazdel-12">Когда важен контроль над данными</h3>
+<p>Пример из кинопроизводства: студии нужен анализ сюжетов и факторов успеха фильма, но передавать материалы чужому сервису она не готова. Морони видит сходные потребности в юридической и медицинской работе</p>
+<p>Он ожидает спрос на дополнительное обучение моделей под узкую задачу. Это обучение часто называют fine-tuning. Его численные сравнения размеров моделей в выступлении не дают основания объявлять любые две модели равными по качеству</p>
+<h3 id="podrazdel-13">Узкая специализация и зависимость от одной технологии</h3>
+<p>Студент спрашивает о найме в NVIDIA под специальные задачи. Морони признаёт ценность глубины и интереса к одной области, но предлагает учитывать зависимость от единственного варианта работы</p>
+<p>Расширение навыков может означать умение собрать приложение, сделать удобный интерфейс и обеспечить работу при росте нагрузки. Такой набор помогает участвовать в создании системы целиком. Изучение одного способа обращения к модели, API, привязывает опыт к конкретному сервису</p>
+<h3 id="podrazdel-14">Малые модели на телефоне</h3>
+<p>Ещё одно направление в его прогнозе связано с запуском ИИ на устройствах. Морони обсуждает обычные и графические процессоры, CPU и GPU, а также SME, расширения для матричных вычислений. Упоминает Vivo, Oppo и инвестиции Apple как часть своего взгляда на развитие устройств</p>
+<p>В примере Alipay речь идёт о поиске по личным фотографиям и сборке подборок. Обработка на устройстве может быть важна из-за контроля над фотографиями, задержки и расходов на облако. Это объяснение требований задачи, без сегодняшней сравнительной таблицы телефонов или обещания, что любая модель заработает локально</p>
+</section>
+<section class="content-section" id="video"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=5101s">Смотреть с 1:25:01</a></p><h2>Мысль 9. Эффектный результат нужно сравнить с исходным намерением</h2><p>Морони предлагает использовать модель для уточнения замысла до генерации. В его примере с хоккеем правдоподобный ролик меняет то, что должно было остаться верным</p>
+<h3 id="podrazdel-15">Две клюшки и зрители в пустой арене</h3>
+<p>По комментарию Морони, генерация по фотографии сына добавила зрителей в пустую тренировочную арену, дала игроку две клюшки и сопроводила промах аплодисментами. Он замечает, что открыл другой ролик, чем собирался, но считает его подходящим примером ошибки</p>
+<p>Затем он показывает сцену с виртуальными актёрами. Для неё заранее описал историю, эмоции, ограничения кадра и видеогенератор Veo. Модель помогала уточнить запрос. После генерации он оценивал, соответствует ли сцена замыслу</p>
+<h3 id="podrazdel-16">Чего это сравнение не доказывает</h3>
+<p>Студент спрашивает: может быть, дело в недостатке хоккейных данных, а не в способе подготовки? Морони признаёт, что условия различались и контролируемого опыта он не проводил</p>
+<p>Он сообщает, что подготовка помогала ему уменьшать число попыток, и вспоминает обычные для своей работы две-три попытки. Это личный опыт. Нельзя переносить его на любой запрос или считать доказанным точный эффект описанной последовательности</p>
+<p>Морони также признаёт, что знакомые профессиональные актёры критиковали игру виртуальных персонажей. Критерий оценки остаётся предметным: нужные эмоции, правильное действие, соответствие истории. Демонстрация не доказывает готовности заменить профессиональное кино</p>
+</section>
+<section class="content-section" id="obrazovanie"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=5552s">Смотреть с 1:32:32</a></p><h2>Мысль 10. Знание своей работы помогает начать без инженерного образования</h2><p>На вопрос о том, что больше всего удивило в индустрии, Морони отвечает историями о решениях людей. Его беспокоят влияние хайпа на руководителей и предпочтение немедленной прибыли долгосрочной пользе</p>
+<h3 id="podrazdel-17">История сертификата TensorFlow</h3>
+<p>После образовательных программ на Coursera существовала профессиональная сертификация TensorFlow. Морони рассказывает об участнике из Сирии, которому сертификат помог получить работу в Германии и поддержать семью</p>
+<p>По словам спикера, программу старались сделать самоокупаемой, но она обходилась Google примерно в 100-150 тысяч долларов в год и была закрыта. Это воспоминание Морони о решении и судьбе участника. Полного финансового разбора программы в лекции нет</p>
+<h3 id="podrazdel-18">Хоккеист и квартальные отчёты</h3>
+<p>Другой его знакомый, бывший профессиональный хоккеист, управлял некоммерческими катками. Каждый квартал нужно было собирать отчёты из таблиц, PDF и операционных данных. Эту работу выполняли консультанты</p>
+<p>Программировать знакомый не умел, зато понимал, какие данные и какой отчёт нужны организации. Он стал загружать материалы в ChatGPT. По рассказу Морони, подготовка сократилась примерно до двух часов; Морони посмотрел результат и счёл его удачным</p>
+<p>Высвободившиеся средства направляли на хоккейное снаряжение и занятия для детей. Сумму спикер называет по-разному: сначала говорит о прежних расходах свыше 150 тысяч долларов в год, затем об экономии 150 тысяч и в конце о диапазоне 100-150 тысяч. Это оценки в его рассказе, а не независимый аудит</p>
+<p>История не подтверждает правильность любого финансового отчёта из чата. Её смысл в сочетании знания своей области и технической помощи. В ответе следующему студенту Морони предлагает специалистам помогать таким пользователям разбираться в механизме, ошибках и пригодности результата. Отсутствие инженерного образования не означает недостатка способностей</p>
+</section>
+<section class="content-section" id="nauka"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=5991s">Смотреть с 1:39:51</a></p><h2>Мысль 11. Доступ к инструменту ещё нужно превратить в проверяемую пользу</h2><p>На вопрос об ИИ в исследованиях Морони поддерживает автоматизацию, но возвращается к необходимости сверять ожидания с реальностью. Он вспоминает собственную склонность автоматизировать работу ещё во время изучения физики</p>
+<h3 id="podrazdel-19">Один графический процессор на исследовательскую группу</h3>
+<p>В университете Уэльса он встретил исследователя рака мозга. По воспоминанию Морони, на десять исследователей был один графический процессор, а собеседнику доставалась половина вторника. Неудачный запуск означал ожидание следующего доступа</p>
+<p>Морони показал ему Google Colab и возможность использовать облачные вычисления. В рассказе это расширило доступ к инструменту. Сам Морони говорит, что не знает дальнейшего результата исследования: медицинского открытия история не устанавливает, нынешних условий Colab не описывает</p>
+<h3 id="podrazdel-20">Последний вопрос: равенство или неравенство?</h3>
+<p>В финале из зала спрашивают, какой социальный эффект принесёт ИИ. Морони допускает оба исхода. Он делает акцент на образовании, объяснении полезных способов работы и подготовке к злоупотреблениям</p>
+<p>Он предлагает исходить из добрых намерений, одновременно готовясь к недобрым. Ошибки возможны и при хороших намерениях. Эта оговорка связывает заключительный вопрос с ранним разбором защитных фильтров: намерение не освобождает от оценки последствий. Затем Ын благодарит спикера и аудиторию</p>
+</section>
+<section class="content-section" id="zadacha"><p class="section-label"><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=330s">Смотреть с 05:30</a></p><h2>Мысль 12. Начни с вопроса «зачем», затем выбирай решение</h2><p>В начале лекции Ын описывает сдвиг ограничения. Получить код по ясному заданию стало проще. Сложнее определить, какую задачу вообще стоит решать. Эту работу называют управлением продуктом: понять потребность людей и выбрать, что должно появиться</p>
+<h3 id="podrazdel-21">Покажи человеку и уточни задание</h3>
+<p>Цикл Ына состоит из повторяющихся действий: создать версию, показать пользователям, услышать, что неудобно, и изменить задачу. Человеку может быть непонятен интерфейс, нужна другая функция, а улучшенная разработчиком часть ему безразлична</p>
+<p>Ын наблюдает изменение состава отдельных команд: меньше инженеров приходится на одного менеджера продукта, иногда два или один. Он предупреждает, что пропорции сильно различаются. Эти примеры нельзя превращать в обязательную норму штата</p>
+<p>Инженер, который сам разговаривает с пользователями, может быстрее выбирать следующую доработку. Но Ын признаёт прежнюю ошибку: пытаясь склонить всех хороших инженеров к продуктовой работе, он заставил некоторых почувствовать себя плохими специалистами. Такая работа нравится не каждому, инженерная специализация сохраняет ценность</p>
+<h3 id="podrazdel-22">Компания попросила агента, продавцам мешала подготовка к встречам</h3>
+<p>В истории Морони <a href="https://www.youtube.com/watch?v=AuZoDsNmG_s&amp;t=3518s">с 58:38</a> европейская компания просит внедрить ИИ-агента. Он спрашивает о причине и выясняет, что ожидания руководителя возникли из соцсетей. Дальше он обсуждает работу с продавцами</p>
+<p>Нашлась конкретная трудность: перед встречей приходилось часами изучать сайты компаний и профили людей. По описанию Морони, около 80% времени уходило на исследование, около 20% на продажи. Команда поставила цель повысить эффективность продавцов на 20% и только затем выбрала применение ИИ</p>
+<h3 id="podrazdel-23">Четыре действия, по которым можно проверить агента</h3>
+<p>Морони объясняет агентный процесс через понятные действия. Агент здесь означает систему, которая выполняет задачу по шагам и обращается к доступным инструментам</p>
+<ol><li>Уточнить намерение: какая работа мешает и какой результат нужен</li><li>Составить план с учётом доступных инструментов, например поиска и браузера</li><li>Выполнить план и получить результат</li><li>Сопоставить результат с целью и при необходимости повторить</li></ol>
+<p>По его рассказу, пилот экономил 10-15% времени, тратившегося впустую, а обзор перед встречей стал занимать минуты вместо часов. Первоначальная цель «на 20% эффективнее» и сообщённая экономия времени являются разными показателями. Методика измерения и данные пилота в лекции не показаны</p>
+<p>Морони также сообщает о небольшом росте продаж, заработка и удовлетворённости сотрудников. Это результат в его рассказе о конкретной компании, без обещания повторения. Неподтверждённую долю неудач ИИ-проектов из выступления здесь не переносим</p>
+<p>Так появляется ответ на вопрос вступления. Полезность решения начинается с описанной работы и понятного способа принять результат. В знакомой тебе задаче сначала можно выяснить, что мешает человеку, а затем решить, какой инструмент действительно нужен</p>
+</section>
+<section class="content-section" id="practice"><p class="section-label">Для своего чата</p><h2>Проверь лекцию в своём чате: три приёма до и после</h2><p>Это примеры применения мыслей лекции, составленные для конспекта. Они работают как обычные текстовые запросы в ChatGPT, Claude или другом чате, без специальных подключений. «До» и «после» здесь относятся к формулировке запроса. Ответы зависят от модели</p>
+<h3 id="podrazdel-24">Приём 1. Сначала уточни, зачем нужна автоматизация</h3>
+<p>Из мысли 12: запрос компании на агента стал рабочей задачей после разговора с продавцами</p>
+<p><b>До</b></p>
+<div class="code-card"><pre id="priem-1-do"><code>Придумай ИИ-агента для моей работы</code></pre><button class="copy-button" type="button" data-copy-target="priem-1-do" aria-label="Скопировать запрос 1, до" aria-live="polite">Скопировать</button></div>
+<p><b>После</b></p>
+<div class="code-card"><pre id="priem-1-posle"><code>Помоги понять, стоит ли автоматизировать подготовку к встречам с клиентами. Сейчас я собираю сведения из сайта компании и своих заметок. Сначала задай до пяти вопросов: что мешает, кому нужен результат, какие данные есть, какие ошибки недопустимы и как проверить пользу. Пока не предлагай инструменты и ничего не придумывай. Дождись моих ответов</code></pre><button class="copy-button" type="button" data-copy-target="priem-1-posle" aria-label="Скопировать запрос 1, после" aria-live="polite">Скопировать</button></div>
+<p>Вместо немедленного списка агентов ты получишь вопросы о работе. После ответов можно просить план. Сам запрос не создаёт агента и не подключает поиск</p>
+<h3 id="podrazdel-25">Приём 2. Заранее опиши, какой результат можно принять</h3>
+<p>Из мыслей 9 и 12: сгенерированное нужно сравнить с замыслом и требованиями</p>
+<p><b>До</b></p>
+<div class="code-card"><pre id="priem-2-do"><code>Сделай квартальный отчёт по этим данным</code></pre><button class="copy-button" type="button" data-copy-target="priem-2-do" aria-label="Скопировать запрос 2, до" aria-live="polite">Скопировать</button></div>
+<p><b>После</b></p>
+<div class="code-card"><pre id="priem-2-posle"><code>Вот учебные данные катка за квартал: январь 120 посещений, февраль 150, март 130. Подготовь короткий отчёт для руководителя: посещения по месяцам, итог за квартал, изменение марта к январю в посещениях и процентах. Затем отдельно проверь расчёты. Не добавляй сведения о выручке или причинах изменений: их здесь нет. В конце перечисли, каких данных не хватает для вывода о работе катка</code></pre><button class="copy-button" type="button" data-copy-target="priem-2-posle" aria-label="Скопировать запрос 2, после" aria-live="polite">Скопировать</button></div>
+<p>Это учебный пример, не отчёт из истории Морони. Для сверки: всего 400 посещений; март больше января на 10 посещений, примерно на 8,3%. Ответ не должен объяснять рост выдуманными событиями</p>
+<h3 id="podrazdel-26">Приём 3. Проверь, что останется после первой версии</h3>
+<p>Из мысли 6: у быстрого решения есть сопровождение и цена ошибок</p>
+<p><b>До</b></p>
+<div class="code-card"><pre id="priem-3-do"><code>Вот идея: чат составляет отчёты по таблицам. Как быстрее это запустить?</code></pre><button class="copy-button" type="button" data-copy-target="priem-3-do" aria-label="Скопировать запрос 3, до" aria-live="polite">Скопировать</button></div>
+<p><b>После</b></p>
+<div class="code-card"><pre id="priem-3-posle"><code>Разбери идею: чат составляет квартальный отчёт по таблицам. Ничего не запускай. Отдельно перечисли, что уточнить до прототипа, какие проверки нужны перед рабочим использованием и кто должен уметь исправить результат. Укажи возможные ошибки в данных и расчётах, вопросы о доступе к файлам и о поддержке после ухода создателя. Не объявляй идею надёжной без примеров и критериев проверки</code></pre><button class="copy-button" type="button" data-copy-target="priem-3-posle" aria-label="Скопировать запрос 3, после" aria-live="polite">Скопировать</button></div>
+<p>В ответе появятся вопросы о данных, приёмке и сопровождении. Это список для дальнейшей проверки человеком; один ответ модели не подтверждает надёжность будущей системы</p>
+</section><section class="content-section" id="pamyatka"><p class="section-label">Памятка</p><h2>Вся лекция в одной памятке</h2>
+<ol><li>Следи за изменениями инструментов и применяй знания в проектах</li><li>Уточняй будущую команду и учитывай свои жизненные обстоятельства</li><li>Учись обсуждать замечания и показывать законченный результат</li><li>Проверяй ограничения, ошибки и последствия применения</li><li>Продумывай сопровождение до того, как от программы начнут зависеть</li><li>Отделяй демонстрации и прогнозы от подтверждённых возможностей</li><li>Выбирай модель и место её запуска по требованиям к задаче и данным</li><li>Начинай с известной тебе работы: уточни цель, составь план, выполни и проверь</li></ol>
+<div class="help-banner"><p class="help-title">Запутался в выборе задачи? Начни с одной знакомой работы</p><p>Замени текст в квадратных скобках и отправь запрос в свой чат. Не вставляй личные или закрытые рабочие данные</p><div class="code-card"><pre id="help-prompt"><code>Я хочу [сократить подготовку квартального отчёта]. Сейчас я [собираю итоги из нескольких таблиц], но не понимаю [как проверить, что чат ничего не пропустил]. Помоги уточнить задачу. Объясняй по одному шагу, задай первый вопрос и дождись ответа. Не придумывай мои данные и требования</code></pre><button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос для разбора своей задачи" aria-live="polite">Скопировать</button></div></div></section><section class="content-section" id="sources"><p class="section-label">Источники</p><h2>Откуда взят конспект</h2>
+<p>Основа - полная запись Stanford Online и её английские субтитры, включая вопросы из аудитории до 1:45:04. Текст передаёт содержание своими словами. Оценки рынка, прогнозы и результаты частных историй отнесены к спикерам и контексту осени 2025 года</p>
+<ul><li><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s">Stanford CS230 | Autumn 2025 | Lecture 9: Career Advice in AI</a> - официальная запись, источник всех историй и таймкодов</li></ul></section><section class="next-read" id="dalshe" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">Разобраться в самом инструменте и выбрать способ работы</p><ul><li><a href="../stanford-2026-kak-uchitsya-ii/"><span class="title">Как учится ИИ: конспект лекции Стэнфорда 2026</span><span class="why">Почему модель выполняет инструкции и как проверяют её попытки</span></a></li><li><a href="../vybor-modeli-i-effort/"><span class="title">Как выбрать модель и глубину рассуждений</span><span class="why">Соотнести сложность задания с инструментом</span></a></li></ul></section><div class="share-row "><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F&amp;text=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F&amp;title=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230" target="_blank" rel="noopener">VK</a></div><section class="seo-related" id="esche-po-teme" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="../stanford-kak-sozdayut-chatgpt/">Как создают ChatGPT: конспект лекции Стэнфорда</a></li></ul></section><p class="cta-question" id="svoi-proekt">Теперь у тебя есть вопросы к своей задаче. Следующий шаг - увидеть, какие проекты можно собрать с нейросетями без знания кода</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section><footer class="foot">Конспект подготовлен 28 октября 2026 года. Лекция относится к осени 2025 года<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div></footer></article></main><aside class="related-plaque" aria-label="Соседняя статья"><p class="plaque-label">Полезно знать</p><h2>Как учится ИИ</h2><p>Предыдущий конспект: инструкции, примеры и проверка попыток</p><p><a href="../stanford-2026-kak-uchitsya-ii/">Открыть статью</a></p></aside></div><div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
+<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+</div>
+<script src="../../assets/image-viewer.js"></script>
+<script>
+var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Сайт использует cookie и Яндекс Метрику для статистики посещений. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>
