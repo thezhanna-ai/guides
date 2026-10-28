@@ -1,0 +1,466 @@
+usage: sobrat_glavnuyu.py [-h] [--proverit] [--statya SLUG | --vse-stati]
+sobrat_glavnuyu.py: error: Неизвестный или некорректный slug статьи
+usage: sobrat_glavnuyu.py [-h] [--proverit] [--statya SLUG | --vse-stati]
+sobrat_glavnuyu.py: error: Неизвестный или некорректный slug статьи
+usage: sobrat_glavnuyu.py [-h] [--proverit] [--statya SLUG | --vse-stati]
+sobrat_glavnuyu.py: error: Неизвестный или некорректный slug статьи
+======================================================================
+ERROR: test_single_article_build_never_writes_other_article_files (test_build_scope.BuildScopeTests.test_single_article_build_never_writes_other_article_files) (args=())
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_build_scope.py", line 38, in test_single_article_build_never_writes_other_article_files
+    self.assertEqual(self.run_build(root, *args), 0)
+                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_build_scope.py", line 20, in run_build
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_single_article_build_never_writes_other_article_files (test_build_scope.BuildScopeTests.test_single_article_build_never_writes_other_article_files) (args=('--statya', 'podklyuchenie-iz-rossii'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_build_scope.py", line 38, in test_single_article_build_never_writes_other_article_files
+    self.assertEqual(self.run_build(root, *args), 0)
+                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_build_scope.py", line 20, in run_build
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_cover_leading (unittest.loader._FailedTest.test_cover_leading)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_cover_leading
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 433, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 374, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_cover_leading.py", line 9, in <module>
+    from PIL import Image, ImageChops, ImageDraw, ImageFont
+ModuleNotFoundError: No module named 'PIL'
+
+
+======================================================================
+ERROR: test_cover_readability (unittest.loader._FailedTest.test_cover_readability)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_cover_readability
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 433, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 374, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_cover_readability.py", line 8, in <module>
+    from PIL import Image, ImageChops, ImageDraw
+ModuleNotFoundError: No module named 'PIL'
+
+
+======================================================================
+ERROR: test_standard_cta_bytes_regression_20261010 (test_erid.EridTest.test_standard_cta_bytes_regression_20261010) (page='claude-ai/klod-ne-poddakivaet/index.html')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_erid.py", line 77, in test_standard_cta_bytes_regression_20261010
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+
+======================================================================
+ERROR: test_standard_cta_bytes_regression_20261010 (test_erid.EridTest.test_standard_cta_bytes_regression_20261010) (page='claude-ai/promty-pravki-foto-chatgpt/index.html')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_erid.py", line 77, in test_standard_cta_bytes_regression_20261010
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+
+======================================================================
+ERROR: test_check_detects_each_stale_artifact_without_writing (test_indexing.IndexingTest.test_check_detects_each_stale_artifact_without_writing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 138, in test_check_detects_each_stale_artifact_without_writing
+    self.assertEqual(self.run_generator(root), 0)
+                     ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 98, in run_generator
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_existing_index_follow_directive_is_preserved (test_indexing.IndexingTest.test_existing_index_follow_directive_is_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 173, in test_existing_index_follow_directive_is_preserved
+    self.assertEqual(self.run_generator(root), 0)
+                     ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 98, in run_generator
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_new_live_status_changes_and_legal_hold_survive_rebuild (test_indexing.IndexingTest.test_new_live_status_changes_and_legal_hold_survive_rebuild) (status='live', reason='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 124, in test_new_live_status_changes_and_legal_hold_survive_rebuild
+    self.assertEqual(self.run_generator(root), 0)
+                     ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 98, in run_generator
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_new_live_status_changes_and_legal_hold_survive_rebuild (test_indexing.IndexingTest.test_new_live_status_changes_and_legal_hold_survive_rebuild) (status='gotova', reason='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 124, in test_new_live_status_changes_and_legal_hold_survive_rebuild
+    self.assertEqual(self.run_generator(root), 0)
+                     ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 98, in run_generator
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_new_live_status_changes_and_legal_hold_survive_rebuild (test_indexing.IndexingTest.test_new_live_status_changes_and_legal_hold_survive_rebuild) (status='draft', reason='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 124, in test_new_live_status_changes_and_legal_hold_survive_rebuild
+    self.assertEqual(self.run_generator(root), 0)
+                     ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 98, in run_generator
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_new_live_status_changes_and_legal_hold_survive_rebuild (test_indexing.IndexingTest.test_new_live_status_changes_and_legal_hold_survive_rebuild) (status='live', reason='Высокий риск: проверка')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 124, in test_new_live_status_changes_and_legal_hold_survive_rebuild
+    self.assertEqual(self.run_generator(root), 0)
+                     ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 98, in run_generator
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_new_live_status_changes_and_legal_hold_survive_rebuild (test_indexing.IndexingTest.test_new_live_status_changes_and_legal_hold_survive_rebuild) (status='live', reason='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 124, in test_new_live_status_changes_and_legal_hold_survive_rebuild
+    self.assertEqual(self.run_generator(root), 0)
+                     ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 98, in run_generator
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_new_live_status_changes_and_legal_hold_survive_rebuild (test_indexing.IndexingTest.test_new_live_status_changes_and_legal_hold_survive_rebuild)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 132, in test_new_live_status_changes_and_legal_hold_survive_rebuild
+    self.assertEqual(self.run_generator(root), 0)
+                     ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 98, in run_generator
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_konspekt_title (unittest.loader._FailedTest.test_konspekt_title)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_konspekt_title
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 433, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 374, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_konspekt_title.py", line 8, in <module>
+    from PIL import Image, ImageChops, ImageDraw, ImageFont
+ModuleNotFoundError: No module named 'PIL'
+
+
+======================================================================
+ERROR: test_photo_expansion (unittest.loader._FailedTest.test_photo_expansion)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_photo_expansion
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 433, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 374, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_photo_expansion.py", line 4, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+
+
+======================================================================
+ERROR: test_accepts_only_matching_published_key_and_html (test_seo.IndexNowPublicationTest.test_accepts_only_matching_published_key_and_html)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_seo.py", line 250, in test_accepts_only_matching_published_key_and_html
+    self.assertEqual(module.publication_errors(payload, get), [])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/indexnow.py", line 30, in publication_errors
+    raise ValueError('Список IndexNow должен совпадать с реестром SEO')
+ValueError: Список IndexNow должен совпадать с реестром SEO
+
+======================================================================
+ERROR: test_does_not_allow_ping_for_old_live_page (test_seo.IndexNowPublicationTest.test_does_not_allow_ping_for_old_live_page)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_seo.py", line 239, in test_does_not_allow_ping_for_old_live_page
+    errors = module.publication_errors(payload, lambda u: key if u == payload['keyLocation'] else '<html>old deployment</html>')
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/indexnow.py", line 30, in publication_errors
+    raise ValueError('Список IndexNow должен совпадать с реестром SEO')
+ValueError: Список IndexNow должен совпадать с реестром SEO
+
+======================================================================
+ERROR: test_check_mode_detects_removed_seo_markup_without_repairing_files (test_seo.SeoTest.test_check_mode_detects_removed_seo_markup_without_repairing_files)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_seo.py", line 212, in test_check_mode_detects_removed_seo_markup_without_repairing_files
+    self.assertEqual(helper.run_generator(root, check=True), 1)
+                     ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 98, in run_generator
+    return module.main()
+           ~~~~~~~~~~~^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 857, in main
+    rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
+                             KORNI / "politika" / "index.html": sobrat_politiku()}))
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 821, in sobrat_seo
+    proverit_seo_statyi(result, metadata[rel], url)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/scripts/sobrat_glavnuyu.py", line 666, in proverit_seo_statyi
+    raise ValueError(url + ': исходное вступление должно содержать 40-60 слов')
+ValueError: https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/: исходное вступление должно содержать 40-60 слов
+
+======================================================================
+ERROR: test_all_articles_share_the_same_header_and_plaque_layout (test_site.GuidesSiteTest.test_all_articles_share_the_same_header_and_plaque_layout) (statya='promty-pravki-foto-chatgpt')
+Шапка и плашка образуют одну колонку 180px во всех статьях.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_site.py", line 1490, in test_all_articles_share_the_same_header_and_plaque_layout
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+
+======================================================================
+ERROR: test_tri_sayta_pravka10 (unittest.loader._FailedTest.test_tri_sayta_pravka10)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_tri_sayta_pravka10
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 433, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/unittest/loader.py", line 374, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_tri_sayta_pravka10.py", line 9, in <module>
+    from PIL import Image
+ModuleNotFoundError: No module named 'PIL'
+
+
+======================================================================
+FAIL: test_generator_retains_the_creative_and_static_disclosure (test_erid.EridTest.test_generator_retains_the_creative_and_static_disclosure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_erid.py", line 156, in test_generator_retains_the_creative_and_static_disclosure
+    self.assertEqual(generator.sobrat_stranicu(), (ROOT / "index.html").read_text())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '<!do[56798 chars]><b>77</b> инструкций по шагам</span>\n      <[133570 chars]l>\n' != '<!do[56798 chars]><b>76</b> инструкций по шагам</span>\n      <[132469 chars]l>\n'
+
+======================================================================
+FAIL: test_sitemap_contains_the_complete_article_cohort (test_global_article_standard.GlobalArticleStandardTest.test_sitemap_contains_the_complete_article_cohort)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_global_article_standard.py", line 31, in test_sitemap_contains_the_complete_article_cohort
+    self.assertEqual(len(urls), sum(a['status'] == 'live' and not a.get('noindex_reason') for a in json.loads((ROOT / 'data/statyi.json').read_text())['statyi']))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 76 != 77
+
+======================================================================
+FAIL: test_only_nonlive_pages_keep_noindex_after_authorized_corrections (test_indexing.IndexingTest.test_only_nonlive_pages_keep_noindex_after_authorized_corrections) (slug='pyat-neyrosetey-dlya-ucheby')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 53, in test_only_nonlive_pages_keep_noindex_after_authorized_corrections
+    self.assertFalse(any("noindex" in r or "nofollow" in r or "none" in r for r in directives))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_sitemap_matches_indexable_live_registry_and_home_exactly (test_indexing.IndexingTest.test_sitemap_matches_indexable_live_registry_and_home_exactly)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_indexing.py", line 60, in test_sitemap_matches_indexable_live_registry_and_home_exactly
+    self.assertEqual(urls, expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['htt[4675 chars]aet/'] != ['htt[4675 chars]aet/', 'https://pronovoe.com/claude-ai/pyat-ne[18 chars]by/']
+
+Second list contains 1 additional elements.
+First extra element 78:
+'https://pronovoe.com/claude-ai/pyat-neyrosetey-dlya-ucheby/'
+
+Diff is 5162 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_scope_includes_all_29_covers_home_and_draft (test_publication.PublicationTest.test_scope_includes_all_29_covers_home_and_draft)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_publication.py", line 38, in test_scope_includes_all_29_covers_home_and_draft
+    self.assertEqual(len(ready), 69)  # +RUNWAY и Frank 27.10
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: 70 != 69
+
+======================================================================
+FAIL: test_all_canonical_pages_have_dated_sitemap (test_seo.SeoTest.test_all_canonical_pages_have_dated_sitemap)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_seo.py", line 22, in test_all_canonical_pages_have_dated_sitemap
+    self.assertEqual(len(items), len(live) + 2)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 78 != 79
+
+======================================================================
+FAIL: test_article_schema_and_faq_are_visible_and_exact (test_seo.SeoTest.test_article_schema_and_faq_are_visible_and_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_seo.py", line 42, in test_article_schema_and_faq_are_visible_and_exact
+    self.assertEqual(len(scripts), 1, str(path))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : /Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/claude-ai/pyat-neyrosetey-dlya-ucheby/index.html
+
+======================================================================
+FAIL: test_llms_and_bot_controls_exist (test_seo.SeoTest.test_llms_and_bot_controls_exist)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_seo.py", line 85, in test_llms_and_bot_controls_exist
+    self.assertIn(str(sum(a['status'] == 'live' for a in json.loads((ROOT / 'data/statyi.json').read_text())['statyi'])) + ' инструкций', llms)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '77 инструкций' not found in '# Про новое\n\n> Инструкции по нейросетям для людей без опыта программирования. Автор: Жанна Слепова\n\n76 инструкций. Выбор материалов: [каталог](https://pronovoe.com/)\n\n## Начать\n\n- [Доступ к Claude](https://pronovoe.com/claude-ai/podklyuchenie-iz-rossii/)\n- [Первый проект](https://pronovoe.com/claude-ai/pervyy-proekt-v-claude/)\n- [Скиллы Claude Code](https://pronovoe.com/claude-ai/pyat-skillov-claude-code/)\n\n## Служебные сведения\n\n- [XML-карта всех канонических страниц](https://pronovoe.com/sitemap.xml)\n- [Политика данных](https://pronovoe.com/politika/)\n\nКонтакт: pronovoe.site@yandex.ru\n'
+
+======================================================================
+FAIL: test_catalog_uses_captioned_article_covers_and_only_live_links (test_site.ArticleImagesTest.test_catalog_uses_captioned_article_covers_and_only_live_links)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_site.py", line 391, in test_catalog_uses_captioned_article_covers_and_only_live_links
+    self.assertEqual([card.attrs["href"] for card in cards], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['cla[253 chars]-ai/podklyuchit-gmail-drive-calendar/', 'claud[2722 chars]de/'] != ['cla[253 chars]-ai/pyat-neyrosetey-dlya-ucheby/', 'claude-ai/[2764 chars]de/']
+
+First differing element 7:
+'claude-ai/podklyuchit-gmail-drive-calendar/'
+'claude-ai/pyat-neyrosetey-dlya-ucheby/'
+
+Second list contains 1 additional elements.
+First extra element 76:
+'claude-ai/runway-iz-claude/'
+
+Diff is 3304 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_generator_is_reproducible_and_missing_or_unsafe_images_get_placeholders (test_site.ArticleImagesTest.test_generator_is_reproducible_and_missing_or_unsafe_images_get_placeholders)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_site.py", line 429, in test_generator_is_reproducible_and_missing_or_unsafe_images_get_placeholders
+    self.assertEqual(self.generator.sobrat_stranicu(), HOME.read_text())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '<!do[56798 chars]><b>77</b> инструкций по шагам</span>\n      <[133570 chars]l>\n' != '<!do[56798 chars]><b>76</b> инструкций по шагам</span>\n      <[132469 chars]l>\n'
+
+======================================================================
+FAIL: test_home_summaries_are_plain_spans_without_individual_styles (test_site.ArticleImagesTest.test_home_summaries_are_plain_spans_without_individual_styles)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zslepova/IvanOS/projects/statya-pyat-neyrosetey/tests/test_site.py", line 521, in test_home_summaries_are_plain_spans_without_individual_styles
+    self.assertEqual(len(cards), len(live))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 76 != 77
+
+----------------------------------------------------------------------
+Ran 217 tests in 19.531s
+
+FAILED (failures=11, errors=21, skipped=6)

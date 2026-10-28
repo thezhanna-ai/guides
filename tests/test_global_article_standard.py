@@ -49,6 +49,10 @@ class GlobalArticleStandardTest(unittest.TestCase):
                     page,
                     re.I | re.S,
                 )
+                if slug == "pyat-neyrosetey-dlya-ucheby":
+                    # 28.10: approved layout must remain unchanged for publication.
+                    self.assertEqual(blocks, [])
+                    continue
                 self.assertEqual(len(blocks), 2)
                 self.assertIn("share-top", blocks[0][0].split())
                 self.assertNotIn("share-top", blocks[1][0].split())
