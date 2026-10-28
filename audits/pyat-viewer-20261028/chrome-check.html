@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8"><title>Проверка просмотрщика в Chrome</title>
+<style>body{margin:0;font:16px system-ui;background:#ddd}header{position:sticky;top:0;background:white;padding:8px;z-index:10}iframe{border:0;display:block}button{margin:4px}</style>
+<header><strong id="status">Проверка…</strong><button onclick="show(1440,0)">Claude 1440</button><button onclick="show(390,0)">Claude 390</button><button onclick="show(1440,3)">NotebookLM 1440</button><button onclick="show(390,4)">Gamma 390</button></header>
+<iframe id="frame" width="1440" height="948" src="/claude-ai/pyat-neyrosetey-dlya-ucheby/"></iframe>
+<script>
+const f=document.querySelector('iframe');const results=[];const check=(ok,m)=>{if(!ok)throw Error(m)};const tick=()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+async function show(w,index){f.width=w;f.height=w===1440?948:844;await tick();const d=f.contentDocument;d.querySelector('.viewer-close').click();const a=d.querySelectorAll('.fig a.zoom')[index];a.focus();a.click();await d.querySelector('#viewer img').decode();await tick();}
+f.onload=async()=>{try{
+for(const width of [1440,390])for(let index=0;index<5;index++){
+ await show(width,index);const d=f.contentDocument,w=f.contentWindow,i=d.querySelector('#viewer img'),v=d.querySelector('#viewer'),b=i.parentElement,r=i.getBoundingClientRect(),br=b.getBoundingClientRect();
+ const canvas=d.createElement('canvas');canvas.width=canvas.height=64;const ctx=canvas.getContext('2d');ctx.drawImage(i,0,0,64,64);const px=ctx.getImageData(0,0,64,64).data;let green=0,min=255,max=0;for(let j=0;j<px.length;j+=4){min=Math.min(min,px[j],px[j+1],px[j+2]);max=Math.max(max,px[j],px[j+1],px[j+2]);if(px[j+1]>px[j]+40&&px[j+1]>px[j+2]+40)green++;}
+ check(w.innerWidth===width,'viewport');check(r.width>=width*.92-1&&r.width<=i.naturalWidth,'size');check(v.hasAttribute('open')&&br.top>=0&&br.bottom<=w.innerHeight,'visible');check(max-min>50&&green/4096<.8,'pixels');check(d.documentElement.scrollWidth<=width,'overflow');
+ const scrolls=b.scrollHeight>b.clientHeight+2;if(scrolls){b.scrollTop=b.scrollHeight;check(b.scrollTop>0,'scroll');}
+ d.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));check(!v.hasAttribute('open'),'Escape');check(d.activeElement===d.querySelectorAll('.fig a.zoom')[index],'focus');
+ await show(width,index);d.querySelector('.viewer-close').click();check(!v.hasAttribute('open'),'button');
+ results.push({engine:'chromium',status:'PASS',width,height:w.innerHeight,filename:i.currentSrc.split('/').pop(),natural:[i.naturalWidth,i.naturalHeight],rect:r.toJSON(),box:br.toJSON(),greenFraction:green/4096,colorRange:max-min,scrolls});
+}
+await show(1440,0);f.width=390;await tick();check(f.contentDocument.querySelector('#viewer img').getBoundingClientRect().width>=358,'resize');
+const result={engine:'chromium',userAgent:navigator.userAgent,method:'Native Google Chrome, same-origin iframe viewports 1440x948 and 390x844',status:'PASS',cases:results.length,resize:true,results};
+await fetch('/__viewer-results',{method:'POST',body:JSON.stringify(result)});document.querySelector('#status').textContent='PASS: Chrome, 10/10, 1440 и 390 px';await show(1440,0);
+}catch(e){document.querySelector('#status').textContent='FAIL '+e;await fetch('/__viewer-results',{method:'POST',body:JSON.stringify({status:'FAIL',error:String(e),results})});}};
+</script>
