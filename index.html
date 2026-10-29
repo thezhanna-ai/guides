@@ -675,6 +675,7 @@
     .catalog-search .cover-hint { margin: 10px 0 0; color: var(--muted) }
     .result-count { min-height: 22px; margin: 8px 0 0; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums }
     .tag-filters { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px }
+    .filter-scroll-hint { display: none }
     .tag-btn { min-height: 44px; padding: 8px 15px; border: 1px solid var(--sage-line); border-radius: 999px; background: var(--guide-color-transparent); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer }
     .tag-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink) }
     .tag-btn:focus-visible, .search-go:focus-visible { outline: 3px solid var(--guide-color-brand-ink); outline-offset: 3px }
@@ -714,6 +715,7 @@
       .catalog-search .search-input { flex: 1 1 0; width: 100%; font-size: 16px; padding: 14px }
       .catalog-search .search-go { padding: 0 16px }
       .tag-filters { flex-wrap: nowrap; overflow-x: auto; padding: 4px 3px 8px; scrollbar-width: thin }
+      .filter-scroll-hint { display: block; margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5 }
       .tag-btn { flex: none; white-space: nowrap }
       .guide-link { flex-direction: row; min-height: 122px; align-items: stretch }
       .guide-cover { width: 112px; height: auto; align-self: center; aspect-ratio: 1600 / 840; object-fit: contain }
@@ -967,7 +969,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <button class="search-go" id="search-reset" type="button">Сбросить</button>
         </div>
         <p class="cover-hint">Например: доступ, голосовой ввод, свой сайт</p>
-    <div class="tag-filters" role="group" aria-label="Темы инструкций">
+    <p class="filter-scroll-hint" id="filter-scroll-hint">Темы можно листать вбок ↔</p>
+    <div class="tag-filters" role="group" aria-label="Темы инструкций" aria-describedby="filter-scroll-hint">
       <button class="tag-btn" type="button" data-filter="all" aria-pressed="true">Все темы</button>
       <button class="tag-btn" type="button" data-filter="claude-chat" aria-pressed="false">Claude (чат)</button>
       <button class="tag-btn" type="button" data-filter="claude-code" aria-pressed="false">Claude Code (код)</button>
