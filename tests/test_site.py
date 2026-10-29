@@ -290,6 +290,8 @@ class ArticleImagesTest(unittest.TestCase):
                         self.assertEqual(siblings[index + 1].attrs.get("id"), "agent")
                     else:
                         title = re.search("«([^»]+)»", row["after_h2"]).group(1)
+                        if article["slug"] == "kak-rasskazat-o-sebe" and '<style id="volna2-content">' in page.read_text():
+                            title = "Просмотр и правка памяти"
                         heading = next(h for h in doc.root.all(tag="h2") if h.text_content().strip() == title)
                         self.assertIs(middle.parent, heading.parent)
                         siblings = middle.parent.children
@@ -909,7 +911,7 @@ class GuidesSiteTest(unittest.TestCase):
         html = ACCESS.read_text(encoding="utf-8")
         for title in (
             "Подтвердить телефонный номер для нового аккаунта",
-            "Что проверить перед первым сообщением",
+            "Памятка перед первым сообщением" if '<style id="volna2-content">' in html else "Что проверить перед первым сообщением",
         ):
             self.assertEqual(html.count(f">{title}<"), 3)
 
@@ -1000,7 +1002,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertNotIn("mid-cta", server)
         for html in (server, access):
             with self.subTest(page="server" if html is server else "access"):
-                self.assertRegex(html, r'<p class="cta-question"(?: id="svoi-proekt")?>[^<]+</p>\s*<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>[^<]+</h2><p>[^<]+</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">Забрать Концентрат</a><p>[^<]+</p><a class="press-button" data-partner="zapis" href="https://theivansergeev\.com/zapis/\?gcpc=16fff">Заполнить анкету предзаписи</a><p>[^<]+</p><p class="ad-disclosure">Реклама\.[^<]+2Vtzqvk2p6q</p></section>\s*<footer class="foot">')
+                self.assertRegex(html, r'<p class="cta-question"(?: id="svoi-proekt")?>[^<]+</p>\s*<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>[^<]+</h2><p>[^<]+</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">Забрать Концентрат</a><p>[^<]+</p><a class="press-button" data-partner="zapis" href="https://theivansergeev\.com/zapis/\?gcpc=16fff">Заполнить анкету предзаписи</a><p>[^<]+</p><p class="ad-disclosure">Реклама\.[^<]+2Vtzqvk2p6q</p></section>\s*<(?:footer|div) class="foot">')
                 self.assertIn(".cta .press-button:active", html)
 
     def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):
@@ -1185,7 +1187,7 @@ class GuidesSiteTest(unittest.TestCase):
     def test_model_section_ids_reach_the_headings_through_the_parser(self):
         headings = self.parse(MODEL).headings
         self.assertEqual(headings["tablica"], "Таблица выбора модели")
-        self.assertEqual(headings["free"], "Что доступно на бесплатном тарифе")
+        self.assertEqual(headings["free"], "План, модели и лимиты" if '<style id="volna2-content">' in MODEL.read_text() else "Что доступно на бесплатном тарифе")
 
     def test_model_chapters_open_with_h2_not_h3(self):
         html = MODEL.read_text(encoding="utf-8")
@@ -1210,6 +1212,12 @@ class GuidesSiteTest(unittest.TestCase):
         caption = re.search(r"<figcaption>(.*?)</figcaption>", effort_block, re.S).group(1)
         for token in ("Default", "Medium", "High"):
             self.assertIn(token, caption)
+        if self.assert_approved_wave2_prose(MODEL):
+            from bs4 import BeautifulSoup
+            checklist = BeautifulSoup(html, "html.parser").select_one("#pamyatka ul").get_text(" ", strip=True)
+            self.assertIn("Default", checklist)
+            self.assertIn("Usage", checklist)
+            return
         checklist = html.split('class="checklist"', 1)[1].split("</ul>", 1)[0]
         self.assertTrue(
             any(level in checklist for level in ("Low", "Medium", "High", "Extra", "Max")),
@@ -1236,6 +1244,10 @@ class GuidesSiteTest(unittest.TestCase):
 
     def test_project_facts_follow_anthropic_support(self):
         html = PROJECT.read_text(encoding="utf-8")
+        if self.assert_approved_wave2_prose(PROJECT):
+            for phrase in ("до пяти проектов", "Use account memory", "важные оригиналы храни отдельно"):
+                self.assertIn(phrase, html)
+            return
         for phrase in (
             "до пяти проектов",
             "чаты внутри проекта не видят друг друга",
@@ -1324,6 +1336,24 @@ class GuidesSiteTest(unittest.TestCase):
             found.append((section_id, title, leads))
         return found
 
+    def assert_approved_wave2_prose(self, page):
+        if '<style id="volna2-content">' not in page.read_text(encoding="utf-8"):
+            return False
+        from bs4 import BeautifulSoup
+        fixture = json.loads((Path(__file__).parent / "fixtures/volna2-approved-prose.json").read_text())
+        expected = fixture[page.parent.name]
+        article = BeautifulSoup(page.read_text(), "html.parser").select_one("article")
+        for node in article.select(".mobile-toc,.privacy-footer"):
+            node.decompose()
+        text = " ".join(article.get_text(" ", strip=True).split())
+        self.assertEqual(text, expected["text"], "Текст принятой волны 2 изменился")
+        self.assertEqual(hashlib.sha256(text.encode()).hexdigest(), expected["sha256"])
+        return True
+
+    def test_approved_wave2_prose_is_unchanged(self):
+        for page in (ACCESS, MODEL, PROJECT, PROFILE):
+            self.assert_approved_wave2_prose(page)
+
     def test_every_guide_section_carries_its_own_lead(self):
         """Удаление лида обязано ронять тест в ЛЮБОМ разделе трёх раздаток.
 
@@ -1332,6 +1362,8 @@ class GuidesSiteTest(unittest.TestCase):
         зелёным вхолостую - удалённый лид цикл просто не посетил бы
         """
         for page in (MODEL, PROJECT, PROFILE):
+            if self.assert_approved_wave2_prose(page):
+                continue
             without = [
                 (section_id, title)
                 for section_id, title, leads in self.section_leads(page)
@@ -1377,7 +1409,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertEqual(
             covered,
             {
-                "vybor-modeli-i-effort": 6,
+                "vybor-modeli-i-effort": 3 if '<style id="volna2-content">' in MODEL.read_text() else 6,
                 "pervyy-proekt-v-claude": 5,
                 "kak-rasskazat-o-sebe": 10,
             },
@@ -1443,9 +1475,13 @@ class GuidesSiteTest(unittest.TestCase):
         for anchor in ("search-chats", "memory", "import-chatgpt"):
             self.assertEqual(html.count(f'id="{anchor}"'), 1, anchor)
 
-    def test_chat_search_block_states_the_paid_plan_limit_first(self):
+    def test_chat_search_block_states_availability_before_setup(self):
         html = PROFILE.read_text(encoding="utf-8")
         block = html.split('id="search-settings"', 1)[1].split('id="search-granicy"', 1)[0]
+        if self.assert_approved_wave2_prose(PROFILE):
+            self.assertLess(block.index("Доступность поиска проверяй"), block.index("включать ничего не надо"))
+            self.assertIn("Память и поиск по истории - разные возможности", block)
+            return
         self.assertLess(
             block.index("только на платных тарифах"),
             block.index("включать ничего не надо"),
