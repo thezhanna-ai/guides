@@ -697,8 +697,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <link rel="canonical" href="https://pronovoe.com/claude-ai/vybor-modeli-i-effort/">
 <!-- seo:canonical:end -->
 <!-- seo:schema:start -->
-<script type="application/ld+json" id="seo-schema">
-{
+<script type="application/ld+json" id="seo-schema">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -732,287 +731,241 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "item": "https://pronovoe.com/claude-ai/vybor-modeli-i-effort/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Нужно ли всегда ставить Max для важной работы?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Начни с рекомендованного уровня модели и оцени ответ по критериям. Больше усилия полезно для сложной обработки, но не исправляет недостающие данные."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Смена модели обнуляет лимит?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Рассчитывать на это нельзя. Проверь счётчики своего плана: общие и отдельные ограничения могут продолжать действовать."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чем API отличается от подписки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "API предназначен для программ и имеет собственный способ оплаты и ограничения. Подписка на чат не означает тот же объём работы или включённый API-баланс."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Развёрнутое размышление доказывает правильность?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Проверь вывод, числа и выполнимость шагов независимо от длины объяснения."
+          }
+        }
+      ]
     }
   ]
-}
-</script>
+}</script>
 <!-- seo:schema:end -->
+<style id="volna2-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:var(--guide-color-transparent)!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card .copy-button{position:static;display:block;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto}article .table-wrap{margin:24px 0;border:1px solid var(--line);border-radius:10px}article .table-wrap table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;color:var(--ink)}article .table-wrap td,article .table-wrap th{vertical-align:top;padding:14px;text-align:left;border-bottom:1px solid var(--line);overflow-wrap:anywhere}article .table-wrap th{background:var(--info);color:var(--emerald)}article .table-wrap tbody tr:nth-child(even){background:var(--paper-2)}@media(max-width:600px){article .table-wrap table{min-width:550px}}article details summary{cursor:pointer;font-weight:700}article #voprosy details{padding:16px 0;border-bottom:1px solid var(--muted)}html[data-theme="dark"] article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white)}article pre{overflow-wrap:anywhere}html[data-theme="dark"] h1.article-standard-h1,html[data-theme="dark"] .cookie-banner a{color:var(--ink)!important}</style><style id="volna2-house-layout">
+
+/* Оболочка опубликованного Курьера, 29.10.2026. Содержимое статьи сохранено. */
+body { font: 18.4px/1.65 Spectral, Georgia, serif }
+.masthead { background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)) }
+.masthead-inner { gap: 20px }
+.brand { font-size: 18px; line-height: 1.65 }
+.theme-toggle { width: 40px; min-height: 40px; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+.toc-label, .related-plaque .plaque-label { font-family: ui-monospace, monospace }
+.lead { margin: 20px 0 0; font-size: inherit; line-height: inherit }
+.route-note h2 { margin: 0 0 18px; color: var(--emerald); font: 700 clamp(23px, 3.3vw, 29px)/1.2 Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -.58px }
+.route-note p { margin: 0 0 20px; color: var(--ink); font-size: inherit; line-height: inherit }
+.mobile-toc { margin-top: 26px }
+.privacy-footer { font: inherit; color: var(--ink) }
+@media (max-width: 860px) {
+  body { font-size: 17px; line-height: 1.62 }
+  .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+}
+
+</style>
 </head>
 <body>
-  <div class="progress" aria-hidden="true"></div>
-  <header class="masthead">
-    <div class="masthead-inner">
-      <div class="brand">Claude.ai: кнопка за кнопкой</div>
-      <div class="header-actions">
-        <div class="handout-title">Выбор модели и effort</div>
-        <div class="header-controls">
-          <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
-
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="page-shell">
-    <nav class="toc" aria-label="Содержание">
-      <p class="toc-label">Содержание</p>
-      <a class="active" href="#vybor-modeli">Выбор модели и effort</a>
-      <a href="#model">Модель</a>
-      <a class="toc-sub" href="#gde-menyu">Где переключить модель</a>
-      <a href="#tablica">Таблица выбора модели</a>
-      <a href="#free">Что доступно на бесплатном тарифе</a>
-      <a class="toc-sub" href="#okno">Как считается лимит: пятичасовое окно</a>
-      <a href="#effort-glava">Effort</a>
-      <a class="toc-sub" href="#effort">Что такое effort</a>
-      <a class="toc-sub" href="#urovni">Уровни effort</a>
-      <a class="toc-sub" href="#thinking">Отдельный переключатель thinking</a>
-      <a href="#pravilo">Простое правило на каждый день</a>
-      <a href="#sources">Источники</a>
-    </nav>
-
-    <main>
-      <details class="mobile-toc">
-        <summary>Содержание статьи</summary>
-        <nav aria-label="Содержание на телефоне">
-          <a href="#vybor-modeli">Выбор модели и effort</a>
-          <a href="#model">Модель</a>
-          <a href="#gde-menyu">Где переключить модель</a>
-          <a href="#tablica">Таблица выбора модели</a>
-          <a href="#free">Что доступно на бесплатном тарифе</a>
-          <a href="#okno">Как считается лимит: пятичасовое окно</a>
-          <a href="#effort-glava">Effort</a>
-          <a href="#effort">Что такое effort</a>
-          <a href="#urovni">Уровни effort</a>
-          <a href="#thinking">Отдельный переключатель thinking</a>
-          <a href="#pravilo">Простое правило на каждый день</a>
-          <a href="#sources">Источники</a>
-        </nav>
-      </details>
-
-      <article>
-        <header id="vybor-modeli">
-          <p class="eyebrow">Claude.ai · выбор модели</p>
-          <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Четыре лошади по росту, от пони до тяжеловоза, стоят вплотную вполоборота как образ уровней effort" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=57559da0e4d1 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Сравнение моделей и уровней усилия для простых и сложных задач</figcaption></figure>
+<div aria-hidden="true" class="progress"></div>
+<header class="masthead">
+<div class="masthead-inner">
+<div class="brand">Claude.ai: кнопка за кнопкой</div>
+<div class="header-actions">
+<div class="handout-title">Выбор модели и effort</div>
+<div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div>
+</div>
+</div>
+</header>
+<div class="page-shell">
+<nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Перед выбором модели</a>
+<a href="#model">Переключение модели</a>
+<a class="toc-sub" href="#gde-menyu">Где переключить модель</a>
+<a href="#tablica">Таблица выбора модели</a>
+<a href="#free">План, модели и лимиты</a>
+<a href="#effort-glava">Усилие и режим размышления</a>
+<a class="toc-sub" href="#effort">Что такое effort</a>
+<a class="toc-sub" href="#urovni">Уровни effort</a>
+<a class="toc-sub" href="#thinking">Отдельный переключатель thinking</a>
+<a href="#pravilo">Порядок выбора на каждый день</a>
+<a href="#oshibki">Что ломается и что делать</a>
+<a href="#pamyatka">Памятка перед отправкой</a>
+<a href="#voprosy">Частые вопросы</a>
+<a href="#sources">Источники</a></nav>
+<main>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Перед выбором модели</a>
+<a href="#model">Переключение модели</a>
+<a class="toc-sub" href="#gde-menyu">Где переключить модель</a>
+<a href="#tablica">Таблица выбора модели</a>
+<a href="#free">План, модели и лимиты</a>
+<a href="#effort-glava">Усилие и режим размышления</a>
+<a class="toc-sub" href="#effort">Что такое effort</a>
+<a class="toc-sub" href="#urovni">Уровни effort</a>
+<a class="toc-sub" href="#thinking">Отдельный переключатель thinking</a>
+<a href="#pravilo">Порядок выбора на каждый день</a>
+<a href="#oshibki">Что ломается и что делать</a>
+<a href="#pamyatka">Памятка перед отправкой</a>
+<a href="#voprosy">Частые вопросы</a>
+<a href="#sources">Источники</a></nav></details>
+<article>
+<header id="vybor-modeli">
+<p class="eyebrow">Claude.ai · выбор модели</p>
+<figure class="cover cover-v2"><img alt="Четыре лошади по росту, от пони до тяжеловоза, стоят вплотную вполоборота как образ уровней effort" data-full-src="assets/oblozhka.webp" decoding="async" fetchpriority="high" height="840" loading="eager" sizes="(max-width: 860px) calc(100vw - 40px), 780px" src="assets/oblozhka.webp" srcset="assets/oblozhka.reading-1600.webp?v=57559da0e4d1 1600w" width="1600"/><figcaption>Сравнение моделей и уровней усилия для простых и сложных задач</figcaption></figure>
 <h1 class="article-standard-h1">Модель и уровень effort: что включать под задачу</h1>
-<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<p class="uroven-metka green" style='display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif'>Начальный уровень</p>
 <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 11 СЕНТЯБРЯ 2026</p>
-
-
-          <p class="lead">В Claude есть несколько моделей, и рядом с ними отдельная настройка effort. Обе управляют одним: сколько сил Claude потратит на твой ответ. Слишком слабая связка даст поверхностный результат, слишком сильная - съест лимит на пустяковой задаче. По таблице ниже выберешь сочетание под свою работу.</p>
-          <aside class="route-note" aria-label="Короткий маршрут">
-            <h2>Выбор модели и effort в Claude: короткий маршрут</h2>
-            <p>Кнопка модели рядом с полем ввода → выбрать модель под задачу → Effort → выбрать уровень → при сложной задаче включить thinking</p>
-          </aside>
-          <p class="purpose">Если вход в Claude ещё не настроен, начни с инструкции <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. А чтобы Claude знал, кто ты и как тебе отвечать, пройди <a href="../kak-rasskazat-o-sebe/">«Как рассказать Claude о себе»</a></p>
-
+<p class="lead">Claude долго думает над коротким письмом, а важный разбор выдаёт слишком поверхностно. Прежде чем менять модель, проверь само задание: есть ли исходные данные и понятный результат. Затем подберём модель и усилие, чтобы не расходовать лимит на то, что не требует долгих рассуждений.</p>
+<aside aria-label="Короткий маршрут" class="route-note">
+<h2>Выбор модели и effort в Claude: короткий маршрут</h2>
+<p>Кнопка модели рядом с полем ввода → выбрать модель под задачу → Effort → выбрать уровень → при сложной задаче включить thinking</p>
+</aside>
+<p class="purpose">Если вход в Claude ещё не настроен, начни с инструкции <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. А чтобы Claude знал, кто ты и как тебе отвечать, пройди <a href="../kak-rasskazat-o-sebe/">«Как рассказать Claude о себе»</a></p>
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Модель и уровень effort: что включать под задачу</span></nav>
 <!-- seo:breadcrumbs:end -->
 </header>
-
 <div class="share-row share-top">
-        <span class="eyebrow">Поделиться</span>
-        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F&amp;text=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83" target="_blank" rel="noopener">Telegram</a>
-        <a class="share-btn" href="https://wa.me/?text=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F&amp;title=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83" target="_blank" rel="noopener">VK</a>
-      </div>
-
-<section class="content-section" id="model">
-          <p class="section-label">Где находится настройка</p>
-          <h2>Модель</h2>
-          <p class="purpose">Задача написана, Claude ответил, но ответ не устроил: то слишком коротко, то слишком долго. Чаще всего работу делала не та модель, а её переключатель новичок ищет в настройках, где его нет</p>
-          <p>Модель выбирается не один раз в настройках, а прямо в чате. Ты можешь менять её под каждую задачу и даже посреди разговора</p>
-          <div class="step">
-            <h3 id="gde-menyu">Где переключить модель</h3>
-            <p>Открой любой чат и посмотри вниз, на строку ввода. Справа, рядом с <a href="../golosovoy-vvod-v-claude/">микрофоном</a>, написано название текущей модели и уровень усилия - например <span class="path">Sonnet 5 High</span>. Нажми на эту надпись, и прямо над ней раскроется список моделей</p>
-            <figure>
-              <div class="shot">
-                <img src="assets/claude-where-click.png" alt="Экран чата Claude: стрелка указывает на кнопку модели справа от строки ввода, под ней раскрытый список моделей" width="1230" height="992" loading="lazy" decoding="async">
-              </div>
-              <figcaption>Под каждой моделью подписано, для чего она: <b>For your toughest challenges</b> - для самых сложных задач, <b>For complex tasks</b> - для сложных задач, <b>Most efficient for everyday tasks</b> - оптимальна для повседневных, <b>Fastest for quick answers</b> - самая быстрая для коротких ответов</figcaption>
-            </figure>
-            <p>Вот тот же список крупно, с пометками тарифов</p>
-            <figure>
-              <div class="shot">
-                <img src="assets/claude-models-plans.png" alt="Меню выбора модели Claude: Fable, Opus, Sonnet и Haiku с пометками тарифов" width="1130" height="730" loading="lazy" decoding="async">
-              </div>
-              <figcaption>Зелёным отмечены модели, доступные на бесплатном тарифе, оранжевым - только на платных</figcaption>
-            </figure>
-            <div class="info-card">
-              <p><span class="info-title">Одно меню - три настройки:</span> в нём выбирается модель, уровень <b>Effort</b> и переключатель <b>thinking</b>. Это разные настройки, и их можно сочетать в любой комбинации</p>
-            </div>
-            <div class="result"><p><b>Результат:</b> ты знаешь, где переключать модель, и можешь делать это в любой момент разговора</p></div>
-          </div>
-        </section>
-
-        <section class="content-section" id="tablica">
-          <p class="section-label">Кому какую работу поручить</p>
-          <h2>Таблица выбора модели</h2>
-          <p class="purpose">Модели идут от самой быстрой к самой основательной. Чем сильнее модель, тем глубже она думает, но тем больше расходует твой лимит. Смысл выбора в том, чтобы не брать тяжёлую модель на лёгкую работу</p>
-          <div class="model-wrap">
-            <table class="model-table">
-              <thead>
-                <tr><th scope="col">Модель</th><th scope="col">Для чего</th><th scope="col">Пример задачи</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Haiku<br><span class="plan-tag plan-free">Есть на Free</span></th>
-                  <td data-label="Для чего">Быстрые ответы, короткие пересказы и простое извлечение данных - то, что нужно получить мгновенно</td>
-                  <td data-label="Пример задачи">Пересказать письмо в трёх строках, вытащить даты из текста, разложить список по категориям</td>
-                </tr>
-                <tr>
-                  <th scope="row">Sonnet<br><span class="plan-tag plan-free">Есть на Free</span></th>
-                  <td data-label="Для чего">Универсальная рабочая модель: код, тексты, анализ и задачи в несколько шагов. Подходит для большинства дел</td>
-                  <td data-label="Пример задачи">Написать пост, разобрать ошибку в коде, собрать план запуска, проанализировать таблицу</td>
-                </tr>
-                <tr>
-                  <th scope="row">Opus<br><span class="plan-tag plan-paid">Платные тарифы</span></th>
-                  <td data-label="Для чего">Глубокое исследование и сложные рассуждения, где действительно нужно долго думать</td>
-                  <td data-label="Пример задачи">Сравнить варианты и выбрать стратегию, разобрать запутанную задачу, с которой не справился Sonnet</td>
-                </tr>
-                <tr>
-                  <th scope="row">Fable<br><span class="plan-tag plan-paid">Платные тарифы</span></th>
-                  <td data-label="Для чего">Самые крупные и важные проекты: длинные сложные задачи, которые Claude ведёт сам, реже спрашивая тебя</td>
-                  <td data-label="Пример задачи">Длинный проект из множества связанных шагов, работа с большим объёмом материалов</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="minor">Названия моделей со временем получают номера версий - например Sonnet 5, Haiku 4.5, Opus 5. Логика выбора от этого не меняется: смотри на само имя модели</p>
-          <div class="result"><p><b>Результат:</b> ты понимаешь, какую модель брать под конкретную задачу, а не выбираешь наугад</p></div>
-        </section>
-
-        <section class="content-section" id="free">
-          <p class="section-label">Бесплатный тариф</p>
-          <h2>Что доступно на бесплатном тарифе</h2>
-          <p class="purpose">Это первое, обо что спотыкается новичок: он читает про Opus, открывает меню и не находит его у себя. Дело не в ошибке, а в тарифе</p>
-          <div class="limit-card">
-            <p><span class="info-title">На бесплатном тарифе доступны Haiku и Sonnet.</span> Opus и Fable открываются только на платных тарифах</p>
-          </div>
-          <p>Кадр выше снят на платном тарифе - поэтому в нём видны все четыре модели. На бесплатном в этом же меню остаются только Sonnet и Haiku</p>
-          <p class="minor">Про Fable интерфейс говорит отдельно: <b>Fable 5.1 is included in Max plans, or available with usage credits on Pro</b> - то есть Fable входит в тариф Max, а на Pro доступен за отдельные кредиты</p>
-          <p>Если в меню видно только две модели - у тебя бесплатный тариф, и это нормально. Sonnet тянет большинство обычных задач: тексты, разбор, планы, простой код</p>
-          <div class="step">
-            <h3 id="okno">Как считается лимит: пятичасовое окно</h3>
-            <p>Ты упёрся в лимит посреди работы и прикидываешь, что теперь ждать до завтра. Ждать почти наверняка придётся меньше</p>
-            <p>Лимит в Claude не привязан к календарным суткам. Он обновляется по пятичасовым окнам, но Anthropic не указывает, что конкретное окно обязательно начинается с твоего первого сообщения</p>
-            <p>После долгого перерыва Claude показывает, сколько осталось до обновления в текущем 5-часовом окне</p>
-            <div class="info-card">
-              <p><span class="info-title">Что это значит на практике:</span> ориентируйся на время обновления лимита, которое показывает сам Claude, а не высчитывай с момента входа в сессию</p>
-            </div>
-            <p>Чем тяжелее модель и выше effort, тем быстрее расходуется окно. Поэтому Haiku и низкий effort на мелких задачах - это не экономия ради экономии, а способ сохранить лимит на то, что действительно важно</p>
-            <p class="minor">На платных тарифах поверх пятичасовых окон действует ещё и недельный потолок</p>
-          </div>
-          <div class="result"><p><b>Результат:</b> ты понимаешь, почему в твоём меню именно такой набор моделей</p></div>
-        </section>
-
-        <section class="content-section" id="effort-glava">
-          <p class="section-label">Глубина размышления</p>
-          <h2>Effort</h2>
-          <p class="purpose">Модель подходящая, а ответ всё равно вышел поверхностным. Или наоборот: Claude думает над ерундой минуту и жжёт лимит. Рядом с моделью лежит вторая настройка, про которую новичок обычно не знает</p>
-          <h3 id="effort">Что такое effort</h3>
-          <p>Называется она effort и задаёт, насколько тщательно Claude обрабатывает каждый твой запрос</p>
-          <p>Работает это так: чем выше уровень, тем подробнее и продуманнее ответ, но тем дольше он готовится и тем больше расходуется лимит. Поэтому effort снижают на рутине и поднимают на сложном</p>
-          <div class="step">
-            <h3 id="urovni">Уровни effort</h3>
-            <p>Открой меню модели и нажми <b>Effort</b>. Уровни идут от самого лёгкого к самому глубокому</p>
-            <figure>
-              <div class="shot">
-                <img src="assets/claude-effort-menu.png" alt="Меню Effort в Claude: уровни Low, Medium, High, Extra, Max и переключатель Thinking" width="920" height="555" loading="lazy" decoding="async">
-              </div>
-              <figcaption>Сверху меню поясняет: <b>Higher effort means more thorough responses, but takes longer and uses your limits faster</b> - чем выше усилие, тем тщательнее ответ, но дольше ожидание и быстрее расход лимита. На этом кадре серая пометка <b>Default</b> нарисована у строки <b>Medium</b>, а синяя галочка выбранного уровня стоит на <b>High</b>; у <b>Max</b> предупреждение <b>3.5× or more usage</b> - расход лимита минимум в 3,5 раза выше</figcaption>
-            </figure>
-            <table class="effort-table">
-              <tbody>
-                <tr><th scope="row">Low</th><td>Самый быстрый уровень. Признак выбора: ответ известен заранее и его надо просто оформить - перевод, список, короткая выжимка</td></tr>
-                <tr><th scope="row">Medium<br><span class="effort-default">ярлык Default на кадре</span></th><td>Признак выбора: ответ надо собрать из нескольких кусков, но перебирать варианты не нужно - обычное письмо, правка текста, разбор короткой таблицы. Пара Low и Medium расходует лимит медленнее старших уровней</td></tr>
-                <tr><th scope="row">High</th><td>Лучший баланс качества и скорости. Хороший выбор, когда задача важная</td></tr>
-                <tr><th scope="row">Extra</th><td>Глубже, чем High. Для длинных задач, которые Claude ведёт долго и без частых подсказок</td></tr>
-                <tr><th scope="row">Max</th><td>Самый тщательный режим. Интерфейс предупреждает: расход лимита минимум в 3,5 раза выше обычного</td></tr>
-              </tbody>
-            </table>
-            <div class="result"><p><b>Результат:</b> ты можешь осознанно поднять или опустить уровень, а не оставлять всё как есть</p></div>
-          </div>
-          <div class="step">
-            <h3 id="thinking">Отдельный переключатель thinking</h3>
-            <p>В том же меню, под уровнями effort, есть переключатель <b>Thinking</b> с подписью <b>Can think for more complex tasks</b> - может думать над более сложными задачами. Он не то же самое, что effort. Effort задаёт глубину каждого ответа, а thinking показывает ход рассуждения: над ответом появляется раскрывающийся блок, в котором видно, как Claude шёл к результату</p>
-            <p>Эти две настройки независимы, и включать их можно в любом сочетании. На сложной задаче есть смысл поднять effort, включить thinking или сделать и то и другое</p>
-            <div class="result"><p><b>Результат:</b> ты различаешь глубину ответа и показ рассуждения и не путаешь одно с другим</p></div>
-          </div>
-        </section>
-
-        <section class="content-section" id="pravilo">
-          <p class="section-label">Как этим пользоваться</p>
-          <h2>Простое правило на каждый день</h2>
-          <p class="purpose">Не нужно каждый раз выбирать заново. Достаточно одного правила, к которому возвращаешься, когда ответ не устроил</p>
-          <div class="check-panel">
-            <h3>Порядок действий</h3>
-            <ul class="checklist">
-              <li>Обычная работа: Sonnet и уровень Medium или High</li>
-              <li>Мелочь и однотипные действия: Haiku или effort ниже</li>
-              <li>Ответ вышел поверхностным: подними effort на той же модели</li>
-              <li>Не помогло: возьми модель сильнее, если она есть на твоём тарифе</li>
-              <li>Хочешь видеть ход мысли: включи thinking</li>
-          </ul>
-          </div>
-          <div class="info-card">
-            <p><span class="info-title">Частая ошибка новичка:</span> всегда держать самую сильную модель и максимальный effort. Лимит уходит на пустяки, а на настоящую задачу его уже не хватает</p>
-          </div>
-          <div class="result"><p><b>Результат:</b> ты тратишь лимит там, где он действительно нужен</p></div>
-        </section>
-
-        <section class="content-section" id="sources">
-          <p class="section-label">Официальные материалы</p>
-          <h2>Источники</h2>
-          <ul class="sources">
-            <li><a href="https://academy.claude.com/tutorials/choosing-the-right-claude-model">Anthropic: как выбрать модель Claude</a></li>
-            <li><a href="https://support.claude.com/en/articles/8664678-change-the-model-effort-and-thinking-settings">Anthropic: настройки модели, effort и thinking</a></li>
-            <li><a href="https://claude.com/pricing">Anthropic: тарифы и доступные модели</a></li>
-          </ul>
-        </section>
-
-        <section class="next-read" aria-label="Дальше по теме">
-          <h2>Дальше по теме</h2>
-          <p class="next-sub">Что логично прочитать следующим</p>
-          <ul>
-            <li><a href="../web-search-v-claude/"><span class="title">Веб-поиск в Claude: ответы со свежими ссылками</span><span class="why">Чтобы ответы были свежими, а не из памяти модели - включи веб-поиск</span></a></li>
-            <li><a href="../pervyy-proekt-v-claude/"><span class="title">Первый проект в Claude: своя папка с памятью</span><span class="why">Следующий шаг: своя папка с памятью вместо отдельных чатов</span></a></li>
-          </ul>
-        </section>
-
+<span class="eyebrow">Поделиться</span>
+<a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F&amp;text=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83" rel="noopener" target="_blank">Telegram</a>
+<a class="share-btn" href="https://wa.me/?text=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F" rel="noopener" target="_blank">WhatsApp</a>
+<a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F&amp;title=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83" rel="noopener" target="_blank">VK</a>
+</div>
+<section class="content-section" id="podgotovka"><h2>Перед выбором модели</h2><p>Работаем в обычном чате Claude. <a href="/claude-ai/podklyuchenie-iz-rossii/">Доступ к аккаунту</a> нужно подготовить заранее. Открой меню модели около кнопки отправки и посмотри, что доступно именно тебе. Сохрани название текущей модели и пометку Default у effort.</p><p>Номера на учебных скриншотах ниже относятся к прежним версиям. Сейчас в меню могут быть другие. Сравнивай семейство, актуальное описание и доступность в своём аккаунте; старое название из чужой инструкции не делает модель доступной.</p></section><section class="content-section" id="model">
+<p class="section-label">Где находится настройка</p>
+<h2>Переключение модели</h2>
+<p class="purpose">Ответ может не устроить из-за выбранной модели, но сначала стоит проверить полноту задания. Если попросить «сделай хорошо» без материалов и критериев, более сильная модель тоже начнёт угадывать.</p>
+<p>Модель выбирается прямо в чате. Ты можешь менять её под каждую задачу и даже посреди разговора</p>
+<div class="step">
+<h3 id="gde-menyu">Где переключить модель</h3>
+<p>Открой любой чат и посмотри вниз, на строку ввода. Справа, рядом с <a href="../golosovoy-vvod-v-claude/">микрофоном</a>, написано название текущей модели и уровень усилия - например <span class="path">Sonnet 5 High</span>. Нажми на эту надпись, и прямо над ней раскроется список моделей</p>
+<figure>
+<div class="shot">
+<img alt="Экран чата Claude: стрелка указывает на кнопку модели справа от строки ввода, под ней раскрытый список моделей" decoding="async" height="992" loading="lazy" src="assets/claude-where-click.png" width="1230"/>
+</div>
+<figcaption>Под каждой моделью подписано, для чего она: <b>For your toughest challenges</b> - для самых сложных задач, <b>For complex tasks</b> - для сложных задач, <b>Most efficient for everyday tasks</b> - оптимальна для повседневных, <b>Fastest for quick answers</b> - самая быстрая для коротких ответов</figcaption>
+</figure>
+<p>Вот тот же список крупно, с пометками тарифов</p>
+<figure>
+<div class="shot">
+<img alt="Меню выбора модели Claude: Fable, Opus, Sonnet и Haiku с пометками тарифов" decoding="async" height="730" loading="lazy" src="assets/claude-models-plans.png" width="1130"/>
+</div>
+<figcaption>Зелёным отмечены модели, доступные на бесплатном тарифе, оранжевым - только на платных</figcaption>
+</figure>
+<div class="info-card">
+<p>В меню рядом с отправкой сообщения выбираются модель, доступный ей effort и thinking. Доступные сочетания зависят от модели и плана: переключатели не всегда можно комбинировать произвольно.</p>
+</div>
+<div class="result"><p><b>Результат:</b> ты знаешь, где переключать модель, и можешь делать это в любой момент разговора</p></div>
+</div>
+</section>
+<section class="content-section" id="tablica"><h2>Таблица выбора модели</h2><p>Начни с характера работы. В <a href="https://academy.claude.com/tutorials/choosing-the-right-claude-model">официальной памятке Anthropic</a> семейства различаются назначением и расходом лимита. Конкретная версия и скорость ответа могут меняться.</p><div class="table-wrap"><table><thead><tr><th>Семейство</th><th>Для какой работы</th><th>Когда переходить дальше</th></tr></thead><tbody><tr><td>Haiku</td><td>Короткая выжимка, извлечение дат, сортировка списка</td><td>Пропускает связи и ограничения в сложном материале</td></tr><tr><td>Sonnet</td><td>Повседневные тексты, код и анализ с несколькими шагами</td><td>На полном задании и нужных исходниках остаются существенные ошибки</td></tr><tr><td>Opus</td><td>Сложный разбор вариантов, код и связанные документы</td><td>Задача требует более долгой самостоятельной работы, а результат не проходит критерии</td></tr><tr><td>Fable</td><td>Самые сложные задачи и длинная работа агента</td><td>Проверь доступ, расход и необходимость такого режима до запуска</td></tr></tbody></table></div><p>Сначала проверь ответ на конкретных требованиях: все ли данные учтены, верны ли числа, можно ли выполнить предложенные шаги. Название сильной модели не заменяет эту проверку.</p></section>
+<section class="content-section" id="free"><h2>План, модели и лимиты</h2><p>Если модели нет в меню, открой <a href="https://claude.com/pricing">текущую страницу планов</a> и условия своего аккаунта. В рабочем аккаунте выбор также может ограничить администратор. Учебный кадр с четырьмя моделями не означает, что все они включены в любой план.</p><p>Free, Pro и Max - личные планы. Team и Enterprise добавляют управление организацией; такой план не нужен только ради повторения чужого меню. Доступ к дополнительной модели, кредиты и общий лимит проверяются отдельно. Цены и API-тарифы не стоит смешивать с ежемесячной подпиской на чат.</p><p>На сохранённом кадре Fable 5.1 указана как включённая в Max и доступная через usage credits в Pro. Это условие кадра, а не обещание текущей комплектации. Перед расходованием кредитов прочитай то условие, которое показано в твоём аккаунте.</p><p>Лимит зависит от длины переписки, вложений, модели и других факторов. Пятичасовое окно и недельный предел могут действовать одновременно. Открой Settings → Usage и ориентируйся на показанное время сброса; ожидание одного окна не обязательно снимает недельное ограничение.</p><p>Контекстное окно - объём материалов, который помещается в обработку. Лимит использования - доступный объём работы за период. Большое контекстное окно не обещает бесконечной переписки. Числа для API также не означают те же условия в браузерном Claude.</p></section>
+<section class="content-section" id="effort-glava">
+<p class="section-label">Глубина размышления</p>
+<h2>Усилие и режим размышления</h2>
+<p class="purpose">Модель подходящая, а ответ всё равно вышел поверхностным. Или наоборот: Claude думает над ерундой минуту и жжёт лимит. Рядом с моделью лежит вторая настройка, про которую новичок обычно не знает</p>
+<h3 id="effort">Что такое effort</h3>
+<p>Называется она effort и задаёт, насколько тщательно Claude обрабатывает каждый твой запрос</p>
+<p>Более высокое усилие позволяет дольше обрабатывать задачу, но требует времени и лимита. Оно не гарантирует правильность ответа. Для начала используй уровень Default, отмеченный у выбранной модели.</p>
+<div class="step">
+<h3 id="urovni">Уровни effort</h3>
+<p>Открой меню модели и нажми <b>Effort</b>. Уровни идут от самого лёгкого к самому глубокому</p>
+<figure>
+<div class="shot">
+<img alt="Меню Effort в Claude: уровни Low, Medium, High, Extra, Max и переключатель Thinking" decoding="async" height="555" loading="lazy" src="assets/claude-effort-menu.png" width="920"/>
+</div>
+<figcaption>Сверху меню поясняет: <b>Higher effort means more thorough responses, but takes longer and uses your limits faster</b> - чем выше усилие, тем тщательнее ответ, но дольше ожидание и быстрее расход лимита. На этом кадре серая пометка <b>Default</b> нарисована у строки <b>Medium</b>, а синяя галочка выбранного уровня стоит на <b>High</b>; у <b>Max</b> предупреждение <b>3.5× or more usage</b> - расход лимита минимум в 3,5 раза выше</figcaption>
+</figure>
+<table class="effort-table">
+<tbody>
+<tr><th scope="row">Low</th><td>Самый быстрый уровень. Признак выбора: ответ известен заранее и его надо просто оформить - перевод, список, короткая выжимка</td></tr>
+<tr><th scope="row">Medium<br/><span class="effort-default">ярлык Default на кадре</span></th><td>Признак выбора: ответ надо собрать из нескольких кусков, но перебирать варианты не нужно - обычное письмо, правка текста, разбор короткой таблицы. Пара Low и Medium расходует лимит медленнее старших уровней</td></tr>
+<tr><th scope="row">High</th><td>Лучший баланс качества и скорости. Хороший выбор, когда задача важная</td></tr>
+<tr><th scope="row">Extra</th><td>Глубже, чем High. Для длинных задач, которые Claude ведёт долго и без частых подсказок</td></tr>
+<tr><th scope="row">Max</th><td>Самый тщательный режим. Интерфейс предупреждает: расход лимита минимум в 3,5 раза выше обычного</td></tr>
+</tbody>
+</table>
+<div class="result"><p><b>Результат:</b> ты можешь осознанно поднять или опустить уровень, а не оставлять всё как есть</p></div>
+</div>
+<div class="step">
+<h3 id="thinking">Отдельный переключатель thinking</h3>
+<p>Thinking управляет использованием режима размышления в поддерживаемых моделях. Раскрывающийся блок в ответе показывает сводку, а не полную внутреннюю цепочку мыслей. Наличие блока не подтверждает правильность вывода.</p>
+<p>Доступность thinking и уровней effort зависит от модели. При смене модели ещё раз посмотри меню: набор уровней и значение Default могут отличаться.</p>
+<div class="result"><p><b>Результат:</b> ты различаешь глубину ответа и показ рассуждения и не путаешь одно с другим</p></div>
+</div>
+</section>
+<section class="content-section" id="pravilo"><h2>Порядок выбора на каждый день</h2><ul><li>Дай материалы и опиши, по чему будешь принимать ответ.</li><li>Выбери доступную модель под сложность работы и начни с её Default.</li><li>Если не хватает глубины, уточни пропущенное требование и проверь следующий ответ.</li><li>Подними effort, когда задача требует сравнения вариантов и проверки связей.</li><li>Если ошибки остаются, попробуй более сильную доступную модель на том же задании.</li><li>После результата сохрани удачную постановку задачи, чтобы не собирать её заново.</li></ul></section>
+<section class="content-section" id="oshibki"><h2>Что ломается и что делать</h2><div class="table-wrap"><table><thead><tr><th>Ситуация</th><th>Действие</th></tr></thead><tbody><tr><td>Нужной модели нет</td><td>Проверь план, More models и ограничения администратора.</td></tr><tr><td>Модель отвечает общими словами</td><td>Добавь исходники, пример результата и конкретный вопрос.</td></tr><tr><td>Высокий effort расходует лимит без пользы</td><td>Верни Default и сократи задачу до необходимого объёма.</td></tr><tr><td>Окно обновилось, а работа не продолжается</td><td>Посмотри недельное ограничение и отдельные условия модели.</td></tr><tr><td>Старая инструкция называет исчезнувшую версию</td><td>Выбери актуальную модель по назначению и заново проверь результат.</td></tr></tbody></table></div></section><section class="content-section" id="pamyatka"><h2>Памятка перед отправкой</h2><ul><li>Исходные материалы приложены и задача названа прямо.</li><li>Модель есть в текущем меню аккаунта.</li><li>Уровень Default проверен у этой модели.</li><li>Числа и ссылки в ответе сверяются с источниками.</li><li>Остаток и время сброса берутся из Usage.</li></ul></section><section class="content-section" id="voprosy"><h2>Частые вопросы</h2><details class="faq-item"><summary>Нужно ли всегда ставить Max для важной работы?</summary><p>Нет. Начни с рекомендованного уровня модели и оцени ответ по критериям. Больше усилия полезно для сложной обработки, но не исправляет недостающие данные.</p></details><details class="faq-item"><summary>Смена модели обнуляет лимит?</summary><p>Рассчитывать на это нельзя. Проверь счётчики своего плана: общие и отдельные ограничения могут продолжать действовать.</p></details><details class="faq-item"><summary>Чем API отличается от подписки?</summary><p>API предназначен для программ и имеет собственный способ оплаты и ограничения. Подписка на чат не означает тот же объём работы или включённый API-баланс.</p></details><details class="faq-item"><summary>Развёрнутое размышление доказывает правильность?</summary><p>Нет. Проверь вывод, числа и выполнимость шагов независимо от длины объяснения.</p></details></section><section class="content-section" id="sources">
+<p class="section-label">Официальные материалы</p>
+<h2>Источники</h2>
+<ul class="sources">
+<li><a href="https://academy.claude.com/tutorials/choosing-the-right-claude-model">Anthropic: как выбрать модель Claude</a></li>
+<li><a href="https://support.claude.com/en/articles/8664678-change-the-model-effort-and-thinking-settings">Anthropic: настройки модели, effort и thinking</a></li>
+<li><a href="https://claude.com/pricing">Anthropic: тарифы и доступные модели</a></li>
+</ul>
+</section>
+<section aria-label="Дальше по теме" class="next-read">
+<h2>Дальше по теме</h2>
+<p class="next-sub">Что логично прочитать следующим</p>
+<ul>
+<li><a href="../web-search-v-claude/"><span class="title">Веб-поиск в Claude: ответы со свежими ссылками</span><span class="why">Чтобы ответы были свежими, а не из памяти модели - включи веб-поиск</span></a></li>
+<li><a href="../pervyy-proekt-v-claude/"><span class="title">Первый проект в Claude: своя папка с памятью</span><span class="why">Следующий шаг: своя папка с памятью вместо отдельных чатов</span></a></li>
+</ul>
+</section>
 <div class="share-row">
-        <span class="eyebrow">Поделиться</span>
-        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F&amp;text=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83" target="_blank" rel="noopener">Telegram</a>
-        <a class="share-btn" href="https://wa.me/?text=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F&amp;title=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83" target="_blank" rel="noopener">VK</a>
-      </div>
-
+<span class="eyebrow">Поделиться</span>
+<a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F&amp;text=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83" rel="noopener" target="_blank">Telegram</a>
+<a class="share-btn" href="https://wa.me/?text=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F" rel="noopener" target="_blank">WhatsApp</a>
+<a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fvybor-modeli-i-effort%2F&amp;title=%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%B8%20%D1%83%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20effort%3A%20%D1%87%D1%82%D0%BE%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83" rel="noopener" target="_blank">VK</a>
+</div>
 <!-- seo:related:start -->
 <section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/stanford-kak-sozdayut-chatgpt/">Как создают ChatGPT: конспект лекции Стэнфорда</a></li><li><a href="/claude-ai/nalog-na-russkiy-tokeny/">Налог на русский: сравниваем расход токенов на четырёх языках</a></li><li><a href="/claude-ai/pomoshchnik-haiku-claude-code/">Помощник Haiku в Claude Code: поиск файлов и чтение логов</a></li><li><a href="/claude-ai/argon-ili-opus-kak-vybrat/">Gemini 4 Argon или Claude Opus 5.5: какую модель выбрать</a></li></ul></section>
 <!-- seo:related:end -->
-<p class="cta-question">Модель подобрана. А если задач десять?</p>
-
-
-
+<p class="cta-question">Подходящая модель и effort выбраны, а удачное задание можно использовать снова. Но подготовка исходников, передача результата и проверка следующего этапа пока остаются на тебе. Ниже - о том, как соединить эти действия в работу над контентом, сайтом и продуктом без знания кода.</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
-<footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев<!-- privacy:footer:start -->
-<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
-<!-- privacy:footer:end -->
+<footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев
 </footer>
-      </article>
-    </main>
-    <aside class="related-plaque" aria-label="Следующая статья">
+</article>
+</main>
+<aside aria-label="Следующая статья" class="related-plaque">
       <p class="plaque-label">Сначала настройка</p>
-      <h2>Claude помнит о тебе: что рассказать один раз</h2>
+<h2>Claude помнит о тебе: что рассказать один раз</h2>
       <p><a href="../kak-rasskazat-o-sebe/">Заполни имя и включи память - тогда любая модель ответит с учётом контекста</a></p>
-    </aside>
-  </div>
-
-    <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
-    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
-    <div class="viewer-scroll"><img alt=""></div>
-    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
-  </div>
+</aside>
+</div>
+<div aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
+<button aria-label="Закрыть" class="viewer-close" type="button">✕</button>
+<div class="viewer-scroll"><img alt=""/></div>
+<p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+</div>
 <script>
     const progress = document.querySelector('.progress');
     const links = [...document.querySelectorAll('.toc a, .mobile-toc a')];
@@ -1066,7 +1019,6 @@ themeButton.addEventListener("click", function () {
   themeButton.textContent = next === "dark" ? "☀" : "◐";
 });
 </script>
-
 <script src="../../assets/image-viewer.js"></script>
 <script>
     // Скриншот открывается в крупном размере с прокруткой на узком экране
@@ -1135,16 +1087,21 @@ themeButton.addEventListener("click", function () {
 <script>
 </script>
 <!-- privacy:banner:start -->
-<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
-  <div class="cookie-inner">
-    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
-    <div class="cookie-actions">
-      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
-      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
-    </div>
-  </div>
+<aside aria-label="Выбор аналитики" class="cookie-banner" hidden="" id="cookie-banner">
+<div class="cookie-inner">
+<p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+<div class="cookie-actions">
+<button aria-describedby="cookie-description" id="cookie-accept" type="button">Принять</button>
+<button aria-describedby="cookie-description" id="cookie-decline" type="button">Отказаться</button>
+</div>
+</div>
 </aside>
 <!-- privacy:banner:end -->
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button data-cookie-settings="" type="button">Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
 <!-- pageviews:start -->
 <script>
 (function () {
