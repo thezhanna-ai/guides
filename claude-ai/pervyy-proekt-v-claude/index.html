@@ -699,8 +699,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <link rel="canonical" href="https://pronovoe.com/claude-ai/pervyy-proekt-v-claude/">
 <!-- seo:canonical:end -->
 <!-- seo:schema:start -->
-<script type="application/ld+json" id="seo-schema">
-{
+<script type="application/ld+json" id="seo-schema">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -741,290 +740,312 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Как создать проект в Claude?",
+          "name": "Название проекта само задаёт контекст?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Открой Projects и нажми New project. Укажи название по своей задаче и короткое пояснение, затем нажми Create project. После создания добавь нужные документы в Context: имя и описание проекта сами по себе не наполняют его базу знаний."
+            "text": "Нет. Название и описание помогают тебе ориентироваться. Рабочие правила добавляй в Instructions, а исходники - в базу знаний."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему перенос чата не решил вопрос с файлами?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Перемещённый разговор остаётся разговором. Документы для всех новых чатов добавляются в Context отдельно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Проект сам читает обновления прайса на компьютере?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет, ручная загрузка не создаёт синхронизацию. При изменении исходника обнови документ в проекте и проверь ответ повторно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли пользоваться проектом для одной разовой задачи?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Можно, но для одного документа и одного вопроса обычно достаточно чата. Проект полезнее, когда общие материалы нужны повторно."
           }
         }
       ]
     }
   ]
-}
-</script>
+}</script>
 <!-- seo:schema:end -->
+<style id="volna2-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:var(--guide-color-transparent)!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card .copy-button{position:static;display:block;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto}article .table-wrap{margin:24px 0;border:1px solid var(--line);border-radius:10px}article .table-wrap table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;color:var(--ink)}article .table-wrap td,article .table-wrap th{vertical-align:top;padding:14px;text-align:left;border-bottom:1px solid var(--line);overflow-wrap:anywhere}article .table-wrap th{background:var(--info);color:var(--emerald)}article .table-wrap tbody tr:nth-child(even){background:var(--paper-2)}@media(max-width:600px){article .table-wrap table{min-width:550px}}article details summary{cursor:pointer;font-weight:700}article #voprosy details{padding:16px 0;border-bottom:1px solid var(--muted)}html[data-theme="dark"] article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white)}article pre{overflow-wrap:anywhere}html[data-theme="dark"] h1.article-standard-h1,html[data-theme="dark"] .cookie-banner a{color:var(--ink)!important}</style><style id="volna2-house-layout">
+
+/* Оболочка опубликованного Курьера, 29.10.2026. Содержимое статьи сохранено. */
+body { font: 18.4px/1.65 Spectral, Georgia, serif }
+.masthead { background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)) }
+.masthead-inner { gap: 20px }
+.brand { font-size: 18px; line-height: 1.65 }
+.theme-toggle { width: 40px; min-height: 40px; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+.toc-label, .related-plaque .plaque-label { font-family: ui-monospace, monospace }
+.lead { margin: 20px 0 0; font-size: inherit; line-height: inherit }
+.route-note h2 { margin: 0 0 18px; color: var(--emerald); font: 700 clamp(23px, 3.3vw, 29px)/1.2 Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -.58px }
+.route-note p { margin: 0 0 20px; color: var(--ink); font-size: inherit; line-height: inherit }
+.mobile-toc { margin-top: 26px }
+.privacy-footer { font: inherit; color: var(--ink) }
+@media (max-width: 860px) {
+  body { font-size: 17px; line-height: 1.62 }
+  .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+}
+
+</style>
 </head>
 <body>
-  <div class="progress" aria-hidden="true"></div>
-  <header class="masthead">
-    <div class="masthead-inner">
-      <div class="brand">Claude.ai: кнопка за кнопкой</div>
-      <div class="header-actions">
-        <div class="handout-title">Первый проект в Claude</div>
-        <div class="header-controls">
-          <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
-
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="page-shell">
-    <nav class="toc" aria-label="Содержание">
-      <p class="toc-label">Содержание</p>
-      <a class="active" href="#pervyy-proekt">Первый проект в Claude: своя папка с памятью</a>
-      <a href="#sborka">Сборка проекта</a>
-      <a class="toc-sub" href="#gde-proekty">1. Где лежат проекты</a>
-      <a class="toc-sub" href="#sozdat">2. Создать проект и дать ему имя</a>
-      <a class="toc-sub" href="#znaniya">3. Добавить документы в базу знаний</a>
-      <a class="toc-sub" href="#instrukcii">4. Написать инструкции проекта</a>
-      <a class="toc-sub" href="#chat">5. Начать чат внутри проекта</a>
-      <div class="toc-group">Дальше</div>
-      <a href="#perenesti">Перенести старый чат в проект</a>
-      <a href="#granicy">Что проект не делает</a>
-      <a href="#chto-sobrat">Какие проекты собрать первыми</a>
-      <a href="#sources">Источники</a>
-    </nav>
-
-    <main>
-      <details class="mobile-toc">
-        <summary>Содержание статьи</summary>
-        <nav aria-label="Содержание на телефоне">
-          <a href="#pervyy-proekt">Первый проект в Claude: своя папка с памятью</a>
-          <a href="#sborka">Сборка проекта</a>
-          <a href="#gde-proekty">1. Где лежат проекты</a>
-          <a href="#sozdat">2. Создать проект и дать ему имя</a>
-          <a href="#znaniya">3. Добавить документы в базу знаний</a>
-          <a href="#instrukcii">4. Написать инструкции проекта</a>
-          <a href="#chat">5. Начать чат внутри проекта</a>
-          <strong>Дальше</strong>
-          <a href="#perenesti">Перенести старый чат в проект</a>
-          <a href="#granicy">Что проект не делает</a>
-          <a href="#chto-sobrat">Какие проекты собрать первыми</a>
-          <a href="#sources">Источники</a>
-        </nav>
-      </details>
-
-      <article>
-        <header id="pervyy-proekt">
-          <p class="eyebrow">Claude.ai · проекты</p>
-          <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Один архитектурный макет с общей внутренней структурой как образ проекта Claude с инструкциями, памятью и материалами" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=d83a44b64b5c 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Материалы, инструкции и старые разговоры в общей папке для одной задачи</figcaption></figure>
+<div aria-hidden="true" class="progress"></div>
+<header class="masthead">
+<div class="masthead-inner">
+<div class="brand">Claude.ai: кнопка за кнопкой</div>
+<div class="header-actions">
+<div class="handout-title">Первый проект в Claude</div>
+<div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div>
+</div>
+</div>
+</header>
+<div class="page-shell">
+<nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Чат, проект и локальная папка</a>
+<a href="#sborka">Сборка проекта</a>
+<a class="toc-sub" href="#gde-proekty">1. Где лежат проекты</a>
+<a class="toc-sub" href="#sozdat">2. Создать проект и дать ему имя</a>
+<a class="toc-sub" href="#znaniya">3. Добавить документы в базу знаний</a>
+<a class="toc-sub" href="#instrukcii">4. Написать инструкции проекта</a>
+<a class="toc-sub" href="#chat">5. Начать чат внутри проекта</a>
+<a href="#fayly">Проверка загруженных документов</a>
+<a href="#perenesti">Перенести старый чат в проект</a>
+<a href="#pamyat-proekta">Память и доступ к материалам</a>
+<a href="#granicy">Что проект не делает</a>
+<a href="#chto-sobrat">Какие проекты собрать первыми</a>
+<a href="#oshibki">Что ломается и что делать</a>
+<a href="#pamyatka">Памятка перед новым чатом</a>
+<a href="#voprosy">Частые вопросы</a>
+<a href="#sources">Источники</a></nav>
+<main>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Чат, проект и локальная папка</a>
+<a href="#sborka">Сборка проекта</a>
+<a class="toc-sub" href="#gde-proekty">1. Где лежат проекты</a>
+<a class="toc-sub" href="#sozdat">2. Создать проект и дать ему имя</a>
+<a class="toc-sub" href="#znaniya">3. Добавить документы в базу знаний</a>
+<a class="toc-sub" href="#instrukcii">4. Написать инструкции проекта</a>
+<a class="toc-sub" href="#chat">5. Начать чат внутри проекта</a>
+<a href="#fayly">Проверка загруженных документов</a>
+<a href="#perenesti">Перенести старый чат в проект</a>
+<a href="#pamyat-proekta">Память и доступ к материалам</a>
+<a href="#granicy">Что проект не делает</a>
+<a href="#chto-sobrat">Какие проекты собрать первыми</a>
+<a href="#oshibki">Что ломается и что делать</a>
+<a href="#pamyatka">Памятка перед новым чатом</a>
+<a href="#voprosy">Частые вопросы</a>
+<a href="#sources">Источники</a></nav></details>
+<article>
+<header id="pervyy-proekt">
+<p class="eyebrow">Claude.ai · проекты</p>
+<figure class="cover cover-v2"><img alt="Один архитектурный макет с общей внутренней структурой как образ проекта Claude с инструкциями, памятью и материалами" data-full-src="assets/oblozhka.webp" decoding="async" fetchpriority="high" height="840" loading="eager" sizes="(max-width: 860px) calc(100vw - 40px), 780px" src="assets/oblozhka.webp" srcset="assets/oblozhka.reading-1600.webp?v=d83a44b64b5c 1600w" width="1600"/><figcaption>Материалы, инструкции и старые разговоры в общей папке для одной задачи</figcaption></figure>
 <h1 class="article-standard-h1">Первый проект в Claude: своя папка с памятью</h1>
-<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<p class="uroven-metka green" style='display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif'>Начальный уровень</p>
 <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 11 СЕНТЯБРЯ 2026</p>
-
-
-          <p class="lead">Чаты по одной задаче расползаются по всей истории, и нужные файлы приходится каждый раз прикреплять заново. Проект собирает их в одно место: документы лежат в базе знаний, а каждый новый чат внутри проекта уже знает, о чём речь. Ниже создадим его и перенесём старый разговор.</p>
-          <aside class="route-note" aria-label="Короткий маршрут">
-            <h2>Проект в Claude: короткий маршрут</h2>
-            <p>Projects в левом меню → New project → имя → добавить документы в Context → написать инструкции в Instructions → начать чат внутри проекта</p>
-          </aside>
-          <p class="purpose">Если вход в Claude ещё не настроен, начни с инструкции <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. А чтобы Claude знал, кто ты, пройди <a href="../kak-rasskazat-o-sebe/">«Как рассказать Claude о себе»</a></p>
-
+<p class="lead">Ты снова прикрепляешь прайс, объясняешь задачу и ищешь нужный разговор среди остальных чатов. Для повторной работы удобнее собрать материалы в проекте. Создадим его в браузерном Claude, добавим документы и проверим их в новом разговоре, чтобы не рассчитывать на память там, где нужен точный файл с исходными данными.</p>
+<aside aria-label="Короткий маршрут" class="route-note">
+<h2>Проект в Claude: короткий маршрут</h2>
+<p>Projects в левом меню → New project → имя → добавить документы в Context → написать инструкции в Instructions → начать чат внутри проекта</p>
+</aside>
+<p class="purpose">Если вход в Claude ещё не настроен, начни с инструкции <a href="../podklyuchenie-iz-rossii/">«Как подключить Claude из России»</a>. А чтобы Claude знал, кто ты, пройди <a href="../kak-rasskazat-o-sebe/">«Как рассказать Claude о себе»</a></p>
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Первый проект в Claude: своя папка с памятью</span></nav>
 <!-- seo:breadcrumbs:end -->
 </header>
-
 <div class="share-row share-top">
-        <span class="eyebrow">Поделиться</span>
-        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F&amp;text=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E" target="_blank" rel="noopener">Telegram</a>
-        <a class="share-btn" href="https://wa.me/?text=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F&amp;title=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E" target="_blank" rel="noopener">VK</a>
-      </div>
-
-<section class="content-section" id="sborka">
-          <p class="section-label">С чего начать</p>
-          <h2>Сборка проекта</h2>
-          <p class="purpose">Весь проект собирается за пять шагов и занимает минут десять. Дальше он работает сам: ты просто открываешь его и пишешь, как в обычном чате</p>
-          <div class="step">
-            <h3 id="gde-proekty">1. Где лежат проекты</h3>
-            <p>Открой Claude в браузере и посмотри на левое меню. Под строкой нового чата есть пункт <span class="path">Projects</span>. Нажми на него, и откроется список твоих проектов. В первый раз он будет пустой</p>
-            <div class="info-card">
-              <p><span class="info-title">Если левого меню не видно:</span> на узком экране оно спрятано. Нажми на значок из трёх полосок в левом верхнем углу, меню выедет сбоку</p>
-            </div>
-            <p class="minor">Можно попасть туда и напрямую, по адресу <span class="path">claude.ai/projects</span></p>
-            <figure>
-              <div class="shot">
-                <img src="assets/claude-projects-list.png" alt="Страница Projects в Claude: пункт Projects в левом меню и кнопка New project в правом верхнем углу" width="1276" height="558" loading="lazy" decoding="async">
-              </div>
-              <figcaption>Слева в меню пункт <b>Projects</b>, справа вверху кнопка <b>New project</b>. Ниже карточками лежат уже созданные проекты</figcaption>
-            </figure>
-            <div class="result"><p><b>Результат:</b> перед тобой страница проектов, и ты знаешь, как возвращаться сюда каждый раз</p></div>
-          </div>
-          <div class="step">
-            <h3 id="sozdat">2. Создать проект и дать ему имя</h3>
-            <p>В правом верхнем углу страницы проектов нажми <span class="path">New project</span>. Откроется окно <span class="path">Create a project</span> с двумя полями</p>
-            <figure>
-              <div class="shot medium">
-                <img src="assets/claude-create-project.png" alt="Окно Create a project в Claude с полями What are you working on и What are you trying to achieve" width="838" height="559" loading="lazy" decoding="async">
-              </div>
-              <figcaption>Так выглядят заполненные поля: имя <b>Карусели</b> и пояснение <b>для ИГ</b>. Короткого ответа хватает, расписывать не нужно. Дальше жмёшь <b>Create project</b></figcaption>
-            </figure>
-            <p><b>What are you working on?</b> - название проекта. Пиши по задаче, а не по теме вообще: не «Работа», а «Сайт для студии» или «Посты для Телеграма». Тогда через месяц ты найдёшь нужный проект за секунду</p>
-            <p><b>What are you trying to achieve?</b> - короткое пояснение, о чём проект. Это подпись для тебя, чтобы не путать проекты между собой</p>
-            <div class="limit-card">
-              <p><span class="info-title">На бесплатном тарифе можно создать до пяти проектов.</span> Если пять уже есть, новый не создастся, пока не удалить или не убрать в архив один из старых</p>
-            </div>
-            <div class="result"><p><b>Результат:</b> проект создан, и ты внутри него - на пустой экран с полем ввода и базой знаний справа</p></div>
-          </div>
-          <div class="step">
-            <h3 id="znaniya">3. Добавить документы в базу знаний</h3>
-            <p>Посмотри вправо внутри проекта. Там столбец из трёх блоков: <span class="path">Instructions</span>, <span class="path">Memory</span> и <span class="path">Context</span>. База знаний - это <b>Context</b>, нижний блок. Это общая папка проекта: всё, что ты в неё положишь, видят все чаты этого проекта</p>
-            <p>Нажми <span class="path">+</span> справа от слова <b>Context</b> и добавь файлы: документы, таблицы, тексты, куски кода. Можно вставить текст прямо в окно, не загружая файл, или перетащить файлы мышкой прямо на этот столбец</p>
-            <figure>
-              <div class="shot">
-                <img src="assets/claude-project-context.png" alt="Правый столбец проекта в Claude: блоки Instructions, Memory и Context с загруженными файлами и полосой заполнения" width="1220" height="1080" loading="lazy" decoding="async" srcset="assets/claude-project-context.reading-1220.webp 1220w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/claude-project-context.png">
-              </div>
-              <figcaption>Стрелки показывают, куда попадают файлы: жмёшь <b>+</b> у <b>Context</b>, и документы ложатся карточками ниже. Полоса над ними показывает, сколько места проекта занято</figcaption>
-            </figure>
-            <p>Клади туда то, что Claude должен помнить постоянно: описание твоего продукта, прайс, готовые тексты, выгрузку переписки с клиентом, техническое задание</p>
-            <div class="info-card">
-              <p><span class="info-title">Главное про базу знаний:</span> чаты внутри проекта не видят друг друга. Файл, прикреплённый в одном чате, в соседнем не появится. Общим он становится только тогда, когда лежит в базе знаний проекта</p>
-            </div>
-            <p class="minor">На платных тарифах в проект помещается заметно больше материалов: Claude включает режим поиска по базе и расширяет её объём примерно в десять раз</p>
-            <div class="result"><p><b>Результат:</b> документы лежат в базе знаний, и прикреплять их в каждом чате больше не нужно</p></div>
-          </div>
-          <div class="step">
-            <h3 id="instrukcii">4. Написать инструкции проекта</h3>
-            <p>Открой в том же правом столбце верхний блок <span class="path">Instructions</span> - инструкции проекта. Здесь ты один раз объясняешь, как Claude должен вести себя именно в этом проекте: в какой роли, каким тоном, что учитывать и чего не делать</p>
-            <figure>
-              <div class="shot small">
-                <img src="assets/claude-instructions-button.png" alt="Блок Instructions в правом столбце проекта Claude: кнопка плюс с подсказкой Edit instructions" width="364" height="256" loading="lazy" decoding="async">
-              </div>
-              <figcaption>Инструкции прячутся за плюсиком у слова <b>Instructions</b>. Наведёшь - Claude подскажет <b>Edit instructions</b></figcaption>
-            </figure>
-            <figure>
-              <div class="shot">
-                <img src="assets/claude-instructions-window.png" alt="Окно Set project instructions в Claude: пояснение и поле для текста инструкций" width="1758" height="400" loading="lazy" decoding="async">
-              </div>
-              <figcaption>Откроется окно <b>Set project instructions</b>. Claude сразу предупреждает: инструкции проекта работают <b>вместе</b> с настройками профиля, а не вместо них. Текст вставляешь в поле и жмёшь <b>Save instructions</b></figcaption>
-            </figure>
-            <p>Это не то же самое, что общие настройки профиля. Профиль говорит, кто ты вообще. Инструкции проекта говорят, какую работу ты делаешь здесь</p>
-            <div class="prompt-box">
-              <button class="copy-button" type="button" data-copy-target="project-instructions">Скопировать</button>
-              <pre id="project-instructions">Ты помогаешь мне вести этот проект. Что делаем: [коротко, что за проект и какой нужен результат]. Для кого: [кто читатель или клиент]. Опирайся на документы из базы знаний проекта, не выдумывай цифры и факты, которых там нет. Если данных не хватает - спроси, а не заполняй пропуск догадкой. Пиши простым языком, без канцелярита</pre>
-            </div>
-            <p>Подставь в квадратные скобки свои слова и вставь текст в поле инструкций. Дальше правь по ходу: заметил, что Claude раз за разом делает не то, допиши строку сюда</p>
-            <div class="result"><p><b>Результат:</b> каждый новый чат проекта начинается уже настроенным, и объяснять заново не нужно</p></div>
-          </div>
-          <div class="step">
-            <h3 id="chat">5. Начать чат внутри проекта</h3>
-            <p>Напиши задачу своими словами прямо в поле ввода внутри проекта. Выглядит оно как обычный чат, но работает иначе: этот чат уже видит базу знаний и инструкции</p>
-            <p>Все чаты проекта складываются тут же, отдельным списком. История задачи перестаёт смешиваться с остальной перепиской</p>
-            <figure>
-              <div class="shot">
-                <img src="assets/claude-project-chat.png" alt="Чат внутри проекта Claude: путь Projects и имя проекта сверху, поле ввода и меню с тремя точками справа" width="1188" height="639" loading="lazy" decoding="async">
-              </div>
-              <figcaption>Задача пишется обычными словами, без вводных про то, что за проект: Claude уже знает это из базы знаний и инструкций. Сверху видно, где ты находишься, справа меню с тремя точками</figcaption>
-            </figure>
-            <div class="info-card">
-              <p><span class="info-title">Как проверить, что база знаний работает:</span> напиши в чате проекта «перечисли, какие документы лежат в базе знаний проекта». Claude назовёт файлы. Если он их не видит - значит файл прикреплён к чату, а не добавлен в базу</p>
-            </div>
-            <div class="result"><p><b>Результат:</b> проект собран и работает. Дальше ты открываешь его и пишешь, не повторяя вводные</p></div>
-          </div>
-        </section>
-
-        <section class="content-section" id="perenesti">
-          <p class="section-label">Что делать со старой перепиской</p>
-          <h2>Перенести старый чат в проект</h2>
-          <p class="purpose">Обычная ситуация: по задаче уже есть длинный разговор, и начинать с нуля жалко. Переносить его не нужно вручную</p>
-          <p>Открой нужный чат, нажми на меню с тремя точками рядом с его названием и выбери перенос в проект. Чат встанет в список проекта вместе со всей историей</p>
-          <div class="info-card">
-            <p><span class="info-title">Важная деталь:</span> перенос кладёт в проект сам разговор, но не наполняет базу знаний. Файлы, которые были прикреплены внутри того чата, добавь в <span class="path">Context</span> отдельно, иначе соседние чаты их не увидят</p>
-          </div>
-          <div class="result"><p><b>Результат:</b> начатая работа продолжается в проекте, ничего не потеряно</p></div>
-        </section>
-
-        <section class="content-section" id="granicy">
-          <p class="section-label">Чтобы не ждать лишнего</p>
-          <h2>Что проект не делает</h2>
-          <p class="purpose">Три причины, по которым новички решают, что проект сломался</p>
-          <div class="check-panel">
-            <h3>Границы проекта</h3>
-            <ul class="checklist">
-              <li>Чаты проекта не видят друг друга: общее только то, что лежит в базе знаний</li>
-              <li>Имя и описание проекта - подпись для тебя, Claude в работе на них не опирается</li>
-              <li>Проект не подтягивает файлы с твоего компьютера сам: документы нужно положить в базу знаний руками</li>
-          </ul>
-          </div>
-          <div class="info-card">
-            <p><span class="info-title">Если проект стал лишним:</span> его можно убрать в архив, и он перестанет мешаться в списке, сохранив все настройки. Удалить архивный проект сразу нельзя - сначала верни его из архива, тогда появится удаление</p>
-          </div>
-          <div class="result"><p><b>Результат:</b> ты понимаешь, где проходит граница, и не ищешь поломку там, где её нет</p></div>
-        </section>
-
-        <section class="content-section" id="chto-sobrat">
-          <p class="section-label">С чего начать сегодня</p>
-          <h2>Какие проекты собрать первыми</h2>
-          <p class="purpose">Пяти проектов бесплатного тарифа хватает надолго, если заводить их по крупным направлениям, а не по каждой мелкой задаче</p>
-          <table class="effort-table">
-            <tbody>
-              <tr><th scope="row">Твой продукт</th><td>Описание, прайс, частые вопросы клиентов. Отсюда берутся тексты, письма и ответы</td></tr>
-              <tr><th scope="row">Контент</th><td>Твои удачные посты, темы, правила подачи. Claude пишет в твоём стиле, а не в среднем</td></tr>
-              <tr><th scope="row">Учёба</th><td>Конспекты, инструкции, заметки с занятий. Удобно спрашивать по своим материалам</td></tr>
-              <tr><th scope="row">Разовая крупная задача</th><td>Переезд, ремонт, отчёт, поиск работы. Закончилась - проект в архив. Расчёты по такой задаче удобно держать <a href="../artefakty-v-claude/">артефактом</a>: смету правишь прямо в окне, не открывая чат</td></tr>
-            </tbody>
-          </table>
-          <div class="info-card">
-            <p><span class="info-title">Частая ошибка:</span> завести проект и оставить базу знаний пустой. Тогда это просто папка с чатами. Ценность появляется с первого документа внутри</p>
-          </div>
-          <div class="result"><p><b>Результат:</b> у тебя есть понятный список, с чего начать, и проект не превращается в пустую папку</p></div>
-        </section>
-
-        <section class="content-section" id="sources">
-          <p class="section-label">Официальные материалы</p>
-          <h2>Источники</h2>
-          <ul class="sources">
-            <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">Anthropic: что такое проекты</a></li>
-            <li><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">Anthropic: как создать проект и управлять им</a></li>
-          </ul>
-        </section>
-
-        <section class="next-read" aria-label="Дальше по теме">
-          <h2>Дальше по теме</h2>
-          <p class="next-sub">Что логично прочитать следующим</p>
-          <ul>
-            <li><a href="../svoy-server-dlya-claude/"><span class="title">Свой сервер для Claude</span><span class="why">Проект работает - перенеси его на свой сервер и открывай с телефона</span></a></li>
-            <li><a href="../gotovye-fayly-excel-word-pdf/"><span class="title">Готовый Excel, Word, PDF или презентация - без копипаста</span><span class="why">Чтобы проект отдавал готовые Excel, Word и PDF</span></a></li>
-          </ul>
-        </section>
-
+<span class="eyebrow">Поделиться</span>
+<a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F&amp;text=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E" rel="noopener" target="_blank">Telegram</a>
+<a class="share-btn" href="https://wa.me/?text=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F" rel="noopener" target="_blank">WhatsApp</a>
+<a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F&amp;title=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E" rel="noopener" target="_blank">VK</a>
+</div>
+<section class="content-section" id="podgotovka"><h2>Чат, проект и локальная папка</h2><p>Здесь нужен открытый аккаунт Claude; <a href="/claude-ai/podklyuchenie-iz-rossii/">доступ подготовь отдельно</a>. Projects в браузере - рабочее пространство сервиса. Это не локальная папка и не открытый в VS Code проект Claude Code.</p><div class="table-wrap"><table><thead><tr><th>Куда добавить материал</th><th>Для чего</th></tr></thead><tbody><tr><td>Вложение в обычный чат</td><td>Разовый вопрос по документу</td></tr><tr><td>База знаний проекта: Context</td><td>Повторная работа с тем же набором исходников</td></tr><tr><td>Instructions проекта</td><td>Роль и правила ответа в этом проекте</td></tr><tr><td>Memory</td><td>Краткие сведения и контекст, а не точная копия документа</td></tr></tbody></table></div></section><section class="content-section" id="sborka">
+<p class="section-label">С чего начать</p>
+<h2>Сборка проекта</h2>
+<p class="purpose">Сначала создадим проект, затем отдельно добавим документы и инструкции. Проект помогает возвращаться к общей задаче, но сам по расписанию ничего не запускает.</p>
+<div class="step">
+<h3 id="gde-proekty">1. Где лежат проекты</h3>
+<p>Открой Claude в браузере и посмотри на левое меню. Под строкой нового чата есть пункт <span class="path">Projects</span>. Нажми на него, и откроется список твоих проектов. В первый раз он будет пустой</p>
+<div class="info-card">
+<p><span class="info-title">Если левого меню не видно:</span> на узком экране оно спрятано. Нажми на значок из трёх полосок в левом верхнем углу, меню выедет сбоку</p>
+</div>
+<p class="minor">Можно попасть туда и напрямую, по адресу <span class="path">claude.ai/projects</span></p>
+<figure>
+<div class="shot">
+<img alt="Страница Projects в Claude: пункт Projects в левом меню и кнопка New project в правом верхнем углу" decoding="async" height="558" loading="lazy" src="assets/claude-projects-list.png" width="1276"/>
+</div>
+<figcaption>Слева в меню пункт <b>Projects</b>, справа вверху кнопка <b>New project</b>. Ниже карточками лежат уже созданные проекты</figcaption>
+</figure>
+<div class="result"><p><b>Результат:</b> перед тобой страница проектов, и ты знаешь, как возвращаться сюда каждый раз</p></div>
+</div>
+<div class="step">
+<h3 id="sozdat">2. Создать проект и дать ему имя</h3>
+<p>В правом верхнем углу страницы проектов нажми <span class="path">New project</span>. Откроется окно <span class="path">Create a project</span> с двумя полями</p>
+<figure>
+<div class="shot medium">
+<img alt="Окно Create a project в Claude с полями What are you working on и What are you trying to achieve" decoding="async" height="559" loading="lazy" src="assets/claude-create-project.png" width="838"/>
+</div>
+<figcaption>Так выглядят заполненные поля: имя <b>Карусели</b> и пояснение <b>для ИГ</b>. Короткого ответа хватает, расписывать не нужно. Дальше жмёшь <b>Create project</b></figcaption>
+</figure>
+<p><b>What are you working on?</b> - название проекта. Пиши по задаче, а не по теме вообще: не «Работа», а «Сайт для студии» или «Посты для Телеграма». Тогда через месяц ты найдёшь нужный проект за секунду</p>
+<p><b>What are you trying to achieve?</b> - короткое пояснение, о чём проект. Это подпись для тебя, чтобы не путать проекты между собой</p>
+<div class="limit-card">
+<p><span class="info-title">На бесплатном тарифе можно создать до пяти проектов.</span> Если пять уже есть, новый не создастся, пока не удалить или не убрать в архив один из старых</p>
+</div>
+<div class="result"><p><b>Результат:</b> проект создан, и ты внутри него - на пустой экран с полем ввода и базой знаний справа</p></div>
+</div>
+<div class="step">
+<h3 id="znaniya">3. Добавить документы в базу знаний</h3>
+<p>Посмотри вправо внутри проекта. Там столбец из трёх блоков: <span class="path">Instructions</span>, <span class="path">Memory</span> и <span class="path">Context</span>. База знаний - это <b>Context</b>, нижний блок. Это общая папка проекта: всё, что ты в неё положишь, видят все чаты этого проекта</p>
+<p>Нажми <span class="path">+</span> справа от слова <b>Context</b> и добавь файлы: документы, таблицы, тексты, куски кода. Можно вставить текст прямо в окно, не загружая файл, или перетащить файлы мышкой прямо на этот столбец</p>
+<figure>
+<div class="shot">
+<img alt="Правый столбец проекта в Claude: блоки Instructions, Memory и Context с загруженными файлами и полосой заполнения" data-full-src="assets/claude-project-context.png" decoding="async" height="1080" loading="lazy" sizes="(max-width: 860px) calc(100vw - 40px), 780px" src="assets/claude-project-context.png" srcset="assets/claude-project-context.reading-1220.webp 1220w" width="1220"/>
+</div>
+<figcaption>Стрелки показывают, куда попадают файлы: жмёшь <b>+</b> у <b>Context</b>, и документы ложатся карточками ниже. Полоса над ними показывает, сколько места проекта занято</figcaption>
+</figure>
+<p>Клади туда то, что Claude должен помнить постоянно: описание твоего продукта, прайс, готовые тексты, выгрузку переписки с клиентом, техническое задание</p>
+<div class="info-card">
+<p>Точные исходные файлы добавляй в базу знаний проекта. Не рассчитывай, что вложение к одному сообщению автоматически станет общим документом. Память и поиск по разговорам управляются отдельно.</p>
+</div>
+<p class="minor">На поддерживаемых планах при приближении к пределу базы Claude может использовать поиск по фрагментам (RAG). Это не обещает загрузку любого файла и не отменяет проверку конкретного ответа по исходнику.</p>
+<div class="result"><p><b>Результат:</b> документы лежат в базе знаний, и прикреплять их в каждом чате больше не нужно</p></div>
+</div>
+<div class="step">
+<h3 id="instrukcii">4. Написать инструкции проекта</h3>
+<p>Открой в том же правом столбце верхний блок <span class="path">Instructions</span> - инструкции проекта. Здесь ты один раз объясняешь, как Claude должен вести себя именно в этом проекте: в какой роли, каким тоном, что учитывать и чего не делать</p>
+<figure>
+<div class="shot small">
+<img alt="Блок Instructions в правом столбце проекта Claude: кнопка плюс с подсказкой Edit instructions" decoding="async" height="256" loading="lazy" src="assets/claude-instructions-button.png" width="364"/>
+</div>
+<figcaption>Инструкции прячутся за плюсиком у слова <b>Instructions</b>. Наведёшь - Claude подскажет <b>Edit instructions</b></figcaption>
+</figure>
+<figure>
+<div class="shot">
+<img alt="Окно Set project instructions в Claude: пояснение и поле для текста инструкций" decoding="async" height="400" loading="lazy" src="assets/claude-instructions-window.png" width="1758"/>
+</div>
+<figcaption>Откроется окно <b>Set project instructions</b>. Claude сразу предупреждает: инструкции проекта работают <b>вместе</b> с настройками профиля, а не вместо них. Текст вставляешь в поле и жмёшь <b>Save instructions</b></figcaption>
+</figure>
+<p>Это не то же самое, что общие настройки профиля. Профиль говорит, кто ты вообще. Инструкции проекта говорят, какую работу ты делаешь здесь</p>
+<div class="prompt-box">
+<button class="copy-button" data-copy-target="project-instructions" type="button">Скопировать</button>
+<pre id="project-instructions">Ты помогаешь мне вести этот проект. Что делаем: [коротко, что за проект и какой нужен результат]. Для кого: [кто читатель или клиент]. Опирайся на документы из базы знаний проекта, не выдумывай цифры и факты, которых там нет. Если данных не хватает - спроси, а не заполняй пропуск догадкой. Пиши простым языком, без канцелярита</pre>
+</div>
+<p>Подставь в квадратные скобки свои слова и вставь текст в поле инструкций. Дальше правь по ходу: заметил, что Claude раз за разом делает не то, допиши строку сюда</p>
+<div class="result"><p><b>Результат:</b> каждый новый чат проекта начинается уже настроенным, и объяснять заново не нужно</p></div>
+</div>
+<div class="step">
+<h3 id="chat">5. Начать чат внутри проекта</h3>
+<p>Напиши задачу своими словами прямо в поле ввода внутри проекта. Выглядит оно как обычный чат, но работает иначе: этот чат уже видит базу знаний и инструкции</p>
+<p>Все чаты проекта складываются тут же, отдельным списком. История задачи перестаёт смешиваться с остальной перепиской</p>
+<figure>
+<div class="shot">
+<img alt="Чат внутри проекта Claude: путь Projects и имя проекта сверху, поле ввода и меню с тремя точками справа" decoding="async" height="639" loading="lazy" src="assets/claude-project-chat.png" width="1188"/>
+</div>
+<figcaption>Задача пишется обычными словами, без вводных про то, что за проект: Claude уже знает это из базы знаний и инструкций. Сверху видно, где ты находишься, справа меню с тремя точками</figcaption>
+</figure>
+<div class="info-card">
+<p><span class="info-title">Как проверить, что база знаний работает:</span> напиши в чате проекта «перечисли, какие документы лежат в базе знаний проекта». Claude назовёт файлы. Если он их не видит - значит файл прикреплён к чату, а не добавлен в базу</p>
+</div>
+<div class="result"><p><b>Результат:</b> проект собран и работает. Дальше ты открываешь его и пишешь, не повторяя вводные</p></div>
+</div>
+</section>
+<section class="content-section" id="fayly"><h2>Проверка загруженных документов</h2><p>После добавления документа дождись окончания обработки и открой список файлов. Название над полем ввода означает вложение к сообщению; для общей работы файл должен быть виден в Context проекта.</p><p>Начни новый чат внутри этого проекта и попроси назвать конкретный пункт с цитатой из добавленного документа. Одного перечня имён файлов недостаточно: важен ответ по содержимому. Если нужный пункт не найден, сверь файл и повтори вопрос без догадок.</p><div class="prompt-card"><p class="prompt-label">Вставь в чат помощника</p><pre id="volna2-prompt-1">Используй документ [прайс услуг] из базы знаний проекта. Найди раздел [условия записи] и приведи его заголовок и короткую дословную цитату. Если такого файла или раздела нет, скажи об этом. Не восстанавливай условия по памяти и не добавляй типичные правила других компаний.</pre><button aria-label="Скопировать запрос 1" aria-live="polite" class="copy-button" data-copy-target="volna2-prompt-1" type="button">Скопировать</button></div><p>Поля в квадратных скобках - учебный пример: замени их реальными названиями файла и раздела. Для скана без распознанного текста может потребоваться OCR; для защищённого PDF сначала получи доступ к документу. Большой материал дели по смыслу, чтобы не потерять приложения и таблицы.</p></section><section class="content-section" id="perenesti">
+<p class="section-label">Что делать со старой перепиской</p>
+<h2>Перенести старый чат в проект</h2>
+<p class="purpose">Обычная ситуация: по задаче уже есть длинный разговор, и начинать с нуля жалко. Переносить его не нужно вручную</p>
+<p>Открой нужный чат, нажми на меню с тремя точками рядом с его названием и выбери перенос в проект. Чат встанет в список проекта вместе со всей историей</p>
+<div class="info-card">
+<p><span class="info-title">Важная деталь:</span> перенос кладёт в проект сам разговор, но не наполняет базу знаний. Файлы, которые были прикреплены внутри того чата, добавь в <span class="path">Context</span> отдельно, иначе соседние чаты их не увидят</p>
+</div>
+<div class="result"><p><b>Результат:</b> начатая работа продолжается в проекте, ничего не потеряно</p></div>
+</section>
+<section class="content-section" id="pamyat-proekta"><h2>Память и доступ к материалам</h2><p>У проекта есть память, а в новом интерфейсе также может использоваться общая память аккаунта. Проверь Use account memory, если нужно отделить рабочее направление от остальных. Доступ к подробному документу всё равно проверяй через базу знаний.</p><p>Перед добавлением материалов убедись, кто может открыть проект. Особенно это важно для рабочего аккаунта и клиентских документов. Содержимое проекта не становится локальной копией на твоём компьютере: важные оригиналы храни отдельно.</p></section><section class="content-section" id="granicy">
+<p class="section-label">Чтобы не ждать лишнего</p>
+<h2>Что проект не делает</h2>
+<p class="purpose">Три причины, по которым новички решают, что проект сломался</p>
+<div class="check-panel">
+<h3>Границы проекта</h3>
+<ul class="checklist">
+<li>Точные исходные файлы добавляй в базу знаний проекта. Не рассчитывай, что вложение к одному сообщению автоматически станет общим документом. Память и поиск по разговорам управляются отдельно.</li>
+<li>Имя и описание проекта - подпись для тебя, Claude в работе на них не опирается</li>
+<li>Проект не подтягивает файлы с твоего компьютера сам: документы нужно положить в базу знаний руками</li>
+</ul>
+</div>
+<div class="info-card">
+<p><span class="info-title">Если проект стал лишним:</span> его можно убрать в архив, и он перестанет мешаться в списке, сохранив все настройки. Удалить архивный проект сразу нельзя - сначала верни его из архива, тогда появится удаление</p>
+</div>
+<div class="result"><p><b>Результат:</b> ты понимаешь, где проходит граница, и не ищешь поломку там, где её нет</p></div>
+</section>
+<section class="content-section" id="chto-sobrat">
+<p class="section-label">С чего начать сегодня</p>
+<h2>Какие проекты собрать первыми</h2>
+<p class="purpose">Пяти проектов бесплатного тарифа хватает надолго, если заводить их по крупным направлениям, а не по каждой мелкой задаче</p>
+<table class="effort-table">
+<tbody>
+<tr><th scope="row">Твой продукт</th><td>Описание, прайс, частые вопросы клиентов. Отсюда берутся тексты, письма и ответы</td></tr>
+<tr><th scope="row">Контент</th><td>Твои удачные посты, темы, правила подачи. Claude пишет в твоём стиле, а не в среднем</td></tr>
+<tr><th scope="row">Учёба</th><td>Конспекты, инструкции, заметки с занятий. Удобно спрашивать по своим материалам</td></tr>
+<tr><th scope="row">Разовая крупная задача</th><td>Переезд, ремонт, отчёт, поиск работы. Закончилась - проект в архив. Расчёты по такой задаче удобно держать <a href="../artefakty-v-claude/">артефактом</a>: смету правишь прямо в окне, не открывая чат</td></tr>
+</tbody>
+</table>
+<div class="info-card">
+<p><span class="info-title">Частая ошибка:</span> завести проект и оставить базу знаний пустой. Тогда это просто папка с чатами. Ценность появляется с первого документа внутри</p>
+</div>
+<div class="result"><p><b>Результат:</b> у тебя есть понятный список, с чего начать, и проект не превращается в пустую папку</p></div>
+</section>
+<section class="content-section" id="oshibki"><h2>Что ломается и что делать</h2><div class="table-wrap"><table><thead><tr><th>Ситуация</th><th>Проверка</th></tr></thead><tbody><tr><td>Файл есть только в старом чате</td><td>Добавь нужный оригинал в Context отдельно.</td></tr><tr><td>Claude называет файл, но ошибается в содержании</td><td>Попроси точный раздел и цитату; сверь их с документом.</td></tr><tr><td>В PDF будто нет текста</td><td>Проверь текстовый слой и доступ к файлу, при необходимости подготовь распознанную копию.</td></tr><tr><td>Ответ следует общим правилам вместо проектных</td><td>Прочитай Instructions проекта вместе с личными настройками и убери противоречия.</td></tr><tr><td>После переноса чата соседние разговоры не видят вложение</td><td>Перенос разговора не равен добавлению файла в базу знаний.</td></tr></tbody></table></div></section><section class="content-section" id="pamyatka"><h2>Памятка перед новым чатом</h2><ul><li>Нужный проект открыт и назван по задаче.</li><li>Документы видны в Context, а не только в сообщениях.</li><li>Инструкции содержат роль и запрет выдумывать отсутствующие факты.</li><li>Настройки памяти и доступ проекта проверены отдельно.</li><li>В новом чате получен проверяемый ответ с цитатой из документа.</li></ul></section><section class="content-section" id="voprosy"><h2>Частые вопросы</h2><details class="faq-item"><summary>Название проекта само задаёт контекст?</summary><p>Нет. Название и описание помогают тебе ориентироваться. Рабочие правила добавляй в Instructions, а исходники - в базу знаний.</p></details><details class="faq-item"><summary>Почему перенос чата не решил вопрос с файлами?</summary><p>Перемещённый разговор остаётся разговором. Документы для всех новых чатов добавляются в Context отдельно.</p></details><details class="faq-item"><summary>Проект сам читает обновления прайса на компьютере?</summary><p>Нет, ручная загрузка не создаёт синхронизацию. При изменении исходника обнови документ в проекте и проверь ответ повторно.</p></details><details class="faq-item"><summary>Можно ли пользоваться проектом для одной разовой задачи?</summary><p>Можно, но для одного документа и одного вопроса обычно достаточно чата. Проект полезнее, когда общие материалы нужны повторно.</p></details></section><section class="content-section" id="sources">
+<p class="section-label">Официальные материалы</p>
+<h2>Источники</h2>
+<ul class="sources">
+<li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">Anthropic: что такое проекты</a></li>
+<li><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">Anthropic: как создать проект и управлять им</a></li>
+</ul>
+</section>
+<section aria-label="Дальше по теме" class="next-read">
+<h2>Дальше по теме</h2>
+<p class="next-sub">Что логично прочитать следующим</p>
+<ul>
+<li><a href="../svoy-server-dlya-claude/"><span class="title">Свой сервер для Claude</span><span class="why">Проект работает - перенеси его на свой сервер и открывай с телефона</span></a></li>
+<li><a href="../gotovye-fayly-excel-word-pdf/"><span class="title">Готовый Excel, Word, PDF или презентация - без копипаста</span><span class="why">Чтобы проект отдавал готовые Excel, Word и PDF</span></a></li>
+</ul>
+</section>
 <!-- seo:faq:start -->
-<section class="seo-faq" aria-label="Вопросы из поиска" style="margin:36px 0"><h2>Что ещё спрашивают</h2><details class="faq-item"><summary>Как создать проект в Claude?</summary><p>Открой Projects и нажми New project. Укажи название по своей задаче и короткое пояснение, затем нажми Create project. После создания добавь нужные документы в Context: имя и описание проекта сами по себе не наполняют его базу знаний.</p></details></section>
+
 <!-- seo:faq:end -->
 <div class="share-row">
-        <span class="eyebrow">Поделиться</span>
-        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F&amp;text=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E" target="_blank" rel="noopener">Telegram</a>
-        <a class="share-btn" href="https://wa.me/?text=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F&amp;title=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E" target="_blank" rel="noopener">VK</a>
-      </div>
-
+<span class="eyebrow">Поделиться</span>
+<a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F&amp;text=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E" rel="noopener" target="_blank">Telegram</a>
+<a class="share-btn" href="https://wa.me/?text=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F" rel="noopener" target="_blank">WhatsApp</a>
+<a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpervyy-proekt-v-claude%2F&amp;title=%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20Claude%3A%20%D1%81%D0%B2%D0%BE%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20%D1%81%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E" rel="noopener" target="_blank">VK</a>
+</div>
 <!-- seo:related:start -->
 <section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/svoy-stil-otvetov/">Как научить Claude писать в твоём стиле</a></li></ul></section>
 <!-- seo:related:end -->
-<p class="cta-question">Первый проект создан. Каким будет следующий?</p>
-
-
-
+<p class="cta-question">Проект собран, документы доступны в новом разговоре, а правила не приходится вставлять каждый раз. Но выбор темы, подготовка публикации и проверка следующего результата пока требуют отдельных поручений. Ниже - о том, как связать общие материалы с работой над контентом и сайтом без знания кода.</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
-<footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев<!-- privacy:footer:start -->
-<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
-<!-- privacy:footer:end -->
+<footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев
 </footer>
-      </article>
-    </main>
-    <aside class="related-plaque" aria-label="Следующая статья">
+</article>
+</main>
+<aside aria-label="Следующая статья" class="related-plaque">
       <p class="plaque-label">Рядом пригодится</p>
-      <h2>Модель и уровень effort: что включать под задачу</h2>
+<h2>Модель и уровень effort: что включать под задачу</h2>
       <p><a href="../vybor-modeli-i-effort/">Внутри проекта модель выбирается так же - не трать тяжёлую на мелкую работу</a></p>
-    </aside>
-  </div>
-    <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее">
-    <button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
-    <div class="viewer-scroll"><img alt=""></div>
-    <p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
-  </div>
+</aside>
+</div>
+<div aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
+<button aria-label="Закрыть" class="viewer-close" type="button">✕</button>
+<div class="viewer-scroll"><img alt=""/></div>
+<p class="viewer-hint">Нажми в стороне или Esc, чтобы закрыть</p>
+</div>
 <script>
     const progress = document.querySelector('.progress');
     const links = [...document.querySelectorAll('.toc a, .mobile-toc a')];
@@ -1095,7 +1116,6 @@ themeButton.addEventListener("click", function () {
   themeButton.textContent = next === "dark" ? "☀" : "◐";
 });
 </script>
-
 <script src="../../assets/image-viewer.js"></script>
 <script>
     // Скриншот открывается в крупном размере с прокруткой на узком экране
@@ -1164,16 +1184,21 @@ themeButton.addEventListener("click", function () {
 <script>
 </script>
 <!-- privacy:banner:start -->
-<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
-  <div class="cookie-inner">
-    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
-    <div class="cookie-actions">
-      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
-      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
-    </div>
-  </div>
+<aside aria-label="Выбор аналитики" class="cookie-banner" hidden="" id="cookie-banner">
+<div class="cookie-inner">
+<p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+<div class="cookie-actions">
+<button aria-describedby="cookie-description" id="cookie-accept" type="button">Принять</button>
+<button aria-describedby="cookie-description" id="cookie-decline" type="button">Отказаться</button>
+</div>
+</div>
 </aside>
 <!-- privacy:banner:end -->
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button data-cookie-settings="" type="button">Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
 <!-- pageviews:start -->
 <script>
 (function () {
