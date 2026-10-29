@@ -679,7 +679,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-26",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/promty-risunok-zhivopis-chatgpt/assets/oblozhka.webp"
     },
     {
@@ -699,12 +699,50 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "item": "https://pronovoe.com/claude-ai/promty-risunok-zhivopis-chatgpt/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/promty-risunok-zhivopis-chatgpt/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Почему /watercolor меняет фон?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Команда перерисовывает весь кадр в новой технике. Укажи после неё, какие элементы фона сохранить"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли ослабить художественный эффект?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Допиши просьбу сохранить реалистичные черты и применить технику только к цвету или фактуре"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как получить другую технику без смешения?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Снова приложи исходник и вызови новую команду. Если старый стиль остаётся, открой чистый чат"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему /comicpanel добавляет текст?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Полный промпт просит короткое облачко реплики. Точный текст лучше задать после команды и проверить вручную"
+          }
+        }
+      ]
     }
   ]
 }
 </script>
 <!-- seo:schema:end -->
-<script type="application/ld+json" id="faq-schema">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Почему /watercolor меняет фон?","acceptedAnswer":{"@type":"Answer","text":"Команда перерисовывает весь кадр в новой технике. Укажи после неё, какие элементы фона сохранить."}},{"@type":"Question","name":"Можно ли ослабить художественный эффект?","acceptedAnswer":{"@type":"Answer","text":"Да. Допиши просьбу сохранить реалистичные черты и применить технику только к цвету или фактуре."}},{"@type":"Question","name":"Как получить другую технику без смешения?","acceptedAnswer":{"@type":"Answer","text":"Снова приложи исходник и вызови новую команду. Если старый стиль остаётся, открой чистый чат."}},{"@type":"Question","name":"Почему /comicpanel добавляет текст?","acceptedAnswer":{"@type":"Answer","text":"Полный промпт просит короткое облачко реплики. Точный текст лучше задать после команды и проверить вручную."}}]}</script></head><body><div class="progress" aria-hidden="true"></div>
+</head><body><div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
 <div class="header-actions"><div class="handout-title">Фото в живопись</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
@@ -764,7 +802,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- series:end --></section>
 
 
-<section class="content-section" id="proverka"><h2>Проверка перед сохранением</h2><p>Выбранную технику видно по следу материала: у масла остаются мазки, у бумаги края вырезанных слоёв, у вышивки стежки. Короткий промпт направляет рисунок, но не обещает одинаковый результат на каждом фото. Открой пробу крупнее, сравни эти признаки с переводом и сохрани тот вариант, в котором узнаётся и техника, и твой исходный сюжет</p></section><section class="content-section" id="pamyatka"><h2>Памятка на один экран</h2><p>Перед новым вызовом <code>/watercolor</code> пройди эти пять строк по порядку</p><ul><li>Вставь словарь техник до первой картинки</li><li>Команду отправляй вместе с исходным фото</li><li>После слэша можно уточнить цвета, фон и степень стилизации</li><li>Сходство проверяй по лицу, позе, одежде и композиции</li><li>Смешение прошлых стилей лечится новым чистым чатом</li></ul></section><section class="content-section" id="faq"><h2>Частые вопросы</h2><h3>Почему /watercolor меняет фон?</h3><p>Команда перерисовывает весь кадр в новой технике. Укажи после неё, какие элементы фона сохранить</p><h3>Можно ли ослабить художественный эффект?</h3><p>Да. Допиши просьбу сохранить реалистичные черты и применить технику только к цвету или фактуре</p><h3>Как получить другую технику без смешения?</h3><p>Снова приложи исходник и вызови новую команду. Если старый стиль остаётся, открой чистый чат</p><h3>Почему /comicpanel добавляет текст?</h3><p>Полный промпт просит короткое облачко реплики. Точный текст лучше задать после команды и проверить вручную</p></section><section class="help-banner content-section" id="pomoshch" aria-label="Если что-то не получается">
+<section class="content-section" id="proverka"><h2>Проверка перед сохранением</h2><p>Выбранную технику видно по следу материала: у масла остаются мазки, у бумаги края вырезанных слоёв, у вышивки стежки. Короткий промпт направляет рисунок, но не обещает одинаковый результат на каждом фото. Открой пробу крупнее, сравни эти признаки с переводом и сохрани тот вариант, в котором узнаётся и техника, и твой исходный сюжет</p></section><section class="content-section" id="pamyatka"><h2>Памятка на один экран</h2><p>Перед новым вызовом <code>/watercolor</code> пройди эти пять строк по порядку</p><ul><li>Вставь словарь техник до первой картинки</li><li>Команду отправляй вместе с исходным фото</li><li>После слэша можно уточнить цвета, фон и степень стилизации</li><li>Сходство проверяй по лицу, позе, одежде и композиции</li><li>Смешение прошлых стилей лечится новым чистым чатом</li></ul></section><section class="content-section" id="faq"><h2>Частые вопросы</h2><details class="faq-item" open><summary>Почему /watercolor меняет фон?</summary><p>Команда перерисовывает весь кадр в новой технике. Укажи после неё, какие элементы фона сохранить</p></details><details class="faq-item" open><summary>Можно ли ослабить художественный эффект?</summary><p>Да. Допиши просьбу сохранить реалистичные черты и применить технику только к цвету или фактуре</p></details><details class="faq-item" open><summary>Как получить другую технику без смешения?</summary><p>Снова приложи исходник и вызови новую команду. Если старый стиль остаётся, открой чистый чат</p></details><details class="faq-item" open><summary>Почему /comicpanel добавляет текст?</summary><p>Полный промпт просит короткое облачко реплики. Точный текст лучше задать после команды и проверить вручную</p></details></section><section class="help-banner content-section" id="pomoshch" aria-label="Если что-то не получается">
 <p class="help-title">Не сработала команда <code>/watercolor</code>? Попроси ChatGPT найти пропущенный шаг. <span class="accent">Проверяй по одному действию</span></p>
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Я установил словарь и вызвал /watercolor с фотографией. Проверь порядок действий, затем спроси, какую одну деталь нужно сохранить. Объясняй по одному действию</p></div>
 <div class="bubble claude"><span class="who">ChatGPT</span>Какой эффект нужен и какие детали исходника сохранить?</div></div>

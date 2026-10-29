@@ -749,7 +749,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-22"
+      "dateModified": "2026-10-29"
     },
     {
       "@type": "BreadcrumbList",
@@ -766,6 +766,28 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "position": 2,
           "name": "Личная газета в Claude Code: промпт и наш пример",
           "item": "https://pronovoe.com/claude-ai/lichnaya-gazeta-v-claude-code/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/lichnaya-gazeta-v-claude-code/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Нужно устанавливать скилл /daily-paper?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для нашего способа не нужно. Мы использовали собственный текстовый запрос в обычном Claude Code. Название команды из чужого примера не является обязательной встроенной функцией Клода"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Получится такая же газета, как на картинке?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Промпт задаёт одну страницу, три колонки, заголовок, ссылки и цвета. Модель может иначе распределить заметки. Наш PDF можно открыть как ориентир для уточнения вёрстки, а содержание нового номера будет зависеть от доступных источников"
+          }
         }
       ]
     }
@@ -905,8 +927,8 @@ claude</code></pre></div>
 
 <section class="content-section" id="faq">
 <h2>Частые вопросы</h2>
-<details class="check-panel"><summary>Нужно устанавливать скилл /daily-paper?</summary><p>Для нашего способа не нужно. Мы использовали собственный текстовый запрос в обычном Claude Code. Название команды из чужого примера не является обязательной встроенной функцией Клода</p></details>
-<details class="check-panel"><summary>Получится такая же газета, как на картинке?</summary><p>Промпт задаёт одну страницу, три колонки, заголовок, ссылки и цвета. Модель может иначе распределить заметки. Наш PDF можно открыть как ориентир для уточнения вёрстки, а содержание нового номера будет зависеть от доступных источников</p></details>
+<details class="check-panel faq-item"><summary>Нужно устанавливать скилл /daily-paper?</summary><p>Для нашего способа не нужно. Мы использовали собственный текстовый запрос в обычном Claude Code. Название команды из чужого примера не является обязательной встроенной функцией Клода</p></details>
+<details class="check-panel faq-item"><summary>Получится такая же газета, как на картинке?</summary><p>Промпт задаёт одну страницу, три колонки, заголовок, ссылки и цвета. Модель может иначе распределить заметки. Наш PDF можно открыть как ориентир для уточнения вёрстки, а содержание нового номера будет зависеть от доступных источников</p></details>
 </section>
 
 <div class="share-row">

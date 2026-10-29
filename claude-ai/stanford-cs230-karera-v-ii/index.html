@@ -700,7 +700,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-28",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/stanford-cs230-karera-v-ii/assets/oblozhka.webp?v=2"
     },
     {
@@ -718,6 +718,36 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "position": 2,
           "name": "Карьера в ИИ: конспект всей лекции Стэнфорда CS230",
           "item": "https://pronovoe.com/claude-ai/stanford-cs230-karera-v-ii/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/stanford-cs230-karera-v-ii/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как отличить мысль лектора от вывода автора конспекта?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Открой указанный отрезок записи и сопоставь формулировку с речью. Если пишешь собственное продолжение мысли, подпиши его как свой вывод. Учебные числа из упражнения не переноси в историю спикера"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как обсудить лекцию с человеком из другой профессии?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Возьми одну рабочую ситуацию этого человека и спроси, какая мысль лекции помогает принять решение. Затем вместе назовите наблюдаемый результат маленькой проверки. Названия моделей и история чужой компании без этой связи могут остаться отвлечённым примером"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что сохранить после просмотра, чтобы вернуться к решению?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Запиши вопрос, выбранное действие и ссылку на нужную минуту записи. Рядом оставь дату, когда проверишь результат. Так у тебя будет основание для следующего решения, а не только список понравившихся цитат"
+          }
         }
       ]
     }
@@ -775,7 +805,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#dalshe">Дальше по теме</a>
 <a href="#esche-po-teme">Ещё по теме</a>
 <a href="#svoi-proekt">Следующий проект</a>
-</nav><main><details class="mobile-toc"><summary>Содержание конспекта</summary><nav aria-label="Содержание на телефоне"><a href="#nachalo">О лекции</a>
+<a href="#faq">Частые вопросы</a></nav><main><details class="mobile-toc"><summary>Содержание конспекта</summary><nav aria-label="Содержание на телефоне"><a href="#nachalo">О лекции</a>
 <a href="#original">Как смотреть по-русски</a>
 <a href="#karta">Карта лекции</a>
 <a href="#konspekt">12 мыслей</a>
@@ -823,7 +853,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#dalshe">Дальше по теме</a>
 <a href="#esche-po-teme">Ещё по теме</a>
 <a href="#svoi-proekt">Следующий проект</a>
-</nav></details><article><header id="nachalo">
+<a href="#faq">Частые вопросы</a></nav></details><article><header id="nachalo">
 <p class="eyebrow">Конспект · Стэнфорд · CS230 · осень 2025</p>
 <figure class="cover cover-v2"><img src="assets/oblozhka.webp?v=2" alt="Карьера в ИИ: конспект CS230. Эндрю Ын на фоне белой доски" width="1600" height="840" loading="eager" fetchpriority="high" decoding="async"><figcaption>Эндрю Ын на обложке по официальному превью лекции CS230 осени 2025 года</figcaption></figure>
 <h1 class="article-standard-h1">Карьера в ИИ: конспект всей лекции Стэнфорда CS230</h1>
@@ -992,7 +1022,15 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <ol><li>Пробуй новые инструменты на своих проектах</li><li>Перед оффером узнай, с кем будешь работать, и учитывай свои силы</li><li>Учись обсуждать замечания и показывать законченный результат</li><li>Перед запуском проверь, где ИИ ошибается и кто исправит результат</li><li>Реши заранее, кто будет поддерживать программу после запуска</li><li>Сравнивай громкие обещания с тем, что инструмент уже умеет</li><li>Выбирай модель и место запуска с учётом задачи и доступа к данным</li><li>Начни со знакомой задачи: уточни цель, составь план, выполни его и проверь результат</li></ol>
 <div class="help-banner"><p class="help-title">Запутался в выборе задачи? Начни с одной знакомой работы</p><p>Замени текст в квадратных скобках и отправь запрос в свой чат. Не вставляй личные или закрытые рабочие данные</p><div class="code-card"><pre id="help-prompt"><code>Я хочу [сократить подготовку квартального отчёта]. Сейчас я [собираю итоги из нескольких таблиц], но не понимаю [как проверить, что чат ничего не пропустил]. Помоги уточнить задачу. Объясняй по одному шагу, задай первый вопрос и дождись ответа. Не придумывай мои данные и требования</code></pre><button class="copy-button" type="button" data-copy-target="help-prompt" aria-label="Скопировать запрос для разбора своей задачи" aria-live="polite">Скопировать</button></div></div></section><section class="content-section" id="sources"><p class="section-label">Источники</p><h2>Откуда взят конспект</h2>
 <p>Основа - полная запись Stanford Online и её английские субтитры, включая вопросы из аудитории до 1:45:04. Текст передаёт содержание своими словами. Оценки рынка, прогнозы и результаты частных историй переданы как слова спикеров осенью 2025 года: они не гарантируют такой же результат в другой ситуации</p>
-<ul><li><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s">Stanford CS230 | Autumn 2025 | Lecture 9: Career Advice in AI</a> - официальная запись, источник всех историй и таймкодов</li></ul></section><section class="next-read" id="dalshe" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">Разобраться в самом инструменте и выбрать способ работы</p><ul><li><a href="../stanford-2026-kak-uchitsya-ii/"><span class="title">Как учится ИИ: конспект лекции Стэнфорда 2026</span><span class="why">Почему модель выполняет инструкции и как проверяют её попытки</span></a></li><li><a href="../vybor-modeli-i-effort/"><span class="title">Как выбрать модель и глубину рассуждений</span><span class="why">Соотнести сложность задания с инструментом</span></a></li></ul></section><div class="share-row "><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F&amp;text=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F&amp;title=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230" target="_blank" rel="noopener">VK</a></div><section class="seo-related" id="esche-po-teme" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="../stanford-kak-sozdayut-chatgpt/">Как создают ChatGPT: конспект лекции Стэнфорда</a></li></ul></section><p class="cta-question" id="svoi-proekt">Теперь у тебя есть вопросы к своей задаче. Следующий шаг - увидеть, какие проекты можно собрать с нейросетями без знания кода</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section><footer class="foot">Конспект подготовлен 28 октября 2026 года. Лекция относится к осени 2025 года<!-- privacy:footer:start -->
+<ul><li><a href="https://www.youtube.com/watch?v=AuZoDsNmG_s">Stanford CS230 | Autumn 2025 | Lecture 9: Career Advice in AI</a> - официальная запись, источник всех историй и таймкодов</li></ul></section><section class="next-read" id="dalshe" aria-label="Дальше по теме"><h2>Дальше по теме</h2><p class="next-sub">Разобраться в самом инструменте и выбрать способ работы</p><ul><li><a href="../stanford-2026-kak-uchitsya-ii/"><span class="title">Как учится ИИ: конспект лекции Стэнфорда 2026</span><span class="why">Почему модель выполняет инструкции и как проверяют её попытки</span></a></li><li><a href="../vybor-modeli-i-effort/"><span class="title">Как выбрать модель и глубину рассуждений</span><span class="why">Соотнести сложность задания с инструментом</span></a></li></ul></section><div class="share-row "><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F&amp;text=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fstanford-cs230-karera-v-ii%2F&amp;title=%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%20%D0%B2%20%D0%98%D0%98%3A%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%D1%81%D0%B5%D0%B9%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%A1%D1%82%D1%8D%D0%BD%D1%84%D0%BE%D1%80%D0%B4%D0%B0%20CS230" target="_blank" rel="noopener">VK</a></div><section class="seo-related" id="esche-po-teme" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="../stanford-kak-sozdayut-chatgpt/">Как создают ChatGPT: конспект лекции Стэнфорда</a></li></ul></section>
+
+
+<section class="content-section" id="faq"><h2>Частые вопросы</h2>
+<details class="faq-item"><summary>Как отличить мысль лектора от вывода автора конспекта?</summary><p>Открой указанный отрезок записи и сопоставь формулировку с речью. Если пишешь собственное продолжение мысли, подпиши его как свой вывод. Учебные числа из упражнения не переноси в историю спикера</p></details>
+<details class="faq-item"><summary>Как обсудить лекцию с человеком из другой профессии?</summary><p>Возьми одну рабочую ситуацию этого человека и спроси, какая мысль лекции помогает принять решение. Затем вместе назовите наблюдаемый результат маленькой проверки. Названия моделей и история чужой компании без этой связи могут остаться отвлечённым примером</p></details>
+<details class="faq-item"><summary>Что сохранить после просмотра, чтобы вернуться к решению?</summary><p>Запиши вопрос, выбранное действие и ссылку на нужную минуту записи. Рядом оставь дату, когда проверишь результат. Так у тебя будет основание для следующего решения, а не только список понравившихся цитат</p></details>
+</section>
+<p class="cta-question" id="svoi-proekt">Теперь у тебя есть вопросы к своей задаче. Следующий шаг - увидеть, какие проекты можно собрать с нейросетями без знания кода</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section><footer class="foot">Конспект подготовлен 28 октября 2026 года. Лекция относится к осени 2025 года<!-- privacy:footer:start -->
 <div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer></article></main><aside class="related-plaque" aria-label="Соседняя статья">

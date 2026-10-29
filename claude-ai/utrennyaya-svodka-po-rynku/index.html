@@ -1343,7 +1343,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-26",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/utrennyaya-svodka-po-rynku/assets/oblozhka.webp"
     },
     {
@@ -1407,7 +1407,7 @@ bash zapusk.sh</code></pre></div>
 
 <section id="virusnoe-obeshchanie">
 <h2>Что не сходится в вирусном обещании</h2>
-<p>Сетап придумал разработчик Roan, аккаунт @RohOnChain в X. Его статья «How to Turn Grok Bot Into Your Own Bloomberg Terminal» вышла 26 августа 2026 года и набрала больше 2 млн просмотров. Roan пишет, что место в терминале Bloomberg обходится в 27 660 долларов в год, а его сборка примерно в 3 000 долларов в год, то есть в девять раз дешевле</p>
+<p>Сетап придумал разработчик Roan, аккаунт @RohOnChain в X. Его статья «How to Turn Grok Bot Into Your Own Bloomberg Terminal» вышла 26 августа 2026 года и набрала больше 2 млн просмотров. В посте на 26.08.2026 <a href="https://x.com/RohOnChain/status/2092626965224415557" rel="noopener nofollow" target="_blank">Roan пишет</a>, что место в терминале Bloomberg обходится в 27 660 долларов в год, а его сборка примерно в 3 000 долларов в год, то есть в девять раз дешевле</p>
 <p>В той же статье он уточняет: Grok Bot по подписке SuperGrok Heavy - это 200 долларов в месяц, а модель Kimi K3 через API - ещё примерно от 500 до 1 000 долларов в месяц. Его 3 000 в год - только фиксированная часть. Если сложить всё за год, выходит от 8 400 до 14 400 долларов, то есть дешевле терминала примерно в 2-3 раза</p>
 <p>Вторая деталь в слове Grok. Grok Bot в этой схеме работает как пульт: через него задают вопросы. Считает Kimi K3 Swarm Max от Moonshot AI, которая раскидывает задачу на сотни помощников. И сам Roan признаёт, что биржевые данные в реальном времени так не заменить: свою сборку он называет примерно 70% терминала</p>
 </section>
@@ -1883,7 +1883,7 @@ Get-Content SVODKA.txt</code></pre></div>
 <details class="check-panel"><summary>SEC вернул Undeclared Automated Tool</summary><p>Проверь заголовок User-Agent. В нём должны быть имя и почта. SEC разрешает до 10 запросов в секунду, но запрос без подписи блокирует даже при низкой частоте</p></details>
 <details class="check-panel"><summary>В сводке «нет подач SEC», а в <code>01-podachi.json</code> ошибка <code>latin-1</code></summary><p>Подпись написана кириллицей. Перепиши имя и почту латиницей и запусти снова</p></details>
 <details class="check-panel"><summary>Alpha Vantage отказал по AAPL</summary><p>Ключ demo оставлен для примеров. Задай свой ключ через ALPHAVANTAGE_KEY. Лимит Alpha Vantage: 25 запросов в сутки и 5 в минуту</p></details>
-<details class="check-panel"><summary>Цифры отстают</summary><p>На бесплатных тарифах часть данных приходит с задержкой 15-20 минут. Для утренней сводки это не страшно, для слежения за позицией в моменте критично. Смотри поле <code>otstavanie_dney</code>: в понедельник отставание на три дня нормально из-за выходных, а в среду два дня означают, что источник отдаёт старую цену</p></details>
+<details class="check-panel"><summary>Цифры отстают</summary><p>В исходной статье на 26.10.2026 ориентир задержки был 15-20 минут. На 29.10.2026 у Alpha Vantage бесплатный GLOBAL_QUOTE обновляется в конце торгового дня, а данные с задержкой 15 минут доступны по платной подписке. <a href="https://www.alphavantage.co/documentation/#latestprice">Условия Alpha Vantage для GLOBAL_QUOTE</a>. Для утренней сводки это не страшно, для слежения за позицией в моменте критично. Смотри поле <code>otstavanie_dney</code>: в понедельник отставание на три дня нормально из-за выходных, а в среду два дня означают, что источник отдаёт старую цену</p></details>
 <details class="check-panel"><summary>Лимит кончился к обеду</summary><p>25 запросов Alpha Vantage в сутки уйдут к обеду, если опрашивать десять бумаг каждый час. Поэтому эта схема собирает сводку один раз утром</p></details>
 <details class="check-panel"><summary>В сводке пустой раздел</summary><p>Открой три JSON-файла. У отказавшего источника будет поле <code>oshibka</code> с текстом ответа. Четвёртая программа переносит пропуск в раздел ЧЕГО НЕ ХВАТИЛО и не заменяет его догадкой</p></details>
 <details class="check-panel"><summary>Хочется попросить модель дописать число</summary><p>Не проси. В этой схеме пропуск остаётся пропуском, а решение по сводке принимает человек</p></details>
@@ -1902,6 +1902,7 @@ Get-Content SVODKA.txt</code></pre></div>
 <li>6:15 - собрать SVODKA.txt и прочитать ЧЕГО НЕ ХВАТИЛО</li>
 </ul></div></section>
 
+<p class="source-note"><a href="https://www.sec.gov/about/developer-resources">SEC: правила доступа к EDGAR</a> - не больше 10 запросов в секунду на пользователя. Сверено 29.10.2026</p>
 <section id="faq"><h2>Частые вопросы</h2><div class="faq"><details open><summary>Это заменяет терминал Bloomberg?</summary><p>Нет. По словам самого Roan, место в терминале Bloomberg обходится в 27 660 долларов в год, а эта схема переносит только несколько видов открытых данных. Она не повторяет весь терминал и не даёт советов по торговле</p></details><details open><summary>Для SEC нужен ключ?</summary><p>Нет. Нужен заголовок User-Agent с именем и почтой, а запросы надо держать в пределах 10 в секунду. Без подписи SEC возвращает страницу Undeclared Automated Tool</p></details><details open><summary>Где хранить ключ Alpha Vantage?</summary><p>В переменной среды ALPHAVANTAGE_KEY. В программе остаётся только запасное значение demo, которое работает для примеров и может отказать по AAPL</p></details><details open><summary>Что будет, если источник не ответит?</summary><p>Сборщик запишет поле oshibka в свой JSON, а четвёртая программа перенесёт пропуск в раздел ЧЕГО НЕ ХВАТИЛО. Она не подставит придуманное число</p></details><details open><summary>Будет ли сводка собираться при выключенном ноутбуке?</summary><p>Нет. Для работы при выключенном ноутбуке нужна облачная машина, которая остаётся включённой и запускает четыре команды по расписанию</p></details><details open><summary>Нужно уметь программировать?</summary><p>Нет. Достаточно скопировать пять файлов, поменять список тикеров в строке TICKERS и запустить bash zapusk.sh. Если что-то упало, скопируй ошибку целиком и покажи её агенту по запросу внизу статьи</p></details></div></section>
 <div class="share-row">
         <span class="eyebrow">Поделиться</span>

@@ -626,7 +626,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-26",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/assets/oblozhka.webp"
     },
     {
@@ -646,6 +646,36 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "item": "https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как перенести стиль на серию снимков без постепенного искажения?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для каждого снимка используй один и тот же сохранённый JSON и свой исходник. Не делай новый рецепт из уже переделанной картинки: иначе случайная деталь первой генерации станет правилом для всей серии"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что делать, если рецепт содержит детали чужого лица?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Попроси убрать описание внешности человека и оставить свет, цвет, фактуру и композицию. Перед генерацией перечитай этот участок JSON. Черты лица в рецепте могут мешать сохранению человека на твоём снимке"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как подготовить результат для маленькой аватарки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Сначала проверь квадратное кадрирование и лицо в том размере, в котором аватарку увидят. Если важная деталь срезается, попроси добавить свободное место вокруг головы. Оцени маленькую копию до новой генерации"
+          }
+        }
+      ]
     }
   ]
 }
@@ -656,7 +686,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   <div class="progress" aria-hidden="true"></div>
   <div class="masthead" role="banner"><div class="masthead-inner"><a class="brand" href="../../">Гайды по нейросетям</a><div class="header-actions"><span class="handout-title">Стиль любого фото</span><div class="header-controls"><button class="theme-toggle" type="button" aria-label="Переключить тему">◐</button></div></div></div></div>
   <div class="page-shell">
-    <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p><a href="#primery">Скопировать стиль фото в ChatGPT: что получится</a><a href="#chto-ponadobitsya">Что понадобится</a><a href="#chto-takoe-json">Что такое JSON простыми словами</a><a href="#shag-1-retsept">Шаг 1. Получи рецепт образца</a><a href="#shag-2-kopirovanie">Шаг 2. Скопируй JSON</a><a href="#shag-3-svoy-foto">Шаг 3. Перенеси стиль на своё фото</a><a href="#odezhda-i-fon">Как поменять ещё и одежду с фоном</a><a href="#odna-fraza">Одна фраза на все случаи</a><a href="#esli-ne-poluchaetsya">Если что-то не получается</a><a href="#stalo-ponyatnee">Стало понятнее?</a></nav>
+    <nav class="toc" aria-label="Содержание"><p>СОДЕРЖАНИЕ</p><a href="#primery">Скопировать стиль фото в ChatGPT: что получится</a><a href="#chto-ponadobitsya">Что понадобится</a><a href="#chto-takoe-json">Что такое JSON простыми словами</a><a href="#shag-1-retsept">Шаг 1. Получи рецепт образца</a><a href="#shag-2-kopirovanie">Шаг 2. Скопируй JSON</a><a href="#shag-3-svoy-foto">Шаг 3. Перенеси стиль на своё фото</a><a href="#odezhda-i-fon">Как поменять ещё и одежду с фоном</a><a href="#odna-fraza">Одна фраза на все случаи</a><a href="#esli-ne-poluchaetsya">Если что-то не получается</a><a href="#stalo-ponyatnee">Стало понятнее?</a><a href="#faq">Частые вопросы</a></nav>
     <main>
       <p class="eyebrow">ФОТО / стиль любого снимка</p>
       <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Исходный портрет мужчины и два его результата с перенесённым фотографическим стилем в ChatGPT" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=e893dcf5b22e 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Рецепт образца в JSON, применение к своему снимку и смена одежды с фоном</figcaption></figure>
@@ -694,7 +724,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       <li>Фото-образец: любой снимок, стиль которого нравится. Подойдёт кадр из Pinterest, журнала или фильма</li>
       <li>Своё фото, на котором хорошо видно человека</li>
       </ul>
-      <div class="note">Россия не входит в список стран, где официально работает OpenAI, поэтому из России ChatGPT открывается только через VPN</div>
+      <div class="note">Россия не входит в список стран, где официально работает OpenAI, поэтому из России ChatGPT открывается только через VPN <a href="https://help.openai.com/en/articles/7947663-chatgpt-supported-countries">Поддерживаемые страны OpenAI</a></div>
       </section>
       <section class="content-section" id="chto-takoe-json"><h2>Что такое JSON простыми словами</h2>
       <div class="info-note">Страшное слово, но всё просто. JSON - это рецепт картинки: ChatGPT смотрит на фото и записывает по полочкам, откуда снимали, какой был свет, какие цвета, во что одет человек и что за фон. Как рецепт торта: ещё не сам торт, но по нему можно испечь такой же. Читать и понимать его не нужно, его просто копируют</div>
@@ -759,6 +789,16 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%B8%D0%BB%D1%8C%20%D0%BB%D1%8E%D0%B1%D0%BE%D0%B3%D0%BE%20%D1%84%D0%BE%D1%82%D0%BE%20%D0%B2%20ChatGPT%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%20%D0%B8%20JSON%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkopirovat-stil-foto-v-chatgpt%2F" target="_blank" rel="noopener">WhatsApp</a>
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkopirovat-stil-foto-v-chatgpt%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%B8%D0%BB%D1%8C%20%D0%BB%D1%8E%D0%B1%D0%BE%D0%B3%D0%BE%20%D1%84%D0%BE%D1%82%D0%BE%20%D0%B2%20ChatGPT%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%20%D0%B8%20JSON" target="_blank" rel="noopener">VK</a>
       </div>
+
+
+
+
+
+<section class="content-section" id="faq"><h2>Частые вопросы</h2>
+<details class="faq-item"><summary>Как перенести стиль на серию снимков без постепенного искажения?</summary><p>Для каждого снимка используй один и тот же сохранённый JSON и свой исходник. Не делай новый рецепт из уже переделанной картинки: иначе случайная деталь первой генерации станет правилом для всей серии</p></details>
+<details class="faq-item"><summary>Что делать, если рецепт содержит детали чужого лица?</summary><p>Попроси убрать описание внешности человека и оставить свет, цвет, фактуру и композицию. Перед генерацией перечитай этот участок JSON. Черты лица в рецепте могут мешать сохранению человека на твоём снимке</p></details>
+<details class="faq-item"><summary>Как подготовить результат для маленькой аватарки?</summary><p>Сначала проверь квадратное кадрирование и лицо в том размере, в котором аватарку увидят. Если важная деталь срезается, попроси добавить свободное место вокруг головы. Оцени маленькую копию до новой генерации</p></details>
+</section>
 
 <!-- seo:related:start -->
 <section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/otsenka-vneshnosti-po-foto-v-chatgpt/">Оценка лица в ChatGPT: 15 критериев и балл из 10</a></li><li><a href="/claude-ai/promty-pravki-foto-chatgpt/">10 промптов для правки фото в ChatGPT: одежда, цвет, фон и формат кадра</a></li></ul></section>
