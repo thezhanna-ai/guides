@@ -1099,4 +1099,21 @@ claude</pre></div>
   </div>
 </aside>
 <!-- privacy:banner:end -->
+<!-- pageviews:start -->
+<script>
+(function () {
+  function loadPageviews() {
+    if (document.getElementById('pageviews-script')) return;
+    var script = document.createElement('script');
+    script.id = 'pageviews-script';
+    script.async = true;
+    script.referrerPolicy = 'no-referrer';
+    script.src = '/assets/pageviews.js';
+    document.head.appendChild(script);
+  }
+  if (document.readyState === 'complete') window.setTimeout(loadPageviews, 0);
+  else window.addEventListener('load', loadPageviews, { once: true });
+}());
+</script>
+<!-- pageviews:end -->
 </body></html>

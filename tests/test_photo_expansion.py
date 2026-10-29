@@ -72,8 +72,13 @@ class PhotoExpansion(unittest.TestCase):
         # (short title, combined intro wrapper, standard generated JSON-LD),
         # plus the shared cookie-banner copy approved on 28 October.
         import hashlib
+        # The 29 October counter adds only this shared loader. Keep the original
+        # approved hash, so every other byte remains protected by this test.
+        content = (ROOT / PAGE).read_bytes()
+        loader = (ROOT / 'scripts/pageviews-loader.html').read_bytes().strip() + b'\n'
+        self.assertEqual(content.count(loader), 1)
         self.assertEqual(
-            hashlib.sha256((ROOT / PAGE).read_bytes()).hexdigest(),
+            hashlib.sha256(content.replace(loader, b'')).hexdigest(),
             '67da19600e37a7655b33b8956068de0ea8602187fe60c3a12107c62035da6571',
             'Publication must preserve the approved text, prompts, markup and examples',
         )

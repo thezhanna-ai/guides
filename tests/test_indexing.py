@@ -74,7 +74,7 @@ class IndexingTest(unittest.TestCase):
         for folder in ("scripts", "data", "assets"):
             (root / folder).mkdir()
         (root / "assets/fonts").mkdir()
-        for name in ("assets/palette.css", "assets/quality.css", "assets/privacy.css", "assets/fonts/fonts.css", "data/statyi.json", "data/seo.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "index.html"):
+        for name in ("assets/palette.css", "assets/quality.css", "assets/privacy.css", "assets/fonts/fonts.css", "data/statyi.json", "data/seo.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "scripts/pageviews-loader.html", "index.html"):
             shutil.copyfile(ROOT / name, root / name)
         # This fixture exercises the shared article generator. The approved,
         # manually serialized photo page is covered byte-for-byte in

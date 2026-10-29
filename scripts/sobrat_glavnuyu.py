@@ -70,6 +70,15 @@ def privacy_fragment(name):
     return (KORNI / "scripts" / name).read_text(encoding="utf-8").strip()
 
 
+def dobavit_pageviews(html):
+    """Один загрузчик после load, независимо от согласия на Метрику."""
+    block = privacy_fragment('pageviews-loader.html') + '\n'
+    pattern = re.compile(r'<!-- pageviews:start -->.*?<!-- pageviews:end -->\s*', re.S)
+    if pattern.search(html):
+        return pattern.sub(lambda _: block, html)
+    return re.sub(r'</body\s*>', lambda m: block + m[0], html, flags=re.I)
+
+
 def dobavit_quality(html):
     """Embed the shared accessibility styles at their existing cascade position."""
     pattern = re.compile(r'<!-- quality:start -->.*?<!-- quality:end -->|<link\b(?=[^>]*\bhref=[\'\"]/assets/quality\.css[\'\"])[^>]*>', re.S)
@@ -132,7 +141,7 @@ def dobavit_privacy(html):
             html = pattern.sub(lambda _: block, html)
         else:
             html = re.sub(r'</' + tag + r'\s*>', lambda m: block + m[0], html, flags=re.I)
-    return dobavit_palette(dobavit_critical_styles(html))
+    return dobavit_pageviews(dobavit_palette(dobavit_critical_styles(html)))
 
 
 def sobrat_politiku():
