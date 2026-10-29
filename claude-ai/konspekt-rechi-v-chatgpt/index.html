@@ -677,8 +677,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <link rel="canonical" href="https://pronovoe.com/claude-ai/konspekt-rechi-v-chatgpt/">
 <!-- seo:canonical:end -->
 <!-- seo:schema:start -->
-<script type="application/ld+json" id="seo-schema">
-{
+<script type="application/ld+json" id="seo-schema">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -712,61 +711,76 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "item": "https://pronovoe.com/claude-ai/konspekt-rechi-v-chatgpt/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Можно ли сразу попросить ChatGPT сделать конспект по ссылке?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Сначала убедись, что он получил содержание, а не только адрес. Если доступа нет, приложи субтитры или текст. По одному заголовку восстановить речь нельзя."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужен ли Claude Code для локального распознавания?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Команды выполняют FFmpeg и whisper.cpp. Чат нужен на следующем этапе, когда ты сжимаешь полученный текст."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что делать с закрытой записью рабочей встречи?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Используй разрешённый в своей работе способ обработки. Локальное распознавание не отправляет звук в чат, но при загрузке расшифровки её содержание передаётся выбранному сервису."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Картинка заменяет точный конспект?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. В карточках и схеме мысли сокращаются. Сохрани текст с таймкодами для проверки цитат и деталей."
+          }
+        }
+      ]
     }
   ]
-}
-</script>
+}</script>
 <!-- seo:schema:end -->
-</head><body>
-<div class="progress" aria-hidden="true"></div>
+<style id="volna2-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:transparent!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card .copy-button{position:static;display:block;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto}article .table-wrap{margin:24px 0;border:1px solid var(--line);border-radius:10px}article .table-wrap table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;color:var(--ink)}article .table-wrap td,article .table-wrap th{vertical-align:top;padding:14px;text-align:left;border-bottom:1px solid var(--line);overflow-wrap:anywhere}article .table-wrap th{background:var(--info);color:var(--emerald)}article .table-wrap tbody tr:nth-child(even){background:var(--paper-2)}@media(max-width:600px){article .table-wrap table{min-width:550px}}article details summary{cursor:pointer;font-weight:700}article #voprosy details{padding:16px 0;border-bottom:1px solid var(--muted)}html[data-theme="dark"] article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white)}article pre{overflow-wrap:anywhere}</style></head><body>
+<div aria-hidden="true" class="progress"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
 <div class="header-actions"><div class="handout-title">Конспект речи в ChatGPT: 5 запросов</div><div class="header-controls">
-<button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
 </div></div></div></header>
-<div class="page-shell"><nav class="toc" aria-label="Содержание"><p class="toc-label">В статье</p><a href="#podgotovka">Пять запросов на одном примере</a>
-<a href="#kartochki">1. Карточки</a>
-<a href="#komiks">2. Комикс</a>
-<a href="#shema">3. Схема</a>
-<a href="#maynd-karta">4. Майнд-карта</a>
-<a href="#sketchnout">5. Скетчноут</a>
-<a href="#svoy-tekst">Как выбрать формат</a>
-<a href="#stoimost">* Памятка о тарифах</a>
-<a href="#istochniki">Источники</a></nav><main><article><header id="nachalo"><p class="eyebrow">Инструкция · ChatGPT</p>
-<figure class="cover cover-v2"><img src="assets/oblozhka-v4.webp" width="1600" height="840" alt="Открытый блокнот: на левой странице двенадцать карточек по речи Джобса, на правой скетчноут" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka-v4.reading-1600.webp?v=d5c38e0307ba 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka-v4.webp"><figcaption>Два варианта конспекта: карточки и рисованные заметки</figcaption></figure>
+<div class="page-shell"><nav aria-label="Содержание" class="toc"><p class="toc-label">В статье</p><a href="#istochnik">Выбери путь от записи до текста</a><a href="#subtitry">Получение субтитров</a><a href="#svoya-zapis">Распознавание своего аудио</a><a href="#tezy">Сначала собери проверяемые тезисы</a><a href="#podgotovka">Пять запросов на одном примере</a><a href="#kartochki">1. Карточки: быстро повторить главное</a><a href="#komiks">2. Комикс: объяснить детям или молодёжи</a><a href="#shema">3. Схема: показать ход мысли в презентации</a><a href="#maynd-karta">4. Майнд-карта: связать темы и детали</a><a href="#sketchnout">5. Скетчноут: собрать всё на одном листе</a><a href="#svoy-tekst">Как выбрать формат для своего текста</a><a href="#oshibki">Что ломается и что делать</a><a href="#pamyatka">Памятка перед сохранением</a><a href="#voprosy">Частые вопросы</a><a href="#istochniki">Источники</a></nav><main><article><header id="nachalo"><p class="eyebrow">Инструкция · ChatGPT</p>
+<figure class="cover cover-v2"><img alt="Открытый блокнот: на левой странице двенадцать карточек по речи Джобса, на правой скетчноут" data-full-src="assets/oblozhka-v4.webp" decoding="async" fetchpriority="high" height="840" loading="eager" sizes="(max-width: 860px) calc(100vw - 40px), 780px" src="assets/oblozhka-v4.webp" srcset="assets/oblozhka-v4.reading-1600.webp?v=d5c38e0307ba 1600w" width="1600"/><figcaption>Два варианта конспекта: карточки и рисованные заметки</figcaption></figure>
 <h1 class="article-standard-h1">Конспект в ChatGPT: 5 запросов для разных задач</h1>
-<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
-<div class="seo-intro"><p class="lead">Как представить один и тот же текст так, чтобы ребёнку было интересно, а тебе было удобно готовить презентацию?</p>
+<p class="uroven-metka green" style='display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif'>Начальный уровень</p>
+<div class="seo-intro"><p class="lead">Запись лежит в закладках, а нужную мысль опять приходится искать на слух. Сначала получим текст, по которому можно вернуться к месту в записи. Потом выберем, как его сохранить: тезисами, карточками или картинкой с главными связями.</p>
 <p>Специальные запросы задают форму конспекта: комикс для детей и молодёжи, схему для презентации, карточки для повторения. Можно выбрать, как разложить мысли и какие связи показать</p></div>
 <p>Чтобы такой конспект сразу получился наглядным, в запросе просим ChatGPT оформить его картинкой. Он сам выделяет мысли из текста и рисует их в заданной форме. Разберём пять вариантов и посмотрим готовые результаты на примере известной речи Стива Джобса в Стэнфорде в 2005 году</p>
 <p class="meta">ОБНОВЛЕНО 12 ОКТЯБРЯ 2026</p>
-
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Конспект в ChatGPT: 5 запросов для разных задач</span></nav>
 <!-- seo:breadcrumbs:end -->
 </header>
-
 <div class="share-row share-top">
-        <span class="eyebrow">Поделиться</span>
-        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F&amp;text=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87" target="_blank" rel="noopener">Telegram</a>
-        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F&amp;title=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87" target="_blank" rel="noopener">VK</a>
-      </div>
-
-<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Пять запросов на одном примере</a>
-<a href="#kartochki">1. Карточки</a>
-<a href="#komiks">2. Комикс</a>
-<a href="#shema">3. Схема</a>
-<a href="#maynd-karta">4. Майнд-карта</a>
-<a href="#sketchnout">5. Скетчноут</a>
-<a href="#svoy-tekst">Как выбрать формат</a>
-<a href="#stoimost">* Памятка о тарифах</a>
-<a href="#istochniki">Источники</a></nav></details>
-
-
-
-<section class="content-section" id="podgotovka"><h2>Пять запросов на одном примере</h2>
-<p>Чтобы попробовать эти варианты, понадобится аккаунт ChatGPT, в котором можно загружать файлы и создавать картинки (<a href="#stoimost" aria-label="Памятка о тарифах ChatGPT">памятка о тарифах*</a>)</p>
-<p>Скачай <a href="assets/rech-dzhobsa-stanford-2005.pdf" download>PDF речи</a>, открой новый чат в ChatGPT и прикрепи файл. Подожди, пока он загрузится</p>
+<span class="eyebrow">Поделиться</span>
+<a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F&amp;text=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87" rel="noopener" target="_blank">Telegram</a>
+<a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F" rel="noopener" target="_blank">WhatsApp</a>
+<a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F&amp;title=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87" rel="noopener" target="_blank">VK</a>
+</div>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#istochnik">Выбери путь от записи до текста</a><a href="#subtitry">Получение субтитров</a><a href="#svoya-zapis">Распознавание своего аудио</a><a href="#tezy">Сначала собери проверяемые тезисы</a><a href="#podgotovka">Пять запросов на одном примере</a><a href="#kartochki">1. Карточки: быстро повторить главное</a><a href="#komiks">2. Комикс: объяснить детям или молодёжи</a><a href="#shema">3. Схема: показать ход мысли в презентации</a><a href="#maynd-karta">4. Майнд-карта: связать темы и детали</a><a href="#sketchnout">5. Скетчноут: собрать всё на одном листе</a><a href="#svoy-tekst">Как выбрать формат для своего текста</a><a href="#oshibki">Что ломается и что делать</a><a href="#pamyatka">Памятка перед сохранением</a><a href="#voprosy">Частые вопросы</a><a href="#istochniki">Источники</a></nav></details>
+<section class="content-section" id="istochnik"><h2>Выбери путь от записи до текста</h2><p>Не начинай с рисования схемы: ошибка в расшифровке попадёт и на картинку. Сначала определи, есть ли у тебя текст и нужно ли вообще распознавать звук.</p><div class="table-wrap"><table><thead><tr><th>Что у тебя есть</th><th>Первое действие</th><th>Что проверить</th></tr></thead><tbody><tr><td>Текст речи или статьи</td><td>Сохрани исходник в TXT или Markdown</td><td>Полный ли текст, есть ли автор и название</td></tr><tr><td>Видео с субтитрами</td><td>Забери субтитры через интерфейс площадки или yt-dlp</td><td>Язык, повторы строк, имена и числа</td></tr><tr><td>Свой аудиофайл</td><td>Распознай звук, затем проверь текст</td><td>Качество звука и места с неразборчивой речью</td></tr><tr><td>Живая встреча</td><td>Предупреди участников о записи и сохрани аудио</td><td>Слышны ли все говорящие</td></tr></tbody></table></div><p>Для пяти картинок ниже уже есть текст речи. Этот путь можно проходить в браузерном ChatGPT. Командный путь со своим звуком рассчитан на компьютер; на телефоне удобнее начать с готовой расшифровки.</p></section><section class="content-section" id="subtitry"><h2>Получение субтитров</h2><p>Если у видео уже есть субтитры, повторно распознавать звук не нужно. Для команды понадобится установленный <a href="https://github.com/yt-dlp/yt-dlp#installation">yt-dlp</a> и FFmpeg. Сначала открой их официальные инструкции установки. Команду запускай в терминале из папки, где хочешь сохранить текст.</p><div class="prompt-card"><p class="prompt-label">Вставь в терминал</p><pre id="volna2-prompt-1">yt-dlp --skip-download --write-auto-subs --sub-langs ru --convert-subs srt -o "subs" "https://www.youtube.com/watch?v=UF8uR6Z6KLc"</pre><button aria-label="Скопировать запрос 1" aria-live="polite" class="copy-button" data-copy-target="volna2-prompt-1" type="button">Скопировать</button></div><p>Здесь указан адрес речи из примера. Замени его адресом нужного видео. Параметр ru запрашивает русские автосубтитры; если у выбранного видео их нет, эта команда их не создаст. Доступные языки посмотри через yt-dlp --list-subs с тем же адресом. Для готовых субтитров вместо --write-auto-subs нужен --write-subs.</p><p>После завершения найди в текущей папке файл subs.ru.srt. Он содержит номера, таймкоды и текст. У автосубтитров соседние строки могут повторяться; попроси убрать повторы, сохранив последовательность и время первого появления каждой мысли.</p></section><section class="content-section" id="svoya-zapis"><h2>Распознавание своего аудио</h2><p>Когда субтитров нет, нужен распознаватель речи. В локальном пути <a href="https://github.com/ggml-org/whisper.cpp">whisper.cpp</a> использует модель Whisper на твоём компьютере. После скачивания модели распознавание работает локально. Отправка полученного текста в ChatGPT уже передаёт текст облачному сервису.</p><p>Для macOS установи whisper.cpp и FFmpeg по <a href="https://formulae.brew.sh/formula/whisper.cpp">официальной инструкции Homebrew</a>. Модель GGML скачивается отдельно: ссылки и команды находятся в разделе models репозитория whisper.cpp. Ниже выбран файл ggml-large-v3-turbo.bin, который нужно заранее положить в домашнюю папку whisper-models. Для слабого компьютера в том же списке есть модели меньшего размера; скорость и точность будут отличаться.</p><p>Положи свою запись в рабочую папку и назови lekciya.mp3. Открой терминал в этой папке. Сначала подготовь WAV с частотой 16 кГц и одним каналом, затем запусти распознавание:</p><div class="prompt-card"><p class="prompt-label">Вставь в терминал</p><pre id="volna2-prompt-2">ffmpeg -i lekciya.mp3 -ar 16000 -ac 1 -c:a pcm_s16le lekciya.wav
+whisper-cli -m ~/whisper-models/ggml-large-v3-turbo.bin -f lekciya.wav -l ru -otxt -osrt -of konspekt-source</pre><button aria-label="Скопировать запрос 2" aria-live="polite" class="copy-button" data-copy-target="volna2-prompt-2" type="button">Скопировать</button></div><p>Для другого имени исходника замени lekciya.mp3 в первой строке. Во второй строке -l ru означает русский язык записи. Рядом появятся konspekt-source.txt с текстом и konspekt-source.srt с таймкодами. Если команда сообщает, что модель не найдена, сверь путь после -m. Windows и Linux требуют своего способа установки из документации проекта; команды Homebrew для них здесь не подразумеваются.</p></section><section class="content-section" id="tezy"><h2>Сначала собери проверяемые тезисы</h2><p>Красиво нарисованную ошибку заметить труднее. Открой расшифровку, найди подозрительные повторы и прослушай эти места. Затем передай проверенный текст или SRT в чат вместе с запросом:</p><div class="prompt-card"><p class="prompt-label">Вставь в чат помощника</p><pre id="volna2-prompt-3">Составь конспект приложенной расшифровки. Раздели её на смысловые разделы. У каждого раздела укажи таймкод первого упоминания, если время есть в исходнике. Внутри - по одной мысли на строку. Сохрани числа, имена и названия. Ничего не дополняй из своих знаний. Незаконченную мысль отметь как незаконченную, неразборчивый фрагмент пометь [неразборчиво]. Если таймкодов в исходнике нет, не придумывай их. В конце отдельно перечисли вопросы, на которые запись не отвечает.</pre><button aria-label="Скопировать запрос 3" aria-live="polite" class="copy-button" data-copy-target="volna2-prompt-3" type="button">Скопировать</button></div><p>Длинную запись разбивай по смене темы. Сохрани порядок частей, получи конспект каждой, потом попроси объединить их без повторов. После сжатия сверь начало, середину и конец с записью, отдельно проверь имена и числа. Таймкод нужен для перехода к источнику, а не для украшения.</p></section><section class="content-section" id="podgotovka"><h2>Пять запросов на одном примере</h2>
+<p>Чтобы попробовать эти варианты, понадобится аккаунт ChatGPT, в котором можно загружать файлы и создавать картинки (<a aria-label="Памятка о тарифах ChatGPT" href="#stoimost">памятка о тарифах*</a>)</p>
+<p>Скачай <a download="" href="assets/rech-dzhobsa-stanford-2005.pdf">PDF речи</a>, открой новый чат в ChatGPT и прикрепи файл. Подожди, пока он загрузится</p>
 <p>Дальше отправляй запросы ниже по одному в этом же чате: получил картинку, сохранил, перешёл к следующему запросу</p>
 <p>В исходной речи Стива Джобса три истории и заключительный призыв:</p>
 <ul>
@@ -775,14 +789,14 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <li>Смерть: ограниченное время помогает выбирать то, что действительно важно</li>
 <li>В финале он желает выпускникам: «Stay hungry. Stay foolish» («Оставайтесь голодными. Оставайтесь безрассудными»)</li>
 </ul>
-<p>Посмотрим, что у нас получилось.</p>
+
 </section>
 <section class="content-section" id="kartochki"><h2>1. Карточки: быстро повторить главное</h2>
 <p>Каждая карточка содержит одну мысль. Удобно просмотреть перед обсуждением или повторить материал после чтения</p>
 <div class="code-card"><pre id="prompt-1"><code>По загруженному тексту создай картинку: сетку из 8-12 карточек для повторения, как перед экзаменом. Если текст вставлен прямо в этот чат, используй его вместо файла. На каждой карточке одна мысль из текста, выраженная одной короткой фразой до 7 слов. На всём листе не больше 12 подписей, включая заголовок, если он нужен. Никаких длинных пояснений.
 
-Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Вертикальный лист 3:4, светлый фон, ровная сетка, крупный читаемый шрифт, спокойные цветные рамки. Сейчас выдай именно картинку.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-1" aria-label="Скопировать запрос: карточки" aria-live="polite">Скопировать</button></div>
-<figure class="shot-fig konspekt-example"><div class="shot"><img src="assets/primer-kartochki.png" width="1086" height="1448" alt="Двенадцать карточек с короткими мыслями из речи Джобса" loading="lazy" decoding="async"></div><figcaption>Двенадцать карточек с короткими мыслями из речи Джобса</figcaption></figure>
+Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Вертикальный лист 3:4, светлый фон, ровная сетка, крупный читаемый шрифт, спокойные цветные рамки. Сейчас выдай именно картинку.</code></pre><button aria-label="Скопировать запрос: карточки" aria-live="polite" class="copy-button" data-copy-target="prompt-1" type="button">Скопировать</button></div>
+<figure class="shot-fig konspekt-example"><div class="shot"><img alt="Двенадцать карточек с короткими мыслями из речи Джобса" decoding="async" height="1448" loading="lazy" src="assets/primer-kartochki.png" width="1086"/></div><figcaption>Двенадцать карточек с короткими мыслями из речи Джобса</figcaption></figure>
 </section>
 <section class="content-section" id="komiks"><h2>2. Комикс: объяснить детям или молодёжи</h2>
 <p>Комикс передаёт мысли через сцены и короткие реплики. Так проще объяснить содержание тому, кто не будет читать длинный пересказ</p>
@@ -790,8 +804,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 Сохрани порядок основных частей. Если в тексте три истории, покажи все три. На кадр одна короткая реплика до 7 слов. Не больше 8 подписей на всю картинку, включая заголовок, если он нужен. Иллюстрации поясняют мысли; не придумывай новые события и выводы.
 
-Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Вертикальный лист 3:4, светлый фон, простой рисованный стиль, ясные жесты, крупный читаемый шрифт в репликах. Выдай именно картинку.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-2" aria-label="Скопировать запрос: комикс" aria-live="polite">Скопировать</button></div>
-<figure class="shot-fig konspekt-example"><div class="shot"><img src="assets/primer-komiks.png" width="1086" height="1448" alt="Шесть кадров комикса: три истории из речи и общий вывод" loading="lazy" decoding="async"></div><figcaption>Шесть кадров комикса: три истории из речи и общий вывод</figcaption></figure>
+Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Вертикальный лист 3:4, светлый фон, простой рисованный стиль, ясные жесты, крупный читаемый шрифт в репликах. Выдай именно картинку.</code></pre><button aria-label="Скопировать запрос: комикс" aria-live="polite" class="copy-button" data-copy-target="prompt-2" type="button">Скопировать</button></div>
+<figure class="shot-fig konspekt-example"><div class="shot"><img alt="Шесть кадров комикса: три истории из речи и общий вывод" decoding="async" height="1448" loading="lazy" src="assets/primer-komiks.png" width="1086"/></div><figcaption>Шесть кадров комикса: три истории из речи и общий вывод</figcaption></figure>
 </section>
 <section class="content-section" id="shema"><h2>3. Схема: показать ход мысли в презентации</h2>
 <p>Блоки и стрелки показывают, как автор пришёл к выводу. Такая структура подойдёт для слайда с разбором аргументов</p>
@@ -799,8 +813,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 Указывай причины и последствия только там, где они есть в тексте. Если причинной связи нет, поставь блоки рядом в порядке изложения, без стрелки. В каждом блоке одна подпись до 7 слов. Не больше 12 подписей на весь лист, включая итог. Заголовок листа не нужен.
 
-Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Вертикальный лист 3:4, светлый фон, простые прямоугольники, тонкие стрелки, крупный читаемый шрифт. Выдай именно картинку.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-3" aria-label="Скопировать запрос: схема" aria-live="polite">Скопировать</button></div>
-<figure class="shot-fig konspekt-example"><div class="shot"><img src="assets/primer-shema.png" width="1086" height="1448" alt="Три истории в схеме «причина → действие → результат»" loading="lazy" decoding="async"></div><figcaption>Три истории в схеме «причина → действие → результат»</figcaption></figure>
+Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Вертикальный лист 3:4, светлый фон, простые прямоугольники, тонкие стрелки, крупный читаемый шрифт. Выдай именно картинку.</code></pre><button aria-label="Скопировать запрос: схема" aria-live="polite" class="copy-button" data-copy-target="prompt-3" type="button">Скопировать</button></div>
+<figure class="shot-fig konspekt-example"><div class="shot"><img alt="Три истории в схеме «причина → действие → результат»" decoding="async" height="1448" loading="lazy" src="assets/primer-shema.png" width="1086"/></div><figcaption>Три истории в схеме «причина → действие → результат»</figcaption></figure>
 </section>
 <section class="content-section" id="maynd-karta"><h2>4. Майнд-карта: связать темы и детали</h2>
 <p>В центре стоит основная мысль, вокруг неё расходятся темы. На карте видно, к какой теме относится каждая деталь</p>
@@ -808,8 +822,8 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 У каждой главной ветки свой цвет. Центральная идея, названия веток и подветок - всего 10 подписей. Каждая подпись до 7 слов. Отдельный заголовок и пояснения на полях не нужны. Показывай связи тем, не выдумывай причины и последствия.
 
-Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Квадратная картинка, светлый фон, аккуратные цветные линии, крупный читаемый шрифт. Выдай именно картинку.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-4" aria-label="Скопировать запрос: майнд-карта" aria-live="polite">Скопировать</button></div>
-<figure class="shot-fig konspekt-example"><div class="shot"><img src="assets/primer-maynd-karta.png" width="1254" height="1254" alt="Главная мысль и три темы речи на одной карте" loading="lazy" decoding="async"></div><figcaption>Главная мысль и три темы речи на одной карте</figcaption></figure>
+Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Квадратная картинка, светлый фон, аккуратные цветные линии, крупный читаемый шрифт. Выдай именно картинку.</code></pre><button aria-label="Скопировать запрос: майнд-карта" aria-live="polite" class="copy-button" data-copy-target="prompt-4" type="button">Скопировать</button></div>
+<figure class="shot-fig konspekt-example"><div class="shot"><img alt="Главная мысль и три темы речи на одной карте" decoding="async" height="1254" loading="lazy" src="assets/primer-maynd-karta.png" width="1254"/></div><figcaption>Главная мысль и три темы речи на одной карте</figcaption></figure>
 </section>
 <section class="content-section" id="sketchnout"><h2>5. Скетчноут: собрать всё на одном листе</h2>
 <p>Скетчноут выглядит как заметки от руки: короткие тезисы, рисунки, стрелки и цветные выделения. Все три истории можно охватить одним взглядом</p>
@@ -817,25 +831,18 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
 Всего 11 подписей, каждая до 7 слов. Добавь рамки, стрелки и маленькие рисунки на полях, которые поясняют мысли. Не добавляй декоративных слов и новых сюжетов. Не превращай лист в длинный письменный пересказ.
 
-Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Вертикальный лист 3:4, светлая бумага, чёрная ручка, немного цветного маркера, крупный разборчивый рукописный шрифт. Выдай именно картинку.</code></pre><button class="copy-button" type="button" data-copy-target="prompt-5" aria-label="Скопировать запрос: скетчноут" aria-live="polite">Скопировать</button></div>
-<figure class="shot-fig konspekt-example"><div class="shot"><img src="assets/primer-sketchnout.png" width="1086" height="1448" alt="Рукописный конспект с тремя историями, рисунками и выводом" loading="lazy" decoding="async"></div><figcaption>Рукописный конспект с тремя историями, рисунками и выводом</figcaption></figure>
+Все надписи и ответы на русском. Не добавляй того, чего в тексте нет; цитаты переводи близко к оригиналу. Вертикальный лист 3:4, светлая бумага, чёрная ручка, немного цветного маркера, крупный разборчивый рукописный шрифт. Выдай именно картинку.</code></pre><button aria-label="Скопировать запрос: скетчноут" aria-live="polite" class="copy-button" data-copy-target="prompt-5" type="button">Скопировать</button></div>
+<figure class="shot-fig konspekt-example"><div class="shot"><img alt="Рукописный конспект с тремя историями, рисунками и выводом" decoding="async" height="1448" loading="lazy" src="assets/primer-sketchnout.png" width="1086"/></div><figcaption>Рукописный конспект с тремя историями, рисунками и выводом</figcaption></figure>
 </section>
 <section class="content-section" id="svoy-tekst"><h2>Как выбрать формат для своего текста</h2>
 <p>Для повторения возьми карточки, для объяснения детям или молодёжи комикс, для презентации схему. Майнд-карта покажет связи между темами, а скетчноут соберёт тезисы и рисунки на одном листе</p>
 <p>Запросы подходят и для других текстов: лекции, статьи, главы книги или расшифровки вебинара. Схема, майнд-карта и скетчноут сводят материал к двум-трём крупным частям, поэтому в тексте с пятью главами близкие главы объединятся. Загрузи свой материал и вставь подходящий запрос</p>
-<p>Проверяй картинку по исходному тексту. ChatGPT не всегда соблюдает ограничения запроса: в наших примерах он добавил лишние подписи, нарисовал героя комикса похожим на Джобса, а в схеме пропустил увольнение из Apple и не упомянул, что болезнь оказалась излечимой. Чтобы поправить, напиши в том же чате, что именно убрать или исправить</p>
+<p>Проверяй картинку по исходному тексту. ChatGPT не всегда соблюдает ограничения запроса: на иллюстрациях ниже он добавил лишние подписи, нарисовал героя комикса похожим на Джобса, а в схеме пропустил увольнение из Apple и не упомянул, что болезнь оказалась излечимой. Чтобы поправить, напиши в том же чате, что именно убрать или исправить</p>
 <p>Если необходимо, для точных цитат используй исходный текст: на картинках мысли будут пересказаны и сокращены</p>
 <p>Один материал можно представить по-разному: выбирай форму под того, кто будет читать конспект, и под то, для чего он тебе нужен</p>
 </section>
-<aside class="tariff-note" id="stoimost" aria-label="Памятка о тарифах ChatGPT">
-<p class="note-label">* Памятка о тарифах</p>
-<ul>
-<li>Free: 0 $. Загрузка файлов и создание картинок доступны без подписки; файлы можно загружать до трёх в день, в часы пик лимит может быть ниже. Число картинок OpenAI не указывает: когда лимит закончится, ChatGPT сообщит об этом</li>
-<li>Go: 8 $ в месяц в США, в других странах цена может отличаться. По нашей проверке на 11.10.2026 до 70 картинок за 5 часов, потом лимит сбрасывается</li>
-<li>Plus: 20 $ в месяц, возможности создания картинок расширены</li>
-</ul>
-</aside>
-<section class="content-section" id="istochniki">
+<aside aria-label="Памятка о тарифах ChatGPT" class="tariff-note" id="stoimost"><p>Тарифы и лимиты: загрузка файлов и создание изображений зависят от плана и текущих ограничений ChatGPT. Доступное число попыток проверяй в своём аккаунте и в <a href="https://chatgpt.com/plans/free/">официальной справке</a>. Локальное распознавание не расходует лимит чата; обработка и рисование в нём расходуют.</p></aside>
+<section class="content-section" id="oshibki"><h2>Что ломается и что делать</h2><div class="table-wrap"><table><thead><tr><th>Ошибка</th><th>Что изменить</th></tr></thead><tbody><tr><td>Файла субтитров нет</td><td>Проверь --list-subs, язык и наличие автоматических или авторских субтитров.</td></tr><tr><td>whisper-cli не находит модель</td><td>Скачай GGML-файл отдельно и сверь полный путь после -m.</td></tr><tr><td>Русская речь превратилась в латиницу</td><td>Проверь язык записи и параметр -l ru. Прослушай исходный звук.</td></tr><tr><td>В тексте повторяется посторонняя фраза</td><td>Сверь её с аудио, убери подтверждённый повтор до сжатия.</td></tr><tr><td>ChatGPT пропускает конец</td><td>Раздели длинный исходник по темам и обработай части последовательно.</td></tr><tr><td>На картинке лишние слова</td><td>Перечисли, какие подписи убрать, и попроси исправить изображение в том же чате.</td></tr></tbody></table></div></section><section class="content-section" id="pamyatka"><h2>Памятка перед сохранением</h2><ul><li>Источник и язык определены, субтитры проверены до запуска распознавания.</li><li>Для своего звука подготовлены движок, модель и место под WAV.</li><li>Исходная запись сохранена рядом с расшифровкой.</li><li>Повторы и подозрительные фразы сверены со звуком.</li><li>Имена, числа и три места записи проверены после сжатия.</li><li>Картинка сверена с текстом, мелкие подписи читаются на телефоне.</li></ul></section><section class="content-section" id="voprosy"><h2>Частые вопросы</h2><details class="faq-item"><summary>Можно ли сразу попросить ChatGPT сделать конспект по ссылке?</summary><p>Сначала убедись, что он получил содержание, а не только адрес. Если доступа нет, приложи субтитры или текст. По одному заголовку восстановить речь нельзя.</p></details><details class="faq-item"><summary>Нужен ли Claude Code для локального распознавания?</summary><p>Нет. Команды выполняют FFmpeg и whisper.cpp. Чат нужен на следующем этапе, когда ты сжимаешь полученный текст.</p></details><details class="faq-item"><summary>Что делать с закрытой записью рабочей встречи?</summary><p>Используй разрешённый в своей работе способ обработки. Локальное распознавание не отправляет звук в чат, но при загрузке расшифровки её содержание передаётся выбранному сервису.</p></details><details class="faq-item"><summary>Картинка заменяет точный конспект?</summary><p>Нет. В карточках и схеме мысли сокращаются. Сохрани текст с таймкодами для проверки цитат и деталей.</p></details></section><section class="content-section" id="istochniki">
 <p class="section-label">Откуда факты</p>
 <h2>Источники</h2>
 <ul class="sources">
@@ -847,25 +854,20 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </ul>
 <p class="meta">Условия Free и цены Go/Plus сверены 12.10.2026</p>
 </section>
-
 <div class="share-row">
-        <span class="eyebrow">Поделиться</span>
-        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F&amp;text=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87" target="_blank" rel="noopener">Telegram</a>
-        <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F&amp;title=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87" target="_blank" rel="noopener">VK</a>
-      </div>
-
-<p class="cta-question" id="svoi-proekt">Конспект можно оформить под свою задачу. Как применить нейросети к остальной работе над проектом?</p>
-
-
-
+<span class="eyebrow">Поделиться</span>
+<a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F&amp;text=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87" rel="noopener" target="_blank">Telegram</a>
+<a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F" rel="noopener" target="_blank">WhatsApp</a>
+<a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fkonspekt-rechi-v-chatgpt%2F&amp;title=%D0%9A%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%B2%20ChatGPT%3A%205%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87" rel="noopener" target="_blank">VK</a>
+</div>
+<p class="cta-question" id="svoi-proekt">Теперь запись можно найти по тезису и оформить для урока, поста или презентации. Но отбор материалов, подготовка публикации и выпуск по-прежнему требуют отдельных поручений. Ниже - о том, как соединить эти задачи с работой над сайтом и контентом без знания кода.</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section></article></main>
-<aside class="related-plaque" aria-label="Соседняя статья">
-      <p class="plaque-label">Ещё один текст</p><h2>Как учится ИИ: конспект лекции Стэнфорда 2026</h2>
-      <p><a href="../stanford-2026-kak-uchitsya-ii/">Открыть конспект лекции</a></p></aside></div>
-<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Картинка крупнее" aria-hidden="true">
-<button class="viewer-close" type="button" aria-label="Закрыть">✕</button>
-<div class="viewer-scroll" tabindex="0" aria-label="Увеличенный скриншот, можно прокручивать"><img alt=""></div>
+<aside aria-label="Соседняя статья" class="related-plaque">
+<p class="plaque-label">Ещё один текст</p><h2>Как учится ИИ: конспект лекции Стэнфорда 2026</h2>
+<p><a href="../stanford-2026-kak-uchitsya-ii/">Открыть конспект лекции</a></p></aside></div>
+<div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
+<button aria-label="Закрыть" class="viewer-close" type="button">✕</button>
+<div aria-label="Увеличенный скриншот, можно прокручивать" class="viewer-scroll" tabindex="0"><img alt=""/></div>
 <p class="viewer-hint"></p></div>
 <script src="../../assets/image-viewer.js"></script>
 <script>
@@ -984,20 +986,20 @@ addEventListener("scroll", updateReadingState, { passive: true });
     });</script>
 <footer class="privacy-site-footer">
 <!-- privacy:footer:start -->
-<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button data-cookie-settings="" type="button">Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
 <script>
 </script>
 <!-- privacy:banner:start -->
-<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
-  <div class="cookie-inner">
-    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
-    <div class="cookie-actions">
-      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
-      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
-    </div>
-  </div>
+<aside aria-label="Выбор аналитики" class="cookie-banner" hidden="" id="cookie-banner">
+<div class="cookie-inner">
+<p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+<div class="cookie-actions">
+<button aria-describedby="cookie-description" id="cookie-accept" type="button">Принять</button>
+<button aria-describedby="cookie-description" id="cookie-decline" type="button">Отказаться</button>
+</div>
+</div>
 </aside>
 <!-- privacy:banner:end -->
 </body></html>
