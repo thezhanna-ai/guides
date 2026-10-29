@@ -789,7 +789,27 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   ]
 }</script>
 <!-- seo:schema:end -->
-<style id="volna2-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:transparent!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card .copy-button{position:static;display:block;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto}article .table-wrap{margin:24px 0;border:1px solid var(--line);border-radius:10px}article .table-wrap table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;color:var(--ink)}article .table-wrap td,article .table-wrap th{vertical-align:top;padding:14px;text-align:left;border-bottom:1px solid var(--line);overflow-wrap:anywhere}article .table-wrap th{background:var(--info);color:var(--emerald)}article .table-wrap tbody tr:nth-child(even){background:var(--paper-2)}@media(max-width:600px){article .table-wrap table{min-width:550px}}article details summary{cursor:pointer;font-weight:700}article #voprosy details{padding:16px 0;border-bottom:1px solid var(--muted)}html[data-theme="dark"] article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white)}article pre{overflow-wrap:anywhere}</style></head>
+<style id="volna2-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:var(--guide-color-transparent)!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card .copy-button{position:static;display:block;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto}article .table-wrap{margin:24px 0;border:1px solid var(--line);border-radius:10px}article .table-wrap table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;color:var(--ink)}article .table-wrap td,article .table-wrap th{vertical-align:top;padding:14px;text-align:left;border-bottom:1px solid var(--line);overflow-wrap:anywhere}article .table-wrap th{background:var(--info);color:var(--emerald)}article .table-wrap tbody tr:nth-child(even){background:var(--paper-2)}@media(max-width:600px){article .table-wrap table{min-width:550px}}article details summary{cursor:pointer;font-weight:700}article #voprosy details{padding:16px 0;border-bottom:1px solid var(--muted)}html[data-theme="dark"] article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white)}article pre{overflow-wrap:anywhere}html[data-theme="dark"] h1.article-standard-h1,html[data-theme="dark"] .cookie-banner a{color:var(--ink)!important}</style><style id="volna2-house-layout">
+
+/* Оболочка опубликованного Курьера, 29.10.2026. Содержимое статьи сохранено. */
+body { font: 18.4px/1.65 Spectral, Georgia, serif }
+.masthead { background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)) }
+.masthead-inner { gap: 20px }
+.brand { font-size: 18px; line-height: 1.65 }
+.theme-toggle { width: 40px; min-height: 40px; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+.toc-label, .related-plaque .plaque-label { font-family: ui-monospace, monospace }
+.lead { margin: 20px 0 0; font-size: inherit; line-height: inherit }
+.route-note h2 { margin: 0 0 18px; color: var(--emerald); font: 700 clamp(23px, 3.3vw, 29px)/1.2 Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -.58px }
+.route-note p { margin: 0 0 20px; color: var(--ink); font-size: inherit; line-height: inherit }
+.mobile-toc { margin-top: 26px }
+.privacy-footer { font: inherit; color: var(--ink) }
+@media (max-width: 860px) {
+  body { font-size: 17px; line-height: 1.62 }
+  .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+}
+
+</style>
+</head>
 <body>
 <div aria-hidden="true" class="progress"></div>
 <header class="masthead">
@@ -804,12 +824,51 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </div>
 </header>
 <div class="page-shell">
-<nav aria-label="Содержание" class="toc"><p class="toc-label">Содержание</p><a href="#podgotovka">Инструкции, память и история чатов</a><a href="#general">Личные настройки Claude</a><a href="#pamyat">Просмотр и правка памяти</a><a href="#chistka">Исправление, пауза и полный сброс</a><a href="#staryy-razgovor">Найти старый разговор</a><a href="#share-chat">Поделиться чатом по ссылке</a><a href="#granicy">Память проекта и настройка приватности</a><a href="#check">Как проверить настройки</a><a href="#pamyatka">Памятка после настройки</a><a href="#voprosy">Частые вопросы</a><a href="#sources">Источники</a></nav>
+<nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovka">Инструкции, память и история чатов</a>
+<a href="#general">Личные настройки Claude</a>
+<a class="toc-sub" href="#settings">1. Где открыть настройки</a>
+<a href="#pamyat">Просмотр и правка памяти</a>
+<a class="toc-sub" href="#memory">Зачем включать память</a>
+<a class="toc-sub" href="#memory-from-chats">Что Claude выбирает из чатов</a>
+<a class="toc-sub" href="#manage-memory">Где посмотреть и исправить память</a>
+<a href="#chistka">Исправление, пауза и полный сброс</a>
+<a href="#staryy-razgovor">Найти старый разговор</a>
+<a class="toc-sub" href="#search-chats">Когда это понадобится</a>
+<a class="toc-sub" href="#search-how">Как попросить</a>
+<a class="toc-sub" href="#search-settings">Где включается и выключается</a>
+<a class="toc-sub" href="#search-granicy">Где Claude ищет, а где нет</a>
+<a href="#share-chat">Поделиться чатом по ссылке</a>
+<a href="#granicy">Память проекта и настройка приватности</a>
+<a href="#check">Как проверить настройки</a>
+<a href="#pamyatka">Памятка после настройки</a>
+<a href="#voprosy">Частые вопросы</a>
+<a href="#sources">Источники</a>
+<a class="toc-sub" href="#instructions">2. Заполни информацию о себе</a>
+<a class="toc-sub" href="#appearance">3. Как выбрать оформление и шрифт</a>
+<a class="toc-sub" href="#import-chatgpt">Как перенести данные из ChatGPT</a></nav>
 <main>
-<details class="mobile-toc">
-<summary>Содержание статьи</summary>
-<nav aria-label="Содержание на телефоне"><a href="#podgotovka">Инструкции, память и история чатов</a><a href="#general">Личные настройки Claude</a><a href="#pamyat">Просмотр и правка памяти</a><a href="#chistka">Исправление, пауза и полный сброс</a><a href="#staryy-razgovor">Найти старый разговор</a><a href="#share-chat">Поделиться чатом по ссылке</a><a href="#granicy">Память проекта и настройка приватности</a><a href="#check">Как проверить настройки</a><a href="#pamyatka">Памятка после настройки</a><a href="#voprosy">Частые вопросы</a><a href="#sources">Источники</a></nav>
-</details>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovka">Инструкции, память и история чатов</a>
+<a href="#general">Личные настройки Claude</a>
+<a class="toc-sub" href="#settings">1. Где открыть настройки</a>
+<a href="#pamyat">Просмотр и правка памяти</a>
+<a class="toc-sub" href="#memory">Зачем включать память</a>
+<a class="toc-sub" href="#memory-from-chats">Что Claude выбирает из чатов</a>
+<a class="toc-sub" href="#manage-memory">Где посмотреть и исправить память</a>
+<a href="#chistka">Исправление, пауза и полный сброс</a>
+<a href="#staryy-razgovor">Найти старый разговор</a>
+<a class="toc-sub" href="#search-chats">Когда это понадобится</a>
+<a class="toc-sub" href="#search-how">Как попросить</a>
+<a class="toc-sub" href="#search-settings">Где включается и выключается</a>
+<a class="toc-sub" href="#search-granicy">Где Claude ищет, а где нет</a>
+<a href="#share-chat">Поделиться чатом по ссылке</a>
+<a href="#granicy">Память проекта и настройка приватности</a>
+<a href="#check">Как проверить настройки</a>
+<a href="#pamyatka">Памятка после настройки</a>
+<a href="#voprosy">Частые вопросы</a>
+<a href="#sources">Источники</a>
+<a class="toc-sub" href="#instructions">2. Заполни информацию о себе</a>
+<a class="toc-sub" href="#appearance">3. Как выбрать оформление и шрифт</a>
+<a class="toc-sub" href="#import-chatgpt">Как перенести данные из ChatGPT</a></nav></details>
 <article>
 <header id="o-sebe">
 <p class="eyebrow">Claude.ai · настройка под себя</p>
@@ -1147,16 +1206,14 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- seo:related:end -->
 <p class="cta-question">В новом чате уже не приходится повторять роль и правила ответа. Но память сама не готовит публикации и не проверяет материалы: для этого нужны отдельные задания и порядок работы с ними. Ниже - о том, как из этих поручений собрать работу над контентом и сайтом без знания кода.</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
-<footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев<!-- privacy:footer:start -->
-<div class="privacy-footer"><a href="/politika/">Политика данных</a><button data-cookie-settings="" type="button">Настройки аналитики</button></div>
-<!-- privacy:footer:end -->
+<footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев
 </footer>
 </article>
 </main>
 <aside aria-label="Следующая статья" class="related-plaque">
-<p class="plaque-label">Сначала доступ</p>
+      <p class="plaque-label">Сначала доступ</p>
 <h2>Claude из России: подключение без блокировок</h2>
-<p><a href="../podklyuchenie-iz-rossii/">Вход, VPN и первый чат - если доступ ещё не настроен</a></p>
+      <p><a href="../podklyuchenie-iz-rossii/">Вход, VPN и первый чат - если доступ ещё не настроен</a></p>
 </aside>
 </div>
 <div aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
@@ -1312,5 +1369,10 @@ themeButton.addEventListener("click", function () {
 </div>
 </aside>
 <!-- privacy:banner:end -->
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button data-cookie-settings="" type="button">Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
 </body>
 </html>
