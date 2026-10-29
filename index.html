@@ -834,6 +834,14 @@ h1.intro-title .accent { color: var(--guide-color-forest) }
 .sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
 </style>
 <!-- quality:end -->
+<style id="hero-text-contrast">
+/* Подложка поверх фото, ниже текста и прежнего зерна. */
+.cover::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, var(--guide-color-hero-forest-alpha-92) 0%, var(--guide-color-hero-forest-alpha-86) 65%, var(--guide-color-hero-forest-alpha-55) 85%, var(--guide-color-hero-forest-alpha-35) 100%) }
+@media (max-width: 600px) {
+  .cover::before { background: linear-gradient(180deg, var(--guide-color-transparent) 0, var(--guide-color-transparent) 170px, var(--guide-color-hero-forest-alpha-92) 230px) }
+}
+</style>
 <!-- privacy:head:start -->
 <!-- critical:privacy-style:start -->
 <style id="guide-privacy-style">

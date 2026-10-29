@@ -489,6 +489,14 @@
 </style>
 <!-- erid:style:end -->
 <link rel="stylesheet" href="/assets/quality.css">
+<style id="hero-text-contrast">
+/* Подложка поверх фото, ниже текста и прежнего зерна. */
+.cover::before {{ content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, var(--guide-color-hero-forest-alpha-92) 0%, var(--guide-color-hero-forest-alpha-86) 65%, var(--guide-color-hero-forest-alpha-55) 85%, var(--guide-color-hero-forest-alpha-35) 100%) }}
+@media (max-width: 600px) {{
+  .cover::before {{ background: linear-gradient(180deg, var(--guide-color-transparent) 0, var(--guide-color-transparent) 170px, var(--guide-color-hero-forest-alpha-92) 230px) }}
+}}
+</style>
 </head>
 <body>
   <header class="cover">
