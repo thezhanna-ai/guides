@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ru"><head>
-<meta name="robots" content="noindex, nofollow"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>LTX Desktop: проверяем компьютер и запускаем видео локально</title><style>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>LTX Desktop: проверяем компьютер и запускаем видео локально</title><style>
 /* Exact primitive palette for the existing guides, not a replacement theme.
  * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
  * layer and keep their original values and theme overrides. Components use these
@@ -1966,13 +1966,104 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 .privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
 </style>
 <!-- critical:privacy-style:end -->
-<script defer="" src="/assets/privacy.js"></script>
+<script defer src="/assets/privacy.js"></script>
 <!-- privacy:head:end -->
 <!-- seo:canonical:start -->
-
+<link rel="canonical" href="https://pronovoe.com/claude-ai/ltx-desktop-lokalno/">
 <!-- seo:canonical:end -->
 <!-- seo:schema:start -->
-
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/#article",
+      "headline": "LTX Desktop: проверяем компьютер и запускаем видео локально",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-29"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "LTX Desktop: проверяем компьютер и запускаем видео локально",
+          "item": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "В примечаниях есть NVIDIA с меньшей памятью. Почему в таблице от 24 ГБ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Разработчик допускает ограниченные конфигурации ниже основных требований, но не рекомендует их. Программный порог допуска к инструментам не гарантирует полный набор настроек. Подробности находятся в необязательном разделе Lower-spec machines. Для первого запуска ориентируйся на таблицу выше."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "LTX Desktop и LTX Studio - одно и то же?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Здесь описано отдельное приложение LTX Desktop, которое устанавливается на компьютер. Инструкции для облачного LTX Studio с входом на сайт и оплатой кредитами не заменяют этот маршрут установки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Хватит ли Mac с 32 ГБ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для ограниченного локального режима нужны Apple Silicon и macOS 26 или новее. Доступны 540p и видео до 5 секунд. Для полного локального режима разработчик указывает от 48 ГБ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужно ли заводить API-ключ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для описанного здесь пути с Local Text Encoder ключ не нужен. Бесплатная облачная обработка текста через LTX API - дополнительный вариант. Генерация видео в облаке оплачивается отдельно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Загрузка LTX 2.5 не начинается после входа. Что делать?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Открой страницу модели в том же аккаунте Hugging Face, прими условия доступа и вернись в программу. Затем повтори скачивание. Если издатель подтверждает доступ вручную, дождись подтверждения."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Где искать готовое видео?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "В Assets, библиотеке в левом меню LTX Desktop. Открой ролик и проверь воспроизведение. В Settings → Models находится папка моделей, это другое место."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <!-- seo:schema:end -->
 <!-- erid:style:start -->
 <style>
@@ -2033,24 +2124,16 @@ article .prompt-legend + .code-card{margin-top:0}
 #viewer { grid-template-rows: minmax(0, 1fr) auto; padding: 64px 3vw 18px; }
 #viewer .viewer-scroll { min-width: 0; min-height: 0; max-width: 94vw; }
 #viewer .viewer-scroll img { max-width: none; max-height: none; height: auto; }
-</style><meta content="LTX Desktop: требования к Mac, Windows и Linux, официальный выпуск 1.3.1, Hugging Face, модель LTX 2.5 и локальный энкодер. Где заканчивается бесплатный режим." name="description"/><meta content="LTX Desktop: проверяем компьютер и запускаем видео локально" property="og:title"/><meta content="article" property="og:type"/><meta content="https://pronovoe.com/claude-ai/ltx-desktop-lokalno/assets/oblozhka.webp" property="og:image"/><meta content="https://pronovoe.com/claude-ai/ltx-desktop-lokalno/" property="og:url"/><link href="https://pronovoe.com/claude-ai/ltx-desktop-lokalno/" rel="canonical"/><script id="seo-schema" type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "LTX Desktop: проверяем компьютер и запускаем видео локально",
-  "inLanguage": "ru",
-  "dateModified": "2026-10-29",
-  "image": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/assets/oblozhka.webp",
-  "mainEntityOfPage": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/"
-}</script><style id="ltx-article">
+</style><meta content="LTX Desktop: требования к Mac, Windows и Linux, официальный выпуск 1.3.1, Hugging Face, модель LTX 2.5 и локальный энкодер. Где заканчивается бесплатный режим." name="description"/><meta content="LTX Desktop: проверяем компьютер и запускаем видео локально" property="og:title"/><meta content="article" property="og:type"/><meta content="https://pronovoe.com/claude-ai/ltx-desktop-lokalno/assets/oblozhka.webp" property="og:image"/><meta content="https://pronovoe.com/claude-ai/ltx-desktop-lokalno/" property="og:url"/><style id="ltx-article">
 html[data-theme="dark"] h1.article-standard-h1{color:var(--ink)!important}
 article .faq-item{background:var(--white)}
 article .warn-card + h3,article .result + h3{margin-top:24px}
 /* LTX article: only local content layout. Shared shell and interactions retained. */
-article .result{background:transparent;border:0;border-left:3px solid var(--guide-color-success-ink);border-radius:0;padding:4px 0 4px 14px;margin:18px 0;font:inherit;color:var(--ink)}
+article .result{background:var(--guide-color-transparent);border:0;border-left:3px solid var(--guide-color-success-ink);border-radius:0;padding:4px 0 4px 14px;margin:18px 0;font:inherit;color:var(--ink)}
 article .warn-card,article .check-panel{padding:11px 18px}
 article .check-panel p{margin:0}
 article .info-card + p,article .warn-card + p,article .check-panel + p{margin-top:25px}
-article .table-wrap th,article .table-wrap td{background:transparent}
+article .table-wrap th,article .table-wrap td{background:var(--guide-color-transparent)}
 article .table-wrap tbody tr:nth-child(odd){background:var(--white)}
 article .table-wrap tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-2) 25%,var(--white) 75%)}
 article .table-wrap thead th{background:var(--info)}
@@ -2070,15 +2153,19 @@ article .related-plaque h3{font:600 20px/1.35 Spectral,Georgia,serif;margin:8px 
 </div></div></div></header><div class="page-shell"><nav aria-label="Содержание" class="toc"><p class="toc-label">Содержание</p><ul class="toc-steps"><li><a href="#computer">Шаг 1. Проверь, подходит ли компьютер</a></li><li class="toc-sub"><a href="#mac-memory">Узнай чип, память и систему на Mac</a></li><li class="toc-sub"><a href="#windows-memory">Узнай ОЗУ и видеопамять на Windows</a></li><li><a href="#download">Шаг 2. Скачай официальный установщик</a></li><li><a href="#setup">Шаг 3. Установи программу и запусти первое видео</a></li><li class="toc-sub"><a href="#hugging-face">Войди в Hugging Face и разреши загрузку модели</a></li><li class="toc-sub"><a href="#models">Скачай LTX 2.5 и локальный текстовый энкодер</a></li><li class="toc-sub"><a href="#first-video">Открой Text to Video и отправь задание</a></li><li class="toc-sub"><a href="#results">Найди результат в Assets</a></li><li><a href="#free">Когда видео действительно бесплатны</a></li><li><a href="#unsupported">Если компьютер не подходит</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#sources">Официальные инструкции</a></li><li><a href="#related">Ещё по теме</a></li></ul></nav><main><article><header id="nachalo">
 <p class="eyebrow">НЕЙРОСЕТИ · ВИДЕО НА КОМПЬЮТЕРЕ</p>
 <h1 class="article-standard-h1">LTX Desktop: проверяем компьютер и запускаем видео локально</h1>
-<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Начальный уровень</p>
-<div class="seo-intro"><p class="lead">LTX Desktop позволяет делать видео на своём компьютере без платы за каждую генерацию. Но прежде чем скачивать программу и большие файлы моделей, нужно понять, подходит ли твой компьютер. Иначе установка закончится окном приложения, в котором локальное видео недоступно.</p>
-<p>LTX Desktop - программа от Lightricks. В ней ты описываешь сцену, а нейросеть LTX 2.5 создаёт видео. Программа даёт окно с кнопками и настройками, модель отвечает за генерацию. При локальном запуске считает твой компьютер. В облачном сервисе эту работу выполняет чужой сервер.</p>
-<p>Здесь пройдём путь от проверки памяти до первого задания в Text to Video. Сначала посмотри характеристики своего Mac или Windows-компьютера, а затем переходи к скачиванию.</p></div>
-<figure class="cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="LTX Desktop: видео на своём компьютере. Справа настоящий экран из официальной документации LTX"><figcaption>Требования, установка и локальный режим без API-ключа. На обложке официальный пример LTX.</figcaption></figure>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<div class="seo-intro"><p class="lead">LTX Desktop позволяет делать видео на своём компьютере без платы за каждую генерацию. Но прежде чем скачивать программу и большие файлы моделей, нужно понять, подходит ли твой компьютер. Иначе установка закончится окном приложения, в котором локальное видео недоступно. LTX Desktop - программа от Lightricks.</p></div>
+<p>В ней ты описываешь сцену, а нейросеть LTX 2.5 создаёт видео. Программа даёт окно с кнопками и настройками, модель отвечает за генерацию. При локальном запуске считает твой компьютер. В облачном сервисе эту работу выполняет чужой сервер.</p>
+<p>Здесь пройдём путь от проверки памяти до первого задания в Text to Video. Сначала посмотри характеристики своего Mac или Windows-компьютера, а затем переходи к скачиванию.</p>
+<figure class="cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="LTX Desktop: видео на своём компьютере. Справа настоящий экран из официальной документации LTX"><figcaption>Требования, установка и локальный режим без API-ключа</figcaption></figure>
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">LTX Desktop</span></nav>
 <p class="service-terms">Инструкция для версии 1.3.1. Актуальность требований: 29 октября 2026 года. Программа находится в бета-версии, интерфейс может меняться.</p>
 <div class="check-panel"><p><strong>Что понадобится.</strong> Компьютер из следующего раздела, свободное место на диске и интернет для установки и скачивания моделей. Для LTX 2.5 нужен аккаунт Hugging Face, сайта с файлами нейросетей. Если аккаунта нет, зарегистрируйся на <a href="https://huggingface.co/join">huggingface.co</a> и подтверди почту. Подключение аккаунта к программе разберём в шаге 3.</p></div>
-</header>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">LTX Desktop: проверяем компьютер и запускаем видео локально</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header><div class="share-row share-top"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F&amp;text=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F&amp;title=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE" target="_blank" rel="noopener">VK</a></div>
 <details class="mobile-toc"><summary>Содержание</summary><nav aria-label="Содержание на телефоне"><ul class="toc-steps"><li><a href="#computer">Шаг 1. Проверь, подходит ли компьютер</a></li><li class="toc-sub"><a href="#mac-memory">Узнай чип, память и систему на Mac</a></li><li class="toc-sub"><a href="#windows-memory">Узнай ОЗУ и видеопамять на Windows</a></li><li><a href="#download">Шаг 2. Скачай официальный установщик</a></li><li><a href="#setup">Шаг 3. Установи программу и запусти первое видео</a></li><li class="toc-sub"><a href="#hugging-face">Войди в Hugging Face и разреши загрузку модели</a></li><li class="toc-sub"><a href="#models">Скачай LTX 2.5 и локальный текстовый энкодер</a></li><li class="toc-sub"><a href="#first-video">Открой Text to Video и отправь задание</a></li><li class="toc-sub"><a href="#results">Найди результат в Assets</a></li><li><a href="#free">Когда видео действительно бесплатны</a></li><li><a href="#unsupported">Если компьютер не подходит</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#sources">Официальные инструкции</a></li><li><a href="#related">Ещё по теме</a></li></ul></nav></details>
 <section class="content-section">
 <h2 id="computer">Шаг 1. Проверь, подходит ли компьютер</h2>
@@ -2112,7 +2199,9 @@ article .related-plaque h3{font:600 20px/1.35 Spectral,Georgia,serif;margin:8px 
 <p>Для Ubuntu удобно выбрать <code>.deb</code>, для запуска отдельным файлом есть AppImage. Архитектура файла должна совпадать с архитектурой компьютера. Архивы Source code предназначены для исходного кода, для обычной установки они не нужны.</p>
 <p class="result"><strong>Результат:</strong> в загрузках лежит установщик под твою систему с названием из таблицы.</p>
 </section>
-<aside class="related-plaque"><p class="plaque-label">Другой способ сделать видео</p><h3>Видео из текста в браузере</h3><p><a href="/claude-ai/besplatnye-video-iz-teksta/">Сравни сервисы и условия скачивания</a>, если локальный вариант не подходит.</p></aside>
+<aside class="related-plaque">
+      <p class="plaque-label">Другой способ сделать видео</p><h3>Видео из текста в браузере</h3>
+      <p><a href="/claude-ai/besplatnye-video-iz-teksta/">Сравни сервисы и условия скачивания</a>, если локальный вариант не подходит.</p></aside>
 <section class="content-section">
 <h2 id="setup">Шаг 3. Установи программу и запусти первое видео</h2>
 <ol><li>На Mac открой <code>.dmg</code> и перенеси LTX Desktop в «Программы». На Windows запусти <code>.exe</code> и пройди установщик. На Linux установи выбранный <code>.deb</code> или разреши запуск AppImage как программы в свойствах файла и открой его.</li><li>Запусти LTX Desktop. Дождись подготовки окружения Python, компонентов для работы нейросети. Отдельно устанавливать Python по этому маршруту не нужно.</li><li>На первом запуске появится Setup, экран начальной настройки. Оставь интернет включённым: дальше программа будет скачивать модели.</li></ol>
@@ -2135,7 +2224,9 @@ article .related-plaque h3{font:600 20px/1.35 Spectral,Georgia,serif;margin:8px 
 <p>Модели хранятся отдельно от этой библиотеки. Их папку можно открыть или изменить в <strong>Settings → Models → Models folder</strong>. Не ищи готовое видео среди файлов весов модели.</p>
 <p class="result"><strong>Результат:</strong> завершённый ролик доступен в Assets и воспроизводится. Ошибка в Queue означает, что генерацию ещё нужно закончить.</p>
 </section>
-<aside class="related-plaque"><p class="plaque-label">Следующий навык</p><h3>Сформулируй сцену точнее</h3><p><a href="/claude-ai/prompt-master-uluchshitel-promptov/">Как уточнять запрос к нейросети</a>: опиши, что происходит, как движется камера и какой результат нужен.</p></aside>
+<aside class="related-plaque">
+      <p class="plaque-label">Следующий навык</p><h3>Сформулируй сцену точнее</h3>
+      <p><a href="/claude-ai/prompt-master-uluchshitel-promptov/">Как уточнять запрос к нейросети</a>: опиши, что происходит, как движется камера и какой результат нужен.</p></aside>
 <section class="content-section">
 <h2 id="free">Когда видео действительно бесплатны</h2>
 <p>Локальная генерация работает на твоём оборудовании, без подписки и API-ключа. За каждое такое видео LTX не списывает плату. При этом компьютер, место на диске и электричество всё равно нужны.</p>
@@ -2169,8 +2260,8 @@ article .related-plaque h3{font:600 20px/1.35 Spectral,Georgia,serif;margin:8px 
 <ul><li><a href="https://github.com/Lightricks/LTX-Desktop/releases/tag/v1.3.1">Выпуск 1.3.1 и файлы установки</a>.</li><li><a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/setup-and-settings.md">Требования к компьютеру, первый запуск и Text encoding</a>.</li><li><a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/models-and-loras.md">Загрузка моделей и вход в Hugging Face</a>.</li><li><a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/tools-and-options.md">Настройки Text to Video и улучшения запросов</a>.</li><li><a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/api-keys-and-privacy.md">Облачные функции, оплата и передача данных</a>.</li></ul>
 </section>
 <section class="seo-related content-section" aria-label="Ещё по теме"><h2 id="related">Ещё по теме</h2><ul><li><a href="/claude-ai/besplatnye-video-iz-teksta/">Видео из текста: сервисы и условия скачивания</a></li><li><a href="/claude-ai/prompt-master-uluchshitel-promptov/">Как уточнить запрос к нейросети</a></li><li><a href="/claude-ai/runway-iz-claude/">Runway в Claude: видео прямо в чате</a></li></ul></section>
-<p class="cta-question">У видео есть работа до и после генерации: подготовить сценарий, собрать материалы и страницу, на которой ролик увидят. Эти задачи тоже можно поручать нейросетям. Ниже - примеры того, что они умеют, если не знаешь кода.</p>
-<section aria-label="Концентрат и мастер-группа Ивана Сергеева" class="cta"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
+<div class="share-row "><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F&amp;text=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F&amp;title=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE" target="_blank" rel="noopener">VK</a></div><p class="cta-question">У видео есть работа до и после генерации: подготовить сценарий, собрать материалы и страницу, на которой ролик увидят. Эти задачи тоже можно поручать нейросетям. Ниже - примеры того, что они умеют, если не знаешь кода.</p>
+<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 </article></main><aside class="related-plaque" aria-label="Соседняя статья"><p class="plaque-label">Полезно знать</p><h2>Видео в браузере</h2><p><a href="/claude-ai/besplatnye-video-iz-teksta/">Сервисы и условия скачивания</a></p></aside></div><div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog"><button aria-label="Закрыть" class="viewer-close" type="button">✕</button><div class="viewer-scroll" tabindex="0"><img alt=""/></div><p class="viewer-hint"></p></div><script src="../../assets/image-viewer.js"></script><script>
 (function () {
   var viewer = document.getElementById("viewer");
