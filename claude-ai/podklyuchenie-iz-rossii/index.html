@@ -852,7 +852,31 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
   ]
 }</script>
 <!-- seo:schema:end -->
-<style id="volna2-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:transparent!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card .copy-button{position:static;display:block;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto}article .table-wrap{margin:24px 0;border:1px solid var(--line);border-radius:10px}article .table-wrap table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;color:var(--ink)}article .table-wrap td,article .table-wrap th{vertical-align:top;padding:14px;text-align:left;border-bottom:1px solid var(--line);overflow-wrap:anywhere}article .table-wrap th{background:var(--info);color:var(--emerald)}article .table-wrap tbody tr:nth-child(even){background:var(--paper-2)}@media(max-width:600px){article .table-wrap table{min-width:550px}}article details summary{cursor:pointer;font-weight:700}article #voprosy details{padding:16px 0;border-bottom:1px solid var(--muted)}html[data-theme="dark"] article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white)}article pre{overflow-wrap:anywhere}</style></head>
+<style id="volna2-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:var(--guide-color-transparent)!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card .copy-button{position:static;display:block;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto}article .table-wrap{margin:24px 0;border:1px solid var(--line);border-radius:10px}article .table-wrap table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;color:var(--ink)}article .table-wrap td,article .table-wrap th{vertical-align:top;padding:14px;text-align:left;border-bottom:1px solid var(--line);overflow-wrap:anywhere}article .table-wrap th{background:var(--info);color:var(--emerald)}article .table-wrap tbody tr:nth-child(even){background:var(--paper-2)}@media(max-width:600px){article .table-wrap table{min-width:550px}}article details summary{cursor:pointer;font-weight:700}article #voprosy details{padding:16px 0;border-bottom:1px solid var(--muted)}html[data-theme="dark"] article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white)}article pre{overflow-wrap:anywhere}html[data-theme="dark"] h1.article-standard-h1,html[data-theme="dark"] .cookie-banner a{color:var(--ink)!important}</style><style id="volna2-house-layout">
+
+/* Оболочка опубликованного Курьера, 29.10.2026. Содержимое статьи сохранено. */
+body { font: 18.4px/1.65 Spectral, Georgia, serif }
+.masthead { background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)) }
+.masthead-inner { gap: 20px }
+.brand { font-size: 18px; line-height: 1.65 }
+.theme-toggle { width: 40px; min-height: 40px; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+.toc-label, .related-plaque .plaque-label { font-family: ui-monospace, monospace }
+.lead { margin: 20px 0 0; font-size: inherit; line-height: inherit }
+.route-note h2 { margin: 0 0 18px; color: var(--emerald); font: 700 clamp(23px, 3.3vw, 29px)/1.2 Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -.58px }
+.route-note p { margin: 0 0 20px; color: var(--ink); font-size: inherit; line-height: inherit }
+.mobile-toc { margin-top: 26px }
+.privacy-footer { font: inherit; color: var(--ink) }
+@media (max-width: 860px) {
+  body { font-size: 17px; line-height: 1.62 }
+  .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+}
+
+.mobile-toc { padding: 0; border: 0; border-radius: 0; background: var(--guide-color-transparent) }
+@media (max-width:860px) { .mobile-toc { margin: 26px 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line) } }
+
+.setup-note p { margin-bottom: 20px }
+</style>
+</head>
 <body>
 <div aria-hidden="true" class="progress"></div>
 <header class="masthead">
@@ -867,12 +891,31 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </div>
 </header>
 <div class="page-shell">
-<nav aria-label="Содержание" class="toc"><p class="toc-label">Содержание</p><a href="#podgotovit">Подготовка перед входом</a><a href="#vpn">Доступность и ошибка сети</a><a href="#google-account">Выбор почты с долгим доступом</a><a href="#claude-login">Открыть Claude и войти через Google</a><a href="#pismo">Письмо для входа не приходит</a><a href="#phone-verification">Подтвердить телефонный номер для нового аккаунта</a><a href="#lichnost">Проверка личности отдельно от SMS</a><a href="#first-chat">Проверить первый чат</a><a href="#troubleshooting">Что проверить, если вход не получился</a><a href="#checklist">Памятка перед первым сообщением</a><a href="#voprosy">Частые вопросы</a><a href="#sources">Источники</a></nav>
+<nav class="toc" aria-label="Содержание"><p class="toc-label">Содержание</p><a href="#podgotovit">Подготовка перед входом</a>
+<a href="#vpn">Доступность и ошибка сети</a>
+<a href="#google-account">Выбор почты с долгим доступом</a>
+<a href="#claude-login">Открыть Claude и войти через Google</a>
+<a href="#pismo">Письмо для входа не приходит</a>
+<a href="#phone-verification">Подтвердить телефонный номер для нового аккаунта</a>
+<a href="#lichnost">Проверка личности отдельно от SMS</a>
+<a href="#first-chat">Проверить первый чат</a>
+<a href="#troubleshooting">Что проверить, если вход не получился</a>
+<a href="#checklist">Памятка перед первым сообщением</a>
+<a href="#voprosy">Частые вопросы</a>
+<a href="#sources">Источники</a></nav>
 <main>
-<details class="mobile-toc">
-<summary>Содержание гида</summary>
-<nav aria-label="Содержание на телефоне"><a href="#podgotovit">Подготовка перед входом</a><a href="#vpn">Доступность и ошибка сети</a><a href="#google-account">Выбор почты с долгим доступом</a><a href="#claude-login">Открыть Claude и войти через Google</a><a href="#pismo">Письмо для входа не приходит</a><a href="#phone-verification">Подтвердить телефонный номер для нового аккаунта</a><a href="#lichnost">Проверка личности отдельно от SMS</a><a href="#first-chat">Проверить первый чат</a><a href="#troubleshooting">Что проверить, если вход не получился</a><a href="#checklist">Памятка перед первым сообщением</a><a href="#voprosy">Частые вопросы</a><a href="#sources">Источники</a></nav>
-</details>
+<details class="mobile-toc"><summary>Содержание гида</summary><nav aria-label="Содержание на телефоне"><a href="#podgotovit">Подготовка перед входом</a>
+<a href="#vpn">Доступность и ошибка сети</a>
+<a href="#google-account">Выбор почты с долгим доступом</a>
+<a href="#claude-login">Открыть Claude и войти через Google</a>
+<a href="#pismo">Письмо для входа не приходит</a>
+<a href="#phone-verification">Подтвердить телефонный номер для нового аккаунта</a>
+<a href="#lichnost">Проверка личности отдельно от SMS</a>
+<a href="#first-chat">Проверить первый чат</a>
+<a href="#troubleshooting">Что проверить, если вход не получился</a>
+<a href="#checklist">Памятка перед первым сообщением</a>
+<a href="#voprosy">Частые вопросы</a>
+<a href="#sources">Источники</a></nav></details>
 <article>
 <header class="article-header" data-handout-title="Claude из России: подключение без блокировок" id="dostup">
 <p class="eyebrow">Claude.ai · кнопка за кнопкой</p>
@@ -1021,16 +1064,14 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- seo:related:end -->
 <p class="cta-question">После проверки доступа у тебя есть рабочий чат и понятный способ вернуться в аккаунт. Чтобы поручить ему подготовку контента или сайта, ещё нужны исходные материалы, задание и проверка результата. Ниже - о таких рабочих сценариях с нейросетями без знания кода.</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
-<footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев<!-- privacy:footer:start -->
-<div class="privacy-footer"><a href="/politika/">Политика данных</a><button data-cookie-settings="" type="button">Настройки аналитики</button></div>
-<!-- privacy:footer:end -->
+<footer class="foot">Независимый русскоязычный гид. Claude и Anthropic являются товарными знаками их владельцев
 </footer>
 </article>
 </main>
 <aside aria-label="Следующая статья" class="related-plaque">
-<p class="plaque-label">После первого чата</p>
+      <p class="plaque-label">После первого чата</p>
 <h2>Claude помнит о тебе: что рассказать один раз</h2>
-<p><a href="../kak-rasskazat-o-sebe/">Имя, постоянные инструкции и память - чтобы не объяснять контекст заново</a></p>
+      <p><a href="../kak-rasskazat-o-sebe/">Имя, постоянные инструкции и память - чтобы не объяснять контекст заново</a></p>
 </aside>
 </div>
 <script>
@@ -1119,5 +1160,10 @@ themeButton.addEventListener("click", function () {
 </div>
 </aside>
 <!-- privacy:banner:end -->
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button data-cookie-settings="" type="button">Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
 </body>
 </html>
