@@ -1343,7 +1343,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-26",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/utrennyaya-svodka-po-rynku/assets/oblozhka.webp"
     },
     {
@@ -1902,6 +1902,7 @@ Get-Content SVODKA.txt</code></pre></div>
 <li>6:15 - собрать SVODKA.txt и прочитать ЧЕГО НЕ ХВАТИЛО</li>
 </ul></div></section>
 
+<p class="source-note"><a href="https://www.sec.gov/about/developer-resources">SEC: правила доступа к EDGAR</a> - не больше 10 запросов в секунду на пользователя. Сверено 29.10.2026</p>
 <section id="faq"><h2>Частые вопросы</h2><div class="faq"><details open><summary>Это заменяет терминал Bloomberg?</summary><p>Нет. По словам самого Roan, место в терминале Bloomberg обходится в 27 660 долларов в год, а эта схема переносит только несколько видов открытых данных. Она не повторяет весь терминал и не даёт советов по торговле</p></details><details open><summary>Для SEC нужен ключ?</summary><p>Нет. Нужен заголовок User-Agent с именем и почтой, а запросы надо держать в пределах 10 в секунду. Без подписи SEC возвращает страницу Undeclared Automated Tool</p></details><details open><summary>Где хранить ключ Alpha Vantage?</summary><p>В переменной среды ALPHAVANTAGE_KEY. В программе остаётся только запасное значение demo, которое работает для примеров и может отказать по AAPL</p></details><details open><summary>Что будет, если источник не ответит?</summary><p>Сборщик запишет поле oshibka в свой JSON, а четвёртая программа перенесёт пропуск в раздел ЧЕГО НЕ ХВАТИЛО. Она не подставит придуманное число</p></details><details open><summary>Будет ли сводка собираться при выключенном ноутбуке?</summary><p>Нет. Для работы при выключенном ноутбуке нужна облачная машина, которая остаётся включённой и запускает четыре команды по расписанию</p></details><details open><summary>Нужно уметь программировать?</summary><p>Нет. Достаточно скопировать пять файлов, поменять список тикеров в строке TICKERS и запустить bash zapusk.sh. Если что-то упало, скопируй ошибку целиком и покажи её агенту по запросу внизу статьи</p></details></div></section>
 <div class="share-row">
         <span class="eyebrow">Поделиться</span>

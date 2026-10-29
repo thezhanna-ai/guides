@@ -795,7 +795,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-11",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/svoy-server-dlya-claude/assets/oblozhka.webp"
     },
     {
@@ -813,6 +813,36 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "position": 2,
           "name": "Свой сервер для Claude: личный VPN, облако Anthropic и работа с телефона",
           "item": "https://pronovoe.com/claude-ai/svoy-server-dlya-claude/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/svoy-server-dlya-claude/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Что сохранить до смены хостинга?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Скачай отдельную копию папки проекта и запиши, какие программы нужны для её запуска. Пароли и ключи храни отдельно от проекта. До отключения старого VPS открой копию на новом сервере и проверь одну обычную задачу"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно дать другому человеку пароль от сервера?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для совместной работы попроси создать отдельного пользователя с доступом только к нужной папке. Пароль root даёт слишком широкий доступ. Если человек должен только посмотреть результат, отправь готовый файл или ссылку на просмотр"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что проверить перед отменой аренды?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Сначала забери файлы и убедись, что они открываются на твоём компьютере. Проверь, не остались ли на VPS бот, сайт или задача по расписанию. Затем отключи продление у хостинга и сохрани подтверждение: удаление программы на ноутбуке аренду не отменяет"
+          }
         }
       ]
     }
@@ -854,7 +884,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
       <a href="#oshibki"><span>Если что-то пошло не так</span></a>
       <a href="#vozmozhnosti"><span>Что ещё умеет твой сервер</span></a>
       <a href="#istochniki"><span>Официальные источники</span></a>
-    </nav>
+    <a href="#faq">Частые вопросы</a></nav>
 
     <main>
       <details class="mobile-toc">
@@ -870,7 +900,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <a href="#oshibki">Если что-то пошло не так</a>
           <a href="#vozmozhnosti">Что ещё умеет твой сервер</a>
           <a href="#istochniki">Официальные источники</a>
-        </nav>
+        <a href="#faq">Частые вопросы</a></nav>
       </details>
 
       <article>
@@ -1036,7 +1066,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <div class="step">
             <h3>Установи приложение</h3>
             <ul class="requirements-list">
-              <li><b>iPhone и iPad:</b> App Store, приложение «AmneziaVPN». Нужен iOS 17 или новее</li>
+              <li><strong>iPhone и iPad:</strong> App Store, приложение «AmneziaVPN». В карточке версии 5.0.3 указаны iOS 16.0 и iPadOS 16.0 или новее. <a href="https://apps.apple.com/us/app/amneziavpn/id1600529900">Совместимость в App Store</a></li>
               <li><b>Android:</b> Google Play, приложение «Amnezia VPN»</li>
               <li><b>Windows и Mac:</b> страница <a href="https://github.com/amnezia-vpn/amnezia-client/releases">релизов AmneziaVPN на GitHub</a>. Открой верхний релиз, разверни блок «Assets» и скачай файл, который оканчивается на <span class="path">x64.exe</span> для Windows или <span class="path">macos.pkg</span> для Mac</li>
             </ul>
@@ -1346,6 +1376,11 @@ claude remote-control</pre>
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsvoy-server-dlya-claude%2F&amp;title=%D0%A1%D0%B2%D0%BE%D0%B9%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%20%D0%B4%D0%BB%D1%8F%20Claude%3A%20%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B9%20VPN%2C%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE%20Anthropic%20%D0%B8%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D1%81%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D0%B0" target="_blank" rel="noopener">VK</a>
       </div>
 
+<section class="content-section" id="faq"><h2>Частые вопросы</h2>
+<details class="faq-item"><summary>Что сохранить до смены хостинга?</summary><p>Скачай отдельную копию папки проекта и запиши, какие программы нужны для её запуска. Пароли и ключи храни отдельно от проекта. До отключения старого VPS открой копию на новом сервере и проверь одну обычную задачу</p></details>
+<details class="faq-item"><summary>Можно дать другому человеку пароль от сервера?</summary><p>Для совместной работы попроси создать отдельного пользователя с доступом только к нужной папке. Пароль root даёт слишком широкий доступ. Если человек должен только посмотреть результат, отправь готовый файл или ссылку на просмотр</p></details>
+<details class="faq-item"><summary>Что проверить перед отменой аренды?</summary><p>Сначала забери файлы и убедись, что они открываются на твоём компьютере. Проверь, не остались ли на VPS бот, сайт или задача по расписанию. Затем отключи продление у хостинга и сохрани подтверждение: удаление программы на ноутбуке аренду не отменяет</p></details>
+</section>
 <p class="cta-question">Сервер работает круглые сутки. Чем его занять?</p>
 
 

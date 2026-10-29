@@ -636,7 +636,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-11",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/zagruzka-faylov-v-claude/assets/oblozhka.webp"
     },
     {
@@ -654,6 +654,36 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "position": 2,
           "name": "Загрузка файлов в Claude: один документ и пачка файлов",
           "item": "https://pronovoe.com/claude-ai/zagruzka-faylov-v-claude/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/zagruzka-faylov-v-claude/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Что делать, если два файла противоречат друг другу?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Назови основной документ и попроси выписать расхождения отдельно, со ссылкой на страницу или строку каждого файла. Пока ты не выберешь верное значение, Claude должен оставить его спорным, а не брать более правдоподобную цифру"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как заметить ошибку распознавания скана?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Выбери страницу с таблицей или мелкими числами и попроси переписать её без расчётов. Сравни несколько строк с оригиналом. Если цифры перепутаны, передай этот участок отдельным чётким изображением и повтори проверку"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как продолжить работу после обновления документа?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Дай новой версии отличимое имя и прямо напиши, какой файл она заменяет. Попроси перечислить только изменения, затем проверь их по оригиналу. Так старое значение не попадёт в ответ незаметно"
+          }
         }
       ]
     }
@@ -676,7 +706,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#formaty">Форматы и скрытая засада</a>
 <a href="#zaprosy">Спроси по оригиналам</a>
 <a href="#sources">Источники</a>
-</nav><main><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне">
+<a href="#faq">Частые вопросы</a></nav><main><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне">
 <a href="#nachalo">Загрузка файлов в Claude: один документ и пачка файлов</a>
 <a href="#odin">Прикрепи один документ</a>
 <a href="#neskolko">Добавь пачку файлов</a>
@@ -684,7 +714,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <a href="#formaty">Форматы и скрытая засада</a>
 <a href="#zaprosy">Спроси по оригиналам</a>
 <a href="#sources">Источники</a>
-</nav></details><article>
+<a href="#faq">Частые вопросы</a></nav></details><article>
 <header id="nachalo"><p class="eyebrow">Claude.ai · выпуск 18</p><figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Один объёмный PDF и пачка из трёх PDF входят в реплику как образ загрузки файлов в разговор Claude" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=0c9f32abd301 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Прикрепление документов, сверка полученных вложений и вопросы по оригиналам</figcaption></figure>
 <h1 class="article-standard-h1">Загрузка файлов в Claude: один документ и пачка файлов</h1>
 <p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
@@ -718,7 +748,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <section class="content-section" id="neskolko"><p class="section-label">Три версии разом</p><h2>Добавь пачку файлов</h2>
 <p class="purpose">Если сравниваешь несколько версий, приложи оригиналы в один чат, чтобы Claude мог сопоставить их между собой</p>
 <div class="step"><h3>3. Выдели нужные документы</h3><p>Снова нажми <span class="path">+</span> → <span class="path">Add files or photos</span>. Открой папку на компьютере, выдели нужные файлы и нажми <span class="path">Открыть (Open)</span>. Несколько выделенных файлов можно также перетащить в чат вместе</p><div class="result"><p><b>Результат:</b> у сообщения видны отдельные вложения для каждой версии. Выбор файлов в папке не открывает Claude всю папку</p></div><figure><div class="shot"><img src="assets/her/shag-tri-fayla.webp" alt="Три вложения в поле ввода Claude, выделенные рамкой; содержимое двух PDF скрыто" loading="lazy" width="910" height="314"></div><figcaption>Скрин автора: три отдельных вложения у сообщения</figcaption></figure></div>
-<p>В обычном чате Anthropic указывает предел до 20 файлов и до 500 МБ на файл. Если материалов больше, раздели анализ на части. Для постоянной справки есть <a href="../pervyy-proekt-v-claude/">Projects в Claude</a>: туда добавляют файлы, доступные в новых чатах этого проекта</p>
+<p>В обычном чате Anthropic указывает предел до 20 файлов и до 500 МБ на файл. Если материалов больше, раздели анализ на части. Для постоянной справки есть <a href="../pervyy-proekt-v-claude/">Projects в Claude</a>: туда добавляют файлы, доступные в новых чатах этого проекта <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude">Лимиты вложений Anthropic</a></p>
 </section>
 <section class="content-section" id="proverka"><p class="section-label">До анализа</p><h2>Проверь, что Claude получил</h2>
 <p class="purpose">Вложения появились у сообщения. Теперь отправь короткую проверку, прежде чем просить вывод по договору</p>
@@ -732,7 +762,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p>Для XLSX включи <span class="path">Settings → Capabilities → Code execution and file creation</span>. Прямой путь: <a href="https://claude.ai/settings/capabilities">настройки возможностей Claude</a>. Без этого переключателя XLSX не загрузится</p>
 <figure><div class="shot"><img src="assets/03-xlsx-setting-anthropic.png" alt="Официальный скрин включённого переключателя Code execution and file creation в настройках Claude" loading="lazy" width="1902" height="1008"></div><figcaption>Синий переключатель Code execution and file creation нужен для XLSX. Источник: <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Anthropic Help Center, Create and edit files with Claude</a></figcaption></figure>
 <div class="warn-card"><p><span class="info-title">Засада с Word:</span> из DOCX и других документов, кроме PDF, Claude извлекает текст, но не читает встроенные изображения. Если схема или скрин внутри Word влияют на ответ, приложи изображение отдельно и назови его в запросе</p></div>
-<p>У PDF до 100 страниц Claude анализирует текст вместе с визуальными элементами. В PDF от 101 до 1000 страниц Claude обрабатывает только текст. Для PDF указывай номер страницы из просмотрщика файла: напечатанный на листе номер может отличаться</p>
+<p>У PDF до 100 страниц Claude анализирует текст вместе с визуальными элементами. В PDF от 101 до 1000 страниц Claude обрабатывает только текст. Для PDF указывай номер страницы из просмотрщика файла: напечатанный на листе номер может отличаться <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude">Обработка PDF по справке Anthropic</a></p>
 </section>
 <section class="content-section" id="zaprosy"><p class="section-label">Теперь вопрос</p><h2>Спроси по оригиналам</h2>
 <p class="purpose">Когда Claude назвал все файлы и важные картинки приложены отдельно, переходи от общего «что думаешь?» к пункту, который можно открыть и проверить</p>
@@ -751,6 +781,16 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://wa.me/?text=%D0%97%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0%20%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%20%D0%B2%20Claude%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%20%D0%B8%20%D0%BF%D0%B0%D1%87%D0%BA%D0%B0%20%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fzagruzka-faylov-v-claude%2F" target="_blank" rel="noopener">WhatsApp</a>
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fzagruzka-faylov-v-claude%2F&amp;title=%D0%97%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0%20%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%20%D0%B2%20Claude%3A%20%D0%BE%D0%B4%D0%B8%D0%BD%20%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%20%D0%B8%20%D0%BF%D0%B0%D1%87%D0%BA%D0%B0%20%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2" target="_blank" rel="noopener">VK</a>
       </div>
+
+
+
+
+
+<section class="content-section" id="faq"><h2>Частые вопросы</h2>
+<details class="faq-item"><summary>Что делать, если два файла противоречат друг другу?</summary><p>Назови основной документ и попроси выписать расхождения отдельно, со ссылкой на страницу или строку каждого файла. Пока ты не выберешь верное значение, Claude должен оставить его спорным, а не брать более правдоподобную цифру</p></details>
+<details class="faq-item"><summary>Как заметить ошибку распознавания скана?</summary><p>Выбери страницу с таблицей или мелкими числами и попроси переписать её без расчётов. Сравни несколько строк с оригиналом. Если цифры перепутаны, передай этот участок отдельным чётким изображением и повтори проверку</p></details>
+<details class="faq-item"><summary>Как продолжить работу после обновления документа?</summary><p>Дай новой версии отличимое имя и прямо напиши, какой файл она заменяет. Попроси перечислить только изменения, затем проверь их по оригиналу. Так старое значение не попадёт в ответ незаметно</p></details>
+</section>
 
 <!-- seo:related:start -->
 <section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/pyat-neyrosetey-dlya-ucheby/">Пять нейросетей для учёбы и работы: с чего начать</a></li></ul></section>

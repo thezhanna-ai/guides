@@ -679,7 +679,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-26",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/promty-sveta-dlya-foto-chatgpt/assets/oblozhka.webp"
     },
     {
@@ -699,12 +699,50 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "item": "https://pronovoe.com/claude-ai/promty-sveta-dlya-foto-chatgpt/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/promty-sveta-dlya-foto-chatgpt/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Почему /closeup не работает в пустом чате?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Короткое имя действует только там, где уже принят словарь с его полным промптом"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли после команды уточнить цвет света?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Напиши уточнение после команды, например: /neonwash холодный свет справа"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему ракурс изменил одежду?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Генератор пересобирает весь кадр. Сравни результат с исходником и перечисли детали, которые нужно сохранить"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как сравнить несколько вариантов честно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для каждого варианта снова прикладывай исходное фото, чтобы изменения не накапливались"
+          }
+        }
+      ]
     }
   ]
 }
 </script>
 <!-- seo:schema:end -->
-<script type="application/ld+json" id="faq-schema">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Почему /closeup не работает в пустом чате?","acceptedAnswer":{"@type":"Answer","text":"Короткое имя действует только там, где уже принят словарь с его полным промптом."}},{"@type":"Question","name":"Можно ли после команды уточнить цвет света?","acceptedAnswer":{"@type":"Answer","text":"Да. Напиши уточнение после команды, например: /neonwash холодный свет справа."}},{"@type":"Question","name":"Почему ракурс изменил одежду?","acceptedAnswer":{"@type":"Answer","text":"Генератор пересобирает весь кадр. Сравни результат с исходником и перечисли детали, которые нужно сохранить."}},{"@type":"Question","name":"Как сравнить несколько вариантов честно?","acceptedAnswer":{"@type":"Answer","text":"Для каждого варианта снова прикладывай исходное фото, чтобы изменения не накапливались."}}]}</script></head><body><div class="progress" aria-hidden="true"></div>
+</head><body><div class="progress" aria-hidden="true"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
 <div class="header-actions"><div class="handout-title">Свет для фото</div><div class="header-controls">
 <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
@@ -766,7 +804,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <!-- series:end --></section>
 
 
-<section class="content-section" id="proverka"><h2>Проверка перед сохранением</h2><p>Почему свет поменялся, а вместе с ним сдвинулись детали лица? Короткий промпт описывает желаемую картинку, но не закрепляет каждый участок снимка. В нашей пробе с садом это видно даже при слове only («только»). Начни с одного эффекта, открой исходник и результат крупнее, сравни лицо, волосы, одежду. Если они изменились, верни исходное фото и добавь, что нужно сохранить </p></section><section class="content-section" id="pamyatka"><h2>Памятка на один экран</h2><p>Перед новым вызовом <code>/neonwash</code> пройди эти пять строк по порядку</p><ul><li>Сначала словарь, потом исходное фото и команда первой строкой</li><li>Новый ракурс проверяй по лицу, одежде и предметам на фоне</li><li>Каждый следующий эффект начинай с исходника, не с прошлой генерации</li><li>Для чистого кадра используй новый чат с тем же словарём</li><li>Если неон меняет лицо, допиши: «Сохрани форму носа, губ, разрез глаз и фактуру кожи; меняй только цвет света»</li></ul></section><section class="content-section" id="faq"><h2>Частые вопросы</h2><h3>Почему /closeup не работает в пустом чате?</h3><p>Короткое имя действует только там, где уже принят словарь с его полным промптом</p><h3>Можно ли после команды уточнить цвет света?</h3><p>Да. Напиши уточнение после команды, например: /neonwash холодный свет справа</p><h3>Почему ракурс изменил одежду?</h3><p>Генератор пересобирает весь кадр. Сравни результат с исходником и перечисли детали, которые нужно сохранить</p><h3>Как сравнить несколько вариантов честно?</h3><p>Для каждого варианта снова прикладывай исходное фото, чтобы изменения не накапливались</p></section><section class="help-banner content-section" id="pomoshch" aria-label="Если что-то не получается">
+<section class="content-section" id="proverka"><h2>Проверка перед сохранением</h2><p>Почему свет поменялся, а вместе с ним сдвинулись детали лица? Короткий промпт описывает желаемую картинку, но не закрепляет каждый участок снимка. В нашей пробе с садом это видно даже при слове only («только»). Начни с одного эффекта, открой исходник и результат крупнее, сравни лицо, волосы, одежду. Если они изменились, верни исходное фото и добавь, что нужно сохранить </p></section><section class="content-section" id="pamyatka"><h2>Памятка на один экран</h2><p>Перед новым вызовом <code>/neonwash</code> пройди эти пять строк по порядку</p><ul><li>Сначала словарь, потом исходное фото и команда первой строкой</li><li>Новый ракурс проверяй по лицу, одежде и предметам на фоне</li><li>Каждый следующий эффект начинай с исходника, не с прошлой генерации</li><li>Для чистого кадра используй новый чат с тем же словарём</li><li>Если неон меняет лицо, допиши: «Сохрани форму носа, губ, разрез глаз и фактуру кожи; меняй только цвет света»</li></ul></section><section class="content-section" id="faq"><h2>Частые вопросы</h2><details class="faq-item" open><summary>Почему /closeup не работает в пустом чате?</summary><p>Короткое имя действует только там, где уже принят словарь с его полным промптом</p></details><details class="faq-item" open><summary>Можно ли после команды уточнить цвет света?</summary><p>Да. Напиши уточнение после команды, например: /neonwash холодный свет справа</p></details><details class="faq-item" open><summary>Почему ракурс изменил одежду?</summary><p>Генератор пересобирает весь кадр. Сравни результат с исходником и перечисли детали, которые нужно сохранить</p></details><details class="faq-item" open><summary>Как сравнить несколько вариантов честно?</summary><p>Для каждого варианта снова прикладывай исходное фото, чтобы изменения не накапливались</p></details></section><section class="help-banner content-section" id="pomoshch" aria-label="Если что-то не получается">
 <p class="help-title">Не сработала команда <code>/neonwash</code>? Попроси ChatGPT найти пропущенный шаг. <span class="accent">Проверяй по одному действию</span></p>
 <div class="help-demo"><div class="bubble me"><span class="who">Ты</span><p id="help-prompt">Я установил словарь и вызвал /neonwash с фотографией. Проверь порядок действий, затем спроси, какую одну деталь нужно сохранить. Объясняй по одному действию</p></div>
 <div class="bubble claude"><span class="who">ChatGPT</span>Какой эффект нужен и какие детали исходника сохранить?</div></div>

@@ -675,7 +675,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-26",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/gotovye-fayly-excel-word-pdf/assets/oblozhka.webp"
     },
     {
@@ -729,7 +729,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "name": "Какой максимальный размер",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "30 МБ на файл - и когда загружаешь свой, и когда скачиваешь собранный"
+            "text": "При загрузке в обычный чат - до 500 МБ на файл, в материалы проекта - до 30 МБ. Отдельный предел скачивания готового файла в этой справке не указан. Официальные лимиты"
           }
         },
         {
@@ -862,7 +862,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 
           <div class="step" id="s-1">
             <h3>1. Включи создание файлов</h3>
-            <p>Пока функция выключена, Клод будет отвечать таблицей в чате, сколько ни проси файл. Открой раздел <span class="path">Capabilities</span> и включи верхний тумблер - <span class="path">Cloud code execution and file creation</span>. Под ним прямо написано, что именно он даёт: Клод сможет выполнять код на сервере и создавать документы, таблицы, презентации и PDF. На бесплатном тарифе функция тоже есть</p>
+            <p>Открой Settings → Capabilities и проверь Code execution and file creation. В обновлённом интерфейсе этот пункт может называться Create and edit files. По справке Anthropic создание файлов доступно на всех тарифах и включено по умолчанию; в рабочем аккаунте его может отключить администратор. <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Настройка создания файлов</a></p>
             <figure>
               <div class="shot">
                 <img src="assets/05-nastroyki.png" alt="Раздел Capabilities: тумблер Cloud code execution and file creation включён" width="1532" height="610" loading="lazy" decoding="async">
@@ -977,7 +977,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           </div>
           <div class="check-panel">
             <h3>Файл слишком большой</h3>
-            <p>Предел - 30 МБ на файл, и он работает в обе стороны, на загрузку и на скачивание. Для таблицы с расчётом это много, но огромная выгрузка на сотни тысяч строк в него не поместится</p>
+            <p>Для загрузки в обычный чат предел составляет 500 МБ на файл, до 20 файлов в разговоре. В файлах проекта действует другой предел: 30 МБ на файл. Эти цифры относятся к загрузке, а не к размеру готового документа. <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude">Лимиты загрузки Anthropic</a></p>
           </div>
         </section>
 
@@ -1021,7 +1021,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           </details>
           <details class="faq-item">
             <summary>Какой максимальный размер</summary>
-            <p>30 МБ на файл - и когда загружаешь свой, и когда скачиваешь собранный</p>
+            <p>При загрузке в обычный чат - до 500 МБ на файл, в материалы проекта - до 30 МБ. Отдельный предел скачивания готового файла в этой справке не указан. <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude">Официальные лимиты</a></p>
           </details>
           <details class="faq-item">
             <summary>Можно сохранить сразу в облако</summary>
@@ -1037,7 +1037,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <p class="section-label">Откуда факты</p>
           <h2>Источники</h2>
           <ul class="sources">
-            <li><a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Claude Help Center: Create and edit files with Claude</a> - форматы xlsx, docx, pptx и pdf, предел 30 МБ на файл в обе стороны, тумблер создания файлов в разделе Capabilities, доступность на всех тарифах и сохранение в Google Drive</li>
+            <li><a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Claude Help Center: создание файлов</a> - форматы, включение функции и доступность по тарифам. <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude">Загрузка файлов</a> - размеры и число вложений. Сверено 29.10.2026</li>
             <li><a href="https://claude.com/blog/create-files">Claude blog: Claude can now create and edit files</a> - работающие формулы в таблицах, сборка презентаций и документов, работа в браузере, в приложении на компьютере и на телефоне</li>
           </ul>
           <p class="meta">Ответы Клода и вид готового файла на картинках сняты с живого интерфейса 17 сентября 2026. Все суммы в примере условные</p>

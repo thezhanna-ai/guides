@@ -571,7 +571,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-26",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/pyat-instrumentov-claude-code/assets/oblozhka.webp"
     },
     {
@@ -589,6 +589,52 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "position": 2,
           "name": "Пять дополнений для Claude Code: что каждое решает",
           "item": "https://pronovoe.com/claude-ai/pyat-instrumentov-claude-code/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/pyat-instrumentov-claude-code/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Обязательно ставить все пять?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Начни с ручной работы, которую повторяешь сегодня. База и проверка безопасности нужны проекту позже, чем браузерная проверка или свежая документация"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Где взять project_ref для Supabase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Открой нужный проект, затем Settings → General и скопируй Reference ID. Он ограничит MCP одним проектом организации"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что означает бюджет Strix в 10 долларов?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Это верхний предел расходов модели на один запуск. Если бюджет закончился раньше, код 0 не доказывает, что весь проект проверен"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли запускать Strix на чужом сайте?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Только с письменным разрешением владельца. Инструмент имитирует действия атакующего, поэтому обычной публичной ссылки недостаточно"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как проверить Context7 в режиме CLI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Убедись, что создан скилл find-docs, затем получи ID через ctx7 library и запроси документацию через ctx7 docs"
+          }
         }
       ]
     }
@@ -742,11 +788,11 @@ playwright-cli close</code></pre></div></li>
 </section>
 
 <section class="content-section seo-faq" id="faq" aria-label="Частые вопросы"><p class="eyebrow">До установки всех пяти</p><h2>Частые вопросы</h2>
-<details><summary>Обязательно ставить все пять?</summary><p>Нет. Начни с ручной работы, которую повторяешь сегодня. База и проверка безопасности нужны проекту позже, чем браузерная проверка или свежая документация</p></details>
-<details><summary>Где взять project_ref для Supabase?</summary><p>Открой нужный проект, затем Settings → General и скопируй Reference ID. Он ограничит MCP одним проектом организации</p></details>
-<details><summary>Что означает бюджет Strix в 10 долларов?</summary><p>Это верхний предел расходов модели на один запуск. Если бюджет закончился раньше, код 0 не доказывает, что весь проект проверен</p></details>
-<details><summary>Можно ли запускать Strix на чужом сайте?</summary><p>Только с письменным разрешением владельца. Инструмент имитирует действия атакующего, поэтому обычной публичной ссылки недостаточно</p></details>
-<details><summary>Как проверить Context7 в режиме CLI?</summary><p>Убедись, что создан скилл find-docs, затем получи ID через <span class="path">ctx7 library</span> и запроси документацию через <span class="path">ctx7 docs</span></p></details>
+<details class="faq-item"><summary>Обязательно ставить все пять?</summary><p>Нет. Начни с ручной работы, которую повторяешь сегодня. База и проверка безопасности нужны проекту позже, чем браузерная проверка или свежая документация</p></details>
+<details class="faq-item"><summary>Где взять project_ref для Supabase?</summary><p>Открой нужный проект, затем Settings → General и скопируй Reference ID. Он ограничит MCP одним проектом организации</p></details>
+<details class="faq-item"><summary>Что означает бюджет Strix в 10 долларов?</summary><p>Это верхний предел расходов модели на один запуск. Если бюджет закончился раньше, код 0 не доказывает, что весь проект проверен</p></details>
+<details class="faq-item"><summary>Можно ли запускать Strix на чужом сайте?</summary><p>Только с письменным разрешением владельца. Инструмент имитирует действия атакующего, поэтому обычной публичной ссылки недостаточно</p></details>
+<details class="faq-item"><summary>Как проверить Context7 в режиме CLI?</summary><p>Убедись, что создан скилл find-docs, затем получи ID через <span class="path">ctx7 library</span> и запроси документацию через <span class="path">ctx7 docs</span></p></details>
 </section>
 
 <section class="content-section" id="drugie"><p class="eyebrow">Если болит другое</p><h2>Ещё пять вариантов из прежней подборки</h2><p>Если в первой пятёрке нет твоей помехи, проверь ещё пять инструментов: для лимитов моделей, памяти между разговорами, длинных отчётов, подбора настроек и повторяющихся исправлений. Выбери один под текущую задачу, ставить все десять сразу не нужно</p></section>

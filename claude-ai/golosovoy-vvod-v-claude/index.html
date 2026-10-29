@@ -659,7 +659,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-13",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/golosovoy-vvod-v-claude/assets/oblozhka.webp"
     },
     {
@@ -677,6 +677,36 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "position": 2,
           "name": "Голосовой ввод в Claude: Dictate, Voice mode и выбор микрофона",
           "item": "https://pronovoe.com/claude-ai/golosovoy-vvod-v-claude/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/golosovoy-vvod-v-claude/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Понимает ли Claude русский",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да, русский язык в списке поддерживаемых для голосового ввода. Голосу можно задать свой язык отдельно от языка интерфейса: Settings → General → Voice → Language"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Куда девается запись моего голоса",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "После того как речь превращена в текст, аудиозапись удаляется. В истории чата остаётся текст разговора, как обычная переписка. Если этот текст не должен остаться в истории, разговор начинают в режиме инкогнито"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужен ли платный тариф",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Голосовой режим работает на всех тарифах, включая бесплатный. Разговоры расходуют общий лимит, отдельного голосового лимита нет"
+          }
         }
       ]
     }
@@ -944,17 +974,17 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           <h2>Частые вопросы</h2>
           <p class="purpose">Вопросы, которые возникают в первые же дни, когда начинаешь пользоваться голосом каждый день</p>
           <div class="check-panel">
-            <h3>Понимает ли Claude русский</h3>
+            <details class="faq-item" open><summary>Понимает ли Claude русский</summary>
             <p>Да, русский язык в списке поддерживаемых для голосового ввода. Голосу можно задать свой язык отдельно от языка интерфейса: <span class="path">Settings → General → Voice → Language</span></p>
-          </div>
+          </details></div>
           <div class="check-panel">
-            <h3>Куда девается запись моего голоса</h3>
+            <details class="faq-item" open><summary>Куда девается запись моего голоса</summary>
             <p>После того как речь превращена в текст, аудиозапись удаляется. В истории чата остаётся текст разговора, как обычная переписка. Если этот текст не должен остаться в истории, разговор начинают в <a href="../incognito-chat-v-claude/">режиме инкогнито</a></p>
-          </div>
+          </details></div>
           <div class="check-panel">
-            <h3>Нужен ли платный тариф</h3>
+            <details class="faq-item" open><summary>Нужен ли платный тариф</summary>
             <p>Голосовой режим работает на всех тарифах, включая бесплатный. Разговоры расходуют общий лимит, отдельного голосового лимита нет</p>
-          </div>
+          </details></div>
         </section>
 
         <section class="content-section" id="sources">

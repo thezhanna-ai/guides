@@ -748,7 +748,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         "name": "Жанна Слепова",
         "url": "https://pronovoe.com/#about"
       },
-      "dateModified": "2026-10-22",
+      "dateModified": "2026-10-29",
       "image": "https://pronovoe.com/claude-ai/15-zadach-claude-code-codex/assets/oblozhka.webp"
     },
     {
@@ -768,6 +768,36 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "item": "https://pronovoe.com/claude-ai/15-zadach-claude-code-codex/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/15-zadach-claude-code-codex/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Что передать следующему агенту после остановки работы?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Попроси короткую записку: что уже изменено, какая проверка прошла, где видна ошибка и какое действие осталось. Добавь имена нужных файлов. В новом разговоре сначала дай прочитать записку и сверить её с папкой"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как понять, что новый тест действительно проверяет ошибку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Попроси показать, что тест падает на версии с ошибкой и проходит после исправления. Если он проходит в обоих случаях, он пока не доказывает, что повтор ошибки будет замечен"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что делать, если агент предлагает одновременно чинить и обновлять зависимости?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Попроси разделить эти изменения и объяснить, без какого обновления исправление невозможно. Сначала проверь минимальную правку. Иначе при новом сбое будет сложнее понять, какое изменение его вызвало"
+          }
+        }
+      ]
     }
   ]
 }
@@ -782,7 +812,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <div class="page-shell"><nav class="toc" aria-label="Содержание">
       <p class="toc-label">15 этапов</p>
       <a href="#zadacha-1">1. Требования</a><a href="#zadacha-2">2. Правила проекта</a><a href="#zadacha-3">3. План до правок</a><a href="#zadacha-4">4. Работа по спецификации</a><a href="#zadacha-5">5. Бриф интерфейса</a><a href="#zadacha-6">6. Шаги реализации</a><a href="#zadacha-7">7. Подходящий MCP</a><a href="#zadacha-8">8. Тестовая база</a><a href="#zadacha-9">9. Проверка безопасности</a><a href="#zadacha-10">10. Причина ошибки</a><a href="#zadacha-11">11. Пользовательские сценарии</a><a href="#zadacha-12">12. Лишний код</a><a href="#zadacha-13">13. История версий</a><a href="#zadacha-14">14. Автопроверки</a><a href="#zadacha-15">15. Повторяемый скилл</a>
-    </nav><main><article>
+    <a href="#faq">Частые вопросы</a></nav><main><article>
         <header id="nachalo">
           <p class="eyebrow">Работа над проектом</p>
           <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="15 этапов работы над проектом в Claude Code и Codex: ноутбук и модули этапов на столе" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-480.webp 480w, assets/oblozhka.reading-960.webp 960w, assets/oblozhka.webp 1600w" sizes="(max-width: 900px) calc(100vw - 32px), 760px"><figcaption>15 этапов: от требований и плана до тестов, истории версий и скилла</figcaption></figure>
@@ -804,7 +834,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2F15-zadach-claude-code-codex%2F&amp;title=15%20%D1%8D%D1%82%D0%B0%D0%BF%D0%BE%D0%B2%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B%20%D0%BD%D0%B0%D0%B4%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BE%D0%BC%20%D0%B2%20Claude%20Code%20%D0%B8%20Codex" target="_blank" rel="noopener">VK</a>
       </div>
 
-<details class="mobile-toc"><summary>Открыть содержание</summary><nav aria-label="Содержание на телефоне"><a href="#zadacha-1">1. Требования</a><a href="#zadacha-2">2. Правила проекта</a><a href="#zadacha-3">3. План до правок</a><a href="#zadacha-4">4. Работа по спецификации</a><a href="#zadacha-5">5. Бриф интерфейса</a><a href="#zadacha-6">6. Шаги реализации</a><a href="#zadacha-7">7. Подходящий MCP</a><a href="#zadacha-8">8. Тестовая база</a><a href="#zadacha-9">9. Проверка безопасности</a><a href="#zadacha-10">10. Причина ошибки</a><a href="#zadacha-11">11. Пользовательские сценарии</a><a href="#zadacha-12">12. Лишний код</a><a href="#zadacha-13">13. История версий</a><a href="#zadacha-14">14. Автопроверки</a><a href="#zadacha-15">15. Повторяемый скилл</a></nav></details>
+<details class="mobile-toc"><summary>Открыть содержание</summary><nav aria-label="Содержание на телефоне"><a href="#zadacha-1">1. Требования</a><a href="#zadacha-2">2. Правила проекта</a><a href="#zadacha-3">3. План до правок</a><a href="#zadacha-4">4. Работа по спецификации</a><a href="#zadacha-5">5. Бриф интерфейса</a><a href="#zadacha-6">6. Шаги реализации</a><a href="#zadacha-7">7. Подходящий MCP</a><a href="#zadacha-8">8. Тестовая база</a><a href="#zadacha-9">9. Проверка безопасности</a><a href="#zadacha-10">10. Причина ошибки</a><a href="#zadacha-11">11. Пользовательские сценарии</a><a href="#zadacha-12">12. Лишний код</a><a href="#zadacha-13">13. История версий</a><a href="#zadacha-14">14. Автопроверки</a><a href="#zadacha-15">15. Повторяемый скилл</a><a href="#faq">Частые вопросы</a></nav></details>
 
         <div class="promise"><p><b>Как пользоваться:</b> создай отдельную папку «Список дел - учебная копия» и открой её в Claude Code или Codex. Если тренируешься на существующем проекте, сначала сделай его отдельную копию и работай только в ней, не в рабочей папке. Нажми «Скопировать», вставь промпт в поле агента и отправь. Переходи к следующему этапу только после проверки под промптом. На шестом шаге сначала прочитай предложенный порядок, затем явно подтверди его; дождись реализации и зелёных проверок перед этапом 7. Все операции с базой, удалением и git выполняй только в учебной копии. Если агент ещё не работает рядом с файлами проекта, сначала открой инструкцию <a href="/claude-ai/claude-i-codex-v-vscode/">«Claude Code и Codex в одном VS Code»</a></p></div>
         <div class="route" aria-label="Путь работы"><span>Что должно произойти</span><span>Как проверить</span><span>План</span><span>Реализация</span><span>Приёмка</span></div>
@@ -892,6 +922,14 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2F15-zadach-claude-code-codex%2F&amp;title=15%20%D1%8D%D1%82%D0%B0%D0%BF%D0%BE%D0%B2%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B%20%D0%BD%D0%B0%D0%B4%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BE%D0%BC%20%D0%B2%20Claude%20Code%20%D0%B8%20Codex" target="_blank" rel="noopener">VK</a>
       </div>
 
+
+
+
+<section class="content-section" id="faq"><h2>Частые вопросы</h2>
+<details class="faq-item"><summary>Что передать следующему агенту после остановки работы?</summary><p>Попроси короткую записку: что уже изменено, какая проверка прошла, где видна ошибка и какое действие осталось. Добавь имена нужных файлов. В новом разговоре сначала дай прочитать записку и сверить её с папкой</p></details>
+<details class="faq-item"><summary>Как понять, что новый тест действительно проверяет ошибку?</summary><p>Попроси показать, что тест падает на версии с ошибкой и проходит после исправления. Если он проходит в обоих случаях, он пока не доказывает, что повтор ошибки будет замечен</p></details>
+<details class="faq-item"><summary>Что делать, если агент предлагает одновременно чинить и обновлять зависимости?</summary><p>Попроси разделить эти изменения и объяснить, без какого обновления исправление невозможно. Сначала проверь минимальную правку. Иначе при новом сбое будет сложнее понять, какое изменение его вызвало</p></details>
+</section>
 <p class="cta-question" id="svoi-proekt">Ты получил инструкцию для своей версии. Как применить эти инструменты к своему проекту?</p>
 
 
