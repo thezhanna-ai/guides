@@ -610,8 +610,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <link rel="canonical" href="https://pronovoe.com/claude-ai/pdf-v-markdown-markitdown/">
 <!-- seo:canonical:end -->
 <!-- seo:schema:start -->
-<script type="application/ld+json" id="seo-schema">
-{
+<script type="application/ld+json" id="seo-schema">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -645,295 +644,211 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
           "item": "https://pronovoe.com/claude-ai/pdf-v-markdown-markitdown/"
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Перевод в Markdown всегда уменьшает расход втрое?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Это зависит от исходника и способа его обработки. Примерный расчёт по знакам не измеряет лимит браузерного чата."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли заменить этим оригинал договора?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Сохрани оригинал. В Markdown могут потеряться номера страниц, колонки и связь текста с приложениями; спорный пункт сверяй по исходнику."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему после конвертации нет текста со скана?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Конвертация структуры и распознавание букв - разные задачи. Для изображения страниц сначала нужен OCR."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужен ли ключ к нейросети для обычного текстового PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для базовой локальной конвертации нет. Ключи и сетевые сервисы могут понадобиться дополнительным функциям, например описанию изображений."
+          }
+        }
+      ]
     }
   ]
-}
-</script>
+}</script>
 <!-- seo:schema:end -->
-</head>
+<style id="volna2-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:transparent!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card .copy-button{position:static;display:block;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto}article .table-wrap{margin:24px 0;border:1px solid var(--line);border-radius:10px}article .table-wrap table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;color:var(--ink)}article .table-wrap td,article .table-wrap th{vertical-align:top;padding:14px;text-align:left;border-bottom:1px solid var(--line);overflow-wrap:anywhere}article .table-wrap th{background:var(--info);color:var(--emerald)}article .table-wrap tbody tr:nth-child(even){background:var(--paper-2)}@media(max-width:600px){article .table-wrap table{min-width:550px}}article details summary{cursor:pointer;font-weight:700}article #voprosy details{padding:16px 0;border-bottom:1px solid var(--muted)}html[data-theme="dark"] article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white)}article pre{overflow-wrap:anywhere}</style></head>
 <body>
-  <div class="progress" aria-hidden="true"></div>
-  <header class="masthead">
-    <div class="masthead-inner">
-      <div class="brand">Claude.ai: кнопка за кнопкой</div>
-      <div class="header-actions">
-        <div class="handout-title">Документы в markdown</div>
-        <div class="header-controls">
-          <button class="theme-toggle" type="button" aria-label="Переключить тему" title="Переключить тему">◐</button>
-
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="page-shell">
-    <nav class="toc" aria-label="Содержание">
-      <p class="toc-label">Содержание</p>
-      <a href="#pochemu">Почему документ съедает лимит</a>
-      <a href="#test">Мой тест на PDF: около 41 700 против 13 600</a>
-      <a href="#bez-ustanovki">Способ 1: без установки, прямо в чате</a>
-      <a class="toc-sub" href="#prosba">1. Загрузи файл и попроси</a>
-      <a class="toc-sub" href="#sohrani">2. Сохрани результат себе</a>
-      <a href="#markitdown">Способ 2: MarkItDown, ставится один раз</a>
-      <a class="toc-sub" href="#python">1. Проверь Python</a>
-      <a class="toc-sub" href="#postavit">2. Поставь MarkItDown</a>
-      <a class="toc-sub" href="#konvert">3. Переведи файл одной командой</a>
-      <a href="#kogda">Когда переводить, а когда не нужно</a>
-      <a href="#granicy">Чего этот приём не делает</a>
-      <a href="#sources">Источники</a>
-    </nav>
-
-    <main>
-      <article>
-        <details class="mobile-toc">
-          <summary>Содержание</summary>
-          <a href="#pochemu">Почему документ съедает лимит</a>
-          <a href="#test">Мой тест на PDF: около 41 700 против 13 600</a>
-          <a href="#bez-ustanovki">Способ 1: без установки, прямо в чате</a>
-          <a href="#markitdown">Способ 2: MarkItDown, ставится один раз</a>
-          <a href="#kogda">Когда переводить, а когда не нужно</a>
-          <a href="#granicy">Чего этот приём не делает</a>
-          <a href="#sources">Источники</a>
-        </details>
-
-        <header id="pdf-markdown">
-          <p class="eyebrow">Claude.ai · Документы и лимиты</p>
-          <figure class="cover cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="Крупные знаки заголовка и выделения markdown для статьи о переводе документов в лёгкий текстовый формат" loading="eager" decoding="async" fetchpriority="high" srcset="assets/oblozhka.reading-1600.webp?v=f6c217f3c79a 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"><figcaption>Два способа перевести PDF в текст и сравнение расхода токенов на реальном файле</figcaption></figure>
+<div aria-hidden="true" class="progress"></div>
+<header class="masthead">
+<div class="masthead-inner">
+<div class="brand">Claude.ai: кнопка за кнопкой</div>
+<div class="header-actions">
+<div class="handout-title">Документы в markdown</div>
+<div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div>
+</div>
+</div>
+</header>
+<div class="page-shell">
+<nav aria-label="Содержание" class="toc"><p class="toc-label">Содержание</p><a href="#pochemu">Текст и исходное оформление</a><a href="#test">Проверка экономии без обещания процента</a><a href="#bez-ustanovki">Способ 1: без установки, прямо в чате</a><a href="#markitdown">MarkItDown для повторяющейся работы</a><a href="#podklyuchenie">Подключение к Claude Desktop</a><a href="#kogda">Когда переводить, а когда не нужно</a><a href="#granicy">Чего этот приём не делает</a><a href="#oshibki">Что ломается и что делать</a><a href="#pamyatka">Памятка перед загрузкой в чат</a><a href="#voprosy">Частые вопросы</a><a href="#sources">Источники</a></nav>
+<main>
+<article>
+<details class="mobile-toc">
+<summary>Содержание</summary>
+<a href="#pochemu">Почему документ съедает лимит</a>
+<a href="#test">Мой тест на PDF: около 41 700 против 13 600</a>
+<a href="#bez-ustanovki">Способ 1: без установки, прямо в чате</a>
+<a href="#markitdown">Способ 2: MarkItDown, ставится один раз</a>
+<a href="#kogda">Когда переводить, а когда не нужно</a>
+<a href="#granicy">Чего этот приём не делает</a>
+<a href="#sources">Источники</a>
+</details>
+<header id="pdf-markdown">
+<p class="eyebrow">Claude.ai · Документы и лимиты</p>
+<figure class="cover cover-v2"><img alt="Крупные знаки заголовка и выделения markdown для статьи о переводе документов в лёгкий текстовый формат" data-full-src="assets/oblozhka.webp" decoding="async" fetchpriority="high" height="840" loading="eager" sizes="(max-width: 860px) calc(100vw - 40px), 780px" src="assets/oblozhka.webp" srcset="assets/oblozhka.reading-1600.webp?v=f6c217f3c79a 1600w" width="1600"/><figcaption>Два способа перевести PDF в текст и сравнение расхода токенов на реальном файле</figcaption></figure>
 <h1 class="article-standard-h1">Документы в markdown: как не сжигать лимит Claude на оформлении</h1>
-<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<p class="uroven-metka green" style='display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif'>Начальный уровень</p>
 <p class="meta">ПОШАГОВАЯ ИНСТРУКЦИЯ · ОБНОВЛЕНО 20 СЕНТЯБРЯ 2026</p>
-
-
-          <p class="lead">Ты загружаешь в Claude договор, методичку или таблицу, задаёшь три вопроса - и упираешься в лимит. Документ не выглядел большим: восемнадцать страниц. Но Claude читает его вместе с вёрсткой: шрифты, колонки, разбивка по листам. Переведём тот же текст в markdown, сравним расход и разберём, каким документам этот приём подходит.</p>
-          <aside class="route-note" aria-label="Короткий маршрут">
-            <h2>PDF в markdown через MarkItDown: короткий маршрут</h2>
-            <p>Загрузи документ в чат и напиши: «Переведи этот документ в markdown, сохрани заголовки и таблицы, верни только текст». Скопируй ответ в обычный текстовый файл - дальше работай с ним, а не с исходником</p>
-          </aside>
-
+<p class="lead">Документ загрузился, разговор начался, а лимит закончился раньше разбора. Иногда для работы нужен только текст, и тяжёлый PDF можно заранее перевести в Markdown. Выберем подходящий путь и проверим, что при переводе не потерялись таблицы, числа и нужные части документа. Исходный файл сохраним рядом для проверки.</p>
+<aside aria-label="Короткий маршрут" class="route-note">
+<h2>PDF в markdown через MarkItDown: короткий маршрут</h2>
+<p>Загрузи документ в чат и напиши: «Переведи этот документ в markdown, сохрани заголовки и таблицы, верни только текст». Скопируй ответ в обычный текстовый файл - дальше работай с ним, а не с исходником</p>
+</aside>
 <!-- seo:breadcrumbs:start -->
 <nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Документы в markdown: как не сжигать лимит Claude на оформлении</span></nav>
 <!-- seo:breadcrumbs:end -->
 </header>
-
 <div class="share-row share-top">
-        <span class="eyebrow">Поделиться</span>
-        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F&amp;text=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8" target="_blank" rel="noopener">Telegram</a>
-        <a class="share-btn" href="https://wa.me/?text=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F&amp;title=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8" target="_blank" rel="noopener">VK</a>
-      </div>
-
+<span class="eyebrow">Поделиться</span>
+<a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F&amp;text=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8" rel="noopener" target="_blank">Telegram</a>
+<a class="share-btn" href="https://wa.me/?text=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F" rel="noopener" target="_blank">WhatsApp</a>
+<a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F&amp;title=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8" rel="noopener" target="_blank">VK</a>
+</div>
 <p class="purpose">Если вход в Claude ещё не настроен, сначала пройди <a href="../podklyuchenie-iz-rossii/">«Claude из России: подключение без блокировок»</a>. Там доступ и первый чат, а сюда вернёшься за документами</p>
-
-
-
-
-<section class="content-section" id="pochemu">
-          <p class="section-label">Дело не в размере файла</p>
-          <h2>Почему документ съедает лимит</h2>
-          <p class="purpose">Лимит Claude считается не в страницах и не в мегабайтах, а в токенах. Чем больше токенов съел документ, тем быстрее закончится разговор</p>
-          <div class="info-card"><p><span class="info-title">Что такое токен:</span> это кусочек текста, на которые Claude режет всё, что читает. Короткое слово - обычно один токен, длинное разбивается на два-три, знаки препинания и пробелы тоже считаются. На русском один токен выходит примерно в два-три символа, то есть страница обычного текста - это около 700-900 токенов. Считать их самому не нужно: важно только понимать, что лимит тратится на объём прочитанного, а не на вес файла в мегабайтах</p></div>
-          <p>Любой офисный формат хранит не только слова, но и то, как они разложены: шрифты, колонки, отступы, границы ячеек, разбивку по слайдам. PDF придуман для печати и держит вёрстку страницы целиком. Word тащит за собой стили и служебную разметку. Excel - сетку, форматы ячеек и формулы. Презентация - каждый слайд с его оформлением. Когда ты отдаёшь такой файл Claude, он разбирает всю эту обвязку, а не читает чистый текст. Отсюда и расход: заметная часть лимита уходит на оформление, которое в разговоре тебе не нужно</p>
-
-          <div class="check-panel">
-            <h3>Что дешевеет при переводе</h3>
-            <ul class="checklist">
-              <li><b>PDF</b> - вёрстка страницы, шрифты, разбивка на листы</li>
-              <li><b>Word</b> - стили, служебная разметка документа</li>
-              <li><b>Excel</b> - сетка, форматы ячеек, оформление таблицы</li>
-              <li><b>PowerPoint</b> - оформление слайдов, порядок и рамки</li>
-              <li><b>HTML-страница</b> - теги, меню, реклама, скрипты</li>
-            </ul>
-          </div>
-          <div class="info-card"><p><span class="info-title">Простыми словами:</span> markdown - это текст без обёртки. Те же заголовки и списки, но помеченные обычными знаками: решётка - заголовок, дефис - пункт списка. Ни шрифтов, ни вёрстки, ни лишнего веса</p></div>
-          <p>Смысл документа при этом не теряется: заголовки остаются заголовками, таблицы таблицами, порядок разделов прежний. Пропадает только оформление, на которое уходил лимит</p>
-        </section>
-
-        <section class="content-section" id="test">
-          <p class="section-label">Мой собственный замер</p>
-          <h2>Мой тест на PDF: около 41 700 токенов против 13 600</h2>
-          <p class="purpose">Я сравнивала на своём документе - протоколе на восемнадцать страниц. Загрузила его двумя способами и посчитала, во что обходится каждый. Цифры ниже относятся именно к этому случаю, но механика одинаковая для всех форматов: оформление стоит лимита, текст - нет</p>
-          <div class="check-panel">
-            <h3>Один документ, два формата</h3>
-            <ul class="checklist">
-              <li>Как PDF - около <b>41 700 токенов</b></li>
-              <li>В markdown - около <b>13 600 токенов</b></li>
-              <li>Разница - примерно втрое, экономия около <b>68%</b></li>
-            </ul>
-          </div>
-          <p>На практике это значит вот что: на одном и том же лимите ты либо задаёшь документу три вопроса, либо девять. Либо загружаешь один отчёт, либо три подряд в одном разговоре</p>
-          <div class="warn-card"><p><span class="info-title">Откуда эти цифры и почему «около»:</span> в самом Claude счётчика токенов нет. Он нигде не показывает, во сколько ему обошёлся твой файл, - ни в чате, ни в настройках. Поэтому мои числа это не показание счётчика, а расчёт по объёму текста: сколько знаков в документе, столько примерно и токенов выходит. Порядок разницы такой и есть, но искать в интерфейсе строчку «41 700» бесполезно, её там нет</p></div>
-
-          <div class="check-panel">
-            <h3>Как прикинуть самому, без всяких счётчиков</h3>
-            <ul class="checklist">
-              <li>Загрузи документ в Claude и спроси: «Сколько знаков в этом тексте?»</li>
-              <li>Раздели число знаков на 2,5 - выйдет примерно столько токенов</li>
-              <li>Переведи файл в markdown и повтори то же самое</li>
-              <li>Сравни два числа между собой - разница и есть твоя выгода</li>
-            </ul>
-          </div>
-          <p>Точность здесь и не нужна: решение принимается по порядку величины, а не по последней цифре. Если после перевода текста стало вдвое-втрое меньше - переводить стоит</p>
-          <div class="info-card"><p><span class="info-title">И ещё честно:</span> Word, Excel и презентацию я так же не считала. Насколько выиграешь там, зависит от того, сколько в файле оформления. Правило простое: чем больше вёрстки, тем больше выгода от перевода</p></div>
-        </section>
-
-        <section class="content-section" id="bez-ustanovki">
-          <p class="section-label">Два действия</p>
-          <h2>Способ 1: без установки, прямо в чате</h2>
-          <p class="purpose">Самый простой путь: попросить перевести файл сам Claude. Ничего ставить не нужно, работает в браузере с любого компьютера. Подходит, когда документов немного</p>
-
-          <div class="step">
-            <h3 id="prosba">1. Загрузи файл и попроси перевести</h3>
-            <p>Открой новый чат, прикрепи документ скрепкой - PDF, Word, Excel, презентацию - и отправь вместе с просьбой. Формулировка важна: без неё Claude начнёт пересказывать содержимое своими словами, а тебе нужен весь текст целиком</p>
-            <div class="prompt-box">
-              <button class="copy-button" type="button" data-copy-target="prompt-convert">Скопировать</button>
-              <pre id="prompt-convert">Переведи этот документ в markdown.
+<section class="content-section" id="pochemu"><h2>Текст и исходное оформление</h2><p>Markdown - обычный текст с обозначениями заголовков, списков и таблиц. Его удобно хранить, редактировать и передавать в разные чаты. Для договора, методички или отчёта это полезно, когда важны формулировки и данные, а расположение на странице не нужно.</p><p>PDF может обрабатываться как текст и как изображения страниц. Расход зависит от файла, модели и способа загрузки. Поэтому обещать одну экономию для всех документов нельзя. Конвертация также может потерять часть структуры: проверять нужно полученный текст, а не только наличие нового файла.</p><div class="table-wrap"><table><thead><tr><th>Задача</th><th>Выбор</th></tr></thead><tbody><tr><td>Найти пункты и сравнить формулировки</td><td>Markdown с сохранённым исходником для сверки</td></tr><tr><td>Проверить дизайн страницы или схему</td><td>Исходный PDF либо изображение нужной страницы</td></tr><tr><td>Прочитать фотографии страниц</td><td>Сначала распознавание текста (OCR)</td></tr><tr><td>Разобрать формулы Excel</td><td>Исходная таблица: текстовый экспорт не сохраняет вычисления</td></tr></tbody></table></div></section>
+<section class="content-section" id="test"><h2>Проверка экономии без обещания процента</h2><p>Раньше здесь был расчёт для 18-страничного документа: около 41 700 токенов против 13 600. Он оценивался по числу знаков и не измерял реальную стоимость обработки PDF. Такой расчёт не подтверждает ни экономию лимита чата, ни число дополнительных вопросов.</p><p>Для решения о конвертации достаточно проверить практическое: сохранились ли нужные данные, удобно ли работать с текстом повторно, получается ли передать необходимые разделы без лишних страниц. Число знаков и мегабайты файла не являются счётчиком использования Claude.</p><p>Если точный расход действительно нужен, сравни одинаковые запросы и способ обработки через доступный счётчик API. Это отдельный замер; условия API не тождественны подписке на браузерный чат.</p></section>
+<section class="content-section" id="bez-ustanovki">
+<p class="section-label">Два действия</p>
+<h2>Способ 1: без установки, прямо в чате</h2>
+<p class="purpose">Самый простой путь: попросить перевести файл сам Claude. Ничего ставить не нужно, работает в браузере с любого компьютера. Подходит, когда документов немного</p>
+<div class="step">
+<h3 id="prosba">1. Загрузи файл и попроси перевести</h3>
+<p>Открой новый чат, прикрепи документ скрепкой - PDF, Word, Excel, презентацию - и отправь вместе с просьбой. Формулировка важна: без неё Claude начнёт пересказывать содержимое своими словами, а тебе нужен весь текст целиком</p>
+<div class="prompt-box">
+<button class="copy-button" data-copy-target="prompt-convert" type="button">Скопировать</button>
+<pre id="prompt-convert">Переведи этот документ в markdown.
 Сохрани все заголовки, списки и таблицы, порядок разделов не меняй.
 Ничего не пересказывай и не сокращай - нужен весь текст.
 В ответе верни только markdown, без комментариев.</pre>
-            </div>
-            <div class="result"><p><b>Результат:</b> Claude возвращает документ обычным текстом с разметкой - заголовки помечены решётками, списки дефисами</p></div>
-          </div>
-
-          <div class="step">
-            <h3 id="sohrani">2. Сохрани результат себе</h3>
-            <p>Скопируй ответ и сохрани его в обычный текстовый файл с расширением <span class="path">.md</span> - подойдёт любой простой редактор: «Блокнот» на Windows, TextEdit на Mac. Дальше загружай в Claude именно этот файл, а исходник больше не трогай</p>
-            <div class="warn-card"><p><span class="info-title">Важно:</span> перевод происходит в том же чате, и сам документ лимит всё равно съел. Выгода начинается со второго обращения: теперь у тебя есть лёгкая версия, с которой можно работать хоть десять раз</p></div>
-            <div class="result"><p><b>Результат:</b> лёгкая копия документа лежит у тебя на компьютере и готова к любому новому разговору</p></div>
-          </div>
-
-          <div class="info-card"><p><span class="info-title">Когда этот способ не сработает:</span> очень большой файл может не поместиться в один ответ. Тогда проси переводить по частям - «переведи первые шесть страниц», потом следующие. Или переходи ко второму способу</p></div>
-        </section>
-
-        <section class="content-section" id="markitdown">
-          <p class="section-label">Три действия, один раз</p>
-          <h2>Способ 2: MarkItDown, ставится один раз</h2>
-          <p class="purpose">MarkItDown - бесплатный инструмент от Microsoft. Он переводит файл в markdown прямо на твоём компьютере, не тратя лимит Claude вообще. Имеет смысл, если документы у тебя регулярно</p>
-          <p>Ставится он один раз и дальше работает одной командой. Понимает PDF, Word, Excel, PowerPoint, картинки, HTML, CSV, ZIP-архивы и ещё десяток форматов - командa для всех одна и та же, меняется только имя файла</p>
-
-          <div class="step">
-            <h3 id="python">1. Проверь, есть ли Python</h3>
-            <p>MarkItDown работает на Python версии 3.10 или новее. Открой терминал - на Mac это программа «Терминал», на Windows «Командная строка» - и вставь команду</p>
-            <div class="prompt-box">
-              <button class="copy-button" type="button" data-copy-target="cmd-python">Скопировать</button>
-              <pre id="cmd-python">python3 --version</pre>
-            </div>
-            <p>Если в ответ пришло что-то вроде <span class="path">Python 3.12.1</span> - всё на месте, иди дальше. Если терминал ругается, что команда не найдена, поставь Python с <a href="https://www.python.org/downloads/">официального сайта</a> и вернись сюда</p>
-            <div class="result"><p><b>Результат:</b> ты знаешь, готов ли компьютер, и не гадаешь, почему следующая команда не сработала</p></div>
-          </div>
-
-          <div class="step">
-            <h3 id="postavit">2. Поставь MarkItDown</h3>
-            <p>Одна команда в том же терминале. Кавычки нужны, без них часть команды потеряется</p>
-            <div class="prompt-box">
-              <button class="copy-button" type="button" data-copy-target="cmd-install">Скопировать</button>
-              <pre id="cmd-install">pip install 'markitdown[all]'</pre>
-            </div>
-            <p>Пойдёт список скачиваемых частей - это нормально, подожди минуту. В конце появится строка со словом <span class="path">Successfully installed</span></p>
-            <div class="result"><p><b>Результат:</b> инструмент стоит на компьютере. Повторять этот шаг больше не придётся</p></div>
-          </div>
-
-          <div class="step">
-            <h3 id="konvert">3. Переведи файл одной командой</h3>
-            <p>Перетащи файл в терминал после слова <span class="path">markitdown</span> - путь подставится сам. Строка после <span class="path">-o</span> это имя нового файла. Формат исходника значения не имеет: <span class="path">.pdf</span>, <span class="path">.docx</span>, <span class="path">.xlsx</span>, <span class="path">.pptx</span> - команда одна</p>
-            <div class="prompt-box">
-              <button class="copy-button" type="button" data-copy-target="cmd-convert">Скопировать</button>
-              <pre id="cmd-convert">markitdown документ.pdf -o документ.md
-markitdown таблица.xlsx -o таблица.md</pre>
-            </div>
-            <p>Рядом с исходником появится новый файл с расширением <span class="path">.md</span>. Его и загружай в Claude</p>
-            <div class="result"><p><b>Результат:</b> перевод занимает секунды и не тратит лимит Claude вообще - вся работа идёт на твоём компьютере</p></div>
-          </div>
-
-          <div class="info-card"><p><span class="info-title">Где он живёт:</span> исходный код и документация - <a href="https://github.com/microsoft/markitdown">github.com/microsoft/markitdown</a>. Проект открытый и бесплатный, у него больше 185 тысяч отметок на GitHub</p></div>
-        </section>
-
-        <section class="content-section" id="kogda">
-          <p class="section-label">Не по привычке</p>
-          <h2>Когда переводить, а когда не нужно</h2>
-          <p class="purpose">Перевод оправдан не всегда. На коротком файле возня займёт больше времени, чем сэкономит</p>
-          <div class="check-panel">
-            <h3>Переводи в markdown</h3>
-            <ul class="checklist">
-              <li>документ длиннее десяти страниц</li>
-              <li>к файлу ты будешь возвращаться не один раз</li>
-              <li>нужно загрузить несколько документов в один разговор</li>
-              <li>методичка, договор, отчёт, инструкция - текст без картинок</li>
-              <li>таблица Excel, из которой нужны цифры, а не оформление</li>
-              <li>презентация, где важен текст слайдов, а не их вид</li>
-              <li>лимит заканчивается раньше, чем разговор</li>
-            </ul>
-          </div>
-          <div class="check-panel">
-            <h3>Грузи PDF как есть</h3>
-            <ul class="checklist">
-              <li>файл на две-три страницы или один слайд</li>
-              <li>вопрос разовый, возвращаться не будешь</li>
-              <li>важно, как именно документ свёрстан на листе или слайде</li>
-              <li>внутри в основном картинки, схемы или сканы</li>
-              <li>в таблице важны формулы, а не результат в ячейках</li>
-            </ul>
-          </div>
-          <div class="info-card"><p><span class="info-title">Если сомневаешься:</span> задай один вопрос - вернусь ли я к этому файлу ещё раз. Ответ «да» - переводи, лёгкая копия окупится со второго обращения</p></div>
-        </section>
-
-        <section class="content-section" id="granicy">
-          <p class="section-label">Честные границы</p>
-          <h2>Чего этот приём не делает</h2>
-          <p class="purpose">Перевод в markdown экономит лимит, но не превращает Claude во всесильного и не заменяет чтение документа человеком</p>
-          <div class="warn-card"><p><span class="info-title">Сканы и фотографии:</span> если PDF сделан фотографированием страниц, текста внутри нет - есть картинки. MarkItDown распознаёт такие файлы хуже, а часть оформления теряется. То же с Excel: формулы в markdown не переезжают, остаются только значения из ячеек. Проверь результат глазами, прежде чем работать дальше</p></div>
-          <p>Сложные таблицы иногда переносятся неровно, объединённые ячейки разъезжаются, а подписи к картинкам могут потеряться совсем. Это не поломка, а плата за лёгкость: вместе с вёрсткой уходит часть того, что вёрсткой и держалось. Если в документе важна именно структура - договор с приложениями, бланк с полями, отчёт со сложной таблицей, - смотри итог внимательно</p>
-          <div class="info-card"><p><span class="info-title">Проверка за полминуты:</span> открой полученный файл и пролистай. Заголовки на местах, таблицы читаются, текст не обрывается на середине - можно работать</p></div>
-        </section>
-
-        <section class="content-section" id="sources">
-          <p class="section-label">Проверено 20 сентября 2026</p>
-          <h2>Источники</h2>
-          <ul class="sources">
-            <li>Собственное сравнение на PDF в 18 страниц, сентябрь 2026: около 41 700 токенов против 13 600. Это расчёт по объёму текста, а не показание счётчика - в интерфейсе Claude счётчика токенов нет. Другие форматы так же не проверялись</li>
-            <li><a href="https://github.com/microsoft/markitdown">github.com/microsoft/markitdown</a> - официальный репозиторий Microsoft: установка, полный список поддерживаемых форматов, требование Python 3.10+</li>
-            <li><a href="https://support.claude.com/">Claude Help Center</a> - справка Anthropic по загрузке файлов и лимитам</li>
-          </ul>
-        </section>
-
-        <section class="next-read" aria-label="Дальше по теме">
-          <h2>Дальше по теме</h2>
-          <p class="next-sub">Что логично прочитать следующим</p>
-          <ul>
-            <li><a href="../gotovye-fayly-excel-word-pdf/"><span class="title">Готовый Excel, Word, PDF или презентация</span><span class="why">Обратная задача: не разобрать чужой документ, а получить от Claude свой - готовым файлом</span></a></li>
-            <li><a href="../pervyy-proekt-v-claude/"><span class="title">Собери первый проект в Claude</span><span class="why">Куда положить переведённые документы, чтобы не загружать их заново в каждом чате</span></a></li>
-          </ul>
-        </section>
-
+</div>
+<div class="result"><p><b>Результат:</b> Claude возвращает документ обычным текстом с разметкой - заголовки помечены решётками, списки дефисами</p></div>
+</div>
+<div class="step">
+<h3 id="sohrani">2. Сохрани результат себе</h3>
+<p>Скопируй ответ и сохрани его в обычный текстовый файл с расширением .md - подойдёт любой простой редактор: «Блокнот» на Windows, TextEdit на Mac. Дальше загружай в Claude именно этот файл, а исходник сохрани для проверки спорных фрагментов</p>
+<div class="warn-card"><p>Первая загрузка исходника уже расходует лимит этого чата. Для повторной работы открой новый разговор и приложи сохранённый Markdown; оставшийся в старом чате PDF от этого не исчезнет.</p></div>
+<div class="result"><p><b>Результат:</b> лёгкая копия документа лежит у тебя на компьютере и готова к любому новому разговору</p></div>
+</div>
+<div class="info-card"><p><span class="info-title">Когда этот способ не сработает:</span> очень большой файл может не поместиться в один ответ. Тогда проси переводить по частям - «переведи первые шесть страниц», потом следующие. Или переходи ко второму способу</p></div>
+</section>
+<section class="content-section" id="markitdown"><h2>MarkItDown для повторяющейся работы</h2><p>Когда файлов много, конвертацию удобно выполнять до загрузки в чат. <a href="https://github.com/microsoft/markitdown">MarkItDown от Microsoft</a> переводит поддерживаемые документы в Markdown. Для базовой локальной конвертации не нужен Claude Code; команды выполняются в терминале.</p><p>Подготовь Python версии от 3.10 до 3.14 по <a href="https://www.python.org/downloads/">официальной инструкции</a>. На Mac открой Terminal, на Windows - PowerShell. Создай обычную папку markdown-work и положи в неё файл dokument.pdf. Открой терминал в этой папке. Команды ниже создают отдельное окружение .venv, чтобы зависимости не смешивались с другими проектами.</p><h3>macOS и Linux</h3><div class="prompt-card"><p class="prompt-label">Вставь в терминал</p><pre id="volna2-prompt-1">python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install "markitdown[all]"
+markitdown --help
+markitdown dokument.pdf -o dokument.md</pre><button aria-label="Скопировать запрос 1" aria-live="polite" class="copy-button" data-copy-target="volna2-prompt-1" type="button">Скопировать</button></div><h3>Windows PowerShell</h3><div class="prompt-card"><p class="prompt-label">Вставь в терминал</p><pre id="volna2-prompt-2">py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install "markitdown[all]"
+.\.venv\Scripts\markitdown.exe --help
+.\.venv\Scripts\markitdown.exe dokument.pdf -o dokument.md</pre><button aria-label="Скопировать запрос 2" aria-live="polite" class="copy-button" data-copy-target="volna2-prompt-2" type="button">Скопировать</button></div><p>В Windows здесь используются полные пути к программам окружения, поэтому менять политику запуска PowerShell ради активации не требуется. Справка --help подтверждает доступность команды. После последней строки в текущей папке должен быть dokument.md. Путь после -o определяет, где появится результат; он не обязан совпадать с папкой исходника.</p><p>Открой dokument.md в текстовом редакторе. Сверь начало и конец, заголовки, числа и таблицы с PDF. Только после этой проверки прикрепляй текст к новому чату. Для Word, Excel и PowerPoint меняется имя входного файла; у сложных таблиц и схем проверка особенно нужна.</p><h3>Команды на будущее</h3><div class="prompt-card"><p class="prompt-label">Вставь в терминал</p><pre id="volna2-prompt-3">markitdown dokument.pdf -o dokument.md
+markitdown prezentaciya.pptx -o prezentaciya.md
+markitdown tablica.xlsx -o tablica.md
+markitdown --list-plugins</pre><button aria-label="Скопировать запрос 3" aria-live="polite" class="copy-button" data-copy-target="volna2-prompt-3" type="button">Скопировать</button></div><p>Последняя команда показывает плагины, а не конвертирует файл. Плагины включаются отдельно. Если нужен только PDF, документация предлагает установку с дополнением [pdf] вместо [all].</p></section>
+<section class="content-section" id="podklyuchenie"><h2>Подключение к Claude Desktop</h2><p>Если документы приходят постоянно, в проекте есть отдельный <a href="https://github.com/microsoft/markitdown/tree/main/packages/markitdown-mcp">MarkItDown MCP</a>. Он позволяет приложению вызывать конвертацию как инструмент. Сначала добейся корректного результата одной команды; подключение не исправит ошибки распознавания.</p><p>В активном окружении macOS/Linux установи пакет python -m pip install markitdown-mcp. В настройке Claude Desktop укажи полный путь к markitdown-mcp из этого окружения. Файл конфигурации на Mac: ~/Library/Application Support/Claude/claude_desktop_config.json; на Windows: %APPDATA%\Claude\claude_desktop_config.json. Сохрани копию перед правкой и добавь запись внутрь уже существующего mcpServers, не стирая другие подключения.</p><p>Схема записи: имя markitdown, поле command с полным путём к исполняемому файлу. Путь зависит от твоей папки и системы, поэтому готовую строку из чужого компьютера не копируй. После перезапуска Desktop проверь наличие инструмента и попроси конвертировать один документ. Если инструмент не появился, вернись к официальному README пакета и сверь текущий формат подключения.</p><p>У базовой локальной обработки и дополнительных функций разные границы. Описания изображений через внешнюю модель, облачный OCR и получение материалов по ссылке могут передавать данные в сеть. Не называй любой запуск с плагинами полностью локальным.</p></section><section class="content-section" id="kogda">
+<p class="section-label">Не по привычке</p>
+<h2>Когда переводить, а когда не нужно</h2>
+<p class="purpose">Перевод оправдан не всегда. На коротком файле возня займёт больше времени, чем сэкономит</p>
+<div class="check-panel">
+<h3>Переводи в markdown</h3>
+<ul class="checklist">
+<li>документ длиннее десяти страниц</li>
+<li>к файлу ты будешь возвращаться не один раз</li>
+<li>нужно загрузить несколько документов в один разговор</li>
+<li>методичка, договор, отчёт, инструкция - текст без картинок</li>
+<li>таблица Excel, из которой нужны цифры, а не оформление</li>
+<li>презентация, где важен текст слайдов, а не их вид</li>
+<li>лимит заканчивается раньше, чем разговор</li>
+</ul>
+</div>
+<div class="check-panel">
+<h3>Грузи PDF как есть</h3>
+<ul class="checklist">
+<li>файл на две-три страницы или один слайд</li>
+<li>вопрос разовый, возвращаться не будешь</li>
+<li>важно, как именно документ свёрстан на листе или слайде</li>
+<li>внутри в основном картинки, схемы или сканы</li>
+<li>в таблице важны формулы, а не результат в ячейках</li>
+</ul>
+</div>
+<div class="info-card"><p><span class="info-title">Если сомневаешься:</span> задай один вопрос - вернусь ли я к этому файлу ещё раз. Ответ «да» - переводи, лёгкая копия окупится со второго обращения</p></div>
+</section>
+<section class="content-section" id="granicy">
+<p class="section-label">Честные границы</p>
+<h2>Чего этот приём не делает</h2>
+<p class="purpose">Перевод в markdown экономит лимит, но не превращает Claude во всесильного и не заменяет чтение документа человеком</p>
+<div class="warn-card"><p><span class="info-title">Сканы и фотографии:</span> если PDF сделан фотографированием страниц, текста внутри нет - есть картинки. MarkItDown распознаёт такие файлы хуже, а часть оформления теряется. То же с Excel: формулы в markdown не переезжают, остаются только значения из ячеек. Проверь результат глазами, прежде чем работать дальше</p></div>
+<p>Сложные таблицы иногда переносятся неровно, объединённые ячейки разъезжаются, а подписи к картинкам могут потеряться совсем. При переводе в текст может потеряться связь между ячейками и подписями. Если в документе важна именно структура - договор с приложениями, бланк с полями, отчёт со сложной таблицей, - смотри итог внимательно</p>
+<div class="info-card"><p><span class="info-title">Проверка за полминуты:</span> открой полученный файл и пролистай. Заголовки на местах, таблицы читаются, текст не обрывается на середине - можно работать</p></div>
+</section>
+<section class="content-section" id="oshibki"><h2>Что ломается и что делать</h2><div class="table-wrap"><table><thead><tr><th>Сообщение или результат</th><th>Проверка</th></tr></thead><tbody><tr><td>command not found</td><td>На Mac/Linux активируй .venv/bin/activate; на Windows используй полный путь из инструкции выше.</td></tr><tr><td>Не хватает зависимости для PDF</td><td>Установи дополнение [pdf] или [all] тем же Python из окружения.</td></tr><tr><td>Пустой текст из скана</td><td>Внутри фотографии страниц. Нужен OCR; базовая конвертация не обязана распознать буквы.</td></tr><tr><td>Таблица потеряла колонки</td><td>Сверь её с оригиналом. Для сложной структуры выбери другой поддерживаемый конвертер или облачный Document Intelligence по документации.</td></tr><tr><td>Файл сохранился не там</td><td>Проверь текущую папку терминала и путь после -o.</td></tr><tr><td>Текст в чате обрезан</td><td>Конвертер и чат - разные этапы. Передай нужные разделы по частям и проверь конец ответа.</td></tr></tbody></table></div></section><section class="content-section" id="pamyatka"><h2>Памятка перед загрузкой в чат</h2><ul><li>Исходный документ сохранён отдельно.</li><li>Выбран путь: редкий файл через чат или повторная конвертация на компьютере.</li><li>Справка MarkItDown открылась, нужные дополнения установлены.</li><li>Markdown найден по пути после -o и открыт.</li><li>Начало, конец, таблицы и числа сверены с исходником.</li><li>Понятно, используются ли внешние функции и плагины.</li></ul></section><section class="content-section" id="voprosy"><h2>Частые вопросы</h2><details class="faq-item"><summary>Перевод в Markdown всегда уменьшает расход втрое?</summary><p>Нет. Это зависит от исходника и способа его обработки. Примерный расчёт по знакам не измеряет лимит браузерного чата.</p></details><details class="faq-item"><summary>Можно ли заменить этим оригинал договора?</summary><p>Сохрани оригинал. В Markdown могут потеряться номера страниц, колонки и связь текста с приложениями; спорный пункт сверяй по исходнику.</p></details><details class="faq-item"><summary>Почему после конвертации нет текста со скана?</summary><p>Конвертация структуры и распознавание букв - разные задачи. Для изображения страниц сначала нужен OCR.</p></details><details class="faq-item"><summary>Нужен ли ключ к нейросети для обычного текстового PDF?</summary><p>Для базовой локальной конвертации нет. Ключи и сетевые сервисы могут понадобиться дополнительным функциям, например описанию изображений.</p></details></section><section class="content-section" id="sources">
+<p class="section-label">Проверено 20 сентября 2026</p>
+<h2>Источники</h2>
+<ul class="sources">
+<li>Прежний расчёт по объёму текста не был измерением расхода PDF; его ограничения разобраны выше.</li>
+<li><a href="https://github.com/microsoft/markitdown">github.com/microsoft/markitdown</a> - официальный репозиторий Microsoft: установка, полный список поддерживаемых форматов, требование Python 3.10+</li>
+<li><a href="https://support.claude.com/">Claude Help Center</a> - справка Anthropic по загрузке файлов и лимитам</li>
+</ul>
+</section>
+<section aria-label="Дальше по теме" class="next-read">
+<h2>Дальше по теме</h2>
+<p class="next-sub">Что логично прочитать следующим</p>
+<ul>
+<li><a href="../gotovye-fayly-excel-word-pdf/"><span class="title">Готовый Excel, Word, PDF или презентация</span><span class="why">Получить от Claude свой документ готовым файлом</span></a></li>
+<li><a href="../pervyy-proekt-v-claude/"><span class="title">Собери первый проект в Claude</span><span class="why">Куда положить переведённые документы, чтобы не загружать их заново в каждом чате</span></a></li>
+</ul>
+</section>
 <div class="share-row">
-        <span class="eyebrow">Поделиться</span>
-        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F&amp;text=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8" target="_blank" rel="noopener">Telegram</a>
-        <a class="share-btn" href="https://wa.me/?text=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F&amp;title=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8" target="_blank" rel="noopener">VK</a>
-      </div>
-
+<span class="eyebrow">Поделиться</span>
+<a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F&amp;text=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8" rel="noopener" target="_blank">Telegram</a>
+<a class="share-btn" href="https://wa.me/?text=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F" rel="noopener" target="_blank">WhatsApp</a>
+<a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fpdf-v-markdown-markitdown%2F&amp;title=%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D0%B2%20markdown%3A%20%D0%BA%D0%B0%D0%BA%20%D0%BD%D0%B5%20%D1%81%D0%B6%D0%B8%D0%B3%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%20Claude%20%D0%BD%D0%B0%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8" rel="noopener" target="_blank">VK</a>
+</div>
 <!-- seo:related:start -->
 <section class="seo-related" aria-label="Ещё по теме" style="margin:36px 0"><h2>Ещё по теме</h2><ul><li><a href="/claude-ai/artefakty-v-claude/">Артефакты: ответ Клода в отдельном окне, а не в переписке</a></li><li><a href="/claude-ai/nalog-na-russkiy-tokeny/">Налог на русский: сравниваем расход токенов на четырёх языках</a></li></ul></section>
 <!-- seo:related:end -->
-<p class="cta-question">Лимит сэкономлен. На что его потратить?</p>
-
-
-
+<p class="cta-question">У тебя есть проверенная текстовая копия документа, с которой удобно работать повторно. Но разбор нового файла, подготовка материала и выпуск результата всё ещё требуют отдельных действий. Ниже - о том, как связать документы с работой над контентом, сайтом и продуктом без знания кода.</p>
 <section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
 <footer class="foot">Интерфейс может меняться. Документ от 20 сентября 2026<!-- privacy:footer:start -->
-<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button data-cookie-settings="" type="button">Настройки аналитики</button></div>
 <!-- privacy:footer:end -->
 </footer>
-      </article>
-    </main>
-
-    <aside class="related-plaque" aria-label="Соседняя статья">
-      <p class="plaque-label">Соседняя инструкция</p>
-      <h2>Готовые файлы от Claude</h2>
-      <p><a href="../gotovye-fayly-excel-word-pdf/">Excel, Word, PDF и презентации одним запросом</a></p>
-    </aside>
-  </div>
-
-  <script>
+</article>
+</main>
+<aside aria-label="Соседняя статья" class="related-plaque">
+<p class="plaque-label">Соседняя инструкция</p>
+<h2>Готовые файлы от Claude</h2>
+<p><a href="../gotovye-fayly-excel-word-pdf/">Excel, Word, PDF и презентации одним запросом</a></p>
+</aside>
+</div>
+<script>
     var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
     document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
 
@@ -994,14 +909,14 @@ markitdown таблица.xlsx -o таблица.md</pre>
 <script>
 </script>
 <!-- privacy:banner:start -->
-<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
-  <div class="cookie-inner">
-    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
-    <div class="cookie-actions">
-      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
-      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
-    </div>
-  </div>
+<aside aria-label="Выбор аналитики" class="cookie-banner" hidden="" id="cookie-banner">
+<div class="cookie-inner">
+<p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+<div class="cookie-actions">
+<button aria-describedby="cookie-description" id="cookie-accept" type="button">Принять</button>
+<button aria-describedby="cookie-description" id="cookie-decline" type="button">Отказаться</button>
+</div>
+</div>
 </aside>
 <!-- privacy:banner:end -->
 </body>
