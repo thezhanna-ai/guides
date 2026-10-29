@@ -1,0 +1,2573 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>LTX Desktop: проверяем компьютер и запускаем видео локально</title><style>
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+
+
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@layer article-content {
+:root{--sh-heroimg: 0 1px 2px rgba(28, 24, 21, 0.18);--paper: #FAF6EF;--panel: #F3ECE0;--card: #FFFFFF;--ink: #1C1815;--ink-soft: #2A241F;--muted: #6E6358;--line: #E4DACB;--line-soft: #EFE6D7;--accent: #BE4A24;--accent-soft: rgba(190, 74, 36, 0.35);--accent-btn: #BE4A24;--accent-btn-ink: #FAF6EF;--amber: #C98A3C;--warn-bg: #F7ECE6;--code-bg: #0E0D0C;--code-ink: #D7D0C4;--code-line: #2A2724;--code-lift: var(--lift-2), var(--edge-dark);--cta-bg: #1C1815;--cta-ink: #FAF6EF;--cta-link: #FFD23F;--font-display: 'Unbounded', 'UnboundedFB', ui-sans-serif, system-ui, sans-serif;--font-body: 'Spectral', 'Spectral-fb', Georgia, serif;--font-mono: 'JetBrains Mono', 'JetBrainsMono-fb', ui-monospace, SFMono-Regular, monospace;--content-width: 720px;--toc-width: 250px;--fs-caption: 0.8125rem;--fs-small:   0.875rem;--fs-ui:      0.9375rem;--fs-body:    1.15rem;--fs-lead:    1.3rem;--fs-h3:      1.5rem;--fs-h2:      2rem;--fs-h1:      3rem;--fs-h1-display: 2.35rem;--fs-display: 3.75rem;--lh-tight:   1.15;--lh-heading: 1.28;--lh-body:    1.65;--lh-ui:      1.4;--sp-1: 0.25rem;--sp-2: 0.5rem;--sp-3: 0.75rem;--sp-4: 1rem;--sp-6: 1.5rem;--sp-8: 2rem;--sp-12: 3rem;--sp-16: 4rem;--sp-24: 6rem;--rhythm-inline:  var(--sp-4);--rhythm-block:   var(--sp-8);--rhythm-sub:     var(--sp-12);--rhythm-section: var(--sp-24);--r-xs: 4px;--r-sm: 8px;--r-md: 12px;--r-lg: 16px;--r-pill: 999px;--radius: var(--r-md);--radius-lg: var(--r-lg);--lamp: #DBB36A;--lift-1: 0 1px 1px rgba(28, 24, 21, 0.05);--lift-2: 0 1px 1px rgba(28, 24, 21, 0.06), 0 8px 16px -8px rgba(28, 24, 21, 0.10),
+            0 22px 40px -22px rgba(28, 24, 21, 0.12);--lift-3: 0 1px 1px rgba(28, 24, 21, 0.07), 0 12px 22px -10px rgba(28, 24, 21, 0.13),
+            0 36px 64px -30px rgba(28, 24, 21, 0.18);--edge: inset 0 1px 0 rgba(255, 255, 255, 0.72);--edge-dark: inset 0 1px 0 rgba(255, 255, 255, 0.09);--shadow-1: var(--lift-1);--shadow-2: var(--lift-2);--shadow-3: var(--lift-3);--dur-fast: 140ms;--dur-base: 200ms;--dur-slow: 320ms;--ease-out: cubic-bezier(0.16, 1, 0.3, 1);--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);--header-h: 72px;--rail-width: var(--toc-width);}
+@media (prefers-color-scheme: dark){:root{--sh-heroimg: 0 1px 2px rgba(0, 0, 0, 0.5);--paper: #161311;--panel: #201C18;--card: #1D1915;--ink: #EAE3D6;--ink-soft: #D6CCBD;--muted: #A2988A;--line: #332D26;--line-soft: #2A2520;--accent: #E0693C;--accent-soft: rgba(224, 105, 60, 0.4);--accent-btn: #BE4A24;--accent-btn-ink: #FAF6EF;--amber: #D89A50;--warn-bg: #2A1E17;--cta-bg: #26211C;--cta-ink: #EAE3D6;--code-bg: #0A0908;--code-line: #454240;--code-lift: var(--edge-dark), 0 0 0 1px rgb(255 255 255/.08), 0 18px 44px -20px rgb(0 0 0/.85);--lift-1: 0 0 0 1px rgba(255, 255, 255, 0.05);--lift-2: 0 0 0 1px rgba(255, 255, 255, 0.07), 0 10px 28px -14px rgba(0, 0, 0, 0.62);--lift-3: 0 0 0 1px rgba(255, 255, 255, 0.09), 0 18px 44px -18px rgba(0, 0, 0, 0.72);--edge: inset 0 1px 0 rgba(255, 255, 255, 0.09);--shadow-1: var(--lift-1);--shadow-2: var(--lift-2);--shadow-3: var(--lift-3);}}
+:where(a, button, summary, input, [tabindex]):focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+:where(button, .btn-cta, .btn-nav, .copy-btn, .checklist-copy, .share-btn, .nav-burger){
+  transition: transform var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+:where(button, .btn-cta, .btn-nav, .copy-btn, .checklist-copy, .share-btn):active{ transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce){:where(button, .btn-cta, .btn-nav, .copy-btn, .checklist-copy, .share-btn):active{ transform: none; }}
+@supports (animation-timeline: scroll()){@keyframes readbar{ from { transform: scaleX(0); } to { transform: scaleX(1); } }}
+.site-logo{
+  font-family: var(--font-display); font-weight: 600;
+  font-size: var(--fs-lead); color: var(--ink); border-bottom: none;
+  display: inline-flex; align-items: center; min-height: 44px;
+}
+.nav-toggle, .nav-burger, .nav-drop{ display: none; }
+@media (max-width: 639.98px){.nav-toggle{
+    display: block; position: absolute; right: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 2.75rem; height: 2.75rem; margin: 0; padding: 0;
+    opacity: 0; cursor: pointer; z-index: 2;
+    -webkit-appearance: none; appearance: none;
+  }
+.nav-burger{
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    width: 2.75rem; height: 2.75rem; padding: 0 0.65rem;
+    border: 1px solid var(--line); border-radius: var(--r-sm);
+    background: var(--guide-color-transparent); cursor: pointer;
+  }
+.nav-burger span{
+    display: block; height: 2px; border-radius: var(--r-xs);
+    background: var(--ink);
+    transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out);
+  }
+.nav-toggle:checked ~ .nav-burger span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+.nav-toggle:checked ~ .nav-burger span:nth-child(2){ opacity: 0; }
+.nav-toggle:checked ~ .nav-burger span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+.nav-toggle:focus-visible ~ .nav-burger{ outline: 2px solid var(--accent); outline-offset: 2px; }
+.nav-drop{
+    display: flex; flex-direction: column; gap: 0.2rem;
+    position: absolute; top: calc(100% + 0.85rem); right: 0;
+    min-width: 13rem; padding: 0.55rem;
+    background: var(--paper);
+    border: 1px solid var(--line); border-radius: var(--r-lg);
+    box-shadow: var(--shadow-3);
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: opacity var(--dur-base) var(--ease-out),
+                transform var(--dur-base) var(--ease-out),
+                visibility var(--dur-base) var(--ease-out);
+    z-index: 50;
+  }
+.nav-toggle:checked ~ .nav-drop{ opacity: 1; visibility: visible; transform: none; }}
+.breadcrumbs{
+  font-size: var(--fs-small); color: var(--muted); margin: var(--sp-2) 0 0;
+  font-family: var(--font-mono); line-height: var(--lh-ui);
+}
+.breadcrumbs ol{
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: nowrap; align-items: center; gap: var(--sp-2);
+  min-height: 52px;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.breadcrumbs ol::-webkit-scrollbar{ width: 0; height: 0; }
+@supports (mask-image: linear-gradient(#000, #000)){.breadcrumbs ol{
+    mask-image: linear-gradient(to right, var(--guide-color-black) calc(100% - 28px), var(--guide-color-transparent));
+    -webkit-mask-image: linear-gradient(to right, var(--guide-color-black) calc(100% - 28px), var(--guide-color-transparent));
+  }}
+.breadcrumbs li{ display: flex; align-items: center; gap: var(--sp-2); flex: 0 0 auto; white-space: nowrap; }
+.breadcrumbs li + li::before{ content: '→'; color: var(--muted); }
+.breadcrumbs li:last-child{ padding-right: var(--sp-4); }
+.breadcrumbs a, .breadcrumbs [aria-current]{
+  display: inline-flex; align-items: center; min-height: 44px;
+}
+.breadcrumbs a{ color: var(--muted); border-bottom: none; transition: color var(--dur-fast) var(--ease-out); }
+@media (hover: hover) and (pointer: fine){.breadcrumbs a:hover{ color: var(--accent); }}
+.breadcrumbs [aria-current]{ color: var(--ink-soft); }
+.layout{ max-width: var(--content-width); margin: 0 auto; padding: 0 1.25rem; }
+@media (min-width: 1024px) and (max-width: 1199.98px){.layout{
+    --toc-width: 200px;
+    --col-gap: 2rem;
+    max-width: calc(var(--toc-width) + var(--content-width) + var(--col-gap) + 2.5rem);
+    display: grid;
+    grid-template-columns: var(--toc-width) minmax(0, var(--content-width));
+    gap: var(--col-gap);
+    align-items: start;
+  }}
+@media (min-width: 1200px){.layout{
+    --col-gap: 3rem;
+    max-width: calc(var(--toc-width) * 2 + var(--content-width) + var(--col-gap) * 2 + 2.5rem);
+    display: grid;
+    grid-template-columns: var(--toc-width) minmax(0, var(--content-width)) var(--toc-width);
+    gap: var(--col-gap);
+    align-items: start;
+  }
+.layout.layout-solo{
+    display: block;
+    max-width: calc(var(--content-width) + 2.5rem);
+  }}
+@media (min-width: 1200px) and (max-width: 1355px){.layout{ --toc-width: 210px; --col-gap: 2rem; }}
+.article-hero{ margin: var(--rhythm-block) 0 0; }
+.article-hero picture{ display: block; }
+.article-hero img{
+  width: 100%; height: auto; display: block;
+  aspect-ratio: 1200 / 630;  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+}
+.article-hero:not([data-hero="decor"]):not(.hero-decor) img{ aspect-ratio: auto; object-fit: contain; }
+@media (max-width: 519.98px){.article-hero[data-hero="decor"] img,
+  .article-hero.hero-decor img{ aspect-ratio: 16 / 9; object-fit: cover; }}
+.article-hero figcaption{ font-size: var(--fs-small); color: var(--muted); margin-top: var(--sp-2); line-height: var(--lh-ui); }
+.article-meta{
+  display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-6); align-items: center;
+  font-family: var(--font-mono); font-size: var(--fs-small); color: var(--muted);
+  margin: 0 0 var(--sp-6);
+}
+.quick-answer{
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-sm);
+  padding: 1.1rem 1.3rem;
+  margin: 0 0 var(--rhythm-block);
+  font-size: var(--fs-lead); line-height: 1.55;
+}
+.quick-answer p{ margin: 0; font-size: inherit; }
+.quick-answer p + p{ margin-top: var(--sp-3); }
+.nbr{ display: contents; white-space: nowrap; }
+.h-anchor{
+  margin-left: var(--sp-2); color: var(--line);
+  border-bottom: none; font-family: var(--font-mono); font-size: 0.9em;
+  opacity: 0; transition: opacity var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.h-anchor:focus-visible{ opacity: 1; color: var(--accent); }
+.fig{ margin: var(--rhythm-block) 0; }
+.fig img{
+  width: 100%; height: auto; display: block;
+  border-radius: var(--r-md); border: 1px solid var(--line);
+}
+.fig figcaption{ font-size: var(--fs-small); color: var(--muted); margin-top: var(--sp-2); line-height: var(--lh-ui); }
+.fig-narrow img{ max-width: 480px; margin-left: auto; margin-right: auto; }
+.code-block{
+  position: relative; margin: var(--rhythm-block) 0;
+  border-radius: var(--r-md); overflow: hidden;
+  background: var(--code-bg); border: 1px solid var(--code-line);
+}
+.code-block pre, article pre{
+  background: var(--code-bg); color: var(--code-ink);
+  border: 1px solid var(--code-line); border-radius: var(--r-md);
+  padding: var(--sp-4) 1.1rem; margin: 0;
+  font-family: var(--font-mono); font-size: var(--fs-small); line-height: 1.6;
+  white-space: pre-wrap; word-break: break-word;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  tab-size: 2;
+}
+.code-block pre{ border: 0; border-radius: 0; box-shadow: none; }
+.code-block .code-bar{
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+  min-height: 44px; padding: 0 var(--sp-3);
+  border-bottom: 1px solid var(--code-line);
+  font-family: var(--font-mono); font-size: var(--fs-small); line-height: 1;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--code-ink) 62%, var(--guide-color-transparent));
+}
+.code-block .code-bar .code-lang{ letter-spacing: 0.08em; }
+.code-block .code-bar .copy-btn{ position: static; }
+.code-block .copy-btn{
+  position: absolute; top: var(--sp-2); right: var(--sp-2);
+  background: color-mix(in srgb, var(--guide-color-warm-paper-highlight) 8%, var(--guide-color-transparent)); color: var(--code-ink);
+  border: 1px solid var(--code-line); border-radius: var(--r-sm);
+  font-family: var(--font-mono); font-size: var(--fs-small);
+  min-height: 44px; padding: 0 var(--sp-3); cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine){.code-block .copy-btn:hover{ border-color: var(--code-ink); background: color-mix(in srgb, var(--guide-color-warm-paper-highlight) 16%, var(--guide-color-transparent)); }}
+.code-block .copy-btn:focus-visible{ outline: 2px solid var(--code-ink); outline-offset: 2px; }
+code{ font-family: var(--font-mono); font-size: 0.9em; background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--r-xs); padding: 0.12em 0.36em; }
+pre code{ background: none; border: none; padding: 0; font-size: inherit; }
+code{ overflow-wrap: anywhere; }
+.callout{
+  --callout-accent: var(--accent);
+  --callout-bg: var(--card);
+  margin: var(--rhythm-block) 0;
+  padding: var(--sp-6);
+  background: var(--callout-bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--callout-accent);
+  border-radius: var(--r-lg);
+  font-size: var(--fs-body); line-height: var(--lh-body);
+}
+.bul{ list-style: none; padding: 0; margin: var(--rhythm-inline) 0 0; }
+.bul > li{ position: relative; padding-left: 1.4rem; margin-top: var(--sp-3); font-size: var(--fs-body); line-height: var(--lh-body); color: var(--ink-soft); }
+.bul > li::before{ content: ''; position: absolute; left: 0.15rem; top: 0.72em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.tablewrap{ overflow-x: auto; -webkit-overflow-scrolling: touch; margin: var(--rhythm-block) 0; overscroll-behavior-x: contain; }
+table.fix{ width: 100%; border-collapse: collapse; font-size: var(--fs-small); min-width: 520px; }
+table.fix th{
+  position: sticky; top: 0; z-index: 1;
+  text-align: left; background: var(--panel);
+  font-family: var(--font-mono); font-size: var(--fs-small); font-weight: 500;
+  line-height: 1.3; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft);
+  padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--line);
+}
+table.fix td{
+  padding: var(--sp-3) var(--sp-4); vertical-align: top; color: var(--ink-soft);
+  font-size: var(--fs-small); line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+table.fix tbody tr:nth-child(even){ background: color-mix(in srgb, var(--panel) 45%, var(--guide-color-transparent)); }
+table.fix tr:last-child td{ border-bottom: none; }
+.checklist{
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: var(--sp-6); margin: var(--rhythm-block) 0;
+  box-shadow: var(--shadow-1);
+}
+.checklist ul{ list-style: none; margin: var(--sp-3) 0 0; padding: 0; }
+.checklist li{ position: relative; padding-left: 1.8rem; margin-top: var(--sp-3); font-size: var(--fs-body); line-height: 1.55; color: var(--ink-soft); }
+.checklist li::before{ content: '☐'; position: absolute; left: 0; top: 0; color: var(--accent); font-size: var(--fs-body); }
+.checklist-copy{
+  background: var(--panel); color: var(--ink-soft);
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+  font-family: var(--font-mono); font-size: var(--fs-small);
+  min-height: 44px; padding: 0 var(--sp-4); cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine){.checklist-copy:hover{ border-color: var(--accent); color: var(--accent); }}
+.vizblock{
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: var(--sp-6); margin: var(--rhythm-block) 0;
+  box-shadow: var(--shadow-1);
+}
+.faq details{ border-bottom: 1px solid var(--line-soft); padding: var(--sp-2) 0; }
+.faq summary{
+  cursor: pointer; font-family: var(--font-body); font-weight: 600; font-size: var(--fs-lead);
+  line-height: var(--lh-ui); list-style: none;
+  display: flex; align-items: center; gap: var(--sp-3);
+  min-height: 44px; padding: var(--sp-2) 0;
+}
+.faq summary::-webkit-details-marker{ display: none; }
+.faq summary::before{
+  content: '+'; color: var(--accent); font-family: var(--font-mono); font-weight: 700;
+  display: inline-block; line-height: 1;
+  transition: rotate var(--dur-base) var(--ease-out);
+}
+.faq details[open] summary::before{ rotate: 45deg; }
+.faq summary:focus-visible{ outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--r-xs); }
+.faq details{ color: var(--ink-soft); font-size: var(--fs-body); line-height: var(--lh-body); }
+.faq details[open]{ padding-bottom: var(--sp-4); }
+.faq summary{ color: var(--ink); }
+.faq details p{ margin: var(--sp-3) 0 var(--sp-4); font-size: var(--fs-body); line-height: var(--lh-body); color: var(--ink-soft); }
+@supports selector(details::details-content){.faq details::details-content{
+    block-size: 0; overflow: hidden;
+    transition: block-size var(--dur-slow) var(--ease-out),
+                content-visibility var(--dur-slow) allow-discrete;
+  }
+.faq details[open]::details-content{ block-size: auto; }}
+@media (prefers-reduced-motion: reduce){.faq summary::before{ transition: none; }}
+.author-card .name a{ color: var(--ink); border-bottom: none; }
+.related-card{
+  display: flex; flex-direction: column; background: var(--card);
+  border: 1px solid var(--line); border-radius: var(--r-md);
+  padding: 1.1rem 1.2rem; color: var(--ink);
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+.table-scroll{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  margin: var(--rhythm-block) 0;
+  max-width: 100%;
+}
+.table-scroll > table{ margin: 0; min-width: 34rem; }
+@media (min-width: 760px){.table-scroll > table{ min-width: 0; }}
+.related-card .rc-tag{
+  display: block; font-family: var(--font-mono); font-size: var(--fs-small);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+  margin: 0 0 var(--sp-2);
+}
+.related-card .rc-desc{
+  font-size: var(--fs-small); color: var(--muted); margin: var(--sp-2) 0 0; line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.share-row{ display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3); margin: var(--rhythm-block) 0; }
+.share-btn{
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: var(--panel); color: var(--ink-soft);
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+  font-family: var(--font-mono); font-size: var(--fs-small);
+  min-height: 44px; padding: 0 var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+@media (hover: hover) and (pointer: fine){.share-btn:hover{ border-color: var(--accent); color: var(--accent); }}
+@keyframes rise{ from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.d1{ animation-delay: 0.05s; }
+@media (prefers-reduced-motion: reduce){*{ transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }}
+.quick-answer{
+  margin-top: var(--rhythm-block, 1.4rem);  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--r-lg);
+  padding: 2.1rem 1.4rem 1.3rem;
+  box-shadow: var(--shadow-1);
+}
+.quick-answer::before{
+  content: 'Коротко о главном';
+  position: absolute; top: 0.8rem; left: 1.4rem;
+  font-family: var(--font-mono); font-size: var(--fs-small); line-height: 1;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+}
+.tablebox{ margin: var(--rhythm-block) 0; }
+.tablebox .tablewrap{ margin: 0; }
+.tablewrap{
+  background-image:
+    linear-gradient(to right, var(--paper) 32%, var(--guide-color-transparent)),
+    linear-gradient(to left, var(--paper) 32%, var(--guide-color-transparent)),
+    radial-gradient(farthest-side at 0 50%, color-mix(in srgb, var(--guide-color-warm-surface) 24%, var(--guide-color-transparent)), var(--guide-color-transparent)),
+    radial-gradient(farthest-side at 100% 50%, color-mix(in srgb, var(--guide-color-warm-surface) 24%, var(--guide-color-transparent)), var(--guide-color-transparent));
+  background-position: left center, right center, left center, right center;
+  background-repeat: no-repeat;
+  background-size: 46px 100%, 46px 100%, 26px 100%, 26px 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+.tablehint{
+  display: none; margin: 0.5rem 0 0;
+  font-family: var(--font-mono); font-size: var(--fs-small);
+  letter-spacing: 0.07em; color: var(--muted);
+}
+@media (max-width: 760px){.tablehint{ display: block; }}
+.btn-cta{
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  background: var(--cta-link); color: var(--guide-color-warm-surface);
+  font-family: var(--font-mono); font-weight: 700;
+  font-size: var(--fs-ui); letter-spacing: 0.01em; line-height: 1.3;
+  min-height: 48px; padding: var(--sp-3) 1.35rem; border-radius: var(--r-sm);
+  border-bottom: none;
+}
+.btn-cta::after{ content: '→'; font-weight: 700; }
+@media (hover: hover) and (pointer: fine){.btn-cta:hover{ border-bottom: none; filter: brightness(1.07); }}
+.fig .zoom, .article-hero .zoom{ display: block; position: relative; border-bottom: none; cursor: zoom-in; }
+.fig .zoom::after,
+.article-hero .zoom::after{
+  content: 'Открыть крупнее';
+  position: absolute; right: 0.6rem; bottom: 0.6rem;
+  background: color-mix(in srgb, var(--guide-color-warm-surface) 78%, var(--guide-color-transparent)); color: var(--guide-color-warm-paper-highlight);
+  font-family: var(--font-mono); font-size: var(--fs-small); letter-spacing: 0.05em;
+  padding: 0.32rem 0.62rem; border-radius: var(--r-xs);
+  opacity: 0; transition: opacity var(--dur-base) var(--ease-out);
+}
+.fig .zoom:focus-visible::after,
+.article-hero .zoom:focus-visible::after{ opacity: 1; }
+@media (hover: hover) and (pointer: fine){.fig .zoom:hover::after,
+  .article-hero .zoom:hover::after{ opacity: 1; }}
+@media (hover: none){.fig .zoom::after, .article-hero .zoom::after{ opacity: 0.8; }}
+.lightbox{
+  position: fixed; inset: 0; z-index: 80;
+  display: flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--guide-color-warm-black) 93%, var(--guide-color-transparent)); padding: 1.5rem; cursor: zoom-out;
+}
+.lightbox img{ max-width: 100%; max-height: 100%; border-radius: var(--r-sm); }
+.lightbox-close{
+  position: absolute; top: 0.7rem; right: 1.1rem;
+  background: none; border: 0; color: var(--guide-color-warm-paper-highlight);
+  font-family: var(--font-mono); font-size: 1.6rem; line-height: 1; cursor: pointer;
+  min-width: 44px; min-height: 44px;
+}
+.share-top{ margin: var(--rhythm-block) 0; gap: var(--sp-2); }
+.share-top .share-btn{ padding: 0 var(--sp-3); font-size: var(--fs-small); min-height: 44px; }
+@media (prefers-color-scheme: dark){.tablewrap{
+    background-image:
+      linear-gradient(to right, var(--paper) 32%, var(--guide-color-transparent)),
+      linear-gradient(to left, var(--paper) 32%, var(--guide-color-transparent)),
+      radial-gradient(farthest-side at 0 50%, color-mix(in srgb, var(--guide-color-black) 55%, var(--guide-color-transparent)), var(--guide-color-transparent)),
+      radial-gradient(farthest-side at 100% 50%, color-mix(in srgb, var(--guide-color-black) 55%, var(--guide-color-transparent)), var(--guide-color-transparent));
+  }
+.quick-answer{ box-shadow: var(--lift-1), var(--edge); }}
+.rail{
+  position: sticky; top: calc(var(--header-h) + var(--sp-6));
+  display: flex; flex-direction: column; gap: var(--sp-3);
+  padding: var(--sp-6);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+}
+.rail p{ margin: 0; font-size: var(--fs-small); line-height: 1.5; color: var(--muted); }
+.rail .btn-cta{
+  background: var(--accent-btn); color: var(--accent-btn-ink);
+  font-size: var(--fs-small); padding: var(--sp-3) var(--sp-4); justify-content: center;
+}
+.rail .rail-top{
+  font-family: var(--font-mono); font-size: var(--fs-small); color: var(--muted);
+  border-bottom: none; min-height: 44px; display: inline-flex; align-items: center;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.rail .rail-top::before{ content: '↑'; margin-right: var(--sp-2); }
+@media (hover: hover) and (pointer: fine){.rail .rail-top:hover{ color: var(--accent); }}
+.article-hero{
+  padding: 6px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: calc(var(--r-lg) + 6px);
+  box-shadow: var(--lift-2), var(--edge);
+}
+.article-hero img{ border: 0; box-shadow: var(--sh-heroimg); }
+.article-hero figcaption{ padding: 0 2px; }
+.code-block, article pre{ box-shadow: var(--code-lift); }
+.code-block .code-bar{ position: relative; padding-left: calc(var(--sp-3) + 52px); }
+.code-block .code-bar::before{
+  content: ''; position: absolute; left: var(--sp-3); top: 50%;
+  width: 9px; height: 9px; border-radius: 50%; transform: translateY(-50%);
+  background: var(--guide-color-terminal-red); box-shadow: 15px 0 0 var(--guide-color-terminal-yellow), 30px 0 0 var(--guide-color-terminal-green);
+}
+.quick-answer{ box-shadow: var(--lift-2), var(--edge); }
+.quick-answer::before{
+  top: 0.72rem; padding: 0.22em 0.6em; letter-spacing: 0.16em;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--guide-color-transparent));
+  border-radius: var(--r-pill); background: var(--paper);
+}
+.fig img{ box-shadow: var(--lift-1), var(--edge); }
+.fig figcaption{ position: relative; padding-left: 1rem; }
+.fig figcaption::before{
+  content: ''; position: absolute; left: 0; top: 0.62em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--amber);
+}
+.btn-cta{
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              filter var(--dur-fast) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine){.btn-cta:hover{ box-shadow: 0 0 0 3px color-mix(in srgb, var(--lamp) 22%, var(--guide-color-transparent)); }}
+.faq summary{
+  border-radius: var(--r-sm);
+  margin-inline: -0.5rem; padding-inline: 0.5rem;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine){.faq summary:hover{ background: color-mix(in srgb, var(--panel) 55%, var(--guide-color-transparent)); }}
+.code-block .copy-btn.is-copied{
+  border-color: var(--guide-color-success-ink);
+  background: var(--guide-color-success-alpha-2);
+}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){@keyframes ottisk-emerge{
+      from { opacity: 0.35; translate: 0 10px; }
+      to   { opacity: 1;    translate: 0 0; }
+    }}}
+@media (prefers-reduced-motion: reduce){.btn-cta{ transition: none; }
+.faq summary{ transition: none; }}
+:root{--vt-x:50%;--vt-y:0px}
+@supports (view-transition-name: none){@media (prefers-reduced-motion: no-preference){::view-transition-old(root){animation:none}
+::view-transition-new(root){animation:ott-theme-wipe .42s var(--ease-out)}
+@keyframes ott-theme-wipe{from{clip-path:circle(0 at var(--vt-x) var(--vt-y))}to{clip-path:circle(150vmax at var(--vt-x) var(--vt-y))}}}}
+@supports (--tap-min: 44px){:root{--tap-min:44px}}
+html[data-theme="dark"]{--sh-heroimg:0 1px 2px rgba(0, 0, 0, 0.5);--paper:#161311;--panel:#201C18;--card:#1D1915;--ink:#EAE3D6;--ink-soft:#D6CCBD;--muted:#A2988A;--line:#332D26;--line-soft:#2A2520;--accent:#E0693C;--accent-soft:rgba(224, 105, 60, 0.4);--amber:#D89A50;--warn-bg:#2A1E17;--cta-bg:#26211C;--cta-ink:#EAE3D6;--code-bg:#0A0908;--code-line:#454240;--code-lift:var(--edge-dark), 0 0 0 1px rgb(255 255 255/.08), 0 18px 44px -20px rgb(0 0 0/.85);--lift-1:0 0 0 1px rgba(255, 255, 255, 0.05);--lift-2:0 0 0 1px rgba(255, 255, 255, 0.07), 0 10px 28px -14px rgba(0, 0, 0, 0.62);--lift-3:0 0 0 1px rgba(255, 255, 255, 0.09), 0 18px 44px -18px rgba(0, 0, 0, 0.72);--edge:inset 0 1px 0 rgba(255, 255, 255, 0.09)}
+}
+
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h2[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: fit-content; max-width: 100% }
+    .shot img { display: block; width: auto; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot:has(img[src="assets/voice-brauzer.webp"]) img { width: 560px }
+    .shot:has(img[src="assets/voice-telefon.webp"]) img { width: 300px }
+    .shot:has(img[src="assets/zapros-1.webp"]) img { width: 620px }
+    .shot:has(img[src="assets/otvet-vpermeshku.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-1.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-2.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/plan-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/plan-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/tri-zadachi.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px; font-size: 17px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { background: var(--guide-color-coral); color: var(--guide-color-forest); position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+.code-card .copy-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest) }
+.code-card .copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest) }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+
+
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white); font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: var(--guide-color-paper-layer) }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: var(--guide-color-brand); color: var(--guide-color-forest-night); font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-coral-deep) }
+    .cta .press-button:hover { background: var(--guide-color-brand); color: var(--guide-color-forest-night); box-shadow: 0 2px 0 var(--guide-color-coral-deep); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+
+
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+
+
+.konspekt-example { max-width: 700px; margin: 24px auto 38px }
+.konspekt-example .shot img { width: 100%; height: auto; max-height: none; object-fit: contain }
+.tariff-note { margin-top: 42px; padding: 18px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; line-height: 1.6 }
+.tariff-note p { font-size: inherit; line-height: inherit; margin: 0 0 12px }
+.tariff-note .note-label { font-weight: 400 }
+.tariff-note ul { margin: 0; padding-left: 22px }
+.tariff-note li { margin: 0 0 14px; font-size: inherit; line-height: inherit }
+
+.shot img{width:650px}.code-card pre{overflow-wrap:anywhere;white-space:pre-wrap}.tariff-note{margin-top:32px}
+
+.share-row{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}.share-btn{display:inline-flex;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--white)}.quick-answer,.game-card,.game-note{border-color:var(--line);background:var(--info)}
+article .cta{margin-top:16px}
+
+
+body { overflow-x: hidden }
+.tool-table { width: 100%; min-width: 940px; table-layout: fixed; border-collapse: collapse }
+.tool-table th, .tool-table td { width: 25%; vertical-align: top; overflow-wrap: anywhere }
+.tool-table td > a { font-weight: 700 }
+.tool-table code { white-space: normal; overflow-wrap: anywhere; word-break: break-word }
+.tool-shot { margin: 12px 0 0 }
+.tool-table .tool-shot img { display: block; width: 100%; height: auto; max-height: 210px; object-fit: contain; border-radius: 8px }
+.tool-table .portrait-shot img { max-height: 360px }
+.where { display: block; margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.45 }
+.quick-answer { padding: 52px 20px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel) }
+.quick-answer p:last-child { margin-bottom: 0 }
+.cover-v2 img { width: 100%; max-height: 760px; object-fit: cover; object-position: center 18% }
+.table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain }
+@media (max-width: 600px) {
+  .tool-table { min-width: 760px }
+  .tool-table .tool-shot img { max-height: 150px }
+  .tool-table .portrait-shot img { max-height: 300px }
+  .cover-v2 img { max-height: 580px }
+}
+
+
+.bul + p { margin-top: 18px }
+.fix-card { padding: 18px 0; border-top: 1px solid var(--line) }
+.fix-card p { margin: 0 0 8px }
+.fix-card p:last-child { margin: 0 }
+.tool-cards { margin: 24px 0 0 }
+.tool-card { padding: 26px 0; border-top: 1px solid var(--line) }
+.tool-card h3 { margin: 0 0 12px; text-align: left }
+.tool-card .tool-shot { margin: 0 0 14px }
+.tool-card .tool-shot img { display: block; width: 100%; height: auto; max-height: 260px; object-fit: contain; object-position: left; border-radius: 8px }
+.tool-card .portrait-shot img { max-height: 420px }
+.tool-card p { margin: 0 0 12px }
+.tool-card .code-block { margin: 14px 0 }
+.tool-card pre { overflow-x: auto }
+.tool-card pre code { white-space: pre }
+.tool-note, .tool-need { font-size: .95em }
+
+
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+
+
+.prep-step{margin:12px 0;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--white)}
+.prep-step>summary{cursor:pointer;color:var(--emerald);padding:4px 0;min-height:44px}
+.prep-step>summary>h3{display:inline;margin:0;font-size:20px;line-height:1.4}
+.prep-step>summary:focus-visible{outline:3px solid var(--accent);outline-offset:5px;border-radius:3px}
+.prep-step[open]>summary{margin-bottom:16px}
+.prep-step>p:last-child{margin-bottom:0}
+.role-catalogue>.content-section>h3{font-family:Unbounded,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:29px;line-height:1.2;letter-spacing:-.58px;margin-bottom:22px}
+.toc-group{list-style:none;margin:0;padding:0 0 0 14px}
+.mobile-toc .toc-group{padding-left:16px}
+.toc-group>li{margin:0;padding:0}
+
+.content-section h3{font-size:23px;line-height:1.3}
+.role-prep{border-left:3px solid var(--accent);padding-left:18px}
+.draft-limit{background:var(--paper-2);padding:18px;border-radius:12px}
+.code-head{margin-bottom:10px;font:700 12px/1.3 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--guide-color-mint-border)}
+.code-card pre{margin:0;padding:0;white-space:pre-wrap;overflow-wrap:anywhere;font:500 14px/1.6 var(--font-mono)}
+.night-table{max-width:100%;overflow-x:auto}
+.night-table table{min-width:520px;width:100%;border-collapse:collapse}
+.night-table th,.night-table td{text-align:left;padding:16px;border-bottom:1px solid var(--line);vertical-align:top}
+.night-table tr:nth-child(even){background:var(--paper-2)}
+.mobile-table-cards{display:none}
+.mobile-table-card{padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--white)}
+.mobile-table-card:nth-child(even){background:var(--paper-2)}
+.mobile-table-field{overflow-wrap:anywhere}
+.mobile-table-field+.mobile-table-field{margin-top:14px}
+.mobile-table-label{display:block;margin-bottom:4px;font:700 11px/1.3 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.faq-item{margin:12px 0;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--white)}
+.faq-item summary{cursor:pointer;font-weight:700;color:var(--emerald-mid)}
+.faq-item p:last-child{margin-bottom:0}
+.konspekt-example{width:66.6667%;max-width:466px;margin:24px auto 38px}
+.konspekt-example .shot,.konspekt-example .shot img{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
+.mail-steps{margin:12px 0 18px;padding-left:25px}
+.mail-steps li{margin:9px 0}
+header#nachalo>.lead+p{margin-top:20px}
+.toc{overscroll-behavior:contain;scrollbar-gutter:stable}
+@media(max-width:600px){.night-table{overflow-x:visible}.night-table table{display:none}.mobile-table-cards{display:grid;gap:12px}.konspekt-example{width:66.6667%;max-width:none}.code-card pre{font-size:13px}}
+
+
+/* Канон раздаток §7.1: разные функции различимы, одинаковые оформлены одинаково */
+article .role-path { margin-top: 24px; }
+article .role-path + .role-path { margin-top: 28px; }
+article .role-catalogue > .content-section > .role-heading {
+  font-size: 26px; line-height: 1.25; margin-bottom: 18px;
+}
+article .role-path > h4.uroven-metka { max-width: 100%; }
+article .role-reference,
+article .reference-note {
+  margin: 14px 0 20px; padding: 2px 0 2px 15px;
+  border: 0; border-left: 3px solid var(--info-line);
+  border-radius: 0; background: none; color: var(--muted);
+  font: 400 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+article .role-reference p,
+article .reference-note p { margin: 0; }
+article .role-reference a,
+article .reference-note a { font: inherit; font-weight: 600; }
+article .role-path > .role-result {
+  margin: 16px 0 12px; padding: 2px 0 2px 15px;
+  border: 0; border-left: 3px solid var(--ok);
+  background: none; color: var(--emerald-mid);
+}
+article .role-path > .role-check {
+  margin: 12px 0 0; padding: 12px 16px;
+  border: 1px solid var(--line); border-radius: 10px;
+  background: var(--white); color: var(--ink);
+}
+article .role-check > .role-check-label {
+  margin: 0 0 8px; color: var(--emerald);
+  font: 700 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+article .role-check > p:last-child { margin-bottom: 0; }
+article .code-card {
+  width: 100%; max-width: 100%; margin: 18px 0;
+  padding: 18px; border: 1px solid var(--guide-color-teal-muted);
+  border-radius: 11px; background: var(--guide-color-forest);
+  color: var(--guide-color-mint-paper); box-shadow: none;
+}
+article .code-card .code-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px; margin: 0 0 16px; color: var(--guide-color-mint-border);
+  font: 600 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  text-transform: none; letter-spacing: normal;
+}
+article .code-card .code-head > span { flex: 1; min-width: 0; padding-top: 10px; }
+article .code-card .code-head > .copy-button {
+  position: static; flex: 0 0 auto; margin: 0; min-height: 44px;
+  padding: 10px 14px; font-size: 13px; line-height: 1.3;
+}
+article .code-card pre {
+  margin: 0; padding: 0; border: 0; border-radius: 0;
+  background: var(--guide-color-transparent); color: inherit; box-shadow: none;
+  font: 500 14px/1.65 var(--font-mono);
+  white-space: pre-wrap; overflow-wrap: anywhere; word-break: normal;
+}
+article .faq > details {
+  margin: 12px 0; padding: 12px 16px;
+  border: 1px solid var(--line); border-radius: 10px;
+  background: var(--white);
+}
+article .faq > details > summary {
+  min-height: 44px; padding: 10px 0; cursor: pointer;
+  color: var(--emerald); font: 700 18px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+article .faq > details[open] > summary { margin-bottom: 10px; }
+article .faq > details > p:last-child { margin-bottom: 0; }
+article #bez-konnektora > h4 {
+  margin: 0 0 12px; color: var(--emerald);
+  font: 750 20px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+@media (max-width: 600px) {
+  article .role-catalogue > .content-section > .role-heading { font-size: 22px; }
+  article .code-card { padding: 16px; }
+  article .code-card .code-head { gap: 12px; }
+}
+
+/* Мягкое чередование строк и их мобильных карточек, как в «Темах для контента» */
+article .night-table tbody tr:nth-child(odd),
+article .night-table .mobile-table-card:nth-child(odd) { background: var(--white); }
+article .night-table tbody tr:nth-child(even),
+article .night-table .mobile-table-card:nth-child(even) {
+  background: color-mix(in srgb, var(--paper-2) 25%, var(--white));
+}
+:root[data-theme="dark"] article .night-table { --twenty-table-dark: #2C403C; }
+:root[data-theme="dark"] article .night-table tbody tr:nth-child(even),
+:root[data-theme="dark"] article .night-table .mobile-table-card:nth-child(even) {
+  background: color-mix(in srgb, var(--twenty-table-dark) 25%, var(--white));
+}
+
+
+.page-shell{grid-template-columns:210px minmax(0,800px)} main{min-width:0}.mobile-comparison{display:grid;grid-template-columns:1fr 1fr;gap:16px}.shot img,.shot video{display:block;max-width:100%;height:auto;border-radius:12px}.shot{margin:28px 0}.shot figcaption{font-size:15px;line-height:1.45;color:var(--muted);margin-top:10px}.shot .zoom{margin-top:8px}.table-scroll{overflow-x:auto}pre{white-space:pre-wrap;overflow-wrap:anywhere}pre code{white-space:pre-wrap}.code-block:has(.reader-prompt){background:var(--article-prompt-bg);color:var(--article-prompt-ink)}.code-block .reader-prompt,.code-block .reader-prompt code{background:var(--guide-color-transparent);color:var(--article-prompt-ink)}.code-block:has(.reader-prompt) .code-bar{background:var(--guide-color-transparent);color:var(--article-prompt-ink)}.draft-note{font:13px/1.4 system-ui;color:var(--muted);margin-bottom:24px}article h1{overflow-wrap:normal}@media(max-width:860px){.page-shell{display:block}.mobile-comparison{gap:10px}.mobile-comparison figcaption{font-size:13px}}
+.article-standard-h1{font-family:'Unbounded',sans-serif;font-weight:700}.cover{margin:25px 0}.cover img{display:block;width:100%;height:auto;border-radius:12px}.cover figcaption{font-size:14px;color:var(--muted);margin-top:8px}.lead{font-size:clamp(20px,2.3vw,25px);line-height:1.42}.share-row{margin:24px 0 34px}.reader-prompt{overflow-wrap:anywhere}
+/* Impeccable commands: approved soft rows, both columns fit on mobile. */
+.impeccable-table > table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse}
+.impeccable-table th,.impeccable-table td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+.impeccable-table th:first-child,.impeccable-table td:first-child{width:7.5rem}
+.impeccable-table td:first-child{font-family:var(--font-mono);font-size:.875rem}
+.impeccable-table tbody tr:nth-child(odd){background:var(--white)}
+.impeccable-table tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-2) 25%,var(--white))}
+
+@media(max-width:600px){.impeccable-table th,.impeccable-table td{padding:12px 10px}.impeccable-table th:first-child,.impeccable-table td:first-child{width:6.25rem}}
+@media(max-width:600px){.table-wrap{overflow-x:visible}.table-wrap table,.table-wrap tbody,.table-wrap tr,.table-wrap td{display:block;width:auto}.table-wrap thead{display:none}.table-wrap tr{border-bottom:1px solid var(--line);padding:10px 0}.table-wrap td{border:0;padding:3px 0}.table-wrap td::before{content:attr(data-label);display:block;font-size:.8em;opacity:.65}}.table-wrap thead th{background:var(--info)}.table-wrap tbody tr:nth-child(odd){background:var(--white)}</style><style id="article-v3">
+    .faq-item { margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); overflow: hidden }
+
+    .faq-item summary { padding: 13px 44px 13px 18px; position: relative; color: var(--emerald); font: 750 17px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer; list-style: none }
+
+    .faq-item summary::-webkit-details-marker { display: none }
+
+    .faq-item summary::after { content: "+"; position: absolute; top: 50%; right: 17px; transform: translateY(-50%); color: var(--accent-dark); font: 700 22px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+
+    .faq-item[open] summary::after { content: "−" }
+
+    .faq-item p { margin: 0; padding: 0 18px 15px }
+.toc-steps{list-style:none;margin:0;padding:0}.toc-steps>li{margin:0;padding:0}.toc-group{list-style:none;margin:0;padding:0 0 0 12px}.toc .toc-group .toc-sub{padding-left:12px;font-size:12.5px}.mobile-toc .toc-group{margin:8px 0 12px;padding-left:20px}.mobile-toc li{margin:8px 0}.header-related{text-decoration:none}.header-related:hover{text-decoration:underline}.faq-item summary:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+</style>
+<style id="article-v4">
+article .related-plaque { position: static; margin: 28px 0; padding: 14px 16px; border: 1px solid var(--info-line, var(--line)); border-radius: 11px; background: var(--info) }
+article .related-plaque p { margin: 0 }
+article .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+article .related-plaque .plaque-title { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+article .related-plaque .why { color: var(--muted); font-size: 16px }
+</style>
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h2[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: fit-content; max-width: 100% }
+    .shot img { display: block; width: auto; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot:has(img[src="assets/voice-brauzer.webp"]) img { width: 560px }
+    .shot:has(img[src="assets/voice-telefon.webp"]) img { width: 300px }
+    .shot:has(img[src="assets/zapros-1.webp"]) img { width: 620px }
+    .shot:has(img[src="assets/otvet-vpermeshku.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-1.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-2.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/plan-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/plan-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/tri-zadachi.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px; font-size: 17px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { background: var(--guide-color-coral); color: var(--guide-color-forest); position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+.code-card .copy-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest) }
+.code-card .copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest) }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white); font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: var(--guide-color-paper-layer) }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: var(--guide-color-brand); color: var(--guide-color-forest-night); font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-coral-deep) }
+    .cta .press-button:hover { background: var(--guide-color-brand); color: var(--guide-color-forest-night); box-shadow: 0 2px 0 var(--guide-color-coral-deep); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<style id="konspekt-editorial">
+.konspekt-example { max-width: 700px; margin: 24px auto 38px }
+.konspekt-example .shot img { width: 100%; height: auto; max-height: none; object-fit: contain }
+.tariff-note { margin-top: 42px; padding: 18px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; line-height: 1.6 }
+.tariff-note p { font-size: inherit; line-height: inherit; margin: 0 0 12px }
+.tariff-note .note-label { font-weight: 400 }
+.tariff-note ul { margin: 0; padding-left: 22px }
+.tariff-note li { margin: 0 0 14px; font-size: inherit; line-height: inherit }
+</style><style>.cover-v2{margin:28px 0}.cover-v2 img{display:block;max-width:100%;height:auto;max-height:440px;object-fit:contain;margin:auto}.page-shell main{min-width:0}</style><style id="article-v5">
+main{min-width:0} .lead{font-size:inherit;line-height:inherit}
+.next-grid{display:grid;gap:12px}.next-card{display:grid;gap:6px;padding:18px;border:1px solid var(--sage-line);border-radius:10px;background:var(--paper);text-decoration:none}.next-card span{color:var(--muted)}
+article .related-plaque{grid-column:auto;grid-row:auto;position:static}
+</style>
+<link href="../../assets/article-sharing.css" rel="stylesheet"/><style id="article-colors">:root{--article-prompt-bg:#173f39;--article-prompt-ink:#f5f6ed}</style><!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  flex: 1 1 0; width: 124px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+#cookie-accept { background: var(--guide-color-brand); color: var(--guide-color-forest); border-color: var(--guide-color-brand) }
+#cookie-decline { background: var(--guide-color-slate-paper); color: var(--guide-color-forest); border-color: var(--guide-color-slate-paper) }
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/ltx-desktop-lokalno/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/#article",
+      "headline": "LTX Desktop: проверяем компьютер и запускаем видео локально",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-29"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "LTX Desktop: проверяем компьютер и запускаем видео локально",
+          "item": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/ltx-desktop-lokalno/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "В примечаниях есть NVIDIA с меньшей памятью. Почему в таблице от 24 ГБ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Разработчик допускает ограниченные конфигурации ниже основных требований, но не рекомендует их. Программный порог допуска к инструментам не гарантирует полный набор настроек. Подробности находятся в необязательном разделе Lower-spec machines. Для первого запуска ориентируйся на таблицу выше."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "LTX Desktop и LTX Studio - одно и то же?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Здесь описано отдельное приложение LTX Desktop, которое устанавливается на компьютер. Инструкции для облачного LTX Studio с входом на сайт и оплатой кредитами не заменяют этот маршрут установки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Хватит ли Mac с 32 ГБ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для ограниченного локального режима нужны Apple Silicon и macOS 26 или новее. Доступны 540p и видео до 5 секунд. Для полного локального режима разработчик указывает от 48 ГБ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужно ли заводить API-ключ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для описанного здесь пути с Local Text Encoder ключ не нужен. Бесплатная облачная обработка текста через LTX API - дополнительный вариант. Генерация видео в облаке оплачивается отдельно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Загрузка LTX 2.5 не начинается после входа. Что делать?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Открой страницу модели в том же аккаунте Hugging Face, прими условия доступа и вернись в программу. Затем повтори скачивание. Если издатель подтверждает доступ вручную, дождись подтверждения."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Где искать готовое видео?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "В Assets, библиотеке в левом меню LTX Desktop. Открой ролик и проверь воспроизведение. В Settings → Models находится папка моделей, это другое место."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<style id="photo-pairs-v3">
+.prompt-section{padding:24px 0;border-top:1px solid var(--line)}
+.prompt-number{color:var(--accent-dark);font:700 12px/1.4 ui-monospace,monospace;letter-spacing:.1em}
+.comparison{display:grid;grid-template-columns:1fr;gap:18px;margin:24px 0}
+.comparison figure{margin:0}.comparison img,.outfit-reference img{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
+.comparison figcaption,.outfit-reference figcaption{margin-top:8px}.pair-example{font-size:15px;color:var(--muted)}
+.table-wrap{max-width:100%;overflow-x:auto}.table-wrap table{width:100%;border-collapse:collapse}.table-wrap th,.table-wrap td{padding:12px;border-bottom:1px solid var(--line);text-align:left}
+</style><style>
+/* Compact source illustrations; full frame is available through the existing viewer. */
+.runway-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:360px;margin:24px auto;align-items:start}
+.runway-gallery.runway-single{grid-template-columns:minmax(0,1fr);max-width:158px}
+.runway-gallery.runway-trio{grid-template-columns:repeat(3,minmax(0,1fr));max-width:480px}
+.fig.runway-side{display:grid;grid-template-columns:160px minmax(0,1fr);gap:20px;align-items:center;max-width:540px;margin:24px 0}
+.fig.runway-side .zoom{display:block;border:0;border-radius:var(--r-md);overflow:hidden}
+.fig.runway-side img{display:block;width:100%;height:auto;border-radius:var(--r-md)}
+.fig.runway-side figcaption{margin:0;padding:0;text-align:left;font-size:15px;line-height:1.5;color:var(--muted)}
+.fig.runway-side figcaption::before{content:none;display:none}
+@media(max-width:639px){.fig.runway-side{grid-template-columns:120px minmax(0,1fr);gap:14px}.fig.runway-side figcaption{font-size:14px}}
+.runway-gallery .runway-visual{margin:0;min-width:0}
+.runway-gallery .zoom{display:block;border:0;border-radius:var(--r-md);overflow:hidden}
+.runway-gallery img{display:block;width:100%;height:auto;max-height:280px;object-fit:contain;border-radius:var(--r-md)}
+.runway-example{max-width:720px;margin:24px auto}.runway-example video{display:block;width:100%;height:auto;border-radius:var(--r-md)}.runway-example figcaption{font-size:13px;line-height:1.45;color:var(--muted);margin-top:8px}
+.runway-gallery figcaption{font-size:13px;line-height:1.45;color:var(--muted);margin-top:8px;text-align:center}
+@media(max-width:639px){.runway-gallery{max-width:270px;gap:12px}.runway-gallery.runway-single{max-width:120px}.runway-gallery.runway-trio{max-width:324px;gap:8px}.runway-gallery img{max-height:220px}.runway-gallery figcaption{font-size:12px}}
+</style><style id="five-article-layout">
+.service-terms{font-size:14px;line-height:1.5;color:var(--muted);margin:24px 0}
+article .code-card{width:100%;padding:52px 18px 18px}
+article .code-card .copy-button{min-width:128px;min-height:32px}
+article .code-card pre{font-size:16px;line-height:1.75;color:var(--guide-color-mint-paper)}
+article .code-card .prompt-material{color:var(--guide-color-gold-pale);box-shadow:inset 0 -1px currentColor}
+article .prompt-legend{font:14px/1.5 system-ui,sans-serif;color:var(--ink);margin:20px 0 8px}
+article .prompt-legend + .code-card{margin-top:0}
+#viewer .viewer-hint a{color:inherit;text-decoration:underline}
+.table-wrap thead th{background:var(--info)}
+.table-wrap tbody tr:nth-child(even){background:var(--sage-note)}
+.table-wrap tbody tr:nth-child(odd){background:var(--white)}
+.fig.runway-side{grid-template-columns:240px minmax(0,1fr);max-width:100%}
+.fig.runway-side a.zoom{display:block}.fig.runway-side img{max-height:none;object-fit:contain}
+@media(max-width:639px){.fig.runway-side{grid-template-columns:120px minmax(0,1fr);gap:14px}}
+/* Full-size frames on this page; a tall frame scrolls instead of shrinking. */
+#viewer { grid-template-rows: minmax(0, 1fr) auto; padding: 64px 3vw 18px; }
+#viewer .viewer-scroll { min-width: 0; min-height: 0; max-width: 94vw; }
+#viewer .viewer-scroll img { max-width: none; max-height: none; height: auto; }
+</style><meta content="LTX Desktop: требования к Mac, Windows и Linux, официальный выпуск 1.3.1, Hugging Face, модель LTX 2.5 и локальный энкодер. Где заканчивается бесплатный режим." name="description"/><meta content="LTX Desktop: проверяем компьютер и запускаем видео локально" property="og:title"/><meta content="article" property="og:type"/><meta content="https://pronovoe.com/claude-ai/ltx-desktop-lokalno/assets/oblozhka.webp" property="og:image"/><meta content="https://pronovoe.com/claude-ai/ltx-desktop-lokalno/" property="og:url"/><style id="ltx-article">
+html[data-theme="dark"] h1.article-standard-h1{color:var(--ink)!important}
+article .faq-item{background:var(--white)}
+article .warn-card + h3,article .result + h3{margin-top:24px}
+/* LTX article: only local content layout. Shared shell and interactions retained. */
+article .result{background:var(--guide-color-transparent);border:0;border-left:3px solid var(--guide-color-success-ink);border-radius:0;padding:4px 0 4px 14px;margin:18px 0;font:inherit;color:var(--ink)}
+article .warn-card,article .check-panel{padding:11px 18px}
+article .check-panel p{margin:0}
+article .info-card + p,article .warn-card + p,article .check-panel + p{margin-top:25px}
+article .table-wrap th,article .table-wrap td{background:var(--guide-color-transparent)}
+article .table-wrap tbody tr:nth-child(odd){background:var(--white)}
+article .table-wrap tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-2) 25%,var(--white) 75%)}
+article .table-wrap thead th{background:var(--info)}
+article code{overflow-wrap:anywhere;word-break:normal}
+article .code-card{padding:52px 18px 18px}
+article .code-card pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:16px;line-height:1.65}
+article .code-card .copy-button{min-width:150px;min-height:36px;white-space:nowrap}
+article .ltx-shot{position:relative;margin:24px 0;max-width:100%}
+article .ltx-shot img{display:block;width:100%;height:auto;border-radius:11px}
+article .ltx-shot a.zoom{display:block;position:relative}
+article .ltx-shot .zoom-label{position:absolute;right:8px;bottom:8px;background:var(--forest);color:var(--guide-color-white);padding:5px 10px;border-radius:7px;font:600 12px/1.4 system-ui,sans-serif}
+article .ltx-shot figcaption{font-size:14px;line-height:1.5}
+article .related-plaque h3{font:600 20px/1.35 Spectral,Georgia,serif;margin:8px 0}
+</style></head><body><div aria-hidden="true" class="progress"></div><header class="masthead"><div class="masthead-inner"><a class="brand" href="/">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">LTX Desktop: видео на компьютере</div><div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div></div></div></header><div class="page-shell"><nav aria-label="Содержание" class="toc"><p class="toc-label">Содержание</p><ul class="toc-steps"><li><a href="#computer">Шаг 1. Проверь, подходит ли компьютер</a></li><li class="toc-sub"><a href="#mac-memory">Узнай чип, память и систему на Mac</a></li><li class="toc-sub"><a href="#windows-memory">Узнай ОЗУ и видеопамять на Windows</a></li><li><a href="#download">Шаг 2. Скачай официальный установщик</a></li><li><a href="#setup">Шаг 3. Установи программу и запусти первое видео</a></li><li class="toc-sub"><a href="#hugging-face">Войди в Hugging Face и разреши загрузку модели</a></li><li class="toc-sub"><a href="#models">Скачай LTX 2.5 и локальный текстовый энкодер</a></li><li class="toc-sub"><a href="#first-video">Открой Text to Video и отправь задание</a></li><li class="toc-sub"><a href="#results">Найди результат в Assets</a></li><li><a href="#free">Когда видео действительно бесплатны</a></li><li><a href="#unsupported">Если компьютер не подходит</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#sources">Официальные инструкции</a></li><li><a href="#related">Ещё по теме</a></li></ul></nav><main><article><header id="nachalo">
+<p class="eyebrow">НЕЙРОСЕТИ · ВИДЕО НА КОМПЬЮТЕРЕ</p>
+<h1 class="article-standard-h1">LTX Desktop: проверяем компьютер и запускаем видео локально</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p>
+<div class="seo-intro"><p class="lead">LTX Desktop позволяет делать видео на своём компьютере без платы за каждую генерацию. Но прежде чем скачивать программу и большие файлы моделей, нужно понять, подходит ли твой компьютер. Иначе установка закончится окном приложения, в котором локальное видео недоступно. LTX Desktop - программа от Lightricks.</p></div>
+<p>В ней ты описываешь сцену, а нейросеть LTX 2.5 создаёт видео. Программа даёт окно с кнопками и настройками, модель отвечает за генерацию. При локальном запуске считает твой компьютер. В облачном сервисе эту работу выполняет чужой сервер.</p>
+<p>Здесь пройдём путь от проверки памяти до первого задания в Text to Video. Сначала посмотри характеристики своего Mac или Windows-компьютера, а затем переходи к скачиванию.</p>
+<figure class="cover-v2"><img src="assets/oblozhka.webp" width="1600" height="840" alt="LTX Desktop: видео на своём компьютере. Справа настоящий экран из официальной документации LTX"><figcaption>Требования, установка и локальный режим без API-ключа</figcaption></figure>
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">LTX Desktop</span></nav>
+<p class="service-terms">Инструкция для версии 1.3.1. Актуальность требований: 29 октября 2026 года. Программа находится в бета-версии, интерфейс может меняться.</p>
+<div class="check-panel"><p><strong>Что понадобится.</strong> Компьютер из следующего раздела, свободное место на диске и интернет для установки и скачивания моделей. Для LTX 2.5 нужен аккаунт Hugging Face, сайта с файлами нейросетей. Если аккаунта нет, зарегистрируйся на <a href="https://huggingface.co/join">huggingface.co</a> и подтверди почту. Подключение аккаунта к программе разберём в шаге 3.</p></div>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">LTX Desktop: проверяем компьютер и запускаем видео локально</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header><div class="share-row share-top"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F&amp;text=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F&amp;title=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE" target="_blank" rel="noopener">VK</a></div>
+<details class="mobile-toc"><summary>Содержание</summary><nav aria-label="Содержание на телефоне"><ul class="toc-steps"><li><a href="#computer">Шаг 1. Проверь, подходит ли компьютер</a></li><li class="toc-sub"><a href="#mac-memory">Узнай чип, память и систему на Mac</a></li><li class="toc-sub"><a href="#windows-memory">Узнай ОЗУ и видеопамять на Windows</a></li><li><a href="#download">Шаг 2. Скачай официальный установщик</a></li><li><a href="#setup">Шаг 3. Установи программу и запусти первое видео</a></li><li class="toc-sub"><a href="#hugging-face">Войди в Hugging Face и разреши загрузку модели</a></li><li class="toc-sub"><a href="#models">Скачай LTX 2.5 и локальный текстовый энкодер</a></li><li class="toc-sub"><a href="#first-video">Открой Text to Video и отправь задание</a></li><li class="toc-sub"><a href="#results">Найди результат в Assets</a></li><li><a href="#free">Когда видео действительно бесплатны</a></li><li><a href="#unsupported">Если компьютер не подходит</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#sources">Официальные инструкции</a></li><li><a href="#related">Ещё по теме</a></li></ul></nav></details>
+<section class="content-section">
+<h2 id="computer">Шаг 1. Проверь, подходит ли компьютер</h2>
+<p>На диске хранятся программа и модели, в оперативной памяти выполняется работа. У Windows и Linux есть ещё видеопамять на видеокарте. Свободные гигабайты на диске не заменяют ни оперативную, ни видеопамять.</p>
+<div class="table-wrap"><table><thead><tr><th>Компьютер</th><th>Условия локального запуска</th></tr></thead><tbody>
+<tr><td>Mac с Apple Silicon</td><td>Чип M1 или новее, macOS 26 (Tahoe) или новее. С 32 ГБ общей памяти доступны 540p и видео до 5 секунд. Для полного локального режима разработчик указывает от 48 ГБ.</td></tr>
+<tr><td>Windows</td><td>Windows 10/11, 64 бит. Видеокарта NVIDIA с CUDA и от 24 ГБ видеопамяти, рекомендовано 32 ГБ видеопамяти. Отдельно нужны 32 ГБ оперативной памяти.</td></tr>
+<tr><td>Linux</td><td>Ubuntu 22.04 или новее либо аналогичный дистрибутив, x64 или arm64. NVIDIA с CUDA, установленный драйвер NVIDIA, от 24 ГБ видеопамяти (рекомендовано 32 ГБ) и 32 ГБ оперативной памяти.</td></tr>
+<tr><td>Диск на любой платформе</td><td>Минимум 100 ГБ свободного места. С дополнительными LoRA и IC-LoRA, файлами для стилей и эффектов, планируй 160 ГБ и больше.</td></tr>
+</tbody></table></div>
+<p>Эти числа относятся к <a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/setup-and-settings.md#platform-requirements">локальной генерации в LTX Desktop 1.3.1</a>. CUDA - технология NVIDIA, с помощью которой нейросеть использует видеокарту. Наличие любой другой видеокарты не означает, что этот путь подойдёт.</p>
+<div class="warn-card"><p><strong>Открыть программу и генерировать локально - разные вещи.</strong> Само приложение запускается с macOS 14, но для локального видео нужна macOS 26 или новее. На macOS 14 и 15 вместо локальных инструментов появляется Coming soon to your device.</p></div>
+<h3 id="mac-memory">Узнай чип, память и систему на Mac</h3>
+<ol><li>Нажми значок Apple в левом верхнем углу экрана и открой «Об этом Mac».</li><li>Найди строки «Чип», «Память» и версию macOS. Нужен чип Apple M1 или новее. Intel Mac для этого локального маршрута не подходит.</li><li>Открой «Системные настройки» → «Основные» → «Хранилище» и посмотри свободное место.</li></ol>
+<p>Я сама локально LTX Desktop не запускала: на моём Mac 24 ГБ памяти, а для локального режима нужно минимум 32 ГБ.</p>
+<h3 id="windows-memory">Узнай ОЗУ и видеопамять на Windows</h3>
+<ol><li>Открой «Пуск» → «Параметры» → «Система» → «О системе». Найди «Оперативная память» и «Тип системы».</li><li>Нажми Ctrl + Shift + Esc, чтобы открыть «Диспетчер задач». При необходимости включи подробный вид, затем открой «Производительность» и выбери GPU с названием NVIDIA.</li><li>Посмотри полный объём выделенной памяти GPU. Общая память GPU может включать часть ОЗУ, поэтому её не сравнивай с требованием к видеопамяти.</li><li>В «Проводнике» открой «Этот компьютер» и посмотри свободное место на диске для моделей.</li></ol>
+<p>На Linux название видеокарты и её память можно посмотреть через установленную панель NVIDIA. Объём оперативной памяти и свободное место проверь в системном мониторе и файловом менеджере своего дистрибутива.</p>
+<p class="result"><strong>Результат:</strong> ты знаешь версию системы, объём памяти и свободного диска. Если конфигурация не подходит, сразу переходи к разделу <a href="#unsupported">«Если компьютер не подходит»</a>.</p>
+<details class="faq-item"><summary>В примечаниях есть NVIDIA с меньшей памятью. Почему в таблице от 24 ГБ?</summary><p>Разработчик допускает ограниченные конфигурации ниже основных требований, но не рекомендует их. Программный порог допуска к инструментам не гарантирует полный набор настроек. Подробности находятся в необязательном разделе <a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/setup-and-settings.md#lower-spec-machines">Lower-spec machines</a>. Для первого запуска ориентируйся на таблицу выше.</p></details>
+</section>
+<section class="content-section">
+<h2 id="download">Шаг 2. Скачай официальный установщик</h2>
+<p>Открой <a href="https://github.com/Lightricks/LTX-Desktop/releases/tag/v1.3.1">выпуск LTX Desktop 1.3.1 на GitHub</a>. GitHub здесь служит страницей загрузки программы. Прокрути до Assets, списка файлов выпуска, и раскрой его, если список свёрнут.</p>
+<div class="table-wrap"><table><thead><tr><th>Твоя система</th><th>Нужный файл</th></tr></thead><tbody>
+<tr><td>Mac с Apple Silicon</td><td><code>LTX-Desktop-arm64.dmg</code></td></tr>
+<tr><td>Windows, x64</td><td><code>LTX-Desktop-Setup.exe</code></td></tr>
+<tr><td>Linux, x64</td><td><code>LTX-Desktop-x86_64.AppImage</code> или <code>LTX-Desktop-amd64.deb</code></td></tr>
+<tr><td>Linux, arm64</td><td><code>LTX-Desktop-arm64.AppImage</code> или <code>LTX-Desktop-arm64.deb</code></td></tr>
+</tbody></table></div>
+<p>Для Ubuntu удобно выбрать <code>.deb</code>, для запуска отдельным файлом есть AppImage. Архитектура файла должна совпадать с архитектурой компьютера. Архивы Source code предназначены для исходного кода, для обычной установки они не нужны.</p>
+<p class="result"><strong>Результат:</strong> в загрузках лежит установщик под твою систему с названием из таблицы.</p>
+</section>
+<aside class="related-plaque">
+      <p class="plaque-label">Другой способ сделать видео</p><h3>Видео из текста в браузере</h3>
+      <p><a href="/claude-ai/besplatnye-video-iz-teksta/">Сравни сервисы и условия скачивания</a>, если локальный вариант не подходит.</p></aside>
+<section class="content-section">
+<h2 id="setup">Шаг 3. Установи программу и запусти первое видео</h2>
+<ol><li>На Mac открой <code>.dmg</code> и перенеси LTX Desktop в «Программы». На Windows запусти <code>.exe</code> и пройди установщик. На Linux установи выбранный <code>.deb</code> или разреши запуск AppImage как программы в свойствах файла и открой его.</li><li>Запусти LTX Desktop. Дождись подготовки окружения Python, компонентов для работы нейросети. Отдельно устанавливать Python по этому маршруту не нужно.</li><li>На первом запуске появится Setup, экран начальной настройки. Оставь интернет включённым: дальше программа будет скачивать модели.</li></ol>
+<h3 id="hugging-face">Войди в Hugging Face и разреши загрузку модели</h3>
+<p>На экране Setup нажми <strong>Sign in with Hugging Face</strong>. Откроется браузер: войди в свой аккаунт Hugging Face, разреши подключение приложения и прими условия доступа на <a href="https://huggingface.co/Lightricks/LTX-2.5">официальной странице LTX 2.5</a>. Если приложение показывает Request access, переходи по этой ссылке к условиям модели.</p>
+<p>Вернись в LTX Desktop и продолжи скачивание. Если оно не начинается, проверь, что условия приняты именно в том аккаунте, через который ты вошёл. Затем повтори загрузку. Для некоторых моделей доступ подтверждает издатель: один вход в аккаунт ещё не открывает все файлы.</p>
+<h3 id="models">Скачай LTX 2.5 и локальный текстовый энкодер</h3>
+<p>Если первичная настройка уже закрыта, открой <strong>Settings</strong> внизу левого меню, затем вкладку <strong>Models</strong>. Здесь можно войти в Hugging Face и выбрать папку для моделей.</p>
+<ol><li>В разделе <strong>Base models</strong> скачай <strong>LTX 2.5</strong>. В окне генерации она будет называться <strong>LTX 2.5 Fast</strong>.</li><li>В разделе <strong>Encoding models</strong> скачай <strong>Local Text Encoder</strong>. Это компонент, который переводит текстовое описание в данные для видеомодели.</li><li>Открой <strong>Settings → General → Text encoding</strong> и выбери локальный энкодер. Так обработка текста тоже будет выполняться на компьютере и API-ключ не понадобится.</li><li>Для первой пробы выключи <strong>Auto-enhance on local generation</strong> в <strong>Settings → General → Generation</strong>. Автоматическое улучшение запроса сейчас не нужно, описание пойдёт в модель в том виде, в котором ты его введёшь.</li></ol>
+<figure class="fig ltx-shot"><a class="zoom" href="assets/settings-models-official.webp" aria-label="Открыть крупнее: Вкладка Settings → Models в LTX Desktop"><img src="assets/settings-models-official.webp" width="1400" height="690" alt="Вкладка Settings → Models в LTX Desktop" loading="lazy" decoding="async"><span class="zoom-label">Открыть крупнее</span></a><figcaption>Настоящий экран из документации разработчика: Hugging Face сверху, выбор папки и Base models ниже. Английские названия сохранены, чтобы найти их в программе. <a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/models-and-loras.md#managing-models">Официальный источник LTX</a>.</figcaption></figure>
+<p class="result"><strong>Результат:</strong> модель LTX 2.5 и Local Text Encoder скачаны, в Text encoding выбран локальный режим. Можно переходить к генерации без добавления API-ключей.</p>
+<h3 id="first-video">Открой Text to Video и отправь задание</h3>
+<ol><li>Вернись на <strong>Home</strong>, главный экран. В галерее инструментов открой <strong>Text to Video</strong>, генерацию видео по тексту.</li><li>В поле <strong>Model</strong> выбери <strong>LTX 2.5 Fast</strong>. Для первой пробы поставь <strong>Resolution 540p</strong>, <strong>Duration 3s</strong>, <strong>Frame Rate 24</strong> и <strong>Aspect Ratio 16:9</strong>. Это настройки официального примера ниже, они укладываются и в ограничение Mac с 32 ГБ.</li><li>Вставь описание сцены в поле <strong>Prompt</strong>. В нём нужны предмет, действие и обстановка. Если важен звук, опиши и его. Ниже короткий фрагмент запроса из официального примера с лисой.</li></ol>
+<div class="code-card"><button type="button" class="copy-button" data-copy-target="fox-prompt">Скопировать</button><pre id="fox-prompt">A red fox trotting through fresh snow in a quiet pine forest at sunrise, warm golden light through the trees, soft mist.</pre></div>
+<p>По-русски: рыжая лиса бежит по свежему снегу в тихом сосновом лесу на рассвете, сквозь деревья идёт тёплый золотистый свет, лёгкий туман.</p>
+<p>Нажми <strong>Generate</strong>. Задание появится в общей очереди <strong>Queue</strong>. Дождись завершения: скорость зависит от компьютера и выбранных настроек. Если задача закончилась ошибкой, открой её сообщение в очереди, затем проверь загруженные модели и выбранные параметры.</p>
+<figure class="fig ltx-shot"><a class="zoom" href="assets/text-to-video-official.webp" aria-label="Открыть крупнее: Text to Video: запрос и настройки слева, пример с лисой справа"><img src="assets/text-to-video-official.webp" width="1920" height="1200" alt="Text to Video: запрос и настройки слева, пример с лисой справа" loading="lazy" decoding="async"><span class="zoom-label">Открыть крупнее</span></a><figcaption>Официальный пример разработчика. Слева Prompt и настройки, внизу Generate, справа показан его результат. <a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/README.md#features">Официальный источник LTX</a>.</figcaption></figure>
+<h3 id="results">Найди результат в Assets</h3>
+<p>Открой <strong>Assets</strong> в левом меню. Это библиотека загруженных материалов и сгенерированных видео. Открой готовый ролик, запусти воспроизведение и проверь картинку и звук. Задания и материалы сохраняются между запусками программы.</p>
+<p>Модели хранятся отдельно от этой библиотеки. Их папку можно открыть или изменить в <strong>Settings → Models → Models folder</strong>. Не ищи готовое видео среди файлов весов модели.</p>
+<p class="result"><strong>Результат:</strong> завершённый ролик доступен в Assets и воспроизводится. Ошибка в Queue означает, что генерацию ещё нужно закончить.</p>
+</section>
+<aside class="related-plaque">
+      <p class="plaque-label">Следующий навык</p><h3>Сформулируй сцену точнее</h3>
+      <p><a href="/claude-ai/prompt-master-uluchshitel-promptov/">Как уточнять запрос к нейросети</a>: опиши, что происходит, как движется камера и какой результат нужен.</p></aside>
+<section class="content-section">
+<h2 id="free">Когда видео действительно бесплатны</h2>
+<p>Локальная генерация работает на твоём оборудовании, без подписки и API-ключа. За каждое такое видео LTX не списывает плату. При этом компьютер, место на диске и электричество всё равно нужны.</p>
+<p>В одном приложении есть и облачные функции. API-ключ - ключ доступа к внешнему сервису: с ним часть работы может выполняться на сервере. У этих функций свои условия.</p>
+<div class="table-wrap"><table><thead><tr><th>Режим</th><th>Где выполняется работа и за что платишь</th></tr></thead><tbody>
+<tr><td>Локальное видео и Local Text Encoder</td><td>На твоём компьютере. Нет платы за каждую генерацию, API-ключи не нужны.</td></tr>
+<tr><td>Облачное Text encoding через LTX API</td><td>Текст обрабатывается внешним сервисом. Эта обработка бесплатна, нужен ключ. Бесплатной генерацию видео в облаке она не делает.</td></tr>
+<tr><td>Облачное видео в Gen Space и Video Editor</td><td>Генерация через API платная. К ней относятся и LTX 2.5 Pro / 2.3 Pro. Retake и Extend в облачном Video Editor тоже платные.</td></tr>
+</tbody></table></div>
+<p>У программы и весов модели разные лицензии. Приложение распространяется под Apache 2.0, а условия использования самой LTX 2.5 находятся на <a href="https://huggingface.co/Lightricks/LTX-2.5">странице модели</a>. Прочитай их до коммерческого использования.</p>
+<div class="warn-card"><p><strong>Для полностью локального пути оставь облачные функции выключенными.</strong> Используй Local Text Encoder и не выбирай Gemini API для улучшения запроса или помощника. С подключёнными облачными функциями соответствующие тексты и материалы отправляются внешнему сервису.</p></div>
+</section>
+<section class="content-section">
+<h2 id="unsupported">Если компьютер не подходит</h2>
+<p>Установка приложения не добавит памяти и не заменит видеокарту. На Mac с 24 ГБ локальный маршрут из этой инструкции недоступен. Если не подходит только версия macOS, обновление до macOS 26 или новее поможет лишь при поддержке этой системы самим Mac и достаточной памяти.</p>
+<p>Если видишь <strong>Coming soon to your device</strong>, сравни систему и память с требованиями в шаге 1. Если вкладка <strong>Settings → Models</strong> скрыта, программа работает в режиме API-only, то есть через облачные сервисы. Переустановка не превратит его в локальный режим.</p>
+<p>Можно выбрать облачный видеосервис, но сначала посмотри условия генерации и скачивания. Подписка на облако - отдельное решение, она не нужна для проверки характеристик компьютера. Для сравнения есть <a href="/claude-ai/besplatnye-video-iz-teksta/">обзор видео из текста в браузере</a>.</p>
+<p>Перед скачиванием у тебя теперь есть понятная развилка: подходящая система, память и диск ведут к локальному запуску. Если одного из условий нет, сначала решается вопрос с компьютером, затем с установкой.</p>
+</section>
+<section class="content-section">
+<h2 id="faq">Частые вопросы</h2>
+<details class="faq-item"><summary>LTX Desktop и LTX Studio - одно и то же?</summary><p>Нет. Здесь описано отдельное приложение LTX Desktop, которое устанавливается на компьютер. Инструкции для облачного LTX Studio с входом на сайт и оплатой кредитами не заменяют этот маршрут установки.</p></details>
+<details class="faq-item"><summary>Хватит ли Mac с 32 ГБ?</summary><p>Для ограниченного локального режима нужны Apple Silicon и macOS 26 или новее. Доступны 540p и видео до 5 секунд. Для полного локального режима разработчик указывает от 48 ГБ.</p></details>
+<details class="faq-item"><summary>Нужно ли заводить API-ключ?</summary><p>Для описанного здесь пути с Local Text Encoder ключ не нужен. Бесплатная облачная обработка текста через LTX API - дополнительный вариант. Генерация видео в облаке оплачивается отдельно.</p></details>
+<details class="faq-item"><summary>Загрузка LTX 2.5 не начинается после входа. Что делать?</summary><p>Открой страницу модели в том же аккаунте Hugging Face, прими условия доступа и вернись в программу. Затем повтори скачивание. Если издатель подтверждает доступ вручную, дождись подтверждения.</p></details>
+<details class="faq-item"><summary>Где искать готовое видео?</summary><p>В Assets, библиотеке в левом меню LTX Desktop. Открой ролик и проверь воспроизведение. В Settings → Models находится папка моделей, это другое место.</p></details>
+</section>
+<section class="sources content-section">
+<h2 id="sources">Официальные инструкции</h2>
+<p>Основной путь уже описан выше. Эти ссылки пригодятся для дополнительных настроек и проверки требований после обновления программы.</p>
+<ul><li><a href="https://github.com/Lightricks/LTX-Desktop/releases/tag/v1.3.1">Выпуск 1.3.1 и файлы установки</a>.</li><li><a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/setup-and-settings.md">Требования к компьютеру, первый запуск и Text encoding</a>.</li><li><a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/models-and-loras.md">Загрузка моделей и вход в Hugging Face</a>.</li><li><a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/tools-and-options.md">Настройки Text to Video и улучшения запросов</a>.</li><li><a href="https://github.com/Lightricks/LTX-Desktop/blob/v1.3.1/docs/api-keys-and-privacy.md">Облачные функции, оплата и передача данных</a>.</li></ul>
+</section>
+<section class="seo-related content-section" aria-label="Ещё по теме"><h2 id="related">Ещё по теме</h2><ul><li><a href="/claude-ai/besplatnye-video-iz-teksta/">Видео из текста: сервисы и условия скачивания</a></li><li><a href="/claude-ai/prompt-master-uluchshitel-promptov/">Как уточнить запрос к нейросети</a></li><li><a href="/claude-ai/runway-iz-claude/">Runway в Claude: видео прямо в чате</a></li></ul></section>
+<div class="share-row "><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F&amp;text=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE" target="_blank" rel="noopener">Telegram</a><a class="share-btn" href="https://wa.me/?text=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F" target="_blank" rel="noopener">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fltx-desktop-lokalno%2F&amp;title=LTX%20Desktop%3A%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8F%D0%B5%D0%BC%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE" target="_blank" rel="noopener">VK</a></div><p class="cta-question">У видео есть работа до и после генерации: подготовить сценарий, собрать материалы и страницу, на которой ролик увидят. Эти задачи тоже можно поручать нейросетям. Ниже - примеры того, что они умеют, если не знаешь кода.</p>
+<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section>
+</article></main><aside class="related-plaque" aria-label="Соседняя статья"><p class="plaque-label">Полезно знать</p><h2>Видео в браузере</h2><p><a href="/claude-ai/besplatnye-video-iz-teksta/">Сервисы и условия скачивания</a></p></aside></div><div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog"><button aria-label="Закрыть" class="viewer-close" type="button">✕</button><div class="viewer-scroll" tabindex="0"><img alt=""/></div><p class="viewer-hint"></p></div><script src="../../assets/image-viewer.js"></script><script>
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  // Size from the viewport, never from the article thumbnail or above 1:1.
+  function sizeImage() {
+    if (!viewer.hasAttribute("open") || !big.naturalWidth) return;
+    // Safari reports the dialog's shrink-to-fit width before the image lays out, so use the window.
+    var room = window.innerWidth * 0.94;
+    // Fill the width for readable interface text; the box scrolls when the frame is taller than the window.
+    var target = Math.min(room, big.naturalWidth);
+    if (big.naturalHeight > big.naturalWidth) {
+      target = Math.min(target, window.innerHeight * 0.9 * big.naturalWidth / big.naturalHeight);
+    }
+    big.style.width = Math.floor(target) + "px";
+    viewer.classList.toggle("fits", target <= room);
+    box.scrollLeft = 0;
+    box.scrollTop = 0;
+    var scrolls = box.scrollWidth > box.clientWidth + 2 || box.scrollHeight > box.clientHeight + 2;
+    viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Прокручивай картинку, чтобы увидеть её целиком. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+  }
+  addEventListener("resize", sizeImage);
+
+  function open(img) {
+    var link = img.closest('a.zoom');
+    var source = link ? link.href : (img.dataset.fullSrc || img.currentSrc || img.src);
+    var hint = viewer.querySelector('.viewer-hint');
+    hint.textContent = 'Загрузка изображения…';
+    big.alt = img.alt;
+    big.onerror = function () {
+      hint.textContent = 'Не удалось загрузить изображение. ';
+      var original = document.createElement('a');
+      original.href = source;
+      original.textContent = 'Открыть файл';
+      hint.appendChild(original);
+    };
+    big.onload = sizeImage;
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = source;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.onerror = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll('.fig a.zoom').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      open(link.querySelector('img'));
+    });
+  });
+  document.querySelectorAll(".outfit-reference img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINKS = {"koncentrat": "https://the\u0069vansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://the\u0069vansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+var visibleTocSection = "";
+function revealActiveTocLink(sectionId) {
+  var toc = document.querySelector(".toc");
+  var link = toc && toc.querySelector('a[href="#' + sectionId + '"]');
+  if (!link || toc.clientHeight === 0) return;
+  var top = link.offsetTop;
+  var bottom = top + link.offsetHeight;
+  var inset = 8;
+  if (top < toc.scrollTop + inset) toc.scrollTop = Math.max(0, top - inset);
+  else if (bottom > toc.scrollTop + toc.clientHeight - inset) toc.scrollTop = bottom - toc.clientHeight + inset;
+}
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+  if (visibleTocSection !== current.id) {
+    visibleTocSection = current.id;
+    revealActiveTocLink(current.id);
+  }
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+// Открываем подготовительный пункт при переходе по ссылке или прямому адресу
+function revealPreparation(id) {
+  var target = document.getElementById(id);
+  var item = target && target.closest('details.prep-step');
+  if (!item) return;
+  item.open = true;
+  requestAnimationFrame(function () {
+    target.scrollIntoView({ block: 'start' });
+    updateReadingState();
+  });
+}
+function revealPreparationFromHash() {
+  try { revealPreparation(decodeURIComponent(location.hash.slice(1))); }
+  catch (error) { return; }
+}
+document.addEventListener('click', function (event) {
+  if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  var link = event.target.closest('a[href^="#"]');
+  if (!link) return;
+  try { revealPreparation(decodeURIComponent(link.getAttribute('href').slice(1))); }
+  catch (error) { return; }
+});
+addEventListener('hashchange', revealPreparationFromHash);
+document.querySelectorAll('details.prep-step').forEach(function (item) {
+  item.addEventListener('toggle', updateReadingState);
+});
+revealPreparationFromHash();
+
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script><script>
+(function () {
+  'use strict';
+
+  var bar = document.getElementById('readbar');
+  var cssDrivesBar = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'scroll()');
+  if (bar && !cssDrivesBar) {
+    var ticking = false;
+    var updBar = function () {
+      var d = document.documentElement;
+      var max = d.scrollHeight - d.clientHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? d.scrollTop / max : 0) + ')';
+      ticking = false;
+    };
+    window.addEventListener('scroll', function () {
+      if (!ticking) { window.requestAnimationFrame(updBar); ticking = true; }
+    }, { passive: true });
+    updBar();
+  }
+
+  var pres = document.querySelectorAll('article pre');
+  for (var i = 0; i < pres.length; i++) {
+    var pre = pres[i];
+    if (pre.closest('.code-block') || pre.closest('.code-card')) continue;
+    var wrap = document.createElement('div');
+    wrap.className = 'code-block';
+    pre.parentNode.insertBefore(wrap, pre);
+    var bar = document.createElement('div');
+    bar.className = 'code-bar';
+    var lang = document.createElement('span');
+    lang.className = 'code-lang';
+    lang.textContent = pre.getAttribute('data-lang') || '';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.textContent = 'Скопировать';
+    bar.appendChild(lang);
+    bar.appendChild(btn);
+    wrap.appendChild(bar);
+    wrap.appendChild(pre);
+  }
+
+  function copyText(text, btn, label) {
+    function done() {
+      var old = btn.textContent;
+      btn.textContent = label;
+      btn.classList.add('is-copied');
+      setTimeout(function () { btn.textContent = old; btn.classList.remove('is-copied'); }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var copyBtn = e.target.closest('.copy-btn');
+    if (copyBtn) {
+      var block = copyBtn.closest('.code-block');
+      var pre = block ? block.querySelector('pre') : null;
+      if (pre) copyText(pre.innerText, copyBtn, 'Скопировано ✓');
+      return;
+    }
+    var listBtn = e.target.closest('.checklist-copy');
+    if (listBtn) {
+      var items = listBtn.closest('.checklist').querySelectorAll('li');
+      var lines = [];
+      for (var j = 0; j < items.length; j++) lines.push('- ' + items[j].innerText.trim());
+      copyText(lines.join('\n'), listBtn, 'Скопировано ✓');
+    }
+  });
+
+  var heads = document.querySelectorAll('article h2[id], article h3[id]');
+  for (var k = 0; k < heads.length; k++) {
+    var a = document.createElement('a');
+    a.className = 'h-anchor';
+    a.href = '#' + heads[k].id;
+    a.setAttribute('aria-label', 'Ссылка на раздел');
+    a.textContent = '#';
+    heads[k].appendChild(a);
+  }
+
+  var tocLinks = document.querySelectorAll('.toc-desktop .toc-list a[href^="#"]');
+  if ('IntersectionObserver' in window && tocLinks.length) {
+    var byId = {};
+    for (var m = 0; m < tocLinks.length; m++) {
+      byId[decodeURIComponent(tocLinks[m].getAttribute('href')).slice(1)] = tocLinks[m];
+    }
+    var spy = new IntersectionObserver(function (entries) {
+      for (var n = 0; n < entries.length; n++) {
+        if (!entries[n].isIntersecting) continue;
+        for (var p = 0; p < tocLinks.length; p++) tocLinks[p].classList.remove('is-current');
+        var link = byId[entries[n].target.id];
+        if (link) link.classList.add('is-current');
+      }
+    }, { rootMargin: '-15% 0px -70% 0px' });
+    var spyTargets = document.querySelectorAll('article section[id], article h2[id]');
+    for (var q = 0; q < spyTargets.length; q++) {
+      if (byId[spyTargets[q].id]) spy.observe(spyTargets[q]);
+    }
+  }
+})();
+</script><footer class="privacy-site-footer"><!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer><!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+</body></html>
