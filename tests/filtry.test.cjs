@@ -460,3 +460,28 @@ test('№08: русские названия и обратная расклад�
     assert.deepEqual(results[0], results[1]); assert.deepEqual(results[0], results[2]);
   }
 });
+
+// Пачка 4: проверяем весь настоящий реестр в неверной раскладке и с пропуском буквы.
+for (const [label, source] of [['HTML', script], ['шаблон', templateScript]]) {
+  test('Все кодовые слова: неверная раскладка и опечатка при активном фильтре ' + label, () => {
+    const p = page(source);
+    const codes = [...new Set(registry.filter(a => a.status === 'live' && a.kod_slovo).map(a => a.kod_slovo))];
+    for (const code of codes) {
+      const raw = code.toLowerCase();
+      const wrongLayout = p.state.rasklad(raw, p.state.OBRATNAYA);
+      const queries = [wrongLayout];
+      if (p.state.normalize(raw).length >= 5) queries.push(raw.slice(0, 2) + raw.slice(3));
+      for (const query of queries) {
+        p.filter('sravnenie'); p.search(query);
+        for (const article of registry.filter(a => a.status === 'live' && a.kod_slovo === code)) {
+          assert.ok(p.visible().some(link => link.attrs.href === articleHref(article.slug)), code + ' / ' + query + ': ' + article.slug);
+        }
+        p.reset.listeners.click();
+        assert.equal(p.input.value, '');
+        assert.equal(p.select.value, 'all');
+        assert.equal(p.visible().length, liveCount);
+        assert.deepEqual(p.visible(), p.links);
+      }
+    }
+  });
+}
