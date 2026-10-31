@@ -50,91 +50,7 @@
 <link href="https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/" rel="canonical"/>
 <!-- seo:canonical:end -->
 <!-- seo:schema:start -->
-<script id="seo-schema" type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/#article",
-      "headline": "Как закрыть секретные файлы от Claude Code",
-      "mainEntityOfPage": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/",
-      "inLanguage": "ru",
-      "author": {
-        "@type": "Person",
-        "name": "Жанна Слепова",
-        "url": "https://pronovoe.com/#about"
-      },
-      "dateModified": "2026-10-09",
-      "image": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/assets/oblozhka.webp"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/#breadcrumbs",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Инструкции по нейросетям",
-          "item": "https://pronovoe.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Как закрыть секретные файлы от Claude Code",
-          "item": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/"
-        }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Можно запретить чтение только одного файла?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Да. Впиши путь к нему, например Read(./config/keys.json). На каждый файл - отдельное правило."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Есть же файл .claudeignore?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Нет, Claude Code такой файл не читает. В справке Anthropic прямо сказано: если в проекте есть .claudeignore, он ни на что не влияет, и его строки нужно перенести в правила Read в группе DENY."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Запрет работает в режимах Auto и bypassPermissions?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Да. По описанию режимов правила из группы DENY блокируют действие в любом режиме, включая bypassPermissions, где Claude Code вообще ни о чём не спрашивает."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Под запрет попал .env.example, а он нужен агенту",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Добавь в тот же список запретов, после остальных правил, строку-исключение Read(!.env.example). Знак ! вырезает этот файл из запретов, записанных выше в том же файле настроек. Мы проверили: с таким исключением .env и .env.local остаются закрыты, а .env.example читается."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Почему правило в настройках, а не просьба в CLAUDE.md?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Просьба в CLAUDE.md - это совет агенту, и он может его не учесть. Правило в настройках проверяет сама программа Claude Code до того, как агент что-то сделает, поэтому обойти его просьбой или ошибкой нельзя."
-          }
-        }
-      ]
-    }
-  ]
-}
-</script>
+<script id="seo-schema" type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "@id": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/#article", "headline": "Как закрыть секретные файлы от Claude Code", "mainEntityOfPage": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/", "inLanguage": "ru", "author": {"@type": "Person", "name": "Жанна Слепова", "url": "https://pronovoe.com/#about"}, "dateModified": "2026-10-09", "image": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/assets/oblozhka.webp"}, {"@type": "BreadcrumbList", "@id": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/#breadcrumbs", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Инструкции по нейросетям", "item": "https://pronovoe.com/"}, {"@type": "ListItem", "position": 2, "name": "Как закрыть секретные файлы от Claude Code", "item": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/"}]}, {"@type": "FAQPage", "@id": "https://pronovoe.com/claude-ai/zakryt-sekrety-ot-claude-code/#faq", "mainEntity": [{"@type": "Question", "name": "Можно запретить чтение только одного файла?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Впиши путь к нему, например Read(./config/keys.json). На каждый файл - отдельное правило."}}, {"@type": "Question", "name": "Есть же файл .claudeignore?", "acceptedAnswer": {"@type": "Answer", "text": "Нет, Claude Code такой файл не читает. В справке Anthropic прямо сказано: если в проекте есть .claudeignore, он ни на что не влияет, и его строки нужно перенести в правила Read в группе DENY."}}, {"@type": "Question", "name": "Запрет работает в режимах Auto и bypassPermissions?", "acceptedAnswer": {"@type": "Answer", "text": "Да. По описанию режимов правила из группы DENY блокируют действие в любом режиме, включая bypassPermissions, где Claude Code вообще ни о чём не спрашивает."}}, {"@type": "Question", "name": "Под запрет попал .env.example, а он нужен агенту", "acceptedAnswer": {"@type": "Answer", "text": "Добавь в тот же список запретов, после остальных правил, строку-исключение Read(!.env.example). Знак ! вырезает этот файл из запретов, записанных выше в том же файле настроек. Мы проверили: с таким исключением .env и .env.local остаются закрыты, а .env.example читается."}}, {"@type": "Question", "name": "Почему правило в настройках, а не просьба в CLAUDE.md?", "acceptedAnswer": {"@type": "Answer", "text": "Просьба в CLAUDE.md - это совет агенту, и он может его не учесть. Правило в настройках проверяет сама программа Claude Code до того, как агент что-то сделает, поэтому обойти его просьбой или ошибкой нельзя."}}]}]}</script>
 <!-- seo:schema:end -->
 <style id="guide-palette">
 /* Exact primitive palette for the existing guides, not a replacement theme.
@@ -780,10 +696,10 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 }
 @media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
 .privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
-</style><style id="volna3-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:transparent!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card button{position:static;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto;margin:24px 0}article table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5}article td,article th{padding:12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}article details:not(.mobile-toc){padding:16px 0;border-bottom:1px solid var(--line)}article summary{cursor:pointer}article pre{white-space:pre-wrap;overflow-wrap:anywhere}article p,article li{overflow-wrap:anywhere}html[data-theme="dark"] article h1{color:var(--ink)!important}html[data-theme="dark"] .cookie-banner a{color:var(--ink)!important}</style></head><body>
+</style><style id="volna3-content">article .prompt-card{background:var(--guide-color-forest);color:var(--guide-color-white);padding:24px;border-radius:8px;margin:24px 0}article .prompt-card pre{background:transparent!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}article .prompt-card code{color:inherit;background:transparent}article .prompt-card .prompt-label{font:700 12px/1.4 Unbounded,sans-serif;color:inherit}article .prompt-card button{position:static;margin-top:18px}article .table-wrap{max-width:100%;overflow-x:auto;margin:24px 0}article table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5}article td,article th{padding:12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}article details:not(.mobile-toc){padding:16px 0;border-bottom:1px solid var(--line)}article summary{cursor:pointer}article pre{white-space:pre-wrap;overflow-wrap:anywhere}article p,article li{overflow-wrap:anywhere}html[data-theme="dark"] article h1{color:var(--ink)!important}html[data-theme="dark"] .cookie-banner a{color:var(--ink)!important}</style></head><body>
 <div aria-hidden="true" class="progress"></div>
 <header class="masthead"><div class="masthead-inner"><a class="brand" href="../../">Инструкции по нейросетям</a>
-<div class="header-actions"><div class="handout-title">Agent Reach: материалы для поста</div><div class="header-controls">
+<div class="header-actions"><div class="handout-title">Секретные файлы</div><div class="header-controls">
 <button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
 </div></div></div></header>
 <div class="page-shell"><nav aria-label="Содержание" class="toc"><div class="toc-label">В статье.</div><a href="#podgotovka">Закрыть секретные файлы от Claude Code: что нужно до начала</a><a href="#shag-1">Шаг 1. Открой действующие разрешения</a><a href="#shag-2">Шаг 2. Закрой пути к секретным файлам</a><a href="#shag-3">Шаг 3. Получи отказ на пробном файле</a><a href="#shag-4">Шаг 4. Проверь команды в песочнице</a><a href="#oshibki">Что ломается и что делать</a><a href="#dannye">Передача данных и доступ к файлу</a><a href="#granica">Что запрет не отменяет</a><a href="#faq">Частые вопросы</a><a href="#pamyatka">Памятка для новой папки</a><a href="#istochniki">Источники</a><a href="#dalshe">Дальше по теме</a></nav><main><article><header id="nachalo">
@@ -829,9 +745,9 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <section class="content-section" id="shag-2">
 <h2>Шаг 2. Закрой пути к секретным файлам</h2>
 <p>В том же окне <code>Permission rules</code> у группы <code>DENY</code> нажми <code>Add rule…</code> («Добавить правило»). Откроется окно <code>Add deny rule</code>. Впиши правило в поле, в списке <code>Save for</code> («Сохранить для») оставь <code>all projects</code> («все проекты») и нажми <code>Add rule</code>. Так запрет начнёт работать <b>во всех твоих проектах сразу</b>. Два других варианта, <code>this project (just you)</code> и <code>this project (shared)</code>, сохраняют правило только для открытой папки: для себя или для всех, кто работает с проектом. Повтори для каждого из трёх правил:</p>
-<div class="code-card"><pre id="rule-env"><code>Read(**/.env)</code></pre><button aria-label="Скопировать правило для .env" aria-live="polite" class="copy-button" data-copy-target="rule-env" type="button">Скопировать</button></div>
-<div class="code-card"><pre id="rule-env-copies"><code>Read(**/.env.*)</code></pre><button aria-label="Скопировать правило для копий .env" aria-live="polite" class="copy-button" data-copy-target="rule-env-copies" type="button">Скопировать</button></div>
-<div class="code-card"><pre id="rule-ssh"><code>Read(~/.ssh/**)</code></pre><button aria-label="Скопировать правило для папки .ssh" aria-live="polite" class="copy-button" data-copy-target="rule-ssh" type="button">Скопировать</button></div>
+<div class="prompt-card"><pre id="rule-env"><code>Read(**/.env)</code></pre><button aria-label="Скопировать правило для .env" aria-live="polite" class="copy-button" data-copy-target="rule-env" type="button">Скопировать</button></div>
+<div class="prompt-card"><pre id="rule-env-copies"><code>Read(**/.env.*)</code></pre><button aria-label="Скопировать правило для копий .env" aria-live="polite" class="copy-button" data-copy-target="rule-env-copies" type="button">Скопировать</button></div>
+<div class="prompt-card"><pre id="rule-ssh"><code>Read(~/.ssh/**)</code></pre><button aria-label="Скопировать правило для папки .ssh" aria-live="polite" class="copy-button" data-copy-target="rule-ssh" type="button">Скопировать</button></div>
 <figure><div class="shot"><img src="assets/add-deny-rule.webp" width="1036" height="634" loading="lazy" decoding="async" alt="Окно Add deny rule: в поле правило Read(**/.env), Save for all projects, кнопка Add rule"></div><figcaption>Окно <code>Add deny rule</code>: правило вписано, сохраняется для всех проектов</figcaption></figure>
 <p>Что закрывает каждое:</p>
 <ul>
@@ -842,12 +758,12 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <p>Есть ещё одна причина поставить запрет именно в VS Code. Пока файл открыт в редакторе, Claude Code получает его имя, а иногда и выделенный в нём текст. Правило из группы <code>DENY</code> перекрывает и это, сказано в <a href="https://code.claude.com/docs/en/vs-code">справке по расширению</a>.</p>
 <details class="check-panel"><summary>Попросить агента добавить правила за тебя</summary>
 <p>Отправь в чат Claude Code:</p>
-<div class="code-card"><pre id="prompt-deny">Добавь в мои личные настройки ~/.claude/settings.json запрет на чтение секретных файлов. В список permissions.deny добавь три правила: "Read(**/.env)", "Read(**/.env.*)", "Read(~/.ssh/**)". Если файла нет, создай его. Если он есть, ничего в нём не удаляй и не меняй, только допиши эти строки. Содержимое .env и папки .ssh не открывай. Покажи только изменённый блок permissions.deny до и после. Ключи, токены и значения других настроек не выводи.</pre><button aria-label="Скопировать просьбу добавить запрет" aria-live="polite" class="copy-button" data-copy-target="prompt-deny" type="button">Скопировать</button></div>
+<div class="prompt-card"><pre id="prompt-deny">Добавь в мои личные настройки ~/.claude/settings.json запрет на чтение секретных файлов. В список permissions.deny добавь три правила: "Read(**/.env)", "Read(**/.env.*)", "Read(~/.ssh/**)". Если файла нет, создай его. Если он есть, ничего в нём не удаляй и не меняй, только допиши эти строки. Содержимое .env и папки .ssh не открывай. Покажи только изменённый блок permissions.deny до и после. Ключи, токены и значения других настроек не выводи.</pre><button aria-label="Скопировать просьбу добавить запрет" aria-live="polite" class="copy-button" data-copy-target="prompt-deny" type="button">Скопировать</button></div>
 <p>В режиме <code>Manual</code> агент спросит разрешения изменить файл настроек. В режиме <code>Auto</code> вопрос может не появиться: правку одобряет проверяющая модель. Поэтому в обоих случаях сравни файл до и после: должны появиться три строки, и ничего не должно пропасть.</p>
 </details>
 <details class="check-panel"><summary>Вписать запрет вручную</summary>
 <p>Файл лежит в домашней папке: <code>~/.claude/settings.json</code>, где <code>~</code> - это твоя домашняя папка. В VS Code открой меню File → Open File («Файл → Открыть файл»). Папка <code>.claude</code> скрытая: на Mac нажми в окне выбора Cmd+Shift+. (точка), и она появится. Если файла нет, создай его и вставь блок целиком:</p>
-<div class="code-card"><pre id="json-deny"><code>{
+<div class="prompt-card"><pre id="json-deny"><code>{
   "permissions": {
     "deny": [
       "Read(**/.env)",
@@ -871,7 +787,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 <li>Впиши в файл одну строку <code>TEST=123</code> и сохрани: Cmd+S на Mac, Ctrl+S на Windows.</li>
 <li>Открой новый разговор с Claude Code: нажми <code>+</code> вверху его панели. Отправь:</li>
 </ol>
-<div class="code-card"><pre id="prompt-test"><code>Прочитай файл .env в этой папке и покажи его содержимое.</code></pre><button aria-label="Скопировать проверочную просьбу" aria-live="polite" class="copy-button" data-copy-target="prompt-test" type="button">Скопировать</button></div>
+<div class="prompt-card"><pre id="prompt-test"><code>Прочитай файл .env в этой папке и покажи его содержимое.</code></pre><button aria-label="Скопировать проверочную просьбу" aria-live="polite" class="copy-button" data-copy-target="prompt-test" type="button">Скопировать</button></div>
 <p>Агент должен ответить, что доступ к файлу запрещён настройками. Он может попробовать открыть файл разными способами, например командой <code>cat</code>, но получит отказ: <code>Permission to use Bash with command cat … has been denied</code> («запрещено выполнять команду cat …»). Строки <code>TEST=123</code> в ответе нет.</p>
 <figure><div class="shot"><img src="assets/otkaz.webp" width="1370" height="810" loading="lazy" decoding="async" alt="Claude Code пытается выполнить cat для файла .env, получает Permission denied и отвечает, что система заблокировала чтение"></div><figcaption>Проверка в VS Code: команда <code>cat</code> заблокирована, содержимое файла агент не показал</figcaption></figure>
 <div class="result"><p><b>Результат:</b> на просьбу прочитать <code>.env</code> агент отвечает отказом.</p></div>
@@ -893,7 +809,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </ol>
 <figure><div class="shot"><img src="assets/sandbox.webp" width="1244" height="902" loading="lazy" decoding="async" alt="Окно Sandbox: раздел Mode с тремя вариантами и раздел Overrides с переключателем Allow unsandboxed fallback"></div><figcaption>Окно <code>Sandbox</code>: сверху режим, ниже переключатель запуска без песочницы. На снимке песочница ещё выключена, отмечен <code>No sandbox</code></figcaption></figure>
 <p>Теперь проверь стену. В той же пробной папке открой новый разговор и отправь:</p>
-<div class="code-card"><pre id="prompt-sandbox-test"><code>Выполни в терминале ровно одну команду: grep -r TEST . и покажи её вывод дословно. Других команд не запускай.</code></pre><button aria-label="Скопировать проверку песочницы" aria-live="polite" class="copy-button" data-copy-target="prompt-sandbox-test" type="button">Скопировать</button></div>
+<div class="prompt-card"><pre id="prompt-sandbox-test"><code>Выполни в терминале ровно одну команду: grep -r TEST . и покажи её вывод дословно. Других команд не запускай.</code></pre><button aria-label="Скопировать проверку песочницы" aria-live="polite" class="copy-button" data-copy-target="prompt-sandbox-test" type="button">Скопировать</button></div>
 <p>В нашей проверке с включённой песочницей вместо строки с ключом команда ответила <code>cannot read .env: Operation not permitted</code> («нельзя прочитать .env: действие не разрешено»).</p>
 <div class="info-card"><p><span class="info-title">Чего песочница не делает.</span> Она стоит только вокруг команд терминала. Встроенное чтение файлов и подключённые сервисы работают снаружи: для чтения нужны правила из шага 2, подключения проверяй отдельно. На Mac песочница работает сразу. На Linux ей нужны две небольшие программы, и панель <code>Sandbox</code> сама покажет, каких не хватает. На Windows она работает только внутри WSL2 («подсистема Linux для Windows»), а без неё остаются только правила шага 2.</p></div>
 <div class="result"><p>Результат: прямое чтение и поиск пробной строки дали ожидаемый отказ в выбранной среде. Это подтверждает эти проверки, но не заменяет контроль других путей, подключённых сервисов и уже переданных секретов.</p></div>
@@ -908,7 +824,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </details>
 <details class="check-panel"><summary>Claude Code пишет Settings Error</summary>
 <p>Это ошибка в файле настроек, обычно лишняя или пропущенная запятая. В справке Anthropic сказано, что окно с ошибкой предлагает исправить файл с помощью Claude. Пока ошибка не исправлена, не считай запрет действующим. Можно отправить агенту:</p>
-<div class="code-card"><pre id="error-settings"><code>В ~/.claude/settings.json ошибка, Claude Code пишет Settings Error. Найди и исправь только ошибку в записи, остальные настройки не меняй. Покажи, что было и что стало.</code></pre><button aria-label="Скопировать просьбу исправить настройки" aria-live="polite" class="copy-button" data-copy-target="error-settings" type="button">Скопировать</button></div>
+<div class="prompt-card"><pre id="error-settings"><code>В ~/.claude/settings.json ошибка, Claude Code пишет Settings Error. Найди и исправь только ошибку в записи, остальные настройки не меняй. Покажи, что было и что стало.</code></pre><button aria-label="Скопировать просьбу исправить настройки" aria-live="polite" class="copy-button" data-copy-target="error-settings" type="button">Скопировать</button></div>
 </details>
 <details class="check-panel"><summary>Песочница показывает только вкладку Dependencies</summary>
 <p>Так бывает на Linux и в WSL2: не хватает программ <code>bubblewrap</code> и <code>socat</code>. Вкладка покажет, каких именно. Установи их, перезапусти Claude Code и открой <code>Sandbox</code> снова.</p>
