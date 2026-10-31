@@ -76,7 +76,7 @@ test('Все настоящие inline просмотрщики использу
     assert.ok(!/document\.body\.style\.overflow\s*=/.test(html), name);
   }
   // The logo, Stanford CS230, LTX Desktop, and Canary articles use the shared viewer lifecycle.
-  assert.equal(count, 62);
+  assert.equal(count, 63);
 });
 
 test('Disabled элемент пропускается, внешний фокус возвращается в модалку', () => {

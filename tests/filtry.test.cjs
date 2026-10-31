@@ -307,7 +307,7 @@ const templateScript = template.match(/<script>([\s\S]*?)<\/script>/)[1].replace
 for (const [label, source] of [['HTML', script], ['шаблон', templateScript]]) {
   test('Регрессия ФОТО: код, точный заголовок и тема идут раньше нечётких совпадений ' + label, () => {
     const p = page(source); p.search('ФОТО');
-    assert.equal(p.visible().length, 25);
+    assert.equal(p.visible().length, 26);
     assert.ok(p.visible().slice(0, 2).every(link => link.attrs['data-kod'] === 'ФОТО'));
     const exact = p.visible().filter(link => p.state.normalize(link.attrs['data-poisk']).includes('фото'));
     assert.deepEqual(p.visible().slice(0, exact.length), exact);

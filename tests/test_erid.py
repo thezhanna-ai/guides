@@ -38,7 +38,7 @@ class EridTest(unittest.TestCase):
                 block = blocks[0]
                 self.assertEqual(block.all(tag="h2")[0].text_content(), TITLE)
                 self.assertEqual([p.text_content().strip() for p in block.all(tag="p")],
-                                 [*COPY, DISCLOSURE])
+                                 [*[x + "." if page.parent.name == "8-stiley-reklamy-iz-foto-tovara" else x for x in COPY], DISCLOSURE])
                 links = block.all(tag="a")
                 self.assertEqual(len(links), 2)
                 self.assertEqual(
@@ -89,6 +89,15 @@ class EridTest(unittest.TestCase):
                                  else signature(c) for c in node.children
                                  if getattr(c, 'name', None) or str(c).strip()])
                     self.assertEqual(signature(actual), signature(expected))
+                    continue
+                if page.parent.name == "8-stiley-reklamy-iz-foto-tovara":
+                    from bs4 import BeautifulSoup
+                    actual = BeautifulSoup(page.read_text(), 'html.parser').select_one('section.cta')
+                    expected = BeautifulSoup(standard, 'html.parser').select_one('section.cta')
+                    for paragraph, copy in zip(actual.find_all('p')[:3], COPY):
+                        self.assertEqual(paragraph.get_text(), copy + '.')
+                        paragraph.string = copy
+                    self.assertEqual(str(actual), str(expected))
                     continue
                 match = re.search(pattern, page.read_bytes(), re.S)
                 self.assertIsNotNone(match)

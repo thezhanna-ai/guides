@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="ru"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>8 стилей рекламы из фото товара: готовые промпты для ChatGPT</title>
+<!-- critical:fonts:start -->
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: fit-content; max-width: 100% }
+    .shot img { display: block; width: auto; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot:has(img[src="assets/voice-brauzer.webp"]) img { width: 560px }
+    .shot:has(img[src="assets/voice-telefon.webp"]) img { width: 300px }
+    .shot:has(img[src="assets/zapros-1.webp"]) img { width: 620px }
+    .shot:has(img[src="assets/otvet-vpermeshku.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-1.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-2.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/plan-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/plan-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/tri-zadachi.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px; font-size: 17px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { background: var(--guide-color-coral); color: var(--guide-color-forest); position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+.code-card .copy-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest) }
+.code-card .copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest) }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
+<style id="konspekt-editorial">
+.konspekt-example { max-width: 700px; margin: 24px auto 38px }
+.konspekt-example .shot img { width: 100%; height: auto; max-height: none; object-fit: contain }
+.tariff-note { margin-top: 42px; padding: 18px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; line-height: 1.6 }
+.tariff-note p { font-size: inherit; line-height: inherit; margin: 0 0 12px }
+.tariff-note .note-label { font-weight: 400 }
+.tariff-note ul { margin: 0; padding-left: 22px }
+.tariff-note li { margin: 0 0 14px; font-size: inherit; line-height: inherit }
+</style>
+<style>.shot img{width:650px}.code-card pre{overflow-wrap:anywhere;white-space:pre-wrap}.tariff-note{margin-top:32px}</style>
+<link href="../../assets/article-sharing.css" rel="stylesheet"/>
+<!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  flex: 1 1 0; width: 124px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+#cookie-accept { background: var(--guide-color-brand); color: var(--guide-color-forest); border-color: var(--guide-color-brand) }
+#cookie-decline { background: var(--guide-color-slate-paper); color: var(--guide-color-forest); border-color: var(--guide-color-slate-paper) }
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/8-stiley-reklamy-iz-foto-tovara/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/8-stiley-reklamy-iz-foto-tovara/#article",
+      "headline": "8 стилей рекламы из фото товара: промпты для ChatGPT",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/8-stiley-reklamy-iz-foto-tovara/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-10-31"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/8-stiley-reklamy-iz-foto-tovara/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "8 стилей рекламы из фото товара: промпты для ChatGPT",
+          "item": "https://pronovoe.com/claude-ai/8-stiley-reklamy-iz-foto-tovara/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/8-stiley-reklamy-iz-foto-tovara/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Нужно ли описывать свой товар вместо банки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Прикрепи фото своего товара и скопируй весь промпт. Он уже просит использовать упаковку из приложенной фотографии. Уточнение понадобится, если нейросеть не разобрала название или важную деталь."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Получится ли точно такая же картинка?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Точное совпадение не обещается. Промпт задаёт оформление, свет и композицию. Другой товар и повторная генерация могут дать другой результат."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли применить промпты к коробке или флакону?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "В запросах используется слово «товар», поэтому их можно отправить с фотографией коробки или флакона. В варианте с водой проверь, есть ли на упаковке свободное место для передней волны. Если нет, попроси оставить воду за товаром."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему ChatGPT отвечает текстом вместо картинки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Уточни, что нужно создать само изображение из приложенного фото. Если сервис сообщает о лимите или недоступности создания картинок, следуй сообщению в своём аккаунте."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+<meta content="Восемь примеров рекламы одного товара: минимализм, поп-арт, хром, неон и другие стили. Полные промпты, исходная банка и запросы для правок." name="description"/><meta content="#122b31" name="theme-color"/><meta content="8 стилей рекламы из фото товара: готовые промпты для ChatGPT" property="og:title"/><meta content="Восемь примеров рекламы одного товара: минимализм, поп-арт, хром, неон и другие стили. Полные промпты, исходная банка и запросы для правок." property="og:description"/><meta content="article" property="og:type"/><meta content="https://pronovoe.com/claude-ai/8-stiley-reklamy-iz-foto-tovara/assets/og.webp" property="og:image"/><meta content="ru_RU" property="og:locale"/><style>
+html[data-theme="dark"] article h1{color:var(--ink)!important}
+#style-05-brutalist .shot .zoom{bottom:48px}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.product-figure{margin:24px 0 30px}.product-figure .shot{width:min(100%,520px);margin:auto}.product-figure img{width:100%;height:auto}.product-figure figcaption{margin-top:11px;color:var(--muted);font:400 14px/1.5 Spectral,Georgia,serif}.before-after .product-figure{margin:0 0 20px}.code-card{position:relative;background:var(--guide-color-forest);color:var(--guide-color-paper);border-radius:12px;padding:61px 20px 22px;margin:24px 0;overflow:hidden}.code-card pre,.code-card pre code{background:var(--guide-color-transparent)!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font:500 17px/1.6 "JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace}.code-card pre{margin:15px 0 0}.prompt-destination{display:block;font:500 12px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--guide-color-paper)}.code-card .copy-button{position:absolute;top:12px;right:13px;min-width:140px;min-height:38px;padding:0 12px;border:0;border-radius:8px;background:var(--accent);color:var(--guide-color-forest);font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;box-shadow:0 3px 0 var(--guide-color-brand-ink);transition:background .15s,transform .15s,box-shadow .15s}.code-card .copy-button:hover{background:var(--guide-color-brand-hover);color:var(--guide-color-forest);transform:translateY(1px);box-shadow:0 2px 0 var(--guide-color-brand-ink)}.code-card .copy-button:active{background:var(--guide-color-brand-pressed);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42)}.code-card .copy-button.is-copied{background:var(--guide-color-brand-pressed);box-shadow:0 0 0 3px var(--guide-color-brand-pressed-alpha-55)}.code-card .copy-button:focus-visible{outline:3px solid var(--guide-color-brand-pressed);outline-offset:4px}@media(prefers-reduced-motion:reduce){.code-card .copy-button{transition:none}.code-card .copy-button:hover,.code-card .copy-button:active{transform:none}}
+.result-line{border-left:3px solid var(--guide-color-success-ink);padding-left:16px;background:var(--guide-color-transparent)}.faq-item{padding:16px 18px;border:1px solid var(--line);border-radius:11px;margin:12px 0;background:var(--white)}.faq-item summary{cursor:pointer;font-weight:600}.faq-item p{margin-bottom:0}.draft-sharing-note{font:400 13px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted)}@media(max-width:600px){.before-after{gap:10px}.code-card{padding:61px 18px 22px}.code-card pre,.code-card pre code{font-size:17px}}
+</style><style>/* Review corrections: visible advert hover and cover viewer affordance. */
+.cta .press-button:hover{background:var(--guide-color-brand-pale)!important;color:var(--guide-color-forest)!important}
+figure.cover{position:relative}.cover .zoom{position:absolute;right:10px;bottom:38px;padding:5px 10px;border:0;border-radius:6px;background:var(--guide-color-forest);color:var(--guide-color-white);font:700 11px/1.3 sans-serif;cursor:pointer}
+</style><meta content="https://pronovoe.com/claude-ai/8-stiley-reklamy-iz-foto-tovara/" property="og:url"/></head><body>
+<div aria-hidden="true" class="progress"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="https://pronovoe.com/">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">8 стилей рекламы товара</div><div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div></div></div></header>
+<div class="page-shell"><nav aria-label="Содержание" class="toc"><p class="toc-label">В статье.</p><a href="#ishodnik">Исходная фотография и рекламный плакат</a><a href="#povtorit">Создаём рекламу из фото товара в ChatGPT</a><a href="#style-01-minimal">1. Минимализм</a><a href="#style-02-pop-art">2. Поп-арт</a><a href="#style-03-bauhaus">3. Баухаус</a><a href="#style-04-y2k">4. Y2K: хром и вода</a><a href="#style-05-brutalist">5. Брутализм</a><a href="#style-06-swiss">6. Швейцарская типографика</a><a href="#style-07-vaporwave">7. Vaporwave: неон</a><a href="#style-08-retrofuturism">8. Ретрофутуризм</a><a href="#pravki">Исправляем упаковку и лишние детали</a><a href="#sohranit">Проверяем и сохраняем картинку</a><a href="#faq">Частые вопросы</a><a href="#istochniki">Дополнительно по теме</a></nav><main><article><header id="nachalo"><p class="eyebrow">Реклама товара · Готовые промпты.</p><figure class="cover cover-v2"><img alt="Одно фото товара, восемь стилей рекламы. Примеры с голубой водой, геометрией и неоном." fetchpriority="high" height="840" loading="eager" src="assets/cover.webp" width="1600"/><figcaption>Одна банка в восьми оформлениях и полные запросы для своего товара</figcaption></figure><h1 class="article-standard-h1">8 стилей рекламы из фото товара: промпты для ChatGPT</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><p class="lead">Есть фотография товара, а для рекламы хочется несколько разных картинок. Как будет смотреться твоя упаковка на спокойном светлом фоне, среди яркой графики или в голубой воде? Здесь восемь примеров и полные промпты, которые можно отправить в ChatGPT со своим фото.</p><p>Во всех примерах одна вымышленная банка лимонного чая. Меняются фон, свет и графика вокруг неё. Выбери понравившееся оформление, получи свою картинку и сравни упаковку с исходником.</p><p class="meta">ОБНОВЛЕНО 31 ОКТЯБРЯ 2026.</p><nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="https://pronovoe.com/">Инструкции по нейросетям</a><span aria-hidden="true"> / </span><span aria-current="page">8 стилей рекламы товара</span></nav>
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">8 стилей рекламы из фото товара: промпты для ChatGPT</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#ishodnik">Исходная фотография и рекламный плакат</a><a href="#povtorit">Создаём рекламу из фото товара в ChatGPT</a><a href="#style-01-minimal">1. Минимализм</a><a href="#style-02-pop-art">2. Поп-арт</a><a href="#style-03-bauhaus">3. Баухаус</a><a href="#style-04-y2k">4. Y2K: хром и вода</a><a href="#style-05-brutalist">5. Брутализм</a><a href="#style-06-swiss">6. Швейцарская типографика</a><a href="#style-07-vaporwave">7. Vaporwave: неон</a><a href="#style-08-retrofuturism">8. Ретрофутуризм</a><a href="#pravki">Исправляем упаковку и лишние детали</a><a href="#sohranit">Проверяем и сохраняем картинку</a><a href="#faq">Частые вопросы</a><a href="#istochniki">Дополнительно по теме</a></nav></details><div class="share-row share-top"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2F8-stiley-reklamy-iz-foto-tovara%2F&amp;text=8%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5%D0%B9%20%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D1%8B%20%D0%B8%D0%B7%20%D1%84%D0%BE%D1%82%D0%BE%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%B0%3A%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D1%8B%20%D0%B4%D0%BB%D1%8F%20ChatGPT" rel="noopener" target="_blank">Telegram</a><a class="share-btn" href="https://wa.me/?text=8%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5%D0%B9%20%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D1%8B%20%D0%B8%D0%B7%20%D1%84%D0%BE%D1%82%D0%BE%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%B0%3A%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D1%8B%20%D0%B4%D0%BB%D1%8F%20ChatGPT%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2F8-stiley-reklamy-iz-foto-tovara%2F" rel="noopener" target="_blank">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2F8-stiley-reklamy-iz-foto-tovara%2F&amp;title=8%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5%D0%B9%20%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D1%8B%20%D0%B8%D0%B7%20%D1%84%D0%BE%D1%82%D0%BE%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%B0%3A%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D1%8B%20%D0%B4%D0%BB%D1%8F%20ChatGPT" rel="noopener" target="_blank">VK</a></div><section class="content-section" id="ishodnik"><h2>Исходная фотография и рекламный плакат</h2><p>Слева исходная банка, справа оформление с голубой водой и хромом. Рисунок лимона и надписи относятся к самой упаковке. Вода, фон и крупный заголовок добавлены вокруг товара.</p><div class="before-after"><figure class="product-figure"><div class="shot"><img alt="Исходная светлая банка лимонного чая с реалистичным лимоном и надписями ЧАЙ, ЛИМОН, 330 мл." decoding="async" height="1536" loading="lazy" src="assets/source.webp" width="1024"/></div><figcaption>Исходная фотография.</figcaption></figure><figure class="product-figure"><div class="shot"><img alt="Та же банка на голубом фоне с хромом и одной прозрачной нижней волной." decoding="async" height="1536" loading="lazy" src="assets/04-y2k.webp" width="1024"/></div><figcaption>Рекламное оформление с голубой водой.</figcaption></figure></div><p>Можно взять <a download="banka-limonnogo-chaya.png" href="assets/source.png">исходную картинку банки для пробы</a> или сразу использовать свой товар. Для своего товара выбери чёткое фото, на котором товар виден целиком, а название, рисунок и логотип можно разобрать.</p></section><section class="content-section" id="povtorit"><h2>Создаём рекламу из фото товара в ChatGPT</h2><ol><li>Открой <a href="https://chatgpt.com/" rel="noopener" target="_blank">ChatGPT</a> и начни новый чат. Прикрепи фотографию товара к сообщению через кнопку добавления файла рядом с полем ввода. Дождись, пока рядом с сообщением появится вложение.</li><li>Выбери один из восьми стилей ниже. Нажми «Скопировать» и вставь весь промпт в поле сообщения. Отправь его вместе с фотографией.</li><li>Дождись изображения в ответе. Если ChatGPT прислал только описание, напиши: «Создай само изображение по этому заданию, используя приложенное фото».</li><li>Сравни название, логотип, рисунок и форму товара с исходником. Ниже есть отдельные запросы для исправления деталей.</li></ol><p class="result-line"><strong>Результат:</strong> в чате появится рекламная картинка с твоим товаром в выбранном оформлении.</p><p>Для следующего стиля начни новый чат и снова прикрепи исходную фотографию. Так ты задашь новый вариант от исходника, а не от предыдущего постера. Каждый промпт ниже самостоятельный: добавлять к нему текст из соседних блоков не нужно.</p><p>Примеры показывают направление оформления. С твоим товаром композиция и детали будут отличаться. Нейросеть может изменить буквы и упаковку, даже если в запросе сказано их сохранить. Для загрузки фото и создания картинок действуют ограничения твоего аккаунта ChatGPT.</p></section><section class="content-section" id="style-01-minimal"><h2>1. Минимализм</h2><p>Здесь всё внимание на банке: тёплый фон, большой жёлтый круг и мягкая тень. Подойдёт, когда нужен спокойный рекламный кадр с крупно показанным товаром.</p><figure class="product-figure"><div class="shot"><img alt="Пример 1: Минимализм. Светлый фон и свободное пространство." decoding="async" height="1536" loading="lazy" src="assets/01-minimal.webp" width="1024"/></div><figcaption>Светлый фон и свободное пространство.</figcaption></figure><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="prompt-1"><code>Создай вертикальный рекламный постер формата 2:3 с товаром из приложенной фотографии. Используй фотографию как точный образец: сохрани форму и пропорции товара, материал упаковки, её цвета, логотип, рисунок и все надписи. Товар должен быть крупным, полностью видимым и узнаваемым. Меняй окружение, свет, композицию и графику вокруг товара. Не добавляй другие бренды, цены и новые свойства продукта. Если нужен заголовок, возьми название с упаковки. Сохрани точное написание. Не добавляй подпись с названием стиля и водяные знаки.
+
+Тёплый светлый фон, один большой плоский круг в основном цвете упаковки, мягкий направленный свет и аккуратная тень. Товар чуть ниже центра, сверху крупное название из упаковки элегантным чёрным шрифтом. Много свободного пространства. Без дополнительных фруктов, льда, брызг, декораций и капель вокруг товара.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-1" type="button">Скопировать</button></div></section><section class="content-section" id="style-02-pop-art"><h2>2. Поп-арт</h2><p>Бирюзовые и коралловые панели, печатные точки, жёлтые вспышки и крупные буквы делают кадр похожим на комикс. Товар остаётся фотореалистичным.</p><figure class="product-figure"><div class="shot"><img alt="Пример 2: Поп-арт. Комиксная графика и яркие цвета." decoding="async" height="1536" loading="lazy" src="assets/02-pop-art.webp" width="1024"/></div><figcaption>Комиксная графика и яркие цвета.</figcaption></figure><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="prompt-2"><code>Создай вертикальный рекламный постер формата 2:3 с товаром из приложенной фотографии. Используй фотографию как точный образец: сохрани форму и пропорции товара, материал упаковки, её цвета, логотип, рисунок и все надписи. Товар должен быть крупным, полностью видимым и узнаваемым. Меняй окружение, свет, композицию и графику вокруг товара. Не добавляй другие бренды, цены и новые свойства продукта. Если нужен заголовок, возьми название с упаковки. Сохрани точное написание. Не добавляй подпись с названием стиля и водяные знаки.
+
+Яркая реклама в стиле поп-арт: бирюзовые, коралловые, жёлтые и чёрные панели, полутоновые точки, чёрные комиксные контуры и графический взрыв за товаром. Сам товар оставь фотореалистичным, не перерисовывай упаковку в комикс. Вверху крупное наклонное название с чёрным контуром. Если используешь ингредиенты из фотографии упаковки, они не должны закрывать товар.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-2" type="button">Скопировать</button></div></section><section class="content-section" id="style-03-bauhaus"><h2>3. Баухаус</h2><p>Баухаус здесь означает оформление из простой геометрии: красных, синих и жёлтых фигур. Упаковка стоит перед ними, а не превращается в рисунок.</p><figure class="product-figure"><div class="shot"><img alt="Пример 3: Баухаус. Круги, прямоугольники и основные цвета." decoding="async" height="1536" loading="lazy" src="assets/03-bauhaus.webp" width="1024"/></div><figcaption>Круги, прямоугольники и основные цвета.</figcaption></figure><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="prompt-3"><code>Создай вертикальный рекламный постер формата 2:3 с товаром из приложенной фотографии. Используй фотографию как точный образец: сохрани форму и пропорции товара, материал упаковки, её цвета, логотип, рисунок и все надписи. Товар должен быть крупным, полностью видимым и узнаваемым. Меняй окружение, свет, композицию и графику вокруг товара. Не добавляй другие бренды, цены и новые свойства продукта. Если нужен заголовок, возьми название с упаковки. Сохрани точное написание. Не добавляй подпись с названием стиля и водяные знаки.
+
+Графический плакат Баухаус на тёплой бумаге цвета слоновой кости. Большие красные, синие, жёлтые и чёрные круги, полукруги и прямоугольники, одна выразительная диагональ. Продуманная асимметричная композиция. Товар ближе к правой стороне, слева сверху название строгим чёрным геометрическим шрифтом. Сохрани фотографическую реалистичность товара, добавь тонкую фактуру печати только фону.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-3" type="button">Скопировать</button></div></section><section class="content-section" id="style-04-y2k"><h2>4. Y2K: хром и вода</h2><p>Y2K - глянцевая графика в духе начала 2000-х. В этом варианте голубой фон сочетается с хромом, а одна прозрачная волна проходит перед нижней частью банки.</p><figure class="product-figure"><div class="shot"><img alt="Пример 4: Y2K: хром и вода. Голубой фон, жидкий хром и вода." decoding="async" height="1536" loading="lazy" src="assets/04-y2k.webp" width="1024"/></div><figcaption>Голубой фон, жидкий хром и вода.</figcaption></figure><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="prompt-4"><code>Создай вертикальный рекламный постер формата 2:3 с товаром из приложенной фотографии. Используй фотографию как точный образец: сохрани форму и пропорции товара, материал упаковки, её цвета, логотип, рисунок и все надписи. Товар должен быть крупным, полностью видимым и узнаваемым. Меняй окружение, свет, композицию и графику вокруг товара. Не добавляй другие бренды, цены и новые свойства продукта. Если нужен заголовок, возьми название с упаковки. Сохрани точное написание. Не добавляй подпись с названием стиля и водяные знаки.
+
+Глянцевая реклама начала 2000-х: голубой перламутровый фон, обтекаемые завитки жидкого хрома, серебристые кольца и хромированный объёмный заголовок. Сама упаковка остаётся в своих исходных цветах. Одна прозрачная изогнутая водяная лента проходит перед нижней свободной частью товара и уходит за него по краям. Размести её ниже основного рисунка и выше надписи объёма, если такая свободная полоса есть. Не закрывай логотип, рисунок и буквы. Верхнюю переднюю водяную ленту не добавляй. Вода прозрачная с тонкими голубыми бликами, не металлический ремень.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-4" type="button">Скопировать</button></div></section><section class="content-section" id="style-05-brutalist"><h2>5. Брутализм</h2><p>Брутализм здесь строится на резком контрасте: почти чёрный фон, крупные белые буквы и жёлтые полосы. Надписи на самой упаковке должны оставаться читаемыми.</p><figure class="product-figure"><div class="shot"><img alt="Пример 5: Брутализм. Чёрный фон и огромные белые буквы." decoding="async" height="1536" loading="lazy" src="assets/05-brutalist.webp" width="1024"/></div><figcaption>Чёрный фон и огромные белые буквы.</figcaption></figure><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="prompt-5"><code>Создай вертикальный рекламный постер формата 2:3 с товаром из приложенной фотографии. Используй фотографию как точный образец: сохрани форму и пропорции товара, материал упаковки, её цвета, логотип, рисунок и все надписи. Товар должен быть крупным, полностью видимым и узнаваемым. Меняй окружение, свет, композицию и графику вокруг товара. Не добавляй другие бренды, цены и новые свойства продукта. Если нужен заголовок, возьми название с упаковки. Сохрани точное написание. Не добавляй подпись с названием стиля и водяные знаки.
+
+Почти чёрный шероховатый бумажный фон, огромная белая рубленая типографика за товаром, жёлтая полоса и контрастные прямоугольники. Видимая строгая модульная сетка, резкий предметный свет и чёткая тень. Края фоновых букв могут уходить за поля, но название должно оставаться узнаваемым. Сам товар фотореалистичный, этикетка читаемая. Без военной символики и выдуманных технических характеристик.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-5" type="button">Скопировать</button></div></section><section class="content-section" id="style-06-swiss"><h2>6. Швейцарская типографика</h2><p>В швейцарской типографике текст и цветовые поля выстроены по строгой сетке. В нашем примере банку выделяет большой красный прямоугольник.</p><figure class="product-figure"><div class="shot"><img alt="Пример 6: Швейцарская типографика. Белый фон, красное поле и строгая сетка." decoding="async" height="1536" loading="lazy" src="assets/06-swiss.webp" width="1024"/></div><figcaption>Белый фон, красное поле и строгая сетка.</figcaption></figure><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="prompt-6"><code>Создай вертикальный рекламный постер формата 2:3 с товаром из приложенной фотографии. Используй фотографию как точный образец: сохрани форму и пропорции товара, материал упаковки, её цвета, логотип, рисунок и все надписи. Товар должен быть крупным, полностью видимым и узнаваемым. Меняй окружение, свет, композицию и графику вокруг товара. Не добавляй другие бренды, цены и новые свойства продукта. Если нужен заголовок, возьми название с упаковки. Сохрани точное написание. Не добавляй подпись с названием стиля и водяные знаки.
+
+Белый фон, асимметричная сетка, строгий чёрный гротеск, большой насыщенно-красный прямоугольник в нижней правой части. Сверху крупное название из упаковки. Товар ниже и правее, частично на фоне красного поля, целиком виден. Одна тонкая чёрная линия подчёркивает сетку. Выверенные поля, чистая предметная тень и минимум декоративных деталей.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-6" type="button">Скопировать</button></div></section><section class="content-section" id="style-07-vaporwave"><h2>7. Vaporwave: неон</h2><p>Vaporwave - стилизация под цифровую графику 1980-1990-х: розовый и фиолетовый свет, сетка и закатный круг. Цвет упаковки при этом сохраняем.</p><figure class="product-figure"><div class="shot"><img alt="Пример 7: Vaporwave: неон. Розово-фиолетовый неон и светящаяся сетка." decoding="async" height="1536" loading="lazy" src="assets/07-vaporwave.webp" width="1024"/></div><figcaption>Розово-фиолетовый неон и светящаяся сетка.</figcaption></figure><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="prompt-7"><code>Создай вертикальный рекламный постер формата 2:3 с товаром из приложенной фотографии. Используй фотографию как точный образец: сохрани форму и пропорции товара, материал упаковки, её цвета, логотип, рисунок и все надписи. Товар должен быть крупным, полностью видимым и узнаваемым. Меняй окружение, свет, композицию и графику вокруг товара. Не добавляй другие бренды, цены и новые свойства продукта. Если нужен заголовок, возьми название с упаковки. Сохрани точное написание. Не добавляй подпись с названием стиля и водяные знаки.
+
+Пурпурно-розовый закат, большой полосатый солнечный диск, фиолетово-синяя перспективная сетка пола, тёмные силуэты пальм по краям и розовые неоновые отражения. Товар крупный и фотореалистичный, исходные цвета упаковки сохраняются; неон подсвечивает только края и поверхность. Вверху название широким ретро-шрифтом с розово-голубым контуром. Главный объект ничем не перекрыт.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-7" type="button">Скопировать</button></div></section><section class="content-section" id="style-08-retrofuturism"><h2>8. Ретрофутуризм</h2><p>Ретрофутуризм показывает будущее таким, каким его представляли в старой фантастике: орбиты, плавная архитектура и тёплые цвета. Банка остаётся фотографической.</p><figure class="product-figure"><div class="shot"><img alt="Пример 8: Ретрофутуризм. Тёплая палитра и космические мотивы." decoding="async" height="1536" loading="lazy" src="assets/08-retrofuturism.webp" width="1024"/></div><figcaption>Тёплая палитра и космические мотивы.</figcaption></figure><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="prompt-8"><code>Создай вертикальный рекламный постер формата 2:3 с товаром из приложенной фотографии. Используй фотографию как точный образец: сохрани форму и пропорции товара, материал упаковки, её цвета, логотип, рисунок и все надписи. Товар должен быть крупным, полностью видимым и узнаваемым. Меняй окружение, свет, композицию и графику вокруг товара. Не добавляй другие бренды, цены и новые свойства продукта. Если нужен заголовок, возьми название с упаковки. Сохрани точное написание. Не добавляй подпись с названием стиля и водяные знаки.
+
+Оптимистическая реклама космической эпохи 1960-х. Кремовый фон, тёплый оранжевый, золотистый жёлтый и бирюзовые акценты. За товаром орбитальные дуги, круглый световой портал и плавная архитектура вымышленного города будущего. Фон как качественная ретро-иллюстрация с лёгкой фактурой печати, товар остаётся фотореалистичным. Сверху вытянутый выразительный заголовок. Без пальм, неоновой сетки и комиксных точек.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-8" type="button">Скопировать</button></div></section><section class="content-section" id="pravki"><h2>Исправляем упаковку и лишние детали</h2><p>Если фон нравится, но изменились буквы или рисунок, прикрепи исходную фотографию ещё раз в тот же чат и отправь этот запрос.</p><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="fix-package"><code>Сохрани фон, свет и композицию. Верни товару форму, логотип, рисунок и надписи как на исходной фотографии. Исправь только упаковку. Исходное фото прикрепляю ещё раз.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="fix-package" type="button">Скопировать</button></div><p>Для варианта с водой можно отдельно убрать верхнюю волну и оставить одну нижнюю.</p><div class="code-card"><span class="prompt-destination">Отправь в ChatGPT вместе с фото товара</span><pre id="fix-water"><code>Оставь одну прозрачную водяную ленту перед свободной нижней частью товара. Не закрывай рисунок и текст. Верхнюю переднюю ленту убери. Остальное сохрани.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="fix-water" type="button">Скопировать</button></div><p>Если у твоей упаковки нет свободного места для передней волны, попроси провести всю воду за товаром. Сохранять рисунок и надписи важнее, чем повторить положение волны.</p><p class="result-line"><strong>Результат:</strong> исправленный вариант появляется в том же чате. Ещё раз сравни его с исходником: просьба сохранить деталь не гарантирует, что она сохранится точно.</p></section><section class="content-section" id="sohranit"><h2>Проверяем и сохраняем картинку</h2><div class="check-panel"><ul><li>Название и логотип совпадают с исходником, в буквах нет ошибок.</li><li>Форма, цвет упаковки и рисунок не изменились.</li><li>В кадре нет выдуманных скидок, состава или свойств продукта.</li><li>Вода, декорации и крупные фоновые буквы не закрывают важное на товаре.</li></ul></div><p>Открой получившуюся картинку в ChatGPT и воспользуйся кнопкой сохранения или скачивания. Для публикации выбери версию, на которой упаковка читается и соответствует реальному товару.</p><p>В промптах задан вертикальный формат 2:3, как у примеров на этой странице. Если нужен фон для рилса на весь экран, перед отправкой замени в первой строке «2:3» на «9:16». Расположение предметов при этом может измениться.</p></section><section class="content-section" id="faq"><h2>Частые вопросы</h2><details class="faq-item"><summary>Нужно ли описывать свой товар вместо банки?</summary><p>Нет. Прикрепи фото своего товара и скопируй весь промпт. Он уже просит использовать упаковку из приложенной фотографии. Уточнение понадобится, если нейросеть не разобрала название или важную деталь.</p></details><details class="faq-item"><summary>Получится ли точно такая же картинка?</summary><p>Точное совпадение не обещается. Промпт задаёт оформление, свет и композицию. Другой товар и повторная генерация могут дать другой результат.</p></details><details class="faq-item"><summary>Можно ли применить промпты к коробке или флакону?</summary><p>В запросах используется слово «товар», поэтому их можно отправить с фотографией коробки или флакона. В варианте с водой проверь, есть ли на упаковке свободное место для передней волны. Если нет, попроси оставить воду за товаром.</p></details><details class="faq-item"><summary>Почему ChatGPT отвечает текстом вместо картинки?</summary><p>Уточни, что нужно создать само изображение из приложенного фото. Если сервис сообщает о лимите или недоступности создания картинок, следуй сообщению в своём аккаунте.</p></details></section><section class="content-section" id="istochniki"><h2>Дополнительно по теме</h2><p><a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt" rel="noopener" target="_blank">Официальная справка OpenAI по созданию и редактированию изображений</a> объясняет работу с собственным фото и правками. Переходить в неё для использования промптов не обязательно.</p><p>Для работы с визуальным образцом открой статью <a href="https://pronovoe.com/claude-ai/kopirovat-stil-foto-v-chatgpt/">«Как скопировать стиль любого фото в ChatGPT»</a>. В ней показано, как описать оформление по примеру и применить его к своей картинке.</p></section><p class="cta-question" id="svoi-proekt">С готовыми рекламными картинками можно оформить страницу товара. Следующий шаг - собрать сайт под предложение и связать его с заявками. Ниже можно посмотреть, какие задачи ИИ-агенты помогают решать без знания кода.</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽.</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество.</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно.</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section><div class="share-row"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2F8-stiley-reklamy-iz-foto-tovara%2F&amp;text=8%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5%D0%B9%20%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D1%8B%20%D0%B8%D0%B7%20%D1%84%D0%BE%D1%82%D0%BE%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%B0%3A%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D1%8B%20%D0%B4%D0%BB%D1%8F%20ChatGPT" rel="noopener" target="_blank">Telegram</a><a class="share-btn" href="https://wa.me/?text=8%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5%D0%B9%20%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D1%8B%20%D0%B8%D0%B7%20%D1%84%D0%BE%D1%82%D0%BE%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%B0%3A%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D1%8B%20%D0%B4%D0%BB%D1%8F%20ChatGPT%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2F8-stiley-reklamy-iz-foto-tovara%2F" rel="noopener" target="_blank">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2F8-stiley-reklamy-iz-foto-tovara%2F&amp;title=8%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5%D0%B9%20%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D1%8B%20%D0%B8%D0%B7%20%D1%84%D0%BE%D1%82%D0%BE%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%B0%3A%20%D0%BF%D1%80%D0%BE%D0%BC%D0%BF%D1%82%D1%8B%20%D0%B4%D0%BB%D1%8F%20ChatGPT" rel="noopener" target="_blank">VK</a></div></article></main>
+<aside aria-label="Соседняя статья" class="related-plaque">
+      <p class="plaque-label">Больше вариантов.</p><h2>72 промпта для фото товара и упаковки</h2>
+      <p><a href="https://pronovoe.com/claude-ai/promty-tovar-reklama-chatgpt/">Выбрать другой товарный кадр</a></p></aside></div>
+<div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
+<button aria-label="Закрыть" class="viewer-close" type="button">✕</button>
+<div aria-label="Увеличенный скриншот, можно прокручивать" class="viewer-scroll" tabindex="0"><img alt=""/></div>
+<p class="viewer-hint"></p></div>
+<script src="../../assets/image-viewer.js"></script>
+<script>
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  Array.from(document.querySelectorAll(".shot img")).concat(Array.from(document.querySelectorAll(".cover img"))).forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+}
+updateReadingState();
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+<!-- pageviews:start -->
+<script>
+(function () {
+  function loadPageviews() {
+    if (document.getElementById('pageviews-script')) return;
+    var script = document.createElement('script');
+    script.id = 'pageviews-script';
+    script.async = true;
+    script.referrerPolicy = 'no-referrer';
+    script.src = '/assets/pageviews.js';
+    document.head.appendChild(script);
+  }
+  if (document.readyState === 'complete') window.setTimeout(loadPageviews, 0);
+  else window.addEventListener('load', loadPageviews, { once: true });
+}());
+</script>
+<!-- pageviews:end -->
+</body></html>
