@@ -10,6 +10,11 @@ h1.article-standard-h1 {
   text-wrap: balance;
 }
 
+/* Общий светлый заголовок на тёмной бумаге; HTML статей не меняется. */
+html[data-theme="dark"] h1.article-standard-h1 {
+  color: var(--guide-color-paper, #F8F7F2) !important;
+}
+
 @media (max-width: 860px) {
   h1.article-standard-h1 {
     line-height: 1.16 !important;
