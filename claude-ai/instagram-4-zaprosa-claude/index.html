@@ -1,0 +1,1123 @@
+<!doctype html>
+<html data-theme="light" lang="ru"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Instagram с Claude: 4 запроса для сценария, тем и первых секунд</title>
+<meta content="Claude для контента в Instagram: темы, сценарии, первые секунды и план. В статье четыре запроса с реальными ответами и 13 навыков для установки в Claude Code." name="description"/>
+<meta content="#F8F7F2" name="theme-color"/>
+<meta content="article" property="og:type"/><meta content="ru_RU" property="og:locale"/>
+<meta content="Instagram с Claude: 4 запроса для сценария, тем и первых секунд" property="og:title"/>
+<meta content="Claude для контента в Instagram: темы, сценарии, первые секунды и план. В статье четыре запроса с реальными ответами и 13 навыков для установки в Claude Code." property="og:description"/>
+
+
+
+
+<meta content="summary_large_image" name="twitter:card"/>
+
+
+<!-- critical:fonts:start -->
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id], h4[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: fit-content; max-width: 100% }
+    .shot img { display: block; width: auto; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot:has(img[src="assets/voice-brauzer.webp"]) img { width: 560px }
+    .shot:has(img[src="assets/voice-telefon.webp"]) img { width: 300px }
+    .shot:has(img[src="assets/zapros-1.webp"]) img { width: 620px }
+    .shot:has(img[src="assets/otvet-vpermeshku.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-1.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-2.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/plan-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/plan-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/tri-zadachi.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px; font-size: 17px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted, var(--ink-soft)); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { background: var(--guide-color-coral); color: var(--guide-color-forest); position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+.code-card .copy-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest) }
+.code-card .copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest) }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
+<style id="konspekt-editorial">
+.konspekt-example { max-width: 700px; margin: 24px auto 38px }
+.konspekt-example .shot img { width: 100%; height: auto; max-height: none; object-fit: contain }
+.tariff-note { margin-top: 42px; padding: 18px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; line-height: 1.6 }
+.tariff-note p { font-size: inherit; line-height: inherit; margin: 0 0 12px }
+.tariff-note .note-label { font-weight: 400 }
+.tariff-note ul { margin: 0; padding-left: 22px }
+.tariff-note li { margin: 0 0 14px; font-size: inherit; line-height: inherit }
+</style>
+<style>.shot img{width:650px}.code-card pre{overflow-wrap:anywhere;white-space:pre-wrap}.tariff-note{margin-top:32px}</style>
+<style>/* H1 и шаринг: вычисленные значения эталона Trellis 2 на 390 и 1440 px */
+h1.article-standard-h1 {
+  margin: 0 !important;
+  color: var(--guide-color-forest) !important;
+  font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: clamp(27px, 4.4vw, 37.6px) !important;
+  font-weight: 700 !important;
+  line-height: 1.13 !important;
+  letter-spacing: -0.752px !important;
+  text-wrap: balance;
+}
+
+@media (max-width: 860px) {
+  h1.article-standard-h1 {
+    line-height: 1.16 !important;
+  }
+}
+
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--guide-color-paper-border);
+  border-radius: 8px;
+  background: var(--guide-color-white);
+  color: var(--guide-color-forest-hover);
+  font-family: "JetBrains Mono", JetBrainsMono-fb, ui-monospace, SFMono-Regular, monospace;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .share-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+/* Цифры по высоте заглавных во всех статьях: Spectral по умолчанию рисует их «старым стилем» (4, 9 ниже строки) */
+body { font-feature-settings: "lnum" 1; }
+</style>
+<!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  flex: 1 1 0; width: 124px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+#cookie-accept { background: var(--guide-color-brand); color: var(--guide-color-forest); border-color: var(--guide-color-brand) }
+#cookie-decline { background: var(--guide-color-slate-paper); color: var(--guide-color-forest); border-color: var(--guide-color-slate-paper) }
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/#article",
+      "headline": "Instagram с Claude: 4 запроса для сценария, тем и первых секунд",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-11-01",
+      "image": "https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Instagram с Claude: 4 запроса для сценария, тем и первых секунд",
+          "item": "https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+<style>
+.ig-result{border-left:3px solid var(--guide-color-emerald);padding:0 0 0 16px;background:var(--guide-color-transparent)}
+.ig-notice{background:var(--info);border:1px solid var(--info-line);border-left:6px solid var(--accent);border-radius:8px;padding:10px 14px}.ig-notice p{margin:0}
+.ig-table{overflow-x:auto;margin:24px 0}.ig-table table{border-collapse:collapse;width:100%;min-width:530px;font-size:17px;line-height:1.55}.ig-table th,.ig-table td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.ig-table th{font:700 13px/1.4 'JetBrains Mono',monospace}
+article .ig-table th,article .ig-table td{background:var(--guide-color-transparent)}
+article .ig-table tbody tr:nth-child(odd){background:var(--white)}
+article .ig-table tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-2) 25%,var(--white) 75%)}
+article .ig-table thead th{background:var(--info)}
+
+.code-card{padding:68px 18px 18px;background:var(--guide-color-forest);color:var(--guide-color-paper);position:relative}.code-card pre{background:var(--guide-color-transparent)!important;border:0!important;box-shadow:none!important;color:inherit!important;margin:0!important;white-space:pre-wrap;overflow-wrap:anywhere;padding:0!important;font-size:15px!important}.code-card pre code{background:var(--guide-color-transparent);color:inherit;padding:0}.code-card .copy-button{top:13px;right:13px;bottom:auto;min-width:164px}.ig-illustration{max-width:390px;margin:0 auto}.ig-illustration img{width:100%;height:auto}.shot-fig figcaption{margin-top:10px}
+article details{border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:12px 0}article details summary{cursor:pointer;font-family:Arial,sans-serif;font-size:18px}article details p{margin-bottom:0}.code-card:focus-within{outline:2px solid var(--accent)}
+</style><style id="claude-answers-v2">
+figure.claude-answer{display:grid;grid-template-columns:minmax(0,1fr) 158px;gap:18px;align-items:start;margin:30px 0}
+.claude-answer .shot{display:block;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--guide-color-white)}
+.claude-answer img{display:block;width:100%;height:auto}
+figure.claude-answer figcaption{margin:0;padding:4px 0 0;font:400 14px/1.55 Spectral,Georgia,serif;overflow-wrap:anywhere}
+blockquote.claude-excerpt{margin:22px 0;padding:16px 20px;border-left:3px solid var(--guide-color-forest);background:var(--guide-color-mint-paper)}
+.claude-excerpt p{margin:0 0 8px;font-size:18px;line-height:1.65}.claude-excerpt p:last-child{margin-bottom:0}
+@media(max-width:600px){figure.claude-answer{grid-template-columns:minmax(0,1fr) 92px;gap:10px}figure.claude-answer figcaption{font-size:12px;line-height:1.45}.claude-excerpt p{font-size:17px}}
+.claude-manual{margin:18px 0;border-bottom:1px solid var(--line);padding-bottom:12px}.claude-manual summary{cursor:pointer;font-weight:600;line-height:1.5}.claude-manual .code-card{margin-top:16px}.claude-day li{margin-bottom:10px}
+</style><style id="ig-v3-editorial">
+.toc-steps{list-style:none;margin:0;padding:0}.toc-steps>li{margin:0;padding:0}.toc-group{list-style:none;margin:0;padding:0 0 0 12px}.toc .toc-group .toc-sub{padding-left:12px;font-size:12.5px}.mobile-toc .toc-group{margin:8px 0 12px;padding-left:20px}.mobile-toc li{margin:8px 0}
+article .related-plaque{grid-column:auto;grid-row:auto;position:static;margin:28px 0;padding:14px 16px;border:1px solid var(--info-line,var(--line));border-radius:11px;background:var(--info)}article .related-plaque p{margin:0}article .related-plaque .plaque-label{margin-bottom:5px;color:var(--accent-dark);font:700 11px/1.3 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}article .related-plaque .plaque-title{margin:0 0 8px;font:750 18px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}article .related-plaque .why{color:var(--muted);font-size:16px}
+.related-links{margin:32px 0}.cover-v2 img{display:block;width:100%;height:auto}
+.code-card .prompt-value { color: var(--guide-color-coral) }
+</style>
+<style id="article-parts-v6">
+.article-part { margin-top: 86px; padding-top: 38px; border-top: 1px solid var(--line) }
+.part-header .eyebrow { margin-bottom: 14px }
+article {
+  --article-part-size: clamp(1.6rem, 2.3vw, 2rem);
+  --article-step-size: clamp(1.3rem, 2vw, 1.6rem);
+  --article-subheading-size: 1.2rem;
+}
+.part-header h2 { margin-bottom: 0; font-size: var(--article-part-size); overflow-wrap: normal }
+.article-part h3 { margin: 0 0 22px; color: var(--emerald); font: 700 var(--article-step-size)/1.2 Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -.58px; text-wrap: balance; overflow-wrap: normal }
+.article-part h4 { margin: 0 0 9px; color: var(--emerald); font: 750 var(--article-subheading-size)/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+.article-part > .content-section:first-of-type { margin-top: 38px }
+.article-part h4 { margin-top: 32px }
+.toc-part { margin: 12px 0; border-top: 1px solid var(--line); padding-top: 12px }
+.toc-part > summary { cursor: pointer; color: var(--emerald); font: 750 13.5px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; padding: 6px 0 }
+.toc-part > summary::marker { color: var(--accent-dark) }
+.toc-sections { list-style: none; margin: 6px 0 0; padding: 0 }
+.toc-sections > li { margin: 0; padding: 0 }
+.mobile-toc .toc-part > summary { font-size: 14px }
+@media (max-width: 860px) {
+  .article-part h3 { margin-bottom: 18px }
+  .article-part { margin-top: 64px; padding-top: 30px }
+  .article-part > .content-section:first-of-type { margin-top: 30px }
+}
+</style>
+<meta property="og:url" content="https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/">
+<meta property="og:image" content="https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/assets/oblozhka.webp">
+<meta property="og:image:alt" content="Instagram с Claude: четыре запроса. Смартфон на подставке рядом с ноутбуком и микрофоном на зелёном фоне">
+<meta name="twitter:image" content="https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/assets/oblozhka.webp">
+<link rel="stylesheet" href="../../assets/article-sharing.css">
+</head><body>
+<div aria-hidden="true" class="progress"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="https://pronovoe.com/">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">Instagram: 4 запроса к Claude</div><div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div></div></div></header>
+<div class="page-shell"><nav aria-label="Содержание" class="toc"><p class="toc-label">Содержание</p><ul class="toc-steps"><li><a href="#chto-ponadobitsya">Что понадобится</a></li><li><details class="toc-part" data-part="chast-1" open><summary>Часть 1. Вручную в чате Claude</summary><ul class="toc-sections"><li><a href="#scenariy">Шаг 1. Получи сценарий рилза</a><ul class="toc-group"><li><a class="toc-sub" href="#otvet-scenariy">Сценарий, который предложил Claude</a></li><li><a class="toc-sub" href="#proverka">Три признака пригодного сценария</a></li></ul></li><li><a href="#temy">Шаг 2. Найди темы для следующих роликов</a><ul class="toc-group"><li><a class="toc-sub" href="#otvet-temy">Пять направлений из ответа Claude</a></li></ul></li><li><a href="#nachalo-rolika">Шаг 3. Усиль первые секунды</a><ul class="toc-group"><li><a class="toc-sub" href="#otvet-nachala">Ограничение и пять новых начал</a></li></ul></li><li><a href="#oshibki">Исправь то, что чаще всего мешает</a></li></ul></details></li><li><details class="toc-part" data-part="chast-2"><summary>Часть 2. Контент‑завод и набор навыков</summary><ul class="toc-sections"><li><a href="#povtor">Шаг 4. Попроси Claude спроектировать контент‑завод</a><ul class="toc-group"><li><a class="toc-sub" href="#otvet-shema">Схема контент‑завода из ответа Claude</a></li><li><a class="toc-sub" href="#podklyucheniya">Что подключить для этой схемы</a></li><li><a class="toc-sub" href="#ruchnoy-zapusk">Без автоматики: три промпта по очереди</a></li></ul></li><li><a href="#navyki">Шаг 5. Поставь набор из 13 навыков</a><ul class="toc-group"><li><a class="toc-sub" href="#ustanovka-navykov">Одна команда в Claude Code</a></li><li><a class="toc-sub" href="#svoy-golos">Добавь свой голос</a></li></ul></li></ul></details></li><li><details class="toc-part" data-part="chast-3"><summary>Часть 3. Перед съёмкой и ответы</summary><ul class="toc-sections"><li><a href="#pamyatka">Памятка перед следующей съёмкой</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#related">Ещё по теме</a></li><li><a href="#istochniki">Источники и следующий шаг</a></li></ul></details></li></ul></nav><main><article><header id="nachalo"><p class="eyebrow">Инструкция · Claude · 1 ноября 2026</p><h1 class="article-standard-h1">Instagram с Claude: 4 запроса для сценария, тем и первых секунд</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><p class="lead">С Claude можно вести весь контент в Instagram: он находит темы, пишет сценарии рилзов, усиливает первые секунды и раскладывает выпуски по дням. Ниже четыре запроса с настоящими ответами Claude и готовый набор из 13 навыков, который ставится одной командой в Claude Code.</p>
+<figure class="cover-v2"><img alt="Instagram с Claude: четыре запроса. Смартфон на подставке рядом с ноутбуком и микрофоном на зелёном фоне" fetchpriority="high" height="840" src="assets/oblozhka.webp" width="1600" srcset="assets/oblozhka.webp 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"/><figcaption>Четыре запроса с настоящими ответами и набор из 13 навыков для Claude Code</figcaption></figure>
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Instagram с Claude: 4 запроса для сценария, тем и первых секунд</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header>
+
+<div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Finstagram-4-zaprosa-claude%2F&amp;text=Instagram%20%D1%81%20Claude%3A%204%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D1%8F%2C%20%D1%82%D0%B5%D0%BC%20%D0%B8%20%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D1%85%20%D1%81%D0%B5%D0%BA%D1%83%D0%BD%D0%B4" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=Instagram%20%D1%81%20Claude%3A%204%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D1%8F%2C%20%D1%82%D0%B5%D0%BC%20%D0%B8%20%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D1%85%20%D1%81%D0%B5%D0%BA%D1%83%D0%BD%D0%B4%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Finstagram-4-zaprosa-claude%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Finstagram-4-zaprosa-claude%2F&amp;title=Instagram%20%D1%81%20Claude%3A%204%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D1%8F%2C%20%D1%82%D0%B5%D0%BC%20%D0%B8%20%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D1%85%20%D1%81%D0%B5%D0%BA%D1%83%D0%BD%D0%B4" target="_blank" rel="noopener">VK</a>
+      </div>
+
+<details class="mobile-toc"><summary>Содержание</summary><nav aria-label="Содержание на телефоне"><ul class="toc-steps"><li><a href="#chto-ponadobitsya">Что понадобится</a></li><li><details class="toc-part" data-part="chast-1" open><summary>Часть 1. Вручную в чате Claude</summary><ul class="toc-sections"><li><a href="#scenariy">Шаг 1. Получи сценарий рилза</a><ul class="toc-group"><li><a class="toc-sub" href="#otvet-scenariy">Сценарий, который предложил Claude</a></li><li><a class="toc-sub" href="#proverka">Три признака пригодного сценария</a></li></ul></li><li><a href="#temy">Шаг 2. Найди темы для следующих роликов</a><ul class="toc-group"><li><a class="toc-sub" href="#otvet-temy">Пять направлений из ответа Claude</a></li></ul></li><li><a href="#nachalo-rolika">Шаг 3. Усиль первые секунды</a><ul class="toc-group"><li><a class="toc-sub" href="#otvet-nachala">Ограничение и пять новых начал</a></li></ul></li><li><a href="#oshibki">Исправь то, что чаще всего мешает</a></li></ul></details></li><li><details class="toc-part" data-part="chast-2"><summary>Часть 2. Контент‑завод и набор навыков</summary><ul class="toc-sections"><li><a href="#povtor">Шаг 4. Попроси Claude спроектировать контент‑завод</a><ul class="toc-group"><li><a class="toc-sub" href="#otvet-shema">Схема контент‑завода из ответа Claude</a></li><li><a class="toc-sub" href="#podklyucheniya">Что подключить для этой схемы</a></li><li><a class="toc-sub" href="#ruchnoy-zapusk">Без автоматики: три промпта по очереди</a></li></ul></li><li><a href="#navyki">Шаг 5. Поставь набор из 13 навыков</a><ul class="toc-group"><li><a class="toc-sub" href="#ustanovka-navykov">Одна команда в Claude Code</a></li><li><a class="toc-sub" href="#svoy-golos">Добавь свой голос</a></li></ul></li></ul></details></li><li><details class="toc-part" data-part="chast-3"><summary>Часть 3. Перед съёмкой и ответы</summary><ul class="toc-sections"><li><a href="#pamyatka">Памятка перед следующей съёмкой</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#related">Ещё по теме</a></li><li><a href="#istochniki">Источники и следующий шаг</a></li></ul></details></li></ul></nav></details><section class="content-section" id="chto-ponadobitsya"><h2>Что понадобится</h2><ul><li><strong>Аккаунт <a href="https://claude.ai/">claude.ai</a>.</strong> Для запросов 1-4 хватает браузера. Четвёртый запрос (шаг 4) тоже отправляется в обычном чате</li><li><strong>Веб-поиск в Claude.</strong> Для запросов 2 и 3 включи Web search в меню инструментов рядом с полем сообщения; подробнее в <a href="#temy">шаге 2</a></li><li><strong>Claude Code.</strong> Нужен для набора навыков из <a href="#chast-2">части 2</a><details id="kak-postavit-claude-code"><summary>Как поставить Claude Code</summary><ol><li>Если Visual Studio Code ещё нет, скачай его с <a href="https://code.visualstudio.com/">сайта Microsoft</a>, установи и запусти</li><li>В VS Code выбери «Файл → Открыть папку…» и открой папку, где будешь готовить контент</li><li>Открой «Вид → Расширения», найди Claude Code for VS Code от Anthropic и нажми «Установить». Если видны кнопки «Отключить» и «Удалить», расширение уже установлено</li><li>Нажми значок Claude в верхней части редактора или на боковой полосе. Если появится просьба войти, используй свой аккаунт Claude, затем вернись в VS Code</li><li>В открывшемся чате Claude Code отправь сообщение для установки набора из <a href="#ustanovka-navykov">шага 5</a></li></ol><p>Для этой статьи достаточно установить Claude Code и открыть его чат в своей папке</p></details></li></ul></section><aside class="related-plaque route-choice" aria-label="Выбери способ работы"><p>Работаешь в обычном чате claude.ai: начни с <a href="#chast-1">части 1</a>. Стоит Claude Code или хочешь поставить выпуск роликов на поток: переходи к <a href="#chast-2">части 2</a>.</p></aside><section class="article-part" id="chast-1" aria-labelledby="chast-1-title"><div class="part-header"><h2 id="chast-1-title">Часть 1. Вручную в чате Claude</h2></div><section class="content-section" id="scenariy"><h3>Шаг 1. Получи сценарий рилза</h3><p>Промпт это обычный текст задания для нейросети. Один запрос помогает написать сценарий, другой ищет материал, третий меняет начало. Если попросить всё сразу, труднее понять, на каком шаге ответ перестал быть полезным.</p><p>Открой <a href="https://claude.ai/">claude.ai</a>, войди в свой аккаунт и начни новый разговор. Если аккаунта ещё нет, сначала пройди регистрацию на сайте. Для этого примера нужны только поле ввода и твоя тема. Поиск по интернету для сценария не требуется.</p><p>Скопируй запрос и замени то, что в квадратных скобках, на свою тему, например «как выбрать свет для домашней съёмки». Отправь сообщение и дождись конца ответа.</p><div class="code-card"><pre id="prompt-script"><code>Напиши сценарий для Instagram Reels с высокой досматриваемостью по теме <span class="prompt-value">[Claude и нейросети для экспертов]</span> с сильным разрывом шаблона в первые 2 секунды. Сразу создай эмоциональное напряжение, любопытство или спор, затем дай быструю развязку.
+
+Уложи сценарий в 20-30 секунд. Оптимизируй под время просмотра, повторные пересмотры и вовлечённость. В конце добавь мягкий призыв.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-script" type="button">Скопировать</button></div><p>Смотри на конкретные реплики, а не на обещание «высокой досматриваемости». Нейросеть может предложить начало и разложить текст по секундам. Заранее знать, сколько людей досмотрит ролик, она не может.</p><h4 id="otvet-scenariy">Сценарий, который предложил Claude</h4><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/1-scenariy-nachalo.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/1-scenariy-nachalo.jpg" width="900" height="536" alt="Claude начинает с кадра, где эксперт рвёт контент-план, и сразу даёт реплику и текст на экране" loading="lazy"/></a><figcaption>Claude начинает с кадра, где эксперт рвёт контент-план, и сразу даёт реплику и текст на экране</figcaption></figure><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/1-scenariy-prodolzhenie.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/1-scenariy-prodolzhenie.jpg" width="900" height="636" alt="Дальше идут свои тексты, вопросы о клиенте и финал, который возвращает к первому кадру" loading="lazy"/></a><figcaption>Дальше идут свои тексты, вопросы о клиенте и финал, который возвращает к первому кадру</figcaption></figure><p>У Claude уже есть сцена, реплики и разметка до 27 секунд, поэтому можно сразу прикинуть кадры. Реплики про клиентов и работу за минуту оставляй только для своего подтверждённого опыта; перед съёмкой прочитай текст с секундомером и замени слово в призыве («стиль») на своё.</p><p class="ig-result"><strong>Результат:</strong> перед тобой сценарий с репликами и экранным текстом. Его можно проверить чтением вслух и подготовить нужные кадры.</p><h4 id="proverka">Три признака пригодного сценария</h4><p>В ответе должны быть таймкоды, реплики голоса и текст на экране для каждого куска. Общая разметка должна укладываться в 20-30 секунд. Но таймкоды ещё не означают, что именно столько займёт твоя речь. Прочитай весь текст без ускорения и сравни с разметкой.</p><p>Если пришли советы вроде «сделай цепляющее начало», попроси переписать ответ в готовые реплики с кадрами и временем. Проверь, что отправлен весь запрос и названа конкретная тема. Когда в тексте остаётся «тема» или «ниша» в скобках, модели приходится самой решать, о чём ты говоришь.</p><div class="ig-table"><table><thead><tr><th>Задача</th><th>Что просить</th><th>Нужен интернет</th></tr></thead><tbody><tr><td>Есть тема, нужен ролик</td><td>Сценарий с репликами и таймкодами</td><td>Нет</td></tr><tr><td>Не знаешь, о чём снимать</td><td>Подборку источников и тем</td><td>Да</td></tr><tr><td>Слабое начало</td><td>Разбор исходных роликов и новые начала</td><td>Да, если исходники не приложены</td></tr><tr><td>Нужен повторяемый процесс</td><td>Порядок действий под твои условия</td><td>Для самого плана нет</td></tr></tbody></table></div><aside aria-label="Подробнее о запросах" class="related-plaque inline-related"><p class="plaque-label">Если ответ слишком общий</p><p class="plaque-title"><a href="https://pronovoe.com/claude-ai/prompt-master-uluchshitel-promptov/">Улучшатель промптов: навык Prompt Master для Claude</a></p><p class="why">Посмотри, как уточнить задание перед следующим запросом</p></aside></section><section class="content-section" id="temy"><h3>Шаг 2. Найди темы для следующих роликов</h3><p>Когда конкретной темы нет, задай границы поиска: нишу, площадки и последние 30 дней. В меню инструментов рядом с полем сообщения выбери Search and tools, затем включи Web search.</p><p>Тему в скобках замени на свою</p><div class="code-card"><pre id="prompt-topics"><code>Найди в Instagram Reels, TikTok и Reddit топовые посты по теме <span class="prompt-value">[Claude и нейросети для экспертов]</span> за последние 30 дней. Определи повторяющиеся визуальные стили, хуки и темы, которые стабильно залетают. Сопоставь, что встречается на всех площадках, и дай мне 5 самых востребованных контент-углов.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-topics" type="button">Скопировать</button></div><p>Хороший ответ показывает ссылки, даты и то, почему материал подходит под задачу. Одно число просмотров мало о чём говорит: для небольшого аккаунта и большого блога это разные результаты.</p><h4 id="otvet-temy">Пять направлений из ответа Claude</h4><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/2-pyat-tem.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/2-pyat-tem.jpg" width="900" height="574" alt="Пять направлений: свой эксперимент, сравнение времени, польза для профессии, разбор мифов и чужого ролика" loading="lazy"/></a><figcaption>Пять направлений: свой эксперимент, сравнение времени, польза для профессии, разбор мифов и чужого ролика</figcaption></figure><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/2-pyataya-tema.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/2-pyataya-tema.jpg" width="900" height="368" alt="Пятое направление: разобрать чужой ролик с помощью ИИ. Claude отдельно предлагает собрать реальные примеры с показателями" loading="lazy"/></a><figcaption>Пятое направление: разобрать чужой ролик с помощью ИИ. Claude отдельно предлагает собрать реальные примеры с показателями</figcaption></figure><p>Здесь удобно взять способ показать свою работу: процесс до и после или одну задачу конкретной профессии. Цифры и ссылки из ответа проверь руками перед съёмкой.</p><p class="ig-result"><strong>Результат:</strong> есть пять направлений для подготовки материалов.</p><p>Для месячного плана одного такого списка мало. Сначала выбери, сколько выпусков можешь подготовить, затем разложи идеи по дням и запиши, какие исходники нужны к каждой. Схема ежедневной работы есть в шаге 4.</p></section><section class="content-section" id="nachalo-rolika"><h3>Шаг 3. Усиль первые секунды</h3><p>Начало должно вести к тому, что действительно происходит в ролике. Вопрос «А откуда Claude взял эту цифру?» подходит, когда дальше есть конкретная цифра и её источник. Если в твоём ролике нет цифры, не начинай с вопроса про цифру.</p><p>Тему в скобках замени на свою</p><div class="code-card"><pre id="prompt-hooks"><code>Разбери топ-10 залетевших Reels в нише <span class="prompt-value">[Claude и нейросети для экспертов]</span>. Найди паттерны хуков, темп и эмоциональные триггеры, которые они используют в первые 3 секунды.
+
+Затем создай 5 новых вариантов хуков - более провокационных, цепляющих на любопытство и заточенных на то, чтобы остановить пролистывание.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-hooks" type="button">Скопировать</button></div><p>Без исходников Claude не составит настоящий топ-10, как видно в ответе ниже. Для предметного разбора включи Web search и вставь 10 ссылок на Reels или скриншоты их первых кадров.</p><h4 id="otvet-nachala">Ограничение и пять новых начал</h4><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/3-ogranichenie-i-priemy.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/3-ogranichenie-i-priemy.jpg" width="900" height="650" alt="Claude прямо пишет, что не может составить настоящий топ-10, и предлагает общие приёмы начала" loading="lazy"/></a><figcaption>Claude прямо пишет, что не может составить настоящий топ-10, и предлагает общие приёмы начала</figcaption></figure><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/3-pyat-hukov.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/3-pyat-hukov.jpg" width="900" height="634" alt="Пять новых начал из ответа Claude" loading="lazy"/></a><figcaption>Пять новых начал из ответа Claude</figcaption></figure><p>Полезно сравнить пять разных способов начать одну тему, а затем приложить свои ролики для предметного разбора. Подставь в выбранное начало свои истории и цифры. Цифры и ссылки из ответа проверь руками перед съёмкой.</p><p class="ig-result"><strong>Результат:</strong> выбрано начало, которое можно раскрыть в этом же ролике.</p></section><section class="content-section" id="oshibki"><h3>Исправь то, что чаще всего мешает</h3><div class="ig-table"><table><thead><tr><th>Что видишь</th><th>Возможная причина</th><th>Что сделать</th></tr></thead><tbody><tr><td>Модель не ищет источники</td><td>Веб-поиск выключен или недоступен в аккаунте</td><td>Проверь Web search в меню инструментов; если поиск недоступен, приложи свои источники</td></tr><tr><td>Ссылки не открываются</td><td>Ответ мог быть достроен без чтения страниц</td><td>Попроси открыть каждую ссылку и убрать неподтверждённые строки</td></tr><tr><td>Общие советы вместо сценария</td><td>Не названа тема или потеряна часть задания</td><td>Подставь конкретную тему и отправь запрос целиком</td></tr><tr><td>Сценарий без таймкодов</td><td>Нужная форма ответа не соблюдена</td><td>Попроси таблицу времени, реплик и экранного текста</td></tr><tr><td>Красивый текст, который ты не произнесёшь</td><td>У модели нет примеров твоей речи</td><td>Дай два-три своих настоящих фрагмента и попроси сохранить лексику и длину фраз</td></tr></tbody></table></div><p>Добавка «пиши так, как я говорю» помогает, когда рядом есть твоя речь. Без образцов модель снова выбирает голос сама. Замени всё, что стоит в квадратных скобках, своим, но не удаляй конкретные условия: тему, длину и нужный вид ответа.</p><p>Удачные инструкции можно сохранить в навыке: это папка с правилами для Claude Code, о ней в шаге 5.</p></section></section><section class="article-part" id="chast-2" aria-labelledby="chast-2-title"><div class="part-header"><h2 id="chast-2-title">Часть 2. Контент‑завод и набор навыков</h2></div><section class="content-section" id="povtor"><h3>Шаг 4. Попроси Claude спроектировать контент‑завод</h3><p>Контент-завод это система, которая каждый день находит темы, пишет сценарии и собирает ролики почти без твоего участия. Claude по запросу составит её план, а три промпта из этого плана можно пройти руками уже сегодня.</p><p>Четвёртый запрос просит полностью автоматическую систему под несколько публикаций в день. Claude ответил документом «Контент-завод: Claude и нейросети для экспертов»: с расписанием, тремя роликами в день и проверкой в Telegram перед публикацией.</p><p>Тему в скобках замени на свою</p><div class="code-card"><pre id="prompt-workflow"><code>Собери полностью автоматическую контент-систему, которая каждый день находит трендовые темы в нише <span class="prompt-value">[Claude и нейросети для экспертов]</span>, пишет сценарии с высокой досматриваемостью, генерирует единый по стилю визуал, превращает его в короткие видео и пишет описания. Оформи всё как повторяемый воркфлоу под несколько публикаций в день в Instagram.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-workflow" type="button">Скопировать</button></div><h4 id="otvet-shema">Схема контент‑завода из ответа Claude</h4><p>В документе утро начинается в 06:00 со сбора тем, к 08:30 три готовых ролика приходят на проверку, а публикации назначены на 09:00, 13:00 и 19:00. Вот расписание, которое предложил Claude:</p><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/4-shema-dnya.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/4-shema-dnya.jpg" width="900" height="590" alt="Схема дня в документе Claude: от тем и сценариев до проверки человеком и публикации" loading="lazy"/></a><figcaption>Схема дня в документе Claude: от тем и сценариев до проверки человеком и публикации</figcaption></figure><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/4-otbor-tem.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/4-otbor-tem.jpg" width="900" height="704" alt="Отбор тем по свежести, пользе, наглядности и неожиданности. Уже использованные темы предлагается исключать" loading="lazy"/></a><figcaption>Отбор тем по свежести, пользе, наглядности и неожиданности. Уже использованные темы предлагается исключать</figcaption></figure><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/4-scenariy-rolika.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/4-scenariy-rolika.jpg" width="900" height="800" alt="Задание для сценария: тема, источники, короткий хук, смена сцен и проверка фактов" loading="lazy"/></a><figcaption>Задание для сценария: тема, источники, короткий хук, смена сцен и проверка фактов</figcaption></figure><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/4-publikaciya.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/4-publikaciya.jpg" width="900" height="540" alt="Предложение связать этапы через n8n и Instagram Graph API" loading="lazy"/></a><figcaption>Предложение связать этапы через n8n и Instagram Graph API</figcaption></figure><p>Здесь полезна связка: вместе с роликом приходит список утверждений и источников, а без подтверждения человека публикация остаётся в черновиках. Доступность функций, цены, лимиты и ссылки из ответа проверь руками перед настройкой.</p><h4 id="podklyucheniya">Что подключить для этой схемы</h4><p>Claude перечислил следующие инструменты. Для выбранных сервисов понадобятся аккаунты, доступ к API и ключи, а в n8n нужно связать этапы и настроить расписание.</p><p>n8n это сервис, который запускает шаги по расписанию без кода. API это способ, которым сервисы передают друг другу данные, ключ API это пароль для такого обмена.</p><div class="ig-table"><table><thead><tr><th>Этап</th><th>Инструменты из ответа Claude</th></tr></thead><tbody><tr><td>Расписание и связи между этапами</td><td>n8n (запуск шагов по расписанию): запуск утром, вызов инструментов и повтор при ошибке</td></tr><tr><td>Сбор тем</td><td>RSS (лента новостей сайта), Apify (сбор постов из соцсетей), Reddit API (данные постов и комментариев) и YouTube (видеоплощадка); ссылки на новости и комментарии</td></tr><tr><td>Отбор тем, сценарии и описания</td><td>Claude API (обращение к Claude программно)</td></tr><tr><td>Картинки и анимация</td><td>Runway (генерация картинок и видео); палитра и свои картинки-референсы для единого стиля</td></tr><tr><td>Озвучка</td><td>ElevenLabs (озвучка) или Runway (генерация картинок и видео); выбранный голос</td></tr><tr><td>Субтитры</td><td>Whisper (распознавание речи для субтитров) для времени появления слов</td></tr><tr><td>Сборка роликов и обложек</td><td>Creatomate/Shotstack (сборка видео по шаблону); заранее настроенный шаблон</td></tr><tr><td>Проверка</td><td>Telegram-бот (проверка ролика в мессенджере) с роликом, описанием, источниками и кнопками решения</td></tr><tr><td>Публикация</td><td>Instagram Graph API (публикация от имени аккаунта); в ответе также предложены Later/Buffer (планировщик публикаций)</td></tr><tr><td>Учёт тем и статистики</td><td>Google Sheets (таблица)</td></tr></tbody></table></div><p>Для публикации в документе указаны профессиональный аккаунт Instagram, страница Facebook и приложение в Meta for Developers.</p><h4 id="ruchnoy-zapusk">Без автоматики: три промпта по очереди</h4><p>Из этого же ответа можно взять три готовых промпта и пройти их в обычном чате по одному ролику. Автоматика для такого старта не нужна: источники, тему и сценарий передаёшь между шагами самостоятельно.</p><details class="claude-manual"><summary>Отбери темы: промпт из ответа Claude</summary><p>Вместо {{raw_items}} вставь 5-10 ссылок на свежие новости или посты по теме, каждую с новой строки. Перед отправкой включи Web search, как в шаге 2, или вставь вместо ссылок сам текст материалов. Вместо {{last_30_days_topics}} перечисли уже использованные темы. Промпт предложит три темы: выбери одну для первого ролика. Ответ придёт кодом в фигурных скобках (формат JSON). Из него скопируй значения topic, angle, format и sources во второй промпт.</p><div class="code-card"><pre id="manual-topics"><code>Ты контент-стратег аккаунта про Claude и нейросети для экспертов:
+коучей, психологов, юристов, маркетологов, преподавателей.
+Ниже сырые материалы за последние 48 часов.
+
+Оцени каждую тему по 4 критериям от 1 до 5:
+1. Свежесть: обсуждают сейчас, а не месяц назад.
+2. Польза: эксперт может применить это сегодня в работе.
+3. Наглядность: можно показать на экране за 30 секунд.
+4. Спор или удивление: есть «не знала, что так можно».
+
+Выбери 3 темы с наибольшей суммой. Не бери темы,
+которые уже были в списке EXCLUDE.
+Для каждой укажи формат: news, tutorial, mistake или case.
+Все три формата должны быть разными.
+
+Ответ строго в JSON:
+[{&quot;topic&quot;: &quot;...&quot;, &quot;angle&quot;: &quot;что это даёт эксперту&quot;,
+  &quot;format&quot;: &quot;...&quot;, &quot;score&quot;: 0, &quot;sources&quot;: [&quot;url&quot;]}]
+
+МАТЕРИАЛЫ:
+{{raw_items}}
+EXCLUDE:
+{{last_30_days_topics}}</code></pre><button aria-live="polite" class="copy-button" data-copy-target="manual-topics" type="button">Скопировать</button></div></details><details class="claude-manual"><summary>Подготовь сценарий: промпт из ответа Claude</summary><p>Подставь выбранную тему, её пользу для зрителя, формат и ссылки вместо {{topic}}, {{angle}}, {{format}} и {{sources}}. Сохрани ответ целиком: это сценарий со сценами и списком утверждений для проверки.</p><div class="code-card"><pre id="manual-script"><code>Напиши сценарий рилса на русском для экспертов, которые
+только начинают пользоваться нейросетями.
+Тема: {{topic}}
+Угол: {{angle}}
+Формат: {{format}}
+Источники: {{sources}}
+
+Правила:
+- 70–100 слов, разговорный язык, короткие фразы.
+- Хук до 8 слов, без «привет» и «в этом видео».
+- Каждые 3–4 секунды новая сцена.
+- Никаких фактов, которых нет в источниках.
+  Версии моделей и названия функций только из источников.
+- Последняя фраза перекликается с хуком.
+- Призыв к действию один.
+
+Перед ответом сделай 5 вариантов хука, выбери самый сильный
+и объясни выбор в поле hook_reason.
+
+Ответ строго в JSON:
+{
+  &quot;hook_text_on_screen&quot;: &quot;...&quot;,
+  &quot;hook_reason&quot;: &quot;...&quot;,
+  &quot;scenes&quot;: [
+    {&quot;n&quot;: 1, &quot;voiceover&quot;: &quot;...&quot;, &quot;on_screen_text&quot;: &quot;...&quot;,
+     &quot;visual&quot;: &quot;что показать в кадре&quot;, &quot;seconds&quot;: 3}
+  ],
+  &quot;cta&quot;: &quot;...&quot;,
+  &quot;fact_check&quot;: [&quot;каждое утверждение и его источник&quot;]
+}</code></pre><button aria-live="polite" class="copy-button" data-copy-target="manual-script" type="button">Скопировать</button></div></details><details class="claude-manual"><summary>Напиши описание: промпт из ответа Claude</summary><p>Вместо {{script_json}} вставь полученный сценарий. Собери видео по сценарию в привычном редакторе, например CapCut; монтаж в этой статье не разбирается. Проверь описание по готовому ролику, просмотри его целиком и опубликуй вручную.</p><div class="code-card"><pre id="manual-caption"><code>По сценарию ниже напиши описание для Instagram Reels.
+
+- Первая строка до 90 знаков: интрига, которая дополняет хук.
+- Дальше 3–5 коротких строк с главной пользой,
+  чтобы ролик хотелось сохранить.
+- Ключевые слова для поиска Instagram естественно в тексте:
+  нейросети, Claude, ИИ для экспертов, промпты.
+- Призыв: тот же, что в ролике.
+- 3–5 хэштегов, не больше: 2 широких, 3 узких.
+- Отдельно текст первого комментария с промптом из ролика,
+  если формат tutorial.
+
+Ответ в JSON: {&quot;caption&quot;: &quot;...&quot;, &quot;hashtags&quot;: [], &quot;first_comment&quot;: &quot;...&quot;}
+СЦЕНАРИЙ:
+{{script_json}}</code></pre><button aria-live="polite" class="copy-button" data-copy-target="manual-caption" type="button">Скопировать</button></div></details><p>Хэштеги можно подготовить под готовый материал отдельно. Автоматический запуск по расписанию через n8n и публикацию через API в этой статье не настраиваем. Для первого ролика хватит трёх промптов выше.</p><p class="ig-result"><strong>Результат:</strong> есть план контент-завода и три промпта для ручной подготовки ролика.</p></section><section class="content-section" id="navyki"><h3>Шаг 5. Поставь набор из 13 навыков</h3><p>После нескольких сценариев замечаешь, что объясняешь Claude одно и то же: кто твой зритель, как ты говоришь, какой ответ нужен. Навык хранит порядок работы и вспомогательные материалы в папке. Claude Code читает их, когда выполняет похожую задачу. Это удобно для повторной подготовки контента.</p><p><a href="https://github.com/Jakeschincariol/instagram-agent-skill">instagram-agent-skill</a> это открытый набор Джейка Скинкариола для Claude. GitHub, сайт, где разработчики выкладывают такие наборы, хранит файлы этого набора. По состоянию на 31 октября 2026 года в нём 13 навыков. Все команды и их задачи перечислены в таблице ниже. Набор бесплатный и открытый: его можно ставить и менять под себя.</p><div class="ig-table" id="tablitsa-navykov"><table><thead><tr><th>Команда</th><th>Что делает</th></tr></thead><tbody><tr><td><code>/ig-reel</code></td><td>Превращает идею в короткое видео: выбирает три хука из 26 формул, оценивает их, пишет сценарий, текст на экране и план по времени</td></tr><tr><td><code>/ig-viral</code></td><td>находит посты, которые набрали намного больше обычного для своего автора, и называет приём в начале</td></tr><tr><td><code>/ig-caption</code></td><td>Пишет и проверяет описание, показывает первые 125 символов, видимых в ленте до раскрытия</td></tr><tr><td><code>/ig-carousel</code></td><td>Готовит обложку, тексты слайдов и файлы карусели 1080×1350</td></tr><tr><td><code>/ig-story</code></td><td>Готовит ежедневную серию сторис, подбирает стикеры и путь к переписке, которую первым начинает зритель</td></tr><tr><td><code>/ig-profile</code></td><td>Даёт профилю оценку из 100 баллов по 12 критериям и переписывает его, начиная с главных исправлений</td></tr><tr><td><code>/ig-plan</code></td><td>Планирует неделю: публикации, форматы, время и 10 аккаунтов для общения</td></tr><tr><td><code>/ig-human</code></td><td>убирает из текста обороты, по которым видно нейросеть</td></tr><tr><td><code>/ig-comment</code></td><td>Готовит комментарии к чужим постам: выбирает подходящий вариант из девяти типов</td></tr><tr><td><code>/ig-reply</code></td><td>Разбирает комментарии под твоим постом по категориям и готовит ответы в порядке: кодовое слово, потенциальный клиент, содержательный отклик, вопрос, поддержка, шум</td></tr><tr><td><code>/ig-dm</code></td><td>Готовит выдачу по кодовому слову, первое сообщение, предложение сотрудничества и два повторных сообщения</td></tr><tr><td><code>/ig-repurpose</code></td><td>Превращает одно видео, подкаст или письмо в неделю самостоятельных коротких видео и каруселей</td></tr><tr><td><code>/ig-audit</code></td><td>разбирает уже опубликованное: какие посты набрали больше обычного и чаще всего пересылались</td></tr></tbody></table></div><figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/5-github-13-navykov.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/5-github-13-navykov.jpg" width="1200" height="988" alt="13 папок навыков: репозиторий (папка набора на GitHub) instagram-agent-skill, от ig-audit до ig-viral" loading="lazy"/></a><figcaption>13 папок навыков: репозиторий (папка набора на GitHub) instagram-agent-skill, от ig-audit до ig-viral</figcaption></figure><p>Выбери команду под текущую задачу: набор готовит тексты и материалы. Начни с /ig-reel, остальные команды подключай по мере задач.</p><h4 id="ustanovka-navykov">Одна команда в Claude Code</h4><p>Скопируй этот блок целиком, вставь в поле чата Claude Code и нажми Enter. Claude Code сам скачает набор и проверит, что команда работает.</p><div class="code-card"><pre id="prompt-install"><code>https://github.com/Jakeschincariol/instagram-agent-skill
+
+Установи этот набор навыков для Claude Code и проверь, что /ig-reel доступен. Не подключай Instagram и не публикуй материалы.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-install" type="button">Скопировать</button></div><p>После установки введи <code>/ig-reel</code> в Claude Code. Должен открыться навык подготовки сценария, который запросит исходные данные. Если команда не найдена, закрой чат Claude Code, открой его заново и снова введи /ig-reel. Не помогло: напиши Claude Code «/ig-reel не найден, проверь установку».</p><p class="ig-result"><strong>Результат:</strong> Claude Code видит /ig-reel и может начать задачу по его инструкции.</p><h4 id="svoy-golos">Добавь свой голос</h4><p>В папке набора есть шаблон <code>templates/voice.md</code>. Попроси Claude Code заполнить его по твоим настоящим текстам. Дай три своих фрагмента, назови аудиторию и запреты. Claude Code сам создаст файл голоса и скажет, где он лежит. Затем открой полученный файл и оставь правила, которые соответствуют твоей речи.</p><p>Для темы из примера («Claude и нейросети для экспертов») подходят правила: обращение на «ты», обычные слова, никаких выдуманных личных историй. Аудитория примера: эксперт, которому нужен первый сценарий для ролика. Эти данные помогают выбирать объяснения и примеры.</p><figure class="shot-fig"><div class="shot ig-illustration"><img alt="Пример правил голоса и описания аудитории" height="1125" loading="lazy" src="assets/voice-cropped-v3.png" width="964"/></div><figcaption>Пример правил голоса и описания аудитории для файла voice.md.</figcaption></figure><p>Если работаешь только в браузерном Claude, README (описание набора на его странице GitHub) предлагает вставить содержимое одного SKILL.md (файл с инструкцией внутри папки навыка) в начало чата как инструкцию. Так работает только текстовая часть навыка, проверки текста скриптами в браузере не запустятся. Чтобы начать без установки и файлов, используй четыре запроса выше.</p><aside aria-label="Подробнее о правилах проекта" class="related-plaque inline-related"><p class="plaque-label">Правила проекта</p><p class="plaque-title"><a href="https://pronovoe.com/claude-ai/kanareyka-v-claude-code/">Как заметить, что Claude Code пропускает твои указания</a></p><p class="why">Добавь обращение в CLAUDE.md, проверь ответы и сохрани итог перед новой сессией. Разница /clear и /compact, памятка и частые ошибки</p></aside></section></section><section class="article-part" id="chast-3" aria-labelledby="chast-3-title"><div class="part-header"><h2 id="chast-3-title">Часть 3. Перед съёмкой и ответы</h2></div><section class="content-section" id="pamyatka"><h3>Памятка перед следующей съёмкой</h3><ul><li>Есть тема: начни со сценария и проверь реплики, экранный текст и время чтения.</li><li>Темы нет: включи поиск, запроси ссылки и отдели идеи от подтверждённого спроса.</li><li>Нужно начало: приложи исходные ролики или попроси новые варианты без выдуманного топа.</li><li>Хочешь выпускать ролики каждый день: возьми план контент-завода и три промпта из <a href="#chast-2">части 2</a></li><li>Ответ звучит чужим: приложи собственные фразы.</li><li>Задача повторяется: сохрани правила в файле голоса или навыке.</li></ul><p>Для первого выпуска достаточно одного вопроса клиента и твоего ответа на него. Преврати ответ в сценарий, прочитай вслух, подготовь кадры. Остальные инструменты добавляй, когда понятна повторяющаяся задача, которую они снимают.</p></section><section class="content-section" id="faq"><h3>Частые вопросы</h3><details><summary>Запросы работают только в Claude?</summary><p>Их можно дать другой модели. Форма и содержание ответа будут отличаться. Ответы на этой странице получены в Claude 31 октября 2026 года, а команды набора навыков описаны для Claude Code.</p></details><details><summary>Нужна платная подписка?</summary><p>Для короткого сценария попробуй доступный тебе тариф. Веб-поиск расходует лимит быстрее обычного ответа. Доступность инструментов зависит от плана и настроек аккаунта; универсального числа бесплатных сценариев нет.</p></details><details><summary>Почему после четвёртого запроса не появились видео?</summary><p>Запрос просит составить процесс. Он не подключает автоматически источник тем, генератор, монтаж, расписание и аккаунт. Каждая из этих частей настраивается отдельно.</p></details><details><summary>Можно дать сразу несколько тем?</summary><p>Начни с одной темы, чтобы проверить форму и голос. Для второй темы отправь отдельный запрос. Так легче заметить, где сценарий ушёл в общие советы.</p></details><details><summary>Можно получить ещё варианты?</summary><p>После ответа попроси ещё три начала для той же темы, сохранив длину и конкретный пример. Проверь, что новое начало раскрывается дальше в сценарии.</p></details><details><summary>Чем это полезнее списка промптов?</summary><p>Рядом с каждым запросом есть ожидаемый вид ответа, пример или ограничение. Ты видишь, где нужен источник, где достаточно своего текста и какой результат следует открыть перед съёмкой.</p></details><details><summary>Набор навыков зайдёт в мой аккаунт?</summary><p>Сам набор пишет и проверяет материалы. Для его установки не нужны пароль от Instagram и права на публикацию. Подключение к Instagram для публикации настраивается отдельно, набору оно не нужно.</p></details></section><section class="seo-related related-links" aria-labelledby="related"><h2 id="related">Ещё по теме</h2><ul><li><a href="https://pronovoe.com/claude-ai/prompt-master-uluchshitel-promptov/">Улучшатель промптов: навык Prompt Master для Claude</a></li><li><a href="https://pronovoe.com/claude-ai/pervyy-proekt-v-claude/">Первый проект в Claude: своя папка с памятью</a></li><li><a href="https://pronovoe.com/claude-ai/kanareyka-v-claude-code/">Как заметить, что Claude Code пропускает твои указания</a></li></ul></section><section class="content-section" id="istochniki"><h2>Источники и следующий шаг</h2><ul><li><a href="https://pronovoe.com/claude-ai/claude-i-codex-v-vscode/">Инструкция по установке Claude Code в VS Code</a>.</li><li><a href="https://github.com/Jakeschincariol/instagram-agent-skill">README instagram-agent-skill</a>: состав, установка, файл голоса и границы работы.</li><li><a href="https://github.com/Jakeschincariol/instagram-agent-skill/blob/d03c56bb598be770c60b201f94237e5d1a4268a6/LICENSE">Лицензия MIT сохранённой версии</a>.</li><li><a href="https://support.claude.com/en/articles/10684626-enable-and-use-web-search">Справка Claude о веб-поиске</a>: включение и расход лимита.</li></ul></section>
+
+<div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Finstagram-4-zaprosa-claude%2F&amp;text=Instagram%20%D1%81%20Claude%3A%204%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D1%8F%2C%20%D1%82%D0%B5%D0%BC%20%D0%B8%20%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D1%85%20%D1%81%D0%B5%D0%BA%D1%83%D0%BD%D0%B4" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=Instagram%20%D1%81%20Claude%3A%204%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D1%8F%2C%20%D1%82%D0%B5%D0%BC%20%D0%B8%20%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D1%85%20%D1%81%D0%B5%D0%BA%D1%83%D0%BD%D0%B4%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Finstagram-4-zaprosa-claude%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Finstagram-4-zaprosa-claude%2F&amp;title=Instagram%20%D1%81%20Claude%3A%204%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D1%8F%2C%20%D1%82%D0%B5%D0%BC%20%D0%B8%20%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D1%85%20%D1%81%D0%B5%D0%BA%D1%83%D0%BD%D0%B4" target="_blank" rel="noopener">VK</a>
+      </div>
+<p class="cta-question">Запросы помогают подготовить текст. Дальше нужно выбрать, что ты продвигаешь, собрать материал и дать зрителю понятный следующий шаг. Когда захочется связать контент с продуктом, сайтом и воронкой, в бесплатной практике ниже можно посмотреть, как эти задачи собирают с ИИ-агентами.</p>
+
+<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section></section></article></main>
+<aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Следующий шаг.</p><h2>Твой первый проект с Claude</h2>
+      <p><a href="https://pronovoe.com/claude-ai/pervyy-proekt-v-claude/">Начать работу в Claude Code</a></p></aside></div>
+<div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
+<button aria-label="Закрыть" class="viewer-close" type="button">✕</button>
+<div aria-label="Увеличенный скриншот, можно прокручивать" class="viewer-scroll" tabindex="0"><img alt=""/></div>
+<p class="viewer-hint"></p></div>
+<script src="../../assets/image-viewer.js"></script>
+<script>
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+var themeButton = document.querySelector(".theme-toggle");
+var savedTheme = "light";
+try { savedTheme = localStorage.getItem("guide-theme") === "dark" ? "dark" : "light"; } catch (error) {}
+document.documentElement.setAttribute("data-theme", savedTheme);
+themeButton.textContent = savedTheme === "dark" ? "☀" : "◐";
+themeButton.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("guide-theme", next); } catch (error) {}
+  themeButton.textContent = next === "dark" ? "☀" : "◐";
+});
+var links = Array.from(document.querySelectorAll(".toc a, .mobile-toc a"));
+var tocParts = Array.from(document.querySelectorAll(".toc-part"));
+// One list in article order: the desktop and mobile copies must not compete
+var targetIds = new Set(links.map(function (link) { return link.getAttribute("href").slice(1); }));
+var sections = Array.from(document.querySelectorAll("article [id]")).filter(function (element) {
+  return targetIds.has(element.id) || element.classList.contains("article-part");
+});
+var activeReadingId;
+function revealReadingPart(target) {
+  var part = target.closest(".article-part");
+  tocParts.forEach(function (group) {
+    group.open = group.dataset.part === (part ? part.id : "chast-1");
+  });
+}
+function updateReadingState() {
+  var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  document.querySelector(".progress").style.width = (scrollable > 0 ? window.scrollY / scrollable * 100 : 0) + "%";
+  var current = sections[0];
+  sections.forEach(function (section) { if (section.getBoundingClientRect().top <= 120) current = section; });
+  links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + current.id); });
+  // Reopen only on section change, so a reader can collapse the current group
+  if (activeReadingId !== current.id) {
+    revealReadingPart(current);
+    activeReadingId = current.id;
+  }
+}
+function revealHashPart() {
+  var target = document.getElementById(window.location.hash.slice(1));
+  if (target && target.closest("article")) revealReadingPart(target);
+}
+links.forEach(function (link) {
+  link.addEventListener("click", function () {
+    var target = document.getElementById(link.getAttribute("href").slice(1));
+    if (target) revealReadingPart(target);
+  });
+});
+updateReadingState();
+revealHashPart();
+addEventListener("hashchange", revealHashPart);
+addEventListener("scroll", updateReadingState, { passive: true });
+
+    document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = document.getElementById(button.dataset.copyTarget).textContent;
+        function markCopied() {
+          clearTimeout(button.copyTimer);
+          button.textContent = "✓ Скопировано";
+          button.classList.add("is-copied");
+          button.copyTimer = setTimeout(function () {
+            button.textContent = "Скопировать";
+            button.classList.remove("is-copied");
+          }, 1800);
+        }
+        function copyFallback() {
+          var field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          if (document.execCommand("copy")) markCopied();
+          field.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(copyFallback);
+        } else {
+          copyFallback();
+        }
+      });
+    });</script>
+<footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<script>
+</script>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+<!-- pageviews:start -->
+<script>
+(function () {
+  function loadPageviews() {
+    if (document.getElementById('pageviews-script')) return;
+    var script = document.createElement('script');
+    script.id = 'pageviews-script';
+    script.async = true;
+    script.referrerPolicy = 'no-referrer';
+    script.src = '/assets/pageviews.js';
+    document.head.appendChild(script);
+  }
+  if (document.readyState === 'complete') window.setTimeout(loadPageviews, 0);
+  else window.addEventListener('load', loadPageviews, { once: true });
+}());
+</script>
+<!-- pageviews:end -->
+</body></html>
