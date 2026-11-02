@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="ru"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>YouTube с Claude: 7 запросов и набор из 11 навыков</title>
+<meta content="Тема YouTube-канала, план на 90 дней, сценарий, заголовок и обложка: семь запросов для чата Claude и 11 навыков для Claude Code." name="description"/>
+<meta content="#F8F7F2" name="theme-color"/>
+<!-- critical:fonts:start -->
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id], h4[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: fit-content; max-width: 100% }
+    .shot img { display: block; width: auto; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot:has(img[src="assets/voice-brauzer.webp"]) img { width: 560px }
+    .shot:has(img[src="assets/voice-telefon.webp"]) img { width: 300px }
+    .shot:has(img[src="assets/zapros-1.webp"]) img { width: 620px }
+    .shot:has(img[src="assets/otvet-vpermeshku.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-1.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-2.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/plan-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/plan-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/tri-zadachi.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px; font-size: 17px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2 { margin: 22px 0 26px }
+    figure.cover-v2 img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2 img { box-shadow: none }
+    figure.cover-v2 figcaption { margin-top: 11px; color: var(--muted); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { background: var(--guide-color-coral); color: var(--guide-color-forest); position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+.code-card .copy-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest) }
+.code-card .copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest) }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
+<style id="konspekt-editorial">
+.konspekt-example { max-width: 700px; margin: 24px auto 38px }
+.konspekt-example .shot img { width: 100%; height: auto; max-height: none; object-fit: contain }
+.tariff-note { margin-top: 42px; padding: 18px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; line-height: 1.6 }
+.tariff-note p { font-size: inherit; line-height: inherit; margin: 0 0 12px }
+.tariff-note .note-label { font-weight: 400 }
+.tariff-note ul { margin: 0; padding-left: 22px }
+.tariff-note li { margin: 0 0 14px; font-size: inherit; line-height: inherit }
+</style>
+<style>.shot img{width:650px}.code-card pre{overflow-wrap:anywhere;white-space:pre-wrap}.tariff-note{margin-top:32px}</style>
+<style>/* H1 и шаринг: вычисленные значения эталона Trellis 2 на 390 и 1440 px */
+h1.article-standard-h1 {
+  margin: 0 !important;
+  color: var(--guide-color-forest) !important;
+  font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: clamp(27px, 4.4vw, 37.6px) !important;
+  font-weight: 700 !important;
+  line-height: 1.13 !important;
+  letter-spacing: -0.752px !important;
+  text-wrap: balance;
+}
+
+@media (max-width: 860px) {
+  h1.article-standard-h1 {
+    line-height: 1.16 !important;
+  }
+}
+
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--guide-color-paper-border);
+  border-radius: 8px;
+  background: var(--guide-color-white);
+  color: var(--guide-color-forest-hover);
+  font-family: "JetBrains Mono", JetBrainsMono-fb, ui-monospace, SFMono-Regular, monospace;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .share-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+/* Цифры по высоте заглавных во всех статьях: Spectral по умолчанию рисует их «старым стилем» (4, 9 ниже строки) */
+body { font-feature-settings: "lnum" 1; }
+</style>
+<!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  flex: 1 1 0; width: 124px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+#cookie-accept { background: var(--guide-color-brand); color: var(--guide-color-forest); border-color: var(--guide-color-brand) }
+#cookie-decline { background: var(--guide-color-slate-paper); color: var(--guide-color-forest); border-color: var(--guide-color-slate-paper) }
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/youtube-7-zaprosov-claude/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/youtube-7-zaprosov-claude/#article",
+      "headline": "YouTube с Claude: 7 запросов и набор из 11 навыков",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/youtube-7-zaprosov-claude/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-11-02",
+      "image": "https://pronovoe.com/claude-ai/youtube-7-zaprosov-claude/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/youtube-7-zaprosov-claude/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "YouTube с Claude: 7 запросов и набор из 11 навыков",
+          "item": "https://pronovoe.com/claude-ai/youtube-7-zaprosov-claude/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+<style>
+.ig-result{border-left:3px solid var(--guide-color-emerald);padding:0 0 0 16px;background:var(--guide-color-transparent)}
+.ig-notice{background:var(--info);border:1px solid var(--info-line);border-left:6px solid var(--accent);border-radius:8px;padding:10px 14px}.ig-notice p{margin:0}
+.ig-table{overflow-x:auto;margin:24px 0}.ig-table table{border-collapse:collapse;width:100%;min-width:530px;font-size:17px;line-height:1.55}.ig-table th,.ig-table td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.ig-table th{font:700 13px/1.4 'JetBrains Mono',monospace}
+article .ig-table th,article .ig-table td{background:var(--guide-color-transparent)}
+article .ig-table tbody tr:nth-child(odd){background:var(--white)}
+article .ig-table tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-2) 25%,var(--white) 75%)}
+article .ig-table thead th{background:var(--info)}
+
+.code-card{padding:68px 18px 18px;background:var(--guide-color-forest);color:var(--guide-color-paper);position:relative}.code-card pre{background:var(--guide-color-transparent)!important;border:0!important;box-shadow:none!important;color:inherit!important;margin:0!important;white-space:pre-wrap;overflow-wrap:anywhere;padding:0!important;font-size:15px!important}.code-card pre code{background:var(--guide-color-transparent);color:inherit;padding:0}.code-card .copy-button{top:13px;right:13px;bottom:auto;min-width:164px}.ig-illustration{max-width:390px;margin:0 auto}.ig-illustration img{width:100%;height:auto}.shot-fig figcaption{margin-top:10px}
+article details{border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:12px 0}article details summary{cursor:pointer;font-family:Arial,sans-serif;font-size:18px}article details p{margin-bottom:0}.code-card:focus-within{outline:2px solid var(--accent)}
+</style><style id="claude-answers-v2">
+figure.claude-answer{display:grid;grid-template-columns:minmax(0,1fr) 158px;gap:18px;align-items:start;margin:30px 0}
+.claude-answer .shot{display:block;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--guide-color-white)}
+.claude-answer img{display:block;width:100%;height:auto}
+figure.claude-answer figcaption{margin:0;padding:4px 0 0;font:400 14px/1.55 Spectral,Georgia,serif;overflow-wrap:anywhere}
+blockquote.claude-excerpt{margin:22px 0;padding:16px 20px;border-left:3px solid var(--guide-color-forest);background:var(--guide-color-mint-paper)}
+.claude-excerpt p{margin:0 0 8px;font-size:18px;line-height:1.65}.claude-excerpt p:last-child{margin-bottom:0}
+@media(max-width:600px){figure.claude-answer{grid-template-columns:minmax(0,1fr) 92px;gap:10px}figure.claude-answer figcaption{font-size:12px;line-height:1.45}.claude-excerpt p{font-size:17px}}
+.claude-manual{margin:18px 0;border-bottom:1px solid var(--line);padding-bottom:12px}.claude-manual summary{cursor:pointer;font-weight:600;line-height:1.5}.claude-manual .code-card{margin-top:16px}.claude-day li{margin-bottom:10px}
+</style><style id="ig-v3-editorial">
+.toc-steps{list-style:none;margin:0;padding:0}.toc-steps>li{margin:0;padding:0}.toc-group{list-style:none;margin:0;padding:0 0 0 12px}.toc .toc-group .toc-sub{padding-left:12px;font-size:12.5px}.mobile-toc .toc-group{margin:8px 0 12px;padding-left:20px}.mobile-toc li{margin:8px 0}
+article .related-plaque{grid-column:auto;grid-row:auto;position:static;margin:28px 0;padding:14px 16px;border:1px solid var(--info-line);border-radius:11px;background:var(--info)}article .related-plaque p{margin:0}article .related-plaque .plaque-label{margin-bottom:5px;color:var(--accent-dark);font:700 11px/1.3 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}article .related-plaque .plaque-title{margin:0 0 8px;font:750 18px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}article .related-plaque .why{color:var(--muted);font-size:16px}
+.related-links{margin:32px 0}.cover-v2 img{display:block;width:100%;height:auto}
+.code-card .prompt-value { color: var(--guide-color-coral) }
+</style>
+<style id="article-parts-v6">
+.article-part { margin-top: 86px; padding-top: 38px; border-top: 1px solid var(--line) }
+.part-header .eyebrow { margin-bottom: 14px }
+article {
+  --article-part-size: clamp(1.6rem, 2.3vw, 2rem);
+  --article-step-size: clamp(1.3rem, 2vw, 1.6rem);
+  --article-subheading-size: 1.2rem;
+}
+.part-header h2 { margin-bottom: 0; font-size: var(--article-part-size); overflow-wrap: normal }
+.article-part h3 { margin: 0 0 22px; color: var(--emerald); font: 700 var(--article-step-size)/1.2 Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -.58px; text-wrap: balance; overflow-wrap: normal }
+.article-part h4 { margin: 0 0 9px; color: var(--emerald); font: 750 var(--article-subheading-size)/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+.article-part > .content-section:first-of-type { margin-top: 38px }
+.article-part h4 { margin-top: 32px }
+.toc-part { margin: 12px 0; border-top: 1px solid var(--line); padding-top: 12px }
+.toc-part > summary { cursor: pointer; color: var(--emerald); font: 750 13.5px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; padding: 6px 0 }
+.toc-part > summary::marker { color: var(--accent-dark) }
+.toc-sections { list-style: none; margin: 6px 0 0; padding: 0 }
+.toc-sections > li { margin: 0; padding: 0 }
+.mobile-toc .toc-part > summary { font-size: 14px }
+@media (max-width: 860px) {
+  .article-part h3 { margin-bottom: 18px }
+  .article-part { margin-top: 64px; padding-top: 30px }
+  .article-part > .content-section:first-of-type { margin-top: 30px }
+}
+</style>
+<meta content="https://pronovoe.com/claude-ai/youtube-7-zaprosov-claude/assets/oblozhka.webp" name="twitter:image"/>
+<style>
+.uroven-metka{display:inline-block;padding:5px 12px;border-radius:999px;background:var(--guide-color-mint-layer);color:var(--guide-color-forest-hover);font:700 13px Arial}.ig-table tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--paper-2) 25%,var(--white) 75%)}.ig-table tbody tr:nth-child(odd) td{background:var(--white)}html[data-theme="dark"] .uroven-metka{background:var(--guide-color-forest-panel);color:var(--guide-color-mint-border)}.mobile-toc{display:none}@media(max-width:1100px){.mobile-toc{display:block}.page-shell>.toc{display:none}.page-shell{display:block!important}}@media(max-width:600px){.code-card{padding-top:65px}.code-card pre{font-size:14px!important}.handout-title{display:none}}
+</style><meta property="og:image" content="https://pronovoe.com/claude-ai/youtube-7-zaprosov-claude/assets/oblozhka.webp">
+<meta property="og:image:alt" content="YouTube с Claude: семь запросов. Ноутбук с панелью YouTube Studio, микрофон и камера на зелёном фоне">
+<meta property="og:url" content="https://pronovoe.com/claude-ai/youtube-7-zaprosov-claude/"/>
+<link rel="stylesheet" href="../../assets/article-sharing.css">
+</head><body><header class="masthead"><div class="masthead-inner"><a class="brand" href="https://pronovoe.com/">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">YouTube: 7 запросов к Claude</div><div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div></div></div></header><div class="page-shell"><nav aria-label="Содержание" class="toc"><p class="toc-label">Содержание</p><ul class="toc-steps"><li><a href="#chto-ponadobitsya">Что понадобится</a></li><li><details class="toc-part" open=""><summary>Часть 1. Подготовь в чате всё для YouTube-канала</summary><ul class="toc-sections"><li><a href="#svoya-tema">Впиши свою тему</a></li><li><a href="#nisha">Шаг 1. Выбери направление</a></li><li><a href="#obraz">Шаг 2. Собери образ канала</a></li><li><a href="#plan">Шаг 3. Попроси план на 90 дней</a></li><li><a href="#scenariy">Шаг 4. Получи сценарий</a></li><li><a href="#upakovka">Шаг 5. Подготовь заголовок и обложку</a></li><li><a href="#dengi">Шаг 6. Разбери заработок помимо рекламы</a></li><li><a href="#pereupakovka">Шаг 7. Переупакуй один ролик</a></li></ul></details></li><li><details class="toc-part" open=""><summary>Часть 2. Подключи набор в Claude Code</summary><ul class="toc-sections"><li><a href="#ustanovi">Установи набор</a></li><li><a href="#golos">Передай свой голос</a></li><li><a href="#komandy">Одиннадцать команд</a></li><li><a href="#primery-instrumentov">Результаты инструментов</a></li></ul></details></li><li><details class="toc-part" open=""><summary>Часть 3. Проверь материалы перед выпуском</summary><ul class="toc-sections"><li><a href="#proverka">Проверка ответа</a></li><li><a href="#cifry">Предположения и цифры</a></li><li><a href="#oshibki">Ошибки</a></li><li><a href="#vse-zaprosy">Все запросы</a></li><li><a href="#pamyatka">Памятка</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#istochniki">Источники и следующий шаг</a></li></ul></details></li></ul></nav><main><article><header id="nachalo"><p class="eyebrow">Инструкция · Claude · 2 ноября 2026</p><h1 class="article-standard-h1">YouTube с Claude: 7 запросов и набор из 11 навыков</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><p class="lead">С Claude ты соберёшь всё для YouTube-канала: тему, образ, план на 90 дней, готовый сценарий, заголовок, идею обложки и способы заработка помимо рекламы. Первая часть работает в обычном чате Claude без установки, а вторая поможет подключить бесплатный набор из 11 навыков для задач, которые повторяются каждую неделю</p><figure class="cover-v2"><img alt="YouTube с Claude: семь запросов. Ноутбук с панелью YouTube Studio, микрофон и камера на зелёном фоне" fetchpriority="high" height="840" src="assets/oblozhka.webp" width="1600" srcset="assets/oblozhka.webp 1600w" sizes="(max-width: 860px) calc(100vw - 40px), 780px" data-full-src="assets/oblozhka.webp"/><figcaption>Семь запросов для чата Claude и набор из 11 навыков для Claude Code</figcaption></figure><div class="share-row share-top">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fyoutube-7-zaprosov-claude%2F&amp;text=YouTube%20%D1%81%20Claude%3A%207%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B8%20%D0%BD%D0%B0%D0%B1%D0%BE%D1%80%20%D0%B8%D0%B7%2011%20%D0%BD%D0%B0%D0%B2%D1%8B%D0%BA%D0%BE%D0%B2" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=YouTube%20%D1%81%20Claude%3A%207%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B8%20%D0%BD%D0%B0%D0%B1%D0%BE%D1%80%20%D0%B8%D0%B7%2011%20%D0%BD%D0%B0%D0%B2%D1%8B%D0%BA%D0%BE%D0%B2%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fyoutube-7-zaprosov-claude%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fyoutube-7-zaprosov-claude%2F&amp;title=YouTube%20%D1%81%20Claude%3A%207%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B8%20%D0%BD%D0%B0%D0%B1%D0%BE%D1%80%20%D0%B8%D0%B7%2011%20%D0%BD%D0%B0%D0%B2%D1%8B%D0%BA%D0%BE%D0%B2" target="_blank" rel="noopener">VK</a>
+      </div>
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">YouTube с Claude: 7 запросов и набор из 11 навыков</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header><details class="mobile-toc"><summary>Содержание статьи</summary><p class="toc-label">Содержание</p><ul class="toc-steps"><li><a href="#chto-ponadobitsya">Что понадобится</a></li><li><details class="toc-part" open=""><summary>Часть 1. Подготовь в чате всё для YouTube-канала</summary><ul class="toc-sections"><li><a href="#svoya-tema">Впиши свою тему</a></li><li><a href="#nisha">Шаг 1. Выбери направление</a></li><li><a href="#obraz">Шаг 2. Собери образ канала</a></li><li><a href="#plan">Шаг 3. Попроси план на 90 дней</a></li><li><a href="#scenariy">Шаг 4. Получи сценарий</a></li><li><a href="#upakovka">Шаг 5. Подготовь заголовок и обложку</a></li><li><a href="#dengi">Шаг 6. Разбери заработок помимо рекламы</a></li><li><a href="#pereupakovka">Шаг 7. Переупакуй один ролик</a></li></ul></details></li><li><details class="toc-part" open=""><summary>Часть 2. Подключи набор в Claude Code</summary><ul class="toc-sections"><li><a href="#ustanovi">Установи набор</a></li><li><a href="#golos">Передай свой голос</a></li><li><a href="#komandy">Одиннадцать команд</a></li><li><a href="#primery-instrumentov">Результаты инструментов</a></li></ul></details></li><li><details class="toc-part" open=""><summary>Часть 3. Проверь материалы перед выпуском</summary><ul class="toc-sections"><li><a href="#proverka">Проверка ответа</a></li><li><a href="#cifry">Предположения и цифры</a></li><li><a href="#oshibki">Ошибки</a></li><li><a href="#vse-zaprosy">Все запросы</a></li><li><a href="#pamyatka">Памятка</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#istochniki">Источники и следующий шаг</a></li></ul></details></li></ul></details><section class="content-section" id="chto-ponadobitsya"><h2>Что понадобится</h2>
+<p>Для семи запросов нужен доступ к <a href="https://claude.ai/">Claude в браузере</a>. Тему канала продумай заранее. Открой новый чат и отправляй задания по одному. Продолжай в этом же разговоре: следующие шаги используют предыдущие ответы</p>
+<p>Проверь <a href="https://support.claude.com/en/articles/8461763-where-can-i-access-claude">список поддерживаемых регионов Anthropic</a>: Россия в него не входит. Как подключить Claude из России, рассказываем в <a href="https://pronovoe.com/claude-ai/podklyuchenie-iz-rossii/">отдельной статье</a>. Если подключить не получается, эти же запросы можно отправить любой нейросети, которой ты пользуешься</p>
+<p>Партнёрская программа YouTube недоступна для каналов с российским регионом, а новые аккаунты AdSense с регионом Россия не создаются: Google ограничил монетизацию на этой территории. Поэтому способы заработка из шага 6 рассматривай отдельно от рекламы YouTube. Условия указаны в <a href="https://support.google.com/youtube/answer/7101720?hl=ru">официальной справке</a></p>
+<p>Для второй части нужен Claude Code, помощник с доступом к папке на компьютере, и Python 3 для инструментов набора. Установка разобрана в начале части 2</p>
+<p>Ниже ответы Claude на семь запросов по теме «Claude и нейросети для экспертов». «0 подписчиков» - условие нового канала в шестом запросе</p></section><aside class="related-plaque route-choice"><h2>Выбери свой путь</h2><p>Работаешь в чате: начни с <a href="#chast-1">части 1</a>. Стоит Claude Code или нужна помощь с повторяющимися задачами: переходи к <a href="#chast-2">части 2</a></p></aside><section class="article-part" id="chast-1"><div class="part-header"><h2>Часть 1. Подготовь в чате всё для YouTube-канала</h2></div><section class="content-section" id="svoya-tema"><h3>Впиши свою тему</h3><p>«Нейросети» слишком широко. «Claude и нейросети для экспертов, которые сами делают контент» задаёт и тему, и зрителя. Цветом в запросах выделены значения для нашего примера. Если тема уже выбрана, начни с шага 2</p></section><div class="ig-table"><table><thead><tr><th>Шаг</th><th>Что меняешь</th><th>Что получаешь</th></tr></thead><tbody><tr><td>1. Ниша</td><td>Тему</td><td>10 направлений и вопросы для проверки дохода и спроса</td></tr><tr><td>2. Образ канала</td><td>Тему</td><td>5 названий, слоган, зрителя, 4 темы и особенность подачи</td></tr><tr><td>3. План</td><td>Тему</td><td>12 поисковых гипотез и график на 90 дней</td></tr><tr><td>4. Сценарий</td><td>Название из плана</td><td>Реплики по времени и то, что показать</td></tr><tr><td>5. Упаковка</td><td>Название</td><td>Заголовок, описание, 10 тегов и два варианта обложки словами</td></tr><tr><td>6. Заработок</td><td>Тему и число подписчиков</td><td>Идеи продуктов, партнёрств, подарка и письмо спонсору</td></tr><tr><td>7. Переупаковка</td><td>Тему, название и текст сценария</td><td>Пост, ветку, 3 зацепки, письмо и описание для Pinterest</td></tr></tbody></table></div><section class="content-section" id="nisha"><h3>Шаг 1. Выбери направление</h3><p>Первый запрос помогает увидеть десять направлений. Доход с тысячи просмотров и спрос проверяй по аналитике: обычный чат сам не получает доступ к статистике каналов</p><p>Замени то, что в [скобках], на своё, скобки убери</p><div class="code-card"><pre id="prompt-1"><code>Я выбираю тему YouTube-канала про <span class="prompt-value">[Claude и нейросети для экспертов]</span>. Разбери 10 ниш YouTube с высоким доходом с тысячи просмотров, низкой конкуренцией и спросом, который не проходит со временем. Для каждой дай: примерный доход с тысячи просмотров, сложность съёмки, способы заработка помимо рекламы и идею канала в 3 словах. Не придумывай доход и спрос; если данных нет, так и напиши.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-1" type="button">Скопировать</button></div><!-- REPLY-1-BEGIN: ответ Claude из записи 1.mp4 -->
+<div data-reply-status="recorded" data-source-recording="1.mp4" data-source-prompt="prompt-1" id="reply-1">
+<div class="ig-notice"><p>Цифры RPM (сколько автор получает с 1000 просмотров) и исследования назвал Claude, мы их не проверяли. Сверь их перед выбором ниши</p></div>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/1-nishi-finansy-rieltory.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/1-nishi-finansy-rieltory.jpg" width="528" height="376" alt="Claude предлагает направления для бухгалтеров и риелторов. Диапазоны RPM относятся к более широким категориям, а не к этим двум каналам" loading="lazy"/></a><figcaption>Claude предлагает направления для бухгалтеров и риелторов. Диапазоны RPM относятся к более широким категориям, а не к этим двум каналам</figcaption></figure>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/1-nishi-obrazovanie-dannye.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/1-nishi-obrazovanie-dannye.jpg" width="528" height="303" alt="Для преподавателей отдельной оценки дохода нет. Для аналитиков предложены запись экрана и шаблоны" loading="lazy"/></a><figcaption>Для преподавателей отдельной оценки дохода нет. Для аналитиков предложены запись экрана и шаблоны</figcaption></figure>
+<p>В ответе есть десять направлений и диапазоны RPM (дохода автора на тысячу просмотров) по широким категориям. Claude оговаривает, что они относятся к англоязычной аудитории. Для низкой конкуренции и постоянного спроса подтверждений в узких нишах он не нашёл. Доход своего канала проверяй по своей аналитике, а источники и даты приведённых оценок открой отдельно</p>
+<details class="claude-manual"><summary>Полный ответ Claude</summary>
+<blockquote class="claude-excerpt"><p>Цифры ниже надо читать с поправкой. YouTube не публикует официальных данных по RPM для разных ниш, все таблицы собраны сторонними сервисами по отчётам авторов, моделям или своим выборкам каналов. И разброс внутри одной ниши огромный: в образовании RPM у разных каналов от $2.31 до $19.50, это больше, чем разница между большинством ниш.</p>
+<p>Все цифры для англоязычной аудитории, в основном из США. Если канал будет на русском, они не подходят. Официальная монетизация российским авторам недоступна с 2022 года, а те, кто подключил рекламу в обход ограничений, получают около $1-2 за тысячу просмотров. Тогда основной доход придёт не от рекламы.</p>
+<p>Shorts тоже считай отдельно: по исследованию AIR на 274 каналах, RPM в Shorts обычно составлял 3-14% от RPM длинных роликов.</p>
+<p>Про конкуренцию и вечный спрос в узких темах вроде «ИИ для юристов» надёжных данных я не нашёл. Это придётся проверять руками: забить запросы в поиск YouTube и посмотреть, сколько там каналов и как давно выходят ролики.</p>
+<p><strong>1. ИИ для финансистов и бухгалтеров</strong></p>
+<p>RPM: по vidIQ финансы и инвестиции дают примерно $4-12, другие источники называют $15-30. Разброс большой, ориентируйся на нижнюю границу.</p>
+<p>Съёмка простая: запись экрана с Claude и таблицами плюс голос.<br/>Помимо рекламы: шаблоны отчётов и промптов, внедрение в бухгалтерских фирмах, партнёрки учётного софта.</p>
+<p>Идея: «Отчёты без рутины».</p>
+<p><strong>2. ИИ для риелторов</strong></p>
+<p>RPM: недвижимость примерно $4-10 и выше, в зависимости от подниши.</p>
+<p>Съёмка простая или средняя, если показывать работу на реальных объектах.</p>
+<p>Помимо рекламы: обучение агентств, готовые наборы для описаний объектов и переписки с клиентами, партнёрки CRM.<br/>Идея: «Риелтор с нейросетью».</p>
+<p><strong>3. ИИ для маркетологов и предпринимателей</strong></p>
+<p>RPM: цифровой маркетинг и бизнес $4-9.</p>
+<p>Съёмка простая, экран и голос.</p>
+<p>Помимо рекламы: курсы, консультации, партнёрки сервисов.<br/>Данных о конкуренции нет, но тему ИИ для маркетинга снимают многие. Проверь выдачу до старта.</p>
+<p>Идея: «Маркетинг на автопилоте».</p>
+<p><strong>4. Обзоры ИИ-сервисов для работы</strong></p>
+<p>RPM: обзоры софта и SaaS $8-18, рекламодатели B2B, зрители приносят компаниям много денег, сложность средняя.</p>
+<p>Съёмка простая, но нужно постоянно тестировать новые сервисы.</p>
+<p>Помимо рекламы: партнёрские ссылки, оплаченные обзоры от сервисов.</p>
+<p>Идея: «Нейросети для работы».</p>
+<p><strong>5. Обучение работе с Claude</strong></p>
+<p>RPM: образование и наука медиана $10.22, это больше чем в четыре раза выше медианы по всем нишам. Но в эту категорию попадает и научпоп, так что для обучения ИИ цифра примерная.<br/>Съёмка простая.</p>
+<p>Помимо рекламы: курсы, платное сообщество, корпоративные тренинги.</p>
+<p>Идея: «Claude с нуля».</p>
+<p><strong>6. ИИ для страховых агентов</strong></p>
+<p>RPM: страхование $10-20, сложность высокая: тема регулируемая, аудитория узкая.</p>
+<p>Съёмка средняя, нужно знать отрасль, иначе не поверят.<br/>Помимо рекламы: обучение агентств, готовые скрипты для общения с клиентами.</p>
+<p>Идея: «Страховщик и ИИ».</p>
+<p><strong>7. ИИ для юристов</strong></p>
+<p>RPM: отдельных данных по юридической нише не нашлось. Ближе всего категория бизнеса, но это догадка, не цифра.<br/>Съёмка средняя: надо показывать работу с документами и не давать юридических советов, за которые потом стыдно.<br/>Помимо рекламы: шаблоны договоров с промптами, обучение юрфирм.<br/>Идея: «Юрист на Claude».</p>
+<p><strong>8. ИИ для врачей и клиник</strong></p>
+<p>RPM: здоровье и фитнес $2-5, отдельно про ИИ для медиков данных нет.</p>
+<p>Съёмка сложная: медицинская тема требует аккуратности в каждом утверждении.</p>
+<p>Помимо рекламы: обучение клиник, помощь с документацией и перепиской с пациентами.</p>
+<p>Идея: «Врач и нейросети».</p>
+<p><strong>9. ИИ для преподавателей и репетиторов</strong></p>
+<p>RPM: отдельных данных нет. Может попасть в категорию образования, но насколько цифра совпадёт, неизвестно.<br/>Съёмка простая.</p>
+<p>Помимо рекламы: наборы промптов для уроков, курсы для учителей, платные шаблоны заданий.</p>
+<p>Идея: «Уроки за минуты».</p>
+<p><strong>10. ИИ для аналитиков и работы с данными</strong></p>
+<p>RPM: технологии и софт примерно $4-10.</p>
+<p>Съёмка простая, экран с таблицами и кодом.</p>
+<p>Помимо рекламы: шаблоны, консалтинг, корпоративное обучение.</p>
+<p>Идея: «Данные без кода».</p></blockquote>
+</details>
+</div><!-- REPLY-1-END --><aside aria-label="Подробнее о запросах" class="related-plaque inline-related"><p class="plaque-label">Если ответ слишком общий</p><p class="plaque-title"><a href="https://pronovoe.com/claude-ai/prompt-master-uluchshitel-promptov/">Улучшатель промптов: навык Prompt Master для Claude</a></p><p class="why">Посмотри, как уточнить задание перед следующим запросом</p></aside></section><section class="content-section" id="obraz"><h3>Шаг 2. Собери образ канала</h3><p>Введи свою нишу. Просьбу придумать отличительную черту читай как предложение формы канала: нейросеть не знает твою биографию и не может сама установить преимущество</p><div class="code-card"><pre id="prompt-2"><code>Я запускаю YouTube-канал про <span class="prompt-value">[Claude и нейросети для экспертов]</span>. Собери полный образ канала: название (5 вариантов), слоган, портрет зрителя, 4 главные темы и мою «фишку», которая отличает меня от других авторов.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-2" type="button">Скопировать</button></div><!-- REPLY-2-BEGIN: ответ Claude из записи 2.mp4 -->
+<div data-reply-status="recorded" data-source-recording="2.mp4" data-source-prompt="prompt-2" id="reply-2">
+<div class="ig-notice"><p>Портрет зрителя и утверждение «специалисты сразу чувствуют» - предположения Claude. Сверь их со своей аудиторией</p></div>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/2-nazvaniya.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/2-nazvaniya.jpg" width="508" height="276" alt="Пять названий и пояснение, чем ограничивает канал название одного инструмента" loading="lazy"/></a><figcaption>Пять названий и пояснение, чем ограничивает канал название одного инструмента</figcaption></figure>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/2-fishka.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/2-fishka.jpg" width="508" height="457" alt="Три варианта подачи: свой профессиональный опыт, работа с гостем или проверка ответа вместе со специалистом" loading="lazy"/></a><figcaption>Три варианта подачи: свой профессиональный опыт, работа с гостем или проверка ответа вместе со специалистом</figcaption></figure>
+<blockquote class="claude-excerpt"><ol><li>Claude по делу</li><li>Нейросеть для профи</li><li>ИИ в работе эксперта</li><li>Умнее за 10 минут</li><li>Эксперт плюс ИИ</li></ol></blockquote>
+<p>Из этого ответа можно выбрать название, четыре темы и подход к подаче. Возраст зрителя, его страхи и сэкономленные часы здесь предложены моделью. Сверь этот портрет с людьми, для которых собираешься снимать, и выбери ту «фишку», которую можешь подтвердить своей работой</p>
+<details class="claude-manual"><summary>Полный ответ Claude</summary>
+<blockquote class="claude-excerpt"><p><strong>Название</strong></p>
+<ol><li>Claude по делу</li><li>Нейросеть для профи</li><li>ИИ в работе эксперта</li><li>Умнее за 10 минут</li><li>Эксперт плюс ИИ</li></ol>
+<p>Если берёшь вариант с Claude, учти: канал будет привязан к одному инструменту. Выйдет новая модель у конкурентов, и название начнёт мешать. «Нейросеть для профи» или «Эксперт плюс ИИ» переживут любую смену моды.</p>
+<p><strong>Слоган</strong></p>
+<p>«Нейросети, которые экономят часы, а не время на их изучение».</p>
+<p>Короче: «Меньше рутины. Больше экспертизы».</p>
+<p><strong>Портрет зрителя</strong></p>
+<p>Человек 30-50 лет, который хорошо разбирается в своём деле: юрист, бухгалтер, консультант, врач, преподаватель, риелтор.</p>
+<p>Работает на себя или в небольшой компании. Его время дорогое, а рутина съедает половину дня: письма, отчёты, договоры, ответы клиентам.</p>
+<p>Про нейросети слышал, пару раз пробовал. Получил что-то общее и бестолковое, решил, что это игрушка для айтишников.</p>
+<p>Боится двух вещей: что ИИ напишет ерунду, а он не заметит, и что коллеги уже давно всё автоматизировали, а он отстаёт.</p>
+<p>Ему не нужны обзоры каждой новинки. Ему нужно: открыл ролик, повторил, сэкономил два часа.</p>
+<p><strong>4 главные темы</strong></p>
+<p>Рутина эксперта. Письма, отчёты, протоколы встреч, ответы клиентам. Самая понятная польза, отсюда придут первые зрители.</p>
+<p>Работа с документами. Загрузить договор, отчёт или выписку и получить разбор, сравнение, список рисков.</p>
+<p>Промпты под профессию. Готовые запросы для юриста, бухгалтера, врача, с примерами до и после.</p>
+<p>Где ИИ ошибается. Разборы, как он врёт, путает цифры, выдумывает источники, и как это ловить. Эта тема даёт доверие: ты не продаёшь нейросети, ты честно показываешь границы.</p>
+<p><strong>Фишка</strong></p>
+<p>Тут многое зависит от тебя, поэтому три варианта на выбор.</p>
+<p>Ты сам эксперт в какой-то области. Тогда фишка: «Я не айтишник, я такой же специалист, как вы». Показываешь свою реальную работу, свои задачи, свои ошибки. Таких авторов мало: про ИИ обычно рассказывают технари.</p>
+<p>Ты не эксперт, но умеешь объяснять. Тогда фишка: каждый ролик решает задачу конкретного специалиста. Зовёшь юриста, бухгалтера, врача, берёшь их реальную задачу и при них решаешь с Claude. Зритель видит живую реакцию профессионала.</p>
+<p>Ты любишь проверять. Тогда фишка: «Проверяю, можно ли этому верить». Даёшь нейросети задачу, а потом с экспертом разбираешь, где она права, а где ошиблась. Большинство каналов про ИИ хвалят, а ты проверяешь.</p>
+<p>Первый вариант самый сильный, если он про тебя правда. Подделать его не получится: специалисты сразу чувствуют, кто из их мира, а кто нет.</p></blockquote>
+</details>
+</div><!-- REPLY-2-END --></section><section class="content-section" id="plan"><h3>Шаг 3. Попроси план на 90 дней</h3><p>Продолжи в том же чате. Попроси график, который подходит твоему времени на съёмку. Метка «поиск» обозначает тему под вопрос зрителя. Частотность этого вопроса нужно проверить отдельно</p><div class="code-card"><pre id="prompt-3"><code>Составь план роликов на 90 дней для нового YouTube-канала про <span class="prompt-value">[Claude и нейросети для экспертов]</span>. Добавь: 12 названий под поиск, график выхода, какие ролики снимать под поиск, а какие под охват, и порядок тем, который шаг за шагом делает меня экспертом для зрителя.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-3" type="button">Скопировать</button></div><!-- REPLY-3-BEGIN: ответ Claude из записи 3.mp4 -->
+<div data-reply-status="recorded" data-source-recording="3.mp4" data-source-prompt="prompt-3" id="reply-3">
+<div class="ig-notice"><p>Ролики под поиск люди находят сами по запросу, ролики под охват YouTube показывает в рекомендациях. Частотность запросов и охват Claude не замерял. Проверь темы поиском YouTube</p></div>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/3-grafik.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/3-grafik.jpg" width="512" height="275" alt="Один длинный выпуск в неделю, три видео на старте и короткие фрагменты между выпусками" loading="lazy"/></a><figcaption>Один длинный выпуск в неделю, три видео на старте и короткие фрагменты между выпусками</figcaption></figure>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/3-plan.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/3-plan.jpg" width="512" height="385" alt="Второй месяц посвящён документам и профессиям, третий - проверке ответов и своей системе" loading="lazy"/></a><figcaption>Второй месяц посвящён документам и профессиям, третий - проверке ответов и своей системе</figcaption></figure>
+<blockquote class="claude-excerpt"><p><strong>График</strong></p><p>Один длинный ролик в неделю, в один и тот же день. Для одного автора это реальный темп, который не сгорит к третьему месяцу.</p><p>Итого за 90 дней: 15 длинных роликов и около 35 Shorts.</p></blockquote>
+<p>В плане Claude получилось 15 длинных выпусков: 12 под поиск и 3 под охват. Около 35 Shorts - предложенный объём нарезки. Частотность названий он не проверял. Подстрой график под время на подготовку и проверь поисковые формулировки перед съёмкой</p>
+<details class="claude-manual"><summary>Полный ответ Claude</summary>
+<blockquote class="claude-excerpt"><p><strong>График</strong></p>
+<p>Один длинный ролик в неделю, в один и тот же день. Для одного автора это реальный темп, который не сгорит к третьему месяцу.</p>
+<p>На старте выложи сразу три ролика. Человек, который зашёл на канал после первого видео, должен найти, что посмотреть дальше.</p>
+<p>Из каждого длинного ролика нарезай 2-3 Shorts и выкладывай их в остальные дни недели. Это бесплатный трафик на основное видео.</p>
+<p>Итого за 90 дней: 15 длинных роликов и около 35 Shorts.</p>
+<p><strong>Поиск и охват: в чём разница</strong></p>
+<p>Ролик под поиск отвечает на вопрос, который человек уже вбил в YouTube. Название звучит как запрос: «как сделать», «как разобрать», «нейросеть для». Такие ролики набирают просмотры медленно, но месяцами и годами.</p>
+<p>Ролик под охват цепляет любопытство: эксперимент, спор, неожиданный результат. Его не ищут, его показывают в рекомендациях.</p>
+<p>Новому каналу без подписчиков рекомендации почти ничего не дают, поэтому первые недели строятся на поиске. Охватные ролики идут реже и позже, когда уже есть на что опереться: 12 под поиск и 3 под охват.</p>
+<p><strong>Порядок тем</strong></p>
+<p>Логика такая: сначала ты объясняешь основы понятнее других, потом экономишь зрителю время на рутине, потом показываешь глубину в его профессии, потом честно говоришь о границах, и в конце помогаешь собрать свою систему.</p>
+<p>К третьему месяцу зритель видит в тебе не человека, который пересказывает новости про ИИ, а того, у кого можно спросить.</p>
+<p><strong>План по неделям</strong></p>
+<p><em>Месяц 1. Основа и первая польза</em></p>
+<p>Неделя 1, запуск, три ролика:<br/>«Как пользоваться Claude: инструкция для начинающих» (поиск)<br/>«Claude или ChatGPT: что выбрать для работы» (поиск)<br/>«Как написать промпт, чтобы нейросеть не писала ерунду» (поиск)</p>
+<p>Неделя 2: «Как сделать протокол встречи с помощью нейросети» (поиск)</p>
+<p>Неделя 3: «Как отвечать клиентам с помощью нейросети» (поиск)</p>
+<p>Неделя 4: «Как разобрать договор с помощью нейросети» (поиск)</p>
+<p><em>Месяц 2. Документы и профессии</em></p>
+<p>Неделя 5: «Я отдал нейросети неделю своей работы. Что получилось» (охват)</p>
+<p>Неделя 6: «Как анализировать таблицу Excel с помощью Claude» (поиск)</p>
+<p>Неделя 7: «Нейросеть для бухгалтера: 5 задач, которые можно отдать уже сегодня» (поиск)</p>
+<p>Неделя 8: «Нейросеть для юриста: что можно доверить, а что нет» (поиск)</p>
+<p><em>Месяц 3. Доверие и своя система</em></p>
+<p>Неделя 9: «Юрист проверяет договор, который написал Claude» (охват)</p>
+<p>Неделя 10: «Как проверить, не врёт ли нейросеть» (поиск)</p>
+<p>Неделя 11: «Как сделать презентацию с помощью нейросети» (поиск)</p>
+<p>Неделя 12: «Проекты в Claude: как настроить помощника под свою работу» (поиск)</p>
+<p>Неделя 13: «90 дней работаю с нейросетью: сколько часов я сэкономил» (охват)</p>
+<p><strong>Что проверить перед съёмкой</strong></p>
+<p>Частотность этих запросов я не проверял, названия собраны по тому, как люди обычно формулируют такие вопросы. Перед каждым роликом начни вбивать запрос в поиск YouTube и посмотри подсказки. Если подсказка звучит иначе, бери её формулировку.</p>
+<p>Профессии в неделях 7 и 8 подставь под свою аудиторию. Если ты сам из какой-то области, начни с неё.</p>
+<p>Охватные ролики подстрой под свою фишку. Если ты эксперт, делай эксперименты на своей работе. Если работаешь с гостями, зови специалиста. Если проверяешь, сталкивай нейросеть с профессионалом.</p></blockquote>
+</details>
+</div><!-- REPLY-3-END --></section><section class="content-section" id="scenariy"><h3>Шаг 4. Получи сценарий</h3><p>Вставь название ролика из своего плана с шага 3. Здесь выбрано «Как дать Claude свой голос: 3 текста вместо длинного промпта». Попроси опираться только на твои реальные случаи и цифры</p><div class="code-card"><pre id="prompt-4"><code>Напиши полный сценарий YouTube-ролика «<span class="prompt-value">[Как дать Claude свой голос: 3 текста вместо длинного промпта]</span>». Структура: зацепка (первые 30 секунд, чтобы зритель не ушёл), усиление проблемы, решение по шагам, 3 главные мысли, призыв к действию и анонс следующего ролика на финальной заставке.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-4" type="button">Скопировать</button></div><!-- REPLY-4-BEGIN: ответ Claude из записи 4.mp4 -->
+<div data-reply-status="recorded" data-source-recording="4.mp4" data-source-prompt="prompt-4" id="reply-4">
+<div class="ig-notice"><p>«Я месяц писал…», «Я так делал месяц» и похожие реплики - история, которую Claude придумал для сценария. Рассказывай свою</p></div>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/4-zacepka.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/4-zacepka.jpg" width="780" height="745" alt="Начало сценария: зритель сравнивает два письма и угадывает, какое написала нейросеть" loading="lazy"/></a><figcaption>Начало сценария: зритель сравнивает два письма и угадывает, какое написала нейросеть</figcaption></figure>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/4-shagi-zapros.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/4-shagi-zapros.jpg" width="780" height="617" alt="Три главные мысли сценария: показать стиль на примерах, взять разные авторские тексты и сохранить настройку в Claude" loading="lazy"/></a><figcaption>Три главные мысли сценария: показать стиль на примерах, взять разные авторские тексты и сохранить настройку в Claude</figcaption></figure>
+<blockquote class="claude-excerpt"><p><strong>Зацепка (0:00-0:30)</strong></p>
+<p>Эти два письма клиенту. Одно написал я. Второе написала нейросеть.</p>
+<p>Поставьте на паузу и попробуйте угадать.</p></blockquote>
+<p>Это сценарий на девять минут из шести этапов. В нём есть реплики «Я так делал месяц» и «Claude писал моим голосом»: перед съёмкой замени их своим настоящим опытом. Обещание уложиться в пять минут проверь на своей записи. Блок 8:00-8:40 просит и повторить действие, и написать комментарий, и подписаться, хотя сам ответ предлагает одну просьбу. Выбери одно действие для финала</p>
+<details class="claude-manual"><summary>Полный ответ Claude</summary>
+<blockquote class="claude-excerpt"><p><strong>Как дать Claude свой голос: 3 текста вместо длинного промпта</strong></p>
+<p><strong>Зацепка (0:00-0:30)</strong></p>
+<p>Задача первых 30 секунд: показать результат до объяснения. Зритель должен сам увидеть, что текст от нейросети не отличить от твоего.</p>
+<p><em>[На экране: два коротких текста рядом, подписаны «А» и «Б». Один написал ты, второй Claude.]</em></p>
+<p>Эти два письма клиенту. Одно написал я. Второе написала нейросеть.</p>
+<p>Поставьте на паузу и попробуйте угадать.</p>
+<p><em>[Пауза 2 секунды.]</em></p>
+<p>Нейросеть написала письмо «Б». Если не угадали, значит всё сработало: Claude писал моим голосом. И для этого я не писал ему длинную инструкцию про стиль.</p>
+<p>Я просто дал ему три своих текста. Сейчас покажу, как это сделать за пять минут, и вы больше не будете переписывать за нейросетью каждое письмо.</p>
+<p><em>[Монтаж: быстрый переход к экрану с Claude.]</em></p>
+<p><strong>Усиление проблемы (0:30-1:30)</strong></p>
+<p>Задача: зритель узнаёт себя и понимает, почему у него не получалось.</p>
+<p>Знакомая ситуация. Просите нейросеть написать письмо клиенту или пост. Она пишет. Вроде грамотно, а читать невозможно.</p>
+<p><em>[На экране: типичный ответ нейросети. Подсветить фразы вроде «в современном мире», «рад сообщить», «надеюсь, это письмо застанет вас в добром здравии».]</em></p>
+<p>Так никто не пишет. Ни вы, ни ваши коллеги. Клиент такое письмо распознает с первой строки.</p>
+<p>Дальше обычно два пути.</p>
+<p>Первый: переписать всё руками. Тогда непонятно, зачем вообще была нейросеть.</p>
+<p>Второй: написать длинную инструкцию. «Пиши дружелюбно, но профессионально. Коротко, но подробно. Без канцелярита, но уважительно».</p>
+<p><em>[На экране: длинный промпт на полэкрана, который прокручивается.]</em></p>
+<p>Я так делал месяц. Результат стал чуть лучше, но всё равно не мой.</p>
+<p>Проблема в том, что свой стиль невозможно описать словами. Вы не знаете, какой длины у вас предложения и какими словами вы начинаете письма. Вы просто так пишете.</p>
+<p>А нейросеть получает от вас «дружелюбно, но профессионально» и понимает это по-своему.</p>
+<p><strong>Решение по шагам (1:30-7:00)</strong></p>
+<p>Задача: зритель повторяет за тобой прямо во время просмотра. Весь блок снимаешь записью экрана.</p>
+<p>Идея простая: не описывать свой стиль, а показать его. Нейросеть отлично копирует по примерам и плохо понимает абстрактные описания. Поэтому вместо длинного промпта три ваших текста.</p>
+<p><strong>Этап 1. Выберите три текста разного типа</strong></p>
+<p>Не три письма, а три разных жанра. Например: письмо клиенту, пост или заметка, объяснение сложной вещи простыми словами.</p>
+<p>Так Claude увидит, что в вашем стиле постоянное, а что зависит от ситуации.</p>
+<p><em>[На экране: три текста в отдельных окнах, подписи «письмо», «пост», «объяснение».]</em></p>
+<p><strong>Этап 2. Проверьте, что тексты правда ваши</strong></p>
+<p>Только то, что вы писали сами. Без правок редактора, без шаблонов компании, без текстов, которые за вас писала нейросеть.</p>
+<p>И уберите личные данные клиентов: имена, суммы, номера договоров.</p>
+<p>Тексты лучше брать средней длины. Если всё ваше это три строчки в мессенджере, Claude мало что поймёт.</p>
+<p><strong>Этап 3. Дайте тексты Claude с короткой инструкцией</strong></p>
+<p><em>[На экране: вставляешь тексты в чат и пишешь инструкцию. Крупно показать текст запроса.]</em></p>
+<p>Запрос:</p>
+<p>Вот три моих текста. Изучи, как я пишу: длину предложений, слова, как я начинаю и заканчиваю, как обращаюсь к читателю. Не копируй фразы из примеров, а пиши так же. Сначала опиши мой стиль в нескольких пунктах.</p>
+<p>Обратите внимание: здесь нет ни слова про «дружелюбно» и «профессионально». Всё это Claude возьмёт из текстов сам.</p>
+<p><strong>Этап 4. Проверьте, как Claude вас понял</strong></p>
+<p>Он опишет ваш стиль пунктами. Прочитайте и поправьте, если что-то не так.</p>
+<p><em>[На экране: ответ Claude с описанием стиля. Обвести пункт, который ты поправляешь.]</em></p>
+<p>Например: «Нет, я не всегда пишу коротко, в объяснениях могу развернуться». Этот шаг важный: иначе Claude закрепит неточность.</p>
+<p><strong>Этап 5. Дайте реальную задачу</strong></p>
+<p>Попросите написать то, что вам нужно прямо сейчас. Письмо, ответ клиенту, пост.</p>
+<p><em>[На экране: результат. Рядом твой настоящий текст для сравнения.]</em></p>
+<p>Прочитайте вслух. Где спотыкаетесь, там не ваше. Скажите Claude конкретно: «Я бы не написал „рад сообщить“, я пишу „коротко о главном“».</p>
+<p><strong>Этап 6. Сохраните, чтобы не повторять</strong></p>
+<p>Каждый раз вставлять три текста неудобно. Есть два способа сохранить.</p>
+<p>Стили. В Claude можно создать свой стиль из примеров текстов и включать его, когда нужно.</p>
+<p>Проекты. Создайте проект, положите туда свои три текста и описание стиля. Все чаты внутри проекта будут писать вашим голосом.</p>
+<p><em>[На экране: короткая демонстрация, где это находится в интерфейсе. Перед съёмкой проверь, как это выглядит в актуальной версии.]</em></p>
+<p><strong>3 главные мысли (7:00-8:00)</strong></p>
+<p>Задача: зритель уносит с собой три фразы, которые легко запомнить и пересказать.</p>
+<p><em>[На экране: каждая мысль появляется отдельной плашкой.]</em></p>
+<p>Первое. Показать лучше, чем описать. Три ваших текста скажут о стиле больше, чем страница инструкций.</p>
+<p>Второе. Тексты должны быть разными и правда вашими. Один жанр даёт однобокий стиль, чужие правки дают чужой голос.</p>
+<p>Третье. Настроили один раз, пользуетесь всегда. Сохраните стиль или проект, и больше не нужно ничего объяснять заново.</p>
+<p><strong>Призыв к действию (8:00-8:40)</strong></p>
+<p>Задача: одно простое действие сразу после ролика, а не список просьб.</p>
+<p>Сделайте это сегодня, пока не забыли. Откройте почту, найдите три своих текста и дайте их Claude. Это займёт пять минут.</p>
+<p>А потом напишите в комментариях, что Claude сказал про ваш стиль. Мне правда интересно, и так другие увидят, как это работает у людей из разных профессий.</p>
+<p>Если ролик сэкономил вам время, подпишитесь. Здесь каждую неделю одна задача эксперта, которую можно отдать нейросети.</p>
+<p><strong>Финальная заставка и анонс (8:40-9:00)</strong></p>
+<p>Задача: зритель сразу переходит на следующий ролик. Анонс продолжает тему, а не уводит в сторону.</p>
+<p><em>[На экране: конечная заставка YouTube. Слева карточка следующего ролика, справа кнопка подписки. Длительность 20 секунд.]</em></p>
+<p>Свой голос вы Claude дали. Но в проект можно положить не только тексты, а ещё ваши шаблоны, прайс, частые вопросы клиентов.</p>
+<p>Тогда Claude будет не просто писать как вы, а знать вашу работу. Как это настроить, рассказываю в следующем ролике: «Проекты в Claude: как настроить помощника под свою работу».</p>
+<p>Он вот здесь, слева. Увидимся там.</p>
+<p><em>[Указать рукой или стрелкой на карточку ролика.]</em></p></blockquote>
+</details>
+</div><!-- REPLY-4-END --></section><section class="content-section" id="upakovka"><h3>Шаг 5. Подготовь заголовок и обложку</h3><p>Попроси название и обложку вместе. Иначе они легко повторяют одну мысль одними словами, хотя места для объяснения и так мало</p><div class="code-card"><pre id="prompt-5"><code>Для ролика «<span class="prompt-value">[Как дать Claude свой голос: 3 текста вместо длинного промпта]</span>» дай: два варианта обложки с текстом на каждой, название под поиск YouTube (до 60 знаков), описание (с таймкодами, ключевыми словами и ссылками) и 10 тегов. Подскажи, как сравнить два варианта обложки на зрителях.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-5" type="button">Скопировать</button></div><!-- REPLY-5-BEGIN: ответ Claude из записи 5.mp4 -->
+<div data-reply-status="recorded" data-source-recording="5.mp4" data-source-prompt="prompt-5" id="reply-5">
+<div class="ig-notice"><p>Прогноз CTR (сколько людей из увидевших обложку нажимают на ролик) и сравнение обложек - мнение Claude. Проверить их можно только тестом на своём канале</p></div>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/5-oblozhki-nazvanie.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/5-oblozhki-nazvanie.jpg" width="771" height="685" alt="Два разных подхода к обложке и поисковый заголовок из ответа Claude" loading="lazy"/></a><figcaption>Два разных подхода к обложке и поисковый заголовок из ответа Claude</figcaption></figure>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/5-sravnenie.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/5-sravnenie.jpg" width="771" height="338" alt="Claude предлагает предварительный опрос и отдельно отмечает неточность ручного сравнения CTR" loading="lazy"/></a><figcaption>Claude предлагает предварительный опрос и отдельно отмечает неточность ручного сравнения CTR</figcaption></figure>
+<blockquote class="claude-excerpt"><p><strong>Обложки</strong></p><p>Вариант А, «угадайка». Слева и справа два листа с текстом, над ними крупно «Я» и «ИИ» со знаком вопроса. Твоё лицо сбоку с хитрым или задумчивым видом.<br/>Текст: «Угадай, где ИИ»</p><p>Вариант Б, «контраст». Слева длинная простыня промпта, перечёркнутая красным. Справа три аккуратных листа с зелёной галочкой.<br/>Текст: «3 текста вместо промпта»</p><p><strong>Название</strong></p><p>Как научить Claude писать вашим стилем за 5 минут</p></blockquote>
+<p>Собери две обложки по этим заданиям и проверь надписи на телефоне. В названии 49 знаков вместе с пробелами: лимит до 60 соблюдён. Таймкоды замени после монтажа, а вместо [ссылка] поставь свои адреса. Доступность теста проверь в YouTube Studio; ручную смену обложек и сравнение CTR (доли показов, после которых зритель открыл видео) оценивай с учётом разной аудитории показов</p>
+<details class="claude-manual"><summary>Полный ответ Claude</summary>
+<blockquote class="claude-excerpt"><p><strong>Обложки</strong></p>
+<p>Вариант А, «угадайка». Слева и справа два листа с текстом, над ними крупно «Я» и «ИИ» со знаком вопроса. Твоё лицо сбоку с хитрым или задумчивым видом.<br/>Текст: «Угадай, где ИИ»</p>
+<p>Вариант Б, «контраст». Слева длинная простыня промпта, перечёркнутая красным. Справа три аккуратных листа с зелёной галочкой.<br/>Текст: «3 текста вместо промпта»</p>
+<p>А цепляет любопытством, Б понятнее объясняет, о чём ролик. Как раз хорошая пара для сравнения: разные подходы, а не разный цвет.</p>
+<p><strong>Название</strong></p>
+<p>Как научить Claude писать вашим стилем за 5 минут</p>
+<p>49 знаков. Частотность запроса я не проверял, перед публикацией вбей начало фразы в поиск YouTube и посмотри подсказки.</p>
+<p><strong>Описание</strong></p>
+<p>Таймкоды примерные, по сценарию. После монтажа сверь с готовым роликом.</p>
+<div class="code-card"><pre><code>Нейросеть пишет «в современном мире» и «рад сообщить»? Покажу, как за 5 минут научить Claude писать вашим стилем. Без длинного промпта: хватит трёх ваших текстов.
+
+Подойдёт юристам, бухгалтерам, консультантам и всем, кто пишет клиентам письма, посты и объяснения.
+
+Таймкоды:
+0:00 Угадайте, какой текст написала нейросеть
+0:30 Почему длинный промпт про стиль не работает
+1:30 Идея: показать стиль, а не описывать
+2:00 Этап 1. Выбираем три текста
+2:45 Этап 2. Проверяем, что тексты ваши
+3:30 Этап 3. Запрос для Claude
+4:30 Этап 4. Проверяем, как Claude вас понял
+5:15 Этап 5. Пробуем на реальной задаче
+6:00 Этап 6. Сохраняем стиль в Claude
+7:00 Три главные мысли
+8:00 Что сделать сегодня
+
+Запрос из ролика:
+Вот три моих текста. Изучи, как я пишу: длину предложений, слова, как я начинаю и заканчиваю, как обращаюсь к читателю. Не копируй фразы из примеров, а пиши так же. Сначала опиши мой стиль в нескольких пунктах.
+
+Ссылки:
+Claude: https://claude.ai
+Следующий ролик, проекты в Claude: [ссылка]
+Мой Telegram: [ссылка]
+
+#Claude #нейросеть #ИИдляэкспертов</code></pre></div>
+<p><strong>10 тегов</strong></p>
+<p>Claude, Claude AI, нейросеть, научить нейросеть писать, стиль текста нейросеть, промпты для Claude, нейросеть для экспертов, ИИ для работы, как писать с ИИ, Claude на русском</p>
+<p>Теги на поиск почти не влияют. Основную работу делают название, описание и первые слова в ролике.</p>
+<p><strong>Как сравнить обложки</strong></p>
+<p>В YouTube Studio есть встроенный тест. Можно сравнить до трёх обложек: в Studio выбираешь ролик, под обложкой жмёшь “Test &amp; compare”, загружаешь варианты, и тест стартует после публикации. YouTube сам показывает обложки зрителям поровну и выбирает победителя по времени просмотра. Если явного победителя нет, остаётся первая загруженная обложка, но можно выбрать другую вручную.</p>
+<p>Есть ограничения. Функция работает только на компьютере. И с доступом не всё ясно: по одним данным, нужно быть в партнёрской программе YouTube и включить расширенные функции канала, по другим, YouTube постепенно открывает тест для всех. На новом канале кнопки может не быть. Просто проверь в Studio.</p>
+<p>Если кнопки нет, есть два способа попроще.</p>
+<p>До публикации покажи обе обложки 10-15 людям из своей аудитории: коллегам, клиентам, знакомым экспертам. Спроси не «какая красивее», а «на какую нажал бы». Это не статистика, но грубые промахи отсеет.</p>
+<p>После публикации можно поменять обложку вручную через несколько дней и сравнить CTR в аналитике. Только учти: в первые дни ролик показывают подписчикам, потом поиск, и CTR меняется сам по себе. Такое сравнение очень приблизительное.</p></blockquote>
+</details>
+</div><!-- REPLY-5-END --></section><section class="content-section" id="dengi"><h3>Шаг 6. Разбери заработок помимо рекламы</h3><p>Впиши реальное число подписчиков, даже если их пока нет. Запрос предложит способы получать доход от своей работы. Для выбора продукта пригодятся вопросы и задачи твоих зрителей</p><div class="code-card"><pre id="prompt-6"><code>У меня YouTube-канал про <span class="prompt-value">[Claude и нейросети для экспертов]</span>, <span class="prompt-value">[0]</span> подписчиков. Составь план заработка помимо рекламы YouTube: партнёрские программы, идеи своих цифровых продуктов, шаблон письма спонсору и бесплатный подарок, за который зритель оставит почту.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-6" type="button">Скопировать</button></div><!-- REPLY-6-BEGIN: ответ Claude из записи 6.mp4 -->
+<div data-reply-status="recorded" data-source-recording="6.mp4" data-source-prompt="prompt-6" id="reply-6">
+<div class="ig-notice"><p>Сроки и «хватит десятка зрителей» - оценка Claude, не гарантия</p></div>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/6-produkty.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/6-produkty.jpg" width="814" height="667" alt="Идеи своих предложений: консультация, набор запросов, готовый проект, мини-курс и воркшоп" loading="lazy"/></a><figcaption>Идеи своих предложений: консультация, набор запросов, готовый проект, мини-курс и воркшоп</figcaption></figure>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/6-podarok-pismo.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/6-podarok-pismo.jpg" width="814" height="623" alt="Основной подарок: двадцать запросов для рутинных задач эксперта. Ещё два варианта - чек-лист проверки и шаблон своего голоса" loading="lazy"/></a><figcaption>Основной подарок: двадцать запросов для рутинных задач эксперта. Ещё два варианта - чек-лист проверки и шаблон своего голоса</figcaption></figure>
+<blockquote class="claude-excerpt"><p><strong>Порядок</strong></p>
+<p>С нулём подписчиков доход сначала даст не партнёрка, а ты сам: консультации и разборы. Для них хватит десятка доверяющих зрителей. Партнёрки и спонсоры начнут работать, когда будут просмотры.</p>
+<p>Поэтому так:</p>
+<p>Сразу: бесплатный подарок за почту. Список адресов твой, его не отключит никакой алгоритм.</p>
+<p>Первый месяц: консультации и настройка Claude под конкретного эксперта.</p>
+<p>Месяцы 2-3: недорогие шаблоны и наборы промптов.</p>
+<p>Потом: курс, воркшопы для компаний, спонсоры, партнёрки.</p></blockquote>
+<p>Для канала с нулём подписчиков Claude предложил сначала консультации и подарок, затем шаблоны и другие продукты. Это идеи для проверки спроса. «Двадцать запросов» пока название предложенного подарка, его предстоит собрать. Сроки первого дохода, условия партнёрских программ и гостевых пропусков проверь отдельно. В письме замени поля в скобках своими данными и убери утверждения об аудитории и опыте, которые пока не можешь подтвердить</p>
+<details class="claude-manual"><summary>Полный ответ Claude</summary>
+<blockquote class="claude-excerpt"><p><strong>Порядок</strong></p>
+<p>С нулём подписчиков доход сначала даст не партнёрка, а ты сам: консультации и разборы. Для них хватит десятка доверяющих зрителей. Партнёрки и спонсоры начнут работать, когда будут просмотры.</p>
+<p>Поэтому так:</p>
+<p>Сразу: бесплатный подарок за почту. Список адресов твой, его не отключит никакой алгоритм.</p>
+<p>Первый месяц: консультации и настройка Claude под конкретного эксперта.</p>
+<p>Месяцы 2-3: недорогие шаблоны и наборы промптов.</p>
+<p>Потом: курс, воркшопы для компаний, спонсоры, партнёрки.</p>
+<p><strong>Партнёрские программы</strong></p>
+<p>Про самого Claude честно. Открытой партнёрки для блогеров с процентом от подписок я не нашёл. Есть два близких варианта, но оба не про YouTube.</p>
+<p>Подписчики тарифа Max могут командой /passes в Claude Code получить три гостевых пропуска, каждый даёт новому пользователю семь бесплатных дней Claude Pro. Денег за это нет, но как подарок зрителям годится.</p>
+<p>Ещё у Anthropic есть реферальная программа для партнёров, которые приводят организации на Claude for Enterprise. Подаётся заявка от компании, после проверки присылают условия. Это для дальнейшего, когда начнёшь работать с фирмами.</p>
+<p>Реальные партнёрки ищи у сервисов, которые ты показываешь рядом с Claude: заметки, транскрибация встреч, автоматизация, создание презентаций, CRM. У многих таких сервисов есть страница «Affiliate» или «Partners» внизу сайта. Ставки и условия у всех разные и часто меняются, смотри на месте.</p>
+<p>Главное правило: рекомендуй только то, чем пользуешься сам. Эксперты быстро чувствуют, когда им продают.</p>
+<p><strong>Свои цифровые продукты</strong></p>
+<p>Консультация «Claude под вашу работу». Час созвона, настраиваешь проект со стилем, шаблонами и запросами под профессию человека. Самый быстрый первый доход.</p>
+<p>Наборы запросов по профессиям. «Claude для юриста», «Claude для бухгалтера»: 30-50 проверенных запросов с примерами. Недорогой продукт, делается за неделю.</p>
+<p>Готовые проекты для Claude. Не просто промпты, а комплект: инструкции, файлы-примеры, описание стиля. Человек загружает и сразу работает.</p>
+<p>Мини-курс «Claude за выходные». 5-7 коротких уроков от нуля до своей системы. Делай, когда увидишь, какие вопросы чаще всего задают в комментариях.</p>
+<p>Воркшоп для команды. Полдня обучения для юрфирмы, бухгалтерии или агентства. Самый дорогой продукт и лучший для экспертного канала.</p>
+<p>Если часть аудитории в России, заранее реши вопрос с приёмом оплаты: зарубежные карты там не работают, а российские не везде принимаются. Выбери платёжный сервис, который подходит и тебе, и зрителям.</p>
+<p><strong>Бесплатный подарок за почту</strong></p>
+<p>Лучше всего работает то, что даёт результат за 10 минут.</p>
+<p>Главный вариант: «Стартовый набор эксперта: 20 запросов для Claude, которые снимают рутину». Письма клиентам, протоколы встреч, разбор договора, отчёты. Каждый запрос с примером, что получится.</p>
+<p>Запасные:</p>
+<p>Чек-лист «Как проверить, не врёт ли нейросеть» на одну страницу.</p>
+<p>Шаблон «Мой голос в Claude» из ролика про стиль: запрос, требования к текстам, что поправить после.</p>
+<p>Упоминай подарок в каждом ролике там, где он к месту, а не только в конце. Ссылка первой строкой в описании и в закреплённом комментарии.</p>
+<p><strong>Письмо спонсору</strong></p>
+<p>Писать стоит, когда выйдет хотя бы 8-10 роликов. С нулём подписчиков продавай не охват, а точность аудитории, и первую интеграцию предлагай недорого или по бартеру, чтобы получить кейс.</p>
+<div class="code-card"><pre><code>Тема: Интеграция [продукт] в ролик для юристов и бухгалтеров
+
+Здравствуйте, [имя]!
+
+Меня зовут [имя], я веду YouTube-канал «[название]» про то, как эксперты используют Claude и нейросети в работе. Мои зрители: юристы, бухгалтеры, консультанты, которые ищут, как убрать рутину.
+
+Я пользуюсь [продукт] сам, например для [конкретная задача]. Хочу показать это в ролике «[тема ролика]», где [продукт] решает задачу зрителя по-настоящему, а не в рекламной вставке.
+
+Канал молодой, поэтому честно о цифрах: [число] роликов, [число] подписчиков, в среднем [число] просмотров на ролик. Зато аудитория узкая и платёжеспособная, а ролики под поиск продолжают набирать просмотры месяцами.
+
+Предлагаю первую интеграцию на пробных условиях: [бартер / цена]. После выхода пришлю статистику: просмотры, клики по ссылке, комментарии.
+
+Примеры роликов: [ссылка], [ссылка]
+
+Удобно обсудить на этой неделе?
+
+[имя]
+[контакты]</code></pre></div>
+<p>Перед отправкой найди в письме два места, которые нельзя скопировать другому бренду: как ты сам пользуешься продуктом и какой ролик предлагаешь. Если их нет, письмо выглядит рассылкой.</p></blockquote>
+</details>
+</div><!-- REPLY-6-END --></section><section class="content-section" id="pereupakovka"><h3>Шаг 7. Переупакуй один ролик</h3><p>Отправь запрос после сценария в том же чате. Проверь, что во всех форматах остались те же факты: выдуманный случай из сценария иначе появится и в письме, и в коротком видео</p><p>На месте <code>[СЦЕНАРИЙ]</code> вставь сюда сценарий из шага 4</p><div class="code-card"><pre id="prompt-7"><code>Переупакуй сценарий YouTube-ролика «<span class="prompt-value">[Как дать Claude свой голос: 3 текста вместо длинного промпта]</span>» для канала про <span class="prompt-value">[Claude и нейросети для экспертов]</span> в: пост для Telegram-канала, ветку для Threads, 3 зацепки для Shorts, письмо для рассылки и описание для Pinterest. Подскажи, какие площадки важнее для моей ниши.
+
+Сценарий:
+<span class="prompt-value">[СЦЕНАРИЙ]</span></code></pre><button aria-live="polite" class="copy-button" data-copy-target="prompt-7" type="button">Скопировать</button></div><!-- REPLY-7-BEGIN: ответ Claude из записи 7.mp4 -->
+<div data-reply-status="recorded" data-source-recording="7.mp4" data-source-prompt="prompt-7" id="reply-7">
+<div class="ig-notice"><p>«Я месяц писал…» и похожие реплики - история, которую Claude придумал для сценария. Рассказывай свою</p></div>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/7-shorts.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/7-shorts.jpg" width="814" height="458" alt="Три зацепки для коротких роликов: угадайка, знакомая проблема и сравнение двух способов" loading="lazy"/></a><figcaption>Три зацепки для коротких роликов: угадайка, знакомая проблема и сравнение двух способов</figcaption></figure>
+<figure class="shot-fig claude-answer"><a class="shot" href="assets/claude-otvety/7-ploshchadki.jpg" target="_blank" rel="noopener"><img src="assets/claude-otvety/7-ploshchadki.jpg" width="814" height="651" alt="В этом ответе Claude ставит рассылку и Telegram первыми, YouTube вторым. Он прямо называет это своей оценкой" loading="lazy"/></a><figcaption>В этом ответе Claude ставит рассылку и Telegram первыми, YouTube вторым. Он прямо называет это своей оценкой</figcaption></figure>
+<blockquote class="claude-excerpt"><p><strong>Пост для Telegram</strong></p>
+<div class="code-card"><pre><code>Нейросеть пишет «рад сообщить» и «в современном мире». Знакомо?
+
+Я месяц писал Claude длинную инструкцию про свой стиль.</code></pre></div></blockquote>
+<p>Claude переиспользовал сценарий из того же разговора и подготовил все пять форматов. Вместе с темой перенёс и выдуманную историю про месяц настройки, и обещание писать почти без правок. Перед публикацией замени их настоящими фактами и поставь свои ссылки. Приоритет площадок из ответа проверь по отклику своей аудитории</p>
+<details class="claude-manual"><summary>Полный ответ Claude</summary>
+<blockquote class="claude-excerpt"><p><strong>Пост для Telegram</strong></p>
+<div class="code-card"><pre><code>Нейросеть пишет «рад сообщить» и «в современном мире». Знакомо?
+
+Я месяц писал Claude длинную инструкцию про свой стиль. «Дружелюбно, но профессионально. Коротко, но подробно». Стало чуть лучше, но всё равно не моё.
+
+Потом понял: свой стиль словами не описать. Вы не знаете, какой длины у вас предложения. Вы просто так пишете.
+
+Сработало другое. Я дал Claude три своих текста:
+письмо клиенту,
+пост,
+объяснение сложной вещи простыми словами.
+
+И попросил: изучи, как я пишу, сначала опиши мой стиль пунктами, потом пиши так же.
+
+Теперь Claude пишет письма, которые я отправляю почти без правок.
+
+Три правила:
+тексты разных жанров, иначе стиль выйдет однобоким;
+только ваши, без правок редактора и чужих шаблонов;
+сохраните стиль в Claude один раз и больше не объясняйте.
+
+Весь процесс по шагам и готовый запрос в новом ролике: [ссылка]</code></pre></div>
+<p><strong>Ветка для Threads</strong></p>
+<div class="code-card"><pre><code>1/ Перестал писать нейросети длинные инструкции про стиль. Дал ей три своих текста, и она начала писать как я. Рассказываю, как это сделать за 5 минут 👇
+
+2/ Проблема: «пиши дружелюбно, но профессионально» каждый понимает по-своему. Нейросеть тоже. Свой стиль невозможно описать словами, его можно только показать.
+
+3/ Этап 1. Возьмите три своих текста разного жанра: письмо клиенту, пост, объяснение. Так Claude увидит, что в стиле постоянное, а что зависит от ситуации.
+
+4/ Этап 2. Только ваши тексты. Без правок редактора, без шаблонов компании, без того, что за вас писала нейросеть. И уберите имена и данные клиентов.
+
+5/ Этап 3. Запрос: «Вот три моих текста. Изучи, как я пишу. Не копируй фразы, а пиши так же. Сначала опиши мой стиль пунктами». Проверьте описание и поправьте, если Claude ошибся.
+
+6/ Этап 4. Сохраните стиль в Claude или положите тексты в проект. Настроили один раз, пользуетесь всегда.
+
+7/ Полная версия с примерами на YouTube: [ссылка]. А вы уже пробовали учить нейросеть своему стилю?</code></pre></div>
+<p><strong>3 зацепки для Shorts</strong></p>
+<p>Первая, угадайка. На экране два письма рядом.<br/>«Одно письмо написал я, второе нейросеть. Угадаете?»<br/>Ответ в конце ролика, это держит досмотр.</p>
+<p>Вторая, боль. На экране подсвечиваются «рад сообщить», «в современном мире».<br/>«Если нейросеть пишет вот так, вы даёте ей не ту инструкцию».</p>
+<p>Третья, контраст. Длинный промпт прокручивается и зачёркивается, рядом появляются три листа.<br/>«Я выкинул промпт на полстраницы и заменил его тремя текстами».</p>
+<p><strong>Письмо для рассылки</strong></p>
+<div class="code-card"><pre><code>Тема: Почему нейросеть пишет не как вы
+
+Привет!
+
+Скажу честно: я долго не мог заставить Claude писать нормальные письма. Получалось грамотно, но мёртво. Клиент такое распознаёт с первой строки.
+
+Я писал всё более длинные инструкции. «Дружелюбно, но без панибратства». «Коротко, но по делу». Не помогало.
+
+Сработала простая вещь: я перестал описывать свой стиль и показал его. Дал Claude три своих текста разного жанра и попросил сначала описать, как я пишу, а потом писать так же.
+
+Теперь письма клиентам у меня занимают пару минут, и я отправляю их почти без правок.
+
+В новом ролике показываю весь процесс на экране, с готовым запросом, который можно скопировать: [ссылка]
+
+Попробуйте сегодня на трёх своих текстах и ответьте на это письмо: что Claude сказал про ваш стиль? Я читаю все ответы.
+
+[имя]
+
+P.S. Если вы ещё не забрали «Стартовый набор эксперта» с 20 запросами для рутины, он здесь: [ссылка]</code></pre></div>
+<p><strong>Описание для Pinterest</strong></p>
+<div class="code-card"><pre><code>Как научить Claude писать вашим стилем за 5 минут. Вместо длинного промпта дайте нейросети три своих текста: письмо, пост и объяснение. Готовый запрос и пошаговая инструкция для юристов, бухгалтеров, консультантов и всех, кто пишет клиентам. Нейросеть для работы, промпты для Claude, ИИ для экспертов.</code></pre></div>
+<p><strong>Какие площадки важнее</strong></p>
+<p>Это моя оценка, а не данные: точной статистики по твоей нише у меня нет.</p>
+<p>Рассылка и Telegram на первом месте. Это твои площадки, где зритель видит каждый пост, а не то, что выбрал алгоритм. Для русскоязычной экспертной аудитории Telegram главный канал общения, а с почтой проще всего продавать консультации и продукты.</p>
+<p>YouTube на втором. Он приводит новых людей через поиск, но отдаёт их лучше всего, когда есть куда отдать: в Telegram или рассылку.</p>
+<p>Threads в качестве эксперимента. Попробуй месяц, посмотри, приходят ли люди. Дёшево, потому что текст уже есть.</p>
+<p>Pinterest для твоей ниши слабее всех. Там ищут картинки и идеи, а не инструменты для юристов и бухгалтеров. Я бы его отложил и вернулся, если останется время.</p></blockquote>
+</details>
+</div><!-- REPLY-7-END --></section></section><section class="article-part" id="chast-2"><div class="part-header"><h2>Часть 2. Подключи набор в Claude Code</h2></div><section class="content-section" id="ustanovi"><h3>Шаг 1. Установи готовый набор навыков</h3><p>Когда задача повторяется, удобнее хранить правила рядом с помощником. YouTube Agent Skill это набор из 11 папок с инструкциями для Claude Code и шестью небольшими Python-инструментами. Автор набора - Джейк Скинкариол. Например, вместо длинного объяснения структуры сценария ты вызываешь <code>/yt-script</code> и даёшь тему</p><p>Если Claude Code ещё нет, открой <a href="https://pronovoe.com/claude-ai/claude-i-codex-v-vscode/">нашу инструкцию установки в VS Code</a> и выполни шаги для расширения <strong>Claude Code for VS Code от Anthropic</strong></p><p>Затем в VS Code выбери <strong>Файл → Открыть папку</strong>, открой папку своего канала и нажми значок Claude, оранжевое солнышко. Войди в аккаунт Claude, если появится запрос</p><p>В поле сообщения открывшегося чата вставь весь блок ниже и отправь его стрелкой</p><div class="code-card"><pre id="install"><code>https://github.com/Jakeschincariol/youtube-agent-skill
+
+Установи этот набор навыков, затем проверь, что /yt-script работает</code></pre><button aria-live="polite" class="copy-button" data-copy-target="install" type="button">Скопировать</button></div><p>После установки введи <code>/yt-script</code> и тему первого ролика. Если команда не появилась, попроси проверить, в какой папке лежат навыки и загружает ли их текущая сессия. Если Python не найден, попроси помочь с его установкой; текстовое описание навыка само проверочный инструмент не запускает</p><p>В обычном браузерном чате ссылка не даёт доступ к файлам компьютера. README предлагает вставить содержимое одного <code>SKILL.md</code> в начало чата как правила разговора. В этом режиме Python-инструменты запускаются отдельно</p><aside aria-label="Подробнее об установке Claude Code" class="related-plaque inline-related"><p class="plaque-label">Установка Claude Code</p><p class="plaque-title"><a href="https://pronovoe.com/claude-ai/claude-i-codex-v-vscode/">Claude Code и Codex в одном VS Code: чаты и файлы рядом</a></p><p class="why">Установи расширения и открой папку проекта рядом с чатом</p></aside></section><section class="content-section" id="golos"><h3>Шаг 2. Передай свой голос</h3>
+<p>Набор читает <code>voice.md</code>: кому ты говоришь, как звучишь и каких слов избегаешь. Claude Code создаст файл сам по <a href="https://github.com/Jakeschincariol/youtube-agent-skill/blob/main/templates/voice.md">шаблону набора</a>. Открой три своих текста, скопируй их вместо выделенного значения и отправь запрос в тот же чат Claude Code</p><div class="code-card"><pre id="voice-prompt"><code>Создай ~/.claude/youtube/voice.md по шаблону набора из этих трёх моих текстов: <span class="prompt-value">[ТЕКСТЫ]</span>
+
+Бери правила из моих реальных фраз. Не придумывай мой опыт, доход, кейсы и биографию. Покажи созданный файл, чтобы я мог проверить правила.</code></pre><button aria-live="polite" class="copy-button" data-copy-target="voice-prompt" type="button">Скопировать</button></div><p>Прочитай созданный файл и поправь выводы, которые не похожи на твою речь. При следующих заданиях набор читает <code>voice.md</code> из <code>~/.claude/youtube/voice.md</code> и использует эти правила</p></section><section class="content-section" id="komandy"><h3>Одиннадцать команд и их результат</h3><div class="ig-table"><table><thead><tr><th>Команда</th><th>Что получится</th></tr></thead><tbody><tr><td><code>/yt-script</code></td><td>Из идеи делает сценарий: пять хуков по 21 формуле, оценка, реплики и кадры</td></tr><tr><td><code>/yt-package</code></td><td>Проверяет заголовок и обложку как одну пару</td></tr><tr><td><code>/yt-edit</code></td><td>Из расшифровки с временем делает список монтажных правок: паузы, слова-паразиты и повторы</td></tr><tr><td><code>/yt-comment</code></td><td>Делит комментарии на четыре группы, пишет ответы и предлагает один для закрепления</td></tr><tr><td><code>/yt-plan</code></td><td>Планирует выпуски с учётом доступных часов и уже готовых материалов</td></tr><tr><td><code>/yt-viral</code></td><td>Сравнивает просмотры видео с медианой своего канала в собранном публичном списке</td></tr><tr><td><code>/yt-retention</code></td><td>Читает CSV удержания (таблицу, которую выгружаешь из YouTube Аналитики), отмечает потери и сопоставляет их с расшифровкой</td></tr><tr><td><code>/yt-shorts</code></td><td>Выбирает самостоятельные отрезки расшифровки и пишет новую первую фразу для каждого</td></tr><tr><td><code>/yt-seo</code></td><td>Готовит описание, теги и три поисковых запроса</td></tr><tr><td><code>/yt-chapters</code></td><td>Готовит главы по расшифровке и проверяет начало 00:00, минимум три главы и длину от 10 секунд</td></tr><tr><td><code>/yt-audit</code></td><td>Разбирает канал и заканчивает одной приоритетной правкой</td></tr></tbody></table></div><p>Набор сам ничего не публикует. <code>/yt-edit</code> выдаёт список правок с таймкодами, а <code>/yt-shorts</code> отрезки и новые первые фразы. Готовые MP4 они не создают: правки применяешь в монтажной программе. Для удержания нужен твой CSV, для фразы у провала ещё и расшифровка с временем. Без исходников модель не узнает, что ты говорил в конкретную секунду</p><p>CSV удержания возьми в <strong>YouTube Studio → Контент → нужный ролик → Аналитика → Вовлечение → Удержание аудитории → значок экспорта → CSV</strong> и передай его Claude Code вместе с расшифровкой</p></section><section class="content-section" id="primery-instrumentov"><h3>Посмотри результаты инструментов</h3><p>В набор входят шесть инструментов. Четыре примера ниже показывают их ответы: оценки начала и заголовка, учебный график удержания и сравнение публичных просмотров</p><div class="ig-table"><table><thead><tr><th>Инструмент</th><th>Что получишь</th><th>Пример или исходник</th><th>Что учитывать</th></tr></thead><tbody>
+<tr><td>hookscore.py</td><td>Оценку первой фразы и замечания к ней</td><td>Пять русских хуков: 32, 32, 32, 31 и 26 из 100</td><td>Инструмент ищет английские слова; русский текст лучше проверить чтением вслух</td></tr>
+<tr><td>title.py</td><td>Длину заголовка и предупреждение об обрезке на телефоне</td><td>Первая пара: 98/100; заголовок 60 знаков</td><td>Оценка не предсказывает клики; повтор русских слов проверяй самостоятельно</td></tr>
+<tr><td>deadair.py</td><td>Список пауз, повторов и слов-паразитов с таймкодами</td><td>Нужна расшифровка с временем</td><td>Правки применяешь в монтажной программе</td></tr>
+<tr><td>chapters.py</td><td>Главы с проверкой начала 00:00 и длительности</td><td>Нужна расшифровка готового ролика</td><td>Для глав нужно хотя бы три отрезка от 10 секунд</td></tr>
+<tr><td>retention.py</td><td>Секунды потери зрителей и реплику рядом, если передана расшифровка</td><td>25 учебных точек; провал на 180 с, потеря 20 процентных пунктов</td><td>График и расшифровка созданы для примера; провал задан вручную</td></tr>
+<tr><td>swipe.py</td><td>Видео, которые опередили обычные просмотры своего канала в собранном списке</td><td>148 видео из 5 каналов; Every: ×30.56</td><td>Сравнение относится к собранной выборке</td></tr>
+</tbody></table></div><figure class="shot-fig"><div class="shot ig-illustration"><img alt="Пример hookscore.py: первая фраза получила 32/100. Замечания к русскому тексту нужно оценить самостоятельно" height="1920" loading="lazy" src="assets/03-script.png" width="1080"/></div><figcaption>Пример hookscore.py: первая фраза получила 32/100. Замечания к русскому тексту нужно оценить самостоятельно</figcaption></figure><figure class="shot-fig"><div class="shot ig-illustration"><img alt="Демонстрация retention.py: синтетический график и реплика около заложенного провала на 180-й секунде" height="1920" loading="lazy" src="assets/06-retention.png" width="1080"/></div><figcaption>Демонстрация retention.py: синтетический график и реплика около заложенного провала на 180-й секунде</figcaption></figure><p>Инструмент нашёл реплику «Прежде чем продолжить, немного общей теории». Мы специально поместили её рядом с провалом в учебной расшифровке. В реальном видео совпадение секунды и фразы ещё не доказывает причину ухода: посмотри сам фрагмент</p><p>В примере использованы публичные списки Matt Wolfe, MattVidPro, TheAIGRID, AI Coffee Break with Letitia и Every: до 30 видео на канал. У двух видео просмотры отсутствовали, поэтому они исключены из сравнения</p><figure class="shot-fig"><div class="shot ig-illustration"><img alt="Результат swipe.py: видео Every выше медианы собранного списка в 30,56 раза" height="1920" loading="lazy" src="assets/09-viral-card.png" width="1080"/></div><figcaption>Результат swipe.py: видео Every выше медианы собранного списка в 30,56 раза</figcaption></figure><p>У канала Every в публичном списке 50 400 подписчиков. Видео <a href="https://www.youtube.com/watch?v=jZh55CQwSh8">How Sam Altman Actually Uses Dots to Run OpenAI and His Life</a> получило 191 000 просмотров при медиане 6 250: 191 000 / 6 250 = ×30.56. Эти числа относятся к моменту сбора 1 ноября. Просмотры в публичном списке округлены YouTube  поэтому кратность тоже ориентир по этой выборке</p><p>Инструмент назвал формулу заголовка <code>The Question</code>, то есть вопрос. Из неё можно взять способ подачи «как человек решает конкретную задачу». Для нашей темы получится «3 своих текста: собираем правила голоса Claude»</p></section></section><section class="article-part" id="chast-3"><div class="part-header"><h2>Часть 3. Проверь материалы перед выпуском</h2></div><section class="content-section" id="proverka"><h3>Проверь, что ответ пригодится</h3><p>У хорошего ответа есть твоя конкретная задача. В образе канала виден зритель, которому нужно объяснить работу с нейросетью. В названиях есть вопрос, который можно проверить. В сценарии у каждого отрезка написано, что показать. Общую фразу «создавай качественный контент» невозможно превратить в кадр</p><p>Прочитай реплики вслух и сверь факты с исходниками. В файле голоса должны быть твои примеры. В заголовке и обложке должна быть понятна тема ролика. Если ответ слишком общий, уточни, для кого он и в каких условиях человек будет повторять действие</p></section><section class="content-section" id="cifry"><h3>Отдели предположения от цифр</h3><div class="ig-table"><table><thead><tr><th>Что предлагает модель</th><th>Где брать подтверждение</th></tr></thead><tbody><tr><td>Доход с тысячи просмотров</td><td>Свой RPM в YouTube Studio, когда доступна статистика дохода. Переводить зарубежные оценки на свой канал коэффициентом нельзя</td></tr><tr><td>Поисковые названия</td><td>Вкладка «Тренды» в YouTube Studio и доступные запросы зрителей. Наличие данных зависит от региона, языка и канала</td></tr><tr><td>Победитель обложек</td><td>Результат A/B-теста по времени просмотра в YouTube Studio</td></tr><tr><td>Таймкоды и главы</td><td>Готовый ролик и расшифровка с реальным временем. Сценарные метки сначала примерные</td></tr><tr><td>Теги</td><td>Официальная справка: помогают при вариантах написания, но название, обложка и описание важнее</td></tr><tr><td>Причина провала удержания</td><td>CSV, расшифровка и просмотр самого фрагмента. Совпадение по времени даёт точку для проверки</td></tr><tr><td>«Вирусный» заголовок</td><td>Публичные просмотры, определённая выборка и медиана; формула заголовка не доказывает причину успеха</td></tr></tbody></table></div><p>Для доли дохода от рекламы в Партнёрской программе YouTube базовый порог: 1 000 подписчиков и 4 000 действительных часов публичного просмотра за последние 12 месяцев либо 10 млн действительных публичных просмотров Shorts за 90 дней. Кроме чисел есть требования программы и доступность по стране. Выполнение порога не означает автоматическое принятие</p></section><section class="content-section" id="oshibki"><h3>Исправь типичные ошибки</h3><div class="ig-table"><table><thead><tr><th>Что видишь</th><th>Что произошло</th><th>Что сделать</th></tr></thead><tbody><tr><td>«Мои клиенты получили», хотя такого кейса нет</td><td>Модель дописала правдоподобную историю</td><td>Удали её целиком или замени настоящим случаем. Добавь запрет на выдуманный опыт</td></tr><tr><td>Процент или доход без источника</td><td>Модель придумала убедительную цифру</td><td>Попроси источник. Если его нет, убери число</td></tr><tr><td>На шаге 7 просят прислать сценарий</td><td>Открыт другой чат или сценарий не передан</td><td>Вернись к цепочке либо приложи сценарий целиком</td></tr><tr><td>Все идеи подходят любому каналу</td><td>Ниша слишком широкая</td><td>Добавь читателя, задачу и условия съёмки</td></tr><tr><td>Оценка русского хука кажется странной</td><td>Инструмент ищет английские слова</td><td>Прочитай начало вслух и оцени, понятно ли, о чём ролик</td></tr><tr><td>После /yt-shorts нет видеофайлов</td><td>Навык подготовил задания на нарезку</td><td>Открой исходное видео в редакторе и примени выбранные отрезки</td></tr><tr><td>Команда не найдена</td><td>Навык не загружен текущей сессией</td><td>Попроси проверить место установки и доступность команды в Claude Code</td></tr><tr><td>CSV не читается</td><td>Нет числовых столбцов или слишком мало точек</td><td>Передай экспорт с позицией и процентом удержания; скрипту нужно хотя бы восемь точек</td></tr></tbody></table></div></section><section class="content-section" id="vse-zaprosy"><h3>Сохрани все семь запросов</h3><p>Скопируй этот блок в заметки. В чат отправляй запросы по одному, сверху вниз, без номера. В седьмой запрос подставь сценарий из шага 4</p><div class="code-card"><pre id="all-prompts"><code>1. Я выбираю тему YouTube-канала про <span class="prompt-value">[Claude и нейросети для экспертов]</span>. Разбери 10 ниш YouTube с высоким доходом с тысячи просмотров, низкой конкуренцией и спросом, который не проходит со временем. Для каждой дай: примерный доход с тысячи просмотров, сложность съёмки, способы заработка помимо рекламы и идею канала в 3 словах. Не придумывай доход и спрос; если данных нет, так и напиши.
+
+2. Я запускаю YouTube-канал про <span class="prompt-value">[Claude и нейросети для экспертов]</span>. Собери полный образ канала: название (5 вариантов), слоган, портрет зрителя, 4 главные темы и мою «фишку», которая отличает меня от других авторов.
+
+3. Составь план роликов на 90 дней для нового YouTube-канала про <span class="prompt-value">[Claude и нейросети для экспертов]</span>. Добавь: 12 названий под поиск, график выхода, какие ролики снимать под поиск, а какие под охват, и порядок тем, который шаг за шагом делает меня экспертом для зрителя.
+
+4. Напиши полный сценарий YouTube-ролика «<span class="prompt-value">[Как дать Claude свой голос: 3 текста вместо длинного промпта]</span>». Структура: зацепка (первые 30 секунд, чтобы зритель не ушёл), усиление проблемы, решение по шагам, 3 главные мысли, призыв к действию и анонс следующего ролика на финальной заставке.
+
+5. Для ролика «<span class="prompt-value">[Как дать Claude свой голос: 3 текста вместо длинного промпта]</span>» дай: два варианта обложки с текстом на каждой, название под поиск YouTube (до 60 знаков), описание (с таймкодами, ключевыми словами и ссылками) и 10 тегов. Подскажи, как сравнить два варианта обложки на зрителях.
+
+6. У меня YouTube-канал про <span class="prompt-value">[Claude и нейросети для экспертов]</span>, <span class="prompt-value">[0]</span> подписчиков. Составь план заработка помимо рекламы YouTube: партнёрские программы, идеи своих цифровых продуктов, шаблон письма спонсору и бесплатный подарок, за который зритель оставит почту.
+
+7. Переупакуй сценарий YouTube-ролика «<span class="prompt-value">[Как дать Claude свой голос: 3 текста вместо длинного промпта]</span>» для канала про <span class="prompt-value">[Claude и нейросети для экспертов]</span> в: пост для Telegram-канала, ветку для Threads, 3 зацепки для Shorts, письмо для рассылки и описание для Pinterest. Подскажи, какие площадки важнее для моей ниши.
+
+Сценарий:
+<span class="prompt-value">[СЦЕНАРИЙ]</span></code></pre><button aria-live="polite" class="copy-button" data-copy-target="all-prompts" type="button">Скопировать</button></div></section><section class="content-section" id="pamyatka"><h3>Памятка перед записью</h3><ul><li>Одна цепочка живёт в одном чате; название для сценария берёшь из плана</li><li>Перед отправкой проверь свою тему, название, число подписчиков и текст сценария</li><li>График подгоняешь под время на съёмку, поисковые названия проверяешь по вопросам аудитории</li><li>Личные истории, проценты и доход сверяешь с реальными материалами</li><li>Сценарий читаешь вслух, таймкоды уточняешь по готовому видео</li><li>Обложку собираешь отдельно; пары сравниваешь по времени просмотра в Studio</li><li>Для /yt-retention нужен CSV, для реплики у провала ещё и расшифровка</li><li>Навыки готовят материалы; монтаж и публикация остаются отдельными действиями</li></ul></section><section class="content-section" id="faq"><h3>Частые вопросы</h3><details><summary>Какие запросы нужны для YouTube-канала?</summary><p>Ниша, образ канала, план, сценарий, упаковка, заработок и переупаковка. Отправляй их в одном чате. Если тема уже выбрана, начинай с образа канала</p></details><details><summary>Можно верить доходу с тысячи просмотров из ответа?</summary><p>В ответе Claude есть диапазоны RPM по широким категориям для англоязычной аудитории. Для части узких направлений отдельных данных нет. Сверяй доход своего канала с собственной аналитикой и действующими условиями монетизации</p></details><details><summary>Сколько времени займут все семь шагов?</summary><p>Это зависит от длины ответов, лимитов модели и готовности исходников. Заложи время на выбор тем, чтение сценария вслух и проверку материалов перед съёмкой</p></details><details><summary>Claude нарисует обложку по пятому запросу?</summary><p>Этот запрос даёт идеи текстом: композицию, надпись и цвета. Саму обложку нужно собрать в редакторе или генераторе изображений</p></details><details><summary>Нужна подписка для набора?</summary><p>Сам набор опубликован по MIT. Доступ к Claude Code, лимиты модели и дополнительные инструменты определяются условиями выбранной среды отдельно</p></details><details><summary>Навыки сами смонтируют и выложат ролик?</summary><p>Нет. /yt-edit даёт список правок, /yt-shorts предлагает фрагменты и первые фразы. Набор не меняет видеофайлы и ничего не публикует</p></details><details><summary>Можно использовать набор без Claude Code?</summary><p>README допускает вставку одного SKILL.md в обычный чат как правил ответа. В таком режиме шесть Python-инструментов не выполняются автоматически</p></details><details><summary>Получится зарабатывать на рекламе YouTube из России?</summary><p>Сейчас авторы из России не могут вступить в партнёрскую программу. Отдельно рассматривай свои продукты, услуги и партнёрства, проверяя их условия</p></details></section><section class="seo-related related-links" aria-labelledby="related"><h2 id="related">Ещё по теме</h2><ul><li><a href="https://pronovoe.com/claude-ai/instagram-4-zaprosa-claude/">Instagram с Claude: 4 запроса для сценария, тем и первых секунд</a></li><li><a href="https://pronovoe.com/claude-ai/prompt-master-uluchshitel-promptov/">Улучшатель промптов: навык Prompt Master для Claude и запрос для любой нейросети</a></li><li><a href="https://pronovoe.com/claude-ai/pervyy-proekt-v-claude/">Первый проект в Claude: своя папка с памятью</a></li></ul></section><section class="content-section" id="istochniki"><h3>Источники и следующий шаг</h3><ul><li><a href="https://github.com/Jakeschincariol/youtube-agent-skill">README YouTube Agent Skill: установка, состав, ограничения</a></li><li><a href="https://github.com/Jakeschincariol/youtube-agent-skill/tree/a2feb2104981a375ffd4f87ee04f4f5344ac43c6/skills">Правила всех 11 навыков сохранённой версии</a></li><li><a href="https://github.com/Jakeschincariol/youtube-agent-skill/blob/main/templates/voice.md">Шаблон файла голоса voice.md</a></li><li><a href="https://support.google.com/youtube/answer/16391400?hl=ru">A/B-тестирование названий и обложек</a></li><li><a href="https://support.google.com/youtube/answer/9884579?hl=ru">Правила глав в видео</a></li><li><a href="https://support.google.com/youtube/answer/146402?hl=ru">Роль тегов</a></li><li><a href="https://support.google.com/youtube/answer/72851?hl=ru">Условия Партнёрской программы</a></li><li><a href="https://support.google.com/youtube/answer/7101720?hl=ru">Доступность партнёрской программы по странам</a></li><li><a href="https://support.google.com/youtube/answer/9314357?hl=ru">Доход на тысячу просмотров</a></li><li><a href="https://support.google.com/youtube/answer/11962757?hl=ru">Идеи и поисковые запросы в Studio</a></li></ul></section><div class="share-row">
+        <span class="eyebrow">Поделиться</span>
+        <a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fyoutube-7-zaprosov-claude%2F&amp;text=YouTube%20%D1%81%20Claude%3A%207%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B8%20%D0%BD%D0%B0%D0%B1%D0%BE%D1%80%20%D0%B8%D0%B7%2011%20%D0%BD%D0%B0%D0%B2%D1%8B%D0%BA%D0%BE%D0%B2" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-btn" href="https://wa.me/?text=YouTube%20%D1%81%20Claude%3A%207%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B8%20%D0%BD%D0%B0%D0%B1%D0%BE%D1%80%20%D0%B8%D0%B7%2011%20%D0%BD%D0%B0%D0%B2%D1%8B%D0%BA%D0%BE%D0%B2%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fyoutube-7-zaprosov-claude%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fyoutube-7-zaprosov-claude%2F&amp;title=YouTube%20%D1%81%20Claude%3A%207%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2%20%D0%B8%20%D0%BD%D0%B0%D0%B1%D0%BE%D1%80%20%D0%B8%D0%B7%2011%20%D0%BD%D0%B0%D0%B2%D1%8B%D0%BA%D0%BE%D0%B2" target="_blank" rel="noopener">VK</a>
+      </div>
+<p class="cta-question">Когда сценарий, обложка и короткие фрагменты подготовлены, остаётся связать контент со своей задачей: что человек найдёт после просмотра и куда перейдёт. Такой же порядок можно собрать для продукта, сайта и воронки. Ниже можно посмотреть, какие задачи нейросеть выполняет, если не знаешь кода</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section></section></article></main><aside class="related-plaque" aria-label="Соседняя статья">
+      <p class="plaque-label">Следующий шаг</p>
+      <h2>Твой первый проект с Claude</h2>
+      <p><a href="https://pronovoe.com/claude-ai/pervyy-proekt-v-claude/">Первый проект в Claude: своя папка с памятью</a></p>
+    </aside></div><script>document.querySelector('.theme-toggle').onclick=()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark'};document.querySelectorAll('[data-copy-target]').forEach(b=>b.onclick=async()=>{const text=document.getElementById(b.dataset.copyTarget).textContent;try{await navigator.clipboard.writeText(text)}catch(e){const t=document.createElement('textarea');t.value=text;document.body.append(t);t.select();const ok=document.execCommand('copy');t.remove();if(!ok){b.textContent='Выдели и скопируй текст';return}}b.textContent='Скопировано';b.classList.add('is-copied');setTimeout(()=>{b.textContent='Скопировать';b.classList.remove('is-copied')},1600)});</script><footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer>
+<!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+<!-- pageviews:start -->
+<script>
+(function () {
+  function loadPageviews() {
+    if (document.getElementById('pageviews-script')) return;
+    var script = document.createElement('script');
+    script.id = 'pageviews-script';
+    script.async = true;
+    script.referrerPolicy = 'no-referrer';
+    script.src = '/assets/pageviews.js';
+    document.head.appendChild(script);
+  }
+  if (document.readyState === 'complete') window.setTimeout(loadPageviews, 0);
+  else window.addEventListener('load', loadPageviews, { once: true });
+}());
+</script>
+<!-- pageviews:end -->
+<div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
+<button aria-label="Закрыть" class="viewer-close" type="button">✕</button>
+<div aria-label="Увеличенный скриншот, можно прокручивать" class="viewer-scroll" tabindex="0"><img alt=""/></div>
+<p class="viewer-hint"></p></div>
+<script src="../../assets/image-viewer.js"></script>
+<script>
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+</script>
+</body></html>
