@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Суд над идеей в Claude: как установить и запустить court-skill</title>
+
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+
+
+<!-- critical:fonts:start -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: fit-content; max-width: 100% }
+    .shot img { display: block; width: auto; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot:has(img[src="assets/voice-brauzer.webp"]) img { width: 560px }
+    .shot:has(img[src="assets/voice-telefon.webp"]) img { width: 300px }
+    .shot:has(img[src="assets/zapros-1.webp"]) img { width: 620px }
+    .shot:has(img[src="assets/otvet-vpermeshku.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-1.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-2.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/plan-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/plan-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/tri-zadachi.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px; font-size: 17px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2:not(.shot) { margin: 22px 0 26px }
+    figure.cover-v2:not(.shot) img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2:not(.shot) img { box-shadow: none }
+    figure.cover-v2:not(.shot) figcaption { margin-top: 11px; color: var(--muted); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { background: var(--guide-color-coral); color: var(--guide-color-forest); position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+.code-card .copy-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest) }
+.code-card .copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest) }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<!-- erid:style:end -->
+
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
+
+<style id="konspekt-editorial">
+.konspekt-example { max-width: 700px; margin: 24px auto 38px }
+.konspekt-example .shot img { width: 100%; height: auto; max-height: none; object-fit: contain }
+.tariff-note { margin-top: 42px; padding: 18px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; line-height: 1.6 }
+.tariff-note p { font-size: inherit; line-height: inherit; margin: 0 0 12px }
+.tariff-note .note-label { font-weight: 400 }
+.tariff-note ul { margin: 0; padding-left: 22px }
+.tariff-note li { margin: 0 0 14px; font-size: inherit; line-height: inherit }
+</style>
+<style>.shot img{width:650px}.code-card pre{overflow-wrap:anywhere;white-space:pre-wrap}.tariff-note{margin-top:32px}</style>
+<style>/* H1 и шаринг: вычисленные значения эталона Trellis 2 на 390 и 1440 px */
+h1.article-standard-h1 {
+  margin: 0 !important;
+  color: var(--guide-color-forest) !important;
+  font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: clamp(27px, 4.4vw, 37.6px) !important;
+  font-weight: 700 !important;
+  line-height: 1.13 !important;
+  letter-spacing: -0.752px !important;
+  text-wrap: balance;
+}
+
+@media (max-width: 860px) {
+  h1.article-standard-h1 {
+    line-height: 1.16 !important;
+  }
+}
+
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--guide-color-paper-border);
+  border-radius: 8px;
+  background: var(--guide-color-white);
+  color: var(--guide-color-forest-hover);
+  font-family: "JetBrains Mono", JetBrainsMono-fb, ui-monospace, SFMono-Regular, monospace;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .share-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+/* Цифры по высоте заглавных во всех статьях: Spectral по умолчанию рисует их «старым стилем» (4, 9 ниже строки) */
+body { font-feature-settings: "lnum" 1; }
+</style>
+<meta name="theme-color" content="#122b31"><style>
+html[data-theme="dark"] article h1{color:var(--ink)!important}
+#style-05-brutalist .shot .zoom{bottom:48px}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.product-figure{margin:24px 0 30px}.product-figure .shot{width:min(100%,520px);margin:auto}.product-figure img{width:100%;height:auto}.product-figure figcaption{margin-top:11px;color:var(--muted);font:400 14px/1.5 Spectral,Georgia,serif}.before-after .product-figure{margin:0 0 20px}.code-card{position:relative;background:var(--guide-color-forest);color:var(--guide-color-paper);border-radius:12px;padding:61px 20px 22px;margin:24px 0;overflow:hidden}.code-card pre,.code-card pre code{background:var(--guide-color-transparent)!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font:500 17px/1.6 "JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace}.code-card pre{margin:15px 0 0}.prompt-destination{display:block;font:500 12px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--guide-color-paper)}.code-card .copy-button{position:absolute;top:12px;right:13px;min-width:140px;min-height:38px;padding:0 12px;border:0;border-radius:8px;background:var(--accent);color:var(--guide-color-forest);font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;box-shadow:0 3px 0 var(--guide-color-brand-ink);transition:background .15s,transform .15s,box-shadow .15s}.code-card .copy-button:hover{background:var(--guide-color-brand-hover);color:var(--guide-color-forest);transform:translateY(1px);box-shadow:0 2px 0 var(--guide-color-brand-ink)}.code-card .copy-button:active{background:var(--guide-color-brand-pressed);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42)}.code-card .copy-button.is-copied{background:var(--guide-color-brand-pressed);box-shadow:0 0 0 3px var(--guide-color-brand-pressed-alpha-55)}.code-card .copy-button:focus-visible{outline:3px solid var(--guide-color-brand-pressed);outline-offset:4px}@media(prefers-reduced-motion:reduce){.code-card .copy-button{transition:none}.code-card .copy-button:hover,.code-card .copy-button:active{transform:none}}
+.result-line{border-left:3px solid var(--guide-color-success-ink);padding-left:16px;background:var(--guide-color-transparent)}.faq-item{padding:16px 18px;border:1px solid var(--line);border-radius:11px;margin:12px 0;background:var(--white)}.faq-item summary{cursor:pointer;font-weight:600}.faq-item p{margin-bottom:0}.draft-sharing-note{font:400 13px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted)}@media(max-width:600px){.before-after{gap:10px}.code-card{padding:61px 18px 22px}.code-card pre,.code-card pre code{font-size:17px}}
+</style><style>/* Review corrections: visible advert hover and cover viewer affordance. */
+.cta .press-button:hover{background:var(--guide-color-brand-pale)!important;color:var(--guide-color-forest)!important}
+figure.cover{position:relative}.cover .zoom{position:absolute;right:10px;bottom:38px;padding:5px 10px;border:0;border-radius:6px;background:var(--guide-color-forest);color:var(--guide-color-white);font:700 11px/1.3 sans-serif;cursor:pointer}
+</style><meta name="description" content="Как установить court-skill, запустить суд над идеей и прочитать вердикт на примере"><meta name="robots" content="index, follow"><meta property="og:title" content="Суд над идеей в Claude: как установить и запустить court-skill"><meta property="og:description" content="Как установить court-skill, запустить суд над идеей и прочитать вердикт на примере"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><style>
+.code-card .prompt-value{color:var(--guide-color-coral)}
+.prompt-edit-hint{font:400 14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted);margin-bottom:10px}
+.product-figure .shot .zoom{position:static;display:block;margin:10px 0 0 auto;opacity:1}
+</style><style>
+.code-card{position:relative;width:fit-content;max-width:100%;box-sizing:border-box;padding:14px 128px 14px 18px}
+.code-card pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.code-card .copy-button{position:absolute;top:9px;right:9px;margin:0;min-width:0;min-height:30px;padding:6px 12px;font-size:12px;border-radius:7px}
+@media (max-width:600px){.code-card{width:auto;padding:46px 14px 14px}}
+.prompt-value{color:var(--guide-color-brand-peach)}
+.shot{width:100%;max-width:100%;display:flex;flex-direction:column;align-items:stretch;overflow:visible;background:var(--guide-color-transparent);border:0}
+.shot img{display:block;width:100%;height:auto;max-width:100%;border-radius:10px}
+.shot .zoom,.cover .zoom{position:static;align-self:flex-end;display:block;width:fit-content;opacity:1;margin:9px 0 0;min-height:36px;padding:9px 12px}
+.cover img{width:100%;height:auto;max-height:none;object-fit:contain}
+.cover .zoom{margin-left:auto;background:var(--guide-color-forest-hover);color:var(--guide-color-paper);border:0;border-radius:6px;font:700 11px/1 sans-serif;cursor:pointer}
+.table-wrap{width:100%;overflow-x:auto;margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:17px}
+th,td{text-align:left;vertical-align:top;padding:12px;border:1px solid var(--line)}
+tbody tr{background:var(--white)}
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-2) 25%,var(--white) 75%)}
+li>p{margin-top:8px}
+@media(max-width:600px){.code-card{padding:46px 14px 14px}.table-wrap table{min-width:590px}}
+</style><meta name="twitter:image" content="https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/assets/oblozhka.webp"><style>/* H1 и шаринг: вычисленные значения эталона Trellis 2 на 390 и 1440 px */
+h1.article-standard-h1 {
+  margin: 0 !important;
+  color: var(--guide-color-forest) !important;
+  font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: clamp(27px, 4.4vw, 37.6px) !important;
+  font-weight: 700 !important;
+  line-height: 1.13 !important;
+  letter-spacing: -0.752px !important;
+  text-wrap: balance;
+}
+
+/* Общий светлый заголовок на тёмной бумаге; HTML статей не меняется. */
+html[data-theme="dark"] h1.article-standard-h1 {
+  color: var(--guide-color-paper) !important;
+}
+
+@media (max-width: 860px) {
+  h1.article-standard-h1 {
+    line-height: 1.16 !important;
+  }
+}
+
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--guide-color-paper-border);
+  border-radius: 8px;
+  background: var(--guide-color-white);
+  color: var(--guide-color-forest-hover);
+  font-family: "JetBrains Mono", JetBrainsMono-fb, ui-monospace, SFMono-Regular, monospace;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .share-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+/* Цифры по высоте заглавных во всех статьях: Spectral по умолчанию рисует их «старым стилем» (4, 9 ниже строки) */
+body { font-feature-settings: "lnum" 1; }
+</style>
+<style>
+.prompt-value{color:var(--guide-color-brand-peach)}
+#perekladka .info-card{margin-top:16px}#perekladka .info-card p{font-size:15px;line-height:1.55;color:var(--muted)}
+.next-read h2{margin:0 0 4px;font-size:20px}.next-read p.next-sub{margin:0 0 16px;font-size:14.5px}.next-read .why{font-size:14px}
+.shot{background:var(--guide-color-transparent)}figure.shot:has(video){width:75%;max-width:405px;margin:24px auto}.shot video{display:block;width:100%;height:auto}figure.shot:has(video) figcaption{margin-top:9px}.shot img{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
+.shot .zoom{position:static;align-self:flex-end;display:block;width:fit-content;opacity:1;margin:9px 0 0;min-height:36px;padding:9px 12px}
+.code-card{width:auto;max-width:100%;padding-top:54px;padding-right:18px}
+.code-card .copy-button{min-width:135px;min-height:36px;font-size:13px}
+.code-card pre{white-space:pre-wrap;overflow-wrap:anywhere}
+:root{--sage-note:#E2E8E9;--sage-line:#BBC7CA}
+:root[data-theme="dark"]{--sage-note:#243735;--sage-line:#48605C}
+html[data-theme="dark"] .uroven-metka{background:var(--guide-color-warm-success);color:var(--guide-color-success-on-dark)}
+.warn-card + h3{margin-top:32px}
+.uroven-metka{display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+article figcaption{font-family:'Spectral',Georgia,serif;font-weight:400}
+</style><meta property="og:image" content="https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/assets/oblozhka.webp">
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/#article",
+      "headline": "Суд над идеей в Claude: как установить и запустить court-skill",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-11-07",
+      "image": "https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/assets/oblozhka.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Суд над идеей в Claude: как установить и запустить court-skill",
+          "item": "https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Сколько стоит?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Скилл бесплатный, тратит только лимит подписки (см. выше)"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли на русском?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Напиши описание и попроси ответить по-русски. Пример выше тоже проводили на русском"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чем суд отличается от просьбы «покритикуй»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Участники суда спорят и голосуют по отдельности, подробнее - в разделе «Что делает суд над идеей»"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Безопасно ли ставить?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Код скилла (версия на 7 ноября 2026) только сохраняет материалы суда в папку .court и считает голоса. Сетевых запросов и установки программ в нём нет. У новых версий код может быть другим, поэтому перед разрешением читай, что Claude собирается сделать"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+
+
+
+
+
+<style>.faq-item{padding:16px 18px;border:1px solid var(--line);border-radius:11px;margin:12px 0;background:var(--white)} .faq-item summary{cursor:pointer;font-weight:600} .faq-item p{margin-bottom:0} .step-circle {display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--guide-color-white);font-size:16px;margin-right:8px}.score-card strong {font-size:48px;line-height:1.1}.info-card ul {margin:8px 0 0;padding-left:22px}.score-card p + p {margin-top:10px}article > section {margin-top:66px} .info-card + h2, .info-card + h3, .warn-card + h2, .warn-card + h3 {margin-top:48px} @media (max-width:860px) {article > section {margin-top:52px}} #istochniki + .cta-question {margin-top:32px}</style><link href="../../assets/article-sharing.css" rel="stylesheet"/><meta property="og:url" content="https://pronovoe.com/claude-ai/sud-nad-ideey-v-claude/"><!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  flex: 1 1 0; width: 124px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+#cookie-accept { background: var(--guide-color-brand); color: var(--guide-color-forest); border-color: var(--guide-color-brand) }
+#cookie-decline { background: var(--guide-color-slate-paper); color: var(--guide-color-forest); border-color: var(--guide-color-slate-paper) }
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+</head><body><script src="../../assets/image-viewer.js"></script>
+<div aria-hidden="true" class="progress"></div>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="https://pronovoe.com/">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">Суд над идеей в Claude</div><div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div></div></div></header>
+<div class="page-shell"><nav class="toc" aria-label="Содержание"><a href="#chto">Что делает суд над идеей</a><a href="#nuzhno">Что понадобится</a><a href="#ustanovka">Установка скилла</a><a class="toc-sub" href="#heading-3">1 Подключи каталог, где лежит скилл</a><a class="toc-sub" href="#heading-4">2 Установи скилл</a><a href="#opisanie">Описание идеи для суда</a><a href="#zapusk">Запуск быстрого суда</a><a href="#primer">Пример вердикта</a><a class="toc-sub" href="#heading-8">Спор обвинения и защиты</a><a class="toc-sub" href="#golosa">Голоса присяжных</a><a class="toc-sub" href="#obvineniya">Что суд признал слабыми местами</a><a class="toc-sub" href="#zashchita">Что в идее сильное</a><a class="toc-sub" href="#usloviya">Итог судьи: что исправить</a><a href="#povtor">Если не согласен с вердиктом</a><a href="#faq">Частые вопросы</a><a href="#istochniki">Источники</a></nav><main><article><header id="nachalo"><p class="eyebrow">Claude Code</p><h1 class="article-standard-h1">Суд над идеей в Claude: как установить и запустить court-skill</h1>
+<p class="uroven-metka green" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Начальный уровень</p><p>court-skill - бесплатное дополнение к Claude Code, которое проводит суд над идеей</p><p class="lead">У тебя есть идея своего дела: канал, курс, гайд, приложение или услуга, и хочется понять, что в ней стоит исправить до того, как тратить месяцы и деньги. Устрой ей суд в Claude: несколько копий Claude сыграют обвинителя, защитника и присяжных, поспорят и проголосуют, а судья скажет, что исправить до запуска</p><p class="meta">ОБНОВЛЕНО 7 НОЯБРЯ 2026</p>
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Суд над идеей в Claude: как установить и запустить court-skill</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header><div class="share-row share-top"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsud-nad-ideey-v-claude%2F&amp;text=%D0%A1%D1%83%D0%B4%20%D0%BD%D0%B0%D0%B4%20%D0%B8%D0%B4%D0%B5%D0%B5%D0%B9%20%D0%B2%20Claude%3A%20%D0%BA%D0%B0%D0%BA%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C%20court-skill" rel="noopener" target="_blank">Telegram</a><a class="share-btn" href="https://wa.me/?text=%D0%A1%D1%83%D0%B4%20%D0%BD%D0%B0%D0%B4%20%D0%B8%D0%B4%D0%B5%D0%B5%D0%B9%20%D0%B2%20Claude%3A%20%D0%BA%D0%B0%D0%BA%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C%20court-skill%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsud-nad-ideey-v-claude%2F" rel="noopener" target="_blank">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsud-nad-ideey-v-claude%2F&amp;title=%D0%A1%D1%83%D0%B4%20%D0%BD%D0%B0%D0%B4%20%D0%B8%D0%B4%D0%B5%D0%B5%D0%B9%20%D0%B2%20Claude%3A%20%D0%BA%D0%B0%D0%BA%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C%20court-skill" rel="noopener" target="_blank">VK</a></div><figure class="cover-v2"><img alt="Судья с молотком: суд над идеей в Claude" height="840" src="assets/oblozhka.webp" width="1600"/><figcaption>Агенты спорят о твоей идее и выносят вердикт</figcaption></figure>
+<div class="info-card"><p><b>Что получишь после суда:</b></p><ul><li>Какие слабые места суд признал</li><li>Что в идее сильное</li><li>Что исправить перед запуском</li></ul></div>
+<details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#chto">Что делает суд над идеей</a><a href="#nuzhno">Что понадобится</a><a href="#ustanovka">Установка скилла</a><a class="toc-sub" href="#heading-3">1 Подключи каталог, где лежит скилл</a><a class="toc-sub" href="#heading-4">2 Установи скилл</a><a href="#opisanie">Описание идеи для суда</a><a href="#zapusk">Запуск быстрого суда</a><a href="#primer">Пример вердикта</a><a class="toc-sub" href="#heading-8">Спор обвинения и защиты</a><a class="toc-sub" href="#golosa">Голоса присяжных</a><a class="toc-sub" href="#obvineniya">Что суд признал слабыми местами</a><a class="toc-sub" href="#zashchita">Что в идее сильное</a><a class="toc-sub" href="#usloviya">Итог судьи: что исправить</a><a href="#povtor">Если не согласен с вердиктом</a><a href="#faq">Частые вопросы</a><a href="#istochniki">Источники</a></nav></details>
+<section id="chto"><h2>Что делает суд над идеей</h2><p>Для суда понадобится Claude Code - программа, в которой можно общаться с Claude и поручать ему работу с файлами на компьютере</p>
+<div class="info-card"><p><b>Обвинитель</b> ищет причины, по которым идея может не сработать</p></div><div class="info-card"><p><b>Защитник</b> ищет аргументы в пользу идеи. Потом обе стороны отвечают друг другу</p></div><div class="info-card"><p><b>Присяжные</b> читают дело каждый со своей позиции, например дизайнера или инвестора. Они голосуют отдельно и не видят голосов друг друга</p></div><div class="info-card"><p><b>Судья</b> собирает результаты и пишет вердикт</p></div><p>На «покритикуй» ты получишь один ответ. Здесь стороны отвечают друг другу, а каждый присяжный объясняет свой голос. Так видно больше разных дыр</p><div class="info-card"><p><b>Скилл</b> - дополнение к Claude Code, как приложение к телефону. Ставится двумя командами</p></div><div class="info-card"><p><b>Агент</b> - ещё один Claude, которому дали одну роль. На суде у каждой роли своя задача</p></div><div class="info-card"><p><b>Лимит</b> - сколько ты можешь пользоваться Claude по своей подписке</p></div><div class="info-card"><p><b>Терминал</b> - приложение на компьютере, куда вводят команды. В нём можно открыть Claude Code</p></div></section>
+<section id="nuzhno"><h2>Что понадобится</h2><p>Нужен Claude Code на платном тарифе и свободный лимит</p><div class="warn-card"><p>Суд тратит лимит подписки: быстрый режим - 11 запросов к Claude, полный - 17. Для первого раза бери быстрый</p></div><p>Если Claude у тебя не открывается, начни с <a href="https://pronovoe.com/claude-ai/podklyuchenie-iz-rossii/">инструкции «Claude из России»</a>. Установить Claude Code поможет <a href="https://code.claude.com/docs/en/setup">официальная инструкция</a></p></section>
+<section id="ustanovka"><h2>Установка скилла</h2><p>Открой Claude Code. Внизу есть строка для сообщений, туда и вставляй команды по очереди</p><div class="step" id="shag-1"><h3 id="heading-3"><span class="step-circle">1</span> Подключи каталог, где лежит скилл</h3><div class="code-card"><span class="prompt-destination">Вставь в Claude Code</span><pre id="market"><code>/plugin marketplace add alexyc9381/court-skill</code></pre><button aria-live="polite" class="copy-button" data-copy-target="market" type="button">Скопировать</button></div><p>Дождись ответа Claude Code</p></div><div class="step" id="shag-2"><h3 id="heading-4"><span class="step-circle">2</span> Установи скилл</h3><div class="code-card"><span class="prompt-destination">Вставь в Claude Code</span><pre id="install"><code>/plugin install court-skill@court-skill</code></pre><button aria-live="polite" class="copy-button" data-copy-target="install" type="button">Скопировать</button></div><p>Дождись подтверждения. После такой установки полное имя команды - <code>/court-skill:court</code></p><p>Не видишь команду? Перезапусти Claude Code и проверь список команд</p></div><p>Автор скилла: Alex Chen (@nocodealex), лицензия MIT. Код: <a href="https://github.com/alexyc9381/court-skill">github.com/alexyc9381/court-skill</a></p></section>
+<section id="opisanie"><h2>Описание идеи для суда</h2><div class="warn-card"><p><b>Суд знает только то, что ты написал.</b> Если не указать цену, сроки или другие данные, участники не смогут их учесть</p></div><p>Опиши идею и аудиторию. Добавь цену, сроки, известные данные и ограничения. Если чего-то пока нет, так и напиши</p><p>Не добавляй оценку вроде «идея точно сработает». Пример заполнен про канал о тревожности. Замени каждую строку своей. Если цены нет, так и напиши</p><div class="code-card"><span class="prompt-destination">Замени текст в скобках своими фактами</span><pre id="case"><code>Идея: <span class="prompt-value">[создать канал о тревожности и продавать готовый гайд]</span>
+Для кого: <span class="prompt-value">[люди, которые хотят справляться со стрессом]</span>
+Продукт и цена: <span class="prompt-value">[готовый гайд, цена пока не утверждена]</span>
+Что уже есть: <span class="prompt-value">[гайд написан]</span>
+План и срок: <span class="prompt-value">[начать продажи сразу, пересмотреть запуск через 4 недели]</span>
+Цель и ограничения: <span class="prompt-value">[оценивать рост подписчиков, запуск ведёт один человек]</span></code></pre><button aria-live="polite" class="copy-button" data-copy-target="case" type="button">Скопировать</button></div></section>
+<section id="zapusk"><h2>Запуск быстрого суда</h2><p>Скопируй команду, вставь вместо текста в скобках своё описание и отправь в Claude Code. Слово <code>--quick</code> - переключатель: суд пройдёт быстрее, с шестью присяжными</p><div class="code-card"><span class="prompt-destination">Вставь в Claude Code</span><pre id="run"><code>/court-skill:court --quick <span class="prompt-value">[вставь описание своей идеи и факты о ней]</span></code></pre><button aria-live="polite" class="copy-button" data-copy-target="run" type="button">Скопировать</button></div><p>Claude Code спросит разрешение создать файлы. Прочитай, что он просит, и подтверди. Чтобы не подтверждать каждый файл, нажми Shift+Tab: включится режим принятия правок (так советует автор)</p><p>Когда суд закончится, Claude покажет вердикт. Полные материалы и файл <code>VERDICT.md</code> будут в папке <code>.court</code> внутри рабочей папки</p><p>Без <code>--quick</code> заседают 12 присяжных. С помощью <code>--jury N</code> можно выбрать от 3 до 12</p></section>
+<section id="primer"><h2>Пример вердикта</h2>
+<div class="info-card"><p><b>Что мы отправили на суд</b></p><p>Автору захотелось сделать гайд и продавать его. Гайд уже готов, но рынок не изучали, цены не поставили, понятного показателя успеха продаж нет</p><p>Мы знали, что идея сыровата, и хотели посмотреть: найдёт ли суд что-то кроме очевидного «нет цены»</p><ul><li>Канал о тревожности, стрессе, сне и энергии для людей любого возраста. Канала и аудитории пока нет</li><li>Гайд на 25-35 страниц с трекером на 14 дней и 28 проверенными источниками. Аудиоверсия - около 100 минут</li><li>План: один ролик в день на три площадки. Путь к покупке: ролик → карточка по кодовому слову → Telegram-канал → продажа</li><li>Бота нет, на сообщения отвечают вручную. Цель - 300+ человек в Telegram за 4-6 недель</li><li>Предзаписи и предоплат не будет, продажи откроют сразу</li></ul></div>
+<p>Очевидное суд, конечно, нашёл. Но интереснее оказались вещи, которых мы не ждали: разрыв между темой канала и гайдом, ручная воронка, которая может сломаться при росте, и цель, по которой не понять, работают ли продажи</p>
+<h3 id="heading-8">Спор обвинения и защиты</h3>
+<div class="info-card"><p><b>Обвинение:</b> Продажа не проверена. Гайд написали до первого сигнала спроса, а предзаписи и предоплат не будет</p><p><b>Защита:</b> Продукт уже готов. Запуск без готового продукта хуже, чем продукт без аудитории: пока выходят ролики, дописывать гайд не придётся</p></div>
+<div class="info-card"><p><b>Обвинение:</b> Канал про сон, энергию и стресс привлечёт разных людей, а продаёт он гайд про тревогу. Связка не объяснена</p><p><b>Защита:</b> Широкий вход и узкая продажа могут работать. Но связку действительно надо объяснить, иначе она может снизить продажи</p></div>
+<div class="info-card"><p><b>Обвинение:</b> Воронка держится на ручных ответах, а на каждом переходе часть людей может уйти. При росте автор рискует не справиться</p><p><b>Защита:</b> Пока аудитории нет, масштабировать нечего. Ручные ответы дают живые вопросы людей, а бота можно поставить, когда появится поток</p></div>
+<div class="warn-card score-card"><p><strong>5:1</strong></p><p>Пятеро считают, что идею надо доработать, один поддержал запуск. В вердикте это GUILTY - «виновен»</p></div>
+<h3 id="golosa">Голоса присяжных</h3>
+<div class="info-card"><p><b>Дизайнер - против</b></p><p>Незнакомец за пять секунд не поймёт, зачем ему канал. Вход про сон и энергию, а гайд про тревогу</p><p><b>Решающий факт:</b> связку между широкой темой канала и узким продуктом не объяснили</p><p><b>Передумает, если:</b> обещание сузят до одной понятной фразы и поставят её в первый кадр роликов, карточку и шапку канала, а условия предложения утвердят</p></div>
+<div class="info-card"><p><b>Инженер - против</b></p><p>Вся цепочка и ручные ответы держатся на одном человеке. Ломаться она начнёт ровно в тот момент, когда сработает</p><p><b>Решающий факт:</b> за четыре недели считают подписчиков, а не покупки, поэтому работу воронки не оценить</p><p><b>Передумает, если:</b> зададут условия предложения и порог покупок или конверсии, а ещё границу, после которой ручные ответы заменит бот</p></div>
+<div class="info-card"><p><b>Инвестор - против</b></p><p>«Свои деньги я бы в это именно в таком виде не вложил». Без порога продаж и точки остановки нельзя сопоставить выигрыш с риском</p><p><b>Решающий факт:</b> ориентир есть только по подписчикам, окупаемость и остановка по продажам не определены</p><p><b>Передумает, если:</b> установят условия продажи и число покупок со сроком решения о продолжении или остановке либо заранее проверят спрос</p></div>
+<div class="info-card"><p><b>Бывший судья - против</b></p><p>Доказательств спроса нет, есть только надежда. Бремя доказательства лежит на тех, кто предлагает запускать</p><p><b>Решающий факт:</b> в деле нет данных, показывающих, что люди готовы платить</p><p><b>Передумает, если:</b> появится порог оплат со сроком остановки или подтверждённый сигнал спроса, например предоплаты или опрос о готовности платить</p></div>
+<div class="info-card"><p><b>Владелец малого бизнеса - за</b></p><p>Товар уже на полке, а денежных расходов на запуск в деле нет. В медленный месяц теряется только время автора, поэтому лавку можно открывать</p><p><b>Решающий факт:</b> гайд написан, источники проверены, а запуск обещают пересмотреть через четыре недели без роста</p><p><b>Передумает, если:</b> появятся платные расходы без условий и порога продаж или выяснится, что аудио ещё не записано, а один человек одновременно ведёт запись, ролики и ответы</p></div>
+<div class="info-card"><p><b>Родитель - против</b></p><p>Я бы не доверил это людям в тревоге: защита от вреда описана одной строкой. Аудитория при этом любого возраста</p><p><b>Решающий факт:</b> не сказано, как ограничения будут соблюдаться в роликах</p><p><b>Передумает, если:</b> в роликах и гайде появятся конкретные правила безопасности, возрастная граница и обращение «к специалисту» в каждом ролике</p></div>
+<h3 id="obvineniya">Что суд признал слабыми местами</h3><div class="info-card"><ul><li>Непроверенное предложение и спрос</li><li>Показатель роста без показателя продаж</li><li>Неясная связь канала с продуктом и недостаточные правила безопасности</li></ul></div>
+<h3 id="zashchita">Что в идее сильное</h3><p>Судья признал: гайд уже написан, источники проверены, а срок пересмотра запуска задан</p>
+<h3 id="usloviya">Итог судьи: что исправить</h3><p>Идею отправили на доработку, а не в архив. Судья предложил собрать условия предложения и критерий решения в один план: что проверяем, какой результат считаем достаточным и когда подводим итог</p><p>Проверку готовности платить можно провести опросом до запуска или внутри него. Обещание и правила безопасности должны появиться в самих материалах, а не остаться только в описании идеи</p><div class="warn-card"><p>Вердикт не доказывает, что идея сработает: он показывает, что проверить на людях</p></div></section>
+<section id="povtor"><h2>Если не согласен с вердиктом</h2><p>Посмотри, каких фактов не хватило присяжным. Добавь реальные данные, уточни условия и запусти суд снова</p><p>Если цифр пока нет, не придумывай их. Сначала проверь предположение с людьми</p></section>
+<section id="faq"><h2>Частые вопросы</h2><details class="faq-item" id="stoimost"><summary>Сколько стоит?</summary><p>Скилл бесплатный, тратит только лимит подписки (см. выше)</p></details><details class="faq-item" id="russkiy"><summary>Можно ли на русском?</summary><p>Да. Напиши описание и попроси ответить по-русски. Пример выше тоже проводили на русском</p></details><details class="faq-item" id="otlichie"><summary>Чем суд отличается от просьбы «покритикуй»?</summary><p>Участники суда спорят и голосуют по отдельности, подробнее - в разделе <a href="#chto">«Что делает суд над идеей»</a></p></details><details class="faq-item" id="bezopasnost"><summary>Безопасно ли ставить?</summary><p>Код скилла (версия на 7 ноября 2026) только сохраняет материалы суда в папку <code>.court</code> и считает голоса. Сетевых запросов и установки программ в нём нет. У новых версий код может быть другим, поэтому перед разрешением читай, что Claude собирается сделать</p></details></section>
+<section id="istochniki"><h2>Источники</h2><ul class="sources"><li><a href="https://github.com/alexyc9381/court-skill">court-skill на GitHub</a> - инструкция автора, исходный код и лицензия</li><li><a href="https://code.claude.com/docs/en/setup">Официальная инструкция Claude Code</a> - установка программы</li></ul></section><p class="cta-question">Суд показал, что проверить. Если хочешь собирать такие проверки и продукты с нейросетями без кода, вот с чего начать</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q</p></section><aside aria-label="Дальше по теме" class="next-read"><h2>Дальше по теме</h2><p class="next-sub">Продолжи знакомство с агентами Claude</p><ul><li><a href="https://pronovoe.com/claude-ai/komanda-ii-agentov-dlya-bloga/"><span class="title">Команда ИИ-агентов для блога</span><span class="why">Роли и задачи агентов в работе над контентом</span></a></li><li><a href="https://pronovoe.com/claude-ai/proverka-rezyume-claude-code/"><span class="title">Проверка резюме в Claude Code</span><span class="why">Ещё один пример работы с Claude Code</span></a></li></ul></aside><div class="share-row"><span class="eyebrow">Поделиться</span><a class="share-btn" href="https://t.me/share/url?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsud-nad-ideey-v-claude%2F&amp;text=%D0%A1%D1%83%D0%B4%20%D0%BD%D0%B0%D0%B4%20%D0%B8%D0%B4%D0%B5%D0%B5%D0%B9%20%D0%B2%20Claude%3A%20%D0%BA%D0%B0%D0%BA%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C%20court-skill" rel="noopener" target="_blank">Telegram</a><a class="share-btn" href="https://wa.me/?text=%D0%A1%D1%83%D0%B4%20%D0%BD%D0%B0%D0%B4%20%D0%B8%D0%B4%D0%B5%D0%B5%D0%B9%20%D0%B2%20Claude%3A%20%D0%BA%D0%B0%D0%BA%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C%20court-skill%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsud-nad-ideey-v-claude%2F" rel="noopener" target="_blank">WhatsApp</a><a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fsud-nad-ideey-v-claude%2F&amp;title=%D0%A1%D1%83%D0%B4%20%D0%BD%D0%B0%D0%B4%20%D0%B8%D0%B4%D0%B5%D0%B5%D0%B9%20%D0%B2%20Claude%3A%20%D0%BA%D0%B0%D0%BA%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C%20%D0%B8%20%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C%20court-skill" rel="noopener" target="_blank">VK</a></div></article></main>
+<aside aria-label="Соседняя статья" class="related-plaque">
+      <p class="plaque-label">Следующий шаг</p>
+      <p><a href="https://pronovoe.com/claude-ai/komanda-ii-agentov-dlya-bloga/">Команда ИИ-агентов для блога</a></p>
+    </aside></div>
+<div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
+<button aria-label="Закрыть" class="viewer-close" type="button">✕</button>
+<div aria-label="Увеличенный скриншот, можно прокручивать" class="viewer-scroll" tabindex="0"><img alt=""/></div>
+<p class="viewer-hint"></p></div>
+
+
+
+
+<script>document.querySelectorAll('[data-copy-target]').forEach(function(b){b.addEventListener('click',async function(){let t=document.getElementById(b.dataset.copyTarget).innerText;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t)}else{let e=document.createElement('textarea');e.value=t;e.style.position='fixed';e.style.opacity='0';document.body.appendChild(e);e.select();let ok=document.execCommand('copy');e.remove();if(!ok)throw Error('copy failed')}b.textContent='✓ Скопировано';b.classList.add('is-copied');clearTimeout(b.copyTimer);b.copyTimer=setTimeout(()=>{b.textContent='Скопировать';b.classList.remove('is-copied')},1800)}catch(e){b.textContent='Не удалось скопировать'}})});let toggle=document.querySelector('.theme-toggle');if(toggle)toggle.addEventListener('click',()=>{let h=document.documentElement;h.dataset.theme=h.dataset.theme==='dark'?'light':'dark'});</script><footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer><script>
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+      if (wide) target = Math.min(target, (viewer.clientHeight - 96) * big.naturalWidth / big.naturalHeight);
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+</script><!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+<!-- pageviews:start -->
+<script>
+(function () {
+  function loadPageviews() {
+    if (document.getElementById('pageviews-script')) return;
+    var script = document.createElement('script');
+    script.id = 'pageviews-script';
+    script.async = true;
+    script.referrerPolicy = 'no-referrer';
+    script.src = '/assets/pageviews.js';
+    document.head.appendChild(script);
+  }
+  if (document.readyState === 'complete') window.setTimeout(loadPageviews, 0);
+  else window.addEventListener('load', loadPageviews, { once: true });
+}());
+</script>
+<!-- pageviews:end -->
+</body></html>
