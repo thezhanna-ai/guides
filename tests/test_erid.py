@@ -71,7 +71,7 @@ class EridTest(unittest.TestCase):
                  ROOT / "scripts/shablon_glavnoy.html"]
         for page in pages:
             with self.subTest(page=str(page.relative_to(ROOT))):
-                if page.parent.name in {"promty-pravki-foto-chatgpt", "klod-ne-poddakivaet"}:
+                if page.parent.name in {"promty-pravki-foto-chatgpt", "klod-ne-poddakivaet", "album-viralspin-sortirovka-foto"}:
                     # Approved HTML is serialized: attribute order and whitespace
                     # differ. Compare the complete advertising DOM with standard.
                     from bs4 import BeautifulSoup
@@ -80,6 +80,9 @@ class EridTest(unittest.TestCase):
                     if page.parent.name == "klod-ne-poddakivaet":
                         self.assertEqual(actual.get('id'), 'next')
                         del actual['id']  # Existing TOC target; retain the approved ad bytes.
+                    elif page.parent.name == "album-viralspin-sortirovka-foto":
+                        self.assertEqual(actual.get("id"), "svoi-proekt")
+                        del actual["id"]  # Approved TOC target; retain the accepted advertising DOM.
                     else:
                         self.assertEqual(actual.h2.get('id'), 'section-26')
                         del actual.h2['id']  # Approved TOC target; ad text/links stay canonical.

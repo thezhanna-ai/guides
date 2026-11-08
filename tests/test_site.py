@@ -1522,7 +1522,7 @@ class GuidesSiteTest(unittest.TestCase):
                 self.assertRegex(html, r"\.masthead \.(press-button|camp-link) \{ flex: 1")
                 # плашка соседней статьи: надзаголовок, название и ОДНА строка-ссылка
                 plashka = html.split('class="related-plaque"', 1)[1].split("</aside>", 1)[0]
-                if papka.name == "promty-pravki-foto-chatgpt":
+                if papka.name in {"promty-pravki-foto-chatgpt", "album-viralspin-sortirovka-foto"}:
                     from bs4 import BeautifulSoup
                     plashka = str(BeautifulSoup(html, 'html.parser').select_one('aside.related-plaque[aria-label="Соседняя статья"]'))
                     self.assertEqual(len(re.findall(r"<p\b", plashka)), 2)
