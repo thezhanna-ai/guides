@@ -35,7 +35,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"} and not a.get("seriya")}
-        self.assertEqual(len(ready), 86)  # +ИНТЕРВЬЮ: публикация 09.11.2026
+        self.assertEqual(len(ready), 87)  # +ПЕРЕЕЗД: публикация 10.11.2026
         optional_without_cover = {a["slug"] for a in self.registry
                                   if a.get("oblozhka") is False and a["slug"] not in self.covers}
         self.assertEqual(set(self.covers), (ready | {a["slug"] for a in self.registry
@@ -134,6 +134,17 @@ class PublicationTest(unittest.TestCase):
                 continue
             links = [n for n in doc.root.all(tag="a") if "data-partner" in n.attrs or
                      "theivansergeev.com" in n.attrs.get("href", "")]
+            if page.parent.name == "pereezd-iz-claude-v-codex":
+                # The guide credits its source and links the source's local archive viewer.
+                source_paths = {
+                    "/guide-verifikaciya-claude/",
+                    "/guide-verifikaciya-claude/claude-recovery-templates.zip",
+                }
+                links = [link for link in links if "data-partner" in link.attrs or not (
+                    urlsplit(link.attrs.get("href", "")).netloc == "theivansergeev.com"
+                    and urlsplit(link.attrs.get("href", "")).path in source_paths
+                    and not urlsplit(link.attrs.get("href", "")).query
+                )]
             with self.subTest(page=str(page.relative_to(ROOT))):
                 self.assertEqual([link.attrs.get("data-partner") for link in links],
                                  ["koncentrat", "zapis"])
