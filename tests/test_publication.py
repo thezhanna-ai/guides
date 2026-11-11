@@ -163,7 +163,7 @@ class PublicationTest(unittest.TestCase):
     def test_svyaz_has_master_group_cta_and_no_foreign_author_in_text(self):
         html = (ROOT / "claude-ai/chatgpt-composio-prilozheniya/index.html").read_text()
         self.assertIn('class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"', html)
-        self.assertIn('erid: 2Vtzqvk2p6q', html)
+        self.assertIn('erid: 2Vtzqwfc8iA', html)
         before_cta = re.split(r'<p class="cta-question"[^>]*>', html, maxsplit=1)[0].lower()
         self.assertNotRegex(before_cta.split("<main>")[1], r"иван|theivansergeev|data-partner|источник-ролик")
         self.assertNotIn('noindex', html)

@@ -8,7 +8,7 @@ const root = path.resolve(__dirname, '..');
 const pages = ['index.html', ...fs.readdirSync(path.join(root, 'claude-ai'))
   .map(slug => `claude-ai/${slug}/index.html`)
   .filter(file => fs.existsSync(path.join(root, file)) && file !== "claude-ai/chatgpt-composio-prilozheniya/index.html"), 'scripts/shablon_glavnoy.html'];
-const disclosure = 'Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q';
+const disclosure = 'Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqwfc8iA';
 const partnerLinks = {
   koncentrat: 'https://theivansergeev.com/koncentrat/?gcpc=16fff',
   zapis: 'https://theivansergeev.com/zapis/?gcpc=16fff'
@@ -42,7 +42,8 @@ for (const file of pages) {
     const labels = [...html.matchAll(/<p class="ad-disclosure">([\s\S]*?)<\/p>/g)];
     assert.equal(labels.length, 1);
     assert.equal(labels[0][1], disclosure, 'The full label must be plain text without running JS');
-    assert.equal((html.match(/2Vtzqvk2p6q/g) || []).length, 1);
+    assert.equal((html.match(/2Vtzqwfc8iA/g) || []).length, 1);
+    assert.doesNotMatch(html, /2Vtzqvk2p6q/);
     assert.doesNotMatch(html, /2Vtzquqo4SZ/);
     assert.doesNotMatch(html, /2VtzqviiWtm/);
     assert.doesNotMatch(html, /\b(?:var|let|const)\s+ERID\b|data-erid/);

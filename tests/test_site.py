@@ -1002,7 +1002,7 @@ class GuidesSiteTest(unittest.TestCase):
         self.assertNotIn("mid-cta", server)
         for html in (server, access):
             with self.subTest(page="server" if html is server else "access"):
-                self.assertRegex(html, r'<p class="cta-question"(?: id="svoi-proekt")?>[^<]+</p>\s*<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>[^<]+</h2><p>[^<]+</p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">Забрать Концентрат</a><p>[^<]+</p><a class="press-button" data-partner="zapis" href="https://theivansergeev\.com/zapis/\?gcpc=16fff">Заполнить анкету предзаписи</a><p>[^<]+</p><p class="ad-disclosure">Реклама\.[^<]+2Vtzqvk2p6q</p></section>\s*<(?:footer|div) class="foot">')
+                self.assertRegex(html, r'<p class="cta-question"(?: id="svoi-proekt")?>[^<]+</p>\s*<section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>[^<]+</h2><p>[^<]+<strong>990 ₽ один раз\. Доступ на 14 дней после оплаты\.</strong></p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev\.com/koncentrat/\?gcpc=16fff">Забрать Концентрат</a><p>[^<]+</p><a class="press-button" data-partner="zapis" href="https://theivansergeev\.com/zapis/\?gcpc=16fff">Заполнить анкету предзаписи</a><p>[^<]+</p><p class="ad-disclosure">Реклама\.[^<]+2Vtzqwfc8iA</p></section>\s*<(?:footer|div) class="foot">')
                 self.assertIn(".cta .press-button:active", html)
 
     def test_server_guide_keeps_both_routes_mobile_layout_and_manual_theme(self):
@@ -1749,5 +1749,5 @@ class SvodkaDraftTest(unittest.TestCase):
     def test_svodka_ad_renders_exactly(self):
         rendered = html.unescape(self.source)
         self.assertIn("Концентрат Ивана Сергеева", rendered)
-        self.assertIn("Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q", rendered)
+        self.assertIn("Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqwfc8iA", rendered)
         self.assertIn("https://theivansergeev.com/koncentrat/?gcpc=16fff", rendered)
