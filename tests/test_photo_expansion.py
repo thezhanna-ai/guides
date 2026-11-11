@@ -74,12 +74,14 @@ class PhotoExpansion(unittest.TestCase):
         import hashlib
         # The 29 October counter adds only this shared loader. Keep the original
         # approved hash, so every other byte remains protected by this test.
+        # Updated 12 November only for the approved shared ad copy and ERID;
+        # all bytes outside section.cta were verified against the prior page.
         content = (ROOT / PAGE).read_bytes()
         loader = (ROOT / 'scripts/pageviews-loader.html').read_bytes().strip() + b'\n'
         self.assertEqual(content.count(loader), 1)
         self.assertEqual(
             hashlib.sha256(content.replace(loader, b'')).hexdigest(),
-            '67da19600e37a7655b33b8956068de0ea8602187fe60c3a12107c62035da6571',
+            '3e9c6be123f16e04da319176b2da8c7dff58c0cf112f13d5b725d32b98e0cf72',
             'Publication must preserve the approved text, prompts, markup and examples',
         )
 

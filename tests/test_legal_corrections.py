@@ -25,7 +25,7 @@ class LegalCorrectionsTest(unittest.TestCase):
                 self.assertNotIn("За 3-4 дня в лагере", html)
                 self.assertIn("Забрать Концентрат", html)
                 self.assertIn("Заполнить анкету предзаписи", html)
-                self.assertIn("Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q", html)
+                self.assertIn("Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqwfc8iA", html)
         for path in [ROOT / "index.html", *ROOT.glob("claude-ai/*/index.html"), *ROOT.glob("scripts/shablon_*.html")]:
             with self.subTest(path=path.relative_to(ROOT)):
                 html = path.read_text()

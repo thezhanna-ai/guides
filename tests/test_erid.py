@@ -10,11 +10,11 @@ from test_site import ImageDocument, ROOT, PARTNER_LINKS
 
 TITLE = "Что можно делать с нейросетями, если не знаешь кода?"
 COPY = [
-    "Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три дня бесплатно, VIP с четвёртым днём - 990 ₽",
+    "Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева в записи. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три вечера в записи, промпты и четыре скилла. 990 ₽ один раз. Доступ на 14 дней после оплаты.",
     "Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество",
     "Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно",
 ]
-DISCLOSURE = "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqvk2p6q"
+DISCLOSURE = "Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqwfc8iA"
 BUTTONS = [
     ("koncentrat", "Забрать Концентрат"),
     ("zapis", "Заполнить анкету предзаписи"),
@@ -38,7 +38,11 @@ class EridTest(unittest.TestCase):
                 block = blocks[0]
                 self.assertEqual(block.all(tag="h2")[0].text_content(), TITLE)
                 self.assertEqual([p.text_content().strip() for p in block.all(tag="p")],
-                                 [*[x + "." if page.parent.name == "8-stiley-reklamy-iz-foto-tovara" else x for x in COPY], DISCLOSURE])
+                                 [*[x + "." if i > 0 and page.parent.name == "8-stiley-reklamy-iz-foto-tovara" else x for i, x in enumerate(COPY)], DISCLOSURE])
+                self.assertEqual(
+                    [n.text_content() for n in block.all(tag="p")[0].all(tag="strong")],
+                    ["990 ₽ один раз. Доступ на 14 дней после оплаты."],
+                )
                 links = block.all(tag="a")
                 self.assertEqual(len(links), 2)
                 self.assertEqual(
@@ -97,7 +101,7 @@ class EridTest(unittest.TestCase):
                     from bs4 import BeautifulSoup
                     actual = BeautifulSoup(page.read_text(), 'html.parser').select_one('section.cta')
                     expected = BeautifulSoup(standard, 'html.parser').select_one('section.cta')
-                    for paragraph, copy in zip(actual.find_all('p')[:3], COPY):
+                    for paragraph, copy in zip(actual.find_all('p')[1:3], COPY[1:]):
                         self.assertEqual(paragraph.get_text(), copy + '.')
                         paragraph.string = copy
                     self.assertEqual(str(actual), str(expected))
@@ -121,7 +125,8 @@ class EridTest(unittest.TestCase):
                 normalized = normalized.replace(r"\u0069", "i")
                 declaration = "var PARTNER_LINKS = " + repr(PARTNER_LINKS).replace("'", '"') + ";"
                 self.assertIn(declaration, normalized)
-                self.assertEqual(html.count("2Vtzqvk2p6q"), 1)
+                self.assertEqual(html.count("2Vtzqwfc8iA"), 1)
+                self.assertNotIn("2Vtzqvk2p6q", html)
                 self.assertNotIn("2Vtzquqo4SZ", html)
                 self.assertNotIn("2VtzqviiWtm", html)
                 self.assertNotRegex(html, r'var PARTNER_LINK\s*=')

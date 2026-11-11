@@ -10,7 +10,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "claude-ai" / "tri-sayta-video-pdf-foto" / "index.html"
-CTA_SHA256 = "4417f2b5a164ec481550b1caa304f1142ca6c91eeb7318edd94cd8b1c97204ac"
+CTA_SHA256 = "abdda329c4605cbb94028a3e49b305cb086c70972c54575024e6079ab88112e7"
 FAQ_ANSWER = (
     "Да, если сначала закрыть фрагмент через Redact и Export PDF, затем заново открыть "
     "этот PDF и выбрать Tools → Compress PDF → Maximum (JPEG) → Compress & Download. "
