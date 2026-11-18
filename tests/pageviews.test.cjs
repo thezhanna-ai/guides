@@ -7,7 +7,7 @@ const test = require('node:test');
 const root = path.join(__dirname, '..');
 const endpoint = 'https://test-account.goatcounter.com/count';
 
-function counter({ configured = true, hostname = 'pronovoe.com', protocol = 'https:', referrer = 'https://www.instagram.com/path?email=secret#private', prerendering = false, failure = false, fetchAvailable = true, observerAvailable = true, ads = [{}] } = {}) {
+function counter({ configured = true, hostname = 'pronovoe.com', protocol = 'https:', referrer = 'https://www.instagram.com/path?email=secret#private', prerendering = false, failure = false, fetchAvailable = true, observerAvailable = true, ads = [{ querySelector() { return null; } }] } = {}) {
   const requests = [], listeners = {}, observed = [];
   let intersection, disconnected = false;
   const document = { referrer, prerendering, addEventListener(name, fn) { listeners[name] = fn; }, querySelectorAll(selector) { assert.equal(selector, 'section.cta'); return ads; } };
@@ -22,7 +22,7 @@ function counter({ configured = true, hostname = 'pronovoe.com', protocol = 'htt
   if (observerAvailable) window.IntersectionObserver = class {
     constructor(callback) { intersection = callback; }
     observe(node) { observed.push(node); }
-    disconnect() { disconnected = true; }
+    unobserve() { disconnected = true; }
   };
   for (const object of [window, document]) {
     for (const key of ['localStorage', 'sessionStorage', 'cookie', 'screen', 'navigator']) {
@@ -134,12 +134,12 @@ test('production collector is the exact owner-provided provovoe account', () => 
 });
 
 test('ad impression waits for an actual intersection and is sent once per opening', () => {
-  const ad = {}, app = counter({ ads: [ad] });
+  const ad = { querySelector() { return null; } }, app = counter({ ads: [ad] });
   assert.deepEqual(app.observed, [ad]);
   app.intersect([{ isIntersecting: false, target: ad }]);
   assert.equal(app.requests.length, 1);
-  app.intersect([{ isIntersecting: true, target: ad }]);
-  app.intersect([{ isIntersecting: true, target: ad }]);
+  app.intersect([{ isIntersecting: true, intersectionRatio: 1, target: ad }]);
+  app.intersect([{ isIntersecting: true, intersectionRatio: 1, target: ad }]);
   assert.equal(app.requests.length, 2);
   assert.equal(app.disconnected, true);
   const req = app.requests[1];
@@ -192,8 +192,21 @@ test('prerender installs ad listeners only on activation', () => {
 
 test('collector failures on events do not interrupt interaction or retry', async () => {
   const app = counter({ failure: true });
-  app.intersect([{ isIntersecting: true }]);
+  app.intersect([{ isIntersecting: true, intersectionRatio: 1, target: app.observed[0] }]);
   app.click('https://theivansergeev.com/');
   await new Promise(resolve => setImmediate(resolve));
   assert.equal(app.requests.length, 3);
+});
+
+test('visible marked blocks produce separate named events once each', () => {
+  const ads = ['2Vtzqwfc8iA', '2VtzqvBca1C'].map(id => ({
+    querySelector() { return { textContent: 'erid: ' + id }; }
+  }));
+  const app = counter({ ads });
+  for (const ratio of [0, 0.5, 1]) {
+    app.intersect(ads.map(target => ({target, intersectionRatio: ratio, isIntersecting: true})));
+    if (!ratio) assert.equal(app.requests.length, 1);
+  }
+  assert.deepEqual(app.requests.slice(1).map(req => new URL(req.url).searchParams.get('p')),
+    ['reklama-pokaz', 'reklama-pokaz:2Vtzqwfc8iA', 'reklama-pokaz:2VtzqvBca1C']);
 });
