@@ -32,13 +32,22 @@
     send(window.location.pathname, false, referrer);
 
     if (typeof window.IntersectionObserver === 'function') {
-      let shown = false;
+      let legacyShown = false;
+      const measured = new WeakSet();
       const observer = new window.IntersectionObserver(function (entries) {
-        if (shown || !entries.some(function (entry) { return entry.isIntersecting; })) return;
-        shown = true;
-        observer.disconnect();
-        send('reklama-pokaz', true);
-      });
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting || entry.intersectionRatio <= 0 || measured.has(entry.target)) return;
+          measured.add(entry.target);
+          observer.unobserve(entry.target);
+          if (!legacyShown) {
+            legacyShown = true;
+            send('reklama-pokaz', true);
+          }
+          const disclosure = entry.target.querySelector('.ad-disclosure');
+          const match = disclosure && /\berid:\s*(2Vtzqwfc8iA|2VtzqvBca1C)\s*$/.exec(disclosure.textContent);
+          if (match) send('reklama-pokaz:' + match[1], true);
+        });
+      }, { threshold: [0, 0.000001] });
       document.querySelectorAll('section.cta').forEach(function (section) { observer.observe(section); });
     }
 
