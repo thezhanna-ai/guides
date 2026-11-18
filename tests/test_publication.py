@@ -35,7 +35,7 @@ class PublicationTest(unittest.TestCase):
 
     def test_scope_includes_all_29_covers_home_and_draft(self):
         ready = {a["slug"] for a in self.registry if a["status"] in {"live", "gotova"} and not a.get("seriya")}
-        self.assertEqual(len(ready), 91)  # +Google Drive: публикация 16.11.2026
+        self.assertEqual(len(ready), 92)  # +Google Drive: публикация 16.11.2026
         optional_without_cover = {a["slug"] for a in self.registry
                                   if a.get("oblozhka") is False and a["slug"] not in self.covers}
         self.assertEqual(set(self.covers), (ready | {a["slug"] for a in self.registry
@@ -134,9 +134,10 @@ class PublicationTest(unittest.TestCase):
                 continue
             links = [n for n in doc.root.all(tag="a") if "data-partner" in n.attrs or
                      "theivansergeev.com" in n.attrs.get("href", "")]
-            if page.parent.name == "pereezd-iz-claude-v-codex":
+            if page.parent.name in {"pereezd-iz-claude-v-codex", "kimi-kak-nachat"}:
                 # The guide credits its source and links the source's local archive viewer.
                 source_paths = {
+                    "/guide-kimi-k3-registraciya-iz-rossii/",
                     "/guide-verifikaciya-claude/",
                     "/guide-verifikaciya-claude/claude-recovery-templates.zip",
                 }
