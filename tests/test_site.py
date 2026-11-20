@@ -1343,7 +1343,7 @@ class GuidesSiteTest(unittest.TestCase):
         fixture = json.loads((Path(__file__).parent / "fixtures/volna2-approved-prose.json").read_text())
         expected = fixture[page.parent.name]
         article = BeautifulSoup(page.read_text(), "html.parser").select_one("article")
-        for node in article.select(".mobile-toc,.privacy-footer"):
+        for node in article.select(".mobile-toc,.privacy-footer,[data-night-ad-top]"):
             node.decompose()
         text = " ".join(article.get_text(" ", strip=True).split())
         self.assertEqual(text, expected["text"], "Текст принятой волны 2 изменился")

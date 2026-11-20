@@ -10,7 +10,7 @@ const endpoint = 'https://test-account.goatcounter.com/count';
 function counter({ configured = true, hostname = 'pronovoe.com', protocol = 'https:', referrer = 'https://www.instagram.com/path?email=secret#private', prerendering = false, failure = false, fetchAvailable = true, observerAvailable = true, ads = [{ querySelector() { return null; } }] } = {}) {
   const requests = [], listeners = {}, observed = [];
   let intersection, disconnected = false;
-  const document = { referrer, prerendering, addEventListener(name, fn) { listeners[name] = fn; }, querySelectorAll(selector) { assert.equal(selector, 'section.cta'); return ads; } };
+  const document = { referrer, prerendering, addEventListener(name, fn) { listeners[name] = fn; }, querySelectorAll(selector) { assert.equal(selector, '[data-night-ad-top], section.cta'); return ads; } };
   const window = {
     location: { hostname, protocol, pathname: '/claude-ai/shest-skillov/', search: '?email=secret', hash: '#private' },
     fetch(url, options) {
@@ -34,8 +34,9 @@ function counter({ configured = true, hostname = 'pronovoe.com', protocol = 'htt
   vm.runInNewContext(source, { window, document, URL, URLSearchParams });
   return { requests, observed, listeners, get disconnected() { return disconnected; },
     intersect(entries) { intersection(entries); },
-    click(href, { button = 0, type = 'click', nested = false } = {}) {
-      const link = href === null ? null : { href };
+    click(href, { button = 0, type = 'click', nested = false, ad = undefined } = {}) {
+      const selectedAd = ad === undefined ? ads[0] : ad;
+      const link = href === null ? null : { href, closest(selector) { assert.equal(selector, '[data-night-ad-top], section.cta'); return selectedAd; } };
       const element = { closest(selector) { assert.equal(selector, 'a[href]'); return link; } };
       listeners[type]({ button, type, target: nested ? { parentElement: element } : element });
     }, activate() { document.prerendering = false; listeners.prerenderingchange(); } };
@@ -148,13 +149,19 @@ test('ad impression waits for an actual intersection and is sent once per openin
   assert.equal(req.options.referrerPolicy, 'no-referrer');
 });
 
-test('no observer or no ad section never invents an impression and clicks still work', () => {
-  for (const settings of [{ observerAvailable: false }, { ads: [] }]) {
-    const app = counter(settings);
-    assert.equal(app.observed.length, 0);
-    app.click('https://theivansergeev.com/koncentrat/?gcpc=16fff', { nested: true });
-    assert.equal(app.requests.length, 2);
-  }
+test('no observer invents no impression while an ad click still works', () => {
+  const app = counter({ observerAvailable: false });
+  assert.equal(app.observed.length, 0);
+  app.click('https://theivansergeev.com/koncentrat/?gcpc=16fff', { nested: true });
+  assert.equal(app.requests.length, 2);
+});
+
+test('links outside the two blocks retain the general click event only', () => {
+  const app = counter({ ads: [] });
+  assert.equal(app.observed.length, 0);
+  app.click('https://theivansergeev.com/koncentrat/?gcpc=16fff', { nested: true });
+  assert.deepEqual(app.requests.map(req => new URL(req.url).searchParams.get('p')),
+    ['/claude-ai/shest-skillov/', 'reklama-klik']);
 });
 
 test('click events send only the fixed event name and flags, including nested and middle clicks', () => {
@@ -209,4 +216,16 @@ test('visible marked blocks produce separate named events once each', () => {
   }
   assert.deepEqual(app.requests.slice(1).map(req => new URL(req.url).searchParams.get('p')),
     ['reklama-pokaz', 'reklama-pokaz:2Vtzqwfc8iA', 'reklama-pokaz:2VtzqvBca1C']);
+});
+
+test('top and lower ad clicks produce separate erid events without link data', () => {
+  const ads = ['2VtzqvBca1C', '2Vtzqwfc8iA'].map(id => ({
+    querySelector() { return { textContent: 'Реклама. erid: ' + id }; }
+  }));
+  const app = counter({ ads });
+  app.click('https://theivansergeev.com/koncentrat/?email=secret#private', { ad: ads[0] });
+  app.click('https://theivansergeev.com/zapis/?gcpc=16fff', { ad: ads[1], nested: true });
+  assert.deepEqual(app.requests.slice(1).map(req => new URL(req.url).searchParams.get('p')),
+    ['reklama-klik', 'reklama-klik:2VtzqvBca1C', 'reklama-klik', 'reklama-klik:2Vtzqwfc8iA']);
+  assert.ok(app.requests.slice(1).every(req => !req.url.includes('secret')));
 });

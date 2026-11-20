@@ -72,12 +72,18 @@ class PhotoExpansion(unittest.TestCase):
         # (short title, combined intro wrapper, standard generated JSON-LD),
         # plus the shared cookie-banner copy approved on 28 October.
         import hashlib
+        import re
         # The 29 October counter adds only this shared loader. Keep the original
         # approved hash, so every other byte remains protected by this test.
         # Updated 12 November only for the approved shared ad copy and ERID;
         # all bytes outside section.cta were verified against the prior page.
         content = (ROOT / PAGE).read_bytes()
         loader = (ROOT / 'scripts/pageviews-loader.html').read_bytes().strip() + b'\n'
+        content = content.replace(b'<!-- article-ads:style --><link rel="stylesheet" href="../../assets/article-ads.css">', b'')
+        content, blocks = re.subn(
+            rb'<!-- night-ad-top:start -->.*?<!-- night-ad-top:end -->', b'', content, flags=re.S,
+        )
+        self.assertEqual(blocks, 1)
         self.assertEqual(content.count(loader), 1)
         self.assertEqual(
             hashlib.sha256(content.replace(loader, b'')).hexdigest(),
