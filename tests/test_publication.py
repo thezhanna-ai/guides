@@ -132,7 +132,9 @@ class PublicationTest(unittest.TestCase):
         for page, doc in self.docs.items():
             if page == ROOT / "politika/index.html" or page.parent.name == "chatgpt-composio-prilozheniya":
                 continue
-            links = [n for n in doc.root.all(tag="a") if "data-partner" in n.attrs or
+            lower = doc.root.all(klass="cta")
+            self.assertEqual(len(lower), 1)
+            links = [n for n in lower[0].all(tag="a") if "data-partner" in n.attrs or
                      "theivansergeev.com" in n.attrs.get("href", "")]
             if page.parent.name in {"pereezd-iz-claude-v-codex", "kimi-kak-nachat"}:
                 # The guide credits its source and links the source's local archive viewer.
@@ -165,7 +167,9 @@ class PublicationTest(unittest.TestCase):
         html = (ROOT / "claude-ai/chatgpt-composio-prilozheniya/index.html").read_text()
         self.assertIn('class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"', html)
         self.assertIn('erid: 2Vtzqwfc8iA', html)
-        before_cta = re.split(r'<p class="cta-question"[^>]*>', html, maxsplit=1)[0].lower()
+        before_cta = re.split(r'<p class="cta-question"[^>]*>', html, maxsplit=1)[0]
+        before_cta = re.sub(r'<!-- night-ad-top:start -->.*?<!-- night-ad-top:end -->', '',
+                            before_cta, flags=re.S).lower()
         self.assertNotRegex(before_cta.split("<main>")[1], r"иван|theivansergeev|data-partner|источник-ролик")
         self.assertNotIn('noindex', html)
 

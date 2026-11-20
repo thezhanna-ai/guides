@@ -24,6 +24,13 @@
   }
 
   function start() {
+    const AD_SELECTOR = '[data-night-ad-top], section.cta';
+    const ERID_PATTERN = /\berid:\s*(2Vtzqwfc8iA|2VtzqvBca1C)\s*$/;
+    function adErid(section) {
+      const disclosure = section && section.querySelector('.ad-disclosure');
+      const match = disclosure && ERID_PATTERN.exec(disclosure.textContent);
+      return match && match[1];
+    }
     let referrer = '';
     try {
       const source = new URL(document.referrer);
@@ -43,12 +50,11 @@
             legacyShown = true;
             send('reklama-pokaz', true);
           }
-          const disclosure = entry.target.querySelector('.ad-disclosure');
-          const match = disclosure && /\berid:\s*(2Vtzqwfc8iA|2VtzqvBca1C)\s*$/.exec(disclosure.textContent);
-          if (match) send('reklama-pokaz:' + match[1], true);
+          const erid = adErid(entry.target);
+          if (erid) send('reklama-pokaz:' + erid, true);
         });
       }, { threshold: [0, 0.000001] });
-      document.querySelectorAll('section.cta').forEach(function (section) { observer.observe(section); });
+      document.querySelectorAll(AD_SELECTOR).forEach(function (section) { observer.observe(section); });
     }
 
     function countClick(event) {
@@ -61,6 +67,8 @@
         const url = new URL(link.href);
         if ((url.protocol === 'https:' || url.protocol === 'http:') && url.hostname === 'theivansergeev.com') {
           send('reklama-klik', true);
+          const erid = adErid(link.closest(AD_SELECTOR));
+          if (erid) send('reklama-klik:' + erid, true);
         }
       } catch (_) { /* An invalid link is not an advertising click. */ }
     }

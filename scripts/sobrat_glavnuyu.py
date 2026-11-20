@@ -66,6 +66,26 @@ def dobavit_shapku(html, slug):
         '<a class="brand" href="../../">Инструкции по нейросетям</a>', html, count=1)
 
 
+def dobavit_verhnyuyu_reklamu(html):
+    """Один общий верхний креатив после заголовочного контейнера статьи."""
+    block = privacy_fragment('night-ad-top.html')
+    html = re.sub(r'<!-- night-ad-top:start -->.*?<!-- night-ad-top:end -->', '', html,
+                  flags=re.S)
+    stylesheet = '<!-- article-ads:style --><link rel="stylesheet" href="../../assets/article-ads.css">'
+    html = re.sub(r'(?:<!-- (?:night-ad-top|article-ads):style -->)?'
+                  r'<link\b(?=[^>]*\bhref=[\'\"](?:/|\.\./\.\./)assets/(?:night-ad-top|article-ads)\.css[\'\"])[^>]*>',
+                  '', html, flags=re.I)
+    if len(re.findall(r'</h1\s*>', html, re.I)) != 1:
+        raise ValueError('Для верхней рекламы нужен один заголовок h1')
+    if len(re.findall(r'</head\s*>', html, re.I)) != 1:
+        raise ValueError('Для верхней рекламы нужен один закрывающий тег head')
+    html = re.sub(r'</head\s*>', stylesheet + '</head>', html, count=1, flags=re.I)
+    # Вступление является частью заголовочного блока не во всех старых макетах.
+    # Его конец - общий поддерживаемый якорь, который не загрязняет SEO-текст.
+    _, position, _ = seo_intro(html)
+    return html[:position] + block + html[position:]
+
+
 def privacy_fragment(name):
     return (KORNI / "scripts" / name).read_text(encoding="utf-8").strip()
 
@@ -570,7 +590,7 @@ def sobrat_indeksaciyu(podpisi):
             if not re.search(r"</head\s*>", html, re.I):
                 raise ValueError("%s: отсутствует закрывающий тег head" % slug)
             html = re.sub(r"</head\s*>", zapret + "\n</head>", html, count=1, flags=re.I)
-        stranicy[page] = dobavit_privacy(dobavit_shapku(html, slug))
+        stranicy[page] = dobavit_privacy(dobavit_verhnyuyu_reklamu(dobavit_shapku(html, slug)))
 
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -865,6 +885,12 @@ def main():
     podpisi = sobrat_metki_urovnya(sobrat_podpisi())
     rezultaty = sobrat_seo(sobrat_serii({GLAVNAYA: stranica, **sobrat_indeksaciyu(podpisi),
                              KORNI / "politika" / "index.html": sobrat_politiku()}))
+    # Страница подключения имеет собственный canonical и ссылку из Runway,
+    # но не является отдельной карточкой в реестре главной.
+    runway_setup = KORNI / 'claude-ai/runway-iz-claude/podklyuchenie.html'
+    if runway_setup.is_file():
+        html = runway_setup.read_text(encoding='utf-8')
+        rezultaty[runway_setup] = dobavit_pageviews(dobavit_verhnyuyu_reklamu(html))
     proverka = args.proverit
     # Global calculation still validates the registry before any write. Only an
     # explicit scope can authorize writes to article files, even when stale.

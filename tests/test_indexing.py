@@ -74,7 +74,7 @@ class IndexingTest(unittest.TestCase):
         for folder in ("scripts", "data", "assets"):
             (root / folder).mkdir()
         (root / "assets/fonts").mkdir()
-        for name in ("assets/palette.css", "assets/quality.css", "assets/privacy.css", "assets/fonts/fonts.css", "data/statyi.json", "data/seo.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "scripts/pageviews-loader.html", "index.html"):
+        for name in ("assets/palette.css", "assets/quality.css", "assets/privacy.css", "assets/article-ads.css", "assets/fonts/fonts.css", "data/statyi.json", "data/seo.json", "data/OBLOZHKI.json", "scripts/shablon_glavnoy.html", "scripts/shablon_politiki.html", "scripts/privacy-banner.html", "scripts/pageviews-loader.html", "scripts/night-ad-top.html", "index.html"):
             shutil.copyfile(ROOT / name, root / name)
         # This fixture exercises the shared article generator. The approved,
         # manually serialized photo page is covered byte-for-byte in
@@ -173,7 +173,8 @@ class IndexingTest(unittest.TestCase):
             self.assertEqual(self.run_generator(root), 0)
             module = generator()
             metadata = json.loads((root / 'data/seo.json').read_text())['claude-ai/podklyuchenie-iz-rossii/index.html']
-            self.assertEqual(page.read_text(), module.dobavit_seo(module.dobavit_privacy(html), BASE + 'claude-ai/podklyuchenie-iz-rossii/', metadata))
+            shared = module.dobavit_privacy(module.dobavit_verhnyuyu_reklamu(html))
+            self.assertEqual(page.read_text(), module.dobavit_seo(shared, BASE + 'claude-ai/podklyuchenie-iz-rossii/', metadata))
             self.assertEqual(robots(page.read_text()), ["index,follow"])
 
 
