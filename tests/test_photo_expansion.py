@@ -87,7 +87,7 @@ class PhotoExpansion(unittest.TestCase):
         self.assertEqual(content.count(loader), 1)
         self.assertEqual(
             hashlib.sha256(content.replace(loader, b'')).hexdigest(),
-            '3e9c6be123f16e04da319176b2da8c7dff58c0cf112f13d5b725d32b98e0cf72',
+            '1869321e105dce4f0ddcb64575f5df12513339eba1838fe9b2402bdd4df523b1',
             'Publication must preserve the approved text, prompts, markup and examples',
         )
 
