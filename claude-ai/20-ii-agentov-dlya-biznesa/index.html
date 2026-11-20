@@ -1352,7 +1352,7 @@ header#nachalo>.lead+p{margin-top:20px}
 .toc{overscroll-behavior:contain;scrollbar-gutter:stable}
 @media(max-width:600px){.night-table{overflow-x:visible}.night-table table{display:none}.mobile-table-cards{display:grid;gap:12px}.konspekt-example{width:66.6667%;max-width:none}.code-card pre{font-size:13px}}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Как собрать 20 ИИ-агентов для бизнеса", "description": "20 ролей ИИ-помощников для почты, календаря, контента, счетов и работы с клиентами: готовые команды и два пути настройки", "mainEntityOfPage": "https://pronovoe.com/claude-ai/20-ii-agentov-dlya-biznesa/", "image": {"@type": "ImageObject", "url": "https://pronovoe.com/claude-ai/20-ii-agentov-dlya-biznesa/assets/cover.png", "width": 1600, "height": 840}, "datePublished": "2026-10-21", "dateModified": "2026-10-21", "inLanguage": "ru-RU"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Как собрать 20 ИИ-агентов для бизнеса", "description": "20 ролей ИИ-помощников для почты, календаря, контента, счетов и работы с клиентами: готовые команды и два пути настройки", "mainEntityOfPage": "https://pronovoe.com/claude-ai/20-ii-agentov-dlya-biznesa/", "image": {"@type": "ImageObject", "url": "https://pronovoe.com/claude-ai/20-ii-agentov-dlya-biznesa/assets/cover.png", "width": 1600, "height": 840}, "datePublished": "2026-10-21", "dateModified": "2026-10-29", "inLanguage": "ru-RU"}</script>
 <style id="twenty-agents-format">
 /* Канон раздаток §7.1: разные функции различимы, одинаковые оформлены одинаково */
 article .role-path { margin-top: 24px; }
@@ -2547,6 +2547,7 @@ revealPreparationFromHash();
 
   var heads = document.querySelectorAll('article h2[id], article h3[id]');
   for (var k = 0; k < heads.length; k++) {
+    if (heads[k].closest('summary')) continue;
     var a = document.createElement('a');
     a.className = 'h-anchor';
     a.href = '#' + heads[k].id;
