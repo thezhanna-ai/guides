@@ -85,6 +85,12 @@ class PhotoExpansion(unittest.TestCase):
         )
         self.assertEqual(blocks, 1)
         self.assertEqual(content.count(loader), 1)
+        # Only the two approved accessibility labels may differ from the
+        # reviewed markup. Keep the original hash for every other byte.
+        for label in ('Инструкция по освещению фото', 'Инструкция по копированию стиля фото'):
+            attribute = f'aria-label="{label}"'.encode()
+            self.assertEqual(content.count(attribute), 1)
+            content = content.replace(attribute, 'aria-label="Связанная инструкция"'.encode(), 1)
         self.assertEqual(
             hashlib.sha256(content.replace(loader, b'')).hexdigest(),
             '1869321e105dce4f0ddcb64575f5df12513339eba1838fe9b2402bdd4df523b1',
