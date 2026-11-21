@@ -7,7 +7,8 @@ const {test} = require('node:test');
 const assert = require('node:assert/strict');
 
 const root = path.resolve(__dirname, '..');
-const liveCount = JSON.parse(fs.readFileSync(path.join(root, 'data/statyi.json'), 'utf8')).statyi.filter(article => article.status === 'live').length;
+const registry = JSON.parse(fs.readFileSync(path.join(root, 'data/statyi.json'), 'utf8')).statyi;
+const liveCount = registry.filter(article => article.status === 'live').length;
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
 const fixture = JSON.parse(execFileSync(process.env.SITE_PYTHON || 'python3', ['-c', 'import json; from tests.test_site import catalog_dom_fixture; print(json.dumps(catalog_dom_fixture(), ensure_ascii=False))'], {cwd: root, encoding: 'utf8'}));
@@ -101,10 +102,10 @@ test('Название уровня не входит в видимый текс
 
 test('Каждое настоящее название статьи находится целиком', () => {
   const p = page();
-  for (const link of p.links) {
-    const title = link.attrs['aria-label'];
-    assert.ok(title, link.attrs.href);
-    p.search(title); assert.ok(p.visible().includes(link), link.attrs.href);
+  for (const article of registry.filter(article => article.status === 'live')) {
+    const href = articleHref(article.slug);
+    p.search(article.title);
+    assert.ok(p.visible().some(link => link.attrs.href === href), href);
   }
 });
 
@@ -181,7 +182,6 @@ test('Скрипт не выполняет сетевых запросов и р
 });
 
 
-const registry = JSON.parse(fs.readFileSync(path.join(root, 'data/statyi.json'), 'utf8')).statyi;
 const articleHref = slug => 'claude-ai/' + slug + '/';
 
 test('ЖЕМЧУГ находится по слову, транслиту и раскладке; Enter открывает новую статью', () => {

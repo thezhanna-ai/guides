@@ -394,28 +394,31 @@ class ArticleImagesTest(unittest.TestCase):
         for card in cards:
             slug = card.attrs["href"].split("/")[1]
             with self.subTest(slug=slug):
+                article = next(a for a in live if a["slug"] == slug)
+                self.assertNotIn("aria-label", card.attrs)
+                self.assertNotIn("aria-labelledby", card.attrs)
+                body = card.all(klass="guide-body")[0]
+                for child, klass, expected_text in zip(
+                    body.children[:2], ("guide-title", "guide-summary"),
+                    (article["title"], article["kratko"]), strict=True,
+                ):
+                    self.assertEqual(child.attrs["class"], klass)
+                    self.assertEqual(child.text_content(), expected_text)
                 if slug not in self.covers:
-                    article = next(a for a in live if a["slug"] == slug)
                     self.assertIs(article.get("oblozhka"), False)
                     self.assertEqual(card.all(tag="img"), [])
-                    self.assertEqual(len(card.all(klass="guide-placeholder")), 1)
-                    self.assertEqual(card.attrs["aria-label"], article["title"])
+                    self.assertEqual(card.all(klass="guide-placeholder")[0].attrs["aria-hidden"], "true")
                     continue
                 image = card.all(tag="img")[0].attrs
                 self.assertEqual(image["src"], self.covers[slug]["image"])
-                article = next(a for a in live if a["slug"] == slug)
                 self.assertEqual(image["alt"], article["title"] + ". " + self.covers[slug]["alt"])
-                self.assertEqual(card.attrs["aria-label"], article["title"])
+                self.assertEqual(image["aria-hidden"], "true")
                 self.assertIn(article["title"], card.attrs["data-poisk"])
                 self.assertEqual(card.attrs.get("data-kod", ""), article.get("kod_slovo", ""))
                 for term in article["ponyatiya"]:
                     self.assertIn(term, card.attrs["data-poisk"])
                 self.assertEqual((image["width"], image["height"]),
                                  (str(self.covers[slug]["width"]), str(self.covers[slug]["height"])))
-                summaries = card.all(klass="guide-summary")
-                self.assertEqual(len(summaries), 1)
-                self.assertEqual(summaries[0].text_content(), article["kratko"])
-                self.assertEqual(card.all(klass="guide-title")[0].text_content(), article["title"])
                 self.assertTrue((ROOT / image["src"]).is_file())
                 self.assertEqual(image["loading"], "lazy")
         hero = doc.root.all(klass="hero-image")[0].attrs
@@ -472,7 +475,8 @@ class ArticleImagesTest(unittest.TestCase):
         covers = {article["slug"]: {"image": "absent.webp", "subtitle": 'Вопрос <script> & "ответ"?'}}
         doc = ImageDocument(self.generator.sobrat_kartochku(article, covers))
         card = doc.root.all(tag="a")[0]
-        self.assertEqual(card.attrs["aria-label"], article["title"])
+        self.assertNotIn("aria-label", card.attrs)
+        self.assertEqual(card.all(klass="guide-title")[0].text_content(), article["title"])
         self.assertEqual(card.attrs["data-kod"], article["kod_slovo"])
         self.assertIn(article["title"], card.attrs["data-poisk"])
         self.assertEqual(card.all(klass="guide-summary")[0].text_content(), article["kratko"])
