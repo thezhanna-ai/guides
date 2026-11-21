@@ -346,7 +346,7 @@ def sobrat_kartochku(statya, oblozhki):
     put = (KORNI / oblozhka["image"]).resolve() if oblozhka else None
     if put and not Path(oblozhka["image"]).is_absolute() and put.is_relative_to(KORNI) and put.is_file():
         media = (
-            '<img class="guide-cover" src="{image}" alt="{alt}" '
+            '<img class="guide-cover" src="{image}" alt="{alt}" aria-hidden="true" '
             'width="{width}" height="{height}" loading="lazy" decoding="async">'
         ).format(
             image=ekranirovat(oblozhka["image"]),
@@ -367,8 +367,9 @@ def sobrat_kartochku(statya, oblozhki):
     metki = statya.get("metki", [])
     return (
         '          <a class="guide-link" data-tags="{tags}" data-metki="{metki}" data-kod="{kod}" '
-        'data-poisk="{poisk}" aria-label="{title}" href="claude-ai/{slug}/">'
-        '{media}<span class="guide-body">{instrumenty}<span class="guide-title">{title}</span><span class="guide-summary">{summary}</span>'
+        'data-poisk="{poisk}" href="claude-ai/{slug}/">'
+        '{media}<span class="guide-body"><span class="guide-title">{title}</span>'
+        '<span class="guide-summary">{summary}</span>{instrumenty}'
         '<span class="guide-meta"><span class="kind {klass}">{podpis}</span>{uroven}</span>'
         '</span></a>'
     ).format(
