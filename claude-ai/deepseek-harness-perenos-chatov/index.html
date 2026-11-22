@@ -970,11 +970,11 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
         <a class="share-btn" href="https://wa.me/?text=%D0%9A%D0%B0%D0%BA%20%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%B5%D1%81%D1%82%D0%B8%20%D1%87%D0%B0%D1%82%D1%8B%20Claude%20Code%20%D0%B2%20DeepSeek%20Harness%20https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fdeepseek-harness-perenos-chatov%2F" target="_blank" rel="noopener">WhatsApp</a>
         <a class="share-btn" href="https://vk.com/share.php?url=https%3A%2F%2Fpronovoe.com%2Fclaude-ai%2Fdeepseek-harness-perenos-chatov%2F&amp;title=%D0%9A%D0%B0%D0%BA%20%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%B5%D1%81%D1%82%D0%B8%20%D1%87%D0%B0%D1%82%D1%8B%20Claude%20Code%20%D0%B2%20DeepSeek%20Harness" target="_blank" rel="noopener">VK</a>
       </div><details class="mobile-toc"><summary>Содержание</summary><nav aria-label="Содержание"><ul><li><a href="#start-harness">Как запустить Harness и поставить плагин</a></li><li><a href="#import">Как перенести чаты в Harness</a><ul><li><a href="#one-chat">1. Один чат</a></li><li><a href="#selected-chats">2. Несколько выбранных чатов</a></li><li><a href="#all-chats">3. Все чаты из папки</a></li></ul></li><li><a href="#missing-chats">Если нужного чата нет в списке</a></li><li><a href="#continue-chat">Как продолжить разговор</a></li><li><a href="#text-copy">Как сделать текстовую копию длинного чата</a><ul><li><a href="#prepare-files">1. Подготовь копию исходного файла</a></li><li><a href="#ask-agent">2. Вставь запрос в чат агента</a></li><li><a href="#import-output">3. Импортируй получившийся файл</a></li></ul></li><li><a href="#moroni-result">Что получилось на рабочем чате «Ролик Морони»</a></li><li><a href="#faq">Частые вопросы</a></li><li><a href="#sources">Источники</a></li><li><a href="#concentrate">Что можно делать с нейросетями, если не знаешь кода?</a></li></ul></nav></details>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/%D0%BE%D1%82%D0%B2%D0%B5%D1%82-%D0%B2-harness.png" rel="noopener" target="_blank"><img alt="Вопрос о фразе для первых двух секунд ролика и ответ Harness: «Начальник начитался соцсетей и захотел ИИ»." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/%D0%BE%D1%82%D0%B2%D0%B5%D1%82-%D0%B2-harness.png"/><span class="zoom-label">Увеличить</span></a><figcaption>Вопрос о фразе для первых двух секунд ролика и ответ Harness: «Начальник начитался соцсетей и захотел ИИ».</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="Вопрос о фразе для первых двух секунд ролика и ответ Harness: «Начальник начитался соцсетей и захотел ИИ»." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/%D0%BE%D1%82%D0%B2%D0%B5%D1%82-%D0%B2-harness.png"/></div><figcaption>Вопрос о фразе для первых двух секунд ролика и ответ Harness: «Начальник начитался соцсетей и захотел ИИ».</figcaption></figure>
 <section><h2 id="start-harness">Как запустить Harness и поставить плагин</h2>
 <p><strong>Приложение для macOS и Windows.</strong> Эту подготовку достаточно сделать один раз. На странице DeepSeek выбери установщик для своей системы. Открой Harness и перейди в «Плагины» → «Добавить плагин». Введи <code>dsh-chat-import</code>, установи и включи его. В боковом меню появится <code>Import Sessions</code>. Плагину нужна версия Harness <code>dsh 0.1.5-rc.1</code> или новее. <a href="https://www.deepseek.com/harness/">Загрузка Harness</a> · <a href="https://github.com/Nwflower/dsh-chat-import">Документация плагина</a>.</p>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/download.png" rel="noopener" target="_blank"><img alt="На странице DeepSeek кнопка предлагает загрузку для macOS. Стрелка справа открывает список версий." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/download.png"/><span class="zoom-label">Увеличить</span></a><figcaption>На странице DeepSeek кнопка предлагает загрузку для macOS. Стрелка справа открывает список версий.</figcaption></figure>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/plugin.png" rel="noopener" target="_blank"><img alt="В окне Add plugin введено имя dsh-chat-import. Установку запускает кнопка Install." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/plugin.png"/><span class="zoom-label">Увеличить</span></a><figcaption>В окне Add plugin введено имя dsh-chat-import. Установку запускает кнопка Install.</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="На странице DeepSeek кнопка предлагает загрузку для macOS. Стрелка справа открывает список версий." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/download.png"/></div><figcaption>На странице DeepSeek кнопка предлагает загрузку для macOS. Стрелка справа открывает список версий.</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="В окне Add plugin введено имя dsh-chat-import. Установку запускает кнопка Install." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/plugin.png"/></div><figcaption>В окне Add plugin введено имя dsh-chat-import. Установку запускает кнопка Install.</figcaption></figure>
 <p><strong>Браузерная версия для macOS, Windows и Linux.</strong> Эту подготовку тоже делают один раз. Для проверенного здесь Harness 0.2.2-rc.5 установи <a href="https://nodejs.org/en/download">Node.js</a> версии 24.9.0 или новее. На Windows команды вводят в PowerShell, на macOS и Linux - в Терминале. Этот способ использовался для проверки на Mac. <a href="https://github.com/deepseek-ai/deepseek-harness#run">Требования и запуск Harness</a>.</p>
 <p><strong>Установи плагин.</strong> Скопируй первую команду, вставь её в терминал и дождись завершения.</p>
 <div class="code-card">
@@ -988,19 +988,19 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </div>
 </section><section><h2 id="import">Как перенести чаты в Harness</h2>
 <p>После включения плагина нажми <code>Import Sessions</code> внизу левого меню. Справа откроется панель импорта.</p>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/harness-import-menu.png" rel="noopener" target="_blank"><img alt="Кнопка Import Sessions внизу левого меню DeepSeek Harness." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/harness-import-menu.png"/><span class="zoom-label">Увеличить</span></a><figcaption>Кнопка Import Sessions внизу левого меню DeepSeek Harness.</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="Кнопка Import Sessions внизу левого меню DeepSeek Harness." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/harness-import-menu.png"/></div><figcaption>Кнопка Import Sessions внизу левого меню DeepSeek Harness.</figcaption></figure>
 <section class="step"><h3 id="one-chat">1. Один чат</h3>
 <p>В верхней строке панели выбери <code>Claude</code> в списке источников <code>From</code>. Это локальная история Claude Code. Найди чат по названию или дате. Наведи курсор на его строку, нажми <code>Import</code> справа и открой созданную сессию.</p>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/harness-claude-import.png" rel="noopener" target="_blank"><img alt="Источник Claude и кнопка Import рядом с найденным чатом." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/harness-claude-import.png"/><span class="zoom-label">Увеличить</span></a><figcaption>Источник Claude и кнопка Import рядом с найденным чатом.</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="Источник Claude и кнопка Import рядом с найденным чатом." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/harness-claude-import.png"/></div><figcaption>Источник Claude и кнопка Import рядом с найденным чатом.</figcaption></figure>
 <p>Если чат не появился в списке, но файл сессии есть на диске, открой <code>Import from file</code>. Нажми <code>Choose</code> и выбери найденный <code>.jsonl</code> или вставь полный путь к нему. Нажми <code>Preview</code>, чтобы сверить название и источник, затем <code>Import</code>. <a href="https://github.com/Nwflower/dsh-chat-import/blob/main/docs/USAGE.md#import-from-file--any-local-file-and-the-long-tail">Импорт отдельного файла</a>.</p>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/%D0%BF%D1%80%D0%B5%D0%B4%D0%BF%D1%80%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80-%D0%B8%D0%BC%D0%BF%D0%BE%D1%80%D1%82%D0%B0.png" rel="noopener" target="_blank"><img alt="Поля Choose и Preview для ручного выбора файла сессии." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/%D0%BF%D1%80%D0%B5%D0%B4%D0%BF%D1%80%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80-%D0%B8%D0%BC%D0%BF%D0%BE%D1%80%D1%82%D0%B0.png"/><span class="zoom-label">Увеличить</span></a><figcaption>Поля Choose и Preview для ручного выбора файла сессии.</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="Поля Choose и Preview для ручного выбора файла сессии." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/%D0%BF%D1%80%D0%B5%D0%B4%D0%BF%D1%80%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80-%D0%B8%D0%BC%D0%BF%D0%BE%D1%80%D1%82%D0%B0.png"/></div><figcaption>Поля Choose и Preview для ручного выбора файла сессии.</figcaption></figure>
 </section><section class="step"><h3 id="selected-chats">2. Несколько выбранных чатов</h3>
 <p>Если разговоры видны в списке Claude, отметь нужные строки и нажми <code>Import selected (N)</code>. Можно выбрать несколько файлов и из одной папки. В разделе <code>Import from file</code> введи путь к папке, нажми <code>Preview</code> и оставь отметки возле нужных разговоров. На снимке выбран второй способ.</p>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/multi.png" rel="noopener" target="_blank"><img alt="Два учебных разговора отмечены для переноса. Число на кнопке Import selected (2) совпадает с количеством выбранных файлов." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/multi.png"/><span class="zoom-label">Увеличить</span></a><figcaption>Два учебных разговора отмечены для переноса. Число на кнопке Import selected (2) совпадает с количеством выбранных файлов.</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="Два учебных разговора отмечены для переноса. Число на кнопке Import selected (2) совпадает с количеством выбранных файлов." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/multi.png"/></div><figcaption>Два учебных разговора отмечены для переноса. Число на кнопке Import selected (2) совпадает с количеством выбранных файлов.</figcaption></figure>
 </section><section class="step"><h3 id="all-chats">3. Все чаты из папки</h3>
 <p>В <code>Import Sessions</code> открой <code>Import from file</code>, вставь полный путь к папке и нажми <code>Preview</code>. Укажи папку одного проекта или общую папку <code>projects</code>, если нужны разговоры из нескольких проектов.</p>
 <p>На вопрос о подпапках выбери <code>This folder only</code> для текущей папки или <code>Include subfolders</code> для поиска внутри. Для общей папки <code>projects</code> выбирай <code>Include subfolders</code>. Сверь список, нажми <code>Select all importable</code> и затем <code>Import selected (N)</code>. Плагин импортирует все отмеченные файлы, которые смог распознать. <a href="https://github.com/Nwflower/dsh-chat-import/blob/main/docs/USAGE.md#import-from-file--any-local-file-and-the-long-tail">Импорт из папки и поиск в подпапках</a>.</p>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/subfolders.png" rel="noopener" target="_blank"><img alt="This folder only проверяет только выбранную папку. Include subfolders добавляет вложенные папки." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/subfolders.png"/><span class="zoom-label">Увеличить</span></a><figcaption>This folder only проверяет только выбранную папку. Include subfolders добавляет вложенные папки.</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="This folder only проверяет только выбранную папку. Include subfolders добавляет вложенные папки." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/subfolders.png"/></div><figcaption>This folder only проверяет только выбранную папку. Include subfolders добавляет вложенные папки.</figcaption></figure>
 </section></section><section><h2 id="missing-chats">Если нужного чата нет в списке</h2>
 <p>Проверь папку, в которой Claude Code обычно хранит историю. Внутри будут папки проектов, а в них файлы сессий <code>.jsonl</code>.</p>
 <ul>
@@ -1013,7 +1013,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </section><section><h2 id="continue-chat">Как продолжить разговор</h2>
 <p>Harness показывает перенесённые сообщения. Чтобы получить новый ответ в этом чате, подключи языковую модель в настройках Harness и открой перенесённую сессию. Задай вопрос о конкретном решении из прежней переписки и сверь ответ. <a href="https://deepseek-harness.github.io/deepseek-harness/en/guide/providers">Как подключить модель</a>.</p>
 <p>Если выбираешь официальную модель DeepSeek, создай ключ в <a href="https://platform.deepseek.com/api_keys">личном кабинете DeepSeek</a>. В Harness нажми More внизу слева, выбери Add API Key, вставь ключ и нажми Save and continue.</p>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/provider.png" rel="noopener" target="_blank"><img alt="Для официальной модели DeepSeek открой More внизу слева, затем Add API Key. Поле для ключа показано пустым." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/provider.png"/><span class="zoom-label">Увеличить</span></a><figcaption>Для официальной модели DeepSeek открой More внизу слева, затем Add API Key. Поле для ключа показано пустым.</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="Для официальной модели DeepSeek открой More внизу слева, затем Add API Key. Поле для ключа показано пустым." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/provider.png"/></div><figcaption>Для официальной модели DeepSeek открой More внизу слева, затем Add API Key. Поле для ключа показано пустым.</figcaption></figure>
 <div class="warn-card"><p><strong>История открылась, а модель не отвечает.</strong> Если Harness сообщает о переполнении контекста, попробуй модель с бо́льшим лимитом или подготовь текстовую копию по шагам ниже.</p></div>
 </section><section><h2 id="text-copy">Как сделать текстовую копию длинного чата</h2>
 <section class="step"><h3 id="prepare-files">1. Подготовь копию исходного файла</h3>
@@ -1031,7 +1031,7 @@ html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
 </section><section class="step"><h3 id="import-output">3. Импортируй получившийся файл</h3>
 <p>В той же папке должен появиться <code>claude-session-text.jsonl</code>. Число сохранённых сообщений зависит от исходного чата.</p>
 <p>В Harness открой <code>Import Sessions</code> → <code>Import from file</code> и выбери <code>claude-session-text.jsonl</code>. В <code>Preview</code> сверь количество сообщений, затем нажми <code>Import</code>. В открывшейся сессии найди знакомую реплику. Название текстовой копии может отличаться от названия старого чата.</p>
-<figure class="fig"><a class="shot" href="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/text-file.png" rel="noopener" target="_blank"><img alt="В учебном примере Harness распознал файл claude-session-text.jsonl. Кнопка Import под результатом переносит выбранный разговор." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/text-file.png"/><span class="zoom-label">Увеличить</span></a><figcaption>В учебном примере Harness распознал файл claude-session-text.jsonl. Кнопка Import под результатом переносит выбранный разговор.</figcaption></figure>
+<figure class="fig"><div class="shot"><img alt="В учебном примере Harness распознал файл claude-session-text.jsonl. Кнопка Import под результатом переносит выбранный разговор." decoding="async" src="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0/text-file.png"/></div><figcaption>В учебном примере Harness распознал файл claude-session-text.jsonl. Кнопка Import под результатом переносит выбранный разговор.</figcaption></figure>
 </section></section><section><h2 id="moroni-result">Что получилось на рабочем чате «Ролик Морони»</h2>
 <p>Плагин нашёл «Ролик Морони» по названию в стандартной папке Claude Code на Mac. Загрузка файла в панель импорта для поиска не потребовалась.</p>
 <p>На предпросмотре одного файла плагин показал 46 сообщений. После повышения лимита импорта из того же исходного разговора в Harness попали 84 сообщения и 41 вызов инструментов. Заголовок для первых двух секунд ролика сохранился.</p>
@@ -1084,6 +1084,73 @@ document.querySelectorAll('[data-copy-target]').forEach(function(b){b.addEventLi
   </div>
 </aside>
 <!-- privacy:banner:end -->
+<div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
+<button aria-label="Закрыть" class="viewer-close" type="button">✕</button>
+<div aria-label="Увеличенный скриншот, можно прокручивать" class="viewer-scroll" tabindex="0"><img alt=""/></div>
+<p class="viewer-hint"></p></div>
+<script src="../../assets/image-viewer.js"></script>
+<script>
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollTop = 0;
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+</script>
 <!-- pageviews:start -->
 <script>
 (function () {
