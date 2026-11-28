@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="ru"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Джарвис - это кто? OpenJarvis и голосовой Jarvis для Claude Code</title>
+<!-- palette:start -->
+<style id="guide-palette">
+/* Exact primitive palette for the existing guides, not a replacement theme.
+ * Existing --paper/--ink/--forest/--muted/--accent declarations remain the semantic
+ * layer and keep their original values and theme overrides. Components use these
+ * primitives for fixed colors, gradient stops and exact opacity variants.
+ * alpha-N means the original decimal alpha (42=.42, 025=.025); alpha-0 retains
+ * its RGB for gradient interpolation. 136-of-255 preserves the original #fff8.
+ * Add a named primitive here before introducing a new fixed component color.
+ * Advertising erid styles and CTA markup are an immutable documented exception.
+ */
+:root {
+  --guide-color-black: #000000;
+  --guide-color-black-alpha-18: rgba(0,0,0,.18);
+  --guide-color-black-alpha-22: rgba(0,0,0,.22);
+  --guide-color-black-alpha-26: rgba(0,0,0,.26);
+  --guide-color-black-alpha-28: rgba(0,0,0,0.28);
+  --guide-color-black-alpha-3: rgba(0, 0, 0, .3);
+  --guide-color-black-alpha-32: rgba(0,0,0,0.32);
+  --guide-color-black-alpha-85: rgba(0,0,0,.85);
+  --guide-color-transparent: transparent;
+  --guide-color-brand: #FF7A4D;
+  --guide-color-brand-hover: #F28A68;
+  --guide-color-brand-ink: #8F371F;
+  --guide-color-brand-on-dark: #FF9A78;
+  --guide-color-brand-pale: #FFB08F;
+  --guide-color-brand-peach: #FFC5A8;
+  --guide-color-brand-pressed: #FFD1BF;
+  --guide-color-brand-pressed-alpha-34: rgba(255, 209, 191, .34);
+  --guide-color-brand-pressed-alpha-55: rgba(255,209,191,.55);
+  --guide-color-brand-soft: #FFAB8A;
+  --guide-color-brand-tint: #FFC6AD;
+  --guide-color-brand-wash: #FFE6D7;
+  --guide-color-carousel-green: #376759;
+  --guide-color-carousel-green-active: #518978;
+  --guide-color-carousel-green-mid: #3c6c60;
+  --guide-color-caution-ink: #9C4A1E;
+  --guide-color-caution-paper: #FBE3D2;
+  --guide-color-coral: #E86F4A;
+  --guide-color-coral-alpha-15: rgba(232,111,74,.15);
+  --guide-color-coral-alpha-16: rgba(232, 111, 74, .16);
+  --guide-color-coral-alpha-24: rgba(232,111,74,.24);
+  --guide-color-coral-alpha-28: rgba(232, 111, 74, .28);
+  --guide-color-coral-alpha-3: rgba(232,111,74,.3);
+  --guide-color-coral-deep: #B4471F;
+  --guide-color-coral-ink: #B4522F;
+  --guide-color-emerald: #31795D;
+  --guide-color-emerald-deep: #31715f;
+  --guide-color-emerald-light: #4b8b76;
+  --guide-color-error-alpha-16: rgba(200,69,44,.16);
+  --guide-color-forest: #102F30;
+  --guide-color-forest-alpha-06: rgba(16, 47, 48, .06);
+  --guide-color-forest-alpha-07: rgba(16, 47, 48, .07);
+  --guide-color-forest-alpha-08: rgba(16, 47, 48, .08);
+  --guide-color-forest-alpha-1: rgba(16, 47, 48, .1);
+  --guide-color-forest-alpha-12: rgba(16, 47, 48, .12);
+  --guide-color-forest-alpha-13: rgba(16, 47, 48, .13);
+  --guide-color-forest-alpha-16: rgba(16, 47, 48, .16);
+  --guide-color-forest-alpha-2: rgba(16, 47, 48, .2);
+  --guide-color-forest-alpha-24: rgba(16, 47, 48, .24);
+  --guide-color-forest-alpha-42: rgba(16, 47, 48, .42);
+  --guide-color-forest-deep: #0A2424;
+  --guide-color-forest-hover: #1F4A43;
+  --guide-color-forest-night: #0B2223;
+  --guide-color-forest-panel: #172522;
+  --guide-color-forest-raised: #2B5B52;
+  --guide-color-forest-shadow: #092220;
+  --guide-color-forest-surface: #162221;
+  --guide-color-forest-surface-alpha-97: rgba(22,34,33,.97);
+  --guide-color-gold-pale: #F5D3A9;
+  --guide-color-gold-sand: #E9BC89;
+  --guide-color-hero-forest: #0B2122;
+  --guide-color-hero-forest-alpha-0: rgba(11,33,34,0);
+  --guide-color-hero-forest-alpha-25: rgba(11,33,34,.25);
+  --guide-color-hero-forest-alpha-35: rgba(11,33,34,.35);
+  --guide-color-hero-forest-alpha-55: rgba(11,33,34,.55);
+  --guide-color-hero-forest-alpha-6: rgba(11,33,34,.6);
+  --guide-color-hero-forest-alpha-86: rgba(11,33,34,.86);
+  --guide-color-hero-forest-alpha-92: rgba(11,33,34,.92);
+  --guide-color-hero-orange: #F68C3E;
+  --guide-color-hero-orange-glow-alpha-28: rgba(237, 119, 51, .28);
+  --guide-color-hero-orange-glow-alpha-38: rgba(237, 119, 51, .38);
+  --guide-color-hero-orange-light: #FBAD52;
+  --guide-color-hero-orange-shadow-alpha-55: rgba(120, 40, 5, .55);
+  --guide-color-hero-paper: #F3EFE6;
+  --guide-color-hero-paper-alpha-1: rgba(243,239,230,.1);
+  --guide-color-hero-paper-alpha-18: rgba(243,239,230,.18);
+  --guide-color-hero-paper-alpha-6: rgba(243,239,230,.6);
+  --guide-color-hero-paper-alpha-62: rgba(243,239,230,.62);
+  --guide-color-hero-paper-alpha-72: rgba(243,239,230,.72);
+  --guide-color-hero-paper-alpha-84: rgba(243,239,230,.84);
+  --guide-color-hero-paper-highlight: #F7F3EA;
+  --guide-color-hero-paper-layer: #EDE7DA;
+  --guide-color-info-ink: #2C6FA6;
+  --guide-color-info-paper: #E4EDF5;
+  --guide-color-ink: #1E2926;
+  --guide-color-mint-border: #DCEAE4;
+  --guide-color-mint-highlight: #eef2ed;
+  --guide-color-mint-layer: #E8EFEC;
+  --guide-color-mint-mid: #92b8a9;
+  --guide-color-mint-muted: #a7c3b9;
+  --guide-color-mint-on-dark: #A8D0BE;
+  --guide-color-mint-paper: #EDF1EE;
+  --guide-color-mint-soft: #e2ebe7;
+  --guide-color-muted: #62706A;
+  --guide-color-muted-on-dark: #B8C3BE;
+  --guide-color-muted-soft: #C9D6D2;
+  --guide-color-muted-strong: #596760;
+  --guide-color-paper: #F8F7F2;
+  --guide-color-paper-alpha-88: rgba(248, 247, 242, .88);
+  --guide-color-paper-alpha-9: rgba(248, 247, 242, .9);
+  --guide-color-paper-alpha-92: rgba(248, 247, 242, .92);
+  --guide-color-paper-alpha-97: rgba(248,247,242,.97);
+  --guide-color-paper-border: #D5C9B7;
+  --guide-color-paper-layer: #F0E8D8;
+  --guide-color-sage: #5F7F68;
+  --guide-color-sage-alpha-16: rgba(95, 127, 104, .16);
+  --guide-color-sage-deep: #3F5C48;
+  --guide-color-sage-muted: #7b9991;
+  --guide-color-slate-border: #BBC7CA;
+  --guide-color-slate-highlight: #EEF1F1;
+  --guide-color-slate-paper: #E2E8E9;
+  --guide-color-success-alpha-09: rgba(61,122,69,.09);
+  --guide-color-success-alpha-2: rgba(61,122,69,.20);
+  --guide-color-success-ink: #2F7448;
+  --guide-color-success-light: #B5DBB7;
+  --guide-color-success-muted: #40775b;
+  --guide-color-success-on-dark: #B8D5C0;
+  --guide-color-success-paper: #E4F1E8;
+  --guide-color-sun: #D9711F;
+  --guide-color-sun-alpha-0: rgba(217,113,31,0);
+  --guide-color-sun-alpha-06: rgba(217,113,31,.06);
+  --guide-color-sun-alpha-07: rgba(217,113,31,.07);
+  --guide-color-sun-alpha-08: rgba(217,113,31,0.08);
+  --guide-color-sun-alpha-1: rgba(217,113,31,0.1);
+  --guide-color-sun-alpha-14: rgba(217,113,31,.14);
+  --guide-color-sun-alpha-15: rgba(217,113,31,0.15);
+  --guide-color-sun-alpha-16: rgba(217,113,31,.16);
+  --guide-color-sun-alpha-28: rgba(217,113,31,.28);
+  --guide-color-sun-alpha-3: rgba(217,113,31,0.3);
+  --guide-color-sun-alpha-35: rgba(217,113,31,.35);
+  --guide-color-sun-alpha-5: rgba(217,113,31,0.5);
+  --guide-color-sun-alpha-55: rgba(217,113,31,.55);
+  --guide-color-sun-burnt: #C2620F;
+  --guide-color-sun-deep: #B85A16;
+  --guide-color-sun-flare: #F09A45;
+  --guide-color-sun-glow-alpha-16: rgba(217,169,78,0.16);
+  --guide-color-sun-glow-alpha-18: rgba(217,169,78,0.18);
+  --guide-color-sun-glow-alpha-2: rgba(217,169,78,0.2);
+  --guide-color-sun-glow-alpha-22: rgba(217,169,78,0.22);
+  --guide-color-sun-glow-alpha-3: rgba(217,169,78,0.3);
+  --guide-color-sun-glow-alpha-35: rgba(217,169,78,0.35);
+  --guide-color-sun-glow-alpha-4: rgba(217,169,78,0.4);
+  --guide-color-sun-glow-alpha-5: rgba(217,169,78,0.5);
+  --guide-color-sun-light: #E9873A;
+  --guide-color-sun-shadow: #A8540C;
+  --guide-color-teal-deep: #37655C;
+  --guide-color-teal-light: #A9D2C8;
+  --guide-color-teal-light-muted: #4B7E72;
+  --guide-color-teal-mid: #476B64;
+  --guide-color-teal-muted: #48605C;
+  --guide-color-teal-shadow: #34504C;
+  --guide-color-terminal-green: #5FB86A;
+  --guide-color-terminal-orange: #FFB86B;
+  --guide-color-terminal-red: #E5645A;
+  --guide-color-terminal-surface: #171a1d;
+  --guide-color-terminal-yellow: #E5B84B;
+  --guide-color-warm-black: #1C140E;
+  --guide-color-warm-border: #E4D9C8;
+  --guide-color-warm-border-light: #E9DDC6;
+  --guide-color-warm-error: #3A211C;
+  --guide-color-warm-ink-alpha-02: rgba(43,38,34,0.02);
+  --guide-color-warm-ink-alpha-025: rgba(43,38,34,0.025);
+  --guide-color-warm-ink-alpha-06: rgba(43,38,34,0.06);
+  --guide-color-warm-ink-alpha-22: rgba(43,38,34,0.22);
+  --guide-color-warm-ink-alpha-28: rgba(43,38,34,0.28);
+  --guide-color-warm-ink-soft: #3E362C;
+  --guide-color-warm-muted: #3A342A;
+  --guide-color-warm-muted-border: #BCB0A0;
+  --guide-color-warm-muted-light: #C9BCA8;
+  --guide-color-warm-muted-raised: #4A4235;
+  --guide-color-warm-panel: #322C25;
+  --guide-color-warm-paper: #EFE4CC;
+  --guide-color-warm-paper-highlight: #FFF6EA;
+  --guide-color-warm-paper-layer: #F0E6D8;
+  --guide-color-warm-paper-soft: #F5EDE0;
+  --guide-color-warm-success: #263A28;
+  --guide-color-warm-surface: #1C1815;
+  --guide-color-warning-ink: #8A6410;
+  --guide-color-warning-paper: #FDF0CE;
+  --guide-color-white: #FFFFFF;
+  --guide-color-white-alpha-04: rgba(255,255,255,0.04);
+  --guide-color-white-alpha-07: rgba(255,255,255,0.07);
+  --guide-color-white-alpha-09: rgba(255,255,255,.09);
+  --guide-color-white-alpha-136-of-255: #fff8;
+  --guide-color-white-alpha-2: rgba(255,255,255,.2);
+  --guide-color-white-alpha-35: rgba(255,255,255,.35);
+  --guide-color-white-alpha-4: rgba(255,255,255,.4);
+  --guide-color-white-alpha-5: rgba(255,255,255,0.5);
+  --guide-color-white-alpha-55: rgba(255,255,255,0.55);
+  --guide-color-white-alpha-7: rgba(255,255,255,.7);
+  --guide-color-white-alpha-95: rgba(255, 255, 255, .95);
+}
+</style>
+<!-- palette:end -->
+<!-- critical:fonts:start -->
+<style id="guide-fonts">
+/* Local font assets: the page makes no font requests to external services. */
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/unbounded-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/spectral-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!-- critical:fonts:end -->
+<style>
+    :root {
+      --emerald: #102F30;
+      --emerald-mid: #1F4A43;
+      --paper: #F8F7F2;
+      --paper-2: #F0E8D8;
+      --info: #E2E8E9;
+      --info-line: #BBC7CA;
+      --sage-note: #E2E8E9;
+      --sage-line: #BBC7CA;
+      --accent: #E86F4A;
+      --accent-dark: #8F371F;
+      --ok: #5F7F68;
+      --ink: #1E2926;
+      --muted: #62706A;
+      --line: #D5C9B7;
+      --white: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      --paper: #162221;
+      --paper-2: #253331;
+      --info: #243735;
+      --info-line: #48605C;
+      --sage-note: #243735;
+      --sage-line: #48605C;
+      --ink: #EDF1EE;
+      --muted: #B7C2BD;
+      --line: #3C504C;
+      --white: #20302E;
+      --emerald: #DCEAE4;
+      --emerald-mid: #A8D0BE;
+      --accent-dark: #FF9A78;
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 18.4px/1.65 Spectral, Georgia, serif; -webkit-text-size-adjust: 100% }
+
+    a { color: var(--emerald-mid); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 600 }
+    a:hover { color: var(--accent-dark); text-decoration-thickness: 3px }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 30; width: 0; height: 3px; background: var(--accent) }
+    .masthead { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 97%, var(--guide-color-transparent)); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .masthead-inner { max-width: 1200px; min-height: 65px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px }
+    .brand { color: var(--emerald); font-size: 18px; font-weight: 750 }
+    .header-actions { display: flex; align-items: center; gap: 12px }
+    .header-controls { display: flex; align-items: center; gap: 12px }
+    .handout-title { color: var(--accent-dark); font-size: 13px; font-weight: 750 }
+    .theme-toggle, .press-button { min-height: 40px; border: 0; border-radius: 10px; font: 750 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; cursor: pointer }
+    .theme-toggle { width: 40px; background: var(--info); color: var(--emerald); box-shadow: 0 3px 0 var(--info-line) }
+    .press-button { display: inline-flex; align-items: center; padding: 0 15px; background: var(--emerald-mid); color: var(--white); text-decoration: none; box-shadow: 0 3px 0 var(--guide-color-forest-deep); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .theme-toggle:hover, .press-button:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-brand-tint); box-shadow: 0 2px 0 var(--guide-color-forest-deep) }
+    .page-shell { max-width: 1244px; margin: 0 auto; padding: 42px 20px 90px; display: grid; grid-template-columns: 210px minmax(0, 720px); gap: 32px; align-items: start }
+    .toc { position: sticky; top: 84px; width: 260px; max-height: calc(100vh - 104px); margin-left: max(-50px, calc((100vw - 1284px) / -2)); overflow-y: auto; padding: 4px 18px 10px 0; border-right: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .toc-label { margin: 0 0 15px; color: var(--muted); font: 700 11px/1.2 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase }
+    .toc a { position: relative; display: block; padding: 8px 0 8px 12px; color: var(--muted); font-size: 13.5px; line-height: 1.32; text-decoration: none }
+    .toc a.active { color: var(--accent-dark); font-weight: 700 }
+    .toc a.active::before { content: ""; position: absolute; left: -1px; top: 5px; bottom: 5px; width: 2px; background: var(--accent) }
+    .toc .toc-sub { padding-left: 24px }
+    .mobile-toc { display: none }
+    header[id], section[id], h3[id] { scroll-margin-top: 84px }
+    .eyebrow, .section-label { color: var(--accent-dark); font: 700 12px/1.2 ui-monospace, monospace; letter-spacing: .15em; text-transform: uppercase }
+    .eyebrow { margin: 0 0 20px }
+    .section-label { margin: 0 0 12px }
+    h1, h2 { color: var(--emerald); font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; text-wrap: balance }
+    h1 { margin: 0; font-size: 37.6px; line-height: 1.13; letter-spacing: -.752px }
+    h2 { margin: 0 0 22px; font-size: 29px; line-height: 1.2; letter-spacing: -.58px }
+    h3 { margin: 0 0 9px; color: var(--emerald); font: 750 20px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    p { margin: 0 0 20px }
+    .meta { margin: 25px 0 0; color: var(--muted); font: 600 13px/1.4 ui-monospace, monospace; letter-spacing: .04em }
+    .lead, .purpose { max-width: 690px }
+    .lead { margin: 20px 0 0 }
+    .purpose { margin-bottom: 25px }
+    .content-section { margin-top: 66px }
+    .step { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line) }
+    .path { padding: 2px 6px; border-radius: 5px; background: color-mix(in srgb, var(--emerald) 9%, var(--guide-color-transparent)); color: var(--emerald); font: 600 .9em/1.4 ui-monospace, monospace }
+    .result { margin: 20px 0 0; padding: 2px 0 2px 19px; border-left: 3px solid var(--ok); color: var(--emerald-mid) }
+    .result p { margin: 0 }
+
+    .info-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .warn-card { margin-top: 24px; padding: 11px 18px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 11px; background: var(--info) }
+    .warn-card p { margin: 0 }
+
+    .info-card p { margin: 0 }
+    .info-title { color: var(--emerald); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-weight: 750 }
+    figure { margin: 28px 0 0 }
+    .shot { position: relative; width: fit-content; max-width: 100% }
+    .shot img { display: block; width: auto; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--guide-color-white) }
+    .shot:has(img[src="assets/voice-brauzer.webp"]) img { width: 560px }
+    .shot:has(img[src="assets/voice-telefon.webp"]) img { width: 300px }
+    .shot:has(img[src="assets/zapros-1.webp"]) img { width: 620px }
+    .shot:has(img[src="assets/otvet-vpermeshku.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-1.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/spisok-2.webp"]) img { width: 640px }
+    .shot:has(img[src="assets/plan-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/plan-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/tri-zadachi.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-1.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/odno-delo-2.webp"]) img { width: 650px }
+    .shot:has(img[src="assets/export.webp"]) img { width: 320px }
+    .shot:has(img[src="assets/previewer-file.webp"]) img { width: 420px }
+    figcaption { margin-top: 11px; color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .sources { padding-left: 22px; font-size: 17px }
+    .sources li { margin: 9px 0 }
+    .related-plaque { grid-column: 2; padding: 14px 16px; border: 1px solid var(--info-line); border-radius: 11px; background: var(--info) }
+    .related-plaque p { margin: 0 }
+    .related-plaque .plaque-label { margin-bottom: 5px; color: var(--accent-dark); font: 700 11px/1.3 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase }
+    .related-plaque h2 { margin: 0 0 8px; font: 750 18px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    .cta { margin-top: 70px; padding: 30px; border-radius: 14px; background: var(--guide-color-forest); color: var(--guide-color-white) }
+    .cta h2 { color: var(--guide-color-white) }
+    .cta p { color: var(--guide-color-paper-layer) }
+    .cta .section-label { color: var(--guide-color-paper-layer) }
+    .cta .press-button { background: var(--accent); color: var(--guide-color-forest); box-shadow: 0 3px 0 var(--guide-color-brand-ink) }
+    .cta .press-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); box-shadow: 0 2px 0 var(--guide-color-brand-ink); transform: translateY(1px) }
+    .cta .press-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42); transform: translateY(3px) scale(.98) }
+    .foot { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 500 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+    @media (min-width: 1200px) { .page-shell { grid-template-columns: 210px minmax(0, 720px) 180px } .related-plaque { grid-column: 3; grid-row: 1; position: sticky; top: 84px } .header-actions { margin-right: 8px } .header-controls { width: 180px } .masthead .press-button { flex: 1; justify-content: center; padding: 0 8px } }
+    @media (max-width: 860px) {
+      body { font-size: 17px; line-height: 1.62 }
+      .masthead-inner { min-height: 60px; padding: 0 14px }
+      .brand { max-width: 120px; font-size: 14px; line-height: 1.15 }
+      .handout-title { display: none }
+      .page-shell { display: block; padding: 24px 14px 68px }
+      .toc { display: none }
+      .mobile-toc { display: block; margin: 0 0 30px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+      .mobile-toc summary { color: var(--emerald); font-size: 15px; font-weight: 750 }
+      .mobile-toc nav { display: grid; gap: 10px; margin-top: 14px }
+      .mobile-toc a { color: var(--muted); font-size: 14px }
+      .mobile-toc a.active { color: var(--accent-dark); font-weight: 700 }
+      .related-plaque { margin-top: 46px }
+      h1 { font-size: 34px; line-height: 1.16 }
+      h2 { font-size: 27px }
+      .content-section { margin-top: 52px }
+      .cta { padding: 26px 22px 28px }
+    }
+
+
+
+@media (min-width:861px) and (max-width:1199px) { .toc { width: 240px; margin-left: 0 } }
+@media (min-width:1200px) { .toc { margin-left: max(-50px, calc(630px - 50vw)) } }
+@media (min-width:1200px) and (max-width:1304px) { .toc { width: calc(260px - (1304px - 100vw) / 2) } }
+.content-section ul,.content-section ol{margin:8px 0 20px;padding-left:25px}
+.content-section li{margin:7px 0;padding-left:3px}
+.pair-card{margin-top:18px;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.pair-card p{margin:0 0 10px}
+.pair-card p:last-child{margin-bottom:0}
+.pair-card a{overflow-wrap:anywhere}
+.masthead .press-button:active{background:var(--guide-color-brand-pressed);color:var(--guide-color-forest);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42);transform:translateY(3px) scale(.98)}
+:target{animation:target-glow 1.6s ease-out;border-radius:8px}
+@keyframes target-glow{from{background:var(--guide-color-coral-alpha-15)}to{background:var(--guide-color-transparent)}}
+@media(max-width:860px){.pair-card{padding:15px 16px}}
+@media(prefers-reduced-motion:reduce){:target{animation:none}}
+    main, article { min-width: 0 }
+    h1 { font-size: clamp(27px, 4.4vw, 37.6px); overflow-wrap: anywhere }
+    h2 { margin-bottom: 18px; font-size: clamp(23px, 3.3vw, 29px); overflow-wrap: anywhere }
+    .pair-card ol { margin: 8px 0 18px; padding-left: 25px }
+    .pair-card .result { margin: 16px 0 14px }
+    .pair-card .catch { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--info-line); border-left: 6px solid var(--accent); border-radius: 9px; background: var(--info) }
+    .pair-card .catch p { margin: 0 }
+    .shot .zoom { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 9px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-paper); font: 750 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; opacity: 0 }
+    .shot .zoom { padding: 5px 10px; border-radius: 6px; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em }
+    .shot:hover .zoom, .shot .zoom:focus-visible { opacity: 1 }
+    @media (hover: none), (max-width: 860px) { .shot .zoom { opacity: .94 } }
+    .viewer { position: fixed; inset: 0; z-index: 50; display: none; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 64px 16px 18px; background: var(--guide-color-forest) }
+    .viewer[open] { display: grid }
+    .viewer-scroll { max-width: 100%; max-height: 100%; overflow: auto; border-radius: 10px; background: var(--guide-color-white); -webkit-overflow-scrolling: touch }
+    .viewer-scroll img { display: block; max-width: none; height: auto }
+    .viewer.fits .viewer-scroll img { margin: 0 auto }
+    .viewer-close { position: absolute; top: 16px; right: 16px; min-width: 42px; min-height: 42px; border: 0; border-radius: 10px; background: var(--guide-color-paper); color: var(--guide-color-forest); font: 750 17px/1 sans-serif; cursor: pointer }
+    .viewer-hint { margin: 0; color: var(--guide-color-muted-soft); font: 600 13px/1.4 sans-serif; text-align: center }
+    .press-button, .theme-toggle, .shot .zoom, .viewer-close { box-shadow: 0 3px 0 var(--info-line); transition: background .12s ease, color .12s ease, box-shadow .12s ease, transform .12s ease }
+    .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest); transform: translateY(1px); box-shadow: 0 2px 0 var(--info-line) }
+    .masthead .press-button:hover { background: var(--guide-color-forest-raised); color: var(--guide-color-white) }
+    .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+    .help-banner { background: var(--guide-color-forest); color: var(--guide-color-white); border-radius: 22px; padding: 30px 22px; margin: 40px 0 10px; text-align: center }
+    .help-banner .help-title { font: 700 clamp(19px,4.4vw,26px)/1.35 Unbounded,Arial,sans-serif; margin: 0; color: var(--guide-color-white) }
+    .help-banner .accent { color: var(--guide-color-brand-soft) }
+    .help-demo { display: grid; gap: 16px; margin-top: 24px; text-align: left; font: 16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif }
+    .help-demo .bubble { padding: 14px 16px; border-radius: 12px }
+    .help-demo .me { background: var(--guide-color-forest-hover) }
+    .help-demo .claude { background: var(--guide-color-paper); color: var(--guide-color-forest) }
+    .help-demo .who { display: block; margin-bottom: 5px; font-weight: 750 }
+    @media (prefers-reduced-motion: reduce) { .press-button, .theme-toggle, .shot .zoom, .viewer-close { transition: none } .press-button:hover, .theme-toggle:hover, .shot .zoom:hover, .viewer-close:hover, .press-button:active, .theme-toggle:active, .shot .zoom:active, .viewer-close:active, .masthead .press-button:active, .cta .press-button:active { transform: none } }
+
+    .pair-card .result p { margin: 0 }
+
+    figure.cover { margin: 22px 0 26px; padding: 0; border: 0; background: var(--guide-color-transparent) }
+    figure.cover img { display: block; width: 100%; height: auto; border: 0; border-radius: 14px; box-shadow: 0 12px 28px var(--guide-color-forest-alpha-16) }
+    :root[data-theme="dark"] figure.cover img { box-shadow: 0 12px 28px var(--guide-color-black-alpha-3) }
+
+
+    figure.cover-v2:not(.shot) { margin: 22px 0 26px }
+    figure.cover-v2:not(.shot) img { border-radius: 14px; box-shadow: none }
+    :root[data-theme="dark"] figure.cover-v2:not(.shot) img { box-shadow: none }
+    figure.cover-v2:not(.shot) figcaption { margin-top: 11px; color: var(--muted); font: 400 14px/1.5 Spectral, Georgia, serif }
+    h1.article-title-v2 { margin: 0; font-family: Spectral, Georgia, serif; font-size: 46px; font-weight: 300; line-height: 1.07; letter-spacing: -.3px; text-wrap: balance }
+    @media (max-width: 860px) { h1.article-title-v2 { font-size: clamp(30px, 7.5vw, 46px); line-height: 1.1 } }
+
+.warn-card + p, .info-card + p { margin-top: 25px }
+figure + .result, figure + p, figure + ol { margin-top: 20px }
+.result + p { margin-top: 16px }
+.shot:has(img[src="assets/camera-open.webp"]) { width: min(100%, 260px) }
+.shot:has(img[src="assets/lens.webp"]) { width: min(100%, 380px) }
+.help-banner .copy-button { margin-top: 16px; min-width: 172px }
+.copy-button { padding: 10px 15px; border: 0; border-radius: 9px; background: var(--guide-color-forest-hover); color: var(--guide-color-white); font: 700 13px/1.3 sans-serif; box-shadow: 0 3px 0 var(--guide-color-forest) }
+.copy-button:hover { background: var(--guide-color-forest-raised); transform: translateY(1px); box-shadow: 0 2px 0 var(--guide-color-forest) }
+.copy-button:active { background: var(--guide-color-brand-pressed); color: var(--guide-color-forest); transform: translateY(3px) scale(.98); box-shadow: inset 0 0 0 3px var(--guide-color-forest-alpha-42) }
+.copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest); outline: 3px solid var(--guide-color-brand-soft) }
+@media (prefers-reduced-motion: reduce) { .copy-button { transform: none !important; transition: none } }
+
+    .code-card { margin: 16px 0 20px; padding: 18px; border: 1px solid var(--guide-color-teal-muted); border-radius: 11px; background: var(--guide-color-forest); color: var(--guide-color-mint-paper) }
+    .code-card pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 14px/1.6 "JetBrains Mono", ui-monospace, monospace }
+    .code-card code { font: inherit; color: inherit }
+    p code, li code { font: 500 .85em/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere }
+    .copy-button { min-width: 172px; min-height: 44px; cursor: pointer; transition: background .12s ease, box-shadow .12s ease, transform .12s ease }
+    .check-panel { margin: 22px 0; padding: 11px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--white) }
+    .check-panel summary { cursor: pointer; font-weight: 600; color: var(--emerald-mid) }
+    .check-panel[open] summary { margin-bottom: 16px }
+    .check-panel > p:last-child { margin-bottom: 0 }
+    .next-read { margin: 46px 0 0; padding: 24px; border: 1px solid var(--sage-line); border-radius: 14px; background: var(--sage-note) }
+    .next-read h2 { margin-bottom: 12px }
+    .next-sub { margin-bottom: 18px; color: var(--muted) }
+    .next-read ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+    .next-read a { position: relative; display: block; padding: 14px 40px 14px 16px; border: 1px solid var(--sage-line); border-radius: 9px; background: var(--white); text-decoration: none; color: var(--emerald-mid) }
+    .next-read .title { display: block; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px }
+    .next-read .why { display: block; margin-top: 7px; color: var(--muted); font-weight: 400 }
+    .next-read a::after { content: "→"; position: absolute; top: 14px; right: 16px; color: var(--accent); font-size: 19px; font-weight: 700 }
+    .mobile-toc { margin-top: 26px }
+    @media (max-width: 860px) { .code-card { padding: 15px } .next-read { padding: 18px } }
+
+/* компактные плашки команд: ширина по тексту, «Скопировать» маленькой кнопкой справа сверху */
+.code-card { position: relative; width: fit-content; max-width: 100%; box-sizing: border-box; padding: 14px 128px 14px 18px }
+.code-card pre { margin: 0 }
+.code-card .copy-button { background: var(--guide-color-coral); color: var(--guide-color-forest); position: absolute; top: 9px; right: 9px; margin: 0; min-width: 0; min-height: 30px; padding: 6px 12px; font-size: 12px; border-radius: 7px }
+.code-card .copy-button:hover { background: var(--guide-color-brand-hover); color: var(--guide-color-forest) }
+.code-card .copy-button.is-copied { background: var(--guide-color-mint-border); color: var(--guide-color-forest) }
+@media (max-width: 600px) { .code-card { width: auto; padding: 46px 14px 14px } }
+
+.shot:has(img[src="assets/connect.webp"]) img, .shot:has(img[src="assets/organizaciya.webp"]) img, .shot:has(img[src="assets/pervyy-agent.webp"]) img { width: 400px }
+.shot:has(img[src="assets/naym-odobrenie.webp"]) img, .shot:has(img[src="assets/pervaya-zadacha.webp"]) img { width: 560px }
+</style>
+<!-- erid:style:start -->
+<!-- erid:style:start -->
+<style>
+    .cta-question { margin: 70px 0 0 }
+    .cta-question + .cta { margin-top: 16px }
+    .cta { padding: 22px 22px 18px; border-radius: 14px; background: #102F30; color: #FFFFFF }
+    .cta h2 { color: #FFFFFF; font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin: 0 0 10px }
+    .cta p { font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: #F0E8D8 }
+    .cta .press-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 8px; background: #FF7A4D; color: #0B2223; font-size: 15px; font-weight: 750; text-decoration: none; box-shadow: 0 3px 0 #B4471F }
+    .cta .press-button:hover { background: #FF7A4D; color: #0B2223; box-shadow: 0 2px 0 #B4471F; transform: translateY(1px) }
+    .cta .press-button:active { background: #FFD1BF; color: #102F30; box-shadow: inset 0 0 0 3px rgba(16, 47, 48, .42); transform: translateY(3px) scale(.98) }
+    .cta .press-button + p { margin-top: 18px }
+    .cta .press-button + .ad-disclosure { margin: 18px 0 0 }
+    .cta .ad-disclosure { overflow-wrap: anywhere }
+    @media (prefers-reduced-motion: reduce) { .cta .press-button:hover, .cta .press-button:active { transform: none } }
+</style>
+<!-- erid:style:end -->
+<!-- erid:style:end -->
+<!-- quality:start -->
+<style id="guide-quality">
+/* Контраст компонентов и клавиатурный фокус, без изменения бумажной палитры */
+:root { --accent: #FF7A4D; --quality-muted: #596760; --quality-focus: #102F30 }
+html[data-theme="dark"] { --quality-muted: #B8C3BE; --quality-focus: #F8F7F2 }
+.kind-instr, .soon { color: var(--guide-color-muted-strong) }
+.howto-num { color: var(--guide-color-forest) }
+.cta-button, .cta-button:hover, .cta-button:active { color: var(--guide-color-black) }
+.search-go { color: var(--guide-color-forest) }
+.search-go:hover { color: var(--guide-color-forest) }
+.guide-link.kod-hit::after { color: var(--guide-color-brand-ink) }
+.next-read p.next-sub, .next-read .why, .related-plaque .why, .cost-table-total td span { color: var(--quality-muted) }
+.check li.ok { color: var(--quality-muted) }
+html .privacy-footer a, html .privacy-footer button { color: var(--quality-muted) }
+.shot .zoom:hover, .shot .zoom:active { color: var(--guide-color-forest) }
+html[data-theme="dark"] .masthead { background: var(--paper) }
+html[data-theme="dark"] .shot .zoom { background: var(--guide-color-forest); color: var(--guide-color-paper) }
+html[data-theme="dark"] .shot .zoom:hover, html[data-theme="dark"] .shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+html[data-theme="dark"] .toc a span, html[data-theme="dark"] .mobile-toc a span { color: inherit !important }
+html[data-theme="dark"] .toc a, html[data-theme="dark"] .mobile-toc a { color: var(--guide-color-muted-on-dark) }
+html[data-theme="dark"] .toc a.active, html[data-theme="dark"] .mobile-toc a.active { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .jump { color: var(--guide-color-brand-on-dark) }
+html[data-theme="dark"] .sources a, html[data-theme="dark"] .seo-related a,
+html[data-theme="dark"] nav[aria-label="Хлебные крошки"] a { color: var(--guide-color-mint-on-dark) }
+html[data-theme="dark"] .cost-table thead th { color: var(--guide-color-paper) }
+html[data-theme="dark"] .cost-table tbody th { color: var(--guide-color-forest) }
+html[data-theme="dark"] .cost-table .cost-table-total th { background: var(--sage-note); color: var(--heading, var(--guide-color-mint-paper)) }
+html[data-theme="dark"] .plan-free { color: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .quick-link, html[data-theme="dark"] .quick-link:hover { background: var(--guide-color-forest-hover); color: var(--guide-color-white) }
+html[data-theme="dark"] .help-banner { background: var(--guide-color-forest) }
+.help-demo .who { opacity: 1 }
+.help-banner .copy-button:hover { color: var(--guide-color-paper) }
+.help-banner :is(a,button):focus-visible { outline-color: var(--guide-color-paper) }
+.say .copy, .say .copy:hover, .say .copy:active, .tag { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+.copy.done { color: var(--guide-color-forest); background: var(--guide-color-success-on-dark) }
+html[data-theme="dark"] .toc a::before { opacity: 1 }
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--quality-focus); outline-offset: 3px;
+}
+/* Фокус также показывает кнопку увеличения, которая скрыта до наведения */
+.shot .zoom:focus-visible { opacity: 1 }
+
+/* Контраст отдельных состояний: прозрачная copy-кнопка сохраняет исходный светлый текст */
+.prompt .copy.press-button:hover { color: var(--guide-color-white) }
+.prompt .copy.press-button:active { color: var(--guide-color-black) }
+.num, .lepestok .num { color: var(--guide-color-forest) }
+.jump:hover { color: var(--guide-color-brand-ink) }
+.shot .zoom:active { background: var(--guide-color-brand); color: var(--guide-color-forest) }
+/* Постоянно тёмные блоки сохраняют светлый фокус и в светлой теме */
+:is(.cover,.cta,.code-card,.prompt-box,.prompt-block,.prompt-card,.prompt,.say,.help-banner,.viewer,.image-viewer) :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline-color: var(--guide-color-paper);
+}
+
+/* Эти help-компоненты содержат оранжевые copy-кнопки, в отличие от зелёной общей кнопки */
+.help-banner .prompt-box .copy-button:hover, #pamyatka .help-banner .copy-button:hover { color: var(--guide-color-forest) }
+#pamyatka .help-banner :focus-visible { outline-color: var(--quality-focus) }
+.service-snippets .shot .zoom:focus-visible { outline-color: var(--guide-color-forest) }
+/* В этих четырёх шаблонах промпта фон использует светлый emerald-токен тёмной темы */
+html[data-theme="dark"] .copy-button[data-copy-target="instructions-template"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="chatgpt-memory-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="search-chats-prompt"]:focus-visible,
+html[data-theme="dark"] .copy-button[data-copy-target="project-instructions"]:focus-visible { outline-color: var(--guide-color-forest) }
+
+/* Подписи маркеров и крупный акцент заголовка, отмеченные axe для ручной проверки */
+.marker, .shot-outline::before { color: var(--guide-color-forest) }
+h1.intro-title .accent { color: var(--guide-color-forest) }
+/* Исходный декоративный градиент солнца сохраняется при исправлении цвета кнопок */
+.sun-core, .sun-rays, .visual-sun-bg span, .intro .eyebrow::before { --accent: #D9711F }
+</style>
+<!-- quality:end -->
+<style id="konspekt-editorial">
+.konspekt-example { max-width: 700px; margin: 24px auto 38px }
+.konspekt-example .shot img { width: 100%; height: auto; max-height: none; object-fit: contain }
+.tariff-note { margin-top: 42px; padding: 18px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; line-height: 1.6 }
+.tariff-note p { font-size: inherit; line-height: inherit; margin: 0 0 12px }
+.tariff-note .note-label { font-weight: 400 }
+.tariff-note ul { margin: 0; padding-left: 22px }
+.tariff-note li { margin: 0 0 14px; font-size: inherit; line-height: inherit }
+</style>
+<style>.shot img{width:650px}.code-card pre{overflow-wrap:anywhere;white-space:pre-wrap}.tariff-note{margin-top:32px}</style>
+<style>/* H1 и шаринг: вычисленные значения эталона Trellis 2 на 390 и 1440 px */
+h1.article-standard-h1 {
+  margin: 0 !important;
+  color: var(--guide-color-forest) !important;
+  font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: clamp(27px, 4.4vw, 37.6px) !important;
+  font-weight: 700 !important;
+  line-height: 1.13 !important;
+  letter-spacing: -0.752px !important;
+  text-wrap: balance;
+}
+
+@media (max-width: 860px) {
+  h1.article-standard-h1 {
+    line-height: 1.16 !important;
+  }
+}
+
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--guide-color-paper-border);
+  border-radius: 8px;
+  background: var(--guide-color-white);
+  color: var(--guide-color-forest-hover);
+  font-family: "JetBrains Mono", JetBrainsMono-fb, ui-monospace, SFMono-Regular, monospace;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .share-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+/* Цифры по высоте заглавных во всех статьях: Spectral по умолчанию рисует их «старым стилем» (4, 9 ниже строки) */
+body { font-feature-settings: "lnum" 1; }
+</style>
+<style>
+html[data-theme="dark"] article h1{color:var(--ink)!important}
+#style-05-brutalist .shot .zoom{bottom:48px}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.product-figure{margin:24px 0 30px}.product-figure .shot{width:min(100%,520px);margin:auto}.product-figure img{width:100%;height:auto}.product-figure figcaption{margin-top:11px;color:var(--muted);font:400 14px/1.5 Spectral,Georgia,serif}.before-after .product-figure{margin:0 0 20px}.code-card{position:relative;background:var(--guide-color-forest);color:var(--guide-color-paper);border-radius:12px;padding:61px 20px 22px;margin:24px 0;overflow:hidden}.code-card pre,.code-card pre code{background:var(--guide-color-transparent)!important;color:inherit!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;overflow-wrap:anywhere;font:500 17px/1.6 "JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace}.code-card pre{margin:15px 0 0}.prompt-destination{display:block;font:500 12px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--guide-color-paper)}.code-card .copy-button{position:absolute;top:12px;right:13px;min-width:140px;min-height:38px;padding:0 12px;border:0;border-radius:8px;background:var(--accent);color:var(--guide-color-forest);font:750 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;box-shadow:0 3px 0 var(--guide-color-brand-ink);transition:background .15s,transform .15s,box-shadow .15s}.code-card .copy-button:hover{background:var(--guide-color-brand-hover);color:var(--guide-color-forest);transform:translateY(1px);box-shadow:0 2px 0 var(--guide-color-brand-ink)}.code-card .copy-button:active{background:var(--guide-color-brand-pressed);transform:translateY(3px) scale(.98);box-shadow:inset 0 0 0 3px var(--guide-color-forest-alpha-42)}.code-card .copy-button.is-copied{background:var(--guide-color-brand-pressed);box-shadow:0 0 0 3px var(--guide-color-brand-pressed-alpha-55)}.code-card .copy-button:focus-visible{outline:3px solid var(--guide-color-brand-pressed);outline-offset:4px}@media(prefers-reduced-motion:reduce){.code-card .copy-button{transition:none}.code-card .copy-button:hover,.code-card .copy-button:active{transform:none}}
+.result-line{border-left:3px solid var(--guide-color-success-ink);padding-left:16px;background:var(--guide-color-transparent)}.faq-item{padding:16px 18px;border:1px solid var(--line);border-radius:11px;margin:12px 0;background:var(--white)}.faq-item summary{cursor:pointer;font-weight:600}.faq-item p{margin-bottom:0}.draft-sharing-note{font:400 13px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted)}@media(max-width:600px){.before-after{gap:10px}.code-card{padding:61px 18px 22px}.code-card pre,.code-card pre code{font-size:17px}}
+</style><style>/* Review corrections: visible advert hover and cover viewer affordance. */
+.cta .press-button:hover{background:var(--guide-color-brand-pale)!important;color:var(--guide-color-forest)!important}
+figure.cover{position:relative}.cover .zoom{position:absolute;right:10px;bottom:38px;padding:5px 10px;border:0;border-radius:6px;background:var(--guide-color-forest);color:var(--guide-color-white);font:700 11px/1.3 sans-serif;cursor:pointer}
+</style><style>
+.code-card .prompt-value{color:var(--guide-color-coral)}
+.prompt-edit-hint{font:400 14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--muted);margin-bottom:10px}
+.product-figure .shot .zoom{position:static;display:block;margin:10px 0 0 auto;opacity:1}
+</style><style>
+.code-card{position:relative;width:fit-content;max-width:100%;box-sizing:border-box;padding:14px 128px 14px 18px}
+.code-card pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.code-card .copy-button{position:absolute;top:9px;right:9px;margin:0;min-width:0;min-height:30px;padding:6px 12px;font-size:12px;border-radius:7px}
+@media (max-width:600px){.code-card{width:auto;padding:46px 14px 14px}}
+.prompt-value{color:var(--guide-color-brand-peach)}
+.shot{width:100%;max-width:100%;display:flex;flex-direction:column;align-items:stretch;overflow:visible;background:var(--guide-color-transparent);border:0}
+.shot img{display:block;width:100%;height:auto;max-width:100%;border-radius:10px}
+.shot .zoom,.cover .zoom{position:static;align-self:flex-end;display:block;width:fit-content;opacity:1;margin:9px 0 0;min-height:36px;padding:9px 12px}
+.cover img{width:100%;height:auto;max-height:none;object-fit:contain}
+.cover .zoom{margin-left:auto;background:var(--guide-color-forest-hover);color:var(--guide-color-paper);border:0;border-radius:6px;font:700 11px/1 sans-serif;cursor:pointer}
+.table-wrap{width:100%;overflow-x:auto;margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:17px}
+th,td{text-align:left;vertical-align:top;padding:12px;border:1px solid var(--line)}
+tbody tr{background:var(--white)}
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-2) 25%,var(--white) 75%)}
+li>p{margin-top:8px}
+@media(max-width:600px){.code-card{padding:46px 14px 14px}.table-wrap table{min-width:590px}}
+</style><style>/* H1 и шаринг: вычисленные значения эталона Trellis 2 на 390 и 1440 px */
+h1.article-standard-h1 {
+  margin: 0 !important;
+  color: var(--guide-color-forest) !important;
+  font-family: Unbounded, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: clamp(27px, 4.4vw, 37.6px) !important;
+  font-weight: 700 !important;
+  line-height: 1.13 !important;
+  letter-spacing: -0.752px !important;
+  text-wrap: balance;
+}
+
+/* Общий светлый заголовок на тёмной бумаге; HTML статей не меняется. */
+html[data-theme="dark"] h1.article-standard-h1 {
+  color: var(--guide-color-paper) !important;
+}
+
+@media (max-width: 860px) {
+  h1.article-standard-h1 {
+    line-height: 1.16 !important;
+  }
+}
+
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--guide-color-paper-border);
+  border-radius: 8px;
+  background: var(--guide-color-white);
+  color: var(--guide-color-forest-hover);
+  font-family: "JetBrains Mono", JetBrainsMono-fb, ui-monospace, SFMono-Regular, monospace;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .share-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+/* Цифры по высоте заглавных во всех статьях: Spectral по умолчанию рисует их «старым стилем» (4, 9 ниже строки) */
+body { font-feature-settings: "lnum" 1; }
+</style>
+<style>
+.prompt-value{color:var(--guide-color-brand-peach)}
+#perekladka .info-card{margin-top:16px}#perekladka .info-card p{font-size:15px;line-height:1.55;color:var(--muted)}
+.next-read h2{margin:0 0 4px;font-size:20px}.next-read p.next-sub{margin:0 0 16px;font-size:14.5px}.next-read .why{font-size:14px}
+.shot{background:var(--guide-color-transparent)}figure.shot:has(video){width:75%;max-width:405px;margin:24px auto}.shot video{display:block;width:100%;height:auto}figure.shot:has(video) figcaption{margin-top:9px}.shot img{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
+.shot .zoom{position:static;align-self:flex-end;display:block;width:fit-content;opacity:1;margin:9px 0 0;min-height:36px;padding:9px 12px}
+.code-card{width:auto;max-width:100%;padding-top:54px;padding-right:18px}
+.code-card .copy-button{min-width:135px;min-height:36px;font-size:13px}
+.code-card pre{white-space:pre-wrap;overflow-wrap:anywhere}
+:root{--sage-note:#E2E8E9;--sage-line:#BBC7CA}
+:root[data-theme="dark"]{--sage-note:#243735;--sage-line:#48605C}
+html[data-theme="dark"] .uroven-metka{background:var(--guide-color-warm-success);color:var(--guide-color-success-on-dark)}
+.warn-card + h3{margin-top:32px}
+.uroven-metka{display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-success-paper);color:var(--guide-color-success-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+article figcaption{font-family:'Spectral',Georgia,serif;font-weight:400}
+</style>
+<!-- seo:canonical:start -->
+<link rel="canonical" href="https://pronovoe.com/claude-ai/jarvis-golosovoy-pomoshchnik/">
+<!-- seo:canonical:end -->
+<!-- seo:schema:start -->
+<script type="application/ld+json" id="seo-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://pronovoe.com/claude-ai/jarvis-golosovoy-pomoshchnik/#article",
+      "headline": "Джарвис - это кто? Два ИИ-помощника, которых можно установить",
+      "mainEntityOfPage": "https://pronovoe.com/claude-ai/jarvis-golosovoy-pomoshchnik/",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Person",
+        "name": "Жанна Слепова",
+        "url": "https://pronovoe.com/#about"
+      },
+      "dateModified": "2026-11-28"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pronovoe.com/claude-ai/jarvis-golosovoy-pomoshchnik/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Инструкции по нейросетям",
+          "item": "https://pronovoe.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Джарвис - это кто? Два ИИ-помощника, которых можно установить",
+          "item": "https://pronovoe.com/claude-ai/jarvis-golosovoy-pomoshchnik/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pronovoe.com/claude-ai/jarvis-golosovoy-pomoshchnik/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Загрузка не доходит до STANDBY",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Открой оставленную нижнюю панель, где работает npm start, и посмотри последнее сообщение. Если запуск остановился, повтори в этой же панели выбранную команду первого запуска с теми же условиями. Затем открой адрес из строки Local и нажми INITIALISE. Если процесс работает, а экран остаётся на загрузке, перезагрузи страницу. Если это не помогло, отправь снимок и текст из этой панели через запрос помощи. Помощник устанавливал проект, а этот процесс запускаешь и останавливаешь ты."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Браузер не разрешает микрофон",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Открой справку своего браузера: разрешение микрофона в Chrome или разрешения микрофона в Edge. Если браузер всё равно не слышит, приложи сообщение и название браузера к запросу помощи. Не переустанавливай Jarvis только из-за отказа разрешения."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jarvis отвечает «Not logged in»",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Это означает «вход не выполнен». Вернись к нижней панели с командой claude из шага 2 и выполни вход по начальному руководству. Когда вопрос про два плюс два получит ответ в этом терминальном чате, останови Jarvis через Ctrl+C и повтори выбранную команду запуска. Переустанавливать пакеты ради входа не нужно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude сообщает, что закончился лимит",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jarvis использует тот же доступ к модели и не увеличивает лимиты. Время восстановления проверь в Claude Code. Дождись восстановления доступа или проверь условия своего тарифа."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нет ответа, Jarvis не слышит или не говорит",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Проверь выбранные динамики или наушники и громкость вкладки. На странице Jarvis клавиша T запускает звуковую самопроверку: должен прозвучать тестовый голос. Если его не слышно, проверь устройство вывода звука. Клавиша D открывает панель диагностики. Найди строку last heard («последняя услышанная фраза»). Если после твоей реплики там по-прежнему nothing yet («пока ничего»), проверь разрешение микрофона и повтори английскую фразу. Если фраза появилась, а ответа нет, проверь вход в Claude Code. Если причина остаётся непонятной, приложи снимок панели к запросу помощи; его можно отправить и в браузерный чат. Last heard показывает распознанную фразу. Nothing yet означает, что распознанного текста пока нет."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Страница не видит мост",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вернись в панель с npm start и прочитай ошибку. У страницы и моста разные порты, номера подключения: Local показывает адрес страницы, а мост по умолчанию использует 8787. Если не открывается сама страница, используй текущий Local. Если страница открылась, но пишет Bridge not reachable («мост недоступен»), одного нового адреса Local недостаточно. Проверь сообщение запуска моста в той же панели. Ошибка занятого порта означает, что этот номер подключения уже использует другая программа. Если ранее уже запускался Jarvis, останови предыдущий запуск через Ctrl+C в его панели и повтори выбранную команду запуска. Если не знаешь, какая программа занимает порт, не останавливай чужие процессы: скопируй сообщение в запрос помощи."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Трёхмерная графика не появилась",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для трёхмерной графики нужна возможность браузера WebGL. Если появляется сообщение WebGL context, передай его помощнику вместе с названием браузера и системой."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли пользоваться с телефона?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Эта инструкция запускает Jarvis на компьютере. Доступ с телефона потребует отдельной настройки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Работает ли он, пока компьютер выключен?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Локальные процессы останавливаются вместе с компьютером. Для постоянной работы нужна отдельная работающая машина и настройка сервиса."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли заменить Claude на Codex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Codex может помочь установить файлы проекта, но выбранный Jarvis отправляет задачи именно Claude Code. Чтобы подключить другую модель вместо Claude, придётся менять программу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли сразу разговаривать по-русски?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "В исходной версии проекта, на которую ведёт ссылка в шаге 1, распознавание и выбор голосов настроены на английский. Поэтому для первого запуска здесь даны английские вопросы. Для русского нужно отдельно изменить язык распознавания, язык ответов и выбор системного голоса. Русская речь не требует обязательного подключения ElevenLabs: вопрос языка и выбор сервиса озвучки - разные настройки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужно ли подключать отдельный сервис для голоса?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для описанного первого запуска достаточно системного голоса. ElevenLabs можно рассмотреть позже, если захочешь другой тембр или копию своего голоса. Это необязательный выбор; доступные варианты описаны в документации сервиса. Если ключ уже настроен на компьютере, сначала проверь режим по пояснению перед голосовой пробой."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что здесь бесплатно, а что оплачивается?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Исходный код Jarvis можно использовать бесплатно по лицензии MIT, разрешению на использование и изменение программы. Для ответов нужен доступ к Claude. При входе через подписку расходуются её лимиты. При использовании API-ключа, личного ключа для обращений к модели из других программ, запросы оплачиваются отдельно по правилам этого способа доступа. Перед запуском проверь способ оплаты в официальной справке Anthropic. Никому не отправляй ключ."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:schema:end -->
+<style>.faq-item{padding:16px 18px;border:1px solid var(--line);border-radius:11px;margin:12px 0;background:var(--white)} .faq-item summary{cursor:pointer;font-weight:600} .faq-item p{margin-bottom:0} .step-circle {display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--guide-color-white);font-size:16px;margin-right:8px}.score-card strong {font-size:48px;line-height:1.1}.info-card ul {margin:8px 0 0;padding-left:22px}.score-card p + p {margin-top:10px}article > section {margin-top:66px} .info-card + h2, .info-card + h3, .warn-card + h2, .warn-card + h3 {margin-top:48px} @media (max-width:860px) {article > section {margin-top:52px}} #istochniki + .cta-question {margin-top:32px}</style><link href="/assets/article-sharing.css" rel="stylesheet"/><!-- privacy:head:start -->
+<!-- critical:privacy-style:start -->
+<style id="guide-privacy-style">
+/* Shared UI font token uses the site's existing system font stack. */
+:root { --guide-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif }
+/* Высота плашки измеряется: последний текст и подвал можно прокрутить выше неё */
+body { padding-bottom: var(--cookie-height, 0px) }
+html { scroll-padding-bottom: calc(var(--cookie-height, 0px) + 16px) }
+.cookie-banner[hidden] { display: none }
+.cookie-banner {
+  position: fixed; inset: auto 0 0; z-index: 40;
+  max-height: 45dvh; overflow-y: auto;
+  background: var(--paper, var(--guide-color-paper)); color: var(--ink, var(--guide-color-ink));
+  border-top: 1px solid var(--line, var(--guide-color-paper-border));
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 18px var(--guide-color-forest-alpha-08);
+  font: 400 14px/1.45 var(--guide-font-ui);
+}
+.cookie-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 20px }
+.cookie-banner p { flex: 1; min-width: 0; margin: 0; overflow-wrap: anywhere }
+.cookie-banner a { color: var(--emerald-mid, var(--guide-color-forest-hover)); text-decoration: underline; text-underline-offset: 3px }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0 }
+.cookie-actions button {
+  flex: 1 1 0; width: 124px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line, var(--guide-color-paper-border));
+  border-radius: 10px; background: var(--paper-2, var(--guide-color-paper-layer)); color: var(--ink, var(--guide-color-ink));
+  font: 600 14px/1.2 var(--guide-font-ui); cursor: pointer;
+}
+#cookie-accept { background: var(--guide-color-brand); color: var(--guide-color-forest); border-color: var(--guide-color-brand) }
+#cookie-decline { background: var(--guide-color-slate-paper); color: var(--guide-color-forest); border-color: var(--guide-color-slate-paper) }
+.cookie-actions button:hover { border-color: var(--accent-dark, var(--guide-color-brand-ink)) }
+.cookie-banner button:focus-visible, .privacy-footer button:focus-visible, .cookie-banner a:focus-visible {
+  outline: 3px solid var(--accent-dark, var(--guide-color-brand-ink)); outline-offset: 3px;
+}
+.privacy-footer { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 12px; align-items: baseline }
+.privacy-footer a, .privacy-footer button {
+  color: var(--muted, var(--guide-color-muted)); font: 500 13px/1.5 var(--guide-font-ui);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.privacy-footer button { padding: 0; border: 0; background: var(--guide-color-transparent); cursor: pointer }
+@media (max-width: 600px) {
+  .cookie-banner { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 13px }
+  .cookie-inner { flex-direction: column; align-items: stretch; gap: 10px }
+  .cookie-actions button { flex: 1 }
+}
+@media print { .cookie-banner, [data-cookie-settings] { display: none } body { padding-bottom: 0 } }
+.privacy-site-footer { max-width: 1160px; margin: 30px auto 0; padding: 18px 20px 32px; border-top: 1px solid var(--line, var(--guide-color-paper-border)) }
+</style>
+<!-- critical:privacy-style:end -->
+<script defer src="/assets/privacy.js"></script>
+<!-- privacy:head:end -->
+<style>article > section{margin-top:60px} .fig{margin:26px 0}.fig img{display:block;max-width:100%;height:auto}.fig .shot{max-width:540px;margin:auto;cursor:zoom-in}.fig-app .shot{max-width:min(340px,76%)} button[disabled]{cursor:not-allowed;opacity:.6} .code-card pre{white-space:pre-wrap;overflow-wrap:anywhere} .faq-item{background:var(--white)}</style><style>.table-wrap table{min-width:0;table-layout:fixed}.table-wrap th,.table-wrap td{overflow-wrap:anywhere}.result-line{font-size:.86em;line-height:1.6;color:var(--muted);border-left:2px solid var(--line);padding-left:16px}.result-line a{color:inherit;font-weight:400}.full-answer{margin:24px 0}.full-answer .fig{margin:24px 0 8px}.example-conclusion{margin:24px 0}article pre,article pre code{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;box-sizing:border-box}.fig .shot{width:26em;max-width:100%;margin:0 auto}.fig img{display:block;width:100%;height:auto}.fig .shot:has(img[src$="pole-vvoda.webp"]){width:34em}.fig .shot:has(img[src$="terminal-shell.webp"]){width:28em}.fig .shot:has(img[src$="mac-terminal-version.webp"]){width:28em}.fig .shot:has(img[src$="windows-powershell.webp"]){width:24em}.fig .shot:has(img[src$="terminal-anthropic.webp"]){width:22em}.command-list{padding-left:1.35em;margin:0 0 30px}.command-list li{margin:0 0 .45em}.command-list a{font-weight:600}.code-card pre{white-space:pre-wrap;overflow-wrap:anywhere}.shot{position:relative}.shot .zoom{position:static;display:block;opacity:1;margin:8px 0 0 auto}.shot:hover .zoom,.shot:focus-within .zoom{opacity:1}.shot:has(img[src$="terminal-anthropic.webp"]) .zoom{position:static;opacity:1;margin:8px 0 0 auto}</style><meta content="index, follow" name="robots"/><meta name="description" content="Что умеют два личных ИИ-помощника и как установить их на Mac или Windows. Настрой утреннюю газету в Telegram или поговори с Claude Code голосом."/><meta content="Джарвис - это кто? Два ИИ-помощника, которых можно установить" property="og:title"/><meta content="Два личных ИИ-помощника: OpenJarvis для задач на компьютере и голосовой Jarvis для Claude Code. Установка, первый разговор и утренняя газета в Telegram." property="og:description"/><meta content="article" property="og:type"/><meta content="ru_RU" property="og:locale"/><meta content="https://pronovoe.com/claude-ai/jarvis-golosovoy-pomoshchnik/" property="og:url"/><style>.mobile-toc .toc-sub{padding-left:14px;font-size:13px} article [id],h2[id],h3[id],figure[id],.code-card,[id^="err-"],#status-standby{scroll-margin-top:100px}.result-line{border-left:3px solid var(--guide-color-success-ink)}article p strong .prompt-value{color:var(--ink);text-decoration:underline;text-underline-offset:.18em}</style><style>.mobile-toc .toc-sub{padding-left:24px}.toc .toc-step,.mobile-toc .toc-step{padding-left:40px}</style><style>article figure.shot[style*="--shot-width"]{width:min(100%,var(--shot-width));margin-inline:auto}article figure.shot[style*="--shot-width"]>img{width:100%}</style><!-- article-ads:style --><link rel="stylesheet" href="../../assets/article-ads.css"></head><body><script src="/assets/image-viewer.js"></script><div aria-hidden="true" class="progress"></div><header class="masthead"><div class="masthead-inner"><a class="brand" href="https://pronovoe.com/">Инструкции по нейросетям</a>
+<div class="header-actions"><div class="handout-title">Два Джарвиса</div><div class="header-controls">
+<button aria-label="Переключить тему" class="theme-toggle" title="Переключить тему" type="button">◐</button>
+</div></div></div></header><div class="page-shell"><nav aria-label="Содержание" class="toc"><p><strong>Содержание</strong></p><a href="#nachalo">Вступление. Кто такой Джарвис</a><a href="#openjarvis">1. OpenJarvis</a><a class="toc-sub" href="#openjarvis-choice">Установить с агентом или вручную</a><a class="toc-sub" href="#openjarvis-terminal">Ввести команду в терминале</a><a class="toc-sub" href="#openjarvis-chat">Запустить первый чат</a><a class="toc-sub" href="#openjarvis-tools">Как собрать свою утреннюю газету</a><a class="toc-sub toc-step" href="#gazeta-agent">Поручить настройку агенту</a><a class="toc-sub toc-step" href="#gazeta-manual">Настроить вручную</a><a class="toc-sub" href="#openjarvis-services">Как искать по документам и управлять светом</a><a href="#podgotovka">2. Голосовой Jarvis</a><a class="toc-sub" href="#voice-setup">Что подготовить</a><a class="toc-sub" href="#ustanovka">Установка и первый разговор</a><a class="toc-sub toc-step" href="#skachat">Скачать проект</a><a class="toc-sub toc-step" href="#pakety">Установить и запустить Jarvis</a><a class="toc-sub toc-step" href="#razgovor">Включить микрофон и задать вопрос</a><a class="toc-sub" href="#ustroystvo">Что умеет голосовой Jarvis</a><a class="toc-sub" href="#dokument">Найти время встречи в файле</a><a class="toc-sub" href="#nastroika">Настройки и ежедневная работа</a><a class="toc-sub toc-step" href="#pamyat">Что помощник запоминает</a><a class="toc-sub toc-step" href="#instrumenty">Как подключить инструменты</a><a class="toc-sub toc-step" href="#kazhdyy-den">Как запустить Jarvis в следующий раз</a><a class="toc-sub" href="#oshibki">Если разговор не начался</a><a class="toc-sub" href="#faq">Частые вопросы</a><a class="toc-sub" href="#pomoshch">Как попросить помощи</a><a href="#istochniki">Исходники и документация</a></nav><main><article><header id="nachalo">
+<p class="eyebrow">Инструкция · ИИ-помощники</p>
+<h1 class="article-standard-h1">Джарвис - это кто? Два ИИ-помощника, которых можно установить</h1>
+<p class="uroven-metka blue" style="display:inline-block;margin:16px 0 0;padding:5px 12px;border-radius:999px;background:var(--guide-color-info-paper);color:var(--guide-color-info-ink);font:700 13px/1.3 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Arial,sans-serif">Средний уровень</p>
+<p class="lead">Джарвис (JARVIS) из фильма «Железный человек» разговаривает с Тони Старком, управляет его домом и помогает пилотировать броню. Имя JARVIS складывается из первых букв английской фразы <i><b>J</b>ust <b>A</b> <b>R</b>ather <b>V</b>ery <b>I</b>ntelligent <b>S</b>ystem</i> («Просто весьма интеллектуальная система»). Сегодня Джарвисом называют личного ИИ-помощника, который знает твои привычки, понимает задачи и выполняет поручения.</p><!-- night-ad-top:start -->
+<aside class="night-ad-top" data-night-ad-top aria-label="Реклама Концентрата">
+  <div class="night-ad-top__copy">
+    <p>За три вечера разберись, как создавать продукт, контент, сайты и воронки с ИИ-агентами без кода. Записи за 990 ₽.</p>
+    <p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2VtzqvBca1C</p>
+  </div>
+  <a class="night-ad-top__button" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a>
+</aside>
+<!-- night-ad-top:end -->
+<p>Ты выбираешь, к каким файлам, приложениям и устройствам у него будет доступ, и какие задачи он будет для тебя выполнять. Разберём два проекта с таким названием: OpenJarvis и голосовой Jarvis для Claude Code.</p><div class="info-card"><p><strong>Какого Джарвиса выбрать?</strong></p>
+<p><a href="#openjarvis">OpenJarvis от исследователей из Стэнфорда</a> подойдёт, если хочешь запустить модель на своём компьютере и подключать документы, мессенджер или умный дом.</p>
+<p><a href="#podgotovka">Jarvis для Claude Code</a> подойдёт, если хочешь общаться с Claude Code голосом. Первый запуск в этой инструкции на английском.</p></div><figure class="cover cover-v2 shot"><img alt="Центральная анимация настоящего интерфейса Jarvis" height="680" loading="eager" src="assets/jarvis-overview.webp" width="680"/><img alt="STANDBY, настоящий статус ожидания обращения" data-no-zoom="" id="status-standby" loading="eager" src="assets/jarvis-standby-word.png" style="display:block;width:min(100%,180px);margin:16px auto 0;cursor:default"/><figcaption>Экран голосового Jarvis. STANDBY означает, что помощник ждёт обращения.</figcaption></figure>
+
+<p class="meta">Обновлено 28 ноября 2026 · Mac и Windows</p>
+
+<!-- seo:breadcrumbs:start -->
+<nav aria-label="Хлебные крошки" style="margin:12px 0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif"><a href="/">Инструкции по нейросетям</a> <span aria-hidden="true"> / </span><span aria-current="page">Джарвис - это кто? Два ИИ-помощника, которых можно установить</span></nav>
+<!-- seo:breadcrumbs:end -->
+</header><details class="mobile-toc"><summary>Содержание статьи</summary><nav aria-label="Содержание на телефоне"><a href="#nachalo">Вступление. Кто такой Джарвис</a><a href="#openjarvis">1. OpenJarvis</a><a class="toc-sub" href="#openjarvis-choice">Установить с агентом или вручную</a><a class="toc-sub" href="#openjarvis-terminal">Ввести команду в терминале</a><a class="toc-sub" href="#openjarvis-chat">Запустить первый чат</a><a class="toc-sub" href="#openjarvis-tools">Как собрать свою утреннюю газету</a><a class="toc-sub toc-step" href="#gazeta-agent">Поручить настройку агенту</a><a class="toc-sub toc-step" href="#gazeta-manual">Настроить вручную</a><a class="toc-sub" href="#openjarvis-services">Как искать по документам и управлять светом</a><a href="#podgotovka">2. Голосовой Jarvis</a><a class="toc-sub" href="#voice-setup">Что подготовить</a><a class="toc-sub" href="#ustanovka">Установка и первый разговор</a><a class="toc-sub toc-step" href="#skachat">Скачать проект</a><a class="toc-sub toc-step" href="#pakety">Установить и запустить Jarvis</a><a class="toc-sub toc-step" href="#razgovor">Включить микрофон и задать вопрос</a><a class="toc-sub" href="#ustroystvo">Что умеет голосовой Jarvis</a><a class="toc-sub" href="#dokument">Найти время встречи в файле</a><a class="toc-sub" href="#nastroika">Настройки и ежедневная работа</a><a class="toc-sub toc-step" href="#pamyat">Что помощник запоминает</a><a class="toc-sub toc-step" href="#instrumenty">Как подключить инструменты</a><a class="toc-sub toc-step" href="#kazhdyy-den">Как запустить Jarvis в следующий раз</a><a class="toc-sub" href="#oshibki">Если разговор не начался</a><a class="toc-sub" href="#faq">Частые вопросы</a><a class="toc-sub" href="#pomoshch">Как попросить помощи</a><a href="#istochniki">Исходники и документация</a></nav></details><section id="openjarvis"><h2>1. OpenJarvis</h2>
+<p>OpenJarvis от исследователей из Стэнфорда позволяет собрать личного ИИ-помощника на своём компьютере. Ты выбираешь модель, которая будет отвечать на вопросы, и подключаешь сервисы для конкретных дел. Сама программа бесплатна, а модель можно запускать прямо на компьютере.</p><p>Ему можно поручить собирать новости по твоей теме и каждое утро присылать подборку в Telegram. С Google Drive или Notion помощник сможет искать ответы в твоих материалах, а через Home Assistant управлять светом в гостиной.</p><figure class="shot" style="--shot-width:700px"><img alt="Ответ OpenJarvis в окне чата" loading="lazy" src="assets/openjarvis-official-chat.webp"/><figcaption>Так выглядит разговор в оконном интерфейсе OpenJarvis. В центре видны вопрос и ответ. Кадр из <a href="https://github.com/open-jarvis/OpenJarvis#readme">демонстрации разработчиков</a>.</figcaption></figure><h3 id="openjarvis-choice">Как установить OpenJarvis: с агентом или вручную</h3><p>Выбирай, как тебе удобнее. Если у тебя уже есть Claude Code, Codex или другой агент с доступом к терминалу, он может взять установку на себя. Если такого помощника пока нет или хочется разобраться самостоятельно, переходи к <a href="#openjarvis-terminal">ручной установке на Mac или Windows</a>.</p><p>Для установки с агентом открой его на своём компьютере и отправь это поручение:</p><div class="code-card"><pre id="openjarvis-install-prompt">Помоги установить OpenJarvis на моём компьютере и открыть первый чат. Сначала посмотри, что уже установлено. Всё, что можешь сделать через терминал, сделай сам. Когда понадобится моё действие, дай один шаг: куда зайти, что нажать и что сообщить тебе в ответ. Дождись моего ответа и только потом продолжай. В конце покажи, как мне открыть чат в следующий раз.</pre><button class="copy-button" type="button" aria-label="Скопировать поручение" data-copy-target="openjarvis-install-prompt">Скопировать</button></div>
+<h3 id="openjarvis-terminal">1. Ввести команду в терминале</h3>
+<p><strong>На Mac</strong> нажми Command + пробел, найди «Терминал» и открой его. Если macOS предложит установить инструменты командной строки, подтверди установку и дождись окончания. <a href="https://open-jarvis.github.io/OpenJarvis/getting-started/macos/">Инструкция для Mac</a>.</p>
+<p><strong>На Windows</strong> открой Ubuntu из меню «Пуск», если уже пользуешься WSL2. Если Ubuntu ещё нет, найди PowerShell, выбери «Запуск от имени администратора» и выполни команду ниже. Если Windows попросит перезагрузиться, сделай это. Затем открой Ubuntu и заверши первоначальную настройку. <a href="https://open-jarvis.github.io/OpenJarvis/getting-started/wsl2/">Инструкция для Windows</a>.</p>
+<div class="code-card"><pre id="openjarvis-wsl">wsl --install</pre><button aria-label="Скопировать команду установки WSL" aria-live="polite" class="copy-button" data-copy-target="openjarvis-wsl" type="button">Скопировать</button></div>
+<p id="openjarvis-install"><strong>Команда установки OpenJarvis</strong></p>
+<p>Вставь команду в Терминал на Mac или в Ubuntu на Windows. Нажми Enter и дождись окончания установки. Установщик скачает OpenJarvis, Ollama для запуска модели и небольшую стартовую модель. Если появится выбор облачного провайдера и ты хочешь запустить модель на компьютере, выбери локальный вариант. <a href="https://open-jarvis.github.io/OpenJarvis/getting-started/install/">Официальный установщик</a>.</p>
+<div class="code-card"><pre id="openjarvis-command">curl -fsSL https://open-jarvis.github.io/OpenJarvis/install.sh | bash</pre><button aria-label="Скопировать команду установки OpenJarvis" aria-live="polite" class="copy-button" data-copy-target="openjarvis-command" type="button">Скопировать</button></div>
+<h3 id="openjarvis-chat">2. Запусти первый чат</h3>
+<p>В том же окне введи команду ниже. Если система пишет, что команда не найдена, закрой окно, открой заново и повтори. Когда появится строка ввода, задай простой вопрос. Например, «Объясни разницу между архивом и папкой в двух предложениях». Ответ появится в том же окне.</p>
+<div class="code-card"><pre id="openjarvis-start">jarvis</pre><button aria-label="Скопировать команду запуска OpenJarvis" aria-live="polite" class="copy-button" data-copy-target="openjarvis-start" type="button">Скопировать</button></div>
+<h3 id="openjarvis-tools">Как собрать свою утреннюю газету</h3><p>С OpenJarvis можно сделать себе утреннюю газету. Допустим, ты следишь за нейросетями для монтажа. Каждое утро Джарвис просматривает выбранные тобой источники и присылает в Telegram одно сообщение: что появилось, чем это пригодится в работе и где посмотреть оригинал. За завтраком ты читаешь подборку и открываешь только то, что заинтересовало.</p><p>Собрать газету тоже можно двумя способами. Если у тебя есть агент, отправь ему поручение ниже. Если удобнее сделать самостоятельно, открой <a href="#gazeta-manual">ручную настройку газеты</a>.</p><h4 id="gazeta-agent">Поручить настройку агенту</h4><p>Открой своего агента на компьютере, где будет работать OpenJarvis. Скопируй текст ниже, впиши тему и ссылки на источники. Время и часовой пояс можно заменить.</p><div class="code-card"><pre id="gazeta-agent-prompt">Настрой мне утреннюю газету через OpenJarvis. Каждый день в 09:00 по Москве присылай в мой личный чат Telegram до трёх новостей за последние сутки. К каждой дай короткое объяснение и ссылку на оригинал. Если свежих новостей нет, так и напиши.
+
+Моя тема: [о чём я хочу читать].
+Мои источники: [вставь ссылки на сайты].
+
+Посмотри, как у меня установлен OpenJarvis, и настрой сбор новостей, доставку и расписание для моей системы. Проведи меня по шагам. Когда понадобится моё участие, дай только одно действие: куда зайти, что нажать и что сообщить тебе в ответ. Если бота ещё нет, помоги создать его через @BotFather и дождись, пока я напишу своему боту. Когда понадобится токен Telegram, открой мне локальный файл или скрытый ввод и скажи, куда его вставить. Определи номер моего чата по сообщению, которое я отправлю боту. Пришли один пробный выпуск. В конце покажи, где менять тему, ссылки и время и как отключить рассылку.</pre><button class="copy-button" type="button" aria-label="Скопировать поручение для агента" data-copy-target="gazeta-agent-prompt">Скопировать</button></div><p>Первый выпуск придёт в личный чат твоего бота. Открой одну из ссылок и посмотри, подходит ли подборка. Для следующих выпусков компьютер должен быть включён в назначенное время, с доступом к модели и интернету.</p><h4 id="gazeta-manual">Как настроить газету вручную</h4><p>Ниже один способ собрать выпуск по своим ссылкам и получать его в личном чате. Команды вводи в Терминале на Mac или в Ubuntu на Windows. Понадобятся установленный OpenJarvis, запущенная модель и интернет.</p><h4>1. Создай бота и укажи, куда присылать выпуск</h4><p>В Telegram открой <a href="https://t.me/BotFather">@BotFather</a>, отправь <code>/newbot</code> и выбери имя и адрес бота. Скопируй выданный токен. Затем открой своего нового бота, нажми «Старт» и отправь ему слово «Газета».</p><figure class="shot" style="--shot-width:295px"><img alt="Публичный профиль BotFather в Telegram" loading="lazy" src="assets/botfather-profile.png"/><figcaption>У официального BotFather имя @BotFather. Открой его в Telegram, затем отправь /newbot.</figcaption></figure><p>На компьютере открой настройки OpenJarvis этой командой:</p><div class="code-card"><pre id="gazeta-copy-1">nano ~/.openjarvis/config.toml</pre><button class="copy-button" type="button" aria-label="Скопировать блок 1" data-copy-target="gazeta-copy-1">Скопировать</button></div><p>В разделе <code>[channel]</code> установи <code>enabled = true</code>. В разделе <code>[channel.telegram]</code> вставь токен между кавычками. Если такого заголовка ещё нет, добавь его. Каждый заголовок в файле должен встречаться один раз.</p><div class="code-card"><pre id="gazeta-copy-2">[channel.telegram]
+bot_token = &quot;сюда вставь токен от BotFather&quot;</pre><button class="copy-button" type="button" aria-label="Скопировать блок 2" data-copy-target="gazeta-copy-2">Скопировать</button></div><p>В редакторе nano нажми Ctrl+O, затем Enter для сохранения и Ctrl+X для выхода. Токен даёт доступ к боту, храни его у себя. <a href="https://github.com/open-jarvis/OpenJarvis/blob/main/docs/user-guide/channels.md#configuration">Настройки каналов OpenJarvis</a>.</p><p>Теперь узнай номер личного чата. Для только что созданного бота вставь команду ниже целиком. Она попросит токен без отображения на экране и выведет номера личных чатов, из которых боту написали «Газета». Скопируй свой номер.</p><div class="code-card"><pre id="gazeta-copy-3">python3 - &lt;&lt;&#x27;PYTHON&#x27;
+import getpass, json, urllib.request
+token = getpass.getpass(&quot;Токен BotFather: &quot;).strip()
+url = &quot;https://api.telegram.org/bot&quot; + token + &quot;/getUpdates&quot;
+with urllib.request.urlopen(url) as response:
+    updates = json.load(response)[&quot;result&quot;]
+for update in updates:
+    msg = update.get(&quot;message&quot;, {})
+    chat = msg.get(&quot;chat&quot;, {})
+    if chat.get(&quot;type&quot;) == &quot;private&quot; and msg.get(&quot;text&quot;, &quot;&quot;).strip() == &quot;Газета&quot;:
+        print(chat.get(&quot;first_name&quot;, &quot;&quot;), chat[&quot;id&quot;])
+PYTHON</pre><button class="copy-button" type="button" aria-label="Скопировать блок 3" data-copy-target="gazeta-copy-3">Скопировать</button></div><p>Если номера нет, отправь слово «Газета» именно в личный чат своего бота и повтори команду. <a href="https://core.telegram.org/bots/api#getupdates">Как Telegram передаёт сообщения боту</a>.</p><h4>2. Вставь свои ссылки и напиши поручение</h4><p>Введи команду ниже. Она откроет текстовый файл для твоего задания.</p><div class="code-card"><pre id="gazeta-copy-4">nano ~/.openjarvis/gazeta.txt</pre><button class="copy-button" type="button" aria-label="Скопировать блок 4" data-copy-target="gazeta-copy-4">Скопировать</button></div><p>Вставь текст ниже. Вместо двух адресов в конце можно поставить ссылки на разделы новостей, которые ты читаешь. Тему, язык и количество новостей тоже можно поменять. Сохрани файл через Ctrl+O, Enter, Ctrl+X.</p><div class="code-card"><pre id="gazeta-copy-5">Собери до трёх новостей о программах для видеомонтажа за последние сутки. Используй только указанные ниже источники. Для каждой новости напиши по-русски, что изменилось и кому это пригодится. Дай прямую ссылку на публикацию. Если свежих новостей нет, так и скажи. Весь выпуск должен поместиться в 2500 знаков.
+https://blog.adobe.com/
+https://www.blackmagicdesign.com/media/</pre><button class="copy-button" type="button" aria-label="Скопировать блок 5" data-copy-target="gazeta-copy-5">Скопировать</button></div><h4>3. Свяжи сбор новостей с отправкой в Telegram</h4><p>Выполни <code>command -v jarvis</code> и скопируй полный путь, который появится. Затем открой новый файл:</p><div class="code-card"><pre id="gazeta-copy-6">nano ~/.openjarvis/gazeta.sh</pre><button class="copy-button" type="button" aria-label="Скопировать блок 6" data-copy-target="gazeta-copy-6">Скопировать</button></div><p>Вставь четыре строки. В первой паре кавычек укажи скопированный путь, во второй паре свой номер чата. Сохрани файл. При запуске первая команда OpenJarvis прочитает твоё поручение и соберёт новости, вторая отправит готовый текст в Telegram.</p><div class="code-card"><pre id="gazeta-copy-7">JARVIS=&quot;полный путь из command -v jarvis&quot;
+CHAT=&quot;номер личного чата&quot;
+digest=$(&quot;$JARVIS&quot; ask --agent orchestrator --tools web_search,http_request &quot;$(cat &quot;$HOME/.openjarvis/gazeta.txt&quot;)&quot;) || exit 1
+[ -n &quot;$digest&quot; ] &amp;&amp; &quot;$JARVIS&quot; channel send --channel-type telegram &quot;$CHAT&quot; &quot;$digest&quot;</pre><button class="copy-button" type="button" aria-label="Скопировать блок 7" data-copy-target="gazeta-copy-7">Скопировать</button></div><p>Чтобы сразу получить первый выпуск, введи следующую команду:</p><div class="code-card"><pre id="gazeta-copy-8">bash ~/.openjarvis/gazeta.sh</pre><button class="copy-button" type="button" aria-label="Скопировать блок 8" data-copy-target="gazeta-copy-8">Скопировать</button></div><p>Открой личный чат именно своего бота: там должен появиться выпуск. Если сообщения нет, посмотри, какую ошибку вывел терминал, сверь номер чата и токен бота. Если подборка не собралась, открой чат OpenJarvis и проверь, отвечает ли модель.</p><h4>4. Выбери время доставки</h4><p><strong>На Mac</strong> введи <code>EDITOR=nano crontab -e</code>. Добавь строку ниже в конец и сохрани. Она запускает твою газету каждый день в 09:00 по местному времени. Для 08:30 замени первые два числа на <code>30 8</code>.</p><div class="code-card"><pre id="gazeta-copy-9">0 9 * * * /bin/bash &quot;$HOME/.openjarvis/gazeta.sh&quot;</pre><button class="copy-button" type="button" aria-label="Скопировать блок 9" data-copy-target="gazeta-copy-9">Скопировать</button></div><p><strong>На Windows с Ubuntu</strong> открой «Планировщик заданий» в меню «Пуск». Выбери «Создать простую задачу», назови её «Утренняя газета», выбери «Ежедневно» и укажи время. В действии «Запустить программу» введи <code>wsl.exe</code>. В поле «Добавить аргументы» вставь строку ниже и нажми «Готово».</p><div class="code-card"><pre id="gazeta-copy-10">-d Ubuntu -- bash -lc &quot;bash ~/.openjarvis/gazeta.sh&quot;</pre><button class="copy-button" type="button" aria-label="Скопировать блок 10" data-copy-target="gazeta-copy-10">Скопировать</button></div><p>К назначенному времени компьютер должен работать, а модель и интернет быть доступны. Чтобы сменить источники или поручение, отредактируй <code>gazeta.txt</code>. Расписание при этом сохранится. На Mac для смены времени снова открой crontab. Для отмены удали только строку со своим gazeta.sh. На Windows открой библиотеку Планировщика заданий и выбери «Утренняя газета». В «Свойства → Триггеры → Изменить» можно перенести выпуск, а действие «Отключить» остановит рассылку. После перезагрузки убедись, что модель отвечает в чате OpenJarvis. <a href="https://github.com/open-jarvis/OpenJarvis/blob/main/examples/scheduled_ops/daily_digest.py">Пример новостной подборки у разработчиков</a>.</p><h3 id="openjarvis-services">Как искать по документам и управлять светом</h3><p>Для следующих шагов понадобится оконная версия. Открой <a href="https://github.com/open-jarvis/OpenJarvis/releases/latest">последний выпуск OpenJarvis Desktop</a> и раскрой список Assets. На Mac выбери установщик .dmg для своего процессора, на Windows файл setup.exe для архитектуры компьютера. После установки открой OpenJarvis из списка приложений. Есть также <a href="https://open-jarvis.github.io/OpenJarvis/getting-started/quickstart/#browser-app">порядок запуска в браузере</a>.</p><figure class="shot" style="--shot-width:620px"><img alt="Страница выпуска OpenJarvis Desktop на GitHub" loading="lazy" src="assets/openjarvis-release.png"/><figcaption>Название версии находится вверху. Список Assets с установщиками расположен под описанием выпуска.</figcaption></figure><p><strong>Google Drive.</strong> В Google Cloud включи Google Drive API и создай данные для входа через Google по инструкции ниже. В оконной версии OpenJarvis открой Agents → Channels → Google Drive, вставь Client ID (идентификатор приложения) и Client Secret (его секретный ключ) и подтверди доступ на чтение в окне Google. После синхронизации вернись в чат и спроси о конкретном документе, например «Какой микрофон указан в списке оборудования?». <a href="https://github.com/open-jarvis/OpenJarvis/blob/main/docs/user-guide/channels-and-connectors.md#google-drive">Пошаговая настройка Google Drive</a>.</p><p><strong>Notion.</strong> Создай внутреннюю интеграцию в Notion. На нужной странице открой меню «…» → Connections и выбери эту интеграцию. В OpenJarvis открой Agents → Channels → Notion и вставь токен интеграции. <a href="https://github.com/open-jarvis/OpenJarvis/blob/main/docs/user-guide/channels-and-connectors.md#notion">Как создать интеграцию и открыть нужные страницы</a>.</p><p><strong>Свет в гостиной.</strong> Сначала добавь светильник в Home Assistant и убедись, что он включается из этого приложения. Затем подключи к OpenJarvis сервер Home Assistant по инструкции разработчиков: там показано, в какой раздел настроек вставить адрес сервера и токен. После подключения можно попросить выключить светильник по его имени. <a href="https://github.com/open-jarvis/OpenJarvis/blob/main/docs/user-guide/mcp-external-servers.md#home-assistant-via-streamable-http">Настройки подключения Home Assistant</a>.</p>
+<p><a href="https://github.com/open-jarvis/OpenJarvis">Проект на GitHub</a> · <a href="https://github.com/open-jarvis/OpenJarvis/blob/main/docs/user-guide/channels-and-connectors.md">Google Drive и Notion</a> · <a href="https://github.com/open-jarvis/OpenJarvis/blob/main/docs/user-guide/channels.md">Телеграм</a> · <a href="https://github.com/open-jarvis/OpenJarvis/tree/main/examples/scheduled_ops">Задачи по расписанию</a> · <a href="https://github.com/open-jarvis/OpenJarvis/blob/main/docs/user-guide/mcp-external-servers.md">Умный дом</a>.</p>
+</section>
+<section id="podgotovka"><h2>2. Голосовой Jarvis</h2><p>Голосовой Jarvis позволяет разговаривать с Claude Code, ИИ-помощником, который работает с файлами проекта. Ты открываешь Jarvis в браузере, задаёшь вопрос в микрофон и слышишь ответ. Это удобно, когда обе руки заняты или проще спросить вслух, чем открывать файлы по очереди.</p><p>Например, в папке проекта лежит план встречи. Ты спрашиваешь, во сколько она начнётся, Claude находит время в файле, а Jarvis произносит его вслух. В этой версии вопросы и ответы звучат по-английски. Для работы нужен доступ к Claude.</p><h3 id="voice-setup">Что подготовить</h3><p>Файлы <a href="https://github.com/adewaskar/jarvis">голосового Jarvis</a> можно скачать бесплатно. Ответы Claude расходуют лимиты подписки или оплачиваются отдельно при использовании API.</p>
+<p>Открой редактор VS Code. Если его ещё нет, подготовь рабочее окно по <a href="https://pronovoe.com/claude-ai/claude-i-codex-v-vscode/">инструкции по VS Code, Claude Code и Codex</a>. Для самого разговора понадобится установленный Claude Code с выполненным входом в аккаунт, даже если установку Jarvis поручишь Codex. Установка и вход показаны в <a href="https://code.claude.com/docs/en/quickstart">официальном начальном руководстве Claude Code</a>.</p>
+<p>Установку и заметку поручим панели Claude Code или Codex в VS Code. В шаге 2 показано, где вставлять запрос. Помощник проверит Node.js, программу для запуска Jarvis, и при необходимости установит подходящую официальную версию.</p>
+<p>Подготовь Chrome и микрофон. Открывай адрес в отдельном окне Chrome, а не во вкладке просмотра внутри VS Code. Тариф и доступность Claude зависят от аккаунта и <a href="https://www.anthropic.com/supported-countries">поддерживаемой страны</a>.</p>
+<p class="result-line">Редактор и доступ к Claude готовятся один раз. Дальше установку и работу с пробной заметкой поручим помощнику.</p><section id="ustanovka"><h3>Установка и первый разговор</h3>
+<h4 id="skachat">1. Скачай готовый проект и открой его папку</h4>
+<p><a href="https://github.com/adewaskar/jarvis/archive/9ae5ec846b6b20a17b2d264e699d6234c4284b23.zip">Скачай ZIP-архив проверенной версии Jarvis.</a> Ссылка ведёт на GitHub, где хранятся файлы проекта, и закреплена за версией 9ae5ec8. Название скачанного архива начинается с jarvis-, дальше идёт длинный номер версии. <a href="https://github.com/adewaskar/jarvis/tree/9ae5ec846b6b20a17b2d264e699d6234c4284b23">Исходники этой версии.</a></p>
+<p>После распаковки нужную папку узнаешь по двум файлам: <code>README</code> с инструкцией проекта и <code>package.json</code> со списком компонентов и команд запуска.</p>
+<p>ZIP означает архив, один файл с папкой проекта внутри. Найди его в «Загрузках» и распакуй:</p>
+<div class="info-card"><p><strong>На Mac.</strong></p><ol><li>Дважды нажми скачанный ZIP-архив.</li><li>Дождись появления распакованной папки рядом с архивом.</li></ol><figure class="shot" style="--shot-width:270px"><img alt="Пример Finder: распакованная папка рядом с ZIP-архивом" loading="lazy" src="assets/mac-unzip-result.webp"/><figcaption>Пример результата распаковки в Finder. В нашем случае имя папки начинается с jarvis-, дальше указан номер версии.</figcaption></figure></div>
+<div class="info-card"><p><strong>На Windows.</strong></p><ol><li>Нажми скачанный ZIP-архив правой кнопкой и выбери «Извлечь всё».</li><li>Подтверди распаковку. Открой полученную папку. Если внутри ещё одна папка с именем jarvis-, открой её: рядом должны лежать README и package.json.</li></ol><figure class="shot" style="--shot-width:345px"><img alt="Настоящая команда Extract All в меню Windows" loading="lazy" src="assets/win-extract-all.png"/><figcaption>Extract All означает «Извлечь всё». Фрагмент настоящего меню Windows.</figcaption></figure></div>
+<p>Перемести папку проекта туда, где хранишь проекты. В окне открытия выбирай распакованную папку, а не ZIP.</p>
+<p>В стартовом окне VS Code нажми <strong>Open Folder</strong> («Открыть папку») и выбери распакованную папку Jarvis с README и package.json. Если стартовый экран закрыт, в верхнем меню File («Файл») выбери Open Folder («Открыть папку»).</p>
+<figure class="shot" style="--shot-width:416px"><img alt="Стартовый экран VS Code с кнопкой Open Folder" loading="lazy" src="assets/vscode-open-folder.webp"/><figcaption>Open Folder открывает папку проекта. <a href="https://code.visualstudio.com/docs/editing/getting-started/tips-and-tricks">Кадр официальной справки VS Code.</a></figcaption></figure>
+<p class="result-line"><strong>Результат:</strong> слева в редакторе появились файлы Jarvis. Помощнику можно дать задачу именно в этой папке.</p>
+<h4 id="pakety">2. Поручи помощнику установку, затем запусти Jarvis</h4>
+<p>Сначала проверь доступ к Claude Code. В списке файлов слева нажми папку проекта правой кнопкой и выбери <strong>Open in Integrated Terminal</strong> («Открыть во встроенном терминале»). Внизу появится панель команд.</p>
+<figure class="shot" style="--shot-width:345px" id="vscode-files"><img alt="Команда Open in Integrated Terminal из настоящего меню папки VS Code" loading="lazy" src="assets/open-terminal.jpg"/><figcaption>В контекстном меню корневой папки Jarvis выбери эту команду. Фрагмент настоящего меню из официальной справки. <a href="https://code.visualstudio.com/docs/terminal/basics">Источник: VS Code.</a></figcaption></figure><figure class="shot" style="--shot-width:385px"><img alt="Последняя строка с курсором в настоящем терминале VS Code" loading="lazy" src="assets/integrated-terminal-input.webp"/><figcaption>Последняя строка с мигающим курсором в нижней панели принимает команды. На кадре официальной справки другой проект; у тебя будет Jarvis.</figcaption></figure>
+<p>В нижней панели нажми на последнюю строку с мигающим курсором. Вставь команду ниже и нажми Enter. Откроется чат Claude Code. В строке самого Claude Code задай вопрос «Сколько будет два плюс два?» и дождись ответа 4. Если нужен вход, пройди его по начальному руководству выше. Если лимит закончился, проверь в Claude Code время его восстановления.</p><div class="code-card"><pre id="claude-access">claude</pre><button aria-label="Скопировать запуск Claude Code" aria-live="polite" class="copy-button" data-copy-target="claude-access" type="button">Скопировать</button></div><figure class="shot" style="--shot-width:350px"><img alt="Настоящая строка ввода вопроса в терминальном чате Claude Code" loading="lazy" src="assets/terminal-anthropic.webp"/><figcaption>После запуска claude вопрос вводится в строку самого Claude Code. На кадре показан пример ввода, не ответ Jarvis.</figcaption></figure>
+<p>Проверка в нижней панели завершена. Для задач установки и заметки используй отдельную панель расширения: нажми оранжевую иконку Claude или значок OpenAI для Codex. Если обе панели уже открыты, выбери вкладку <strong>Claude Code</strong> или <strong>Codex</strong>, как на кадре. Папка Jarvis остаётся открытой. В поле выбранного чата вставь запрос целиком и отправь стрелкой.</p><figure class="shot" style="--shot-width:595px"><img alt="Реальные иконки Claude и Codex и вкладки Claude Code и Codex в VS Code" loading="lazy" src="assets/vscode-icons-crop.jpg"/><figcaption>Панель расширения выбирается по иконке или подписанной вкладке. Это другой чат, не нижняя панель команд.</figcaption></figure>
+<figure class="shot"><img alt="Поле запроса в панели Claude Code и кнопка отправки со стрелкой" loading="lazy" src="assets/claude-message-crop.jpg"/><figcaption>В Claude Code запрос вставляется в поле над нижней строкой настроек.</figcaption></figure>
+<figure class="shot"><img alt="Поле запроса в панели Codex и кнопка отправки со стрелкой" loading="lazy" src="assets/codex-message-crop.jpg"/><figcaption>В Codex используй это поле. Для всей установки достаточно одного выбранного помощника.</figcaption></figure><div class="code-card"><pre id="install-agent">Установи adewaskar/jarvis из уже открытой папки этого проекта. Сначала прочитай README, файл с инструкцией проекта, и требования пакетов, дополнительных компонентов Jarvis. Проверь Node.js: для этого маршрута нужна актуальная версия с длительной поддержкой (LTS), не старее 22.12. Если подходящей версии нет, установи её только из официального источника nodejs.org обычным способом для моей системы. Если требуется моё подтверждение, объясни конкретное действие.
+Установи пакеты проекта. Сам не запускай постоянный сервер: npm start я введу в отдельном видимом терминале. Не меняй исходный код Jarvis, другие проекты, мои файлы настроек, ключи и данные аккаунтов. Не включай режим записи Jarvis и дополнительные подключения. Не показывай секреты. Отдельно проверь только наличие ключа ElevenLabs в окружении и домашней конфигурации Claude Code, не выводя его значение. Сообщи, включит ли уже имеющийся ключ ElevenLabs автоматически; не добавляй ключ и не подключай сервис вручную. Для первой пробы явно проверь условия запуска: JARVIS_ALLOW_WRITES=0, JARVIS_ACCOUNT_CONNECTORS=0, JARVIS_MCP_SERVERS задан пустой строкой (а не отсутствует), JARVIS_FILE_ROOTS пуст, JARVIS_DISABLE включает browser,camera. Обычный npm start наследует окружение: не считай эти возможности выключенными без проверки. Если для отдельного терминала нельзя подтвердить эти значения, дай одну точную одноразовую команду запуска для моей системы, которая явно задаёт их только этому процессу. Не меняй глобальные настройки, аккаунты или исходники. Сам процесс не запускай. Если подготовить такой запуск не удалось, сообщи об этом и остановись.
+В конце сообщи фактическую версию Node.js, полный путь к проекту и завершилась ли установка пакетов без ошибки. Если нет, покажи причину, а не сообщение об успехе.</pre><button aria-label="Скопировать задачу установки Jarvis" aria-live="polite" class="copy-button" data-copy-target="install-agent" type="button">Скопировать</button></div>
+<div class="warn-card"><p>Если помощник остановился с ошибкой, не переходи к голосовой пробе. Отправь ему точное сообщение и попроси объяснить следующий шаг. При сбое самого Claude Code можно воспользоваться <a href="#pomoshch">запросом помощи</a> в браузерном ChatGPT.</p></div>
+<div class="warn-card" id="golosovoy-rezhim"><p><strong>Для первой пробы отдельный сервис голоса не нужен.</strong> Без ключа ElevenLabs Jarvis использует распознавание браузера и системный голос. Если такой ключ уже есть в окружении компьютера или домашней конфигурации Claude Code, сервис может включиться автоматически, а речь - передаваться ему ещё до обращения Hey Jarvis. До разрешения микрофона попроси помощника проверить ключ и выбранный режим, не показывая сам ключ. Не добавляй его ради этой пробы. Проверка MCP-серверов и значение VITE_USE_ELEVENLABS=false сами по себе такое подключение не исключают.</p></div><p>Когда установка закончилась без ошибки, снова открой <a href="#vscode-files">Open in Integrated Terminal</a> через контекстное меню папки. Это отдельная новая панель: не вводи команду в чат Claude Code из первой проверки. Обычную строку ниже используй только если помощник подтвердил условия из запроса установки для этого запуска. Если он дал одноразовую команду, в которой отключены дополнительные подключения и изменение файлов, вставь её вместо npm start. Если условий нет, остановись и передай ответ через <a href="#pomoshch">запрос помощи</a>. Нажми Enter после выбранной команды.</p><div class="code-card"><pre id="first-start">npm start</pre><button aria-label="Скопировать первый запуск Jarvis" aria-live="polite" class="copy-button" data-copy-target="first-start" type="button">Скопировать</button></div><p>В этой новой панели появится строка <strong>Local:</strong> («Локальный адрес»), обычно <code>http://localhost:5173/</code>. Открой показанный адрес в Chrome. Localhost означает твой компьютер, а не опубликованный сайт. Оставь эту панель работающей. Именно здесь потом остановишь сервер сочетанием <strong>Ctrl+C</strong>.</p><figure class="shot" style="--shot-width:400px"><img alt="Строка Local с адресом http://localhost:5174/ в реальном выводе npm start" height="38" loading="lazy" src="assets/jarvis-local-line.webp" width="590"/><figcaption>Кадр реальной записи консоли npm start. Адрес для браузера стоит после Local. Адрес может отличаться: копируй его из своей панели.</figcaption></figure>
+<p class="result-line"><strong>Результат:</strong> по адресу из терминала открылся экран Jarvis с кнопкой INITIALISE («Запустить»). Ответ модели проверим следующим шагом.</p>
+<h4 id="razgovor">3. Разреши микрофон и задай вопрос</h4>
+<p>На странице нажми <strong>INITIALISE</strong> («Запустить»). Во всплывающем запросе Chrome нажми «Разрешить в этот раз», как на кадре ниже. Запрос может появиться ещё при загрузке: тогда разреши доступ сразу.</p><figure class="shot"><img alt="Настоящий экран Jarvis с кнопкой INITIALISE" loading="lazy" src="assets/jarvis-initialise.webp"/><figcaption>Так выглядит страница до включения разговорного режима.</figcaption></figure>
+<figure class="shot" style="--shot-width:320px"><img alt="Реальные кнопки запроса доступа к микрофону в Chrome" loading="lazy" src="assets/chrome-permission.webp"/><figcaption>Пример кнопок Chrome. «Разрешить в этот раз» даёт разовый доступ.</figcaption></figure>
+<p>Дождись окончания загрузочной анимации и надписи <strong>STANDBY</strong> («Ожидание»). Только после неё произнеси <strong>Hey Jarvis</strong> («Хей, Джарвис») и затем <strong>What is two plus two?</strong> («Сколько будет два плюс два?»). <a href="#status-standby">Так выглядит надпись STANDBY.</a></p>
+<div class="info-card"><p><strong>Пример ответа:</strong> Two plus two is four.</p><p>Это означает «Два плюс два - четыре».</p></div>
+<p>Для успешной пробы Jarvis должен услышать вопрос, Claude должен ответить по существу, ответ должен прозвучать через выбранные динамики или наушники. Сообщение о входе или лимите ответом не считается. Если экран не доходит до STANDBY, используй <a href="#oshibki">раздел диагностики</a>.</p>
+<p>После ответа Jarvis ещё некоторое время слушает: тогда можно произнести следующую реплику. Если он снова ждёт обращения, повтори Hey Jarvis. Пробел позволяет начать реплику без обращения.</p>
+<p class="result-line"><strong>Результат:</strong> если вопрос распознан и правильный ответ прозвучал, голосовая проба прошла успешно. Теперь проверим полезную задачу.</p></section><section id="ustroystvo">
+<h3>Что умеет этот Джарвис</h3>
+<p>Произносишь обращение и задачу. Jarvis передаёт распознанную речь в Claude Code и читает подготовленный ответ вслух. Вопросы не нужно каждый раз отправлять кнопкой. Можно перебить ответ следующей репликой.</p>
+<p>Jarvis состоит из двух работающих частей: страницы в браузере и локального моста, который передаёт задачи Claude Code. Мост запускается на компьютере вместе со страницей. Модель отвечает через серверы Anthropic, поэтому эта сборка требует интернета.</p>
+<p>Сначала помощнику можно поручить чтение одного документа. Для других задач понадобятся внешние инструменты. Условия их передачи в Jarvis разобраны в <a href="#instrumenty">разделе подключений</a>.</p>
+</section>
+<section id="dokument"><h3>Первая полезная задача: найти время встречи</h3>
+<p>Подготовим обезличенную заметку о встрече. Снова открой тот же чат помощника в папке Jarvis и отправь запрос ниже. Он создаст один тестовый файл, вместо того чтобы искать скрытые папки и сохранять заметку вручную.</p><div class="code-card"><pre id="make-note">Подготовь одну пробную заметку для Jarvis. Сначала проверь только наличие <span class="prompt-value">demo-plan.txt</span> по нужному пути. Если такой файл уже существует, ОСТАНОВИСЬ и сообщи только его полный путь. Не читай и не перезаписывай существующий файл без моего отдельного разрешения. Рабочая папка самого Jarvis по умолчанию находится в домашней папке пользователя: .jarvis/workspace. Если работающий мост Jarvis запущен с другим значением настройки JARVIS_WORKSPACE, используй именно эту папку. Если действующий путь не удаётся определить, остановись и сообщи это, не выбирай папку наугад. Не просматривай секреты и файлы других проектов. Если запись в рабочую папку запрещена, покажи её точный путь и запроси доступ только к ней. До получения доступа не объявляй файл созданным.
+Создай в разрешённой рабочей папке только <span class="prompt-value">demo-plan.txt</span> с точным содержимым:
+Team meeting: Tuesday at 15:00.
+Task: prepare three questions for the call.
+Не включай режим записи самого Jarvis. В конце покажи полный путь созданного файла и прочитай только его содержимое. Если создать его не получилось, сообщи точную причину и не объявляй успех.</pre><button aria-label="Скопировать задачу создания заметки" aria-live="polite" class="copy-button" data-copy-target="make-note" type="button">Скопировать</button></div>
+<p>Если файл создан, сверь полный путь и обе строки с запросом. Если помощник сообщил, что файл уже существует, не продолжай эту пробу: выбери для неё другое имя, например demo-plan-2.txt, и замени имя в запросе создания заметки, голосовом вопросе про встречу и запросе изменения времени. Чужую или старую заметку читать и перезаписывать для пробы не нужно. При ошибке сначала реши её с помощником.</p><div class="warn-card"><p>Рабочая папка Jarvis обычно находится вне папки скачанного проекта. Если агент сообщает, что запись туда запрещена, попроси показать полный путь и запросить доступ только к этой рабочей папке. Не выдавай доступ ко всему компьютеру. Если доступ получить не удалось, не переходи к голосовой пробе файла: отправь помощнику точный отказ и путь. JARVIS_WORKSPACE задаёт рабочую папку при запуске моста. Если помощник не смог её определить, приложи снимок панели запуска npm start к <a href="#pomoshch">запросу помощи</a> и напиши «Не знаю рабочую папку Jarvis». До уточнения пути не переходи к пробе файла.</p></div>
+<p>Когда файл подготовлен, произнеси: <strong>Hey Jarvis, read <span class="prompt-value">demo-plan.txt</span> and tell me the meeting time.</strong> Это просьба прочитать заметку и назвать время встречи. Сверь ответ с 15:00; по-английски это может быть three p.m.</p>
+<div class="info-card"><p><strong>Пример ответа:</strong> The team meeting is on Tuesday at 3 p.m.</p><p>То есть встреча во вторник в 15:00.</p></div>
+<p>Для второй пробы отправь в тот же чат Claude Code или Codex запрос на изменение времени:</p><div class="code-card"><pre id="change-note">В той же разрешённой рабочей папке Jarvis открой только <span class="prompt-value">demo-plan.txt</span>, который мы создали для этой пробы. Сначала сравни его содержимое с точными двумя строками:
+Team meeting: Tuesday at 15:00.
+Task: prepare three questions for the call.
+Если содержимое отличается, ОСТАНОВИСЬ, сообщи только полный путь и не меняй файл. Если совпадает, замени только время 15:00 на 16:30. Другой текст и остальные файлы не меняй. Сохрани заметку и покажи её полный путь и новое содержимое. Если изменение не выполнилось, сообщи об этом.</pre><button aria-label="Скопировать задачу изменения времени" aria-live="polite" class="copy-button" data-copy-target="change-note" type="button">Скопировать</button></div>
+<p>Дождись подтверждения нового содержимого с 16:30. Затем повтори тот же голосовой вопрос про встречу. Эта проба проверяет совпадение ответов с заметкой, но сама по себе не показывает, каким инструментом получен ответ. Если файл не найден или время не совпадает, передай помощнику полный путь и точный ответ через <a href="#pomoshch">запрос помощи</a>.</p>
+<div class="info-card"><p><strong>Пример ответа:</strong> The team meeting is on Tuesday at 4:30 p.m.</p><p>То есть встреча во вторник в 16:30.</p></div>
+<p class="result-line"><strong>Результат:</strong> если в ответах прозвучали 15:00, затем 16:30, обе проверки времени дали ожидаемый результат.</p></section>
+<section id="nastroika">
+<h3>Память, инструменты и ежедневная работа</h3>
+<h4 id="pamyat">Что помощник запоминает</h4>
+<p>Jarvis начинает собственный разговор. Правила из других проектов и прошлые разговоры Claude автоматически сюда не попадают. После закрытия соединения не рассчитывай на восстановление того же разговора.</p>
+<p>Постоянные сведения лучше хранить отдельными файлами в разрешённой рабочей папке. Например, профиль проекта и список текущих задач. Чтобы сам голосовой Jarvis сохранял или менял файлы, ему отдельно включают режим записи. В этом упражнении файл меняет помощник в редакторе, поэтому запись для Jarvis выключена.</p>
+<h4 id="instrumenty">Что понадобится для дополнительных подключений</h4>
+<p>MCP связывает помощника с внешним инструментом: поиском, браузером или конкретным сервисом. В настройке запуска <code>JARVIS_MCP_SERVERS</code> перечисляют подключения, которые разрешено использовать Claude Code. Если настройка отсутствует, передаются все уже настроенные MCP-серверы; явно пустое значение не передаёт ни одного. Настройка только внутри постороннего проекта сюда автоматически не переходит.</p>
+<p>Почта и календарь из аккаунта Claude включаются отдельной настройкой запуска: <code>JARVIS_ACCOUNT_CONNECTORS=1</code>. Число 1 включает этот способ доступа. Пока эта настройка выключена, эти подключения аккаунта Claude не передаются в Jarvis; MCP-серверы управляются отдельно. Начинай с одного инструмента и одной понятной задачи.</p>
+<p>Для управления страницами Chrome установи расширение Claude и подключи его к Claude Code по инструкции проекта. Текущий проект поддерживает Mac и Windows. Для клиентской базы (CRM) и 1С нужен подходящий способ подключения: универсальной готовой связки в этой установке нет.</p>
+<p>Точные параметры и способы запуска перечислены в <a href="https://github.com/adewaskar/jarvis#configuration">настройках проекта</a>. Меняй их под конкретную задачу вместе с помощником, который работает с этой папкой; не включай все права сразу ради первого разговора.</p>
+<h4 id="kazhdyy-den">Что делать при следующем запуске</h4>
+<p>Открой папку Jarvis в VS Code. В списке файлов слева нажми папку правой кнопкой и выбери <a href="#vscode-files">Open in Integrated Terminal</a>, как на снимке выше. Повтори ту же команду с подтверждёнными условиями, которая использовалась в первой пробе. Если помощник подготовил одноразовую изолированную команду, нужна именно она. Обычный вариант ниже подходит только при тех же проверенных условиях:</p><div class="code-card"><pre id="daily-start">npm start</pre><button aria-label="Скопировать повторный запуск Jarvis" aria-live="polite" class="copy-button" data-copy-target="daily-start" type="button">Скопировать</button></div>
+<p>Открой адрес из строки Local в Chrome, нажми INITIALISE и дождись STANDBY. Скачивание проекта и установка пакетов заново не нужны.</p><p>Пока пользуешься помощником, компьютер должен работать, а страница и мост оставаться открытыми. Для остановки нажми <strong>Ctrl+C</strong> в панели запуска. Один npm start не превращает программу в круглосуточный сервис и не создаёт расписание задач.</p>
+</section>
+<section id="oshibki">
+<h3>Если разговор не начался</h3><p>Выбери свой симптом: <a href="#err-standby">экран не загрузился</a>, <a href="#err-mic">запрещён микрофон</a>, <a href="#err-login">нужен вход</a>, <a href="#err-limit">закончился лимит</a>, <a href="#err-voice">нет голоса</a>, <a href="#err-bridge">не виден мост</a> или <a href="#err-webgl">нет графики</a>.</p><details class="faq-item" id="err-standby"><summary>Загрузка не доходит до STANDBY</summary><p>Открой оставленную нижнюю панель, где работает npm start, и посмотри последнее сообщение. Если запуск остановился, повтори в этой же панели выбранную команду первого запуска с теми же условиями. Затем открой адрес из строки Local и нажми INITIALISE. Если процесс работает, а экран остаётся на загрузке, перезагрузи страницу. Если это не помогло, отправь снимок и текст из этой панели через <a href="#pomoshch">запрос помощи</a>. Помощник устанавливал проект, а этот процесс запускаешь и останавливаешь ты.</p></details>
+<details class="faq-item" id="err-mic"><summary>Браузер не разрешает микрофон</summary><p>Открой справку своего браузера: <a href="https://support.google.com/chrome/answer/2693767?hl=ru">разрешение микрофона в Chrome</a> или <a href="https://learn.microsoft.com/en-us/troubleshoot/microsoft-edge/development/edge-camera-microphone-not-working">разрешения микрофона в Edge</a>. Если браузер всё равно не слышит, приложи сообщение и название браузера к <a href="#pomoshch">запросу помощи</a>. Не переустанавливай Jarvis только из-за отказа разрешения.</p></details>
+<details class="faq-item" id="err-login"><summary>Jarvis отвечает «Not logged in»</summary><p>Это означает «вход не выполнен». Вернись к <a href="#pakety">нижней панели с командой claude из шага 2</a> и выполни вход по <a href="https://code.claude.com/docs/en/quickstart">начальному руководству</a>. Когда вопрос про два плюс два получит ответ в этом терминальном чате, останови Jarvis через Ctrl+C и повтори выбранную команду запуска. Переустанавливать пакеты ради входа не нужно.</p></details>
+<details class="faq-item" id="err-limit"><summary>Claude сообщает, что закончился лимит</summary><p>Jarvis использует тот же доступ к модели и не увеличивает лимиты. Время восстановления проверь в Claude Code. Дождись восстановления доступа или проверь условия своего тарифа.</p></details>
+<details class="faq-item" id="err-voice"><summary>Нет ответа, Jarvis не слышит или не говорит</summary><p>Проверь выбранные динамики или наушники и громкость вкладки. На странице Jarvis клавиша <strong>T</strong> запускает звуковую самопроверку: должен прозвучать тестовый голос. Если его не слышно, проверь устройство вывода звука. Клавиша <strong>D</strong> открывает панель диагностики. Найди строку <strong>last heard</strong> («последняя услышанная фраза»). Если после твоей реплики там по-прежнему <strong>nothing yet</strong> («пока ничего»), проверь разрешение микрофона и повтори английскую фразу. Если фраза появилась, а ответа нет, проверь вход в Claude Code. Если причина остаётся непонятной, приложи снимок панели к <a href="#pomoshch">запросу помощи</a>; его можно отправить и в браузерный чат.</p><figure class="shot"><img alt="Диагностика Jarvis со строками last heard и nothing yet" loading="lazy" src="assets/jarvis-diagnostics.webp"/><figcaption>Last heard показывает распознанную фразу. Nothing yet означает, что распознанного текста пока нет.</figcaption></figure></details>
+<details class="faq-item" id="err-bridge"><summary>Страница не видит мост</summary><p>Вернись в панель с npm start и прочитай ошибку. У страницы и моста разные порты, номера подключения: Local показывает адрес страницы, а мост по умолчанию использует 8787. Если не открывается сама страница, используй текущий Local. Если страница открылась, но пишет Bridge not reachable («мост недоступен»), одного нового адреса Local недостаточно. Проверь сообщение запуска моста в той же панели. Ошибка занятого порта означает, что этот номер подключения уже использует другая программа. Если ранее уже запускался Jarvis, останови предыдущий запуск через Ctrl+C в его панели и повтори выбранную команду запуска. Если не знаешь, какая программа занимает порт, не останавливай чужие процессы: скопируй сообщение в <a href="#pomoshch">запрос помощи</a>.</p></details>
+<details class="faq-item" id="err-webgl"><summary>Трёхмерная графика не появилась</summary><p>Для трёхмерной графики нужна возможность браузера WebGL. Если появляется сообщение WebGL context, передай его помощнику вместе с названием браузера и системой.</p></details>
+</section>
+<section id="faq">
+<h3>Частые вопросы</h3>
+<details class="faq-item"><summary>Можно ли пользоваться с телефона?</summary><p>Эта инструкция запускает Jarvis на компьютере. Доступ с телефона потребует отдельной настройки.</p></details>
+<details class="faq-item"><summary>Работает ли он, пока компьютер выключен?</summary><p>Нет. Локальные процессы останавливаются вместе с компьютером. Для постоянной работы нужна отдельная работающая машина и настройка сервиса.</p></details>
+<details class="faq-item"><summary>Можно ли заменить Claude на Codex?</summary><p>Codex может помочь установить файлы проекта, но выбранный Jarvis отправляет задачи именно Claude Code. Чтобы подключить другую модель вместо Claude, придётся менять программу.</p></details>
+<details class="faq-item"><summary>Можно ли сразу разговаривать по-русски?</summary><p>В исходной версии проекта, на которую ведёт ссылка в шаге 1, распознавание и выбор голосов настроены на английский. Поэтому для первого запуска здесь даны английские вопросы. Для русского нужно отдельно изменить язык распознавания, язык ответов и выбор системного голоса. Русская речь не требует обязательного подключения ElevenLabs: вопрос языка и выбор сервиса озвучки - разные настройки.</p></details>
+<details class="faq-item"><summary>Нужно ли подключать отдельный сервис для голоса?</summary><p>Для описанного первого запуска достаточно системного голоса. ElevenLabs можно рассмотреть позже, если захочешь другой тембр или копию своего голоса. Это необязательный выбор; <a href="https://elevenlabs.io/docs/overview/capabilities/voices">доступные варианты описаны в документации сервиса</a>. Если ключ уже настроен на компьютере, сначала проверь режим по <a href="#golosovoy-rezhim">пояснению перед голосовой пробой</a>.</p></details>
+<details class="faq-item"><summary>Что здесь бесплатно, а что оплачивается?</summary><p>Исходный код Jarvis можно использовать бесплатно по лицензии MIT, разрешению на использование и изменение программы. Для ответов нужен доступ к Claude. При входе через подписку расходуются её лимиты. При использовании API-ключа, личного ключа для обращений к модели из других программ, запросы оплачиваются отдельно по правилам этого способа доступа. Перед запуском проверь способ оплаты в <a href="https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan">официальной справке Anthropic</a>. Никому не отправляй ключ.</p></details>
+</section>
+<section id="pomoshch">
+<h3>Как попросить помощи на своём экране</h3>
+<p>Вставь запрос ниже в тот же чат Claude Code или Codex в открытой папке Jarvis, в поле, показанное в шаге установки. Если Claude Code не открывается или не пускает в аккаунт, используй обычный <a href="https://chatgpt.com/">ChatGPT в браузере</a>: вставь запрос и приложи текст ошибки. Для объяснения ошибки доступ к твоим файлам не нужен. Начальная установка и вход описаны в <a href="https://code.claude.com/docs/en/quickstart">официальном руководстве Claude Code</a>.</p>
+<p>Цветом выделено то, что заменяешь своими данными. Скобки оставляй.</p><div class="warn-card"><p>Перед отправкой снимка закрой ключи, адреса почты и личные документы.</p></div>
+<div class="code-card"><pre id="help">Хочу запустить adewaskar/jarvis. Моя система: <span class="prompt-value">[Mac или Windows]</span>. Уже выполнено: <span class="prompt-value">[какие шаги]</span>. Сейчас вижу: <span class="prompt-value">[сообщение или экран]</span>. Не понимаю: <span class="prompt-value">[мой вопрос]</span>. Объясни следующий шаг простыми словами и дождись моего ответа. Не включай режим записи Jarvis.</pre><button aria-label="Скопировать запрос помощи" aria-live="polite" class="copy-button" data-copy-target="help" type="button">Скопировать</button></div>
+</section>
+</section>
+<section id="istochniki">
+<h2>Исходники и документация</h2>
+<ul class="sources"><li><a href="https://github.com/open-jarvis/OpenJarvis">OpenJarvis: исходный код и возможности.</a></li><li><a href="https://open-jarvis.github.io/OpenJarvis/getting-started/install/">Установка OpenJarvis и первый запуск.</a></li>
+<li><a href="https://github.com/adewaskar/jarvis">Jarvis: файлы, установка, настройки и диагностика.</a></li>
+<li><a href="https://github.com/adewaskar/jarvis/blob/9ae5ec846b6b20a17b2d264e699d6234c4284b23/src/lib/voice.ts">Язык распознавания речи в использованной версии.</a></li>
+<li><a href="https://github.com/adewaskar/jarvis/blob/9ae5ec846b6b20a17b2d264e699d6234c4284b23/bridge/server.mjs">Рабочая папка, подключения и ограничения действий.</a></li>
+<li><a href="https://code.claude.com/docs/en/quickstart">Установка и вход в Claude Code.</a></li>
+<li><a href="https://nodejs.org/en/download">Официальная загрузка Node.js.</a></li>
+</ul>
+</section>
+<p class="cta-question">Когда помощник читает нужный документ и отвечает голосом, можно переходить от пробной заметки к своим рабочим задачам. Ниже показано, что ещё можно собрать с ИИ-агентами без знания кода.</p><section class="cta" aria-label="Концентрат и мастер-группа Ивана Сергеева"><h2>Что можно делать с нейросетями, если не знаешь кода?</h2><p>Чтобы почувствовать размах, посмотри Концентрат Ивана Сергеева в записи. ИИ-агенты на твоих глазах собирают продукт, контент, сайты и воронки без кода. Это основа под любую цель: свои услуги, партнёрка, чужой бизнес. Три вечера в записи, промпты и четыре скилла. <strong>990 ₽ один раз. Доступ на 14 дней после оплаты.</strong></p><a class="press-button" data-partner="koncentrat" href="https://theivansergeev.com/koncentrat/?gcpc=16fff">Забрать Концентрат</a><p>Уже знаешь, чего хочешь? Тогда в мастер-группу Ивана: система продаж на ИИ без продюсера и технаря, сопровождение и сообщество</p><a class="press-button" data-partner="zapis" href="https://theivansergeev.com/zapis/?gcpc=16fff">Заполнить анкету предзаписи</a><p>Набор открывается редко, кто записался заранее, получает лучшую цену и бонусы. Платить сейчас не нужно</p><p class="ad-disclosure">Реклама. ИП Сергеев И. С., ИНН 352511695540. erid: 2Vtzqwfc8iA</p></section><aside aria-label="Дальше по теме" class="next-read"><h2>Дальше по теме</h2><p class="next-sub">Что логично прочитать следующим</p><ul><li><a href="https://pronovoe.com/claude-ai/claude-i-codex-v-vscode/"><span class="title">Рабочее окно для Claude Code и Codex</span><span class="why">Подготовь редактор и чаты помощников, прежде чем ставить Jarvis.</span></a></li><li><a href="https://pronovoe.com/claude-ai/chetyre-mcp-claude-code/"><span class="title">Инструменты для Claude Code через MCP</span><span class="why">Разберись, как помощнику дают доступ к поиску и другим сервисам.</span></a></li></ul></aside></article></main><aside aria-label="Соседняя статья" class="related-plaque"><p class="plaque-label">Следующий шаг</p><p><a href="https://pronovoe.com/claude-ai/claude-i-codex-v-vscode/">Рабочее окно для Claude Code и Codex</a></p></aside></div><div aria-hidden="true" aria-label="Картинка крупнее" aria-modal="true" class="viewer" id="viewer" role="dialog">
+<button aria-label="Закрыть" class="viewer-close" type="button">✕</button>
+<div aria-label="Увеличенный скриншот, можно прокручивать" class="viewer-scroll" tabindex="0"><img alt=""/></div>
+<p class="viewer-hint"></p></div>
+<script>document.querySelectorAll('[data-copy-target]').forEach(function(b){b.copyLabel=b.getAttribute('aria-label')||'Скопировать';b.addEventListener('click',async function(){let t=document.getElementById(b.dataset.copyTarget).textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t)}else{let e=document.createElement('textarea');e.value=t;e.style.position='fixed';e.style.opacity='0';document.body.appendChild(e);e.select();let ok=document.execCommand('copy');e.remove();if(!ok)throw Error('copy failed')}b.copyLabel=b.copyLabel||b.getAttribute('aria-label');b.textContent='✓ Скопировано';b.setAttribute('aria-label','Скопировано');b.classList.add('is-copied');clearTimeout(b.copyTimer);b.copyTimer=setTimeout(()=>{b.textContent='Скопировать';b.setAttribute('aria-label',b.copyLabel);b.classList.remove('is-copied')},1800)}catch(e){clearTimeout(b.copyTimer);b.classList.remove('is-copied');b.textContent='Не удалось скопировать';b.setAttribute('aria-label','Не удалось скопировать')}})});let toggle=document.querySelector('.theme-toggle');if(toggle)toggle.addEventListener('click',()=>{let h=document.documentElement;h.dataset.theme=h.dataset.theme==='dark'?'light':'dark'});</script><footer class="privacy-site-footer">
+<!-- privacy:footer:start -->
+<div class="privacy-footer"><a href="/politika/">Политика данных</a><button type="button" data-cookie-settings>Настройки аналитики</button></div>
+<!-- privacy:footer:end -->
+</footer><script>
+(function () {
+  var viewer = document.getElementById("viewer");
+      var viewerModal = GuideImageViewer.mount(viewer, close);
+  var big = viewer.querySelector("img");
+  var box = viewer.querySelector(".viewer-scroll");
+  var closeButton = viewer.querySelector(".viewer-close");
+
+  function open(img) {
+
+    big.alt = img.alt;
+    big.onload = function () {
+      var room = viewer.clientWidth - 44;
+      var target = Math.min(img.getBoundingClientRect().width * 2.2, big.naturalWidth);
+      var wide = viewer.clientWidth >= 860;
+      target = wide ? Math.min(target, room) : Math.max(target, Math.min(room, big.naturalWidth));
+
+      big.style.width = Math.round(target) + "px";
+      viewer.classList.toggle("fits", target <= room);
+      box.scrollTop = 0;
+      box.scrollLeft = Math.max(0, (target - box.clientWidth) / 2);
+      var scrolls = box.scrollWidth > box.clientWidth + 2;
+      viewer.querySelector(".viewer-hint").textContent = (scrolls ? "Двигай картинку пальцем. " : "") + "Нажми в стороне или Esc, чтобы закрыть";
+    };
+    viewerModal.open(img);
+    viewer.setAttribute("aria-hidden", "false");
+
+    big.src = img.dataset.fullSrc || img.currentSrc || img.src;
+    closeButton.focus();
+  }
+  function close() {
+    if (!viewerModal.close()) return;
+    viewer.setAttribute("aria-hidden", "true");
+
+    big.onload = null;
+    big.removeAttribute("src");
+    big.style.width = "";
+
+  }
+  document.querySelectorAll(".shot img:not([data-no-zoom])").forEach(function (img) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "zoom";
+    button.textContent = "Открыть крупнее";
+    button.setAttribute("aria-label", "Открыть крупнее: " + img.alt);
+    button.addEventListener("click", function () { open(img); });
+    img.addEventListener("click", function () { open(img); });
+    img.parentElement.appendChild(button);
+  });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer || event.target === closeButton) close();
+  });
+  addEventListener("keydown", function (event) {
+    if (!viewer.hasAttribute("open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (document.activeElement === closeButton) box.focus(); else closeButton.focus();
+    }
+  });
+})();
+var PARTNER_LINKS = {"koncentrat": "https://theivansergeev.com/koncentrat/?gcpc=16fff", "zapis": "https://theivansergeev.com/zapis/?gcpc=16fff"};
+document.querySelectorAll("a[data-partner]").forEach(function (link) { if (PARTNER_LINKS[link.dataset.partner]) link.href = PARTNER_LINKS[link.dataset.partner]; });
+</script><!-- privacy:banner:start -->
+<aside class="cookie-banner" id="cookie-banner" aria-label="Выбор аналитики" hidden>
+  <div class="cookie-inner">
+    <p id="cookie-description">Мы используем cookie и Яндекс Метрику, чтобы понимать, какие статьи и темы вам интересны, и делать новые полезнее. Нажимая «Принять», вы соглашаетесь на их обработку. <a href="/politika/">Подробнее</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" aria-describedby="cookie-description">Принять</button>
+      <button type="button" id="cookie-decline" aria-describedby="cookie-description">Отказаться</button>
+    </div>
+  </div>
+</aside>
+<!-- privacy:banner:end -->
+<!-- pageviews:start -->
+<script>
+(function () {
+  function loadPageviews() {
+    if (document.getElementById('pageviews-script')) return;
+    var script = document.createElement('script');
+    script.id = 'pageviews-script';
+    script.async = true;
+    script.referrerPolicy = 'no-referrer';
+    script.src = '/assets/pageviews.js';
+    document.head.appendChild(script);
+  }
+  if (document.readyState === 'complete') window.setTimeout(loadPageviews, 0);
+  else window.addEventListener('load', loadPageviews, { once: true });
+}());
+</script>
+<!-- pageviews:end -->
+<script>(function(){const links=[...document.querySelectorAll('.toc a,.mobile-toc a')];const headings=[...document.querySelectorAll('article h1,article h2,article h3,article h4')].map(h=>h.id?h:h.parentElement).filter(h=>h.id);function update(){let id=headings[0]?.id;for(const h of headings){if(h.getBoundingClientRect().top<=125)id=h.id;}for(const l of links)l.classList.toggle('active',l.hash==='#'+id);const total=document.documentElement.scrollHeight-innerHeight;document.querySelector('.progress').style.width=(total>0?Math.min(100,100*scrollY/total):0)+'%';}addEventListener('scroll',update,{passive:true});addEventListener('resize',update);update();})();</script></body></html>
